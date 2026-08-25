@@ -30,7 +30,7 @@ const routes = new Map([
   ['https://example.com/agents.json', [JSON.stringify({ version: '1.0', standard: 'https://agents-txt.com', site: { name: 'Example Knowledge Site', url: 'https://example.com/' }, mcp: [{ url: 'https://example.com/mcp', type: 'streamable-http' }], skills: [{ url: 'https://example.com/skills/search/SKILL.md' }], a2a: [{ url: 'https://example.com/.well-known/agent-card.json' }] }), 'application/json']],
   ['https://example.com/.well-known/api-catalog', [JSON.stringify({ linkset: [{ anchor: 'https://example.com/api', 'service-desc': [{ href: 'https://example.com/openapi.json', type: 'application/json' }] }] }), 'application/linkset+json']],
   ['https://example.com/.well-known/oauth-protected-resource', [JSON.stringify({ resource: 'https://example.com/', authorization_servers: ['https://auth.example.com/'], scopes_supported: ['read'] }), 'application/json']],
-  ['https://example.com/.well-known/agent-card.json', [JSON.stringify({ name: 'Example Agent', description: 'Searches the example library.', version: '1.0.0', supportedInterfaces: [{ url: 'https://example.com/a2a', protocolBinding: 'JSONRPC', protocolVersion: '1.0' }], skills: [{ id: 'search', name: 'Search', description: 'Search knowledge', tags: ['search'], examples: [] }] }), 'application/json']],
+  ['https://example.com/.well-known/agent-card.json', [JSON.stringify({ name: 'Example Agent', description: 'Searches the example library.', version: '1.0.0', supportedInterfaces: [{ url: 'https://example.com/a2a', protocolBinding: 'JSONRPC', protocolVersion: '1.0' }], capabilities: {}, defaultInputModes: ['text/plain'], defaultOutputModes: ['text/plain'], skills: [{ id: 'search', name: 'Search', description: 'Search knowledge', tags: ['search'], examples: [] }] }), 'application/json']],
   ['https://example.com/.well-known/agent-skills/index.json', [JSON.stringify({ skills: [{ name: 'search', type: 'skill-md', url: 'https://example.com/skills/search/SKILL.md', digest: `sha256:${'a'.repeat(64)}` }] }), 'application/json']],
   ['https://example.com/.well-known/ai-catalog.json', [JSON.stringify({ specVersion: '1.0', entries: [{ identifier: 'urn:air:example.com:mcp:knowledge', type: 'application/mcp-server-card+json', data: { name: 'com.example/knowledge', title: 'Knowledge MCP', version: '1.0.0', remotes: [{ url: 'https://example.com/mcp', type: 'streamable-http' }] } }] }), 'application/ai-catalog+json']],
   ['https://example.com/mcp/server-card', [JSON.stringify({ name: 'com.example/knowledge', title: 'Knowledge MCP', version: '1.0.0', remotes: [{ url: 'https://example.com/mcp', type: 'streamable-http' }] }), 'application/mcp-server-card+json']]
@@ -52,6 +52,7 @@ assert.ok(resolved.interfaces.tools.some(item => item.kind === 'mcp-server-card'
 assert.ok(resolved.interfaces.agents.some(item => item.protocol === 'A2A'));
 assert.ok(resolved.interfaces.skills.some(item => item.protocol === 'Agent Skills'));
 assert.equal(resolved.conflicts.length, 0);
+assert.equal(planResolvedSite(resolved, 'read').selected.url, 'https://example.com/llms.txt');
 assert.equal(planResolvedSite(resolved, 'search').selected.url, 'https://example.com/search.json');
 assert.equal(planResolvedSite(resolved, 'structured').selected.url, 'https://example.com/openapi.json');
 assert.equal(planResolvedSite(resolved, 'tools').selected.url, 'https://example.com/mcp');
@@ -70,5 +71,18 @@ const conflictFetch = async (url, options = {}) => {
 const conflicted = await resolveSite('https://example.com', { fetchImpl: conflictFetch, resolveImpl: PUBLIC_DNS, timeoutMs: 1000, maxBytes: 128 * 1024 });
 assert.ok(conflicted.conflicts.some(item => item.kind === 'source-mismatch'));
 
+const plainFetch = async (url, options = {}) => {
+  const key = String(url);
+  if (key === 'https://plain.example/') {
+    if (options.method === 'HEAD') return response(key, '', { contentType: 'text/html; charset=utf-8' });
+    return response(key, '<!doctype html><html><head><title>Plain HTML Site</title><meta name="description" content="Only ordinary HTML"></head><body>Plain content</body></html>', { contentType: 'text/html; charset=utf-8' });
+  }
+  return response(key, 'not found', { status: 404, contentType: 'text/plain' });
+};
+const plain = await resolveSite('https://plain.example/', { fetchImpl: plainFetch, resolveImpl: PUBLIC_DNS, timeoutMs: 1000, maxBytes: 128 * 1024 });
+assert.equal(planResolvedSite(plain, 'read').selected.url, 'https://plain.example/');
+assert.equal(planResolvedSite(plain, 'read').selected.kind, 'html');
+assert.equal(planResolvedSite(plain, 'search').selected, null);
+
 await assert.rejects(() => resolveSite('https://127.0.0.1', { fetchImpl, resolveImpl: PUBLIC_DNS }), /Private or reserved|public HTTPS|not allowed/i);
-console.log('PASS resolver normalizes ARWP, agents.txt/json, RFC9727/9728, A2A, Agent Skills and experimental MCP discovery with conflict-aware plans');
+console.log('PASS resolver normalizes heterogeneous discovery, prefers richer read interfaces, and preserves ordinary HTML as the honest fallback');
