@@ -3,115 +3,145 @@
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
-**Make your website understandable to AI agents.**
+**Resolve how a website can actually be used by agents.**
 
-A website has navigation for people. An external AI client may still have to guess whether it should scrape HTML, read a dataset, use a retrieval index, call an API, load an Agent Skill, connect to MCP, or trust a particular provenance/review surface.
+Modern websites may expose HTML, `llms.txt`, datasets, retrieval indexes, OpenAPI, Agent Skills, MCP, A2A, OAuth resource metadata, `agents.json` and other discovery surfaces. A client should not need site-specific code — or guess which manifest is authoritative — to understand them.
 
-Agent-Ready Web Profile (ARWP) gives those existing interfaces one small machine-readable service map:
+ARWP now has two complementary parts:
 
-```text
-https://example.com/ai/site-profile.json
-```
+1. **ARWP Profile** — an experimental publisher-maintained service map at `/ai/site-profile.json`.
+2. **ARWP Resolver** — an interoperability engine that reads ARWP plus existing upstream/community discovery, preserves evidence and conflicts, and selects an interface for a concrete intent.
 
-ARWP does not make an AI smarter. **It removes guessing about how a website can be used.**
+The profile is useful. It is **not** required to use the resolver and it is not intended to replace upstream standards.
 
 Public project site: https://dkharlanau.github.io/agent-ready-web-profile/
 
-Profile contract: **experimental v0.1**. The first public GitHub/Marketplace release is [`v0.1.0`](https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0). The current `main` toolchain is version **0.2.0** and adds scanner/init, health reporting, directory/federation and public-service deployment code. The npm package is prepared but must not be described as published until the registry publication succeeds.
+Profile contract: **experimental v0.1**. Released validator/Action: [`v0.1.0`](https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0). The current `main` toolchain is version **0.2.0**; npm publication remains an external release gate and must not be described as complete until it succeeds.
 
-## The problem in one picture
+## The problem
 
-Without a discovery map:
-
-```text
-Agent
-  → search
-  → scrape HTML
-  → guess URLs
-  → maybe discover an API/dataset
-  → maybe lose canonical identity/provenance
-```
-
-With ARWP:
+A site can legitimately publish several independent discovery surfaces:
 
 ```text
-Agent
-  → /ai/site-profile.json
-  → see declared interfaces
-  → choose the best available source
-  → verify it
-  → retrieve with source identity intact
+                         WEBSITE
+                            |
+       +--------------------+---------------------+
+       |          |         |        |            |
+   ARWP profile  agents.*  API     A2A Card   Agent Skills
+                          Catalog
+       |                    |                     |
+       +------------- MCP / OAuth / web ----------+
+                            |
+                       ARWP RESOLVER
+                            |
+                 evidence-backed service map
+                            |
+               +------------+-------------+
+               |            |             |
+             read         search         tools
+             data       structured       agent
 ```
 
-ARWP is a thin discovery contract over existing interfaces. It does **not** replace SEO, `llms.txt`, Agent Skills, WebMCP, Model Context Protocol (MCP), A2A, OpenAPI, JSON Schema, Schema.org, Croissant, sitemaps, feeds or crawler controls.
+The resolver does not ask every ecosystem to converge on one file. It answers:
 
-## What changes after adding ARWP?
+> **What does this website actually expose, where did each claim come from, do the claims conflict, and which interface should a client use for this task?**
 
-| User | Without ARWP | With ARWP |
-| --- | --- | --- |
-| Site owner | Every AI integration rediscovers the site differently | One stable machine entry point describes the real interfaces |
-| AI agent | Starts from search/HTML and guesses | Can prefer structured data, retrieval or tools when declared |
-| RAG system | Re-crawls and re-chunks by default | Can discover a publisher-maintained retrieval distribution |
-| Developer | Searches docs/repos for API/schema/tool locations | Gets explicit OpenAPI/schema/MCP/Skill locations |
-| Trusted knowledge consumer | Provenance/licensing/review may be separate | Trust surfaces are part of the same discovery map |
-
-A small truthful profile is better than a large speculative one.
-
-## Start with a website you already have
+## Resolve a site
 
 ```bash
-npm ci
-node bin/arwp.mjs scan https://example.com
-node bin/arwp.mjs init https://example.com
+node bin/arwp.mjs resolve https://example.com
 ```
 
-`scan` reports bounded public evidence it can actually observe. `init` writes a conservative valid draft to `ai/site-profile.json` by default.
-
-The scanner looks for high-confidence evidence such as:
-
-- canonical site metadata;
-- `robots.txt` and sitemaps;
-- `llms.txt`;
-- explicitly linked RSS, Atom and JSON feeds;
-- explicitly linked OpenAPI contracts;
-- an existing `/ai/site-profile.json` when present.
-
-It deliberately does **not** infer Agent Skills, WebMCP, MCP or A2A from marketing text or filenames alone.
-
-See [`docs/SCANNER.md`](docs/SCANNER.md) for its security and evidence model.
-
-## Validate, verify and inspect health
-
-Schema validation:
+Machine-readable output:
 
 ```bash
-node bin/arwp.mjs validate ai/site-profile.json
+node bin/arwp.mjs resolve https://example.com --json
 ```
 
-Live verification of every declared public URL:
+The resolver currently normalizes evidence from:
+
+- ordinary web discovery from the bounded scanner;
+- valid ARWP profiles;
+- `/agents.txt` and `/agents.json` as a community convention;
+- RFC 9727 `/.well-known/api-catalog`;
+- RFC 9728 root Protected Resource Metadata;
+- A2A `/.well-known/agent-card.json`;
+- Agent Skills `/.well-known/agent-skills/index.json`;
+- experimental MCP AI Catalog / Server Card discovery.
+
+Experimental/community sources remain explicitly labeled. Static metadata is never silently upgraded into runtime conformance.
+
+See [`docs/RESOLVER.md`](docs/RESOLVER.md).
+
+## Explain what was found
 
 ```bash
-node bin/arwp.mjs verify https://example.com/ai/site-profile.json
+node bin/arwp.mjs explain https://example.com
 ```
 
-Evidence-oriented site health:
+Example shape:
+
+```text
+Example Knowledge Site
+Canonical: https://example.com/
+Evidence: 5/8 discovery sources resolved; 1 conflict(s).
+
+Content: 2
+Retrieval: 1
+APIs: 2
+Tools: 1
+
+Conflicts:
+- MCP declarations differ between agents.txt and agents.json.
+
+Recommended interfaces:
+- read: https://example.com/llms.txt
+- search: https://example.com/search.json
+- structured: https://example.com/openapi.json
+- tools: https://example.com/mcp
+```
+
+## Plan for an intent
 
 ```bash
-node bin/arwp.mjs health https://example.com
+node bin/arwp.mjs plan https://example.com --intent=search
 ```
 
-`health` separates states such as:
+Supported intents:
 
-- observed;
-- declared;
-- verified;
-- warning/failing;
-- not declared;
-- not assessed.
+- `read`
+- `search`
+- `structured`
+- `tools`
+- `agent`
 
-It does not collapse them into an opaque “AI readiness” score.
+The planner returns the selected interface, its evidence source/authority and fallbacks. It uses deterministic routing heuristics — not a hidden quality or readiness score.
 
-## Minimal profile
+## Source authority stays visible
+
+Resolver output distinguishes the origin/status of a claim:
+
+| Authority | Example |
+| --- | --- |
+| `ietf-standard` | RFC 9727 / RFC 9728 |
+| `upstream-standard` | A2A Agent Card |
+| `upstream-convention` | Agent Skills discovery |
+| `community-convention` | agents.txt / agents.json |
+| `experimental-upstream` | current MCP Server Card / AI Catalog work |
+| `project-profile` | ARWP publisher profile |
+| `observed-web` | directly observed ordinary web evidence |
+
+Authority is not authorization. Security and permission decisions remain with the real protocol/runtime.
+
+## ARWP Profile
+
+Publishers that want one explicit service map can still expose:
+
+```text
+/ai/site-profile.json
+```
+
+Minimal profile:
 
 ```json
 {
@@ -123,153 +153,32 @@ It does not collapse them into an opaque “AI readiness” score.
   "description": "A reviewed public knowledge library.",
   "web": {
     "sitemap": "https://example.com/sitemap.xml",
-    "robots": "https://example.com/robots.txt",
     "llms": "https://example.com/llms.txt"
   }
 }
 ```
 
-Recommended location:
-
-```text
-/ai/site-profile.json
-```
-
-This is an ARWP convention, **not** a registered `.well-known` URI.
-
-A publisher may additionally advertise it with:
+Optional HTML advertisement:
 
 ```html
 <link rel="describedby" type="application/json" href="/ai/site-profile.json">
 ```
 
-See [`SPEC.md`](SPEC.md) for the normative experimental contract.
+This is an ARWP convention, not a registered `.well-known` location. See [`SPEC.md`](SPEC.md).
 
-## Real reference suite
-
-The project is tested against five public knowledge-site architectures that now publish ARWP profiles themselves:
-
-- **Dzmitryi Kharlanau — SAP Knowledge** — data, retrieval, Agent Skills discovery and local MCP implementations;
-- **Brali Practical Knowledge Library** — static API/OpenAPI, retrieval and local MCP;
-- **Cognitive Biases Knowledge Library** — versioned data, RAG/provenance and local reference MCP;
-- **CBT Cards** — reviewed retrieval, explicit safety/trust surfaces and a real Agent Skill;
-- **Metkagram** — multilingual data, OpenAPI and retrieval without pretending a static MCP-shaped JSON file is a live server.
-
-The reference fixtures live in [`examples/reference/`](examples/reference/). Their public URLs are probed by a scheduled workflow.
-
-## ARWP Directory
-
-The repository now includes a small machine-readable directory:
-
-```text
-registry/sites.json
-```
-
-Public Pages copy:
-
-```text
-https://dkharlanau.github.io/agent-ready-web-profile/directory.json
-```
-
-List sites by capability:
+## Adopt ARWP from an existing website
 
 ```bash
-node bin/arwp.mjs directory
-node bin/arwp.mjs directory --capability=retrieval
-node bin/arwp.mjs directory --capability=mcp
+node bin/arwp.mjs scan https://example.com
+node bin/arwp.mjs init https://example.com
+node bin/arwp.mjs validate ai/site-profile.json
+node bin/arwp.mjs verify https://example.com/ai/site-profile.json
+node bin/arwp.mjs health https://example.com
 ```
 
-Directory inclusion means only that a public ARWP profile can be discovered and inspected. It is not a ranking or endorsement.
+`scan` observes bounded public evidence. `init` generates a conservative profile and does not invent unverified MCP, WebMCP, Skills or A2A capabilities.
 
-See [`docs/DIRECTORY.md`](docs/DIRECTORY.md).
-
-## Federated retrieval without centralizing the knowledge
-
-Search declared retrieval indexes across directory sites:
-
-```bash
-node bin/arwp.mjs federated-search "outside view"
-```
-
-Or expose the same discovery/search layer as a local MCP server:
-
-```bash
-npm run router:mcp
-```
-
-The router preserves each result's source site, profile and retrieval index. It does not create a new canonical knowledge database.
-
-## Generic read-only MCP gateway
-
-A static GitHub Pages site can host canonical HTML, JSON/NDJSON, schemas, retrieval indexes and Agent Skills. It cannot execute a remote MCP server itself.
-
-ARWP's generic gateway lets the knowledge stay static while a small runtime exposes bounded tools.
-
-Local stdio:
-
-```bash
-ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start
-```
-
-Remote Streamable HTTP:
-
-```bash
-ARWP_PROFILE=https://example.com/ai/site-profile.json \
-ARWP_HTTP_ALLOWED_HOSTS=mcp.example.com \
-npm run mcp:http
-```
-
-The gateway exposes:
-
-- `get_site_profile`
-- `list_declared_resources`
-- `fetch_declared_resource`
-- `search_retrieval`
-- `get_record`
-
-It accepts only profile-declared HTTPS resources, applies origin allow-listing, re-checks redirects and limits response size. The remote layer additionally validates Host, Origin and endpoint path.
-
-Domain-specific MCP servers remain preferable when a knowledge model needs reviewed semantic operations, authorization, safety-aware routing or mutation.
-
-See [`docs/GATEWAY.md`](docs/GATEWAY.md).
-
-## Hosted scanner service
-
-`scanner-service/` exposes the same bounded scanner semantics through only:
-
-- `GET /health`
-- `POST /scan`
-- `OPTIONS /scan`
-
-It is not a general URL proxy. Browser origins are explicit, response/request behavior is bounded, and repeated clients are rate-limited.
-
-```bash
-ARWP_SCANNER_ALLOWED_ORIGINS=https://dkharlanau.github.io \
-npm run scanner:http
-```
-
-Container deployment is included in [`scanner-service/Dockerfile`](scanner-service/Dockerfile). The static project page stays in CLI mode until a real hosted endpoint is configured; it does not pretend GitHub Pages can run server-side scanning.
-
-## Automatic adoption PRs
-
-[`templates/github-actions/propose-arwp-profile.yml`](templates/github-actions/propose-arwp-profile.yml) can be copied into another GitHub repository. A manual run scans that repository's public site, regenerates the conservative profile, validates it and opens a pull request only when the profile changed.
-
-See [`docs/ADOPTION.md`](docs/ADOPTION.md) for the adopter workflow and neutral “profile available” badge.
-
-## Protocol-specific artifact checks
-
-`lib/protocol-checks.mjs` adds conservative checks for inspectable protocol artifacts such as:
-
-- Agent Skill `SKILL.md` frontmatter;
-- declared MCP Registry metadata URLs;
-- A2A Agent Card structure;
-- explicit `not-assessed` results where real MCP/WebMCP runtime behavior would require a protocol session or browser runtime.
-
-This intentionally does not upgrade URL reachability into protocol conformance.
-
-## Reusable GitHub Action
-
-An adopting repository can keep its profile valid in CI:
+A reusable validation Action is available:
 
 ```yaml
 - name: Validate Agent-Ready Web Profile
@@ -278,111 +187,189 @@ An adopting repository can keep its profile valid in CI:
     profile: ai/site-profile.json
 ```
 
-Pin an exact release or commit when reproducibility matters.
+[`templates/github-actions/propose-arwp-profile.yml`](templates/github-actions/propose-arwp-profile.yml) provides an opt-in profile-update PR workflow.
 
-## Capability groups
+## Bounded hosted discovery service
 
-ARWP keeps different mechanisms separate:
-
-1. **Web** — crawlable HTML, sitemaps, robots policy, feeds and optional `llms.txt`.
-2. **Data** — stable records, schemas, APIs, releases and dataset metadata.
-3. **Retrieval** — bounded search/RAG distributions with identity, citations and abstention where relevant.
-4. **Agent Skills** — portable `SKILL.md` procedures; instructions, not a tool transport.
-5. **Agent Web** — WebMCP capabilities exposed by actual browser pages.
-6. **MCP** — real local or remote MCP servers. Static JSON is not a remote MCP server.
-7. **Agent** — A2A discovery only when a real agent service exists.
-8. **Identity and trust** — stable IDs, aliases, licensing, citation, provenance, review and security surfaces.
-
-More capability groups do not automatically make a site better.
-
-## Ecosystem publication status
-
-Prepared in the repository:
-
-- npm package shape and `npm pack` install smoke tests;
-- npm trusted-publishing workflow gate;
-- `mcpName` package ownership metadata;
-- Official MCP Registry `server.json`;
-- GitHub OIDC MCP Registry publication workflow;
-- SchemaStore catalog-entry candidate;
-- external adopter kit;
-- versioned directory/discovery contract.
-
-External acceptance/publication must not be claimed before it actually succeeds.
-
-See [`ecosystem/README.md`](ecosystem/README.md).
-
-## Design principle
-
-**One source of truth, many representations.**
+The same server runtime exposes only fixed expensive operations:
 
 ```text
-                         CANONICAL KNOWLEDGE
-                                 |
-             +-------------------+-------------------+
-             |                   |                   |
-         HUMAN / SEO          DATA / RAG         AGENT LAYER
-             |                   |                   |
-         HTML pages            JSON/NDJSON          Agent Skills
-         sitemap               JSON Schema          WebMCP
-         JSON-LD               OpenAPI              MCP
-         feeds                 releases             A2A (if real)
-                               provenance
-             \___________________|___________________/
-                                 |
-                         site-profile.json
+GET  /health
+POST /scan
+POST /resolve
+POST /explain
+POST /plan
 ```
 
-ARWP describes these surfaces. It should not become another source of domain content.
+It includes HTTPS-only target rules, DNS/private-network rejection, redirect revalidation, response/request bounds, explicit browser Origin allow-listing and shared rate limiting. It is not an arbitrary URL proxy.
 
-## Boundaries
+```bash
+ARWP_SCANNER_ALLOWED_ORIGINS=https://dkharlanau.github.io \
+npm run scanner:http
+```
 
-- **Not an SEO ranking mechanism.** Search still depends on ordinary content, crawlability and indexing.
-- **Not a permission layer.** Metadata never grants crawler access, authorization or execution rights.
-- **Not another MCP.** MCP is one capability ARWP may point to; the generic gateway is one ARWP consumer.
-- **Not an Agent Card badge.** A2A is declared only for a real agent service.
-- **Not a speculative catalog.** New core fields should normally come from concrete interoperability failures.
-- **Not a single readiness score.** Evidence states remain inspectable instead of being hidden behind a number.
+A container artifact is in [`scanner-service/`](scanner-service/). Public hosting remains an external deployment gate.
+
+## Resolver as MCP
+
+Agents can consume the resolver itself:
+
+```bash
+npm run resolver:mcp
+```
+
+Tools:
+
+- `resolve_site`
+- `explain_site`
+- `plan_site_interface`
+
+The existing ARWP profile gateway remains available separately for reading one profile's declared resources:
+
+```bash
+ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start
+```
+
+Remote Streamable HTTP gateway:
+
+```bash
+ARWP_PROFILE=https://example.com/ai/site-profile.json \
+ARWP_HTTP_ALLOWED_HOSTS=mcp.example.com \
+npm run mcp:http
+```
+
+See [`docs/GATEWAY.md`](docs/GATEWAY.md).
+
+## Directory and federation
+
+The initial five-site ARWP Directory remains a reference/adoption registry:
+
+```bash
+node bin/arwp.mjs directory
+node bin/arwp.mjs directory --capability=retrieval
+node bin/arwp.mjs federated-search "outside view"
+```
+
+Public directory JSON:
+
+```text
+https://dkharlanau.github.io/agent-ready-web-profile/directory.json
+```
+
+The next federation step is resolver-backed: sites should eventually be resolvable even when they do not publish an ARWP profile but do expose usable upstream discovery.
+
+See [`docs/DIRECTORY.md`](docs/DIRECTORY.md).
+
+## Real reference suite
+
+Five public knowledge-site architectures currently publish ARWP profiles and are live-verified:
+
+- Dzmitryi Kharlanau — SAP Knowledge;
+- Brali Practical Knowledge Library;
+- Cognitive Biases Knowledge Library;
+- CBT Cards;
+- Metkagram.
+
+They intentionally expose different combinations of data, retrieval, OpenAPI, Agent Skills, MCP and trust metadata. Owned references are implementation evidence, **not independent adoption evidence**.
+
+## Benchmark before marketing claims
+
+```bash
+npm run benchmark:resolver
+```
+
+The current benchmark is synthetic deterministic regression coverage. It compares HTML-only, `llms.txt`, ARWP-only, agents-only, upstream-native and Resolver-union strategies over reviewed fixtures.
+
+It explicitly does **not** prove token savings, latency savings, ranking, adoption or answer quality.
+
+The next evidence milestone is a reproducible 20–50-site external corpus measuring:
+
+- requests and bytes until a usable interface is identified;
+- correct/missed interface selection;
+- false-positive capabilities;
+- conflicts detected;
+- canonical identity/provenance preservation;
+- fallbacks required.
+
+Raw negative results must be published too. See [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
+
+## What ARWP deliberately does not replace
+
+ARWP should resolve and preserve upstream semantics rather than reimplement them.
+
+Do not create ARWP-native replacements for:
+
+- RFC 9727 API Catalog;
+- RFC 9728 Protected Resource Metadata;
+- A2A Agent Cards;
+- MCP runtime discovery / Server Cards;
+- Agent Skills;
+- crawler AI-use preferences;
+- payment/commerce protocols.
+
+Project rule:
+
+```text
+UPSTREAM EXISTS
+      ↓
+resolve / validate / normalize it
+
+UPSTREAM DOES NOT EXIST
+      ↓
+collect a real interoperability failure
+
+ONLY THEN
+      ↓
+consider an ARWP-specific extension
+```
+
+## Security boundaries
+
+- public HTTPS targets only;
+- private/reserved/link-local targets rejected;
+- redirect destinations revalidated;
+- bounded requests and responses;
+- no URL credentials;
+- metadata never grants permission;
+- URL reachability never proves MCP/WebMCP/A2A runtime conformance;
+- conflicts remain visible instead of being hidden by a score.
+
+## Development direction
+
+The North Star is:
+
+> **How many external sites can ARWP correctly resolve and route without site-specific integration code?**
+
+Current Iteration 2 priorities:
+
+1. publish/install/deploy the 0.2.x resolver toolchain;
+2. build the external utility benchmark corpus;
+3. obtain three independent adopters;
+4. reconcile static MCP evidence with live `server/discover` behavior;
+5. verify A2A card signatures when present;
+6. build resolver snapshots and drift/conflict monitoring;
+7. use evidence to decide whether a new ARWP profile-contract version is needed at all.
+
+See [`ROADMAP.md`](ROADMAP.md).
 
 ## Repository map
 
-- [`SPEC.md`](SPEC.md) — normative experimental v0.1 specification.
-- [`schema/site-profile.schema.json`](schema/site-profile.schema.json) — JSON Schema 2020-12 profile contract.
-- [`bin/arwp.mjs`](bin/arwp.mjs) — CLI for scan/init/validate/verify/health/directory/federation.
-- [`lib/scanner.mjs`](lib/scanner.mjs) — bounded evidence-based website discovery.
-- [`lib/health.mjs`](lib/health.mjs) — evidence/declaration/verification health report.
-- [`lib/protocol-checks.mjs`](lib/protocol-checks.mjs) — conservative protocol artifact checks.
-- [`gateway/`](gateway/) — local and remote generic MCP gateway.
-- [`scanner-service/`](scanner-service/) — bounded hosted scanner runtime.
-- [`router/`](router/) — directory loader, federated search and multi-site MCP router.
-- [`registry/`](registry/) — directory data and JSON Schema.
-- [`server.json`](server.json) — prepared Official MCP Registry metadata.
-- [`templates/`](templates/) — adopter automation templates.
-- [`docs/`](docs/) — public site and deeper guides.
-- [`ecosystem/`](ecosystem/) — external submission artifacts and publication gates.
-
-## P0–P3 development status
-
-**P0 — Understand & adopt:** value-first homepage, real examples, scanner/init UX, generated profile download path and CI adoption are implemented.
-
-**P1 — Install & connect:** package-ready CLI, health report, local/remote MCP gateway, hosted-scanner runtime, badge and deployment examples are implemented. Actual npm/runtime publication remains an external operation.
-
-**P2 — Discover & federate:** public directory, directory schema, capability filtering, federated search, multi-site MCP router, adopter PR automation and MCP Registry metadata are implemented/prepared.
-
-**P3 — Ecosystem adoption:** SchemaStore submission artifact, independent-adopter kit and static discovery API contract are prepared. External acceptance and independent adoption are deliberately not fabricated.
-
-## Principles
-
-- Prefer existing standards over ARWP-specific fields.
-- Declare only capabilities that actually exist.
-- Keep canonical identity stable across HTML, data, retrieval and agent surfaces.
-- Preserve provenance, review state, licensing and citations with retrieved records.
-- Prefer read-only public integrations unless mutation is necessary.
-- Make abstention and `no_match` explicit where unsupported answers would be harmful or misleading.
-- Keep security and authorization at runtime; metadata is never permission.
-- Treat experimental browser/runtime features as experimental.
-- Version contracts before consumers depend on them.
-- Prefer evidence from working implementations over speculative fields.
+- [`SPEC.md`](SPEC.md) — experimental ARWP profile contract.
+- [`schema/site-profile.schema.json`](schema/site-profile.schema.json) — profile JSON Schema.
+- [`bin/arwp.mjs`](bin/arwp.mjs) — CLI.
+- [`lib/scanner.mjs`](lib/scanner.mjs) — bounded website scanner.
+- [`lib/resolver.mjs`](lib/resolver.mjs) — multi-standard resolver and planner.
+- [`lib/resolver-adapters.mjs`](lib/resolver-adapters.mjs) — upstream/community adapters.
+- [`lib/public-fetch.mjs`](lib/public-fetch.mjs) — bounded public-HTTPS fetch primitives.
+- [`resolver/server.mjs`](resolver/server.mjs) — resolver MCP server.
+- [`scanner-service/`](scanner-service/) — bounded hosted scan/resolve service.
+- [`gateway/`](gateway/) — generic ARWP-profile MCP gateway.
+- [`router/`](router/) — directory federation.
+- [`registry/`](registry/) — initial public ARWP Directory.
+- [`benchmarks/`](benchmarks/) — resolver regression/evidence work.
+- [`docs/RESOLVER.md`](docs/RESOLVER.md) — resolver model.
+- [`docs/BENCHMARK.md`](docs/BENCHMARK.md) — benchmark rules.
+- [`ROADMAP.md`](ROADMAP.md) — evidence-driven next iteration.
 
 ## License
 
