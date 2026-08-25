@@ -2,15 +2,19 @@
   "name": "agent-ready-web-profile",
   "version": "0.1.0",
   "private": true,
-  "description": "Specification, schema and validator for the Agent-Ready Web Profile (ARWP).",
+  "description": "Specification, schema, validator and reference MCP gateway for the Agent-Ready Web Profile (ARWP).",
   "type": "module",
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
-    "test": "node scripts/test.mjs"
+    "test:gateway": "node scripts/gateway-test.mjs && node --check gateway/server.mjs",
+    "test": "node scripts/test.mjs && node scripts/gateway-test.mjs && node --check gateway/server.mjs",
+    "mcp:start": "node gateway/server.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "zod": "^4.0.0"
   },
   "engines": {
     "node": ">=20"
