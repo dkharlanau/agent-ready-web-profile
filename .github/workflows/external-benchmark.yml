@@ -8,6 +8,10 @@ on:
       - '.github/workflows/external-benchmark.yml'
       - 'benchmarks/corpus/**'
       - 'benchmarks/external-runner.mjs'
+      - 'benchmarks/federation-corpus.json'
+      - 'benchmarks/federation-runner.mjs'
+      - 'gateway/lib.mjs'
+      - 'router/resolved-federated.mjs'
       - 'lib/resolver.mjs'
       - 'lib/resolver-adapters.mjs'
       - 'lib/scanner.mjs'
@@ -47,6 +51,9 @@ jobs:
           mkdir -p benchmark-results
           npm run benchmark:external -- --output=benchmark-results/external.json
 
+      - name: Run resolver-backed federation corpus
+        run: npm run benchmark:federation-external -- --output=benchmark-results/federation.json
+
       - name: Write job summary
         if: always()
         run: |
@@ -69,7 +76,24 @@ jobs:
             const accuracy = result.accuracy == null ? 'n/a' : `${(result.accuracy * 100).toFixed(1)}%`;
             lines.push(`| ${strategy} | ${result.correct} | ${result.total} | ${accuracy} |`);
           }
-          lines.push('', '> Engineering evidence only. Ground truth is the reviewed corpus; Resolver output is never allowed to become its own ground truth. Sub-strategy rows are selection-only projections over the same Resolver observation, not independent network-performance measurements.');
+          if (fs.existsSync('benchmark-results/federation.json')) {
+            const federation = JSON.parse(fs.readFileSync('benchmark-results/federation.json', 'utf8'));
+            lines.push(
+              '',
+              '## Resolver-backed federation corpus',
+              '',
+              `Independent sites: ${federation.independentSites}`,
+              `Expected interfaces executed: ${federation.expectedInterfacesExecuted}`,
+              `Sites with query hits: ${federation.sitesWithHits}`,
+              '',
+              '| Site | Status | Executed | Hits |',
+              '| --- | --- | ---: | ---: |'
+            );
+            for (const site of federation.sites || []) {
+              lines.push(`| ${site.id} | ${site.status} | ${(site.executed || []).length} | ${site.hits || 0} |`);
+            }
+          }
+          lines.push('', '> Engineering evidence only. Ground truth is the reviewed corpus; Resolver output is never allowed to become its own ground truth. Sub-strategy rows are selection-only projections over the same Resolver observation, not independent network-performance measurements. Federation hit counts are not answer-quality measurements.');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
           NODE
           else
@@ -77,11 +101,11 @@ jobs:
             echo 'No result file was produced.' >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: Upload raw benchmark report
+      - name: Upload raw benchmark reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: arwp-external-benchmark-${{ github.run_id }}
-          path: benchmark-results/external.json
+          path: benchmark-results/*.json
           if-no-files-found: warn
           retention-days: 90

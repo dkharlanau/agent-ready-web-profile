@@ -61,6 +61,8 @@ export function recordSummary(record) {
     ?? record?.description
     ?? record?.excerpt
     ?? record?.text
+    ?? record?.content_text
+    ?? record?.content_html
     ?? record?.content
     ?? '';
   const text = typeof candidate === 'string' ? candidate : JSON.stringify(candidate);

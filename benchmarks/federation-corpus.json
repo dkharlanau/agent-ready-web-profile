@@ -1,0 +1,87 @@
+{
+  "corpusVersion": "0.1",
+  "reviewedAt": "2026-08-26",
+  "purpose": "Independent public sites with an explicitly published JSON Feed that can exercise resolver-backed federation without site-specific operation code.",
+  "sites": [
+    {
+      "id": "jsonfeed-org",
+      "name": "JSON Feed",
+      "url": "https://www.jsonfeed.org/",
+      "ownership": "independent",
+      "query": "JSON Feed",
+      "expectedInterfaceUrl": "https://www.jsonfeed.org/feed.json",
+      "evidence": [
+        {
+          "url": "https://www.jsonfeed.org/version/1.1/",
+          "sourceType": "official-spec",
+          "note": "JSON Feed 1.1 defines rel=alternate discovery and feed.json as the conventional manually discoverable location."
+        },
+        {
+          "url": "https://www.jsonfeed.org/feed.json",
+          "sourceType": "public-artifact",
+          "note": "The project site publishes its own JSON Feed."
+        }
+      ]
+    },
+    {
+      "id": "manton-reece",
+      "name": "Manton Reece",
+      "url": "https://www.manton.org/",
+      "ownership": "independent",
+      "query": "Manton",
+      "expectedInterfaceUrl": "https://www.manton.org/feed.json",
+      "evidence": [
+        {
+          "url": "https://www.manton.org/2017/05/17/json-feed.html",
+          "sourceType": "publisher-post",
+          "note": "The publisher documents JSON Feed support on Micro.blog-hosted sites."
+        },
+        {
+          "url": "https://www.manton.org/feed.json",
+          "sourceType": "public-artifact",
+          "note": "The site publishes a JSON Feed at feed.json."
+        }
+      ]
+    },
+    {
+      "id": "ai-rud-is",
+      "name": "ai.rud.is",
+      "url": "https://ai.rud.is/",
+      "ownership": "independent",
+      "query": "machine",
+      "expectedInterfaceUrl": "https://ai.rud.is/feed.json",
+      "evidence": [
+        {
+          "url": "https://ai.rud.is/posts/2026-05-23-making-airudis-legible-to-machines",
+          "sourceType": "publisher-post",
+          "note": "The publisher documents adding JSON Feed 1.1 at /feed.json with application/feed+json auto-discovery in the page head."
+        },
+        {
+          "url": "https://ai.rud.is/feed.json",
+          "sourceType": "public-artifact",
+          "note": "The documented JSON Feed endpoint used by the federation corpus."
+        }
+      ]
+    },
+    {
+      "id": "daring-fireball",
+      "name": "Daring Fireball",
+      "url": "https://daringfireball.net/",
+      "ownership": "independent",
+      "query": "John Gruber",
+      "expectedInterfaceUrl": "https://daringfireball.net/feeds/json",
+      "evidence": [
+        {
+          "url": "https://daringfireball.net/feeds/",
+          "sourceType": "publisher-docs",
+          "note": "The publisher lists https://daringfireball.net/feeds/json as the site's main JSON feed."
+        },
+        {
+          "url": "https://daringfireball.net/feeds/json",
+          "sourceType": "public-artifact",
+          "note": "The site's published JSON Feed endpoint."
+        }
+      ]
+    }
+  ]
+}

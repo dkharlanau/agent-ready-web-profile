@@ -9,7 +9,8 @@ function inferFormat(item) {
   const source = `${item?.url || ''} ${item?.mediaType || ''}`.toLowerCase();
   if (source.includes('ndjson') || source.endsWith('.ndjson')) return 'ndjson';
   if (source.includes('jsonl') || source.endsWith('.jsonl')) return 'jsonl';
-  if (source.includes('application/json') || /\.json(?:$|[?#])/.test(source)) return 'json';
+  if (source.includes('application/feed+json') || source.includes('application/json') || /\.json(?:$|[?#])/.test(source)) return 'json';
+  if (item?.kind === 'feed' && /\/(?:feed(?:\.json)?|feeds?\/json|jsonfeed(?:\.json)?)(?:$|[?#])/i.test(String(item.url || ''))) return 'json';
   return null;
 }
 
@@ -25,11 +26,23 @@ function authorityRank(value) {
   })[value] || 0;
 }
 
+function staticSurfaceRank(item) {
+  if (item.kind === 'index') return 2;
+  if (item.kind === 'feed') return 1;
+  return 0;
+}
+
 export function resolvedStaticIndexes(resolution) {
-  return (resolution?.interfaces?.retrieval || [])
+  const candidates = [
+    ...(resolution?.interfaces?.retrieval || []),
+    ...(resolution?.interfaces?.content || []).filter(item => item.kind === 'feed')
+  ];
+  return candidates
     .map(item => ({ ...item, format: inferFormat(item) }))
-    .filter(item => item.url && item.format && (item.kind === 'index' || ['json', 'jsonl', 'ndjson'].includes(item.format)))
-    .sort((a, b) => authorityRank(b.sourceAuthority) - authorityRank(a.sourceAuthority) || String(a.url).localeCompare(String(b.url)));
+    .filter(item => item.url && item.format && (item.kind === 'index' || item.kind === 'feed' || ['json', 'jsonl', 'ndjson'].includes(item.format)))
+    .sort((a, b) => authorityRank(b.sourceAuthority) - authorityRank(a.sourceAuthority)
+      || staticSurfaceRank(b) - staticSurfaceRank(a)
+      || String(a.url).localeCompare(String(b.url)));
 }
 
 async function mapLimit(items, concurrency, mapper) {
@@ -71,6 +84,7 @@ export async function searchResolvedFederated(query, {
     error: item.error
   }));
   const failures = [];
+  const executed = [];
   const hitsBySite = await mapLimit(resolvedSites, safeConcurrency, async item => {
     const indexes = resolvedStaticIndexes(item.resolution);
     if (!indexes.length) {
@@ -82,7 +96,22 @@ export async function searchResolvedFederated(query, {
       const fetched = await fetchTextImpl(selected.url, { maxBytes: maxIndexBytes });
       if (!fetched.ok) throw new Error(`HTTP ${fetched.status}`);
       const records = parseIndexText(fetched.text, selected.format);
-      return searchRecords(records, normalizedQuery, safePerSite).map(hit => ({
+      const matches = searchRecords(records, normalizedQuery, safePerSite);
+      executed.push({
+        siteId: item.id,
+        siteName: item.name || item.resolution.identity?.name || item.id,
+        interface: {
+          kind: selected.kind || 'index',
+          url: selected.url,
+          mediaType: selected.mediaType || null,
+          format: selected.format,
+          sourceId: selected.sourceId || null,
+          sourceAuthority: selected.sourceAuthority || null
+        },
+        records: records.length,
+        matches: matches.length
+      });
+      return matches.map(hit => ({
         ...hit,
         site: {
           id: item.id,
@@ -114,12 +143,14 @@ export async function searchResolvedFederated(query, {
 
   const results = hitsBySite.flat();
   results.sort((a, b) => b.score - a.score || a.site.name.localeCompare(b.site.name) || String(a.id || '').localeCompare(String(b.id || '')));
+  executed.sort((a, b) => String(a.siteId).localeCompare(String(b.siteId)) || String(a.interface.url).localeCompare(String(b.interface.url)));
   return {
-    federationVersion: '0.1',
+    federationVersion: '0.2',
     query: normalizedQuery,
-    policy: 'Only resolved static JSON/JSONL/NDJSON retrieval indexes are executed. Generic federation does not invent OpenAPI, MCP or A2A operations.',
-    searchedSites: resolvedSites.length - skipped.filter(item => item.reason === 'no-supported-static-retrieval-index').length,
+    policy: 'Only resolved static JSON/JSONL/NDJSON retrieval indexes and JSON Feed surfaces are executed. Generic federation does not invent OpenAPI, MCP or A2A operations.',
+    searchedSites: executed.length,
     resolvedSites: resolvedSites.length,
+    executed,
     results: results.slice(0, safeLimit),
     skipped,
     failures,
