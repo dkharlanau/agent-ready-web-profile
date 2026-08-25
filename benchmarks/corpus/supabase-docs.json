@@ -1,0 +1,32 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "supabase-docs",
+  "url": "https://supabase.com/docs/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": [
+      "https://supabase.com/llms.txt",
+      { "url": "https://supabase.com/docs/", "protocol": "HTML", "kind": "html" }
+    ],
+    "search": [],
+    "structured": [],
+    "tools": [
+      { "url": "https://mcp.supabase.com/mcp", "protocol": "MCP" }
+    ],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://supabase.com/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Supabase publishes a root llms.txt index covering its public documentation."
+    },
+    {
+      "url": "https://supabase.com/docs/guides/getting-started/mcp",
+      "sourceType": "official-docs",
+      "note": "Supabase documents its hosted MCP server at mcp.supabase.com/mcp. This fixture accepts it only for the generic tools intent; no docs-search semantics are inferred."
+    }
+  ],
+  "note": "The benchmark only discovers/chooses the MCP endpoint; it does not authenticate to Supabase, access a project or invoke mutable tools."
+}
