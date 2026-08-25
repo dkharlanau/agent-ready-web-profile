@@ -12,6 +12,8 @@ on:
       - 'lib/resolver-adapters.mjs'
       - 'lib/http-discovery.mjs'
       - 'lib/public-fetch.mjs'
+      - 'package.json'
+      - 'package-lock.json'
 
 permissions:
   contents: read
