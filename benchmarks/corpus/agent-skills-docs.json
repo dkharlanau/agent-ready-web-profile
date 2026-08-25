@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "agent-skills-docs",
+  "url": "https://agentskills.io/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://agentskills.io/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://agentskills.io/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "The Agent Skills documentation publishes a root llms.txt index linking the specification and integration pages."
+    }
+  ],
+  "note": "The docs explain Agent Skills but are not themselves counted as an executable skill or tool interface."
+}
