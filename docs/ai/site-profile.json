@@ -4,7 +4,7 @@
   "id": "agent-ready-web-profile",
   "name": "Agent-Ready Web Profile",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
-  "description": "Public documentation, directory and tooling project for making a website's real web, data, retrieval, agent and trust interfaces easier for software to discover and verify.",
+  "description": "Public interoperability resolver, profile contract, directory and tooling project for discovering, normalizing and routing a website's real web, data, retrieval, agent and trust interfaces.",
   "languages": ["en"],
   "data": {
     "catalog": "https://dkharlanau.github.io/agent-ready-web-profile/directory.json",
@@ -33,6 +33,13 @@
         "transport": "stdio",
         "source": "https://github.com/dkharlanau/agent-ready-web-profile/tree/main/gateway",
         "documentation": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GATEWAY.md",
+        "readOnly": true
+      },
+      {
+        "name": "arwp-site-resolver",
+        "transport": "stdio",
+        "source": "https://github.com/dkharlanau/agent-ready-web-profile/tree/main/resolver",
+        "documentation": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md",
         "readOnly": true
       },
       {
