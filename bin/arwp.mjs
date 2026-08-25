@@ -6,20 +6,27 @@ import { loadProfile, validateProfile, formatAjvError } from '../lib/validator.m
 import { verifyProfileSource } from '../lib/verifier.mjs';
 import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 
+const packageJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
+const toolVersion = packageJson.version;
+
 function usage() {
-  console.log(`Agent-Ready Web Profile CLI
+  console.log(`Agent-Ready Web Profile CLI ${toolVersion}
 
 Usage:
-  node bin/arwp.mjs validate <profile.json> [--json]
-  node bin/arwp.mjs verify <profile.json|https://...> [--json] [--timeout=<ms>] [--concurrency=<n>]
-  node bin/arwp.mjs scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
-  node bin/arwp.mjs init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
+  arwp validate <profile.json> [--json]
+  arwp verify <profile.json|https://...> [--json] [--timeout=<ms>] [--concurrency=<n>]
+  arwp scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
+  arwp init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
+  arwp mcp
+  arwp mcp-http
 
 Commands:
   validate   Validate one local ARWP profile against the v0.1 schema and semantic checks.
   verify     Validate a local or remote profile and probe every declared public URL.
   scan       Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
   init       Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
+  mcp        Start the generic read-only MCP gateway over stdio (configure with ARWP_PROFILE).
+  mcp-http   Start the guarded Streamable HTTP MCP gateway.
 `);
 }
 
@@ -73,23 +80,35 @@ function printVerification(result) {
   for (const warning of result.warnings ?? []) console.warn(`WARN ${warning}`);
 }
 
-if (!command || command === '--help' || command === '-h') {
-  usage();
-  process.exit(0);
-}
+async function main() {
+  if (!command || command === '--help' || command === '-h') {
+    usage();
+    return 0;
+  }
+  if (command === '--version' || command === '-v') {
+    console.log(toolVersion);
+    return 0;
+  }
+  if (command === 'mcp') {
+    await import('../gateway/server.mjs');
+    return null;
+  }
+  if (command === 'mcp-http') {
+    await import('../gateway/http-node.mjs');
+    return null;
+  }
 
-if (!['validate', 'verify', 'scan', 'init'].includes(command) || !source) {
-  usage();
-  process.exit(2);
-}
+  if (!['validate', 'verify', 'scan', 'init'].includes(command) || !source) {
+    usage();
+    return 2;
+  }
 
-try {
   if (command === 'validate') {
     const profile = loadProfile(source);
     const result = validateProfile(profile);
     if (jsonOutput) console.log(JSON.stringify(result, null, 2));
     else printValidation(source, result);
-    process.exit(result.valid ? 0 : 1);
+    return result.valid ? 0 : 1;
   }
 
   if (command === 'verify') {
@@ -99,7 +118,7 @@ try {
     });
     if (jsonOutput) console.log(JSON.stringify(result, null, 2));
     else printVerification(result);
-    process.exit(result.valid ? 0 : 1);
+    return result.valid ? 0 : 1;
   }
 
   const scan = await scanSite(source, {
@@ -115,7 +134,7 @@ try {
       console.log('\nDraft profile (not written):');
       console.log(JSON.stringify(scan.draftProfile, null, 2));
     }
-    process.exit(0);
+    return 0;
   }
 
   const output = path.resolve(optionValue('output') || path.join('ai', 'site-profile.json'));
@@ -136,9 +155,14 @@ try {
     console.log(`WROTE ${output}`);
     console.log(`Detected ${scan.evidence.length} evidence item(s).`);
     for (const warning of scan.warnings) console.warn(`WARN ${warning}`);
-    console.log(`Next: node bin/arwp.mjs validate ${output}`);
+    console.log(`Next: arwp validate ${output}`);
   }
-  process.exit(0);
+  return 0;
+}
+
+try {
+  const exitCode = await main();
+  if (Number.isInteger(exitCode)) process.exit(exitCode);
 } catch (error) {
   if (jsonOutput) {
     console.log(JSON.stringify({ valid: false, fatal: String(error.message ?? error) }, null, 2));
