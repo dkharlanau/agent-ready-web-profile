@@ -1,0 +1,56 @@
+name: Fix Pages public links
+
+on:
+  push:
+    branches:
+      - fix/pages-public-links
+
+permissions:
+  contents: write
+
+jobs:
+  fix-links:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/pages-public-links
+
+      - name: Normalize public links and package homepage
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          html_path = Path('docs/index.html')
+          html = html_path.read_text(encoding='utf-8')
+          html = html.replace('href="../SPEC.md"', 'href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md"')
+          html_path.write_text(html, encoding='utf-8')
+
+          package_path = Path('package.json')
+          package = json.loads(package_path.read_text(encoding='utf-8'))
+          package['homepage'] = 'https://dkharlanau.github.io/agent-ready-web-profile/'
+          package_path.write_text(json.dumps(package, indent=2) + '\n', encoding='utf-8')
+          PY
+
+          ! grep -q 'href="../SPEC.md"' docs/index.html
+          grep -q 'https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md' docs/index.html
+          grep -q 'https://dkharlanau.github.io/agent-ready-web-profile/' package.json
+          npm test
+          npm run test:package
+
+      - name: Commit fixes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html package.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "fix: use public Pages-safe links"
+          git push origin HEAD:fix/pages-public-links
