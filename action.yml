@@ -1,0 +1,24 @@
+name: Validate Agent-Ready Web Profile
+description: Validate an ARWP site-profile.json against the current schema and semantic checks.
+author: Dzmitryi Kharlanau
+
+inputs:
+  profile:
+    description: Path to the ARWP JSON profile in the caller repository.
+    required: false
+    default: ai/site-profile.json
+
+runs:
+  using: composite
+  steps:
+    - name: Install ARWP validator dependencies
+      shell: bash
+      run: npm install --prefix "$GITHUB_ACTION_PATH" --no-audit --no-fund
+
+    - name: Validate ARWP profile
+      shell: bash
+      run: node "$GITHUB_ACTION_PATH/bin/arwp.mjs" validate "${{ inputs.profile }}"
+
+branding:
+  icon: check-circle
+  color: blue
