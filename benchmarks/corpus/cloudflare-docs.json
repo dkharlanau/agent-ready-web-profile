@@ -8,14 +8,19 @@
     "read": ["https://developers.cloudflare.com/llms.txt"],
     "search": [{ "url": "https://docs.mcp.cloudflare.com/mcp", "protocol": "MCP" }],
     "structured": [{ "protocol": "OpenAPI" }],
-    "tools": [{ "url": "https://docs.mcp.cloudflare.com/mcp", "protocol": "MCP" }],
+    "tools": [{ "protocol": "MCP" }],
     "agent": []
   },
   "evidence": [
     {
+      "url": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+      "sourceType": "official-docs",
+      "note": "Cloudflare documents a catalog of managed remote MCP servers including the API, documentation, AI Gateway, observability and other product-specific servers. Any explicitly discovered Cloudflare MCP is therefore acceptable for the generic tools intent; the documentation MCP remains the specific accepted search interface."
+    },
+    {
       "url": "https://developers.cloudflare.com/agents/",
       "sourceType": "official-docs",
-      "note": "Cloudflare documents llms.txt, Markdown page access, OpenAPI schemas, an Agent Skill and a hosted documentation MCP server."
+      "note": "Cloudflare documents llms.txt, Markdown page access, OpenAPI schemas, Agent Skills and hosted MCP integrations for agent clients."
     },
     {
       "url": "https://developers.cloudflare.com/style-guide/ai-content-guidelines/",
@@ -23,5 +28,5 @@
       "note": "Cloudflare explicitly documents llms.txt/llms-full.txt and Markdown-oriented agent access patterns."
     }
   ],
-  "note": "Useful mixed-surface fixture: root llms.txt plus cross-origin OpenAPI and docs MCP evidence."
+  "note": "Mixed-surface fixture. Generic tools accepts any documented/discovered Cloudflare MCP; search remains specifically the documentation MCP because search semantics cannot be inferred from an arbitrary MCP endpoint."
 }
