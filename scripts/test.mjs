@@ -1,15 +1,26 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { loadProfile, validateProfile } from '../lib/validator.mjs';
+
+const referenceDir = path.resolve('examples/reference');
+const referenceProfiles = fs.readdirSync(referenceDir)
+  .filter(name => name.endsWith('.site-profile.json'))
+  .sort()
+  .map(name => path.join('examples/reference', name));
 
 const examples = [
   'examples/minimal.site-profile.json',
-  'examples/knowledge-site.site-profile.json'
+  'examples/knowledge-site.site-profile.json',
+  ...referenceProfiles
 ];
 
 for (const file of examples) {
   const result = validateProfile(loadProfile(file));
   assert.equal(result.valid, true, `${file} should validate: ${JSON.stringify(result.errors)}`);
 }
+
+assert.equal(referenceProfiles.length, 5, 'The v0.1 reference suite should contain five real-site profiles.');
 
 const missingRequired = loadProfile('examples/minimal.site-profile.json');
 delete missingRequired.canonicalUrl;
@@ -41,7 +52,7 @@ const sourceBackedStdioMcp = loadProfile('examples/minimal.site-profile.json');
 sourceBackedStdioMcp.mcp = {
   servers: [
     {
-      name: 'example/source-server',
+      name: 'example-source-server',
       transport: 'stdio',
       source: 'https://github.com/example/knowledge/tree/main/mcp/server',
       readOnly: true
@@ -69,4 +80,4 @@ falseSkillName.agentSkills = {
 };
 assert.equal(validateProfile(falseSkillName).valid, false, 'Agent Skill names must follow the lowercase hyphenated naming contract.');
 
-console.log(`PASS ${examples.length} valid examples and 6 negative/conditional contract tests`);
+console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references) and 6 negative/conditional contract tests`);
