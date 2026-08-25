@@ -1,0 +1,58 @@
+name: Reference site verification
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-reference-sites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Verify published reference resources
+        id: verify
+        shell: bash
+        run: |
+          mkdir -p reports/reference-verification
+          failed=0
+          for profile in examples/reference/*.site-profile.json; do
+            name="$(basename "$profile" .site-profile.json)"
+            echo "::group::Verify $name"
+            if node bin/arwp.mjs verify "$profile" --json --timeout=15000 --concurrency=6 > "reports/reference-verification/$name.json"; then
+              cat "reports/reference-verification/$name.json"
+            else
+              cat "reports/reference-verification/$name.json"
+              failed=1
+            fi
+            echo "::endgroup::"
+          done
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+
+      - name: Upload verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arwp-reference-verification
+          path: reports/reference-verification/*.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Fail on reference drift
+        if: steps.verify.outputs.failed == '1'
+        run: |
+          echo "One or more published reference resources failed ARWP live verification."
+          exit 1
