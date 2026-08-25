@@ -1,71 +1,71 @@
 # Agent-Ready Web Profile
 
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
+[![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
-Agent-Ready Web Profile (ARWP) is a small interoperability profile for websites that want to be useful to people, search engines, retrieval systems, browser agents, and MCP clients without inventing a new protocol for each audience.
+Agent-Ready Web Profile (ARWP) is a small interoperability profile for websites that want to be useful to people, search engines, retrieval systems and AI agents without inventing a new protocol for every audience.
 
-ARWP does **not** replace SEO, `llms.txt`, WebMCP, Model Context Protocol (MCP), A2A, OpenAPI, JSON Schema, Schema.org, Croissant, sitemaps, feeds, or crawler controls. It provides one machine-readable map that tells a consumer which of those surfaces a site actually exposes and where they live.
+ARWP does **not** replace SEO, `llms.txt`, Agent Skills, WebMCP, Model Context Protocol (MCP), A2A, OpenAPI, JSON Schema, Schema.org, Croissant, sitemaps, feeds or crawler controls. It provides one machine-readable map that says which of those surfaces a site actually exposes and where they live.
 
 Status: **experimental v0.1**.
 
-## The problem
+## Why this exists
 
-Modern knowledge websites often publish several parallel interfaces:
+A modern knowledge site may already publish:
 
-- human-readable HTML pages;
-- search-engine metadata and sitemaps;
-- JSON, JSONL, NDJSON, RDF or other structured data;
-- schemas, releases and provenance;
-- RAG-ready distributions;
-- `llms.txt` and Markdown mirrors;
-- WebMCP tools exposed by interactive pages;
+- useful human-readable HTML;
+- sitemaps, canonical URLs and crawler policy;
+- JSON, JSONL or NDJSON datasets;
+- schemas, APIs, releases and provenance;
+- RAG-ready indexes;
+- `llms.txt` and Markdown resources;
+- portable Agent Skills;
+- WebMCP tools on interactive pages;
 - local or remote MCP servers;
 - sometimes a real A2A agent.
 
-These pieces can be individually correct while still being difficult for an external agent to discover and combine. ARWP adds a thin discovery layer over them.
+Each interface can be correct while the overall site is still difficult for an external client to discover and integrate. ARWP is a thin discovery contract over those existing interfaces.
 
 ## Design principle
 
 **One source of truth, many representations.**
 
-A site should maintain canonical knowledge and derive its human, search, data, retrieval and agent interfaces from that knowledge wherever practical. ARWP describes those interfaces; it does not become another source of domain content.
-
 ```text
                          CANONICAL KNOWLEDGE
                                  |
-              +------------------+------------------+
-              |                  |                  |
-          HUMAN / SEO          DATA / RAG        AGENT TOOLS
-              |                  |                  |
-          HTML pages           JSON/NDJSON         WebMCP
-          sitemap              JSON Schema         MCP
-          JSON-LD              OpenAPI             A2A (if real)
-          feeds                releases
+             +-------------------+-------------------+
+             |                   |                   |
+         HUMAN / SEO          DATA / RAG         AGENT LAYER
+             |                   |                   |
+         HTML pages            JSON/NDJSON          Agent Skills
+         sitemap               JSON Schema          WebMCP
+         JSON-LD               OpenAPI              MCP
+         feeds                 releases             A2A (if real)
                                provenance
-              \__________________|__________________/
+             \___________________|___________________/
                                  |
                          site-profile.json
 ```
 
-## Profile location
+ARWP describes these surfaces. It should not become another source of domain content.
 
-The recommended initial location is:
+## Recommended profile location
 
 ```text
 /ai/site-profile.json
 ```
 
-This is a project convention, **not** a registered `.well-known` URI. ARWP intentionally avoids claiming a new Internet standard before there is adoption and interoperability evidence.
+This is an ARWP project convention, **not** a registered `.well-known` URI. v0.1 intentionally avoids claiming a new Internet discovery standard before there is independent adoption evidence.
 
-A site may additionally advertise the profile with an HTTP `Link` header or an HTML link element, for example:
+A publisher may additionally advertise the profile with an applicable link relation, for example:
 
 ```html
 <link rel="describedby" type="application/json" href="/ai/site-profile.json">
 ```
 
-Consumers should not assume that every site has an ARWP profile.
+Consumers should also support an explicitly configured profile URL.
 
-## Minimal example
+## Minimal profile
 
 ```json
 {
@@ -82,77 +82,82 @@ Consumers should not assume that every site has an ARWP profile.
   },
   "data": {
     "catalog": "https://example.com/data/catalog.json",
-    "schemas": "https://example.com/schemas/",
-    "openapi": "https://example.com/api/openapi.json"
+    "schemas": "https://example.com/schemas/index.json"
   },
   "trust": {
     "license": "https://example.com/license/",
-    "citation": "https://example.com/cite/",
     "provenance": "https://example.com/data/provenance.json"
   }
 }
 ```
 
-See [`SPEC.md`](SPEC.md) for normative language and [`examples/`](examples/) for fuller profiles.
+See [`SPEC.md`](SPEC.md) for normative requirements and [`examples/`](examples/) for fuller profiles.
 
-## Layers
+## Capability groups
 
-ARWP treats these as separate concerns:
+ARWP keeps different interoperability mechanisms separate:
 
-1. **Web** — crawlable HTML, canonical URLs, sitemaps, robots policy, feeds, `llms.txt` and optional Markdown representations.
+1. **Web** — crawlable HTML, sitemaps, robots policy, feeds, `llms.txt` and optional Markdown discovery.
 2. **Data** — stable machine-readable records, schemas, APIs, releases and dataset metadata.
-3. **Retrieval** — bounded search/RAG distributions, citation-preserving chunks and explicit no-match/abstention behavior where relevant.
-4. **Agent Web** — WebMCP tools exposed by a page to browser agents.
-5. **MCP** — real local or remote MCP servers. A static API must not be described as a hosted MCP server.
-6. **Agent** — A2A discovery only when the site operates an actual agent service.
+3. **Retrieval** — bounded search/RAG distributions with canonical identity, citations and abstention behavior where relevant.
+4. **Agent Skills** — portable `SKILL.md` procedures; instructions, not a tool transport.
+5. **Agent Web** — WebMCP capabilities exposed by actual browser pages.
+6. **MCP** — real local or remote MCP servers. Static JSON is not a remote MCP server.
+7. **Agent** — A2A discovery only when a real agent service exists.
+8. **Identity and trust** — stable IDs, aliases, licensing, citation, provenance, review and security surfaces.
 
-These layers are complementary. A site can implement any useful subset.
+A site can implement any useful subset. More capability groups do not automatically make a site better.
 
 ## Important distinctions
 
 ### ARWP is not an SEO ranking mechanism
 
-Google Search does not require `llms.txt`, AI-specific markup, or a special machine-readable file for AI Overviews or AI Mode. ARWP must therefore never be marketed as a Google ranking hack. Human-readable, indexable, useful content and normal technical SEO remain a separate requirement.
+ARWP must not be marketed as a Google ranking hack. Important content still needs to be useful, crawlable and indexable through ordinary web/search mechanisms. AI-oriented discovery surfaces are complementary.
 
-### WebMCP is not remote MCP
+### Agent Skills, WebMCP and MCP are different
 
-WebMCP exposes structured tools from a web page to a browser agent. MCP connects clients to external tools and data sources. A site may support one, both, or neither.
+- **Agent Skills** package reusable procedural instructions.
+- **WebMCP** exposes structured tools from an interactive page to browser agents.
+- **MCP** connects clients to external tools and data through an MCP runtime.
 
-### Static hosting can still be highly agent-ready
+A site may support one, several or none of them.
 
-A static site can expose versioned JSON, NDJSON, schemas, OpenAPI, RAG distributions, `llms.txt`, provenance and WebMCP-enhanced pages. A remote MCP endpoint requires an actual runtime; it should only be declared when one exists.
+### Static hosting can be highly agent-ready
+
+A GitHub Pages site can publish versioned JSON, NDJSON, schemas, OpenAPI, RAG distributions, `llms.txt`, Agent Skills and provenance. A hosted remote MCP server still requires an actual runtime.
 
 ### A2A is not a badge
 
-An A2A Agent Card describes a real agent and its capabilities. A knowledge repository should not publish one merely to appear "AI-ready".
+An Agent Card describes a real agent. A static knowledge repository should not publish one merely to look "AI-ready".
 
-## Repository contents
+## Tooling included in this repository
 
-- [`SPEC.md`](SPEC.md) — v0.1 profile specification.
-- [`schema/site-profile.schema.json`](schema/site-profile.schema.json) — JSON Schema 2020-12.
-- [`examples/minimal.site-profile.json`](examples/minimal.site-profile.json) — minimum valid example.
-- [`examples/knowledge-site.site-profile.json`](examples/knowledge-site.site-profile.json) — fuller knowledge-site example.
-- [`bin/arwp.mjs`](bin/arwp.mjs) — command-line validator.
-- [`action.yml`](action.yml) — reusable GitHub Action for adopting repositories.
-- [`docs/CONFORMANCE.md`](docs/CONFORMANCE.md) — capability-based validation and verification model.
-- [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) — how ARWP relates to existing standards and conventions.
-- [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — validates schemas and examples in CI.
-
-## Quick start
-
-Local validation:
+### Schema validation
 
 ```bash
 npm install
-npm test
 node bin/arwp.mjs validate examples/minimal.site-profile.json
 ```
 
-For a website implementation, copy the example profile, replace the URLs with real public endpoints, and remove capabilities the site does not actually provide.
+The validator checks the v0.1 JSON Schema plus small semantic warnings.
 
-### Use from another GitHub repository
+### Live verification
 
-Add the profile to the adopting site, for example `ai/site-profile.json`, then add a workflow step:
+```bash
+node bin/arwp.mjs verify https://example.com/ai/site-profile.json
+```
+
+or:
+
+```bash
+node bin/arwp.mjs verify ai/site-profile.json --json
+```
+
+The verifier probes declared URLs, follows redirects, checks final HTTPS status and reports basic media-type mismatches. It distinguishes hard failures from warnings.
+
+### Reusable GitHub Action
+
+An adopting repository can validate its profile in CI:
 
 ```yaml
 - name: Validate Agent-Ready Web Profile
@@ -161,45 +166,102 @@ Add the profile to the adopting site, for example `ai/site-profile.json`, then a
     profile: ai/site-profile.json
 ```
 
-`main` is appropriate while v0.1 is experimental. Once release tags exist, production adopters should pin a tag or commit.
+`main` is acceptable while v0.1 is experimental. Production consumers should pin a tag or commit once stable releases exist.
+
+### Generic read-only MCP gateway
+
+ARWP includes a profile-driven stdio MCP gateway for static knowledge sites:
+
+```bash
+ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start
+```
+
+It exposes a deliberately small baseline:
+
+- `get_site_profile`
+- `list_declared_resources`
+- `fetch_declared_resource`
+- `search_retrieval`
+- `get_record`
+
+The gateway accepts only profile-declared HTTPS resources, applies origin allow-listing, re-checks redirects, limits response size and never accepts an arbitrary URL from the MCP caller. See [`docs/GATEWAY.md`](docs/GATEWAY.md).
+
+Domain-specific MCP servers remain preferable when the knowledge model needs reviewed operations such as evidence lookup, ontology traversal, safety-aware routing or semantic comparison.
+
+## Real reference suite
+
+v0.1 is tested against five real public knowledge-site architectures:
+
+- Dzmitryi Kharlanau SAP knowledge site;
+- Brali Practical Knowledge Library;
+- Cognitive Biases Knowledge Library;
+- CBT Cards public reflection resource;
+- Metkagram.
+
+The fixtures live under [`examples/reference/`](examples/reference/). They intentionally model different capability combinations instead of forcing every site into the same shape.
+
+For example, a static MCP-compatible JSON description is kept under data metadata unless an actual MCP runtime exists; a standard `SKILL.md` is declared as an Agent Skill, while a publisher-specific skill routing catalog can be declared without pretending every entry is a portable skill.
+
+The reference profiles are schema-tested on every change. A separate scheduled workflow probes their public resources and uploads machine-readable verification reports so reference drift is visible without making ordinary pull requests depend on external network availability.
+
+## Repository map
+
+- [`SPEC.md`](SPEC.md) — normative experimental v0.1 specification.
+- [`schema/site-profile.schema.json`](schema/site-profile.schema.json) — JSON Schema 2020-12 contract.
+- [`bin/arwp.mjs`](bin/arwp.mjs) — validation and live-verification CLI.
+- [`lib/validator.mjs`](lib/validator.mjs) — reusable schema validator.
+- [`lib/verifier.mjs`](lib/verifier.mjs) — declared-resource verifier.
+- [`gateway/`](gateway/) — generic read-only MCP gateway.
+- [`action.yml`](action.yml) — reusable validation action.
+- [`examples/`](examples/) — generic and real-site profiles.
+- [`docs/CONFORMANCE.md`](docs/CONFORMANCE.md) — capability-based conformance model.
+- [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) — relationship to upstream standards/conventions.
+- [`docs/GATEWAY.md`](docs/GATEWAY.md) — MCP gateway contract and security model.
+- [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — deterministic CI.
+- [`.github/workflows/reference-verification.yml`](.github/workflows/reference-verification.yml) — scheduled live reference checks.
 
 ## Principles
 
 - Prefer existing standards over ARWP-specific fields.
-- Do not claim capabilities that are not live.
-- Keep canonical identity stable across HTML, data, RAG and agent surfaces.
+- Declare only capabilities that actually exist.
+- Keep canonical identity stable across HTML, data, retrieval and agent surfaces.
 - Preserve provenance, review state, licensing and citations with retrieved records.
-- Prefer read-only integrations by default for public knowledge sites.
+- Prefer read-only public integrations unless mutation is necessary.
 - Make abstention and `no_match` explicit where unsupported answers would be harmful or misleading.
-- Treat browser-agent security and remote-tool authorization as runtime concerns, not metadata shortcuts.
+- Keep security and authorization at runtime; metadata is never permission.
+- Treat experimental browser/runtime features as experimental.
 - Version contracts before consumers depend on them.
+- Prefer evidence from working implementations over speculative fields.
 
-## Current external standards tracked by v0.1
+## Standards and conventions tracked by v0.1
 
-ARWP v0.1 is designed to coexist with:
+ARWP is designed to coexist with:
 
-- Google Search technical requirements and normal SEO;
-- `llms.txt` v2 (community proposal/convention);
-- WebMCP (experimental browser API in Chrome 149+ origin trial);
+- normal web/search technical requirements;
+- `llms.txt` v2 as a community proposal/convention;
+- Agent Skills / `SKILL.md`;
+- WebMCP as an experimental browser capability;
 - Model Context Protocol and the official MCP Registry;
 - A2A Agent Card discovery;
 - OpenAPI;
 - JSON Schema 2020-12;
 - Schema.org structured data;
-- MLCommons Croissant for dataset metadata;
+- MLCommons Croissant;
 - standard sitemaps, feeds, robots controls and HTTP link relations.
 
-Experimental or preview technologies are labelled as such in the specification rather than treated as permanent requirements.
+See [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) for the current upstream map and status notes.
 
 ## Roadmap
 
-v0.1 focuses on discovery and truthful capability declaration. Planned follow-up work includes:
+The implemented v0.1 baseline already includes schema validation, live URL verification, a reusable GitHub Action, a generic read-only MCP gateway and five real reference profiles.
 
-- network conformance tests that verify declared URLs and media types;
-- reference profiles for several real static knowledge sites;
-- a generic read-only MCP gateway driven by an ARWP profile;
-- WebMCP reference examples and agentic-browser evals;
-- release/pinning guidance and compatibility rules;
-- evidence for or against standardizing a future `.well-known` discovery location.
+Next work should focus on interoperability evidence rather than adding metadata fields:
 
-Contributions should prefer concrete interoperability problems and working implementations over adding speculative metadata.
+- protocol-specific checks using upstream Agent Skills, WebMCP, MCP and A2A tooling;
+- a stateless Streamable HTTP form of the generic gateway;
+- profile generation/adoption tooling for static-site builds;
+- better release and compatibility policy before a stable version;
+- WebMCP reference implementations and agentic-browser evals;
+- evidence for or against proposing a future registered discovery location.
+
+Contributions should start from a concrete integration failure, missing interoperability case or working implementation.
