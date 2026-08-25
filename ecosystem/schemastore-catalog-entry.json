@@ -1,0 +1,8 @@
+{
+  "name": "Agent-Ready Web Profile",
+  "description": "Machine-readable discovery profile for a website's web, data, retrieval, agent and trust interfaces.",
+  "fileMatch": [
+    "**/ai/site-profile.json"
+  ],
+  "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json"
+}
