@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
+import fs from 'node:fs';
+import path from 'node:path';
 import { loadProfile, validateProfile, formatAjvError } from '../lib/validator.mjs';
 import { verifyProfileSource } from '../lib/verifier.mjs';
+import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 
 function usage() {
   console.log(`Agent-Ready Web Profile CLI
@@ -9,10 +12,14 @@ function usage() {
 Usage:
   node bin/arwp.mjs validate <profile.json> [--json]
   node bin/arwp.mjs verify <profile.json|https://...> [--json] [--timeout=<ms>] [--concurrency=<n>]
+  node bin/arwp.mjs scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
+  node bin/arwp.mjs init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
 
 Commands:
   validate   Validate one local ARWP profile against the v0.1 schema and semantic checks.
   verify     Validate a local or remote profile and probe every declared public URL.
+  scan       Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
+  init       Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
 `);
 }
 
@@ -21,9 +28,17 @@ const command = args[0];
 const source = args[1];
 const jsonOutput = args.includes('--json');
 
-function numericOption(name, fallback) {
+function optionValue(name) {
   const prefix = `--${name}=`;
-  const raw = args.find(arg => arg.startsWith(prefix))?.slice(prefix.length);
+  const inline = args.find(arg => arg.startsWith(prefix));
+  if (inline) return inline.slice(prefix.length);
+  const index = args.indexOf(`--${name}`);
+  if (index >= 0 && args[index + 1] && !args[index + 1].startsWith('--')) return args[index + 1];
+  return null;
+}
+
+function numericOption(name, fallback) {
+  const raw = optionValue(name);
   if (!raw) return fallback;
   const value = Number(raw);
   if (!Number.isFinite(value) || value <= 0) throw new Error(`Invalid --${name} value: ${raw}`);
@@ -63,7 +78,7 @@ if (!command || command === '--help' || command === '-h') {
   process.exit(0);
 }
 
-if (!['validate', 'verify'].includes(command) || !source) {
+if (!['validate', 'verify', 'scan', 'init'].includes(command) || !source) {
   usage();
   process.exit(2);
 }
@@ -77,13 +92,53 @@ try {
     process.exit(result.valid ? 0 : 1);
   }
 
-  const result = await verifyProfileSource(source, {
+  if (command === 'verify') {
+    const result = await verifyProfileSource(source, {
+      timeoutMs: numericOption('timeout', 8000),
+      concurrency: numericOption('concurrency', 6)
+    });
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else printVerification(result);
+    process.exit(result.valid ? 0 : 1);
+  }
+
+  const scan = await scanSite(source, {
     timeoutMs: numericOption('timeout', 8000),
-    concurrency: numericOption('concurrency', 6)
+    maxBytes: numericOption('max-bytes', 512 * 1024)
   });
-  if (jsonOutput) console.log(JSON.stringify(result, null, 2));
-  else printVerification(result);
-  process.exit(result.valid ? 0 : 1);
+
+  if (command === 'scan') {
+    if (jsonOutput) {
+      console.log(JSON.stringify(scan, null, 2));
+    } else {
+      console.log(formatScanSummary(scan));
+      console.log('\nDraft profile (not written):');
+      console.log(JSON.stringify(scan.draftProfile, null, 2));
+    }
+    process.exit(0);
+  }
+
+  const output = path.resolve(optionValue('output') || path.join('ai', 'site-profile.json'));
+  if (fs.existsSync(output) && !args.includes('--force')) {
+    throw new Error(`Refusing to overwrite existing file: ${output}. Use --force to replace it.`);
+  }
+  fs.mkdirSync(path.dirname(output), { recursive: true });
+  fs.writeFileSync(output, `${JSON.stringify(scan.draftProfile, null, 2)}\n`, 'utf8');
+
+  if (jsonOutput) {
+    console.log(JSON.stringify({
+      written: output,
+      profile: scan.draftProfile,
+      evidence: scan.evidence,
+      warnings: scan.warnings
+    }, null, 2));
+  } else {
+    console.log(`WROTE ${output}`);
+    console.log(`Detected ${scan.evidence.length} evidence item(s).`);
+    for (const warning of scan.warnings) console.warn(`WARN ${warning}`);
+    console.log(`Next: node bin/arwp.mjs validate ${output}`);
+  }
+  process.exit(0);
 } catch (error) {
   if (jsonOutput) {
     console.log(JSON.stringify({ valid: false, fatal: String(error.message ?? error) }, null, 2));
