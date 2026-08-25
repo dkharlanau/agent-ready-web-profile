@@ -7,11 +7,11 @@ Agent-Ready Web Profile (ARWP) is a small interoperability profile for websites 
 
 ARWP does **not** replace SEO, `llms.txt`, Agent Skills, WebMCP, Model Context Protocol (MCP), A2A, OpenAPI, JSON Schema, Schema.org, Croissant, sitemaps, feeds or crawler controls. It provides one machine-readable map that says which of those surfaces a site actually exposes and where they live.
 
-Status: **experimental v0.1**. The first public release is [`v0.1.0`](https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0).
+Profile contract: **experimental v0.1**. First public GitHub/Marketplace release: [`v0.1.0`](https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0). The `main` toolchain is being prepared as version **0.2.0** with scan/init and npm distribution; it is not yet published to npm.
 
 ## Start with an existing website
 
-You do not need to understand the full ARWP schema before trying it.
+You do not need to understand the full ARWP schema before trying it from a repository checkout.
 
 ```bash
 npm ci
@@ -302,14 +302,14 @@ See [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) for the current upstream ma
 
 ## Roadmap
 
-The implemented v0.1 line now includes schema validation, live verification, scan/init onboarding, a reusable GitHub Action, local and remote generic read-only MCP gateways and five real reference profiles.
+The implemented `main` toolchain includes schema validation, live verification, scan/init onboarding, a reusable GitHub Action, a pack-tested npm distribution shape, local and remote generic read-only MCP gateways and five real reference profiles.
 
-Next work should focus on distribution and independent interoperability evidence rather than adding metadata fields:
+Next work should focus on public distribution and independent interoperability evidence rather than adding metadata fields:
 
-- package the CLI for normal `npx` installation;
-- expose the same bounded scanner through a small public website/Worker service;
+- publish the 0.2.0 CLI package and enable npm trusted publishing;
+- expose the bounded scanner through a small public website/Worker service;
 - add protocol-specific checks using upstream Agent Skills, WebMCP, MCP and A2A tooling;
-- publish an installable or hosted MCP artifact through the official MCP Registry when its package boundary is ready;
+- publish a real installable/hosted MCP artifact through the official MCP Registry;
 - obtain independent adopters and record real integration failures;
 - evaluate SchemaStore and curated ecosystem listings only after adoption evidence exists.
 
