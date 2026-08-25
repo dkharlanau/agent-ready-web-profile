@@ -1,0 +1,27 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "cloudflare-docs",
+  "url": "https://developers.cloudflare.com/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://developers.cloudflare.com/llms.txt"],
+    "search": [{ "url": "https://docs.mcp.cloudflare.com/mcp", "protocol": "MCP" }],
+    "structured": [{ "protocol": "OpenAPI" }],
+    "tools": [{ "url": "https://docs.mcp.cloudflare.com/mcp", "protocol": "MCP" }],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://developers.cloudflare.com/agents/",
+      "sourceType": "official-docs",
+      "note": "Cloudflare documents llms.txt, Markdown page access, OpenAPI schemas, an Agent Skill and a hosted documentation MCP server."
+    },
+    {
+      "url": "https://developers.cloudflare.com/style-guide/ai-content-guidelines/",
+      "sourceType": "official-docs",
+      "note": "Cloudflare explicitly documents llms.txt/llms-full.txt and Markdown-oriented agent access patterns."
+    }
+  ],
+  "note": "Useful mixed-surface fixture: root llms.txt plus cross-origin OpenAPI and docs MCP evidence."
+}
