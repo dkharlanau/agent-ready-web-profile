@@ -1,148 +1,171 @@
 # ARWP Roadmap
 
-ARWP has completed its first build-out: profile contract, validation, scanning, health reporting, public examples, directory/federation and generic MCP gateways exist.
+ARWP has moved beyond its first profile/specification build-out. The project now has two complementary layers:
 
-The next iteration changes the center of gravity.
+1. **ARWP Profile** — optional publisher-maintained service-map metadata;
+2. **ARWP Resolver** — the primary product direction: discover, normalize, verify and route the machine/agent interfaces a public website actually exposes.
 
 > **ARWP should not win by becoming another universal agent manifest. It should become the interoperability resolver that tells software what a website actually exposes, where that evidence came from, and which interface is appropriate for the task.**
 
 ## North Star
 
-The primary measure is no longer “how many sites publish ARWP?”
-
-The North Star is:
-
 > **How many external sites can ARWP correctly resolve and route without site-specific integration code?**
 
-Supporting metrics:
+Supporting measures:
 
-1. resolved external sites;
-2. correct-interface selection rate for a reviewed intent;
-3. discovery requests / bytes until a usable interface is identified;
-4. conflicts detected between independent discovery sources;
-5. downstream integrations that actually consume resolver output.
+1. resolved independent sites;
+2. correct-interface selection against manually reviewed ground truth;
+3. discovery requests / bytes / duration for the real Resolver run;
+4. real conflicts detected between independent discovery surfaces;
+5. downstream integrations that actually consume Resolver output.
 
-Schema field count, readiness scores and owned reference sites are not North Star metrics.
+Owned reference sites, schema field count, GitHub stars and readiness scores are not North Star metrics.
 
 ## Status vocabulary
 
-- **implemented** — code/docs/tests exist in this repository and pass CI;
-- **prepared** — implementation/deployment/submission artifacts exist, but an external action has not completed;
-- **external** — success depends on hosting, a registry, or an independent adopter;
-- **evidence-gated** — deliberately blocked until a real interoperability failure or benchmark result justifies it.
+- **implemented** — code/docs/tests exist and are kept green in CI;
+- **prepared** — deployment/publication artifacts exist but the external action has not completed;
+- **external** — success depends on hosting, a registry or independent users/sites;
+- **evidence-gated** — intentionally blocked until external evidence justifies the work.
 
 ---
 
-# Iteration 2 — Resolver utility
+# R0 — Prove utility outside the project
 
-## R0 — Prove the project is useful
+| Initiative | Status | Current gate |
+| --- | --- | --- |
+| Package-ready 0.2.x Resolver | implemented / prepared | npm trusted-publishing configuration + external publication |
+| Prepared Official MCP Registry Resolver artifact | implemented / prepared | npm publication first, then Registry acceptance |
+| Public bounded discovery service code | implemented / prepared | external HTTPS runtime + edge controls + Pages wiring |
+| Synthetic resolver regression benchmark | implemented | remains engineering-only, never marketed as external evidence |
+| External benchmark fixture schema + runner | implemented | first 10 reviewed independent fixtures created; pilot run in progress |
+| 20–50-site independent benchmark | external / next | expand reviewed corpus after the pilot exposes fixture/resolver problems |
+| 3 independent adopters | external | collect real use/friction rather than owner-controlled demos |
+| Publish negative results | policy | misses, failures and cases where simpler discovery wins stay visible |
 
-| Initiative | Status | Why it matters | Definition of done |
-| --- | --- | --- | --- |
-| Publish installable 0.2.x package | prepared / external | Users must be able to use the tool without cloning the repository | `npx agent-ready-web-profile ...` works from the public registry |
-| Public bounded discovery service | prepared / external | Removes local installation from onboarding | public HTTPS `/scan`, `/resolve`, `/explain`, `/plan` deployment |
-| Public demo resolver MCP | prepared / external | Proves agents can use the resolver directly | hosted or documented installable MCP artifact consumed by an external client |
-| 3 independent adopters | external | Separates project usefulness from owner-controlled examples | 3 sites outside the original reference suite publish/use discovery surfaces and report friction |
-| Synthetic resolver regression benchmark | implemented | Prevents intent-routing coverage regressions | `npm run benchmark:resolver` stays deterministic and explicit about its limits |
-| External utility benchmark | external / next | Tests the actual product thesis | 20–50 reviewed public sites, raw results and reproducible runner |
-| Publish negative results too | evidence-gated policy | Prevents benchmark-as-marketing | cases where Resolver is slower/worse remain visible in raw results |
+### R0 decision rule
 
-### R0 decision gate
-
-Do not add a new ARWP core field to manufacture an advantage if the external benchmark does not show resolver utility. Reduce scope instead.
+If independent evidence does not show useful resolution/routing gains, reduce scope. Do not add ARWP fields merely to manufacture an advantage.
 
 ---
 
-## R1 — Resolver core
+# R1 — Resolver core and evidence ladder
 
 | Initiative | Status | Notes |
 | --- | --- | --- |
-| `arwp resolve URL` | implemented | normalized evidence-backed service map |
-| `arwp explain URL` | implemented | human-readable explanation of discovered interfaces and conflicts |
-| `arwp plan URL --intent=...` | implemented | deterministic routing for `read`, `search`, `structured`, `tools`, `agent` |
-| Public-HTTPS SSRF boundaries | implemented | DNS validation, reserved/private IP rejection, redirect revalidation, time/size bounds |
-| ARWP profile adapter | implemented | ARWP becomes one resolver input rather than the only possible source |
-| agents.txt / agents.json adapter | implemented | community convention, explicitly not treated as ratified standard |
-| RFC 9727 API Catalog adapter | implemented | native IETF discovery is preserved, not duplicated |
-| RFC 9728 root protected-resource adapter | implemented | root-origin OAuth resource metadata |
-| A2A Agent Card adapter | implemented | reads v1.0 `supportedInterfaces` and legacy v0.3 shape |
-| Agent Skills discovery-index adapter | implemented | preserves skill artifact/digest metadata when available |
-| Experimental MCP AI Catalog / Server Card adapter | implemented | explicitly marked experimental-upstream |
-| Source authority model | implemented | `ietf-standard`, `upstream-standard`, `upstream-convention`, `community-convention`, `experimental-upstream`, `project-profile`, observed web |
-| Narrow conflict engine | implemented | identity, agents.txt/json capability mismatches, MCP endpoint/card mismatch |
-| Hosted `/resolve`, `/explain`, `/plan` routes | implemented | same bounded runtime as scanner; no arbitrary proxy route |
-| Resolver MCP server | implemented | `resolve_site`, `explain_site`, `plan_site_interface` |
-| MCP live `server/discover` reconciliation | next | verify static MCP evidence against runtime without treating static metadata as authoritative |
-| A2A Agent Card signature verification | next | verify JWS when present; do not make unsigned cards invalid by default |
-| RFC 9728 path-scoped resources | evidence-gated | add only when a concrete protected-resource use case requires non-root resource identifiers |
-| Link-header discovery | next | use RFC 8288 `api-catalog`, `describedby`, alternate surfaces where directly observable |
-| Content negotiation observation | next | record `Accept: text/markdown` availability without turning it into a universal requirement |
+| `arwp resolve URL` | implemented | evidence-backed normalized service map |
+| `arwp explain URL` | implemented | human-readable interfaces/conflicts/plans |
+| `arwp plan URL --intent=...` | implemented | deterministic `read/search/structured/tools/agent` routing |
+| Canonical HTML read fallback | implemented | ordinary web remains a valid low-priority read interface |
+| Public HTTPS / SSRF / redirect / size / timeout boundaries | implemented | shared bounded network primitives |
+| ARWP profile adapter | implemented | optional resolver input, not a prerequisite |
+| agents.txt / agents.json | implemented | community convention with explicit authority label |
+| RFC 8288 HTTP Link discovery | implemented | `api-catalog`, `service-desc`, `service-doc`, Markdown alternate, ARWP `describedby` |
+| Markdown content negotiation observation | implemented | `Accept: text/markdown` HEAD observation; not a universal requirement |
+| RFC 9727 API Catalog | implemented | conventional and explicit Link discovery |
+| RFC 9728 root protected-resource metadata | implemented | root-origin metadata only |
+| A2A Agent Card | implemented | current v1 + legacy compatibility parsing |
+| Agent Skills discovery index | implemented | artifact/digest metadata preserved |
+| Experimental MCP AI Catalog / Server Cards | implemented | remains explicitly `experimental-upstream` |
+| Source-authority model | implemented | upstream/project/community/observed evidence remains distinct |
+| Static conflict engine | implemented | identity, agents.*, MCP endpoint/card conflicts |
+| Hosted `/scan`, `/resolve`, `/explain`, `/plan` | implemented | fixed bounded routes; no arbitrary proxy |
+| Resolver MCP | implemented | resolve, batch resolve, resolved federation, explain, plan and opt-in verification tools |
+| MCP modern runtime `server/discover` | implemented | opt-in; no tool invocation |
+| MCP legacy initialize lifecycle | implemented | initialize + session + initialized notification |
+| MCP static/runtime reconciliation | implemented | self-reported runtime identity mismatch becomes conflict |
+| A2A v1 shape validator | implemented | current required shape checked before signature work |
+| A2A RS256 / ES256 verifier | implemented internally | bounded JWKS, unsigned/verified/invalid/unavailable states |
+| A2A cross-SDK signed-card interoperability | external / next | must prove canonicalization against independent upstream signatures |
+| RFC 9728 path-scoped protected resources | evidence-gated | implement only for a real resource-level use case |
 
-### Resolver principle
+### Evidence ladder
 
-If an upstream protocol has discovery metadata, parse and preserve it. Do not copy its semantics into new ARWP core fields unless a concrete interoperability gap cannot be represented otherwise.
+ARWP should continue to distinguish:
 
----
+```text
+declared-static
+observed-web / verified-artifact
+runtime-observed
+signature-verified (when cryptographically proven)
+conflict
+not-assessed / unsupported
+```
 
-## R2 — From one site to a resolvable web
-
-| Initiative | Status | Notes |
-| --- | --- | --- |
-| ARWP-owned profile directory | implemented | remains useful as adoption/reference registry |
-| Federated retrieval over ARWP sites | implemented | preserves source site/profile/index identity |
-| Federated MCP router | implemented | current directory-backed multi-site search |
-| Resolver-aware corpus | next | corpus may include sites with no ARWP profile if upstream/community discovery is sufficient |
-| Resolved-site snapshots | next | persist public normalized snapshots with observation timestamp and source URLs |
-| Drift diff | next | show added/removed/changed capabilities between resolver runs |
-| Conflict monitoring | next | alert on endpoint/identity changes, not just HTTP 404 drift |
-| `resolve_many` batch API | next | bounded batch resolution for research/inventory, with concurrency and domain limits |
-| Resolver-backed federation | next | search/route across resolved sites, not only sites that published an ARWP profile |
-| Compatibility export to agents.json | next / guarded | only map semantics that are representable; report lossy fields explicitly |
-| Compatibility export to ARWP profile | next / guarded | generate a conservative publisher draft from resolved evidence, never silently promote unverified runtime claims |
-
-The existing ARWP Directory should not be mutated into a universal Internet registry before there is external demand. A separate reviewed resolver corpus is preferable for experimentation.
+A successful runtime probe or signature does not by itself establish business/security trust.
 
 ---
 
-## R3 — Evidence, maintenance and governance
+# R2 — Operational Resolver
 
 | Initiative | Status | Notes |
 | --- | --- | --- |
-| Resolver methodology documentation | implemented | `docs/RESOLVER.md` |
+| `arwp resolve-many` / `resolveMany` | implemented | max batch, bounded concurrency, same-origin serialization, isolated failures |
+| Resolver MCP `resolve_sites` | implemented | bounded multi-site inventory |
+| Compact resolver snapshots | implemented | no canonical datasets copied |
+| `arwp snapshot` | implemented | versioned deterministic operational state |
+| Machine-readable drift diff | implemented | identity/source/interface/conflict/plan changes |
+| `arwp drift` | implemented | explicit drift exit state |
+| Resolver monitor engine | implemented | baseline/stable/drift/failure states |
+| Selective fail classes | implemented | identity/removal/conflict/plan/resolution policies |
+| Monitor config schema/example | implemented | copyable operational contract |
+| Scheduled GitHub Actions monitor template | implemented | cached snapshots + always-uploaded report |
+| Existing ARWP-profile federation | implemented | original reference/use path retained |
+| Resolver-backed federation from canonical URLs | implemented | ARWP profile no longer required |
+| Safe static-index execution | implemented | generic federation only executes resolved JSON/JSONL/NDJSON retrieval indexes |
+| Resolver MCP `search_resolved_sites` | implemented | preserves source/discovery/interface provenance |
+| Advanced redirect/version drift classification | next | needs observed real-world drift evidence |
+| Notification-oriented compact monitor summaries | next | add only after monitor use shows what is actionable |
+| Public universal resolver registry | evidence-gated | a reviewed corpus is sufficient until external clients need registry semantics |
+
+Generic federation must not invent OpenAPI, MCP or A2A operations when the semantic search/action contract is unknown.
+
+---
+
+# R3 — Evidence, benchmarking and governance
+
+| Initiative | Status | Notes |
+| --- | --- | --- |
+| Resolver methodology | implemented | `docs/RESOLVER.md` |
 | Benchmark evidence rules | implemented | `docs/BENCHMARK.md` |
-| Upstream-status labeling | implemented | experimental/community sources stay labeled honestly |
-| Automated upstream watcher | next | detect material MCP/A2A/Agent Skills/agents.txt/RFC-adapter drift |
-| Real-site conformance fixtures | next | 20–50 reviewed snapshots across docs/research/open-data/technical portals |
-| Failure taxonomy | next | false positive, missed discovery, identity conflict, stale declaration, runtime mismatch, unsupported mapping |
-| Public resolver changelog | next | record upstream behavior changes separately from ARWP profile-contract changes |
-| SchemaStore submission | evidence-gated | editor discovery is valuable only after independent profile adoption |
-| New ARWP profile version | evidence-gated | requires real consumer failure not solvable through an upstream standard or extension |
-| Registered ARWP `.well-known` URI | evidence-gated | do not create a format war around discovery paths without demonstrated need |
-| Naming / positioning review | next | assess collision with other “AgentReady” projects; preserve `ARWP` identity while leading with “resolver” rather than “readiness standard” |
+| Strict benchmark fixture JSON Schema | implemented | independent/reference/example ownership is explicit |
+| External benchmark runner | implemented | raw site/strategy/intent output; aggregate only independent fixtures |
+| Network-metric attribution policy | implemented | request/byte/time claims only for actual Resolver run; subset strategies remain selection projections |
+| First 10 independent fixtures | implemented as reviewed pilot corpus | deliberately includes ordinary HTML and path-scoped discovery misses |
+| 20–50 independent fixtures | next | expand after reviewing first pilot results |
+| Upstream status labeling | implemented | experimental/community inputs are not promoted to standards |
+| Failure taxonomy through issues | implemented foundation | real interoperability failures should drive changes |
+| Automated upstream compatibility watcher | next | detect material MCP/A2A/Skills/RFC changes |
+| A2A cross-SDK crypto fixtures | next | required before broad interoperability claim |
+| Public resolver change log separate from profile contract | next | useful once upstream-driven adapter changes accelerate |
+| SchemaStore inclusion | evidence-gated | only after independent profile adoption justifies editor discovery |
+| ARWP Profile v0.2 | evidence-gated | requires consumer failure not solvable through upstream metadata or extension |
+| Registered ARWP `.well-known` URI | evidence-gated | do not create a discovery-path format war without demonstrated need |
+| Naming/positioning review | next | continue leading with `ARWP Resolver`, not “readiness certification” |
 
 ---
 
 # Product wedge
 
-The first resolver corpus should deliberately focus on sites where ARWP's existing architecture is strongest:
+Initial evidence remains focused on:
 
 - technical documentation;
-- research and evidence libraries;
+- research/evidence libraries;
 - public knowledge bases;
 - open datasets;
-- product/developer portals;
+- developer/product portals;
 - professional knowledge sites.
 
-Do not broaden into commerce/payments/checkout orchestration merely because another agent-web specification contains those fields. ARWP can observe/link those ecosystems later if a resolver use case requires them.
+Do not broaden into commerce, payments, checkout or transaction orchestration merely because adjacent agent-web formats contain those fields.
 
-# What ARWP should not build next
+# What ARWP should not build
 
 Do not create ARWP-native replacements for:
 
 - OAuth Protected Resource Metadata;
 - API Catalog;
 - A2A Agent Cards;
-- MCP Server Cards / runtime discovery;
+- MCP runtime discovery / Server Cards;
 - Agent Skills packages/discovery;
 - crawler AI-use preference standards;
 - payment protocols.
@@ -152,36 +175,38 @@ Prefer:
 ```text
 UPSTREAM EXISTS
       ↓
-resolve / validate / normalize it
+resolve / verify / normalize it
 
 UPSTREAM DOES NOT EXIST
       ↓
-collect a real interoperability failure
+collect a concrete interoperability failure
 
 ONLY THEN
       ↓
-consider an ARWP-specific extension or profile field
+consider an ARWP extension or profile field
 ```
 
 # Immediate execution order
 
-1. keep main CI green for resolver + package + hosted routes;
-2. update public product page to lead with Resolver value, not “new standard” framing;
-3. complete issue #4: npm/GitHub/MCP distribution gates;
-4. complete issue #5: deploy the bounded discovery service and wire the live project UI;
-5. create a reviewed external benchmark corpus and runner;
-6. recruit three independent sites and record adoption friction in issue #6;
-7. add MCP runtime reconciliation and A2A signature verification;
-8. build resolved-site snapshots/drift monitoring only after the public resolver is being used;
-9. use benchmark/adopter evidence to decide whether an ARWP profile v0.2 contract is needed at all.
+1. keep main CI green after the operational/runtime/crypto expansion;
+2. complete the first 10-site external pilot and publish raw negative/positive results;
+3. fix systematic discovery gaps only after the baseline result is preserved;
+4. rerun the same corpus to show before/after without changing ground truth;
+5. expand the corpus to 20–50 independent sites;
+6. complete #4 npm + MCP Registry publication;
+7. complete #5 public HTTPS resolver deployment;
+8. obtain three independent consumers/adopters in #6;
+9. prove A2A signature interoperability against upstream/second-language signed cards;
+10. decide from evidence whether ARWP Profile itself needs another version.
 
-# Release gate
+# Next release gate
 
-Before the next public toolchain release:
+Before a public 0.2.x toolchain release:
 
-1. resolver tests are green;
-2. packed npm artifact contains resolver modules/docs/MCP server;
-3. hosted service tests prove fixed routes, rate limiting, CORS and no arbitrary proxy behavior;
-4. synthetic benchmark is reproducible and labeled as synthetic;
-5. upstream statuses are current at release time;
-6. release notes distinguish implemented code from external evidence/adoption claims.
+1. all resolver/monitor/federation/runtime/crypto tests are green;
+2. npm pack/install smoke proves all shipped modules and the Resolver MCP entry point;
+3. hosted service tests prove fixed routes, CORS/rate limits and no arbitrary proxy behavior;
+4. synthetic benchmark remains reproducible and labeled synthetic;
+5. the independent pilot benchmark is preserved with raw failures, not just a headline score;
+6. current upstream protocol statuses are rechecked;
+7. release notes distinguish implemented code from external hosting/registry/adoption claims.
