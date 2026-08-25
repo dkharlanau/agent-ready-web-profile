@@ -13,11 +13,11 @@ A profile is ARWP v0.1 conforming when it:
 5. describes only capabilities that actually exist;
 6. does not treat ARWP metadata as crawler permission, authentication, or execution authorization.
 
-The CLI checks items 1–4 structurally. Truthfulness and runtime availability require external verification.
+Schema validation can prove items 1–4. URL verification can provide evidence that declared resources are reachable. Truthfulness and protocol behavior still require the publisher and protocol-specific tests.
 
 ## Capability groups
 
-A conforming site can implement any subset of the following groups.
+A conforming site can implement any useful subset.
 
 ### Web
 
@@ -26,7 +26,7 @@ Typical evidence:
 - crawlable canonical HTML;
 - sitemap;
 - crawler policy;
-- feed;
+- feeds;
 - optional `llms.txt`;
 - optional Markdown discovery.
 
@@ -54,6 +54,17 @@ Typical evidence:
 - canonical IDs and citations preserved in returned records;
 - documented unsupported-query or abstention behavior where relevant.
 
+### Agent Skills
+
+Typical evidence:
+
+- each declared skill has a valid Agent Skills name;
+- the declared URL resolves to the real `SKILL.md`;
+- optional version/source metadata matches the distributed skill;
+- the skill describes a real reusable procedure rather than a placeholder capability.
+
+Agent Skills are not tool transports. A valid skill does not imply that MCP, WebMCP or an API exists unless those interfaces are separately declared and implemented.
+
 ### Agent Web
 
 Typical evidence:
@@ -72,6 +83,7 @@ Typical evidence:
 - a real MCP server can be started or reached;
 - the declared transport matches reality;
 - a remote Streamable HTTP declaration resolves to an actual MCP endpoint;
+- a stdio declaration has installable package metadata or a public source location;
 - Registry metadata is linked when published;
 - public knowledge operations are read-only by default when mutation is unnecessary.
 
@@ -89,17 +101,9 @@ Publishing `/.well-known/agent-card.json` without a real agent is non-conforming
 
 ## Validation versus verification
 
-ARWP distinguishes two types of checks.
+ARWP distinguishes deterministic contract validation from live resource verification.
 
 ### Schema validation
-
-Deterministic and local:
-
-- required fields;
-- allowed properties;
-- URI syntax;
-- conditional requirements such as a URL for Streamable HTTP MCP;
-- enabled WebMCP requiring at least one page.
 
 Run:
 
@@ -107,36 +111,88 @@ Run:
 node bin/arwp.mjs validate ai/site-profile.json
 ```
 
-### Runtime verification
+This checks:
 
-Network- and implementation-dependent:
+- required fields;
+- allowed properties;
+- URI syntax;
+- Agent Skills naming;
+- local MCP package/source requirements;
+- a URL for Streamable HTTP MCP;
+- enabled WebMCP requiring at least one page.
 
-- URL status and redirects;
-- media types;
-- sitemap/robots correctness;
-- `llms.txt` syntax;
-- JSON Schema/OpenAPI/Croissant validity;
-- stable release manifests;
-- WebMCP tool discovery;
-- MCP protocol handshake and tool listing;
-- A2A Agent Card validity;
-- citation/provenance preservation through retrieval.
+### Live URL verification
 
-Runtime verification is planned for a later CLI command because it needs explicit network policy, timeouts, redirect handling and protocol-specific adapters.
+Run against a local profile:
+
+```bash
+node bin/arwp.mjs verify ai/site-profile.json
+```
+
+Or a published profile:
+
+```bash
+node bin/arwp.mjs verify https://example.com/ai/site-profile.json
+```
+
+The current verifier checks:
+
+- profile validity before probing;
+- HTTPS reachability;
+- redirects and final HTTPS URL;
+- HTTP status;
+- expected media type with warnings for mismatches;
+- Agent Skill files/source links;
+- declared WebMCP pages/documentation;
+- MCP URLs/source/registry/documentation;
+- data, retrieval, identity and trust resources.
+
+It uses `HEAD` where possible and a bounded `GET` fallback for servers that reject `HEAD`.
+
+The verifier does **not yet** execute protocol-semantic tests such as:
+
+- parsing and linting every `SKILL.md` against the upstream Agent Skills validator;
+- WebMCP runtime tool discovery;
+- MCP initialize/handshake/tool-listing;
+- A2A Agent Card semantic validation;
+- OpenAPI/Croissant domain validation;
+- citation/provenance preservation through a real retrieval run.
+
+Those checks should use upstream validators/adapters rather than reimplementing their protocols inside ARWP.
+
+## Exit semantics
+
+`validate` and `verify` return a non-zero exit status for hard failures.
+
+Live verification distinguishes:
+
+- `pass` — the resource is reachable and matches the expected basic transport contract;
+- `warn` — reachable but metadata such as `Content-Type` is unexpected or incomplete;
+- `fail` — unreachable, error status or invalid HTTPS final URL.
+
+Warnings do not make a profile invalid by themselves.
+
+Use `--json` for machine-readable results:
+
+```bash
+node bin/arwp.mjs verify https://example.com/ai/site-profile.json --json
+```
 
 ## Recommended CI policy
 
-For an adopting repository, fail CI on:
+For an adopting repository, always fail CI on:
 
 - invalid ARWP JSON;
 - schema violations;
 - a declared remote MCP server without a remote URL;
+- a stdio MCP server with neither package nor source metadata;
 - WebMCP enabled with no declared page;
+- invalid Agent Skill names;
 - unsupported core properties.
 
-Do not fail CI merely because a site does not implement optional MCP, WebMCP, A2A, Croissant or `llms.txt` surfaces.
+Do not fail CI merely because a site does not implement optional MCP, WebMCP, Agent Skills, A2A, Croissant or `llms.txt` surfaces.
 
-Example:
+Example validation step:
 
 ```yaml
 - name: Validate Agent-Ready Web Profile
@@ -145,33 +201,17 @@ Example:
     profile: ai/site-profile.json
 ```
 
+Live verification is better suited to a scheduled or deployment smoke test because it depends on external network availability.
+
 For reproducible production use, pin a released tag or commit instead of `main` once ARWP publishes stable releases.
 
-## Future conformance work
+## No single readiness score
 
-Planned checks should produce machine-readable results rather than a single opaque score. The goal is to answer "what is implemented and what is broken?", not to create a vanity agent-readiness grade.
+ARWP intentionally does not produce one opaque "agent-ready score". A content-rich static site with excellent data and no WebMCP may be more useful than a site with many experimental integrations and weak source material.
 
-Candidate result shape:
+Conformance output should answer two questions instead:
 
-```json
-{
-  "profile": "https://example.com/ai/site-profile.json",
-  "schema": "pass",
-  "web": {
-    "sitemap": "pass",
-    "llms": "not-declared"
-  },
-  "data": {
-    "schemas": "pass",
-    "releases": "warning"
-  },
-  "agentWeb": {
-    "webmcp": "experimental"
-  },
-  "mcp": {
-    "remote": "pass"
-  }
-}
-```
+1. Which capabilities are actually declared?
+2. Which declared contracts are currently healthy?
 
-This keeps conformance evidence inspectable and avoids turning optional experimental technologies into mandatory badges.
+That keeps interoperability evidence inspectable and avoids turning optional technologies into vanity badges.
