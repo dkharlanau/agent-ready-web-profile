@@ -3,6 +3,9 @@ const prepareButton = document.querySelector('#prepare');
 const message = document.querySelector('#url-message');
 const scanCommand = document.querySelector('#scan-command code');
 const initCommand = document.querySelector('#init-command code');
+const resolveCommand = document.querySelector('#resolve-command code');
+const explainCommand = document.querySelector('#explain-command code');
+const planCommand = document.querySelector('#plan-command code');
 const scanResults = document.querySelector('#scan-results');
 const downloadButton = document.querySelector('#download-profile');
 const scannerMode = document.querySelector('#scanner-mode');
@@ -16,9 +19,9 @@ function normalizeSite(value) {
   if (!raw) throw new Error('Enter a public HTTPS website.');
   const candidate = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
   const url = new URL(candidate);
-  if (url.protocol !== 'https:') throw new Error('ARWP scanning is HTTPS-only.');
+  if (url.protocol !== 'https:') throw new Error('ARWP discovery is HTTPS-only.');
   if (url.username || url.password) throw new Error('URLs with credentials are not supported.');
-  if (url.port && url.port !== '443') throw new Error('Non-standard HTTPS ports are not supported by the bounded scanner.');
+  if (url.port && url.port !== '443') throw new Error('Non-standard HTTPS ports are not supported by the bounded resolver.');
   return url.href;
 }
 
@@ -70,7 +73,7 @@ function selectProfileDemo(site) {
   const summary = document.querySelector('#profile-demo-summary');
   const url = document.querySelector('#profile-demo-url');
   if (name) name.textContent = site.name;
-  if (summary) summary.textContent = `${site.summary} An agent can start at this profile instead of guessing the site's integration surface.`;
+  if (summary) summary.textContent = `${site.summary} Its ARWP profile is one explicit evidence source the resolver can consume.`;
   if (url) url.textContent = site.profileUrl;
 }
 
@@ -106,44 +109,56 @@ async function loadDirectory() {
   renderDirectory();
 }
 
-async function runHostedScan(site) {
-  if (!scannerEndpoint) return false;
-  scannerMode.textContent = 'live scanner';
+function fixedServiceRoute(route) {
+  if (!scannerEndpoint) return '';
+  const configured = new URL(scannerEndpoint, window.location.href);
+  configured.pathname = configured.pathname.replace(/\/(scan|resolve|explain|plan)\/?$/, '') + route;
+  configured.search = '';
+  configured.hash = '';
+  return configured.href;
+}
+
+async function runHostedResolve(site) {
+  const endpoint = fixedServiceRoute('/resolve');
+  if (!endpoint) return false;
+  scannerMode.textContent = 'live resolver';
   scanResults.hidden = false;
-  scanResults.innerHTML = '<p>Scanning bounded public discovery surfaces…</p>';
-  const response = await fetch(scannerEndpoint, {
+  scanResults.innerHTML = '<p>Resolving bounded public discovery surfaces…</p>';
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers: { 'content-type': 'application/json', accept: 'application/json' },
     body: JSON.stringify({ url: site })
   });
   const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.error || `Scanner returned HTTP ${response.status}.`);
-  generatedProfile = payload.profile || null;
-  const discovered = payload.scan?.discovered || {};
-  const rows = [
-    ['Sitemap', discovered.sitemap], ['robots.txt', discovered.robots], ['llms.txt', discovered.llms],
-    ['OpenAPI', discovered.openapi], ['Existing ARWP profile', discovered.profile]
-  ];
-  const feeds = discovered.feeds?.length ? `${discovered.feeds.length} feed(s)` : null;
-  scanResults.innerHTML = `<h4>Observed public evidence</h4><ul>${rows.map(([label, value]) => `<li>${escapeHtml(label)}: <strong>${value ? 'detected' : 'not detected'}</strong></li>`).join('')}${feeds ? `<li>Feeds: <strong>${escapeHtml(feeds)}</strong></li>` : ''}</ul>`;
-  downloadButton.hidden = !generatedProfile;
+  if (!response.ok) throw new Error(payload.error || `Resolver returned HTTP ${response.status}.`);
+  const resolution = payload.resolution || {};
+  const summary = resolution.summary || {};
+  const plans = resolution.plans || {};
+  const planRows = ['read', 'search', 'structured', 'tools', 'agent']
+    .map(intent => `<li>${escapeHtml(intent)}: <strong>${escapeHtml(plans[intent]?.selected?.url || 'none')}</strong></li>`).join('');
+  scanResults.innerHTML = `<h4>Evidence-backed service map</h4><p>${escapeHtml(summary.sourcesResolved ?? 0)}/${escapeHtml(summary.sourcesAttempted ?? 0)} discovery sources resolved · ${escapeHtml(summary.interfacesResolved ?? 0)} interfaces · ${escapeHtml(summary.conflicts ?? 0)} conflicts</p><ul>${planRows}</ul>`;
+  generatedProfile = null;
+  downloadButton.hidden = true;
   return true;
 }
 
-async function prepareScan() {
+async function prepareDiscovery() {
   try {
     const site = normalizeSite(siteInput.value);
     siteInput.value = site;
+    resolveCommand.textContent = `node bin/arwp.mjs resolve ${site}`;
+    explainCommand.textContent = `node bin/arwp.mjs explain ${site}`;
+    planCommand.textContent = `node bin/arwp.mjs plan ${site} --intent=search`;
     scanCommand.textContent = `node bin/arwp.mjs scan ${site}`;
     initCommand.textContent = `node bin/arwp.mjs init ${site}`;
     message.textContent = '';
     generatedProfile = null;
     downloadButton.hidden = true;
     scanResults.hidden = true;
-    if (scannerEndpoint) await runHostedScan(site);
+    if (scannerEndpoint) await runHostedResolve(site);
     else {
       scannerMode.textContent = 'CLI ready';
-      message.textContent = 'Commands prepared. This Pages deployment uses the local scanner until a hosted scanner endpoint is configured.';
+      message.textContent = 'Resolver commands prepared. This Pages deployment stays local-only until the bounded discovery service is deployed.';
     }
   } catch (error) {
     message.textContent = error.message;
@@ -165,8 +180,8 @@ function downloadGeneratedProfile() {
   URL.revokeObjectURL(url);
 }
 
-prepareButton?.addEventListener('click', prepareScan);
-siteInput?.addEventListener('keydown', event => { if (event.key === 'Enter') prepareScan(); });
+prepareButton?.addEventListener('click', prepareDiscovery);
+siteInput?.addEventListener('keydown', event => { if (event.key === 'Enter') prepareDiscovery(); });
 downloadButton?.addEventListener('click', downloadGeneratedProfile);
 
 for (const button of document.querySelectorAll('.filter')) {
