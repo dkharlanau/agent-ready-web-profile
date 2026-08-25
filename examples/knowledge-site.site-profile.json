@@ -1,0 +1,92 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
+  "profileVersion": "0.1",
+  "id": "example-knowledge-site",
+  "name": "Example Knowledge Site",
+  "canonicalUrl": "https://knowledge.example.com/",
+  "description": "A reviewed public knowledge library with versioned data, retrieval artifacts, browser-agent tools and a read-only remote MCP server.",
+  "languages": ["en", "de"],
+  "web": {
+    "sitemap": "https://knowledge.example.com/sitemap.xml",
+    "robots": "https://knowledge.example.com/robots.txt",
+    "llms": "https://knowledge.example.com/llms.txt",
+    "feeds": [
+      {
+        "url": "https://knowledge.example.com/feed.json",
+        "mediaType": "application/feed+json",
+        "title": "Knowledge updates"
+      }
+    ],
+    "markdownIndex": "https://knowledge.example.com/markdown-index.json"
+  },
+  "data": {
+    "catalog": "https://knowledge.example.com/data/catalog.json",
+    "schemas": "https://knowledge.example.com/schemas/",
+    "openapi": "https://knowledge.example.com/api/openapi.json",
+    "releases": "https://knowledge.example.com/data/releases/",
+    "croissant": "https://knowledge.example.com/data/croissant.json",
+    "distributions": [
+      {
+        "name": "Canonical records",
+        "url": "https://knowledge.example.com/data/records.jsonl",
+        "mediaType": "application/x-ndjson",
+        "role": "canonical-data",
+        "description": "Canonical public records with stable IDs and provenance."
+      }
+    ]
+  },
+  "retrieval": {
+    "indexes": [
+      {
+        "name": "RAG distribution",
+        "url": "https://knowledge.example.com/data/rag.ndjson",
+        "mediaType": "application/x-ndjson",
+        "format": "ndjson",
+        "description": "Retrieval chunks preserving canonical record IDs, citations and review state."
+      }
+    ],
+    "search": "https://knowledge.example.com/for-ai/query/",
+    "abstention": "https://knowledge.example.com/docs/retrieval-contract/"
+  },
+  "agentWeb": {
+    "webmcp": {
+      "enabled": true,
+      "pages": [
+        "https://knowledge.example.com/explore/",
+        "https://knowledge.example.com/for-ai/query/"
+      ],
+      "documentation": "https://knowledge.example.com/docs/webmcp/",
+      "tools": ["search_knowledge", "get_record"]
+    }
+  },
+  "mcp": {
+    "servers": [
+      {
+        "name": "io.github.example/knowledge",
+        "transport": "streamable-http",
+        "url": "https://mcp.knowledge.example.com/mcp",
+        "registry": "https://registry.modelcontextprotocol.io/",
+        "documentation": "https://knowledge.example.com/docs/mcp/",
+        "readOnly": true
+      }
+    ]
+  },
+  "identity": {
+    "namespace": "knowledge",
+    "idPattern": "knowledge:<kind>:<local-id>",
+    "aliases": "https://knowledge.example.com/data/aliases.json"
+  },
+  "trust": {
+    "license": "https://knowledge.example.com/license/",
+    "citation": "https://knowledge.example.com/cite/",
+    "provenance": "https://knowledge.example.com/data/provenance.json",
+    "reviewPolicy": "https://knowledge.example.com/editorial-policy/",
+    "security": "https://knowledge.example.com/.well-known/security.txt"
+  },
+  "extensions": {
+    "knowledge.example.com/domain-contract": {
+      "version": "1.2.0",
+      "url": "https://knowledge.example.com/schemas/domain-contract.json"
+    }
+  }
+}
