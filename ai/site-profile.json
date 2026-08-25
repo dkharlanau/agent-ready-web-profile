@@ -1,0 +1,52 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/v0.1.0/schema/site-profile.schema.json",
+  "profileVersion": "0.1",
+  "id": "agent-ready-web-profile",
+  "name": "Agent-Ready Web Profile",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "description": "Public documentation, directory and tooling project for making a website's real web, data, retrieval, agent and trust interfaces easier for software to discover and verify.",
+  "languages": ["en"],
+  "data": {
+    "catalog": "https://dkharlanau.github.io/agent-ready-web-profile/directory.json",
+    "schemas": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
+    "distributions": [
+      {
+        "name": "ARWP public site directory",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/directory.json",
+        "mediaType": "application/json",
+        "role": "catalog",
+        "description": "Initial directory of public websites that publish ARWP profiles."
+      },
+      {
+        "name": "ARWP aggregate directory statistics",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/stats.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Aggregate capability counts derived only from public directory declarations, without visitor tracking."
+      }
+    ]
+  },
+  "mcp": {
+    "servers": [
+      {
+        "name": "io.github.dkharlanau/agent-ready-web-profile",
+        "transport": "stdio",
+        "source": "https://github.com/dkharlanau/agent-ready-web-profile/tree/main/gateway",
+        "documentation": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GATEWAY.md",
+        "readOnly": true
+      },
+      {
+        "name": "arwp-federated-router",
+        "transport": "stdio",
+        "source": "https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router",
+        "documentation": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/DIRECTORY.md",
+        "readOnly": true
+      }
+    ]
+  },
+  "trust": {
+    "license": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/LICENSE",
+    "citation": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/CITATION.cff",
+    "reviewPolicy": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CONTRIBUTING.md"
+  }
+}
