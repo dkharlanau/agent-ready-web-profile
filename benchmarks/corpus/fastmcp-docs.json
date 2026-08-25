@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "fastmcp-docs",
+  "url": "https://gofastmcp.com/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://gofastmcp.com/llms.txt"],
+    "search": [{ "url": "https://gofastmcp.com/mcp", "protocol": "MCP" }],
+    "structured": [],
+    "tools": [{ "url": "https://gofastmcp.com/mcp", "protocol": "MCP" }],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://gofastmcp.com/getting-started/welcome",
+      "sourceType": "official-docs",
+      "note": "FastMCP documents root llms.txt/llms-full.txt, Markdown page variants and a hosted documentation MCP endpoint at https://gofastmcp.com/mcp that can search the docs."
+    }
+  ],
+  "note": "Useful multi-surface docs fixture where the MCP endpoint has explicit documentation-search semantics."
+}
