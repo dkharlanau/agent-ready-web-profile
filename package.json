@@ -5,38 +5,24 @@
   "license": "Apache-2.0",
   "type": "module",
   "mcpName": "io.github.dkharlanau/agent-ready-web-profile",
-  "bin": {
-    "arwp": "bin/arwp.mjs"
-  },
+  "bin": { "arwp": "bin/arwp.mjs" },
   "files": [
-    "bin/",
-    "lib/",
-    "schema/",
-    "gateway/",
-    "scanner-service/",
-    "router/",
-    "registry/",
-    "server.json",
-    "SPEC.md",
-    "README.md",
-    "LICENSE",
-    "docs/CONFORMANCE.md",
-    "docs/GATEWAY.md",
-    "docs/SCANNER.md",
-    "docs/STANDARDS-MAP.md",
-    "docs/USE-CASES.md",
-    "docs/ADOPTION.md"
+    "bin/", "lib/", "schema/", "gateway/", "scanner-service/", "router/", "registry/", "server.json",
+    "SPEC.md", "README.md", "LICENSE", "docs/CONFORMANCE.md", "docs/GATEWAY.md", "docs/SCANNER.md",
+    "docs/STANDARDS-MAP.md", "docs/USE-CASES.md", "docs/ADOPTION.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
     "test:gateway": "node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "test:verifier": "node scripts/verifier-test.mjs",
     "test:scanner": "node scripts/scanner-test.mjs && node --check lib/scanner.mjs",
+    "test:health": "node scripts/health-test.mjs && node --check lib/health.mjs",
     "test:scanner-service": "node scripts/scanner-service-test.mjs && node --check scanner-service/handler.mjs && node --check scanner-service/http-node.mjs",
+    "test:directory": "node scripts/directory-test.mjs",
     "test:router": "node scripts/router-test.mjs && node --check router/federated.mjs && node --check router/server.mjs",
     "test:package": "node scripts/package-smoke-test.mjs",
     "test:site": "node scripts/site-test.mjs",
-    "test": "node scripts/test.mjs && node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node scripts/verifier-test.mjs && node scripts/scanner-test.mjs && node scripts/scanner-service-test.mjs && node scripts/router-test.mjs && node scripts/site-test.mjs && node --check lib/scanner.mjs && node --check scanner-service/handler.mjs && node --check scanner-service/http-node.mjs && node --check router/federated.mjs && node --check router/server.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
+    "test": "node scripts/test.mjs && node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node scripts/verifier-test.mjs && node scripts/scanner-test.mjs && node scripts/health-test.mjs && node scripts/scanner-service-test.mjs && node scripts/directory-test.mjs && node scripts/router-test.mjs && node scripts/site-test.mjs && node --check lib/scanner.mjs && node --check lib/health.mjs && node --check scanner-service/handler.mjs && node --check scanner-service/http-node.mjs && node --check router/federated.mjs && node --check router/server.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "mcp:start": "node gateway/server.mjs",
     "mcp:http": "node gateway/http-node.mjs",
     "scanner:http": "node scanner-service/http-node.mjs",
@@ -49,33 +35,10 @@
     "ajv-formats": "^3.0.1",
     "zod": "^4.0.0"
   },
-  "engines": {
-    "node": ">=20"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dkharlanau/agent-ready-web-profile.git"
-  },
+  "engines": { "node": ">=20" },
+  "repository": { "type": "git", "url": "https://github.com/dkharlanau/agent-ready-web-profile.git" },
   "homepage": "https://dkharlanau.github.io/agent-ready-web-profile/",
-  "bugs": {
-    "url": "https://github.com/dkharlanau/agent-ready-web-profile/issues"
-  },
-  "keywords": [
-    "agent-ready-web",
-    "ai-agents",
-    "machine-readable-web",
-    "mcp",
-    "webmcp",
-    "llms-txt",
-    "agent-skills",
-    "a2a",
-    "openapi",
-    "interoperability",
-    "website-scanner",
-    "rag",
-    "discovery"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
+  "bugs": { "url": "https://github.com/dkharlanau/agent-ready-web-profile/issues" },
+  "keywords": ["agent-ready-web","ai-agents","machine-readable-web","mcp","webmcp","llms-txt","agent-skills","a2a","openapi","interoperability","website-scanner","rag","discovery"],
+  "publishConfig": { "access": "public" }
 }
