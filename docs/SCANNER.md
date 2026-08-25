@@ -8,8 +8,16 @@ It is intentionally conservative. It is not a general crawler, vulnerability sca
 
 ## Scan a site
 
+From a repository checkout:
+
 ```bash
 node bin/arwp.mjs scan https://example.com
+```
+
+After the npm package is published, the intended equivalent will be:
+
+```bash
+npx agent-ready-web-profile scan https://example.com
 ```
 
 Machine-readable output:
@@ -65,6 +73,38 @@ node bin/arwp.mjs validate ai/site-profile.json
 ```
 
 Then review the profile manually. Add capabilities only when the corresponding public implementation actually exists.
+
+## GitHub Pages / static-site example
+
+Suppose a GitHub Pages repository publishes from its repository root and the live site is:
+
+```text
+https://example.github.io/project/
+```
+
+From a local ARWP checkout, generate a draft into the site repository:
+
+```bash
+node /path/to/agent-ready-web-profile/bin/arwp.mjs scan https://example.github.io/project/
+node /path/to/agent-ready-web-profile/bin/arwp.mjs init https://example.github.io/project/ --output=ai/site-profile.json
+```
+
+Commit the generated file so it is published at a stable public URL, normally:
+
+```text
+https://example.github.io/project/ai/site-profile.json
+```
+
+Then add ARWP validation to that repository's workflow:
+
+```yaml
+- name: Validate Agent-Ready Web Profile
+  uses: dkharlanau/agent-ready-web-profile@v0.1.0
+  with:
+    profile: ai/site-profile.json
+```
+
+The profile must point to canonical live URLs rather than local source paths. If the Pages build copies assets from another source directory, place `site-profile.json` in whichever source path maps to `/ai/site-profile.json` in the deployed site.
 
 ## What is deliberately not inferred
 
