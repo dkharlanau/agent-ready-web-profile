@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
 
+# One guarded push trigger is kept only to run the initial pilot from the latest reviewed corpus.
 jobs:
   benchmark:
     if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run first external resolver benchmark'
