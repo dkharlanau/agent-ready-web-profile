@@ -21,8 +21,8 @@ assert.match(html, /href="\.\/arwp\.css"/);
 assert.match(html, /src="\.\/arwp\.js"/);
 assert.match(html, /id="site-url"/);
 assert.match(html, /node bin\/arwp\.mjs scan/);
-assert.match(html, /not yet published to npm/i);
-assert.doesNotMatch(html, /AI readiness score/i, 'site must not market an opaque AI-readiness score');
+assert.match(html, /not advertised here as available until the first registry publication is complete/i);
+assert.doesNotMatch(html, /single\s+AI[- ]readiness\s+score/i, 'site must not market an opaque AI-readiness score');
 
 const js = fs.readFileSync(jsPath, 'utf8');
 assert.match(js, /url\.protocol !== 'https:'/);
