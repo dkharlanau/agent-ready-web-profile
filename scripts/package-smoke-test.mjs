@@ -23,10 +23,11 @@ try {
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
     'bin/arwp.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs',
-    'lib/public-fetch.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'resolver/server.mjs',
+    'lib/public-fetch.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
     'scanner-service/handler.mjs', 'router/federated.mjs', 'router/server.mjs',
     'registry/sites.json', 'registry/directory.schema.json', 'server.json',
+    'benchmarks/external-runner.mjs', 'benchmarks/corpus/fixture.schema.json',
     'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md',
     'README.md', 'SPEC.md', 'LICENSE'
   ]) assert.ok(paths.has(required), `packed artifact is missing ${required}`);
@@ -47,6 +48,7 @@ try {
   const installedPackage = JSON.parse(fs.readFileSync(path.join(installedRoot, 'package.json'), 'utf8'));
   assert.equal(installedPackage.mcpName, 'io.github.dkharlanau/agent-ready-web-profile');
   assert.equal(installedPackage.scripts['resolver:mcp'], 'node resolver/server.mjs');
+  assert.equal(installedPackage.scripts['benchmark:external'], 'node benchmarks/external-runner.mjs');
 
   const installedServer = JSON.parse(fs.readFileSync(path.join(installedRoot, 'server.json'), 'utf8'));
   assert.equal(installedServer.name, installedPackage.mcpName);
@@ -59,9 +61,7 @@ try {
   const version = execFileSync(process.execPath, [installedCli, '--version'], { cwd: consumerDir, encoding: 'utf8' }).trim();
   assert.equal(version, '0.2.0');
   const help = execFileSync(process.execPath, [installedCli, '--help'], { cwd: consumerDir, encoding: 'utf8' });
-  assert.match(help, /arwp resolve/);
-  assert.match(help, /arwp plan/);
-  assert.match(help, /arwp resolver-mcp/);
+  for (const expected of ['arwp resolve', 'arwp resolve-many', 'arwp plan', 'arwp snapshot', 'arwp drift', 'arwp resolver-mcp']) assert.match(help, new RegExp(expected.replace('-', '\\-')));
 
   const directoryOutput = execFileSync(process.execPath, [installedCli, 'directory', '--json'], { cwd: installedRoot, encoding: 'utf8' });
   const directory = JSON.parse(directoryOutput);
