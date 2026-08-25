@@ -1,5 +1,7 @@
 # Agent-Ready Web Profile
 
+[![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
+
 Agent-Ready Web Profile (ARWP) is a small interoperability profile for websites that want to be useful to people, search engines, retrieval systems, browser agents, and MCP clients without inventing a new protocol for each audience.
 
 ARWP does **not** replace SEO, `llms.txt`, WebMCP, Model Context Protocol (MCP), A2A, OpenAPI, JSON Schema, Schema.org, Croissant, sitemaps, feeds, or crawler controls. It provides one machine-readable map that tells a consumer which of those surfaces a site actually exposes and where they live.
@@ -131,10 +133,14 @@ An A2A Agent Card describes a real agent and its capabilities. A knowledge repos
 - [`examples/minimal.site-profile.json`](examples/minimal.site-profile.json) — minimum valid example.
 - [`examples/knowledge-site.site-profile.json`](examples/knowledge-site.site-profile.json) — fuller knowledge-site example.
 - [`bin/arwp.mjs`](bin/arwp.mjs) — command-line validator.
+- [`action.yml`](action.yml) — reusable GitHub Action for adopting repositories.
+- [`docs/CONFORMANCE.md`](docs/CONFORMANCE.md) — capability-based validation and verification model.
 - [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) — how ARWP relates to existing standards and conventions.
 - [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — validates schemas and examples in CI.
 
 ## Quick start
+
+Local validation:
 
 ```bash
 npm install
@@ -143,6 +149,19 @@ node bin/arwp.mjs validate examples/minimal.site-profile.json
 ```
 
 For a website implementation, copy the example profile, replace the URLs with real public endpoints, and remove capabilities the site does not actually provide.
+
+### Use from another GitHub repository
+
+Add the profile to the adopting site, for example `ai/site-profile.json`, then add a workflow step:
+
+```yaml
+- name: Validate Agent-Ready Web Profile
+  uses: dkharlanau/agent-ready-web-profile@main
+  with:
+    profile: ai/site-profile.json
+```
+
+`main` is appropriate while v0.1 is experimental. Once release tags exist, production adopters should pin a tag or commit.
 
 ## Principles
 
@@ -176,8 +195,7 @@ Experimental or preview technologies are labelled as such in the specification r
 
 v0.1 focuses on discovery and truthful capability declaration. Planned follow-up work includes:
 
-- conformance tests that verify declared URLs and media types;
-- a reusable GitHub Action for third-party repositories;
+- network conformance tests that verify declared URLs and media types;
 - reference profiles for several real static knowledge sites;
 - a generic read-only MCP gateway driven by an ARWP profile;
 - WebMCP reference examples and agentic-browser evals;
