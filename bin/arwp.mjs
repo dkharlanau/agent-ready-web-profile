@@ -8,6 +8,8 @@ import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 import { formatHealthReport, healthReport } from '../lib/health.mjs';
 import { checkProtocolArtifacts } from '../lib/protocol-checks.mjs';
 import { resolveSite, explainResolvedSite, planResolvedSite } from '../lib/resolver.mjs';
+import { resolveMany } from '../lib/resolver-batch.mjs';
+import { createResolverSnapshot, diffResolverSnapshots } from '../lib/resolver-snapshot.mjs';
 import { DEFAULT_DIRECTORY_SOURCE, loadDirectory, searchFederated, selectSites } from '../router/federated.mjs';
 
 const packageJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
@@ -23,8 +25,11 @@ Usage:
   arwp init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
   arwp health <https://site.example> [--json]
   arwp resolve <https://site.example> [--json]
+  arwp resolve-many <targets.json|targets.txt> [--concurrency=<n>] [--json]
   arwp explain <https://site.example> [--json]
   arwp plan <https://site.example> --intent=<read|search|structured|tools|agent> [--json]
+  arwp snapshot <https://site.example> [--output=<snapshot.json>] [--json]
+  arwp drift <before.snapshot.json> <after.snapshot.json> [--json]
   arwp protocol-checks <profile.json|https://...> [--json] [--timeout=<ms>]
   arwp directory [--capability=<name>] [--json]
   arwp federated-search <query> [--sites=id1,id2] [--limit=<n>] [--json]
@@ -40,8 +45,11 @@ Commands:
   init               Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
   health             Combine bounded discovery with live verification of an existing ARWP profile.
   resolve            Normalize ARWP and upstream/community discovery surfaces into one evidence-backed service map.
+  resolve-many       Resolve a bounded file-backed batch; failures are isolated and same-origin work is serialized.
   explain            Explain a resolved site in human-readable terms, including conflicts and preferred interfaces.
   plan               Select the best resolved interface for a concrete intent without hiding fallbacks or evidence source.
+  snapshot           Resolve a site and emit a bounded reproducible snapshot suitable for later drift comparison.
+  drift              Compare two resolver snapshots and report identity/source/interface/conflict/plan changes.
   protocol-checks    Inspect declared Agent Skill, MCP Registry and A2A artifacts without pretending URL checks prove runtime conformance.
   directory          List sites from the configured ARWP directory, optionally by declared capability.
   federated-search   Search declared retrieval indexes across directory sites while preserving source identity.
@@ -55,6 +63,7 @@ Commands:
 const args = process.argv.slice(2);
 const command = args[0];
 const source = args[1];
+const secondSource = args[2] && !args[2].startsWith('--') ? args[2] : null;
 const jsonOutput = args.includes('--json');
 
 function optionValue(name) {
@@ -121,6 +130,31 @@ function printResolution(result) {
   for (const conflict of result.conflicts) console.warn(`WARN ${conflict.message}`);
 }
 
+function readJsonFile(file) {
+  const resolved = path.resolve(file);
+  return JSON.parse(fs.readFileSync(resolved, 'utf8'));
+}
+
+function readBatchTargets(file) {
+  const resolved = path.resolve(file);
+  const text = fs.readFileSync(resolved, 'utf8').trim();
+  if (!text) throw new Error(`Target file is empty: ${resolved}`);
+  if (text.startsWith('[') || text.startsWith('{')) {
+    const payload = JSON.parse(text);
+    if (Array.isArray(payload)) return payload;
+    if (Array.isArray(payload.targets)) return payload.targets;
+    throw new Error('JSON target file must be an array or an object with a targets array.');
+  }
+  return text.split(/\r?\n/).map(value => value.trim()).filter(value => value && !value.startsWith('#'));
+}
+
+function writeJsonOutput(value, output) {
+  const resolved = path.resolve(output);
+  fs.mkdirSync(path.dirname(resolved), { recursive: true });
+  fs.writeFileSync(resolved, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+  return resolved;
+}
+
 async function resolveCommandSite() {
   return resolveSite(source, {
     timeoutMs: numericOption('timeout', 8000),
@@ -185,7 +219,32 @@ async function main() {
     return result.results.length ? 0 : 1;
   }
 
-  if (['resolve', 'explain', 'plan'].includes(command)) {
+  if (command === 'resolve-many') {
+    if (!source) throw new Error('resolve-many requires a JSON or newline-delimited target file.');
+    const result = await resolveMany(readBatchTargets(source), {
+      concurrency: Math.min(10, Math.max(1, Math.trunc(numericOption('concurrency', 4)))),
+      resolveOptions: { timeoutMs: numericOption('timeout', 8000), maxBytes: numericOption('max-bytes', 512 * 1024) }
+    });
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else {
+      for (const item of result.results) console.log(`${item.status.toUpperCase()} ${item.id} ${item.inputUrl}${item.error ? ` — ${item.error}` : ''}`);
+      console.log(`Summary: ${result.summary.resolved} resolved, ${result.summary.failed} failed, ${result.summary.conflicts} conflict(s), ${result.summary.interfacesResolved} interface(s)`);
+    }
+    return result.summary.failed ? 1 : 0;
+  }
+
+  if (command === 'drift') {
+    if (!source || !secondSource) throw new Error('drift requires before.snapshot.json and after.snapshot.json.');
+    const drift = diffResolverSnapshots(readJsonFile(source), readJsonFile(secondSource));
+    if (jsonOutput) console.log(JSON.stringify(drift, null, 2));
+    else {
+      console.log(`${drift.hasDrift ? 'DRIFT' : 'NO-DRIFT'} ${drift.after.canonicalUrl}`);
+      console.log(`Sources +${drift.summary.sourcesAdded}/-${drift.summary.sourcesRemoved}/~${drift.summary.sourcesChanged}; interfaces +${drift.summary.interfacesAdded}/-${drift.summary.interfacesRemoved}/~${drift.summary.interfacesChanged}; conflicts +${drift.summary.conflictsAdded}/-${drift.summary.conflictsRemoved}; plans ${drift.summary.planChanges}; identity ${drift.summary.identityChanged ? 'changed' : 'stable'}`);
+    }
+    return drift.hasDrift ? 1 : 0;
+  }
+
+  if (['resolve', 'explain', 'plan', 'snapshot'].includes(command)) {
     if (!source) throw new Error(`A website URL is required for ${command}.`);
     const result = await resolveCommandSite();
     if (command === 'resolve') {
@@ -197,6 +256,16 @@ async function main() {
       const explanation = explainResolvedSite(result);
       if (jsonOutput) console.log(JSON.stringify({ resolution: result, explanation }, null, 2));
       else console.log(explanation);
+      return 0;
+    }
+    if (command === 'snapshot') {
+      const snapshot = createResolverSnapshot(result, { resolverVersion: toolVersion });
+      const output = optionValue('output');
+      if (output) {
+        const written = writeJsonOutput(snapshot, output);
+        if (jsonOutput) console.log(JSON.stringify({ written, snapshot }, null, 2));
+        else console.log(`WROTE ${written}`);
+      } else console.log(JSON.stringify(snapshot, null, 2));
       return 0;
     }
     const intent = optionValue('intent');
