@@ -182,12 +182,20 @@ async function loadIndex(index, allowed) {
   return parseIndexText(text, index.format);
 }
 
-async function createServer() {
+async function prepareContext() {
   const { profile, sourceUrl, warnings } = await loadProfile();
-  const allowed = allowedOrigins(profile, sourceUrl);
-  const resources = collectResources(profile);
-  const indexes = retrievalIndexes(profile);
+  return {
+    profile,
+    sourceUrl,
+    warnings,
+    allowed: allowedOrigins(profile, sourceUrl),
+    resources: collectResources(profile),
+    indexes: retrievalIndexes(profile)
+  };
+}
 
+function createServer(context) {
+  const { profile, sourceUrl, warnings, allowed, resources, indexes } = context;
   const server = new McpServer({
     name: `arwp-gateway-${profile.id}`,
     version: '0.1.0'
@@ -281,5 +289,6 @@ async function createServer() {
   return server;
 }
 
-void serveStdio(createServer);
-console.error(`ARWP MCP gateway starting with profile ${PROFILE_SOURCE}`);
+const context = await prepareContext();
+void serveStdio(() => createServer(context));
+console.error(`ARWP MCP gateway running on stdio with profile ${PROFILE_SOURCE}`);
