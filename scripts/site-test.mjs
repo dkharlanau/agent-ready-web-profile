@@ -16,19 +16,24 @@ for (const file of [htmlPath, cssPath, jsPath, directoryPath]) {
 }
 
 const html = fs.readFileSync(htmlPath, 'utf8');
-assert.match(html, /Make your website understandable to AI agents/i);
+assert.match(html, /Resolve how a website can actually be used by agents/i);
 assert.match(html, /It removes guessing about how a website can be used/i);
-assert.match(html, /Without ARWP/i);
-assert.match(html, /With ARWP/i);
+assert.match(html, /Without a resolver/i);
+assert.match(html, /With ARWP Resolver/i);
+assert.match(html, /No format war required/i);
 assert.match(html, /Five real websites already publish ARWP profiles/i);
 assert.match(html, /ARWP Directory/i);
 assert.match(html, /Federated router/i);
+assert.match(html, /Benchmark utility before expanding the format/i);
 assert.match(html, /data-scanner-endpoint=""/);
 assert.match(html, /<meta name="description"/);
 assert.match(html, /<link rel="canonical" href="https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/">/);
 assert.match(html, /href="\.\/arwp\.css"/);
 assert.match(html, /src="\.\/arwp\.js"/);
 assert.match(html, /id="site-url"/);
+assert.match(html, /node bin\/arwp\.mjs resolve/);
+assert.match(html, /node bin\/arwp\.mjs explain/);
+assert.match(html, /node bin\/arwp\.mjs plan/);
 assert.match(html, /node bin\/arwp\.mjs scan/);
 assert.doesNotMatch(html, /single\s+AI[- ]readiness\s+score/i, 'site must not market an opaque AI-readiness score');
 
@@ -42,7 +47,8 @@ for (const site of directory.sites) {
 const js = fs.readFileSync(jsPath, 'utf8');
 assert.match(js, /url\.protocol !== 'https:'/);
 assert.match(js, /fetch\('\.\/directory\.json'/, 'site may fetch only its same-origin directory for static rendering');
-assert.match(js, /fetch\(scannerEndpoint/, 'hosted scan calls must use the fixed configured scanner endpoint');
+assert.match(js, /fetch\(endpoint/, 'hosted resolver calls must use a fixed route derived from the configured service endpoint');
+assert.match(js, /fixedServiceRoute\('\/resolve'\)/, 'live UI must use the resolver route rather than direct browser fetching');
 assert.doesNotMatch(js, /fetch\(site\b|fetch\(siteInput|fetch\(normalizeSite/, 'user-provided URLs must never become a direct browser fetch target');
 
-console.log('PASS ARWP project site explains user value, renders the reference directory, and keeps browser scanning behind a fixed configured endpoint');
+console.log('PASS ARWP project site leads with resolver utility, preserves reference evidence, and keeps browser resolution behind a fixed bounded service endpoint');
