@@ -5,6 +5,8 @@ import path from 'node:path';
 import { loadProfile, validateProfile, formatAjvError } from '../lib/validator.mjs';
 import { verifyProfileSource } from '../lib/verifier.mjs';
 import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
+import { formatHealthReport, healthReport } from '../lib/health.mjs';
+import { DEFAULT_DIRECTORY_SOURCE, loadDirectory, searchFederated, selectSites } from '../router/federated.mjs';
 
 const packageJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 const toolVersion = packageJson.version;
@@ -17,16 +19,24 @@ Usage:
   arwp verify <profile.json|https://...> [--json] [--timeout=<ms>] [--concurrency=<n>]
   arwp scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
   arwp init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
+  arwp health <https://site.example> [--json]
+  arwp directory [--capability=<name>] [--json]
+  arwp federated-search <query> [--sites=id1,id2] [--limit=<n>] [--json]
   arwp mcp
   arwp mcp-http
+  arwp router-mcp
 
 Commands:
-  validate   Validate one local ARWP profile against the v0.1 schema and semantic checks.
-  verify     Validate a local or remote profile and probe every declared public URL.
-  scan       Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
-  init       Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
-  mcp        Start the generic read-only MCP gateway over stdio (configure with ARWP_PROFILE).
-  mcp-http   Start the guarded Streamable HTTP MCP gateway.
+  validate           Validate one local ARWP profile against the v0.1 schema and semantic checks.
+  verify             Validate a local or remote profile and probe every declared public URL.
+  scan               Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
+  init               Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
+  health             Combine bounded discovery with live verification of an existing ARWP profile.
+  directory          List sites from the configured ARWP directory, optionally by declared capability.
+  federated-search   Search declared retrieval indexes across directory sites while preserving source identity.
+  mcp                Start the generic read-only MCP gateway over stdio (configure with ARWP_PROFILE).
+  mcp-http           Start the guarded Streamable HTTP MCP gateway.
+  router-mcp         Start the federated directory/search MCP router over stdio.
 `);
 }
 
@@ -58,7 +68,6 @@ function printValidation(sourceName, result) {
     for (const warning of result.warnings) console.warn(`WARN ${warning}`);
     return;
   }
-
   console.error(`FAIL ${sourceName}`);
   for (const error of result.errors) console.error(`  ${formatAjvError(error)}`);
   for (const warning of result.warnings) console.warn(`WARN ${warning}`);
@@ -70,7 +79,6 @@ function printVerification(result) {
     for (const error of result.schemaErrors) console.error(`  ${error}`);
     return;
   }
-
   console.log(`${result.valid ? 'PASS' : 'FAIL'} ${result.source}`);
   for (const item of result.resources) {
     const suffix = item.issues?.length ? ` — ${item.issues.join('; ')}` : '';
@@ -97,8 +105,43 @@ async function main() {
     await import('../gateway/http-node.mjs');
     return null;
   }
+  if (command === 'router-mcp') {
+    await import('../router/server.mjs');
+    return null;
+  }
 
-  if (!['validate', 'verify', 'scan', 'init'].includes(command) || !source) {
+  if (command === 'directory') {
+    const { directory, sourceUrl } = await loadDirectory(process.env.ARWP_DIRECTORY || DEFAULT_DIRECTORY_SOURCE);
+    const sites = selectSites(directory, { capability: optionValue('capability') });
+    if (jsonOutput) console.log(JSON.stringify({ directory: sourceUrl, sites }, null, 2));
+    else {
+      console.log(`Directory: ${sourceUrl}`);
+      for (const site of sites) console.log(`${site.id}\t${site.name}\t${site.profileUrl}`);
+      console.log(`Sites: ${sites.length}`);
+    }
+    return 0;
+  }
+
+  if (command === 'federated-search') {
+    if (!source) throw new Error('A federated search query is required.');
+    const siteIds = String(optionValue('sites') || '').split(',').map(value => value.trim()).filter(Boolean);
+    const result = await searchFederated(source, {
+      directorySource: process.env.ARWP_DIRECTORY || DEFAULT_DIRECTORY_SOURCE,
+      siteIds,
+      limit: numericOption('limit', 10),
+      limitPerSite: numericOption('limit-per-site', 3)
+    });
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else {
+      console.log(`Query: ${result.query}`);
+      for (const hit of result.results) console.log(`${hit.score}\t${hit.site.name}\t${hit.title}\t${hit.url || hit.id || ''}`);
+      for (const failure of result.failures) console.warn(`WARN ${failure.siteName}: ${failure.error}`);
+      console.log(`Results: ${result.results.length}; searched sites: ${result.searchedSites.length}`);
+    }
+    return result.results.length ? 0 : 1;
+  }
+
+  if (!['validate', 'verify', 'scan', 'init', 'health'].includes(command) || !source) {
     usage();
     return 2;
   }
@@ -121,15 +164,24 @@ async function main() {
     return result.valid ? 0 : 1;
   }
 
+  if (command === 'health') {
+    const result = await healthReport(source, {
+      timeoutMs: numericOption('timeout', 8000),
+      maxBytes: numericOption('max-bytes', 512 * 1024)
+    });
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else console.log(formatHealthReport(result));
+    return result.profile.status === 'failing' || result.profile.status === 'invalid' ? 1 : 0;
+  }
+
   const scan = await scanSite(source, {
     timeoutMs: numericOption('timeout', 8000),
     maxBytes: numericOption('max-bytes', 512 * 1024)
   });
 
   if (command === 'scan') {
-    if (jsonOutput) {
-      console.log(JSON.stringify(scan, null, 2));
-    } else {
+    if (jsonOutput) console.log(JSON.stringify(scan, null, 2));
+    else {
       console.log(formatScanSummary(scan));
       console.log('\nDraft profile (not written):');
       console.log(JSON.stringify(scan.draftProfile, null, 2));
@@ -138,19 +190,12 @@ async function main() {
   }
 
   const output = path.resolve(optionValue('output') || path.join('ai', 'site-profile.json'));
-  if (fs.existsSync(output) && !args.includes('--force')) {
-    throw new Error(`Refusing to overwrite existing file: ${output}. Use --force to replace it.`);
-  }
+  if (fs.existsSync(output) && !args.includes('--force')) throw new Error(`Refusing to overwrite existing file: ${output}. Use --force to replace it.`);
   fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.writeFileSync(output, `${JSON.stringify(scan.draftProfile, null, 2)}\n`, 'utf8');
 
   if (jsonOutput) {
-    console.log(JSON.stringify({
-      written: output,
-      profile: scan.draftProfile,
-      evidence: scan.evidence,
-      warnings: scan.warnings
-    }, null, 2));
+    console.log(JSON.stringify({ written: output, profile: scan.draftProfile, evidence: scan.evidence, warnings: scan.warnings }, null, 2));
   } else {
     console.log(`WROTE ${output}`);
     console.log(`Detected ${scan.evidence.length} evidence item(s).`);
@@ -164,10 +209,7 @@ try {
   const exitCode = await main();
   if (Number.isInteger(exitCode)) process.exit(exitCode);
 } catch (error) {
-  if (jsonOutput) {
-    console.log(JSON.stringify({ valid: false, fatal: String(error.message ?? error) }, null, 2));
-  } else {
-    console.error(`ERROR ${error.message ?? error}`);
-  }
+  if (jsonOutput) console.log(JSON.stringify({ valid: false, fatal: String(error.message ?? error) }, null, 2));
+  else console.error(`ERROR ${error.message ?? error}`);
   process.exit(2);
 }
