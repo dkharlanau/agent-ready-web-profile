@@ -1,0 +1,91 @@
+name: ARWP adoption report
+description: Share an independent site adoption or a concrete interoperability failure.
+title: "Adoption: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for public sites outside the original ARWP reference suite. The useful signal is not “I added the badge”; it is what became easier or what still failed during discovery/integration.
+
+  - type: input
+    id: site
+    attributes:
+      label: Canonical website
+      placeholder: https://example.com/
+    validations:
+      required: true
+
+  - type: input
+    id: profile
+    attributes:
+      label: Public ARWP profile
+      placeholder: https://example.com/ai/site-profile.json
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: What were you trying to make easier?
+      description: For example, structured retrieval, API discovery, Agent Skill discovery, MCP connection, citation/provenance or CI validation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Adoption workflow
+      description: What did you run/change? Include scan/init/validate/verify commands when relevant.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: capabilities
+    attributes:
+      label: Capability groups actually used
+      options:
+        - label: Web discovery
+        - label: Data / API
+        - label: Retrieval / RAG
+        - label: Agent Skills
+        - label: WebMCP
+        - label: MCP
+        - label: A2A
+        - label: Identity / trust
+
+  - type: textarea
+    id: manual
+    attributes:
+      label: What required manual editing?
+      description: Name declarations the scanner could not or should not infer.
+
+  - type: textarea
+    id: consumer
+    attributes:
+      label: Did a downstream client actually use the profile?
+      description: Name the client/workflow if public and explain what it did with ARWP.
+
+  - type: textarea
+    id: friction
+    attributes:
+      label: Concrete friction or interoperability failure
+      description: This is the highest-value section. Describe ambiguity, false positive, missing discovery signal, stale declaration or client incompatibility.
+    validations:
+      required: true
+
+  - type: textarea
+    id: verify
+    attributes:
+      label: Verification output
+      description: Paste the relevant `arwp verify` / `arwp health` summary. Remove secrets; ARWP profiles should be public metadata.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: truth
+    attributes:
+      label: Declaration check
+      options:
+        - label: I verified that the profile describes capabilities that currently exist; planned capabilities are not declared as live.
+          required: true
