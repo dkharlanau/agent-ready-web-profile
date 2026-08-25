@@ -1,0 +1,27 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "ty-docs",
+  "url": "https://docs.astral.sh/ty/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": [{ "url": "https://docs.astral.sh/ty/", "protocol": "HTML", "kind": "html" }],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://docs.astral.sh/ty/",
+      "sourceType": "official-docs",
+      "note": "Astral publishes the public ty documentation site. For this reviewed fixture only canonical HTML is accepted; no additional agent interface is inferred without explicit evidence."
+    },
+    {
+      "url": "https://github.com/astral-sh/ty",
+      "sourceType": "official-repository",
+      "note": "The public Astral repository confirms ownership and the documentation project identity."
+    }
+  ],
+  "note": "Conservative HTML control. This fixture intentionally does not assume ty mirrors uv/Ruff llms discovery unless it is directly reviewed."
+}
