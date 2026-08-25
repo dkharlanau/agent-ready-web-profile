@@ -1,0 +1,23 @@
+{
+  "version": "0.1",
+  "updatedAt": "2026-08-25",
+  "source": "registry/sites.json",
+  "privacy": "Aggregate counts derived from the public directory only. No visitor, scan or user tracking is collected.",
+  "sites": 5,
+  "capabilities": {
+    "web": 5,
+    "data": 5,
+    "retrieval": 5,
+    "openapi": 2,
+    "agentSkills": 2,
+    "webmcp": 0,
+    "mcp": 3,
+    "a2a": 0,
+    "trust": 5
+  },
+  "mcpTransports": {
+    "local": 3,
+    "remote": 0,
+    "local+remote": 0
+  }
+}
