@@ -7,7 +7,7 @@ import { verifyProfileSource } from '../lib/verifier.mjs';
 import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 import { formatHealthReport, healthReport } from '../lib/health.mjs';
 import { checkProtocolArtifacts } from '../lib/protocol-checks.mjs';
-import { resolveSite, explainResolvedSite, planResolvedSite } from '../lib/resolver.mjs';
+import { resolveSite, explainResolvedSite, planResolvedSite, DEFAULT_RESOLVER_MAX_BYTES } from '../lib/resolver.mjs';
 import { resolveMany } from '../lib/resolver-batch.mjs';
 import { createResolverSnapshot, diffResolverSnapshots } from '../lib/resolver-snapshot.mjs';
 import { DEFAULT_DIRECTORY_SOURCE, loadDirectory, searchFederated, selectSites } from '../router/federated.mjs';
@@ -158,7 +158,7 @@ function writeJsonOutput(value, output) {
 async function resolveCommandSite() {
   return resolveSite(source, {
     timeoutMs: numericOption('timeout', 8000),
-    maxBytes: numericOption('max-bytes', 512 * 1024)
+    maxBytes: numericOption('max-bytes', DEFAULT_RESOLVER_MAX_BYTES)
   });
 }
 
@@ -223,7 +223,7 @@ async function main() {
     if (!source) throw new Error('resolve-many requires a JSON or newline-delimited target file.');
     const result = await resolveMany(readBatchTargets(source), {
       concurrency: Math.min(10, Math.max(1, Math.trunc(numericOption('concurrency', 4)))),
-      resolveOptions: { timeoutMs: numericOption('timeout', 8000), maxBytes: numericOption('max-bytes', 512 * 1024) }
+      resolveOptions: { timeoutMs: numericOption('timeout', 8000), maxBytes: numericOption('max-bytes', DEFAULT_RESOLVER_MAX_BYTES) }
     });
     if (jsonOutput) console.log(JSON.stringify(result, null, 2));
     else {
