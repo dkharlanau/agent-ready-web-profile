@@ -26,7 +26,8 @@
     "test:verifier": "node scripts/verifier-test.mjs",
     "test:scanner": "node scripts/scanner-test.mjs && node --check lib/scanner.mjs",
     "test:package": "node scripts/package-smoke-test.mjs",
-    "test": "node scripts/test.mjs && node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node scripts/verifier-test.mjs && node scripts/scanner-test.mjs && node --check lib/scanner.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
+    "test:site": "node scripts/site-test.mjs",
+    "test": "node scripts/test.mjs && node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node scripts/verifier-test.mjs && node scripts/scanner-test.mjs && node scripts/site-test.mjs && node --check lib/scanner.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "mcp:start": "node gateway/server.mjs",
     "mcp:http": "node gateway/http-node.mjs"
   },
