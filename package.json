@@ -7,7 +7,7 @@
   "mcpName": "io.github.dkharlanau/agent-ready-web-profile",
   "bin": { "arwp": "bin/arwp.mjs" },
   "files": [
-    "bin/", "lib/", "schema/", "gateway/", "scanner-service/", "router/", "resolver/", "registry/", "server.json",
+    "bin/", "lib/", "schema/", "gateway/", "scanner-service/", "router/", "resolver/", "registry/", "benchmarks/", "server.json",
     "SPEC.md", "README.md", "LICENSE", "docs/CONFORMANCE.md", "docs/GATEWAY.md", "docs/SCANNER.md",
     "docs/STANDARDS-MAP.md", "docs/USE-CASES.md", "docs/ADOPTION.md", "docs/DIRECTORY.md", "docs/RESOLVER.md", "docs/BENCHMARK.md"
   ],
