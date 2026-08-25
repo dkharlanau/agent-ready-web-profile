@@ -1,0 +1,60 @@
+name: Resolver interoperability failure
+description: Report a real site where ARWP Resolver misses, misroutes, conflicts, or overclaims an interface.
+title: "[resolver] "
+labels: []
+body:
+  - type: input
+    id: site
+    attributes:
+      label: Public website
+      placeholder: https://example.com/
+    validations:
+      required: true
+  - type: dropdown
+    id: failure
+    attributes:
+      label: Failure type
+      options:
+        - Missed discovery surface
+        - False-positive capability
+        - Wrong interface selected for intent
+        - Identity mismatch
+        - Conflicting declarations not detected
+        - Stale declaration / drift
+        - Runtime differs from static metadata
+        - Unsupported upstream mapping
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: intent
+    attributes:
+      label: Intent, if applicable
+      options:
+        - Not applicable
+        - read
+        - search
+        - structured
+        - tools
+        - agent
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Public evidence
+      description: Link to the real discovery/runtime artifact and explain what a correct client should observe.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Resolver output
+      description: Include the relevant `arwp resolve --json`, `explain`, or `plan` result.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe the smallest interoperability behavior that would fix this case. Do not propose a new core field unless existing/upstream metadata cannot represent it.
+    validations:
+      required: true
