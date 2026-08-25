@@ -1,0 +1,194 @@
+#!/usr/bin/env node
+
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import Ajv2020 from 'ajv/dist/2020.js';
+import addFormats from 'ajv-formats';
+import { resolveSite, planResolvedSite } from '../lib/resolver.mjs';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const args = process.argv.slice(2);
+
+function option(name, fallback = null) {
+  const prefix = `--${name}=`;
+  const value = args.find(arg => arg.startsWith(prefix));
+  return value ? value.slice(prefix.length) : fallback;
+}
+
+const corpusDir = path.resolve(option('corpus', path.join(root, 'benchmarks', 'corpus')));
+const outputPath = option('output') ? path.resolve(option('output')) : null;
+const includeNonIndependent = args.includes('--include-non-independent');
+const schema = JSON.parse(fs.readFileSync(path.join(corpusDir, 'fixture.schema.json'), 'utf8'));
+const ajv = new Ajv2020({ allErrors: true, strict: true });
+addFormats(ajv);
+const validate = ajv.compile(schema);
+const intents = ['read', 'search', 'structured', 'tools', 'agent'];
+
+function normalizeUrl(value) {
+  if (!value) return null;
+  try {
+    const parsed = new URL(value);
+    parsed.hash = '';
+    return parsed.href.replace(/\/$/, '');
+  } catch {
+    return String(value);
+  }
+}
+
+function criterionMatches(item, criterion) {
+  if (!item) return false;
+  if (typeof criterion === 'string') return normalizeUrl(item.url) === normalizeUrl(criterion);
+  for (const [key, expected] of Object.entries(criterion)) {
+    const actual = key === 'url' ? normalizeUrl(item.url) : item[key];
+    const normalizedExpected = key === 'url' ? normalizeUrl(expected) : expected;
+    if (actual !== normalizedExpected) return false;
+  }
+  return true;
+}
+
+function scoreSelection(selected, accepted) {
+  if (!accepted.length) return { correct: !selected, classification: selected ? 'false-positive' : 'correct-none' };
+  if (!selected) return { correct: false, classification: 'missed-interface' };
+  const correct = accepted.some(criterion => criterionMatches(selected, criterion));
+  return { correct, classification: correct ? 'correct-interface' : 'wrong-interface' };
+}
+
+function emptyResolutionLike(resolution) {
+  return {
+    canonicalUrl: resolution.canonicalUrl,
+    identity: resolution.identity,
+    sources: resolution.sources,
+    conflicts: resolution.conflicts,
+    summary: resolution.summary,
+    interfaces: Object.fromEntries(Object.keys(resolution.interfaces).map(key => [key, []]))
+  };
+}
+
+function filteredResolution(resolution, strategy) {
+  if (strategy === 'resolver-union') return resolution;
+  const copy = emptyResolutionLike(resolution);
+  function include(item) {
+    const id = String(item.sourceId || '');
+    const authority = String(item.sourceAuthority || '');
+    if (strategy === 'ordinary-web') return authority === 'observed-web' && item.protocol !== 'llms.txt';
+    if (strategy === 'llms-aware') return authority === 'observed-web';
+    if (strategy === 'agents-aware') return /^agents-(?:txt|json)/.test(id);
+    if (strategy === 'arwp-profile-only') return id.startsWith('arwp-profile:');
+    if (strategy === 'protocol-native') {
+      return ['ietf-standard', 'upstream-standard', 'upstream-convention', 'experimental-upstream'].includes(authority);
+    }
+    return false;
+  }
+  for (const [group, items] of Object.entries(resolution.interfaces)) copy.interfaces[group] = items.filter(include);
+  return copy;
+}
+
+const fixtureFiles = fs.readdirSync(corpusDir)
+  .filter(name => name.endsWith('.json') && name !== 'fixture.schema.json')
+  .sort();
+const fixtures = fixtureFiles.map(file => {
+  const payload = JSON.parse(fs.readFileSync(path.join(corpusDir, file), 'utf8'));
+  if (!validate(payload)) throw new Error(`${file}: ${JSON.stringify(validate.errors, null, 2)}`);
+  return { file, ...payload };
+}).filter(fixture => includeNonIndependent || fixture.ownership === 'independent');
+
+if (!fixtures.length) {
+  console.error('No benchmark fixtures selected. Add reviewed ownership=independent fixtures or pass --include-non-independent for engineering-only runs.');
+  process.exit(2);
+}
+
+const strategies = ['ordinary-web', 'llms-aware', 'agents-aware', 'protocol-native', 'arwp-profile-only', 'resolver-union'];
+const rawResults = [];
+
+for (const fixture of fixtures) {
+  const startedAt = Date.now();
+  let resolution;
+  try {
+    resolution = await resolveSite(fixture.url);
+  } catch (error) {
+    rawResults.push({ id: fixture.id, url: fixture.url, ownership: fixture.ownership, status: 'failed', durationMs: Date.now() - startedAt, error: String(error?.message || error) });
+    continue;
+  }
+
+  const strategyResults = {};
+  for (const strategy of strategies) {
+    const view = filteredResolution(resolution, strategy);
+    const intentResults = {};
+    for (const intent of intents) {
+      const plan = planResolvedSite(view, intent);
+      intentResults[intent] = {
+        selected: plan.selected ? {
+          url: plan.selected.url || null,
+          protocol: plan.selected.protocol || null,
+          kind: plan.selected.kind || null,
+          transport: plan.selected.transport || null,
+          sourceId: plan.selected.sourceId || null,
+          sourceAuthority: plan.selected.sourceAuthority || null
+        } : null,
+        accepted: fixture.accepted[intent],
+        ...scoreSelection(plan.selected, fixture.accepted[intent])
+      };
+    }
+    strategyResults[strategy] = {
+      intents: intentResults,
+      correct: Object.values(intentResults).filter(item => item.correct).length,
+      total: intents.length,
+      metrics: strategy === 'resolver-union' ? {
+        requests: resolution.summary?.requests ?? resolution.metrics?.requests ?? null,
+        bytes: resolution.summary?.bytes ?? resolution.metrics?.bytes ?? null,
+        durationMs: Date.now() - startedAt,
+        sourcesResolved: resolution.summary?.sourcesResolved ?? null,
+        sourcesAttempted: resolution.summary?.sourcesAttempted ?? null,
+        conflicts: resolution.conflicts?.length ?? 0
+      } : null,
+      metricScope: strategy === 'resolver-union' ? 'observed during the real resolver run' : 'selection-only view of the same resolver observation; no independent request/byte claim'
+    };
+  }
+
+  rawResults.push({
+    id: fixture.id,
+    url: fixture.url,
+    ownership: fixture.ownership,
+    reviewedAt: fixture.reviewedAt,
+    evidence: fixture.evidence,
+    status: 'resolved',
+    canonicalUrl: resolution.canonicalUrl,
+    strategyResults
+  });
+  console.log(`RESOLVED ${fixture.id}`);
+}
+
+const independentResults = rawResults.filter(item => item.ownership === 'independent');
+const aggregate = {};
+for (const strategy of strategies) {
+  let correct = 0;
+  let total = 0;
+  for (const site of independentResults.filter(item => item.status === 'resolved')) {
+    correct += site.strategyResults[strategy].correct;
+    total += site.strategyResults[strategy].total;
+  }
+  aggregate[strategy] = { correct, total, accuracy: total ? correct / total : null };
+}
+
+const report = {
+  benchmarkVersion: '0.1',
+  generatedAt: new Date().toISOString(),
+  corpus: corpusDir,
+  evidencePolicy: 'Only ownership=independent fixtures count toward aggregate results. Ground truth is manually reviewed public evidence and is never derived from Resolver output.',
+  metricPolicy: 'Only resolver-union network metrics reflect a real network run. Sub-strategy comparisons are selection-only projections over the same observed resolution.',
+  sitesSelected: fixtures.length,
+  independentSites: independentResults.length,
+  resolvedIndependentSites: independentResults.filter(item => item.status === 'resolved').length,
+  failedIndependentSites: independentResults.filter(item => item.status === 'failed').length,
+  aggregate,
+  results: rawResults
+};
+
+if (outputPath) {
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  console.log(`WROTE ${outputPath}`);
+} else {
+  console.log(JSON.stringify(report, null, 2));
+}
