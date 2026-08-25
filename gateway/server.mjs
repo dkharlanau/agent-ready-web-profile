@@ -150,6 +150,32 @@ function collectResources(profile) {
     });
   }
 
+  add('agentSkills.catalog', profile.agentSkills?.catalog);
+  add('agentSkills.specification', profile.agentSkills?.specification);
+  for (const [index, skill] of (profile.agentSkills?.skills ?? []).entries()) {
+    add(`agentSkills.skills.${index}.url`, skill.url, {
+      name: skill.name,
+      version: skill.version,
+      description: skill.description
+    });
+    add(`agentSkills.skills.${index}.source`, skill.source, { name: skill.name });
+  }
+
+  for (const [index, page] of (profile.agentWeb?.webmcp?.pages ?? []).entries()) {
+    add(`agentWeb.webmcp.pages.${index}`, page);
+  }
+  add('agentWeb.webmcp.documentation', profile.agentWeb?.webmcp?.documentation);
+
+  for (const [index, server] of (profile.mcp?.servers ?? []).entries()) {
+    add(`mcp.servers.${index}.url`, server.url, { name: server.name, transport: server.transport });
+    add(`mcp.servers.${index}.source`, server.source, { name: server.name, transport: server.transport });
+    add(`mcp.servers.${index}.registry`, server.registry, { name: server.name });
+    add(`mcp.servers.${index}.documentation`, server.documentation, { name: server.name });
+  }
+
+  add('a2a.agentCard', profile.a2a?.agentCard);
+  add('identity.aliases', profile.identity?.aliases);
+
   for (const key of ['license', 'citation', 'provenance', 'reviewPolicy', 'security']) {
     add(`trust.${key}`, profile.trust?.[key]);
   }
@@ -213,9 +239,9 @@ function createServer(context) {
   server.registerTool(
     'list_declared_resources',
     {
-      description: 'List public web, data, retrieval and trust resources declared by the ARWP profile. Listing does not fetch them.',
+      description: 'List public web, data, retrieval, Agent Skills, integration and trust resources declared by the ARWP profile. Listing does not fetch them.',
       inputSchema: z.object({
-        prefix: z.string().optional().describe('Optional key prefix such as data, retrieval, web or trust.')
+        prefix: z.string().optional().describe('Optional key prefix such as data, retrieval, agentSkills, mcp, web or trust.')
       })
     },
     async ({ prefix }) => {
@@ -228,7 +254,7 @@ function createServer(context) {
   server.registerTool(
     'fetch_declared_resource',
     {
-      description: 'Fetch one explicitly declared same-origin public resource by ARWP resource key. Arbitrary URLs are not accepted.',
+      description: 'Fetch one explicitly declared allowed-origin public resource by ARWP resource key. Arbitrary URLs are not accepted.',
       inputSchema: z.object({
         key: z.string().min(1),
         max_chars: z.number().int().min(100).max(100000).default(20000)
