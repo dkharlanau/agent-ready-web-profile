@@ -4,7 +4,7 @@
   "id": "example-knowledge-site",
   "name": "Example Knowledge Site",
   "canonicalUrl": "https://knowledge.example.com/",
-  "description": "A reviewed public knowledge library with versioned data, retrieval artifacts, browser-agent tools and a read-only remote MCP server.",
+  "description": "A reviewed public knowledge library with versioned data, retrieval artifacts, portable Agent Skills, browser-agent tools and a read-only remote MCP server.",
   "languages": ["en", "de"],
   "web": {
     "sitemap": "https://knowledge.example.com/sitemap.xml",
@@ -47,6 +47,18 @@
     ],
     "search": "https://knowledge.example.com/for-ai/query/",
     "abstention": "https://knowledge.example.com/docs/retrieval-contract/"
+  },
+  "agentSkills": {
+    "specification": "https://agentskills.io/specification",
+    "skills": [
+      {
+        "name": "knowledge-research",
+        "url": "https://knowledge.example.com/skills/knowledge-research/SKILL.md",
+        "version": "1.0.0",
+        "description": "Research the reviewed knowledge library while preserving citations and abstention boundaries.",
+        "source": "https://knowledge.example.com/skills/knowledge-research/"
+      }
+    ]
   },
   "agentWeb": {
     "webmcp": {
