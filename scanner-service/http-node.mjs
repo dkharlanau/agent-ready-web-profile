@@ -2,6 +2,7 @@ import http from 'node:http';
 import { Readable } from 'node:stream';
 import { createScannerHandler } from './handler.mjs';
 
+// Keep ARWP_SCANNER_* environment names for backward compatibility with the 0.2.0 deployment artifacts.
 const bind = process.env.ARWP_SCANNER_BIND || '127.0.0.1';
 const port = Number(process.env.PORT || process.env.ARWP_SCANNER_PORT || 8787);
 const allowedOrigins = String(process.env.ARWP_SCANNER_ALLOWED_ORIGINS || '')
@@ -9,7 +10,7 @@ const allowedOrigins = String(process.env.ARWP_SCANNER_ALLOWED_ORIGINS || '')
 const requestsPerWindow = Number(process.env.ARWP_SCANNER_RATE_LIMIT || 10);
 const windowMs = Number(process.env.ARWP_SCANNER_RATE_WINDOW_MS || 60_000);
 
-if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error(`Invalid scanner port: ${port}`);
+if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error(`Invalid discovery-service port: ${port}`);
 if (!Number.isFinite(requestsPerWindow) || requestsPerWindow < 1) throw new Error('ARWP_SCANNER_RATE_LIMIT must be positive.');
 if (!Number.isFinite(windowMs) || windowMs < 1000) throw new Error('ARWP_SCANNER_RATE_WINDOW_MS must be at least 1000.');
 
@@ -50,6 +51,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(port, bind, () => {
-  console.log(`ARWP scanner listening on http://${bind}:${port}`);
+  console.log(`ARWP discovery service listening on http://${bind}:${port}`);
+  console.log('Routes: GET /health; POST /scan, /resolve, /explain, /plan');
   console.log(`Allowed browser origins: ${allowedOrigins.length ? allowedOrigins.join(', ') : '(none)'}`);
 });
