@@ -1,8 +1,10 @@
 import { scanSite } from '../lib/scanner.mjs';
+import { resolveSite, explainResolvedSite, planResolvedSite } from '../lib/resolver.mjs';
 
 const DEFAULT_BODY_LIMIT = 8 * 1024;
 const DEFAULT_WINDOW_MS = 60_000;
 const DEFAULT_REQUESTS_PER_WINDOW = 10;
+const POST_ROUTES = new Set(['/scan', '/resolve', '/explain', '/plan']);
 
 function jsonResponse(body, status = 200, headers = {}) {
   return new Response(`${JSON.stringify(body, null, 2)}\n`, {
@@ -41,6 +43,9 @@ async function readJsonBounded(request, maxBytes) {
 
 export function createScannerHandler({
   scanImpl = scanSite,
+  resolveImpl = resolveSite,
+  explainImpl = explainResolvedSite,
+  planImpl = planResolvedSite,
   allowedOrigins = [],
   bodyLimit = DEFAULT_BODY_LIMIT,
   windowMs = DEFAULT_WINDOW_MS,
@@ -88,10 +93,10 @@ export function createScannerHandler({
     }
 
     if (url.pathname === '/health' && request.method === 'GET') {
-      return jsonResponse({ ok: true, service: 'arwp-scanner' }, 200, cors || {});
+      return jsonResponse({ ok: true, service: 'arwp-discovery', routes: ['/scan', '/resolve', '/explain', '/plan'] }, 200, cors || {});
     }
 
-    if (url.pathname !== '/scan') return jsonResponse({ error: 'Not found.' }, 404, cors || {});
+    if (!POST_ROUTES.has(url.pathname)) return jsonResponse({ error: 'Not found.' }, 404, cors || {});
     if (request.method !== 'POST') return jsonResponse({ error: 'Method not allowed.' }, 405, { allow: 'POST, OPTIONS', ...(cors || {}) });
 
     try {
@@ -99,22 +104,33 @@ export function createScannerHandler({
       const payload = await readJsonBounded(request, bodyLimit);
       const target = String(payload?.url || '').trim();
       if (!target) throw Object.assign(new Error('Field "url" is required.'), { status: 400 });
-      const scan = await scanImpl(target);
-      return jsonResponse({
-        scan: {
-          source: scan.source,
-          finalUrl: scan.finalUrl,
-          canonicalUrl: scan.canonicalUrl,
-          identity: scan.identity,
-          discovered: scan.discovered,
-          existingProfile: scan.existingProfile,
-          evidence: scan.evidence,
-          capabilities: scan.capabilities,
-          warnings: scan.warnings,
-          draftWarnings: scan.draftWarnings
-        },
-        profile: scan.draftProfile
-      }, 200, cors || {});
+
+      if (url.pathname === '/scan') {
+        const scan = await scanImpl(target);
+        return jsonResponse({
+          scan: {
+            source: scan.source,
+            finalUrl: scan.finalUrl,
+            canonicalUrl: scan.canonicalUrl,
+            identity: scan.identity,
+            discovered: scan.discovered,
+            existingProfile: scan.existingProfile,
+            evidence: scan.evidence,
+            capabilities: scan.capabilities,
+            warnings: scan.warnings,
+            draftWarnings: scan.draftWarnings
+          },
+          profile: scan.draftProfile
+        }, 200, cors || {});
+      }
+
+      const resolution = await resolveImpl(target);
+      if (url.pathname === '/resolve') return jsonResponse({ resolution }, 200, cors || {});
+      if (url.pathname === '/explain') return jsonResponse({ canonicalUrl: resolution.canonicalUrl, explanation: explainImpl(resolution), conflicts: resolution.conflicts }, 200, cors || {});
+
+      const intent = String(payload?.intent || '').trim().toLowerCase();
+      if (!['read', 'search', 'structured', 'tools', 'agent'].includes(intent)) throw Object.assign(new Error('Field "intent" must be read, search, structured, tools or agent.'), { status: 400 });
+      return jsonResponse({ canonicalUrl: resolution.canonicalUrl, plan: planImpl(resolution, intent), conflicts: resolution.conflicts }, 200, cors || {});
     } catch (error) {
       const status = Number(error?.status) || 400;
       return jsonResponse({ error: String(error?.message || error) }, status >= 400 && status <= 599 ? status : 500, cors || {});
