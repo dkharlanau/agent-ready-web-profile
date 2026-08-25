@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "pydantic-ai-docs",
+  "url": "https://ai.pydantic.dev/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://pydantic.dev/docs/ai/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://ai.pydantic.dev/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Pydantic AI publishes a path-scoped llms.txt index (currently redirected under pydantic.dev/docs/ai/) with Markdown documentation links and explicit agent-query guidance."
+    }
+  ],
+  "note": "Redirected/path-scoped llms.txt fixture; the site also asks agent clients to avoid personal/private data in optional goal/organization query metadata."
+}
