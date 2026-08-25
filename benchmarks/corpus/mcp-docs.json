@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "mcp-docs",
+  "url": "https://modelcontextprotocol.io/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://modelcontextprotocol.io/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://modelcontextprotocol.io/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "The official MCP documentation publishes a root llms.txt index for machine-oriented documentation discovery."
+    }
+  ],
+  "note": "Protocol documentation fixture; the documentation website itself is not treated as an MCP server merely because it documents MCP."
+}
