@@ -23,10 +23,12 @@ try {
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
     'bin/arwp.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs',
+    'lib/public-fetch.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
     'scanner-service/handler.mjs', 'router/federated.mjs', 'router/server.mjs',
     'registry/sites.json', 'registry/directory.schema.json', 'server.json',
-    'docs/USE-CASES.md', 'docs/ADOPTION.md', 'README.md', 'SPEC.md', 'LICENSE'
+    'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md',
+    'README.md', 'SPEC.md', 'LICENSE'
   ]) assert.ok(paths.has(required), `packed artifact is missing ${required}`);
 
   assert.equal(paths.has('scripts/scanner-test.mjs'), false, 'test scripts must not ship in the npm artifact');
@@ -44,9 +46,13 @@ try {
   assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', 'arwp')), 'npm bin shim is missing');
   const installedPackage = JSON.parse(fs.readFileSync(path.join(installedRoot, 'package.json'), 'utf8'));
   assert.equal(installedPackage.mcpName, 'io.github.dkharlanau/agent-ready-web-profile');
+  assert.equal(installedPackage.scripts['resolver:mcp'], 'node resolver/server.mjs');
 
   const version = execFileSync(process.execPath, [installedCli, '--version'], { cwd: consumerDir, encoding: 'utf8' }).trim();
   assert.equal(version, '0.2.0');
+  const help = execFileSync(process.execPath, [installedCli, '--help'], { cwd: consumerDir, encoding: 'utf8' });
+  assert.match(help, /arwp resolve/);
+  assert.match(help, /arwp plan/);
 
   const directoryOutput = execFileSync(process.execPath, [installedCli, 'directory', '--json'], { cwd: installedRoot, encoding: 'utf8' });
   const directory = JSON.parse(directoryOutput);
