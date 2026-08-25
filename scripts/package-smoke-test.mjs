@@ -23,9 +23,10 @@ try {
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
     'bin/arwp.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs',
-    'lib/public-fetch.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'resolver/server.mjs',
+    'lib/public-fetch.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
-    'scanner-service/handler.mjs', 'router/federated.mjs', 'router/server.mjs',
+    'scanner-service/handler.mjs', 'router/federated.mjs', 'router/resolved-federated.mjs', 'router/server.mjs',
+    'monitor/runner.mjs', 'monitor/config.schema.json', 'monitor/example.config.json',
     'registry/sites.json', 'registry/directory.schema.json', 'server.json',
     'benchmarks/external-runner.mjs', 'benchmarks/corpus/fixture.schema.json',
     'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md',
@@ -49,6 +50,7 @@ try {
   assert.equal(installedPackage.mcpName, 'io.github.dkharlanau/agent-ready-web-profile');
   assert.equal(installedPackage.scripts['resolver:mcp'], 'node resolver/server.mjs');
   assert.equal(installedPackage.scripts['benchmark:external'], 'node benchmarks/external-runner.mjs');
+  assert.equal(installedPackage.scripts['monitor:resolver'], 'node monitor/runner.mjs');
 
   const installedServer = JSON.parse(fs.readFileSync(path.join(installedRoot, 'server.json'), 'utf8'));
   assert.equal(installedServer.name, installedPackage.mcpName);
