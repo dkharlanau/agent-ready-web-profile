@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/registry/directory.schema.json",
+  "title": "ARWP public directory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "updatedAt", "description", "sites"],
+  "properties": {
+    "version": { "type": "string", "minLength": 1 },
+    "updatedAt": { "type": "string", "format": "date" },
+    "description": { "type": "string", "minLength": 1 },
+    "sites": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/site" }
+    }
+  },
+  "$defs": {
+    "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "category", "canonicalUrl", "profileUrl", "summary", "capabilities"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{1,127}$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "category": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "canonicalUrl": { "$ref": "#/$defs/httpsUrl" },
+        "profileUrl": { "$ref": "#/$defs/httpsUrl" },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 600 },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["web", "data", "retrieval", "openapi", "agentSkills", "webmcp", "mcp", "a2a", "trust"],
+          "properties": {
+            "web": { "type": "boolean" },
+            "data": { "type": "boolean" },
+            "retrieval": { "type": "boolean" },
+            "openapi": { "type": "boolean" },
+            "agentSkills": { "type": "boolean" },
+            "webmcp": { "type": "boolean" },
+            "mcp": { "oneOf": [{ "type": "boolean" }, { "enum": ["local", "remote", "local+remote"] }] },
+            "a2a": { "type": "boolean" },
+            "trust": { "type": "boolean" }
+          }
+        }
+      }
+    }
+  }
+}
