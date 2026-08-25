@@ -1,64 +1,39 @@
 # Release and distribution policy
 
-ARWP v0.x is experimental, but public consumers still need reproducible, versioned artifacts. This document defines the release path for the profile, validator, GitHub Action and future MCP distribution.
+ARWP v0.x is experimental, but public consumers still need reproducible, versioned artifacts. This document defines the release path for the profile contract, CLI, GitHub Action and MCP distribution.
+
+## Version layers
+
+ARWP has two related but distinct version numbers:
+
+- **tool/package release**, such as `0.2.0`, covers the CLI, scanner, verifier, validator, Action and generic MCP gateway;
+- **profile contract version**, currently `profileVersion: "0.1"`, covers the normative `site-profile.json` contract.
+
+A tooling release does not require a profile-contract bump. ARWP 0.2.0 can therefore add `scan` and `init` while continuing to generate and validate profile version 0.1.
 
 ## Release principles
 
 - Treat `main` as development, not a stable dependency target.
-- Publish immutable semantic-version tags such as `v0.1.0`.
-- Maintain a moving major tag such as `v0` for GitHub Action consumers that accept compatible v0 updates.
-- Keep schema, validator, Action and documentation in the same release unless a change is explicitly tooling-only.
-- Do not publish planned MCP, WebMCP, A2A or other capabilities as if they are already deployed.
-- Prefer reproducible installs from `package-lock.json` and `npm ci`.
+- Publish immutable semantic-version tags such as `v0.1.0` and `v0.2.0`.
+- Keep a released schema immutable; generated v0.1 profiles should reference the released v0.1.0 schema URL.
+- Keep capability declarations truthful: tooling must not publish planned MCP, WebMCP, A2A or Agent Skills as implemented facts.
+- Prefer `package-lock.json` + `npm ci` for reproducible installs.
+- Test the packed npm artifact in a clean consumer project before publication.
+- Prefer npm trusted publishing/OIDC over long-lived write tokens after the package exists.
+- Keep external-network reference checks separate from deterministic release gates.
 
-## v0.1.0 release gate
+## GitHub Marketplace
 
-Before publishing the first release:
+The validator Action was first released as `v0.1.0` under the name:
 
-1. Confirm `package-lock.json` is committed and matches `package.json`.
-2. Run deterministic tests with Node.js 24:
+`Validate Agent-Ready Web Profile`
 
-   ```bash
-   npm ci --ignore-scripts --no-audit --no-fund
-   npm test
-   node bin/arwp.mjs validate examples/minimal.site-profile.json
-   node bin/arwp.mjs validate examples/knowledge-site.site-profile.json
-   ```
+Recommended Marketplace categories remain:
 
-3. Confirm the repository GitHub Action passes against a real example profile.
-4. Confirm the scheduled reference verifier is not used as a release gate for ordinary code changes; external sites can fail independently of ARWP.
-5. Review `CHANGELOG.md` and ensure the release describes implemented behavior only.
-6. Confirm `action.yml` remains the only Action metadata file at the repository root.
-7. Search GitHub Marketplace for the exact Action name and confirm it is still unique.
+- `Code quality`
+- `Utilities`
 
-## GitHub Marketplace publication
-
-The first Marketplace release should use:
-
-- Action name: `Validate Agent-Ready Web Profile`
-- Release/tag: `v0.1.0`
-- Primary category: `Code quality`
-- Secondary category: `Utilities`
-
-Publish the release from GitHub and select **Publish this Action to the GitHub Marketplace**. GitHub requires a public repository, a root `action.yml`/`action.yaml`, a unique Action name, Marketplace agreement acceptance and two-factor authentication for publication.
-
-After `v0.1.0` is published, create or move the compatibility tag:
-
-```bash
-git tag -f v0 v0.1.0
-git push origin v0 --force
-```
-
-Consumers can then choose between:
-
-```yaml
-# Compatible v0 updates
-- uses: dkharlanau/agent-ready-web-profile@v0
-  with:
-    profile: ai/site-profile.json
-```
-
-and a fully pinned release:
+Consumers that want a fully pinned Action should use:
 
 ```yaml
 - uses: dkharlanau/agent-ready-web-profile@v0.1.0
@@ -66,59 +41,124 @@ and a fully pinned release:
     profile: ai/site-profile.json
 ```
 
-Security-sensitive environments may pin the exact commit SHA.
+A moving `v0` compatibility tag is optional and is intentionally deferred until there is a stronger compatibility policy across more than one v0 release.
 
-## Release notes for v0.1.0
+## ARWP 0.2.0 release gate
 
-The release should lead with what users can do today:
+ARWP 0.2.0 is the first release intended to contain scan/init onboarding and a normal npm-installable CLI while retaining profile contract 0.1.
 
-- validate an ARWP profile locally or in CI;
-- verify declared public resources;
-- run the generic read-only MCP gateway over a declared profile;
-- inspect five reference architectures.
+Before publishing `v0.2.0`:
 
-Do not position ARWP as a search-ranking mechanism or as a replacement for MCP, WebMCP, Agent Skills, A2A, OpenAPI, Schema.org, sitemaps or `llms.txt`.
+1. Confirm `package.json` and `package-lock.json` both report `0.2.0`.
+2. Run the deterministic suite on Node.js 24:
 
-## Future npm distribution
+   ```bash
+   npm ci --ignore-scripts --no-audit --no-fund
+   npm test
+   npm run test:package
+   ```
 
-The CLI should be published only after its public package name and package boundary are fixed. A future package should support a normal executable entry point such as:
+3. Confirm the package smoke test:
+   - runs `npm pack`;
+   - excludes development fixtures/tests from the tarball;
+   - installs the tarball into a clean consumer project;
+   - creates the `arwp` binary shim;
+   - reports `0.2.0` through `arwp --version`;
+   - validates a profile using the schema shipped inside the installed package.
+4. Confirm the reusable GitHub Action still passes.
+5. Review `CHANGELOG.md` and ensure `Unreleased` accurately describes only implemented behavior.
+6. Confirm the public npm name immediately before the first publish.
+7. Do not create the GitHub `v0.2.0` release until the exact npm publication sequence is ready, so release artifacts and package version stay aligned.
 
-```bash
-npx <package> validate ai/site-profile.json
-npx <package> verify https://example.com/ai/site-profile.json
+## npm package
+
+The intended public package name is:
+
+```text
+agent-ready-web-profile
 ```
 
-The highest-value next CLI capability is profile generation/discovery (`init` or `scan`), not more schema fields.
+It exposes one executable:
 
-Before npm publication:
+```text
+arwp
+```
 
-- choose and verify the package namespace;
-- remove the current private-package guard intentionally;
-- define the `bin` entry and published `files` set;
-- test installation from a packed tarball;
-- document Node.js support and compatibility policy;
-- keep the GitHub Action pinned to the repository release rather than depending on an unversioned npm install.
+The expected installed UX is:
 
-## Future MCP Registry publication
+```bash
+npx agent-ready-web-profile scan https://example.com
+npx agent-ready-web-profile init https://example.com
+npx agent-ready-web-profile validate ai/site-profile.json
+npx agent-ready-web-profile verify https://example.com/ai/site-profile.json
+```
 
-The generic gateway may be published to the Official MCP Registry only when there is a real installable or hosted MCP server artifact matching the Registry metadata.
+After normal installation, the shorter executable is available directly:
 
-Registry publication should not turn ARWP into an MCP-specific format. The ARWP profile remains the discovery contract; the generic MCP gateway is one consumer of that contract.
+```bash
+arwp scan https://example.com
+arwp init https://example.com
+arwp mcp
+arwp mcp-http
+```
 
-When the gateway package is ready:
+Do not advertise the `npx` commands as generally available until the package has actually been published to npm.
 
-1. publish the installable package or hosted endpoint;
-2. create and validate `server.json` using the official MCP Registry tooling;
-3. authenticate ownership of the chosen namespace;
-4. publish with the official `mcp-publisher` workflow;
-5. add the resulting Registry URL to ARWP documentation and only to profiles where that server is actually used.
+## First npm publication
+
+npm trusted publishing can only be configured for a package that already exists in the npm registry. Therefore the first package publication is a one-time bootstrap operation performed by the owner with normal npm authentication and 2FA.
+
+The first publication should happen only after `v0.2.0` code is final and CI is green:
+
+```bash
+npm ci --ignore-scripts --no-audit --no-fund
+npm test
+npm run test:package
+npm publish --access public
+```
+
+Immediately after the package exists, configure npm Trusted Publishing for this repository instead of storing a long-lived npm write token in GitHub.
+
+## Trusted publishing after bootstrap
+
+For GitHub Actions trusted publishing, configure npm with:
+
+- GitHub user/organization: `dkharlanau`
+- repository: `agent-ready-web-profile`
+- workflow filename: the dedicated npm publishing workflow once it is added;
+- allowed action: `npm publish` (or staged publish if human approval is preferred).
+
+The workflow must run on a GitHub-hosted runner and grant:
+
+```yaml
+permissions:
+  contents: read
+  id-token: write
+```
+
+Use Node.js 24 and a current npm CLI supporting trusted publishing. Once trusted publishing is configured, npm can use OIDC instead of a long-lived write token and automatically attach provenance for the public package from this public repository.
+
+A dedicated automatic publishing workflow should be added only after the first package exists and the npm trusted-publisher configuration can be tested. This avoids committing a workflow that will predictably fail before registry ownership is established.
+
+## MCP Registry
+
+The generic gateway may be published to the Official MCP Registry only after the npm package or a hosted gateway is a real public artifact matching the Registry metadata.
+
+Registry publication must not turn ARWP into an MCP-specific format. The ARWP profile remains the discovery contract; the generic MCP gateway is one consumer of that contract.
+
+When the package is public:
+
+1. decide whether the generic gateway remains inside `agent-ready-web-profile` or should split only if installation/adoption evidence justifies it;
+2. create and validate the official `server.json`;
+3. verify namespace ownership;
+4. publish using the official MCP Registry tooling;
+5. add the authoritative Registry entry to documentation and only to profiles where that server is actually used.
 
 ## Compatibility
 
 During v0.x, incompatible changes are possible. They must still be intentional and documented.
 
 - Patch releases should fix implementation defects without changing the profile contract.
-- Minor v0 releases may extend or revise the experimental contract.
+- Tooling minor releases may add commands while retaining the same profile contract.
 - A profile-version change must be reflected in the schema, validator, examples, specification and compatibility documentation.
-
-Do not move the `v0` GitHub Action tag to a release that knowingly breaks the documented Action inputs or invocation contract without a migration note.
+- Do not introduce a moving compatibility tag until its update policy is clear enough that consumers can reasonably depend on it.
