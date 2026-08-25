@@ -124,7 +124,7 @@ A site may support one, several or none of them.
 
 ### Static hosting can be highly agent-ready
 
-A GitHub Pages site can publish versioned JSON, NDJSON, schemas, OpenAPI, RAG distributions, `llms.txt`, Agent Skills and provenance. A hosted remote MCP server still requires an actual runtime.
+A GitHub Pages site can publish versioned JSON, NDJSON, schemas, OpenAPI, RAG distributions, `llms.txt`, Agent Skills and provenance. A hosted remote MCP server still requires an actual runtime; ARWP's generic gateway can provide that runtime without moving the canonical knowledge out of the static site.
 
 ### A2A is not a badge
 
@@ -168,15 +168,29 @@ An adopting repository can validate its profile in CI:
 
 `main` is acceptable while v0.1 is experimental. Production consumers should pin a tag or commit once stable releases exist.
 
-### Generic read-only MCP gateway
+### Generic read-only MCP gateways
 
-ARWP includes a profile-driven stdio MCP gateway for static knowledge sites:
+ARWP provides the same bounded tool surface over two transports.
+
+Local stdio:
 
 ```bash
 ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start
 ```
 
-It exposes a deliberately small baseline:
+Remote Streamable HTTP:
+
+```bash
+ARWP_HTTP_BIND=0.0.0.0 \
+PORT=3000 \
+ARWP_PROFILE=https://example.com/ai/site-profile.json \
+ARWP_HTTP_ALLOWED_HOSTS=mcp.example.com \
+npm run mcp:http
+```
+
+The remote endpoint is `/mcp` by default and refuses to start without an explicit allowed Host. Browser Origins are rejected unless separately allowed.
+
+Both transports expose:
 
 - `get_site_profile`
 - `list_declared_resources`
@@ -184,7 +198,9 @@ It exposes a deliberately small baseline:
 - `search_retrieval`
 - `get_record`
 
-The gateway accepts only profile-declared HTTPS resources, applies origin allow-listing, re-checks redirects, limits response size and never accepts an arbitrary URL from the MCP caller. See [`docs/GATEWAY.md`](docs/GATEWAY.md).
+The shared gateway accepts only profile-declared HTTPS resources, applies source-origin allow-listing, re-checks redirects, limits response size and never accepts an arbitrary source URL from the MCP caller. The HTTP layer additionally validates Host, Origin and endpoint path before entering MCP.
+
+See [`docs/GATEWAY.md`](docs/GATEWAY.md) for the deployment and security model.
 
 Domain-specific MCP servers remain preferable when the knowledge model needs reviewed operations such as evidence lookup, ontology traversal, safety-aware routing or semantic comparison.
 
@@ -211,7 +227,10 @@ The reference profiles are schema-tested on every change. A separate scheduled w
 - [`bin/arwp.mjs`](bin/arwp.mjs) — validation and live-verification CLI.
 - [`lib/validator.mjs`](lib/validator.mjs) — reusable schema validator.
 - [`lib/verifier.mjs`](lib/verifier.mjs) — declared-resource verifier.
-- [`gateway/`](gateway/) — generic read-only MCP gateway.
+- [`gateway/factory.mjs`](gateway/factory.mjs) — shared validated profile/retrieval/tool factory.
+- [`gateway/server.mjs`](gateway/server.mjs) — local stdio MCP launcher.
+- [`gateway/http.mjs`](gateway/http.mjs) — guarded stateless Streamable HTTP handler.
+- [`gateway/http-node.mjs`](gateway/http-node.mjs) — standalone Node HTTP launcher.
 - [`action.yml`](action.yml) — reusable validation action.
 - [`examples/`](examples/) — generic and real-site profiles.
 - [`docs/CONFORMANCE.md`](docs/CONFORMANCE.md) — capability-based conformance model.
@@ -253,15 +272,19 @@ See [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) for the current upstream ma
 
 ## Roadmap
 
-The implemented v0.1 baseline already includes schema validation, live URL verification, a reusable GitHub Action, a generic read-only MCP gateway and five real reference profiles.
+The implemented v0.1 baseline includes schema validation, live URL verification, a reusable GitHub Action, local and remote generic read-only MCP gateways and five real reference profiles.
 
 Next work should focus on interoperability evidence rather than adding metadata fields:
 
 - protocol-specific checks using upstream Agent Skills, WebMCP, MCP and A2A tooling;
-- a stateless Streamable HTTP form of the generic gateway;
 - profile generation/adoption tooling for static-site builds;
+- a Node-free Worker build of the HTTP gateway;
 - better release and compatibility policy before a stable version;
 - WebMCP reference implementations and agentic-browser evals;
 - evidence for or against proposing a future registered discovery location.
 
 Contributions should start from a concrete integration failure, missing interoperability case or working implementation.
+
+## License
+
+Apache License 2.0. See [`LICENSE`](LICENSE).
