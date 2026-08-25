@@ -26,6 +26,9 @@ jobs:
       - name: Run contract tests
         run: npm test
 
+      - name: Smoke-test npm package
+        run: npm run test:package
+
       - name: Validate examples through CLI
         run: |
           node bin/arwp.mjs validate examples/minimal.site-profile.json
