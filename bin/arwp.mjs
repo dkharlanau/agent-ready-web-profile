@@ -7,6 +7,7 @@ import { verifyProfileSource } from '../lib/verifier.mjs';
 import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 import { formatHealthReport, healthReport } from '../lib/health.mjs';
 import { checkProtocolArtifacts } from '../lib/protocol-checks.mjs';
+import { resolveSite, explainResolvedSite, planResolvedSite } from '../lib/resolver.mjs';
 import { DEFAULT_DIRECTORY_SOURCE, loadDirectory, searchFederated, selectSites } from '../router/federated.mjs';
 
 const packageJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
@@ -21,6 +22,9 @@ Usage:
   arwp scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
   arwp init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
   arwp health <https://site.example> [--json]
+  arwp resolve <https://site.example> [--json]
+  arwp explain <https://site.example> [--json]
+  arwp plan <https://site.example> --intent=<read|search|structured|tools|agent> [--json]
   arwp protocol-checks <profile.json|https://...> [--json] [--timeout=<ms>]
   arwp directory [--capability=<name>] [--json]
   arwp federated-search <query> [--sites=id1,id2] [--limit=<n>] [--json]
@@ -34,6 +38,9 @@ Commands:
   scan               Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
   init               Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
   health             Combine bounded discovery with live verification of an existing ARWP profile.
+  resolve            Normalize ARWP and upstream/community discovery surfaces into one evidence-backed service map.
+  explain            Explain a resolved site in human-readable terms, including conflicts and preferred interfaces.
+  plan               Select the best resolved interface for a concrete intent without hiding fallbacks or evidence source.
   protocol-checks    Inspect declared Agent Skill, MCP Registry and A2A artifacts without pretending URL checks prove runtime conformance.
   directory          List sites from the configured ARWP directory, optionally by declared capability.
   federated-search   Search declared retrieval indexes across directory sites while preserving source identity.
@@ -101,6 +108,24 @@ function printProtocolChecks(result) {
   console.log(`Summary: ${result.summary.pass} pass, ${result.summary.warning} warning, ${result.summary.fail} fail, ${result.summary['not-assessed']} not assessed`);
 }
 
+function printResolution(result) {
+  console.log(`${result.identity.name || result.canonicalUrl}`);
+  console.log(`Canonical: ${result.canonicalUrl}`);
+  console.log(`Sources: ${result.summary.sourcesResolved}/${result.summary.sourcesAttempted} resolved; interfaces: ${result.summary.interfacesResolved}; conflicts: ${result.summary.conflicts}`);
+  for (const sourceItem of result.sources.filter(item => item.status === 'resolved')) console.log(`SOURCE ${sourceItem.type} ${sourceItem.url} [${sourceItem.authority || 'unknown'}]`);
+  for (const [group, items] of Object.entries(result.interfaces)) {
+    for (const item of items) console.log(`${group.toUpperCase()} ${item.protocol || item.kind || ''} ${item.url || item.name || ''} [${item.sourceAuthority || 'unknown'}]`);
+  }
+  for (const conflict of result.conflicts) console.warn(`WARN ${conflict.message}`);
+}
+
+async function resolveCommandSite() {
+  return resolveSite(source, {
+    timeoutMs: numericOption('timeout', 8000),
+    maxBytes: numericOption('max-bytes', 512 * 1024)
+  });
+}
+
 async function main() {
   if (!command || command === '--help' || command === '-h') {
     usage();
@@ -152,6 +177,34 @@ async function main() {
       console.log(`Results: ${result.results.length}; searched sites: ${result.searchedSites.length}`);
     }
     return result.results.length ? 0 : 1;
+  }
+
+  if (['resolve', 'explain', 'plan'].includes(command)) {
+    if (!source) throw new Error(`A website URL is required for ${command}.`);
+    const result = await resolveCommandSite();
+    if (command === 'resolve') {
+      if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+      else printResolution(result);
+      return 0;
+    }
+    if (command === 'explain') {
+      const explanation = explainResolvedSite(result);
+      if (jsonOutput) console.log(JSON.stringify({ resolution: result, explanation }, null, 2));
+      else console.log(explanation);
+      return 0;
+    }
+    const intent = optionValue('intent');
+    if (!intent) throw new Error('plan requires --intent=read|search|structured|tools|agent.');
+    const plan = planResolvedSite(result, intent);
+    if (jsonOutput) console.log(JSON.stringify({ canonicalUrl: result.canonicalUrl, plan, conflicts: result.conflicts }, null, 2));
+    else {
+      console.log(`Intent: ${plan.intent}`);
+      console.log(`Selected: ${plan.selected?.url || 'none'}`);
+      console.log(`Reason: ${plan.reason}`);
+      for (const fallback of plan.fallbacks) console.log(`Fallback: ${fallback.url} (${fallback.protocol || fallback.kind})`);
+      for (const conflict of result.conflicts) console.warn(`WARN ${conflict.message}`);
+    }
+    return plan.selected ? 0 : 1;
   }
 
   if (!['validate', 'verify', 'scan', 'init', 'health', 'protocol-checks'].includes(command) || !source) {
