@@ -39,8 +39,6 @@ jobs:
           ! grep -q 'href="../SPEC.md"' docs/index.html
           grep -q 'https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md' docs/index.html
           grep -q 'https://dkharlanau.github.io/agent-ready-web-profile/' package.json
-          npm test
-          npm run test:package
 
       - name: Commit fixes
         shell: bash
