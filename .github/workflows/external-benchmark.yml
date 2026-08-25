@@ -10,6 +10,7 @@ on:
       - 'benchmarks/external-runner.mjs'
       - 'lib/resolver.mjs'
       - 'lib/resolver-adapters.mjs'
+      - 'lib/scanner.mjs'
       - 'lib/http-discovery.mjs'
       - 'lib/public-fetch.mjs'
       - 'package.json'
