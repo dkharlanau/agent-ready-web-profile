@@ -21,7 +21,7 @@ jobs:
           node-version: '24'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Run contract tests
         run: npm test
@@ -30,3 +30,8 @@ jobs:
         run: |
           node bin/arwp.mjs validate examples/minimal.site-profile.json
           node bin/arwp.mjs validate examples/knowledge-site.site-profile.json
+
+      - name: Exercise reusable GitHub Action
+        uses: ./
+        with:
+          profile: examples/minimal.site-profile.json
