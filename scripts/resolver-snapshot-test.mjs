@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict';
 import { createResolverSnapshot, diffResolverSnapshots } from '../lib/resolver-snapshot.mjs';
 
-function resolution({ endpoint = 'https://example.com/mcp', conflict = false } = {}) {
+function resolution({
+  endpoint = 'https://example.com/mcp',
+  conflict = false,
+  catalogSourceUrl = 'https://example.com/.well-known/api-catalog'
+} = {}) {
   return {
     canonicalUrl: 'https://example.com/',
     identity: { name: 'Example', description: 'Example knowledge site', languages: ['en'] },
     sources: [
       { id: 'agents-json:0', type: 'agents-json', url: 'https://example.com/agents.json', status: 'resolved', authority: 'community-convention' },
-      { id: 'api-catalog:0', type: 'api-catalog', url: 'https://example.com/.well-known/api-catalog', status: 'resolved', authority: 'ietf-standard' }
+      { id: 'api-catalog:0', type: 'api-catalog', url: catalogSourceUrl, status: 'resolved', authority: 'ietf-standard' }
     ],
     interfaces: {
       content: [{ sourceId: 'homepage-scan', sourceAuthority: 'observed-web', kind: 'llms', protocol: 'llms.txt', url: 'https://example.com/llms.txt' }],
@@ -38,4 +42,23 @@ assert.equal(drift.summary.conflictsAdded, 1);
 assert.equal(drift.summary.planChanges, 1);
 assert.equal(drift.plans[0].intent, 'tools');
 
-console.log('PASS resolver snapshots are bounded, reproducible and produce machine-readable drift reports');
+const redirectedCatalog = createResolverSnapshot(resolution({ catalogSourceUrl: 'https://example.com/catalog/v2' }), { resolverVersion: '0.2.0', observedAt: '2026-08-25T23:00:00Z' });
+const migration = diffResolverSnapshots(before, redirectedCatalog);
+assert.equal(migration.summary.sourcesRemoved, 1, 'raw source diff remains available');
+assert.equal(migration.summary.sourcesAdded, 1, 'raw source diff remains available');
+assert.equal(migration.summary.sourceMigrations, 1, 'fixed root discovery target change should be classified separately');
+assert.equal(migration.summary.hardSourcesRemoved, 0, 'redirect-target migration must not look like hard source disappearance');
+assert.equal(migration.sourceMigrations[0].kind, 'redirect-target-migration');
+assert.equal(migration.sourceMigrations[0].sourceId, 'api-catalog:0');
+
+const linkedSourceBefore = createResolverSnapshot(resolution({ catalogSourceUrl: 'https://example.com/catalog/v1' }), { resolverVersion: '0.2.0', observedAt: '2026-08-26T00:00:00Z' });
+linkedSourceBefore.sources[1].type = 'api-catalog-link';
+linkedSourceBefore.sources[1].id = 'api-catalog-link:0';
+const linkedSourceAfter = structuredClone(linkedSourceBefore);
+linkedSourceAfter.observedAt = '2026-08-26T01:00:00Z';
+linkedSourceAfter.sources[1].url = 'https://example.com/catalog/v2';
+const ambiguousMove = diffResolverSnapshots(linkedSourceBefore, linkedSourceAfter);
+assert.equal(ambiguousMove.summary.sourceMigrations, 0, 'linked discovery target moves are not inferred as redirects without fixed-slot evidence');
+assert.equal(ambiguousMove.summary.hardSourcesRemoved, 1);
+
+console.log('PASS resolver snapshots are bounded, reproducible and distinguish evidenced redirect-target migration from hard disappearance');

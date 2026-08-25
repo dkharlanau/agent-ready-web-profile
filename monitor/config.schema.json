@@ -26,7 +26,7 @@
       "type": "array",
       "uniqueItems": true,
       "items": {
-        "enum": ["any", "identity", "source-removed", "interface-removed", "conflict-added", "plan-changed", "resolution-failed"]
+        "enum": ["any", "identity", "source-removed", "source-migrated", "interface-removed", "conflict-added", "plan-changed", "resolution-failed"]
       }
     }
   }

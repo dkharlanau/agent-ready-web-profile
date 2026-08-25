@@ -39,14 +39,14 @@ fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 
 if (jsonOutput) console.log(JSON.stringify(report, null, 2));
 else {
-  console.log(`Resolver monitor: ${report.summary.sites} site(s)`);
-  console.log(`Baseline ${report.summary.baselineCreated}; stable ${report.summary.stable}; drift ${report.summary.drifted}; failed ${report.summary.resolutionFailed}`);
-  for (const site of report.sites) {
-    const suffix = site.classes?.length ? ` [${site.classes.join(', ')}]` : '';
-    console.log(`${site.status.toUpperCase()} ${site.id}${suffix}${site.error ? ` — ${site.error}` : ''}`);
+  console.log(report.notification.title);
+  console.log(report.notification.text);
+  for (const site of report.notification.sites) {
+    const suffix = site.classes.length ? ` [${site.classes.join(', ')}]` : '';
+    console.log(`${site.status.toUpperCase()} ${site.id}${suffix}`);
   }
+  if (report.notification.omittedSites) console.log(`... ${report.notification.omittedSites} additional changed site(s) omitted from console summary`);
   console.log(`Report: ${reportPath}`);
-  if (report.triggered.length) console.error(`Fail-on triggered: ${report.triggered.join(', ')}`);
 }
 
 process.exit(report.shouldFail ? 1 : 0);

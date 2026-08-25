@@ -46,6 +46,32 @@ jobs:
           echo "status=$status" >> "$GITHUB_OUTPUT"
           exit 0
 
+      - name: Publish compact monitor summary
+        if: always()
+        shell: bash
+        run: |
+          if [ ! -f .arwp-resolver/report.json ]; then
+            echo "### ARWP resolver monitor" >> "$GITHUB_STEP_SUMMARY"
+            echo "No monitor report was produced." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          node --input-type=module - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import fs from 'node:fs';
+          const report = JSON.parse(fs.readFileSync('.arwp-resolver/report.json', 'utf8'));
+          const note = report.notification;
+          console.log(`### ${note.title}`);
+          console.log('');
+          console.log(note.text);
+          if (note.sites.length) {
+            console.log('');
+            for (const site of note.sites) {
+              const classes = site.classes.length ? ` — ${site.classes.join(', ')}` : '';
+              console.log(`- \`${site.id}\`: ${site.status}${classes}`);
+            }
+          }
+          if (note.omittedSites) console.log(`- ... ${note.omittedSites} additional changed site(s)`);
+          NODE
+
       - name: Upload drift report
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,5 +84,5 @@ jobs:
       - name: Fail on configured drift classes
         if: steps.monitor.outputs.status != '0'
         run: |
-          echo "Resolver monitor detected a configured fail-on condition. Inspect the uploaded drift report."
+          echo "Resolver monitor detected a configured fail-on condition. Inspect the step summary and uploaded drift report."
           exit 1
