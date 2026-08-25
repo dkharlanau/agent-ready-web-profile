@@ -6,13 +6,11 @@
   "additionalProperties": false,
   "required": ["version", "updatedAt", "description", "sites"],
   "properties": {
+    "$schema": { "type": "string", "format": "uri" },
     "version": { "type": "string", "minLength": 1 },
     "updatedAt": { "type": "string", "format": "date" },
     "description": { "type": "string", "minLength": 1 },
-    "sites": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/site" }
-    }
+    "sites": { "type": "array", "items": { "$ref": "#/$defs/site" } }
   },
   "$defs": {
     "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
