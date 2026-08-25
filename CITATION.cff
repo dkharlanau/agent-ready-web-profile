@@ -5,7 +5,6 @@ type: software
 authors:
   - family-names: "Kharlanau"
     given-names: "Dzmitryi"
-    orcid: ""
 repository-code: "https://github.com/dkharlanau/agent-ready-web-profile"
 url: "https://github.com/dkharlanau/agent-ready-web-profile"
 version: "0.1"
