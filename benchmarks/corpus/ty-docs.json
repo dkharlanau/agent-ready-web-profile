@@ -5,7 +5,10 @@
   "ownership": "independent",
   "reviewedAt": "2026-08-25",
   "accepted": {
-    "read": [{ "url": "https://docs.astral.sh/ty/", "protocol": "HTML", "kind": "html" }],
+    "read": [
+      "https://docs.astral.sh/ty/llms.txt",
+      { "url": "https://docs.astral.sh/ty/", "protocol": "HTML", "kind": "html" }
+    ],
     "search": [],
     "structured": [],
     "tools": [],
@@ -13,15 +16,15 @@
   },
   "evidence": [
     {
-      "url": "https://docs.astral.sh/ty/",
-      "sourceType": "official-docs",
-      "note": "Astral publishes the public ty documentation site. For this reviewed fixture only canonical HTML is accepted; no additional agent interface is inferred without explicit evidence."
+      "url": "https://github.com/astral-sh/ty/commit/ae931b2c038bc8a81d11227f15bcae331aab04c7",
+      "sourceType": "official-repository-commit",
+      "note": "Astral added mkdocs-llmstxt support specifically to publish https://docs.astral.sh/ty/llms.txt and clean Markdown documentation URLs, matching uv and Ruff."
     },
     {
-      "url": "https://github.com/astral-sh/ty",
-      "sourceType": "official-repository",
-      "note": "The public Astral repository confirms ownership and the documentation project identity."
+      "url": "https://docs.astral.sh/ty/",
+      "sourceType": "official-docs",
+      "note": "Canonical HTML remains an accepted fallback for public documentation access."
     }
   ],
-  "note": "Conservative HTML control. This fixture intentionally does not assume ty mirrors uv/Ruff llms discovery unless it is directly reviewed."
+  "note": "Ground truth was corrected after reviewing the official ty repository commit that added the production llms.txt path."
 }
