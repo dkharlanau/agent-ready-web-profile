@@ -1,0 +1,74 @@
+name: External resolver benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/external-benchmark.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run first external resolver benchmark'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate reviewed corpus
+        run: node benchmarks/corpus-test.mjs
+
+      - name: Run external benchmark
+        run: |
+          mkdir -p benchmark-results
+          npm run benchmark:external -- --output=benchmark-results/external.json
+
+      - name: Write job summary
+        if: always()
+        run: |
+          if [ -f benchmark-results/external.json ]; then
+            node - <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('benchmark-results/external.json', 'utf8'));
+          const lines = [
+            '# ARWP external resolver benchmark',
+            '',
+            `Independent sites: ${report.independentSites}`,
+            `Resolved: ${report.resolvedIndependentSites}`,
+            `Failed: ${report.failedIndependentSites}`,
+            '',
+            '| Strategy | Correct | Total | Accuracy |',
+            '| --- | ---: | ---: | ---: |'
+          ];
+          for (const [strategy, result] of Object.entries(report.aggregate || {})) {
+            const accuracy = result.accuracy == null ? 'n/a' : `${(result.accuracy * 100).toFixed(1)}%`;
+            lines.push(`| ${strategy} | ${result.correct} | ${result.total} | ${accuracy} |`);
+          }
+          lines.push('', '> Pilot evidence only. Sub-strategy rows are selection-only projections over the same Resolver observation; they are not independent network-performance measurements.');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
+          NODE
+          else
+            echo '# ARWP external resolver benchmark' >> "$GITHUB_STEP_SUMMARY"
+            echo 'No result file was produced.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload raw benchmark report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arwp-external-benchmark-${{ github.run_id }}
+          path: benchmark-results/external.json
+          if-no-files-found: warn
+          retention-days: 90
