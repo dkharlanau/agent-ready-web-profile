@@ -135,14 +135,18 @@ for (const fixture of fixtures) {
       correct: Object.values(intentResults).filter(item => item.correct).length,
       total: intents.length,
       metrics: strategy === 'resolver-union' ? {
-        requests: resolution.summary?.requests ?? resolution.metrics?.requests ?? null,
-        bytes: resolution.summary?.bytes ?? resolution.metrics?.bytes ?? null,
+        resolverRequestsAfterScan: resolution.metrics?.resolverRequests ?? null,
+        resolverBytesAfterScan: resolution.metrics?.resolverBytes ?? null,
+        networkScope: 'post-scan-resolver-discovery-only',
         durationMs: Date.now() - startedAt,
+        durationScope: 'complete-resolveSite-call-including-bounded-base-scan',
         sourcesResolved: resolution.summary?.sourcesResolved ?? null,
         sourcesAttempted: resolution.summary?.sourcesAttempted ?? null,
         conflicts: resolution.conflicts?.length ?? 0
       } : null,
-      metricScope: strategy === 'resolver-union' ? 'observed during the real resolver run' : 'selection-only view of the same resolver observation; no independent request/byte claim'
+      metricScope: strategy === 'resolver-union'
+        ? 'resolverRequestsAfterScan/resolverBytesAfterScan are measured resolver discovery fetches after the bounded base-site scan; durationMs covers the complete resolveSite call including that scan'
+        : 'selection-only view of the same resolver observation; no independent request/byte claim'
     };
   }
 
@@ -176,7 +180,7 @@ const report = {
   generatedAt: new Date().toISOString(),
   corpus: corpusDir,
   evidencePolicy: 'Only ownership=independent fixtures count toward aggregate results. Ground truth is manually reviewed public evidence and is never derived from Resolver output.',
-  metricPolicy: 'Only resolver-union network metrics reflect a real network run. Sub-strategy comparisons are selection-only projections over the same observed resolution.',
+  metricPolicy: 'Only resolver-union exposes measured network counters, and those counters cover resolver discovery after the bounded base-site scan rather than the complete scan+resolver network total. Sub-strategy comparisons are selection-only projections over the same observed resolution.',
   sitesSelected: fixtures.length,
   independentSites: independentResults.length,
   resolvedIndependentSites: independentResults.filter(item => item.status === 'resolved').length,
