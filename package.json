@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "Specification, schema, validator, verifier and reference MCP gateway for the Agent-Ready Web Profile (ARWP).",
+  "license": "Apache-2.0",
   "type": "module",
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
