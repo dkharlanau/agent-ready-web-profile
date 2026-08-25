@@ -48,11 +48,20 @@ try {
   assert.equal(installedPackage.mcpName, 'io.github.dkharlanau/agent-ready-web-profile');
   assert.equal(installedPackage.scripts['resolver:mcp'], 'node resolver/server.mjs');
 
+  const installedServer = JSON.parse(fs.readFileSync(path.join(installedRoot, 'server.json'), 'utf8'));
+  assert.equal(installedServer.name, installedPackage.mcpName);
+  assert.equal(installedServer.title, 'ARWP Site Resolver');
+  assert.equal(installedServer.packages?.[0]?.identifier, 'agent-ready-web-profile');
+  assert.equal(installedServer.packages?.[0]?.version, installedPackage.version);
+  assert.equal(installedServer.packages?.[0]?.packageArguments?.[0]?.value, 'resolver-mcp');
+  assert.equal(installedServer.packages?.[0]?.environmentVariables, undefined, 'primary Resolver package must not require ARWP_PROFILE');
+
   const version = execFileSync(process.execPath, [installedCli, '--version'], { cwd: consumerDir, encoding: 'utf8' }).trim();
   assert.equal(version, '0.2.0');
   const help = execFileSync(process.execPath, [installedCli, '--help'], { cwd: consumerDir, encoding: 'utf8' });
   assert.match(help, /arwp resolve/);
   assert.match(help, /arwp plan/);
+  assert.match(help, /arwp resolver-mcp/);
 
   const directoryOutput = execFileSync(process.execPath, [installedCli, 'directory', '--json'], { cwd: installedRoot, encoding: 'utf8' });
   const directory = JSON.parse(directoryOutput);
