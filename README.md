@@ -7,7 +7,37 @@ Agent-Ready Web Profile (ARWP) is a small interoperability profile for websites 
 
 ARWP does **not** replace SEO, `llms.txt`, Agent Skills, WebMCP, Model Context Protocol (MCP), A2A, OpenAPI, JSON Schema, Schema.org, Croissant, sitemaps, feeds or crawler controls. It provides one machine-readable map that says which of those surfaces a site actually exposes and where they live.
 
-Status: **experimental v0.1**.
+Status: **experimental v0.1**. The first public release is [`v0.1.0`](https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0).
+
+## Start with an existing website
+
+You do not need to understand the full ARWP schema before trying it.
+
+```bash
+npm ci
+node bin/arwp.mjs scan https://example.com
+```
+
+The bounded scanner looks for directly observable evidence such as:
+
+- canonical site metadata;
+- `robots.txt` and sitemaps;
+- `llms.txt`;
+- explicitly linked RSS, Atom and JSON feeds;
+- explicitly linked OpenAPI contracts;
+- an existing `/ai/site-profile.json` when present.
+
+It deliberately does **not** infer Agent Skills, WebMCP, MCP or A2A from marketing text or filenames alone.
+
+Generate a conservative draft:
+
+```bash
+node bin/arwp.mjs init https://example.com
+```
+
+This writes `ai/site-profile.json` by default and validates the generated profile before writing it.
+
+See [`docs/SCANNER.md`](docs/SCANNER.md) for the discovery model, security boundaries and limitations.
 
 ## Why this exists
 
@@ -57,7 +87,7 @@ ARWP describes these surfaces. It should not become another source of domain con
 
 This is an ARWP project convention, **not** a registered `.well-known` URI. v0.1 intentionally avoids claiming a new Internet discovery standard before there is independent adoption evidence.
 
-A publisher may additionally advertise the profile with an applicable link relation, for example:
+A publisher may additionally advertise the profile with an applicable link relation:
 
 ```html
 <link rel="describedby" type="application/json" href="/ai/site-profile.json">
@@ -69,7 +99,7 @@ Consumers should also support an explicitly configured profile URL.
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/v0.1.0/schema/site-profile.schema.json",
   "profileVersion": "0.1",
   "id": "example-knowledge-site",
   "name": "Example Knowledge Site",
@@ -79,14 +109,6 @@ Consumers should also support an explicitly configured profile URL.
     "sitemap": "https://example.com/sitemap.xml",
     "robots": "https://example.com/robots.txt",
     "llms": "https://example.com/llms.txt"
-  },
-  "data": {
-    "catalog": "https://example.com/data/catalog.json",
-    "schemas": "https://example.com/schemas/index.json"
-  },
-  "trust": {
-    "license": "https://example.com/license/",
-    "provenance": "https://example.com/data/provenance.json"
   }
 }
 ```
@@ -124,19 +146,28 @@ A site may support one, several or none of them.
 
 ### Static hosting can be highly agent-ready
 
-A GitHub Pages site can publish versioned JSON, NDJSON, schemas, OpenAPI, RAG distributions, `llms.txt`, Agent Skills and provenance. A hosted remote MCP server still requires an actual runtime; ARWP's generic gateway can provide that runtime without moving the canonical knowledge out of the static site.
+A GitHub Pages site can publish versioned JSON, NDJSON, schemas, OpenAPI, RAG distributions, `llms.txt`, Agent Skills and provenance. A hosted remote MCP server still requires an actual runtime; ARWP's generic gateway can provide that runtime without moving canonical knowledge out of the static site.
 
 ### A2A is not a badge
 
 An Agent Card describes a real agent. A static knowledge repository should not publish one merely to look "AI-ready".
 
-## Tooling included in this repository
+## Tooling
+
+### Scan and bootstrap
+
+```bash
+node bin/arwp.mjs scan https://example.com
+node bin/arwp.mjs scan https://example.com --json
+node bin/arwp.mjs init https://example.com
+```
+
+`scan` reports observed evidence and marks advanced runtime capabilities as `not-assessed` when the bounded pass cannot prove them. `init` writes a minimal valid draft rather than filling the profile with guessed capabilities.
 
 ### Schema validation
 
 ```bash
-npm install
-node bin/arwp.mjs validate examples/minimal.site-profile.json
+node bin/arwp.mjs validate ai/site-profile.json
 ```
 
 The validator checks the v0.1 JSON Schema plus small semantic warnings.
@@ -157,16 +188,16 @@ The verifier probes declared URLs, follows redirects, checks final HTTPS status 
 
 ### Reusable GitHub Action
 
-An adopting repository can validate its profile in CI:
+An adopting repository can validate its profile in CI using the released Action:
 
 ```yaml
 - name: Validate Agent-Ready Web Profile
-  uses: dkharlanau/agent-ready-web-profile@main
+  uses: dkharlanau/agent-ready-web-profile@v0.1.0
   with:
     profile: ai/site-profile.json
 ```
 
-`main` is acceptable while v0.1 is experimental. Production consumers should pin a tag or commit once stable releases exist.
+Pin an exact release or commit when reproducibility matters. The Action installs from the committed lockfile and is exercised as a reusable Action in this repository's own CI.
 
 ### Generic read-only MCP gateways
 
@@ -216,28 +247,27 @@ v0.1 is tested against five real public knowledge-site architectures:
 
 The fixtures live under [`examples/reference/`](examples/reference/). They intentionally model different capability combinations instead of forcing every site into the same shape.
 
-For example, a static MCP-compatible JSON description is kept under data metadata unless an actual MCP runtime exists; a standard `SKILL.md` is declared as an Agent Skill, while a publisher-specific skill routing catalog can be declared without pretending every entry is a portable skill.
-
 The reference profiles are schema-tested on every change. A separate scheduled workflow probes their public resources and uploads machine-readable verification reports so reference drift is visible without making ordinary pull requests depend on external network availability.
 
 ## Repository map
 
 - [`SPEC.md`](SPEC.md) — normative experimental v0.1 specification.
 - [`schema/site-profile.schema.json`](schema/site-profile.schema.json) — JSON Schema 2020-12 contract.
-- [`bin/arwp.mjs`](bin/arwp.mjs) — validation and live-verification CLI.
+- [`bin/arwp.mjs`](bin/arwp.mjs) — scan, init, validation and live-verification CLI.
+- [`lib/scanner.mjs`](lib/scanner.mjs) — bounded evidence-based website discovery and draft generation.
 - [`lib/validator.mjs`](lib/validator.mjs) — reusable schema validator.
 - [`lib/verifier.mjs`](lib/verifier.mjs) — declared-resource verifier.
 - [`gateway/factory.mjs`](gateway/factory.mjs) — shared validated profile/retrieval/tool factory.
 - [`gateway/server.mjs`](gateway/server.mjs) — local stdio MCP launcher.
 - [`gateway/http.mjs`](gateway/http.mjs) — guarded stateless Streamable HTTP handler.
 - [`gateway/http-node.mjs`](gateway/http-node.mjs) — standalone Node HTTP launcher.
-- [`action.yml`](action.yml) — reusable validation action.
+- [`action.yml`](action.yml) — reusable validation Action.
 - [`examples/`](examples/) — generic and real-site profiles.
+- [`docs/SCANNER.md`](docs/SCANNER.md) — scanner evidence and network-safety model.
 - [`docs/CONFORMANCE.md`](docs/CONFORMANCE.md) — capability-based conformance model.
 - [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) — relationship to upstream standards/conventions.
 - [`docs/GATEWAY.md`](docs/GATEWAY.md) — MCP gateway contract and security model.
-- [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — deterministic CI.
-- [`.github/workflows/reference-verification.yml`](.github/workflows/reference-verification.yml) — scheduled live reference checks.
+- [`docs/RELEASING.md`](docs/RELEASING.md) — release and distribution policy.
 
 ## Principles
 
@@ -272,16 +302,16 @@ See [`docs/STANDARDS-MAP.md`](docs/STANDARDS-MAP.md) for the current upstream ma
 
 ## Roadmap
 
-The implemented v0.1 baseline includes schema validation, live URL verification, a reusable GitHub Action, local and remote generic read-only MCP gateways and five real reference profiles.
+The implemented v0.1 line now includes schema validation, live verification, scan/init onboarding, a reusable GitHub Action, local and remote generic read-only MCP gateways and five real reference profiles.
 
-Next work should focus on interoperability evidence rather than adding metadata fields:
+Next work should focus on distribution and independent interoperability evidence rather than adding metadata fields:
 
-- protocol-specific checks using upstream Agent Skills, WebMCP, MCP and A2A tooling;
-- profile generation/adoption tooling for static-site builds;
-- a Node-free Worker build of the HTTP gateway;
-- better release and compatibility policy before a stable version;
-- WebMCP reference implementations and agentic-browser evals;
-- evidence for or against proposing a future registered discovery location.
+- package the CLI for normal `npx` installation;
+- expose the same bounded scanner through a small public website/Worker service;
+- add protocol-specific checks using upstream Agent Skills, WebMCP, MCP and A2A tooling;
+- publish an installable or hosted MCP artifact through the official MCP Registry when its package boundary is ready;
+- obtain independent adopters and record real integration failures;
+- evaluate SchemaStore and curated ecosystem listings only after adoption evidence exists.
 
 Contributions should start from a concrete integration failure, missing interoperability case or working implementation.
 
