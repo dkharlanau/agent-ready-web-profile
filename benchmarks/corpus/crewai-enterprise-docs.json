@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "crewai-enterprise-docs",
+  "url": "https://enterprise-docs.crewai.com/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://enterprise-docs.crewai.com/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://enterprise-docs.crewai.com/reference/chart-values/secrets",
+      "sourceType": "official-docs",
+      "note": "CrewAI Enterprise documentation pages explicitly advertise https://enterprise-docs.crewai.com/llms.txt as the complete documentation index."
+    }
+  ],
+  "note": "Public enterprise documentation fixture. No executable interface is inferred merely because the product documents automations or agents."
+}
