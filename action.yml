@@ -1,5 +1,5 @@
 name: Validate Agent-Ready Web Profile
-description: Validate an ARWP site-profile.json against the current schema and semantic checks.
+description: Validate an ARWP site-profile.json in CI with the versioned schema and semantic checks.
 author: Dzmitryi Kharlanau
 
 inputs:
@@ -11,9 +11,14 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install ARWP validator dependencies
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+
+    - name: Install pinned ARWP runtime
       shell: bash
-      run: npm install --prefix "$GITHUB_ACTION_PATH" --no-audit --no-fund
+      run: npm ci --prefix "$GITHUB_ACTION_PATH" --omit=dev --ignore-scripts --no-audit --no-fund
 
     - name: Validate ARWP profile
       shell: bash

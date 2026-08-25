@@ -50,6 +50,9 @@ The reference suite includes deliberately different capability combinations so s
 - Added deterministic CI on push and pull request.
 - Added scheduled/manual live verification of reference resources with JSON report artifacts.
 - Added Apache-2.0 licensing and contribution guidelines.
+- Added a committed npm lockfile and switched CI/runtime installs to reproducible `npm ci`.
+- Added an integration test that exercises the repository as the reusable GitHub Action.
+- Added a release and distribution policy for Marketplace, semantic tags and future npm/MCP Registry publication.
 
 ## Next
 
@@ -58,6 +61,6 @@ The next milestone should prioritize interoperability evidence over additional m
 - upstream/protocol-specific validation adapters;
 - profile-generation/adoption tooling;
 - a Node-free Worker build of the Streamable HTTP gateway;
-- compatibility and release policy;
+- public CLI/package distribution and compatibility policy;
 - WebMCP reference implementations and browser-agent evals;
 - independent adopters before proposing any new registered discovery location.
