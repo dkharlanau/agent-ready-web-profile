@@ -84,6 +84,29 @@ function filteredResolution(resolution, strategy) {
   return copy;
 }
 
+function benchmarkObservation(resolution) {
+  return {
+    summary: resolution.summary,
+    metrics: resolution.metrics,
+    sources: (resolution.sources || []).map(source => ({
+      id: source.id || null,
+      type: source.type || null,
+      url: source.url || null,
+      status: source.status || null,
+      authority: source.authority || null,
+      httpStatus: source.httpStatus ?? null,
+      contentType: source.contentType || null,
+      issue: source.issue || null
+    })),
+    conflicts: (resolution.conflicts || []).map(conflict => ({
+      kind: conflict.kind || null,
+      severity: conflict.severity || null,
+      capability: conflict.capability || null,
+      message: conflict.message || null
+    }))
+  };
+}
+
 const fixtureFiles = fs.readdirSync(corpusDir)
   .filter(name => name.endsWith('.json') && name !== 'fixture.schema.json')
   .sort();
@@ -158,6 +181,7 @@ for (const fixture of fixtures) {
     evidence: fixture.evidence,
     status: 'resolved',
     canonicalUrl: resolution.canonicalUrl,
+    resolverObservation: benchmarkObservation(resolution),
     strategyResults
   });
   console.log(`RESOLVED ${fixture.id}`);
@@ -181,6 +205,7 @@ const report = {
   corpus: corpusDir,
   evidencePolicy: 'Only ownership=independent fixtures count toward aggregate results. Ground truth is manually reviewed public evidence and is never derived from Resolver output.',
   metricPolicy: 'Only resolver-union exposes measured network counters, and those counters cover resolver discovery after the bounded base-site scan rather than the complete scan+resolver network total. Sub-strategy comparisons are selection-only projections over the same observed resolution.',
+  diagnosticPolicy: 'Raw artifacts retain bounded resolver source/status/content-type diagnostics so benchmark mismatches can be audited without treating Resolver output as ground truth.',
   sitesSelected: fixtures.length,
   independentSites: independentResults.length,
   resolvedIndependentSites: independentResults.filter(item => item.status === 'resolved').length,
