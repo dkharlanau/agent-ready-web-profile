@@ -2,7 +2,7 @@
 
 ARWP is pre-stable. The `main` branch may contain work intended for the next v0.x release; tagged releases are immutable compatibility points.
 
-## Unreleased
+## Unreleased — intended for 0.2.0
 
 ### Adoption tooling
 
@@ -13,6 +13,16 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 - Added private/reserved target rejection, DNS checks, redirect re-validation, HTTPS-only policy, response-size limits and request timeouts.
 - Generated drafts now reference the immutable v0.1.0 schema URL.
 - Added deterministic scanner tests with mocked network evidence and private-target/redirect rejection cases.
+
+### Distribution
+
+- Prepared the root project as public npm package `agent-ready-web-profile` version `0.2.0` while retaining ARWP profile contract `0.1`.
+- Added the single `arwp` executable with validate, verify, scan, init, stdio MCP and Streamable HTTP MCP commands.
+- Added an explicit npm `files` allow-list so development fixtures/tests are not distributed.
+- Synchronized `package-lock.json` to 0.2.0.
+- Added a real `npm pack` smoke test that installs the tarball into a clean consumer project, checks the executable shim/version and validates through the bundled schema.
+- Added the package smoke test to CI.
+- Updated the release policy for one-time npm bootstrap publication followed by OIDC trusted publishing/provenance.
 
 ## 0.1.0 — experimental baseline
 
@@ -68,11 +78,11 @@ The reference suite includes deliberately different capability combinations so s
 
 ## Next
 
-The next milestone should prioritize distribution and independent interoperability evidence over additional metadata fields:
+The next milestone should prioritize public use and independent interoperability evidence over additional metadata fields:
 
-- public CLI/package distribution;
-- a bounded public scanner UI/Worker using the same discovery engine;
-- upstream/protocol-specific validation adapters;
-- a Node-free Worker build of the Streamable HTTP gateway;
-- WebMCP reference implementations and browser-agent evals;
-- independent adopters before proposing any new registered discovery location.
+- publish the 0.2.0 CLI package and then enable npm trusted publishing;
+- expose the bounded scanner through a small public website/Worker service;
+- add protocol-specific checks using upstream Agent Skills, WebMCP, MCP and A2A tooling;
+- publish the real generic gateway to the Official MCP Registry after its npm/hosted artifact exists;
+- obtain independent adopters and record concrete integration failures;
+- evaluate SchemaStore and curated ecosystem listings after adoption evidence exists.
