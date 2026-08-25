@@ -1,0 +1,55 @@
+name: Propose ARWP profile update
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: Public HTTPS website to scan
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install ARWP from the public GitHub repository
+        run: npm install --no-save --ignore-scripts github:dkharlanau/agent-ready-web-profile
+
+      - name: Generate a conservative profile draft
+        run: npx arwp init "${{ inputs.site_url }}" --output=ai/site-profile.json --force
+
+      - name: Validate the generated profile
+        run: npx arwp validate ai/site-profile.json
+
+      - name: Create pull request when the profile changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- ai/site-profile.json; then
+            echo "No ARWP profile changes detected."
+            exit 0
+          fi
+          branch="arwp/profile-refresh-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add ai/site-profile.json
+          git commit -m "Update Agent-Ready Web Profile"
+          git push --set-upstream origin "$branch"
+          gh pr create \
+            --title "Update Agent-Ready Web Profile" \
+            --body "Generated from bounded public evidence for ${{ inputs.site_url }}. Review any domain-specific data, retrieval, Agent Skills, WebMCP, MCP, A2A and trust declarations manually before merging; the scanner does not invent advanced capabilities." \
+            --base "${GITHUB_REF_NAME}" \
+            --head "$branch"
