@@ -4,16 +4,39 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Resolver interoperability layer
+
+- Reframed the toolchain so an ARWP profile is one useful publisher input rather than a required universal manifest.
+- Added `arwp resolve` to normalize heterogeneous public discovery into one evidence-backed service map.
+- Added `arwp explain` for a human-readable account of discovered interfaces, source evidence, conflicts and recommended routes.
+- Added `arwp plan --intent=read|search|structured|tools|agent` with deterministic selected/fallback interfaces.
+- Added bounded reusable public-HTTPS fetch primitives with DNS/private-address checks, redirect revalidation, response/time limits and optional request/byte metrics.
+- Added resolver adapters for valid ARWP profiles, `agents.txt`, `agents.json`, RFC 9727 API Catalog, RFC 9728 root Protected Resource Metadata, A2A Agent Cards, Agent Skills discovery indexes and experimental MCP AI Catalog / Server Cards.
+- Preserve source authority as `ietf-standard`, `upstream-standard`, `upstream-convention`, `community-convention`, `experimental-upstream`, `project-profile` or directly observed web evidence.
+- Added explicit conflict reporting for canonical identity disagreement, agents.txt/agents.json capability mismatches and experimental MCP Server Card endpoint mismatches.
+- Added a dedicated stdio Resolver MCP server with `resolve_site`, `explain_site` and `plan_site_interface`.
+- Extended the bounded hosted discovery runtime with fixed `/resolve`, `/explain` and `/plan` routes alongside `/scan`; it remains explicitly not an arbitrary URL proxy.
+- Updated the project's own ARWP profile to advertise the resolver MCP implementation.
+- Added deterministic cross-standard resolver tests and npm-pack requirements for resolver modules/docs/MCP entry point.
+
+### Benchmark and evidence discipline
+
+- Added a deterministic synthetic resolver regression benchmark comparing HTML-only, llms-only, ARWP-only, agents-only, upstream-native and resolver-union strategies across reviewed fixtures.
+- Run the synthetic benchmark in CI as regression coverage.
+- Added a public benchmark methodology for a future 20–50-site independent corpus measuring requests, bytes, correct/missed interface selection, conflicts and source/provenance preservation.
+- Benchmark documentation explicitly prohibits presenting synthetic fixtures as evidence of real-world token, latency, ranking, adoption or answer-quality gains.
+- Reframed `ROADMAP.md` around the North Star: external sites correctly resolved/routed without site-specific integration code.
+- New ARWP profile fields, registered discovery locations and broad ecosystem expansion are evidence-gated rather than roadmap defaults.
+
 ### Product and public site
 
-- Reframed the project around a simple user outcome: **make your website understandable to AI agents**.
-- Added a value-first public homepage that explains the difference between human navigation and machine service discovery before introducing protocol terminology.
-- Added explicit “Without ARWP / With ARWP” integration flows and the principle that ARWP removes guessing rather than making a model smarter.
-- Added concrete outcomes for site owners, AI agents, developers and trusted-knowledge consumers.
-- Added live reference cards for the five real ARWP sites and an interactive canonical profile-URL example.
-- Added public capability filtering, adoption/connect flows and P0–P3 implementation status.
-- Added practical use-case and adoption guides.
-- Added a neutral `ARWP profile available` badge that is deliberately not a certification or readiness score.
+- Reframed the public project around **resolve how a website can actually be used by agents**, while retaining the original goal of making sites understandable to software.
+- Replaced manifest-first positioning with “one site → many discovery surfaces → ARWP Resolver → evidence-backed service map → intent plan”.
+- Explain that existing RFC, A2A, Agent Skills and MCP semantics remain upstream rather than being redefined in ARWP.
+- Added source-authority and benchmark/evidence sections to the public Pages site.
+- Added resolver/explain/plan CLI setup directly to the public website UI.
+- Keep the initial five live ARWP sites as implementation fixtures while explicitly separating them from independent adoption evidence.
+- Added live reference cards, interactive profile examples, directory filtering and a neutral profile-availability badge without certification/readiness claims.
 
 ### Adoption tooling
 
@@ -28,13 +51,12 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 - Added a copyable GitHub workflow template that scans a public site, regenerates/validates its conservative profile and opens a pull request only when the profile changes.
 - Added an ARWP adoption-report issue template focused on concrete interoperability failures.
 
-### Hosted scanner runtime
+### Hosted discovery runtime
 
-- Added a small HTTP service that reuses the same bounded scanner implementation instead of introducing a browser crawler.
-- Exposed only `GET /health`, `POST /scan` and `OPTIONS /scan`.
-- Added explicit browser Origin allow-listing, request-body limits and in-memory rate limiting.
-- Kept arbitrary user-supplied browser fetches prohibited; the static Pages UI calls only a fixed configured scanner endpoint.
-- Added generated profile download support to the public UI when a real hosted scanner endpoint is configured.
+- Added a small HTTP service that reuses the same bounded scanner/resolver implementation instead of introducing a browser crawler.
+- Exposes only `GET /health`, `POST /scan`, `POST /resolve`, `POST /explain`, `POST /plan` and their bounded CORS preflight.
+- Added explicit browser Origin allow-listing, request-body limits and shared in-memory rate limiting across expensive routes.
+- Kept arbitrary user-supplied browser fetches prohibited; the static Pages UI calls only a fixed configured service endpoint.
 - Added standalone Node and Docker deployment artifacts plus service-boundary tests.
 
 ### Directory and federation
@@ -47,22 +69,25 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 - Added a federated retrieval layer that selects only sites declaring retrieval, reads their declared indexes and preserves source site/profile/index identity in every result.
 - Added a multi-site stdio MCP router with `list_arwp_sites` and `search_arwp_sites` tools.
 - Deliberately kept the directory as discovery metadata rather than a new canonical knowledge store.
+- Resolver-backed federation across heterogeneous non-ARWP sites is the next iteration; it is not yet claimed as implemented.
 
 ### Protocol checks
 
 - Added conservative inspectable-artifact checks for Agent Skill frontmatter, declared MCP Registry metadata and A2A Agent Cards.
 - Added `arwp protocol-checks` CLI access to those checks.
 - Remote MCP and WebMCP runtime behavior remains explicitly `not-assessed` when a real protocol session/browser runtime has not been exercised; URL reachability is not upgraded into protocol conformance.
+- Resolver support for MCP Server Card / AI Catalog remains explicitly `experimental-upstream`; the next runtime step is reconciliation with live MCP `server/discover` behavior.
 
 ### Distribution
 
 - Prepared the root project as public npm package `agent-ready-web-profile` version `0.2.0` while retaining ARWP profile contract `0.1`.
-- Expanded the single `arwp` executable with validate, verify, scan, init, health, protocol checks, directory, federated search, stdio MCP, Streamable HTTP MCP and federated-router entry points.
-- Added an explicit npm `files` allow-list so development fixtures/tests are not distributed.
+- Expanded the single `arwp` executable with validate, verify, scan, init, health, resolve, explain, plan, protocol checks, directory and federated search commands.
+- Added profile gateway, federated-router and resolver stdio MCP entry points plus the existing Streamable HTTP gateway.
+- Added an explicit npm `files` allow-list so development fixtures/tests are not distributed while resolver modules/docs are included.
 - Added matching npm `mcpName: io.github.dkharlanau/agent-ready-web-profile` metadata.
-- Added a real `npm pack` smoke test that installs the tarball into a clean consumer project, checks the executable/version/directory and validates through the bundled schema.
-- Added scanner, directory, health, protocol, router, site and package tests to CI.
-- Added Docker deployment artifacts for the remote MCP gateway and scanner plus a local compose example.
+- Added a real `npm pack` smoke test that installs the tarball into a clean consumer project, checks executable/version/directory/resolver help and validates through the bundled schema.
+- Added scanner, resolver, directory, health, protocol, router, site, benchmark and package tests to CI.
+- Added Docker deployment artifacts for the remote MCP gateway and bounded discovery service plus a local compose example.
 - Added a gated npm trusted-publishing workflow using GitHub OIDC; no long-lived npm token is embedded in the repository.
 
 ### MCP ecosystem preparation
@@ -75,9 +100,9 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 ### Ecosystem preparation
 
 - Added a candidate SchemaStore catalog entry for `**/ai/site-profile.json`.
-- Added explicit evidence gates: SchemaStore/curated-list submissions and any registered discovery URI/link relation should wait for independent adoption evidence.
+- Added explicit evidence gates: SchemaStore/curated-list submissions and any registered ARWP discovery URI/link relation should wait for independent adoption evidence.
 - Added `ROADMAP.md` separating `implemented`, `prepared`, `external` and `evidence-gated` work.
-- Updated the public backlog issues so npm/MCP Registry, hosted scanner deployment and independent adoption are the only remaining external gates.
+- Updated the public backlog issues so npm/MCP Registry, hosted service deployment and independent adoption remain external gates.
 
 ## 0.1.0 — experimental baseline
 
@@ -131,13 +156,15 @@ The reference suite includes deliberately different capability combinations so s
 - Added an integration test that exercises the repository as the reusable GitHub Action.
 - Added a release and distribution policy for Marketplace, semantic tags and future npm/MCP Registry publication.
 
-## Remaining external gates for 0.2.0
+## Remaining external / evidence gates for 0.2.x
 
-The repository implementation is substantially complete. Remaining work depends on external systems or independent users:
+Repository implementation now includes the resolver iteration. The highest-value remaining work depends on external systems or independent evidence:
 
-- publish the tested `0.2.0` npm package through trusted publishing;
-- publish the prepared MCP metadata to the Official MCP Registry after npm publication;
-- deploy the hosted scanner (and optional public demo MCP endpoint) on an HTTPS runtime;
-- connect the project UI to that real scanner endpoint;
-- obtain at least three independent adopters outside the original reference suite and record concrete integration failures;
-- evaluate/submit SchemaStore and curated ecosystem entries only when adoption evidence justifies them.
+- publish the tested npm package through trusted publishing and create the corresponding immutable GitHub release;
+- publish the prepared MCP package metadata after the npm artifact exists;
+- deploy the bounded `/scan|resolve|explain|plan` service on a public HTTPS runtime and wire the Pages UI;
+- obtain at least three independent adopters outside the original reference suite;
+- build and publish the reviewed 20–50-site external resolver benchmark corpus, including negative results;
+- reconcile static MCP metadata against live `server/discover` behavior and verify A2A Agent Card signatures when present;
+- add resolver snapshots/drift/conflict monitoring after a public resolver service is being used;
+- decide whether any new ARWP profile-contract version is needed only from external benchmark/adopter failures.
