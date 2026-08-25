@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.dkharlanau/agent-ready-web-profile",
-  "title": "Agent-Ready Web Profile Gateway",
-  "description": "Read-only generic MCP gateway for a website that publishes a valid Agent-Ready Web Profile. The gateway exposes only profile-declared resources and retrieval indexes.",
+  "title": "ARWP Site Resolver",
+  "description": "Read-only MCP resolver for public websites. It normalizes ARWP plus existing web, API, agents.txt/json, A2A, Agent Skills and experimental MCP discovery into an evidence-backed service map and deterministic intent plans. A site does not need to publish an ARWP profile.",
   "repository": {
     "url": "https://github.com/dkharlanau/agent-ready-web-profile",
     "source": "github"
@@ -20,23 +20,7 @@
       "packageArguments": [
         {
           "type": "positional",
-          "value": "mcp"
-        }
-      ],
-      "environmentVariables": [
-        {
-          "name": "ARWP_PROFILE",
-          "description": "HTTPS URL or local path of the Agent-Ready Web Profile that configures the read-only gateway.",
-          "isRequired": true,
-          "isSecret": false,
-          "format": "string"
-        },
-        {
-          "name": "ARWP_ALLOWED_ORIGINS",
-          "description": "Optional comma-separated additional HTTPS origins that declared resources may use.",
-          "isRequired": false,
-          "isSecret": false,
-          "format": "string"
+          "value": "resolver-mcp"
         }
       ]
     }
