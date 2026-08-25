@@ -189,28 +189,46 @@ for (const fixture of fixtures) {
 
 const independentResults = rawResults.filter(item => item.ownership === 'independent');
 const aggregate = {};
+const resolvedOnlyAggregate = {};
 for (const strategy of strategies) {
   let correct = 0;
   let total = 0;
-  for (const site of independentResults.filter(item => item.status === 'resolved')) {
-    correct += site.strategyResults[strategy].correct;
-    total += site.strategyResults[strategy].total;
+  let resolvedCorrect = 0;
+  let resolvedTotal = 0;
+  for (const site of independentResults) {
+    // A full-site resolver failure is an end-to-end failure for every scored intent.
+    // Keep it in the denominator so the benchmark cannot improve by failing on hard sites.
+    total += intents.length;
+    if (site.status !== 'resolved') continue;
+    const result = site.strategyResults[strategy];
+    correct += result.correct;
+    resolvedCorrect += result.correct;
+    resolvedTotal += result.total;
   }
   aggregate[strategy] = { correct, total, accuracy: total ? correct / total : null };
+  resolvedOnlyAggregate[strategy] = {
+    correct: resolvedCorrect,
+    total: resolvedTotal,
+    accuracy: resolvedTotal ? resolvedCorrect / resolvedTotal : null
+  };
 }
 
+const resolvedIndependentSites = independentResults.filter(item => item.status === 'resolved').length;
+const failedIndependentSites = independentResults.filter(item => item.status === 'failed').length;
 const report = {
-  benchmarkVersion: '0.1',
+  benchmarkVersion: '0.2',
   generatedAt: new Date().toISOString(),
   corpus: corpusDir,
-  evidencePolicy: 'Only ownership=independent fixtures count toward aggregate results. Ground truth is manually reviewed public evidence and is never derived from Resolver output.',
+  evidencePolicy: 'Only ownership=independent fixtures count toward aggregate results. Ground truth is manually reviewed public evidence and is never derived from Resolver output. A site-level resolution failure counts as incorrect for every scored intent in the primary aggregate; resolvedOnlyAggregate is diagnostic only.',
   metricPolicy: 'Only resolver-union exposes measured network counters, and those counters cover resolver discovery after the bounded base-site scan rather than the complete scan+resolver network total. Sub-strategy comparisons are selection-only projections over the same observed resolution.',
   diagnosticPolicy: 'Raw artifacts retain bounded resolver source/status/content-type diagnostics so benchmark mismatches can be audited without treating Resolver output as ground truth.',
   sitesSelected: fixtures.length,
   independentSites: independentResults.length,
-  resolvedIndependentSites: independentResults.filter(item => item.status === 'resolved').length,
-  failedIndependentSites: independentResults.filter(item => item.status === 'failed').length,
+  resolvedIndependentSites,
+  failedIndependentSites,
+  resolutionCoverage: independentResults.length ? resolvedIndependentSites / independentResults.length : null,
   aggregate,
+  resolvedOnlyAggregate,
   results: rawResults
 };
 
