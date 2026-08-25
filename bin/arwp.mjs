@@ -6,6 +6,7 @@ import { loadProfile, validateProfile, formatAjvError } from '../lib/validator.m
 import { verifyProfileSource } from '../lib/verifier.mjs';
 import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 import { formatHealthReport, healthReport } from '../lib/health.mjs';
+import { checkProtocolArtifacts } from '../lib/protocol-checks.mjs';
 import { DEFAULT_DIRECTORY_SOURCE, loadDirectory, searchFederated, selectSites } from '../router/federated.mjs';
 
 const packageJson = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
@@ -20,6 +21,7 @@ Usage:
   arwp scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
   arwp init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
   arwp health <https://site.example> [--json]
+  arwp protocol-checks <profile.json|https://...> [--json] [--timeout=<ms>]
   arwp directory [--capability=<name>] [--json]
   arwp federated-search <query> [--sites=id1,id2] [--limit=<n>] [--json]
   arwp mcp
@@ -32,6 +34,7 @@ Commands:
   scan               Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
   init               Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
   health             Combine bounded discovery with live verification of an existing ARWP profile.
+  protocol-checks    Inspect declared Agent Skill, MCP Registry and A2A artifacts without pretending URL checks prove runtime conformance.
   directory          List sites from the configured ARWP directory, optionally by declared capability.
   federated-search   Search declared retrieval indexes across directory sites while preserving source identity.
   mcp                Start the generic read-only MCP gateway over stdio (configure with ARWP_PROFILE).
@@ -88,6 +91,16 @@ function printVerification(result) {
   for (const warning of result.warnings ?? []) console.warn(`WARN ${warning}`);
 }
 
+function printProtocolChecks(result) {
+  console.log(`${result.valid ? 'PASS' : 'FAIL'} ${result.source}`);
+  console.log(result.scope);
+  for (const check of result.checks) {
+    const issues = [check.issue, ...(check.issues ?? [])].filter(Boolean);
+    console.log(`${check.status.toUpperCase().padEnd(12)} ${check.kind} ${check.name}${check.url ? ` ${check.url}` : ''}${issues.length ? ` — ${issues.join('; ')}` : ''}`);
+  }
+  console.log(`Summary: ${result.summary.pass} pass, ${result.summary.warning} warning, ${result.summary.fail} fail, ${result.summary['not-assessed']} not assessed`);
+}
+
 async function main() {
   if (!command || command === '--help' || command === '-h') {
     usage();
@@ -141,7 +154,7 @@ async function main() {
     return result.results.length ? 0 : 1;
   }
 
-  if (!['validate', 'verify', 'scan', 'init', 'health'].includes(command) || !source) {
+  if (!['validate', 'verify', 'scan', 'init', 'health', 'protocol-checks'].includes(command) || !source) {
     usage();
     return 2;
   }
@@ -172,6 +185,13 @@ async function main() {
     if (jsonOutput) console.log(JSON.stringify(result, null, 2));
     else console.log(formatHealthReport(result));
     return result.profile.status === 'failing' || result.profile.status === 'invalid' ? 1 : 0;
+  }
+
+  if (command === 'protocol-checks') {
+    const result = await checkProtocolArtifacts(source, { timeoutMs: numericOption('timeout', 8000) });
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else printProtocolChecks(result);
+    return result.valid ? 0 : 1;
   }
 
   const scan = await scanSite(source, {
