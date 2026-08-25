@@ -13,7 +13,7 @@
   },
   "data": {
     "catalog": "https://cognitive-biases.github.io/data/catalog.json",
-    "schemas": "https://cognitive-biases.github.io/schemas/",
+    "schemas": "https://raw.githubusercontent.com/Cognitive-Biases/cognitive-biases.github.io/main/schemas/reasoning-practice.schema.json",
     "distributions": [
       {
         "name": "Knowledge release manifest",
@@ -54,7 +54,7 @@
     ]
   },
   "trust": {
-    "license": "https://cognitive-biases.github.io/LICENSE",
+    "license": "https://raw.githubusercontent.com/Cognitive-Biases/cognitive-biases.github.io/main/LICENSE",
     "provenance": "https://cognitive-biases.github.io/data/provenance.json"
   }
 }
