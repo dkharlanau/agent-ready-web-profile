@@ -1,0 +1,62 @@
+name: ARWP resolver drift
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 5 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout monitored configuration
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # Before the 0.2.x npm release, this installs the current repository toolchain.
+      # Replace with an immutable npm/tag version once published.
+      - name: Install ARWP Resolver
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund github:dkharlanau/agent-ready-web-profile#main
+
+      - name: Restore previous resolver snapshots
+        uses: actions/cache@v4
+        with:
+          path: .arwp-resolver/snapshots
+          key: ${{ runner.os }}-arwp-resolver-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-arwp-resolver-
+
+      - name: Run bounded resolver monitor
+        id: monitor
+        shell: bash
+        run: |
+          set +e
+          node node_modules/agent-ready-web-profile/monitor/runner.mjs \
+            --config=arwp-resolver-monitor.json \
+            --snapshot-dir=.arwp-resolver/snapshots \
+            --report=.arwp-resolver/report.json
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload drift report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arwp-resolver-drift-${{ github.run_id }}
+          path: .arwp-resolver/report.json
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Fail on configured drift classes
+        if: steps.monitor.outputs.status != '0'
+        run: |
+          echo "Resolver monitor detected a configured fail-on condition. Inspect the uploaded drift report."
+          exit 1
