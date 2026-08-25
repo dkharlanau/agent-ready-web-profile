@@ -1,0 +1,27 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "langchain-docs",
+  "url": "https://docs.langchain.com/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://docs.langchain.com/llms.txt"],
+    "search": [{ "url": "https://docs.langchain.com/mcp", "protocol": "MCP" }],
+    "structured": [],
+    "tools": [{ "url": "https://docs.langchain.com/mcp", "protocol": "MCP" }],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://docs.langchain.com/use-these-docs",
+      "sourceType": "official-docs",
+      "note": "LangChain explicitly publishes a root llms.txt and a documentation MCP endpoint at https://docs.langchain.com/mcp for real-time documentation queries."
+    },
+    {
+      "url": "https://docs.langchain.com/oss/python/reference/overview",
+      "sourceType": "official-docs",
+      "note": "LangChain documentation pages advertise the same root llms.txt index for machine-oriented documentation access."
+    }
+  ],
+  "note": "The docs MCP is accepted for both generic tool access and documentation search because the official docs describe that exact use."
+}
