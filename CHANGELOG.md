@@ -1,6 +1,18 @@
 # Changelog
 
-ARWP is pre-stable. Until the first tagged release, entries describe the current `main` development line rather than a compatibility promise.
+ARWP is pre-stable. The `main` branch may contain work intended for the next v0.x release; tagged releases are immutable compatibility points.
+
+## Unreleased
+
+### Adoption tooling
+
+- Added bounded `scan` discovery for existing public HTTPS websites.
+- Added `init` to generate a conservative validated `ai/site-profile.json` draft from observed evidence.
+- Added discovery for canonical metadata, `robots.txt`, sitemaps, `llms.txt`, linked feeds, explicit OpenAPI `service-desc` links and existing ARWP profiles.
+- Added explicit `not-assessed` reporting for Agent Skills, WebMCP, MCP and A2A when the bounded scanner cannot prove runtime/protocol behavior.
+- Added private/reserved target rejection, DNS checks, redirect re-validation, HTTPS-only policy, response-size limits and request timeouts.
+- Generated drafts now reference the immutable v0.1.0 schema URL.
+- Added deterministic scanner tests with mocked network evidence and private-target/redirect rejection cases.
 
 ## 0.1.0 — experimental baseline
 
@@ -56,11 +68,11 @@ The reference suite includes deliberately different capability combinations so s
 
 ## Next
 
-The next milestone should prioritize interoperability evidence over additional metadata fields:
+The next milestone should prioritize distribution and independent interoperability evidence over additional metadata fields:
 
+- public CLI/package distribution;
+- a bounded public scanner UI/Worker using the same discovery engine;
 - upstream/protocol-specific validation adapters;
-- profile-generation/adoption tooling;
 - a Node-free Worker build of the Streamable HTTP gateway;
-- public CLI/package distribution and compatibility policy;
 - WebMCP reference implementations and browser-agent evals;
 - independent adopters before proposing any new registered discovery location.
