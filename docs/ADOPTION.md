@@ -36,6 +36,23 @@ Then advertise it from HTML when practical:
 
 Use an immutable release or commit when reproducibility matters.
 
+## Let GitHub propose profile updates
+
+The repository includes:
+
+```text
+templates/github-actions/propose-arwp-profile.yml
+```
+
+Copy it into an adopting repository's `.github/workflows/` directory. A manual workflow run will:
+
+1. scan the configured public site;
+2. generate a conservative profile draft;
+3. validate it;
+4. create a branch and pull request only when `ai/site-profile.json` changed.
+
+The generated PR deliberately does not invent domain-specific data, retrieval, Agent Skills, WebMCP, MCP or A2A declarations.
+
 ## Verify the published site
 
 ```bash
@@ -44,12 +61,44 @@ node bin/arwp.mjs verify https://example.com/ai/site-profile.json
 
 A valid JSON document is not enough. Verification catches stale or unreachable declarations.
 
+For a higher-level evidence report:
+
+```bash
+node bin/arwp.mjs health https://example.com
+```
+
+The report separates observed, declared, verified, warning/failing and not-assessed states rather than producing an opaque readiness score.
+
+## Optional: show profile availability
+
+A neutral badge is available at:
+
+```text
+https://dkharlanau.github.io/agent-ready-web-profile/arwp-profile.svg
+```
+
+Example Markdown:
+
+```markdown
+[![ARWP profile available](https://dkharlanau.github.io/agent-ready-web-profile/arwp-profile.svg)](https://example.com/ai/site-profile.json)
+```
+
+The badge says only that a profile is available. It is not a certification or quality score.
+
 ## Optional: connect through the generic MCP gateway
 
 Local stdio:
 
 ```bash
 ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start
+```
+
+Remote Streamable HTTP:
+
+```bash
+ARWP_PROFILE=https://example.com/ai/site-profile.json \
+ARWP_HTTP_ALLOWED_HOSTS=mcp.example.com \
+npm run mcp:http
 ```
 
 The generic gateway is intentionally read-only and only fetches resources declared by the profile. If your domain requires semantic operations, authorization, safety rules or mutation, build a domain-specific server instead.
@@ -65,6 +114,19 @@ Open an issue in this repository with:
 - a successful `arwp verify` result.
 
 Directory inclusion means only that a public profile is available and can be inspected. It is not a quality endorsement.
+
+The directory itself is machine-readable at:
+
+```text
+https://dkharlanau.github.io/agent-ready-web-profile/directory.json
+```
+
+and can be queried locally:
+
+```bash
+node bin/arwp.mjs directory --capability=retrieval
+node bin/arwp.mjs federated-search "outside view"
+```
 
 ## What makes a useful external adoption report
 
