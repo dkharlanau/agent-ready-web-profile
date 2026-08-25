@@ -28,6 +28,7 @@ Usage:
   arwp protocol-checks <profile.json|https://...> [--json] [--timeout=<ms>]
   arwp directory [--capability=<name>] [--json]
   arwp federated-search <query> [--sites=id1,id2] [--limit=<n>] [--json]
+  arwp resolver-mcp
   arwp mcp
   arwp mcp-http
   arwp router-mcp
@@ -44,8 +45,9 @@ Commands:
   protocol-checks    Inspect declared Agent Skill, MCP Registry and A2A artifacts without pretending URL checks prove runtime conformance.
   directory          List sites from the configured ARWP directory, optionally by declared capability.
   federated-search   Search declared retrieval indexes across directory sites while preserving source identity.
-  mcp                Start the generic read-only MCP gateway over stdio (configure with ARWP_PROFILE).
-  mcp-http           Start the guarded Streamable HTTP MCP gateway.
+  resolver-mcp       Start the site Resolver MCP server over stdio; no ARWP profile is required.
+  mcp                Start the generic read-only ARWP-profile gateway over stdio (configure with ARWP_PROFILE).
+  mcp-http           Start the guarded Streamable HTTP ARWP-profile gateway.
   router-mcp         Start the federated directory/search MCP router over stdio.
 `);
 }
@@ -134,6 +136,10 @@ async function main() {
   if (command === '--version' || command === '-v') {
     console.log(toolVersion);
     return 0;
+  }
+  if (command === 'resolver-mcp') {
+    await import('../resolver/server.mjs');
+    return null;
   }
   if (command === 'mcp') {
     await import('../gateway/server.mjs');
