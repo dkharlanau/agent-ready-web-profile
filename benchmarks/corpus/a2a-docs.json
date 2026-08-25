@@ -1,0 +1,27 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "a2a-docs",
+  "url": "https://a2a-protocol.org/latest/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": [{ "url": "https://a2a-protocol.org/latest/", "protocol": "HTML", "kind": "html" }],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://a2a-protocol.org/latest/",
+      "sourceType": "official-docs",
+      "note": "The official A2A documentation is a normal public HTML documentation site. It documents agents but the documentation site is not itself treated as an A2A agent."
+    },
+    {
+      "url": "https://a2a-protocol.org/latest/specification/",
+      "sourceType": "official-specification",
+      "note": "The current A2A specification describes Agent Cards and agent interoperability, providing context for why documentation is distinct from an actual Agent Card endpoint."
+    }
+  ],
+  "note": "Plain-web control fixture: ordinary canonical HTML must remain a valid read fallback."
+}
