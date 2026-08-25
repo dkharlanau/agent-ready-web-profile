@@ -258,7 +258,9 @@ The monitor runtime (`npm run monitor:resolver`) persists per-site snapshots and
 
 The original federation layer requires ARWP profiles. The newer resolver-backed path does not.
 
-`search_resolved_sites` accepts reviewed canonical site URLs, resolves them first, then executes only explicitly discovered static JSON/JSONL/NDJSON retrieval indexes.
+`search_resolved_sites` accepts reviewed canonical site URLs, resolves them first, then executes only explicitly resolved static JSON/JSONL/NDJSON retrieval indexes and JSON Feed surfaces. JSON Feed is treated as a static record source only after the Resolver has already identified the URL as feed evidence; federation does not guess an arbitrary feed URL or scrape HTML as records.
+
+JSON Feed payloads fit the existing generic JSON parser because their `items[]` array is a record collection. `content_text` and `content_html` are exposed as record summaries when a more specific summary/description is absent. Retrieval indexes remain preferred over feeds when authority is otherwise equal.
 
 It intentionally does not invent generic OpenAPI, MCP or A2A calls because an interface description alone does not define the semantic search operation to invoke.
 
@@ -266,10 +268,12 @@ Each result preserves:
 
 - source site identity;
 - original discovery source and authority;
-- selected retrieval interface;
+- selected retrieval/feed interface;
 - record-level retrieval result.
 
-Sites without a supported static retrieval index are skipped rather than scraped arbitrarily.
+The federation response also includes an `executed[]` observation so a benchmark can distinguish “interface executed but query returned no hits” from “no compatible interface was resolved.” Sites without a supported static retrieval index or JSON Feed are skipped rather than scraped arbitrarily.
+
+A reviewed independent smoke corpus lives at `benchmarks/federation-corpus.json` and runs with `npm run benchmark:federation-external`. The first live observation on 2026-08-26 executed the reviewed JSON Feed for 1 of 4 independent sites. The three misses are retained as misses rather than changing ground truth to match Resolver output; they identify discovery coverage as the next workstream. The durable report is under `benchmarks/results/2026-08-26-federation-v0.1.*`.
 
 ## Network safety
 
@@ -303,11 +307,12 @@ Resolver v0.1 does not:
 
 ## Current upstream references
 
-As of 2026-08-25, implementation work tracks:
+As of 2026-08-26, implementation work tracks:
 
 - RFC 8288 — Web Linking;
 - RFC 9727 — API Catalog;
 - RFC 9728 — OAuth 2.0 Protected Resource Metadata;
+- JSON Feed 1.1 for explicitly resolved static feed execution;
 - A2A v1.0 Agent Card discovery/signature model;
 - Agent Skills discovery index;
 - agents.txt / agents.json community specification;

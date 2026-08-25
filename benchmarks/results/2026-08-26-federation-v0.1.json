@@ -1,0 +1,109 @@
+{
+  "benchmarkVersion": "0.1",
+  "generatedAt": "2026-08-25T23:12:39.691Z",
+  "headSha": "3fe33ce530167cc24ebe29a481cbf9c3b9c749b5",
+  "workflowRun": 32909627342,
+  "artifact": {
+    "id": 9586089541,
+    "name": "arwp-external-benchmark-32909627342",
+    "sha256": "a046f7ccd8317edd976ffac773fca0ade85b1cf556ac7c29abfb8920fa31d1d4"
+  },
+  "corpusVersion": "0.1",
+  "corpusReviewedAt": "2026-08-26",
+  "independentSites": 4,
+  "expectedInterfacesExecuted": 1,
+  "sitesWithHits": 1,
+  "sites": [
+    {
+      "id": "jsonfeed-org",
+      "name": "JSON Feed",
+      "url": "https://www.jsonfeed.org/",
+      "query": "JSON Feed",
+      "expectedInterfaceUrl": "https://www.jsonfeed.org/feed.json",
+      "status": "no-compatible-interface-executed",
+      "executed": [],
+      "hits": 0,
+      "skipped": [
+        {
+          "id": "jsonfeed-org",
+          "inputUrl": "https://www.jsonfeed.org/",
+          "reason": "no-supported-static-retrieval-index"
+        }
+      ],
+      "failures": [],
+      "durationMs": 2239
+    },
+    {
+      "id": "manton-reece",
+      "name": "Manton Reece",
+      "url": "https://www.manton.org/",
+      "query": "Manton",
+      "expectedInterfaceUrl": "https://www.manton.org/feed.json",
+      "status": "no-compatible-interface-executed",
+      "executed": [],
+      "hits": 0,
+      "skipped": [
+        {
+          "id": "manton-reece",
+          "inputUrl": "https://www.manton.org/",
+          "reason": "no-supported-static-retrieval-index"
+        }
+      ],
+      "failures": [],
+      "durationMs": 2038
+    },
+    {
+      "id": "ai-rud-is",
+      "name": "ai.rud.is",
+      "url": "https://ai.rud.is/",
+      "query": "machine",
+      "expectedInterfaceUrl": "https://ai.rud.is/feed.json",
+      "status": "expected-interface-executed",
+      "executed": [
+        {
+          "siteId": "ai-rud-is",
+          "siteName": "ai.rud.is",
+          "interface": {
+            "kind": "feed",
+            "url": "https://ai.rud.is/feed.json",
+            "mediaType": null,
+            "format": "json",
+            "sourceId": "homepage-scan",
+            "sourceAuthority": "observed-web"
+          },
+          "records": 43,
+          "matches": 3
+        }
+      ],
+      "hits": 3,
+      "skipped": [],
+      "failures": [],
+      "durationMs": 1614
+    },
+    {
+      "id": "daring-fireball",
+      "name": "Daring Fireball",
+      "url": "https://daringfireball.net/",
+      "query": "John Gruber",
+      "expectedInterfaceUrl": "https://daringfireball.net/feeds/json",
+      "status": "no-compatible-interface-executed",
+      "executed": [],
+      "hits": 0,
+      "skipped": [
+        {
+          "id": "daring-fireball",
+          "inputUrl": "https://daringfireball.net/",
+          "reason": "no-supported-static-retrieval-index"
+        }
+      ],
+      "failures": [],
+      "durationMs": 1440
+    }
+  ],
+  "methodology": {
+    "groundTruth": "Expected feed URLs are manually reviewed from publisher/spec evidence in benchmarks/federation-corpus.json; Resolver output is not used as its own ground truth.",
+    "execution": "Each site is resolved independently, then only the first supported static JSON/JSONL/NDJSON retrieval index or JSON Feed selected by resolver-backed federation is fetched.",
+    "interpretation": "This is an interoperability smoke benchmark. A matching interface proves discovery and bounded execution for that observation; hit count is not an answer-quality metric.",
+    "failurePolicy": "Third-party resolution or retrieval failures are recorded in the report and do not by themselves make the engineering workflow fail."
+  }
+}

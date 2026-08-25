@@ -2,7 +2,7 @@
 
 ARWP should justify its existence through measurable interoperability utility, not through a readiness score or unverified marketing claims.
 
-The benchmark program has two layers.
+The benchmark program has three layers.
 
 ## Layer 1 — deterministic regression benchmark
 
@@ -89,6 +89,30 @@ npm run benchmark:external -- --output=benchmark-results/external.json
 ```
 
 Only fixtures marked `ownership=independent` count toward the primary aggregate unless an engineering-only run explicitly opts into the other fixtures.
+
+## Layer 3 — resolver-backed federation smoke corpus
+
+Resolver-backed federation has a separate live corpus because a discovery-selection score does not prove that a resolved interface can actually be executed and parsed.
+
+Run:
+
+```bash
+npm run benchmark:federation-external -- --output=benchmark-results/federation.json
+```
+
+`benchmarks/federation-corpus.json` contains only reviewed independent sites with publisher/spec evidence for a public JSON Feed. The runner resolves each canonical site first and then executes only the static surface selected by `searchResolvedFederated`.
+
+This layer records:
+
+- whether the reviewed interface was actually selected and fetched;
+- which discovery source/authority produced it;
+- records parsed;
+- query hits;
+- skipped sites and retrieval failures.
+
+A query hit is only a smoke signal that records reached the generic search path. It is not a ranking or answer-quality metric.
+
+The first live observation on 2026-08-26 executed the reviewed interface for 1 of 4 sites. `ai.rud.is` exposed `/feed.json`, 43 records were parsed and three matched the smoke query. JSONFeed.org, Manton Reece and Daring Fireball were skipped because the current resolver observation did not expose a compatible static feed surface. The ground-truth fixtures were deliberately left unchanged. See `benchmarks/results/2026-08-26-federation-v0.1.md` and the adjacent raw JSON record.
 
 ## Metrics
 
