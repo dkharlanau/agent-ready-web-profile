@@ -10,6 +10,7 @@ Status snapshot: 25 August 2026. Upstream specifications remain authoritative.
 | Crawler access | `robots.txt` and crawler-specific controls | Point to the policy resource; ARWP grants no permission |
 | LLM-oriented site map | `llms.txt` v2 proposal | Point to the applicable file |
 | Page-to-Markdown discovery | `llms.txt` v2 link-relation guidance | Do not invent a conflicting mirror convention |
+| Portable agent procedures | Agent Skills / `SKILL.md` | Point to real skill manifests and optional catalogs; do not copy skill instructions |
 | Browser-agent tools | WebMCP | Declare only pages where tools really exist |
 | External tools/data protocol | Model Context Protocol | Link to real MCP servers and Registry metadata |
 | MCP public discovery | Official MCP Registry and `server.json` | Link; do not duplicate Registry-specific installation metadata |
@@ -48,6 +49,28 @@ Upstream:
 - https://llmstxt.org/changes.html
 - https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt
 
+## Agent Skills
+
+Agent Skills are portable procedural capability bundles centered on a `SKILL.md` file. The open specification defines required frontmatter and a progressive-disclosure directory structure for optional scripts, references and assets.
+
+ARWP treats skills as instructions rather than tool transports:
+
+- `agentSkills.catalog` may point to a publisher's discovery surface;
+- `agentSkills.skills[].url` should point directly to a real `SKILL.md`;
+- `agentSkills.skills[].source` may point to the containing source directory or repository;
+- skill names follow the lowercase hyphenated Agent Skills naming contract.
+
+A skill may explain how to use a website, API or MCP server, but it does not make those interfaces exist. ARWP therefore keeps Agent Skills, WebMCP and MCP separate.
+
+The Agent Skills format is supported across multiple agent products. OpenAI documents Skills in ChatGPT/Codex as following the Agent Skills open standard.
+
+Upstream:
+
+- https://agentskills.io/
+- https://agentskills.io/specification
+- https://github.com/agentskills/agentskills
+- https://help.openai.com/en/articles/20001063-skills-in-chatgpt
+
 ## WebMCP
 
 WebMCP lets web applications expose structured tools to browser agents instead of forcing an agent to infer every action from UI geometry and text.
@@ -72,13 +95,13 @@ Upstream:
 
 ## Model Context Protocol
 
-MCP connects clients to external tools and data. This is different from WebMCP, which exposes capabilities from a web page to a browser agent.
+MCP connects clients to external tools and data. This is different from WebMCP, which exposes capabilities from a web page to a browser agent, and from Agent Skills, which package procedural instructions.
 
 ARWP may describe local or remote MCP servers, but it does not replace MCP discovery/installation metadata.
 
 The official MCP Registry is currently in preview. Registry server metadata uses standardized `server.json`. Remote MCP servers can be represented through the Registry `remotes` property; current documentation supports `streamable-http` remote transports.
 
-A static GitHub Pages JSON endpoint is not a remote MCP server. It may still be an excellent data source for an MCP adapter running elsewhere.
+A static GitHub Pages JSON endpoint is not a remote MCP server. It may still be an excellent data source for an MCP adapter running elsewhere. For local stdio implementations, ARWP can point to installable package metadata or a public source location.
 
 Upstream:
 
