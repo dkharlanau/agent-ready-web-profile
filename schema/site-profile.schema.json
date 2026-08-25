@@ -5,42 +5,19 @@
   "description": "Discovery profile for a website's existing web, data, retrieval and agent-facing interfaces.",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "profileVersion",
-    "id",
-    "name",
-    "canonicalUrl",
-    "description"
-  ],
+  "required": ["profileVersion", "id", "name", "canonicalUrl", "description"],
   "properties": {
-    "$schema": {
-      "type": "string",
-      "format": "uri"
-    },
-    "profileVersion": {
-      "const": "0.1"
-    },
+    "$schema": { "type": "string", "format": "uri" },
+    "profileVersion": { "const": "0.1" },
     "id": {
       "type": "string",
       "minLength": 2,
       "maxLength": 128,
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
     },
-    "name": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 200
-    },
-    "canonicalUrl": {
-      "type": "string",
-      "format": "uri",
-      "pattern": "^https://"
-    },
-    "description": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 1000
-    },
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "description": { "type": "string", "minLength": 1, "maxLength": 1000 },
     "languages": {
       "type": "array",
       "items": {
@@ -51,35 +28,18 @@
       },
       "uniqueItems": true
     },
-    "web": {
-      "$ref": "#/$defs/web"
-    },
-    "data": {
-      "$ref": "#/$defs/data"
-    },
-    "retrieval": {
-      "$ref": "#/$defs/retrieval"
-    },
-    "agentWeb": {
-      "$ref": "#/$defs/agentWeb"
-    },
-    "mcp": {
-      "$ref": "#/$defs/mcp"
-    },
-    "a2a": {
-      "$ref": "#/$defs/a2a"
-    },
-    "identity": {
-      "$ref": "#/$defs/identity"
-    },
-    "trust": {
-      "$ref": "#/$defs/trust"
-    },
+    "web": { "$ref": "#/$defs/web" },
+    "data": { "$ref": "#/$defs/data" },
+    "retrieval": { "$ref": "#/$defs/retrieval" },
+    "agentSkills": { "$ref": "#/$defs/agentSkills" },
+    "agentWeb": { "$ref": "#/$defs/agentWeb" },
+    "mcp": { "$ref": "#/$defs/mcp" },
+    "a2a": { "$ref": "#/$defs/a2a" },
+    "identity": { "$ref": "#/$defs/identity" },
+    "trust": { "$ref": "#/$defs/trust" },
     "extensions": {
       "type": "object",
-      "propertyNames": {
-        "pattern": "^[a-z0-9][a-z0-9.-]*/[A-Za-z0-9._-]+$"
-      },
+      "propertyNames": { "pattern": "^[a-z0-9][a-z0-9.-]*/[A-Za-z0-9._-]+$" },
       "additionalProperties": true
     }
   },
@@ -94,18 +54,9 @@
       "additionalProperties": false,
       "required": ["url", "mediaType"],
       "properties": {
-        "url": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "mediaType": {
-          "type": "string",
-          "minLength": 3,
-          "maxLength": 100
-        },
-        "title": {
-          "type": "string",
-          "maxLength": 200
-        }
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "mediaType": { "type": "string", "minLength": 3, "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 200 }
       }
     },
     "distribution": {
@@ -113,86 +64,43 @@
       "additionalProperties": false,
       "required": ["name", "url", "mediaType"],
       "properties": {
-        "name": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "url": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "mediaType": {
-          "type": "string",
-          "minLength": 3,
-          "maxLength": 100
-        },
+        "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "mediaType": { "type": "string", "minLength": 3, "maxLength": 100 },
         "role": {
           "type": "string",
-          "enum": [
-            "canonical-data",
-            "catalog",
-            "rag",
-            "search-index",
-            "evaluation",
-            "release",
-            "other"
-          ]
+          "enum": ["canonical-data", "catalog", "rag", "search-index", "evaluation", "release", "other"]
         },
-        "description": {
-          "type": "string",
-          "maxLength": 500
-        }
+        "description": { "type": "string", "maxLength": 500 }
       }
     },
     "web": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "sitemap": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "robots": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "llms": {
-          "$ref": "#/$defs/httpsUri"
-        },
+        "sitemap": { "$ref": "#/$defs/httpsUri" },
+        "robots": { "$ref": "#/$defs/httpsUri" },
+        "llms": { "$ref": "#/$defs/httpsUri" },
         "feeds": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/feed"
-          },
+          "items": { "$ref": "#/$defs/feed" },
           "uniqueItems": true
         },
-        "markdownIndex": {
-          "$ref": "#/$defs/httpsUri"
-        }
+        "markdownIndex": { "$ref": "#/$defs/httpsUri" }
       }
     },
     "data": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "catalog": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "schemas": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "openapi": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "releases": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "croissant": {
-          "$ref": "#/$defs/httpsUri"
-        },
+        "catalog": { "$ref": "#/$defs/httpsUri" },
+        "schemas": { "$ref": "#/$defs/httpsUri" },
+        "openapi": { "$ref": "#/$defs/httpsUri" },
+        "releases": { "$ref": "#/$defs/httpsUri" },
+        "croissant": { "$ref": "#/$defs/httpsUri" },
         "distributions": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/distribution"
-          }
+          "items": { "$ref": "#/$defs/distribution" }
         }
       }
     },
@@ -201,27 +109,11 @@
       "additionalProperties": false,
       "required": ["name", "url", "mediaType"],
       "properties": {
-        "name": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "url": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "mediaType": {
-          "type": "string",
-          "minLength": 3,
-          "maxLength": 100
-        },
-        "format": {
-          "type": "string",
-          "enum": ["json", "jsonl", "ndjson", "csv", "parquet", "other"]
-        },
-        "description": {
-          "type": "string",
-          "maxLength": 500
-        }
+        "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "mediaType": { "type": "string", "minLength": 3, "maxLength": 100 },
+        "format": { "type": "string", "enum": ["json", "jsonl", "ndjson", "csv", "parquet", "other"] },
+        "description": { "type": "string", "maxLength": 500 }
       }
     },
     "retrieval": {
@@ -230,58 +122,68 @@
       "properties": {
         "indexes": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/retrievalIndex"
-          }
+          "items": { "$ref": "#/$defs/retrievalIndex" }
         },
-        "search": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "abstention": {
-          "$ref": "#/$defs/httpsUri"
-        }
+        "search": { "$ref": "#/$defs/httpsUri" },
+        "abstention": { "$ref": "#/$defs/httpsUri" }
       }
+    },
+    "agentSkill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 1024 },
+        "source": { "$ref": "#/$defs/httpsUri" }
+      }
+    },
+    "agentSkills": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "catalog": { "$ref": "#/$defs/httpsUri" },
+        "specification": { "$ref": "#/$defs/httpsUri" },
+        "skills": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/agentSkill" }
+        }
+      },
+      "anyOf": [
+        { "required": ["catalog"] },
+        { "required": ["skills"] }
+      ]
     },
     "webmcp": {
       "type": "object",
       "additionalProperties": false,
       "required": ["enabled"],
       "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
+        "enabled": { "type": "boolean" },
         "pages": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/httpsUri"
-          },
+          "items": { "$ref": "#/$defs/httpsUri" },
           "uniqueItems": true,
           "minItems": 1
         },
-        "documentation": {
-          "$ref": "#/$defs/httpsUri"
-        },
+        "documentation": { "$ref": "#/$defs/httpsUri" },
         "tools": {
           "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 100
-          },
+          "items": { "type": "string", "minLength": 1, "maxLength": 100 },
           "uniqueItems": true
         }
       },
       "allOf": [
         {
-          "if": {
-            "properties": {
-              "enabled": {"const": true}
-            },
-            "required": ["enabled"]
-          },
-          "then": {
-            "required": ["pages"]
-          }
+          "if": { "properties": { "enabled": { "const": true } }, "required": ["enabled"] },
+          "then": { "required": ["pages"] }
         }
       ]
     },
@@ -289,9 +191,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "webmcp": {
-          "$ref": "#/$defs/webmcp"
-        }
+        "webmcp": { "$ref": "#/$defs/webmcp" }
       }
     },
     "mcpServer": {
@@ -299,43 +199,27 @@
       "additionalProperties": false,
       "required": ["name", "transport"],
       "properties": {
-        "name": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 200
-        },
-        "transport": {
-          "type": "string",
-          "enum": ["streamable-http", "stdio", "sse", "other"]
-        },
-        "url": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "package": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 300
-        },
-        "registry": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "documentation": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "readOnly": {
-          "type": "boolean"
-        }
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "transport": { "type": "string", "enum": ["streamable-http", "stdio", "sse", "other"] },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "package": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "source": { "$ref": "#/$defs/httpsUri" },
+        "registry": { "$ref": "#/$defs/httpsUri" },
+        "documentation": { "$ref": "#/$defs/httpsUri" },
+        "readOnly": { "type": "boolean" }
       },
       "allOf": [
         {
-          "if": {
-            "properties": {
-              "transport": {"const": "streamable-http"}
-            },
-            "required": ["transport"]
-          },
+          "if": { "properties": { "transport": { "const": "streamable-http" } }, "required": ["transport"] },
+          "then": { "required": ["url"] }
+        },
+        {
+          "if": { "properties": { "transport": { "const": "stdio" } }, "required": ["transport"] },
           "then": {
-            "required": ["url"]
+            "anyOf": [
+              { "required": ["package"] },
+              { "required": ["source"] }
+            ]
           }
         }
       ]
@@ -348,9 +232,7 @@
         "servers": {
           "type": "array",
           "minItems": 1,
-          "items": {
-            "$ref": "#/$defs/mcpServer"
-          }
+          "items": { "$ref": "#/$defs/mcpServer" }
         }
       }
     },
@@ -359,49 +241,27 @@
       "additionalProperties": false,
       "required": ["agentCard"],
       "properties": {
-        "agentCard": {
-          "$ref": "#/$defs/httpsUri"
-        }
+        "agentCard": { "$ref": "#/$defs/httpsUri" }
       }
     },
     "identity": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "namespace": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "idPattern": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 300
-        },
-        "aliases": {
-          "$ref": "#/$defs/httpsUri"
-        }
+        "namespace": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "idPattern": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "aliases": { "$ref": "#/$defs/httpsUri" }
       }
     },
     "trust": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "license": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "citation": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "provenance": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "reviewPolicy": {
-          "$ref": "#/$defs/httpsUri"
-        },
-        "security": {
-          "$ref": "#/$defs/httpsUri"
-        }
+        "license": { "$ref": "#/$defs/httpsUri" },
+        "citation": { "$ref": "#/$defs/httpsUri" },
+        "provenance": { "$ref": "#/$defs/httpsUri" },
+        "reviewPolicy": { "$ref": "#/$defs/httpsUri" },
+        "security": { "$ref": "#/$defs/httpsUri" }
       }
     }
   }
