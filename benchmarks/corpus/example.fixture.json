@@ -1,0 +1,15 @@
+{
+  "id": "example-only-not-a-benchmark-site",
+  "url": "https://example.com/",
+  "ownership": "example-only",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": [],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [],
+  "note": "Schema/example only. This fixture must never count toward external benchmark results."
+}
