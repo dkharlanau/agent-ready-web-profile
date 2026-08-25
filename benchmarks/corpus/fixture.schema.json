@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": ["id", "url", "ownership", "reviewedAt", "accepted", "evidence"],
   "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
     "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,127}$" },
     "url": { "type": "string", "format": "uri", "pattern": "^https://" },
     "ownership": { "enum": ["independent", "project-reference", "example-only"] },
