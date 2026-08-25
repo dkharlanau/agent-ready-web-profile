@@ -3,6 +3,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/node';
 import * as z from 'zod/v4';
 import { resolveSite, explainResolvedSite, planResolvedSite } from '../lib/resolver.mjs';
 import { resolveMany } from '../lib/resolver-batch.mjs';
+import { reconcileMcpRuntime } from '../lib/mcp-runtime.mjs';
 import { searchResolvedFederated } from '../router/resolved-federated.mjs';
 
 const asText = value => ({ content: [{ type: 'text', text: typeof value === 'string' ? value : JSON.stringify(value, null, 2) }] });
@@ -10,7 +11,7 @@ const asText = value => ({ content: [{ type: 'text', text: typeof value === 'str
 const server = new McpServer({ name: 'arwp-site-resolver', version: '0.2.0' });
 
 server.registerTool('resolve_site', {
-  description: 'Resolve a public HTTPS website into one evidence-backed service map across ARWP, ordinary web discovery, agents.txt/json, RFC 9727/9728, A2A, Agent Skills and experimental MCP discovery. Source authority and conflicts are preserved.',
+  description: 'Resolve a public HTTPS website into one evidence-backed service map across ARWP, ordinary web discovery, agents.txt/json, RFC 8288/9727/9728, A2A, Agent Skills and experimental MCP discovery. Source authority and conflicts are preserved.',
   inputSchema: z.object({ url: z.string().url() })
 }, async ({ url }) => asText(await resolveSite(url)));
 
@@ -41,6 +42,21 @@ server.registerTool('search_resolved_sites', {
   limitPerSite: limit_per_site,
   concurrency
 })));
+
+server.registerTool('verify_mcp_runtime', {
+  description: 'Opt-in runtime reconciliation for remote MCP interfaces discovered on a site. Modern endpoints are probed with server/discover; legacy endpoints use initialize plus notifications/initialized. No MCP tools are invoked and no credentials discovered from metadata are sent automatically.',
+  inputSchema: z.object({
+    url: z.string().url(),
+    max_endpoints: z.number().int().min(1).max(4).default(4)
+  })
+}, async ({ url, max_endpoints }) => {
+  const resolution = await resolveSite(url);
+  return asText({
+    canonicalUrl: resolution.canonicalUrl,
+    staticConflicts: resolution.conflicts,
+    runtime: await reconcileMcpRuntime(resolution, { maxEndpoints: max_endpoints })
+  });
+});
 
 server.registerTool('explain_site', {
   description: 'Explain the resolved machine/agent-facing interfaces of a public website in human-readable terms, including source conflicts and recommended interfaces.',
