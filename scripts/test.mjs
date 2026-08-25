@@ -26,6 +26,30 @@ falseRemoteMcp.mcp = {
 };
 assert.equal(validateProfile(falseRemoteMcp).valid, false, 'streamable-http MCP must declare a URL.');
 
+const falseStdioMcp = loadProfile('examples/minimal.site-profile.json');
+falseStdioMcp.mcp = {
+  servers: [
+    {
+      name: 'example/local-server',
+      transport: 'stdio'
+    }
+  ]
+};
+assert.equal(validateProfile(falseStdioMcp).valid, false, 'stdio MCP must declare package or source metadata.');
+
+const sourceBackedStdioMcp = loadProfile('examples/minimal.site-profile.json');
+sourceBackedStdioMcp.mcp = {
+  servers: [
+    {
+      name: 'example/source-server',
+      transport: 'stdio',
+      source: 'https://github.com/example/knowledge/tree/main/mcp/server',
+      readOnly: true
+    }
+  ]
+};
+assert.equal(validateProfile(sourceBackedStdioMcp).valid, true, 'stdio MCP may be declared through a public source URL.');
+
 const falseWebMcp = loadProfile('examples/minimal.site-profile.json');
 falseWebMcp.agentWeb = {
   webmcp: {
@@ -34,4 +58,15 @@ falseWebMcp.agentWeb = {
 };
 assert.equal(validateProfile(falseWebMcp).valid, false, 'Enabled WebMCP must declare at least one page.');
 
-console.log(`PASS ${examples.length} valid examples and 3 negative contract tests`);
+const falseSkillName = loadProfile('examples/minimal.site-profile.json');
+falseSkillName.agentSkills = {
+  skills: [
+    {
+      name: 'Bad_Skill_Name',
+      url: 'https://example.com/skills/bad/SKILL.md'
+    }
+  ]
+};
+assert.equal(validateProfile(falseSkillName).valid, false, 'Agent Skill names must follow the lowercase hyphenated naming contract.');
+
+console.log(`PASS ${examples.length} valid examples and 6 negative/conditional contract tests`);
