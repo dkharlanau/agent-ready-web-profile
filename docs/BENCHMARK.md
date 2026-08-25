@@ -82,6 +82,14 @@ E — ARWP profile only
 F — ARWP Resolver union
 ```
 
+Run the reviewed external corpus with:
+
+```bash
+npm run benchmark:external -- --output=benchmark-results/external.json
+```
+
+Only fixtures marked `ownership=independent` count toward the primary aggregate unless an engineering-only run explicitly opts into the other fixtures.
+
 ## Metrics
 
 Record observable metrics, not a composite score:
@@ -97,6 +105,21 @@ Record observable metrics, not a composite score:
 - fallback required;
 - protocol/runtime verification still required.
 
+### Failure-inclusive correctness
+
+The primary external correctness denominator is all reviewed independent sites multiplied by all scored intents. A site-level Resolver failure therefore counts as incorrect for every intent on that site. It is not removed from the denominator.
+
+This rule prevents survivorship bias: a strategy cannot improve its reported accuracy by failing before it produces a selection on a difficult site.
+
+The external report also exposes:
+
+- `resolutionCoverage` — independently reviewed sites that completed `resolveSite` divided by all independently reviewed sites;
+- `resolvedOnlyAggregate` — a diagnostic selection-quality view restricted to sites that resolved successfully.
+
+`resolvedOnlyAggregate` must not replace the primary aggregate in headline comparisons. It is useful for separating selection mistakes from whole-site resolution failures.
+
+Only the Resolver-union observation contains measured Resolver request/byte counters. Sub-strategy rows are selection-only projections over the same observation and must not be described as independent network-performance measurements.
+
 ## Ground truth
 
 Ground truth cannot be “whatever ARWP says.”
@@ -104,6 +127,8 @@ Ground truth cannot be “whatever ARWP says.”
 For each benchmark site, record a reviewed fixture describing which public interfaces actually exist and why each one counts. Evidence should link to the public resource or protocol-native runtime check.
 
 A site may legitimately have multiple correct interfaces. Benchmark scoring should therefore support sets of accepted results rather than forcing one URL when several are equivalent.
+
+Review dates are evidence metadata, not proof by themselves. When a live site changes, re-review its accepted interfaces rather than changing the fixture merely to match Resolver output.
 
 ## Publication rules
 
@@ -115,7 +140,9 @@ When external benchmark results are published:
 4. do not convert the metrics into a universal readiness score;
 5. report cases where Resolver performs worse;
 6. separate discovery success from runtime protocol conformance;
-7. keep owned/reference sites identifiable so they cannot be mistaken for independent evidence.
+7. keep owned/reference sites identifiable so they cannot be mistaken for independent evidence;
+8. keep failed sites in the primary denominator and report resolution coverage separately;
+9. sanitize transient signed URLs, tokens, cookies or other request-specific material before committing a durable result artifact.
 
 ## Decision gate
 
