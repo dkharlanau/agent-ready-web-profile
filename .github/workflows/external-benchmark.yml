@@ -6,14 +6,22 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/external-benchmark.yml'
+      - 'benchmarks/corpus/**'
+      - 'benchmarks/external-runner.mjs'
+      - 'lib/resolver.mjs'
+      - 'lib/resolver-adapters.mjs'
+      - 'lib/http-discovery.mjs'
+      - 'lib/public-fetch.mjs'
 
 permissions:
   contents: read
 
-# One guarded push trigger is kept only to run the initial pilot from the latest reviewed corpus.
+concurrency:
+  group: external-resolver-benchmark-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   benchmark:
-    if: github.event_name == 'workflow_dispatch' || github.event.head_commit.message == 'Run first external resolver benchmark'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -46,6 +54,7 @@ jobs:
           const lines = [
             '# ARWP external resolver benchmark',
             '',
+            `Head: ${process.env.GITHUB_SHA}`,
             `Independent sites: ${report.independentSites}`,
             `Resolved: ${report.resolvedIndependentSites}`,
             `Failed: ${report.failedIndependentSites}`,
@@ -57,7 +66,7 @@ jobs:
             const accuracy = result.accuracy == null ? 'n/a' : `${(result.accuracy * 100).toFixed(1)}%`;
             lines.push(`| ${strategy} | ${result.correct} | ${result.total} | ${accuracy} |`);
           }
-          lines.push('', '> Pilot evidence only. Sub-strategy rows are selection-only projections over the same Resolver observation; they are not independent network-performance measurements.');
+          lines.push('', '> Engineering evidence only. Ground truth is the reviewed corpus; Resolver output is never allowed to become its own ground truth. Sub-strategy rows are selection-only projections over the same Resolver observation, not independent network-performance measurements.');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
           NODE
           else
