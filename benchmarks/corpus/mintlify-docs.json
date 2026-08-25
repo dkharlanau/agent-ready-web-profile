@@ -1,0 +1,30 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "mintlify-docs",
+  "url": "https://www.mintlify.com/docs/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": [
+      "https://www.mintlify.com/docs/llms.txt",
+      { "url": "https://www.mintlify.com/docs/", "protocol": "HTML", "kind": "html" }
+    ],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://www.mintlify.com/docs/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Mintlify publishes a path-scoped llms.txt index for its own documentation."
+    },
+    {
+      "url": "https://www.mintlify.com/blog/mintlify-llms-txt",
+      "sourceType": "official-blog",
+      "note": "Mintlify documents automatic llms.txt generation as a machine-readable documentation surface."
+    }
+  ],
+  "note": "Path-scoped llms.txt fixture. No MCP/API capability is accepted merely because Mintlify can generate such integrations for customer documentation."
+}
