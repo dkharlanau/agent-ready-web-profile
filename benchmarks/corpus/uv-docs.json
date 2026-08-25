@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "uv-docs",
+  "url": "https://docs.astral.sh/uv/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://docs.astral.sh/uv/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://docs.astral.sh/uv/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "uv publishes a path-scoped llms.txt index and explicitly recommends clean Markdown index.md page URLs for documentation retrieval."
+    }
+  ],
+  "note": "Path-scoped llms.txt fixture: useful for detecting the current limitation of root-origin conventional probing."
+}
