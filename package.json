@@ -1,15 +1,31 @@
 {
   "name": "agent-ready-web-profile",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Specification, schema, scanner, validator, verifier and reference MCP gateways for the Agent-Ready Web Profile (ARWP).",
+  "version": "0.2.0",
+  "description": "Interoperability profile, scanner, validator and MCP gateway for agent-ready websites.",
   "license": "Apache-2.0",
   "type": "module",
+  "bin": {
+    "arwp": "bin/arwp.mjs"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "schema/",
+    "gateway/",
+    "SPEC.md",
+    "README.md",
+    "LICENSE",
+    "docs/CONFORMANCE.md",
+    "docs/GATEWAY.md",
+    "docs/SCANNER.md",
+    "docs/STANDARDS-MAP.md"
+  ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
     "test:gateway": "node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "test:verifier": "node scripts/verifier-test.mjs",
     "test:scanner": "node scripts/scanner-test.mjs && node --check lib/scanner.mjs",
+    "test:package": "node scripts/package-smoke-test.mjs",
     "test": "node scripts/test.mjs && node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node scripts/verifier-test.mjs && node scripts/scanner-test.mjs && node --check lib/scanner.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "mcp:start": "node gateway/server.mjs",
     "mcp:http": "node gateway/http-node.mjs"
@@ -27,5 +43,24 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/dkharlanau/agent-ready-web-profile.git"
+  },
+  "homepage": "https://github.com/dkharlanau/agent-ready-web-profile#readme",
+  "bugs": {
+    "url": "https://github.com/dkharlanau/agent-ready-web-profile/issues"
+  },
+  "keywords": [
+    "agent-ready-web",
+    "ai-agents",
+    "mcp",
+    "webmcp",
+    "llms-txt",
+    "agent-skills",
+    "a2a",
+    "openapi",
+    "interoperability",
+    "website-scanner"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
