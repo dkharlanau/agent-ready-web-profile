@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Agent-Ready Web Profile (ARWP): one evidence-based map of a website's web, data, retrieval and agent-facing interfaces.">
+  <meta name="theme-color" content="#10120f">
+  <title>ARWP — Agent-Ready Web Profile</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/">
+  <link rel="stylesheet" href="./arwp.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="ARWP home">
+      <span class="brand-mark" aria-hidden="true">A/</span>
+      <span>ARWP</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#how">How it works</a>
+      <a href="#capabilities">Surfaces</a>
+      <a href="#try">Try it</a>
+      <a href="../SPEC.md">Spec</a>
+      <a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">Experimental interoperability profile · v0.1 contract</p>
+        <h1>One map for the interfaces your website already has.</h1>
+        <p class="hero-lead">ARWP gives people, search systems, retrieval tools and AI agents a small machine-readable map of the real surfaces a site exposes — without pretending to replace SEO, MCP, WebMCP, Agent Skills, A2A, OpenAPI or <code>llms.txt</code>.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#try">Scan an existing site</a>
+          <a class="button secondary" href="https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0">View v0.1.0</a>
+        </div>
+      </div>
+
+      <div class="manifest-card" aria-label="Minimal ARWP manifest example">
+        <div class="manifest-head">
+          <span>ai/site-profile.json</span>
+          <span class="status-dot">experimental</span>
+        </div>
+        <pre><code>{
+  "profileVersion": "0.1",
+  "id": "example-site",
+  "canonicalUrl": "https://example.com/",
+  "web": {
+    "sitemap": "https://example.com/sitemap.xml",
+    "llms": "https://example.com/llms.txt"
+  },
+  "data": {
+    "openapi": "https://example.com/openapi.json"
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="problem shell" aria-labelledby="problem-title">
+      <div class="section-number">01</div>
+      <div>
+        <p class="eyebrow">The problem</p>
+        <h2 id="problem-title">A site can expose everything correctly and still be difficult to integrate.</h2>
+      </div>
+      <p class="section-copy">A sitemap tells a crawler where pages live. OpenAPI describes an API. <code>SKILL.md</code> describes a reusable procedure. MCP exposes tools or data. None of those is a complete inventory of the site's other interfaces. ARWP is a thin discovery layer over those existing contracts.</p>
+    </section>
+
+    <section id="how" class="shell workflow" aria-labelledby="how-title">
+      <div class="section-heading">
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">Observe → describe → verify.</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-index">01</span>
+          <h3>Observe</h3>
+          <p>The bounded scanner checks a small set of public HTTPS discovery surfaces and records evidence it can actually see.</p>
+        </li>
+        <li>
+          <span class="step-index">02</span>
+          <h3>Describe</h3>
+          <p><code>arwp init</code> creates a conservative draft profile. Unverified MCP, WebMCP, Agent Skills or A2A capabilities are not invented.</p>
+        </li>
+        <li>
+          <span class="step-index">03</span>
+          <h3>Verify</h3>
+          <p>The schema validator checks the contract; the live verifier checks declared public resources; the GitHub Action keeps the profile valid in CI.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="capabilities" class="surface-section">
+      <div class="shell">
+        <div class="section-heading split">
+          <div>
+            <p class="eyebrow">Capability groups</p>
+            <h2>Different mechanisms stay different.</h2>
+          </div>
+          <p>ARWP does not award points for adding more technologies. A small truthful profile is better than a large speculative one.</p>
+        </div>
+
+        <div class="surface-grid">
+          <article><span class="surface-code">WEB</span><h3>Web discovery</h3><p>Canonical HTML, sitemaps, robots policy, feeds and optional <code>llms.txt</code>.</p></article>
+          <article><span class="surface-code">DATA</span><h3>Data & APIs</h3><p>Machine-readable records, schemas, OpenAPI, releases and dataset metadata.</p></article>
+          <article><span class="surface-code">RET</span><h3>Retrieval</h3><p>Bounded search/RAG distributions with stable identity, citations and explicit no-match behavior.</p></article>
+          <article><span class="surface-code">SKILL</span><h3>Agent Skills</h3><p>Real portable <code>SKILL.md</code> procedures. Instructions are not treated as a tool transport.</p></article>
+          <article><span class="surface-code">WEBMCP</span><h3>Agent Web</h3><p>Browser pages that actually expose structured WebMCP tools at runtime.</p></article>
+          <article><span class="surface-code">MCP</span><h3>Model Context Protocol</h3><p>Real local or remote MCP servers. Static JSON does not become MCP by declaration.</p></article>
+          <article><span class="surface-code">A2A</span><h3>Agent-to-agent</h3><p>An Agent Card is declared only when a real agent service exists behind it.</p></article>
+          <article><span class="surface-code">TRUST</span><h3>Identity & trust</h3><p>Stable IDs, licensing, provenance, review state and citation surfaces.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell evidence" aria-labelledby="evidence-title">
+      <div class="section-number">02</div>
+      <div>
+        <p class="eyebrow">Evidence over badges</p>
+        <h2 id="evidence-title">ARWP reports what was assessed, not a vanity readiness score.</h2>
+      </div>
+      <div class="evidence-list">
+        <p><span class="signal detected">detected</span> The scanner has direct evidence for the surface.</p>
+        <p><span class="signal warning">warning</span> A resource exists but its contract or metadata needs attention.</p>
+        <p><span class="signal unassessed">not assessed</span> Static discovery cannot prove the runtime/protocol behavior.</p>
+      </div>
+    </section>
+
+    <section id="try" class="try-section">
+      <div class="shell try-layout">
+        <div>
+          <p class="eyebrow">Try with a site you already have</p>
+          <h2>Generate the exact local scan commands.</h2>
+          <p class="section-copy">The public browser UI does not proxy arbitrary websites. Enter a public HTTPS site and this page will prepare commands for the bounded scanner in the repository checkout.</p>
+        </div>
+
+        <div class="try-card">
+          <label for="site-url">Public HTTPS site</label>
+          <div class="input-row">
+            <input id="site-url" name="site-url" type="url" value="https://example.com" inputmode="url" autocomplete="url" spellcheck="false">
+            <button id="prepare" type="button">Prepare</button>
+          </div>
+          <p id="url-message" class="form-message" aria-live="polite"></p>
+
+          <div id="command-panel" class="command-panel">
+            <div class="command-label"><span>1 · Clone / update ARWP</span><button class="copy" data-copy="clone-command" type="button">Copy</button></div>
+            <pre id="clone-command"><code>git clone https://github.com/dkharlanau/agent-ready-web-profile.git
+cd agent-ready-web-profile
+npm ci</code></pre>
+
+            <div class="command-label"><span>2 · Inspect evidence</span><button class="copy" data-copy="scan-command" type="button">Copy</button></div>
+            <pre id="scan-command"><code>node bin/arwp.mjs scan https://example.com</code></pre>
+
+            <div class="command-label"><span>3 · Generate draft</span><button class="copy" data-copy="init-command" type="button">Copy</button></div>
+            <pre id="init-command"><code>node bin/arwp.mjs init https://example.com</code></pre>
+          </div>
+          <p class="package-note">npm distribution is prepared as toolchain 0.2.0 but is not advertised here as available until the first registry publication is complete.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell boundaries" aria-labelledby="boundaries-title">
+      <div class="section-heading split">
+        <div>
+          <p class="eyebrow">Boundaries</p>
+          <h2 id="boundaries-title">Small by design.</h2>
+        </div>
+        <p>ARWP is useful only if its claims remain inspectable.</p>
+      </div>
+      <div class="boundary-grid">
+        <p><strong>Not an SEO ranking mechanism.</strong> Search eligibility still depends on ordinary search and web fundamentals.</p>
+        <p><strong>Not a permission layer.</strong> Metadata never grants crawler access, authorization or execution rights.</p>
+        <p><strong>Not another MCP.</strong> The generic gateway is one ARWP consumer; the profile itself stays protocol-neutral.</p>
+        <p><strong>Not a speculative catalog.</strong> New fields should come from concrete interoperability failures, not new AI terminology.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile</div>
+    <div class="footer-links">
+      <a href="../SPEC.md">Specification</a>
+      <a href="./CONFORMANCE.md">Conformance</a>
+      <a href="./SCANNER.md">Scanner</a>
+      <a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a>
+    </div>
+    <p>Apache-2.0 · Experimental v0.1 profile contract</p>
+  </footer>
+
+  <script src="./arwp.js"></script>
+</body>
+</html>
