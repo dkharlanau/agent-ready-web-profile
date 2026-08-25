@@ -20,13 +20,18 @@ ARWP is pre-stable. Until the first tagged release, entries describe the current
 - Added a reusable GitHub Action for profile validation.
 - Added deterministic positive, negative and conditional contract tests.
 
-### MCP gateway
+### MCP gateways
 
+- Added a shared profile/retrieval/tool factory used by all gateway transports.
 - Added a generic read-only stdio MCP gateway driven by an ARWP profile.
+- Added a stateless Streamable HTTP MCP handler using the MCP v2 server SDK.
+- Added a standalone Node HTTP launcher for hosted/container deployments.
+- Added fail-closed remote Host validation, optional browser Origin allow-listing and a fixed MCP endpoint path.
 - Added deterministic JSON/JSONL/NDJSON retrieval support.
 - Added stable-record lookup and explicit no-match behavior.
-- Restricted network access to profile-declared HTTPS resources and explicit allowed origins.
+- Restricted source-data network access to profile-declared HTTPS resources and explicit allowed origins.
 - Added redirect re-validation, response-size limits and in-memory caching.
+- Added tests for missing Host configuration, wrong path, rejected Host and rejected Origin.
 
 ### Reference implementations
 
@@ -51,8 +56,8 @@ The reference suite includes deliberately different capability combinations so s
 The next milestone should prioritize interoperability evidence over additional metadata fields:
 
 - upstream/protocol-specific validation adapters;
-- a stateless Streamable HTTP gateway deployment shape;
 - profile-generation/adoption tooling;
+- a Node-free Worker build of the Streamable HTTP gateway;
 - compatibility and release policy;
 - WebMCP reference implementations and browser-agent evals;
 - independent adopters before proposing any new registered discovery location.
