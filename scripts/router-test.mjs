@@ -41,10 +41,17 @@ try {
     }
   };
   const index = [{ id: 'alpha', title: 'Planning fallacy', summary: 'Forecasts often ignore the outside view.', url: 'https://one.example/alpha/' }];
+
+  function responseFor(url, body, init = {}) {
+    const response = new Response(body, init);
+    Object.defineProperty(response, 'url', { value: String(url), configurable: true });
+    return response;
+  }
+
   const fetchImpl = async url => {
-    if (String(url).endsWith('/ai/site-profile.json')) return new Response(JSON.stringify(profile), { status: 200, headers: { 'content-type': 'application/json' } });
-    if (String(url).endsWith('/data/search.json')) return new Response(JSON.stringify(index), { status: 200, headers: { 'content-type': 'application/json' } });
-    return new Response('not found', { status: 404 });
+    if (String(url).endsWith('/ai/site-profile.json')) return responseFor(url, JSON.stringify(profile), { status: 200, headers: { 'content-type': 'application/json' } });
+    if (String(url).endsWith('/data/search.json')) return responseFor(url, JSON.stringify(index), { status: 200, headers: { 'content-type': 'application/json' } });
+    return responseFor(url, 'not found', { status: 404 });
   };
 
   const result = await searchFederated('outside view', { directorySource: directoryPath, fetchImpl });
