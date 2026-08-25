@@ -1,0 +1,21 @@
+services:
+  scanner:
+    build:
+      context: ..
+      dockerfile: scanner-service/Dockerfile
+    environment:
+      ARWP_SCANNER_ALLOWED_ORIGINS: https://dkharlanau.github.io
+      ARWP_SCANNER_RATE_LIMIT: "10"
+    ports:
+      - "8787:8787"
+
+  mcp:
+    build:
+      context: ..
+      dockerfile: gateway/Dockerfile
+    environment:
+      ARWP_PROFILE: https://cognitive-biases.github.io/ai/site-profile.json
+      ARWP_HTTP_ALLOWED_HOSTS: localhost
+      ARWP_HTTP_PATH: /mcp
+    ports:
+      - "3000:3000"
