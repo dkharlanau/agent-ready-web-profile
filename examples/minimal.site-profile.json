@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
+  "profileVersion": "0.1",
+  "id": "example-site",
+  "name": "Example Site",
+  "canonicalUrl": "https://example.com/",
+  "description": "An example website publishing a basic Agent-Ready Web Profile.",
+  "web": {
+    "sitemap": "https://example.com/sitemap.xml",
+    "robots": "https://example.com/robots.txt"
+  }
+}
