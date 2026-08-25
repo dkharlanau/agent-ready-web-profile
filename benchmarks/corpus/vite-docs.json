@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "vite-docs",
+  "url": "https://vite.dev/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://vite.dev/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://vite.dev/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Vite publishes a public root llms.txt describing the project and linking to Markdown documentation pages."
+    }
+  ],
+  "note": "Independent open-source documentation fixture reviewed from the public publisher-maintained llms.txt surface."
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "stripe-docs",
+  "url": "https://docs.stripe.com/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://docs.stripe.com/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://docs.stripe.com/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Stripe publishes a public llms.txt documentation index on the docs.stripe.com origin."
+    }
+  ],
+  "note": "Independent vendor documentation fixture reviewed from the public publisher-maintained llms.txt surface."
+}

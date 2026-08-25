@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "perplexity-docs",
+  "url": "https://docs.perplexity.ai/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://docs.perplexity.ai/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://docs.perplexity.ai/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Perplexity publishes a public root llms.txt for its developer documentation."
+    }
+  ],
+  "note": "Independent vendor documentation fixture reviewed from the public publisher-maintained llms.txt surface."
+}

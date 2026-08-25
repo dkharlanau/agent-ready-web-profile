@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "bun-docs",
+  "url": "https://bun.com/docs/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://bun.com/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://bun.com/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Bun publishes a public root llms.txt linking to its Markdown documentation pages on bun.com."
+    }
+  ],
+  "note": "Independent open-source documentation fixture reviewed from the public publisher-maintained llms.txt surface."
+}

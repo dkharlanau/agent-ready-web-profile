@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "anthropic-platform-docs",
+  "url": "https://platform.claude.com/docs/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://platform.claude.com/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://platform.claude.com/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Anthropic publishes a public root llms.txt for the Claude developer documentation; it identifies the documentation root and links to Markdown documentation pages."
+    }
+  ],
+  "note": "Independent vendor documentation fixture reviewed from the public publisher-maintained llms.txt surface."
+}

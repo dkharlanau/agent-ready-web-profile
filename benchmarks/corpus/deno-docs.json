@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "deno-docs",
+  "url": "https://docs.deno.com/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://docs.deno.com/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://docs.deno.com/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Deno publishes a public root llms.txt for its documentation origin."
+    }
+  ],
+  "note": "Independent open-source documentation fixture reviewed from the public publisher-maintained llms.txt surface."
+}
