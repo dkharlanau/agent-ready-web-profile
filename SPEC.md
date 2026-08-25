@@ -16,12 +16,13 @@ An ARWP document answers questions such as:
 - Where are its sitemap, crawler policy and `llms.txt` resources?
 - Which structured datasets, schemas, releases or APIs are public?
 - Are retrieval-ready distributions available?
+- Which portable Agent Skills does the publisher expose?
 - Does the site expose WebMCP tools in the browser?
 - Is there a real local or remote MCP server?
 - Is there a real A2A agent and Agent Card?
 - Where can a consumer find license, citation, provenance and review information?
 
-ARWP does not define the semantics of the site's domain records and does not replace the protocols it points to.
+ARWP does not define the semantics of the site's domain records and does not replace the protocols or formats it points to.
 
 ## 2. Non-goals
 
@@ -31,6 +32,7 @@ ARWP v0.1 is not:
 - a crawler permission system;
 - a replacement for `robots.txt`;
 - a replacement for `llms.txt`;
+- an Agent Skills format;
 - an API description language;
 - a tool-execution protocol;
 - an MCP transport;
@@ -131,7 +133,25 @@ Retrieval distributions SHOULD preserve enough metadata to recover canonical rec
 
 Safety-sensitive knowledge systems SHOULD document explicit unsupported-query or `no_match` behavior rather than encouraging a client to fabricate an answer.
 
-### 6.4 `agentWeb`
+### 6.4 `agentSkills`
+
+The `agentSkills` object describes portable Agent Skills associated with the site.
+
+It MAY contain:
+
+- `catalog` — a publisher-maintained skill catalog or discovery page;
+- `specification` — the Agent Skills specification used by the publisher;
+- `skills` — explicitly declared skills.
+
+Each declared skill MUST have a valid lowercase hyphenated `name` and a public `url`. The URL SHOULD point directly to the skill's `SKILL.md` file. A publisher MAY also declare the skill version, a concise description and a source directory/repository URL.
+
+ARWP does not copy the skill body into `site-profile.json`. `SKILL.md` remains authoritative for the skill's instructions and metadata.
+
+Agent Skills and MCP solve different problems. A skill is portable procedural knowledge for an agent; MCP exposes tools/data through a runtime protocol. A skill MAY teach an agent how to use an MCP server, API or website, but declaring a skill does not create those capabilities.
+
+Publishers MUST NOT advertise placeholder skills that are not retrievable or usable.
+
+### 6.5 `agentWeb`
 
 The `agentWeb` object describes browser-agent capabilities exposed by the website itself.
 
@@ -143,7 +163,7 @@ WebMCP is currently experimental in Chrome and MUST be treated as an evolving br
 
 WebMCP is distinct from remote MCP. A WebMCP-enabled page is not, by that fact alone, an MCP server.
 
-### 6.5 `mcp`
+### 6.6 `mcp`
 
 The `mcp` object describes real Model Context Protocol servers associated with the site.
 
@@ -152,9 +172,17 @@ Each server declaration SHOULD identify:
 - stable server name;
 - transport or installation type;
 - remote URL when remote;
-- package/installation metadata when local;
+- package metadata or public source when local/stdin-stdout based;
 - official MCP Registry URL when published;
+- documentation when available;
 - whether the exposed knowledge operations are intended to be read-only.
+
+A `streamable-http` server MUST declare a real remote `url`.
+
+A `stdio` server MUST declare at least one of:
+
+- `package` — installable package/command metadata; or
+- `source` — a public source location from which the server can be inspected or installed.
 
 A publisher MUST NOT declare a static JSON API as a remote MCP server unless an actual MCP runtime exists at the declared MCP endpoint.
 
@@ -162,7 +190,7 @@ Remote servers SHOULD use the transport forms supported by the current MCP speci
 
 Registry metadata SHOULD remain authoritative for Registry-specific installation details; ARWP SHOULD link to it rather than duplicate the full `server.json` contract.
 
-### 6.6 `a2a`
+### 6.7 `a2a`
 
 The `a2a` object describes a real agent service using the A2A protocol.
 
@@ -174,7 +202,7 @@ https://agent.example.com/.well-known/agent-card.json
 
 A static knowledge site without a real A2A agent MUST NOT publish an Agent Card merely to satisfy an ARWP capability checklist.
 
-### 6.7 `identity`
+### 6.8 `identity`
 
 The optional `identity` object documents how canonical record identities are formed.
 
@@ -186,7 +214,7 @@ It MAY provide:
 
 Canonical identity SHOULD be independent from presentation labels and SHOULD survive URL or title changes when possible.
 
-### 6.8 `trust`
+### 6.9 `trust`
 
 The `trust` object MAY identify:
 
@@ -224,17 +252,16 @@ An ARWP profile is a declaration, not proof.
 
 Publishers MUST NOT claim capabilities that are planned but unavailable.
 
-Consumers SHOULD verify declared URLs before relying on them and MAY check:
+Consumers SHOULD verify declared resources before relying on them. The reference CLI provides two levels:
 
-- successful HTTPS retrieval;
-- expected media type;
-- schema validity;
-- stable canonical identity;
-- release/version consistency;
-- availability of declared MCP or WebMCP capabilities;
-- trust metadata required by the consumer's use case.
+```bash
+node bin/arwp.mjs validate ai/site-profile.json
+node bin/arwp.mjs verify https://example.com/ai/site-profile.json
+```
 
-Future ARWP conformance tooling may automate these checks.
+`validate` performs deterministic schema/semantic checks. `verify` additionally probes declared public URLs, HTTPS redirects and expected media types.
+
+Verification of URL reachability is still not proof that a WebMCP tool, MCP protocol handshake, Agent Skill behavior or A2A agent is semantically correct. Protocol-specific conformance remains the responsibility of the corresponding upstream implementation/tooling.
 
 ## 9. Search engines and AI search
 
@@ -261,17 +288,19 @@ Where Markdown alternates are published, sites SHOULD follow current `llms.txt` 
 
 ARWP metadata MUST NOT bypass authorization.
 
-A client MUST treat a declared tool, API, WebMCP surface, MCP server or agent as untrusted until its own security policy permits interaction.
+A client MUST treat a declared skill, tool, API, WebMCP surface, MCP server or agent as untrusted until its own security policy permits interaction.
 
 Publishers SHOULD:
 
 - expose public knowledge integrations read-only by default;
 - separate discovery metadata from credentials;
 - require explicit authorization for sensitive actions;
-- avoid embedding user-controlled instructions into tool descriptions;
+- avoid embedding user-controlled instructions into tool descriptions or trusted skill metadata;
 - validate tool inputs at execution time;
 - follow current WebMCP and MCP security guidance;
 - document meaningful safety boundaries for sensitive knowledge domains.
+
+The reference MCP gateway accepts only profile-declared resources, uses HTTPS and origin allow-listing, re-checks redirects and applies response-size limits. These controls reduce accidental SSRF-like behavior but do not make remote content trusted.
 
 ## 12. Versioning
 
@@ -281,7 +310,7 @@ v0.x versions are experimental and may change incompatibly.
 
 A future stable ARWP version should define compatibility rules before claiming long-term interoperability guarantees.
 
-Publishers SHOULD version their domain datasets independently from ARWP.
+Publishers SHOULD version their domain datasets, APIs, Agent Skills and MCP servers independently when their consumers require reproducibility.
 
 ## 13. Conformance
 
@@ -290,17 +319,18 @@ A profile conforms to ARWP v0.1 when:
 1. it is valid JSON;
 2. it validates against the v0.1 JSON Schema;
 3. all declared capabilities are truthful at publication time;
-4. the publisher does not reinterpret ARWP as granting permissions or implementing the protocols it only references.
+4. the publisher does not reinterpret ARWP as granting permissions or implementing the protocols/formats it only references.
 
 A conforming profile is not required to implement every optional capability group.
 
 ## 14. Upstream references
 
-ARWP intentionally delegates protocol details to their upstream specifications and documentation:
+ARWP intentionally delegates protocol/format details to their upstream specifications and documentation:
 
 - Google Search Central — AI features and technical Search guidance: https://developers.google.com/search/docs/appearance/ai-features
 - Google Search Central — Generative AI optimization guide: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
 - llms.txt proposal: https://llmstxt.org/
+- Agent Skills specification: https://agentskills.io/specification
 - WebMCP documentation: https://developer.chrome.com/docs/ai/webmcp
 - Model Context Protocol: https://modelcontextprotocol.io/
 - MCP Registry: https://modelcontextprotocol.io/registry/about
