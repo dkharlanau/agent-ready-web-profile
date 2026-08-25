@@ -1,0 +1,77 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
+  "profileVersion": "0.1",
+  "id": "cbt-cards-public-reflection",
+  "name": "CBT Cards Public Reflection Resource",
+  "canonicalUrl": "https://cbt-cards.github.io/",
+  "description": "Static, inspectable public reflection library with reviewed practice routing, explicit safety boundaries, retrieval-ready data, schemas and a portable Agent Skill.",
+  "languages": ["en", "ru", "de"],
+  "web": {
+    "sitemap": "https://cbt-cards.github.io/sitemap.xml",
+    "robots": "https://cbt-cards.github.io/robots.txt",
+    "llms": "https://cbt-cards.github.io/llms.txt",
+    "feeds": [
+      {
+        "url": "https://cbt-cards.github.io/feed.xml",
+        "mediaType": "application/rss+xml",
+        "title": "CBT Cards updates"
+      },
+      {
+        "url": "https://cbt-cards.github.io/feed.json",
+        "mediaType": "application/feed+json",
+        "title": "CBT Cards JSON Feed"
+      }
+    ]
+  },
+  "data": {
+    "catalog": "https://cbt-cards.github.io/data/catalog.json",
+    "schemas": "https://cbt-cards.github.io/schemas/index.json",
+    "distributions": [
+      {
+        "name": "Public knowledge records",
+        "url": "https://cbt-cards.github.io/data/knowledge.jsonl",
+        "mediaType": "application/x-ndjson",
+        "role": "canonical-data",
+        "description": "Record-level public knowledge distribution with rights metadata."
+      },
+      {
+        "name": "Practice RAG manifest",
+        "url": "https://cbt-cards.github.io/data/practice-rag-manifest.json",
+        "mediaType": "application/json",
+        "role": "release",
+        "description": "Manifest and provenance for the reviewed practice retrieval distribution."
+      }
+    ]
+  },
+  "retrieval": {
+    "indexes": [
+      {
+        "name": "Reviewed practice RAG",
+        "url": "https://cbt-cards.github.io/data/practice-rag.ndjson",
+        "mediaType": "application/x-ndjson",
+        "format": "ndjson",
+        "description": "Stable retrieval chunks that keep practice safety context and provenance in-chunk."
+      }
+    ],
+    "abstention": "https://cbt-cards.github.io/agents/cbt-cards/PRACTICE_SYSTEM.md"
+  },
+  "agentSkills": {
+    "specification": "https://agentskills.io/specification",
+    "skills": [
+      {
+        "name": "cbt-cards",
+        "url": "https://cbt-cards.github.io/agents/cbt-cards/SKILL.md",
+        "version": "1.8.0",
+        "description": "Use CBT Cards reviewed public reflection practices and resources while preserving review, provenance and safety boundaries.",
+        "source": "https://github.com/CBT-cards/cbt-cards.github.io/tree/main/agents/cbt-cards"
+      }
+    ]
+  },
+  "trust": {
+    "license": "https://cbt-cards.github.io/LICENSE",
+    "citation": "https://cbt-cards.github.io/CITATION.cff",
+    "provenance": "https://cbt-cards.github.io/data/practice-rag-manifest.json",
+    "reviewPolicy": "https://cbt-cards.github.io/about/editorial-review/",
+    "security": "https://cbt-cards.github.io/.well-known/security.txt"
+  }
+}
