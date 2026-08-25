@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Make your website understandable to AI agents. ARWP gives a website one machine-readable map of its pages, data, retrieval indexes, Agent Skills, MCP servers and trust information.">
+  <meta name="description" content="ARWP Resolver discovers how a website can actually be used by agents across ARWP, APIs, agents.json, A2A, Agent Skills, MCP and other evidence-backed interfaces.">
   <meta name="theme-color" content="#10120f">
-  <meta property="og:title" content="ARWP — Make your website understandable to AI agents">
-  <meta property="og:description" content="A machine-readable service map for websites: web, data, retrieval, skills, MCP and trust in one verifiable profile.">
+  <meta property="og:title" content="ARWP Resolver — resolve how a website can be used by agents">
+  <meta property="og:description" content="One evidence-backed service map across the machine and agent interfaces a website actually exposes.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dkharlanau.github.io/agent-ready-web-profile/">
-  <title>ARWP — Make your website understandable to AI agents</title>
+  <title>ARWP Resolver — resolve how a website can be used by agents</title>
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/">
+  <link rel="describedby" type="application/json" href="./ai/site-profile.json">
   <link rel="stylesheet" href="./arwp.css">
 </head>
 <body data-scanner-endpoint="">
@@ -18,11 +19,11 @@
   <header class="topbar">
     <a class="brand" href="#top" aria-label="ARWP home"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
     <nav aria-label="Primary navigation">
-      <a href="#why">Why</a>
+      <a href="#resolver">Resolver</a>
       <a href="#examples">Examples</a>
-      <a href="#adopt">Adopt</a>
+      <a href="#adopt">Try it</a>
       <a href="#directory">Directory</a>
-      <a href="#connect">Connect</a>
+      <a href="#evidence">Evidence</a>
       <a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a>
     </nav>
   </header>
@@ -30,58 +31,60 @@
   <main id="main">
     <section id="top" class="hero shell">
       <div class="hero-copy">
-        <p class="eyebrow">Agent-Ready Web Profile · experimental v0.1 contract</p>
-        <h1>Make your website understandable to AI agents.</h1>
-        <p class="hero-lead">Your website has navigation for people. ARWP gives software a small, verifiable service map: where the useful pages, datasets, APIs, retrieval indexes, Agent Skills, MCP servers and trust information actually live.</p>
+        <p class="eyebrow">ARWP Resolver · experimental interoperability tooling</p>
+        <h1>Resolve how a website can actually be used by agents.</h1>
+        <p class="hero-lead">A site may expose HTML, <code>llms.txt</code>, datasets, APIs, <code>agents.json</code>, Agent Skills, MCP, A2A and trust metadata at the same time. ARWP reads those surfaces, preserves where every claim came from, reports conflicts, and selects the best interface for the task.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#adopt">Make a site agent-ready</a>
-          <a class="button secondary" href="#examples">See real websites</a>
+          <a class="button primary" href="#adopt">Resolve a website</a>
+          <a class="button secondary" href="./RESOLVER.md">Resolver model</a>
         </div>
         <div class="hero-proof" aria-label="Key properties">
-          <span>No new backend required for the profile</span>
-          <span>Does not replace SEO or MCP</span>
-          <span>Declares only real capabilities</span>
+          <span>No format war required</span>
+          <span>Upstream standards stay upstream</span>
+          <span>Evidence and conflicts stay visible</span>
         </div>
       </div>
-      <div class="service-map" aria-label="ARWP service map example">
-        <div class="service-map__label">ONE ENTRY POINT</div>
-        <code>https://example.com/ai/site-profile.json</code>
-        <div class="service-map__arrow">↓</div>
+      <div class="service-map" aria-label="ARWP Resolver flow">
+        <div class="service-map__label">ONE SITE · MANY SURFACES</div>
         <div class="service-map__grid">
-          <span>HTML</span><span>DATA</span><span>RAG</span><span>SKILLS</span><span>MCP</span><span>TRUST</span>
+          <span>ARWP</span><span>agents.*</span><span>API</span><span>SKILLS</span><span>MCP</span><span>A2A</span>
         </div>
-        <p>An agent can stop guessing which interface it should use.</p>
+        <div class="service-map__arrow">↓</div>
+        <strong>ARWP RESOLVER</strong>
+        <div class="service-map__arrow">↓</div>
+        <code>evidence-backed service map</code>
+        <p>Then plan for <strong>read · search · structured · tools · agent</strong>.</p>
       </div>
     </section>
 
-    <section id="why" class="shell problem-section">
+    <section id="resolver" class="shell problem-section">
       <div class="section-heading wide">
         <p class="eyebrow">The practical problem</p>
-        <h2>A website can be rich in machine-readable resources and still look like “just HTML” to an external agent.</h2>
+        <h2>The web does not need another manifest that pretends every other discovery mechanism will disappear.</h2>
       </div>
       <div class="before-after">
         <article class="flow-card muted-card">
-          <p class="flow-label">Without ARWP</p>
+          <p class="flow-label">Without a resolver</p>
           <ol>
-            <li>Search for the website</li>
-            <li>Scrape HTML</li>
-            <li>Guess undocumented URLs</li>
-            <li>Maybe discover an API or dataset</li>
-            <li>Maybe lose provenance and review state</li>
+            <li>Search or scrape the site</li>
+            <li>Guess which discovery file matters</li>
+            <li>Read several incompatible metadata shapes</li>
+            <li>Silently choose when declarations disagree</li>
+            <li>Lose why an interface was trusted</li>
           </ol>
-          <strong>Integration depends on guessing.</strong>
+          <strong>Integration depends on site-specific logic.</strong>
         </article>
         <div class="versus" aria-hidden="true">→</div>
         <article class="flow-card accent-card">
-          <p class="flow-label">With ARWP</p>
+          <p class="flow-label">With ARWP Resolver</p>
           <ol>
-            <li>Open one profile</li>
-            <li>See the interfaces the site declares</li>
-            <li>Choose the best available source</li>
-            <li>Verify that source is live</li>
-            <li>Keep canonical identity and provenance</li>
+            <li>Observe bounded public discovery</li>
+            <li>Normalize existing standards and conventions</li>
+            <li>Keep source authority with every interface</li>
+            <li>Surface conflicts instead of hiding them</li>
+            <li>Plan the best interface for the intent</li>
           </ol>
-          <strong>Integration starts from evidence.</strong>
+          <strong>Integration starts from inspectable evidence.</strong>
         </article>
       </div>
       <p class="big-statement">ARWP does not make an AI smarter. <strong>It removes guessing about how a website can be used.</strong></p>
@@ -90,76 +93,99 @@
     <section class="outcomes-section">
       <div class="shell">
         <div class="section-heading split">
-          <div><p class="eyebrow">What changes</p><h2>One small file creates a stable machine entry point.</h2></div>
-          <p>ARWP describes existing surfaces. It does not duplicate the site's domain knowledge.</p>
+          <div><p class="eyebrow">Resolve, do not replace</p><h2>Existing standards keep their own semantics.</h2></div>
+          <p>The resolver treats the ARWP profile as one useful publisher source — not as a mandatory universal manifest.</p>
         </div>
         <div class="outcome-grid">
-          <article><span>01</span><h3>For site owners</h3><p>Stop documenting every machine interface differently for every AI client. Publish one discoverable map and validate it in CI.</p></article>
-          <article><span>02</span><h3>For AI agents</h3><p>Prefer datasets, retrieval indexes or tools when the site exposes them instead of defaulting to fragile HTML scraping.</p></article>
-          <article><span>03</span><h3>For developers</h3><p>Find OpenAPI, schemas, releases, MCP implementations and Agent Skills without reverse-engineering a repository.</p></article>
-          <article><span>04</span><h3>For trusted knowledge</h3><p>Keep licensing, citation, provenance, review policy and security surfaces attached to the integration map.</p></article>
+          <article><span>RFC</span><h3>API & authorization</h3><p>RFC 9727 API Catalog and RFC 9728 Protected Resource Metadata are resolved as IETF-standard evidence rather than copied into new ARWP semantics.</p></article>
+          <article><span>A2A</span><h3>Agent discovery</h3><p>A2A Agent Cards remain the protocol-native description of a callable agent and its supported interfaces.</p></article>
+          <article><span>SKILL</span><h3>Portable procedures</h3><p>Agent Skills discovery points to the real Skill artifacts; ARWP does not turn instructions into a transport.</p></article>
+          <article><span>MCP</span><h3>Tools</h3><p>MCP metadata is preserved separately from live runtime conformance. Experimental Server Cards remain labeled experimental.</p></article>
         </div>
       </div>
     </section>
 
-    <section id="examples" class="shell examples-section">
+    <section class="shell surfaces-section" aria-labelledby="normalized-title">
       <div class="section-heading split">
-        <div><p class="eyebrow">Working references</p><h2>Five real websites already publish ARWP profiles.</h2></div>
-        <p>They intentionally expose different capability combinations. ARWP is not a badge checklist.</p>
+        <div><p class="eyebrow">Normalized output</p><h2 id="normalized-title">One service map, with the evidence still attached.</h2></div>
+        <p>The normalized map is resolver output. It is not a new normative replacement schema.</p>
       </div>
-      <div id="reference-cards" class="reference-grid" aria-live="polite"><p class="loading">Loading the public directory…</p></div>
-      <div class="profile-demo">
-        <div>
-          <p class="eyebrow">Give an agent one URL</p>
-          <h3 id="profile-demo-name">Choose a reference site</h3>
-          <p id="profile-demo-summary">The profile URL is a stable discovery entry point for the site's declared machine interfaces.</p>
-        </div>
-        <div class="profile-url-box">
-          <code id="profile-demo-url">/ai/site-profile.json</code>
-          <button class="copy compact" data-copy="profile-demo-url" type="button">Copy</button>
-        </div>
+      <div class="surface-grid">
+        <article><span class="surface-code">CONTENT</span><h3>Readable surfaces</h3><p>HTML discovery, sitemaps, feeds and <code>llms.txt</code>.</p></article>
+        <article><span class="surface-code">DATA</span><h3>Data</h3><p>Catalogs, schemas, releases and publisher distributions.</p></article>
+        <article><span class="surface-code">SEARCH</span><h3>Retrieval</h3><p>Publisher-maintained search and RAG indexes when available.</p></article>
+        <article><span class="surface-code">API</span><h3>Structured APIs</h3><p>OpenAPI and API Catalog evidence.</p></article>
+        <article><span class="surface-code">TOOL</span><h3>Tools</h3><p>MCP and browser-tool interfaces without conflating their runtimes.</p></article>
+        <article><span class="surface-code">SKILL</span><h3>Skills</h3><p>Portable procedures and discovery indexes.</p></article>
+        <article><span class="surface-code">AGENT</span><h3>Agents</h3><p>A2A discovery and callable interface metadata.</p></article>
+        <article><span class="surface-code">TRUST</span><h3>Trust & auth</h3><p>Provenance, review, licensing, security and protected-resource metadata.</p></article>
       </div>
     </section>
 
     <section id="adopt" class="adopt-section">
       <div class="shell adopt-layout">
         <div>
-          <p class="eyebrow">Adopt ARWP</p>
-          <h2>Start from a website you already have.</h2>
-          <p class="section-copy">The scanner looks only for bounded, observable public evidence. It will not invent MCP, WebMCP, Agent Skills or A2A because a page mentions them.</p>
+          <p class="eyebrow">Try the resolver</p>
+          <h2>Start from a website, not from a schema.</h2>
+          <p class="section-copy">The bounded resolver can discover useful surfaces even when the site has no ARWP profile. A publisher profile remains valuable when the site wants to explicitly declare retrieval, trust or integration surfaces that ordinary discovery cannot prove.</p>
           <div class="adopt-points">
-            <p><strong>1 · Scan</strong> — see what can be observed.</p>
-            <p><strong>2 · Generate</strong> — create a conservative draft.</p>
-            <p><strong>3 · Validate</strong> — keep the profile correct in CI.</p>
-            <p><strong>4 · Connect</strong> — expose declared data through an agent integration when useful.</p>
+            <p><strong>Resolve</strong> — normalize available discovery.</p>
+            <p><strong>Explain</strong> — see evidence and conflicts in plain language.</p>
+            <p><strong>Plan</strong> — select an interface for a concrete intent.</p>
+            <p><strong>Profile</strong> — optionally publish a stable publisher-maintained ARWP map.</p>
           </div>
         </div>
         <div class="scanner-card">
-          <div class="scanner-head"><span>Website scanner</span><span id="scanner-mode" class="status-pill">CLI ready</span></div>
+          <div class="scanner-head"><span>Website resolver</span><span id="scanner-mode" class="status-pill">CLI ready</span></div>
           <label for="site-url">Public HTTPS website</label>
-          <div class="input-row"><input id="site-url" name="site-url" type="url" value="https://example.com" inputmode="url" autocomplete="url" spellcheck="false"><button id="prepare" type="button">Scan setup</button></div>
+          <div class="input-row"><input id="site-url" name="site-url" type="url" value="https://example.com" inputmode="url" autocomplete="url" spellcheck="false"><button id="prepare" type="button">Prepare</button></div>
           <p id="url-message" class="form-message" aria-live="polite"></p>
           <div id="scan-results" class="scan-results" hidden></div>
           <div id="command-panel" class="command-panel">
-            <div class="command-label"><span>Install from the repository</span><button class="copy" data-copy="clone-command" type="button">Copy</button></div>
-            <pre id="clone-command"><code>git clone https://github.com/dkharlanau/agent-ready-web-profile.git
-cd agent-ready-web-profile
-npm ci</code></pre>
-            <div class="command-label"><span>Observe the site</span><button class="copy" data-copy="scan-command" type="button">Copy</button></div>
+            <div class="command-label"><span>Resolve all discovery</span><button class="copy" data-copy="resolve-command" type="button">Copy</button></div>
+            <pre id="resolve-command"><code>node bin/arwp.mjs resolve https://example.com</code></pre>
+            <div class="command-label"><span>Explain what was found</span><button class="copy" data-copy="explain-command" type="button">Copy</button></div>
+            <pre id="explain-command"><code>node bin/arwp.mjs explain https://example.com</code></pre>
+            <div class="command-label"><span>Plan for search</span><button class="copy" data-copy="plan-command" type="button">Copy</button></div>
+            <pre id="plan-command"><code>node bin/arwp.mjs plan https://example.com --intent=search</code></pre>
+            <div class="command-label"><span>Observe / bootstrap ARWP profile</span><button class="copy" data-copy="scan-command" type="button">Copy</button></div>
             <pre id="scan-command"><code>node bin/arwp.mjs scan https://example.com</code></pre>
-            <div class="command-label"><span>Generate a validated draft</span><button class="copy" data-copy="init-command" type="button">Copy</button></div>
             <pre id="init-command"><code>node bin/arwp.mjs init https://example.com</code></pre>
           </div>
           <button id="download-profile" class="button primary full" type="button" hidden>Download site-profile.json</button>
-          <p class="scanner-note">This GitHub Pages deployment cannot safely scan arbitrary websites by itself. The repository includes a bounded scanner service runtime; when a hosted endpoint is configured, this same UI switches to live scanning.</p>
+          <p class="scanner-note">GitHub Pages cannot safely resolve arbitrary external sites server-side. The repository includes one bounded hosted service with fixed <code>/scan</code>, <code>/resolve</code>, <code>/explain</code> and <code>/plan</code> routes. Until that HTTPS runtime is deployed, this UI prepares local commands.</p>
         </div>
+      </div>
+    </section>
+
+    <section id="evidence" class="shell evidence">
+      <div class="section-number">E</div>
+      <div><p class="eyebrow">Evidence model</p><h2>Not every discovery source has the same status.</h2></div>
+      <div class="evidence-list">
+        <p><span class="signal detected">ietf-standard</span> RFC 9727 / RFC 9728.</p>
+        <p><span class="signal detected">upstream</span> Protocol-native discovery such as A2A.</p>
+        <p><span class="signal warning">community</span> Useful conventions such as agents.txt / agents.json.</p>
+        <p><span class="signal unassessed">experimental</span> Current MCP Server Card / AI Catalog work.</p>
+        <p><span class="signal detected">publisher</span> Valid ARWP profile.</p>
+      </div>
+    </section>
+
+    <section id="examples" class="shell examples-section">
+      <div class="section-heading split">
+        <div><p class="eyebrow">Working references</p><h2>Five real websites already publish ARWP profiles.</h2></div>
+        <p>They remain useful implementation fixtures, but owner-controlled examples are not counted as independent adoption evidence.</p>
+      </div>
+      <div id="reference-cards" class="reference-grid" aria-live="polite"><p class="loading">Loading the public directory…</p></div>
+      <div class="profile-demo">
+        <div><p class="eyebrow">Publisher profile example</p><h3 id="profile-demo-name">Choose a reference site</h3><p id="profile-demo-summary">The profile is one explicit source the resolver can consume.</p></div>
+        <div class="profile-url-box"><code id="profile-demo-url">/ai/site-profile.json</code><button class="copy compact" data-copy="profile-demo-url" type="button">Copy</button></div>
       </div>
     </section>
 
     <section id="directory" class="shell directory-section">
       <div class="section-heading split">
-        <div><p class="eyebrow">ARWP Directory</p><h2>Discover machine-readable sites by capability.</h2></div>
-        <p>The directory records public ARWP declarations. Inclusion is not a ranking, endorsement or claim that more capabilities are better.</p>
+        <div><p class="eyebrow">ARWP Directory</p><h2>Reference/adoption registry today; resolver corpus next.</h2></div>
+        <p>The current directory records sites that publish ARWP. The next research corpus may include sites with no ARWP profile when upstream discovery is sufficient.</p>
       </div>
       <div class="directory-tools" role="group" aria-label="Filter ARWP sites">
         <button class="filter active" data-filter="all" type="button">All</button>
@@ -173,83 +199,48 @@ npm ci</code></pre>
       <p class="directory-machine"><a href="./directory.json">Machine-readable directory JSON →</a></p>
     </section>
 
-    <section id="connect" class="connect-section">
+    <section class="connect-section">
       <div class="shell">
         <div class="section-heading split">
-          <div><p class="eyebrow">Use ARWP</p><h2>Turn a static knowledge site into an agent-readable source.</h2></div>
-          <p>The generic gateway is a consumer of ARWP, not the definition of ARWP. Domain-specific MCP servers remain preferable when semantics or safety need custom logic.</p>
+          <div><p class="eyebrow">Agent-consumable resolver</p><h2>Expose resolution itself as MCP.</h2></div>
+          <p>The resolver MCP server lets an agent inspect another site's discovery surfaces without encoding every standard into the client.</p>
         </div>
         <div class="connect-grid">
-          <article class="connect-card">
-            <span class="surface-code">STDIO</span><h3>Local MCP</h3><p>Point the generic read-only gateway at any valid profile.</p>
-            <pre id="stdio-command"><code>ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start</code></pre>
-            <button class="copy" data-copy="stdio-command" type="button">Copy command</button>
-          </article>
-          <article class="connect-card">
-            <span class="surface-code">HTTP</span><h3>Remote MCP</h3><p>Run the same bounded tools through stateless Streamable HTTP.</p>
-            <pre id="http-command"><code>ARWP_PROFILE=https://example.com/ai/site-profile.json \
-ARWP_HTTP_ALLOWED_HOSTS=mcp.example.com \
-npm run mcp:http</code></pre>
-            <button class="copy" data-copy="http-command" type="button">Copy command</button>
-          </article>
-          <article class="connect-card">
-            <span class="surface-code">FED</span><h3>Federated router</h3><p>Use the directory to select multiple ARWP sites, then search their declared retrieval surfaces without merging their canonical knowledge.</p>
-            <a class="text-link" href="https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router">View router implementation →</a>
-          </article>
+          <article class="connect-card"><span class="surface-code">RESOLVE</span><h3>Resolve site</h3><p>Normalize discovery and preserve source authority.</p><pre id="resolver-mcp-command"><code>npm run resolver:mcp</code></pre><button class="copy" data-copy="resolver-mcp-command" type="button">Copy command</button></article>
+          <article class="connect-card"><span class="surface-code">PLAN</span><h3>Plan interface</h3><p>Select for read, search, structured access, tools or agent interaction — with fallbacks.</p><a class="text-link" href="./RESOLVER.md">Read resolver contract →</a></article>
+          <article class="connect-card"><span class="surface-code">FED</span><h3>Federated router</h3><p>Current federation searches ARWP-declared retrieval. Next it will operate on resolved heterogeneous sites.</p><a class="text-link" href="https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router">View router →</a></article>
         </div>
       </div>
     </section>
 
-    <section id="surfaces" class="shell surfaces-section">
-      <div class="section-heading split">
-        <div><p class="eyebrow">Technical layer</p><h2>Existing mechanisms stay separate.</h2></div>
-        <p>After the value is clear, the profile tells software which concrete standards and conventions the site actually supports.</p>
-      </div>
-      <div class="surface-grid">
-        <article><span class="surface-code">WEB</span><h3>Web discovery</h3><p>Canonical HTML, sitemaps, robots policy, feeds and optional <code>llms.txt</code>.</p></article>
-        <article><span class="surface-code">DATA</span><h3>Data & APIs</h3><p>Machine-readable records, JSON Schema, OpenAPI, releases and dataset metadata.</p></article>
-        <article><span class="surface-code">RET</span><h3>Retrieval</h3><p>Search/RAG distributions with stable identity, citations and explicit no-match behavior where needed.</p></article>
-        <article><span class="surface-code">SKILL</span><h3>Agent Skills</h3><p>Real portable <code>SKILL.md</code> procedures. Instructions are not treated as a tool transport.</p></article>
-        <article><span class="surface-code">WEBMCP</span><h3>WebMCP</h3><p>Browser pages that actually expose structured tools at runtime.</p></article>
-        <article><span class="surface-code">MCP</span><h3>MCP</h3><p>Real local or remote servers. Static JSON does not become MCP by declaration.</p></article>
-        <article><span class="surface-code">A2A</span><h3>A2A</h3><p>Agent Card discovery only when a real remotely callable agent exists.</p></article>
-        <article><span class="surface-code">TRUST</span><h3>Identity & trust</h3><p>Stable IDs, licensing, provenance, review state, citation and security surfaces.</p></article>
-      </div>
-    </section>
-
-    <section id="roadmap" class="roadmap-section">
+    <section class="roadmap-section">
       <div class="shell">
-        <div class="section-heading split"><div><p class="eyebrow">Development loop</p><h2>P0 → P3: from understandable to discoverable infrastructure.</h2></div><p>The repository tracks implementation separately from external publication steps that require registry or hosting credentials.</p></div>
+        <div class="section-heading split"><div><p class="eyebrow">Next evidence gate</p><h2>Benchmark utility before expanding the format.</h2></div><p>ARWP should earn its next profile revision through observed interoperability failures, not new AI vocabulary.</p></div>
         <div class="roadmap-grid">
-          <article><span class="priority">P0</span><h3>Understand & adopt</h3><ul><li class="done">Value-first public site</li><li class="done">Real reference examples</li><li class="done">Scanner / profile-generation UX</li><li class="done">GitHub Action path</li></ul></article>
-          <article><span class="priority">P1</span><h3>Install & connect</h3><ul><li class="done">Package-ready CLI</li><li class="done">Local + remote MCP gateway</li><li class="done">Capability health model</li><li class="external">npm / hosted runtime publication</li></ul></article>
-          <article><span class="priority">P2</span><h3>Discover & federate</h3><ul><li class="done">Public directory contract</li><li class="done">Capability filtering</li><li class="done">Federated router implementation</li><li class="prepared">MCP Registry artifact prepared</li></ul></article>
-          <article><span class="priority">P3</span><h3>Ecosystem adoption</h3><ul><li class="prepared">SchemaStore submission package</li><li class="prepared">Independent adopter kit</li><li class="prepared">Discovery API contract</li><li class="external">External submissions and adopters</li></ul></article>
+          <article><span class="priority">R0</span><h3>Prove utility</h3><ul><li class="done">Synthetic regression benchmark</li><li>20–50 independent sites</li><li>Requests / bytes / correct-interface selection</li><li>Publish negative results</li></ul></article>
+          <article><span class="priority">R1</span><h3>Verify runtime</h3><ul><li class="done">Multi-standard resolver</li><li>MCP <code>server/discover</code> reconciliation</li><li>A2A signature verification</li><li>Link-header discovery</li></ul></article>
+          <article><span class="priority">R2</span><h3>Resolve the web</h3><ul><li>Resolver-aware corpus</li><li>Snapshots and drift</li><li>Conflict monitoring</li><li>Resolver-backed federation</li></ul></article>
+          <article><span class="priority">R3</span><h3>Govern by evidence</h3><ul><li>Upstream watcher</li><li>Failure taxonomy</li><li>Three independent adopters</li><li>New profile fields only if needed</li></ul></article>
         </div>
+        <p class="directory-machine"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md">Full evidence-driven roadmap →</a> · <a href="./BENCHMARK.md">Benchmark methodology →</a></p>
       </div>
     </section>
 
     <section class="shell boundaries">
-      <div class="section-heading split"><div><p class="eyebrow">Boundaries</p><h2>Useful because the claims stay narrow.</h2></div><p>ARWP should get smaller when an upstream standard solves the same discovery problem better.</p></div>
+      <div class="section-heading split"><div><p class="eyebrow">Boundaries</p><h2>Interoperability, not another readiness score.</h2></div><p>Resolver output should remain inspectable.</p></div>
       <div class="boundary-grid">
-        <p><strong>Not an SEO ranking mechanism.</strong> Search still depends on ordinary content, crawlability and indexing.</p>
-        <p><strong>Not a permission layer.</strong> Metadata never grants access, authorization or execution rights.</p>
-        <p><strong>Not another MCP.</strong> MCP is one capability ARWP can point to.</p>
-        <p><strong>Not an AI-readiness score.</strong> The project reports evidence and verification states, not a vanity number.</p>
+        <p><strong>Not an SEO ranking mechanism.</strong> Ordinary web fundamentals still matter.</p>
+        <p><strong>Not a permission layer.</strong> Metadata never grants access or authorization.</p>
+        <p><strong>Not another MCP/A2A/OAuth/API standard.</strong> Native protocol metadata remains authoritative for its own semantics.</p>
+        <p><strong>Not a speculative catalog.</strong> New ARWP fields need concrete integration failures.</p>
       </div>
     </section>
   </main>
 
   <footer class="footer shell">
-    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile</div>
-    <div class="footer-links">
-      <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md">Specification</a>
-      <a href="./CONFORMANCE.md">Conformance</a>
-      <a href="./SCANNER.md">Scanner</a>
-      <a href="./directory.json">Directory JSON</a>
-      <a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a>
-    </div>
-    <p>Apache-2.0 · Experimental v0.1 profile contract</p>
+    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Resolver</div>
+    <div class="footer-links"><a href="./RESOLVER.md">Resolver</a><a href="./BENCHMARK.md">Benchmark</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md">Profile spec</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></div>
+    <p>Apache-2.0 · Experimental profile v0.1 · Resolver toolchain 0.2.x</p>
   </footer>
 
   <script src="./arwp.js"></script>
