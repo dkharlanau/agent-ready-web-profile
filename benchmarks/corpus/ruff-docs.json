@@ -1,0 +1,22 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "ruff-docs",
+  "url": "https://docs.astral.sh/ruff/",
+  "ownership": "independent",
+  "reviewedAt": "2026-08-25",
+  "accepted": {
+    "read": ["https://docs.astral.sh/ruff/llms.txt"],
+    "search": [],
+    "structured": [],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://docs.astral.sh/ruff/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "Ruff publishes a path-scoped llms.txt index and explicitly recommends clean Markdown index.md URLs for documentation retrieval."
+    }
+  ],
+  "note": "Second path-scoped Astral fixture, useful for separating a systematic discovery gap from a one-site anomaly."
+}
