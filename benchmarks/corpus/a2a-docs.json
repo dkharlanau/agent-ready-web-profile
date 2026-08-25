@@ -5,7 +5,10 @@
   "ownership": "independent",
   "reviewedAt": "2026-08-25",
   "accepted": {
-    "read": [{ "url": "https://a2a-protocol.org/latest/", "protocol": "HTML", "kind": "html" }],
+    "read": [
+      "https://a2a-protocol.org/llms.txt",
+      { "url": "https://a2a-protocol.org/latest/", "protocol": "HTML", "kind": "html" }
+    ],
     "search": [],
     "structured": [],
     "tools": [],
@@ -13,15 +16,20 @@
   },
   "evidence": [
     {
+      "url": "https://a2a-protocol.org/llms.txt",
+      "sourceType": "official-llms-index",
+      "note": "The official A2A site publishes a root llms.txt index covering the current specification, concepts, SDKs and tutorials."
+    },
+    {
       "url": "https://a2a-protocol.org/latest/",
       "sourceType": "official-docs",
-      "note": "The official A2A documentation is a normal public HTML documentation site. It documents agents but the documentation site is not itself treated as an A2A agent."
+      "note": "Canonical HTML remains an accepted fallback for reading the public documentation."
     },
     {
       "url": "https://a2a-protocol.org/latest/specification/",
       "sourceType": "official-specification",
-      "note": "The current A2A specification describes Agent Cards and agent interoperability, providing context for why documentation is distinct from an actual Agent Card endpoint."
+      "note": "The current A2A specification distinguishes Agent Cards used by actual A2A servers from documentation about the protocol."
     }
   ],
-  "note": "Plain-web control fixture: ordinary canonical HTML must remain a valid read fallback."
+  "note": "Ground truth was corrected after the initial pilot because the official site does publish a root llms.txt. The docs site is still not counted as an A2A agent without a valid callable Agent Card."
 }
