@@ -23,6 +23,21 @@ assert.ok(adapted.interfaces.apis.some(item => item.kind === 'api-description' &
 assert.ok(adapted.interfaces.content.some(item => item.kind === 'markdown-negotiated'));
 assert.ok(adapted.interfaces.content.some(item => item.kind === 'markdown-alternate'));
 
+const htmlAdapted = adaptHttpDiscovery({
+  url: 'https://plain.example/docs/',
+  contentType: 'text/html; charset=utf-8',
+  markdownNegotiated: false,
+  links: []
+});
+assert.deepEqual(htmlAdapted.interfaces.content, [{
+  sourceId: 'http-head:0',
+  sourceAuthority: 'observed-web',
+  kind: 'html',
+  protocol: 'HTML',
+  url: 'https://plain.example/docs/',
+  mediaType: 'text/html; charset=utf-8'
+}]);
+
 const PUBLIC_DNS = async () => [{ address: '93.184.216.34', family: 4 }];
 let calls = 0;
 const fetchImpl = async (url, options) => {
@@ -48,4 +63,4 @@ assert.equal(metrics.bytes, 0, 'HEAD discovery must not claim downloaded body by
 
 await assert.rejects(() => fetchPublicHead('https://127.0.0.1/', { fetchImpl, resolveImpl: PUBLIC_DNS }), /Private or reserved|not allowed/i);
 
-console.log('PASS HTTP discovery parses Link relations, observes Markdown negotiation and keeps public-HTTPS redirect boundaries');
+console.log('PASS HTTP discovery parses Link relations, preserves HTML fallback, observes Markdown negotiation and keeps public-HTTPS redirect boundaries');
