@@ -10,11 +10,20 @@ arwp explain https://example.com
 arwp plan https://example.com --intent=search
 ```
 
+Operational commands now extend the same model:
+
+```bash
+arwp resolve-many targets.txt
+arwp snapshot https://example.com --output=example.snapshot.json
+arwp drift old.snapshot.json new.snapshot.json
+npm run monitor:resolver
+```
+
 ## Why a resolver
 
 A site may publish several independent discovery surfaces at the same time:
 
-- ordinary HTML, `robots.txt`, sitemap and `llms.txt`;
+- ordinary HTTP/HTML, Link headers, content negotiation, `robots.txt`, sitemap and `llms.txt`;
 - an ARWP profile;
 - `/agents.txt` and `/agents.json`;
 - RFC 9727 `/.well-known/api-catalog`;
@@ -32,7 +41,7 @@ The resolver does not flatten all claims into an undifferentiated truth set. Eve
 
 | Authority | Meaning |
 | --- | --- |
-| `ietf-standard` | IETF-published discovery such as RFC 9727 / RFC 9728 |
+| `ietf-standard` | IETF-published discovery such as RFC 8288 Link relations, RFC 9727 and RFC 9728 |
 | `upstream-standard` | protocol-native standardized discovery such as A2A Agent Card |
 | `upstream-convention` | protocol ecosystem convention such as Agent Skills discovery |
 | `community-convention` | useful non-ratified discovery such as agents.txt / agents.json |
@@ -61,9 +70,25 @@ This normalized map is resolver output. It is not the normative ARWP profile sch
 
 ## Discovery surfaces currently resolved
 
+### Ordinary HTTP discovery
+
+In addition to the bounded base-page scan, Resolver performs a bounded `HEAD` observation with `Accept: text/markdown`.
+
+It can use standard HTTP `Link` relations such as:
+
+- `api-catalog`;
+- `service-desc`;
+- `service-doc`;
+- `alternate` with `text/markdown`;
+- `describedby` when it explicitly identifies an ARWP profile.
+
+If the response itself negotiates to `text/markdown`, that is recorded as `observed-web` content evidence. A linked RFC 9727 API catalog is subsequently resolved through the normal API Catalog adapter.
+
+This means a site can become more machine-discoverable through normal HTTP metadata without adopting an ARWP-specific manifest.
+
 ### ARWP profile
 
-If `/ai/site-profile.json` exists and validates, its declared web, data, retrieval, Agent Skills, WebMCP, MCP, A2A and trust surfaces are normalized.
+If `/ai/site-profile.json` exists and validates, its declared web, data, retrieval, Agent Skills, WebMCP, MCP, A2A and trust surfaces are normalized. A profile explicitly linked with `rel=describedby` can also be resolved.
 
 ### agents.txt / agents.json
 
@@ -79,7 +104,7 @@ The resolver requests:
 /.well-known/api-catalog
 ```
 
-and understands Linkset `item`, `service-desc`, `service-doc` and nested `api-catalog` relations.
+and also follows explicit HTTP `Link: <...>; rel="api-catalog"` declarations. It understands Linkset `item`, `service-desc`, `service-doc` and nested `api-catalog` relations.
 
 RFC 9727 is an IETF Standards Track RFC. ARWP does not duplicate its API catalog semantics.
 
@@ -93,7 +118,7 @@ For a root-origin resource, the resolver probes:
 
 and preserves resource, authorization-server, scope and bearer-method metadata when present.
 
-Path-scoped RFC 9728 resolution is a future extension and should be driven by a concrete protected-resource use case rather than guessed from a site root.
+Path-scoped RFC 9728 resolution remains evidence-gated and should be driven by a concrete protected-resource use case rather than guessed from a site root.
 
 ### A2A Agent Card
 
@@ -104,6 +129,8 @@ The resolver probes the current canonical A2A discovery location:
 ```
 
 Readers accept both the v1.0 `supportedInterfaces[]` structure and the legacy v0.3-style URL/interface shape during the transition.
+
+Presence of Agent Card signatures is preserved as evidence, but ARWP does not currently claim cryptographic verification. Signing is optional and correct verification depends on A2A field-presence canonicalization plus RFC 8785 JCS. Until cross-SDK fixtures prove the implementation path, signed cards remain signed-but-not-verified rather than receiving a false trust label.
 
 ### Agent Skills discovery
 
@@ -135,13 +162,44 @@ and follows card URLs or inline card data. If a remote MCP endpoint is already k
 
 A Server Card remains advisory. Resolver output must never treat it as stronger than the live MCP runtime.
 
+## MCP runtime reconciliation
+
+Runtime verification is opt-in. A normal `resolve` does not create MCP sessions.
+
+The Resolver MCP exposes `verify_mcp_runtime`, which first resolves static MCP evidence and then probes up to four discovered remote Streamable HTTP endpoints.
+
+For current MCP servers it sends a real sessionless:
+
+```text
+server/discover
+```
+
+For legacy servers that do not support the modern discovery request, it falls back to the actual lifecycle:
+
+```text
+initialize
+notifications/initialized
+```
+
+The probe:
+
+- keeps HTTPS/DNS/private-network/time/size protections;
+- blocks cross-origin runtime redirects;
+- reports 401/403 as `authorization-required`;
+- never invokes MCP tools;
+- never sends credentials discovered from site metadata automatically;
+- compares self-reported runtime server identity with static metadata and emits a conflict when they disagree.
+
+A successful runtime probe is still evidence about the endpoint, not a security endorsement of the server.
+
 ## Conflict model
 
-The first conflict rules are intentionally narrow and explainable:
+Conflict rules remain intentionally narrow and explainable:
 
 1. canonical site identity differs across discovery sources;
 2. `agents.txt` and `agents.json` disagree about MCP, Agent Skills, A2A or WebMCP URLs;
-3. an experimental MCP Server Card endpoint conflicts with a single site-declared remote MCP endpoint.
+3. an experimental MCP Server Card endpoint conflicts with a single site-declared remote MCP endpoint;
+4. opt-in MCP runtime identity differs from the static identity for that endpoint.
 
 A conflict is evidence for a maintainer to investigate. It is not automatically an error: sites can legitimately expose several interfaces.
 
@@ -161,28 +219,71 @@ Example:
 arwp plan https://example.com --intent=search
 ```
 
-The planner returns:
+The planner returns selected interface, reason, source authority, fallbacks and conflicts. It prefers publisher-maintained retrieval for search, API descriptions for structured access, remote MCP for tools and A2A for agent-to-agent interaction. Markdown content discovered through `llms.txt`, HTTP negotiation or an explicit alternate link can be used for `read`.
 
-- selected interface;
-- why it was selected;
-- source authority;
-- fallback interfaces;
-- any resolver conflicts.
+These are deterministic routing heuristics, not learned quality rankings.
 
-The planner prefers publisher-maintained retrieval for search, API descriptions for structured access, remote MCP for server-side tools, and A2A for agent-to-agent interaction. These are deterministic routing heuristics, not learned quality rankings.
+## Batch resolution
+
+`resolveMany` and `arwp resolve-many` support inventory/research workflows without turning one failed site into a failed batch.
+
+Safety limits include:
+
+- at most 100 library/CLI targets per batch;
+- bounded global concurrency;
+- same-origin resolutions are serialized within one batch;
+- per-site failures are isolated;
+- summary metrics do not collapse into a readiness score.
+
+The Resolver MCP exposes a smaller `resolve_sites` surface capped at 25 URLs.
+
+## Snapshots and drift
+
+`arwp snapshot` emits a compact versioned snapshot containing:
+
+- canonical identity;
+- discovery sources and authority;
+- normalized interfaces;
+- conflicts;
+- deterministic intent plans;
+- observation/resolver version metadata.
+
+It deliberately does not copy canonical datasets.
+
+`arwp drift` compares two snapshots and reports added/removed/changed sources, interfaces, conflicts, identity and plan changes. Observation time alone does not count as drift.
+
+The monitor runtime (`npm run monitor:resolver`) persists per-site snapshots and can fail only on selected operational classes such as `interface-removed`, `identity`, `conflict-added` or `resolution-failed`. `templates/github-actions/resolver-monitor.yml` provides a copyable scheduled workflow.
+
+## Resolver-backed federation
+
+The original federation layer requires ARWP profiles. The newer resolver-backed path does not.
+
+`search_resolved_sites` accepts reviewed canonical site URLs, resolves them first, then executes only explicitly discovered static JSON/JSONL/NDJSON retrieval indexes.
+
+It intentionally does not invent generic OpenAPI, MCP or A2A calls because an interface description alone does not define the semantic search operation to invoke.
+
+Each result preserves:
+
+- source site identity;
+- original discovery source and authority;
+- selected retrieval interface;
+- record-level retrieval result.
+
+Sites without a supported static retrieval index are skipped rather than scraped arbitrarily.
 
 ## Network safety
 
-Resolver fetches use bounded public-HTTPS primitives:
+Resolver network operations use bounded public-HTTPS primitives:
 
 - HTTPS only;
 - no URL credentials;
-- no non-standard HTTPS ports;
+- no non-standard HTTPS ports for general discovery;
 - DNS resolution before requests;
 - private, loopback, link-local and reserved IP rejection;
 - redirect target revalidation;
 - request timeouts;
-- response-size limits.
+- response-size limits;
+- stricter same-origin redirect policy for MCP runtime sessions.
 
 The resolver does not provide an arbitrary fetch/proxy endpoint.
 
@@ -192,9 +293,10 @@ Resolver v0.1 does not:
 
 - define a payment standard;
 - replace OAuth metadata;
-- replace MCP, A2A, Agent Skills, RFC 9727 or RFC 9728;
+- replace MCP, A2A, Agent Skills, RFC 8288, RFC 9727 or RFC 9728;
 - claim experimental MCP Server Cards are ratified;
 - execute browser WebMCP tools;
+- invent generic API/tool calls from interface metadata;
 - make security decisions from self-reported metadata;
 - infer a capability from marketing copy;
 - hide source conflicts behind a readiness score.
@@ -203,12 +305,13 @@ Resolver v0.1 does not:
 
 As of 2026-08-25, implementation work tracks:
 
-- RFC 9727 — API Catalog
-- RFC 9728 — OAuth 2.0 Protected Resource Metadata
-- A2A v1.0 Agent Card discovery
-- Agent Skills discovery index
-- agents.txt / agents.json community specification
-- MCP 2026-07-28 `server/discover`
-- experimental MCP Server Card / AI Catalog extension work
+- RFC 8288 — Web Linking;
+- RFC 9727 — API Catalog;
+- RFC 9728 — OAuth 2.0 Protected Resource Metadata;
+- A2A v1.0 Agent Card discovery/signature model;
+- Agent Skills discovery index;
+- agents.txt / agents.json community specification;
+- MCP 2026-07-28 `server/discover` plus legacy initialization compatibility;
+- experimental MCP Server Card / AI Catalog extension work.
 
 Upstream status can change. Resolver adapters should change to follow upstream rather than adding overlapping ARWP core fields.
