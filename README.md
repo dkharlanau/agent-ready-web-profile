@@ -5,14 +5,14 @@
 
 **Resolve how a website can actually be used by agents.**
 
-Modern websites may expose HTML, `llms.txt`, datasets, retrieval indexes, OpenAPI, Agent Skills, MCP, A2A, OAuth resource metadata, `agents.json` and other discovery surfaces. A client should not need site-specific code — or guess which manifest is authoritative — to understand them.
+Modern websites may expose HTML, Markdown negotiation, HTTP `Link` discovery, `llms.txt`, datasets, retrieval indexes, OpenAPI, Agent Skills, MCP, A2A, OAuth resource metadata, `agents.json` and other surfaces. A client should not need site-specific code — or guess which manifest is authoritative — to understand them.
 
 ARWP now has two complementary parts:
 
 1. **ARWP Profile** — an experimental publisher-maintained service map at `/ai/site-profile.json`.
-2. **ARWP Resolver** — an interoperability engine that reads ARWP plus existing upstream/community discovery, preserves evidence and conflicts, and selects an interface for a concrete intent.
+2. **ARWP Resolver** — an interoperability engine that reads ARWP plus existing upstream/community/web discovery, preserves evidence and conflicts, and selects an interface for a concrete intent.
 
-The profile is useful. It is **not** required to use the resolver and it is not intended to replace upstream standards.
+The profile is useful. It is **not** required to use the Resolver and it is not intended to replace upstream standards.
 
 Public project site: https://dkharlanau.github.io/agent-ready-web-profile/
 
@@ -25,12 +25,12 @@ A site can legitimately publish several independent discovery surfaces:
 ```text
                          WEBSITE
                             |
-       +--------------------+---------------------+
-       |          |         |        |            |
-   ARWP profile  agents.*  API     A2A Card   Agent Skills
-                          Catalog
-       |                    |                     |
-       +------------- MCP / OAuth / web ----------+
+      +---------------------+----------------------+
+      |          |          |         |            |
+    HTTP       ARWP      agents.*   API/A2A    Agent Skills
+ Link/HTML    profile                metadata
+      |                     |                      |
+      +-------------- MCP / OAuth / web ---------+
                             |
                        ARWP RESOLVER
                             |
@@ -42,72 +42,21 @@ A site can legitimately publish several independent discovery surfaces:
              data       structured       agent
 ```
 
-The resolver does not ask every ecosystem to converge on one file. It answers:
+The Resolver does not ask every ecosystem to converge on one file. It answers:
 
 > **What does this website actually expose, where did each claim come from, do the claims conflict, and which interface should a client use for this task?**
 
-## Resolve a site
+## Resolve, explain and plan
 
 ```bash
 node bin/arwp.mjs resolve https://example.com
-```
-
-Machine-readable output:
-
-```bash
-node bin/arwp.mjs resolve https://example.com --json
-```
-
-The resolver currently normalizes evidence from:
-
-- ordinary web discovery from the bounded scanner;
-- valid ARWP profiles;
-- `/agents.txt` and `/agents.json` as a community convention;
-- RFC 9727 `/.well-known/api-catalog`;
-- RFC 9728 root Protected Resource Metadata;
-- A2A `/.well-known/agent-card.json`;
-- Agent Skills `/.well-known/agent-skills/index.json`;
-- experimental MCP AI Catalog / Server Card discovery.
-
-Experimental/community sources remain explicitly labeled. Static metadata is never silently upgraded into runtime conformance.
-
-See [`docs/RESOLVER.md`](docs/RESOLVER.md).
-
-## Explain what was found
-
-```bash
 node bin/arwp.mjs explain https://example.com
-```
-
-Example shape:
-
-```text
-Example Knowledge Site
-Canonical: https://example.com/
-Evidence: 5/8 discovery sources resolved; 1 conflict(s).
-
-Content: 2
-Retrieval: 1
-APIs: 2
-Tools: 1
-
-Conflicts:
-- MCP declarations differ between agents.txt and agents.json.
-
-Recommended interfaces:
-- read: https://example.com/llms.txt
-- search: https://example.com/search.json
-- structured: https://example.com/openapi.json
-- tools: https://example.com/mcp
-```
-
-## Plan for an intent
-
-```bash
 node bin/arwp.mjs plan https://example.com --intent=search
 ```
 
-Supported intents:
+Machine-readable output is available with `--json`.
+
+Supported planning intents:
 
 - `read`
 - `search`
@@ -115,27 +64,182 @@ Supported intents:
 - `tools`
 - `agent`
 
-The planner returns the selected interface, its evidence source/authority and fallbacks. It uses deterministic routing heuristics — not a hidden quality or readiness score.
+Planning is deterministic. It preserves source authority and fallbacks rather than hiding decisions behind a readiness score.
+
+For `read`, richer publisher surfaces such as `llms.txt` or Markdown can be preferred, while ordinary canonical HTML remains an honest low-priority fallback. A plain website is therefore not treated as unusable merely because it has no AI-specific metadata.
+
+See [`docs/RESOLVER.md`](docs/RESOLVER.md).
+
+## Discovery surfaces
+
+The Resolver currently normalizes evidence from:
+
+- canonical HTML and bounded ordinary web discovery;
+- HTTP `Link` relations including `api-catalog`, `service-desc`, `service-doc`, Markdown `alternate` and ARWP `describedby`;
+- `Accept: text/markdown` content-negotiation observation;
+- valid ARWP profiles;
+- `/agents.txt` and `/agents.json` as a community convention;
+- RFC 9727 API Catalog;
+- RFC 9728 root Protected Resource Metadata;
+- A2A `/.well-known/agent-card.json`;
+- Agent Skills `/.well-known/agent-skills/index.json`;
+- experimental MCP AI Catalog / Server Card discovery.
+
+Experimental/community sources remain explicitly labeled. Static metadata is never silently upgraded into runtime conformance.
 
 ## Source authority stays visible
 
-Resolver output distinguishes the origin/status of a claim:
-
 | Authority | Example |
 | --- | --- |
-| `ietf-standard` | RFC 9727 / RFC 9728 |
+| `ietf-standard` | RFC 8288 / RFC 9727 / RFC 9728 |
 | `upstream-standard` | A2A Agent Card |
 | `upstream-convention` | Agent Skills discovery |
 | `community-convention` | agents.txt / agents.json |
 | `experimental-upstream` | current MCP Server Card / AI Catalog work |
 | `project-profile` | ARWP publisher profile |
-| `observed-web` | directly observed ordinary web evidence |
+| `observed-web` | directly observed HTML/HTTP evidence |
 
-Authority is not authorization. Security and permission decisions remain with the real protocol/runtime.
+Authority is not authorization or a security trust rank.
+
+## Batch resolution
+
+Inventory/research workflows can resolve several sites without site-specific wrappers:
+
+```bash
+node bin/arwp.mjs resolve-many targets.txt
+node bin/arwp.mjs resolve-many targets.json --concurrency=4 --json
+```
+
+The library primitive is bounded to 100 targets and max concurrency 10. Same-origin work is serialized inside a batch and failures are isolated per site.
+
+## Snapshots and drift
+
+Create compact operational state:
+
+```bash
+node bin/arwp.mjs snapshot https://example.com --output=example.snapshot.json
+```
+
+Compare two observations:
+
+```bash
+node bin/arwp.mjs drift before.snapshot.json after.snapshot.json --json
+```
+
+Snapshots keep identity, discovery sources, normalized interfaces, conflicts and deterministic intent plans. They do **not** copy canonical datasets.
+
+Drift distinguishes added/removed/changed sources, interfaces, conflicts, identity and routing-plan changes. Observation time alone is not drift.
+
+## Resolver monitoring
+
+A small monitor runtime builds on the same snapshots:
+
+```bash
+cp monitor/example.config.json arwp-resolver-monitor.json
+npm run monitor:resolver
+```
+
+A monitor may fail only on selected operational classes:
+
+- `identity`
+- `source-removed`
+- `interface-removed`
+- `conflict-added`
+- `plan-changed`
+- `resolution-failed`
+- `any`
+
+[`templates/github-actions/resolver-monitor.yml`](templates/github-actions/resolver-monitor.yml) provides a scheduled workflow with cached operational snapshots and always-uploaded drift reports.
+
+## Runtime evidence is opt-in
+
+A normal `resolve` remains static/bounded discovery and does not open MCP sessions or perform cryptographic trust checks.
+
+The Resolver MCP exposes explicit verification tools when deeper evidence is wanted.
+
+### MCP runtime reconciliation
+
+`verify_mcp_runtime`:
+
+- sends real modern `server/discover` where supported;
+- falls back to legacy `initialize` + `notifications/initialized` lifecycle;
+- records negotiated/self-reported server metadata;
+- reports `authorization-required` separately from runtime failure;
+- blocks cross-origin runtime redirects;
+- never invokes MCP tools;
+- never sends credentials discovered from metadata automatically;
+- surfaces static/runtime identity mismatches as conflicts.
+
+### A2A signature verification
+
+`verify_a2a_signatures`:
+
+- validates the current v1 Agent Card required shape;
+- treats unsigned cards as `unsigned`, not invalid;
+- retrieves explicitly declared public HTTPS JWKS under the same network bounds;
+- verifies RS256 and ES256 signatures by `kid`;
+- distinguishes `signature-verified`, `signature-invalid`, `key-unavailable`, `unsupported-algorithm`, `invalid-card` and `not-assessed`.
+
+Internal RSA/EC fixtures and tampering detection pass CI. Broad **cross-SDK interoperability is still an explicit external gate** because current A2A implementations have had canonicalization/default-field inconsistencies. A cryptographically valid signature also does not by itself make a signer trustworthy.
+
+## Resolver as MCP
+
+```bash
+npm run resolver:mcp
+```
+
+Current tools:
+
+- `resolve_site`
+- `resolve_sites`
+- `search_resolved_sites`
+- `explain_site`
+- `plan_site_interface`
+- `verify_mcp_runtime`
+- `verify_a2a_signatures`
+
+The prepared Official MCP Registry artifact launches this Resolver and does not require an ARWP profile.
+
+The older ARWP-profile gateway remains available separately:
+
+```bash
+ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start
+```
+
+Remote Streamable HTTP profile gateway:
+
+```bash
+ARWP_PROFILE=https://example.com/ai/site-profile.json \
+ARWP_HTTP_ALLOWED_HOSTS=mcp.example.com \
+npm run mcp:http
+```
+
+See [`docs/GATEWAY.md`](docs/GATEWAY.md).
+
+## Resolver-backed federation
+
+The original directory federation remains available:
+
+```bash
+node bin/arwp.mjs directory
+node bin/arwp.mjs federated-search "outside view"
+```
+
+The newer Resolver MCP `search_resolved_sites` starts from canonical site URLs. It does not require ARWP profiles.
+
+Generic federation deliberately executes only resolved static JSON/JSONL/NDJSON retrieval indexes. It does not invent OpenAPI, MCP or A2A calls when operation semantics are unknown. Each result preserves source site, discovery source/authority and selected interface.
+
+Public ARWP reference directory:
+
+```text
+https://dkharlanau.github.io/agent-ready-web-profile/directory.json
+```
+
+See [`docs/DIRECTORY.md`](docs/DIRECTORY.md).
 
 ## ARWP Profile
 
-Publishers that want one explicit service map can still expose:
+Publishers that want one explicit service map can expose:
 
 ```text
 /ai/site-profile.json
@@ -178,7 +282,7 @@ node bin/arwp.mjs health https://example.com
 
 `scan` observes bounded public evidence. `init` generates a conservative profile and does not invent unverified MCP, WebMCP, Skills or A2A capabilities.
 
-A reusable validation Action is available:
+Reusable Action:
 
 ```yaml
 - name: Validate Agent-Ready Web Profile
@@ -191,7 +295,7 @@ A reusable validation Action is available:
 
 ## Bounded hosted discovery service
 
-The same server runtime exposes only fixed expensive operations:
+The server runtime exposes only fixed operations:
 
 ```text
 GET  /health
@@ -201,7 +305,7 @@ POST /explain
 POST /plan
 ```
 
-It includes HTTPS-only target rules, DNS/private-network rejection, redirect revalidation, response/request bounds, explicit browser Origin allow-listing and shared rate limiting. It is not an arbitrary URL proxy.
+It includes HTTPS-only target rules, DNS/private-network rejection, redirect revalidation, request/response bounds, explicit browser Origin allow-listing and shared rate limiting. It is not an arbitrary URL proxy.
 
 ```bash
 ARWP_SCANNER_ALLOWED_ORIGINS=https://dkharlanau.github.io \
@@ -210,59 +314,9 @@ npm run scanner:http
 
 A container artifact is in [`scanner-service/`](scanner-service/). Public hosting remains an external deployment gate.
 
-## Resolver as MCP
-
-Agents can consume the resolver itself:
-
-```bash
-npm run resolver:mcp
-```
-
-Tools:
-
-- `resolve_site`
-- `explain_site`
-- `plan_site_interface`
-
-The existing ARWP profile gateway remains available separately for reading one profile's declared resources:
-
-```bash
-ARWP_PROFILE=https://example.com/ai/site-profile.json npm run mcp:start
-```
-
-Remote Streamable HTTP gateway:
-
-```bash
-ARWP_PROFILE=https://example.com/ai/site-profile.json \
-ARWP_HTTP_ALLOWED_HOSTS=mcp.example.com \
-npm run mcp:http
-```
-
-See [`docs/GATEWAY.md`](docs/GATEWAY.md).
-
-## Directory and federation
-
-The initial five-site ARWP Directory remains a reference/adoption registry:
-
-```bash
-node bin/arwp.mjs directory
-node bin/arwp.mjs directory --capability=retrieval
-node bin/arwp.mjs federated-search "outside view"
-```
-
-Public directory JSON:
-
-```text
-https://dkharlanau.github.io/agent-ready-web-profile/directory.json
-```
-
-The next federation step is resolver-backed: sites should eventually be resolvable even when they do not publish an ARWP profile but do expose usable upstream discovery.
-
-See [`docs/DIRECTORY.md`](docs/DIRECTORY.md).
-
 ## Real reference suite
 
-Five public knowledge-site architectures currently publish ARWP profiles and are live-verified:
+Five owner-controlled public knowledge-site architectures publish ARWP profiles and are live-verified:
 
 - Dzmitryi Kharlanau — SAP Knowledge;
 - Brali Practical Knowledge Library;
@@ -270,35 +324,35 @@ Five public knowledge-site architectures currently publish ARWP profiles and are
 - CBT Cards;
 - Metkagram.
 
-They intentionally expose different combinations of data, retrieval, OpenAPI, Agent Skills, MCP and trust metadata. Owned references are implementation evidence, **not independent adoption evidence**.
+They are implementation/regression evidence, **not independent adoption evidence**.
 
 ## Benchmark before marketing claims
+
+Synthetic regression:
 
 ```bash
 npm run benchmark:resolver
 ```
 
-The current benchmark is synthetic deterministic regression coverage. It compares HTML-only, `llms.txt`, ARWP-only, agents-only, upstream-native and Resolver-union strategies over reviewed fixtures.
+Independent-corpus runner:
 
-It explicitly does **not** prove token savings, latency savings, ranking, adoption or answer quality.
+```bash
+npm run benchmark:external -- --output=benchmark-results/external.json
+```
 
-The next evidence milestone is a reproducible 20–50-site external corpus measuring:
+The external runner has a strict reviewed fixture schema. Aggregate results count only `ownership=independent`. Ground truth is manually reviewed public evidence and cannot be generated from Resolver output itself.
 
-- requests and bytes until a usable interface is identified;
-- correct/missed interface selection;
-- false-positive capabilities;
-- conflicts detected;
-- canonical identity/provenance preservation;
-- fallbacks required.
+Subset strategy comparisons are selection-only projections over the same observed resolution. Request/byte/time metrics are attributed only to the actual Resolver network run.
 
-Raw negative results must be published too. See [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
+The first pilot corpus contains 10 independent documentation sites and deliberately includes ordinary HTML controls and path-scoped discovery that the Resolver may miss. The target after reviewing the pilot is 20–50 sites.
+
+No benchmark result is evidence of token savings, search ranking, adoption or answer quality. Raw negative results must remain visible. See [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
 
 ## What ARWP deliberately does not replace
 
-ARWP should resolve and preserve upstream semantics rather than reimplement them.
-
 Do not create ARWP-native replacements for:
 
+- RFC 8288 Web Linking;
 - RFC 9727 API Catalog;
 - RFC 9728 Protected Resource Metadata;
 - A2A Agent Cards;
@@ -312,11 +366,11 @@ Project rule:
 ```text
 UPSTREAM EXISTS
       ↓
-resolve / validate / normalize it
+resolve / verify / normalize it
 
 UPSTREAM DOES NOT EXIST
       ↓
-collect a real interoperability failure
+collect a concrete interoperability failure
 
 ONLY THEN
       ↓
@@ -330,8 +384,11 @@ consider an ARWP-specific extension
 - redirect destinations revalidated;
 - bounded requests and responses;
 - no URL credentials;
+- generic federation does not invent operations;
 - metadata never grants permission;
-- URL reachability never proves MCP/WebMCP/A2A runtime conformance;
+- static reachability never proves runtime conformance;
+- runtime probes are opt-in and do not invoke MCP tools;
+- signature verification does not establish signer trust;
 - conflicts remain visible instead of being hidden by a score.
 
 ## Development direction
@@ -340,15 +397,16 @@ The North Star is:
 
 > **How many external sites can ARWP correctly resolve and route without site-specific integration code?**
 
-Current Iteration 2 priorities:
+Immediate work is increasingly external/evidence-driven:
 
-1. publish/install/deploy the 0.2.x resolver toolchain;
-2. build the external utility benchmark corpus;
-3. obtain three independent adopters;
-4. reconcile static MCP evidence with live `server/discover` behavior;
-5. verify A2A card signatures when present;
-6. build resolver snapshots and drift/conflict monitoring;
-7. use evidence to decide whether a new ARWP profile-contract version is needed at all.
+1. preserve and review the first independent benchmark pilot;
+2. fix systematic discovery gaps only after the baseline is recorded;
+3. expand the corpus to 20–50 sites;
+4. publish/install the 0.2.x Resolver package and MCP Registry artifact;
+5. deploy the bounded public HTTPS discovery service;
+6. obtain three independent adopters/consumers;
+7. prove A2A signature interoperability against independent upstream implementations;
+8. decide from evidence whether the ARWP Profile contract needs another version at all.
 
 See [`ROADMAP.md`](ROADMAP.md).
 
@@ -356,20 +414,25 @@ See [`ROADMAP.md`](ROADMAP.md).
 
 - [`SPEC.md`](SPEC.md) — experimental ARWP profile contract.
 - [`schema/site-profile.schema.json`](schema/site-profile.schema.json) — profile JSON Schema.
-- [`bin/arwp.mjs`](bin/arwp.mjs) — CLI.
+- [`bin/arwp.mjs`](bin/arwp.mjs) — CLI for profile, Resolver and operations.
 - [`lib/scanner.mjs`](lib/scanner.mjs) — bounded website scanner.
 - [`lib/resolver.mjs`](lib/resolver.mjs) — multi-standard resolver and planner.
-- [`lib/resolver-adapters.mjs`](lib/resolver-adapters.mjs) — upstream/community adapters.
-- [`lib/public-fetch.mjs`](lib/public-fetch.mjs) — bounded public-HTTPS fetch primitives.
-- [`resolver/server.mjs`](resolver/server.mjs) — resolver MCP server.
+- [`lib/http-discovery.mjs`](lib/http-discovery.mjs) — RFC 8288 / Markdown HTTP discovery.
+- [`lib/mcp-runtime.mjs`](lib/mcp-runtime.mjs) — opt-in MCP runtime reconciliation.
+- [`lib/a2a-signature.mjs`](lib/a2a-signature.mjs) — bounded A2A signature verification.
+- [`lib/resolver-snapshot.mjs`](lib/resolver-snapshot.mjs) — compact snapshots/drift.
+- [`lib/resolver-batch.mjs`](lib/resolver-batch.mjs) — bounded multi-site resolution.
+- [`lib/resolver-monitor.mjs`](lib/resolver-monitor.mjs) — operational drift monitoring.
+- [`resolver/server.mjs`](resolver/server.mjs) — Resolver MCP server.
 - [`scanner-service/`](scanner-service/) — bounded hosted scan/resolve service.
 - [`gateway/`](gateway/) — generic ARWP-profile MCP gateway.
-- [`router/`](router/) — directory federation.
+- [`router/`](router/) — profile and Resolver-backed federation.
+- [`monitor/`](monitor/) — monitor runner/config schema.
 - [`registry/`](registry/) — initial public ARWP Directory.
-- [`benchmarks/`](benchmarks/) — resolver regression/evidence work.
-- [`docs/RESOLVER.md`](docs/RESOLVER.md) — resolver model.
+- [`benchmarks/`](benchmarks/) — synthetic and independent evidence tooling.
+- [`docs/RESOLVER.md`](docs/RESOLVER.md) — Resolver model.
 - [`docs/BENCHMARK.md`](docs/BENCHMARK.md) — benchmark rules.
-- [`ROADMAP.md`](ROADMAP.md) — evidence-driven next iteration.
+- [`ROADMAP.md`](ROADMAP.md) — evidence-driven roadmap.
 
 ## License
 
