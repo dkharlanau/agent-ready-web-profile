@@ -4,6 +4,7 @@ import * as z from 'zod/v4';
 import { resolveSite, explainResolvedSite, planResolvedSite } from '../lib/resolver.mjs';
 import { resolveMany } from '../lib/resolver-batch.mjs';
 import { reconcileMcpRuntime } from '../lib/mcp-runtime.mjs';
+import { verifyResolvedA2aSignatures } from '../lib/a2a-signature.mjs';
 import { searchResolvedFederated } from '../router/resolved-federated.mjs';
 
 const asText = value => ({ content: [{ type: 'text', text: typeof value === 'string' ? value : JSON.stringify(value, null, 2) }] });
@@ -55,6 +56,18 @@ server.registerTool('verify_mcp_runtime', {
     canonicalUrl: resolution.canonicalUrl,
     staticConflicts: resolution.conflicts,
     runtime: await reconcileMcpRuntime(resolution, { maxEndpoints: max_endpoints })
+  });
+});
+
+server.registerTool('verify_a2a_signatures', {
+  description: 'Opt-in cryptographic verification of signatures on the resolved A2A Agent Card. Unsigned cards remain valid unsigned evidence. Supported verification currently covers RS256 and ES256 with bounded public-HTTPS JWKS retrieval; unsupported or unavailable trust material remains not-assessed rather than falsely verified.',
+  inputSchema: z.object({ url: z.string().url() })
+}, async ({ url }) => {
+  const resolution = await resolveSite(url);
+  return asText({
+    canonicalUrl: resolution.canonicalUrl,
+    staticConflicts: resolution.conflicts,
+    signatureVerification: await verifyResolvedA2aSignatures(resolution)
   });
 });
 
