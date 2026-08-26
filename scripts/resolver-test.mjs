@@ -56,6 +56,8 @@ assert.equal(planResolvedSite(resolved, 'read').selected.url, 'https://example.c
 assert.equal(planResolvedSite(resolved, 'search').selected.url, 'https://example.com/search.json');
 assert.equal(planResolvedSite(resolved, 'structured').selected.url, 'https://example.com/openapi.json');
 assert.equal(planResolvedSite(resolved, 'tools').selected.url, 'https://example.com/mcp');
+assert.equal(planResolvedSite(resolved, 'agent').selected.url, 'https://example.com/a2a');
+assert.equal(planResolvedSite(resolved, 'agent').selected.agentCardUrl, 'https://example.com/.well-known/agent-card.json');
 assert.match(explainResolvedSite(resolved), /Recommended interfaces:/);
 assert.equal(resolved.upstreamStatus['MCP Server Card / AI Catalog'], 'experimental-upstream');
 
@@ -85,4 +87,4 @@ assert.equal(planResolvedSite(plain, 'read').selected.kind, 'html');
 assert.equal(planResolvedSite(plain, 'search').selected, null);
 
 await assert.rejects(() => resolveSite('https://127.0.0.1', { fetchImpl, resolveImpl: PUBLIC_DNS }), /Private or reserved|public HTTPS|not allowed/i);
-console.log('PASS resolver normalizes heterogeneous discovery, accepts spec-valid empty A2A tag arrays, and preserves ordinary HTML as the honest fallback');
+console.log('PASS resolver normalizes heterogeneous discovery, routes A2A cards to callable interfaces, accepts spec-valid empty A2A tag arrays, and preserves ordinary HTML as the honest fallback');
