@@ -21,10 +21,10 @@
       "note": "Mintlify publishes a path-scoped llms.txt index for its own documentation."
     },
     {
-      "url": "https://www.mintlify.com/blog/mintlify-llms-txt",
+      "url": "https://www.mintlify.com/blog/simplifying-docs-with-llms-txt",
       "sourceType": "official-blog",
-      "note": "Mintlify documents automatic llms.txt generation as a machine-readable documentation surface."
+      "note": "Mintlify documents automatic generation and hosting of llms.txt and llms-full.txt as machine-readable documentation surfaces."
     }
   ],
-  "note": "Path-scoped llms.txt fixture. No MCP/API capability is accepted merely because Mintlify can generate such integrations for customer documentation."
+  "note": "Path-scoped llms.txt fixture. No MCP/API capability is accepted merely because Mintlify can generate such integrations for customer documentation. Official blog evidence was re-reviewed and refreshed on 2026-08-26 after the previous slug returned 404."
 }
