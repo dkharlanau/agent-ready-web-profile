@@ -3,6 +3,7 @@ import { createResolverSnapshot, diffResolverSnapshots } from '../lib/resolver-s
 
 function resolution({
   endpoint = 'https://example.com/mcp',
+  transport = 'streamable-http',
   conflict = false,
   catalogSourceUrl = 'https://example.com/.well-known/api-catalog'
 } = {}) {
@@ -18,7 +19,7 @@ function resolution({
       data: [],
       retrieval: [{ sourceId: 'agents-json:0', sourceAuthority: 'community-convention', kind: 'search', url: 'https://example.com/search.json' }],
       apis: [{ sourceId: 'api-catalog:0', sourceAuthority: 'ietf-standard', kind: 'api-description', protocol: 'OpenAPI', url: 'https://example.com/openapi.json' }],
-      tools: [{ sourceId: 'agents-json:0', sourceAuthority: 'community-convention', kind: 'mcp', protocol: 'MCP', transport: 'streamable-http', url: endpoint }],
+      tools: [{ sourceId: 'agents-json:0', sourceAuthority: 'community-convention', kind: 'mcp', protocol: 'MCP', transport, url: endpoint }],
       skills: [], agents: [], browserTools: [], auth: [], trust: []
     },
     conflicts: conflict ? [{ kind: 'mcp-endpoint-mismatch', severity: 'warning', capability: 'MCP', message: 'MCP endpoints disagree.' }] : [],
@@ -38,9 +39,20 @@ const drift = diffResolverSnapshots(before, after);
 assert.equal(drift.hasDrift, true);
 assert.equal(drift.summary.interfacesAdded, 1);
 assert.equal(drift.summary.interfacesRemoved, 1);
+assert.equal(drift.summary.interfaceMigrations, 1, 'URL-only interface move should be classified separately');
+assert.equal(drift.summary.hardInterfacesRemoved, 0, 'URL-only interface move must not look like hard disappearance');
+assert.equal(drift.interfaceMigrations[0].kind, 'interface-url-migration');
+assert.equal(drift.interfaceMigrations[0].beforeUrl, 'https://example.com/mcp');
+assert.equal(drift.interfaceMigrations[0].afterUrl, 'https://example.com/mcp-v2');
 assert.equal(drift.summary.conflictsAdded, 1);
 assert.equal(drift.summary.planChanges, 1);
 assert.equal(drift.plans[0].intent, 'tools');
+
+const materialEndpointChange = createResolverSnapshot(resolution({ endpoint: 'https://example.com/mcp-v2', transport: 'sse' }), { resolverVersion: '0.2.0', observedAt: '2026-08-25T22:30:00Z' });
+const materialInterfaceDrift = diffResolverSnapshots(before, materialEndpointChange);
+assert.equal(materialInterfaceDrift.summary.interfaceMigrations, 0, 'URL plus transport changes are not reduced to URL migration');
+assert.equal(materialInterfaceDrift.summary.hardInterfacesRemoved, 1);
+assert.equal(materialInterfaceDrift.summary.hardInterfacesAdded, 1);
 
 const redirectedCatalog = createResolverSnapshot(resolution({ catalogSourceUrl: 'https://example.com/catalog/v2' }), { resolverVersion: '0.2.0', observedAt: '2026-08-25T23:00:00Z' });
 const migration = diffResolverSnapshots(before, redirectedCatalog);
@@ -61,4 +73,4 @@ const ambiguousMove = diffResolverSnapshots(linkedSourceBefore, linkedSourceAfte
 assert.equal(ambiguousMove.summary.sourceMigrations, 0, 'linked discovery target moves are not inferred as redirects without fixed-slot evidence');
 assert.equal(ambiguousMove.summary.hardSourcesRemoved, 1);
 
-console.log('PASS resolver snapshots are bounded, reproducible and distinguish evidenced redirect-target migration from hard disappearance');
+console.log('PASS resolver snapshots distinguish URL-only interface/source migrations from hard structural disappearance');
