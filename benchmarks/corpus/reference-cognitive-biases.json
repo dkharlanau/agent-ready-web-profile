@@ -1,0 +1,37 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "reference-cognitive-biases",
+  "url": "https://cognitive-biases.github.io/",
+  "ownership": "project-reference",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://cognitive-biases.github.io/llms.txt"],
+    "search": ["https://cognitive-biases.github.io/data/rag.ndjson"],
+    "structured": [
+      "https://raw.githubusercontent.com/Cognitive-Biases/cognitive-biases.github.io/main/schemas/reasoning-practice.schema.json",
+      "https://cognitive-biases.github.io/data/catalog.json",
+      "https://cognitive-biases.github.io/data/manifest.json"
+    ],
+    "tools": [
+      {
+        "protocol": "MCP",
+        "transport": "stdio",
+        "url": "https://github.com/Cognitive-Biases/cognitive-biases.github.io/tree/main/integrations/mcp"
+      }
+    ],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://cognitive-biases.github.io/ai/site-profile.json",
+      "sourceType": "project-reference-arwp-profile",
+      "note": "Owner-controlled reference site publishes an ARWP profile with retrieval-ready data, schema and local MCP declarations."
+    },
+    {
+      "url": "https://cognitive-biases.github.io/data/rag.ndjson",
+      "sourceType": "publisher-retrieval-distribution",
+      "note": "Public NDJSON retrieval distribution is the reviewed search/retrieval surface for this fixture."
+    }
+  ],
+  "note": "Owner-controlled implementation fixture. It is reported separately from independent evidence."
+}
