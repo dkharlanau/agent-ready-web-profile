@@ -41,6 +41,7 @@ jobs:
           node node_modules/agent-ready-web-profile/monitor/runner.mjs \
             --config=arwp-resolver-monitor.json \
             --snapshot-dir=.arwp-resolver/snapshots \
+            --evidence-dir=.arwp-resolver/evidence \
             --report=.arwp-resolver/report.json
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
@@ -62,6 +63,7 @@ jobs:
           console.log(`### ${note.title}`);
           console.log('');
           console.log(note.text);
+          console.log(`Drift evidence bundles: ${report.summary?.evidenceWritten ?? 0}`);
           if (note.sites.length) {
             console.log('');
             for (const site of note.sites) {
@@ -72,12 +74,14 @@ jobs:
           if (note.omittedSites) console.log(`- ... ${note.omittedSites} additional changed site(s)`);
           NODE
 
-      - name: Upload drift report
+      - name: Upload drift report and evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: arwp-resolver-drift-${{ github.run_id }}
-          path: .arwp-resolver/report.json
+          path: |
+            .arwp-resolver/report.json
+            .arwp-resolver/evidence/*.json
           if-no-files-found: error
           retention-days: 30
 
