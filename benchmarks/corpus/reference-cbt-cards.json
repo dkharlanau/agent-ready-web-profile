@@ -1,0 +1,32 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "reference-cbt-cards",
+  "url": "https://cbt-cards.github.io/",
+  "ownership": "project-reference",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://cbt-cards.github.io/llms.txt"],
+    "search": ["https://cbt-cards.github.io/data/practice-rag.ndjson"],
+    "structured": [
+      "https://cbt-cards.github.io/schemas/index.json",
+      "https://cbt-cards.github.io/data/catalog.json",
+      "https://cbt-cards.github.io/data/knowledge.jsonl",
+      "https://cbt-cards.github.io/data/practice-rag-manifest.json"
+    ],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://cbt-cards.github.io/ai/site-profile.json",
+      "sourceType": "project-reference-arwp-profile",
+      "note": "Owner-controlled reference site publishes an ARWP profile with reviewed retrieval, schema, feed, Agent Skill and trust surfaces."
+    },
+    {
+      "url": "https://cbt-cards.github.io/data/practice-rag.ndjson",
+      "sourceType": "publisher-retrieval-distribution",
+      "note": "Public reviewed practice retrieval distribution is the expected search surface for this fixture."
+    }
+  ],
+  "note": "Owner-controlled implementation fixture. Agent Skills are intentionally not scored as the callable agent intent, and no remote MCP tool is claimed."
+}
