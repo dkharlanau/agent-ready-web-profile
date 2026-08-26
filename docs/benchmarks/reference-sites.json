@@ -1,0 +1,75 @@
+{
+  "benchmarkVersion": "0.2",
+  "cohortVersion": "0.1",
+  "observedAt": "2026-08-26T13:24:10.622Z",
+  "ownership": "project-reference",
+  "workflowRun": 32973875472,
+  "commit": "b4afed8e852e09a9924ed187120b5f2f6e96c8da",
+  "artifact": {
+    "name": "arwp-reference-benchmark-32973875472",
+    "id": 9608688155,
+    "digest": "sha256:68623e1f59877359d74d7013b83f348bcc99e658118b17d1d254a18b835617cc"
+  },
+  "evidencePolicy": "Owner-controlled implementation and regression evidence only. Excluded from independent adoption and external interoperability aggregates.",
+  "sites": {
+    "total": 5,
+    "resolved": 5,
+    "failed": 0
+  },
+  "strategies": {
+    "ordinary-web": { "correct": 7, "total": 25, "accuracy": 0.28 },
+    "llms-aware": { "correct": 12, "total": 25, "accuracy": 0.48 },
+    "agents-aware": { "correct": 7, "total": 25, "accuracy": 0.28 },
+    "protocol-native": { "correct": 7, "total": 25, "accuracy": 0.28 },
+    "arwp-profile-only": { "correct": 20, "total": 25, "accuracy": 0.8 },
+    "resolver-union": { "correct": 25, "total": 25, "accuracy": 1.0 }
+  },
+  "referenceSites": [
+    {
+      "id": "reference-dkharlanau",
+      "url": "https://dkharlanau.github.io/",
+      "profile": "https://dkharlanau.github.io/ai/site-profile.json",
+      "resolverUnion": { "correct": 5, "total": 5 },
+      "arwpProfileOnly": { "correct": 4, "total": 5 }
+    },
+    {
+      "id": "reference-brali",
+      "url": "https://brali-lifeos.github.io/",
+      "profile": "https://brali-lifeos.github.io/ai/site-profile.json",
+      "resolverUnion": { "correct": 5, "total": 5 },
+      "arwpProfileOnly": { "correct": 4, "total": 5 }
+    },
+    {
+      "id": "reference-cognitive-biases",
+      "url": "https://cognitive-biases.github.io/",
+      "profile": "https://cognitive-biases.github.io/ai/site-profile.json",
+      "resolverUnion": { "correct": 5, "total": 5 },
+      "arwpProfileOnly": { "correct": 4, "total": 5 }
+    },
+    {
+      "id": "reference-cbt-cards",
+      "url": "https://cbt-cards.github.io/",
+      "profile": "https://cbt-cards.github.io/ai/site-profile.json",
+      "resolverUnion": { "correct": 5, "total": 5 },
+      "arwpProfileOnly": { "correct": 4, "total": 5 }
+    },
+    {
+      "id": "reference-metkagram",
+      "url": "https://metkagram.github.io/",
+      "profile": "https://metkagram.github.io/ai/site-profile.json",
+      "resolverUnion": { "correct": 5, "total": 5 },
+      "arwpProfileOnly": { "correct": 4, "total": 5 }
+    }
+  ],
+  "interpretation": "All five profile-only misses were read-intent decisions. The full Resolver restored observed-web/llms.txt evidence and reached 25/25, supporting the design that ARWP Profile complements rather than replaces ordinary web discovery.",
+  "nonClaims": [
+    "independent adoption",
+    "search ranking improvement",
+    "AI recommendation or citation improvement",
+    "answer quality",
+    "token savings",
+    "runtime MCP or A2A conformance",
+    "security trust",
+    "ecosystem standardization"
+  ]
+}
