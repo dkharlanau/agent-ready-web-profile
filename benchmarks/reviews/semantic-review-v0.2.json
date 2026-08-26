@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "scope": "initial-independent-ten",
+  "scope": "full-independent-corpus",
   "reviewedAt": "2026-08-26",
   "method": "Manual semantic review against publisher-controlled or protocol-native evidence; Resolver output was not used to create or confirm ground truth.",
   "fixtures": [
@@ -26,6 +26,26 @@
       ]
     },
     {
+      "id": "anthropic-platform-docs",
+      "file": "anthropic-platform-docs.json",
+      "blobSha": "e74c6e90e12578982b7bfff399b115480fcc2c78",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://platform.claude.com/llms.txt"
+      ]
+    },
+    {
+      "id": "bun-docs",
+      "file": "bun-docs.json",
+      "blobSha": "8640926efa10f8f722478477c9174b7537adf8d7",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://bun.com/llms.txt"
+      ]
+    },
+    {
       "id": "cloudflare-docs",
       "file": "cloudflare-docs.json",
       "blobSha": "f55f070fc1b7846eff31f61cb6446f898f28b1bf",
@@ -45,6 +65,16 @@
       "status": "confirmed",
       "evidenceBasis": [
         "https://enterprise-docs.crewai.com/reference/chart-values/secrets"
+      ]
+    },
+    {
+      "id": "deno-docs",
+      "file": "deno-docs.json",
+      "blobSha": "d059907f7ccb552cbd14dbba7ab5a08c23278977",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://docs.deno.com/llms.txt"
       ]
     },
     {
@@ -78,6 +108,37 @@
       ]
     },
     {
+      "id": "mintlify-docs",
+      "file": "mintlify-docs.json",
+      "blobSha": "9ebf7df920485b8c423971e36e4a8cc4c5255a3f",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://www.mintlify.com/docs/llms.txt",
+        "https://www.mintlify.com/blog/simplifying-docs-with-llms-txt"
+      ]
+    },
+    {
+      "id": "perplexity-docs",
+      "file": "perplexity-docs.json",
+      "blobSha": "59d1f13c37993d52c7b71f7b4d116b194bc08190",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://docs.perplexity.ai/llms.txt"
+      ]
+    },
+    {
+      "id": "pinecone-docs",
+      "file": "pinecone-docs.json",
+      "blobSha": "0a43f9dd7b1c7af6103236fa62b7d203c808fa6a",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://docs.pinecone.io/llms.txt"
+      ]
+    },
+    {
       "id": "ruff-docs",
       "file": "ruff-docs.json",
       "blobSha": "8589d6910739461d3cf30b1b7ebc7f04879a3257",
@@ -85,6 +146,27 @@
       "status": "confirmed",
       "evidenceBasis": [
         "https://docs.astral.sh/ruff/llms.txt"
+      ]
+    },
+    {
+      "id": "stripe-docs",
+      "file": "stripe-docs.json",
+      "blobSha": "d37175d5f0b627c63975d4bd592f5c0b98efe21d",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://docs.stripe.com/llms.txt"
+      ]
+    },
+    {
+      "id": "supabase-docs",
+      "file": "supabase-docs.json",
+      "blobSha": "686b011e9cefd772893c04ccd25b7faf8c99bb31",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://supabase.com/llms.txt",
+        "https://supabase.com/docs/guides/getting-started/mcp"
       ]
     },
     {
@@ -105,6 +187,27 @@
       "status": "confirmed",
       "evidenceBasis": [
         "https://docs.astral.sh/uv/llms.txt"
+      ]
+    },
+    {
+      "id": "vercel-docs",
+      "file": "vercel-docs.json",
+      "blobSha": "406c5d510e37297fc1d31f249a0e3e87a5732cfe",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://vercel.com/llms.txt",
+        "https://vercel.com/docs/agent-resources/vercel-mcp"
+      ]
+    },
+    {
+      "id": "vite-docs",
+      "file": "vite-docs.json",
+      "blobSha": "8579d8392bca31cdb9844b0af21b6748b3edbc73",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://vite.dev/llms.txt"
       ]
     }
   ]
