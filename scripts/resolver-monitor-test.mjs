@@ -97,7 +97,37 @@ try {
   assert.ok(report.triggered.includes('source-migrated'));
   assert.ok(report.notification.text.includes('source-migrated'));
 
-  console.log('PASS resolver monitor archives before/after drift evidence, classifies redirect migrations separately and emits bounded notification summaries');
+  let interfaceTarget = 'https://interface-migration.example/mcp';
+  const interfaceMigrationResolve = async url => ({
+    canonicalUrl: url,
+    identity: { name: 'Interface Migration Site' },
+    sources: [{ id: 'agents-json:0', type: 'agents-json', url: `${new URL(url).origin}/agents.json`, status: 'resolved', authority: 'community-convention' }],
+    interfaces: {
+      content: [], data: [], retrieval: [], apis: [],
+      tools: [{ sourceId: 'agents-json:0', sourceAuthority: 'community-convention', kind: 'mcp', protocol: 'MCP', transport: 'streamable-http', url: interfaceTarget }],
+      skills: [], agents: [], browserTools: [], auth: [], trust: []
+    },
+    conflicts: [],
+    summary: { sourcesAttempted: 1, sourcesResolved: 1, interfacesResolved: 1, conflicts: 0 }
+  });
+  const interfaceMigrationDir = path.join(temp, 'interface-migration-snapshots');
+  const interfaceMigrationConfig = {
+    version: '0.1',
+    sites: [{ id: 'interface-migration', url: 'https://interface-migration.example/' }],
+    failOn: ['interface-removed']
+  };
+
+  await runResolverMonitor(interfaceMigrationConfig, { snapshotDir: interfaceMigrationDir, resolverVersion: '0.2.0', resolveImpl: interfaceMigrationResolve, observedAt: '2026-08-26T02:30:00Z' });
+  interfaceTarget = 'https://interface-migration.example/mcp/v2';
+  report = await runResolverMonitor(interfaceMigrationConfig, { snapshotDir: interfaceMigrationDir, resolverVersion: '0.2.0', resolveImpl: interfaceMigrationResolve, observedAt: '2026-08-26T03:00:00Z' });
+  assert.equal(report.summary.drifted, 1);
+  assert.equal(report.sites[0].drift.summary.interfaceMigrations, 1);
+  assert.equal(report.sites[0].drift.summary.hardInterfacesRemoved, 0);
+  assert.equal(report.shouldFail, false, 'URL-only interface migration must not trigger interface-removed');
+  assert.ok(!report.sites[0].classes.includes('interface-removed'));
+  assert.ok(report.sites[0].classes.includes('plan-changed'));
+
+  console.log('PASS resolver monitor archives drift evidence and separates source/interface migrations from hard disappearance alerts');
 } finally {
   fs.rmSync(temp, { recursive: true, force: true });
 }
