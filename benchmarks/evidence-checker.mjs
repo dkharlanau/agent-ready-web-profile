@@ -144,7 +144,7 @@ export async function runEvidenceChecks(fixtures, {
   return {
     schemaVersion: '0.2',
     generatedAt: now.toISOString(),
-    scope: 'Transport-level evidence observation only. Reachable or restricted responses do not re-confirm semantic ground truth or protocol correctness.',
+    scope: 'Transport-level evidence observation only. A reachable or restricted response does not re-confirm semantic ground truth or protocol correctness.',
     statusSemantics: {
       reachable: 'HTTP 2xx.',
       restricted: 'HTTP 401, 403, 405 or 429: the target responded but GET cannot establish semantic availability.',
