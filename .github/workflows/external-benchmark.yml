@@ -76,11 +76,11 @@ jobs:
           mkdir -p benchmark-results
           npm run benchmark:external -- --output=benchmark-results/external.json
 
-      - name: Build selection diagnostics
-        run: node benchmarks/selection-diagnostics.mjs --input=benchmark-results/external.json --output=benchmark-results/external-diagnostics.json
-
       - name: Build sanitized publication report
         run: node benchmarks/publication-report.mjs --input=benchmark-results/external.json --output=benchmark-results/external-public.json
+
+      - name: Build publication-safe selection diagnostics
+        run: node benchmarks/selection-diagnostics.mjs --input=benchmark-results/external-public.json --output=benchmark-results/external-diagnostics.json
 
       - name: Run resolver-backed federation corpus
         run: npm run benchmark:federation-external -- --output=benchmark-results/federation.json
@@ -129,7 +129,7 @@ jobs:
               const summary = Object.entries(site.categories || {}).map(([key, value]) => `${key}:${value}`).join(', ');
               lines.push(`| ${site.id} | ${site.correct} | ${site.total} | ${site.misses} | ${summary} |`);
             }
-            lines.push('', '> Diagnostic categories classify mismatches against reviewed ground truth; they do not alter accepted interfaces and are not adoption or answer-quality evidence.');
+            lines.push('', '> Diagnostic categories classify mismatches against reviewed ground truth; URLs are publication-sanitized, accepted interfaces are unchanged, and the report is not adoption or answer-quality evidence.');
           }
           if (fs.existsSync('benchmark-results/evidence.json')) {
             const evidence = JSON.parse(fs.readFileSync('benchmark-results/evidence.json', 'utf8'));

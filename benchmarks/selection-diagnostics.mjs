@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { sanitizePublicationUrl } from './publication-report.mjs';
 
 const DEFAULT_STRATEGY = 'resolver-union';
 const INTENTS = ['read', 'search', 'structured', 'tools', 'agent'];
@@ -14,10 +15,19 @@ function normalizeClassification(value) {
   return value === 'correct-interface' || value === 'correct-none' ? 'correct' : 'unclassified';
 }
 
+function sanitizeCriterion(criterion) {
+  if (typeof criterion === 'string') return sanitizePublicationUrl(criterion);
+  if (!criterion || typeof criterion !== 'object' || Array.isArray(criterion)) return criterion;
+  return Object.fromEntries(Object.entries(criterion).map(([key, value]) => [
+    key,
+    /(?:url|uri|href)$/i.test(key) && typeof value === 'string' ? sanitizePublicationUrl(value) : value
+  ]));
+}
+
 function selectedSummary(selected) {
   if (!selected) return null;
   return {
-    url: selected.url || null,
+    url: sanitizePublicationUrl(selected.url || ''),
     protocol: selected.protocol || null,
     kind: selected.kind || null,
     transport: selected.transport || null,
@@ -52,13 +62,12 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
       for (const intent of INTENTS) {
         const issue = {
           siteId: site.id,
-          siteUrl: site.url,
+          siteUrl: sanitizePublicationUrl(site.url || ''),
           intent,
           category: 'resolution-failure',
           classification: 'resolution-failed',
           selected: null,
-          accepted: null,
-          error: site.error || null
+          accepted: null
         };
         issues.push(issue);
         siteIssues.push(issue);
@@ -80,12 +89,12 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
         }
         const issue = {
           siteId: site.id,
-          siteUrl: site.url,
+          siteUrl: sanitizePublicationUrl(site.url || ''),
           intent,
           category: normalizeClassification(result.classification),
           classification: result.classification || 'unclassified',
           selected: selectedSummary(result.selected),
-          accepted: Array.isArray(result.accepted) ? result.accepted : []
+          accepted: Array.isArray(result.accepted) ? result.accepted.map(sanitizeCriterion) : []
         };
         issues.push(issue);
         siteIssues.push(issue);
@@ -94,7 +103,7 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
 
     siteRows.push({
       id: site.id,
-      url: site.url,
+      url: sanitizePublicationUrl(site.url || ''),
       status: site.status,
       correct: siteCorrect,
       total: siteTotal,
@@ -113,7 +122,7 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
     benchmarkVersion: report.benchmarkVersion || null,
     benchmarkGeneratedAt: report.generatedAt || null,
     strategy,
-    policy: 'Diagnostics classify reviewed benchmark mismatches without changing ground truth. missed-interface => discovery-gap; wrong-interface => selection-gap; false-positive => over-selection; full-site failures => resolution-failure.',
+    policy: 'Diagnostics classify reviewed benchmark mismatches without changing ground truth. URLs are publication-sanitized; free-form resolver errors are omitted. missed-interface => discovery-gap; wrong-interface => selection-gap; false-positive => over-selection; full-site failures => resolution-failure.',
     summary: {
       independentSites: independent.length,
       resolvedSites: independent.filter(site => site.status === 'resolved').length,
