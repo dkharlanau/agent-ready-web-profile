@@ -26,6 +26,11 @@ jobs:
       - name: Run contract tests
         run: npm test
 
+      - name: Test benchmark publication sanitizer
+        run: |
+          node benchmarks/publication-report-test.mjs
+          node --check benchmarks/publication-report.mjs
+
       - name: Test bounded large-homepage scanning
         run: node scripts/scanner-large-homepage-test.mjs
 
