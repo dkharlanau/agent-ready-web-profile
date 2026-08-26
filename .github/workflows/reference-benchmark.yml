@@ -1,0 +1,133 @@
+name: Reference-site resolver benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reference-benchmark.yml'
+      - 'benchmarks/corpus/reference-*.json'
+      - 'benchmarks/corpus/fixture.schema.json'
+      - 'benchmarks/external-runner.mjs'
+      - 'lib/resolver.mjs'
+      - 'lib/resolver-adapters.mjs'
+      - 'lib/scanner.mjs'
+      - 'lib/http-discovery.mjs'
+      - 'lib/public-fetch.mjs'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reference-site-resolver-benchmark-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate benchmark corpus
+        run: node benchmarks/corpus-test.mjs
+
+      - name: Run benchmark including project references
+        run: |
+          mkdir -p benchmark-results
+          node benchmarks/external-runner.mjs --include-non-independent --output=benchmark-results/with-references.json
+
+      - name: Build reference cohort report
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const input = JSON.parse(fs.readFileSync('benchmark-results/with-references.json', 'utf8'));
+          const strategies = ['ordinary-web', 'llms-aware', 'agents-aware', 'protocol-native', 'arwp-profile-only', 'resolver-union'];
+          const sites = (input.results || []).filter(site => site.ownership === 'project-reference');
+          const aggregate = {};
+          for (const strategy of strategies) {
+            let correct = 0;
+            let total = 0;
+            for (const site of sites) {
+              total += 5;
+              if (site.status !== 'resolved') continue;
+              correct += site.strategyResults?.[strategy]?.correct || 0;
+            }
+            aggregate[strategy] = { correct, total, accuracy: total ? correct / total : null };
+          }
+          const report = {
+            benchmarkVersion: input.benchmarkVersion,
+            generatedAt: input.generatedAt,
+            ownership: 'project-reference',
+            evidencePolicy: 'Owner-controlled reference implementation evidence only. These results never count toward the independent benchmark aggregate or adoption claims.',
+            sites: sites.length,
+            resolvedSites: sites.filter(site => site.status === 'resolved').length,
+            failedSites: sites.filter(site => site.status !== 'resolved').length,
+            aggregate,
+            results: sites.map(site => ({
+              id: site.id,
+              url: site.url,
+              reviewedAt: site.reviewedAt,
+              status: site.status,
+              canonicalUrl: site.canonicalUrl || null,
+              evidence: site.evidence || [],
+              strategyResults: site.strategyResults || null
+            }))
+          };
+          fs.writeFileSync('benchmark-results/reference-sites.json', `${JSON.stringify(report, null, 2)}\n`);
+          NODE
+
+      - name: Write job summary
+        if: always()
+        run: |
+          if [ -f benchmark-results/reference-sites.json ]; then
+            node - <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('benchmark-results/reference-sites.json', 'utf8'));
+          const lines = [
+            '# ARWP project-reference benchmark',
+            '',
+            `Head: ${process.env.GITHUB_SHA}`,
+            `Reference sites: ${report.sites}`,
+            `Resolved: ${report.resolvedSites}`,
+            `Failed: ${report.failedSites}`,
+            '',
+            '| Strategy | Correct | Total | Accuracy |',
+            '| --- | ---: | ---: | ---: |'
+          ];
+          for (const [strategy, result] of Object.entries(report.aggregate || {})) {
+            const accuracy = result.accuracy == null ? 'n/a' : `${(result.accuracy * 100).toFixed(1)}%`;
+            lines.push(`| ${strategy} | ${result.correct} | ${result.total} | ${accuracy} |`);
+          }
+          lines.push('', '## Per-site resolver-union results', '', '| Site | Correct | Total |', '| --- | ---: | ---: |');
+          for (const site of report.results || []) {
+            const result = site.strategyResults?.['resolver-union'];
+            lines.push(`| ${site.id} | ${result?.correct ?? 0} | ${result?.total ?? 5} |`);
+          }
+          lines.push('', '> Owner-controlled implementation evidence only. These sites validate our publication patterns and regression behavior; they are not independent adoption evidence.');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
+          NODE
+          else
+            echo '# ARWP project-reference benchmark' >> "$GITHUB_STEP_SUMMARY"
+            echo 'No reference report was produced.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload reference benchmark reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arwp-reference-benchmark-${{ github.run_id }}
+          path: |
+            benchmark-results/reference-sites.json
+            benchmark-results/with-references.json
+          if-no-files-found: warn
+          retention-days: 90
