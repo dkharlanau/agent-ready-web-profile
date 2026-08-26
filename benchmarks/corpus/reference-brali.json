@@ -1,0 +1,40 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "reference-brali",
+  "url": "https://brali-lifeos.github.io/",
+  "ownership": "project-reference",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://brali-lifeos.github.io/llms.txt"],
+    "search": [
+      "https://brali-lifeos.github.io/for-ai/query/",
+      "https://brali-lifeos.github.io/api/v1/search.json"
+    ],
+    "structured": [
+      "https://brali-lifeos.github.io/api/v1/openapi.json",
+      "https://brali-lifeos.github.io/api/v1/index.json",
+      "https://brali-lifeos.github.io/api/v1/manifest.json"
+    ],
+    "tools": [
+      {
+        "protocol": "MCP",
+        "transport": "stdio",
+        "url": "https://github.com/Brali-LifeOS/brali-lifeos.github.io/tree/main/mcp"
+      }
+    ],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://brali-lifeos.github.io/ai/site-profile.json",
+      "sourceType": "project-reference-arwp-profile",
+      "note": "Owner-controlled reference site publishes an ARWP profile with retrieval, OpenAPI and local read-only MCP declarations."
+    },
+    {
+      "url": "https://brali-lifeos.github.io/api/v1/openapi.json",
+      "sourceType": "publisher-openapi",
+      "note": "Public OpenAPI description is the primary reviewed structured interface for this reference fixture."
+    }
+  ],
+  "note": "Owner-controlled implementation fixture. It is reported separately from independent evidence."
+}
