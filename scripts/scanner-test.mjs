@@ -32,6 +32,8 @@ const html = `<!doctype html>
   <meta name="description" content="Reviewed example knowledge for humans and machines.">
   <link rel="canonical" href="https://example.com/">
   <link rel="alternate" type="application/rss+xml" title="Updates" href="/feed.xml">
+  <link rel="alternate" type="application/json" title="JSON Feed" href="/feed.json">
+  <link rel="alternate" type="application/json" title="API representation" href="/data.json">
   <link rel="service-desc" type="application/json" href="/openapi.json">
 </head>
 <body>
@@ -45,6 +47,8 @@ const fixtures = new Map([
   ['HEAD https://example.com/sitemap.xml', response({ status: 200, contentType: 'application/xml' })],
   ['HEAD https://example.com/llms.txt', response({ status: 200, contentType: 'text/plain' })],
   ['HEAD https://example.com/feed.xml', response({ status: 200, contentType: 'application/rss+xml' })],
+  ['HEAD https://example.com/feed.json', response({ status: 200, contentType: 'application/json; charset=utf-8' })],
+  ['HEAD https://example.com/data.json', response({ status: 200, contentType: 'application/json' })],
   ['HEAD https://example.com/openapi.json', response({ status: 200, contentType: 'application/json' })],
   ['GET https://example.com/ai/site-profile.json', response({ status: 404, contentType: 'application/json', text: '{}' })]
 ]);
@@ -73,6 +77,8 @@ assert.equal(scan.discovered.robots.url, 'https://example.com/robots.txt');
 assert.equal(scan.discovered.sitemap.url, 'https://example.com/sitemap.xml');
 assert.equal(scan.discovered.llms.url, 'https://example.com/llms.txt');
 assert.equal(scan.discovered.feeds[0].url, 'https://example.com/feed.xml');
+assert.ok(scan.discovered.feeds.some(feed => feed.url === 'https://example.com/feed.json' && feed.mediaType === 'application/json'));
+assert.equal(scan.discovered.feeds.some(feed => feed.url === 'https://example.com/data.json'), false);
 assert.equal(scan.discovered.openapi.url, 'https://example.com/openapi.json');
 assert.equal(scan.existingProfile, null);
 
@@ -81,6 +87,7 @@ assert.equal(profile.$schema, 'https://raw.githubusercontent.com/dkharlanau/agen
 assert.equal(profile.web.robots, 'https://example.com/robots.txt');
 assert.equal(profile.web.sitemap, 'https://example.com/sitemap.xml');
 assert.equal(profile.web.llms, 'https://example.com/llms.txt');
+assert.ok(profile.web.feeds.some(feed => feed.url === 'https://example.com/feed.json' && feed.mediaType === 'application/json'));
 assert.equal(profile.data.openapi, 'https://example.com/openapi.json');
 assert.equal(profile.agentSkills, undefined);
 assert.equal(profile.agentWeb, undefined);
@@ -112,4 +119,4 @@ await assert.rejects(
   /Private or reserved address/
 );
 
-console.log('PASS bounded scanner detects web evidence, generates a valid conservative profile, and blocks private targets');
+console.log('PASS bounded scanner detects explicit feed evidence, including conservative JSON Feed application/json fallbacks, generates a valid profile, and blocks private targets');
