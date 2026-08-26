@@ -1,0 +1,39 @@
+{
+  "$schema": "../monitor/config.schema.json",
+  "version": "0.1",
+  "sites": [
+    {
+      "id": "a2a-docs",
+      "name": "A2A Protocol documentation",
+      "url": "https://a2a-protocol.org/latest/"
+    },
+    {
+      "id": "mcp-docs",
+      "name": "Model Context Protocol documentation",
+      "url": "https://modelcontextprotocol.io/"
+    },
+    {
+      "id": "stripe-docs",
+      "name": "Stripe documentation",
+      "url": "https://docs.stripe.com/"
+    },
+    {
+      "id": "supabase-docs",
+      "name": "Supabase documentation",
+      "url": "https://supabase.com/docs"
+    },
+    {
+      "id": "vercel-docs",
+      "name": "Vercel documentation",
+      "url": "https://vercel.com/docs"
+    },
+    {
+      "id": "jsonfeed-org",
+      "name": "JSON Feed",
+      "url": "https://www.jsonfeed.org/"
+    }
+  ],
+  "failOn": [
+    "resolution-failed"
+  ]
+}
