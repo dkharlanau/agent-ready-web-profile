@@ -92,7 +92,7 @@ Only fixtures marked `ownership=independent` count toward the primary aggregate 
 
 ### Reviewed evidence liveness
 
-The reviewed corpus now has a separate transport-level liveness check:
+The reviewed corpus has a separate transport-level liveness check:
 
 ```bash
 npm run benchmark:evidence -- --output=benchmark-results/evidence.json
@@ -104,11 +104,21 @@ It probes, for independent fixtures only:
 - public `evidence[]` URLs;
 - URL-bearing accepted interfaces across benchmark intents.
 
-Targets are deduplicated, fetched with bounded concurrency, restricted to validated public HTTPS destinations, and revalidated on every redirect. The probe cancels response bodies after receiving headers/status, so evidence monitoring does not require downloading large pages or API documents. It reports HTTP reachability, probe errors, final redirect targets, content type and review-date age.
+Targets are deduplicated, fetched with bounded concurrency, restricted to validated public HTTPS destinations, and revalidated on every redirect. The probe cancels response bodies after receiving headers/status, so evidence monitoring does not require downloading large pages or API documents.
 
-This is deliberately not a semantic reviewer. A `200` response does not prove that the page still supports the fixture's claim, and a redirect does not automatically authorize changing accepted ground truth. `reviewedAt` remains human evidence metadata. Use the liveness artifact to identify what needs re-review, then change a fixture only after the public evidence has been inspected independently of Resolver output.
+Results deliberately distinguish transport observations that have different meanings:
 
-`--strict` is available for controlled runs, but the public external workflow records liveness observationally rather than failing the whole benchmark because a third-party site has a transient outage.
+- `reachable` — HTTP 2xx;
+- `restricted` — HTTP 401/403/405/429; the endpoint responded, but plain GET cannot establish semantic or protocol availability;
+- `missing` — HTTP 404/410; strong signal that the recorded URL needs re-review;
+- `unhealthy` — another non-2xx response that needs re-review or a later retry;
+- `error` — no usable HTTP response was obtained.
+
+This is deliberately not a semantic reviewer. A `200` response does not prove that the page still supports the fixture's claim, and a `401`/`405` on an MCP endpoint does not prove that the endpoint is broken. A redirect does not automatically authorize changing accepted ground truth. `reviewedAt` remains human evidence metadata. Use the liveness artifact to identify what needs re-review, then change a fixture only after the public evidence has been inspected independently of Resolver output.
+
+`--strict` is available for controlled runs. It treats missing/unhealthy/error targets and stale review dates as failures, but not restricted/method-specific endpoints. The public external workflow records liveness observationally rather than failing the whole benchmark because a third-party site has a transient outage.
+
+The first v0.2 evidence record after independent re-review checked 57 deduplicated targets across 20 independent fixtures: 52 returned 2xx, five were restricted/method-specific, and none were missing, unhealthy, errored or stale. Durable context is recorded in `benchmarks/results/2026-08-26-evidence-liveness-v0.2.md`.
 
 ## Layer 3 — resolver-backed federation smoke corpus
 
