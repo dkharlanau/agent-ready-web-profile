@@ -1,0 +1,32 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "reference-metkagram",
+  "url": "https://metkagram.github.io/",
+  "ownership": "project-reference",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://metkagram.github.io/llms.txt"],
+    "search": ["https://metkagram.github.io/api/v1/search-index.json"],
+    "structured": [
+      "https://metkagram.github.io/api/v1/openapi.json",
+      "https://metkagram.github.io/api/v1/index.json",
+      "https://metkagram.github.io/api/v1/schemas/api-response.json",
+      "https://metkagram.github.io/data/catalog.json"
+    ],
+    "tools": [],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://metkagram.github.io/ai/site-profile.json",
+      "sourceType": "project-reference-arwp-profile",
+      "note": "Owner-controlled reference site publishes an ARWP profile with retrieval, OpenAPI, schema and provenance surfaces."
+    },
+    {
+      "url": "https://metkagram.github.io/api/v1/openapi.json",
+      "sourceType": "publisher-openapi",
+      "note": "Public OpenAPI description is the primary reviewed structured interface for this reference fixture."
+    }
+  ],
+  "note": "Owner-controlled implementation fixture. The static MCP-compatible description is deliberately not accepted as a live MCP tool."
+}
