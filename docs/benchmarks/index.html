@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ARWP Resolver project-reference benchmark: five owner-controlled GitHub Pages sites, 25 intent decisions, strategy comparison and reproducible evidence.">
+  <meta name="robots" content="index,follow">
+  <title>ARWP Reference Benchmark — Resolver evidence</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/benchmarks/">
+  <link rel="stylesheet" href="../arwp.css">
+</head>
+<body>
+  <main class="shell" style="padding-top:3rem;padding-bottom:5rem">
+    <p class="eyebrow">ARWP Resolver · project-reference evidence</p>
+    <h1>Reference-site benchmark</h1>
+    <p class="hero-lead">Five owner-controlled GitHub Pages sites publish ARWP-compatible machine interfaces. This cohort checks whether the Resolver routes those intentionally published interfaces correctly, while remaining separate from the independent benchmark.</p>
+
+    <section style="margin-top:3rem">
+      <h2>Baseline · 26 August 2026</h2>
+      <div class="hero-proof" aria-label="Baseline summary">
+        <span>5 / 5 sites resolved</span>
+        <span>25 / 25 Resolver-union decisions</span>
+        <span>20 / 25 ARWP-profile-only decisions</span>
+      </div>
+      <table style="width:100%;margin-top:1.5rem;border-collapse:collapse">
+        <thead><tr><th style="text-align:left;padding:.7rem">Strategy</th><th style="text-align:right;padding:.7rem">Correct</th><th style="text-align:right;padding:.7rem">Accuracy</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:.7rem">ordinary-web</td><td style="text-align:right;padding:.7rem">7 / 25</td><td style="text-align:right;padding:.7rem">28%</td></tr>
+          <tr><td style="padding:.7rem">llms-aware</td><td style="text-align:right;padding:.7rem">12 / 25</td><td style="text-align:right;padding:.7rem">48%</td></tr>
+          <tr><td style="padding:.7rem">agents-aware</td><td style="text-align:right;padding:.7rem">7 / 25</td><td style="text-align:right;padding:.7rem">28%</td></tr>
+          <tr><td style="padding:.7rem">protocol-native</td><td style="text-align:right;padding:.7rem">7 / 25</td><td style="text-align:right;padding:.7rem">28%</td></tr>
+          <tr><td style="padding:.7rem">arwp-profile-only</td><td style="text-align:right;padding:.7rem">20 / 25</td><td style="text-align:right;padding:.7rem">80%</td></tr>
+          <tr><td style="padding:.7rem"><strong>resolver-union</strong></td><td style="text-align:right;padding:.7rem"><strong>25 / 25</strong></td><td style="text-align:right;padding:.7rem"><strong>100%</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section style="margin-top:3rem">
+      <h2>Reference sites</h2>
+      <div class="directory-list">
+        <article><h3><a href="https://dkharlanau.github.io/">Dzmitryi Kharlanau — SAP Knowledge</a></h3><p>Resolver union 5/5 · profile only 4/5 · <a href="https://dkharlanau.github.io/ai/site-profile.json">ARWP profile</a></p></article>
+        <article><h3><a href="https://brali-lifeos.github.io/">Brali Practical Knowledge Library</a></h3><p>Resolver union 5/5 · profile only 4/5 · <a href="https://brali-lifeos.github.io/ai/site-profile.json">ARWP profile</a></p></article>
+        <article><h3><a href="https://cognitive-biases.github.io/">Cognitive Biases Knowledge Library</a></h3><p>Resolver union 5/5 · profile only 4/5 · <a href="https://cognitive-biases.github.io/ai/site-profile.json">ARWP profile</a></p></article>
+        <article><h3><a href="https://cbt-cards.github.io/">CBT Cards</a></h3><p>Resolver union 5/5 · profile only 4/5 · <a href="https://cbt-cards.github.io/ai/site-profile.json">ARWP profile</a></p></article>
+        <article><h3><a href="https://metkagram.github.io/">Metkagram</a></h3><p>Resolver union 5/5 · profile only 4/5 · <a href="https://metkagram.github.io/ai/site-profile.json">ARWP profile</a></p></article>
+      </div>
+    </section>
+
+    <section style="margin-top:3rem">
+      <h2>What the result shows</h2>
+      <p>All five profile-only misses were for the <code>read</code> intent. The profile supplied valuable retrieval, structured-data and tool declarations, while ordinary observed-web discovery supplied the reviewed <code>llms.txt</code> read surface. Combining both evidence families produced 25/25 correct decisions.</p>
+      <p><strong>Interpretation:</strong> on this owner-controlled suite, ARWP Profile works best as complementary publisher metadata rather than a replacement for normal web discovery.</p>
+    </section>
+
+    <section style="margin-top:3rem">
+      <h2>Evidence and boundaries</h2>
+      <p>This is implementation/regression evidence. It is not independent adoption evidence and does not prove search-ranking gains, AI recommendation/citation gains, answer quality, token savings, runtime MCP/A2A conformance or security trust.</p>
+      <p><a href="./reference-sites.json">Machine-readable baseline JSON →</a></p>
+      <p><a href="../REFERENCE-BENCHMARK.md">Benchmark methodology →</a></p>
+      <p><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/benchmarks/results/2026-08-26-project-reference-v0.1.md">Durable engineering record →</a></p>
+      <p><a href="https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/32973875472">GitHub Actions run →</a></p>
+    </section>
+  </main>
+</body>
+</html>
