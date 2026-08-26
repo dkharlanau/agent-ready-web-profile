@@ -39,10 +39,11 @@ The scan fetches the homepage and a small documented set of discovery resources.
 - sitemaps declared by `robots.txt` and the conventional `/sitemap.xml` path;
 - explicitly linked or conventional `/llms.txt`;
 - RSS, Atom and JSON feeds explicitly linked from HTML;
+- JSON Feed links using the preferred `application/feed+json` media type, plus conservative `application/json` fallback recognition only when the link title or URL shape explicitly identifies a JSON Feed;
 - OpenAPI documents explicitly linked with `rel="service-desc"`;
 - an explicitly linked or conventional `/ai/site-profile.json`, which is syntax-validated when present.
 
-The scanner does not turn page text such as “supports MCP” into a capability declaration.
+The scanner does not treat every `rel="alternate" type="application/json"` link as a feed, and it does not turn page text such as “supports MCP” into a capability declaration.
 
 ## Generate a draft profile
 
