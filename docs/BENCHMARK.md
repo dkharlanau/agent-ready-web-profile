@@ -90,6 +90,26 @@ npm run benchmark:external -- --output=benchmark-results/external.json
 
 Only fixtures marked `ownership=independent` count toward the primary aggregate unless an engineering-only run explicitly opts into the other fixtures.
 
+### Reviewed evidence liveness
+
+The reviewed corpus now has a separate transport-level liveness check:
+
+```bash
+npm run benchmark:evidence -- --output=benchmark-results/evidence.json
+```
+
+It probes, for independent fixtures only:
+
+- the canonical site URL;
+- public `evidence[]` URLs;
+- URL-bearing accepted interfaces across benchmark intents.
+
+Targets are deduplicated, fetched with bounded concurrency, restricted to validated public HTTPS destinations, and revalidated on every redirect. The probe cancels response bodies after receiving headers/status, so evidence monitoring does not require downloading large pages or API documents. It reports HTTP reachability, probe errors, final redirect targets, content type and review-date age.
+
+This is deliberately not a semantic reviewer. A `200` response does not prove that the page still supports the fixture's claim, and a redirect does not automatically authorize changing accepted ground truth. `reviewedAt` remains human evidence metadata. Use the liveness artifact to identify what needs re-review, then change a fixture only after the public evidence has been inspected independently of Resolver output.
+
+`--strict` is available for controlled runs, but the public external workflow records liveness observationally rather than failing the whole benchmark because a third-party site has a transient outage.
+
 ## Layer 3 — resolver-backed federation smoke corpus
 
 Resolver-backed federation has a separate live corpus because a discovery-selection score does not prove that a resolved interface can actually be executed and parsed.
@@ -112,7 +132,7 @@ This layer records:
 
 A query hit is only a smoke signal that records reached the generic search path. It is not a ranking or answer-quality metric.
 
-The first live observation on 2026-08-26 executed the reviewed interface for 1 of 4 sites. `ai.rud.is` exposed `/feed.json`, 43 records were parsed and three matched the smoke query. JSONFeed.org, Manton Reece and Daring Fireball were skipped because the current resolver observation did not expose a compatible static feed surface. The ground-truth fixtures were deliberately left unchanged. See `benchmarks/results/2026-08-26-federation-v0.1.md` and the adjacent raw JSON record.
+The first live observation on 2026-08-26 executed the reviewed interface for 1 of 4 sites. `ai.rud.is` exposed `/feed.json`; JSONFeed.org, Manton Reece and Daring Fireball were retained as misses rather than redefining ground truth. After ordinary-web JSON Feed fallback discovery was tightened to accept `application/json` only with explicit feed evidence, the unchanged four-site corpus executed 4 of 4 reviewed expected interfaces. Durable evidence is recorded in `benchmarks/results/2026-08-26-federation-v0.2.{json,md}`. This is execution/discovery evidence, not adoption, ranking quality or universal federation compatibility.
 
 ## Metrics
 
@@ -166,7 +186,8 @@ When external benchmark results are published:
 6. separate discovery success from runtime protocol conformance;
 7. keep owned/reference sites identifiable so they cannot be mistaken for independent evidence;
 8. keep failed sites in the primary denominator and report resolution coverage separately;
-9. sanitize transient signed URLs, tokens, cookies or other request-specific material before committing a durable result artifact.
+9. sanitize transient signed URLs, tokens, cookies or other request-specific material before committing a durable result artifact;
+10. keep transport-level evidence liveness separate from semantic ground-truth re-review.
 
 ## Decision gate
 
