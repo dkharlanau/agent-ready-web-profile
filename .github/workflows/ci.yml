@@ -46,6 +46,11 @@ jobs:
           node benchmarks/publication-report-test.mjs
           node --check benchmarks/publication-report.mjs
 
+      - name: Test benchmark selection diagnostics
+        run: |
+          node benchmarks/selection-diagnostics-test.mjs
+          node --check benchmarks/selection-diagnostics.mjs
+
       - name: Test bounded large-homepage scanning
         run: node scripts/scanner-large-homepage-test.mjs
 

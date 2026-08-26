@@ -13,6 +13,8 @@ on:
       - 'benchmarks/external-runner.mjs'
       - 'benchmarks/publication-report.mjs'
       - 'benchmarks/publication-report-test.mjs'
+      - 'benchmarks/selection-diagnostics.mjs'
+      - 'benchmarks/selection-diagnostics-test.mjs'
       - 'benchmarks/federation-corpus.json'
       - 'benchmarks/federation-runner.mjs'
       - 'gateway/lib.mjs'
@@ -64,10 +66,18 @@ jobs:
           node benchmarks/publication-report-test.mjs
           node --check benchmarks/publication-report.mjs
 
+      - name: Test selection diagnostics
+        run: |
+          node benchmarks/selection-diagnostics-test.mjs
+          node --check benchmarks/selection-diagnostics.mjs
+
       - name: Run external benchmark
         run: |
           mkdir -p benchmark-results
           npm run benchmark:external -- --output=benchmark-results/external.json
+
+      - name: Build selection diagnostics
+        run: node benchmarks/selection-diagnostics.mjs --input=benchmark-results/external.json --output=benchmark-results/external-diagnostics.json
 
       - name: Build sanitized publication report
         run: node benchmarks/publication-report.mjs --input=benchmark-results/external.json --output=benchmark-results/external-public.json
@@ -90,6 +100,7 @@ jobs:
             `Resolved: ${report.resolvedIndependentSites}`,
             `Failed: ${report.failedIndependentSites}`,
             `Sanitized publication report: ${fs.existsSync('benchmark-results/external-public.json') ? 'produced' : 'missing'}`,
+            `Selection diagnostics: ${fs.existsSync('benchmark-results/external-diagnostics.json') ? 'produced' : 'missing'}`,
             '',
             '| Strategy | Correct | Total | Accuracy |',
             '| --- | ---: | ---: | ---: |'
@@ -97,6 +108,28 @@ jobs:
           for (const [strategy, result] of Object.entries(report.aggregate || {})) {
             const accuracy = result.accuracy == null ? 'n/a' : `${(result.accuracy * 100).toFixed(1)}%`;
             lines.push(`| ${strategy} | ${result.correct} | ${result.total} | ${accuracy} |`);
+          }
+          if (fs.existsSync('benchmark-results/external-diagnostics.json')) {
+            const diagnostics = JSON.parse(fs.readFileSync('benchmark-results/external-diagnostics.json', 'utf8'));
+            const categories = diagnostics.summary?.byCategory || {};
+            lines.push(
+              '',
+              '## Resolver-union mismatch diagnostics',
+              '',
+              `Incorrect intent decisions: ${diagnostics.summary?.incorrect ?? 0}`,
+              `Discovery gaps: ${categories['discovery-gap'] ?? 0}`,
+              `Selection gaps: ${categories['selection-gap'] ?? 0}`,
+              `Over-selection: ${categories['over-selection'] ?? 0}`,
+              `Resolution failures: ${categories['resolution-failure'] ?? 0}`,
+              '',
+              '| Site | Correct | Total | Misses | Categories |',
+              '| --- | ---: | ---: | ---: | --- |'
+            );
+            for (const site of (diagnostics.weakSites || []).slice(0, 10)) {
+              const summary = Object.entries(site.categories || {}).map(([key, value]) => `${key}:${value}`).join(', ');
+              lines.push(`| ${site.id} | ${site.correct} | ${site.total} | ${site.misses} | ${summary} |`);
+            }
+            lines.push('', '> Diagnostic categories classify mismatches against reviewed ground truth; they do not alter accepted interfaces and are not adoption or answer-quality evidence.');
           }
           if (fs.existsSync('benchmark-results/evidence.json')) {
             const evidence = JSON.parse(fs.readFileSync('benchmark-results/evidence.json', 'utf8'));
