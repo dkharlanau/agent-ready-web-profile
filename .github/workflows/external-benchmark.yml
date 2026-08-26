@@ -7,6 +7,9 @@ on:
     paths:
       - '.github/workflows/external-benchmark.yml'
       - 'benchmarks/corpus/**'
+      - 'benchmarks/evidence-checker.mjs'
+      - 'benchmarks/evidence-checker-test.mjs'
+      - 'benchmarks/evidence-check.mjs'
       - 'benchmarks/external-runner.mjs'
       - 'benchmarks/publication-report.mjs'
       - 'benchmarks/publication-report-test.mjs'
@@ -48,6 +51,14 @@ jobs:
       - name: Validate reviewed corpus
         run: node benchmarks/corpus-test.mjs
 
+      - name: Test evidence liveness checker
+        run: node benchmarks/evidence-checker-test.mjs
+
+      - name: Check reviewed evidence liveness
+        run: |
+          mkdir -p benchmark-results
+          npm run benchmark:evidence -- --output=benchmark-results/evidence.json
+
       - name: Test publication sanitizer
         run: |
           node benchmarks/publication-report-test.mjs
@@ -86,6 +97,22 @@ jobs:
           for (const [strategy, result] of Object.entries(report.aggregate || {})) {
             const accuracy = result.accuracy == null ? 'n/a' : `${(result.accuracy * 100).toFixed(1)}%`;
             lines.push(`| ${strategy} | ${result.correct} | ${result.total} | ${accuracy} |`);
+          }
+          if (fs.existsSync('benchmark-results/evidence.json')) {
+            const evidence = JSON.parse(fs.readFileSync('benchmark-results/evidence.json', 'utf8'));
+            lines.push(
+              '',
+              '## Reviewed evidence liveness',
+              '',
+              `Targets checked: ${evidence.totals.targets}`,
+              `Reachable: ${evidence.totals.reachable}`,
+              `Unreachable HTTP responses: ${evidence.totals.unreachable}`,
+              `Probe errors: ${evidence.totals.errors}`,
+              `Redirected: ${evidence.totals.redirected}`,
+              `Stale review dates: ${evidence.totals.staleReviews}`,
+              '',
+              '> This is transport-level liveness only. A reachable URL does not re-confirm semantic ground truth.'
+            );
           }
           if (fs.existsSync('benchmark-results/federation.json')) {
             const federation = JSON.parse(fs.readFileSync('benchmark-results/federation.json', 'utf8'));
