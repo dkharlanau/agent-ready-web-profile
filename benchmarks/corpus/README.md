@@ -35,4 +35,12 @@ Ground truth must come from reviewed public evidence or protocol-native runtime 
 
 A site may have multiple accepted URLs for one intent.
 
+## Semantic review receipts
+
+`benchmarks/reviews/semantic-review-v0.2.json` records completed manual semantic reviews separately from transport-level liveness checks. Each receipt pins the exact Git blob SHA of the fixture that was reviewed and names the current fixture evidence used as the review basis.
+
+`npm run test:benchmark` fails if a byte-pinned reviewed fixture changes without a new semantic review receipt. This prevents an old `reviewedAt` date from silently covering later ground-truth edits.
+
+The receipt set may intentionally cover only part of the independent corpus while review is in progress; the test reports the reviewed count explicitly. Resolver output must not be used as the review basis.
+
 Do not commit credentials, private URLs, private benchmark targets or browsing-history data.
