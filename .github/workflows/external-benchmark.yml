@@ -8,6 +8,8 @@ on:
       - '.github/workflows/external-benchmark.yml'
       - 'benchmarks/corpus/**'
       - 'benchmarks/external-runner.mjs'
+      - 'benchmarks/publication-report.mjs'
+      - 'benchmarks/publication-report-test.mjs'
       - 'benchmarks/federation-corpus.json'
       - 'benchmarks/federation-runner.mjs'
       - 'gateway/lib.mjs'
@@ -46,10 +48,18 @@ jobs:
       - name: Validate reviewed corpus
         run: node benchmarks/corpus-test.mjs
 
+      - name: Test publication sanitizer
+        run: |
+          node benchmarks/publication-report-test.mjs
+          node --check benchmarks/publication-report.mjs
+
       - name: Run external benchmark
         run: |
           mkdir -p benchmark-results
           npm run benchmark:external -- --output=benchmark-results/external.json
+
+      - name: Build sanitized publication report
+        run: node benchmarks/publication-report.mjs --input=benchmark-results/external.json --output=benchmark-results/external-public.json
 
       - name: Run resolver-backed federation corpus
         run: npm run benchmark:federation-external -- --output=benchmark-results/federation.json
@@ -68,6 +78,7 @@ jobs:
             `Independent sites: ${report.independentSites}`,
             `Resolved: ${report.resolvedIndependentSites}`,
             `Failed: ${report.failedIndependentSites}`,
+            `Sanitized publication report: ${fs.existsSync('benchmark-results/external-public.json') ? 'produced' : 'missing'}`,
             '',
             '| Strategy | Correct | Total | Accuracy |',
             '| --- | ---: | ---: | ---: |'
@@ -101,7 +112,7 @@ jobs:
             echo 'No result file was produced.' >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: Upload raw benchmark reports
+      - name: Upload benchmark reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
