@@ -1,11 +1,21 @@
 import { probePublicHttpsUrl } from '../lib/public-fetch.mjs';
 
 const INTENTS = ['read', 'search', 'structured', 'tools', 'agent'];
+const RESTRICTED_HTTP_STATUSES = new Set([401, 403, 405, 429]);
+const MISSING_HTTP_STATUSES = new Set([404, 410]);
 
 function acceptedUrl(value) {
   if (typeof value === 'string') return value;
   if (value && typeof value === 'object' && typeof value.url === 'string') return value.url;
   return null;
+}
+
+function classifyHttpResult(result) {
+  const status = Number(result?.status);
+  if (result?.ok) return 'reachable';
+  if (RESTRICTED_HTTP_STATUSES.has(status)) return 'restricted';
+  if (MISSING_HTTP_STATUSES.has(status)) return 'missing';
+  return 'unhealthy';
 }
 
 export function collectFixtureTargets(fixture) {
@@ -14,7 +24,7 @@ export function collectFixtureTargets(fixture) {
     if (!url) return;
     const normalized = new URL(url).href;
     const existing = targets.get(normalized) || { url: normalized, roles: [] };
-    if (!existing.roles.some(item => item.role === role && item.detail === detail)) {
+    if (!existing.roles.some(item => item.role === role && (item.detail ?? null) === detail)) {
       existing.roles.push({ role, ...(detail ? { detail } : {}) });
     }
     targets.set(normalized, existing);
@@ -75,7 +85,7 @@ export async function runEvidenceChecks(fixtures, {
         fixtureId: fixture.id,
         url: target.url,
         roles: target.roles,
-        status: result.ok ? 'reachable' : 'unreachable',
+        status: classifyHttpResult(result),
         httpStatus: result.status ?? null,
         finalUrl: result.url || target.url,
         redirected: Boolean(result.redirected || (result.url && result.url !== target.url)),
@@ -110,7 +120,9 @@ export async function runEvidenceChecks(fixtures, {
       reviewStale: ageDays == null ? true : ageDays > reviewMaxAgeDays,
       targets: checks.length,
       reachable: checks.filter(item => item.status === 'reachable').length,
-      unreachable: checks.filter(item => item.status === 'unreachable').length,
+      restricted: checks.filter(item => item.status === 'restricted').length,
+      missing: checks.filter(item => item.status === 'missing').length,
+      unhealthy: checks.filter(item => item.status === 'unhealthy').length,
       errors: checks.filter(item => item.status === 'error').length,
       redirected: checks.filter(item => item.redirected).length,
       checks
@@ -121,16 +133,25 @@ export async function runEvidenceChecks(fixtures, {
     independentFixtures: sites.length,
     targets: checked.length,
     reachable: checked.filter(item => item.status === 'reachable').length,
-    unreachable: checked.filter(item => item.status === 'unreachable').length,
+    restricted: checked.filter(item => item.status === 'restricted').length,
+    missing: checked.filter(item => item.status === 'missing').length,
+    unhealthy: checked.filter(item => item.status === 'unhealthy').length,
     errors: checked.filter(item => item.status === 'error').length,
     redirected: checked.filter(item => item.redirected).length,
     staleReviews: sites.filter(site => site.reviewStale).length
   };
 
   return {
-    schemaVersion: '0.1',
+    schemaVersion: '0.2',
     generatedAt: now.toISOString(),
-    scope: 'Transport-level liveness only. Reachability does not re-confirm semantic ground truth or interface correctness.',
+    scope: 'Transport-level evidence observation only. Reachable or restricted responses do not re-confirm semantic ground truth or protocol correctness.',
+    statusSemantics: {
+      reachable: 'HTTP 2xx.',
+      restricted: 'HTTP 401, 403, 405 or 429: the target responded but GET cannot establish semantic availability.',
+      missing: 'HTTP 404 or 410: strong transport-level signal that the recorded URL needs re-review.',
+      unhealthy: 'Other non-2xx HTTP response: target needs re-review or a later retry.',
+      error: 'No usable HTTP response was obtained.'
+    },
     reviewMaxAgeDays,
     totals,
     sites
