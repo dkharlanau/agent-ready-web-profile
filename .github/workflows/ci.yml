@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
 
@@ -30,6 +35,11 @@ jobs:
         run: |
           npm install --no-save --ignore-scripts --no-audit --no-fund @a2a-js/sdk@1.0.1
           node scripts/a2a-js-interoperability-test.mjs
+
+      - name: Test official A2A Python signature interoperability
+        run: |
+          python -m pip install --disable-pip-version-check 'a2a-sdk[signing,encryption]==1.1.2'
+          node scripts/a2a-python-interoperability-test.mjs
 
       - name: Test benchmark publication sanitizer
         run: |
