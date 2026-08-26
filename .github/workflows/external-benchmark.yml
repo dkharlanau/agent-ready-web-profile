@@ -105,13 +105,15 @@ jobs:
               '## Reviewed evidence liveness',
               '',
               `Targets checked: ${evidence.totals.targets}`,
-              `Reachable: ${evidence.totals.reachable}`,
-              `Unreachable HTTP responses: ${evidence.totals.unreachable}`,
+              `HTTP 2xx: ${evidence.totals.reachable}`,
+              `Restricted/method-specific (401/403/405/429): ${evidence.totals.restricted}`,
+              `Missing (404/410): ${evidence.totals.missing}`,
+              `Other unhealthy HTTP: ${evidence.totals.unhealthy}`,
               `Probe errors: ${evidence.totals.errors}`,
               `Redirected: ${evidence.totals.redirected}`,
               `Stale review dates: ${evidence.totals.staleReviews}`,
               '',
-              '> This is transport-level liveness only. A reachable URL does not re-confirm semantic ground truth.'
+              '> This is transport-level observation only. HTTP 2xx or a restricted response does not re-confirm semantic ground truth or protocol correctness.'
             );
           }
           if (fs.existsSync('benchmark-results/federation.json')) {
