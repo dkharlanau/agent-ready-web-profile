@@ -20,23 +20,46 @@ The test asserts all of the following:
 
 The first CI run containing this cross-SDK gate was GitHub Actions run `32917963170` on commit `231c527d985a251413a3e7f3585775964d04e39a`; the interoperability step and the full validation job completed successfully.
 
+## Official Python SDK cross-check
+
+The next CI gate performs the same style of cross-language check against the released official Python package `a2a-sdk[signing,encryption]==1.1.2`.
+
+Tests: `scripts/a2a-python-interoperability-test.mjs` plus the small SDK-side helper `scripts/a2a-python-interop-helper.py`.
+
+This fixture uses ES256 and proves a second algorithm and a second implementation language:
+
+1. The Python SDK constructs and signs a v1 Agent Card with an ephemeral P-256 key.
+2. ARWP and the Python SDK produce byte-for-byte identical canonical payloads for that reviewed card.
+3. ARWP verifies the Python SDK's ES256 JWS using the public JWK produced from the same ephemeral key.
+4. ARWP-compatible fixture logic signs the same payload and the Python SDK verifier accepts it using the exported public key.
+5. Both directions reject a post-signing mutation.
+
+GitHub Actions run `32918172066` on commit `17a18007b71d166a05a09d98f861338154b08b22` completed successfully, including both the JavaScript and Python interoperability steps and the full ARWP validation suite.
+
+The Python dependency is installed only for the CI interoperability gate; it is not added to ARWP's runtime or npm package dependency surface.
+
 ## Canonicalization scope
 
-The official JavaScript SDK v1.0.1 normalizes an Agent Card through its generated v1 model, removes fields not represented by that model, excludes `signatures`, removes empty values according to its implementation, then applies deterministic JCS-style key ordering. ARWP's current presence-normalization path produced byte-for-byte identical canonical JSON for the reviewed fixture above.
+Both official SDK checks assert exact canonical payload equality before relying on signature verification. No fallback canonicalizer or compatibility rewrite is attempted when the payloads differ.
 
-This test deliberately does not turn that single fixture into a universal canonicalization claim. Optional fields explicitly set to protobuf-default-equivalent values, schema extensions and future A2A model changes remain cases that should be tested independently rather than normalized silently.
+For the reviewed fixtures, ARWP matched the official JavaScript SDK v1.0.1 and official Python SDK v1.1.2 canonical payloads exactly. This does not turn two fixtures into a universal canonicalization claim. Optional fields explicitly set to protobuf-default-equivalent values, schema extensions and future A2A model changes remain cases that should be tested independently rather than normalized silently.
 
 ## What this proves
 
-The successful test is evidence of **bidirectional RS256 signature interoperability with the official A2A JavaScript SDK v1.0.1 for the reviewed fixture**.
+The successful gates provide reproducible evidence of:
 
-It does not prove:
+- bidirectional RS256 signature interoperability with the official A2A JavaScript SDK v1.0.1 for the reviewed JavaScript fixture;
+- bidirectional ES256 signature interoperability with the official A2A Python SDK v1.1.2 for the reviewed Python fixture;
+- identical canonical payloads for those two reviewed fixtures;
+- rejection of post-signing mutation in both implementation pairings.
 
-- interoperability with every A2A implementation or language SDK;
-- interoperability for every supported signature algorithm;
+They do not prove:
+
+- interoperability with every A2A implementation or every possible Agent Card shape;
+- interoperability for every signature algorithm;
 - trustworthiness of the signer or JWKS host;
 - key pinning, PKI, revocation or organizational identity;
 - universal compatibility with future A2A schema/default-field behavior;
 - existence of an independently hosted public signed Agent Card.
 
-ARWP therefore continues to describe the verifier as internally verified plus cross-checked against the official JavaScript SDK, while leaving the broader multi-implementation interoperability gate open.
+ARWP can therefore claim reproducible cross-SDK interoperability for the tested JavaScript/RS256 and Python/ES256 fixtures, while keeping broader ecosystem and public-artifact interoperability claims scoped to evidence actually collected.
