@@ -26,6 +26,11 @@ jobs:
       - name: Run contract tests
         run: npm test
 
+      - name: Test official A2A JS signature interoperability
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund @a2a-js/sdk@1.0.1
+          node scripts/a2a-js-interoperability-test.mjs
+
       - name: Test benchmark publication sanitizer
         run: |
           node benchmarks/publication-report-test.mjs
