@@ -1,0 +1,45 @@
+{
+  "$schema": "./fixture.schema.json",
+  "id": "reference-dkharlanau",
+  "url": "https://dkharlanau.github.io/",
+  "ownership": "project-reference",
+  "reviewedAt": "2026-08-26",
+  "accepted": {
+    "read": ["https://dkharlanau.github.io/llms.txt"],
+    "search": [
+      "https://dkharlanau.github.io/datasets/search/",
+      "https://dkharlanau.github.io/ai/atlas-compact-index.json"
+    ],
+    "structured": [
+      "https://dkharlanau.github.io/datasets/schema.json",
+      "https://dkharlanau.github.io/ai/catalog.json",
+      "https://dkharlanau.github.io/datasets/manifest.json"
+    ],
+    "tools": [
+      {
+        "protocol": "MCP",
+        "transport": "stdio",
+        "url": "https://github.com/dkharlanau/dkharlanau.github.io/tree/main/mcp/sap-assessment-mcp"
+      },
+      {
+        "protocol": "MCP",
+        "transport": "stdio",
+        "url": "https://github.com/dkharlanau/dkharlanau.github.io/tree/main/mcp/sap-diagnostics-mcp"
+      }
+    ],
+    "agent": []
+  },
+  "evidence": [
+    {
+      "url": "https://dkharlanau.github.io/ai/site-profile.json",
+      "sourceType": "project-reference-arwp-profile",
+      "note": "Owner-controlled reference site publishes the ARWP profile used to declare its readable, retrieval, structured and local MCP surfaces."
+    },
+    {
+      "url": "https://dkharlanau.github.io/llms.txt",
+      "sourceType": "publisher-llms-index",
+      "note": "Public llms.txt is the preferred reviewed read surface for this reference fixture."
+    }
+  ],
+  "note": "Owner-controlled implementation fixture. It is useful for regression and adoption-quality checks but must never count as independent evidence."
+}
