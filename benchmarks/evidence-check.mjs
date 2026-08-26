@@ -35,13 +35,13 @@ if (options.output) {
   fs.writeFileSync(target, json);
 }
 
-console.log(`Evidence liveness: ${report.totals.reachable}/${report.totals.targets} reachable; ${report.totals.unreachable} unreachable; ${report.totals.errors} errors; ${report.totals.redirected} redirected; ${report.totals.staleReviews} stale review(s).`);
+console.log(`Evidence liveness: ${report.totals.reachable}/${report.totals.targets} HTTP 2xx; ${report.totals.restricted} restricted/method-specific; ${report.totals.missing} missing; ${report.totals.unhealthy} unhealthy; ${report.totals.errors} probe errors; ${report.totals.redirected} redirected; ${report.totals.staleReviews} stale review(s).`);
 for (const site of report.sites) {
-  if (site.unreachable || site.errors || site.reviewStale) {
-    console.log(`- ${site.id}: ${site.reachable}/${site.targets} reachable, ${site.unreachable} unreachable, ${site.errors} errors, review age ${site.reviewAgeDays ?? 'unknown'}d${site.reviewStale ? ' (stale)' : ''}`);
+  if (site.missing || site.unhealthy || site.errors || site.reviewStale) {
+    console.log(`- ${site.id}: ${site.reachable}/${site.targets} 2xx, ${site.restricted} restricted, ${site.missing} missing, ${site.unhealthy} unhealthy, ${site.errors} errors, review age ${site.reviewAgeDays ?? 'unknown'}d${site.reviewStale ? ' (stale)' : ''}`);
   }
 }
 
-if (options.strict && (report.totals.unreachable > 0 || report.totals.errors > 0 || report.totals.staleReviews > 0)) {
+if (options.strict && (report.totals.missing > 0 || report.totals.unhealthy > 0 || report.totals.errors > 0 || report.totals.staleReviews > 0)) {
   process.exitCode = 2;
 }
