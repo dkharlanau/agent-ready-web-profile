@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "scope": "initial-independent-ten",
+  "reviewedAt": "2026-08-26",
+  "method": "Manual semantic review against publisher-controlled or protocol-native evidence; Resolver output was not used to create or confirm ground truth.",
+  "fixtures": [
+    {
+      "id": "a2a-docs",
+      "file": "a2a-docs.json",
+      "blobSha": "f30fac8b8539995601718dd4b512c61e74e361b2",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://a2a-protocol.org/llms.txt",
+        "https://a2a-protocol.org/latest/specification/"
+      ]
+    },
+    {
+      "id": "agent-skills-docs",
+      "file": "agent-skills-docs.json",
+      "blobSha": "0e662dd17f378d108c8d24ab8dc21df9ab98fce7",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://agentskills.io/llms.txt"
+      ]
+    },
+    {
+      "id": "cloudflare-docs",
+      "file": "cloudflare-docs.json",
+      "blobSha": "f55f070fc1b7846eff31f61cb6446f898f28b1bf",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+        "https://developers.cloudflare.com/agents/",
+        "https://developers.cloudflare.com/style-guide/how-we-docs/ai-consumability/"
+      ]
+    },
+    {
+      "id": "crewai-enterprise-docs",
+      "file": "crewai-enterprise-docs.json",
+      "blobSha": "26cde5c83587c2605f84f818786e413e79142784",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://enterprise-docs.crewai.com/reference/chart-values/secrets"
+      ]
+    },
+    {
+      "id": "fastmcp-docs",
+      "file": "fastmcp-docs.json",
+      "blobSha": "43b04aed8a1b6d1eddb89fbe6a988cc420e4d9e1",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://gofastmcp.com/getting-started/welcome"
+      ]
+    },
+    {
+      "id": "langchain-docs",
+      "file": "langchain-docs.json",
+      "blobSha": "c1968303a9a507c4f36995cb1ab9564e44d6e39d",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://docs.langchain.com/use-these-docs"
+      ]
+    },
+    {
+      "id": "mcp-docs",
+      "file": "mcp-docs.json",
+      "blobSha": "fdaf900ebf0b86d6284c4a834ac0fe14c988c528",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://modelcontextprotocol.io/llms.txt"
+      ]
+    },
+    {
+      "id": "ruff-docs",
+      "file": "ruff-docs.json",
+      "blobSha": "8589d6910739461d3cf30b1b7ebc7f04879a3257",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://docs.astral.sh/ruff/llms.txt"
+      ]
+    },
+    {
+      "id": "ty-docs",
+      "file": "ty-docs.json",
+      "blobSha": "2bada3e47aa35ff033abfd7e849fdcc5c8d7e9ca",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://github.com/astral-sh/ty/commit/ae931b2c038bc8a81d11227f15bcae331aab04c7"
+      ]
+    },
+    {
+      "id": "uv-docs",
+      "file": "uv-docs.json",
+      "blobSha": "31361d7c7aba9646ff6ea87faa227a7f02fe07de",
+      "reviewedAt": "2026-08-26",
+      "status": "confirmed",
+      "evidenceBasis": [
+        "https://docs.astral.sh/uv/llms.txt"
+      ]
+    }
+  ]
+}
