@@ -60,6 +60,27 @@ The GitHub Actions workflow `.github/workflows/reference-benchmark.yml` runs the
 
 The workflow summary prints strategy accuracy and per-site `resolver-union` correctness.
 
+## Baseline — 2026-08-26
+
+The first successful reference-cohort run resolved all five sites and scored 25 planning decisions per strategy.
+
+| Strategy | Correct | Accuracy |
+| --- | ---: | ---: |
+| `ordinary-web` | 7 / 25 | 28% |
+| `llms-aware` | 12 / 25 | 48% |
+| `agents-aware` | 7 / 25 | 28% |
+| `protocol-native` | 7 / 25 | 28% |
+| `arwp-profile-only` | 20 / 25 | 80% |
+| `resolver-union` | **25 / 25** | **100%** |
+
+Each of the five sites scored **5 / 5** under `resolver-union` and **4 / 5** under `arwp-profile-only`.
+
+All five profile-only misses were the `read` intent: the profile view selected a structured catalog/feed surface while the reviewed preferred read interface was `llms.txt`. Adding normal observed-web discovery let the union select `llms.txt` correctly.
+
+That is a useful result rather than a defect to hide. It demonstrates the intended composition model on the owner-controlled reference suite: ARWP Profile contributes explicit retrieval/structured/tool declarations, while ordinary web discovery still contributes useful readable surfaces.
+
+Durable result: [`benchmarks/results/2026-08-26-project-reference-v0.1.md`](../benchmarks/results/2026-08-26-project-reference-v0.1.md).
+
 ## How to interpret results
 
 A high `arwp-profile-only` or `resolver-union` result means the reference sites publish machine-readable surfaces coherently enough for ARWP to resolve them.
