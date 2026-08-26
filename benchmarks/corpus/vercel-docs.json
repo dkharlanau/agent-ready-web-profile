@@ -12,8 +12,7 @@
     "search": [],
     "structured": [],
     "tools": [
-      { "url": "https://mcp.vercel.com", "protocol": "MCP" },
-      { "url": "https://mcp.vercel.com/mcp", "protocol": "MCP" }
+      { "url": "https://mcp.vercel.com", "protocol": "MCP" }
     ],
     "agent": []
   },
@@ -24,10 +23,10 @@
       "note": "Vercel publishes a root llms.txt index for its public platform documentation."
     },
     {
-      "url": "https://vercel.com/docs/mcp",
+      "url": "https://vercel.com/docs/agent-resources/vercel-mcp",
       "sourceType": "official-docs",
-      "note": "Vercel documents its MCP integration as a real agent tool surface. Generic tool access is accepted, but no documentation-search semantics are inferred for the search intent."
+      "note": "Vercel's current MCP documentation specifies https://mcp.vercel.com as the official remote OAuth MCP endpoint and documents documentation search plus project/deployment tools."
     }
   ],
-  "note": "Conservative fixture: read and documented MCP tools only. Search/structured interfaces are not accepted without explicit machine-readable semantics."
+  "note": "Conservative fixture: read and the currently documented MCP root only. The previously accepted /mcp variant returned 404 and is not specified by current Vercel documentation, so it was removed during independent ground-truth re-review on 2026-08-26. Search remains unaccepted because an MCP server with search tools is not equivalent to a generic benchmark search interface unless the benchmark defines and verifies those tool semantics explicitly."
 }
