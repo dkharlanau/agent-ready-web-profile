@@ -130,7 +130,9 @@ The resolver probes the current canonical A2A discovery location:
 
 Readers accept both the v1.0 `supportedInterfaces[]` structure and the legacy v0.3-style URL/interface shape during the transition.
 
-Presence of Agent Card signatures is preserved as evidence, but ARWP does not currently claim cryptographic verification. Signing is optional and correct verification depends on A2A field-presence canonicalization plus RFC 8785 JCS. Until cross-SDK fixtures prove the implementation path, signed cards remain signed-but-not-verified rather than receiving a false trust label.
+Presence of Agent Card signatures is preserved as evidence. Cryptographic verification is opt-in: the Resolver MCP `verify_a2a_signatures` path validates the current v1 card shape, normalizes field presence, canonicalizes the supported fixture shape, resolves bounded public-HTTPS JWKS through `jku`, selects by `kid`, and verifies RS256 or ES256 signatures. Unsigned cards remain `unsigned`, while unsupported algorithms, unavailable keys and invalid signatures are reported separately.
+
+The verifier has bidirectional reproducible interoperability tests against official A2A JavaScript (`@a2a-js/sdk@1.0.1`, RS256) and Python (`a2a-sdk[signing,encryption]==1.1.2`, ES256) SDK fixtures. That evidence is scoped to those tested implementations/algorithms; a valid signature proves integrity/authenticity relative to the selected key, not signer trust.
 
 ### Agent Skills discovery
 
@@ -252,7 +254,9 @@ It deliberately does not copy canonical datasets.
 
 `arwp drift` compares two snapshots and reports added/removed/changed sources, interfaces, conflicts, identity and plan changes. Observation time alone does not count as drift.
 
-The monitor runtime (`npm run monitor:resolver`) persists per-site snapshots and can fail only on selected operational classes such as `interface-removed`, `identity`, `conflict-added` or `resolution-failed`. `templates/github-actions/resolver-monitor.yml` provides a copyable scheduled workflow.
+The monitor runtime (`npm run monitor:resolver`) persists per-site snapshots and can fail only on selected operational classes such as `interface-removed`, `identity`, `conflict-added` or `resolution-failed`. Pass `--evidence-dir=<path>` to archive an audit bundle only when structural drift is detected; each bundle preserves the complete compact before snapshot, after snapshot, machine-readable diff, site identity and drift classes. Stable observations do not create evidence bundles. `--no-write` disables both snapshot and evidence writes.
+
+`templates/github-actions/resolver-monitor.yml` provides a copyable scheduled workflow. The repository's independent drift workflow also uploads any generated drift bundles with the run report and current snapshots, so a later stable observation cannot erase the evidence needed to audit the earlier change.
 
 ## Resolver-backed federation
 
@@ -273,7 +277,7 @@ Each result preserves:
 
 The federation response also includes an `executed[]` observation so a benchmark can distinguish “interface executed but query returned no hits” from “no compatible interface was resolved.” Sites without a supported static retrieval index or JSON Feed are skipped rather than scraped arbitrarily.
 
-A reviewed independent smoke corpus lives at `benchmarks/federation-corpus.json` and runs with `npm run benchmark:federation-external`. The first live observation on 2026-08-26 executed the reviewed JSON Feed for 1 of 4 independent sites. The three misses are retained as misses rather than changing ground truth to match Resolver output; they identify discovery coverage as the next workstream. The durable report is under `benchmarks/results/2026-08-26-federation-v0.1.*`.
+A reviewed independent smoke corpus lives at `benchmarks/federation-corpus.json` and runs with `npm run benchmark:federation-external`. After the ordinary-web JSON Feed fallback discovery fix, the unchanged four-site corpus executes all 4/4 reviewed interfaces (JSONFeed.org, Manton Reece, ai.rud.is and Daring Fireball). This is an engineering interoperability observation, not adoption or answer-quality evidence. Durable evidence is under `benchmarks/results/2026-08-26-federation-v0.2.*`.
 
 ## Network safety
 

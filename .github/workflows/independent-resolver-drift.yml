@@ -57,6 +57,7 @@ jobs:
           node monitor/runner.mjs \
             --config=benchmarks/drift-corpus.config.json \
             --snapshot-dir=.arwp-independent-drift/snapshots \
+            --evidence-dir=.arwp-independent-drift/evidence \
             --report=.arwp-independent-drift/report.json
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
@@ -82,6 +83,7 @@ jobs:
           const counts = new Map();
           for (const site of report.sites || []) counts.set(site.status, (counts.get(site.status) || 0) + 1);
           for (const [status, count] of [...counts].sort()) console.log(`- ${status}: ${count}`);
+          console.log(`- drift evidence bundles: ${report.summary?.evidenceWritten ?? 0}`);
           console.log('');
           console.log(report.notification?.text || 'No compact notification was produced.');
           for (const site of report.notification?.sites || []) {
@@ -98,6 +100,7 @@ jobs:
           path: |
             .arwp-independent-drift/report.json
             .arwp-independent-drift/snapshots/*.json
+            .arwp-independent-drift/evidence/*.json
           if-no-files-found: error
           retention-days: 90
 

@@ -17,6 +17,8 @@ function option(name, fallback = null) {
 
 const configPath = path.resolve(option('config', 'arwp-resolver-monitor.json'));
 const snapshotDir = path.resolve(option('snapshot-dir', '.arwp-resolver/snapshots'));
+const evidenceDirOption = option('evidence-dir');
+const evidenceDir = evidenceDirOption ? path.resolve(evidenceDirOption) : null;
 const reportPath = path.resolve(option('report', '.arwp-resolver/report.json'));
 const concurrency = Number(option('concurrency', 4));
 const writeSnapshots = !args.includes('--no-write');
@@ -29,9 +31,11 @@ if (failOnOverride !== null) config.failOn = failOnOverride.split(',').map(value
 
 const report = await runResolverMonitor(config, {
   snapshotDir,
+  evidenceDir,
   resolverVersion: packageJson.version,
   concurrency,
-  writeSnapshots
+  writeSnapshots,
+  writeEvidence: writeSnapshots
 });
 
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
@@ -46,6 +50,7 @@ else {
     console.log(`${site.status.toUpperCase()} ${site.id}${suffix}`);
   }
   if (report.notification.omittedSites) console.log(`... ${report.notification.omittedSites} additional changed site(s) omitted from console summary`);
+  if (report.summary.evidenceWritten) console.log(`Evidence bundles: ${report.summary.evidenceWritten}${report.evidenceDir ? ` in ${report.evidenceDir}` : ''}`);
   console.log(`Report: ${reportPath}`);
 }
 

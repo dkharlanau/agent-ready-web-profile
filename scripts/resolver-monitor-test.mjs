@@ -6,6 +6,7 @@ import { runResolverMonitor } from '../lib/resolver-monitor.mjs';
 
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-monitor-'));
 const snapshotDir = path.join(temp, 'snapshots');
+const evidenceDir = path.join(temp, 'evidence');
 let generation = 1;
 
 function resolution(url) {
@@ -29,29 +30,42 @@ const config = {
 };
 
 try {
-  let report = await runResolverMonitor(config, { snapshotDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T20:00:00Z' });
+  let report = await runResolverMonitor(config, { snapshotDir, evidenceDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T20:00:00Z' });
   assert.equal(report.summary.baselineCreated, 1);
+  assert.equal(report.summary.evidenceWritten, 0);
   assert.equal(report.shouldFail, false);
   assert.equal(report.notification.level, 'ok');
   assert.equal(report.notification.sites.length, 0);
   assert.ok(fs.existsSync(path.join(snapshotDir, 'site.json')));
 
-  report = await runResolverMonitor(config, { snapshotDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T21:00:00Z' });
+  report = await runResolverMonitor(config, { snapshotDir, evidenceDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T21:00:00Z' });
   assert.equal(report.summary.stable, 1);
+  assert.equal(report.summary.evidenceWritten, 0);
   assert.equal(report.shouldFail, false);
 
   generation = 2;
-  report = await runResolverMonitor(config, { snapshotDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T22:00:00Z' });
+  report = await runResolverMonitor(config, { snapshotDir, evidenceDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T22:00:00Z' });
   assert.equal(report.summary.drifted, 1);
+  assert.equal(report.summary.evidenceWritten, 1);
   assert.equal(report.shouldFail, true);
   assert.ok(report.triggered.includes('interface-removed'));
   assert.equal(report.notification.level, 'alert');
   assert.equal(report.notification.sites[0].id, 'site');
   assert.equal(report.notification.sites[0].drift, undefined, 'notification summary must not embed full drift snapshots');
+  assert.ok(report.sites[0].evidenceFile);
+  assert.ok(fs.existsSync(report.sites[0].evidenceFile));
+  const evidence = JSON.parse(fs.readFileSync(report.sites[0].evidenceFile, 'utf8'));
+  assert.equal(evidence.evidenceVersion, '0.1');
+  assert.equal(evidence.site.id, 'site');
+  assert.equal(evidence.beforeSnapshot.interfaces.length, 1);
+  assert.equal(evidence.afterSnapshot.interfaces.length, 0);
+  assert.equal(evidence.drift.summary.interfacesRemoved, 1);
+  assert.deepEqual(evidence.classes, ['interface-removed', 'plan-changed']);
 
   generation = 3;
-  report = await runResolverMonitor(config, { snapshotDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T23:00:00Z' });
+  report = await runResolverMonitor(config, { snapshotDir, evidenceDir, resolverVersion: '0.2.0', resolveImpl, observedAt: '2026-08-25T23:00:00Z' });
   assert.equal(report.shouldFail, true);
+  assert.equal(report.summary.evidenceWritten, 1);
   assert.ok(report.triggered.includes('conflict-added'));
 
   let migrationTarget = 'https://migration.example/.well-known/api-catalog';
@@ -83,7 +97,7 @@ try {
   assert.ok(report.triggered.includes('source-migrated'));
   assert.ok(report.notification.text.includes('source-migrated'));
 
-  console.log('PASS resolver monitor classifies redirect migrations separately and emits bounded notification summaries');
+  console.log('PASS resolver monitor archives before/after drift evidence, classifies redirect migrations separately and emits bounded notification summaries');
 } finally {
   fs.rmSync(temp, { recursive: true, force: true });
 }
