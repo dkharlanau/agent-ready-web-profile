@@ -7,6 +7,14 @@ import { sanitizePublicationUrl } from './publication-report.mjs';
 
 const DEFAULT_STRATEGY = 'resolver-union';
 const INTENTS = ['read', 'search', 'structured', 'tools', 'agent'];
+const STANDARD_NATIVE_SOURCE_PREFIXES = [
+  'a2a-agent-card:',
+  'api-catalog:',
+  'api-catalog-link:',
+  'mcp-server-card:',
+  'agent-skills:'
+];
+const STANDARD_NATIVE_AUTHORITIES = new Set(['upstream-standard', 'ietf-standard']);
 
 function normalizeClassification(value) {
   if (value === 'missed-interface') return 'discovery-gap';
@@ -45,12 +53,47 @@ function countBy(items, keyFn) {
   return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
 }
 
+function sameOriginHost(siteUrl, selectedUrl) {
+  try {
+    const site = new URL(siteUrl);
+    const selected = new URL(selectedUrl);
+    return site.protocol === selected.protocol && site.host === selected.host;
+  } catch {
+    return false;
+  }
+}
+
+function isStandardNativeSelection(selected) {
+  if (!selected) return false;
+  const sourceId = String(selected.sourceId || '');
+  return STANDARD_NATIVE_AUTHORITIES.has(selected.sourceAuthority)
+    && STANDARD_NATIVE_SOURCE_PREFIXES.some(prefix => sourceId.startsWith(prefix));
+}
+
+function possibleLiveCapabilityDrift(issue) {
+  if (issue.category !== 'over-selection' || issue.classification !== 'false-positive') return null;
+  if (!Array.isArray(issue.accepted) || issue.accepted.length !== 0) return null;
+  if (!isStandardNativeSelection(issue.selected)) return null;
+  if (!sameOriginHost(issue.siteUrl, issue.selected?.url)) return null;
+  return {
+    siteId: issue.siteId,
+    intent: issue.intent,
+    protocol: issue.selected.protocol,
+    kind: issue.selected.kind,
+    sourceId: issue.selected.sourceId,
+    sourceAuthority: issue.selected.sourceAuthority,
+    reason: 'live_same_origin_standard_native_surface_conflicts_with_frozen_correct_none',
+    requiredAction: 'human-ground-truth-re-review'
+  };
+}
+
 export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
   if (!report || !Array.isArray(report.results)) throw new Error('Benchmark report must contain results[].');
   const issues = [];
   const siteRows = [];
   const regretCases = [];
   const uniquelyCorrectCases = [];
+  const groundTruthReviewCandidates = [];
   const simplerStrategies = ['ordinary-web', 'llms-aware', 'agents-aware', 'protocol-native', 'arwp-profile-only'];
   let total = 0;
   let correct = 0;
@@ -110,6 +153,8 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
         };
         issues.push(issue);
         siteIssues.push(issue);
+        const reviewCandidate = possibleLiveCapabilityDrift(issue);
+        if (reviewCandidate) groundTruthReviewCandidates.push(reviewCandidate);
       }
     }
 
@@ -130,11 +175,11 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
     .sort((a, b) => b.misses - a.misses || a.id.localeCompare(b.id));
 
   return {
-    diagnosticsVersion: '0.1',
+    diagnosticsVersion: '0.2',
     benchmarkVersion: report.benchmarkVersion || null,
     benchmarkGeneratedAt: report.generatedAt || null,
     strategy,
-    policy: 'Diagnostics classify reviewed benchmark mismatches without changing ground truth. URLs are publication-sanitized; free-form resolver errors are omitted. missed-interface => discovery-gap; wrong-interface => selection-gap; false-positive => over-selection; full-site failures => resolution-failure.',
+    policy: 'Correctness and regret remain frozen to reviewed benchmark ground truth. Diagnostics may separately flag live same-origin standard-native surfaces for human ground-truth re-review; those flags do not change correctness, accepted interfaces, or historical scores automatically. URLs are publication-sanitized; free-form resolver errors are omitted.',
     summary: {
       independentSites: independent.length,
       resolvedSites: independent.filter(site => site.status === 'resolved').length,
@@ -151,10 +196,14 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
         item => item.name
       ),
       resolverUniquelyCorrect: uniquelyCorrectCases.length,
-      uniquelyCorrectByIntent: countBy(uniquelyCorrectCases, item => item.intent)
+      uniquelyCorrectByIntent: countBy(uniquelyCorrectCases, item => item.intent),
+      groundTruthReviewCandidates: groundTruthReviewCandidates.length,
+      groundTruthReviewByProtocol: countBy(groundTruthReviewCandidates, item => item.protocol),
+      groundTruthReviewByIntent: countBy(groundTruthReviewCandidates, item => item.intent)
     },
     regretCases,
     uniquelyCorrectCases,
+    groundTruthReviewCandidates,
     weakSites,
     issues
   };
