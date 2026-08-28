@@ -86,5 +86,21 @@ assert.equal(planResolvedSite(plain, 'read').selected.url, 'https://plain.exampl
 assert.equal(planResolvedSite(plain, 'read').selected.kind, 'html');
 assert.equal(planResolvedSite(plain, 'search').selected, null);
 
+// A generic API description is structured evidence, not an implicit search endpoint.
+const apiOnlyFetch = async (url, options = {}) => {
+  const key = String(url);
+  if (key === 'https://api-only.example/') {
+    if (options.method === 'HEAD') return response(key, '', { contentType: 'text/html; charset=utf-8' });
+    return response(key, '<!doctype html><html><head><title>API only</title></head><body></body></html>', { contentType: 'text/html; charset=utf-8' });
+  }
+  if (key === 'https://api-only.example/.well-known/api-catalog') {
+    return response(key, JSON.stringify({ linkset: [{ anchor: 'https://api-only.example/api', 'service-desc': [{ href: 'https://api-only.example/openapi.json', type: 'application/json' }] }] }), { contentType: 'application/linkset+json' });
+  }
+  return response(key, 'not found', { status: 404, contentType: 'text/plain' });
+};
+const apiOnly = await resolveSite('https://api-only.example/', { fetchImpl: apiOnlyFetch, resolveImpl: PUBLIC_DNS, timeoutMs: 1000, maxBytes: 128 * 1024 });
+assert.equal(planResolvedSite(apiOnly, 'structured').selected.url, 'https://api-only.example/openapi.json');
+assert.equal(planResolvedSite(apiOnly, 'search').selected, null);
+
 await assert.rejects(() => resolveSite('https://127.0.0.1', { fetchImpl, resolveImpl: PUBLIC_DNS }), /Private or reserved|public HTTPS|not allowed/i);
 console.log('PASS resolver normalizes heterogeneous discovery, routes A2A cards to callable interfaces, accepts spec-valid empty A2A tag arrays, and preserves ordinary HTML as the honest fallback');

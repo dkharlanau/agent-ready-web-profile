@@ -49,6 +49,9 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
   if (!report || !Array.isArray(report.results)) throw new Error('Benchmark report must contain results[].');
   const issues = [];
   const siteRows = [];
+  const regretCases = [];
+  const uniquelyCorrectCases = [];
+  const simplerStrategies = ['ordinary-web', 'llms-aware', 'agents-aware', 'protocol-native', 'arwp-profile-only'];
   let total = 0;
   let correct = 0;
 
@@ -82,6 +85,15 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
         if (!result) throw new Error(`${site.id}: missing ${strategy}.${intent} result`);
         total += 1;
         siteTotal += 1;
+        const simplerCorrect = simplerStrategies.filter(name => site.strategyResults?.[name]?.intents?.[intent]?.correct);
+        if (strategy === 'resolver-union') {
+          if (!result.correct && simplerCorrect.length) {
+            regretCases.push({ siteId: site.id, intent, simplerStrategies: simplerCorrect });
+          }
+          if (result.correct && simplerCorrect.length === 0) {
+            uniquelyCorrectCases.push({ siteId: site.id, intent });
+          }
+        }
         if (result.correct) {
           correct += 1;
           siteCorrect += 1;
@@ -131,8 +143,18 @@ export function buildSelectionDiagnostics(report, strategy = DEFAULT_STRATEGY) {
       correct,
       incorrect: total - correct,
       byCategory: countBy(issues, item => item.category),
-      byIntent: countBy(issues, item => item.intent)
+      byIntent: countBy(issues, item => item.intent),
+      resolverRegret: regretCases.length,
+      regretByIntent: countBy(regretCases, item => item.intent),
+      regretBySimplerStrategy: countBy(
+        regretCases.flatMap(item => item.simplerStrategies.map(name => ({ name }))),
+        item => item.name
+      ),
+      resolverUniquelyCorrect: uniquelyCorrectCases.length,
+      uniquelyCorrectByIntent: countBy(uniquelyCorrectCases, item => item.intent)
     },
+    regretCases,
+    uniquelyCorrectCases,
     weakSites,
     issues
   };
