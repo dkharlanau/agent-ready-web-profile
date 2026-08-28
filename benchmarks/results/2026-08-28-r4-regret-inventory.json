@@ -1,0 +1,94 @@
+{
+  "date": "2026-08-28",
+  "policy": "Sanitized regret inventory from unchanged reviewed corpus. No ground-truth edits. URLs and accepted endpoint details intentionally omitted.",
+  "resolver_regret": 6,
+  "cases": [
+    {
+      "site_id": "a2a-docs",
+      "intent": "read",
+      "category": "selection-gap",
+      "classification": "wrong-interface",
+      "selected_protocol": "llms.txt",
+      "selected_kind": "llms",
+      "selected_source_authority": "observed-web",
+      "simpler_strategies_correct": [
+        "ordinary-web"
+      ]
+    },
+    {
+      "site_id": "fastmcp-docs",
+      "intent": "agent",
+      "category": "over-selection",
+      "classification": "false-positive",
+      "selected_protocol": "A2A",
+      "selected_kind": "agent-endpoint",
+      "selected_source_authority": "upstream-standard",
+      "simpler_strategies_correct": [
+        "ordinary-web",
+        "llms-aware",
+        "agents-aware",
+        "arwp-profile-only"
+      ]
+    },
+    {
+      "site_id": "langchain-docs",
+      "intent": "agent",
+      "category": "over-selection",
+      "classification": "false-positive",
+      "selected_protocol": "A2A",
+      "selected_kind": "agent-endpoint",
+      "selected_source_authority": "upstream-standard",
+      "simpler_strategies_correct": [
+        "ordinary-web",
+        "llms-aware",
+        "agents-aware",
+        "arwp-profile-only"
+      ]
+    },
+    {
+      "site_id": "mintlify-docs",
+      "intent": "structured",
+      "category": "over-selection",
+      "classification": "false-positive",
+      "selected_protocol": "RFC9727",
+      "selected_kind": "api-endpoint",
+      "selected_source_authority": "ietf-standard",
+      "simpler_strategies_correct": [
+        "ordinary-web",
+        "llms-aware",
+        "agents-aware",
+        "arwp-profile-only"
+      ]
+    },
+    {
+      "site_id": "perplexity-docs",
+      "intent": "agent",
+      "category": "over-selection",
+      "classification": "false-positive",
+      "selected_protocol": "A2A",
+      "selected_kind": "agent-endpoint",
+      "selected_source_authority": "upstream-standard",
+      "simpler_strategies_correct": [
+        "ordinary-web",
+        "llms-aware",
+        "agents-aware",
+        "arwp-profile-only"
+      ]
+    },
+    {
+      "site_id": "pinecone-docs",
+      "intent": "agent",
+      "category": "over-selection",
+      "classification": "false-positive",
+      "selected_protocol": "A2A",
+      "selected_kind": "agent-endpoint",
+      "selected_source_authority": "upstream-standard",
+      "simpler_strategies_correct": [
+        "ordinary-web",
+        "llms-aware",
+        "agents-aware",
+        "arwp-profile-only"
+      ]
+    }
+  ]
+}
