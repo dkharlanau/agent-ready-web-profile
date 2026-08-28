@@ -1,0 +1,68 @@
+name: R4 resolver regret inventory
+
+on:
+  push:
+    branches:
+      - r4-resolver-dominance
+    paths:
+      - .github/workflows/r4-regret-inventory.yml
+
+permissions:
+  contents: write
+
+jobs:
+  inventory:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: r4-resolver-dominance
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run unchanged external corpus and diagnostics
+        run: |
+          npm run benchmark:external -- --output=/tmp/external.json
+          node benchmarks/publication-report.mjs --input=/tmp/external.json --output=/tmp/external-public.json
+          node benchmarks/selection-diagnostics.mjs --input=/tmp/external-public.json --output=/tmp/diagnostics.json
+      - name: Write sanitized regret inventory
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const diagnostics = JSON.parse(fs.readFileSync('/tmp/diagnostics.json', 'utf8'));
+          const issueByKey = new Map(diagnostics.issues.map(item => [`${item.siteId}:${item.intent}`, item]));
+          const rows = diagnostics.regretCases.map(item => {
+            const issue = issueByKey.get(`${item.siteId}:${item.intent}`) || {};
+            return {
+              site_id: item.siteId,
+              intent: item.intent,
+              category: issue.category || null,
+              classification: issue.classification || null,
+              selected_protocol: issue.selected?.protocol || null,
+              selected_kind: issue.selected?.kind || null,
+              selected_source_authority: issue.selected?.sourceAuthority || null,
+              simpler_strategies_correct: item.simplerStrategies
+            };
+          }).sort((a, b) => a.site_id.localeCompare(b.site_id) || a.intent.localeCompare(b.intent));
+          const payload = {
+            date: '2026-08-28',
+            policy: 'Sanitized regret inventory from unchanged reviewed corpus. No ground-truth edits. URLs and accepted endpoint details intentionally omitted.',
+            resolver_regret: rows.length,
+            cases: rows
+          };
+          fs.mkdirSync('benchmarks/results', { recursive: true });
+          fs.writeFileSync('benchmarks/results/2026-08-28-r4-regret-inventory.json', `${JSON.stringify(payload, null, 2)}\n`);
+          console.log(JSON.stringify(payload, null, 2));
+          NODE
+      - name: Commit inventory only
+        run: |
+          rm .github/workflows/r4-regret-inventory.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "test: inventory resolver regret cases on frozen corpus"
+          git push origin HEAD:r4-resolver-dominance
