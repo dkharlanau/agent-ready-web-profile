@@ -36,3 +36,15 @@ Only then should authority and preference rank eligible candidates.
 ## Benchmark consequence
 
 Abstention is not free. If reviewed ground truth contains a usable interface, `ambiguous` or `insufficient-evidence` still counts as an incorrect benchmark decision. The policy exists to reduce unjustified selection, not to hide misses.
+
+## Resolver regret
+
+R4 also tracks a stricter decision-quality metric: **resolver regret**.
+
+A union decision has regret when it is wrong for an intent while at least one simpler strategy was correct on the same frozen ground truth. A union result is **uniquely correct** only when the union is right and every simpler strategy is wrong.
+
+This prevents “more protocols discovered” from being treated as product progress when a simpler resolver would have made a better decision.
+
+The first measured eligibility correction removed generic OpenAPI descriptions from search selection without changing the reviewed 20-site corpus. The result moved `resolver-union` from 81/100 to **86/100** and reduced over-selection from 10 to **5**, but `llms-aware` remains **89/100**. The same run measured **6 regret cases** and **0 uniquely-correct union cases**. See [`benchmarks/results/2026-08-28-r4-openapi-search-eligibility.md`](../benchmarks/results/2026-08-28-r4-openapi-search-eligibility.md).
+
+Therefore `resolver-union` remains an experimental strategy in R4. It should not become the default recommendation merely because it discovers more protocol surfaces. The gate for dominance is evidence-based: reduce regret and match or exceed the best simpler strategy on unchanged reviewed ground truth.
