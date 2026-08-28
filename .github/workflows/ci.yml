@@ -34,7 +34,7 @@ jobs:
       - name: Measure R4 scope policy on frozen independent corpus
         run: |
           node benchmarks/external-runner.mjs --output=/tmp/r4-scope.json
-          node benchmarks/selection-diagnostics.mjs /tmp/r4-scope.json --output=/tmp/r4-scope-diagnostics.json
+          node benchmarks/selection-diagnostics.mjs --input=/tmp/r4-scope.json --output=/tmp/r4-scope-diagnostics.json
           node - <<'NODE'
           const fs = require('fs');
           const report = JSON.parse(fs.readFileSync('/tmp/r4-scope.json', 'utf8'));
