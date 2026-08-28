@@ -1,0 +1,79 @@
+{
+  "version": "0.1",
+  "generated_on": "2026-08-28",
+  "derived_from": [
+    "2026-08-28-r4-openapi-search-eligibility.md",
+    "2026-08-28-r4-regret-inventory.json",
+    "2026-08-28-r4-regret-provenance.json"
+  ],
+  "benchmark_policy": "This queue does not change frozen benchmark correctness, accepted interfaces, resolver regret, or historical scores. Every candidate requires human ground-truth re-review and a separately recorded review revision before expectations may change.",
+  "frozen_result": {
+    "llms_aware_correct": 89,
+    "resolver_union_correct": 86,
+    "total_intents": 100,
+    "resolver_regret": 6,
+    "resolver_uniquely_correct": 0
+  },
+  "review_candidates": [
+    {
+      "site_id": "fastmcp-docs",
+      "intent": "agent",
+      "protocol": "A2A",
+      "kind": "agent-endpoint",
+      "source_id": "a2a-agent-card:0",
+      "source_authority": "upstream-standard",
+      "same_origin_host": true,
+      "reason": "live_same_origin_standard_native_surface_conflicts_with_frozen_correct_none",
+      "review_status": "pending",
+      "allowed_outcomes": ["resolver-error", "publisher-capability-drift", "ambiguous-or-insufficient"]
+    },
+    {
+      "site_id": "langchain-docs",
+      "intent": "agent",
+      "protocol": "A2A",
+      "kind": "agent-endpoint",
+      "source_id": "a2a-agent-card:0",
+      "source_authority": "upstream-standard",
+      "same_origin_host": true,
+      "reason": "live_same_origin_standard_native_surface_conflicts_with_frozen_correct_none",
+      "review_status": "pending",
+      "allowed_outcomes": ["resolver-error", "publisher-capability-drift", "ambiguous-or-insufficient"]
+    },
+    {
+      "site_id": "mintlify-docs",
+      "intent": "structured",
+      "protocol": "RFC9727",
+      "kind": "api-endpoint",
+      "source_id": "api-catalog-link:0",
+      "source_authority": "ietf-standard",
+      "same_origin_host": true,
+      "reason": "live_same_origin_standard_native_surface_conflicts_with_frozen_correct_none",
+      "review_status": "pending",
+      "allowed_outcomes": ["resolver-error", "publisher-capability-drift", "ambiguous-or-insufficient"]
+    },
+    {
+      "site_id": "perplexity-docs",
+      "intent": "agent",
+      "protocol": "A2A",
+      "kind": "agent-endpoint",
+      "source_id": "a2a-agent-card:0",
+      "source_authority": "upstream-standard",
+      "same_origin_host": true,
+      "reason": "live_same_origin_standard_native_surface_conflicts_with_frozen_correct_none",
+      "review_status": "pending",
+      "allowed_outcomes": ["resolver-error", "publisher-capability-drift", "ambiguous-or-insufficient"]
+    },
+    {
+      "site_id": "pinecone-docs",
+      "intent": "agent",
+      "protocol": "A2A",
+      "kind": "agent-endpoint",
+      "source_id": "a2a-agent-card:0",
+      "source_authority": "upstream-standard",
+      "same_origin_host": true,
+      "reason": "live_same_origin_standard_native_surface_conflicts_with_frozen_correct_none",
+      "review_status": "pending",
+      "allowed_outcomes": ["resolver-error", "publisher-capability-drift", "ambiguous-or-insufficient"]
+    }
+  ]
+}
