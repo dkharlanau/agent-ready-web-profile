@@ -1,0 +1,63 @@
+name: R4 ground-truth review queue
+
+on:
+  push:
+    branches:
+      - r4-resolver-dominance
+    paths:
+      - .github/workflows/r4-ground-truth-review-queue.yml
+
+permissions:
+  contents: write
+
+jobs:
+  review-queue:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: r4-resolver-dominance
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run unchanged reviewed external corpus
+        run: |
+          npm run benchmark:external -- --output=/tmp/external.json
+          node benchmarks/publication-report.mjs --input=/tmp/external.json --output=/tmp/external-public.json
+          node benchmarks/selection-diagnostics.mjs --input=/tmp/external-public.json --output=/tmp/diagnostics.json
+      - name: Write sanitized human re-review queue
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const diagnostics = JSON.parse(fs.readFileSync('/tmp/diagnostics.json', 'utf8'));
+          const queue = {
+            version: '0.1',
+            generated_on: '2026-08-28',
+            benchmark_version: diagnostics.benchmarkVersion,
+            strategy: diagnostics.strategy,
+            policy: 'Human re-review queue only. Frozen benchmark correctness/regret and accepted interfaces remain unchanged until a reviewed ground-truth revision is committed separately.',
+            frozen_result: {
+              total: diagnostics.summary.total,
+              correct: diagnostics.summary.correct,
+              incorrect: diagnostics.summary.incorrect,
+              resolver_regret: diagnostics.summary.resolverRegret,
+              resolver_uniquely_correct: diagnostics.summary.resolverUniquelyCorrect
+            },
+            review_candidates: diagnostics.groundTruthReviewCandidates
+          };
+          fs.mkdirSync('benchmarks/results', { recursive: true });
+          fs.writeFileSync('benchmarks/results/2026-08-28-r4-ground-truth-review-queue.json', `${JSON.stringify(queue, null, 2)}\n`);
+          console.log(JSON.stringify(queue, null, 2));
+          NODE
+      - name: Commit queue without changing ground truth
+        run: |
+          rm .github/workflows/r4-ground-truth-review-queue.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "test: queue possible live capability drift for human review"
+          git push origin HEAD:r4-resolver-dominance
