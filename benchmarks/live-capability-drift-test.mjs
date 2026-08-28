@@ -73,9 +73,10 @@ const report = {
 
 const diagnostics = buildSelectionDiagnostics(report);
 
-// Frozen truth is unchanged: the live A2A signal remains a false positive until human re-review.
-assert.equal(diagnostics.summary.correct, 6);
-assert.equal(diagnostics.summary.incorrect, 4);
+// Frozen truth is unchanged: all six deliberate mismatches remain errors until human re-review.
+assert.equal(diagnostics.summary.correct, 4);
+assert.equal(diagnostics.summary.incorrect, 6);
+assert.equal(diagnostics.summary.byCategory['discovery-gap'], 4);
 assert.equal(diagnostics.summary.byCategory['over-selection'], 2);
 assert.equal(diagnostics.summary.resolverRegret, 2);
 
