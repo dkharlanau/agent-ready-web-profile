@@ -48,3 +48,24 @@ This prevents “more protocols discovered” from being treated as product prog
 The first measured eligibility correction removed generic OpenAPI descriptions from search selection without changing the reviewed 20-site corpus. The result moved `resolver-union` from 81/100 to **86/100** and reduced over-selection from 10 to **5**, but `llms-aware` remains **89/100**. The same run measured **6 regret cases** and **0 uniquely-correct union cases**. See [`benchmarks/results/2026-08-28-r4-openapi-search-eligibility.md`](../benchmarks/results/2026-08-28-r4-openapi-search-eligibility.md).
 
 Therefore `resolver-union` remains an experimental strategy in R4. It should not become the default recommendation merely because it discovers more protocol surfaces. The gate for dominance is evidence-based: reduce regret and match or exceed the best simpler strategy on unchanged reviewed ground truth.
+
+## Frozen truth versus live capability drift
+
+A live benchmark has a second failure mode: the website may have changed after the last human ground-truth review.
+
+For example, a publisher may begin serving a valid same-origin standard discovery resource such as an A2A Agent Card or an RFC 9727 API Catalog after the benchmark expectation was reviewed. If frozen truth still says `correct-none`, Resolver must continue to score as wrong until a human re-review occurs. Otherwise the system would be grading itself by silently changing the answer key.
+
+At the same time, a live same-origin standard-native publisher signal should not be automatically suppressed just to improve the old score. Current diagnostics therefore separate two statements:
+
+1. **benchmark result** — selected interface is wrong against frozen reviewed truth;
+2. **ground-truth review candidate** — live publisher evidence may indicate that the reviewed truth is stale and needs human re-validation.
+
+`selection-diagnostics.mjs` flags `possible_live_capability_drift` only when the current mismatch is an over-selection/false-positive against `correct-none`, the discovered source is a recognized standard-native discovery class, and the selected interface stays on the target origin. The flag does not change `correct`, `regret`, `accepted`, or any historical score.
+
+Human re-review must classify the case as one of:
+
+- `resolver-error` — live evidence does not actually establish a suitable interface for the target/intent;
+- `publisher-capability-drift` — the publisher now exposes a suitable interface and frozen truth should be superseded by a new reviewed revision;
+- `ambiguous-or-insufficient` — evidence exists but is not yet strong enough to change either Resolver policy or ground truth.
+
+If ground truth changes, preserve the old reviewed corpus and score history. Publish a new review revision/date/reason rather than rewriting past benchmark evidence in place.
