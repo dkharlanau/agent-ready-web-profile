@@ -60,12 +60,33 @@ At the same time, a live same-origin standard-native publisher signal should not
 1. **benchmark result** — selected interface is wrong against frozen reviewed truth;
 2. **ground-truth review candidate** — live publisher evidence may indicate that the reviewed truth is stale and needs human re-validation.
 
-`selection-diagnostics.mjs` flags `possible_live_capability_drift` only when the current mismatch is an over-selection/false-positive against `correct-none`, the discovered source is a recognized standard-native discovery class, and the selected interface stays on the target origin. The flag does not change `correct`, `regret`, `accepted`, or any historical score.
+`selection-diagnostics.mjs` flags a ground-truth review candidate only when the current mismatch is an over-selection/false-positive against `correct-none`, the discovered source is a recognized standard-native discovery class, and the selected interface stays on the target origin. The flag does not change `correct`, `regret`, `accepted`, or any historical score.
 
 Human re-review must classify the case as one of:
 
 - `resolver-error` — live evidence does not actually establish a suitable interface for the target/intent;
 - `publisher-capability-drift` — the publisher now exposes a suitable interface and frozen truth should be superseded by a new reviewed revision;
 - `ambiguous-or-insufficient` — evidence exists but is not yet strong enough to change either Resolver policy or ground truth.
+
+The current pending queue is stored in [`benchmarks/results/2026-08-28-r4-ground-truth-review-queue.json`](../benchmarks/results/2026-08-28-r4-ground-truth-review-queue.json). It is derived from the measured regret/provenance run and contains no automatic verdicts.
+
+### Build a read-only review card
+
+The review helper assembles the frozen expectation, pinned semantic-review receipt, previous evidence basis and current standard discovery class. It has no mutation or approval command.
+
+```bash
+node benchmarks/ground-truth-review.mjs \
+  --site=fastmcp-docs \
+  --intent=agent \
+  --format=markdown
+```
+
+Or inspect the complete queue in JSON:
+
+```bash
+node benchmarks/ground-truth-review.mjs --format=json
+```
+
+A card includes the conventional standard probe that should be inspected during re-review, but the tool cannot change the fixture. A new reviewed ground-truth revision must remain a separate explicit commit with review date, evidence basis and reason.
 
 If ground truth changes, preserve the old reviewed corpus and score history. Publish a new review revision/date/reason rather than rewriting past benchmark evidence in place.
