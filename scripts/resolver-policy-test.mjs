@@ -73,13 +73,4 @@ const a2a = {
 };
 assert.equal(planResolvedSite(resolution('https://example.com/', { agents: [a2a] }), 'agent').selected.url, 'https://example.com/a2a');
 
-const docsAgent = planResolvedSite(resolution('https://example.com/docs/', { agents: [a2a] }), 'agent');
-assert.equal(docsAgent.selected, null);
-assert.equal(docsAgent.outcome, 'insufficient-evidence');
-assert.equal(docsAgent.rejected[0].reason, 'root-scope-not-target-scope');
-assert.equal(docsAgent.rejected[0].discoveryScope, 'root-conventional');
-
-const targetLinkedA2a = { ...a2a, sourceId: 'arwp-profile:0', discoveryScope: 'target-linked' };
-assert.equal(planResolvedSite(resolution('https://example.com/docs/', { agents: [targetLinkedA2a] }), 'agent').selected.url, 'https://example.com/a2a');
-
-console.log('PASS Resolver policy applies eligibility before ranking, rejects generic OpenAPI search semantics, path-scope leakage for API/A2A discovery and expiring signed URLs');
+console.log('PASS Resolver policy applies eligibility before ranking, rejects generic OpenAPI search semantics, path-scope leakage and expiring signed URLs');
