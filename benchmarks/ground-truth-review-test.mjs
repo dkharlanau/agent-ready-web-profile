@@ -25,7 +25,11 @@ for (const card of cards) {
   assert.ok(card.frozen_truth.fixture_blob_sha);
   assert.ok(card.frozen_truth.semantic_reviewed_at);
   assert.ok(card.frozen_truth.evidence_basis.length > 0);
-  assert.ok(card.live_signal_under_review.conventional_probe?.startsWith(card.site_url));
+  assert.ok(card.live_signal_under_review.conventional_probe);
+  assert.equal(
+    new URL(card.live_signal_under_review.conventional_probe).origin,
+    new URL(card.site_url).origin
+  );
 }
 
 const a2a = cards.filter(card => card.live_signal_under_review.protocol === 'A2A');
