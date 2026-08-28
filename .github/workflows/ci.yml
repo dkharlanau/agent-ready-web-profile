@@ -31,19 +31,6 @@ jobs:
       - name: Run contract tests
         run: npm test
 
-      - name: Measure R4 scope policy on frozen independent corpus
-        run: |
-          node benchmarks/external-runner.mjs --output=/tmp/r4-scope.json
-          node benchmarks/selection-diagnostics.mjs --input=/tmp/r4-scope.json --output=/tmp/r4-scope-diagnostics.json
-          node - <<'NODE'
-          const fs = require('fs');
-          const report = JSON.parse(fs.readFileSync('/tmp/r4-scope.json', 'utf8'));
-          const diagnostics = JSON.parse(fs.readFileSync('/tmp/r4-scope-diagnostics.json', 'utf8'));
-          console.log('R4_FROZEN_AGGREGATE=' + JSON.stringify(report.aggregate));
-          console.log('R4_FROZEN_COVERAGE=' + report.resolvedIndependentSites + '/' + report.independentSites);
-          console.log('R4_FROZEN_DIAGNOSTICS=' + JSON.stringify(diagnostics.summary || diagnostics));
-          NODE
-
       - name: Test official A2A JS signature interoperability
         run: |
           npm install --no-save --ignore-scripts --no-audit --no-fund @a2a-js/sdk@1.0.1
