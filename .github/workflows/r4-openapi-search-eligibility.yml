@@ -53,7 +53,7 @@ jobs:
           text = text.replace(old, new, 1)
 
           old = '''        if (result.correct) {\n          correct += 1;\n          siteCorrect += 1;\n          continue;\n        }\n        const issue = {'''
-          new = '''        const simplerCorrect = simplerStrategies.filter(name => strategyResult !== site.strategyResults?.[name] && site.strategyResults?.[name]?.intents?.[intent]?.correct);\n        if (strategy === 'resolver-union') {\n          if (!result.correct && simplerCorrect.length) {\n            regretCases.push({ siteId: site.id, intent, simplerStrategies: simplerCorrect });\n          }\n          if (result.correct && simplerCorrect.length === 0) {\n            uniquelyCorrectCases.push({ siteId: site.id, intent });\n          }\n        }\n        if (result.correct) {\n          correct += 1;\n          siteCorrect += 1;\n          continue;\n        }\n        const issue = {'''
+          new = '''        const simplerCorrect = simplerStrategies.filter(name => site.strategyResults?.[name]?.intents?.[intent]?.correct);\n        if (strategy === 'resolver-union') {\n          if (!result.correct && simplerCorrect.length) {\n            regretCases.push({ siteId: site.id, intent, simplerStrategies: simplerCorrect });\n          }\n          if (result.correct && simplerCorrect.length === 0) {\n            uniquelyCorrectCases.push({ siteId: site.id, intent });\n          }\n        }\n        if (result.correct) {\n          correct += 1;\n          siteCorrect += 1;\n          continue;\n        }\n        const issue = {'''
           if old not in text:
               raise SystemExit('diagnostics result marker not found')
           text = text.replace(old, new, 1)
@@ -64,25 +64,20 @@ jobs:
               raise SystemExit('diagnostics summary marker not found')
           diag.write_text(text.replace(old, new, 1), encoding='utf-8')
 
-          dtest = Path('benchmarks/selection-diagnostics-test.mjs')
-          text = dtest.read_text(encoding='utf-8')
-          # Add simpler strategies to the resolved test site so regret semantics are exercised.\n          old = '''      strategyResults: {\n        'resolver-union': {\n          intents: {\n            read: intent(true, 'correct-interface', { url: 'https://mixed.example/llms.txt' }, ['https://mixed.example/llms.txt']),\n            search: intent(false, 'missed-interface', null, ['https://mixed.example/search.json?api_key=secret&plain=ok']),\n            structured: intent(false, 'wrong-interface', { url: sensitiveUrl, protocol: 'OpenAPI' }, [{ url: 'https://mixed.example/openapi.json?signature=secret&plain=ok', protocol: 'OpenAPI' }]),\n            tools: intent(false, 'false-positive', { url: 'https://mixed.example/mcp', protocol: 'MCP' }, []),\n            agent: intent(true, 'correct-none', null, [])\n          }\n        }\n      }'''
-          new = '''      strategyResults: {\n        'resolver-union': {\n          intents: {\n            read: intent(true, 'correct-interface', { url: 'https://mixed.example/llms.txt' }, ['https://mixed.example/llms.txt']),\n            search: intent(false, 'missed-interface', null, ['https://mixed.example/search.json?api_key=secret&plain=ok']),\n            structured: intent(false, 'wrong-interface', { url: sensitiveUrl, protocol: 'OpenAPI' }, [{ url: 'https://mixed.example/openapi.json?signature=secret&plain=ok', protocol: 'OpenAPI' }]),\n            tools: intent(false, 'false-positive', { url: 'https://mixed.example/mcp', protocol: 'MCP' }, []),\n            agent: intent(true, 'correct-none', null, [])\n          }\n        },\n        'ordinary-web': { intents: { read: intent(false, 'missed-interface'), search: intent(false, 'missed-interface'), structured: intent(false, 'missed-interface'), tools: intent(false, 'correct-none'), agent: intent(true, 'correct-none') } },\n        'llms-aware': { intents: { read: intent(true, 'correct-interface'), search: intent(true, 'correct-interface'), structured: intent(false, 'missed-interface'), tools: intent(true, 'correct-none'), agent: intent(true, 'correct-none') } },\n        'agents-aware': { intents: { read: intent(false, 'missed-interface'), search: intent(false, 'missed-interface'), structured: intent(false, 'missed-interface'), tools: intent(false, 'correct-none'), agent: intent(true, 'correct-none') } },\n        'protocol-native': { intents: { read: intent(false, 'missed-interface'), search: intent(false, 'missed-interface'), structured: intent(true, 'correct-interface'), tools: intent(false, 'correct-none'), agent: intent(true, 'correct-none') } },\n        'arwp-profile-only': { intents: { read: intent(false, 'missed-interface'), search: intent(false, 'missed-interface'), structured: intent(false, 'missed-interface'), tools: intent(false, 'correct-none'), agent: intent(true, 'correct-none') } }\n      }'''
+          package = Path('package.json')
+          text = package.read_text(encoding='utf-8')
+          old = 'node benchmarks/selection-diagnostics-test.mjs && node --check benchmarks/selection-diagnostics.mjs'
+          new = 'node benchmarks/selection-diagnostics-test.mjs && node benchmarks/resolver-regret-test.mjs && node --check benchmarks/selection-diagnostics.mjs'
           if old not in text:
-              raise SystemExit('diagnostics test strategy marker not found')
-          text = text.replace(old, new, 1)
-          marker = '''assert.deepEqual(diagnostics.summary.byIntent, {\n  agent: 1,\n  read: 1,\n  search: 2,\n  structured: 2,\n  tools: 2\n});\n'''
-          insert = marker + '''assert.equal(diagnostics.summary.resolverRegret, 3);\nassert.deepEqual(diagnostics.summary.regretByIntent, { search: 1, structured: 1, tools: 1 });\nassert.deepEqual(diagnostics.summary.regretBySimplerStrategy, { 'llms-aware': 2, 'protocol-native': 1 });\nassert.equal(diagnostics.summary.resolverUniquelyCorrect, 0);\n'''
-          if marker not in text:
-              raise SystemExit('diagnostics test summary marker not found')
-          dtest.write_text(text.replace(marker, insert, 1), encoding='utf-8')
+              raise SystemExit('benchmark script marker not found')
+          package.write_text(text.replace(old, new, 1), encoding='utf-8')
           PY
       - name: Install dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Run deterministic resolver and diagnostics tests
+      - name: Run deterministic resolver and benchmark tests
         run: |
           node scripts/resolver-test.mjs
-          node benchmarks/selection-diagnostics-test.mjs
+          node benchmarks/resolver-regret-test.mjs
           npm run test:benchmark
       - name: Run unchanged independent external corpus
         run: |
@@ -133,6 +128,7 @@ jobs:
             '',
             '> External HTTP liveness can change between runs. Aggregate scores remain comparable only when the frozen corpus shape is intact; detailed URLs stay in workflow artifacts rather than this committed summary.'
           ];
+          fs.mkdirSync('benchmarks/results', { recursive: true });
           fs.writeFileSync('benchmarks/results/2026-08-28-r4-openapi-search-eligibility.md', `${lines.join('\n')}\n`);
           console.log(lines.join('\n'));
           NODE
