@@ -63,14 +63,6 @@ jobs:
           if old not in text:
               raise SystemExit('diagnostics summary marker not found')
           diag.write_text(text.replace(old, new, 1), encoding='utf-8')
-
-          package = Path('package.json')
-          text = package.read_text(encoding='utf-8')
-          old = 'node benchmarks/selection-diagnostics-test.mjs && node --check benchmarks/selection-diagnostics.mjs'
-          new = 'node benchmarks/selection-diagnostics-test.mjs && node benchmarks/resolver-regret-test.mjs && node --check benchmarks/selection-diagnostics.mjs'
-          if old not in text:
-              raise SystemExit('benchmark script marker not found')
-          package.write_text(text.replace(old, new, 1), encoding='utf-8')
           PY
       - name: Install dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
