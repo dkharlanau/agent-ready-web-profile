@@ -18,6 +18,19 @@ Public project site: https://dkharlanau.github.io/agent-ready-web-profile/
 
 Profile contract: **experimental v0.1**. Released validator/Action: [`v0.1.0`](https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0). The current `main` toolchain is version **0.2.0**; npm publication remains an external release gate and must not be described as complete until it succeeds.
 
+## Try it locally
+
+The supported evaluation path for the current `main` toolchain is a repository checkout; the unpublished 0.2.x package is not required:
+
+```bash
+git clone https://github.com/dkharlanau/agent-ready-web-profile.git
+cd agent-ready-web-profile
+npm ci
+npm run quickstart
+```
+
+The offline quickstart validates the bundled minimal publisher profile and queries the bundled directory for retrieval-capable reference sites. It does not probe external sites or imply that a reference site adopted ARWP independently.
+
 ## The problem
 
 A site can legitimately publish several independent discovery surfaces:
@@ -439,3 +452,18 @@ See [`ROADMAP.md`](ROADMAP.md).
 ## License
 
 Apache License 2.0. See [`LICENSE`](LICENSE).
+
+## Related projects
+
+- [AI CV Builder](https://github.com/dkharlanau/ai-cv-builder) publishes portable HTML, JSON and JSON-LD profile surfaces. ARWP can inspect a deployed site and its optional publisher profile, but using the builder alone does not imply ARWP conformance.
+- [Enterprise Architecture Composer](https://github.com/dkharlanau/enterprise-architecture-composer) publishes architecture schemas and examples that a site may deliberately declare as data resources. ARWP discovers interfaces; it does not validate architecture decisions.
+- [Visual Workbench](https://github.com/dkharlanau/visual-workbench) publishes a generated SVG gallery and a visual-language schema. ARWP may describe those public surfaces, while Visual Workbench remains responsible for their semantic model and rendering.
+
+These projects are adjacent examples, not independent adoption evidence or a compatibility claim.
+
+## About the author
+
+Created and maintained by **Dzmitryi Kharlanau**, an SAP consultant and system analyst working across enterprise architecture, data, integration, operations, and practical AI.
+
+- [Website and knowledge base](https://dkharlanau.github.io/)
+- [LinkedIn](https://www.linkedin.com/in/dkharlanau/)
