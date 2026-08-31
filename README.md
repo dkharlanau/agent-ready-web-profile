@@ -29,7 +29,7 @@ npm ci
 npm run quickstart
 ```
 
-The offline quickstart validates the bundled minimal publisher profile and queries the bundled directory for retrieval-capable reference sites. It does not probe external sites or imply that a reference site adopted ARWP independently.
+The offline quickstart validates a conservative minimal publisher profile against the same contract used by the CLI and queries the bundled directory for retrieval-capable reference sites. It does not probe external sites or imply that a reference site adopted ARWP independently.
 
 ## The problem
 

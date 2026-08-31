@@ -8,7 +8,7 @@
   "bin": { "arwp": "bin/arwp.mjs" },
   "files": [
     "bin/", "lib/", "schema/", "gateway/", "scanner-service/", "router/", "resolver/", "monitor/", "registry/", "benchmarks/", "server.json",
-    "examples/minimal.site-profile.json", "scripts/quickstart.mjs",
+    "scripts/quickstart.mjs",
     "SPEC.md", "README.md", "LICENSE", "docs/CONFORMANCE.md", "docs/GATEWAY.md", "docs/SCANNER.md",
     "docs/STANDARDS-MAP.md", "docs/USE-CASES.md", "docs/ADOPTION.md", "docs/DIRECTORY.md", "docs/RESOLVER.md", "docs/BENCHMARK.md"
   ],
