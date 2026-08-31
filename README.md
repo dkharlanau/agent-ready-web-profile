@@ -344,7 +344,7 @@ The external runner has a strict reviewed fixture schema. Aggregate results coun
 
 Subset strategy comparisons are selection-only projections over the same observed resolution. Request/byte/time metrics are attributed only to the actual Resolver network run.
 
-The first pilot corpus contains 10 independent documentation sites and deliberately includes ordinary HTML controls and path-scoped discovery that the Resolver may miss. The target after reviewing the pilot is 20–50 sites.
+The frozen decision-quality corpus contains 20 independently owned documentation sites and deliberately includes ordinary HTML controls and path-scoped discovery that the Resolver may miss. It is a reviewed engineering sample, not a representative survey of the web. Expansion to a stratified 50-site corpus is gated on improving the current decision-quality baseline without changing ground truth to fit Resolver output.
 
 No benchmark result is evidence of token savings, search ranking, adoption or answer quality. Raw negative results must remain visible. See [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
 
@@ -399,13 +399,13 @@ The North Star is:
 
 Immediate work is increasingly external/evidence-driven:
 
-1. preserve and review the first independent benchmark pilot;
-2. fix systematic discovery gaps only after the baseline is recorded;
-3. expand the corpus to 20–50 sites;
+1. improve Resolver decision quality against the frozen 20-site corpus without site-specific exceptions;
+2. make ambiguity, rejected evidence and scope decisions explicit;
+3. revalidate MCP and A2A behavior against independent implementations;
 4. publish/install the 0.2.x Resolver package and MCP Registry artifact;
 5. deploy the bounded public HTTPS discovery service;
-6. obtain three independent adopters/consumers;
-7. prove A2A signature interoperability against independent upstream implementations;
+6. add durable assertion and evidence-receipt workflows;
+7. obtain independent downstream consumers before treating owner-controlled examples as adoption;
 8. decide from evidence whether the ARWP Profile contract needs another version at all.
 
 See [`ROADMAP.md`](ROADMAP.md).
@@ -417,6 +417,7 @@ See [`ROADMAP.md`](ROADMAP.md).
 - [`bin/arwp.mjs`](bin/arwp.mjs) — CLI for profile, Resolver and operations.
 - [`lib/scanner.mjs`](lib/scanner.mjs) — bounded website scanner.
 - [`lib/resolver.mjs`](lib/resolver.mjs) — multi-standard resolver and planner.
+- [`lib/resolver-core.mjs`](lib/resolver-core.mjs) — pure normalization and planning policy used by the network-facing resolver.
 - [`lib/http-discovery.mjs`](lib/http-discovery.mjs) — RFC 8288 / Markdown HTTP discovery.
 - [`lib/mcp-runtime.mjs`](lib/mcp-runtime.mjs) — opt-in MCP runtime reconciliation.
 - [`lib/a2a-signature.mjs`](lib/a2a-signature.mjs) — bounded A2A signature verification.
@@ -432,6 +433,7 @@ See [`ROADMAP.md`](ROADMAP.md).
 - [`benchmarks/`](benchmarks/) — synthetic and independent evidence tooling.
 - [`docs/RESOLVER.md`](docs/RESOLVER.md) — Resolver model.
 - [`docs/BENCHMARK.md`](docs/BENCHMARK.md) — benchmark rules.
+- [`docs/README-R4.md`](docs/README-R4.md) — decision-quality and external-trust engineering notes.
 - [`ROADMAP.md`](ROADMAP.md) — evidence-driven roadmap.
 
 ## License
