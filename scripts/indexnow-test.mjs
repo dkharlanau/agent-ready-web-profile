@@ -42,6 +42,6 @@ assert.equal(sent.url, 'https://api.example.net/indexnow');
 const posted = JSON.parse(sent.options.body);
 assert.equal(posted.key, key, 'submission body must contain the real key');
 assert.equal(JSON.stringify(accepted).includes(key), false, 'submission receipt must not leak the IndexNow key');
-assert.throws(() => submitIndexNow(payload, 'http://api.example.net/indexnow', { fetchImpl: async () => ({}) }), /must use HTTPS/i);
+await assert.rejects(() => submitIndexNow(payload, 'http://api.example.net/indexnow', { fetchImpl: async () => ({}) }), /must use HTTPS/i);
 
 console.log('PASS IndexNow helper validates host scope, never prints the key, caps submission semantics, and treats acceptance as receipt rather than indexing proof');
