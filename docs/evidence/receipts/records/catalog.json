@@ -6,6 +6,12 @@
       "evidenceClass": "project-reference",
       "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33993174047",
       "notes": "Owner-controlled public reference-site observation captured by GitHub Actions. It is interoperability evidence, not independent adoption evidence."
+    },
+    "2026-09-05-arwp-reference-2e4e9e7a7212.receipt.json": {
+      "title": "ARWP richer reference observation with source-body digests — 2026-09-05",
+      "evidenceClass": "project-reference",
+      "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33993766445",
+      "notes": "Owner-controlled public reference-site observation captured with explicit bounded source-body SHA-256 evidence. Two of two eligible resolved GET sources were captured with no failures. This is interoperability evidence, not independent adoption evidence."
     }
   }
 }
