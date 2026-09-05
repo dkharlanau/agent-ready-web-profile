@@ -25,7 +25,7 @@ try {
     'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs',
     'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs', 'lib/ai-search-profile.mjs',
     'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
-    'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'ai/ai-search-profile.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
+    'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'schema/claim.schema.json', 'ai/ai-search-profile.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
     'scanner-service/handler.mjs', 'router/federated.mjs', 'router/resolved-federated.mjs', 'router/server.mjs',
     'monitor/runner.mjs', 'monitor/config.schema.json', 'monitor/example.config.json',
     'registry/sites.json', 'registry/directory.schema.json', 'server.json',
@@ -50,6 +50,7 @@ try {
   assert.ok(fs.existsSync(installedAiSearchCli), 'installed AI Search Profile CLI entrypoint is missing');
   assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', 'arwp')), 'npm bin shim is missing');
   assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', 'arwp-ai-search')), 'AI Search Profile npm bin shim is missing');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'claim.schema.json')), 'claim schema must ship in the npm artifact');
   const installedPackage = JSON.parse(fs.readFileSync(path.join(installedRoot, 'package.json'), 'utf8'));
   assert.equal(installedPackage.mcpName, 'io.github.dkharlanau/agent-ready-web-profile');
   assert.equal(installedPackage.scripts['resolver:mcp'], 'node resolver/server.mjs');
@@ -85,12 +86,14 @@ try {
   const aiSelfProfile = path.join(installedRoot, 'ai', 'ai-search-profile.json');
   const installedAiProfile = JSON.parse(fs.readFileSync(aiSelfProfile, 'utf8'));
   assert.equal(installedAiProfile.modules.protocolObservatory.status, 'active', 'packed ARWP dogfood profile must preserve the deployed observatory state');
-  assert.equal(installedAiProfile.modules.protocolObservatory.url, 'https://dkharlanau.github.io/agent-ready-web-profile/observatory/');
+  assert.equal(installedAiProfile.modules.claimsRegistry.status, 'active', 'packed ARWP dogfood profile must preserve the deployed claims registry state');
+  assert.equal(installedAiProfile.surfaces.claimsIndex.status, 'active');
   const aiValidation = execFileSync(process.execPath, [installedAiSearchCli, 'validate', aiSelfProfile], { cwd: consumerDir, encoding: 'utf8' });
   assert.match(aiValidation, /PASS/);
   const aiPlan = execFileSync(process.execPath, [installedAiSearchCli, 'plan', aiSelfProfile], { cwd: consumerDir, encoding: 'utf8' });
-  assert.match(aiPlan, /P1 claimsRegistry/);
+  assert.match(aiPlan, /P1 evidenceReceipts/);
   assert.doesNotMatch(aiPlan, /P0 protocolObservatory/, 'active observatory must not remain in the implementation backlog');
+  assert.doesNotMatch(aiPlan, /P1 claimsRegistry/, 'active claims registry must not remain in the implementation backlog');
 
   console.log(`PASS npm pack/install smoke test (${pack.filename}, ${pack.size} bytes packed)`);
 } finally {
