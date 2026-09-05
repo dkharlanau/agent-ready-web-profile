@@ -31,6 +31,12 @@ jobs:
       - name: Run contract tests
         run: npm test
 
+      - name: Validate adaptive content profile
+        run: |
+          node scripts/content-profile-test.mjs
+          node --check lib/content-profile.mjs
+          node --check bin/arwp-content.mjs
+
       - name: Validate product classification and competitor surface
         run: node scripts/classification-test.mjs
 
