@@ -17,6 +17,7 @@ on:
 permissions:
   contents: read
   id-token: write
+  attestations: write
 
 jobs:
   validate:
@@ -47,8 +48,18 @@ jobs:
           package-manager-cache: false
       - run: npm ci
       - run: npm test
-      - name: Publish through npm trusted publishing
-        run: npm publish --access public
+      - name: Pack exact npm artifact
+        id: pack
+        shell: bash
+        run: |
+          npm pack --json > pack.json
+          node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('pack.json','utf8'))[0].filename; console.log('path='+p)" >> "$GITHUB_OUTPUT"
+      - name: Attest npm tarball provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: ${{ steps.pack.outputs.path }}
+      - name: Publish exact attested tarball through npm trusted publishing
+        run: npm publish "${{ steps.pack.outputs.path }}" --access public
 
   publish-mcp-registry:
     if: ${{ inputs.publish_mcp_registry }}
