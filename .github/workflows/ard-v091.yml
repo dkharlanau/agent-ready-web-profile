@@ -5,13 +5,17 @@ on:
     branches: [main]
     paths:
       - 'lib/ard-v091.mjs'
+      - 'lib/ard-registry.mjs'
       - 'scripts/ard-v091-test.mjs'
+      - 'scripts/ard-registry-test.mjs'
       - 'docs/ARD-V0.91.md'
       - '.github/workflows/ard-v091.yml'
   pull_request:
     paths:
       - 'lib/ard-v091.mjs'
+      - 'lib/ard-registry.mjs'
       - 'scripts/ard-v091-test.mjs'
+      - 'scripts/ard-registry-test.mjs'
       - 'docs/ARD-V0.91.md'
       - '.github/workflows/ard-v091.yml'
 
@@ -26,8 +30,13 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
-      - name: Validate ARD v0.91 pure compatibility layer
+      - name: Validate ARD v0.91 static compatibility layer
         run: |
           node scripts/ard-v091-test.mjs
           node --check lib/ard-v091.mjs
           node --check scripts/ard-v091-test.mjs
+      - name: Validate bounded opt-in ARD registry search
+        run: |
+          node scripts/ard-registry-test.mjs
+          node --check lib/ard-registry.mjs
+          node --check scripts/ard-registry-test.mjs
