@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search + Agent Recommendations — ARWP</title>
+  <meta name="description" content="A source-backed, machine-readable ARWP ruleset for classic search, generative search, citation freshness and browser-agent readiness without ranking promises.">
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/recommendations/">
+  <link rel="describedby" type="application/json" href="./registry.json">
+  <style>
+    :root{color-scheme:light dark;--bg:#f7f7f4;--fg:#151515;--muted:#626262;--card:#fff;--line:#deded8;--accent:#2457d6}
+    @media(prefers-color-scheme:dark){:root{--bg:#101112;--fg:#f4f4f0;--muted:#aaa;--card:#17191b;--line:#303236;--accent:#8cabff}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    main{max-width:1040px;margin:auto;padding:48px 22px 80px}a{color:var(--accent)}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}h1{font-size:clamp(38px,7vw,72px);line-height:1.02;letter-spacing:-.04em;margin:.25em 0}.lead{max-width:820px;font-size:21px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:34px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}.card strong{display:block;font-size:20px;margin-bottom:6px}.card span{color:var(--muted)}
+    section{margin-top:54px}h2{font-size:30px;letter-spacing:-.025em;margin-bottom:10px}.rule{display:grid;grid-template-columns:180px 1fr;gap:18px;border-top:1px solid var(--line);padding:20px 0}.rule:last-child{border-bottom:1px solid var(--line)}.tag{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.rule h3{margin:0 0 7px;font-size:19px}.rule p{margin:0;color:var(--muted)}
+    pre{overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}.note{border-left:4px solid var(--accent);padding:2px 0 2px 18px;color:var(--muted)}footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted)}
+    @media(max-width:620px){.rule{grid-template-columns:1fr}.lead{font-size:18px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">ARWP ruleset 2026.09 · reviewed 5 September 2026</div>
+  <h1 id="top">Search + Agent Recommendations</h1>
+  <p class="lead">A living, source-backed implementation layer for sites that want to stay discoverable in classic search, usable as a citation source in generative search, fresh enough for retrieval, and operable by browser agents.</p>
+
+  <div class="grid" aria-label="Recommendation layers">
+    <div class="card"><strong>Search</strong><span>Indexability, crawl access and stable technical structure.</span></div>
+    <div class="card"><strong>AI search + citation</strong><span>Snippet eligibility, citation surfaces, direct section links and user-selected sources.</span></div>
+    <div class="card"><strong>Freshness</strong><span>Accurate sitemap metadata, feeds and change notification where supported.</span></div>
+    <div class="card"><strong>Agent web</strong><span>Runtime tools, explicit protocol discovery, evaluations and security evidence.</span></div>
+  </div>
+
+  <p class="note"><strong>No ranking promise.</strong> ARWP does not claim that a manifest, score, <code>llms.txt</code>, WebMCP, structured data or any other single mechanism raises search ranking. It records upstream requirements and opportunities, then reports what can actually be observed.</p>
+
+  <section id="audit">
+    <h2>Run the audit</h2>
+    <p>The audit combines the existing bounded scanner with the current recommendations registry. It reports failures, warnings, optional opportunities, runtime-only checks and external measurements separately.</p>
+    <pre><code>arwp audit https://example.com
+arwp audit https://example.com --json</code></pre>
+    <p>Machine-readable registry: <a href="./registry.json">registry.json</a>. Canonical packaged copy: <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/search-agent-recommendations.json">GitHub registry</a>.</p>
+  </section>
+
+  <section id="latest-directions">
+    <h2>New directions captured in 2026.09</h2>
+    <div class="rule"><div class="tag">Google · AI search</div><div><h3 id="preferred-sources">Preferred Sources</h3><p>Detect the official Preferred Sources JavaScript integration, declarative control or content link. Treat it as a user-preference acquisition opportunity, never as a general ranking guarantee.</p></div></div>
+    <div class="rule"><div class="tag">Google · Citation</div><div><h3 id="deep-links">Read more deep links</h3><p>Check for stable heading IDs and flag obvious page-load code that clears URL fragments or forces scroll-to-top behavior.</p></div></div>
+    <div class="rule"><div class="tag">Freshness</div><div><h3 id="freshness">Sitemap <code>lastmod</code> + IndexNow</h3><p>Observe sitemap freshness metadata and keep IndexNow as an explicit configured/receipt-based mechanism rather than guessing adoption from page markup.</p></div></div>
+    <div class="rule"><div class="tag">IETF · Work in progress</div><div><h3 id="aipref">AIPREF Content-Usage</h3><p>Observe draft <code>Content-Usage</code> response headers and robots directives, while keeping the mechanism labelled as an Internet-Draft rather than an RFC.</p></div></div>
+    <div class="rule"><div class="tag">Chrome · Experimental</div><div><h3 id="webmcp">WebMCP runtime + evals</h3><p>Static crawling never upgrades a documented WebMCP feature into runtime conformance. Browser evidence and eval receipts remain a separate proof layer.</p></div></div>
+    <div class="rule"><div class="tag">W3C Community Group</div><div><h3 id="introduction-layer">Introduction Layer watch</h3><p>Track the emerging upstream work and add an adapter when a concrete discovery specification exists instead of starting a competing ARWP manifest.</p></div></div>
+  </section>
+
+  <section id="measurement">
+    <h2>Measure effects instead of claiming them</h2>
+    <p>Google Search Console generative-AI reporting and Bing Webmaster Tools AI Performance are treated as external owner evidence. Public crawling cannot infer citation counts, grounding queries or AI impressions. ARWP's direction is to compare explicit before/after evidence while preserving negative results.</p>
+  </section>
+
+  <section id="status-model">
+    <h2>Status model</h2>
+    <p><code>pass</code> and <code>fail</code> are reserved for checks with observable evidence. <code>warn</code> identifies heuristics or missed optional opportunities. <code>not-assessed</code> is used for authenticated analytics, content-quality judgement and browser runtime behavior that static HTTP inspection cannot prove. <code>watch</code> is used for upstream incubation.</p>
+  </section>
+
+  <footer>
+    <a href="../">ARWP home</a> · <a href="../observatory/">Protocol Observatory</a> · <a href="../crawler-matrix/">AI crawler matrix</a> · <a href="../trust/">Trust Center</a>
+  </footer>
+</main>
+</body>
+</html>
