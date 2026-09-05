@@ -18,6 +18,11 @@ const ruLlmsPath = path.join(docs, 'ru', 'llms.txt');
 const localeManifestPath = path.join(docs, 'ai', 'locales.json');
 const localizationPolicyPath = path.join(docs, 'LOCALIZATION.md');
 const selfProfilePath = path.join(docs, 'ai', 'site-profile.json');
+const mediaHtmlPath = path.join(docs, 'media', 'index.html');
+const mediaRightsPath = path.join(docs, 'media', 'rights.json');
+const pressFactsPath = path.join(docs, 'media', 'press-facts.json');
+const attributionPath = path.join(docs, 'media', 'attribution.txt');
+const boilerplatePath = path.join(docs, 'media', 'boilerplate.txt');
 
 for (const file of [
   htmlPath,
@@ -31,7 +36,12 @@ for (const file of [
   deLlmsPath,
   ruLlmsPath,
   localeManifestPath,
-  localizationPolicyPath
+  localizationPolicyPath,
+  mediaHtmlPath,
+  mediaRightsPath,
+  pressFactsPath,
+  attributionPath,
+  boilerplatePath
 ]) {
   assert.ok(fs.existsSync(file), `missing static site file: ${path.relative(root, file)}`);
   assert.ok(fs.statSync(file).size > 100, `static site file is unexpectedly empty: ${path.relative(root, file)}`);
@@ -102,13 +112,42 @@ const germanLlms = fs.readFileSync(deLlmsPath, 'utf8');
 const russianLlms = fs.readFileSync(ruLlmsPath, 'utf8');
 assert.match(englishLlms, /canonical English agent-routing surface/i);
 assert.match(englishLlms, /Product history JSON/i);
+assert.match(englishLlms, /Open media & AI reuse/i);
+assert.match(englishLlms, /AI\/ML training and dataset inclusion: permitted/i);
 assert.match(germanLlms, /kanonische technische Sprache/i);
 assert.match(russianLlms, /канонический технический язык/i);
+
+const mediaHtml = fs.readFileSync(mediaHtmlPath, 'utf8');
+assert.match(mediaHtml, /Open Media & AI Reuse Pack/i);
+assert.match(mediaHtml, /No permission request required/i);
+assert.match(mediaHtml, /AI & machine use/i);
+assert.match(mediaHtml, /CC BY 4\.0/i);
+
+const rights = JSON.parse(fs.readFileSync(mediaRightsPath, 'utf8'));
+assert.equal(rights.permissionRequired, false);
+assert.equal(rights.license.spdx, 'CC-BY-4.0');
+assert.equal(rights.permissions.press, true);
+assert.equal(rights.permissions.news, true);
+assert.equal(rights.permissions.aiTraining, true);
+assert.equal(rights.permissions.embedding, true);
+assert.equal(rights.permissions.retrievalAugmentedGeneration, true);
+assert.equal(rights.attribution.requiredForPublicReuse, true);
+assert.match(rights.attribution.sourceUrl, /^https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/$/);
+assert.ok(rights.doesNotApplyTo.some(item => /third-party/i.test(item)));
+
+const pressFacts = JSON.parse(fs.readFileSync(pressFactsPath, 'utf8'));
+assert.equal(pressFacts.project.shortName, 'ARWP');
+assert.equal(pressFacts.status.maturity, 'pre-stable');
+assert.equal(pressFacts.licenses.openMedia.spdx, 'CC-BY-4.0');
+assert.ok(pressFacts.facts.length >= 4);
 
 const selfProfile = JSON.parse(fs.readFileSync(selfProfilePath, 'utf8'));
 assert.deepEqual(selfProfile.languages, ['en', 'de', 'ru']);
 assert.equal(selfProfile.web.llms, 'https://dkharlanau.github.io/agent-ready-web-profile/llms.txt');
 assert.equal(selfProfile.extensions['io.github.dkharlanau/localized-llms'].manifest, 'https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json');
+assert.equal(selfProfile.extensions['io.github.dkharlanau/open-media-ai-reuse'].permissionRequired, false);
+assert.equal(selfProfile.extensions['io.github.dkharlanau/open-media-ai-reuse'].license, 'CC-BY-4.0');
+assert.ok(selfProfile.data.distributions.some(item => item.url.endsWith('/media/rights.json')));
 
 const js = fs.readFileSync(jsPath, 'utf8');
 assert.match(js, /url\.protocol !== 'https:'/);
@@ -117,4 +156,4 @@ assert.match(js, /fetch\(endpoint/, 'hosted resolver calls must use a fixed rout
 assert.match(js, /fixedServiceRoute\('\/resolve'\)/, 'live UI must use the resolver route rather than direct browser fetching');
 assert.doesNotMatch(js, /fetch\(site\b|fetch\(siteInput|fetch\(normalizeSite/, 'user-provided URLs must never become a direct browser fetch target');
 
-console.log('PASS ARWP project site leads with resolver utility, publishes source-backed history and multilingual agent routing, and keeps browser resolution behind a fixed bounded service endpoint');
+console.log('PASS ARWP project site leads with resolver utility, publishes source-backed history, multilingual agent routing and explicit permission-free media/AI reuse rights, and keeps browser resolution behind a fixed bounded service endpoint');
