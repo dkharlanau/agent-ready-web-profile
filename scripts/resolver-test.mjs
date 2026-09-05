@@ -20,6 +20,19 @@ const profile = {
   mcp: { servers: [{ name: 'com.example/knowledge', transport: 'streamable-http', url: 'https://example.com/mcp', readOnly: true }] }
 };
 
+const ardCatalog = {
+  specVersion: '1.0',
+  host: { displayName: 'Example Agentic Resources', identifier: 'did:web:example.com' },
+  entries: [
+    { identifier: 'urn:air:example.com:mcp:knowledge', displayName: 'Knowledge MCP', type: 'application/mcp-server-card+json', data: { name: 'com.example/knowledge', title: 'Knowledge MCP', version: '1.0.0', remotes: [{ url: 'https://example.com/mcp', type: 'streamable-http' }] } },
+    { identifier: 'urn:air:example.com:agent:research', displayName: 'Research Agent', type: 'application/a2a-agent-card+json', url: 'https://example.com/agents/research-card.json', description: 'A referenced A2A Agent Card. The catalog URL itself is not callable.' },
+    { identifier: 'urn:air:example.com:skill:summarize', displayName: 'Summarize Skill', type: 'application/ai-skill+md', url: 'https://example.com/skills/summarize/SKILL.md', description: 'Portable summarization procedure.' },
+    { identifier: 'urn:air:example.com:registry:public', displayName: 'Example Registry', type: 'application/ai-registry+json', url: 'https://registry.example.com/api/v1/', description: 'Searchable ARD registry.' },
+    { identifier: 'urn:air:example.com:catalog:engineering', displayName: 'Engineering Catalog', type: 'application/ai-catalog+json', url: 'https://example.com/catalogs/engineering.json' },
+    { identifier: 'urn:air:example.com:data:reference', displayName: 'Reference Dataset', type: 'application/parquet', url: 'https://data.example.com/reference.parquet', tags: ['reference'] }
+  ]
+};
+
 const routes = new Map([
   ['https://example.com/', ['<!doctype html><html lang="en"><head><title>Example Knowledge Site</title><meta name="description" content="Fixture"><link rel="canonical" href="https://example.com/"><link rel="describedby" type="application/json" href="/ai/site-profile.json"></head><body></body></html>', 'text/html']],
   ['https://example.com/robots.txt', ['User-agent: *\nAllow: /\nSitemap: https://example.com/sitemap.xml\n', 'text/plain']],
@@ -32,7 +45,7 @@ const routes = new Map([
   ['https://example.com/.well-known/oauth-protected-resource', [JSON.stringify({ resource: 'https://example.com/', authorization_servers: ['https://auth.example.com/'], scopes_supported: ['read'] }), 'application/json']],
   ['https://example.com/.well-known/agent-card.json', [JSON.stringify({ name: 'Example Agent', description: 'Searches the example library.', version: '1.0.0', supportedInterfaces: [{ url: 'https://example.com/a2a', protocolBinding: 'JSONRPC', protocolVersion: '1.0' }], capabilities: {}, defaultInputModes: ['text/plain'], defaultOutputModes: ['text/plain'], skills: [{ id: 'search', name: 'Search', description: 'Search knowledge', tags: [], examples: [] }] }), 'application/json']],
   ['https://example.com/.well-known/agent-skills/index.json', [JSON.stringify({ skills: [{ name: 'search', type: 'skill-md', url: 'https://example.com/skills/search/SKILL.md', digest: `sha256:${'a'.repeat(64)}` }] }), 'application/json']],
-  ['https://example.com/.well-known/ai-catalog.json', [JSON.stringify({ specVersion: '1.0', entries: [{ identifier: 'urn:air:example.com:mcp:knowledge', type: 'application/mcp-server-card+json', data: { name: 'com.example/knowledge', title: 'Knowledge MCP', version: '1.0.0', remotes: [{ url: 'https://example.com/mcp', type: 'streamable-http' }] } }] }), 'application/ai-catalog+json']],
+  ['https://example.com/.well-known/ai-catalog.json', [JSON.stringify(ardCatalog), 'application/ai-catalog+json']],
   ['https://example.com/mcp/server-card', [JSON.stringify({ name: 'com.example/knowledge', title: 'Knowledge MCP', version: '1.0.0', remotes: [{ url: 'https://example.com/mcp', type: 'streamable-http' }] }), 'application/mcp-server-card+json']]
 ]);
 
@@ -51,6 +64,13 @@ assert.ok(resolved.interfaces.apis.some(item => item.url === 'https://example.co
 assert.ok(resolved.interfaces.tools.some(item => item.kind === 'mcp-server-card'));
 assert.ok(resolved.interfaces.agents.some(item => item.protocol === 'A2A'));
 assert.ok(resolved.interfaces.skills.some(item => item.protocol === 'Agent Skills'));
+assert.ok(resolved.interfaces.skills.some(item => item.kind === 'ard-skill' && item.url === 'https://example.com/skills/summarize/SKILL.md'));
+assert.ok(resolved.interfaces.data.some(item => item.kind === 'ard-a2a-card-reference' && item.url === 'https://example.com/agents/research-card.json'));
+assert.ok(resolved.interfaces.data.some(item => item.kind === 'ard-registry' && item.url === 'https://registry.example.com/api/v1/'));
+assert.ok(resolved.interfaces.data.some(item => item.kind === 'ard-catalog' && item.url === 'https://example.com/catalogs/engineering.json'));
+assert.ok(resolved.interfaces.data.some(item => item.kind === 'ard-artifact' && item.mediaType === 'application/parquet'));
+const catalogSource = resolved.sources.find(item => item.id === 'mcp-ai-catalog:0');
+assert.equal(catalogSource.authority, 'multivendor-open-draft');
 assert.equal(resolved.conflicts.length, 0);
 assert.equal(planResolvedSite(resolved, 'read').selected.url, 'https://example.com/llms.txt');
 assert.equal(planResolvedSite(resolved, 'search').selected.url, 'https://example.com/search.json');
@@ -86,7 +106,6 @@ assert.equal(planResolvedSite(plain, 'read').selected.url, 'https://plain.exampl
 assert.equal(planResolvedSite(plain, 'read').selected.kind, 'html');
 assert.equal(planResolvedSite(plain, 'search').selected, null);
 
-// A generic API description is structured evidence, not an implicit search endpoint.
 const apiOnlyFetch = async (url, options = {}) => {
   const key = String(url);
   if (key === 'https://api-only.example/') {
@@ -103,4 +122,4 @@ assert.equal(planResolvedSite(apiOnly, 'structured').selected.url, 'https://api-
 assert.equal(planResolvedSite(apiOnly, 'search').selected, null);
 
 await assert.rejects(() => resolveSite('https://127.0.0.1', { fetchImpl, resolveImpl: PUBLIC_DNS }), /Private or reserved|public HTTPS|not allowed/i);
-console.log('PASS resolver normalizes heterogeneous discovery, routes A2A cards to callable interfaces, accepts spec-valid empty A2A tag arrays, and preserves ordinary HTML as the honest fallback');
+console.log('PASS resolver normalizes heterogeneous discovery including conservative ARD ai-catalog evidence, routes A2A cards to callable interfaces, accepts spec-valid empty A2A tag arrays, and preserves ordinary HTML as the honest fallback');
