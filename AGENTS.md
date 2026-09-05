@@ -35,8 +35,8 @@ npm run test:site
 6. Do not rewrite reviewed benchmark ground truth to match Resolver output.
 7. Preserve negative results and historical snapshots.
 8. Never claim search ranking, AI citation, token savings, adoption or answer-quality benefits without direct evidence.
-9. Treat Internet-Drafts, Community Group work and vendor proposals at their actual maturity level.
-10. For agentic-resource discovery, consume ARD/ai-catalog semantics where they solve the problem rather than inventing a competing catalog format.
+9. Treat Internet-Drafts, Community Group work and vendor/multivendor proposals at their actual maturity level.
+10. For agentic-resource discovery, consume ARD semantics where they solve the problem rather than inventing a competing catalog format.
 
 ## Resolver changes
 
@@ -52,7 +52,20 @@ When adding a discovery source:
 - add fixtures for malformed, missing and conflicting evidence;
 - rerun the frozen decision-quality benchmark after planner-policy changes.
 
-ARD `/.well-known/ai-catalog.json` is currently normalized conservatively. MCP Server Cards may use the existing server-card path. A2A card references, registries, nested catalogs, Skills and arbitrary typed artifacts are preserved as evidence; registry federation/search is not automatic.
+### ARD boundary
+
+The current reviewed ARD proposal is v0.91 (2026-08-26).
+
+Current canonical static discovery:
+
+- `/.well-known/ard.json`;
+- HTTP/HTML `rel="ard"`;
+- JSON-LD description layer with base context/namespaces;
+- additional routes may include in-page JSON-LD, robots `Agentmap`, DNS/SVCB and registries.
+
+The predecessor `/.well-known/ai-catalog.json` and `rel="ai-catalog"` remain compatibility signals, not the current canonical names.
+
+ARWP currently supports the canonical `ard.json` probe, HTTP `rel=ard`, predecessor fallback and conservative typed evidence. MCP Server Cards may use the existing server-card path. A2A card references, registries, nested catalogs, Skills and arbitrary typed artifacts are preserved as evidence. Full in-page JSON-LD namespace interpretation and ARD registry federation/search are not yet claimed.
 
 ## Public site and metadata
 
@@ -64,6 +77,7 @@ Keep these surfaces synchronized where applicable:
 - `docs/llms.txt`
 - `docs/sitemap.xml`
 - `docs/sitemap.md`
+- `docs/AGENTS.md`
 - `docs/ai/site-profile.json`
 - `docs/ai/ai-search-profile.json`
 - `docs/ai/product-classification.json`
@@ -78,7 +92,7 @@ Do not add `<meta name="keywords">`; structured keywords belong in JSON-LD or ot
 
 ## Comparison policy
 
-Competitor and adjacent-product comparisons are source-backed category maps, not winner rankings. Unknown capabilities must not be presented as absent. The closest current adjacent product family is AgentReady/Ora. Agent Ready (`agent-ready.dev`) is an adjacent validator/research corpus. ARD is an upstream discovery specification, not a product competitor.
+Competitor and adjacent-product comparisons are source-backed category maps, not winner rankings. Unknown capabilities must not be presented as absent. The closest current adjacent product family is AgentReady/Ora. Agent Ready (`agent-ready.dev`) is an adjacent validator/research corpus. ARD is an upstream discovery proposal, not a product competitor.
 
 Create a new immutable comparison/observatory snapshot when facts materially change rather than silently editing historical evidence.
 
