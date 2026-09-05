@@ -1,0 +1,13 @@
+{
+  "version": "0.1",
+  "canonicalComparison": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
+  "policy": "Snapshots are append-only historical observations. Material changes create a new dated snapshot instead of silently rewriting prior competitor capability claims.",
+  "snapshots": [
+    {
+      "date": "2026-09-05",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/compare/history/2026-09-05.json",
+      "source": "https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json",
+      "note": "Initial source-backed category map covering AgentReady/Ora, technical readiness scanners, WebMCP tooling, crawler governance and AI visibility analytics."
+    }
+  ]
+}
