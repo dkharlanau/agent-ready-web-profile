@@ -10,13 +10,14 @@
     "arwp-ai-search": "bin/arwp-ai-search.mjs",
     "arwp-visibility": "bin/arwp-visibility.mjs",
     "arwp-agent-eval": "bin/arwp-agent-eval.mjs",
-    "arwp-indexnow": "bin/arwp-indexnow.mjs"
+    "arwp-indexnow": "bin/arwp-indexnow.mjs",
+    "arwp-ard": "bin/arwp-ard.mjs"
   },
   "files": [
     "bin/", "lib/", "schema/", "gateway/", "scanner-service/", "router/", "resolver/", "monitor/", "registry/", "benchmarks/", "server.json",
     "ai/ai-search-profile.json", "scripts/quickstart.mjs",
     "SPEC.md", "README.md", "LICENSE", "docs/CONFORMANCE.md", "docs/GATEWAY.md", "docs/SCANNER.md",
-    "docs/STANDARDS-MAP.md", "docs/USE-CASES.md", "docs/ADOPTION.md", "docs/DIRECTORY.md", "docs/RESOLVER.md", "docs/BENCHMARK.md", "docs/AI-SEARCH-PROFILE.md", "docs/SEARCH-AGENT-RECOMMENDATIONS.md"
+    "docs/STANDARDS-MAP.md", "docs/USE-CASES.md", "docs/ADOPTION.md", "docs/DIRECTORY.md", "docs/RESOLVER.md", "docs/BENCHMARK.md", "docs/ARD-V0.91.md", "docs/AI-SEARCH-PROFILE.md", "docs/SEARCH-AGENT-RECOMMENDATIONS.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
@@ -25,6 +26,8 @@
     "visibility": "node bin/arwp-visibility.mjs",
     "agent-eval": "node bin/arwp-agent-eval.mjs",
     "indexnow": "node bin/arwp-indexnow.mjs",
+    "ard": "node bin/arwp-ard.mjs",
+    "test:ard": "node scripts/ard-v091-test.mjs && node scripts/ard-registry-test.mjs && node scripts/ard-cli-test.mjs && node --check lib/ard-v091.mjs && node --check lib/ard-registry.mjs && node --check bin/arwp-ard.mjs",
     "test:quickstart": "node scripts/quickstart.mjs",
     "test:gateway": "node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "test:verifier": "node scripts/verifier-test.mjs",
@@ -70,6 +73,6 @@
   "repository": { "type": "git", "url": "https://github.com/dkharlanau/agent-ready-web-profile.git" },
   "homepage": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "bugs": { "url": "https://github.com/dkharlanau/agent-ready-web-profile/issues" },
-  "keywords": ["agent-ready-web","ai-agents","machine-readable-web","resolver","mcp","webmcp","llms-txt","agents-txt","agent-skills","a2a","openapi","api-catalog","interoperability","website-scanner","rag","discovery","ai-search","citation","indexnow","ai-visibility"],
+  "keywords": ["agent-ready-web","ai-agents","machine-readable-web","resolver","mcp","webmcp","llms-txt","agents-txt","agent-skills","a2a","openapi","api-catalog","ard","agentic-resource-discovery","agent-registry","interoperability","website-scanner","rag","discovery","ai-search","citation","indexnow","ai-visibility"],
   "publishConfig": { "access": "public" }
 }
