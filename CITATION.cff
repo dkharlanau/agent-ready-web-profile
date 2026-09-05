@@ -1,13 +1,14 @@
 cff-version: 1.2.0
-message: "If you use Agent-Ready Web Profile (ARWP), please cite this repository."
+message: "If you use Agent-Ready Web Profile (ARWP), please cite the specific release when possible; otherwise cite this repository."
 title: "Agent-Ready Web Profile"
 type: software
 authors:
   - family-names: "Kharlanau"
     given-names: "Dzmitryi"
 repository-code: "https://github.com/dkharlanau/agent-ready-web-profile"
-url: "https://github.com/dkharlanau/agent-ready-web-profile"
-version: "0.1"
+url: "https://dkharlanau.github.io/agent-ready-web-profile/"
+version: "0.1.0"
+date-released: "2026-08-25"
 license: "Apache-2.0"
 keywords:
   - "agentic ai"
@@ -22,8 +23,10 @@ keywords:
   - "json schema"
   - "rag"
   - "ai web"
+  - "agentic web resolver"
 abstract: >-
-  An experimental interoperability profile and reference implementation for websites
-  that expose human-readable, machine-readable, retrieval, and agent-facing surfaces
-  including SEO, llms.txt, Agent Skills, WebMCP, MCP, A2A, schemas, provenance, and
-  bounded read-only gateways.
+  An experimental interoperability resolver, profile contract and reference implementation
+  for discovering and routing the human-readable, machine-readable, retrieval, API, tool,
+  agent and trust surfaces exposed by public websites. ARWP preserves discovery provenance,
+  reports conflicts, distinguishes static declarations from runtime evidence and maintains
+  evidence-backed benchmarks, protocol observations and citation-oriented project surfaces.
