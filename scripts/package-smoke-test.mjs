@@ -83,10 +83,14 @@ try {
   assert.match(validation, /PASS/);
 
   const aiSelfProfile = path.join(installedRoot, 'ai', 'ai-search-profile.json');
+  const installedAiProfile = JSON.parse(fs.readFileSync(aiSelfProfile, 'utf8'));
+  assert.equal(installedAiProfile.modules.protocolObservatory.status, 'active', 'packed ARWP dogfood profile must preserve the deployed observatory state');
+  assert.equal(installedAiProfile.modules.protocolObservatory.url, 'https://dkharlanau.github.io/agent-ready-web-profile/observatory/');
   const aiValidation = execFileSync(process.execPath, [installedAiSearchCli, 'validate', aiSelfProfile], { cwd: consumerDir, encoding: 'utf8' });
   assert.match(aiValidation, /PASS/);
   const aiPlan = execFileSync(process.execPath, [installedAiSearchCli, 'plan', aiSelfProfile], { cwd: consumerDir, encoding: 'utf8' });
-  assert.match(aiPlan, /P0 protocolObservatory/);
+  assert.match(aiPlan, /P1 claimsRegistry/);
+  assert.doesNotMatch(aiPlan, /P0 protocolObservatory/, 'active observatory must not remain in the implementation backlog');
 
   console.log(`PASS npm pack/install smoke test (${pack.filename}, ${pack.size} bytes packed)`);
 } finally {

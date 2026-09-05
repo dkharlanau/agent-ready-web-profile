@@ -9,6 +9,7 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 ## Start here
 
 - [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): Public project page and resolver workflow.
+- [Agentic Web Protocol Observatory](https://dkharlanau.github.io/agent-ready-web-profile/observatory/): Dated primary-source-reviewed map of MCP, A2A, WebMCP, llms.txt, Agent Skills, RFC discovery and emerging commerce mechanisms.
 - [Resolver model](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): How heterogeneous discovery evidence is normalized, compared and routed.
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimental ARWP profile contract. Treat this English document as normative for project-defined semantics.
 - [Conformance](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): What ARWP conformance does and does not assert.
@@ -20,6 +21,8 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and project extensions.
 - [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and P0/P1/P2 citation-surface plan for ARWP itself.
 - [Citation index](https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json): Stable machine-readable index of canonical answers, project-defined terms and comparison pages with concise definitions/answers and review dates.
+- [Protocol Observatory JSON](https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json): Current dated protocol/mechanism snapshot with upstream status, discovery path, ARWP support state and primary sources.
+- [Protocol Observatory history](https://dkharlanau.github.io/agent-ready-web-profile/observatory/history/index.json): Frozen historical snapshots for month-to-month comparison without rewriting prior observations.
 - [AI Search Profile schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json): Validation contract for copying the same implementation profile to other sites.
 - [Open reuse rights](https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json): Machine-readable scope, CC BY 4.0 license, permitted press/news/AI uses and attribution guidance for covered material.
 - [Press facts](https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json): Canonical project facts, boilerplate, versions and source links for press/news/automated citation workflows.
@@ -27,6 +30,25 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [Public directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Reference/adoption registry exposed as JSON.
 - [Directory statistics](https://dkharlanau.github.io/agent-ready-web-profile/stats.json): Aggregate public declaration counts without visitor tracking.
 - [Product history JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): Machine-readable development timeline and current project status.
+
+## Protocol observatory
+
+The observatory is a dated research surface, not a protocol popularity or readiness score. It keeps three things separate:
+
+1. what the upstream protocol/specification currently says;
+2. how the mechanism is discovered or invoked;
+3. what ARWP currently supports, verifies, merely watches, or explicitly does not assess.
+
+The 2026-09-05 snapshot covers HTTP Web Linking, llms.txt, RFC 9727 API Catalog, RFC 9728 Protected Resource Metadata, MCP, A2A, Agent Skills, WebMCP, Agentic Commerce Protocol (ACP) and Universal Commerce Protocol (UCP). The initial snapshot is frozen at `/observatory/history/2026-09-05.json`.
+
+Important boundaries:
+
+- a listed upstream mechanism is not automatically supported by ARWP;
+- static discovery is not runtime conformance;
+- authorization metadata does not grant access;
+- browser-runtime WebMCP is `not-assessed` by the static resolver rather than treated as absent;
+- ACP and UCP are currently watchlist items for future transaction-intent work, not implemented ARWP adapters;
+- the Agent Skills core specification defines `SKILL.md`; ARWP's web-oriented discovery adapter is kept distinct from the core upstream specification.
 
 ## Canonical answers, concepts and comparisons
 
