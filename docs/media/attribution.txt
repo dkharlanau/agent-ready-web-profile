@@ -1,0 +1,14 @@
+Preferred attribution
+
+Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/
+License: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
+
+Short form
+
+ARWP — https://dkharlanau.github.io/agent-ready-web-profile/
+
+For AI / dataset / model documentation
+
+Source material: Agent-Ready Web Profile (ARWP), https://dkharlanau.github.io/agent-ready-web-profile/, CC BY 4.0.
+
+If you modified an asset, indicate that it was adapted from ARWP.

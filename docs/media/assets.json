@@ -1,0 +1,56 @@
+{
+  "version": "0.1",
+  "lastReviewed": "2026-09-05",
+  "canonicalMediaPage": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
+  "defaultLicense": "CC-BY-4.0",
+  "rightsManifest": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
+  "attribution": "Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/",
+  "assets": [],
+  "plannedAssetFamilies": [
+    {
+      "id": "brand-marks",
+      "purpose": "Press/news/project identification",
+      "formats": ["svg", "png"],
+      "variants": ["dark", "light", "transparent"]
+    },
+    {
+      "id": "resolver-flow",
+      "purpose": "Explain website discovery -> ARWP Resolver -> evidence-backed interface plan",
+      "formats": ["svg", "png"]
+    },
+    {
+      "id": "agentic-web-protocol-map",
+      "purpose": "Reusable editorial overview of MCP, A2A, WebMCP, llms.txt, APIs and related surfaces",
+      "formats": ["svg", "png"]
+    },
+    {
+      "id": "research-chart-template",
+      "purpose": "State of the Agentic Web and benchmark charts with reproducible source data",
+      "formats": ["svg", "png"]
+    },
+    {
+      "id": "social-press-card",
+      "purpose": "OpenGraph, press release and social summary card",
+      "formats": ["png"]
+    },
+    {
+      "id": "product-screenshots",
+      "purpose": "Current public site/resolver screenshots for editorial use",
+      "formats": ["png"]
+    }
+  ],
+  "assetRecordRequirements": [
+    "id",
+    "title",
+    "url",
+    "mediaType",
+    "width/height when raster",
+    "license",
+    "sourcePage",
+    "alt",
+    "createdAt or reviewedAt",
+    "sha256 when generated/released",
+    "thirdPartyContent=false unless separately cleared"
+  ],
+  "note": "The catalog intentionally lists no asset as available until the corresponding file is actually published and reviewed."
+}

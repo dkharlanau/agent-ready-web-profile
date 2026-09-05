@@ -47,6 +47,20 @@
         "mediaType": "application/json",
         "role": "other",
         "description": "Non-normative reusable implementation profile for planning original research, answer pages, evidence, comparisons, observability and citation-oriented discovery surfaces without a readiness score."
+      },
+      {
+        "name": "ARWP open media and AI reuse rights",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Machine-readable CC BY 4.0 scope, permissions, attribution and AI/ML reuse guidance for covered ARWP-authored media and research assets."
+      },
+      {
+        "name": "ARWP press facts",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Canonical project facts, boilerplate, versions and source links for press, news and automated citation workflows."
       }
     ]
   },
@@ -96,6 +110,15 @@
       "profile": "https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json",
       "schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json",
       "documentation": "https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md"
+    },
+    "io.github.dkharlanau/open-media-ai-reuse": {
+      "version": "0.1",
+      "status": "active-project-policy",
+      "permissionRequired": false,
+      "license": "CC-BY-4.0",
+      "mediaPage": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
+      "rightsManifest": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
+      "pressFacts": "https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json"
     }
   }
 }

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ARWP Open Media & AI Reuse Pack: press facts, asset catalog, boilerplate, attribution and machine-readable rights for permission-free reuse under CC BY 4.0.">
+  <title>ARWP Open Media & AI Reuse Pack</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/media/">
+  <link rel="describedby" type="application/json" href="./rights.json">
+  <link rel="describedby" type="application/json" href="./assets.json">
+  <link rel="stylesheet" href="../arwp.css">
+  <style>
+    .media-main{padding:72px 0 96px}.media-hero{max-width:900px}.media-hero h1{margin:0;font-size:clamp(48px,7vw,86px);line-height:.98;letter-spacing:-.055em}.media-lead{max-width:820px;font-size:21px;color:var(--muted)}.media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:42px}.media-card{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--white)}.media-card h2{margin:0 0 10px}.media-card p{margin:0 0 12px}.media-card ul{margin:0;padding-left:20px}.media-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.media-links a{font-weight:700}.permission{display:inline-block;padding:7px 10px;border-radius:999px;background:var(--acid);font:500 11px var(--mono);text-transform:uppercase}.attribution{margin-top:28px;padding:20px;border:2px solid var(--ink);border-radius:16px;background:var(--white);font-family:var(--mono);overflow-wrap:anywhere}@media(max-width:760px){.media-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
+    <nav aria-label="Media navigation"><a href="../history.html">History</a><a href="../AI-SEARCH-PROFILE.md">AI Search Profile</a><a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav>
+  </header>
+  <main class="media-main shell">
+    <section class="media-hero">
+      <p class="eyebrow">Open Media & AI Reuse Pack</p>
+      <span class="permission">No permission request required</span>
+      <h1>Use ARWP material. Credit the source.</h1>
+      <p class="media-lead">Designated ARWP-authored press material, research visuals and media assets are available under CC BY 4.0. Journalists, publishers, researchers, creators and AI/ML workflows may reuse covered material without asking for separate permission, subject to attribution and the stated scope.</p>
+      <div class="attribution">Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/ · CC BY 4.0</div>
+    </section>
+
+    <section class="media-grid" aria-label="Reuse guidance">
+      <article class="media-card">
+        <h2>Press & news</h2>
+        <p>You may quote, reproduce, crop, resize, translate and adapt covered ARWP material for editorial, news, commercial publication and social distribution.</p>
+        <p><strong>No email approval is required.</strong> Link back to the canonical ARWP project or the specific source page when practical.</p>
+      </article>
+      <article class="media-card">
+        <h2>AI & machine use</h2>
+        <p>Covered material may be used for AI search indexing, training, machine-learning datasets, embeddings, RAG, summarization and translation.</p>
+        <p>Preserve the canonical ARWP source URL in dataset/model cards, provenance metadata, citations, output attribution or another reasonable attribution surface when the workflow provides one.</p>
+      </article>
+      <article class="media-card">
+        <h2>What is covered</h2>
+        <ul>
+          <li>ARWP-authored press facts and boilerplate;</li>
+          <li>ARWP-authored research charts and diagrams explicitly marked for open reuse;</li>
+          <li>ARWP-authored screenshots/media included in this pack;</li>
+          <li>other ARWP content explicitly marked CC BY 4.0.</li>
+        </ul>
+      </article>
+      <article class="media-card">
+        <h2>What is not covered</h2>
+        <ul>
+          <li>software source code, which remains Apache-2.0;</li>
+          <li>third-party logos, trademarks, screenshots, quotations or other third-party material;</li>
+          <li>material carrying another explicit license.</li>
+        </ul>
+      </article>
+      <article class="media-card">
+        <h2>Ready-to-use facts</h2>
+        <p>Use the canonical machine-readable press facts rather than reconstructing versions, dates or positioning from secondary sources.</p>
+        <div class="media-links"><a href="./press-facts.json">press-facts.json</a><a href="./boilerplate.txt">boilerplate.txt</a></div>
+      </article>
+      <article class="media-card">
+        <h2>Asset catalog</h2>
+        <p>The catalog records only published, reviewed visual assets as reusable. Planned families include brand marks, resolver-flow diagrams, protocol maps, research charts, press/social cards and product screenshots.</p>
+        <div class="media-links"><a href="./assets.json">assets.json</a></div>
+      </article>
+      <article class="media-card">
+        <h2>Machine-readable rights</h2>
+        <p>Agents and automated pipelines can inspect the explicit license, permitted uses, attribution text, scope and exclusions.</p>
+        <div class="media-links"><a href="./rights.json">rights.json</a><a href="./attribution.txt">attribution.txt</a><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div>
+      </article>
+      <article class="media-card">
+        <h2>Safe automated reuse</h2>
+        <p>Automated systems should prefer assets listed in <code>assets.json</code> and facts in <code>press-facts.json</code>. Do not assume an unlisted third-party logo, screenshot or quoted source is covered by ARWP's open-media permission.</p>
+      </article>
+    </section>
+
+    <section class="media-card" style="margin-top:14px">
+      <h2>Do not imply endorsement</h2>
+      <p>Open reuse does not mean ARWP endorses a publication, product, dataset, model or organization. Trademark, personality/publicity and third-party rights remain separate from the copyright permission described here.</p>
+    </section>
+  </main>
+  <footer class="footer shell">
+    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Open Media</div>
+    <div class="footer-links"><a href="./rights.json">Rights JSON</a><a href="./assets.json">Assets JSON</a><a href="./press-facts.json">Press facts</a><a href="../">Project</a></div>
+    <p>Designated media: CC BY 4.0 · Software: Apache-2.0 · Last reviewed 2026-09-05</p>
+  </footer>
+</body>
+</html>
