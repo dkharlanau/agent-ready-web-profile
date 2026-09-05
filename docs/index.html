@@ -13,8 +13,40 @@
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/">
   <link rel="describedby" type="application/json" href="./ai/site-profile.json">
   <link rel="stylesheet" href="./arwp.css">
+<!-- portfolio-consent-analytics -->
+<script>
+(function(w,d,id){
+  var key='portfolio-analytics-consent-v1';
+  function load(){
+    if(w.__portfolioAnalyticsLoaded)return;
+    w.__portfolioAnalyticsLoaded=true;
+    w.dataLayer=w.dataLayer||[];
+    w.gtag=w.gtag||function(){w.dataLayer.push(arguments);};
+    w.gtag('js',new Date());
+    w.gtag('config',id,{anonymize_ip:true});
+    var s=d.createElement('script');
+    s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(id);
+    d.head.appendChild(s);
+  }
+  w.portfolioAnalyticsConsent={
+    grant:function(){try{localStorage.setItem(key,'granted');}catch(e){} load(); var n=d.getElementById('portfolio-analytics-consent');if(n)n.remove();},
+    deny:function(){try{localStorage.setItem(key,'denied');}catch(e){} var n=d.getElementById('portfolio-analytics-consent');if(n)n.remove();}
+  };
+  try{if(localStorage.getItem(key)==='granted')load();}catch(e){}
+})(window,document,'G-T2TS9NCN2N');
+</script>
 </head>
 <body data-scanner-endpoint="">
+<div id="portfolio-analytics-consent" role="dialog" aria-label="Analytics preference" style="position:fixed;z-index:2147483647;right:16px;bottom:16px;max-width:390px;padding:16px;border:1px solid #d0d7de;border-radius:12px;background:#fff;color:#1f2328;font:14px/1.45 system-ui,sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.18)">
+  <strong style="display:block;margin-bottom:6px">Optional analytics</strong>
+  <span>Allow anonymous usage measurement with Google Analytics? No analytics request is sent before you accept.</span>
+  <span style="display:flex;gap:8px;margin-top:12px">
+    <button type="button" onclick="portfolioAnalyticsConsent.grant()" style="padding:7px 12px;border:0;border-radius:8px;background:#0969da;color:#fff;cursor:pointer">Allow</button>
+    <button type="button" onclick="portfolioAnalyticsConsent.deny()" style="padding:7px 12px;border:1px solid #d0d7de;border-radius:8px;background:#fff;color:#1f2328;cursor:pointer">No thanks</button>
+  </span>
+</div>
+<script>(function(){try{if(localStorage.getItem('portfolio-analytics-consent-v1')){var n=document.getElementById('portfolio-analytics-consent');if(n)n.remove();}}catch(e){}})();</script>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="ARWP home"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
