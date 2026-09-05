@@ -81,6 +81,6 @@ assert.ok(comparison.blocks.includes('tradeoffs'));
 const opinionPlan = formatContentPlan('opinion');
 assert.match(opinionPlan, /Do not force:/);
 assert.match(opinionPlan, /not visible headings/i);
-assert.match(opinionPlan, /author context/i);
+assert.match(opinionPlan, /author-note/i);
 
 console.log('PASS Adaptive Content Profile preserves format diversity, evidence discipline, graph semantics and warning-only style lint');
