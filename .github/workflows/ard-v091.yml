@@ -1,0 +1,33 @@
+name: ARD v0.91 compatibility
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/ard-v091.mjs'
+      - 'scripts/ard-v091-test.mjs'
+      - 'docs/ARD-V0.91.md'
+      - '.github/workflows/ard-v091.yml'
+  pull_request:
+    paths:
+      - 'lib/ard-v091.mjs'
+      - 'scripts/ard-v091-test.mjs'
+      - 'docs/ARD-V0.91.md'
+      - '.github/workflows/ard-v091.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  ard-v091:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Validate ARD v0.91 pure compatibility layer
+        run: |
+          node scripts/ard-v091-test.mjs
+          node --check lib/ard-v091.mjs
+          node --check scripts/ard-v091-test.mjs
