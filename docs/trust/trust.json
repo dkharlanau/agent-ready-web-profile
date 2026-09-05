@@ -62,7 +62,8 @@
       "status": "version-and-digest-pinned"
     },
     "openSSFScorecard": {
-      "status": "observed-success",
+      "status": "configured",
+      "resultStatus": "observed-success",
       "viewer": "https://scorecard.dev/viewer/?uri=github.com/dkharlanau/agent-ready-web-profile",
       "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33974701872",
       "observedAt": "2026-09-05",
