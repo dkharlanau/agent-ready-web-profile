@@ -5,16 +5,20 @@
   "license": "Apache-2.0",
   "type": "module",
   "mcpName": "io.github.dkharlanau/agent-ready-web-profile",
-  "bin": { "arwp": "bin/arwp.mjs" },
+  "bin": {
+    "arwp": "bin/arwp.mjs",
+    "arwp-ai-search": "bin/arwp-ai-search.mjs"
+  },
   "files": [
     "bin/", "lib/", "schema/", "gateway/", "scanner-service/", "router/", "resolver/", "monitor/", "registry/", "benchmarks/", "server.json",
-    "scripts/quickstart.mjs",
+    "ai/ai-search-profile.json", "scripts/quickstart.mjs",
     "SPEC.md", "README.md", "LICENSE", "docs/CONFORMANCE.md", "docs/GATEWAY.md", "docs/SCANNER.md",
-    "docs/STANDARDS-MAP.md", "docs/USE-CASES.md", "docs/ADOPTION.md", "docs/DIRECTORY.md", "docs/RESOLVER.md", "docs/BENCHMARK.md"
+    "docs/STANDARDS-MAP.md", "docs/USE-CASES.md", "docs/ADOPTION.md", "docs/DIRECTORY.md", "docs/RESOLVER.md", "docs/BENCHMARK.md", "docs/AI-SEARCH-PROFILE.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
     "quickstart": "node scripts/quickstart.mjs",
+    "ai-search-profile": "node bin/arwp-ai-search.mjs",
     "test:quickstart": "node scripts/quickstart.mjs",
     "test:gateway": "node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "test:verifier": "node scripts/verifier-test.mjs",
@@ -26,6 +30,7 @@
     "test:directory": "node scripts/directory-test.mjs",
     "test:router": "node scripts/router-test.mjs && node scripts/resolved-federated-test.mjs && node --check router/federated.mjs && node --check router/resolved-federated.mjs && node --check router/server.mjs",
     "test:self-profile": "node scripts/self-profile-test.mjs",
+    "test:ai-search-profile": "node scripts/ai-search-profile-test.mjs && node --check lib/ai-search-profile.mjs && node --check bin/arwp-ai-search.mjs",
     "test:package": "node scripts/package-smoke-test.mjs",
     "test:site": "node scripts/site-test.mjs",
     "test:benchmark": "node benchmarks/corpus-test.mjs && node benchmarks/evidence-checker-test.mjs && node benchmarks/resolver-regression.mjs && node --check benchmarks/evidence-checker.mjs && node --check benchmarks/evidence-check.mjs && node --check benchmarks/external-runner.mjs && node --check benchmarks/federation-runner.mjs",
@@ -34,7 +39,7 @@
     "benchmark:evidence": "node benchmarks/evidence-check.mjs",
     "benchmark:federation-external": "node benchmarks/federation-runner.mjs",
     "monitor:resolver": "node monitor/runner.mjs",
-    "test": "node scripts/test.mjs && node scripts/quickstart.mjs && node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node scripts/verifier-test.mjs && node scripts/scanner-test.mjs && node scripts/health-test.mjs && node scripts/protocol-checks-test.mjs && node scripts/public-fetch-test.mjs && node scripts/resolver-test.mjs && node scripts/http-discovery-test.mjs && node scripts/mcp-runtime-test.mjs && node scripts/a2a-signature-test.mjs && node scripts/resolver-snapshot-test.mjs && node scripts/resolver-batch-test.mjs && node scripts/resolver-monitor-test.mjs && node scripts/scanner-service-test.mjs && node scripts/directory-test.mjs && node scripts/router-test.mjs && node scripts/resolved-federated-test.mjs && node scripts/self-profile-test.mjs && node scripts/site-test.mjs && node benchmarks/corpus-test.mjs && node benchmarks/evidence-checker-test.mjs && node benchmarks/resolver-regression.mjs && node --check benchmarks/evidence-checker.mjs && node --check benchmarks/evidence-check.mjs && node --check benchmarks/external-runner.mjs && node --check benchmarks/federation-runner.mjs && node --check lib/scanner.mjs && node --check lib/health.mjs && node --check lib/protocol-checks.mjs && node --check lib/public-fetch.mjs && node --check lib/http-discovery.mjs && node --check lib/mcp-runtime.mjs && node --check lib/a2a-signature.mjs && node --check lib/resolver-adapters.mjs && node --check lib/resolver.mjs && node --check lib/resolver-snapshot.mjs && node --check lib/resolver-batch.mjs && node --check lib/resolver-monitor.mjs && node --check resolver/server.mjs && node --check monitor/runner.mjs && node --check scanner-service/handler.mjs && node --check scanner-service/http-node.mjs && node --check router/federated.mjs && node --check router/resolved-federated.mjs && node --check router/server.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
+    "test": "node scripts/test.mjs && node scripts/quickstart.mjs && node scripts/gateway-test.mjs && node scripts/http-gateway-test.mjs && node scripts/verifier-test.mjs && node scripts/scanner-test.mjs && node scripts/health-test.mjs && node scripts/protocol-checks-test.mjs && node scripts/public-fetch-test.mjs && node scripts/resolver-test.mjs && node scripts/http-discovery-test.mjs && node scripts/mcp-runtime-test.mjs && node scripts/a2a-signature-test.mjs && node scripts/resolver-snapshot-test.mjs && node scripts/resolver-batch-test.mjs && node scripts/resolver-monitor-test.mjs && node scripts/scanner-service-test.mjs && node scripts/directory-test.mjs && node scripts/router-test.mjs && node scripts/resolved-federated-test.mjs && node scripts/self-profile-test.mjs && node scripts/ai-search-profile-test.mjs && node scripts/site-test.mjs && node benchmarks/corpus-test.mjs && node benchmarks/evidence-checker-test.mjs && node benchmarks/resolver-regression.mjs && node --check benchmarks/evidence-checker.mjs && node --check benchmarks/evidence-check.mjs && node --check benchmarks/external-runner.mjs && node --check benchmarks/federation-runner.mjs && node --check lib/scanner.mjs && node --check lib/health.mjs && node --check lib/protocol-checks.mjs && node --check lib/public-fetch.mjs && node --check lib/http-discovery.mjs && node --check lib/mcp-runtime.mjs && node --check lib/a2a-signature.mjs && node --check lib/ai-search-profile.mjs && node --check bin/arwp-ai-search.mjs && node --check lib/resolver-adapters.mjs && node --check lib/resolver.mjs && node --check lib/resolver-snapshot.mjs && node --check lib/resolver-batch.mjs && node --check lib/resolver-monitor.mjs && node --check resolver/server.mjs && node --check monitor/runner.mjs && node --check scanner-service/handler.mjs && node --check scanner-service/http-node.mjs && node --check router/federated.mjs && node --check router/resolved-federated.mjs && node --check router/server.mjs && node --check gateway/factory.mjs && node --check gateway/server.mjs && node --check gateway/http.mjs && node --check gateway/http-entry.mjs && node --check gateway/http-node.mjs",
     "mcp:start": "node gateway/server.mjs",
     "mcp:http": "node gateway/http-node.mjs",
     "scanner:http": "node scanner-service/http-node.mjs",
@@ -52,6 +57,6 @@
   "repository": { "type": "git", "url": "https://github.com/dkharlanau/agent-ready-web-profile.git" },
   "homepage": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "bugs": { "url": "https://github.com/dkharlanau/agent-ready-web-profile/issues" },
-  "keywords": ["agent-ready-web","ai-agents","machine-readable-web","resolver","mcp","webmcp","llms-txt","agents-txt","agent-skills","a2a","openapi","api-catalog","interoperability","website-scanner","rag","discovery"],
+  "keywords": ["agent-ready-web","ai-agents","machine-readable-web","resolver","mcp","webmcp","llms-txt","agents-txt","agent-skills","a2a","openapi","api-catalog","interoperability","website-scanner","rag","discovery","ai-search","citation"],
   "publishConfig": { "access": "public" }
 }
