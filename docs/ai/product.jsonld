@@ -1,0 +1,75 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
+      "@type": ["SoftwareApplication", "WebApplication"],
+      "name": "Agent-Ready Web Profile",
+      "alternateName": "ARWP",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
+      "description": "Evidence-backed agentic web interoperability resolver, scanner and conformance tooling that discovers heterogeneous website interfaces, preserves provenance and conflicts, and routes concrete intents to suitable interfaces.",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Agentic Web Interoperability Resolver",
+      "softwareVersion": "0.2.0",
+      "runtimePlatform": "Node.js >=20 and the public web",
+      "operatingSystem": "Cross-platform",
+      "isAccessibleForFree": true,
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "softwareHelp": "https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md",
+      "releaseNotes": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CHANGELOG.md",
+      "keywords": [
+        "agentic web interoperability",
+        "agent readiness",
+        "AI agent website discovery",
+        "website conformance",
+        "MCP",
+        "A2A",
+        "WebMCP",
+        "llms.txt",
+        "API discovery",
+        "provenance",
+        "AI search readiness"
+      ],
+      "featureList": [
+        "multi-protocol website discovery",
+        "evidence-backed interface normalization",
+        "source authority and conflict preservation",
+        "intent-based interface planning",
+        "Search and Agent recommendations audit",
+        "AI crawler policy matrix",
+        "runtime evidence receipts",
+        "AI visibility evidence comparison"
+      ],
+      "maintainer": {
+        "@type": "Person",
+        "name": "Dzmitryi Kharlanau",
+        "url": "https://github.com/dkharlanau"
+      },
+      "sameAs": [
+        "https://github.com/dkharlanau/agent-ready-web-profile"
+      ],
+      "about": [
+        {
+          "@type": "DefinedTerm",
+          "name": "agentic web interoperability resolver",
+          "termCode": "agentic-web-interoperability-resolver",
+          "description": "A project-defined class for tooling that discovers heterogeneous machine- and agent-facing website interfaces, preserves provenance and conflicts, and routes concrete intents to suitable interfaces.",
+          "url": "https://dkharlanau.github.io/agent-ready-web-profile/compare/"
+        },
+        {"@type":"DefinedTerm","name":"agent readiness infrastructure"},
+        {"@type":"DefinedTerm","name":"web interoperability tooling"},
+        {"@type":"DefinedTerm","name":"website conformance and observability tooling"}
+      ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website",
+      "@type": "WebSite",
+      "name": "Agent-Ready Web Profile",
+      "alternateName": "ARWP",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
+      "inLanguage": ["en", "de", "ru"],
+      "about": {"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "publisher": {"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"}
+    }
+  ]
+}
