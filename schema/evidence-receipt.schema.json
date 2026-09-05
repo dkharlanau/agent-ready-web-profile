@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/evidence-receipt.schema.json",
+  "title": "ARWP Evidence Receipt",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "receiptVersion",
+    "receiptId",
+    "producer",
+    "target",
+    "canonicalUrl",
+    "observedAt",
+    "toolVersion",
+    "resolverVersion",
+    "evidenceSummary",
+    "sources",
+    "plans",
+    "conflicts",
+    "metrics",
+    "upstreamStatus",
+    "artifactDigests",
+    "boundaries",
+    "digests"
+  ],
+  "properties": {
+    "receiptVersion": { "const": "0.1" },
+    "receiptId": { "type": "string", "pattern": "^urn:sha256:[a-f0-9]{64}$" },
+    "producer": { "type": "string", "minLength": 1 },
+    "target": { "type": "string", "minLength": 1 },
+    "canonicalUrl": { "type": "string", "format": "uri" },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "toolVersion": { "type": "string", "minLength": 1 },
+    "resolverVersion": { "type": "string", "minLength": 1 },
+    "decisionPolicyVersion": { "type": ["string", "null"] },
+    "identity": { "type": ["object", "null"] },
+    "evidenceSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourcesAttempted", "sourcesResolved", "interfacesResolved", "conflicts"],
+      "properties": {
+        "sourcesAttempted": { "type": "integer", "minimum": 0 },
+        "sourcesResolved": { "type": "integer", "minimum": 0 },
+        "interfacesResolved": { "type": "integer", "minimum": 0 },
+        "conflicts": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "plans": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["read", "search", "structured", "tools", "agent"],
+      "properties": {
+        "read": { "$ref": "#/$defs/Plan" },
+        "search": { "$ref": "#/$defs/Plan" },
+        "structured": { "$ref": "#/$defs/Plan" },
+        "tools": { "$ref": "#/$defs/Plan" },
+        "agent": { "$ref": "#/$defs/Plan" }
+      }
+    },
+    "conflicts": { "type": "array" },
+    "metrics": { "type": "object" },
+    "upstreamStatus": { "type": "object" },
+    "artifactDigests": { "type": "array" },
+    "boundaries": {
+      "type": "object",
+      "required": [
+        "receiptIsResolverObservation",
+        "receiptIsPublisherManifest",
+        "receiptIsTrustCertificate",
+        "metadataGrantsAuthorization",
+        "sourceBodyDigestsCaptured"
+      ],
+      "properties": {
+        "receiptIsResolverObservation": { "const": true },
+        "receiptIsPublisherManifest": { "const": false },
+        "receiptIsTrustCertificate": { "const": false },
+        "metadataGrantsAuthorization": { "const": false },
+        "sourceBodyDigestsCaptured": { "type": "boolean" },
+        "note": { "type": "string" }
+      }
+    },
+    "digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "canonicalization", "payload"],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "canonicalization": { "type": "string", "minLength": 1 },
+        "payload": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    }
+  },
+  "$defs": {
+    "Interface": {
+      "type": ["object", "null"],
+      "additionalProperties": true
+    },
+    "Plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent", "outcome", "selected", "fallbacks", "rejected", "reason"],
+      "properties": {
+        "intent": { "enum": ["read", "search", "structured", "tools", "agent"] },
+        "outcome": { "type": "string" },
+        "selected": { "$ref": "#/$defs/Interface" },
+        "fallbacks": { "type": "array", "items": { "type": "object" } },
+        "rejected": { "type": "array", "items": { "type": "object" } },
+        "reason": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
