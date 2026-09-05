@@ -59,27 +59,32 @@ assert.ok(citationIndex.items.some(item => item.id === 'ARWP-CLAIM-0002' && item
 
 const observatoryPath = path.join(root, 'docs', 'observatory', 'protocols.json');
 const firstFrozenObservatoryPath = path.join(root, 'docs', 'observatory', 'history', '2026-09-05.json');
-const revisedFrozenObservatoryPath = path.join(root, 'docs', 'observatory', 'history', '2026-09-05-r2.json');
+const r2FrozenObservatoryPath = path.join(root, 'docs', 'observatory', 'history', '2026-09-05-r2.json');
+const r3FrozenObservatoryPath = path.join(root, 'docs', 'observatory', 'history', '2026-09-05-r3.json');
 const observatoryHistoryPath = path.join(root, 'docs', 'observatory', 'history', 'index.json');
-for (const file of [observatoryPath, firstFrozenObservatoryPath, revisedFrozenObservatoryPath, observatoryHistoryPath, path.join(root, 'docs', 'observatory', 'index.html')]) {
+for (const file of [observatoryPath, firstFrozenObservatoryPath, r2FrozenObservatoryPath, r3FrozenObservatoryPath, observatoryHistoryPath, path.join(root, 'docs', 'observatory', 'index.html')]) {
   assert.ok(fs.existsSync(file), `missing observatory file: ${path.relative(root, file)}`);
 }
 const observatory = JSON.parse(fs.readFileSync(observatoryPath, 'utf8'));
 const firstFrozenObservatory = JSON.parse(fs.readFileSync(firstFrozenObservatoryPath, 'utf8'));
-const revisedFrozenObservatory = JSON.parse(fs.readFileSync(revisedFrozenObservatoryPath, 'utf8'));
+const r2FrozenObservatory = JSON.parse(fs.readFileSync(r2FrozenObservatoryPath, 'utf8'));
+const r3FrozenObservatory = JSON.parse(fs.readFileSync(r3FrozenObservatoryPath, 'utf8'));
 const observatoryHistory = JSON.parse(fs.readFileSync(observatoryHistoryPath, 'utf8'));
 assert.equal(observatory.snapshotDate, '2026-09-05');
-assert.equal(observatory.snapshotRevision, 'r2');
+assert.equal(observatory.snapshotRevision, 'r3');
 assert.equal(observatory.mechanisms.length, 16);
 assert.equal(observatory.methodology.noAdoptionInference, true);
 assert.equal(observatory.methodology.noReadinessScore, true);
 assert.equal(firstFrozenObservatory.mechanisms.length, 10, 'the first observatory snapshot must remain immutable');
 assert.equal(firstFrozenObservatory.snapshotRevision, undefined, 'the original snapshot remains the pre-revision historical record');
-assert.deepEqual(revisedFrozenObservatory, observatory, 'r2 frozen snapshot must equal the current published observatory at creation time');
-assert.equal(observatoryHistory.snapshots[0].revision, 'r2');
+assert.equal(r2FrozenObservatory.snapshotRevision, 'r2');
+assert.equal(r2FrozenObservatory.mechanisms.length, 16, 'r2 remains the pre-v0.91 research snapshot');
+assert.notDeepEqual(r2FrozenObservatory, observatory, 'v0.91 correction must create r3 instead of rewriting r2');
+assert.deepEqual(r3FrozenObservatory, observatory, 'r3 frozen snapshot must equal the current published observatory at creation time');
+assert.equal(observatoryHistory.snapshots[0].revision, 'r3');
 assert.equal(observatoryHistory.snapshots[0].mechanisms, 16);
-assert.equal(observatoryHistory.snapshots[1].revision, 'r1');
-assert.equal(observatoryHistory.snapshots[1].mechanisms, 10);
+assert.equal(observatoryHistory.snapshots[1].revision, 'r2');
+assert.equal(observatoryHistory.snapshots[2].revision, 'r1');
 
 const mechanism = id => observatory.mechanisms.find(item => item.id === id);
 assert.equal(mechanism('a2a').currentVersion, '1.0.0');
@@ -89,9 +94,12 @@ assert.equal(mechanism('webmcp').arwpSupport.staticDiscovery, 'not-assessed-as-r
 assert.equal(mechanism('acp-commerce').arwpSupport.staticDiscovery, 'watchlist-no-adapter');
 assert.equal(mechanism('ucp-commerce').arwpSupport.staticDiscovery, 'watchlist-no-adapter');
 assert.match(mechanism('agent-skills').notes, /core public specification defines the SKILL\.md format/i);
-assert.equal(mechanism('ard').currentVersion, 'v0.9 draft; ai-catalog specVersion 1.0');
-assert.equal(mechanism('ard').arwpSupport.staticDiscovery, 'partial-ai-catalog-support');
-assert.match(mechanism('ard').notes, /site-first/i);
+assert.equal(mechanism('ard').currentVersion, 'v0.91 proposal; 2026-08-26');
+assert.equal(mechanism('ard').arwpSupport.staticDiscovery, 'canonical-ard-plus-legacy-ai-catalog-evidence');
+assert.ok(mechanism('ard').discovery.includes('/.well-known/ard.json canonical manifest'));
+assert.ok(mechanism('ard').discovery.includes('rel=ard'));
+assert.match(mechanism('ard').notes, /JSON-LD/i);
+assert.match(mechanism('ard').notes, /predecessor ai-catalog/i);
 assert.equal(mechanism('dns-aid').currentVersion, 'draft-mozleywilliams-dnsop-dnsaid-02');
 assert.equal(mechanism('web-bot-auth').currentVersion, 'draft-meunier-webbotauth-httpsig-protocol-02');
 assert.equal(mechanism('aipref').currentVersion, 'draft-ietf-aipref-attach-05');
@@ -200,4 +208,4 @@ assert.match(planned.stdout, /P1 persistentIdentifiers/);
 assert.match(planned.stdout, /P1 softwareProvenance/);
 assert.match(planned.stdout, /P2 externalTrustSignals/);
 
-console.log('PASS AI Search & Citation Profile validates current observatory research while preserving immutable historical snapshots and evidence guardrails');
+console.log('PASS AI Search & Citation Profile validates current ARD v0.91 observatory research while preserving immutable r1/r2/r3 historical evidence');
