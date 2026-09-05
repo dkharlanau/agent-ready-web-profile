@@ -74,7 +74,7 @@
       "status": "prepared-not-issued",
       "provider": "Zenodo",
       "metadataSource": "CITATION.cff",
-      "activationGuide": "https://dkharlanau.github.io/agent-ready-web-profile/trust/DOI.md",
+      "activationGuide": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/trust/DOI.md",
       "note": "A DOI is not claimed until the repository is enabled in Zenodo and a release is archived."
     }
   },
