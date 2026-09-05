@@ -1,9 +1,17 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "project": "Agent-Ready Web Profile",
   "snapshots": [
     {
       "date": "2026-09-05",
+      "revision": "r2",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/history/2026-09-05-r2.json",
+      "mechanisms": 16,
+      "notes": "Expanded same-day research snapshot adding ARD, DNS-AID, Web Bot Auth, AIPREF, NLWeb and auth.md while preserving the original first snapshot unchanged."
+    },
+    {
+      "date": "2026-09-05",
+      "revision": "r1",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/history/2026-09-05.json",
       "mechanisms": 10,
       "notes": "First frozen ARWP Agentic Web Protocol Observatory snapshot."
