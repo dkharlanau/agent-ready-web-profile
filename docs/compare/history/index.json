@@ -1,8 +1,9 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "canonicalComparison": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
   "policy": "Snapshots are append-only historical observations. Material changes create a new dated/revision snapshot instead of silently rewriting prior competitor capability claims.",
   "snapshots": [
+    {"date":"2026-09-05","revision":"r3","url":"https://dkharlanau.github.io/agent-ready-web-profile/compare/history/2026-09-05-r3.json","source":"https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json","note":"ARD v0.91 correction: canonical ard.json/rel=ard/JSON-LD description layer; predecessor ai-catalog retained only as compatibility. Product competitors remain separated from upstream specifications."},
     {"date":"2026-09-05","revision":"r2","url":"https://dkharlanau.github.io/agent-ready-web-profile/compare/history/2026-09-05-r2.json","source":"https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json","note":"Expanded research pass adding Agent Ready's empirical validator/corpus and explicitly separating ARD/Vercel guidance from product competitors."},
     {"date":"2026-09-05","revision":"r1","url":"https://dkharlanau.github.io/agent-ready-web-profile/compare/history/2026-09-05.json","source":"https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json","note":"Initial source-backed category map covering AgentReady/Ora, technical readiness scanners, WebMCP tooling, crawler governance and AI visibility analytics."}
   ]
