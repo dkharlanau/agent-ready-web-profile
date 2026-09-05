@@ -1,0 +1,5 @@
+# Minimal Perplexity fragment: permit documented search-indexing crawler.
+User-agent: PerplexityBot
+Allow: /
+
+# Perplexity-User intentionally omitted because official documentation is currently inconsistent about robots.txt behavior.
