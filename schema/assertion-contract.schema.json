@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/assertion-contract.schema.json",
+  "title": "ARWP Agent Surface Assertion Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contractVersion", "target", "expect"],
+  "properties": {
+    "contractVersion": { "const": "0.1" },
+    "target": { "type": "string", "minLength": 1 },
+    "canonicalUrl": { "type": "string", "format": "uri" },
+    "expect": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "read": { "$ref": "#/$defs/IntentRule" },
+        "search": { "$ref": "#/$defs/IntentRule" },
+        "structured": { "$ref": "#/$defs/IntentRule" },
+        "tools": { "$ref": "#/$defs/IntentRule" },
+        "agent": { "$ref": "#/$defs/IntentRule" }
+      }
+    },
+    "maxConflicts": { "type": "integer", "minimum": 0 },
+    "forbidConflictKinds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "requiredSourceAuthorities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "changePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selectedInterface": { "$ref": "#/$defs/ChangeAction" },
+        "selectedProtocol": { "$ref": "#/$defs/ChangeAction" },
+        "planOutcome": { "$ref": "#/$defs/ChangeAction" },
+        "newConflicts": { "$ref": "#/$defs/ChangeAction" }
+      }
+    }
+  },
+  "$defs": {
+    "StringOrStrings": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      ]
+    },
+    "ChangeAction": { "enum": ["ignore", "warn", "fail"] },
+    "IntentRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "boolean" },
+        "forbidden": { "type": "boolean" },
+        "protocol": { "$ref": "#/$defs/StringOrStrings" },
+        "kind": { "$ref": "#/$defs/StringOrStrings" },
+        "sourceAuthority": { "$ref": "#/$defs/StringOrStrings" },
+        "outcome": { "$ref": "#/$defs/StringOrStrings" },
+        "url": { "type": "string", "minLength": 1 },
+        "urlPrefix": { "type": "string", "minLength": 1 },
+        "maxRejected": { "type": "integer", "minimum": 0 }
+      },
+      "allOf": [
+        {
+          "not": {
+            "required": ["required", "forbidden"],
+            "properties": {
+              "required": { "const": true },
+              "forbidden": { "const": true }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
