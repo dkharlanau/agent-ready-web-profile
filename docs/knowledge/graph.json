@@ -1,0 +1,176 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer",
+      "@type": "Person",
+      "name": "Dzmitryi Kharlanau",
+      "url": "https://github.com/dkharlanau",
+      "sameAs": [
+        "https://github.com/dkharlanau"
+      ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
+      "@type": "SoftwareSourceCode",
+      "name": "Agent-Ready Web Profile",
+      "alternateName": "ARWP",
+      "description": "Evidence-backed interoperability resolver and profile/tooling project for discovering and routing the machine- and agent-facing interfaces exposed by public websites.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
+      "codeRepository": "https://github.com/dkharlanau/agent-ready-web-profile",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "version": "0.2.0",
+      "programmingLanguage": "JavaScript",
+      "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "sameAs": [
+        "https://github.com/dkharlanau/agent-ready-web-profile",
+        "https://www.npmjs.com/package/agent-ready-web-profile"
+      ],
+      "subjectOf": [
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#trust-center"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#protocol-observatory"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#crawler-matrix"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claims-registry"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#ai-search-profile"}
+      ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website",
+      "@type": "WebSite",
+      "name": "Agent-Ready Web Profile",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "publisher": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "inLanguage": ["en", "de", "ru"]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#trust-center",
+      "@type": "WebPage",
+      "name": "ARWP Trust Center",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/trust/",
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "dateModified": "2026-09-05",
+      "isPartOf": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website"},
+      "mainEntity": [
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"}
+      ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#protocol-observatory",
+      "@type": "Dataset",
+      "name": "ARWP Agentic Web Protocol Observatory",
+      "description": "Dated primary-source-reviewed map of agentic-web protocols and discovery mechanisms with ARWP support state.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/",
+      "creator": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "dateModified": "2026-09-05",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [{
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json"
+      }]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#crawler-matrix",
+      "@type": "Dataset",
+      "name": "ARWP AI Crawler & Access Matrix",
+      "description": "Dated official-source matrix separating AI search/indexing, user-triggered retrieval and model-training/product controls.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/",
+      "creator": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "dateModified": "2026-09-05",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [{
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/crawlers.json"
+      }]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claims-registry",
+      "@type": "CollectionPage",
+      "name": "ARWP Claims Registry",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/",
+      "description": "Stable scoped technical claims with review state, evidence, limitations and supersession policy.",
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "dateModified": "2026-09-05",
+      "hasPart": [
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claim-0001"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claim-0002"}
+      ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claim-0001",
+      "@type": "CreativeWork",
+      "identifier": "ARWP-CLAIM-0001",
+      "name": "A2A Agent Card discovery metadata vs callable interface",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0001.html",
+      "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "isPartOf": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claims-registry"},
+      "dateModified": "2026-09-05",
+      "about": "A2A 1.0 discovery and callable-interface semantics"
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claim-0002",
+      "@type": "CreativeWork",
+      "identifier": "ARWP-CLAIM-0002",
+      "name": "Frozen resolver decision-quality benchmark result",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.html",
+      "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "isPartOf": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claims-registry"},
+      "dateModified": "2026-09-05",
+      "about": "ARWP frozen 20-site resolver decision-quality benchmark"
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#ai-search-profile",
+      "@type": "TechArticle",
+      "name": "ARWP AI Search & Citation Profile",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md",
+      "description": "Reusable implementation profile for citation-ready, evidence-backed and trust-oriented website surfaces.",
+      "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "dateModified": "2026-09-05"
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#vocabulary",
+      "@type": "DefinedTermSet",
+      "name": "ARWP project vocabulary",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/",
+      "hasDefinedTerm": [
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-resolver"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-resolver-regret"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-discovery-conflict"}
+      ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-resolver",
+      "@type": "DefinedTerm",
+      "name": "agentic web resolver",
+      "description": "Software that discovers multiple machine- and agent-facing interfaces exposed by a website, preserves provenance, reports conflicts and selects an interface for a concrete intent.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/agentic-web-resolver.html",
+      "inDefinedTermSet": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#vocabulary"}
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-resolver-regret",
+      "@type": "DefinedTerm",
+      "name": "resolver regret",
+      "description": "A decision-quality case where a simpler discovery strategy selects the reviewed-correct interface while the union Resolver selects an incorrect one.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/resolver-regret.html",
+      "inDefinedTermSet": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#vocabulary"}
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-discovery-conflict",
+      "@type": "DefinedTerm",
+      "name": "discovery conflict",
+      "description": "A disagreement between independently observed or publisher-declared discovery sources that a resolver preserves rather than silently overwriting.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/discovery-conflict.html",
+      "inDefinedTermSet": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#vocabulary"}
+    }
+  ]
+}
