@@ -6,6 +6,7 @@ import {
   createAiSearchProfileStarter,
   formatAiSearchProfilePlan,
   loadAiSearchProfile,
+  planAiSearchProfile,
   validateAiSearchProfile
 } from '../lib/ai-search-profile.mjs';
 
@@ -94,15 +95,14 @@ function main() {
     return validation.valid ? 0 : 1;
   }
 
-  if (jsonOutput) {
-    const { planAiSearchProfile } = await import('../lib/ai-search-profile.mjs');
-    console.log(JSON.stringify(planAiSearchProfile(profile), null, 2));
-  } else console.log(formatAiSearchProfilePlan(profile));
+  const plan = planAiSearchProfile(profile);
+  if (jsonOutput) console.log(JSON.stringify(plan, null, 2));
+  else console.log(formatAiSearchProfilePlan(profile));
   return validation.valid ? 0 : 1;
 }
 
 try {
-  const exitCode = await main();
+  const exitCode = main();
   if (Number.isInteger(exitCode)) process.exit(exitCode);
 } catch (error) {
   if (jsonOutput) console.log(JSON.stringify({ valid: false, fatal: String(error.message ?? error) }, null, 2));
