@@ -1,0 +1,39 @@
+{
+  "receiptVersion": "0.1",
+  "producer": "ARWP Resolver",
+  "target": "https://docs.astral.sh/ty/",
+  "canonicalUrl": "https://docs.astral.sh/ty/",
+  "observedAt": "2026-09-05T21:48:55.000Z",
+  "toolVersion": "0.2.0",
+  "resolverVersion": "0.1",
+  "decisionPolicyVersion": "0.1",
+  "identity": {"name":"ty","description":"ty is an extremely fast Python type checker.","canonicalUrl":"https://docs.astral.sh/ty/"},
+  "evidenceSummary": {"sourcesAttempted":10,"sourcesResolved":2,"interfacesResolved":2,"conflicts":0},
+  "sources": [
+    {"id":"http-head:0","type":"http-head","url":"https://docs.astral.sh/ty/","status":"resolved","authority":"observed-web","contentType":"text/html; charset=utf-8"},
+    {"id":"path-llms:0","type":"path-llms","url":"https://docs.astral.sh/ty/llms.txt","status":"resolved","authority":"observed-web","contentType":"text/plain; charset=utf-8"},
+    {"id":"a2a-agent-card:0","type":"a2a-agent-card","url":"https://docs.astral.sh/.well-known/agent-card.json","status":"not-found","httpStatus":404},
+    {"id":"agent-skills-index:0","type":"agent-skills-index","url":"https://docs.astral.sh/.well-known/agent-skills/index.json","status":"not-found","httpStatus":404},
+    {"id":"agents-json:0","type":"agents-json","url":"https://docs.astral.sh/agents.json","status":"not-found","httpStatus":404},
+    {"id":"agents-txt:0","type":"agents-txt","url":"https://docs.astral.sh/agents.txt","status":"not-found","httpStatus":404},
+    {"id":"api-catalog:0","type":"api-catalog","url":"https://docs.astral.sh/.well-known/api-catalog","status":"not-found","httpStatus":404},
+    {"id":"ard-catalog-legacy:0","type":"ard-catalog-legacy","url":"https://docs.astral.sh/.well-known/ai-catalog.json","status":"not-found","httpStatus":404},
+    {"id":"ard-catalog:0","type":"ard-catalog","url":"https://docs.astral.sh/.well-known/ard.json","status":"not-found","httpStatus":404},
+    {"id":"oauth-protected-resource:0","type":"oauth-protected-resource","url":"https://docs.astral.sh/.well-known/oauth-protected-resource","status":"not-found","httpStatus":404}
+  ],
+  "plans": {
+    "read": {"intent":"read","outcome":"selected","selected":{"url":"https://docs.astral.sh/ty/llms.txt","protocol":"llms.txt","kind":"llms","sourceId":"path-llms:0","sourceAuthority":"observed-web","discoveryScope":"target-path-probe","score":101,"eligible":true},"fallbacks":[{"url":"https://docs.astral.sh/ty/","protocol":"HTML","kind":"html","mediaType":"text/html; charset=utf-8","sourceId":"http-head:0","sourceAuthority":"observed-web","discoveryScope":"target-observed","score":51,"eligible":true}],"rejected":[],"reason":"Selected llms from observed-web evidence after eligibility checks."},
+    "search": {"intent":"search","outcome":"none","selected":null,"fallbacks":[],"rejected":[],"reason":"No suitable search interface was resolved."},
+    "structured": {"intent":"structured","outcome":"none","selected":null,"fallbacks":[],"rejected":[],"reason":"No suitable structured interface was resolved."},
+    "tools": {"intent":"tools","outcome":"none","selected":null,"fallbacks":[],"rejected":[],"reason":"No suitable tools interface was resolved."},
+    "agent": {"intent":"agent","outcome":"none","selected":null,"fallbacks":[],"rejected":[],"reason":"No suitable agent interface was resolved."}
+  },
+  "conflicts": [],
+  "metrics": {"resolverRequests":10,"resolverBytes":2000,"note":"Counts resolver discovery fetches after the bounded base-site scan; scanner requests are reported separately by scanner tooling."},
+  "upstreamStatus": {"RFC8288 HTTP Link":"ietf-standard","RFC9727":"ietf-standard","RFC9728":"ietf-standard","ARD":"multivendor-open-draft","A2A":"upstream-standard","Agent Skills":"upstream-convention","agents.txt/json":"community-convention","MCP Server Card":"experimental-upstream"},
+  "artifactDigests": [{"sourceIds":["path-llms:0"],"sourceTypes":["path-llms"],"requestedUrl":"https://docs.astral.sh/ty/llms.txt","finalUrl":"https://docs.astral.sh/ty/llms.txt","contentType":"text/plain; charset=utf-8","networkBytes":2000,"hashedUtf8Bytes":2000,"algorithm":"sha256","digest":"sha256:606672562c12565e35410a0c83b72b38fe0b80de51239cab8e2e8235007d6e06","digestScope":"decoded-utf8-complete-bounded-response-body","completeWithinBound":true}],
+  "boundaries": {"receiptIsResolverObservation":true,"receiptIsPublisherManifest":false,"receiptIsTrustCertificate":false,"metadataGrantsAuthorization":false,"sourceBodyDigestsCaptured":true,"note":"Receipt payload integrity and explicitly captured source-body digests are recorded. Source digests cover decoded UTF-8 complete bounded response bodies, not HTTP transfer framing or guaranteed raw origin bytes.","sourceBodyDigestScope":"decoded-utf8-complete-bounded-response-body"},
+  "captureSummary": {"captureVersion":"0.1","digestScope":"decoded-utf8-complete-bounded-response-body","maxBytesPerSource":524288,"maxSources":8,"candidates":1,"attempted":1,"captured":1,"failed":0,"omittedByLimit":[],"failures":[],"boundaries":{"ordinaryResolverNetworkUnchanged":true,"headOnlySourcesSkipped":true,"rawWireBytesClaimed":false,"truncatedBodyDigestsPublished":false,"note":"Digests cover the complete decoded UTF-8 text returned by the bounded explicit refetch. They are not hashes of HTTP transfer framing or guaranteed raw origin bytes."}},
+  "digests": {"algorithm":"sha256","canonicalization":"ARWP canonical JSON v0.1: object keys sorted recursively; array order preserved; UTF-8 JSON without insignificant whitespace","payload":"sha256:db212521cdedb111bf60ec16c7db195326076aa67d597368bcc69ee96af6a766"},
+  "receiptId": "urn:sha256:db212521cdedb111bf60ec16c7db195326076aa67d597368bcc69ee96af6a766"
+}
