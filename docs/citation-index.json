@@ -5,56 +5,13 @@
   "lastReviewed": "2026-09-05",
   "license": "CC-BY-4.0",
   "items": [
-    {
-      "id": "answer-agentic-web-resolver",
-      "type": "answer",
-      "title": "What is an agentic web resolver?",
-      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/answers/what-is-agentic-web-resolver.html",
-      "shortAnswer": "An agentic web resolver discovers the machine- and agent-facing interfaces a website actually exposes, preserves where each observation came from, reports conflicts, and selects an interface for a concrete intent.",
-      "reviewedAt": "2026-09-05"
-    },
-    {
-      "id": "answer-protocol-map",
-      "type": "answer",
-      "title": "MCP vs A2A vs WebMCP vs llms.txt",
-      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html",
-      "shortAnswer": "MCP, A2A, WebMCP and llms.txt solve different layers: backend tool/context exchange, agent-to-agent interaction, browser-page tool exposure, and text-oriented content routing respectively.",
-      "reviewedAt": "2026-09-05"
-    },
-    {
-      "id": "concept-agentic-web-resolver",
-      "type": "concept",
-      "title": "Agentic web resolver",
-      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/agentic-web-resolver.html",
-      "definition": "Software that discovers multiple machine- and agent-facing interfaces exposed by a website, preserves provenance, reports conflicts and selects an interface for a concrete intent.",
-      "status": "project-defined",
-      "reviewedAt": "2026-09-05"
-    },
-    {
-      "id": "concept-resolver-regret",
-      "type": "concept",
-      "title": "Resolver regret",
-      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/resolver-regret.html",
-      "definition": "A decision-quality case where a simpler discovery strategy selects the reviewed-correct interface while the union Resolver selects an incorrect one.",
-      "status": "project-defined",
-      "reviewedAt": "2026-09-05"
-    },
-    {
-      "id": "concept-discovery-conflict",
-      "type": "concept",
-      "title": "Discovery conflict",
-      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/discovery-conflict.html",
-      "definition": "A disagreement between independently observed or publisher-declared discovery sources that a resolver preserves rather than silently overwriting.",
-      "status": "project-defined",
-      "reviewedAt": "2026-09-05"
-    },
-    {
-      "id": "compare-static-runtime",
-      "type": "comparison",
-      "title": "Static metadata vs runtime evidence",
-      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/compare/static-metadata-vs-runtime-evidence.html",
-      "shortAnswer": "Static metadata can establish that a publisher advertises an interface; runtime evidence can establish that a protocol endpoint or browser capability responds as observed. Neither alone proves authorization, trustworthiness or task success.",
-      "reviewedAt": "2026-09-05"
-    }
+    {"id":"answer-agentic-web-resolver","type":"answer","title":"What is an agentic web resolver?","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/answers/what-is-agentic-web-resolver.html","shortAnswer":"An agentic web resolver discovers the machine- and agent-facing interfaces a website actually exposes, preserves where each observation came from, reports conflicts, and selects an interface for a concrete intent.","reviewedAt":"2026-09-05"},
+    {"id":"answer-protocol-map","type":"answer","title":"MCP vs A2A vs WebMCP vs llms.txt","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html","shortAnswer":"MCP, A2A, WebMCP and llms.txt solve different layers: backend tool/context exchange, agent-to-agent interaction, browser-page tool exposure, and text-oriented content routing respectively.","reviewedAt":"2026-09-05"},
+    {"id":"concept-agentic-web-resolver","type":"concept","title":"Agentic web resolver","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/concepts/agentic-web-resolver.html","definition":"Software that discovers multiple machine- and agent-facing interfaces exposed by a website, preserves provenance, reports conflicts and selects an interface for a concrete intent.","status":"project-defined","reviewedAt":"2026-09-05"},
+    {"id":"concept-resolver-regret","type":"concept","title":"Resolver regret","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/concepts/resolver-regret.html","definition":"A decision-quality case where a simpler discovery strategy selects the reviewed-correct interface while the union Resolver selects an incorrect one.","status":"project-defined","reviewedAt":"2026-09-05"},
+    {"id":"concept-discovery-conflict","type":"concept","title":"Discovery conflict","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/concepts/discovery-conflict.html","definition":"A disagreement between independently observed or publisher-declared discovery sources that a resolver preserves rather than silently overwriting.","status":"project-defined","reviewedAt":"2026-09-05"},
+    {"id":"compare-static-runtime","type":"comparison","title":"Static metadata vs runtime evidence","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/compare/static-metadata-vs-runtime-evidence.html","shortAnswer":"Static metadata can establish that a publisher advertises an interface; runtime evidence can establish that a protocol endpoint or browser capability responds as observed. Neither alone proves authorization, trustworthiness or task success.","reviewedAt":"2026-09-05"},
+    {"id":"ARWP-CLAIM-0001","type":"claim","title":"A2A 1.0 callable interfaces come from supportedInterfaces, not the Agent Card discovery URL","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0001.html","status":"verified","json":"https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0001.json","shortAnswer":"For A2A 1.0, an Agent Card is discovery metadata; clients select a supported interface and use the URL declared by the selected supportedInterfaces[] entry.","reviewedAt":"2026-09-05"},
+    {"id":"ARWP-CLAIM-0002","type":"claim","title":"Resolver union still trails llms-aware on the frozen reviewed 20-site corpus after the OpenAPI search eligibility correction","canonicalUrl":"https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.html","status":"verified","json":"https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.json","shortAnswer":"Frozen 2026-08-28 result: llms-aware 89/100, resolver-union 86/100, resolver regret 6, resolver uniquely correct 0.","reviewedAt":"2026-09-05"}
   ]
 }
