@@ -38,7 +38,8 @@ assert.equal(source.modules.correctionsLedger.status, 'active');
 assert.equal(source.surfaces.correctionsLedger.url, 'https://dkharlanau.github.io/agent-ready-web-profile/trust/corrections.json');
 assert.equal(source.modules.softwareProvenance.status, 'planned', 'configured future attestations must remain planned until an attested published artifact exists');
 assert.equal(source.modules.persistentIdentifiers.status, 'planned', 'DOI must remain planned until an external provider issues one');
-assert.equal(source.modules.externalTrustSignals.status, 'planned', 'configured Scorecard must remain planned until a successful external result is observed');
+assert.equal(source.modules.externalTrustSignals.status, 'active', 'successful published OpenSSF result should promote the external trust signal');
+assert.match(source.modules.externalTrustSignals.notes, /33974701872/);
 assert.equal(source.surfaces.history.status, 'active');
 assert.equal(source.modules.openReuseAssets.status, 'active');
 assert.equal(source.surfaces.pressKit.status, 'active');
@@ -103,6 +104,10 @@ assert.equal(trust.softwareSupplyChain.mcpPublisherDependency.status, 'version-a
 assert.equal(trust.softwareSupplyChain.mcpPublisherDependency.version, 'v1.8.1');
 assert.equal(trust.persistentIdentifiers.doi.status, 'prepared-not-issued');
 assert.equal(trust.softwareSupplyChain.openSSFScorecard.status, 'configured');
+assert.equal(trust.softwareSupplyChain.openSSFScorecard.resultStatus, 'observed-success');
+assert.equal(trust.softwareSupplyChain.openSSFScorecard.workflowRun, 'https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33974701872');
+assert.equal(trust.softwareSupplyChain.openSSFScorecard.publishedResults, true);
+assert.equal(trust.softwareSupplyChain.openSSFScorecard.uploadedToCodeScanning, true);
 assert.equal(corrections.entries.length, 0);
 assert.equal(corrections.policy.historicalRecordsAreNotSilentlyRewritten, true);
 assert.match(corrections.notes.join(' '), /81\/100 to 86\/100/);
@@ -179,4 +184,4 @@ assert.match(planned.stdout, /P1 persistentIdentifiers/);
 assert.match(planned.stdout, /P1 softwareProvenance/);
 assert.match(planned.stdout, /P2 externalTrustSignals/);
 
-console.log('PASS AI Search & Citation Profile validates, publishes Trust Center/corrections, configures future provenance safely, and keeps external trust evidence gated');
+console.log('PASS AI Search & Citation Profile validates observed OpenSSF evidence while keeping future artifact provenance and DOI evidence gated');
