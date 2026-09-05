@@ -1,0 +1,72 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/content-profile.schema.json",
+  "profileVersion": "0.1",
+  "site": {
+    "id": "agent-ready-web-profile",
+    "name": "Agent-Ready Web Profile",
+    "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "languages": ["en", "de", "ru"],
+    "canonicalLanguage": "en"
+  },
+  "archetypes": {
+    "registry": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/registry/content-archetypes.json",
+    "enabled": ["answer", "guide", "tutorial", "research", "comparison", "case-study", "analysis", "opinion", "reference", "concept", "changelog", "news-update"]
+  },
+  "graph": {
+    "enabled": true,
+    "relationTypes": ["broader", "narrower", "prerequisite", "contrasts-with", "applies-to", "evidence-for", "updates", "implements", "example-of", "next-question"],
+    "minimumMeaningfulRelations": 1,
+    "machineReadableGraph": "https://dkharlanau.github.io/agent-ready-web-profile/knowledge/graph.json"
+  },
+  "publication": {
+    "canonicalRequired": true,
+    "authorIdentity": {
+      "requiredForEditorialContent": true,
+      "profileUrlRecommended": true
+    },
+    "dates": {
+      "published": true,
+      "modifiedOnlyOnMaterialChange": true,
+      "reviewedForTimeSensitiveFacts": true
+    },
+    "structuredData": {
+      "useWhenSemanticallyAccurate": true,
+      "mirrorVisibleContent": true
+    },
+    "discover": {
+      "status": "active",
+      "largeImageRecommended": true,
+      "recommendedMinWidth": 1200,
+      "recommendedMinPixels": 300000,
+      "preferredAspectRatio": "16:9",
+      "maxImagePreviewLarge": true,
+      "source": "https://developers.google.com/search/docs/appearance/google-discover"
+    },
+    "preferredSources": {
+      "status": "planned",
+      "placement": "article-end",
+      "source": "https://developers.google.com/search/docs/appearance/preferred-sources",
+      "notes": "Planned until the site is confirmed as selectable in Google Preferred Sources. The profile does not treat the button as a ranking guarantee."
+    }
+  },
+  "style": {
+    "fingerprintLint": true,
+    "lintMode": "warn",
+    "languages": ["en", "de", "ru"]
+  },
+  "guardrails": {
+    "contentGrammarNotTemplate": true,
+    "formatAdaptive": true,
+    "noForcedWordCount": true,
+    "noKeywordDensityTargets": true,
+    "noMandatoryFaq": true,
+    "noGenericConclusionRequirement": true,
+    "noSyntheticStatistics": true,
+    "noInventedFirstHandExperience": true,
+    "noQueryVariantPageFactory": true,
+    "noUniformSectionOrder": true,
+    "evidenceBeforeDecoration": true,
+    "visibleContentBeforeMachineMetadata": true,
+    "noRankingPromise": true
+  }
+}

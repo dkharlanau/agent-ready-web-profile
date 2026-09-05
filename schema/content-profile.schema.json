@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/content-profile.schema.json",
+  "title": "ARWP Adaptive Content Profile v0.1",
+  "description": "Non-normative content-quality and composition profile for format-adaptive, evidence-backed, graph-connected web publishing without fixed AI-style templates or ranking promises.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profileVersion", "site", "archetypes", "graph", "publication", "style", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "profileVersion": { "const": "0.1" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "canonicalUrl", "languages"],
+      "properties": {
+        "id": { "type": "string", "minLength": 2, "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "canonicalUrl": { "$ref": "#/$defs/httpsUri" },
+        "languages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/language" }
+        },
+        "canonicalLanguage": { "$ref": "#/$defs/language" }
+      }
+    },
+    "archetypes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registry", "enabled"],
+      "properties": {
+        "registry": { "$ref": "#/$defs/httpsUri" },
+        "enabled": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/archetypeId" }
+        },
+        "default": { "$ref": "#/$defs/archetypeId" }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "relationTypes", "minimumMeaningfulRelations"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "relationTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/relationType" }
+        },
+        "minimumMeaningfulRelations": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "machineReadableGraph": { "$ref": "#/$defs/httpsUri" }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalRequired", "authorIdentity", "dates", "structuredData", "discover", "preferredSources"],
+      "properties": {
+        "canonicalRequired": { "const": true },
+        "authorIdentity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["requiredForEditorialContent", "profileUrlRecommended"],
+          "properties": {
+            "requiredForEditorialContent": { "type": "boolean" },
+            "profileUrlRecommended": { "type": "boolean" }
+          }
+        },
+        "dates": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["published", "modifiedOnlyOnMaterialChange", "reviewedForTimeSensitiveFacts"],
+          "properties": {
+            "published": { "type": "boolean" },
+            "modifiedOnlyOnMaterialChange": { "const": true },
+            "reviewedForTimeSensitiveFacts": { "type": "boolean" }
+          }
+        },
+        "structuredData": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["useWhenSemanticallyAccurate", "mirrorVisibleContent"],
+          "properties": {
+            "useWhenSemanticallyAccurate": { "const": true },
+            "mirrorVisibleContent": { "const": true }
+          }
+        },
+        "discover": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "largeImageRecommended", "recommendedMinWidth", "recommendedMinPixels", "preferredAspectRatio", "maxImagePreviewLarge"],
+          "properties": {
+            "status": { "$ref": "#/$defs/policyStatus" },
+            "largeImageRecommended": { "type": "boolean" },
+            "recommendedMinWidth": { "type": "integer", "minimum": 1 },
+            "recommendedMinPixels": { "type": "integer", "minimum": 1 },
+            "preferredAspectRatio": { "type": "string", "minLength": 3, "maxLength": 20 },
+            "maxImagePreviewLarge": { "type": "boolean" },
+            "source": { "$ref": "#/$defs/httpsUri" }
+          }
+        },
+        "preferredSources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "placement"],
+          "properties": {
+            "status": { "$ref": "#/$defs/policyStatus" },
+            "placement": { "type": "string", "enum": ["none", "article-end", "site-chrome", "both"] },
+            "source": { "$ref": "#/$defs/httpsUri" },
+            "notes": { "type": "string", "maxLength": 1000 }
+          }
+        }
+      }
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fingerprintLint", "lintMode", "languages"],
+      "properties": {
+        "fingerprintLint": { "type": "boolean" },
+        "lintMode": { "type": "string", "enum": ["off", "warn"] },
+        "languages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/language" }
+        },
+        "customWarningPhrases": {
+          "type": "array",
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 4, "maxLength": 120 }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contentGrammarNotTemplate",
+        "formatAdaptive",
+        "noForcedWordCount",
+        "noKeywordDensityTargets",
+        "noMandatoryFaq",
+        "noGenericConclusionRequirement",
+        "noSyntheticStatistics",
+        "noInventedFirstHandExperience",
+        "noQueryVariantPageFactory",
+        "noUniformSectionOrder",
+        "evidenceBeforeDecoration",
+        "visibleContentBeforeMachineMetadata",
+        "noRankingPromise"
+      ],
+      "properties": {
+        "contentGrammarNotTemplate": { "const": true },
+        "formatAdaptive": { "const": true },
+        "noForcedWordCount": { "const": true },
+        "noKeywordDensityTargets": { "const": true },
+        "noMandatoryFaq": { "const": true },
+        "noGenericConclusionRequirement": { "const": true },
+        "noSyntheticStatistics": { "const": true },
+        "noInventedFirstHandExperience": { "const": true },
+        "noQueryVariantPageFactory": { "const": true },
+        "noUniformSectionOrder": { "const": true },
+        "evidenceBeforeDecoration": { "const": true },
+        "visibleContentBeforeMachineMetadata": { "const": true },
+        "noRankingPromise": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "httpsUri": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "language": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 },
+    "policyStatus": { "type": "string", "enum": ["active", "planned", "disabled", "not-applicable"] },
+    "archetypeId": {
+      "type": "string",
+      "enum": ["answer", "guide", "tutorial", "research", "comparison", "case-study", "analysis", "opinion", "reference", "concept", "changelog", "news-update"]
+    },
+    "relationType": {
+      "type": "string",
+      "enum": ["broader", "narrower", "prerequisite", "contrasts-with", "applies-to", "evidence-for", "updates", "implements", "example-of", "next-question"]
+    }
+  }
+}

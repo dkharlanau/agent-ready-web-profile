@@ -1,0 +1,63 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/content-item.schema.json",
+  "itemVersion": "0.1",
+  "id": "arwp-resolver-benchmark-research-example",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.html",
+  "title": "Resolver benchmark methodology",
+  "language": "en",
+  "archetype": "research",
+  "purpose": "Explain how ARWP measures resolver decisions, what evidence is captured and which limitations remain visible.",
+  "audiences": ["agentic web implementers", "protocol researchers"],
+  "blocks": ["context", "scope", "method", "data", "evidence", "result", "limitations", "references", "knowledge-path"],
+  "evidence": [
+    {
+      "kind": "dataset",
+      "title": "ARWP benchmark corpus",
+      "url": "https://github.com/dkharlanau/agent-ready-web-profile/tree/main/benchmarks/corpus",
+      "note": "Repository fixtures used by the benchmark runner."
+    },
+    {
+      "kind": "documentation",
+      "title": "Benchmark methodology",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.md"
+    }
+  ],
+  "relations": [
+    {
+      "type": "evidence-for",
+      "target": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.html",
+      "label": "Resolver benchmark claim"
+    },
+    {
+      "type": "broader",
+      "target": "https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md",
+      "label": "Resolver documentation"
+    }
+  ],
+  "visuals": [
+    {
+      "kind": "table",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.html#results",
+      "alt": "Resolver benchmark result table comparing discovery strategies."
+    }
+  ],
+  "authorship": {
+    "authors": [
+      {
+        "name": "Dzmitryi Kharlanau",
+        "url": "https://github.com/dkharlanau",
+        "role": "Maintainer"
+      }
+    ],
+    "datePublished": "2026-08-28",
+    "dateModified": "2026-09-05",
+    "dateReviewed": "2026-09-05"
+  },
+  "schemaTypes": ["TechArticle"],
+  "distribution": {
+    "discoverLargeImage": false,
+    "maxImagePreviewLarge": true,
+    "preferredSourcePrompt": false
+  },
+  "contentSample": "The benchmark records resolver decisions against reviewed fixtures and keeps negative results visible. The important result is not a universal score: it is whether the resolver selected the reviewed-correct interface for the stated intent, and which eridence led to that choice."
+}

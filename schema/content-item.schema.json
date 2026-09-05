@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/content-item.schema.json",
+  "title": "ARWP Content Item v0.1",
+  "description": "Machine-readable companion record for one editorial content item. It records intent, semantic blocks, evidence, relations, visuals and publication metadata without requiring a fixed visible page template.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["itemVersion", "id", "canonicalUrl", "title", "language", "archetype", "purpose", "blocks", "authorship"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "itemVersion": { "const": "0.1" },
+    "id": { "type": "string", "minLength": 2, "maxLength": 160, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+    "canonicalUrl": { "$ref": "#/$defs/httpsUri" },
+    "title": { "type": "string", "minLength": 3, "maxLength": 300 },
+    "language": { "$ref": "#/$defs/language" },
+    "archetype": { "$ref": "#/$defs/archetypeId" },
+    "purpose": { "type": "string", "minLength": 10, "maxLength": 1000 },
+    "audiences": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 2, "maxLength": 120 }
+    },
+    "summary": { "type": "string", "minLength": 10, "maxLength": 1500 },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/blockId" }
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 100,
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "relations": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "$ref": "#/$defs/relation" }
+    },
+    "visuals": {
+      "type": "array",
+      "maxItems": 30,
+      "items": { "$ref": "#/$defs/visual" }
+    },
+    "authorship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authors", "datePublished"],
+      "properties": {
+        "authors": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string", "minLength": 2, "maxLength": 200 },
+              "url": { "$ref": "#/$defs/httpsUri" },
+              "role": { "type": "string", "maxLength": 120 }
+            }
+          }
+        },
+        "datePublished": { "type": "string", "format": "date" },
+        "dateModified": { "type": "string", "format": "date" },
+        "dateReviewed": { "type": "string", "format": "date" }
+      }
+    },
+    "schemaTypes": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 2, "maxLength": 80 }
+    },
+    "distribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "discoverLargeImage": { "type": "boolean" },
+        "maxImagePreviewLarge": { "type": "boolean" },
+        "preferredSourcePrompt": { "type": "boolean" }
+      }
+    },
+    "contentSample": {
+      "type": "string",
+      "maxLength": 50000,
+      "description": "Optional representative body-text sample used only for heuristic style warnings. It is not required and does not replace the canonical article."
+    },
+    "notes": { "type": "string", "maxLength": 3000 }
+  },
+  "$defs": {
+    "httpsUri": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "language": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 },
+    "archetypeId": {
+      "type": "string",
+      "enum": ["answer", "guide", "tutorial", "research", "comparison", "case-study", "analysis", "opinion", "reference", "concept", "changelog", "news-update"]
+    },
+    "blockId": {
+      "type": "string",
+      "enum": ["hook", "answer", "context", "problem", "audience", "scope", "prerequisites", "definition", "original-insight", "evidence", "data", "method", "example", "decision-criteria", "tradeoffs", "steps", "implementation", "result", "limitations", "counterexample", "timeline", "references", "knowledge-path", "next-question", "author-note", "update-note"]
+    },
+    "relationType": {
+      "type": "string",
+      "enum": ["broader", "narrower", "prerequisite", "contrasts-with", "applies-to", "evidence-for", "updates", "implements", "example-of", "next-question"]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "title", "url"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["primary-source", "source", "dataset", "measurement", "experiment", "release", "documentation", "interview", "first-hand-observation"] },
+        "title": { "type": "string", "minLength": 2, "maxLength": 300 },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "date": { "type": "string", "format": "date" },
+        "note": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "target"],
+      "properties": {
+        "type": { "$ref": "#/$defs/relationType" },
+        "target": { "$ref": "#/$defs/httpsUri" },
+        "label": { "type": "string", "maxLength": 200 },
+        "reason": { "type": "string", "maxLength": 500 }
+      }
+    },
+    "visual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "url", "alt"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["image", "chart", "diagram", "video", "table"] },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "alt": { "type": "string", "minLength": 1, "maxLength": 1000 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "sourceNote": { "type": "string", "maxLength": 1000 },
+        "reuseUrl": { "$ref": "#/$defs/httpsUri" }
+      }
+    }
+  }
+}

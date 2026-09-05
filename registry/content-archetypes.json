@@ -1,0 +1,166 @@
+{
+  "registryVersion": "0.1",
+  "description": "Format-adaptive content archetypes for ARWP. These are semantic composition hints, not mandatory heading templates.",
+  "blockVocabulary": [
+    "hook",
+    "answer",
+    "context",
+    "problem",
+    "audience",
+    "scope",
+    "prerequisites",
+    "definition",
+    "original-insight",
+    "evidence",
+    "data",
+    "method",
+    "example",
+    "decision-criteria",
+    "tradeoffs",
+    "steps",
+    "implementation",
+    "result",
+    "limitations",
+    "counterexample",
+    "timeline",
+    "references",
+    "knowledge-path",
+    "next-question",
+    "author-note",
+    "update-note"
+  ],
+  "relationVocabulary": [
+    "broader",
+    "narrower",
+    "prerequisite",
+    "contrasts-with",
+    "applies-to",
+    "evidence-for",
+    "updates",
+    "implements",
+    "example-of",
+    "next-question"
+  ],
+  "archetypes": [
+    {
+      "id": "answer",
+      "label": "Direct answer",
+      "intent": "Resolve one recurring question quickly, then make the answer verifiable.",
+      "coreSignals": ["answer", "scope"],
+      "recommendedBlocks": ["answer", "scope", "evidence", "limitations", "references", "next-question"],
+      "evidenceExpectation": "source-backed-when-factual",
+      "graphRelations": ["broader", "prerequisite", "next-question"],
+      "avoidForcing": ["long introduction", "problem section", "generic conclusion", "FAQ appendix"]
+    },
+    {
+      "id": "guide",
+      "label": "Guide",
+      "intent": "Help a reader make progress through a task or decision without hiding prerequisites or tradeoffs.",
+      "coreSignals": ["scope", "steps"],
+      "recommendedBlocks": ["scope", "audience", "steps", "example", "tradeoffs", "limitations", "next-question"],
+      "evidenceExpectation": "source-backed-where-claims-matter",
+      "graphRelations": ["prerequisite", "applies-to", "next-question"],
+      "avoidForcing": ["statistics without decision value", "FAQ appendix", "generic summary"]
+    },
+    {
+      "id": "tutorial",
+      "label": "Tutorial",
+      "intent": "Teach a concrete implementation by letting the reader reproduce an outcome.",
+      "coreSignals": ["steps", "implementation", "result"],
+      "recommendedBlocks": ["scope", "prerequisites", "steps", "implementation", "example", "result", "limitations"],
+      "evidenceExpectation": "reproducible-or-demonstrated",
+      "graphRelations": ["prerequisite", "implements", "example-of", "next-question"],
+      "avoidForcing": ["market statistics", "broad thought-leadership framing", "generic conclusion"]
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "intent": "Publish a question, method, evidence and result that another reader can inspect or challenge.",
+      "coreSignals": ["method", "evidence", "result", "limitations"],
+      "recommendedBlocks": ["context", "scope", "method", "data", "evidence", "result", "limitations", "counterexample", "references"],
+      "evidenceExpectation": "primary-evidence",
+      "graphRelations": ["evidence-for", "updates", "broader", "next-question"],
+      "avoidForcing": ["sales CTA", "synthetic statistics", "certainty beyond the method", "generic conclusion"]
+    },
+    {
+      "id": "comparison",
+      "label": "Comparison",
+      "intent": "Help a reader choose between alternatives using explicit criteria, evidence and boundaries.",
+      "coreSignals": ["decision-criteria", "tradeoffs"],
+      "recommendedBlocks": ["scope", "decision-criteria", "evidence", "data", "tradeoffs", "example", "limitations", "references"],
+      "evidenceExpectation": "source-backed",
+      "graphRelations": ["contrasts-with", "applies-to", "broader"],
+      "avoidForcing": ["winner without context", "affiliate-style verdict", "feature-table-only treatment", "FAQ appendix"]
+    },
+    {
+      "id": "case-study",
+      "label": "Case study",
+      "intent": "Show what happened in a real bounded situation and distinguish observation from generalization.",
+      "coreSignals": ["context", "implementation", "result", "limitations"],
+      "recommendedBlocks": ["context", "problem", "scope", "implementation", "data", "result", "limitations", "original-insight"],
+      "evidenceExpectation": "first-hand-or-primary",
+      "graphRelations": ["example-of", "applies-to", "evidence-for"],
+      "avoidForcing": ["universal claims from one case", "invented metrics", "hero narrative", "generic conclusion"]
+    },
+    {
+      "id": "analysis",
+      "label": "Analysis",
+      "intent": "Synthesize evidence into a defensible interpretation or model, including uncertainty and alternatives.",
+      "coreSignals": ["original-insight", "evidence", "limitations"],
+      "recommendedBlocks": ["context", "scope", "evidence", "data", "original-insight", "counterexample", "limitations", "next-question"],
+      "evidenceExpectation": "source-backed",
+      "graphRelations": ["broader", "contrasts-with", "evidence-for", "next-question"],
+      "avoidForcing": ["fake neutrality", "listicle structure", "generic key takeaways", "generic conclusion"]
+    },
+    {
+      "id": "opinion",
+      "label": "Opinion",
+      "intent": "Make a clear argument while separating judgment, experience and factual support.",
+      "coreSignals": ["original-insight", "author-note"],
+      "recommendedBlocks": ["hook", "scope", "original-insight", "evidence", "counterexample", "limitations", "author-note"],
+      "evidenceExpectation": "source-backed-for-factual-claims",
+      "graphRelations": ["contrasts-with", "broader", "next-question"],
+      "avoidForcing": ["false consensus", "fake statistics", "neutral-summary voice", "generic conclusion"]
+    },
+    {
+      "id": "reference",
+      "label": "Reference",
+      "intent": "Provide a stable canonical fact surface that is fast to scan and easy to cite.",
+      "coreSignals": ["definition", "scope"],
+      "recommendedBlocks": ["definition", "scope", "data", "example", "limitations", "references", "update-note"],
+      "evidenceExpectation": "canonical-or-primary",
+      "graphRelations": ["broader", "narrower", "applies-to"],
+      "avoidForcing": ["storytelling intro", "opinionated CTA", "generic conclusion", "FAQ appendix"]
+    },
+    {
+      "id": "concept",
+      "label": "Concept definition",
+      "intent": "Define one term precisely, establish boundaries and connect it to neighboring concepts.",
+      "coreSignals": ["definition", "scope"],
+      "recommendedBlocks": ["definition", "scope", "example", "counterexample", "references", "knowledge-path"],
+      "evidenceExpectation": "source-backed-or-project-defined",
+      "graphRelations": ["broader", "narrower", "contrasts-with", "example-of"],
+      "avoidForcing": ["history unless useful", "generic introduction", "generic conclusion"]
+    },
+    {
+      "id": "changelog",
+      "label": "Changelog",
+      "intent": "Record a concrete product or system change, why it matters and what it supersedes.",
+      "coreSignals": ["update-note", "result"],
+      "recommendedBlocks": ["update-note", "context", "result", "implementation", "limitations", "references"],
+      "evidenceExpectation": "release-or-change-evidence",
+      "graphRelations": ["updates", "implements", "applies-to"],
+      "avoidForcing": ["thought-leadership intro", "SEO expansion", "FAQ appendix", "generic conclusion"]
+    },
+    {
+      "id": "news-update",
+      "label": "News update",
+      "intent": "Explain a dated change with primary sourcing, impact and clearly bounded interpretation.",
+      "coreSignals": ["context", "evidence", "update-note"],
+      "recommendedBlocks": ["answer", "context", "evidence", "timeline", "original-insight", "limitations", "references", "update-note"],
+      "evidenceExpectation": "dated-primary-sources",
+      "graphRelations": ["updates", "broader", "applies-to", "next-question"],
+      "avoidForcing": ["evergreen framing that hides the date", "speculation presented as fact", "generic conclusion"]
+    }
+  ]
+}
