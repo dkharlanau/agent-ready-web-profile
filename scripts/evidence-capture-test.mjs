@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { captureSourceBodyDigests } from '../lib/evidence-capture.mjs';
+import { captureSourceBodyDigests, enrichEvidenceReceiptWithCapture } from '../lib/evidence-capture.mjs';
+import { createEvidenceReceipt, verifyEvidenceReceipt } from '../lib/evidence-receipt.mjs';
 
 function headers(values = {}) {
   const map = new Map(Object.entries(values).map(([key, value]) => [key.toLowerCase(), String(value)]));
@@ -27,7 +28,12 @@ function response(status, text = '', contentType = 'application/json') {
   };
 }
 
+const emptyPlan = intent => ({ intent, outcome: 'none', selected: null, fallbacks: [], rejected: [], reason: `No ${intent}.` });
 const resolution = {
+  target: 'https://example.com/',
+  canonicalUrl: 'https://example.com/',
+  resolverVersion: '0.1',
+  decisionPolicyVersion: '0.1',
   sources: [
     { id: 'http-head:0', type: 'http-head', url: 'https://example.com/', status: 'resolved' },
     { id: 'profile:0', type: 'arwp-profile', url: 'https://example.com/ai/site-profile.json', status: 'resolved' },
@@ -35,7 +41,18 @@ const resolution = {
     { id: 'ard:0', type: 'ard-catalog', url: 'https://example.com/.well-known/ard.json', status: 'resolved' },
     { id: 'missing:0', type: 'agents-json', url: 'https://example.com/agents.json', status: 'resolved' },
     { id: 'old:0', type: 'old-source', url: 'https://example.com/old.json', status: 'not-found' }
-  ]
+  ],
+  conflicts: [],
+  metrics: {},
+  upstreamStatus: {},
+  summary: { sourcesAttempted: 6, sourcesResolved: 5, interfacesResolved: 0, conflicts: 0 },
+  plans: {
+    read: emptyPlan('read'),
+    search: emptyPlan('search'),
+    structured: emptyPlan('structured'),
+    tools: emptyPlan('tools'),
+    agent: emptyPlan('agent')
+  }
 };
 
 const bodies = new Map([
@@ -80,6 +97,18 @@ assert.equal(profile.hashedUtf8Bytes, Buffer.byteLength('{"name":"Example"}', 'u
 assert.equal(capture.failures[0].httpStatus, 404);
 assert.equal(capture.failures[0].reason, 'http-non-success');
 
+const baseReceipt = createEvidenceReceipt(resolution, { observedAt: '2026-09-05T21:40:00Z', toolVersion: '0.2.0' });
+assert.equal(baseReceipt.boundaries.sourceBodyDigestsCaptured, false);
+const enriched = enrichEvidenceReceiptWithCapture(baseReceipt, capture);
+assert.equal(enriched.artifactDigests.length, 2);
+assert.equal(enriched.boundaries.sourceBodyDigestsCaptured, true);
+assert.equal(enriched.boundaries.sourceBodyDigestScope, 'decoded-utf8-complete-bounded-response-body');
+assert.equal(enriched.captureSummary.captured, 2);
+assert.equal(enriched.captureSummary.failed, 1);
+assert.notEqual(enriched.receiptId, baseReceipt.receiptId, 'capture evidence must change receipt identity');
+assert.equal(verifyEvidenceReceipt(enriched).valid, true);
+assert.equal(verifyEvidenceReceipt(baseReceipt).valid, true, 'enrichment must not mutate the original receipt');
+
 const limited = await captureSourceBodyDigests(resolution, {
   fetchImpl,
   resolveImpl,
@@ -93,5 +122,6 @@ assert.ok(limited.omittedByLimit.every(item => item.reason === 'max-sources-limi
 
 await assert.rejects(() => captureSourceBodyDigests(resolution, { fetchImpl, resolveImpl, maxSources: 0 }), /between 1 and 20/);
 await assert.rejects(() => captureSourceBodyDigests(resolution, { fetchImpl, resolveImpl, maxBytes: 100 }), /at least 1024/);
+assert.throws(() => enrichEvidenceReceiptWithCapture({ receiptVersion: '0.1' }, capture), /integrity verification/);
 
-console.log('PASS explicit evidence capture deduplicates resolved GET sources, skips HEAD-only observations, preserves failures/limits and publishes scoped decoded-UTF8 SHA-256 digests without claiming raw wire bytes');
+console.log('PASS explicit evidence capture deduplicates resolved GET sources, skips HEAD-only observations, preserves failures/limits, enriches receipts with integrity-covered scoped SHA-256 evidence and does not claim raw wire bytes');
