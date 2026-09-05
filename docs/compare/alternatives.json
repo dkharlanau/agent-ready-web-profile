@@ -1,0 +1,126 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-05",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
+  "subject": {
+    "name": "Agent-Ready Web Profile",
+    "shortName": "ARWP",
+    "preferredClass": "Agentic web interoperability resolver",
+    "classStatus": "project-defined",
+    "primaryQuestion": "Given a website and a concrete intent, which machine- or agent-facing interface should software use, what evidence supports that choice, and where do discovery sources conflict?"
+  },
+  "comparisonAxes": [
+    "primary product question",
+    "multi-protocol discovery",
+    "normalized service map",
+    "provenance and conflict preservation",
+    "intent routing",
+    "static conformance audit",
+    "runtime task evaluation",
+    "single readiness score",
+    "AI visibility analytics",
+    "crawler enforcement"
+  ],
+  "alternatives": [
+    {
+      "id": "agentready-ora",
+      "name": "AgentReady / Ora",
+      "category": "agent readiness standard, scanner, journeys and directory",
+      "relationship": "closest-adjacent",
+      "primaryQuestion": "What should a product implement to be usable by agents, and how agent-ready is it in practice?",
+      "observedCapabilities": [
+        "open AgentReady specification",
+        "100+ readiness checks in Ora",
+        "0-100 implementation score and grades",
+        "real-agent journeys",
+        "agent-ready product discovery and directory"
+      ],
+      "arwpDifference": "ARWP does not define a universal readiness score. Its core output is an evidence-backed normalized interface map with source authority, conflict preservation and intent-based selection across heterogeneous upstream mechanisms.",
+      "sources": ["https://www.agentready.org/", "https://ora.ai/docs"],
+      "sourceReviewedAt": "2026-09-05"
+    },
+    {
+      "id": "zeo-agentready",
+      "name": "AgentReady by Zeo",
+      "category": "agentic web technical audit",
+      "relationship": "adjacent-scanner",
+      "primaryQuestion": "Does a site pass a compact set of crawler, content, API and agent-protocol readiness checks?",
+      "observedCapabilities": ["15 checks across 5 categories", "crawler and robots checks", "content parsing checks", "API and security protocol checks"],
+      "arwpDifference": "ARWP extends beyond a technical checklist into normalized multi-source resolution, evidence authority, conflict handling, intent planning, protocol observatory and historical verification.",
+      "sources": ["https://agentready.zeo.org/"],
+      "sourceReviewedAt": "2026-09-05"
+    },
+    {
+      "id": "webmcpready",
+      "name": "WebMCPReady",
+      "category": "WebMCP and browser-agent readiness scanner",
+      "relationship": "focused-adjacent",
+      "primaryQuestion": "Can browser agents discover and use WebMCP tools on this product?",
+      "observedCapabilities": ["WebMCP readiness scan", "live WebMCP tool examples", "agent-action focus"],
+      "arwpDifference": "ARWP treats WebMCP as one browser-runtime surface among content, API, MCP, A2A, skills, auth and other discovery evidence.",
+      "sources": ["https://www.webmcpready.com/"],
+      "sourceReviewedAt": "2026-09-05"
+    },
+    {
+      "id": "cloudflare-ai-crawl-control",
+      "name": "Cloudflare AI Crawl Control",
+      "category": "AI crawler monitoring and access control",
+      "relationship": "complementary",
+      "primaryQuestion": "Which AI crawlers access my site and how should I allow, block or monetize that traffic?",
+      "observedCapabilities": ["AI crawler traffic analytics", "granular crawler allow/block policies", "robots compliance monitoring", "edge enforcement"],
+      "arwpDifference": "ARWP can audit crawler policy and preserve it as evidence, but it does not operate a WAF, block traffic or monetize crawl access.",
+      "sources": ["https://developers.cloudflare.com/ai-crawl-control/"],
+      "sourceReviewedAt": "2026-09-05"
+    },
+    {
+      "id": "semrush-ai-visibility",
+      "name": "Semrush AI Visibility Toolkit",
+      "category": "AI search visibility analytics",
+      "relationship": "complementary",
+      "primaryQuestion": "How often and how favorably does my brand appear in AI-generated answers versus competitors?",
+      "observedCapabilities": ["AI visibility and mentions", "competitor benchmarks", "prompt tracking", "technical crawlability audit"],
+      "arwpDifference": "ARWP focuses on how a website exposes and proves usable interfaces; AI visibility measurements are external evidence rather than the primary product.",
+      "sources": ["https://www.semrush.com/kb/1493-ai-visibility-toolkit"],
+      "sourceReviewedAt": "2026-09-05"
+    },
+    {
+      "id": "ahrefs-brand-radar",
+      "name": "Ahrefs Brand Radar",
+      "category": "AI visibility and citation analytics",
+      "relationship": "complementary",
+      "primaryQuestion": "Where is a brand mentioned or cited across AI answers and how does its share of voice compare?",
+      "observedCapabilities": ["AI mentions", "citations", "impressions", "AI share of voice", "competitor comparison", "cited-page analysis"],
+      "arwpDifference": "Brand Radar measures external AI-answer visibility at large scale; ARWP resolves site-owned discovery and execution interfaces and can use visibility exports as evidence without turning them into conformance.",
+      "sources": ["https://ahrefs.com/brand-radar"],
+      "sourceReviewedAt": "2026-09-05"
+    },
+    {
+      "id": "peec-ai",
+      "name": "Peec AI",
+      "category": "AI visibility and share-of-voice analytics",
+      "relationship": "complementary",
+      "primaryQuestion": "How does AI describe and rank my brand across prompts and competitors?",
+      "observedCapabilities": ["visibility percentage", "average position", "sentiment", "share of voice", "prompt tracking", "citation-source analysis"],
+      "arwpDifference": "Peec measures brand representation in AI answers; ARWP primarily verifies and routes the underlying web/agent interfaces a site exposes.",
+      "sources": ["https://peec.ai/product/ai-visibility"],
+      "sourceReviewedAt": "2026-09-05"
+    }
+  ],
+  "upstreamNotCompetitors": [
+    {"name":"MCP","role":"backend tool/context protocol"},
+    {"name":"A2A","role":"agent-to-agent discovery and interaction protocol"},
+    {"name":"WebMCP","role":"browser-page tool exposure mechanism"},
+    {"name":"llms.txt","role":"text-oriented content routing convention"},
+    {"name":"OpenAPI","role":"API contract format"},
+    {"name":"RFC 9727 API Catalog","role":"standard API catalog discovery"},
+    {"name":"RFC 9728 Protected Resource Metadata","role":"authorization metadata discovery"},
+    {"name":"Agent Skills","role":"portable procedure/instruction artifact"}
+  ],
+  "guardrails": {
+    "comparisonIsNotRanking": true,
+    "unknownCapabilityIsNotAssumedAbsent": true,
+    "vendorFactsAreLimitedToPubliclyDocumentedCapabilities": true,
+    "projectDefinedClassIsExplicit": true,
+    "noUniversalBestClaim": true
+  }
+}
