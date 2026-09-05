@@ -5,20 +5,24 @@ on:
     branches: [main]
     paths:
       - 'lib/evidence-receipt.mjs'
+      - 'lib/evidence-capture.mjs'
       - 'bin/arwp-receipt.mjs'
       - 'schema/evidence-receipt.schema.json'
       - 'scripts/evidence-receipt-test.mjs'
       - 'scripts/evidence-receipt-cli-test.mjs'
+      - 'scripts/evidence-capture-test.mjs'
       - 'docs/EVIDENCE-RECEIPTS.md'
       - 'package.json'
       - '.github/workflows/evidence-receipts.yml'
   pull_request:
     paths:
       - 'lib/evidence-receipt.mjs'
+      - 'lib/evidence-capture.mjs'
       - 'bin/arwp-receipt.mjs'
       - 'schema/evidence-receipt.schema.json'
       - 'scripts/evidence-receipt-test.mjs'
       - 'scripts/evidence-receipt-cli-test.mjs'
+      - 'scripts/evidence-capture-test.mjs'
       - 'docs/EVIDENCE-RECEIPTS.md'
       - 'package.json'
       - '.github/workflows/evidence-receipts.yml'
@@ -39,5 +43,10 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Validate evidence receipt model, schema and CLI
         run: npm run test:receipt
+      - name: Validate explicit bounded source-body capture
+        run: |
+          node scripts/evidence-capture-test.mjs
+          node --check lib/evidence-capture.mjs
+          node --check scripts/evidence-capture-test.mjs
       - name: Smoke-test npm artifact with arwp-receipt included
         run: npm run test:package
