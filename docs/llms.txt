@@ -9,19 +9,22 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 ## Start here
 
 - [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): Public project page and resolver workflow.
+- [ARWP Trust Center](https://dkharlanau.github.io/agent-ready-web-profile/trust/): Maintainer identity, evidence policy, security, corrections, software provenance, persistent-identifier state, external trust signals and explicit limitations.
 - [Agentic Web Protocol Observatory](https://dkharlanau.github.io/agent-ready-web-profile/observatory/): Dated primary-source-reviewed map of MCP, A2A, WebMCP, llms.txt, Agent Skills, RFC discovery and emerging commerce mechanisms.
 - [AI Crawler & Access Matrix](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/): Current official-source matrix separating AI search indexing, user-triggered retrieval and model-training controls.
 - [ARWP Claims Registry](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/): Stable scoped technical claims with IDs, review state, evidence and explicit limitations.
 - [Resolver model](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): How heterogeneous discovery evidence is normalized, compared and routed.
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimental ARWP profile contract. Treat this English document as normative for project-defined semantics.
 - [Conformance](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): What ARWP conformance does and does not assert.
-- [AI Search & Citation Profile](https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md): Reusable implementation profile for original research, answer pages, evidence, comparisons, observability, open reuse assets and citation-oriented discovery surfaces.
+- [AI Search & Citation Profile](https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md): Reusable implementation profile for original research, answer pages, evidence, trust, observability, open reuse and citation-oriented discovery surfaces.
 - [Open Media & AI Reuse Pack](https://dkharlanau.github.io/agent-ready-web-profile/media/): Permission-free reuse guidance for designated ARWP-authored media/research assets under CC BY 4.0.
 
 ## Machine-readable project surfaces
 
 - [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and project extensions.
-- [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and P0/P1/P2 citation-surface plan for ARWP itself.
+- [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and prioritized citation/trust plan for ARWP itself.
+- [Trust Center JSON](https://dkharlanau.github.io/agent-ready-web-profile/trust/trust.json): Maintainer identity, evidence/review model, security links, software-provenance state, DOI status and trust boundaries.
+- [Corrections ledger JSON](https://dkharlanau.github.io/agent-ready-web-profile/trust/corrections.json): Public corrections policy and material factual-correction history.
 - [Citation index](https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json): Stable machine-readable index of canonical answers, project-defined terms, comparisons and verified claims.
 - [Claims Registry JSON](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json): Claim IDs, status meanings, canonical human/JSON URLs and supersession policy.
 - [Claim JSON Schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json): Validation contract for scoped ARWP claim objects.
@@ -38,6 +41,24 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [Public directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Reference/adoption registry exposed as JSON.
 - [Directory statistics](https://dkharlanau.github.io/agent-ready-web-profile/stats.json): Aggregate public declaration counts without visitor tracking.
 - [Product history JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): Machine-readable development timeline and current project status.
+
+## Trust, corrections and provenance
+
+ARWP treats trust as a set of inspectable signals rather than a score.
+
+Current project trust surfaces establish:
+
+- the named maintainer and canonical repository/site/citation metadata;
+- an evidence model that prefers primary sources, separates owner-controlled examples from independent evidence, preserves negative results and keeps planned work distinct from active capabilities;
+- a public security-reporting policy for the resolver/gateway attack surface;
+- a corrections ledger where material published factual errors are recorded rather than silently rewritten;
+- a publish workflow configured to create GitHub Artifact Attestation provenance for the exact npm tarball on the next npm publish;
+- an OpenSSF Scorecard workflow as an external repository-practice signal;
+- `CITATION.cff` prepared for durable software citation and future Zenodo archiving.
+
+Persistent-identifier status is intentionally conservative: **no DOI is currently claimed**. The DOI module remains `planned` until Zenodo or another external provider actually issues an identifier. Do not infer a DOI from repository metadata.
+
+Artifact provenance is not a security certificate. It can establish where/how a particular artifact was built; it does not prove that the artifact is vulnerability-free or correct. OpenSSF results likewise remain bounded external signals rather than product-quality guarantees.
 
 ## AI crawler and access policy
 
@@ -113,6 +134,9 @@ The profile covers:
 - canonical concept definitions;
 - stable claim identifiers and evidence receipts;
 - an AI/search crawler matrix;
+- a canonical trust center and corrections ledger;
+- software provenance and externally issued persistent identifiers;
+- independent/external trust signals with explicit limitations;
 - reproducible experiments about which surfaces agents actually fetch;
 - a machine-readable knowledge graph;
 - reusable citation visuals;
@@ -121,7 +145,7 @@ The profile covers:
 - AI/search citation and referral measurement;
 - localization and product history.
 
-`planned` means intended work and must not be interpreted as a deployed capability. `active` means the surface is currently published or operated.
+`planned` means intended work and must not be interpreted as a deployed capability. `active` means the surface is currently published or operated. A workflow configured for the next release is not evidence that historical artifacts already carry that provenance.
 
 ## Open media & AI reuse
 
@@ -174,12 +198,14 @@ AI Search & Citation Profile version: 0.1 (non-normative project profile).
 ## Repository and implementation
 
 - [GitHub repository](https://github.com/dkharlanau/agent-ready-web-profile): Source, issues, CI and full documentation.
+- [Security policy](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SECURITY.md): Vulnerability reporting and scope guidance.
+- [Citation metadata](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CITATION.cff): Software citation metadata; no DOI is claimed unless an external archive issues one.
 - [ARWP JSON Schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json): ARWP profile schema.
-- [AI Search Profile CLI](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/bin/arwp-ai-search.mjs): Generate, validate and plan a reusable site citation profile.
+- [AI Search Profile CLI](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/bin/arwp-ai-search.mjs): Generate, validate and plan a reusable site citation/trust profile.
 - [Resolver source](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/resolver): Resolver MCP implementation.
 - [Gateway source](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/gateway): Generic read-only MCP gateway.
 - [Federated router](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router): Multi-site routing and federation work.
 
 ## Boundaries
 
-ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, or proof that an undeclared runtime capability exists. The AI Search & Citation Profile is likewise not a guarantee of inclusion, citation or ranking in any search/AI product. Machine-readable reuse permission applies only to material explicitly covered by the rights manifest and does not override third-party rights. Prefer observed and protocol-native evidence, publish original useful material, preserve source authority and negative results, and keep planned surfaces distinct from active ones. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.
+ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, proof that an undeclared runtime capability exists, security certificate, or external endorsement. The AI Search & Citation Profile is likewise not a guarantee of inclusion, citation or ranking in any search/AI product. Machine-readable reuse permission applies only to material explicitly covered by the rights manifest and does not override third-party rights. Prefer observed and protocol-native evidence, publish original useful material, preserve source authority and negative results, keep planned surfaces distinct from active ones, and do not claim DOI/attestation/adoption before the relevant external evidence exists. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.
