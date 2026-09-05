@@ -59,21 +59,22 @@
       </article>
 
       <article class="trust-card">
-        <h2>Build provenance</h2>
-        <p>The npm ecosystem workflow uses GitHub OIDC/trusted publishing. The next npm publish is configured to attest the exact packed tarball with GitHub Artifact Attestations so consumers can verify repository/workflow/commit provenance.</p>
+        <h2>Build provenance & SBOM</h2>
+        <p>The npm workflow uses GitHub OIDC/trusted publishing. The next npm publish is configured to pack the exact tarball, generate a CycloneDX dependency SBOM, attest provenance and the SBOM to that same tarball, then publish that exact artifact.</p>
         <code>gh attestation verify &lt;tarball&gt; -R dkharlanau/agent-ready-web-profile</code>
-        <p style="margin-top:12px"><strong>Boundary:</strong> provenance proves where and how an artifact was built; it does not prove that the artifact is vulnerability-free.</p>
+        <p style="margin-top:12px">The MCP Registry publisher dependency is also version- and SHA-256-pinned before execution.</p>
+        <p><strong>Boundary:</strong> provenance and SBOM attestations prove scoped build/dependency facts; they do not prove that the artifact is vulnerability-free or correct.</p>
       </article>
 
       <article class="trust-card">
         <h2>Persistent citation</h2>
-        <p>The repository is prepared for Zenodo archiving through <code>CITATION.cff</code>. No DOI is claimed yet. A DOI will be published here only after the repository is externally enabled/archived and Zenodo actually issues one.</p>
-        <div class="trust-links"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CITATION.cff">CITATION.cff</a><a href="./trust.json">Current DOI status</a></div>
+        <p>The repository is prepared for Zenodo archiving through <code>CITATION.cff</code>. <strong>No DOI is claimed yet.</strong> A DOI will be published here only after the repository is externally enabled/archived and Zenodo actually issues one.</p>
+        <div class="trust-links"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CITATION.cff">CITATION.cff</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/trust/DOI.md">DOI activation guide</a><a href="./trust.json">Current DOI status</a></div>
       </article>
 
       <article class="trust-card">
         <h2>Independent security signal</h2>
-        <p>An OpenSSF Scorecard workflow is configured as an external, reproducible signal over repository practices. Its result is not treated as a correctness or quality certificate.</p>
+        <p>An OpenSSF Scorecard workflow is configured as an external, reproducible signal over repository practices. Its result is not treated as a correctness or quality certificate. OpenSSF Best Practices self-certification remains an explicit external task until completed.</p>
         <div class="trust-links"><a href="https://scorecard.dev/viewer/?uri=github.com/dkharlanau/agent-ready-web-profile">Scorecard viewer</a></div>
       </article>
 
