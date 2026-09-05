@@ -56,9 +56,21 @@ node bin/arwp.mjs plan https://example.com --intent=agent
 
 ## Discovery model
 
-ARWP can use ordinary web and protocol evidence including HTML/HTTP links, Markdown negotiation, llms.txt, ARWP profiles, RFC 9727 API Catalog, RFC 9728 metadata, A2A Agent Cards, Agent Skills, MCP Server Cards and ARD ai-catalog evidence.
+ARWP can use ordinary web and protocol evidence including HTML/HTTP links, Markdown negotiation, llms.txt, ARWP profiles, RFC 9727 API Catalog, RFC 9728 metadata, A2A Agent Cards, Agent Skills, MCP Server Cards and ARD evidence.
 
-ARD is an upstream federated agentic-resource discovery specification. ARWP should consume ARD rather than create a parallel catalog standard. Current ARD support is conservative: typed catalog entries are preserved as evidence; registry federation/search is not automatically executed.
+### ARD v0.91
+
+ARD is an upstream federated agentic-resource discovery proposal. ARWP should consume ARD rather than create a parallel catalog standard.
+
+Current canonical ARD static discovery:
+
+- `/.well-known/ard.json`;
+- `rel="ard"`;
+- JSON-LD description layer and namespaces.
+
+The predecessor `/.well-known/ai-catalog.json` and `rel="ai-catalog"` remain compatibility signals.
+
+Current ARWP support is deliberately partial: the Resolver checks canonical `ard.json`, accepts HTTP `rel=ard`, falls back to predecessor ai-catalog when needed, and preserves typed ARD resources as evidence. Full in-page JSON-LD namespace interpretation and federated registry search are not yet claimed.
 
 ## Interpretation rules
 
@@ -67,7 +79,7 @@ ARD is an upstream federated agentic-resource discovery specification. ARWP shou
 - Metadata never grants authorization.
 - Crawler access does not guarantee indexing or citation.
 - Passing an ARWP audit does not guarantee search ranking.
-- A draft is not an RFC or final web standard.
+- A draft/proposal is not an RFC or final web standard.
 - AgentReady/Ora and Agent Ready are adjacent readiness/readability products, not evidence that ARWP needs a universal score.
 
 ## Sitemap
