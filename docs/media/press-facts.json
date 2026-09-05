@@ -1,0 +1,57 @@
+{
+  "version": "0.1",
+  "lastReviewed": "2026-09-05",
+  "project": {
+    "name": "Agent-Ready Web Profile",
+    "shortName": "ARWP",
+    "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "repository": "https://github.com/dkharlanau/agent-ready-web-profile",
+    "oneLine": "ARWP is an open-source interoperability resolver for discovering and normalizing the web, data, API and agent-facing interfaces a public website exposes.",
+    "boilerplate": "Agent-Ready Web Profile (ARWP) is an open-source experimental interoperability project for discovering how public websites can actually be used by software and AI agents. The ARWP Resolver normalizes ordinary web discovery, llms.txt, structured data, APIs and agent-facing protocols while preserving source evidence and conflicts, then plans an interface for a concrete intent such as reading, searching, structured access, tools or agent interaction."
+  },
+  "status": {
+    "development": "active",
+    "maturity": "pre-stable",
+    "startedAt": "2026-08-25",
+    "latestTaggedRelease": "v0.1.0",
+    "profileContract": "0.1",
+    "toolchain": "0.2.0",
+    "aiSearchCitationProfile": "0.1"
+  },
+  "licenses": {
+    "software": {
+      "name": "Apache License 2.0",
+      "spdx": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "openMedia": {
+      "name": "Creative Commons Attribution 4.0 International",
+      "spdx": "CC-BY-4.0",
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "rightsManifest": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json"
+    }
+  },
+  "facts": [
+    {
+      "id": "ARWP-PRESS-FACT-001",
+      "text": "ARWP treats its publisher profile as one discovery source among several rather than as a replacement for upstream standards.",
+      "source": "https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md"
+    },
+    {
+      "id": "ARWP-PRESS-FACT-002",
+      "text": "The Resolver preserves source authority and conflicts instead of collapsing them into a single readiness score.",
+      "source": "https://dkharlanau.github.io/agent-ready-web-profile/"
+    },
+    {
+      "id": "ARWP-PRESS-FACT-003",
+      "text": "ARWP publishes English canonical agent-routing semantics with German and Russian localized discovery surfaces.",
+      "source": "https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"
+    },
+    {
+      "id": "ARWP-PRESS-FACT-004",
+      "text": "ARWP maintains a machine-readable product history and a reusable AI Search & Citation Profile for applying the same evidence-driven website pattern elsewhere.",
+      "source": "https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json"
+    }
+  ],
+  "preferredAttribution": "Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/"
+}
