@@ -28,6 +28,16 @@ jobs:
           node-version: '24'
       - name: Build receipt explorer from immutable records
         run: node scripts/evidence-receipt-explorer.mjs
+      - name: Upload generated explorer outputs
+        uses: actions/upload-artifact@v6
+        with:
+          name: evidence-receipt-explorer-generated
+          path: |
+            docs/evidence/receipts/index.json
+            docs/evidence/receipts/index.html
+            docs/evidence/receipts/*.html
+          if-no-files-found: error
+          retention-days: 30
       - name: Verify explorer outputs are reproducible
         run: |
           git diff --exit-code -- docs/evidence/receipts
