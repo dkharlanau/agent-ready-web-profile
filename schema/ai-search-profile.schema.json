@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json",
+  "title": "ARWP AI Search & Citation Profile v0.1",
+  "description": "Non-normative implementation profile for planning and tracking citation-ready, machine-discoverable and evidence-backed website surfaces without claiming ranking gains.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profileVersion", "site", "objective", "surfaces", "modules", "measurement", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "profileVersion": { "const": "0.1" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "canonicalUrl", "languages"],
+      "properties": {
+        "id": { "type": "string", "minLength": 2, "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "canonicalUrl": { "$ref": "#/$defs/httpsUri" },
+        "languages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 }
+        },
+        "canonicalLanguage": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "targetQuestions"],
+      "properties": {
+        "primary": { "type": "string", "minLength": 10, "maxLength": 500 },
+        "targetQuestions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 5, "maxLength": 300 }
+        },
+        "canonicalTerms": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 2, "maxLength": 100 }
+        }
+      }
+    },
+    "surfaces": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entityHome", "siteProfile", "llmsCanonical"],
+      "properties": {
+        "entityHome": { "$ref": "#/$defs/surface" },
+        "siteProfile": { "$ref": "#/$defs/surface" },
+        "llmsCanonical": { "$ref": "#/$defs/surface" },
+        "history": { "$ref": "#/$defs/surface" },
+        "localeManifest": { "$ref": "#/$defs/surface" },
+        "sitemap": { "$ref": "#/$defs/surface" },
+        "robots": { "$ref": "#/$defs/surface" },
+        "knowledgeGraph": { "$ref": "#/$defs/surface" },
+        "claimsIndex": { "$ref": "#/$defs/surface" }
+      }
+    },
+    "modules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "answerPages", "originalResearch", "protocolObservatory", "comparisonPages", "conceptDefinitions",
+        "claimsRegistry", "evidenceReceipts", "crawlerMatrix", "agentFetchLab", "knowledgeGraph",
+        "citationVisuals", "externalDistribution", "aiVisibility", "localization", "history"
+      ],
+      "properties": {
+        "answerPages": { "$ref": "#/$defs/module" },
+        "originalResearch": { "$ref": "#/$defs/module" },
+        "protocolObservatory": { "$ref": "#/$defs/module" },
+        "comparisonPages": { "$ref": "#/$defs/module" },
+        "conceptDefinitions": { "$ref": "#/$defs/module" },
+        "claimsRegistry": { "$ref": "#/$defs/module" },
+        "evidenceReceipts": { "$ref": "#/$defs/module" },
+        "crawlerMatrix": { "$ref": "#/$defs/module" },
+        "agentFetchLab": { "$ref": "#/$defs/module" },
+        "knowledgeGraph": { "$ref": "#/$defs/module" },
+        "citationVisuals": { "$ref": "#/$defs/module" },
+        "externalDistribution": { "$ref": "#/$defs/module" },
+        "aiVisibility": { "$ref": "#/$defs/module" },
+        "localization": { "$ref": "#/$defs/module" },
+        "history": { "$ref": "#/$defs/module" }
+      }
+    },
+    "vocabulary": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["term", "definition"],
+        "properties": {
+          "term": { "type": "string", "minLength": 2, "maxLength": 120 },
+          "definition": { "type": "string", "minLength": 20, "maxLength": 1000 },
+          "url": { "$ref": "#/$defs/httpsUri" },
+          "status": { "$ref": "#/$defs/status" }
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signals", "reviewCadence", "privacy"],
+      "properties": {
+        "signals": {
+          "type": "array",
+          "maxItems": 30,
+          "items": { "$ref": "#/$defs/measurementSignal" }
+        },
+        "reviewCadence": { "type": "string", "enum": ["weekly", "monthly", "quarterly", "on-change"] },
+        "privacy": { "type": "string", "minLength": 10, "maxLength": 500 }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "noRankingClaimsWithoutEvidence", "separateOwnedFromIndependentEvidence", "preserveNegativeResults",
+        "canonicalTechnicalSemantics", "noFabricatedAdoption", "noReadinessScore"
+      ],
+      "properties": {
+        "noRankingClaimsWithoutEvidence": { "const": true },
+        "separateOwnedFromIndependentEvidence": { "const": true },
+        "preserveNegativeResults": { "const": true },
+        "canonicalTechnicalSemantics": { "const": true },
+        "noFabricatedAdoption": { "const": true },
+        "noReadinessScore": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "httpsUri": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "status": { "type": "string", "enum": ["planned", "active", "paused", "not-applicable"] },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "url"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "language": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 },
+        "mediaType": { "type": "string", "minLength": 3, "maxLength": 100 },
+        "notes": { "type": "string", "maxLength": 500 }
+      }
+    },
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "priority", "description"],
+      "properties": {
+        "status": { "$ref": "#/$defs/status" },
+        "priority": { "type": "string", "enum": ["P0", "P1", "P2"] },
+        "description": { "type": "string", "minLength": 10, "maxLength": 1000 },
+        "url": { "$ref": "#/$defs/httpsUri" },
+        "machineReadable": {
+          "type": "array",
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/httpsUri" }
+        },
+        "cadence": { "type": "string", "enum": ["one-off", "continuous", "weekly", "monthly", "quarterly", "on-change"] },
+        "notes": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "measurementSignal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "status", "description"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2, "maxLength": 100 },
+        "status": { "$ref": "#/$defs/status" },
+        "description": { "type": "string", "minLength": 10, "maxLength": 500 },
+        "url": { "$ref": "#/$defs/httpsUri" }
+      }
+    }
+  }
+}
