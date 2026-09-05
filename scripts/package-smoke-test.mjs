@@ -91,7 +91,8 @@ try {
   assert.equal(installedAiProfile.modules.trustCenter.status, 'active');
   assert.equal(installedAiProfile.modules.correctionsLedger.status, 'active');
   assert.equal(installedAiProfile.modules.softwareProvenance.status, 'planned');
-  assert.equal(installedAiProfile.modules.externalTrustSignals.status, 'planned');
+  assert.equal(installedAiProfile.modules.externalTrustSignals.status, 'active');
+  assert.match(installedAiProfile.modules.externalTrustSignals.notes, /33974701872/);
   assert.equal(installedAiProfile.modules.persistentIdentifiers.status, 'planned');
   assert.equal(installedAiProfile.surfaces.claimsIndex.status, 'active');
   assert.equal(installedAiProfile.surfaces.trustCenter.status, 'active');
@@ -102,8 +103,7 @@ try {
   assert.match(aiPlan, /P1 evidenceReceipts/);
   assert.match(aiPlan, /P1 persistentIdentifiers/);
   assert.match(aiPlan, /P1 softwareProvenance/);
-  assert.match(aiPlan, /P2 externalTrustSignals/);
-  for (const noLongerPlanned of ['protocolObservatory', 'claimsRegistry', 'crawlerMatrix', 'trustCenter', 'correctionsLedger']) {
+  for (const noLongerPlanned of ['protocolObservatory', 'claimsRegistry', 'crawlerMatrix', 'trustCenter', 'correctionsLedger', 'externalTrustSignals']) {
     assert.doesNotMatch(aiPlan, new RegExp(`\\b${noLongerPlanned}\\b`), `active ${noLongerPlanned} must not remain in the implementation backlog`);
   }
 
