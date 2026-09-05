@@ -22,15 +22,15 @@ try {
 
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
-    'bin/arwp.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs',
-    'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs',
+    'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs',
+    'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs', 'lib/ai-search-profile.mjs',
     'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
-    'schema/site-profile.schema.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
+    'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'ai/ai-search-profile.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
     'scanner-service/handler.mjs', 'router/federated.mjs', 'router/resolved-federated.mjs', 'router/server.mjs',
     'monitor/runner.mjs', 'monitor/config.schema.json', 'monitor/example.config.json',
     'registry/sites.json', 'registry/directory.schema.json', 'server.json',
     'benchmarks/external-runner.mjs', 'benchmarks/corpus/fixture.schema.json',
-    'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md',
+    'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md', 'docs/AI-SEARCH-PROFILE.md',
     'README.md', 'SPEC.md', 'LICENSE'
   ]) assert.ok(paths.has(required), `packed artifact is missing ${required}`);
 
@@ -45,13 +45,17 @@ try {
 
   const installedRoot = path.join(consumerDir, 'node_modules', 'agent-ready-web-profile');
   const installedCli = path.join(installedRoot, 'bin', 'arwp.mjs');
+  const installedAiSearchCli = path.join(installedRoot, 'bin', 'arwp-ai-search.mjs');
   assert.ok(fs.existsSync(installedCli), 'installed CLI entrypoint is missing');
+  assert.ok(fs.existsSync(installedAiSearchCli), 'installed AI Search Profile CLI entrypoint is missing');
   assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', 'arwp')), 'npm bin shim is missing');
+  assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', 'arwp-ai-search')), 'AI Search Profile npm bin shim is missing');
   const installedPackage = JSON.parse(fs.readFileSync(path.join(installedRoot, 'package.json'), 'utf8'));
   assert.equal(installedPackage.mcpName, 'io.github.dkharlanau/agent-ready-web-profile');
   assert.equal(installedPackage.scripts['resolver:mcp'], 'node resolver/server.mjs');
   assert.equal(installedPackage.scripts['benchmark:external'], 'node benchmarks/external-runner.mjs');
   assert.equal(installedPackage.scripts['monitor:resolver'], 'node monitor/runner.mjs');
+  assert.equal(installedPackage.scripts['ai-search-profile'], 'node bin/arwp-ai-search.mjs');
 
   const installedServer = JSON.parse(fs.readFileSync(path.join(installedRoot, 'server.json'), 'utf8'));
   assert.equal(installedServer.name, installedPackage.mcpName);
@@ -77,6 +81,12 @@ try {
   }, null, 2));
   const validation = execFileSync(process.execPath, [installedCli, 'validate', profilePath], { cwd: consumerDir, encoding: 'utf8' });
   assert.match(validation, /PASS/);
+
+  const aiSelfProfile = path.join(installedRoot, 'ai', 'ai-search-profile.json');
+  const aiValidation = execFileSync(process.execPath, [installedAiSearchCli, 'validate', aiSelfProfile], { cwd: consumerDir, encoding: 'utf8' });
+  assert.match(aiValidation, /PASS/);
+  const aiPlan = execFileSync(process.execPath, [installedAiSearchCli, 'plan', aiSelfProfile], { cwd: consumerDir, encoding: 'utf8' });
+  assert.match(aiPlan, /P0 protocolObservatory/);
 
   console.log(`PASS npm pack/install smoke test (${pack.filename}, ${pack.size} bytes packed)`);
 } finally {

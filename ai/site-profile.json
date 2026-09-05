@@ -40,6 +40,13 @@
         "mediaType": "application/json",
         "role": "other",
         "description": "Machine-readable product timeline, release milestones and current maturity status."
+      },
+      {
+        "name": "ARWP AI Search & Citation Profile",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Non-normative reusable implementation profile for planning original research, answer pages, evidence, comparisons, observability and citation-oriented discovery surfaces without a readiness score."
       }
     ]
   },
@@ -82,6 +89,13 @@
       "humanInterfaceLanguages": ["en"],
       "agentRoutingLanguages": ["en", "de", "ru"],
       "manifest": "https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"
+    },
+    "io.github.dkharlanau/ai-search-profile": {
+      "version": "0.1",
+      "status": "experimental-project-profile",
+      "profile": "https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json",
+      "schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json",
+      "documentation": "https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md"
     }
   }
 }
