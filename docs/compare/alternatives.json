@@ -1,6 +1,7 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "reviewedAt": "2026-09-05",
+  "revision": "r2",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
   "subject": {
     "name": "Agent-Ready Web Profile",
@@ -9,18 +10,7 @@
     "classStatus": "project-defined",
     "primaryQuestion": "Given a website and a concrete intent, which machine- or agent-facing interface should software use, what evidence supports that choice, and where do discovery sources conflict?"
   },
-  "comparisonAxes": [
-    "primary product question",
-    "multi-protocol discovery",
-    "normalized service map",
-    "provenance and conflict preservation",
-    "intent routing",
-    "static conformance audit",
-    "runtime task evaluation",
-    "single readiness score",
-    "AI visibility analytics",
-    "crawler enforcement"
-  ],
+  "comparisonAxes": ["primary product question","multi-protocol discovery","normalized service map","provenance and conflict preservation","intent routing","static conformance audit","runtime task evaluation","single readiness score","AI visibility analytics","crawler enforcement","empirical corpus/research"],
   "alternatives": [
     {
       "id": "agentready-ora",
@@ -28,15 +18,21 @@
       "category": "agent readiness standard, scanner, journeys and directory",
       "relationship": "closest-adjacent",
       "primaryQuestion": "What should a product implement to be usable by agents, and how agent-ready is it in practice?",
-      "observedCapabilities": [
-        "open AgentReady specification",
-        "100+ readiness checks in Ora",
-        "0-100 implementation score and grades",
-        "real-agent journeys",
-        "agent-ready product discovery and directory"
-      ],
+      "observedCapabilities": ["open AgentReady specification","100+ readiness checks in Ora","0-100 implementation score and grades","real-agent journeys","agent-ready product discovery and directory"],
       "arwpDifference": "ARWP does not define a universal readiness score. Its core output is an evidence-backed normalized interface map with source authority, conflict preservation and intent-based selection across heterogeneous upstream mechanisms.",
-      "sources": ["https://www.agentready.org/", "https://ora.ai/docs"],
+      "sources": ["https://www.agentready.org/", "https://ora.ai/docs", "https://ora.ai/blog/is-agentic-with-vercel"],
+      "canonicalComparison": "https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-agentready.html",
+      "sourceReviewedAt": "2026-09-05"
+    },
+    {
+      "id": "agent-ready-dev",
+      "name": "Agent Ready",
+      "category": "agent readability validator and empirical research corpus",
+      "relationship": "adjacent-scanner-research",
+      "primaryQuestion": "How well does a site satisfy published readability/discovery specifications and protocol checks for AI agents?",
+      "observedCapabilities": ["72-check site scanner as of September 2026","validation against Vercel Agent Readability and llms.txt guidance","protocol checks kept separately from the readability score","0-100 readability score","frozen and live State of Agent Readability research datasets","frozen 2026 corpus of 523 sites and live corpus exceeding 1,500 sites by early September 2026"],
+      "arwpDifference": "Agent Ready is a validator/measurement product around third-party readability specifications and a scored empirical corpus. ARWP can learn from that empirical loop but its core is multi-source interoperability resolution, provenance/conflict handling and intent routing.",
+      "sources": ["https://agent-ready.dev/methodology", "https://agent-ready.dev/specs", "https://agent-ready.dev/state-of-agent-readability/2026", "https://agent-ready.dev/state-of-agent-readability"],
       "sourceReviewedAt": "2026-09-05"
     },
     {
@@ -106,7 +102,12 @@
       "sourceReviewedAt": "2026-09-05"
     }
   ],
+  "adjacentSpecificationsAndGuidance": [
+    {"name":"Vercel Agent Readability","category":"agent readability implementation guidance","relationship":"guidance-not-product-competitor","role":"Discovery, structure and context practices including llms.txt, sitemaps, canonical/meta/JSON-LD, markdown mirrors, content negotiation and skill/context surfaces.","source":"https://vercel.com/kb/guide/agent-readability-spec","reviewedAt":"2026-09-05"},
+    {"name":"Agentic Resource Discovery (ARD)","category":"federated agentic-resource discovery specification","relationship":"upstream-overlap-not-product-competitor","role":"Publish and federate MCP, A2A, Skills, APIs and registry resources via ai-catalog and registry search. ARWP should consume this evidence.","sources":["https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/","https://github.com/ards-project/ard-spec/blob/main/spec/ard.md"],"canonicalComparison":"https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html","reviewedAt":"2026-09-05"}
+  ],
   "upstreamNotCompetitors": [
+    {"name":"Agentic Resource Discovery (ARD)","role":"federated agentic-resource catalog/search specification"},
     {"name":"MCP","role":"backend tool/context protocol"},
     {"name":"A2A","role":"agent-to-agent discovery and interaction protocol"},
     {"name":"WebMCP","role":"browser-page tool exposure mechanism"},
@@ -114,13 +115,14 @@
     {"name":"OpenAPI","role":"API contract format"},
     {"name":"RFC 9727 API Catalog","role":"standard API catalog discovery"},
     {"name":"RFC 9728 Protected Resource Metadata","role":"authorization metadata discovery"},
-    {"name":"Agent Skills","role":"portable procedure/instruction artifact"}
+    {"name":"Agent Skills","role":"portable procedure/instruction artifact"},
+    {"name":"DNS-AID","role":"draft DNS-based agent discovery"},
+    {"name":"Web Bot Auth","role":"draft cryptographic automated-client identity"},
+    {"name":"AIPREF","role":"draft AI content-usage preference attachment"},
+    {"name":"NLWeb","role":"natural-language web interface project/protocol"},
+    {"name":"auth.md","role":"early agentic registration convention"},
+    {"name":"ACP","role":"agentic commerce protocol"},
+    {"name":"UCP","role":"commerce capability negotiation protocol"}
   ],
-  "guardrails": {
-    "comparisonIsNotRanking": true,
-    "unknownCapabilityIsNotAssumedAbsent": true,
-    "vendorFactsAreLimitedToPubliclyDocumentedCapabilities": true,
-    "projectDefinedClassIsExplicit": true,
-    "noUniversalBestClaim": true
-  }
+  "guardrails": {"comparisonIsNotRanking":true,"unknownCapabilityIsNotAssumedAbsent":true,"vendorFactsAreLimitedToPubliclyDocumentedCapabilities":true,"projectDefinedClassIsExplicit":true,"noUniversalBestClaim":true,"draftsAreNotPromotedToStandards":true}
 }
