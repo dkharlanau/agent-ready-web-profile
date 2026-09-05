@@ -1,0 +1,55 @@
+# ARWP Search + Agent Recommendations
+
+> Dated, source-backed implementation guidance for keeping public websites discoverable, citable, fresh and agent-operable across classic search, generative search and browser-agent ecosystems.
+
+This surface is non-normative implementation guidance. It does not promise crawling, indexing, ranking, citation or agent success and does not collapse evidence into a readiness score.
+
+## Start here
+
+- [Human guide](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/): Current Search + Agent recommendations and status model.
+- [Machine-readable ruleset](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/registry.json): Current dated rules, priorities, upstream status, testability and primary sources.
+- [Ruleset history](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/history/index.json): Immutable historical snapshots; prior recommendations are not silently rewritten.
+- [Implementation guide](https://dkharlanau.github.io/agent-ready-web-profile/SEARCH-AGENT-RECOMMENDATIONS.md): Audit, freshness, visibility and runtime-evidence workflow.
+- [Product strategy](https://dkharlanau.github.io/agent-ready-web-profile/SEARCH-AGENT-STRATEGY.md): Why ARWP resolves upstream mechanisms instead of inventing another universal manifest.
+
+## Current ruleset
+
+Ruleset: `2026.09`
+Reviewed: `2026-09-05`
+
+Current layers:
+
+- classic search technical eligibility;
+- generative-search eligibility and platform opportunities;
+- citation/deep-link addressability;
+- freshness and change notification;
+- browser-agent runtime evidence;
+- owner-observed AI visibility measurement;
+- emerging-governance watch items.
+
+Notable 2026.09 items include Google Preferred Sources, Read more deep-link guidance, accurate sitemap `lastmod`, OAI-SearchBot access separation, IndexNow, Google/Bing AI visibility measurement, WebMCP runtime/evals, draft IETF AIPREF `Content-Usage`, and W3C Introduction Layer incubation.
+
+## Evidence semantics
+
+- `pass` / `fail`: directly observable checks with bounded evidence.
+- `warn`: heuristic issue or optional opportunity worth review.
+- `observed`: an experimental/draft signal was actually present.
+- `not-assessed`: requires manual judgment, authenticated owner data or browser runtime evidence.
+- `not-applicable`: the optional mechanism is not adopted or does not apply.
+- `watch`: upstream work is still in incubation.
+
+Static metadata is never upgraded into browser/protocol runtime conformance. Authenticated Google/Bing metrics are never inferred from public crawling. A successful IndexNow receipt is not proof of indexing. Experimental standards remain labelled experimental.
+
+## CLI
+
+```text
+arwp audit https://example.com
+arwp audit https://example.com --json
+arwp-visibility compare before.json after.json
+arwp-agent-eval show agent-eval.json
+arwp-indexnow payload https://example.com --urls-file=changed-urls.txt
+```
+
+## Maintenance
+
+The repository runs a scheduled upstream source watcher. Reachability is only a maintenance signal; material source changes require review before the ruleset changes. New rulesets create a new frozen history snapshot.
