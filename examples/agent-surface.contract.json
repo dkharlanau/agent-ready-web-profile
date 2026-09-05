@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/assertion-contract.schema.json",
+  "contractVersion": "0.1",
+  "target": "https://example.com/docs/",
+  "expect": {
+    "read": {
+      "required": true,
+      "protocol": ["llms.txt", "HTTP", "HTML"]
+    },
+    "tools": {
+      "required": false,
+      "protocol": "MCP"
+    },
+    "agent": {
+      "forbidden": false
+    }
+  },
+  "maxConflicts": 1,
+  "forbidConflictKinds": ["identity-mismatch"],
+  "changePolicy": {
+    "selectedInterface": "fail",
+    "selectedProtocol": "fail",
+    "planOutcome": "warn",
+    "newConflicts": "fail"
+  }
+}
