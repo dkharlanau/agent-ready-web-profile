@@ -23,6 +23,11 @@ assert.equal(source.modules.originalResearch.status, 'active');
 assert.equal(source.modules.protocolObservatory.status, 'active');
 assert.equal(source.modules.protocolObservatory.url, 'https://dkharlanau.github.io/agent-ready-web-profile/observatory/');
 assert.deepEqual(source.modules.protocolObservatory.machineReadable, ['https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json']);
+assert.equal(source.modules.claimsRegistry.status, 'active');
+assert.equal(source.surfaces.claimsIndex.status, 'active');
+assert.equal(source.surfaces.claimsIndex.url, 'https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json');
+assert.ok(source.modules.claimsRegistry.machineReadable.includes('https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json'));
+assert.equal(source.modules.evidenceReceipts.status, 'planned', 'claims must not imply replayable evidence receipts are already implemented');
 assert.equal(source.surfaces.history.status, 'active');
 assert.equal(source.modules.openReuseAssets.status, 'active');
 assert.equal(source.surfaces.pressKit.status, 'active');
@@ -37,6 +42,8 @@ const citationIndex = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'citati
 assert.equal(citationIndex.license, 'CC-BY-4.0');
 assert.ok(citationIndex.items.some(item => item.id === 'concept-resolver-regret'));
 assert.ok(citationIndex.items.some(item => item.id === 'compare-static-runtime'));
+assert.ok(citationIndex.items.some(item => item.id === 'ARWP-CLAIM-0001' && item.status === 'verified'));
+assert.ok(citationIndex.items.some(item => item.id === 'ARWP-CLAIM-0002' && item.status === 'verified'));
 
 const observatoryPath = path.join(root, 'docs', 'observatory', 'protocols.json');
 const frozenObservatoryPath = path.join(root, 'docs', 'observatory', 'history', '2026-09-05.json');
@@ -64,6 +71,11 @@ assert.equal(mechanism('acp-commerce').arwpSupport.staticDiscovery, 'watchlist-n
 assert.equal(mechanism('ucp-commerce').arwpSupport.staticDiscovery, 'watchlist-no-adapter');
 assert.match(mechanism('agent-skills').notes, /core public specification defines the SKILL\.md format/i);
 
+const claimsIndex = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'evidence', 'claims', 'index.json'), 'utf8'));
+assert.equal(claimsIndex.claims.length, 2);
+assert.equal(claimsIndex.claims.every(item => item.status === 'verified'), true);
+assert.match(claimsIndex.historyPolicy, /not silently rewritten/i);
+
 const starter = createAiSearchProfileStarter('https://example.com/docs/', {
   name: 'Example Docs',
   languages: ['en', 'de'],
@@ -79,6 +91,8 @@ assert.equal(starter.surfaces.robots.url, 'https://example.com/robots.txt');
 assert.equal(starter.surfaces.pressKit.url, 'https://example.com/docs/media/');
 assert.equal(starter.surfaces.reuseRights.url, 'https://example.com/docs/media/rights.json');
 assert.equal(starter.modules.openReuseAssets.priority, 'P1');
+assert.equal(starter.modules.claimsRegistry.status, 'planned');
+assert.equal(starter.surfaces.claimsIndex.status, 'planned');
 assert.equal(Object.values(starter.modules).every(module => module.status === 'planned'), true);
 
 const plan = planAiSearchProfile(starter);
@@ -87,6 +101,7 @@ assert.equal(plan.summary.active, 0);
 assert.equal(plan.summary.planned, 16);
 assert.equal(plan.summary.nextPriority, 'P0');
 assert.deepEqual(plan.next.filter(item => item.priority === 'P0').map(item => item.key).sort(), ['answerPages', 'originalResearch', 'protocolObservatory']);
+assert.ok(plan.next.some(item => item.key === 'claimsRegistry' && item.priority === 'P1'));
 assert.ok(plan.next.some(item => item.key === 'openReuseAssets' && item.priority === 'P1'));
 
 const invalid = structuredClone(starter);
@@ -103,6 +118,7 @@ const generated = JSON.parse(fs.readFileSync(output, 'utf8'));
 assert.deepEqual(generated.site.languages, ['en', 'ru']);
 assert.equal(generated.modules.openReuseAssets.status, 'planned');
 assert.equal(generated.modules.protocolObservatory.status, 'planned');
+assert.equal(generated.modules.claimsRegistry.status, 'planned');
 
 const validate = spawnSync(process.execPath, [cli, 'validate', output], { encoding: 'utf8' });
 assert.equal(validate.status, 0, validate.stderr || validate.stdout);
@@ -112,6 +128,7 @@ const planned = spawnSync(process.execPath, [cli, 'plan', output], { encoding: '
 assert.equal(planned.status, 0, planned.stderr || planned.stdout);
 assert.match(planned.stdout, /P0 originalResearch/);
 assert.match(planned.stdout, /P0 protocolObservatory/);
+assert.match(planned.stdout, /P1 claimsRegistry/);
 assert.match(planned.stdout, /P1 openReuseAssets/);
 
-console.log('PASS AI Search & Citation Profile validates, publishes frozen protocol observatory evidence, plans reusable citation/open-reuse surfaces, and preserves conservative capability states');
+console.log('PASS AI Search & Citation Profile validates, publishes frozen observatory and verified claims, plans reusable citation/open-reuse surfaces, and preserves conservative capability states');

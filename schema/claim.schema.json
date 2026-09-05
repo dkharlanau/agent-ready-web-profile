@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json",
+  "title": "ARWP Evidence Claim v0.1",
+  "description": "Non-normative schema for stable, reviewable ARWP claims with explicit scope, evidence and supersession history.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["claimVersion", "id", "status", "title", "claim", "scope", "reviewedAt", "canonicalUrl", "license", "evidence", "doesNotProve"],
+  "properties": {
+    "$schema": {"type":"string","format":"uri"},
+    "claimVersion": {"const":"0.1"},
+    "id": {"type":"string","pattern":"^ARWP-CLAIM-[0-9]{4}$"},
+    "status": {"type":"string","enum":["verified","reviewed","experimental","superseded","withdrawn"]},
+    "title": {"type":"string","minLength":5,"maxLength":200},
+    "claim": {"type":"string","minLength":20,"maxLength":2000},
+    "scope": {"type":"string","minLength":20,"maxLength":2000},
+    "doesNotProve": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":5,"maxLength":500}},
+    "reviewedAt": {"type":"string","format":"date"},
+    "canonicalUrl": {"type":"string","format":"uri","pattern":"^https://"},
+    "license": {"const":"CC-BY-4.0"},
+    "projectVersion": {
+      "type":"object","additionalProperties":false,
+      "properties": {
+        "toolchain":{"type":"string","maxLength":50},
+        "profileContract":{"type":"string","maxLength":50}
+      }
+    },
+    "facts": {
+      "type":"array","maxItems":50,
+      "items": {
+        "type":"object","additionalProperties":false,"required":["name","value"],
+        "properties": {
+          "name":{"type":"string","minLength":1,"maxLength":100},
+          "value":{"type":["string","number","boolean"]},
+          "unit":{"type":"string","maxLength":50},
+          "notes":{"type":"string","maxLength":500}
+        }
+      }
+    },
+    "evidence": {
+      "type":"array","minItems":1,"maxItems":30,
+      "items": {
+        "type":"object","additionalProperties":false,"required":["type","url","description"],
+        "properties": {
+          "type":{"type":"string","enum":["primary-spec","primary-source","internal-implementation","internal-test","internal-benchmark","internal-review","issue-record"]},
+          "url":{"type":"string","format":"uri","pattern":"^https://"},
+          "description":{"type":"string","minLength":5,"maxLength":1000},
+          "reviewedAt":{"type":"string","format":"date"}
+        }
+      }
+    },
+    "supersedes":{"type":"array","uniqueItems":true,"items":{"type":"string","pattern":"^ARWP-CLAIM-[0-9]{4}$"}},
+    "supersededBy":{"type":"string","pattern":"^ARWP-CLAIM-[0-9]{4}$"},
+    "notes":{"type":"array","maxItems":20,"items":{"type":"string","maxLength":1000}}
+  }
+}

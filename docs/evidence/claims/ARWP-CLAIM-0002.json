@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json",
+  "claimVersion": "0.1",
+  "id": "ARWP-CLAIM-0002",
+  "status": "verified",
+  "title": "Resolver union still trails llms-aware on the frozen reviewed 20-site corpus after the OpenAPI search eligibility correction",
+  "claim": "On the unchanged reviewed 20-site independent decision-quality corpus measured on 2026-08-28 after removing generic OpenAPI descriptions from search eligibility, llms-aware scored 89/100 and resolver-union scored 86/100. Resolver-union had 6 regret cases and 0 uniquely-correct union cases.",
+  "scope": "The frozen ARWP 20-site independent decision-quality corpus and the committed 2026-08-28 OpenAPI-search-eligibility measurement only. This is an engineering benchmark of reviewed intent selection, not a representative survey of the web or a claim about answer quality, search ranking, latency or token cost.",
+  "doesNotProve": [
+    "that llms.txt is universally the best web discovery mechanism",
+    "that the 20-site corpus represents the web or market adoption",
+    "that resolver-union has the same score against later human-reviewed ground-truth revisions",
+    "that benchmark accuracy predicts LLM answer quality, SEO ranking, latency or token savings"
+  ],
+  "reviewedAt": "2026-09-05",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.html",
+  "license": "CC-BY-4.0",
+  "projectVersion": {"toolchain":"0.2.0","profileContract":"0.1"},
+  "facts": [
+    {"name":"measurementDate","value":"2026-08-28"},
+    {"name":"independentSites","value":20,"unit":"sites"},
+    {"name":"llmsAwareCorrect","value":89,"unit":"correct / 100"},
+    {"name":"resolverUnionCorrect","value":86,"unit":"correct / 100"},
+    {"name":"resolverRegret","value":6,"unit":"cases"},
+    {"name":"resolverUniquelyCorrect","value":0,"unit":"cases"},
+    {"name":"overSelection","value":5,"unit":"cases"},
+    {"name":"discoveryGaps","value":7,"unit":"cases"},
+    {"name":"selectionGaps","value":2,"unit":"cases"}
+  ],
+  "evidence": [
+    {
+      "type":"internal-benchmark",
+      "url":"https://github.com/dkharlanau/agent-ready-web-profile/blob/e6c5e0d27af9627ee9827f3de8adffaddbcbc7f2/benchmarks/results/2026-08-28-r4-openapi-search-eligibility.md",
+      "description":"Committed dated benchmark result records 89/100 llms-aware, 86/100 resolver-union, 6 regret cases, 0 uniquely-correct union cases and unchanged reviewed ground truth."
+    },
+    {
+      "type":"internal-review",
+      "url":"https://github.com/dkharlanau/agent-ready-web-profile/blob/e6c5e0d27af9627ee9827f3de8adffaddbcbc7f2/docs/DECISION-QUALITY.md",
+      "description":"Decision-quality policy explains resolver regret, the unchanged-ground-truth rule and why resolver-union remains experimental after the correction."
+    },
+    {
+      "type":"issue-record",
+      "url":"https://github.com/dkharlanau/agent-ready-web-profile/issues/15",
+      "description":"R4 dominance epic tracks the same current frozen-corpus gate and broader external trust criteria."
+    }
+  ],
+  "notes": [
+    "The older 81/100 resolver-union value is preserved as historical evidence from before the general OpenAPI search eligibility correction; it is not the current post-correction baseline for this claim.",
+    "Potential live publisher capability drift is queued for human review separately and must not silently mutate this frozen measurement."
+  ]
+}

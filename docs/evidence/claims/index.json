@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "project": "Agent-Ready Web Profile",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/",
+  "schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json",
+  "license": "CC-BY-4.0",
+  "lastUpdated": "2026-09-05",
+  "historyPolicy": "Published claims are not silently rewritten when their evidence/scope becomes obsolete. Mark them superseded or withdrawn and publish a new claim ID or reviewed revision with explicit lineage.",
+  "statusMeaning": {
+    "verified": "Reviewed claim backed by direct primary/internal evidence sufficient for the stated scope.",
+    "reviewed": "Human-reviewed claim whose evidence is useful but does not justify verified status.",
+    "experimental": "Provisional claim retained for testing or investigation.",
+    "superseded": "Historical claim replaced by a newer claim; retained for auditability.",
+    "withdrawn": "Claim no longer supported; retained with history instead of deleted."
+  },
+  "claims": [
+    {
+      "id": "ARWP-CLAIM-0001",
+      "status": "verified",
+      "title": "A2A 1.0 callable interfaces come from supportedInterfaces, not the Agent Card discovery URL",
+      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0001.html",
+      "json": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0001.json",
+      "reviewedAt": "2026-09-05"
+    },
+    {
+      "id": "ARWP-CLAIM-0002",
+      "status": "verified",
+      "title": "Resolver union still trails llms-aware on the frozen reviewed 20-site corpus after the OpenAPI search eligibility correction",
+      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.html",
+      "json": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.json",
+      "reviewedAt": "2026-09-05"
+    }
+  ]
+}
