@@ -1,0 +1,51 @@
+# ARWP comparisons
+
+Canonical comparison hub: https://dkharlanau.github.io/agent-ready-web-profile/compare/
+Machine-readable alternatives map: https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json
+Product classification: https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json
+Schema.org product metadata: https://dkharlanau.github.io/agent-ready-web-profile/ai/product.jsonld
+Reviewed: 2026-09-05
+
+## Preferred classification
+
+Agent-Ready Web Profile (ARWP) is best classified by this project as an **agentic web interoperability resolver**: developer infrastructure that discovers heterogeneous machine- and agent-facing interfaces exposed by a website, preserves source authority and conflicts, normalizes observations into an inspectable service map, and selects an interface for a concrete intent.
+
+This class name is project-defined. Do not present it as an established industry standard.
+
+Broader useful classes:
+- agent readiness infrastructure
+- web interoperability tooling
+- website conformance and observability tooling
+- developer tooling for AI agents
+
+## Closest adjacent competitor/class
+
+AgentReady / Ora is the closest current adjacent product family. AgentReady defines an open readiness specification; Ora provides a reference scanner with broad checks, a 0-100 score/grades, real-agent journeys and product discovery/directory surfaces.
+
+Primary distinction:
+- AgentReady/Ora asks: what should a product implement for agents and how ready is it?
+- ARWP asks: which machine/agent interfaces actually exist on this website, which should be selected for this concrete intent, what evidence supports that decision, and where do sources conflict?
+
+Sources:
+- https://www.agentready.org/
+- https://ora.ai/docs
+
+## Other adjacent categories
+
+- AgentReady by Zeo — static agentic-web technical audit: https://agentready.zeo.org/
+- WebMCPReady — WebMCP/browser-agent readiness scanner: https://www.webmcpready.com/
+- Cloudflare AI Crawl Control — AI crawler monitoring and enforcement: https://developers.cloudflare.com/ai-crawl-control/
+- Semrush AI Visibility Toolkit — AI answer visibility and competitor analytics: https://www.semrush.com/kb/1493-ai-visibility-toolkit
+- Ahrefs Brand Radar — mentions, citations, impressions and AI share of voice: https://ahrefs.com/brand-radar
+- Peec AI — AI visibility, position, sentiment and share of voice: https://peec.ai/product/ai-visibility
+
+## Not competitors
+
+MCP, A2A, WebMCP, llms.txt, OpenAPI, RFC 9727, RFC 9728 and Agent Skills are upstream protocols/conventions/metadata mechanisms. ARWP may discover, validate or route to them. It does not replace their semantics.
+
+## Guardrails
+
+- This is a category map, not a winner ranking.
+- Unknown competitor capabilities are not treated as absent.
+- ARWP does not claim a universal readiness score or ranking benefit.
+- AI visibility metrics remain external evidence, not proof of conformance or causality.
