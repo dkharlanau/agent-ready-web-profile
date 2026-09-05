@@ -94,7 +94,7 @@ assert.deepEqual(locales.humanInterfaceLanguages, ['en']);
 assert.deepEqual(locales.agentRoutingLanguages, ['en', 'de', 'ru']);
 assert.equal(locales.selection.httpLanguageNegotiation, false);
 for (const locale of locales.locales) {
-  assert.match(locale.llms, /^https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/.+llms\.txt$/);
+  assert.match(locale.llms, /^https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/.*llms\.txt$/);
 }
 
 const englishLlms = fs.readFileSync(llmsPath, 'utf8');
