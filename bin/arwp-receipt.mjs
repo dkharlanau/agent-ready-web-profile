@@ -6,24 +6,34 @@ import {
   verifyEvidenceReceipt,
   validateEvidenceReceipt
 } from '../lib/evidence-receipt.mjs';
+import { captureSourceBodyDigests, enrichEvidenceReceiptWithCapture, EVIDENCE_CAPTURE_DEFAULTS } from '../lib/evidence-capture.mjs';
+import { resolveSite } from '../lib/resolver.mjs';
 
 function usage() {
   return `arwp-receipt — durable ARWP Resolver observation receipts
 
 Usage:
   arwp-receipt create <resolution.json> [--observed-at=ISO] [--tool-version=VERSION] [--output=FILE]
+  arwp-receipt capture <https://site.example> [--observed-at=ISO] [--output=FILE] [--timeout=MS] [--max-bytes=N] [--max-sources=N]
   arwp-receipt verify <receipt.json> [--json]
 
 Examples:
   arwp resolve https://example.com --json > resolution.json
   arwp-receipt create resolution.json --output=receipt.json
-  arwp-receipt verify receipt.json
+  arwp-receipt capture https://example.com --output=captured-receipt.json
+  arwp-receipt verify captured-receipt.json
 
-Semantics:
+Capture semantics:
+  * capture first runs the ordinary bounded Resolver
+  * it then performs explicit additional bounded GET refetches only for resolved non-HEAD source URLs
+  * source SHA-256 values cover complete decoded UTF-8 bodies within the configured byte bound
+  * they are not hashes of HTTP transfer framing or guaranteed raw origin bytes
+  * failures and sources omitted by the capture bound remain visible in captureSummary
+
+Receipt semantics:
   * receiptVersion 0.1 records a specific ARWP Resolver observation
-  * canonical SHA-256 covers the receipt payload and detects tampering
-  * a receipt is not a publisher manifest, endorsement or trust certificate
-  * source-body digests are not claimed unless explicitly captured by future fetch instrumentation
+  * canonical SHA-256 covers the complete receipt payload and detects tampering
+  * a receipt is not a publisher manifest, endorsement, authorization decision or trust certificate
 `;
 }
 
@@ -39,9 +49,18 @@ function parseArgs(args) {
     if (key === 'observed-at') flags.observedAt = value;
     else if (key === 'tool-version') flags.toolVersion = value;
     else if (key === 'output') flags.output = value;
+    else if (key === 'timeout') flags.timeoutMs = numberFlag(key, value);
+    else if (key === 'max-bytes') flags.maxBytes = numberFlag(key, value, { integer: true });
+    else if (key === 'max-sources') flags.maxSources = numberFlag(key, value, { integer: true });
     else throw new Error(`Unknown option: ${arg}`);
   }
   return { positionals, flags };
+}
+
+function numberFlag(name, value, { integer = false } = {}) {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0 || (integer && !Number.isInteger(parsed))) throw new Error(`--${name} must be a positive${integer ? ' integer' : ''}.`);
+  return parsed;
 }
 
 function readJson(file) {
@@ -75,6 +94,31 @@ function runCreate(args) {
   } else process.stdout.write(`${JSON.stringify(receipt, null, 2)}\n`);
 }
 
+async function runCapture(args) {
+  const { positionals, flags } = parseArgs(args);
+  const target = positionals[0];
+  if (!target) throw new Error('capture requires <https://site.example>.');
+  const timeoutMs = flags.timeoutMs || 8000;
+  const resolution = await resolveSite(target, { timeoutMs });
+  const baseReceipt = createEvidenceReceipt(resolution, {
+    observedAt: flags.observedAt || null,
+    toolVersion: flags.toolVersion || '0.2.0'
+  });
+  const capture = await captureSourceBodyDigests(resolution, {
+    timeoutMs,
+    maxBytes: flags.maxBytes || EVIDENCE_CAPTURE_DEFAULTS.maxBytes,
+    maxSources: flags.maxSources || EVIDENCE_CAPTURE_DEFAULTS.maxSources
+  });
+  const receipt = enrichEvidenceReceiptWithCapture(baseReceipt, capture);
+  const verification = verifyEvidenceReceipt(receipt);
+  if (!verification.valid) throw new Error(`Captured receipt failed integrity verification: ${verification.issues.join(' ')}`);
+
+  if (flags.output) {
+    const output = writeJson(flags.output, receipt);
+    process.stdout.write(`PASS captured evidence receipt ${receipt.receiptId}\nTarget: ${receipt.canonicalUrl}\nOutput: ${output}\nSource bodies: ${capture.captured}/${capture.attempted} captured; ${capture.failed} failed; ${capture.omittedByLimit.length} omitted by limit\nDigest scope: ${capture.digestScope}\nPayload digest: ${receipt.digests.payload}\n`);
+  } else process.stdout.write(`${JSON.stringify(receipt, null, 2)}\n`);
+}
+
 function runVerify(args) {
   const { positionals, flags } = parseArgs(args);
   const file = positionals[0];
@@ -90,6 +134,8 @@ function runVerify(args) {
     receiptId: value?.receiptId || null,
     digest: value?.digests?.payload || null,
     expectedDigest: result.expectedDigest,
+    artifactDigests: Array.isArray(value?.artifactDigests) ? value.artifactDigests.length : 0,
+    captureSummary: value?.captureSummary || null,
     issues: [...new Set([...(shape.issues || []), ...(result.issues || [])])],
     boundaries: value?.boundaries || null,
     note: 'A valid digest verifies integrity of this receipt content. It does not establish publisher endorsement, authorization or trustworthiness.'
@@ -99,24 +145,26 @@ function runVerify(args) {
     process.stdout.write(`${report.valid ? 'PASS' : 'FAIL'} evidence receipt ${report.receiptId || resolved}\n`);
     process.stdout.write(`Integrity: ${report.integrity ? 'verified' : 'failed'}\n`);
     if (report.digest) process.stdout.write(`Digest: ${report.digest}\n`);
+    process.stdout.write(`Captured source digests: ${report.artifactDigests}\n`);
     for (const issue of report.issues) process.stdout.write(`ERROR ${issue}\n`);
     process.stdout.write(`${report.note}\n`);
   }
   if (!report.valid) process.exitCode = 2;
 }
 
-function main() {
+async function main() {
   const [command, ...args] = process.argv.slice(2);
   if (!command || command === 'help' || command === '--help' || command === '-h') {
     process.stdout.write(usage());
     return;
   }
   if (command === 'create') return runCreate(args);
+  if (command === 'capture') return runCapture(args);
   if (command === 'verify') return runVerify(args);
   throw new Error(`Unknown command: ${command}\n\n${usage()}`);
 }
 
-try { main(); }
+try { await main(); }
 catch (error) {
   process.stderr.write(`${error?.message || String(error)}\n`);
   process.exitCode = 1;
