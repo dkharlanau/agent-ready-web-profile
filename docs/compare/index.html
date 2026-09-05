@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Source-backed comparison of ARWP with AgentReady/Ora, Agent Ready, agent-readiness scanners, ARD, WebMCP tools, crawler controls and AI visibility platforms. Defines ARWP's product class and boundaries.">
+  <meta name="description" content="Source-backed comparison of ARWP with AgentReady/Ora, Agent Ready, agent-readiness scanners, ARD v0.91, WebMCP tools, crawler controls and AI visibility platforms. Defines ARWP's product class and boundaries.">
   <meta name="theme-color" content="#10120f">
   <meta property="og:title" content="ARWP vs alternatives — agent readiness, ARD, interoperability and AI visibility tools">
   <meta property="og:description" content="A category map showing what ARWP is, its closest alternatives, adjacent products, and where ARD, MCP, A2A and WebMCP fit.">
@@ -37,7 +37,7 @@
     "about":[
       {"@type":"SoftwareApplication","name":"Agent-Ready Web Profile","alternateName":"ARWP","applicationCategory":"DeveloperApplication","applicationSubCategory":"Agentic Web Interoperability Resolver","url":"https://dkharlanau.github.io/agent-ready-web-profile/"},
       {"@type":"DefinedTerm","name":"agentic web interoperability resolver","description":"Project-defined class for tooling that discovers heterogeneous website interfaces, preserves provenance and conflicts, and routes concrete intents to suitable interfaces."},
-      {"@type":"Thing","name":"Agentic Resource Discovery"},
+      {"@type":"Thing","name":"Agentic Resource Discovery","version":"0.91"},
       {"@type":"Thing","name":"AgentReady"}
     ],
     "keywords":["ARWP alternatives","AgentReady vs ARWP","ARD vs ARWP","Agent Ready scanner","agent readability","agent readiness scanner","agentic web interoperability","AI visibility tools","WebMCP readiness","AI crawler control"]
@@ -48,10 +48,10 @@
   <main class="compare-shell">
     <a class="back" href="../">← ARWP home</a>
     <header class="compare-hero">
-      <p class="eyebrow">Category map · research revision r2 · 5 Sep 2026</p>
+      <p class="eyebrow">Category map · research revision r3 · 5 Sep 2026</p>
       <h1>ARWP vs alternatives.</h1>
-      <p class="lede"><strong>Short answer:</strong> ARWP is best classified as an <strong>agentic web interoperability resolver</strong>: it discovers heterogeneous website interfaces, preserves where each observation came from, keeps conflicts visible, and selects an interface for a concrete intent. Agent-readiness/readability scanners are the closest product category. ARD is the closest upstream discovery architecture. AI visibility platforms, crawler controls and individual protocols solve different parts of the stack.</p>
-      <div class="direct-links"><a href="./arwp-vs-agentready.html">ARWP vs AgentReady / Ora</a><a href="./arwp-vs-ard.html">ARWP vs ARD</a><a href="./alternatives.json">Machine-readable landscape</a></div>
+      <p class="lede"><strong>Short answer:</strong> ARWP is best classified as an <strong>agentic web interoperability resolver</strong>: it discovers heterogeneous website interfaces, preserves where each observation came from, keeps conflicts visible, and selects an interface for a concrete intent. Agent-readiness/readability scanners are the closest product category. ARD v0.91 is the closest upstream discovery architecture. AI visibility platforms, crawler controls and individual protocols solve different parts of the stack.</p>
+      <div class="direct-links"><a href="./arwp-vs-agentready.html">ARWP vs AgentReady / Ora</a><a href="./arwp-vs-ard.html">ARWP vs ARD v0.91</a><a href="./alternatives.json">Machine-readable landscape</a></div>
     </header>
 
     <section class="class-card" id="class">
@@ -100,15 +100,16 @@
 
     <section aria-labelledby="ard">
       <p class="eyebrow">Closest upstream architecture</p><h2 id="ard">ARD overlaps with ARWP — but should become input, not a format war.</h2>
-      <p><strong>Agentic Resource Discovery (ARD)</strong> v0.9 is a draft federated discovery/search specification for agentic resources. It defines <code>/.well-known/ai-catalog.json</code>, typed artifact entries, registry search/federation and multiple advertisement paths. ARWP already queried ai-catalog, and the new research pass reclassifies that behavior as partial ARD support.</p>
-      <div class="table-wrap"><table class="comparison"><thead><tr><th>Dimension</th><th>ARD</th><th>ARWP</th></tr></thead><tbody>
-        <tr><td>Unit</td><td>Agentic resources across catalogs/registries</td><td>Website plus heterogeneous discovery surfaces</td></tr>
-        <tr><td>Primary mode</td><td>Search-first, cross-domain and federated</td><td>Site-first resolve/explain/plan</td></tr>
-        <tr><td>Core publisher artifact</td><td><code>/.well-known/ai-catalog.json</code></td><td>Optional <code>/ai/site-profile.json</code>; Resolver works without it</td></tr>
-        <tr><td>Conflict/provenance decision</td><td>Trust/provenance hooks in resource records</td><td>Source authority and contradictions are first-class resolver output</td></tr>
-        <tr><td>Relationship</td><td>Upstream discovery specification</td><td>Consumer/interoperability resolver</td></tr>
+      <p><strong>Agentic Resource Discovery (ARD)</strong> v0.91 is the current proposal reviewed on 5 September 2026. Its canonical static discovery path is <code>/.well-known/ard.json</code>, its current relation is <code>rel="ard"</code>, and its description layer uses JSON-LD/namespaces. It also supports registries/search/federation and other advertisement routes. The older <code>/.well-known/ai-catalog.json</code> and <code>rel="ai-catalog"</code> remain predecessor compatibility signals.</p>
+      <div class="table-wrap"><table class="comparison"><thead><tr><th>Dimension</th><th>ARD v0.91</th><th>ARWP</th></tr></thead><tbody>
+        <tr><td>Unit</td><td>Agentic resources across manifests/registries</td><td>Website plus heterogeneous discovery surfaces</td></tr>
+        <tr><td>Primary mode</td><td>Resource/catalog/search-first, cross-domain and federated</td><td>Site-first resolve/explain/plan</td></tr>
+        <tr><td>Core publisher artifact</td><td><code>/.well-known/ard.json</code> with JSON-LD description</td><td>Optional <code>/ai/site-profile.json</code>; Resolver works without it</td></tr>
+        <tr><td>Compatibility</td><td>Previous ai-catalog discovery may be retained during transition</td><td>Resolver checks canonical ARD first and falls back to predecessor ai-catalog when needed</td></tr>
+        <tr><td>Conflict/provenance decision</td><td>Structured resource/trust metadata</td><td>Source authority and contradictions are first-class resolver output</td></tr>
+        <tr><td>Relationship</td><td>Upstream discovery specification/proposal</td><td>Consumer/interoperability resolver</td></tr>
       </tbody></table></div>
-      <p class="boundary"><strong>Decision:</strong> extend ARWP's ARD adapter instead of inventing competing catalog fields. <a href="./arwp-vs-ard.html">Dedicated ARWP vs ARD comparison →</a></p>
+      <p class="boundary"><strong>Decision:</strong> extend ARWP's ARD adapter instead of inventing competing catalog fields. Current support includes canonical <code>ard.json</code>, HTTP <code>rel=ard</code>, predecessor fallback and conservative typed evidence. Full in-page JSON-LD namespace interpretation and bounded registry federation remain explicit next work. <a href="./arwp-vs-ard.html">Dedicated ARWP vs ARD comparison →</a></p>
     </section>
 
     <section aria-labelledby="protocols">
@@ -122,7 +123,7 @@
       <p class="eyebrow">Choose by the decision</p><h2 id="choose">Which class do you need?</h2>
       <div class="table-wrap"><table class="comparison"><thead><tr><th>If you need to…</th><th>Best-matching class</th></tr></thead><tbody>
         <tr><td>Know which interface an agent should use on one website and why</td><td><strong>ARWP / interoperability resolver</strong></td></tr>
-        <tr><td>Search/federate published agentic resources across domains</td><td>ARD registry/catalog ecosystem</td></tr>
+        <tr><td>Search/federate published agentic resources across domains</td><td>ARD registry/manifest ecosystem</td></tr>
         <tr><td>Grade end-to-end agent readiness/readability</td><td>AgentReady/Ora or Agent Ready-style scanner</td></tr>
         <tr><td>Audit whether WebMCP/browser tools exist and work</td><td>WebMCP-focused scanner/runtime tooling</td></tr>
         <tr><td>Allow, block or monetize AI crawler traffic</td><td>Edge crawler governance such as Cloudflare AI Crawl Control</td></tr>
@@ -144,15 +145,15 @@
 
     <section aria-labelledby="method">
       <p class="eyebrow">Comparison policy</p><h2 id="method">No winner table and no invented capability gaps.</h2>
-      <p>Competitor facts on this page are limited to capabilities publicly described by the products or their documentation as reviewed on 5 September 2026. If a capability is not stated publicly, ARWP does not treat that as proof that it is absent. Draft protocols remain drafts. The page is a category map, not a ranking.</p>
+      <p>Competitor facts on this page are limited to capabilities publicly described by the products or their documentation as reviewed on 5 September 2026. If a capability is not stated publicly, ARWP does not treat that as proof that it is absent. Draft/proposal mechanisms remain at their documented maturity. The page is a category map, not a ranking.</p>
       <ul class="source-list">
         <li><a href="https://www.agentready.org/">AgentReady specification</a>, <a href="https://ora.ai/docs">Ora documentation</a> and <a href="https://ora.ai/blog/is-agentic-with-vercel">Ora/Vercel is-agentic announcement</a></li>
         <li><a href="https://agent-ready.dev/methodology">Agent Ready methodology</a>, <a href="https://agent-ready.dev/state-of-agent-readability/2026">frozen 2026 corpus</a> and <a href="https://agent-ready.dev/state-of-agent-readability">live corpus</a></li>
         <li><a href="https://vercel.com/kb/guide/agent-readability-spec">Vercel Agent Readability guide</a></li>
-        <li><a href="https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/">Google ARD announcement</a> and <a href="https://github.com/ards-project/ard-spec/blob/main/spec/ard.md">ARD v0.9 draft</a></li>
+        <li><a href="https://agenticresourcediscovery.org/spec/">ARD v0.91 specification</a>, <a href="https://github.com/ards-project/ard-spec">ARD repository</a> and <a href="https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/">Google ARD announcement</a></li>
         <li><a href="https://agentready.zeo.org/">AgentReady by Zeo</a></li><li><a href="https://www.webmcpready.com/">WebMCPReady</a></li><li><a href="https://developers.cloudflare.com/ai-crawl-control/">Cloudflare AI Crawl Control</a></li><li><a href="https://www.semrush.com/kb/1493-ai-visibility-toolkit">Semrush AI Visibility Toolkit</a></li><li><a href="https://ahrefs.com/brand-radar">Ahrefs Brand Radar</a></li><li><a href="https://peec.ai/product/ai-visibility">Peec AI visibility</a></li>
       </ul>
-      <p class="updated">Reviewed 2026-09-05 · Research revision r2 · Source of record: <a href="./alternatives.json">alternatives.json</a> · Historical snapshots: <a href="./history/index.json">history</a> · Covered explanatory text: CC BY 4.0.</p>
+      <p class="updated">Reviewed 2026-09-05 · Research revision r3 · Source of record: <a href="./alternatives.json">alternatives.json</a> · Historical snapshots: <a href="./history/index.json">history</a> · Covered explanatory text: CC BY 4.0.</p>
     </section>
   </main>
 </body>
