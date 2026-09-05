@@ -1,4 +1,11 @@
 {
   "version": "0.1",
-  "records": {}
+  "records": {
+    "2026-09-05-arwp-reference-12386fb8103d.receipt.json": {
+      "title": "ARWP public reference observation — 2026-09-05",
+      "evidenceClass": "project-reference",
+      "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33993174047",
+      "notes": "Owner-controlled public reference-site observation captured by GitHub Actions. It is interoperability evidence, not independent adoption evidence."
+    }
+  }
 }
