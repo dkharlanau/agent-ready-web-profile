@@ -5,7 +5,7 @@
 
 **Resolve how a website can actually be used by agents.**
 
-Modern websites may expose HTML, Markdown negotiation, HTTP `Link` discovery, `llms.txt`, datasets, retrieval indexes, OpenAPI, Agent Skills, MCP, A2A, OAuth resource metadata, `agents.json` and other surfaces. A client should not need site-specific code — or guess which manifest is authoritative — to understand them.
+Modern websites may expose HTML, Markdown negotiation, HTTP `Link` discovery, `llms.txt`, datasets, retrieval indexes, OpenAPI, ARD catalogs, Agent Skills, MCP, A2A, OAuth resource metadata, `agents.json` and other surfaces. A client should not need site-specific code — or guess which manifest is authoritative — to understand them.
 
 ARWP now has two complementary parts:
 
@@ -14,7 +14,13 @@ ARWP now has two complementary parts:
 
 The profile is useful. It is **not** required to use the Resolver and it is not intended to replace upstream standards.
 
-Public project site: https://dkharlanau.github.io/agent-ready-web-profile/
+ARWP's preferred product class is **agentic web interoperability resolver**. That label is project-defined, not claimed as an established industry standard. AgentReady/Ora is the closest adjacent readiness product family; Agentic Resource Discovery (ARD) is the closest upstream discovery architecture and should be consumed rather than replaced.
+
+- Public project site: https://dkharlanau.github.io/agent-ready-web-profile/
+- Category and competitor map: https://dkharlanau.github.io/agent-ready-web-profile/compare/
+- ARWP vs AgentReady / Ora: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-agentready.html
+- ARWP vs ARD: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html
+- Machine-readable product class: https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json
 
 Profile contract: **experimental v0.1**. Released validator/Action: [`v0.1.0`](https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0). The current `main` toolchain is version **0.2.0**; npm publication remains an external release gate and must not be described as complete until it succeeds.
 
@@ -40,7 +46,7 @@ A site can legitimately publish several independent discovery surfaces:
                             |
       +---------------------+----------------------+
       |          |          |         |            |
-    HTTP       ARWP      agents.*   API/A2A    Agent Skills
+    HTTP       ARWP      agents.*   API/A2A     ARD / Skills
  Link/HTML    profile                metadata
       |                     |                      |
       +-------------- MCP / OAuth / web ---------+
@@ -96,9 +102,10 @@ The Resolver currently normalizes evidence from:
 - RFC 9728 root Protected Resource Metadata;
 - A2A `/.well-known/agent-card.json`;
 - Agent Skills `/.well-known/agent-skills/index.json`;
-- experimental MCP AI Catalog / Server Card discovery.
+- ARD-style `/.well-known/ai-catalog.json` evidence, including conservative typed references for MCP Server Cards, A2A Agent Cards, Skills, nested catalogs, registries and other artifacts;
+- MCP Server Cards referenced by compatible catalog/site evidence.
 
-Experimental/community sources remain explicitly labeled. Static metadata is never silently upgraded into runtime conformance.
+ARD support is intentionally partial: ARWP preserves catalog evidence but does not yet perform ARD federated registry `POST /search`, recursively crawl nested catalogs, or turn an A2A Agent Card URL into a callable endpoint. Static metadata is never silently upgraded into runtime conformance.
 
 ## Source authority stays visible
 
@@ -107,8 +114,9 @@ Experimental/community sources remain explicitly labeled. Static metadata is nev
 | `ietf-standard` | RFC 8288 / RFC 9727 / RFC 9728 |
 | `upstream-standard` | A2A Agent Card |
 | `upstream-convention` | Agent Skills discovery |
+| `multivendor-open-draft` | ARD ai-catalog evidence |
 | `community-convention` | agents.txt / agents.json |
-| `experimental-upstream` | current MCP Server Card / AI Catalog work |
+| `experimental-upstream` | current MCP Server Card work |
 | `project-profile` | ARWP publisher profile |
 | `observed-web` | directly observed HTML/HTTP evidence |
 
@@ -368,9 +376,12 @@ Do not create ARWP-native replacements for:
 - RFC 8288 Web Linking;
 - RFC 9727 API Catalog;
 - RFC 9728 Protected Resource Metadata;
+- Agentic Resource Discovery (ARD) catalogs/registries when they can represent the discovery problem;
 - A2A Agent Cards;
 - MCP runtime discovery / Server Cards;
 - Agent Skills;
+- Web Bot Auth identity;
+- AIPREF/content-usage preference mechanisms;
 - crawler AI-use preferences;
 - payment/commerce protocols.
 
@@ -406,20 +417,26 @@ consider an ARWP-specific extension
 
 ## Development direction
 
-The North Star is:
+The primary North Star is:
 
 > **How many external sites can ARWP correctly resolve and route without site-specific integration code?**
+
+A second operational North Star is:
+
+> **How reliably can ARWP keep a website discoverable, citable and agent-operable as search platforms and agent-web standards change?**
 
 Immediate work is increasingly external/evidence-driven:
 
 1. improve Resolver decision quality against the frozen 20-site corpus without site-specific exceptions;
-2. make ambiguity, rejected evidence and scope decisions explicit;
-3. revalidate MCP and A2A behavior against independent implementations;
-4. publish/install the 0.2.x Resolver package and MCP Registry artifact;
-5. deploy the bounded public HTTPS discovery service;
-6. add durable assertion and evidence-receipt workflows;
-7. obtain independent downstream consumers before treating owner-controlled examples as adoption;
-8. decide from evidence whether the ARWP Profile contract needs another version at all.
+2. expand ARD compatibility from conservative ai-catalog evidence to reviewed multi-artifact and registry interoperability without lowering decision quality;
+3. make ambiguity, rejected evidence and scope decisions explicit;
+4. revalidate MCP and A2A behavior against independent implementations;
+5. publish/install the 0.2.x Resolver package and MCP Registry artifact;
+6. deploy the bounded public HTTPS discovery service;
+7. add durable assertion and evidence-receipt workflows;
+8. obtain independent downstream consumers before treating owner-controlled examples as adoption;
+9. grow the empirical corpus and browser-agent evaluation loop before making broad readiness/effectiveness claims;
+10. decide from evidence whether the ARWP Profile contract needs another version at all.
 
 See [`ROADMAP.md`](ROADMAP.md).
 
@@ -431,6 +448,7 @@ See [`ROADMAP.md`](ROADMAP.md).
 - [`lib/scanner.mjs`](lib/scanner.mjs) — bounded website scanner.
 - [`lib/resolver.mjs`](lib/resolver.mjs) — multi-standard resolver and planner.
 - [`lib/resolver-core.mjs`](lib/resolver-core.mjs) — pure normalization and planning policy used by the network-facing resolver.
+- [`lib/resolver-adapters.mjs`](lib/resolver-adapters.mjs) — protocol/catalog normalization, including conservative ARD ai-catalog evidence.
 - [`lib/http-discovery.mjs`](lib/http-discovery.mjs) — RFC 8288 / Markdown HTTP discovery.
 - [`lib/mcp-runtime.mjs`](lib/mcp-runtime.mjs) — opt-in MCP runtime reconciliation.
 - [`lib/a2a-signature.mjs`](lib/a2a-signature.mjs) — bounded A2A signature verification.
@@ -442,11 +460,13 @@ See [`ROADMAP.md`](ROADMAP.md).
 - [`gateway/`](gateway/) — generic ARWP-profile MCP gateway.
 - [`router/`](router/) — profile and Resolver-backed federation.
 - [`monitor/`](monitor/) — monitor runner/config schema.
-- [`registry/`](registry/) — initial public ARWP Directory.
+- [`registry/`](registry/) — initial public ARWP Directory and product classification.
 - [`benchmarks/`](benchmarks/) — synthetic and independent evidence tooling.
 - [`docs/RESOLVER.md`](docs/RESOLVER.md) — Resolver model.
 - [`docs/BENCHMARK.md`](docs/BENCHMARK.md) — benchmark rules.
 - [`docs/README-R4.md`](docs/README-R4.md) — decision-quality and external-trust engineering notes.
+- [`docs/observatory/`](docs/observatory/) — dated upstream protocol/discovery landscape.
+- [`docs/compare/`](docs/compare/) — canonical competitor/category comparisons.
 - [`ROADMAP.md`](ROADMAP.md) — evidence-driven roadmap.
 
 ## License
