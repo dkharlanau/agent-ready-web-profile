@@ -1,0 +1,34 @@
+name: Evidence Receipt explorer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/evidence/receipts/**'
+      - 'scripts/evidence-receipt-explorer.mjs'
+      - 'lib/evidence-receipt.mjs'
+      - '.github/workflows/evidence-receipt-explorer.yml'
+  pull_request:
+    paths:
+      - 'docs/evidence/receipts/**'
+      - 'scripts/evidence-receipt-explorer.mjs'
+      - 'lib/evidence-receipt.mjs'
+      - '.github/workflows/evidence-receipt-explorer.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  explorer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Build receipt explorer from immutable records
+        run: node scripts/evidence-receipt-explorer.mjs
+      - name: Verify explorer outputs are reproducible
+        run: |
+          git diff --exit-code -- docs/evidence/receipts
+          test -z "$(git status --porcelain --untracked-files=all docs/evidence/receipts | grep -v 'records/catalog.json' || true)"
