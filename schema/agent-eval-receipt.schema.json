@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/agent-eval-receipt.schema.json",
+  "title": "ARWP Browser Agent Evaluation Receipt v0.1",
+  "description": "A reproducible receipt for comparing a human-UI agent path with an explicitly exposed browser tool path such as WebMCP without claiming that static metadata proves runtime behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "site", "capturedAt", "runtime", "tasks", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "capturedAt": { "type": "string", "format": "date-time" },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["browser", "webmcpState"],
+      "properties": {
+        "browser": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "browserVersion": { "type": "string", "maxLength": 100 },
+        "runner": { "type": "string", "maxLength": 200 },
+        "webmcpState": { "type": "string", "enum": ["observed-runtime", "not-supported", "not-assessed"] },
+        "notes": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "variants"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$", "maxLength": 120 },
+          "description": { "type": "string", "minLength": 5, "maxLength": 500 },
+          "variants": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode", "success", "interactions", "retries", "toolCalls"],
+              "properties": {
+                "mode": { "type": "string", "enum": ["ui", "webmcp"] },
+                "success": { "type": "boolean" },
+                "interactions": { "type": "integer", "minimum": 0 },
+                "retries": { "type": "integer", "minimum": 0 },
+                "toolCalls": { "type": "integer", "minimum": 0 },
+                "durationMs": { "type": "number", "minimum": 0 },
+                "errors": { "type": "array", "maxItems": 20, "items": { "type": "string", "maxLength": 500 } },
+                "evidence": { "type": "string", "format": "uri" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sameTaskDefinition", "noSecretsInReceipt", "runtimeEvidenceIsNotTrust"],
+      "properties": {
+        "sameTaskDefinition": { "const": true },
+        "noSecretsInReceipt": { "const": true },
+        "runtimeEvidenceIsNotTrust": { "const": true }
+      }
+    }
+  }
+}
