@@ -11,6 +11,13 @@ version: "0.1.0"
 date-released: "2026-08-25"
 license: "Apache-2.0"
 keywords:
+  - "agentic web interoperability resolver"
+  - "agentic web resolver"
+  - "agent readiness"
+  - "web interoperability"
+  - "website conformance"
+  - "website observability"
+  - "ai search"
   - "agentic ai"
   - "ai agents"
   - "model context protocol"
@@ -23,10 +30,12 @@ keywords:
   - "json schema"
   - "rag"
   - "ai web"
-  - "agentic web resolver"
 abstract: >-
-  An experimental interoperability resolver, profile contract and reference implementation
-  for discovering and routing the human-readable, machine-readable, retrieval, API, tool,
-  agent and trust surfaces exposed by public websites. ARWP preserves discovery provenance,
-  reports conflicts, distinguishes static declarations from runtime evidence and maintains
-  evidence-backed benchmarks, protocol observations and citation-oriented project surfaces.
+  An experimental agentic web interoperability resolver, profile contract and reference
+  implementation for discovering and routing the human-readable, machine-readable,
+  retrieval, API, tool, agent and trust surfaces exposed by public websites. ARWP
+  preserves discovery provenance, reports conflicts, distinguishes static declarations
+  from runtime evidence and maintains evidence-backed benchmarks, protocol observations,
+  search/agent conformance rules and citation-oriented project surfaces. The preferred
+  product class "agentic web interoperability resolver" is project-defined rather than
+  claimed as an established industry standard.
