@@ -12,13 +12,16 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [Resolver model](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): How heterogeneous discovery evidence is normalized, compared and routed.
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimental ARWP profile contract. Treat this English document as normative for project-defined semantics.
 - [Conformance](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): What ARWP conformance does and does not assert.
-- [AI Search & Citation Profile](https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md): Reusable implementation profile for original research, answer pages, evidence, comparisons, observability and citation-oriented discovery surfaces.
+- [AI Search & Citation Profile](https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md): Reusable implementation profile for original research, answer pages, evidence, comparisons, observability, open reuse assets and citation-oriented discovery surfaces.
+- [Open Media & AI Reuse Pack](https://dkharlanau.github.io/agent-ready-web-profile/media/): Permission-free reuse guidance for designated ARWP-authored media/research assets under CC BY 4.0.
 
 ## Machine-readable project surfaces
 
 - [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and project extensions.
 - [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and P0/P1/P2 citation-surface plan for ARWP itself.
 - [AI Search Profile schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json): Validation contract for copying the same implementation profile to other sites.
+- [Open reuse rights](https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json): Machine-readable scope, CC BY 4.0 license, permitted press/news/AI uses and attribution guidance for covered material.
+- [Press facts](https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json): Canonical project facts, boilerplate, versions and source links for press/news/automated citation workflows.
 - [Locale manifest](https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json): Available agent-routing languages, canonical language and fallback policy.
 - [Public directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Reference/adoption registry exposed as JSON.
 - [Directory statistics](https://dkharlanau.github.io/agent-ready-web-profile/stats.json): Aggregate public declaration counts without visitor tracking.
@@ -26,7 +29,7 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 
 ## Reusable AI search / citation program
 
-ARWP now carries a non-normative profile that can be applied to other sites. It tracks implementation status rather than producing a readiness score.
+ARWP carries a non-normative profile that can be applied to other sites. It tracks implementation status rather than producing a readiness score.
 
 The profile covers:
 
@@ -40,11 +43,33 @@ The profile covers:
 - reproducible experiments about which surfaces agents actually fetch;
 - a machine-readable knowledge graph;
 - reusable citation visuals;
+- an open press/media reuse pack with machine-readable rights;
 - external distribution with one canonical source;
 - AI/search citation and referral measurement;
 - localization and product history.
 
 `planned` means intended work and must not be interpreted as a deployed capability. `active` means the surface is currently published or operated.
+
+## Open media & AI reuse
+
+Designated ARWP-authored press facts, research visuals and media assets can be reused without requesting separate permission when they are covered by the media rights manifest.
+
+Current policy for covered material:
+
+- license: CC BY 4.0;
+- press/news/editorial/commercial reuse: permitted;
+- adaptation/translation: permitted;
+- AI search indexing: permitted;
+- AI/ML training and dataset inclusion: permitted;
+- embeddings and retrieval-augmented generation: permitted;
+- summarization: permitted;
+- attribution: required for public reuse; preserve the canonical source URL in dataset/model cards, provenance metadata, citations, output attribution or another reasonable attribution surface when the workflow provides one.
+
+Preferred credit:
+
+`Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/`
+
+Software remains Apache-2.0. Third-party logos, trademarks, screenshots, quotations and other third-party material are not included unless separately marked.
 
 ## Language routes
 
@@ -84,4 +109,4 @@ AI Search & Citation Profile version: 0.1 (non-normative project profile).
 
 ## Boundaries
 
-ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, or proof that an undeclared runtime capability exists. The AI Search & Citation Profile is likewise not a guarantee of inclusion, citation or ranking in any search/AI product. Prefer observed and protocol-native evidence, publish original useful material, preserve source authority and negative results, and keep planned surfaces distinct from active ones. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.
+ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, or proof that an undeclared runtime capability exists. The AI Search & Citation Profile is likewise not a guarantee of inclusion, citation or ranking in any search/AI product. Machine-readable reuse permission applies only to material explicitly covered by the rights manifest and does not override third-party rights. Prefer observed and protocol-native evidence, publish original useful material, preserve source authority and negative results, and keep planned surfaces distinct from active ones. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.
