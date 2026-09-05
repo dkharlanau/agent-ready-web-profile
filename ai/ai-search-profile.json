@@ -75,6 +75,16 @@
       "status": "planned",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json",
       "mediaType": "application/json"
+    },
+    "pressKit": {
+      "status": "active",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
+      "mediaType": "text/html"
+    },
+    "reuseRights": {
+      "status": "active",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
+      "mediaType": "application/json"
     }
   },
   "modules": {
@@ -148,6 +158,16 @@
       "priority": "P2",
       "description": "Publish reusable research charts and diagrams with source notes, accessible alt text, stable URLs and explicit reuse terms.",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/research/assets/"
+    },
+    "openReuseAssets": {
+      "status": "active",
+      "priority": "P1",
+      "description": "Publish a permission-free press/media pack under CC BY 4.0 with machine-readable reuse rights, canonical press facts, attribution guidance and explicit AI/ML training, indexing, embedding and RAG reuse permission for covered materials.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
+      "machineReadable": [
+        "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
+        "https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json"
+      ]
     },
     "externalDistribution": {
       "status": "planned",
