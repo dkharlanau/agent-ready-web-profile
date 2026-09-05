@@ -1,2 +1,152 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="ARWP comparison pages explain practical distinctions between discovery, metadata, runtime evidence and agent-web protocols."><title>ARWP Comparisons</title><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/compare/"><link rel="describedby" type="application/json" href="../citation-index.json"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/"><link rel="stylesheet" href="../citation.css"></head><body><header class="topbar"><a class="brand" href="../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="../answers/">Answers</a><a href="../concepts/">Concepts</a><a class="nav-cta" href="../media/">Reuse</a></nav></header><main class="cite-main shell"><section class="cite-hero"><p class="eyebrow">Canonical comparisons</p><h1>Compare mechanics, not marketing labels.</h1><p class="cite-lead">These pages separate concepts that are easy to conflate: declaration vs observation, protocol role vs discovery surface, and interface presence vs actionability.</p><div class="cite-meta"><span>Reviewed 2026-09-05</span><span>CC BY 4.0</span></div></section><section class="term-grid" style="margin-top:38px"><a class="term-card" href="./static-metadata-vs-runtime-evidence.html"><strong>Static metadata vs runtime evidence</strong><span>What an advertised interface proves versus what live protocol/browser observation proves.</span></a><a class="term-card" href="../answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html"><strong>MCP vs A2A vs WebMCP vs llms.txt</strong><span>Four different layers of the agentic web.</span></a></section><p class="reuse-note">Reuse: CC BY 4.0. Preferred source: https://dkharlanau.github.io/agent-ready-web-profile/compare/</p></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Source-backed comparison of ARWP with AgentReady/Ora, agent-readiness scanners, WebMCP tools, Cloudflare AI Crawl Control, Semrush, Ahrefs and Peec AI. Defines ARWP's product class and boundaries.">
+  <meta name="theme-color" content="#10120f">
+  <meta property="og:title" content="ARWP vs alternatives — agent readiness, interoperability and AI visibility tools">
+  <meta property="og:description" content="A category map showing what ARWP is, its closest alternatives, adjacent products, and where protocols such as MCP, A2A and WebMCP fit.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://dkharlanau.github.io/agent-ready-web-profile/compare/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ARWP vs alternatives">
+  <meta name="twitter:description" content="Agentic web interoperability resolver vs readiness scanners, crawler controls and AI visibility platforms.">
+  <title>ARWP vs alternatives — agent readiness, interoperability and AI visibility tools</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/compare/">
+  <link rel="describedby" type="application/json" href="./alternatives.json">
+  <link rel="describedby" type="application/json" href="../ai/product-classification.json">
+  <link rel="describedby" type="application/ld+json" href="../ai/product.jsonld">
+  <link rel="describedby" type="text/plain" href="./llms.txt">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="../arwp.css">
+  <style>
+    .compare-shell{max-width:1180px;margin:0 auto;padding:56px 24px 88px}.compare-hero{max-width:900px;margin-bottom:42px}.compare-hero h1{font-size:clamp(2.25rem,5vw,4.8rem);line-height:.98;margin:.18em 0}.lede{font-size:1.15rem;line-height:1.65;max-width:850px}.class-card{border:1px solid var(--line,#d9ddd7);border-radius:18px;padding:24px;margin:30px 0;background:rgba(255,255,255,.55)}.class-card strong{font-size:1.25rem}.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.pill-row span{border:1px solid currentColor;border-radius:999px;padding:5px 10px;font-size:.82rem}.table-wrap{overflow-x:auto;margin:24px 0 44px}.comparison{width:100%;border-collapse:collapse;min-width:940px}.comparison th,.comparison td{border-bottom:1px solid var(--line,#d9ddd7);padding:14px 12px;text-align:left;vertical-align:top}.comparison th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}.comparison td:first-child{font-weight:700;min-width:180px}.yes{font-weight:700}.lane-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px;margin:24px 0 48px}.lane{border:1px solid var(--line,#d9ddd7);border-radius:16px;padding:20px}.lane h3{margin-top:4px}.source-list li{margin:.55rem 0}.boundary{border-left:4px solid currentColor;padding:4px 0 4px 18px;margin:28px 0}.updated{font-size:.85rem;opacity:.7}.back{display:inline-block;margin-bottom:24px}
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"ARWP vs alternatives — agent readiness, interoperability and AI visibility tools",
+    "description":"Source-backed category comparison defining ARWP as a project-defined agentic web interoperability resolver and distinguishing it from readiness scanners, crawler controls, AI visibility platforms and upstream protocols.",
+    "datePublished":"2026-09-05",
+    "dateModified":"2026-09-05",
+    "inLanguage":"en",
+    "mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/compare/",
+    "author":{"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"},
+    "about":[
+      {"@type":"SoftwareApplication","name":"Agent-Ready Web Profile","alternateName":"ARWP","applicationCategory":"DeveloperApplication","applicationSubCategory":"Agentic Web Interoperability Resolver","url":"https://dkharlanau.github.io/agent-ready-web-profile/"},
+      {"@type":"DefinedTerm","name":"agentic web interoperability resolver","description":"Project-defined class for tooling that discovers heterogeneous website interfaces, preserves provenance and conflicts, and routes concrete intents to suitable interfaces."}
+    ],
+    "keywords":["ARWP alternatives","AgentReady vs ARWP","agent readiness scanner","agentic web interoperability","AI visibility tools","WebMCP readiness","AI crawler control"]
+  }
+  </script>
+</head>
+<body>
+  <main class="compare-shell">
+    <a class="back" href="../">← ARWP home</a>
+    <header class="compare-hero">
+      <p class="eyebrow">Category map · reviewed 5 Sep 2026</p>
+      <h1>ARWP vs alternatives.</h1>
+      <p class="lede"><strong>Short answer:</strong> ARWP is best classified as an <strong>agentic web interoperability resolver</strong>: it discovers heterogeneous website interfaces, preserves where each observation came from, keeps conflicts visible, and selects an interface for a concrete intent. Agent-readiness standards and scanners are the closest adjacent category. AI visibility platforms, crawler controls and individual protocols solve different parts of the stack.</p>
+    </header>
+
+    <section class="class-card" id="class">
+      <p class="eyebrow">Preferred product class</p>
+      <strong>Agentic web interoperability resolver</strong>
+      <p>This class name is project-defined, not presented as an industry standard. It is intentionally narrower than “agent readiness platform” and broader than any one protocol such as MCP, A2A, WebMCP or <code>llms.txt</code>.</p>
+      <div class="pill-row" aria-label="Broader classes">
+        <span>agent readiness infrastructure</span><span>web interoperability tooling</span><span>website conformance & observability</span><span>AI-agent developer tooling</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="closest">
+      <p class="eyebrow">Closest adjacent product</p>
+      <h2 id="closest">ARWP vs AgentReady / Ora</h2>
+      <p><a href="https://www.agentready.org/">AgentReady</a> is an open specification for what products should implement to be usable by agents. <a href="https://ora.ai/docs">Ora</a> is a reference implementation with 100+ checks, scored scans, real-agent journeys, discovery and a directory. That makes it the closest current comparison.</p>
+      <div class="table-wrap">
+        <table class="comparison">
+          <thead><tr><th>Dimension</th><th>ARWP</th><th>AgentReady / Ora</th></tr></thead>
+          <tbody>
+            <tr><td>Primary question</td><td>Which interface should software use for this website and intent, and what evidence supports the choice?</td><td>What should a product implement for agents, and how ready is it in practice?</td></tr>
+            <tr><td>Normative readiness standard</td><td>No. ARWP tracks upstream rules and has its own optional publisher profile, but avoids declaring one universal readiness definition.</td><td class="yes">Yes. AgentReady is explicitly a readiness specification.</td></tr>
+            <tr><td>Single readiness score</td><td>No universal score by design.</td><td class="yes">Ora implementation: 0–100 score and letter grade.</td></tr>
+            <tr><td>Multi-protocol discovery</td><td class="yes">Core function.</td><td class="yes">Broad protocol/check coverage.</td></tr>
+            <tr><td>Normalized service map</td><td class="yes">Core resolver output.</td><td>Not described as the primary public output.</td></tr>
+            <tr><td>Source authority & conflicts</td><td class="yes">Explicitly preserved in resolver output.</td><td>Not assumed absent; it is not the main public positioning of the standard/scanner.</td></tr>
+            <tr><td>Intent routing</td><td class="yes">Planner selects interfaces for read/search/structured/tools/agent intents.</td><td class="yes">Ora exposes intent-based product discovery and agent journeys, but for a different product-selection/readiness purpose.</td></tr>
+            <tr><td>Real-agent task journeys</td><td>Contract exists; full browser/runtime runner remains evidence-gated work.</td><td class="yes">Available in Ora Deep Scan / journeys.</td></tr>
+            <tr><td>Primary moat</td><td>Interoperability decision quality, provenance, conflicts and resolver evidence.</td><td>Readiness standard, population-scale scanning, score, journeys and directory.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="boundary"><strong>Interpretation:</strong> there is meaningful overlap, but the products optimize different decisions. AgentReady/Ora asks “how ready is this product for agents?” ARWP asks “what agent-facing interfaces actually exist, which one should be used for this intent, and why?”</p>
+    </section>
+
+    <section aria-labelledby="landscape">
+      <p class="eyebrow">Landscape</p>
+      <h2 id="landscape">Other adjacent classes</h2>
+      <div class="lane-grid">
+        <article class="lane"><p class="eyebrow">Technical audit</p><h3>AgentReady by Zeo</h3><p>Compact agentic-web audit across crawling, parsing, API and security/protocol checks. Closest overlap is static diagnostics; ARWP adds normalization, evidence authority, conflicts and routing.</p><p><a href="https://agentready.zeo.org/">Source</a></p></article>
+        <article class="lane"><p class="eyebrow">Browser action</p><h3>WebMCPReady</h3><p>Focused on WebMCP/browser-agent readiness and live page tools. ARWP treats WebMCP as one runtime surface inside a broader content/API/MCP/A2A/skills/auth map.</p><p><a href="https://www.webmcpready.com/">Source</a></p></article>
+        <article class="lane"><p class="eyebrow">Crawler governance</p><h3>Cloudflare AI Crawl Control</h3><p>Monitors AI crawler traffic and can enforce allow/block policies at the edge. ARWP audits crawler policy but does not operate a WAF or enforce access.</p><p><a href="https://developers.cloudflare.com/ai-crawl-control/">Source</a></p></article>
+        <article class="lane"><p class="eyebrow">AI visibility</p><h3>Semrush AI Visibility</h3><p>Tracks mentions, competitor positioning, prompts and crawlability for AI search. ARWP treats visibility as external measurement evidence, not the core product.</p><p><a href="https://www.semrush.com/kb/1493-ai-visibility-toolkit">Source</a></p></article>
+        <article class="lane"><p class="eyebrow">AI visibility</p><h3>Ahrefs Brand Radar</h3><p>Measures mentions, citations, impressions and AI share of voice across large prompt sets. Complementary to ARWP's site-interface and conformance evidence.</p><p><a href="https://ahrefs.com/brand-radar">Source</a></p></article>
+        <article class="lane"><p class="eyebrow">AI visibility</p><h3>Peec AI</h3><p>Tracks visibility, average position, sentiment, share of voice, prompts and cited sources. It measures AI representation; ARWP resolves site-owned interfaces.</p><p><a href="https://peec.ai/product/ai-visibility">Source</a></p></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="protocols">
+      <p class="eyebrow">Do not confuse product and protocol</p>
+      <h2 id="protocols">MCP, A2A, WebMCP and llms.txt are not ARWP competitors.</h2>
+      <p>They are upstream mechanisms that can become resolver evidence. MCP is a tool/context protocol; A2A describes agent-to-agent discovery and interaction; WebMCP exposes structured browser-page tools; <code>llms.txt</code> is a text-oriented content-routing convention. OpenAPI, RFC 9727, RFC 9728 and Agent Skills likewise keep their own semantics. ARWP's job is to discover and reconcile these surfaces, not replace them.</p>
+      <p>See the <a href="../answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html">protocol role comparison</a> and the <a href="../observatory/">Protocol Observatory</a>.</p>
+    </section>
+
+    <section aria-labelledby="choose">
+      <p class="eyebrow">Choose by the decision</p>
+      <h2 id="choose">Which class do you need?</h2>
+      <div class="table-wrap">
+        <table class="comparison">
+          <thead><tr><th>If you need to…</th><th>Best-matching class</th></tr></thead>
+          <tbody>
+            <tr><td>Know which interface an agent should use on one website and why</td><td><strong>ARWP / interoperability resolver</strong></td></tr>
+            <tr><td>Grade end-to-end agent readiness across a broad requirements model</td><td>AgentReady / Ora-style readiness standard and scanner</td></tr>
+            <tr><td>Audit whether WebMCP/browser tools exist and work</td><td>WebMCP-focused scanner/runtime tooling</td></tr>
+            <tr><td>Allow, block or monetize AI crawler traffic</td><td>Edge crawler governance such as Cloudflare AI Crawl Control</td></tr>
+            <tr><td>Track whether ChatGPT/Gemini/AI search mention or cite a brand</td><td>AI visibility platforms such as Semrush, Ahrefs or Peec</td></tr>
+            <tr><td>Expose callable tools to an agent</td><td>MCP/WebMCP/API implementation — an upstream runtime, not a resolver</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="machine">
+      <p class="eyebrow">Machine-readable classification</p>
+      <h2 id="machine">Agents do not have to infer the category from prose.</h2>
+      <ul>
+        <li><a href="../ai/product-classification.json"><code>/ai/product-classification.json</code></a> — explicit preferred class, broader classes, negative boundaries and adjacent classes.</li>
+        <li><a href="../ai/product.jsonld"><code>/ai/product.jsonld</code></a> — Schema.org SoftwareApplication/WebApplication metadata.</li>
+        <li><a href="./alternatives.json"><code>/compare/alternatives.json</code></a> — source-backed competitor/category map.</li>
+        <li><a href="./llms.txt"><code>/compare/llms.txt</code></a> — compact agent-routing summary.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="method">
+      <p class="eyebrow">Comparison policy</p>
+      <h2 id="method">No winner table and no invented capability gaps.</h2>
+      <p>Competitor facts on this page are limited to capabilities publicly described by the products or their documentation as reviewed on 5 September 2026. If a capability is not stated publicly, ARWP does not treat that as proof that it is absent. The page is a category map, not a ranking.</p>
+      <ul class="source-list">
+        <li><a href="https://www.agentready.org/">AgentReady specification</a> and <a href="https://ora.ai/docs">Ora documentation</a></li>
+        <li><a href="https://agentready.zeo.org/">AgentReady by Zeo</a></li>
+        <li><a href="https://www.webmcpready.com/">WebMCPReady</a></li>
+        <li><a href="https://developers.cloudflare.com/ai-crawl-control/">Cloudflare AI Crawl Control documentation</a></li>
+        <li><a href="https://www.semrush.com/kb/1493-ai-visibility-toolkit">Semrush AI Visibility Toolkit documentation</a></li>
+        <li><a href="https://ahrefs.com/brand-radar">Ahrefs Brand Radar</a></li>
+        <li><a href="https://peec.ai/product/ai-visibility">Peec AI visibility documentation</a></li>
+      </ul>
+      <p class="updated">Reviewed 2026-09-05 · Source of record: <a href="./alternatives.json">alternatives.json</a> · Covered explanatory text: CC BY 4.0.</p>
+    </section>
+  </main>
+</body>
+</html>
