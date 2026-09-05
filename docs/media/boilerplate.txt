@@ -1,0 +1,15 @@
+SHORT
+
+Agent-Ready Web Profile (ARWP) is an open-source interoperability resolver for discovering and normalizing the web, data, API and agent-facing interfaces a public website exposes.
+
+STANDARD
+
+Agent-Ready Web Profile (ARWP) is an open-source experimental interoperability project for discovering how public websites can actually be used by software and AI agents. The ARWP Resolver normalizes ordinary web discovery, llms.txt, structured data, APIs and agent-facing protocols while preserving source evidence and conflicts, then plans an interface for a concrete intent such as reading, searching, structured access, tools or agent interaction.
+
+STATUS
+
+ARWP is in active, pre-stable development. The profile contract is version 0.1 and the current repository toolchain is 0.2.0. The latest tagged release is v0.1.0.
+
+SOURCE
+
+https://dkharlanau.github.io/agent-ready-web-profile/
