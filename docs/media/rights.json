@@ -51,6 +51,10 @@
     "allowed": true,
     "markChanges": true
   },
+  "technicalAccess": {
+    "licenseIsNotCrawlerAccess": true,
+    "rule": "This permission describes copyright reuse of covered material. Automated fetchers must still follow the site's applicable robots/crawler access policy and other technical access controls."
+  },
   "notes": [
     "No separate email or written permission is required for covered material.",
     "Reuse must not imply endorsement, certification or partnership by ARWP.",
