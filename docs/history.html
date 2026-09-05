@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A factual timeline of Agent-Ready Web Profile development, releases, architecture changes and current project status.">
+  <meta name="theme-color" content="#10120f">
+  <meta property="og:title" content="ARWP Product History">
+  <meta property="og:description" content="Development timeline, release milestones and current maturity status for Agent-Ready Web Profile.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dkharlanau.github.io/agent-ready-web-profile/history.html">
+  <title>ARWP Product History</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/history.html">
+  <link rel="describedby" type="application/json" href="./history.json">
+  <link rel="describedby" type="text/plain" href="./llms.txt" hreflang="en">
+  <link rel="describedby" type="text/plain" href="./de/llms.txt" hreflang="de">
+  <link rel="describedby" type="text/plain" href="./ru/llms.txt" hreflang="ru">
+  <link rel="stylesheet" href="./arwp.css">
+  <link rel="stylesheet" href="./history.css">
+</head>
+<body class="history-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="ARWP home"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
+    <nav aria-label="History navigation">
+      <a href="./">Resolver</a>
+      <a href="./RESOLVER.md">Model</a>
+      <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md">Roadmap</a>
+      <a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main" class="history-main">
+    <section class="history-hero shell">
+      <div>
+        <p class="eyebrow">Product record · facts over theatre</p>
+        <h1>ARWP product history.</h1>
+        <p class="history-lead">A compact, source-backed record of how Agent-Ready Web Profile has evolved: what shipped, what changed direction, what evidence changed the product, and what is still active.</p>
+      </div>
+      <aside class="history-status-card" aria-label="Current project status">
+        <span class="lifecycle-pill active">Active development</span>
+        <strong>Pre-stable, evidence-driven</strong>
+        <p>The project is actively maintained. Profile contract <code>0.1</code> remains experimental; the toolchain is being developed on the <code>0.2.x</code> line.</p>
+      </aside>
+    </section>
+
+    <section class="history-facts shell" aria-label="Project facts">
+      <div class="history-fact"><span>Status</span><strong>Active</strong></div>
+      <div class="history-fact"><span>Maturity</span><strong>Pre-stable</strong></div>
+      <div class="history-fact"><span>Started</span><strong>25 Aug 2026</strong></div>
+      <div class="history-fact"><span>Versions</span><strong>Profile 0.1 · Toolchain 0.2.0</strong></div>
+    </section>
+
+    <section class="history-layout shell" aria-labelledby="timeline-title">
+      <div class="history-intro">
+        <p class="eyebrow">Timeline</p>
+        <h2 id="timeline-title">What changed, and why it matters.</h2>
+        <p>This page is not a replacement for release notes. It is the readable product-level history; detailed implementation changes remain in the changelog and commit history.</p>
+        <p><a href="./history.json">Machine-readable history JSON →</a></p>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <time class="timeline-date" datetime="2026-08-25">25 Aug 2026</time>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-status completed">Completed</span><span class="timeline-kind">Origin</span></div>
+            <h3>Project started</h3>
+            <p>ARWP began as a small, inspectable discovery profile for websites exposing web, data, retrieval and agent-facing interfaces. The core principle was to describe real public capabilities rather than planned integrations.</p>
+            <div class="timeline-evidence"><a href="https://github.com/dkharlanau/agent-ready-web-profile">Repository</a></div>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <time class="timeline-date" datetime="2026-08-25">25 Aug 2026</time>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-status released">Released</span><span class="timeline-kind">v0.1.0</span></div>
+            <h3>Experimental baseline released</h3>
+            <p>The first tagged release shipped the profile contract, JSON Schema, validator, live verifier, reusable GitHub Action and MCP gateway foundations. It established an immutable compatibility point while keeping the project explicitly experimental.</p>
+            <div class="timeline-evidence"><a href="https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0">Release v0.1.0</a></div>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <time class="timeline-date" datetime="2026-08-25">25 Aug 2026</time>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-status completed">Completed</span><span class="timeline-kind">Architecture</span></div>
+            <h3>From “another manifest” to an evidence-backed resolver</h3>
+            <p>The project changed direction on its first day. Instead of asking every website to adopt one new manifest, ARWP became a resolver across existing discovery mechanisms, preserving source authority, conflicts and fallbacks.</p>
+            <div class="timeline-evidence"><a href="https://github.com/dkharlanau/agent-ready-web-profile/commit/6bd2a83e14a0ebf980d9c80f89dd045fb00b5549">Resolver implementation</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/commit/49fd42a5bd08303f6b84274b7732f11c81276163">Public repositioning</a></div>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <time class="timeline-date" datetime="2026-08-28">28 Aug 2026</time>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-status completed">Completed</span><span class="timeline-kind">Evidence</span></div>
+            <h3>Negative results became product input</h3>
+            <p>Benchmark truth, live publisher drift and experiments were separated. A no-gain A2A scope experiment was retained as evidence rather than quietly turned into a new rule. That established a useful governance constraint: new fields need observed failures.</p>
+            <div class="timeline-evidence"><a href="https://github.com/dkharlanau/agent-ready-web-profile/commit/ae53d6305e686047b7cd3c2c2af81b9e9cc6360b">Retained negative result</a></div>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <time class="timeline-date" datetime="2026-08-31">31 Aug 2026</time>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-status completed">Completed</span><span class="timeline-kind">Adoption</span></div>
+            <h3>Consumer onboarding was hardened</h3>
+            <p>A tested local onboarding path and package-boundary fixes made it possible to evaluate ARWP from a clean consumer setup instead of only from the project repository.</p>
+            <div class="timeline-evidence"><a href="https://github.com/dkharlanau/agent-ready-web-profile/commit/23eec0b928d8b99e8487ba7f09a93bc8dffbb4ef">Onboarding path</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/commit/5425ee7b5dc0157dab4f225bd4512cda6d663be9">Package boundary fix</a></div>
+          </div>
+        </article>
+
+        <article class="timeline-item active">
+          <time class="timeline-date" datetime="2026-09-05">05 Sep 2026</time>
+          <div class="timeline-content">
+            <div class="timeline-meta"><span class="timeline-status active">Active</span><span class="timeline-kind">Product</span></div>
+            <h3>History and multilingual agent discovery</h3>
+            <p>ARWP now exposes this product record and a machine-readable history, plus canonical English and localized German/Russian <code>llms.txt</code> routing surfaces. The translations help multilingual discovery without forking the normative specification: technical contracts, field names and protocol semantics remain canonical in English.</p>
+            <div class="timeline-evidence"><a href="./history.json">History JSON</a><a href="./ai/locales.json">Locale manifest</a><a href="./LOCALIZATION.md">Localization policy</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="history-sources shell" aria-labelledby="sources-title">
+      <p class="eyebrow">Sources of truth</p>
+      <h2 id="sources-title">History is useful only when it stays verifiable.</h2>
+      <div class="history-source-grid">
+        <div class="history-source"><strong><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CHANGELOG.md">Changelog</a></strong><span>Detailed release and implementation changes.</span></div>
+        <div class="history-source"><strong><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md">Roadmap</a></strong><span>Implemented, external and evidence-gated work.</span></div>
+        <div class="history-source"><strong><a href="https://github.com/dkharlanau/agent-ready-web-profile/releases">Releases</a></strong><span>Tagged compatibility points and release notes.</span></div>
+        <div class="history-source"><strong><a href="https://github.com/dkharlanau/agent-ready-web-profile/commits/main">Commits</a></strong><span>The detailed technical record behind this summary.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Product History</div>
+    <div class="footer-links"><a href="./">Resolver</a><a href="./history.json">History JSON</a><a href="./LOCALIZATION.md">Agent locales</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></div>
+    <p>Active development · Pre-stable · Started 25 Aug 2026 · Apache-2.0</p>
+  </footer>
+</body>
+</html>
