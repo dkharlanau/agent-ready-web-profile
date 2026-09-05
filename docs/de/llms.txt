@@ -1,0 +1,51 @@
+# Agent-Ready Web Profile (ARWP)
+
+> ARWP ist ein evidenzbasierter Interoperabilitäts-Resolver. Er ermittelt, wie eine öffentliche Website von Software und KI-Agenten tatsächlich genutzt werden kann: über normale Web-Discovery, llms.txt, strukturierte Daten, APIs, Agent Skills, MCP, A2A und weitere nachweisbare Schnittstellen.
+
+Dies ist die deutschsprachige Routing-Oberfläche für Agenten.
+Die kanonische technische Sprache des Projekts ist Englisch (`en`).
+Diese Datei übersetzt Discovery-Kontext, Beschreibungen und Suchbegriffe. Protokollnamen, JSON-Felder, CLI-Befehle und normative technische Verträge werden nicht übersetzt.
+
+## Einstieg
+
+- [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): Öffentliche Projektseite und Resolver-Workflow.
+- [Resolver-Modell, Englisch](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): Normalisierung, Vergleich und Routing heterogener Discovery-Evidenz.
+- [Profilspezifikation, Englisch](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimenteller ARWP-Profilvertrag. Für projektspezifische Semantik ist dieses englische Dokument maßgeblich.
+- [Conformance, Englisch](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): Was ARWP-Konformität aussagt und was nicht.
+
+## Maschinenlesbare Oberflächen
+
+- [ARWP Self-Profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Projektidentität, Datenoberflächen, MCP-Server, Trust-Metadaten und Lokalisierungs-Extension.
+- [Locale-Manifest](https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json): Verfügbare Agent-Sprachen, kanonische Sprache und Fallback-Regeln.
+- [Öffentliches Directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Referenz-/Adoptionsverzeichnis als JSON.
+- [Produkt-Historie als JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): Maschinenlesbare Entwicklungszeitleiste und aktueller Projektstatus.
+
+## Sprachrouten
+
+- [English / canonical](https://dkharlanau.github.io/agent-ready-web-profile/llms.txt): Kanonische englische Routing-Oberfläche.
+- [Deutsch](https://dkharlanau.github.io/agent-ready-web-profile/de/llms.txt): Diese Datei.
+- [Русский](https://dkharlanau.github.io/agent-ready-web-profile/ru/llms.txt): Russische Routing-Oberfläche.
+- [Lokalisierungsrichtlinie, Englisch](https://dkharlanau.github.io/agent-ready-web-profile/LOCALIZATION.md): Sprachwahl, Fallback und Regeln für technische Identifikatoren.
+
+## Produktstatus und Entwicklung
+
+- [Produkt-Historie](https://dkharlanau.github.io/agent-ready-web-profile/history.html): Lesbare Zeitleiste mit Releases, abgeschlossenen und aktiven Meilensteinen.
+- [Changelog](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CHANGELOG.md): Detaillierte Implementierungshistorie.
+- [Roadmap](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md): Implementierte, externe und evidenzgebundene Arbeit.
+- [Releases](https://github.com/dkharlanau/agent-ready-web-profile/releases): Getaggte Kompatibilitätspunkte.
+
+Aktueller Status: aktive Entwicklung, pre-stable.
+Projektstart: 2026-08-25.
+Letztes getaggtes Release: v0.1.0.
+Aktuelle Toolchain-Version im Repository: 0.2.0.
+Profilvertrag: 0.1.
+
+## Evaluation und Evidenz
+
+- [Benchmark-Methodik, Englisch](https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.md): Evaluationsansatz und Evidenzgrenzen.
+- [Standards Map, Englisch](https://dkharlanau.github.io/agent-ready-web-profile/STANDARDS-MAP.md): Beziehung von ARWP zu bestehenden Standards und Konventionen.
+- [Adoption Guidance, Englisch](https://dkharlanau.github.io/agent-ready-web-profile/ADOPTION.md): Konservativer Adoptionspfad für bestehende Websites.
+
+## Grenzen
+
+ARWP ist kein SEO-Ranking-Mechanismus, keine Berechtigungsschicht und kein Ersatz für MCP, A2A, OAuth oder OpenAPI. Eine Deklaration beweist keine nicht verifizierte Runtime-Fähigkeit. Bevorzuge beobachtete und protokoll-native Evidenz. Falls eine lokalisierte Beschreibung von der kanonischen englischen technischen Dokumentation abweicht, ist für projektspezifische Semantik die englische Dokumentation maßgeblich.

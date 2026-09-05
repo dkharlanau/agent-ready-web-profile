@@ -1,0 +1,60 @@
+# Agent-Ready Web Profile (ARWP)
+
+> ARWP is an evidence-backed interoperability resolver for discovering how a public website can actually be used by software and AI agents across ordinary web discovery, llms.txt, structured data, APIs, Agent Skills, MCP, A2A and related surfaces.
+
+This is the canonical English agent-routing surface for the ARWP project.
+Canonical technical language: English (`en`).
+Localized routing surfaces are available in German (`de`) and Russian (`ru`). They translate discovery context and search vocabulary, not protocol identifiers or normative technical contracts.
+
+## Start here
+
+- [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): Public project page and resolver workflow.
+- [Resolver model](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): How heterogeneous discovery evidence is normalized, compared and routed.
+- [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimental ARWP profile contract. Treat this English document as normative for project-defined semantics.
+- [Conformance](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): What ARWP conformance does and does not assert.
+
+## Machine-readable project surfaces
+
+- [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and localization extension.
+- [Locale manifest](https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json): Available agent-routing languages, canonical language and fallback policy.
+- [Public directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Reference/adoption registry exposed as JSON.
+- [Directory statistics](https://dkharlanau.github.io/agent-ready-web-profile/stats.json): Aggregate public declaration counts without visitor tracking.
+- [Product history JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): Machine-readable development timeline and current project status.
+
+## Language routes
+
+- [English / canonical](https://dkharlanau.github.io/agent-ready-web-profile/llms.txt): Canonical agent-routing text.
+- [Deutsch](https://dkharlanau.github.io/agent-ready-web-profile/de/llms.txt): German discovery and routing descriptions; technical contracts remain canonical in English.
+- [Русский](https://dkharlanau.github.io/agent-ready-web-profile/ru/llms.txt): Russian discovery and routing descriptions; technical contracts remain canonical in English.
+- [Localization policy](https://dkharlanau.github.io/agent-ready-web-profile/LOCALIZATION.md): Language selection, fallback and identifier-preservation rules.
+
+## Product status and history
+
+- [Product history](https://dkharlanau.github.io/agent-ready-web-profile/history.html): Human-readable product timeline with release, completed and active milestones.
+- [Changelog](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CHANGELOG.md): Detailed implementation history.
+- [Roadmap](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md): Implemented, external and evidence-gated work.
+- [Releases](https://github.com/dkharlanau/agent-ready-web-profile/releases): Tagged compatibility points.
+
+Current status: active development, pre-stable.
+Project start: 2026-08-25.
+Latest tagged release: v0.1.0.
+Current repository toolchain version: 0.2.0.
+Profile contract version: 0.1.
+
+## Evaluation and evidence
+
+- [Benchmark methodology](https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.md): Resolver evaluation approach and evidence boundaries.
+- [Standards map](https://dkharlanau.github.io/agent-ready-web-profile/STANDARDS-MAP.md): Relationship between ARWP and upstream standards/conventions.
+- [Adoption guidance](https://dkharlanau.github.io/agent-ready-web-profile/ADOPTION.md): Conservative adoption path for existing websites.
+
+## Repository and implementation
+
+- [GitHub repository](https://github.com/dkharlanau/agent-ready-web-profile): Source, issues, CI and full documentation.
+- [JSON Schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json): ARWP profile schema.
+- [Resolver source](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/resolver): Resolver MCP implementation.
+- [Gateway source](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/gateway): Generic read-only MCP gateway.
+- [Federated router](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router): Multi-site routing and federation work.
+
+## Boundaries
+
+ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, or proof that an undeclared runtime capability exists. Prefer observed and protocol-native evidence. Preserve source authority and conflicts. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.

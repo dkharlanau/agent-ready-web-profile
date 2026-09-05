@@ -1,0 +1,51 @@
+# Agent-Ready Web Profile (ARWP)
+
+> ARWP — это resolver для интероперабельности, который по проверяемым сигналам определяет, как публичный сайт реально может использоваться программами и AI-агентами: через обычный веб, llms.txt, структурированные данные, API, Agent Skills, MCP, A2A и другие явно доступные интерфейсы.
+
+Это русскоязычная навигационная поверхность для AI-агентов.
+Канонический технический язык проекта — английский (`en`).
+Здесь локализуются контекст поиска, описания и навигация. Названия протоколов, JSON-поля, CLI-команды и нормативные технические контракты не переводятся.
+
+## С чего начать
+
+- [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): публичная страница проекта и основной workflow resolver.
+- [Модель resolver, английский](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): как нормализуются, сравниваются и выбираются разные discovery-сигналы.
+- [Спецификация профиля, английский](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): экспериментальный контракт ARWP Profile. Для семантики, определяемой самим проектом, этот английский документ является каноническим.
+- [Conformance, английский](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): что означает и чего не означает соответствие ARWP.
+
+## Машиночитаемые поверхности
+
+- [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): идентичность проекта, данные, MCP-серверы, trust metadata и расширение локализации.
+- [Манифест локалей](https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json): доступные языки для агентов, канонический язык и fallback-политика.
+- [Публичный directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): реестр reference/adoption сайтов в JSON.
+- [История продукта в JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): машиночитаемая хронология развития и текущий статус проекта.
+
+## Языковые маршруты
+
+- [English / canonical](https://dkharlanau.github.io/agent-ready-web-profile/llms.txt): каноническая англоязычная поверхность для агентов.
+- [Deutsch](https://dkharlanau.github.io/agent-ready-web-profile/de/llms.txt): немецкая навигационная поверхность.
+- [Русский](https://dkharlanau.github.io/agent-ready-web-profile/ru/llms.txt): этот файл.
+- [Политика локализации, английский](https://dkharlanau.github.io/agent-ready-web-profile/LOCALIZATION.md): правила выбора языка, fallback и сохранения технических идентификаторов.
+
+## Статус и история продукта
+
+- [История продукта](https://dkharlanau.github.io/agent-ready-web-profile/history.html): читаемая хронология с релизами, завершёнными и активными этапами.
+- [Changelog](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CHANGELOG.md): детальная история изменений реализации.
+- [Roadmap](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md): реализованные, внешние и evidence-gated задачи.
+- [Releases](https://github.com/dkharlanau/agent-ready-web-profile/releases): зафиксированные точки совместимости.
+
+Текущий статус: активная разработка, pre-stable.
+Старт проекта: 2026-08-25.
+Последний tagged release: v0.1.0.
+Текущая версия toolchain в репозитории: 0.2.0.
+Версия Profile contract: 0.1.
+
+## Оценка и доказательства
+
+- [Методика benchmark, английский](https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.md): как измеряется полезность resolver и где проходят границы выводов.
+- [Standards map, английский](https://dkharlanau.github.io/agent-ready-web-profile/STANDARDS-MAP.md): отношения ARWP с существующими стандартами и конвенциями.
+- [Adoption guidance, английский](https://dkharlanau.github.io/agent-ready-web-profile/ADOPTION.md): консервативный путь подключения существующего сайта.
+
+## Границы
+
+ARWP не является механизмом SEO-ранжирования, слоем разрешений или заменой MCP, A2A, OAuth и OpenAPI. Декларация не доказывает непроверенную runtime-возможность. Предпочтение отдаётся наблюдаемым и protocol-native сигналам. Если локализованное описание расходится с канонической англоязычной технической документацией, для проектной семантики используется английская документация.

@@ -5,7 +5,10 @@
   "name": "Agent-Ready Web Profile",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "description": "Public interoperability resolver, profile contract, directory and tooling project for discovering, normalizing and routing a website's real web, data, retrieval, agent and trust interfaces.",
-  "languages": ["en"],
+  "languages": ["en", "de", "ru"],
+  "web": {
+    "llms": "https://dkharlanau.github.io/agent-ready-web-profile/llms.txt"
+  },
   "data": {
     "catalog": "https://dkharlanau.github.io/agent-ready-web-profile/directory.json",
     "schemas": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
@@ -23,6 +26,20 @@
         "mediaType": "application/json",
         "role": "other",
         "description": "Aggregate capability counts derived only from public directory declarations, without visitor tracking."
+      },
+      {
+        "name": "ARWP agent locale manifest",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Experimental project-level catalog of canonical and localized llms.txt routing surfaces for agents."
+      },
+      {
+        "name": "ARWP product history",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/history.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Machine-readable product timeline, release milestones and current maturity status."
       }
     ]
   },
@@ -55,5 +72,16 @@
     "license": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/LICENSE",
     "citation": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/CITATION.cff",
     "reviewPolicy": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CONTRIBUTING.md"
+  },
+  "extensions": {
+    "io.github.dkharlanau/localized-llms": {
+      "version": "0.1",
+      "status": "experimental",
+      "defaultLanguage": "en",
+      "fallbackLanguage": "en",
+      "humanInterfaceLanguages": ["en"],
+      "agentRoutingLanguages": ["en", "de", "ru"],
+      "manifest": "https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"
+    }
   }
 }
