@@ -1,0 +1,12 @@
+{
+  "version": "0.1",
+  "historyPolicy": "Published Search and Agent ruleset snapshots are immutable evidence of what ARWP recommended at a point in time. Later source changes create a new snapshot; historical rules are not silently rewritten.",
+  "snapshots": [
+    {
+      "date": "2026-09-05",
+      "ruleset": "2026.09",
+      "rules": 15,
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/recommendations/history/2026-09-05.json"
+    }
+  ]
+}
