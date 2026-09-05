@@ -30,6 +30,12 @@ jobs:
           node --check research/state-of-agentic-web/build.mjs
       - name: Rebuild committed research outputs
         run: node research/state-of-agentic-web/build.mjs
+      - name: Upload generated research outputs
+        uses: actions/upload-artifact@v6
+        with:
+          name: state-of-agentic-web-generated
+          path: docs/research/state-of-agentic-web/
+          if-no-files-found: error
       - name: Verify release outputs are reproducible
         run: |
           git diff --exit-code -- docs/research/state-of-agentic-web
