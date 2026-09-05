@@ -68,6 +68,7 @@ assert.match(html, /href="\.\/de\/llms\.txt" hreflang="de"/);
 assert.match(html, /href="\.\/ru\/llms\.txt" hreflang="ru"/);
 assert.match(html, /href="\.\/history\.html"/);
 assert.match(html, /href="\.\/LOCALIZATION\.md"/);
+assert.match(html, /href="\.\/trust\/">Trust<\/a>/);
 assert.doesNotMatch(html, /single\s+AI[- ]readiness\s+score/i, 'site must not market an opaque AI-readiness score');
 
 const directory = JSON.parse(fs.readFileSync(directoryPath, 'utf8'));
@@ -109,6 +110,8 @@ const russianLlms = fs.readFileSync(ruLlmsPath, 'utf8');
 assert.match(englishLlms, /canonical English agent-routing surface/i);
 assert.match(englishLlms, /Product history JSON/i);
 assert.match(englishLlms, /Open media & AI reuse/i);
+assert.match(englishLlms, /ARWP Trust Center/i);
+assert.match(englishLlms, /no DOI is currently claimed/i);
 assert.match(englishLlms, /AI\/ML training and dataset inclusion: permitted/i);
 assert.match(germanLlms, /kanonische technische Sprache/i);
 assert.match(russianLlms, /канонический технический язык/i);
@@ -178,9 +181,12 @@ assert.match(scorecardWorkflow, /id-token: write/);
 
 const publishWorkflow = fs.readFileSync(publishWorkflowPath, 'utf8');
 assert.match(publishWorkflow, /attestations: write/);
-assert.match(publishWorkflow, /actions\/attest@v4/);
+assert.match(publishWorkflow, /actions\/attest@1e69f48acb82d1966a394da916b4c1698aa569d6/);
 assert.match(publishWorkflow, /Pack exact npm artifact/);
 assert.match(publishWorkflow, /Publish exact attested tarball/);
+assert.match(publishWorkflow, /mcp-publisher_linux_amd64\.tar\.gz/);
+assert.match(publishWorkflow, /a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc/);
+assert.doesNotMatch(publishWorkflow, /releases\/latest\/download/, 'publish workflow must not execute a mutable latest MCP publisher artifact');
 
 const citation = fs.readFileSync(citationPath, 'utf8');
 assert.match(citation, /version: "0\.1\.0"/);
