@@ -1,0 +1,59 @@
+{
+  "version": "0.1",
+  "project": "Agent-Ready Web Profile",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "policyUrl": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
+  "permissionRequired": false,
+  "license": {
+    "name": "Creative Commons Attribution 4.0 International",
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "appliesTo": [
+    "ARWP-authored press facts and boilerplate",
+    "ARWP-authored research charts and diagrams explicitly marked for open reuse",
+    "ARWP-authored screenshots and media assets explicitly included in the media pack",
+    "ARWP-authored explanatory text explicitly marked CC BY 4.0"
+  ],
+  "doesNotApplyTo": [
+    "software source code, which remains licensed under Apache-2.0",
+    "third-party logos, trademarks, screenshots, quotations or other third-party material unless separately marked",
+    "material whose page or file declares a different license"
+  ],
+  "permissions": {
+    "press": true,
+    "news": true,
+    "editorial": true,
+    "commercialEditorial": true,
+    "socialMedia": true,
+    "research": true,
+    "translation": true,
+    "adaptation": true,
+    "redistribution": true,
+    "aiSearchIndexing": true,
+    "aiTraining": true,
+    "machineLearningTraining": true,
+    "embedding": true,
+    "retrievalAugmentedGeneration": true,
+    "datasetInclusion": true,
+    "summarization": true
+  },
+  "attribution": {
+    "requiredForPublicReuse": true,
+    "preferredText": "Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/",
+    "sourceUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "licenseText": "CC BY 4.0",
+    "aiGuidance": "For AI/ML training, dataset inclusion, embeddings or RAG, preserve the canonical source URL in dataset/model cards, provenance metadata, citations, output attribution or another reasonable attribution surface when the workflow provides one."
+  },
+  "modification": {
+    "allowed": true,
+    "markChanges": true
+  },
+  "notes": [
+    "No separate email or written permission is required for covered material.",
+    "Reuse must not imply endorsement, certification or partnership by ARWP.",
+    "Trademark and personality/publicity rights, if any, are not granted by this copyright license.",
+    "This manifest is a project reuse declaration and does not replace the CC BY 4.0 legal code."
+  ],
+  "lastReviewed": "2026-09-05"
+}
