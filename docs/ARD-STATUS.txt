@@ -1,0 +1,1 @@
+ARD v0.91 status in ARWP: partial implemented support — canonical /.well-known/ard.json, HTTP rel=ard, legacy ai-catalog fallback and conservative typed evidence. Full JSON-LD/in-page/registry federation remains evidence-gated.
