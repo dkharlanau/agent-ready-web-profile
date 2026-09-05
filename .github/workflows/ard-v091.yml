@@ -6,9 +6,11 @@ on:
     paths:
       - 'lib/ard-v091.mjs'
       - 'lib/ard-registry.mjs'
+      - 'lib/ard-site.mjs'
       - 'bin/arwp-ard.mjs'
       - 'scripts/ard-v091-test.mjs'
       - 'scripts/ard-registry-test.mjs'
+      - 'scripts/ard-site-test.mjs'
       - 'scripts/ard-cli-test.mjs'
       - 'package.json'
       - 'docs/ARD-V0.91.md'
@@ -17,9 +19,11 @@ on:
     paths:
       - 'lib/ard-v091.mjs'
       - 'lib/ard-registry.mjs'
+      - 'lib/ard-site.mjs'
       - 'bin/arwp-ard.mjs'
       - 'scripts/ard-v091-test.mjs'
       - 'scripts/ard-registry-test.mjs'
+      - 'scripts/ard-site-test.mjs'
       - 'scripts/ard-cli-test.mjs'
       - 'package.json'
       - 'docs/ARD-V0.91.md'
@@ -41,5 +45,10 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Validate ARD v0.91 static, registry and CLI layers
         run: npm run test:ard
+      - name: Validate bounded ARD site discovery
+        run: |
+          node scripts/ard-site-test.mjs
+          node --check lib/ard-site.mjs
+          node --check scripts/ard-site-test.mjs
       - name: Smoke-test npm artifact with arwp-ard included
         run: npm run test:package
