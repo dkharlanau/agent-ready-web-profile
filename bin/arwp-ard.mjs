@@ -2,17 +2,24 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { searchArdRegistry } from '../lib/ard-registry.mjs';
+import { discoverArdSite } from '../lib/ard-site.mjs';
 import { normalizeArdEntry, validateArdEntry } from '../lib/ard-v091.mjs';
 
 function usage() {
   return `arwp-ard — explicit ARD v0.91 interoperability tools
 
 Usage:
+  arwp-ard discover <site-url> [options]
   arwp-ard search <registry-base-url> <query...> [options]
   arwp-ard validate-entry <file.json> [--json]
 
+Discover options:
+  --max-manifests=N                 Bound manifest fetches; default 6, max 12
+  --max-entries=N                   Bound normalized entries; default 200, max 1000
+  --json                            Emit full JSON evidence
+
 Search options:
-  --federation=none|referrals|auto   Default: none
+  --federation=none|referrals|auto  Default: none
   --page-size=N                     1..100, default 10
   --page-token=TOKEN                Explicit next-page token; never followed automatically
   --type=MEDIA_TYPE                 Adds an ARD type filter; repeatable
@@ -20,8 +27,9 @@ Search options:
   --json                            Emit full JSON evidence instead of a compact table
 
 Safety boundaries:
-  * public HTTPS registry URLs only
-  * one explicit POST /search per invocation
+  * public HTTPS targets only
+  * site discovery does not recurse nested catalogs or execute resources
+  * registry search is one explicit POST /search per invocation
   * redirects, referrals and pagination are never followed automatically
   * registry score means semantic relevance, not trust/security
   * no credentials are inferred from ARD metadata
@@ -50,6 +58,8 @@ function parseFlags(args) {
     else if (key === 'page-token') flags.pageToken = value;
     else if (key === 'type') flags.types.push(value);
     else if (key === 'filter') flags.filters.push(value);
+    else if (key === 'max-manifests') flags.maxManifests = Number(value);
+    else if (key === 'max-entries') flags.maxEntries = Number(value);
     else throw new Error(`Unknown option: ${arg}`);
   }
   return { positionals, flags };
@@ -94,6 +104,41 @@ function compactSearch(result) {
   if (result.pageToken) lines.push('', `Next page token: ${result.pageToken} (not followed)`);
   lines.push('', result.note);
   return lines.join('\n');
+}
+
+function compactDiscovery(result) {
+  const lines = [
+    `ARD site: ${result.canonicalUrl}`,
+    `Sources resolved: ${result.summary.sourcesResolved}/${result.summary.sourcesProcessed}`,
+    `Entries: ${result.summary.validEntries} valid, ${result.summary.invalidEntries} invalid, ${result.summary.inlineEntries} inline`,
+    `Network: ${result.metrics.requests} request(s), ${result.metrics.bytes} byte(s) in bounded discovery fetches`,
+    ''
+  ];
+  for (const source of result.sources) lines.push(`${source.status.toUpperCase()} ${source.relation}: ${source.url}${source.issue ? ` — ${source.issue}` : ''}`);
+  if (result.entries.length) {
+    lines.push('', 'Entries:');
+    for (const item of result.entries.slice(0, 25)) {
+      lines.push(`- ${item.valid ? 'PASS' : 'WARN'} ${item.displayName || item.identifier || 'unnamed'}${item.type ? ` [${item.type}]` : ''}${item.url ? ` → ${item.url}` : ''}`);
+    }
+    if (result.entries.length > 25) lines.push(`- … ${result.entries.length - 25} more entry/entries omitted from compact output; use --json.`);
+  }
+  if (result.parseIssues.length) {
+    lines.push('', 'Parse issues:');
+    for (const issue of result.parseIssues) lines.push(`- ${issue}`);
+  }
+  lines.push('', result.note);
+  return lines.join('\n');
+}
+
+async function runDiscover(args) {
+  const { positionals, flags } = parseFlags(args);
+  const site = positionals[0];
+  if (!site) throw new Error('discover requires <site-url>.');
+  const result = await discoverArdSite(site, {
+    maxManifests: flags.maxManifests,
+    maxEntries: flags.maxEntries
+  });
+  process.stdout.write(flags.json ? `${JSON.stringify(result, null, 2)}\n` : `${compactDiscovery(result)}\n`);
 }
 
 async function runSearch(args) {
@@ -157,6 +202,7 @@ async function main() {
     process.stdout.write(usage());
     return;
   }
+  if (command === 'discover') return runDiscover(args);
   if (command === 'search') return runSearch(args);
   if (command === 'validate-entry') return runValidate(args);
   throw new Error(`Unknown command: ${command}\n\n${usage()}`);
