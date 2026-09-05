@@ -1,0 +1,53 @@
+name: Capture independent benchmark Evidence Receipt
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/independent-evidence-receipt.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  capture-independent-receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify reviewed independent fixture
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const f = JSON.parse(fs.readFileSync('benchmarks/corpus/ty-docs.json','utf8'));
+          if (f.id !== 'ty-docs' || f.ownership !== 'independent' || f.url !== 'https://docs.astral.sh/ty/') throw new Error('Expected reviewed independent ty-docs fixture.');
+          NODE
+      - name: Capture richer independent Evidence Receipt
+        run: |
+          mkdir -p evidence
+          OBSERVED_AT="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          node bin/arwp-receipt.mjs capture https://docs.astral.sh/ty/ \
+            --observed-at="$OBSERVED_AT" \
+            --max-sources=8 \
+            --max-bytes=524288 \
+            --output=evidence/receipt.json
+          node bin/arwp-receipt.mjs verify evidence/receipt.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const r = JSON.parse(fs.readFileSync('evidence/receipt.json','utf8'));
+          const c = r.captureSummary || {};
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Independent benchmark Evidence Receipt: ty-docs\n\n- Fixture: \`benchmarks/corpus/ty-docs.json\`\n- Evidence class after review: \`independent-benchmark\`\n- Receipt: \`${r.receiptId}\`\n- Target: ${r.canonicalUrl}\n- Observed: ${r.observedAt}\n- Sources resolved: ${r.evidenceSummary.sourcesResolved}/${r.evidenceSummary.sourcesAttempted}\n- Interfaces: ${r.evidenceSummary.interfacesResolved}\n- Conflicts: ${r.evidenceSummary.conflicts}\n- Source bodies captured: ${c.captured || 0}/${c.attempted || 0}\n- Capture failures: ${c.failed || 0}\n- Digest scope: ${c.digestScope || 'none'}\n`);
+          NODE
+      - name: Upload captured independent evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: ty-docs-independent-evidence-receipt
+          path: evidence/receipt.json
+          if-no-files-found: error
+          retention-days: 90
