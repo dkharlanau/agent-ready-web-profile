@@ -1,0 +1,36 @@
+name: State of the Agentic Web research
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'research/state-of-agentic-web/**'
+      - 'docs/research/state-of-agentic-web/**'
+      - '.github/workflows/state-of-agentic-web.yml'
+  pull_request:
+    paths:
+      - 'research/state-of-agentic-web/**'
+      - 'docs/research/state-of-agentic-web/**'
+      - '.github/workflows/state-of-agentic-web.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  research-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Validate research model
+        run: |
+          node research/state-of-agentic-web/test.mjs
+          node --check research/state-of-agentic-web/build.mjs
+      - name: Rebuild committed research outputs
+        run: node research/state-of-agentic-web/build.mjs
+      - name: Verify release outputs are reproducible
+        run: |
+          git diff --exit-code -- docs/research/state-of-agentic-web
+          test -z "$(git status --porcelain --untracked-files=all docs/research/state-of-agentic-web)"
