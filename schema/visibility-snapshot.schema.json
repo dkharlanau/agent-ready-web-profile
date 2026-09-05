@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/visibility-snapshot.schema.json",
+  "title": "ARWP Search and AI Visibility Snapshot v0.1",
+  "description": "Evidence contract for comparing observable search/AI visibility signals without inferring ranking or causality from ARWP adoption.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "site", "capturedAt", "period", "sources", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "capturedAt": { "type": "string", "format": "date-time" },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["provider", "status", "metrics"],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "google-search-console-generative-ai",
+              "bing-webmaster-ai-performance",
+              "referral-analytics",
+              "manual-observation"
+            ]
+          },
+          "status": { "type": "string", "enum": ["observed", "partial", "unavailable"] },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "aiImpressions": { "type": "number", "minimum": 0 },
+              "totalCitations": { "type": "number", "minimum": 0 },
+              "averageCitedPages": { "type": "number", "minimum": 0 },
+              "citedPages": { "type": "number", "minimum": 0 },
+              "groundingQueriesSampled": { "type": "number", "minimum": 0 },
+              "referrals": { "type": "number", "minimum": 0 },
+              "externalMentions": { "type": "number", "minimum": 0 }
+            }
+          },
+          "evidence": { "type": "string", "format": "uri" },
+          "notes": { "type": "string", "maxLength": 1000 }
+        }
+      }
+    },
+    "notes": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 1000 } },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["noRankingInference", "noCausalityInference", "aggregateDataOnly"],
+      "properties": {
+        "noRankingInference": { "const": true },
+        "noCausalityInference": { "const": true },
+        "aggregateDataOnly": { "const": true }
+      }
+    }
+  }
+}
