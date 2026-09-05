@@ -1,0 +1,13 @@
+metric,value,unit,scope,evidence_date
+independent_sites,20,sites,reviewed independent documentation-site benchmark corpus,2026-08-28
+decision_cases,100,intent decisions,reviewed independent documentation-site benchmark corpus,2026-08-28
+llms_aware_correct,89,decisions,100 reviewed decisions,2026-08-28
+resolver_union_correct,86,decisions,100 reviewed decisions,2026-08-28
+resolver_union_mismatches,14,decisions,resolver-union,2026-08-28
+resolver_union_over_selection,5,decisions,resolver-union,2026-08-28
+resolver_union_discovery_gaps,7,decisions,resolver-union,2026-08-28
+resolver_union_selection_gaps,2,decisions,resolver-union,2026-08-28
+resolver_union_resolution_failures,0,decisions,resolver-union,2026-08-28
+resolver_regret,6,decisions,resolver-union vs simpler strategies,2026-08-28
+resolver_uniquely_correct,0,decisions,resolver-union,2026-08-28
+historical_resolver_union_correct,81,decisions,historical frozen baseline,2026-08-26
