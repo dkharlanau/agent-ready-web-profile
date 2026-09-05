@@ -60,7 +60,9 @@
         "sitemap": { "$ref": "#/$defs/surface" },
         "robots": { "$ref": "#/$defs/surface" },
         "knowledgeGraph": { "$ref": "#/$defs/surface" },
-        "claimsIndex": { "$ref": "#/$defs/surface" }
+        "claimsIndex": { "$ref": "#/$defs/surface" },
+        "pressKit": { "$ref": "#/$defs/surface" },
+        "reuseRights": { "$ref": "#/$defs/surface" }
       }
     },
     "modules": {
@@ -69,7 +71,7 @@
       "required": [
         "answerPages", "originalResearch", "protocolObservatory", "comparisonPages", "conceptDefinitions",
         "claimsRegistry", "evidenceReceipts", "crawlerMatrix", "agentFetchLab", "knowledgeGraph",
-        "citationVisuals", "externalDistribution", "aiVisibility", "localization", "history"
+        "citationVisuals", "openReuseAssets", "externalDistribution", "aiVisibility", "localization", "history"
       ],
       "properties": {
         "answerPages": { "$ref": "#/$defs/module" },
@@ -83,6 +85,7 @@
         "agentFetchLab": { "$ref": "#/$defs/module" },
         "knowledgeGraph": { "$ref": "#/$defs/module" },
         "citationVisuals": { "$ref": "#/$defs/module" },
+        "openReuseAssets": { "$ref": "#/$defs/module" },
         "externalDistribution": { "$ref": "#/$defs/module" },
         "aiVisibility": { "$ref": "#/$defs/module" },
         "localization": { "$ref": "#/$defs/module" },
