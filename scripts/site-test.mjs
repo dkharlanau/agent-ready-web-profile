@@ -23,28 +23,24 @@ const mediaRightsPath = path.join(docs, 'media', 'rights.json');
 const pressFactsPath = path.join(docs, 'media', 'press-facts.json');
 const attributionPath = path.join(docs, 'media', 'attribution.txt');
 const boilerplatePath = path.join(docs, 'media', 'boilerplate.txt');
+const trustHtmlPath = path.join(docs, 'trust', 'index.html');
+const trustJsonPath = path.join(docs, 'trust', 'trust.json');
+const correctionsHtmlPath = path.join(docs, 'trust', 'corrections.html');
+const correctionsJsonPath = path.join(docs, 'trust', 'corrections.json');
+const securityPath = path.join(root, 'SECURITY.md');
+const scorecardWorkflowPath = path.join(root, '.github', 'workflows', 'scorecard.yml');
+const publishWorkflowPath = path.join(root, '.github', 'workflows', 'publish-ecosystem.yml');
+const citationPath = path.join(root, 'CITATION.cff');
 
 for (const file of [
-  htmlPath,
-  cssPath,
-  jsPath,
-  directoryPath,
-  historyHtmlPath,
-  historyCssPath,
-  historyJsonPath,
-  llmsPath,
-  deLlmsPath,
-  ruLlmsPath,
-  localeManifestPath,
-  localizationPolicyPath,
-  mediaHtmlPath,
-  mediaRightsPath,
-  pressFactsPath,
-  attributionPath,
-  boilerplatePath
+  htmlPath, cssPath, jsPath, directoryPath, historyHtmlPath, historyCssPath, historyJsonPath,
+  llmsPath, deLlmsPath, ruLlmsPath, localeManifestPath, localizationPolicyPath,
+  mediaHtmlPath, mediaRightsPath, pressFactsPath, attributionPath, boilerplatePath,
+  trustHtmlPath, trustJsonPath, correctionsHtmlPath, correctionsJsonPath,
+  securityPath, scorecardWorkflowPath, publishWorkflowPath, citationPath
 ]) {
-  assert.ok(fs.existsSync(file), `missing static site file: ${path.relative(root, file)}`);
-  assert.ok(fs.statSync(file).size > 100, `static site file is unexpectedly empty: ${path.relative(root, file)}`);
+  assert.ok(fs.existsSync(file), `missing project file: ${path.relative(root, file)}`);
+  assert.ok(fs.statSync(file).size > 100, `project file is unexpectedly empty: ${path.relative(root, file)}`);
 }
 
 const html = fs.readFileSync(htmlPath, 'utf8');
@@ -141,13 +137,55 @@ assert.equal(pressFacts.status.maturity, 'pre-stable');
 assert.equal(pressFacts.licenses.openMedia.spdx, 'CC-BY-4.0');
 assert.ok(pressFacts.facts.length >= 4);
 
+const trustHtml = fs.readFileSync(trustHtmlPath, 'utf8');
+const correctionsHtml = fs.readFileSync(correctionsHtmlPath, 'utf8');
+const trust = JSON.parse(fs.readFileSync(trustJsonPath, 'utf8'));
+const corrections = JSON.parse(fs.readFileSync(correctionsJsonPath, 'utf8'));
+assert.match(trustHtml, /Trust should be inspectable/i);
+assert.match(trustHtml, /No DOI is claimed yet/i);
+assert.match(trustHtml, /provenance proves where and how an artifact was built/i);
+assert.match(correctionsHtml, /Corrections stay visible/i);
+assert.match(correctionsHtml, /No material published factual correction/i);
+assert.equal(trust.maturity, 'pre-stable');
+assert.equal(trust.reviewModel.primarySourcesPreferred, true);
+assert.equal(trust.reviewModel.correctionsVisible, true);
+assert.equal(trust.softwareSupplyChain.githubArtifactAttestation.status, 'configured-for-next-npm-publish');
+assert.equal(trust.persistentIdentifiers.doi.status, 'prepared-not-issued');
+assert.equal(trust.softwareSupplyChain.openSSFScorecard.status, 'configured');
+assert.equal(corrections.entries.length, 0);
+assert.equal(corrections.policy.historicalRecordsAreNotSilentlyRewritten, true);
+
 const selfProfile = JSON.parse(fs.readFileSync(selfProfilePath, 'utf8'));
 assert.deepEqual(selfProfile.languages, ['en', 'de', 'ru']);
 assert.equal(selfProfile.web.llms, 'https://dkharlanau.github.io/agent-ready-web-profile/llms.txt');
 assert.equal(selfProfile.extensions['io.github.dkharlanau/localized-llms'].manifest, 'https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json');
 assert.equal(selfProfile.extensions['io.github.dkharlanau/open-media-ai-reuse'].permissionRequired, false);
 assert.equal(selfProfile.extensions['io.github.dkharlanau/open-media-ai-reuse'].license, 'CC-BY-4.0');
+assert.equal(selfProfile.extensions['io.github.dkharlanau/trust-center'].doi, 'prepared-not-issued');
+assert.equal(selfProfile.extensions['io.github.dkharlanau/trust-center'].artifactAttestation, 'configured-for-next-npm-publish');
 assert.ok(selfProfile.data.distributions.some(item => item.url.endsWith('/media/rights.json')));
+assert.ok(selfProfile.data.distributions.some(item => item.url.endsWith('/trust/trust.json')));
+assert.ok(selfProfile.data.distributions.some(item => item.url.endsWith('/trust/corrections.json')));
+
+const security = fs.readFileSync(securityPath, 'utf8');
+assert.match(security, /Please do not publish exploit details in a public issue/i);
+assert.match(security, /SSRF or private-network reachability bypasses/i);
+
+const scorecardWorkflow = fs.readFileSync(scorecardWorkflowPath, 'utf8');
+assert.match(scorecardWorkflow, /ossf\/scorecard-action@2d1146689b8cda280b9bc96326124645441f03bc/);
+assert.match(scorecardWorkflow, /publish_results: true/);
+assert.match(scorecardWorkflow, /id-token: write/);
+
+const publishWorkflow = fs.readFileSync(publishWorkflowPath, 'utf8');
+assert.match(publishWorkflow, /attestations: write/);
+assert.match(publishWorkflow, /actions\/attest@v4/);
+assert.match(publishWorkflow, /Pack exact npm artifact/);
+assert.match(publishWorkflow, /Publish exact attested tarball/);
+
+const citation = fs.readFileSync(citationPath, 'utf8');
+assert.match(citation, /version: "0\.1\.0"/);
+assert.match(citation, /date-released: "2026-08-25"/);
+assert.doesNotMatch(citation, /\bdoi:\s*/i, 'CITATION.cff must not claim a DOI before an external provider issues one');
 
 const js = fs.readFileSync(jsPath, 'utf8');
 assert.match(js, /url\.protocol !== 'https:'/);
@@ -156,4 +194,4 @@ assert.match(js, /fetch\(endpoint/, 'hosted resolver calls must use a fixed rout
 assert.match(js, /fixedServiceRoute\('\/resolve'\)/, 'live UI must use the resolver route rather than direct browser fetching');
 assert.doesNotMatch(js, /fetch\(site\b|fetch\(siteInput|fetch\(normalizeSite/, 'user-provided URLs must never become a direct browser fetch target');
 
-console.log('PASS ARWP project site leads with resolver utility, publishes source-backed history, multilingual agent routing and explicit permission-free media/AI reuse rights, and keeps browser resolution behind a fixed bounded service endpoint');
+console.log('PASS ARWP site publishes resolver utility, evidence-backed discovery, open reuse, security, corrections and verifiable trust/provenance surfaces without fabricating DOI or readiness claims');
