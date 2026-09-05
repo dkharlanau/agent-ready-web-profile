@@ -34,6 +34,13 @@ for (const item of alternatives.alternatives) {
 assert.equal(alternatives.guardrails.comparisonIsNotRanking, true);
 assert.equal(alternatives.guardrails.unknownCapabilityIsNotAssumedAbsent, true);
 
+const history = readJson('docs/compare/history/2026-09-05.json');
+const historyIndex = readJson('docs/compare/history/index.json');
+assert.deepEqual(history, alternatives, 'initial competitor snapshot must freeze the reviewed alternatives map exactly');
+assert.equal(historyIndex.snapshots[0].date, '2026-09-05');
+assert.match(historyIndex.policy, /append-only/i);
+assert.ok(historyIndex.snapshots[0].url.endsWith('/compare/history/2026-09-05.json'));
+
 const product = readJson('docs/ai/product.jsonld');
 assert.equal(product['@context'], 'https://schema.org');
 const software = product['@graph'].find(item => Array.isArray(item['@type']) && item['@type'].includes('SoftwareApplication'));
@@ -87,4 +94,10 @@ assert.ok(profile.data.distributions.some(item => item.url.endsWith('/ai/product
 assert.ok(profile.data.distributions.some(item => item.url.endsWith('/compare/alternatives.json')));
 assert.ok(profile.data.distributions.some(item => item.url.endsWith('/recommendations/registry.json')));
 
-console.log('PASS ARWP publishes a source-backed competitor map, explicit machine-readable product class, Schema.org metadata and canonical sitemap without inventing rankings or fake robots authority');
+const citation = read('CITATION.cff');
+assert.match(citation, /- "agentic web interoperability resolver"/);
+assert.match(citation, /- "agent readiness"/);
+assert.match(citation, /- "web interoperability"/);
+assert.match(citation, /project-defined rather than/i);
+
+console.log('PASS ARWP publishes a source-backed competitor map, frozen comparison history, explicit machine-readable product class, Schema.org/citation metadata and canonical sitemap without inventing rankings or fake robots authority');
