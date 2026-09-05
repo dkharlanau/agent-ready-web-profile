@@ -1,7 +1,7 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "reviewedAt": "2026-09-05",
-  "revision": "r2",
+  "revision": "r3",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
   "subject": {
     "name": "Agent-Ready Web Profile",
@@ -103,11 +103,28 @@
     }
   ],
   "adjacentSpecificationsAndGuidance": [
-    {"name":"Vercel Agent Readability","category":"agent readability implementation guidance","relationship":"guidance-not-product-competitor","role":"Discovery, structure and context practices including llms.txt, sitemaps, canonical/meta/JSON-LD, markdown mirrors, content negotiation and skill/context surfaces.","source":"https://vercel.com/kb/guide/agent-readability-spec","reviewedAt":"2026-09-05"},
-    {"name":"Agentic Resource Discovery (ARD)","category":"federated agentic-resource discovery specification","relationship":"upstream-overlap-not-product-competitor","role":"Publish and federate MCP, A2A, Skills, APIs and registry resources via ai-catalog and registry search. ARWP should consume this evidence.","sources":["https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/","https://github.com/ards-project/ard-spec/blob/main/spec/ard.md"],"canonicalComparison":"https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html","reviewedAt":"2026-09-05"}
+    {
+      "name":"Vercel Agent Readability",
+      "category":"agent readability implementation guidance",
+      "relationship":"guidance-not-product-competitor",
+      "role":"Discovery, structure and context practices including llms.txt, sitemaps, sitemap.md, AGENTS.md, canonical/meta/JSON-LD, Markdown mirrors, content negotiation and skill/context surfaces.",
+      "source":"https://vercel.com/kb/guide/agent-readability-spec",
+      "reviewedAt":"2026-09-05"
+    },
+    {
+      "name":"Agentic Resource Discovery (ARD)",
+      "category":"federated agentic-resource discovery proposal",
+      "relationship":"upstream-overlap-not-product-competitor",
+      "version":"0.91",
+      "publishedAt":"2026-08-26",
+      "role":"Publish and federate MCP, A2A, Skills, APIs and registry resources through canonical /.well-known/ard.json, rel=ard, JSON-LD descriptions and registry search. Predecessor ai-catalog discovery remains compatibility evidence.",
+      "sources":["https://agenticresourcediscovery.org/spec/","https://github.com/ards-project/ard-spec","https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/"],
+      "canonicalComparison":"https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html",
+      "reviewedAt":"2026-09-05"
+    }
   ],
   "upstreamNotCompetitors": [
-    {"name":"Agentic Resource Discovery (ARD)","role":"federated agentic-resource catalog/search specification"},
+    {"name":"Agentic Resource Discovery (ARD)","role":"federated agentic-resource manifest/catalog/search proposal"},
     {"name":"MCP","role":"backend tool/context protocol"},
     {"name":"A2A","role":"agent-to-agent discovery and interaction protocol"},
     {"name":"WebMCP","role":"browser-page tool exposure mechanism"},
