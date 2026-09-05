@@ -8,21 +8,21 @@
       "@type": "Person",
       "name": "Dzmitryi Kharlanau",
       "url": "https://github.com/dkharlanau",
-      "sameAs": [
-        "https://github.com/dkharlanau"
-      ]
+      "sameAs": ["https://github.com/dkharlanau"]
     },
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
       "@type": "SoftwareSourceCode",
       "name": "Agent-Ready Web Profile",
       "alternateName": "ARWP",
-      "description": "Evidence-backed interoperability resolver and profile/tooling project for discovering and routing the machine- and agent-facing interfaces exposed by public websites.",
+      "description": "Evidence-backed agentic web interoperability resolver and profile/tooling project for discovering and routing the machine- and agent-facing interfaces exposed by public websites.",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
       "codeRepository": "https://github.com/dkharlanau/agent-ready-web-profile",
       "license": "https://www.apache.org/licenses/LICENSE-2.0",
       "version": "0.2.0",
       "programmingLanguage": "JavaScript",
+      "keywords": ["agentic web interoperability resolver", "agent readiness", "web interoperability", "website conformance", "AI agents", "MCP", "A2A", "WebMCP", "llms.txt"],
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-interoperability-resolver"},
       "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
       "sameAs": [
         "https://github.com/dkharlanau/agent-ready-web-profile",
@@ -33,7 +33,9 @@
         {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#protocol-observatory"},
         {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#crawler-matrix"},
         {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claims-registry"},
-        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#ai-search-profile"}
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#ai-search-profile"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#product-classification"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#comparison-hub"}
       ]
     },
     {
@@ -69,11 +71,7 @@
       "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
       "dateModified": "2026-09-05",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "distribution": [{
-        "@type": "DataDownload",
-        "encodingFormat": "application/json",
-        "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json"
-      }]
+      "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json"}]
     },
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#crawler-matrix",
@@ -85,11 +83,53 @@
       "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
       "dateModified": "2026-09-05",
       "license": "https://creativecommons.org/licenses/by/4.0/",
-      "distribution": [{
-        "@type": "DataDownload",
-        "encodingFormat": "application/json",
-        "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/crawlers.json"
-      }]
+      "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/crawlers.json"}]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#product-classification",
+      "@type": "Dataset",
+      "name": "ARWP Product Classification",
+      "description": "Machine-readable project-defined product class, broader categories, negative boundaries and adjacent solution classes for ARWP.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json",
+      "creator": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "about": [
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-interoperability-resolver"}
+      ],
+      "dateModified": "2026-09-05",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "distribution": [
+        {"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json"},
+        {"@type": "DataDownload", "encodingFormat": "application/ld+json", "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/ai/product.jsonld"}
+      ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#alternatives-map",
+      "@type": "Dataset",
+      "name": "ARWP Alternatives and Competitor Map",
+      "description": "Dated source-backed category map comparing ARWP with AgentReady/Ora, agent-readiness scanners, WebMCP tooling, crawler governance and AI visibility platforms without ranking them.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json",
+      "creator": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+      "dateModified": "2026-09-05",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "isPartOf": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#comparison-hub"},
+      "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": "https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json"}]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#comparison-hub",
+      "@type": "TechArticle",
+      "name": "ARWP vs alternatives — agent readiness, interoperability and AI visibility tools",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
+      "description": "Source-backed category comparison defining ARWP's product class and distinguishing it from the closest adjacent and complementary products.",
+      "author": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},
+      "about": [
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-interoperability-resolver"}
+      ],
+      "dateModified": "2026-09-05",
+      "isPartOf": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website"},
+      "mainEntity": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#alternatives-map"}
     },
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#claims-registry",
@@ -143,10 +183,20 @@
       "name": "ARWP project vocabulary",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/",
       "hasDefinedTerm": [
+        {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-interoperability-resolver"},
         {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-resolver"},
         {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-resolver-regret"},
         {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-discovery-conflict"}
       ]
+    },
+    {
+      "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-interoperability-resolver",
+      "@type": "DefinedTerm",
+      "name": "agentic web interoperability resolver",
+      "termCode": "agentic-web-interoperability-resolver",
+      "description": "Project-defined class for developer infrastructure that discovers heterogeneous machine- and agent-facing interfaces exposed by a website, preserves source authority and conflicts, normalizes observations into an inspectable service map, and selects an interface for a concrete intent.",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
+      "inDefinedTermSet": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#vocabulary"}
     },
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#term-agentic-web-resolver",
