@@ -1,0 +1,89 @@
+{
+  "project": "Agent-Ready Web Profile",
+  "shortName": "ARWP",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "status": "active",
+  "maturity": "pre-stable",
+  "startedAt": "2026-08-25",
+  "lastUpdated": "2026-09-05",
+  "versions": {
+    "profileContract": "0.1",
+    "toolchain": "0.2.0",
+    "latestRelease": "0.1.0"
+  },
+  "statusMeaning": {
+    "active": "Work is continuing on the resolver, evidence model, distribution and adoption surfaces.",
+    "pre-stable": "The project is usable for experimentation, but the profile contract and toolchain have not reached a stable 1.0 release."
+  },
+  "events": [
+    {
+      "date": "2026-08-25",
+      "status": "completed",
+      "kind": "origin",
+      "title": "Project started",
+      "summary": "ARWP was created as a small, inspectable discovery profile for websites exposing web, data, retrieval and agent-facing interfaces.",
+      "evidence": [
+        "https://github.com/dkharlanau/agent-ready-web-profile"
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "status": "released",
+      "kind": "release",
+      "title": "v0.1.0 experimental baseline released",
+      "summary": "The first tagged release shipped the profile contract, JSON Schema, validator, verifier, GitHub Action and local/remote MCP gateway foundations.",
+      "evidence": [
+        "https://github.com/dkharlanau/agent-ready-web-profile/releases/tag/v0.1.0"
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "status": "completed",
+      "kind": "architecture",
+      "title": "Resolver-first architecture adopted",
+      "summary": "The project moved from manifest-first positioning to an evidence-backed resolver that normalizes existing web and agent discovery surfaces instead of replacing them.",
+      "evidence": [
+        "https://github.com/dkharlanau/agent-ready-web-profile/commit/6bd2a83e14a0ebf980d9c80f89dd045fb00b5549",
+        "https://github.com/dkharlanau/agent-ready-web-profile/commit/49fd42a5bd08303f6b84274b7732f11c81276163"
+      ]
+    },
+    {
+      "date": "2026-08-28",
+      "status": "completed",
+      "kind": "evidence",
+      "title": "Evidence discipline became part of the product",
+      "summary": "Benchmark truth, live publisher drift and negative experiments were separated so the project could keep failed or no-gain results instead of expanding the format by assumption.",
+      "evidence": [
+        "https://github.com/dkharlanau/agent-ready-web-profile/commit/ae53d6305e686047b7cd3c2c2af81b9e9cc6360b"
+      ]
+    },
+    {
+      "date": "2026-08-31",
+      "status": "completed",
+      "kind": "adoption",
+      "title": "Consumer onboarding path hardened",
+      "summary": "A tested local onboarding path and package-boundary fixes made the project easier to evaluate from a clean consumer environment.",
+      "evidence": [
+        "https://github.com/dkharlanau/agent-ready-web-profile/commit/23eec0b928d8b99e8487ba7f09a93bc8dffbb4ef",
+        "https://github.com/dkharlanau/agent-ready-web-profile/commit/5425ee7b5dc0157dab4f225bd4512cda6d663be9"
+      ]
+    },
+    {
+      "date": "2026-09-05",
+      "status": "active",
+      "kind": "product",
+      "title": "Product history and multilingual agent discovery",
+      "summary": "ARWP now publishes an explicit product history plus canonical English and localized German/Russian llms.txt routing surfaces with a machine-readable locale manifest. English remains the normative technical language.",
+      "evidence": [
+        "https://dkharlanau.github.io/agent-ready-web-profile/history.html",
+        "https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"
+      ]
+    }
+  ],
+  "sources": {
+    "changelog": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CHANGELOG.md",
+    "roadmap": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md",
+    "releases": "https://github.com/dkharlanau/agent-ready-web-profile/releases",
+    "commits": "https://github.com/dkharlanau/agent-ready-web-profile/commits/main"
+  }
+}
