@@ -1,0 +1,46 @@
+name: Capture reference Evidence Receipt
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reference-evidence-receipt.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  capture-reference-receipt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Resolve the public ARWP reference site
+        run: |
+          mkdir -p evidence
+          node bin/arwp.mjs resolve https://dkharlanau.github.io/agent-ready-web-profile/ --json > evidence/resolution.json
+      - name: Create and verify Evidence Receipt
+        run: |
+          OBSERVED_AT="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          node bin/arwp-receipt.mjs create evidence/resolution.json --observed-at="$OBSERVED_AT" --output=evidence/receipt.json
+          node bin/arwp-receipt.mjs verify evidence/receipt.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const r = JSON.parse(fs.readFileSync('evidence/receipt.json','utf8'));
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## ARWP reference Evidence Receipt\n\n- Receipt: \`${r.receiptId}\`\n- Target: ${r.canonicalUrl}\n- Observed: ${r.observedAt}\n- Sources resolved: ${r.evidenceSummary.sourcesResolved}/${r.evidenceSummary.sourcesAttempted}\n- Interfaces: ${r.evidenceSummary.interfacesResolved}\n- Conflicts: ${r.evidenceSummary.conflicts}\n- Payload digest: \`${r.digests.payload}\`\n`);
+          NODE
+      - name: Upload captured evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: arwp-reference-evidence-receipt
+          path: |
+            evidence/resolution.json
+            evidence/receipt.json
+          if-no-files-found: error
+          retention-days: 90
