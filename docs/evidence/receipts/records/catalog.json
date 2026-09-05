@@ -12,6 +12,12 @@
       "evidenceClass": "project-reference",
       "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33993766445",
       "notes": "Owner-controlled public reference-site observation captured with explicit bounded source-body SHA-256 evidence. Two of two eligible resolved GET sources were captured with no failures. This is interoperability evidence, not independent adoption evidence."
+    },
+    "2026-09-05-ty-docs-independent-db212521cded.receipt.json": {
+      "title": "ty documentation independent benchmark observation — 2026-09-05",
+      "evidenceClass": "independent-benchmark",
+      "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33994110434",
+      "notes": "Independent public-site observation tied to the manually reviewed ownership=independent ty-docs benchmark fixture. Resolver selected the reviewed llms.txt read interface. This is observation evidence and must not be interpreted as ARWP adoption by Astral."
     }
   }
 }
