@@ -1,5 +1,5 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "reviewedAt": "2026-09-05",
   "project": {
     "name": "Agent-Ready Web Profile",
@@ -27,7 +27,7 @@
     {"class":"agent readability or readiness score","reason":"ARWP intentionally does not collapse evidence into one readability/readiness score."},
     {"class":"AI visibility or GEO tracker","reason":"ARWP can store owner-supplied visibility evidence, but prompt/mention/citation tracking is not its primary product."},
     {"class":"AI crawler control or WAF product","reason":"ARWP observes and audits crawler policy; it does not enforce network access rules."},
-    {"class":"federated agentic resource registry","reason":"ARD-style registries search across published agentic resources; ARWP is primarily a site-first resolver and should consume registry/catalog evidence rather than replace it."},
+    {"class":"federated agentic resource registry","reason":"ARD-style registries search across published agentic resources; ARWP is primarily a site-first resolver and should consume registry/manifest evidence rather than replace it."},
     {"class":"MCP server","reason":"MCP is one upstream interface ARWP can discover and verify; ARWP is not the MCP protocol itself."},
     {"class":"A2A agent","reason":"A2A Agent Cards and callable interfaces are upstream evidence resolved by ARWP."},
     {"class":"WebMCP implementation","reason":"WebMCP is a browser runtime surface ARWP can observe or evaluate when runtime evidence is available."},
@@ -44,11 +44,13 @@
   "closestUpstreamArchitecture": {
     "name": "Agentic Resource Discovery (ARD)",
     "relationship": "upstream-overlap-not-product-competitor",
+    "version": "0.91",
+    "publishedAt": "2026-08-26",
     "overlap": "multi-protocol discovery across MCP, A2A, Skills, APIs and registries",
-    "difference": "ARD is resource/catalog/search-first and federated; ARWP is website/site-first and combines ARD with ordinary web and other evidence while preserving source authority, conflicts and intent routing.",
-    "integrationDirection": "Consume ARD ai-catalog and registry evidence; do not create competing catalog syntax where ARD is sufficient.",
+    "difference": "ARD is resource/manifest/search-first and federated; ARWP is website/site-first and combines ARD with ordinary web and other evidence while preserving source authority, conflicts and intent routing.",
+    "integrationDirection": "Consume canonical ARD /.well-known/ard.json, rel=ard and future bounded registry evidence; preserve predecessor ai-catalog as compatibility rather than inventing competing catalog syntax.",
     "canonicalComparison": "https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html",
-    "sources": ["https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/","https://github.com/ards-project/ard-spec/blob/main/spec/ard.md"]
+    "sources": ["https://agenticresourcediscovery.org/spec/","https://github.com/ards-project/ard-spec","https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/"]
   },
   "upstreamMechanismsNotCompetitors": ["Agentic Resource Discovery (ARD)","MCP","A2A","WebMCP","llms.txt","OpenAPI","RFC 9727 API Catalog","RFC 9728 Protected Resource Metadata","Agent Skills","DNS-AID","Web Bot Auth","AIPREF","NLWeb","auth.md","ACP","UCP"],
   "canonicalComparison": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
