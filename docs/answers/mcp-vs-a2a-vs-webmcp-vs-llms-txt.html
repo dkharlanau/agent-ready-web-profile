@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MCP, A2A, WebMCP and llms.txt address different layers of agent-web interoperability. This ARWP page maps their roles without treating them as substitutes.">
+<title>MCP vs A2A vs WebMCP vs llms.txt — ARWP</title>
+<link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html">
+<link rel="describedby" type="application/json" href="../citation-index.json"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/"><link rel="stylesheet" href="../citation.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"MCP vs A2A vs WebMCP vs llms.txt","dateModified":"2026-09-05","license":"https://creativecommons.org/licenses/by/4.0/","mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html"}</script>
+</head><body>
+<header class="topbar"><a class="brand" href="../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="./">Answers</a><a href="../compare/">Compare</a><a class="nav-cta" href="../media/">Reuse</a></nav></header>
+<main class="cite-main shell">
+<section class="cite-hero"><p class="eyebrow">Answer / protocol map</p><h1>MCP vs A2A vs WebMCP vs llms.txt</h1><div class="cite-meta"><span>Reviewed 2026-09-05</span><span>Current specs checked</span><span>CC BY 4.0</span></div></section>
+<div class="direct-answer">They solve different layers. MCP is a protocol for connecting AI applications to tools/resources; A2A is an agent-to-agent interaction standard; WebMCP exposes tools from a web page runtime; llms.txt is a text-oriented discovery/routing convention for useful site content. A site may legitimately expose several of them at once.</div>
+<section class="cite-card"><table class="cite-table"><thead><tr><th>Surface</th><th>Primary role</th><th>Where it lives</th><th>What discovery alone proves</th></tr></thead><tbody>
+<tr><td><strong>MCP</strong></td><td>Tool/resource/context interoperability between an AI client and an MCP server.</td><td>Server endpoint / protocol runtime.</td><td>Metadata can advertise a server; runtime verification is separate.</td></tr>
+<tr><td><strong>A2A</strong></td><td>Communication and task collaboration between independent agents.</td><td>A2A server plus Agent Card, including the standard well-known discovery path.</td><td>A valid Agent Card describes identity/capabilities/interfaces; it is not itself authorization to act.</td></tr>
+<tr><td><strong>WebMCP</strong></td><td>Expose web-application functionality as browser-visible tools backed by page logic.</td><td>Browser/page JavaScript runtime.</td><td>Static HTTP crawling may not observe a runtime-only tool surface.</td></tr>
+<tr><td><strong>llms.txt</strong></td><td>Provide a concise text map of useful site content for LLM/agent retrieval.</td><td>Plain-text web resource, commonly <code>/llms.txt</code>.</td><td>It routes readers to content; it is not a tool protocol or permission model.</td></tr>
+</tbody></table></section>
+<section class="cite-grid"><article class="cite-card"><h2>Current protocol facts</h2><p>The MCP 2026-07-28 generation introduced a stateless core and authorization hardening. A2A currently publishes version 1.0.0 and standardizes Agent Card discovery at <code>/.well-known/agent-card.json</code>. WebMCP is an evolving browser API proposal for exposing page functionality as structured tools.</p><p>The important architectural consequence is that “agent-ready” does not imply one file or one protocol. Content retrieval, backend tools, remote agents and browser-local tools can coexist.</p></article><aside class="cite-card"><h2>Primary sources</h2><div class="source-list"><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28/">MCP 2026-07-28 specification release</a><a href="https://a2a-protocol.org/dev/specification/">A2A 1.0 specification</a><a href="https://github.com/webmachinelearning/webmcp/blob/main/index.bs">WebMCP specification source</a><a href="https://llmstxt.org/">llms.txt project</a></div></aside></section>
+<section class="cite-card" style="margin-top:14px"><h2>ARWP's position</h2><p>ARWP does not replace these protocols. The Resolver observes and normalizes multiple discovery ecosystems, preserves their source authority and chooses an interface for a specific intent.</p></section>
+<p class="reuse-note">Reuse: CC BY 4.0. Preferred source: https://dkharlanau.github.io/agent-ready-web-profile/answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html</p>
+</main></body></html>

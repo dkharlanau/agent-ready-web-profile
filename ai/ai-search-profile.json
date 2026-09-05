@@ -28,222 +28,58 @@
     ]
   },
   "surfaces": {
-    "entityHome": {
-      "status": "active",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
-      "mediaType": "text/html"
-    },
-    "siteProfile": {
-      "status": "active",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json",
-      "mediaType": "application/json"
-    },
-    "llmsCanonical": {
-      "status": "active",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/llms.txt",
-      "language": "en",
-      "mediaType": "text/plain"
-    },
-    "history": {
-      "status": "active",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/history.html",
-      "mediaType": "text/html"
-    },
-    "localeManifest": {
-      "status": "active",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json",
-      "mediaType": "application/json"
-    },
-    "sitemap": {
-      "status": "planned",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/sitemap.xml",
-      "mediaType": "application/xml",
-      "notes": "Planned explicit project sitemap; do not treat the URL as observed until deployed."
-    },
-    "robots": {
-      "status": "planned",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/robots.txt",
-      "mediaType": "text/plain",
-      "notes": "Planned explicit crawler policy surface for the project path."
-    },
-    "knowledgeGraph": {
-      "status": "planned",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/knowledge/graph.json",
-      "mediaType": "application/json"
-    },
-    "claimsIndex": {
-      "status": "planned",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json",
-      "mediaType": "application/json"
-    },
-    "pressKit": {
-      "status": "active",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
-      "mediaType": "text/html"
-    },
-    "reuseRights": {
-      "status": "active",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
-      "mediaType": "application/json"
-    }
+    "entityHome": {"status":"active","url":"https://dkharlanau.github.io/agent-ready-web-profile/","mediaType":"text/html"},
+    "siteProfile": {"status":"active","url":"https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json","mediaType":"application/json"},
+    "llmsCanonical": {"status":"active","url":"https://dkharlanau.github.io/agent-ready-web-profile/llms.txt","language":"en","mediaType":"text/plain"},
+    "history": {"status":"active","url":"https://dkharlanau.github.io/agent-ready-web-profile/history.html","mediaType":"text/html"},
+    "localeManifest": {"status":"active","url":"https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json","mediaType":"application/json"},
+    "sitemap": {"status":"planned","url":"https://dkharlanau.github.io/agent-ready-web-profile/sitemap.xml","mediaType":"application/xml","notes":"Planned explicit project sitemap; do not treat the URL as observed until deployed."},
+    "robots": {"status":"planned","url":"https://dkharlanau.github.io/agent-ready-web-profile/robots.txt","mediaType":"text/plain","notes":"Planned explicit crawler policy surface for the project path."},
+    "knowledgeGraph": {"status":"planned","url":"https://dkharlanau.github.io/agent-ready-web-profile/knowledge/graph.json","mediaType":"application/json"},
+    "claimsIndex": {"status":"planned","url":"https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json","mediaType":"application/json"},
+    "pressKit": {"status":"active","url":"https://dkharlanau.github.io/agent-ready-web-profile/media/","mediaType":"text/html"},
+    "reuseRights": {"status":"active","url":"https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json","mediaType":"application/json"}
   },
   "modules": {
     "answerPages": {
-      "status": "planned",
-      "priority": "P0",
-      "description": "Create concise canonical pages for recurring agentic-web questions, with direct answers, evidence and stable source URLs.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/answers/"
+      "status":"active","priority":"P0","description":"Create concise canonical pages for recurring agentic-web questions, with direct answers, evidence and stable source URLs.","url":"https://dkharlanau.github.io/agent-ready-web-profile/answers/","machineReadable":["https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json"]
     },
-    "originalResearch": {
-      "status": "active",
-      "priority": "P0",
-      "description": "Publish reviewed resolver benchmarks, negative results and future State of the Agentic Web measurements as original evidence rather than generic SEO content.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.md",
-      "cadence": "monthly"
-    },
-    "protocolObservatory": {
-      "status": "planned",
-      "priority": "P0",
-      "description": "Maintain a dated protocol observatory covering MCP, A2A, WebMCP, llms.txt, Agent Skills, commerce protocols and other relevant discovery surfaces.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/",
-      "cadence": "monthly"
-    },
-    "comparisonPages": {
-      "status": "planned",
-      "priority": "P1",
-      "description": "Publish source-backed comparison pages such as MCP vs A2A, WebMCP vs MCP and llms.txt vs agent manifests.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/compare/"
-    },
-    "conceptDefinitions": {
-      "status": "planned",
-      "priority": "P1",
-      "description": "Publish canonical definitions for ARWP concepts including agentic web resolver, capability graph, resolver regret and discovery conflict.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/"
-    },
-    "claimsRegistry": {
-      "status": "planned",
-      "priority": "P1",
-      "description": "Assign stable identifiers to important technical claims and expose status, review date, evidence and machine-readable representations.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/"
-    },
-    "evidenceReceipts": {
-      "status": "planned",
-      "priority": "P1",
-      "description": "Turn resolver observations and benchmark claims into durable replayable evidence receipts with digests and provenance.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/"
-    },
-    "crawlerMatrix": {
-      "status": "planned",
-      "priority": "P1",
-      "description": "Maintain a dated matrix of AI/search crawler roles, official documentation, robots behavior and recommended configuration without inferring unsupported behavior.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/",
-      "cadence": "monthly"
-    },
-    "agentFetchLab": {
-      "status": "planned",
-      "priority": "P1",
-      "description": "Run reproducible experiments measuring which web surfaces agents actually fetch first for concrete tasks instead of assuming special files are always used.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/research/what-agents-fetch/",
-      "cadence": "quarterly"
-    },
-    "knowledgeGraph": {
-      "status": "planned",
-      "priority": "P2",
-      "description": "Link protocols, concepts, claims, evidence and project surfaces in a machine-readable entity relationship graph.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/knowledge/",
-      "machineReadable": ["https://dkharlanau.github.io/agent-ready-web-profile/knowledge/graph.json"]
-    },
-    "citationVisuals": {
-      "status": "planned",
-      "priority": "P2",
-      "description": "Publish reusable research charts and diagrams with source notes, accessible alt text, stable URLs and explicit reuse terms.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/research/assets/"
-    },
-    "openReuseAssets": {
-      "status": "active",
-      "priority": "P1",
-      "description": "Publish a permission-free press/media pack under CC BY 4.0 with machine-readable reuse rights, canonical press facts, attribution guidance and explicit AI/ML training, indexing, embedding and RAG reuse permission for covered materials.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
-      "machineReadable": [
-        "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
-        "https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json"
-      ]
-    },
-    "externalDistribution": {
-      "status": "planned",
-      "priority": "P2",
-      "description": "Turn each substantial research release into externally distributed references while keeping the ARWP canonical URL and evidence as the source of record.",
-      "cadence": "on-change"
-    },
-    "aiVisibility": {
-      "status": "planned",
-      "priority": "P2",
-      "description": "Measure observable citations, grounding queries, referrals, external mentions and referring domains without collapsing them into a single score.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/visibility/",
-      "cadence": "monthly"
-    },
-    "localization": {
-      "status": "active",
-      "priority": "P1",
-      "description": "Expose English canonical semantics plus reviewed German and Russian discovery routing for AI agents with deterministic English fallback.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/LOCALIZATION.md",
-      "machineReadable": ["https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"]
-    },
-    "history": {
-      "status": "active",
-      "priority": "P1",
-      "description": "Expose product evolution, releases, maturity and current status as both a human timeline and machine-readable JSON.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/history.html",
-      "machineReadable": ["https://dkharlanau.github.io/agent-ready-web-profile/history.json"]
-    }
+    "originalResearch": {"status":"active","priority":"P0","description":"Publish reviewed resolver benchmarks, negative results and future State of the Agentic Web measurements as original evidence rather than generic SEO content.","url":"https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.md","cadence":"monthly"},
+    "protocolObservatory": {"status":"planned","priority":"P0","description":"Maintain a dated protocol observatory covering MCP, A2A, WebMCP, llms.txt, Agent Skills, commerce protocols and other relevant discovery surfaces.","url":"https://dkharlanau.github.io/agent-ready-web-profile/observatory/","cadence":"monthly"},
+    "comparisonPages": {"status":"active","priority":"P1","description":"Publish source-backed comparison pages such as MCP vs A2A, WebMCP vs MCP and llms.txt vs agent manifests.","url":"https://dkharlanau.github.io/agent-ready-web-profile/compare/","machineReadable":["https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json"]},
+    "conceptDefinitions": {"status":"active","priority":"P1","description":"Publish canonical definitions for ARWP concepts including agentic web resolver, capability graph, resolver regret and discovery conflict.","url":"https://dkharlanau.github.io/agent-ready-web-profile/concepts/","machineReadable":["https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json"]},
+    "claimsRegistry": {"status":"planned","priority":"P1","description":"Assign stable identifiers to important technical claims and expose status, review date, evidence and machine-readable representations.","url":"https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/"},
+    "evidenceReceipts": {"status":"planned","priority":"P1","description":"Turn resolver observations and benchmark claims into durable replayable evidence receipts with digests and provenance.","url":"https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/"},
+    "crawlerMatrix": {"status":"planned","priority":"P1","description":"Maintain a dated matrix of AI/search crawler roles, official documentation, robots behavior and recommended configuration without inferring unsupported behavior.","url":"https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/","cadence":"monthly"},
+    "agentFetchLab": {"status":"planned","priority":"P1","description":"Run reproducible experiments measuring which web surfaces agents actually fetch first for concrete tasks instead of assuming special files are always used.","url":"https://dkharlanau.github.io/agent-ready-web-profile/research/what-agents-fetch/","cadence":"quarterly"},
+    "knowledgeGraph": {"status":"planned","priority":"P2","description":"Link protocols, concepts, claims, evidence and project surfaces in a machine-readable entity relationship graph.","url":"https://dkharlanau.github.io/agent-ready-web-profile/knowledge/","machineReadable":["https://dkharlanau.github.io/agent-ready-web-profile/knowledge/graph.json"]},
+    "citationVisuals": {"status":"planned","priority":"P2","description":"Publish reusable research charts and diagrams with source notes, accessible alt text, stable URLs and explicit reuse terms.","url":"https://dkharlanau.github.io/agent-ready-web-profile/research/assets/"},
+    "openReuseAssets": {"status":"active","priority":"P1","description":"Publish a permission-free press/media pack under CC BY 4.0 with machine-readable reuse rights, canonical press facts, attribution guidance and explicit AI/ML training, indexing, embedding and RAG reuse permission for covered materials.","url":"https://dkharlanau.github.io/agent-ready-web-profile/media/","machineReadable":["https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json","https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json"]},
+    "externalDistribution": {"status":"planned","priority":"P2","description":"Turn each substantial research release into externally distributed references while keeping the ARWP canonical URL and evidence as the source of record.","cadence":"on-change"},
+    "aiVisibility": {"status":"planned","priority":"P2","description":"Measure observable citations, grounding queries, referrals, external mentions and referring domains without collapsing them into a single score.","url":"https://dkharlanau.github.io/agent-ready-web-profile/visibility/","cadence":"monthly"},
+    "localization": {"status":"active","priority":"P1","description":"Expose English canonical semantics plus reviewed German and Russian discovery routing for AI agents with deterministic English fallback.","url":"https://dkharlanau.github.io/agent-ready-web-profile/LOCALIZATION.md","machineReadable":["https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"]},
+    "history": {"status":"active","priority":"P1","description":"Expose product evolution, releases, maturity and current status as both a human timeline and machine-readable JSON.","url":"https://dkharlanau.github.io/agent-ready-web-profile/history.html","machineReadable":["https://dkharlanau.github.io/agent-ready-web-profile/history.json"]}
   },
   "vocabulary": [
-    {
-      "term": "agentic web resolver",
-      "definition": "Software that discovers multiple machine- and agent-facing interfaces exposed by a website, preserves their provenance, reports conflicts and selects an interface for a concrete intent.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/agentic-web-resolver/",
-      "status": "planned"
-    },
-    {
-      "term": "resolver regret",
-      "definition": "A decision-quality case where a simpler discovery strategy selects the reviewed-correct interface while the union Resolver selects an incorrect one.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/resolver-regret/",
-      "status": "planned"
-    },
-    {
-      "term": "discovery conflict",
-      "definition": "A visible disagreement between independently observed or publisher-declared discovery sources that a resolver must preserve rather than silently overwrite.",
-      "url": "https://dkharlanau.github.io/agent-ready-web-profile/concepts/discovery-conflict/",
-      "status": "planned"
-    }
+    {"term":"agentic web resolver","definition":"Software that discovers multiple machine- and agent-facing interfaces exposed by a website, preserves their provenance, reports conflicts and selects an interface for a concrete intent.","url":"https://dkharlanau.github.io/agent-ready-web-profile/concepts/agentic-web-resolver.html","status":"active"},
+    {"term":"resolver regret","definition":"A decision-quality case where a simpler discovery strategy selects the reviewed-correct interface while the union Resolver selects an incorrect one.","url":"https://dkharlanau.github.io/agent-ready-web-profile/concepts/resolver-regret.html","status":"active"},
+    {"term":"discovery conflict","definition":"A visible disagreement between independently observed or publisher-declared discovery sources that a resolver must preserve rather than silently overwrite.","url":"https://dkharlanau.github.io/agent-ready-web-profile/concepts/discovery-conflict.html","status":"active"}
   ],
   "measurement": {
     "signals": [
-      {
-        "name": "search visibility",
-        "status": "planned",
-        "description": "Track canonical page indexing, search queries and search performance using available webmaster tooling."
-      },
-      {
-        "name": "AI citations and referrals",
-        "status": "planned",
-        "description": "Track observable AI citations, grounding queries, referrals and external mentions where platforms expose them."
-      },
-      {
-        "name": "referring domains",
-        "status": "planned",
-        "description": "Track external sources that cite or link to ARWP research, definitions, evidence and visual assets."
-      }
+      {"name":"search visibility","status":"planned","description":"Track canonical page indexing, search queries and search performance using available webmaster tooling."},
+      {"name":"AI citations and referrals","status":"planned","description":"Track observable AI citations, grounding queries, referrals and external mentions where platforms expose them."},
+      {"name":"referring domains","status":"planned","description":"Track external sources that cite or link to ARWP research, definitions, evidence and visual assets."}
     ],
-    "reviewCadence": "monthly",
-    "privacy": "Use aggregate, privacy-minimized visibility signals; do not collect resolver inputs or visitor activity into a browsing-history dataset."
+    "reviewCadence":"monthly",
+    "privacy":"Use aggregate, privacy-minimized visibility signals; do not collect resolver inputs or visitor activity into a browsing-history dataset."
   },
   "guardrails": {
-    "noRankingClaimsWithoutEvidence": true,
-    "separateOwnedFromIndependentEvidence": true,
-    "preserveNegativeResults": true,
-    "canonicalTechnicalSemantics": true,
-    "noFabricatedAdoption": true,
-    "noReadinessScore": true
+    "noRankingClaimsWithoutEvidence":true,
+    "separateOwnedFromIndependentEvidence":true,
+    "preserveNegativeResults":true,
+    "canonicalTechnicalSemantics":true,
+    "noFabricatedAdoption":true,
+    "noReadinessScore":true
   }
 }

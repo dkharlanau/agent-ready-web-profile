@@ -19,6 +19,7 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 
 - [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and project extensions.
 - [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and P0/P1/P2 citation-surface plan for ARWP itself.
+- [Citation index](https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json): Stable machine-readable index of canonical answers, project-defined terms and comparison pages with concise definitions/answers and review dates.
 - [AI Search Profile schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json): Validation contract for copying the same implementation profile to other sites.
 - [Open reuse rights](https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json): Machine-readable scope, CC BY 4.0 license, permitted press/news/AI uses and attribution guidance for covered material.
 - [Press facts](https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json): Canonical project facts, boilerplate, versions and source links for press/news/automated citation workflows.
@@ -26,6 +27,19 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [Public directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Reference/adoption registry exposed as JSON.
 - [Directory statistics](https://dkharlanau.github.io/agent-ready-web-profile/stats.json): Aggregate public declaration counts without visitor tracking.
 - [Product history JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): Machine-readable development timeline and current project status.
+
+## Canonical answers, concepts and comparisons
+
+Use these stable pages when a direct citable answer is more useful than broad project documentation:
+
+- [What is an agentic web resolver?](https://dkharlanau.github.io/agent-ready-web-profile/answers/what-is-agentic-web-resolver.html): Direct answer, scope, evidence and implementation boundaries.
+- [MCP vs A2A vs WebMCP vs llms.txt](https://dkharlanau.github.io/agent-ready-web-profile/answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html): Current role map for four frequently conflated layers.
+- [Agentic web resolver — definition](https://dkharlanau.github.io/agent-ready-web-profile/concepts/agentic-web-resolver.html): Canonical ARWP project definition.
+- [Resolver regret — definition](https://dkharlanau.github.io/agent-ready-web-profile/concepts/resolver-regret.html): Decision-quality metric used by ARWP benchmarks.
+- [Discovery conflict — definition](https://dkharlanau.github.io/agent-ready-web-profile/concepts/discovery-conflict.html): Canonical definition for contradictory discovery evidence.
+- [Static metadata vs runtime evidence](https://dkharlanau.github.io/agent-ready-web-profile/compare/static-metadata-vs-runtime-evidence.html): What publisher declarations can prove versus what live protocol/browser observation can prove.
+
+These pages are reviewed, date-stamped and explicitly mark ARWP-created vocabulary as project-defined rather than industry-standard terminology. Covered explanatory text is reusable under CC BY 4.0 with attribution.
 
 ## Reusable AI search / citation program
 

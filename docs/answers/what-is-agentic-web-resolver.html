@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An agentic web resolver discovers the interfaces a website exposes, preserves provenance and conflicts, and selects an interface for a concrete intent.">
+  <title>What is an agentic web resolver? — ARWP</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/answers/what-is-agentic-web-resolver.html">
+  <link rel="describedby" type="application/json" href="../citation-index.json"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="../citation.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"What is an agentic web resolver?","dateModified":"2026-09-05","license":"https://creativecommons.org/licenses/by/4.0/","mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/answers/what-is-agentic-web-resolver.html","description":"An agentic web resolver discovers multiple machine- and agent-facing interfaces exposed by a website, preserves provenance, reports conflicts and selects an interface for a concrete intent."}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="./">Answers</a><a href="../concepts/agentic-web-resolver.html">Definition</a><a class="nav-cta" href="../media/">Reuse</a></nav></header>
+<main class="cite-main shell">
+  <section class="cite-hero"><p class="eyebrow">Answer / ARWP</p><h1>What is an agentic web resolver?</h1><div class="cite-meta"><span>Reviewed 2026-09-05</span><span>Project-defined term</span><span>CC BY 4.0</span></div></section>
+  <div class="direct-answer">An agentic web resolver discovers the machine- and agent-facing interfaces a website actually exposes, preserves where each observation came from, reports conflicts, and selects an interface for a concrete intent.</div>
+  <section class="cite-grid">
+    <article class="cite-card"><h2>Why it is useful</h2><p>A modern site may expose ordinary HTML, Markdown negotiation, <code>llms.txt</code>, OpenAPI, API Catalog metadata, Agent Skills, MCP, A2A or browser-runtime tools. These surfaces are not interchangeable. A resolver lets a client combine them without requiring every publisher to adopt one universal manifest.</p><p>ARWP's resolver model keeps source authority and fallbacks visible. It can answer questions such as “which interface should I use to read?”, “is there a structured search surface?”, or “does the site advertise an agent endpoint?” without silently converting one protocol into another.</p><h2>What it should preserve</h2><ul class="cite-list"><li>canonical site identity and target scope;</li><li>the source and authority of each observation;</li><li>conflicting declarations instead of overwriting them;</li><li>selected interface plus rejected/alternate candidates;</li><li>what static evidence can and cannot prove.</li></ul></article>
+    <aside class="cite-card"><h2>What it is not</h2><p class="scope-note">A resolver is not a permission layer, a trust score, an SEO score, or proof that an advertised runtime will successfully execute a task.</p><h3>ARWP implementation</h3><div class="source-list"><a href="../RESOLVER.md">Resolver model</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/tree/main/resolver">Resolver source</a><a href="../BENCHMARK.md">Benchmark methodology</a></div></aside>
+  </section>
+  <section class="cite-card" style="margin-top:14px"><h2>Related concept</h2><p>The canonical ARWP definition is maintained at <a href="../concepts/agentic-web-resolver.html">Agentic web resolver</a>. The phrase is project-defined terminology, not a claim of industry-standard status.</p></section>
+  <p class="reuse-note">Reuse: CC BY 4.0. Preferred source: https://dkharlanau.github.io/agent-ready-web-profile/answers/what-is-agentic-web-resolver.html</p>
+</main>
+</body></html>

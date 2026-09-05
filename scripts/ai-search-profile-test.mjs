@@ -25,6 +25,16 @@ assert.equal(source.surfaces.history.status, 'active');
 assert.equal(source.modules.openReuseAssets.status, 'active');
 assert.equal(source.surfaces.pressKit.status, 'active');
 assert.equal(source.surfaces.reuseRights.url, 'https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json');
+assert.equal(source.modules.answerPages.status, 'active');
+assert.equal(source.modules.comparisonPages.status, 'active');
+assert.equal(source.modules.conceptDefinitions.status, 'active');
+assert.ok(source.modules.answerPages.machineReadable.includes('https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json'));
+assert.equal(source.vocabulary.every(item => item.status === 'active'), true);
+
+const citationIndex = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'citation-index.json'), 'utf8'));
+assert.equal(citationIndex.license, 'CC-BY-4.0');
+assert.ok(citationIndex.items.some(item => item.id === 'concept-resolver-regret'));
+assert.ok(citationIndex.items.some(item => item.id === 'compare-static-runtime'));
 
 const starter = createAiSearchProfileStarter('https://example.com/docs/', {
   name: 'Example Docs',
@@ -74,4 +84,4 @@ assert.equal(planned.status, 0, planned.stderr || planned.stdout);
 assert.match(planned.stdout, /P0 originalResearch/);
 assert.match(planned.stdout, /P1 openReuseAssets/);
 
-console.log('PASS AI Search & Citation Profile validates, plans prioritized citation and open-reuse surfaces, publishes a matching self-profile, and generates reusable site plans');
+console.log('PASS AI Search & Citation Profile validates, plans prioritized citation and open-reuse surfaces, publishes canonical answer/concept/comparison references, and generates reusable site plans');
