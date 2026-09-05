@@ -7,6 +7,7 @@ import { verifyProfileSource } from '../lib/verifier.mjs';
 import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 import { formatHealthReport, healthReport } from '../lib/health.mjs';
 import { checkProtocolArtifacts } from '../lib/protocol-checks.mjs';
+import { auditSite, formatAuditReport } from '../lib/site-audit.mjs';
 import { resolveSite, explainResolvedSite, planResolvedSite, DEFAULT_RESOLVER_MAX_BYTES } from '../lib/resolver.mjs';
 import { resolveMany } from '../lib/resolver-batch.mjs';
 import { createResolverSnapshot, diffResolverSnapshots } from '../lib/resolver-snapshot.mjs';
@@ -22,6 +23,7 @@ Usage:
   arwp validate <profile.json> [--json]
   arwp verify <profile.json|https://...> [--json] [--timeout=<ms>] [--concurrency=<n>]
   arwp scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
+  arwp audit <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
   arwp init <https://site.example> [--output=ai/site-profile.json] [--force] [--json]
   arwp health <https://site.example> [--json]
   arwp resolve <https://site.example> [--json]
@@ -42,6 +44,7 @@ Commands:
   validate           Validate one local ARWP profile against the v0.1 schema and semantic checks.
   verify             Validate a local or remote profile and probe every declared public URL.
   scan               Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
+  audit              Evaluate source-backed Search, AI Search, citation, freshness and agent-web recommendations without producing a readiness score or ranking promise.
   init               Scan a website and write a conservative valid ARWP draft without inventing unverified capabilities.
   health             Combine bounded discovery with live verification of an existing ARWP profile.
   resolve            Normalize ARWP and upstream/community discovery surfaces into one evidence-backed service map.
@@ -242,6 +245,17 @@ async function main() {
       console.log(`Sources +${drift.summary.sourcesAdded}/-${drift.summary.sourcesRemoved}/~${drift.summary.sourcesChanged}; interfaces +${drift.summary.interfacesAdded}/-${drift.summary.interfacesRemoved}/~${drift.summary.interfacesChanged}; conflicts +${drift.summary.conflictsAdded}/-${drift.summary.conflictsRemoved}; plans ${drift.summary.planChanges}; identity ${drift.summary.identityChanged ? 'changed' : 'stable'}`);
     }
     return drift.hasDrift ? 1 : 0;
+  }
+
+  if (command === 'audit') {
+    if (!source) throw new Error('audit requires a public HTTPS website URL.');
+    const result = await auditSite(source, {
+      timeoutMs: numericOption('timeout', 8000),
+      maxBytes: numericOption('max-bytes', 512 * 1024)
+    });
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else console.log(formatAuditReport(result));
+    return (result.summary.fail || 0) > 0 ? 1 : 0;
   }
 
   if (['resolve', 'explain', 'plan', 'snapshot'].includes(command)) {
