@@ -10,6 +10,7 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 
 - [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): Public project page and resolver workflow.
 - [Agentic Web Protocol Observatory](https://dkharlanau.github.io/agent-ready-web-profile/observatory/): Dated primary-source-reviewed map of MCP, A2A, WebMCP, llms.txt, Agent Skills, RFC discovery and emerging commerce mechanisms.
+- [ARWP Claims Registry](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/): Stable scoped technical claims with IDs, review state, evidence and explicit limitations.
 - [Resolver model](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): How heterogeneous discovery evidence is normalized, compared and routed.
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimental ARWP profile contract. Treat this English document as normative for project-defined semantics.
 - [Conformance](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): What ARWP conformance does and does not assert.
@@ -20,7 +21,9 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 
 - [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and project extensions.
 - [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and P0/P1/P2 citation-surface plan for ARWP itself.
-- [Citation index](https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json): Stable machine-readable index of canonical answers, project-defined terms and comparison pages with concise definitions/answers and review dates.
+- [Citation index](https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json): Stable machine-readable index of canonical answers, project-defined terms, comparisons and verified claims.
+- [Claims Registry JSON](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json): Claim IDs, status meanings, canonical human/JSON URLs and supersession policy.
+- [Claim JSON Schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json): Validation contract for scoped ARWP claim objects.
 - [Protocol Observatory JSON](https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json): Current dated protocol/mechanism snapshot with upstream status, discovery path, ARWP support state and primary sources.
 - [Protocol Observatory history](https://dkharlanau.github.io/agent-ready-web-profile/observatory/history/index.json): Frozen historical snapshots for month-to-month comparison without rewriting prior observations.
 - [AI Search Profile schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json): Validation contract for copying the same implementation profile to other sites.
@@ -49,6 +52,15 @@ Important boundaries:
 - browser-runtime WebMCP is `not-assessed` by the static resolver rather than treated as absent;
 - ACP and UCP are currently watchlist items for future transaction-intent work, not implemented ARWP adapters;
 - the Agent Skills core specification defines `SKILL.md`; ARWP's web-oriented discovery adapter is kept distinct from the core upstream specification.
+
+## Verified claims
+
+Use claim IDs when a precise reviewed statement is more useful than general project prose. Published claims are retained historically; if evidence or scope changes, a claim is superseded or withdrawn rather than silently rewritten.
+
+- [ARWP-CLAIM-0001](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0001.html): For A2A 1.0, an Agent Card is discovery metadata. A client selects a compatible entry from `supportedInterfaces[]` and uses that entry's URL; the Agent Card retrieval URL is not automatically the callable endpoint. Scope: A2A 1.0 discovery/callable-interface semantics, not reachability, authorization or provider trust.
+- [ARWP-CLAIM-0002](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.html): On the unchanged reviewed 20-site corpus measured 2026-08-28 after the general OpenAPI search-eligibility correction, `llms-aware` scored 89/100, `resolver-union` 86/100, resolver regret was 6 and uniquely-correct union cases were 0. Scope: this frozen engineering benchmark only; it is not a web-wide adoption, ranking, answer-quality, latency or token-cost claim.
+
+Machine-readable claim objects contain structured facts, evidence links, `doesNotProve` boundaries, review dates and project-version context. The Claims Registry is active. Replayable Evidence Receipts remain a separate planned module; a reviewed claim is not itself a complete replay bundle or trust certificate.
 
 ## Canonical answers, concepts and comparisons
 
