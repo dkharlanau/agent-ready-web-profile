@@ -1,0 +1,33 @@
+name: Search and Agent recommendations watch
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  review-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Check recommendation source reachability and review age
+        run: node scripts/recommendations-source-check.mjs --json > recommendations-source-report.json
+
+      - name: Publish source-watch report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: recommendations-source-report
+          path: recommendations-source-report.json
+          if-no-files-found: warn
+          retention-days: 30
