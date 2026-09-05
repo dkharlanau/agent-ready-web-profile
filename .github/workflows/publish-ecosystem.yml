@@ -17,13 +17,14 @@ on:
 permissions:
   contents: read
   id-token: write
+  attestations: write
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: '24'
           registry-url: https://registry.npmjs.org
@@ -39,27 +40,46 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: '24'
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
       - run: npm ci
       - run: npm test
-      - name: Publish through npm trusted publishing
-        run: npm publish --access public
+      - name: Pack exact npm artifact
+        id: pack
+        shell: bash
+        run: |
+          npm pack --json > pack.json
+          node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('pack.json','utf8'))[0].filename; console.log('path='+p)" >> "$GITHUB_OUTPUT"
+      - name: Generate CycloneDX npm dependency SBOM
+        run: npm sbom --sbom-format=cyclonedx > npm-sbom.cdx.json
+      - name: Attest npm tarball provenance
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: ${{ steps.pack.outputs.path }}
+      - name: Attest npm tarball SBOM
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: ${{ steps.pack.outputs.path }}
+          sbom-path: npm-sbom.cdx.json
+      - name: Publish exact attested tarball through npm trusted publishing
+        run: npm publish "${{ steps.pack.outputs.path }}" --access public
 
   publish-mcp-registry:
     if: ${{ inputs.publish_mcp_registry }}
     needs: validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - name: Install mcp-publisher
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install pinned mcp-publisher v1.8.1
+        shell: bash
         run: |
-          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" \
-            | tar xz mcp-publisher
+          curl -fsSLo mcp-publisher.tar.gz "https://github.com/modelcontextprotocol/registry/releases/download/v1.8.1/mcp-publisher_linux_amd64.tar.gz"
+          echo "a06c9096dcb9727c13555b6be26c7effa707b01f06a4c561ba7a3635443cf2cc  mcp-publisher.tar.gz" | sha256sum --check --strict
+          tar xzf mcp-publisher.tar.gz mcp-publisher
           ./mcp-publisher --help
       - name: Authenticate to the Official MCP Registry with GitHub OIDC
         run: ./mcp-publisher login github-oidc --registry=https://registry.modelcontextprotocol.io

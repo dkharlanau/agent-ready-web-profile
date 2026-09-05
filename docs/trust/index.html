@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ARWP Trust Center: maintainer identity, evidence policy, security reporting, corrections, software provenance, persistent identifiers and reuse terms.">
+  <title>ARWP Trust Center</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/trust/">
+  <link rel="describedby" type="application/json" href="./trust.json">
+  <link rel="describedby" type="application/json" href="./corrections.json">
+  <link rel="stylesheet" href="../arwp.css">
+  <style>
+    .trust-main{padding:72px 0 96px}.trust-hero{max-width:900px}.trust-hero h1{margin:0;font-size:clamp(48px,7vw,86px);line-height:.98;letter-spacing:-.055em}.trust-lead{max-width:820px;font-size:21px;color:var(--muted)}.trust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:38px}.trust-card{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--white)}.trust-card h2{margin:0 0 10px}.trust-card p{margin:0 0 12px}.trust-card ul{margin:0;padding-left:20px}.trust-card code{overflow-wrap:anywhere}.trust-status{display:inline-block;padding:7px 10px;border-radius:999px;background:var(--acid);font:500 11px var(--mono);text-transform:uppercase}.trust-wide{grid-column:1/-1}.trust-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}.trust-links a{font-weight:700}@media(max-width:760px){.trust-grid{grid-template-columns:1fr}.trust-wide{grid-column:auto}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
+    <nav aria-label="Trust navigation"><a href="../observatory/">Observatory</a><a href="../evidence/claims/">Claims</a><a href="../media/">Open media</a><a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav>
+  </header>
+
+  <main class="trust-main shell">
+    <section class="trust-hero">
+      <p class="eyebrow">Identity · evidence · security · provenance</p>
+      <span class="trust-status">Active · pre-stable</span>
+      <h1>Trust should be inspectable.</h1>
+      <p class="trust-lead">ARWP does not use a single trust or readiness score. This page exposes who maintains the project, what evidence it uses, how corrections are handled, how releases can be verified, what remains external or planned, and what none of those signals prove.</p>
+    </section>
+
+    <section class="trust-grid">
+      <article class="trust-card">
+        <h2>Maintainer & identity</h2>
+        <p>ARWP is maintained by <strong>Dzmitryi Kharlanau</strong>. The canonical source repository and project site are linked below; citation metadata lives in <code>CITATION.cff</code>.</p>
+        <div class="trust-links"><a href="https://github.com/dkharlanau">GitHub profile</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CITATION.cff">Citation metadata</a></div>
+      </article>
+
+      <article class="trust-card">
+        <h2>Evidence model</h2>
+        <ul>
+          <li>primary sources are preferred for protocol/vendor facts;</li>
+          <li>owner-controlled examples stay separate from independent evidence;</li>
+          <li>negative results and resolver regret remain visible;</li>
+          <li>planned capabilities are not presented as deployed;</li>
+          <li>dated snapshots are frozen instead of rewritten.</li>
+        </ul>
+        <div class="trust-links"><a href="../evidence/claims/">Claims Registry</a><a href="../observatory/">Protocol Observatory</a><a href="../BENCHMARK.md">Benchmark method</a></div>
+      </article>
+
+      <article class="trust-card">
+        <h2>Security</h2>
+        <p>The resolver accepts public URLs and parses untrusted web metadata, so network boundaries and read-only behavior are security-relevant. Reports should follow the repository security policy rather than public exploit disclosure.</p>
+        <div class="trust-links"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SECURITY.md">Security policy</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/security">Security page</a></div>
+      </article>
+
+      <article class="trust-card">
+        <h2>Corrections</h2>
+        <p>Material published factual errors are recorded in a public ledger. Benchmark improvements are preserved as revisions rather than relabeled as corrections, and superseded claims remain discoverable.</p>
+        <div class="trust-links"><a href="./corrections.html">Corrections ledger</a><a href="./corrections.json">Corrections JSON</a></div>
+      </article>
+
+      <article class="trust-card">
+        <h2>Build provenance & SBOM</h2>
+        <p>The npm workflow uses GitHub OIDC/trusted publishing. The next npm publish is configured to pack the exact tarball, generate a CycloneDX dependency SBOM, attest provenance and the SBOM to that same tarball, then publish that exact artifact.</p>
+        <code>gh attestation verify &lt;tarball&gt; -R dkharlanau/agent-ready-web-profile</code>
+        <p style="margin-top:12px">The MCP Registry publisher dependency is also version- and SHA-256-pinned before execution.</p>
+        <p><strong>Boundary:</strong> provenance and SBOM attestations prove scoped build/dependency facts; they do not prove that the artifact is vulnerability-free or correct.</p>
+      </article>
+
+      <article class="trust-card">
+        <h2>Persistent citation</h2>
+        <p>The repository is prepared for Zenodo archiving through <code>CITATION.cff</code>. <strong>No DOI is claimed yet.</strong> A DOI will be published here only after the repository is externally enabled/archived and Zenodo actually issues one.</p>
+        <div class="trust-links"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CITATION.cff">CITATION.cff</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/trust/DOI.md">DOI activation guide</a><a href="./trust.json">Current DOI status</a></div>
+      </article>
+
+      <article class="trust-card">
+        <h2>Independent security signal</h2>
+        <p>An OpenSSF Scorecard workflow is configured as an external, reproducible signal over repository practices. Its result is not treated as a correctness or quality certificate. OpenSSF Best Practices self-certification remains an explicit external task until completed.</p>
+        <div class="trust-links"><a href="https://scorecard.dev/viewer/?uri=github.com/dkharlanau/agent-ready-web-profile">Scorecard viewer</a></div>
+      </article>
+
+      <article class="trust-card">
+        <h2>Reuse rights</h2>
+        <p>Software remains Apache-2.0. Designated ARWP-authored press/research/media material is available under CC BY 4.0, including explicit AI/ML reuse permission where covered by the rights manifest.</p>
+        <div class="trust-links"><a href="../media/">Open Media & AI Reuse Pack</a><a href="../media/rights.json">Rights JSON</a></div>
+      </article>
+
+      <article class="trust-card trust-wide">
+        <h2>What this Trust Center does not prove</h2>
+        <p>It does not prove that ARWP is vulnerability-free, universally adopted, endorsed by upstream protocol owners, guaranteed to rank in search/AI systems, or correct outside each claim's stated evidence and date. Trust signals are useful because they are inspectable and bounded, not because they remove judgment.</p>
+        <div class="trust-links"><a href="./trust.json">Machine-readable Trust Center</a><a href="../history.html">Product history</a><a href="../crawler-matrix/">AI crawler matrix</a></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Trust Center</div>
+    <div class="footer-links"><a href="./trust.json">Trust JSON</a><a href="./corrections.json">Corrections JSON</a><a href="../media/">Reuse</a><a href="../">Project</a></div>
+    <p>Active development · Pre-stable · Last reviewed 2026-09-05</p>
+  </footer>
+</body>
+</html>

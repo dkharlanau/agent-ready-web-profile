@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json",
   "title": "ARWP AI Search & Citation Profile v0.1",
-  "description": "Non-normative implementation profile for planning and tracking citation-ready, machine-discoverable and evidence-backed website surfaces without claiming ranking gains.",
+  "description": "Non-normative implementation profile for planning and tracking citation-ready, machine-discoverable, trust-oriented and evidence-backed website surfaces without claiming ranking gains.",
   "type": "object",
   "additionalProperties": false,
   "required": ["profileVersion", "site", "objective", "surfaces", "modules", "measurement", "guardrails"],
@@ -17,12 +17,7 @@
         "id": { "type": "string", "minLength": 2, "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$" },
         "name": { "type": "string", "minLength": 1, "maxLength": 200 },
         "canonicalUrl": { "$ref": "#/$defs/httpsUri" },
-        "languages": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 }
-        },
+        "languages": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 } },
         "canonicalLanguage": { "type": "string", "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$", "maxLength": 35 }
       }
     },
@@ -32,19 +27,8 @@
       "required": ["primary", "targetQuestions"],
       "properties": {
         "primary": { "type": "string", "minLength": 10, "maxLength": 500 },
-        "targetQuestions": {
-          "type": "array",
-          "minItems": 1,
-          "maxItems": 30,
-          "uniqueItems": true,
-          "items": { "type": "string", "minLength": 5, "maxLength": 300 }
-        },
-        "canonicalTerms": {
-          "type": "array",
-          "maxItems": 50,
-          "uniqueItems": true,
-          "items": { "type": "string", "minLength": 2, "maxLength": 100 }
-        }
+        "targetQuestions": { "type": "array", "minItems": 1, "maxItems": 30, "uniqueItems": true, "items": { "type": "string", "minLength": 5, "maxLength": 300 } },
+        "canonicalTerms": { "type": "array", "maxItems": 50, "uniqueItems": true, "items": { "type": "string", "minLength": 2, "maxLength": 100 } }
       }
     },
     "surfaces": {
@@ -62,7 +46,9 @@
         "knowledgeGraph": { "$ref": "#/$defs/surface" },
         "claimsIndex": { "$ref": "#/$defs/surface" },
         "pressKit": { "$ref": "#/$defs/surface" },
-        "reuseRights": { "$ref": "#/$defs/surface" }
+        "reuseRights": { "$ref": "#/$defs/surface" },
+        "trustCenter": { "$ref": "#/$defs/surface" },
+        "correctionsLedger": { "$ref": "#/$defs/surface" }
       }
     },
     "modules": {
@@ -71,7 +57,8 @@
       "required": [
         "answerPages", "originalResearch", "protocolObservatory", "comparisonPages", "conceptDefinitions",
         "claimsRegistry", "evidenceReceipts", "crawlerMatrix", "agentFetchLab", "knowledgeGraph",
-        "citationVisuals", "openReuseAssets", "externalDistribution", "aiVisibility", "localization", "history"
+        "citationVisuals", "openReuseAssets", "trustCenter", "correctionsLedger", "softwareProvenance",
+        "persistentIdentifiers", "externalTrustSignals", "externalDistribution", "aiVisibility", "localization", "history"
       ],
       "properties": {
         "answerPages": { "$ref": "#/$defs/module" },
@@ -86,6 +73,11 @@
         "knowledgeGraph": { "$ref": "#/$defs/module" },
         "citationVisuals": { "$ref": "#/$defs/module" },
         "openReuseAssets": { "$ref": "#/$defs/module" },
+        "trustCenter": { "$ref": "#/$defs/module" },
+        "correctionsLedger": { "$ref": "#/$defs/module" },
+        "softwareProvenance": { "$ref": "#/$defs/module" },
+        "persistentIdentifiers": { "$ref": "#/$defs/module" },
+        "externalTrustSignals": { "$ref": "#/$defs/module" },
         "externalDistribution": { "$ref": "#/$defs/module" },
         "aiVisibility": { "$ref": "#/$defs/module" },
         "localization": { "$ref": "#/$defs/module" },
@@ -112,11 +104,7 @@
       "additionalProperties": false,
       "required": ["signals", "reviewCadence", "privacy"],
       "properties": {
-        "signals": {
-          "type": "array",
-          "maxItems": 30,
-          "items": { "$ref": "#/$defs/measurementSignal" }
-        },
+        "signals": { "type": "array", "maxItems": 30, "items": { "$ref": "#/$defs/measurementSignal" } },
         "reviewCadence": { "type": "string", "enum": ["weekly", "monthly", "quarterly", "on-change"] },
         "privacy": { "type": "string", "minLength": 10, "maxLength": 500 }
       }
@@ -124,10 +112,7 @@
     "guardrails": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "noRankingClaimsWithoutEvidence", "separateOwnedFromIndependentEvidence", "preserveNegativeResults",
-        "canonicalTechnicalSemantics", "noFabricatedAdoption", "noReadinessScore"
-      ],
+      "required": ["noRankingClaimsWithoutEvidence", "separateOwnedFromIndependentEvidence", "preserveNegativeResults", "canonicalTechnicalSemantics", "noFabricatedAdoption", "noReadinessScore"],
       "properties": {
         "noRankingClaimsWithoutEvidence": { "const": true },
         "separateOwnedFromIndependentEvidence": { "const": true },
@@ -162,12 +147,7 @@
         "priority": { "type": "string", "enum": ["P0", "P1", "P2"] },
         "description": { "type": "string", "minLength": 10, "maxLength": 1000 },
         "url": { "$ref": "#/$defs/httpsUri" },
-        "machineReadable": {
-          "type": "array",
-          "maxItems": 20,
-          "uniqueItems": true,
-          "items": { "$ref": "#/$defs/httpsUri" }
-        },
+        "machineReadable": { "type": "array", "maxItems": 20, "uniqueItems": true, "items": { "$ref": "#/$defs/httpsUri" } },
         "cadence": { "type": "string", "enum": ["one-off", "continuous", "weekly", "monthly", "quarterly", "on-change"] },
         "notes": { "type": "string", "maxLength": 1000 }
       }

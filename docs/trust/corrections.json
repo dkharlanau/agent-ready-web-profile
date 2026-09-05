@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "project": "Agent-Ready Web Profile",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/trust/corrections.html",
+  "lastReviewed": "2026-09-05",
+  "policy": {
+    "materialPublishedErrorsAreRecorded": true,
+    "historicalRecordsAreNotSilentlyRewritten": true,
+    "benchmarkImprovementsAreNotMislabelledAsCorrections": true,
+    "supersededClaimsRemainDiscoverable": true,
+    "rule": "When a material published factual error is confirmed, add a dated entry describing what was wrong, the corrected statement, affected canonical URLs and immutable evidence for the change."
+  },
+  "entries": [],
+  "notes": [
+    "No material published factual correction is recorded as of 2026-09-05.",
+    "The resolver-union move from 81/100 to 86/100 on 2026-08-28 is an engineering/benchmark revision after a general eligibility-policy improvement, not a correction of the historical 81/100 measurement. Both remain part of the benchmark history."
+  ]
+}
