@@ -1,0 +1,41 @@
+# ARWP example policy: maximize AI/search discoverability while opting out of documented training crawlers.
+# Reviewed: 2026-09-05
+# This is a starting template, not a universal legal/technical recommendation.
+# Merge it with your existing robots.txt rules and review provider documentation before deployment.
+
+# OpenAI: ChatGPT search allowed, potential model-training crawler blocked.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+# Anthropic: Claude search + user-directed retrieval allowed, training crawler blocked.
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+# Google: Search (including AI Overviews / AI Mode) allowed.
+# Google-Extended is a robots product token, not a distinct HTTP UA.
+# Disallowing it does not block Google Search, but it restricts documented Gemini training / specified non-Search grounding uses.
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+# Perplexity search indexing allowed. PerplexityBot is documented as not being used for foundation-model pretraining.
+User-agent: PerplexityBot
+Allow: /
+
+# Intentionally no Perplexity-User rule here: official Perplexity sources reviewed on 2026-09-05 are not fully consistent about current robots behavior for user-triggered retrieval.
+
+# Bing search indexing allowed; Bingbot honors robots.txt.
+# Microsoft's generative-AI training / Chat-Copilot content-usage controls also include page-level robots meta / X-Robots-Tag directives and are not represented by a separate training crawler token here.
+User-agent: Bingbot
+Allow: /

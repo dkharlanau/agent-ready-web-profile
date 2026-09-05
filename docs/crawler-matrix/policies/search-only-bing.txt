@@ -1,0 +1,5 @@
+# Minimal Bing fragment: keep Bing indexing eligible.
+User-agent: Bingbot
+Allow: /
+
+# Microsoft also documents page-level meta/X-Robots-Tag controls for some generative-AI uses; configure those separately where needed.

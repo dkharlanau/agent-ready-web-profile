@@ -1,0 +1,9 @@
+# Minimal Anthropic fragment: permit search and user-triggered retrieval, opt out of ClaudeBot training crawler.
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /

@@ -28,6 +28,10 @@ assert.equal(source.surfaces.claimsIndex.status, 'active');
 assert.equal(source.surfaces.claimsIndex.url, 'https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json');
 assert.ok(source.modules.claimsRegistry.machineReadable.includes('https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json'));
 assert.equal(source.modules.evidenceReceipts.status, 'planned', 'claims must not imply replayable evidence receipts are already implemented');
+assert.equal(source.modules.crawlerMatrix.status, 'active');
+assert.equal(source.modules.crawlerMatrix.url, 'https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/');
+assert.ok(source.modules.crawlerMatrix.machineReadable.includes('https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/crawlers.json'));
+assert.ok(source.modules.crawlerMatrix.machineReadable.includes('https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/templates/search-visible-training-blocked.txt'));
 assert.equal(source.surfaces.history.status, 'active');
 assert.equal(source.modules.openReuseAssets.status, 'active');
 assert.equal(source.surfaces.pressKit.status, 'active');
@@ -76,6 +80,10 @@ assert.equal(claimsIndex.claims.length, 2);
 assert.equal(claimsIndex.claims.every(item => item.status === 'verified'), true);
 assert.match(claimsIndex.historyPolicy, /not silently rewritten/i);
 
+const crawlerMatrix = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'crawler-matrix', 'crawlers.json'), 'utf8'));
+assert.equal(crawlerMatrix.entries.length, 10);
+assert.equal(crawlerMatrix.methodology.conflictsStayVisible, true);
+
 const starter = createAiSearchProfileStarter('https://example.com/docs/', {
   name: 'Example Docs',
   languages: ['en', 'de'],
@@ -92,6 +100,7 @@ assert.equal(starter.surfaces.pressKit.url, 'https://example.com/docs/media/');
 assert.equal(starter.surfaces.reuseRights.url, 'https://example.com/docs/media/rights.json');
 assert.equal(starter.modules.openReuseAssets.priority, 'P1');
 assert.equal(starter.modules.claimsRegistry.status, 'planned');
+assert.equal(starter.modules.crawlerMatrix.status, 'planned');
 assert.equal(starter.surfaces.claimsIndex.status, 'planned');
 assert.equal(Object.values(starter.modules).every(module => module.status === 'planned'), true);
 
@@ -102,6 +111,7 @@ assert.equal(plan.summary.planned, 16);
 assert.equal(plan.summary.nextPriority, 'P0');
 assert.deepEqual(plan.next.filter(item => item.priority === 'P0').map(item => item.key).sort(), ['answerPages', 'originalResearch', 'protocolObservatory']);
 assert.ok(plan.next.some(item => item.key === 'claimsRegistry' && item.priority === 'P1'));
+assert.ok(plan.next.some(item => item.key === 'crawlerMatrix' && item.priority === 'P1'));
 assert.ok(plan.next.some(item => item.key === 'openReuseAssets' && item.priority === 'P1'));
 
 const invalid = structuredClone(starter);
@@ -119,6 +129,7 @@ assert.deepEqual(generated.site.languages, ['en', 'ru']);
 assert.equal(generated.modules.openReuseAssets.status, 'planned');
 assert.equal(generated.modules.protocolObservatory.status, 'planned');
 assert.equal(generated.modules.claimsRegistry.status, 'planned');
+assert.equal(generated.modules.crawlerMatrix.status, 'planned');
 
 const validate = spawnSync(process.execPath, [cli, 'validate', output], { encoding: 'utf8' });
 assert.equal(validate.status, 0, validate.stderr || validate.stdout);
@@ -129,6 +140,7 @@ assert.equal(planned.status, 0, planned.stderr || planned.stdout);
 assert.match(planned.stdout, /P0 originalResearch/);
 assert.match(planned.stdout, /P0 protocolObservatory/);
 assert.match(planned.stdout, /P1 claimsRegistry/);
+assert.match(planned.stdout, /P1 crawlerMatrix/);
 assert.match(planned.stdout, /P1 openReuseAssets/);
 
-console.log('PASS AI Search & Citation Profile validates, publishes frozen observatory and verified claims, plans reusable citation/open-reuse surfaces, and preserves conservative capability states');
+console.log('PASS AI Search & Citation Profile validates, publishes frozen observatory/claims/crawler policy surfaces, plans reusable citation/open-reuse work, and preserves conservative evidence states');

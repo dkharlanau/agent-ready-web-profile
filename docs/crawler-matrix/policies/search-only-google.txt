@@ -1,0 +1,6 @@
+# Minimal Google fragment: keep Google Search/AI Search crawling eligible while opting out of Google-Extended product uses.
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Disallow: /

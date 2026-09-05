@@ -1,0 +1,33 @@
+# ARWP example policy: allow documented AI/search discovery while opting out of documented training-related crawlers/product tokens.
+# Review current provider documentation before copying this file to another site.
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Perplexity-User is intentionally omitted because current official Perplexity sources conflict about robots.txt behavior.
+
+User-agent: Bingbot
+Allow: /
+
+# Microsoft documents page-level meta/X-Robots-Tag controls for some generative-AI uses; those are not represented by this robots.txt example.

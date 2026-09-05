@@ -1,0 +1,1 @@
+These robots.txt examples reflect official provider documentation reviewed on 2026-09-05. Provider behavior and documentation can change. Re-check the dated crawler matrix and official sources before reuse. Technical crawler access does not itself grant copyright or content-reuse permission, and permission to crawl does not guarantee search or AI citation visibility.

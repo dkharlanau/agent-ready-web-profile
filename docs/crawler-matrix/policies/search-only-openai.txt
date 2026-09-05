@@ -1,0 +1,6 @@
+# Minimal OpenAI fragment: permit ChatGPT search crawler, opt out of GPTBot training crawler.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /

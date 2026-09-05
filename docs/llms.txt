@@ -10,6 +10,7 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 
 - [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): Public project page and resolver workflow.
 - [Agentic Web Protocol Observatory](https://dkharlanau.github.io/agent-ready-web-profile/observatory/): Dated primary-source-reviewed map of MCP, A2A, WebMCP, llms.txt, Agent Skills, RFC discovery and emerging commerce mechanisms.
+- [AI Crawler & Access Matrix](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/): Current official-source matrix separating AI search indexing, user-triggered retrieval and model-training controls.
 - [ARWP Claims Registry](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/): Stable scoped technical claims with IDs, review state, evidence and explicit limitations.
 - [Resolver model](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): How heterogeneous discovery evidence is normalized, compared and routed.
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimental ARWP profile contract. Treat this English document as normative for project-defined semantics.
@@ -26,6 +27,10 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [Claim JSON Schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json): Validation contract for scoped ARWP claim objects.
 - [Protocol Observatory JSON](https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json): Current dated protocol/mechanism snapshot with upstream status, discovery path, ARWP support state and primary sources.
 - [Protocol Observatory history](https://dkharlanau.github.io/agent-ready-web-profile/observatory/history/index.json): Frozen historical snapshots for month-to-month comparison without rewriting prior observations.
+- [AI Crawler Matrix JSON](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/crawlers.json): Current dated crawler/fetcher/product-control roles, official sources and publisher effects.
+- [AI Crawler Matrix history](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/history/index.json): Frozen historical crawler-policy snapshots.
+- [Search-visible / training-opt-out robots template](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/templates/search-visible-training-blocked.txt): Conservative starter policy that separates documented search access from training controls.
+- [Search + training open robots template](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/templates/search-and-training-open.txt): Starter policy for publishers intentionally allowing both documented search and training crawler access.
 - [AI Search Profile schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json): Validation contract for copying the same implementation profile to other sites.
 - [Open reuse rights](https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json): Machine-readable scope, CC BY 4.0 license, permitted press/news/AI uses and attribution guidance for covered material.
 - [Press facts](https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json): Canonical project facts, boilerplate, versions and source links for press/news/automated citation workflows.
@@ -33,6 +38,26 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [Public directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Reference/adoption registry exposed as JSON.
 - [Directory statistics](https://dkharlanau.github.io/agent-ready-web-profile/stats.json): Aggregate public declaration counts without visitor tracking.
 - [Product history JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): Machine-readable development timeline and current project status.
+
+## AI crawler and access policy
+
+Do not interpret “AI access” as one boolean. ARWP separates at least three publisher decisions:
+
+1. **Search/indexing** — may the provider crawl/index the site for AI/search result discovery?
+2. **User-triggered retrieval** — may an assistant fetch the page because a user explicitly requested information from it?
+3. **Training/model use** — may documented crawler/product controls permit the content to be collected/used for model-training or related non-Search uses?
+
+The 2026-09-05 matrix covers OpenAI, Anthropic, Google, Perplexity and Microsoft/Bing. Important reviewed distinctions:
+
+- OpenAI documents `OAI-SearchBot` separately from `GPTBot`, so ChatGPT search visibility and potential model-training crawl access can be configured independently.
+- Anthropic documents `Claude-SearchBot`, `Claude-User` and `ClaudeBot` as separate search, user-triggered and training roles.
+- Google Search AI features use ordinary Googlebot/Search controls. `Google-Extended` is a robots product token, not a distinct request User-Agent; it does not control Google Search inclusion but does control specified Gemini training/grounding uses.
+- Perplexity's current official sources are not fully consistent about `Perplexity-User` robots behavior. ARWP preserves this as `official-source-conflict` and intentionally emits no confident robots rule for it.
+- Bingbot is a search/index crawler upstream of Bing/Microsoft AI experiences. Microsoft documents additional page-level robots meta / X-Robots-Tag controls for Chat/Copilot display and generative-AI training; ARWP does not invent a separate Bing training crawler.
+
+Crawler access is separate from copyright/reuse permission. ARWP's `media/rights.json` explicitly licenses covered material for AI/ML reuse under CC BY 4.0, while crawler access is still independently controlled by robots/WAF/product rules.
+
+Allowing a crawler does not guarantee inclusion, citation or ranking in any AI/search system.
 
 ## Protocol observatory
 
