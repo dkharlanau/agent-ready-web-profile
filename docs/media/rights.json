@@ -3,6 +3,8 @@
   "project": "Agent-Ready Web Profile",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "policyUrl": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
+  "assetCatalog": "https://dkharlanau.github.io/agent-ready-web-profile/media/assets.json",
+  "pressFacts": "https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json",
   "permissionRequired": false,
   "license": {
     "name": "Creative Commons Attribution 4.0 International",
