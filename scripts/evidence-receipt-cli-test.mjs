@@ -13,7 +13,9 @@ const help = spawnSync(process.execPath, [cli, '--help'], { encoding: 'utf8' });
 assert.equal(help.status, 0, help.stderr);
 assert.match(help.stdout, /arwp-receipt/);
 assert.match(help.stdout, /create <resolution\.json>/);
+assert.match(help.stdout, /capture <https:\/\/site\.example>/);
 assert.match(help.stdout, /verify <receipt\.json>/);
+assert.match(help.stdout, /additional bounded GET refetches/i);
 assert.match(help.stdout, /not a publisher manifest/i);
 
 const resolutionPath = path.join(temp, 'resolution.json');
@@ -59,6 +61,7 @@ const verified = spawnSync(process.execPath, [cli, 'verify', receiptPath], { enc
 assert.equal(verified.status, 0, verified.stderr || verified.stdout);
 assert.match(verified.stdout, /^PASS evidence receipt/m);
 assert.match(verified.stdout, /Integrity: verified/);
+assert.match(verified.stdout, /Captured source digests: 0/);
 assert.match(verified.stdout, /does not establish publisher endorsement/i);
 
 const verifiedJson = spawnSync(process.execPath, [cli, 'verify', receiptPath, '--json'], { encoding: 'utf8' });
@@ -66,7 +69,12 @@ assert.equal(verifiedJson.status, 0, verifiedJson.stderr || verifiedJson.stdout)
 const report = JSON.parse(verifiedJson.stdout);
 assert.equal(report.valid, true);
 assert.equal(report.integrity, true);
+assert.equal(report.artifactDigests, 0);
 assert.equal(report.receiptId, receipt.receiptId);
+
+const invalidCapture = spawnSync(process.execPath, [cli, 'capture', 'https://example.com/', '--max-sources=0'], { encoding: 'utf8' });
+assert.equal(invalidCapture.status, 1);
+assert.match(invalidCapture.stderr, /max-sources must be a positive integer/i);
 
 receipt.plans.read.selected.url = 'https://tampered.example/';
 fs.writeFileSync(receiptPath, JSON.stringify(receipt, null, 2));
@@ -80,4 +88,4 @@ assert.notEqual(unknown.status, 0);
 assert.match(unknown.stderr, /Unknown command/);
 
 fs.rmSync(temp, { recursive: true, force: true });
-console.log('PASS arwp-receipt CLI creates deterministic receipts from saved Resolver JSON, verifies canonical payload integrity and exits non-zero after tampering');
+console.log('PASS arwp-receipt CLI exposes explicit richer capture, creates deterministic receipts from saved Resolver JSON, verifies canonical payload integrity and exits non-zero after tampering');
