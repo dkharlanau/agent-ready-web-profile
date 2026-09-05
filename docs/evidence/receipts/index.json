@@ -1,0 +1,30 @@
+{
+  "version": "0.1",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/",
+  "semantics": "Append-only ARWP Resolver observations. Receipt integrity does not imply publisher endorsement, authorization or trustworthiness.",
+  "records": [
+    {
+      "slug": "2026-09-05-arwp-reference-12386fb8103d",
+      "receiptId": "urn:sha256:12386fb8103d00b4c3eddd6197c715eb24146d9c862b29a074d4cad2f2a1da2e",
+      "title": "ARWP public reference observation — 2026-09-05",
+      "evidenceClass": "project-reference",
+      "observedAt": "2026-09-05T21:29:13.000Z",
+      "target": "https://dkharlanau.github.io/agent-ready-web-profile/",
+      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+      "toolVersion": "0.2.0",
+      "resolverVersion": "0.1",
+      "decisionPolicyVersion": "0.1",
+      "payloadDigest": "sha256:12386fb8103d00b4c3eddd6197c715eb24146d9c862b29a074d4cad2f2a1da2e",
+      "summary": {
+        "sourcesAttempted": 10,
+        "sourcesResolved": 3,
+        "interfacesResolved": 34,
+        "conflicts": 0
+      },
+      "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33993174047",
+      "notes": "Owner-controlled public reference-site observation captured by GitHub Actions. It is interoperability evidence, not independent adoption evidence.",
+      "recordUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/records/2026-09-05-arwp-reference-12386fb8103d.receipt.json",
+      "htmlUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/2026-09-05-arwp-reference-12386fb8103d.html"
+    }
+  ]
+}
