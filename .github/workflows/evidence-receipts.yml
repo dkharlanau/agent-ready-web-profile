@@ -10,6 +10,7 @@ on:
       - 'scripts/evidence-receipt-test.mjs'
       - 'scripts/evidence-receipt-cli-test.mjs'
       - 'docs/EVIDENCE-RECEIPTS.md'
+      - 'package.json'
       - '.github/workflows/evidence-receipts.yml'
   pull_request:
     paths:
@@ -19,6 +20,7 @@ on:
       - 'scripts/evidence-receipt-test.mjs'
       - 'scripts/evidence-receipt-cli-test.mjs'
       - 'docs/EVIDENCE-RECEIPTS.md'
+      - 'package.json'
       - '.github/workflows/evidence-receipts.yml'
 
 permissions:
@@ -35,13 +37,7 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Validate receipt model and schema
-        run: |
-          node scripts/evidence-receipt-test.mjs
-          node --check lib/evidence-receipt.mjs
-          node --check scripts/evidence-receipt-test.mjs
-      - name: Validate receipt CLI
-        run: |
-          node scripts/evidence-receipt-cli-test.mjs
-          node --check bin/arwp-receipt.mjs
-          node --check scripts/evidence-receipt-cli-test.mjs
+      - name: Validate evidence receipt model, schema and CLI
+        run: npm run test:receipt
+      - name: Smoke-test npm artifact with arwp-receipt included
+        run: npm run test:package
