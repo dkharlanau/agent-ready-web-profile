@@ -4,6 +4,29 @@
   "semantics": "Append-only ARWP Resolver observations. Receipt integrity does not imply publisher endorsement, authorization or trustworthiness.",
   "records": [
     {
+      "slug": "2026-09-05-ty-docs-independent-db212521cded",
+      "receiptId": "urn:sha256:db212521cdedb111bf60ec16c7db195326076aa67d597368bcc69ee96af6a766",
+      "title": "ty documentation independent benchmark observation — 2026-09-05",
+      "evidenceClass": "independent-benchmark",
+      "observedAt": "2026-09-05T21:48:55.000Z",
+      "target": "https://docs.astral.sh/ty/",
+      "canonicalUrl": "https://docs.astral.sh/ty/",
+      "toolVersion": "0.2.0",
+      "resolverVersion": "0.1",
+      "decisionPolicyVersion": "0.1",
+      "payloadDigest": "sha256:db212521cdedb111bf60ec16c7db195326076aa67d597368bcc69ee96af6a766",
+      "summary": {
+        "sourcesAttempted": 10,
+        "sourcesResolved": 2,
+        "interfacesResolved": 2,
+        "conflicts": 0
+      },
+      "workflowRun": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/33994110434",
+      "notes": "Independent public-site observation tied to the manually reviewed ownership=independent ty-docs benchmark fixture. Resolver selected the reviewed llms.txt read interface. This is observation evidence and must not be interpreted as ARWP adoption by Astral.",
+      "recordUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/records/2026-09-05-ty-docs-independent-db212521cded.receipt.json",
+      "htmlUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/2026-09-05-ty-docs-independent-db212521cded.html"
+    },
+    {
       "slug": "2026-09-05-arwp-reference-2e4e9e7a7212",
       "receiptId": "urn:sha256:2e4e9e7a7212cc616a9925dc1f1b8562b9fa9a65d5d57aedca4169ac96fe01e3",
       "title": "ARWP richer reference observation with source-body digests — 2026-09-05",
