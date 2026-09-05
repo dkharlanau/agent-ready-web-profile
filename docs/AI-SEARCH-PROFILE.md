@@ -18,7 +18,7 @@ An agent-ready website and a cite-worthy website overlap, but they are not the s
 
 ARWP already resolves machine interfaces. The AI Search Profile adds a second question:
 
-> What should this site publish so an external search or AI system can identify the entity, find original evidence, answer recurring questions from canonical pages, verify claims and cite stable sources?
+> What should this site publish so an external search or AI system can identify the entity, find original evidence, answer recurring questions from canonical pages, verify claims, reuse clearly licensed assets and cite stable sources?
 
 The model prefers useful primary-source material over decorative AI metadata.
 
@@ -69,7 +69,9 @@ The profile can track stable canonical surfaces such as:
 - locale manifest;
 - sitemap and crawler policy;
 - knowledge graph;
-- claims index.
+- claims index;
+- press/media kit;
+- machine-readable reuse-rights manifest.
 
 These are URLs, not proof of ranking or inclusion in an AI product.
 
@@ -91,7 +93,7 @@ Publish measurements, experiments, datasets and negative results that cannot be 
 
 Maintain dated facts about relevant protocols/discovery mechanisms, their purpose, maturity, discovery path, current version/support status and evidence source.
 
-### P1 — make facts easy to verify and retrieve
+### P1 — make facts easy to verify, retrieve and reuse
 
 **Comparison pages** — e.g. MCP vs A2A, WebMCP vs MCP, llms.txt vs agent manifests.
 
@@ -104,6 +106,8 @@ Maintain dated facts about relevant protocols/discovery mechanisms, their purpos
 **Crawler matrix** — dated, source-backed crawler/access configuration rather than folklore about AI bots.
 
 **Agent fetch lab** — reproducible experiments about which surfaces agents actually retrieve for real tasks.
+
+**Open reuse assets** — a press/media pack with explicit reuse scope, a standard license, machine-readable rights, canonical facts, boilerplate and attribution instructions. Covered assets should be usable without asking for individual permission. When AI/ML training, embeddings, RAG or dataset inclusion are allowed, say so explicitly in the machine-readable rights manifest rather than expecting an agent to infer it from a prose copyright page.
 
 **Localization** — reviewed language-specific discovery/routing while canonical technical semantics remain stable.
 
@@ -119,6 +123,34 @@ Maintain dated facts about relevant protocols/discovery mechanisms, their purpos
 
 **AI visibility** — measure observable citations, grounding queries, referrals and mentions without collapsing them into a vanity score.
 
+## Open media / AI reuse pattern
+
+A reusable site should make permission easy to understand before a journalist, researcher or machine has to ask.
+
+Recommended pattern:
+
+```text
+/media/
+├─ index.html          # human-readable permission + asset guide
+├─ rights.json         # license, scope, permitted machine uses, attribution
+├─ press-facts.json    # canonical facts, versions, source links
+├─ boilerplate.txt     # ready-to-use short/standard project description
+└─ attribution.txt     # copyable credit line
+```
+
+ARWP uses CC BY 4.0 for designated project-authored press/research/media material because it permits redistribution, adaptation and commercial reuse with attribution. Software remains under its software license; third-party logos, screenshots, quotations and other third-party material must stay outside the open-media grant unless they are separately licensed.
+
+For AI use, the reusable rights manifest should explicitly state whether the covered material may be used for:
+
+- search/indexing;
+- AI/ML training;
+- embeddings;
+- retrieval-augmented generation;
+- dataset inclusion;
+- summarization and translation.
+
+When attribution is technically possible, preserve the canonical source URL in dataset/model cards, provenance metadata, citations, output attribution or another reasonable attribution surface. A machine-readable permission is useful discovery metadata; it does not override third-party rights or the legal text of the chosen license.
+
 ## Suggested site structure
 
 A mature implementation may converge on a structure such as:
@@ -132,6 +164,12 @@ A mature implementation may converge on a structure such as:
 ├─ llms.txt
 ├─ history.html
 ├─ history.json
+├─ media/
+│  ├─ index.html
+│  ├─ rights.json
+│  ├─ press-facts.json
+│  ├─ boilerplate.txt
+│  └─ attribution.txt
 ├─ answers/
 ├─ research/
 │  ├─ state-of-agentic-web/
@@ -178,6 +216,8 @@ publish original data + methodology
       ↓
 produce answer / comparison / visual surfaces
       ↓
+publish open reuse rights + attribution
+      ↓
 distribute externally with canonical source
       ↓
 measure citations / referrals / mentions
@@ -214,7 +254,8 @@ Useful signals can include:
 - external mentions;
 - referring domains;
 - which research/definition pages are repeatedly retrieved;
-- agent-fetch experiments under controlled conditions.
+- agent-fetch experiments under controlled conditions;
+- reuse of openly licensed charts/press facts where observable.
 
 Measurement should remain privacy-minimized.
 
@@ -229,6 +270,8 @@ Every valid profile requires these rules:
 - no fabricated adoption;
 - no single readiness score.
 
+Open reuse additionally needs a clear scope: do not accidentally relicense third-party logos, trademarks, screenshots, quotations or other material you do not own.
+
 These guardrails are part of the schema so they cannot quietly disappear when the profile is copied to another site.
 
 ## Applying this to another site
@@ -238,7 +281,8 @@ These guardrails are part of the schema so they cannot quietly disappear when th
 3. Rewrite `targetQuestions` around the real user/agent questions for that product.
 4. Pick 2–4 P0/P1 modules with genuine source material; do not create every section at once.
 5. Add a small vocabulary of terms the product can define with authority.
-6. Run `plan` and implement the highest-priority remaining work.
-7. Review monthly and record real external evidence before claiming improvements.
+6. Choose which site-owned assets can be openly reused and publish `/media/rights.json` with an explicit standard license and attribution path.
+7. Run `plan` and implement the highest-priority remaining work.
+8. Review monthly and record real external evidence before claiming improvements.
 
 The profile is designed to be copied across the user's sites while preserving the same evidence discipline as the ARWP Resolver.
