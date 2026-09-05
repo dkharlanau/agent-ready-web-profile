@@ -8,6 +8,7 @@ Product classification: https://dkharlanau.github.io/agent-ready-web-profile/ai/
 Schema.org product metadata: https://dkharlanau.github.io/agent-ready-web-profile/ai/product.jsonld
 Protocol Observatory: https://dkharlanau.github.io/agent-ready-web-profile/observatory/
 Reviewed: 2026-09-05
+Research revision: r3
 
 ## Preferred classification
 
@@ -37,17 +38,27 @@ Sources:
 
 ## Closest upstream discovery architecture
 
-Agentic Resource Discovery (ARD) is not treated as a product competitor. It is an open draft specification for publishing, searching and federating agentic resources such as MCP servers, A2A agents, Skills, APIs and registries. Its domain catalog is `/.well-known/ai-catalog.json`.
+Agentic Resource Discovery (ARD) is not treated as a product competitor. The current reviewed proposal is **v0.91 (2026-08-26)**. It publishes/searches/federates agentic resources such as MCP servers, A2A agents, Skills, APIs and registries.
+
+Current static discovery:
+- canonical manifest: `/.well-known/ard.json`
+- current link relation: `rel="ard"`
+- description layer: JSON-LD with base context/namespaces
+- additional advertisement: in-page JSON-LD, robots `Agentmap`, DNS/SVCB and registries
+- predecessor compatibility: `/.well-known/ai-catalog.json` and `rel="ai-catalog"`
 
 Primary distinction:
 - ARD is resource/catalog/search-first and cross-domain/federated.
 - ARWP is website/site-first and resolves heterogeneous ordinary-web and agent/protocol evidence, preserves conflicts, and selects an interface for an intent.
 - ARWP should consume ARD rather than invent a competing catalog syntax.
 
+Current ARWP support is partial: canonical `ard.json`, HTTP `rel=ard`, predecessor fallback and conservative typed artifact evidence are implemented. Full in-page JSON-LD namespace interpretation and registry federation are not yet claimed.
+
 Canonical comparison: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html
 Sources:
+- https://agenticresourcediscovery.org/spec/
+- https://github.com/ards-project/ard-spec
 - https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/
-- https://github.com/ards-project/ard-spec/blob/main/spec/ard.md
 
 ## Other adjacent categories
 
@@ -67,6 +78,6 @@ ARD, MCP, A2A, WebMCP, llms.txt, OpenAPI, RFC 9727, RFC 9728, Agent Skills, DNS-
 
 - This is a category map, not a winner ranking.
 - Unknown competitor capabilities are not treated as absent.
-- Internet-Drafts are not presented as RFCs.
+- Internet-Drafts/proposals are not presented as RFCs or final industry standards.
 - ARWP does not claim a universal readiness score or ranking benefit.
 - AI visibility metrics remain external evidence, not proof of conformance or causality.
