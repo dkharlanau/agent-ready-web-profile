@@ -31,7 +31,14 @@ assert.equal(source.modules.evidenceReceipts.status, 'planned', 'claims must not
 assert.equal(source.modules.crawlerMatrix.status, 'active');
 assert.equal(source.modules.crawlerMatrix.url, 'https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/');
 assert.ok(source.modules.crawlerMatrix.machineReadable.includes('https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/crawlers.json'));
-assert.ok(source.modules.crawlerMatrix.machineReadable.includes('https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/templates/search-visible-training-blocked.txt'));
+assert.equal(source.modules.trustCenter.status, 'active');
+assert.equal(source.surfaces.trustCenter.status, 'active');
+assert.equal(source.surfaces.trustCenter.url, 'https://dkharlanau.github.io/agent-ready-web-profile/trust/');
+assert.equal(source.modules.correctionsLedger.status, 'active');
+assert.equal(source.surfaces.correctionsLedger.url, 'https://dkharlanau.github.io/agent-ready-web-profile/trust/corrections.json');
+assert.equal(source.modules.softwareProvenance.status, 'active');
+assert.equal(source.modules.persistentIdentifiers.status, 'planned', 'DOI must remain planned until an external provider issues one');
+assert.equal(source.modules.externalTrustSignals.status, 'active');
 assert.equal(source.surfaces.history.status, 'active');
 assert.equal(source.modules.openReuseAssets.status, 'active');
 assert.equal(source.surfaces.pressKit.status, 'active');
@@ -84,6 +91,18 @@ const crawlerMatrix = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'crawle
 assert.equal(crawlerMatrix.entries.length, 10);
 assert.equal(crawlerMatrix.methodology.conflictsStayVisible, true);
 
+const trust = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'trust', 'trust.json'), 'utf8'));
+const corrections = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'trust', 'corrections.json'), 'utf8'));
+assert.equal(trust.status, 'active-development');
+assert.equal(trust.reviewModel.primarySourcesPreferred, true);
+assert.equal(trust.reviewModel.correctionsVisible, true);
+assert.equal(trust.softwareSupplyChain.githubArtifactAttestation.status, 'configured-for-next-npm-publish');
+assert.equal(trust.persistentIdentifiers.doi.status, 'prepared-not-issued');
+assert.equal(trust.softwareSupplyChain.openSSFScorecard.status, 'configured');
+assert.equal(corrections.entries.length, 0);
+assert.equal(corrections.policy.historicalRecordsAreNotSilentlyRewritten, true);
+assert.match(corrections.notes.join(' '), /81\/100 to 86\/100/);
+
 const starter = createAiSearchProfileStarter('https://example.com/docs/', {
   name: 'Example Docs',
   languages: ['en', 'de'],
@@ -98,21 +117,26 @@ assert.equal(starter.surfaces.siteProfile.url, 'https://example.com/docs/ai/site
 assert.equal(starter.surfaces.robots.url, 'https://example.com/robots.txt');
 assert.equal(starter.surfaces.pressKit.url, 'https://example.com/docs/media/');
 assert.equal(starter.surfaces.reuseRights.url, 'https://example.com/docs/media/rights.json');
+assert.equal(starter.surfaces.trustCenter.url, 'https://example.com/docs/trust/');
+assert.equal(starter.surfaces.correctionsLedger.url, 'https://example.com/docs/trust/corrections.json');
 assert.equal(starter.modules.openReuseAssets.priority, 'P1');
 assert.equal(starter.modules.claimsRegistry.status, 'planned');
 assert.equal(starter.modules.crawlerMatrix.status, 'planned');
+assert.equal(starter.modules.trustCenter.status, 'planned');
+assert.equal(starter.modules.softwareProvenance.status, 'planned');
+assert.equal(starter.modules.persistentIdentifiers.status, 'planned');
 assert.equal(starter.surfaces.claimsIndex.status, 'planned');
 assert.equal(Object.values(starter.modules).every(module => module.status === 'planned'), true);
 
 const plan = planAiSearchProfile(starter);
 assert.equal(plan.valid, true);
 assert.equal(plan.summary.active, 0);
-assert.equal(plan.summary.planned, 16);
+assert.equal(plan.summary.planned, 21);
 assert.equal(plan.summary.nextPriority, 'P0');
-assert.deepEqual(plan.next.filter(item => item.priority === 'P0').map(item => item.key).sort(), ['answerPages', 'originalResearch', 'protocolObservatory']);
-assert.ok(plan.next.some(item => item.key === 'claimsRegistry' && item.priority === 'P1'));
-assert.ok(plan.next.some(item => item.key === 'crawlerMatrix' && item.priority === 'P1'));
-assert.ok(plan.next.some(item => item.key === 'openReuseAssets' && item.priority === 'P1'));
+assert.deepEqual(plan.next.filter(item => item.priority === 'P0').map(item => item.key).sort(), ['answerPages', 'originalResearch', 'protocolObservatory', 'trustCenter']);
+for (const expected of ['claimsRegistry', 'crawlerMatrix', 'correctionsLedger', 'openReuseAssets', 'persistentIdentifiers', 'softwareProvenance']) {
+  assert.ok(plan.next.some(item => item.key === expected && item.priority === 'P1'), `starter plan must include P1 ${expected}`);
+}
 
 const invalid = structuredClone(starter);
 invalid.guardrails.noReadinessScore = false;
@@ -130,6 +154,8 @@ assert.equal(generated.modules.openReuseAssets.status, 'planned');
 assert.equal(generated.modules.protocolObservatory.status, 'planned');
 assert.equal(generated.modules.claimsRegistry.status, 'planned');
 assert.equal(generated.modules.crawlerMatrix.status, 'planned');
+assert.equal(generated.modules.trustCenter.status, 'planned');
+assert.equal(generated.modules.persistentIdentifiers.status, 'planned');
 
 const validate = spawnSync(process.execPath, [cli, 'validate', output], { encoding: 'utf8' });
 assert.equal(validate.status, 0, validate.stderr || validate.stdout);
@@ -139,8 +165,11 @@ const planned = spawnSync(process.execPath, [cli, 'plan', output], { encoding: '
 assert.equal(planned.status, 0, planned.stderr || planned.stdout);
 assert.match(planned.stdout, /P0 originalResearch/);
 assert.match(planned.stdout, /P0 protocolObservatory/);
+assert.match(planned.stdout, /P0 trustCenter/);
 assert.match(planned.stdout, /P1 claimsRegistry/);
 assert.match(planned.stdout, /P1 crawlerMatrix/);
-assert.match(planned.stdout, /P1 openReuseAssets/);
+assert.match(planned.stdout, /P1 correctionsLedger/);
+assert.match(planned.stdout, /P1 persistentIdentifiers/);
+assert.match(planned.stdout, /P1 softwareProvenance/);
 
-console.log('PASS AI Search & Citation Profile validates, publishes frozen observatory/claims/crawler policy surfaces, plans reusable citation/open-reuse work, and preserves conservative evidence states');
+console.log('PASS AI Search & Citation Profile validates, publishes trust/corrections/provenance surfaces, plans reusable trust work, and preserves conservative evidence states');
