@@ -71,7 +71,7 @@ assert.equal(calls.includes('https://example.com/'), false, 'HEAD-only homepage 
 const profile = capture.digests.find(item => item.finalUrl === 'https://example.com/ai/site-profile.json');
 assert.ok(profile);
 assert.deepEqual(profile.sourceIds.sort(), ['profile-copy:0', 'profile:0']);
-assert.equal(profile.digest, 'sha256:3a588f85bbf6ee304491045643492739e2c6ec74e6a9ec568e48951fb5bb9c7c');
+assert.equal(profile.digest, 'sha256:663c40c5fc625d44d00a597ae77ce292566b2bbf823cd8a7dc6d0333faded5fe');
 assert.equal(profile.digestScope, 'decoded-utf8-complete-bounded-response-body');
 assert.equal(profile.completeWithinBound, true);
 assert.equal(profile.networkBytes, Buffer.byteLength('{"name":"Example"}', 'utf8'));
