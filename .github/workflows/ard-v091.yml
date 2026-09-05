@@ -6,16 +6,22 @@ on:
     paths:
       - 'lib/ard-v091.mjs'
       - 'lib/ard-registry.mjs'
+      - 'bin/arwp-ard.mjs'
       - 'scripts/ard-v091-test.mjs'
       - 'scripts/ard-registry-test.mjs'
+      - 'scripts/ard-cli-test.mjs'
+      - 'package.json'
       - 'docs/ARD-V0.91.md'
       - '.github/workflows/ard-v091.yml'
   pull_request:
     paths:
       - 'lib/ard-v091.mjs'
       - 'lib/ard-registry.mjs'
+      - 'bin/arwp-ard.mjs'
       - 'scripts/ard-v091-test.mjs'
       - 'scripts/ard-registry-test.mjs'
+      - 'scripts/ard-cli-test.mjs'
+      - 'package.json'
       - 'docs/ARD-V0.91.md'
       - '.github/workflows/ard-v091.yml'
 
@@ -30,13 +36,10 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
-      - name: Validate ARD v0.91 static compatibility layer
-        run: |
-          node scripts/ard-v091-test.mjs
-          node --check lib/ard-v091.mjs
-          node --check scripts/ard-v091-test.mjs
-      - name: Validate bounded opt-in ARD registry search
-        run: |
-          node scripts/ard-registry-test.mjs
-          node --check lib/ard-registry.mjs
-          node --check scripts/ard-registry-test.mjs
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate ARD v0.91 static, registry and CLI layers
+        run: npm run test:ard
+      - name: Smoke-test npm artifact with arwp-ard included
+        run: npm run test:package
