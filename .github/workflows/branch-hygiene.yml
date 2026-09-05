@@ -1,0 +1,80 @@
+name: Branch hygiene
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  prune-merged-heads:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete unchanged branches from merged pull requests
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+
+          default_branch="$(gh api "repos/${REPOSITORY}" --jq '.default_branch')"
+          candidates="$(mktemp)"
+          page=1
+
+          while true; do
+            payload="$(gh api "repos/${REPOSITORY}/pulls?state=closed&per_page=100&page=${page}")"
+            count="$(jq 'length' <<<"${payload}")"
+            if [ "${count}" -eq 0 ]; then
+              break
+            fi
+
+            jq -r \
+              --arg repo "${REPOSITORY}" \
+              --arg default "${default_branch}" \
+              '.[]
+                | select(.merged_at != null)
+                | select(.head.repo.full_name == $repo)
+                | select(.head.ref != $default)
+                | [.head.ref, .head.sha]
+                | @tsv' <<<"${payload}" >> "${candidates}"
+
+            if [ "${count}" -lt 100 ]; then
+              break
+            fi
+            page=$((page + 1))
+          done
+
+          if [ ! -s "${candidates}" ]; then
+            echo "No merged pull-request branches to inspect."
+            exit 0
+          fi
+
+          sort -u "${candidates}" | while IFS=$'\t' read -r branch merged_head_sha; do
+            [ -z "${branch}" ] && continue
+
+            current_sha="$(gh api "repos/${REPOSITORY}/git/ref/heads/${branch}" --jq '.object.sha' 2>/dev/null || true)"
+            if [ -z "${current_sha}" ]; then
+              continue
+            fi
+
+            if [ "${current_sha}" != "${merged_head_sha}" ]; then
+              echo "KEEP ${branch}: branch moved after the recorded merged PR head."
+              continue
+            fi
+
+            open_count="$(gh api -X GET "repos/${REPOSITORY}/pulls" \
+              -f state='open' \
+              -f head="${OWNER}:${branch}" \
+              --jq 'length')"
+            if [ "${open_count}" -gt 0 ]; then
+              echo "KEEP ${branch}: an open pull request still uses it."
+              continue
+            fi
+
+            echo "DELETE ${branch}: unchanged since merged PR head ${merged_head_sha}."
+            gh api --method DELETE "repos/${REPOSITORY}/git/refs/heads/${branch}"
+          done
