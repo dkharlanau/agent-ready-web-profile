@@ -6,9 +6,7 @@
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "description": "Public interoperability resolver, profile contract, directory and tooling project for discovering, normalizing and routing a website's real web, data, retrieval, agent and trust interfaces.",
   "languages": ["en", "de", "ru"],
-  "web": {
-    "llms": "https://dkharlanau.github.io/agent-ready-web-profile/llms.txt"
-  },
+  "web": {"llms":"https://dkharlanau.github.io/agent-ready-web-profile/llms.txt"},
   "data": {
     "catalog": "https://dkharlanau.github.io/agent-ready-web-profile/directory.json",
     "schemas": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
@@ -18,47 +16,20 @@
       {"name":"ARWP agent locale manifest","url":"https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json","mediaType":"application/json","role":"other","description":"Experimental project-level catalog of canonical and localized llms.txt routing surfaces for agents."},
       {"name":"ARWP product history","url":"https://dkharlanau.github.io/agent-ready-web-profile/history.json","mediaType":"application/json","role":"other","description":"Machine-readable product timeline, release milestones and current maturity status."},
       {"name":"ARWP AI Search & Citation Profile","url":"https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json","mediaType":"application/json","role":"other","description":"Non-normative reusable implementation profile for planning original research, answer pages, evidence, comparisons, observability and citation-oriented discovery surfaces without a readiness score."},
+      {"name":"ARWP canonical citation index","url":"https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json","mediaType":"application/json","role":"other","description":"Stable index of canonical direct answers, project-defined terms and comparison pages with concise reusable definitions and review dates."},
       {"name":"ARWP open media and AI reuse rights","url":"https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json","mediaType":"application/json","role":"other","description":"Machine-readable CC BY 4.0 scope, permissions, attribution and AI/ML reuse guidance for covered ARWP-authored media and research assets."},
       {"name":"ARWP press facts","url":"https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json","mediaType":"application/json","role":"other","description":"Canonical project facts, boilerplate, versions and source links for press, news and automated citation workflows."}
     ]
   },
-  "mcp": {
-    "servers": [
-      {"name":"io.github.dkharlanau/agent-ready-web-profile","transport":"stdio","source":"https://github.com/dkharlanau/agent-ready-web-profile/tree/main/gateway","documentation":"https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GATEWAY.md","readOnly":true},
-      {"name":"arwp-site-resolver","transport":"stdio","source":"https://github.com/dkharlanau/agent-ready-web-profile/tree/main/resolver","documentation":"https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md","readOnly":true},
-      {"name":"arwp-federated-router","transport":"stdio","source":"https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router","documentation":"https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/DIRECTORY.md","readOnly":true}
-    ]
-  },
-  "trust": {
-    "license": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/LICENSE",
-    "citation": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/CITATION.cff",
-    "reviewPolicy": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CONTRIBUTING.md"
-  },
+  "mcp": {"servers":[
+    {"name":"io.github.dkharlanau/agent-ready-web-profile","transport":"stdio","source":"https://github.com/dkharlanau/agent-ready-web-profile/tree/main/gateway","documentation":"https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GATEWAY.md","readOnly":true},
+    {"name":"arwp-site-resolver","transport":"stdio","source":"https://github.com/dkharlanau/agent-ready-web-profile/tree/main/resolver","documentation":"https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md","readOnly":true},
+    {"name":"arwp-federated-router","transport":"stdio","source":"https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router","documentation":"https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/DIRECTORY.md","readOnly":true}
+  ]},
+  "trust": {"license":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/LICENSE","citation":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/CITATION.cff","reviewPolicy":"https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CONTRIBUTING.md"},
   "extensions": {
-    "io.github.dkharlanau/localized-llms": {
-      "version": "0.1",
-      "status": "experimental",
-      "defaultLanguage": "en",
-      "fallbackLanguage": "en",
-      "humanInterfaceLanguages": ["en"],
-      "agentRoutingLanguages": ["en", "de", "ru"],
-      "manifest": "https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"
-    },
-    "io.github.dkharlanau/ai-search-profile": {
-      "version": "0.1",
-      "status": "experimental-project-profile",
-      "profile": "https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json",
-      "schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json",
-      "documentation": "https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md"
-    },
-    "io.github.dkharlanau/open-media-ai-reuse": {
-      "version": "0.1",
-      "status": "active-project-policy",
-      "permissionRequired": false,
-      "license": "CC-BY-4.0",
-      "mediaPage": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
-      "rightsManifest": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
-      "pressFacts": "https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json"
-    }
+    "io.github.dkharlanau/localized-llms": {"version":"0.1","status":"experimental","defaultLanguage":"en","fallbackLanguage":"en","humanInterfaceLanguages":["en"],"agentRoutingLanguages":["en","de","ru"],"manifest":"https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json"},
+    "io.github.dkharlanau/ai-search-profile": {"version":"0.1","status":"experimental-project-profile","profile":"https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json","schema":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json","documentation":"https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md","citationIndex":"https://dkharlanau.github.io/agent-ready-web-profile/citation-index.json"},
+    "io.github.dkharlanau/open-media-ai-reuse": {"version":"0.1","status":"active-project-policy","permissionRequired":false,"license":"CC-BY-4.0","mediaPage":"https://dkharlanau.github.io/agent-ready-web-profile/media/","rightsManifest":"https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json","pressFacts":"https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json"}
   }
 }
