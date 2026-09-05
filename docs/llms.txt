@@ -12,14 +12,39 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 - [Resolver model](https://dkharlanau.github.io/agent-ready-web-profile/RESOLVER.md): How heterogeneous discovery evidence is normalized, compared and routed.
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md): Experimental ARWP profile contract. Treat this English document as normative for project-defined semantics.
 - [Conformance](https://dkharlanau.github.io/agent-ready-web-profile/CONFORMANCE.md): What ARWP conformance does and does not assert.
+- [AI Search & Citation Profile](https://dkharlanau.github.io/agent-ready-web-profile/AI-SEARCH-PROFILE.md): Reusable implementation profile for original research, answer pages, evidence, comparisons, observability and citation-oriented discovery surfaces.
 
 ## Machine-readable project surfaces
 
-- [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and localization extension.
+- [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and project extensions.
+- [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and P0/P1/P2 citation-surface plan for ARWP itself.
+- [AI Search Profile schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/ai-search-profile.schema.json): Validation contract for copying the same implementation profile to other sites.
 - [Locale manifest](https://dkharlanau.github.io/agent-ready-web-profile/ai/locales.json): Available agent-routing languages, canonical language and fallback policy.
 - [Public directory](https://dkharlanau.github.io/agent-ready-web-profile/directory.json): Reference/adoption registry exposed as JSON.
 - [Directory statistics](https://dkharlanau.github.io/agent-ready-web-profile/stats.json): Aggregate public declaration counts without visitor tracking.
 - [Product history JSON](https://dkharlanau.github.io/agent-ready-web-profile/history.json): Machine-readable development timeline and current project status.
+
+## Reusable AI search / citation program
+
+ARWP now carries a non-normative profile that can be applied to other sites. It tracks implementation status rather than producing a readiness score.
+
+The profile covers:
+
+- direct answer pages for recurring questions;
+- original research and negative results;
+- a dated protocol observatory;
+- protocol comparison pages;
+- canonical concept definitions;
+- stable claim identifiers and evidence receipts;
+- an AI/search crawler matrix;
+- reproducible experiments about which surfaces agents actually fetch;
+- a machine-readable knowledge graph;
+- reusable citation visuals;
+- external distribution with one canonical source;
+- AI/search citation and referral measurement;
+- localization and product history.
+
+`planned` means intended work and must not be interpreted as a deployed capability. `active` means the surface is currently published or operated.
 
 ## Language routes
 
@@ -40,6 +65,7 @@ Project start: 2026-08-25.
 Latest tagged release: v0.1.0.
 Current repository toolchain version: 0.2.0.
 Profile contract version: 0.1.
+AI Search & Citation Profile version: 0.1 (non-normative project profile).
 
 ## Evaluation and evidence
 
@@ -50,11 +76,12 @@ Profile contract version: 0.1.
 ## Repository and implementation
 
 - [GitHub repository](https://github.com/dkharlanau/agent-ready-web-profile): Source, issues, CI and full documentation.
-- [JSON Schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json): ARWP profile schema.
+- [ARWP JSON Schema](https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json): ARWP profile schema.
+- [AI Search Profile CLI](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/bin/arwp-ai-search.mjs): Generate, validate and plan a reusable site citation profile.
 - [Resolver source](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/resolver): Resolver MCP implementation.
 - [Gateway source](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/gateway): Generic read-only MCP gateway.
 - [Federated router](https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router): Multi-site routing and federation work.
 
 ## Boundaries
 
-ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, or proof that an undeclared runtime capability exists. Prefer observed and protocol-native evidence. Preserve source authority and conflicts. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.
+ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, or proof that an undeclared runtime capability exists. The AI Search & Citation Profile is likewise not a guarantee of inclusion, citation or ranking in any search/AI product. Prefer observed and protocol-native evidence, publish original useful material, preserve source authority and negative results, and keep planned surfaces distinct from active ones. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.
