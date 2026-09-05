@@ -54,10 +54,17 @@ jobs:
         run: |
           npm pack --json > pack.json
           node -e "const fs=require('fs'); const p=JSON.parse(fs.readFileSync('pack.json','utf8'))[0].filename; console.log('path='+p)" >> "$GITHUB_OUTPUT"
+      - name: Generate CycloneDX npm dependency SBOM
+        run: npm sbom --sbom-format=cyclonedx > npm-sbom.cdx.json
       - name: Attest npm tarball provenance
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
         with:
           subject-path: ${{ steps.pack.outputs.path }}
+      - name: Attest npm tarball SBOM
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: ${{ steps.pack.outputs.path }}
+          sbom-path: npm-sbom.cdx.json
       - name: Publish exact attested tarball through npm trusted publishing
         run: npm publish "${{ steps.pack.outputs.path }}" --access public
 
