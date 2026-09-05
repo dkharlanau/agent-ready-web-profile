@@ -1,9 +1,12 @@
 # ARWP comparisons
 
 Canonical comparison hub: https://dkharlanau.github.io/agent-ready-web-profile/compare/
+ARWP vs AgentReady / Ora: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-agentready.html
+ARWP vs Agentic Resource Discovery (ARD): https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html
 Machine-readable alternatives map: https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json
 Product classification: https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json
 Schema.org product metadata: https://dkharlanau.github.io/agent-ready-web-profile/ai/product.jsonld
+Protocol Observatory: https://dkharlanau.github.io/agent-ready-web-profile/observatory/
 Reviewed: 2026-09-05
 
 ## Preferred classification
@@ -18,20 +21,37 @@ Broader useful classes:
 - website conformance and observability tooling
 - developer tooling for AI agents
 
-## Closest adjacent competitor/class
+## Closest adjacent product
 
-AgentReady / Ora is the closest current adjacent product family. AgentReady defines an open readiness specification; Ora provides a reference scanner with broad checks, a 0-100 score/grades, real-agent journeys and product discovery/directory surfaces.
+AgentReady / Ora is the closest current adjacent product family. AgentReady defines an open readiness specification; Ora provides scored scans, broad checks, real-agent journeys and product discovery/directory surfaces.
 
 Primary distinction:
 - AgentReady/Ora asks: what should a product implement for agents and how ready is it?
 - ARWP asks: which machine/agent interfaces actually exist on this website, which should be selected for this concrete intent, what evidence supports that decision, and where do sources conflict?
 
+Canonical comparison: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-agentready.html
 Sources:
 - https://www.agentready.org/
 - https://ora.ai/docs
+- https://vercel.com/kb/guide/agent-readability-spec
+
+## Closest upstream discovery architecture
+
+Agentic Resource Discovery (ARD) is not treated as a product competitor. It is an open draft specification for publishing, searching and federating agentic resources such as MCP servers, A2A agents, Skills, APIs and registries. Its domain catalog is `/.well-known/ai-catalog.json`.
+
+Primary distinction:
+- ARD is resource/catalog/search-first and cross-domain/federated.
+- ARWP is website/site-first and resolves heterogeneous ordinary-web and agent/protocol evidence, preserves conflicts, and selects an interface for an intent.
+- ARWP should consume ARD rather than invent a competing catalog syntax.
+
+Canonical comparison: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html
+Sources:
+- https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/
+- https://github.com/ards-project/ard-spec/blob/main/spec/ard.md
 
 ## Other adjacent categories
 
+- Agent Ready — agent-readability scanner plus dated corpus research: https://agent-ready.dev/
 - AgentReady by Zeo — static agentic-web technical audit: https://agentready.zeo.org/
 - WebMCPReady — WebMCP/browser-agent readiness scanner: https://www.webmcpready.com/
 - Cloudflare AI Crawl Control — AI crawler monitoring and enforcement: https://developers.cloudflare.com/ai-crawl-control/
@@ -39,13 +59,14 @@ Sources:
 - Ahrefs Brand Radar — mentions, citations, impressions and AI share of voice: https://ahrefs.com/brand-radar
 - Peec AI — AI visibility, position, sentiment and share of voice: https://peec.ai/product/ai-visibility
 
-## Not competitors
+## Upstream mechanisms, not product competitors
 
-MCP, A2A, WebMCP, llms.txt, OpenAPI, RFC 9727, RFC 9728 and Agent Skills are upstream protocols/conventions/metadata mechanisms. ARWP may discover, validate or route to them. It does not replace their semantics.
+ARD, MCP, A2A, WebMCP, llms.txt, OpenAPI, RFC 9727, RFC 9728, Agent Skills, DNS-AID, Web Bot Auth, AIPREF, NLWeb, auth.md, ACP and UCP are protocols/specifications/conventions/project mechanisms at different maturity levels. ARWP may discover, audit, validate, route to or monitor them. It does not replace their semantics.
 
 ## Guardrails
 
 - This is a category map, not a winner ranking.
 - Unknown competitor capabilities are not treated as absent.
+- Internet-Drafts are not presented as RFCs.
 - ARWP does not claim a universal readiness score or ranking benefit.
 - AI visibility metrics remain external evidence, not proof of conformance or causality.
