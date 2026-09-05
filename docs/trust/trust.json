@@ -1,0 +1,83 @@
+{
+  "version": "0.1",
+  "project": "Agent-Ready Web Profile",
+  "shortName": "ARWP",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "trustCenter": "https://dkharlanau.github.io/agent-ready-web-profile/trust/",
+  "status": "active-development",
+  "maturity": "pre-stable",
+  "lastReviewed": "2026-09-05",
+  "maintainer": {
+    "name": "Dzmitryi Kharlanau",
+    "github": "https://github.com/dkharlanau",
+    "projectCitation": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CITATION.cff"
+  },
+  "identity": {
+    "repository": "https://github.com/dkharlanau/agent-ready-web-profile",
+    "projectSite": "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "citationMetadata": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/CITATION.cff",
+    "license": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/LICENSE"
+  },
+  "reviewModel": {
+    "primarySourcesPreferred": true,
+    "ownerControlledEvidenceSeparatedFromIndependentEvidence": true,
+    "negativeResultsPreserved": true,
+    "plannedCapabilitiesSeparatedFromActiveCapabilities": true,
+    "frozenHistoricalSnapshots": true,
+    "scopedClaimRegistry": true,
+    "correctionsVisible": true,
+    "noReadinessScore": true
+  },
+  "evidence": {
+    "claims": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/index.json",
+    "protocolObservatory": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json",
+    "crawlerMatrix": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/crawlers.json",
+    "benchmarkMethodology": "https://dkharlanau.github.io/agent-ready-web-profile/BENCHMARK.md",
+    "history": "https://dkharlanau.github.io/agent-ready-web-profile/history.json",
+    "corrections": "https://dkharlanau.github.io/agent-ready-web-profile/trust/corrections.json"
+  },
+  "security": {
+    "policy": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SECURITY.md",
+    "repositorySecurity": "https://github.com/dkharlanau/agent-ready-web-profile/security",
+    "boundedPublicFetching": true,
+    "readOnlyPrimaryInterfaces": true
+  },
+  "softwareSupplyChain": {
+    "npmPackage": "https://www.npmjs.com/package/agent-ready-web-profile",
+    "trustedPublishingWorkflow": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/.github/workflows/publish-ecosystem.yml",
+    "githubArtifactAttestation": {
+      "status": "configured-for-next-npm-publish",
+      "verificationCommand": "gh attestation verify <tarball> -R dkharlanau/agent-ready-web-profile"
+    },
+    "sbomAttestation": {
+      "status": "planned"
+    },
+    "openSSFScorecard": {
+      "status": "configured",
+      "viewer": "https://scorecard.dev/viewer/?uri=github.com/dkharlanau/agent-ready-web-profile"
+    },
+    "openSSFBestPracticesBadge": {
+      "status": "external-self-certification-required"
+    }
+  },
+  "persistentIdentifiers": {
+    "doi": {
+      "status": "prepared-not-issued",
+      "provider": "Zenodo",
+      "metadataSource": "CITATION.cff",
+      "note": "A DOI is not claimed until the repository is enabled in Zenodo and a release is archived."
+    }
+  },
+  "reuse": {
+    "software": "Apache-2.0",
+    "coveredMediaAndResearch": "CC-BY-4.0",
+    "rightsManifest": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json"
+  },
+  "boundaries": [
+    "Trust metadata does not prove that the software is vulnerability-free.",
+    "Artifact provenance proves where/how a released artifact was built, not that its contents are secure.",
+    "A DOI is a persistent citation identifier, not an endorsement or quality certificate.",
+    "OpenSSF signals are external security-practice indicators, not proof of correctness.",
+    "ARWP claims and observatory rows remain scoped to their stated evidence and review dates."
+  ]
+}
