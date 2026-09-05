@@ -1,0 +1,98 @@
+{
+  "releaseVersion": "0.1",
+  "releaseId": "2026-09-05-foundation",
+  "title": "State of the Agentic Web — Foundation Release",
+  "publishedAt": "2026-09-05",
+  "evidenceDate": "2026-08-28",
+  "scope": {
+    "cohort": "reviewed independent documentation-site benchmark corpus",
+    "independentSites": 20,
+    "intentsPerSite": 5,
+    "decisionCases": 100,
+    "intents": [
+      "read",
+      "search",
+      "structured",
+      "tools",
+      "agent"
+    ],
+    "representativeOfWeb": false,
+    "ownerControlledReferencesExcluded": true
+  },
+  "decisionQuality": {
+    "strategies": {
+      "llms-aware": {
+        "correct": 89,
+        "total": 100
+      },
+      "resolver-union": {
+        "correct": 86,
+        "total": 100
+      }
+    },
+    "resolverUnion": {
+      "mismatches": 14,
+      "overSelection": 5,
+      "discoveryGaps": 7,
+      "selectionGaps": 2,
+      "resolutionFailures": 0,
+      "regret": 6,
+      "uniquelyCorrect": 0
+    },
+    "historicalBaseline": {
+      "evidenceDate": "2026-08-26",
+      "resolverUnionCorrect": 81,
+      "llmsAwareCorrect": 89,
+      "note": "Historical baseline retained to show the effect of the later general OpenAPI search-eligibility correction without editing reviewed ground truth."
+    }
+  },
+  "interpretation": [
+    "Broader discovery coverage did not yet outperform the strongest simpler strategy on the frozen reviewed corpus.",
+    "The general OpenAPI search-eligibility correction improved resolver-union from 81/100 to 86/100 without changing reviewed ground truth.",
+    "Resolver regret remains visible: six decisions were cases where a simpler strategy was correct while resolver-union was wrong.",
+    "Resolver-union had zero uniquely-correct decisions on this frozen corpus at the evidence date, so discovery breadth alone is not treated as product progress."
+  ],
+  "limitations": [
+    "This is a reviewed engineering sample, not a representative survey of the public web.",
+    "The cohort is documentation-heavy and was selected for Resolver decision-quality evaluation, not adoption measurement.",
+    "The release does not establish ARWP adoption, search ranking gains, AI citation gains, answer quality, token savings or production interoperability beyond the recorded tests.",
+    "Owner-controlled ARWP reference sites are excluded from the independent aggregate.",
+    "Live publisher capabilities can drift after the frozen evidence date; historical ground truth is not silently rewritten."
+  ],
+  "sources": [
+    {
+      "type": "benchmark-result",
+      "url": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/benchmarks/results/2026-08-28-r4-openapi-search-eligibility.md",
+      "description": "Frozen-corpus result after the general OpenAPI search-eligibility correction."
+    },
+    {
+      "type": "methodology",
+      "url": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BENCHMARK.md",
+      "description": "External benchmark methodology and evidence boundaries."
+    },
+    {
+      "type": "claim",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0002.html",
+      "description": "Reviewed bounded claim for the 2026-08-28 decision-quality result."
+    }
+  ],
+  "derived": {
+    "llmsAwareAccuracyPct": 89,
+    "resolverUnionAccuracyPct": 86,
+    "unionVsLlmsAwarePercentagePointDelta": -3,
+    "resolverUnionImprovementFromHistoricalPercentagePoints": 5,
+    "mismatchRatePct": 14,
+    "overSelectionRatePct": 5,
+    "discoveryGapRatePct": 7,
+    "selectionGapRatePct": 2,
+    "regretRatePct": 6,
+    "uniquelyCorrectRatePct": 0
+  },
+  "guardrails": {
+    "noReadinessScore": true,
+    "noAdoptionInference": true,
+    "noRankingInference": true,
+    "noCausalityInference": true,
+    "frozenEvidenceIsNotSilentlyRewritten": true
+  }
+}
