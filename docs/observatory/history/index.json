@@ -1,0 +1,12 @@
+{
+  "version": "0.1",
+  "project": "Agent-Ready Web Profile",
+  "snapshots": [
+    {
+      "date": "2026-09-05",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/observatory/history/2026-09-05.json",
+      "mechanisms": 10,
+      "notes": "First frozen ARWP Agentic Web Protocol Observatory snapshot."
+    }
+  ]
+}
