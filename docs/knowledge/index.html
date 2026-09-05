@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ARWP Knowledge Graph: canonical relationships between the maintainer, software project, Trust Center, observatories, claims and project-defined concepts.">
+  <title>ARWP Knowledge Graph</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/knowledge/">
+  <link rel="describedby" type="application/ld+json" href="./graph.json">
+  <link rel="stylesheet" href="../arwp.css">
+  <style>
+    .kg-main{padding:72px 0 96px}.kg-hero{max-width:920px}.kg-hero h1{margin:0;font-size:clamp(48px,7vw,86px);line-height:.98;letter-spacing:-.055em}.kg-lead{max-width:820px;font-size:21px;color:var(--muted)}.kg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:38px}.kg-card{padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--white)}.kg-card h2{font-size:20px;margin:0 0 8px}.kg-card p{margin:0;color:var(--muted)}.kg-type{display:inline-block;margin-bottom:10px;font:600 11px var(--mono);text-transform:uppercase}.kg-flow{margin-top:28px;padding:24px;border:2px solid var(--ink);border-radius:18px;background:var(--white);font-family:var(--mono);line-height:1.8}.kg-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.kg-links a{font-weight:700}@media(max-width:850px){.kg-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.kg-grid{grid-template-columns:1fr}}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"ARWP Knowledge Graph","url":"https://dkharlanau.github.io/agent-ready-web-profile/knowledge/","about":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#software"},"isPartOf":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#website"}}
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
+    <nav aria-label="Knowledge navigation"><a href="../trust/">Trust</a><a href="../observatory/">Observatory</a><a href="../evidence/claims/">Claims</a><a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav>
+  </header>
+
+  <main class="kg-main shell">
+    <section class="kg-hero">
+      <p class="eyebrow">Canonical entities · explicit relationships</p>
+      <h1>One graph for the project’s identity and evidence.</h1>
+      <p class="kg-lead">ARWP publishes one JSON-LD graph connecting the named maintainer, software project, website, Trust Center, research datasets, Claims Registry and project-defined vocabulary. It is an entity-consistency surface, not a claim that search engines must adopt the graph.</p>
+      <div class="kg-links"><a href="./graph.json">JSON-LD graph →</a><a href="../ai/site-profile.json">ARWP self-profile →</a><a href="../citation-index.json">Citation index →</a></div>
+    </section>
+
+    <div class="kg-flow" aria-label="ARWP entity graph summary">
+      Dzmitryi Kharlanau<br>
+      ↓ author / maintainer<br>
+      Agent-Ready Web Profile (ARWP)<br>
+      ├─ Trust Center<br>
+      ├─ Protocol Observatory → dataset<br>
+      ├─ AI Crawler Matrix → dataset<br>
+      ├─ Claims Registry → ARWP-CLAIM-0001 / 0002<br>
+      ├─ AI Search & Citation Profile<br>
+      └─ Project vocabulary → agentic web resolver / resolver regret / discovery conflict
+    </div>
+
+    <section class="kg-grid" aria-label="Knowledge graph entities">
+      <article class="kg-card"><span class="kg-type">Person</span><h2>Maintainer</h2><p>Dzmitryi Kharlanau is the named author/maintainer associated with the canonical repository and citation metadata.</p></article>
+      <article class="kg-card"><span class="kg-type">SoftwareSourceCode</span><h2>ARWP</h2><p>The software entity connects the public project site, source repository and npm package without treating either distribution channel as a separate product.</p></article>
+      <article class="kg-card"><span class="kg-type">WebSite</span><h2>Project site</h2><p>The GitHub Pages site is the human and machine publishing surface for documentation, claims, research and trust metadata.</p></article>
+      <article class="kg-card"><span class="kg-type">WebPage</span><h2>Trust Center</h2><p>Identity, evidence policy, security, corrections, supply-chain state and external trust-signal boundaries.</p></article>
+      <article class="kg-card"><span class="kg-type">Dataset</span><h2>Protocol Observatory</h2><p>Dated primary-source-reviewed protocol/discovery observations with a stable JSON distribution.</p></article>
+      <article class="kg-card"><span class="kg-type">Dataset</span><h2>Crawler Matrix</h2><p>Dated provider/crawler access roles with official-source boundaries and reusable policy guidance.</p></article>
+      <article class="kg-card"><span class="kg-type">CollectionPage</span><h2>Claims Registry</h2><p>Stable scoped claims remain linked to their own evidence and limitations rather than becoming generic product marketing.</p></article>
+      <article class="kg-card"><span class="kg-type">TechArticle</span><h2>AI Search Profile</h2><p>The reusable site implementation profile links discovery, citation, trust, reuse and measurement workstreams.</p></article>
+      <article class="kg-card"><span class="kg-type">DefinedTermSet</span><h2>Project vocabulary</h2><p>ARWP-created terms are explicitly project-defined and linked to canonical definition pages rather than presented as industry standards.</p></article>
+    </section>
+
+    <section style="margin-top:30px;max-width:820px">
+      <p class="eyebrow">Boundaries</p>
+      <h2>Entity consistency is not authority by itself.</h2>
+      <p>The graph makes project identity and relationships explicit. It does not create independent adoption, prove a claim, grant access, establish authorship for third-party material, or guarantee search/AI inclusion. Claim truth still comes from the evidence attached to each claim or research surface.</p>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Knowledge Graph</div>
+    <div class="footer-links"><a href="./graph.json">Graph JSON-LD</a><a href="../trust/">Trust</a><a href="../">Project</a></div>
+    <p>Reviewed 2026-09-05 · Project-authored graph metadata</p>
+  </footer>
+</body>
+</html>
