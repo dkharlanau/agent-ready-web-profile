@@ -7,8 +7,15 @@ import { evaluateSiteObservations, loadRecommendationsRegistry, robotsRootAccess
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const canonical = JSON.parse(fs.readFileSync(path.join(root, 'registry', 'search-agent-recommendations.json'), 'utf8'));
 const published = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'recommendations', 'registry.json'), 'utf8'));
+const frozen = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'recommendations', 'history', '2026-09-05.json'), 'utf8'));
+const history = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'recommendations', 'history', 'index.json'), 'utf8'));
 
 assert.deepEqual(published, canonical, 'published recommendation registry must match the packaged canonical registry');
+assert.deepEqual(frozen, canonical, 'initial frozen ruleset must match the current ruleset at publication time');
+assert.equal(history.snapshots[0].date, '2026-09-05');
+assert.equal(history.snapshots[0].ruleset, '2026.09');
+assert.equal(history.snapshots[0].rules, 15);
+assert.match(history.historyPolicy, /not silently rewritten/i);
 assert.deepEqual(loadRecommendationsRegistry(), canonical);
 assert.equal(canonical.ruleset, '2026.09');
 assert.equal(canonical.reviewedAt, '2026-09-05');
@@ -84,4 +91,4 @@ assert.equal(blockedById('google-read-more-deep-links').status, 'warn');
 assert.equal(blockedById('aipref-content-usage').status, 'not-assessed');
 assert.equal(blockedById('arwp-profile-validity').status, 'not-applicable');
 
-console.log('PASS Search + Agent recommendations stay source-backed and the audit separates automated evidence, opportunities, runtime-only checks and external measurement');
+console.log('PASS Search + Agent recommendations stay source-backed, frozen by ruleset, and separate automated evidence, opportunities, runtime-only checks and external measurement');
