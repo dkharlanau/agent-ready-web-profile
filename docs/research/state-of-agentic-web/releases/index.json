@@ -1,0 +1,17 @@
+{
+  "version": "0.1",
+  "title": "ARWP State of the Agentic Web release index",
+  "historyPolicy": "Releases are append-only. A later review creates a new release or explicit supersession record instead of rewriting a frozen release.",
+  "releases": [
+    {
+      "id": "2026-09-05-foundation",
+      "publishedAt": "2026-09-05",
+      "evidenceDate": "2026-08-28",
+      "status": "foundation",
+      "representativeOfWeb": false,
+      "html": "https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.html",
+      "json": "https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.json",
+      "csv": "https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.csv"
+    }
+  ]
+}
