@@ -1,0 +1,53 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/claim.schema.json",
+  "claimVersion": "0.1",
+  "id": "ARWP-CLAIM-0001",
+  "status": "verified",
+  "title": "A2A 1.0 callable interfaces come from supportedInterfaces, not the Agent Card discovery URL",
+  "claim": "For A2A 1.0, an Agent Card is discovery metadata. A client selects a supported AgentInterface and sends requests to the URL declared by that selected supportedInterfaces[] entry; the URL used to retrieve the Agent Card is not automatically the callable A2A endpoint.",
+  "scope": "A2A protocol version 1.0 semantics as reviewed on 2026-09-05, and ARWP routing behavior for valid A2A Agent Cards. This claim concerns discovery versus callable interface routing, not authentication or successful task execution.",
+  "doesNotProve": [
+    "that a declared A2A interface is currently reachable",
+    "that the caller is authorized to use the interface",
+    "that an Agent Card signature establishes provider reputation or trust",
+    "that every future A2A protocol version will preserve the same field structure"
+  ],
+  "reviewedAt": "2026-09-05",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/ARWP-CLAIM-0001.html",
+  "license": "CC-BY-4.0",
+  "projectVersion": {"toolchain":"0.2.0","profileContract":"0.1"},
+  "facts": [
+    {"name":"a2aProtocolVersion","value":"1.0"},
+    {"name":"wellKnownDiscoveryPath","value":"/.well-known/agent-card.json"},
+    {"name":"callableInterfaceField","value":"supportedInterfaces[].url"},
+    {"name":"preferredInterfaceRule","value":"first supported transport in supportedInterfaces preference order"}
+  ],
+  "evidence": [
+    {
+      "type":"primary-spec",
+      "url":"https://a2a-protocol.org/dev/specification/",
+      "description":"A2A 1.0 specification section 8 defines Agent Card discovery, supportedInterfaces declaration, client protocol selection and use of the selected interface URL.",
+      "reviewedAt":"2026-09-05"
+    },
+    {
+      "type":"primary-source",
+      "url":"https://a2a-protocol.org/latest/whats-new-v1/",
+      "description":"A2A v1.0 change notes state that the AgentCard url field moved into supportedInterfaces and that supportedInterfaces consolidates callable interface declarations.",
+      "reviewedAt":"2026-09-05"
+    },
+    {
+      "type":"internal-implementation",
+      "url":"https://github.com/dkharlanau/agent-ready-web-profile/blob/e6c5e0d27af9627ee9827f3de8adffaddbcbc7f2/lib/resolver-adapters.mjs",
+      "description":"ARWP adapter implementation validates A2A Agent Cards and normalizes their declared supported interfaces while retaining card provenance."
+    },
+    {
+      "type":"internal-review",
+      "url":"https://github.com/dkharlanau/agent-ready-web-profile/blob/e6c5e0d27af9627ee9827f3de8adffaddbcbc7f2/docs/DECISION-QUALITY.md",
+      "description":"ARWP decision-quality policy explicitly distinguishes Agent Card metadata from callable supportedInterfaces entries."
+    }
+  ],
+  "notes": [
+    "This claim corrects an earlier ARWP protocol-semantics defect where the fetched Agent Card document URL could be treated as the callable agent endpoint.",
+    "If A2A upstream semantics change, publish a superseding claim rather than rewriting this reviewed claim in place."
+  ]
+}
