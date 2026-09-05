@@ -33,7 +33,18 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 - [Resolver regret](https://dkharlanau.github.io/agent-ready-web-profile/concepts/resolver-regret.html)
 - [Discovery conflict](https://dkharlanau.github.io/agent-ready-web-profile/concepts/discovery-conflict.html)
 
-## Current research and standards tracking
+## Research
+
+- [State of the Agentic Web](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/)
+- [State of the Agentic Web methodology](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/methodology.html)
+- [Foundation release — 2026-09-05](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.html)
+- [Foundation release JSON](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.json)
+- [Foundation release CSV](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.csv)
+- [Research release index](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/index.json)
+
+The foundation research release is a frozen engineering sample, not a representative survey of the public web. It contains 20 independent documentation sites and 100 reviewed intent decisions; owner-controlled reference sites are excluded from the independent aggregate.
+
+## Current standards tracking
 
 - [Agentic Web Protocol Observatory](https://dkharlanau.github.io/agent-ready-web-profile/observatory/)
 - [Protocol Observatory JSON](https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json)
@@ -69,6 +80,7 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 - [Repository README](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/README.md)
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md)
 - [Resolver model](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md)
+- [ARD v0.91 compatibility](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/ARD-V0.91.md)
 - [Protocol support](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/PROTOCOL-SUPPORT.md)
 - [Benchmark methodology](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BENCHMARK.md)
 - [Search + Agent recommendations documentation](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/SEARCH-AGENT-RECOMMENDATIONS.md)
