@@ -1,0 +1,50 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-05",
+  "project": {
+    "name": "Agent-Ready Web Profile",
+    "shortName": "ARWP",
+    "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "repository": "https://github.com/dkharlanau/agent-ready-web-profile",
+    "license": "Apache-2.0"
+  },
+  "preferredClass": {
+    "id": "agentic-web-interoperability-resolver",
+    "label": "Agentic web interoperability resolver",
+    "status": "project-defined",
+    "definition": "Developer infrastructure that discovers heterogeneous machine- and agent-facing interfaces exposed by a website, preserves source authority and conflicts, normalizes the observations into an inspectable service map, and selects an interface for a concrete intent.",
+    "broaderClasses": [
+      "agent readiness infrastructure",
+      "web interoperability tooling",
+      "website conformance and observability tooling",
+      "developer tooling for AI agents"
+    ]
+  },
+  "coreJobs": [
+    "discover website machine and agent interfaces",
+    "normalize heterogeneous discovery evidence without replacing upstream protocols",
+    "preserve provenance and contradictory declarations",
+    "route read, search, structured, tool and agent intents to suitable interfaces",
+    "audit search and agent-facing technical signals against dated primary-source rules",
+    "record runtime and visibility evidence separately from static declarations"
+  ],
+  "notEquivalentTo": [
+    {"class":"agent readiness score or badge","reason":"ARWP intentionally does not collapse evidence into one readiness score."},
+    {"class":"AI visibility or GEO tracker","reason":"ARWP can store owner-supplied visibility evidence, but prompt/mention/citation tracking is not its primary product."},
+    {"class":"AI crawler control or WAF product","reason":"ARWP observes and audits crawler policy; it does not enforce network access rules."},
+    {"class":"MCP server","reason":"MCP is one upstream interface ARWP can discover and verify; ARWP is not the MCP protocol itself."},
+    {"class":"A2A agent","reason":"A2A Agent Cards and callable interfaces are upstream evidence resolved by ARWP."},
+    {"class":"WebMCP implementation","reason":"WebMCP is a browser runtime surface ARWP can observe or evaluate when runtime evidence is available."},
+    {"class":"SEO rank tracker","reason":"ARWP audits technical eligibility and evidence but does not promise or measure organic rank as its core output."}
+  ],
+  "closestAdjacentClasses": [
+    {"class":"agent readiness standard and scanner","representative":"AgentReady / Ora","overlap":"multi-layer agent readiness, discovery surfaces, conformance checks, directory/discovery","difference":"AgentReady names readiness requirements and Ora provides scored scans and agent journeys; ARWP centers on interoperability resolution, provenance/conflict preservation and intent routing without a universal readiness score.","source":"https://www.agentready.org/"},
+    {"class":"static agentic web audit","representative":"AgentReady by Zeo","overlap":"robots, sitemap, parsing, protocol and API readiness checks","difference":"ARWP adds normalized multi-source service maps, source-authority/conflict handling, resolver planning and evidence history.","source":"https://agentready.zeo.org/"},
+    {"class":"WebMCP readiness scanner","representative":"WebMCPReady","overlap":"browser-agent operability and WebMCP diagnostics","difference":"WebMCP is one runtime surface in ARWP's broader interoperability model rather than the product boundary.","source":"https://www.webmcpready.com/"},
+    {"class":"AI crawler governance","representative":"Cloudflare AI Crawl Control","overlap":"AI crawler visibility and policy awareness","difference":"Cloudflare monitors and enforces crawler access at the network edge; ARWP audits policy and interoperability but does not enforce traffic rules.","source":"https://developers.cloudflare.com/ai-crawl-control/"},
+    {"class":"AI search visibility analytics","representatives":["Semrush AI Visibility Toolkit","Ahrefs Brand Radar","Peec AI"],"overlap":"AI citation/visibility evidence and competitor context","difference":"These products primarily track mentions, citations, prompts, sentiment or share of voice; ARWP primarily resolves and verifies website interfaces and can ingest such measurements as external evidence.","sources":["https://www.semrush.com/kb/1493-ai-visibility-toolkit","https://ahrefs.com/brand-radar","https://peec.ai/product/ai-visibility"]}
+  ],
+  "upstreamMechanismsNotCompetitors": ["MCP","A2A","WebMCP","llms.txt","OpenAPI","RFC 9727 API Catalog","RFC 9728 Protected Resource Metadata","Agent Skills"],
+  "canonicalComparison": "https://dkharlanau.github.io/agent-ready-web-profile/compare/",
+  "guardrails": {"noUniversalBestClaim":true,"noRankingGuarantee":true,"competitorFactsRequireSource":true,"unknownCompetitorCapabilityIsNotAssumedAbsent":true,"projectDefinedClassIsNotClaimedAsIndustryStandard":true}
+}
