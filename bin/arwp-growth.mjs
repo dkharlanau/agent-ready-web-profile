@@ -7,14 +7,14 @@ function usage() {
   return `arwp-growth — prioritized Search / AI-search / citation improvement planner
 
 Usage:
-  arwp-growth <https://site.example> [--json] [--output=FILE] [--timeout=MS] [--max-bytes=N]
+  arwp-growth <https://site.example> [--vertical=general|documentation|editorial|software-product|commerce|local-business|research-dataset] [--json] [--output=FILE] [--timeout=MS] [--max-bytes=N]
 
 Examples:
   arwp-growth https://example.com
-  arwp-growth https://example.com --json
+  arwp-growth https://example.com --vertical=editorial --json
   arwp-growth https://example.com --output=arwp-growth.json
 
-The Growth Profile does not output a universal quality/readiness score and does not guarantee ranking, AI citation or recommendation outcomes.
+The Growth Profile includes applicable ADOPT/MEASURED Trend Radar changes, but does not output a universal quality/readiness score and does not guarantee ranking, AI citation or recommendation outcomes.
 `;
 }
 
@@ -49,7 +49,8 @@ async function main() {
   if (!target) throw new Error('A public website URL is required.');
   const plan = await buildGrowthPlan(target, {
     timeoutMs: numeric(args, 'timeout', 8000),
-    maxBytes: numeric(args, 'max-bytes', 512 * 1024)
+    maxBytes: numeric(args, 'max-bytes', 512 * 1024),
+    vertical: optionValue(args, 'vertical') || 'general'
   });
   const output = optionValue(args, 'output');
   if (output) {
