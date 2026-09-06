@@ -19,6 +19,7 @@
     "arwp-growth-history": "bin/arwp-growth-history.mjs",
     "arwp-hypotheses": "bin/arwp-hypotheses.mjs",
     "arwp-growth-experiment": "bin/arwp-growth-experiment.mjs",
+    "arwp-growth-remediation": "bin/arwp-growth-remediation.mjs",
     "arwp-trends": "bin/arwp-trends.mjs",
     "arwp-trend-history": "bin/arwp-trend-history.mjs"
   },
@@ -33,6 +34,7 @@
     "monitor/",
     "registry/",
     "benchmarks/",
+    "templates/growth/",
     "server.json",
     "ai/ai-search-profile.json",
     "scripts/quickstart.mjs",
@@ -60,6 +62,7 @@
     "docs/GROWTH-LOOP.md",
     "docs/LOOP-STATUS.md",
     "docs/GROWTH-EXPERIMENTS.md",
+    "docs/GROWTH-REMEDIATION.md",
     "docs/TREND-HISTORY.md"
   ],
   "scripts": {
@@ -77,7 +80,8 @@
     "growth-history": "node bin/arwp-growth-history.mjs",
     "hypotheses": "node bin/arwp-hypotheses.mjs",
     "growth-experiment": "node bin/arwp-growth-experiment.mjs",
-    "test:growth": "node scripts/growth-profile-test.mjs && node scripts/growth-policy-test.mjs && node scripts/growth-history-test.mjs && node scripts/growth-hypotheses-test.mjs && node scripts/growth-experiment-test.mjs && node bin/arwp-hypotheses.mjs check && node --check lib/growth-profile.mjs && node --check lib/growth-plan.mjs && node --check lib/growth-policy.mjs && node --check lib/growth-history.mjs && node --check lib/growth-hypotheses.mjs && node --check bin/arwp-growth.mjs && node --check bin/arwp-growth-policy.mjs && node --check bin/arwp-growth-history.mjs && node --check bin/arwp-hypotheses.mjs && node --check lib/growth-experiment.mjs && node --check bin/arwp-growth-experiment.mjs && node --check scripts/growth-experiment-test.mjs",
+    "growth-remediation": "node bin/arwp-growth-remediation.mjs",
+    "test:growth": "node scripts/growth-profile-test.mjs && node scripts/growth-policy-test.mjs && node scripts/growth-history-test.mjs && node scripts/growth-hypotheses-test.mjs && node scripts/growth-experiment-test.mjs && node scripts/growth-remediation-test.mjs && node bin/arwp-hypotheses.mjs check && node --check lib/growth-profile.mjs && node --check lib/growth-plan.mjs && node --check lib/growth-policy.mjs && node --check lib/growth-history.mjs && node --check lib/growth-hypotheses.mjs && node --check bin/arwp-growth.mjs && node --check bin/arwp-growth-policy.mjs && node --check bin/arwp-growth-history.mjs && node --check bin/arwp-hypotheses.mjs && node --check lib/growth-experiment.mjs && node --check bin/arwp-growth-experiment.mjs && node --check lib/growth-remediation.mjs && node --check bin/arwp-growth-remediation.mjs && node --check scripts/growth-experiment-test.mjs && node --check scripts/growth-remediation-test.mjs",
     "trends": "node bin/arwp-trends.mjs",
     "trend-history": "node bin/arwp-trend-history.mjs",
     "test:trends": "node scripts/trend-radar-test.mjs && node scripts/trend-history-test.mjs && node bin/arwp-trends.mjs check && node --check lib/trend-radar.mjs && node --check lib/growth-plan.mjs && node --check bin/arwp-trends.mjs && node --check bin/arwp-growth.mjs && node --check lib/trend-history.mjs && node --check bin/arwp-trend-history.mjs && node --check scripts/trend-history-test.mjs",
@@ -170,6 +174,7 @@
     "growth-loop",
     "growth-hypotheses",
     "growth-experiments",
+    "growth-remediation",
     "trend-history"
   ],
   "publishConfig": {
