@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": ["policyVersion", "target", "goals", "siteClass"],
   "properties": {
+    "$schema": { "type": "string" },
     "policyVersion": { "const": "0.1" },
     "target": { "type": "string", "format": "uri", "pattern": "^https://" },
     "siteClass": {
