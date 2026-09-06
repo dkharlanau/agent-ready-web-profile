@@ -46,7 +46,7 @@ The existing Resolver, publisher profile, protocol work, scanner, evidence recei
 - `ADOPT -> MEASURED` proposals require real before/after owner visibility evidence with comparable metrics;
 - positive, negative, mixed and unchanged evidence all remain in the denominator;
 - `MEASURED` means observed longitudinal evidence exists, not that the effect was positive or causal;
-- dedicated Growth Learning CI guards against silent maturity promotion and currently passes on `main`.
+- dedicated Growth Learning CI guards against silent maturity promotion and passes on `main`.
 
 ### Packaging and documentation
 
