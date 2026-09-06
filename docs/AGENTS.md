@@ -39,12 +39,39 @@ node bin/arwp.mjs plan https://example.com --intent=tools
 node bin/arwp.mjs plan https://example.com --intent=agent
 ```
 
+## Prepare a website with an AI agent
+
+ARWP publishes portable Agent Skills. Default workflow:
+
+```text
+arwp-prepare-site
+```
+
+Install the skill package where supported:
+
+```bash
+npx skills add dkharlanau/agent-ready-web-profile
+```
+
+Skill catalog:
+https://dkharlanau.github.io/agent-ready-web-profile/skills/
+
+Specialists:
+
+- `arwp-ai-search-content` — useful/original/evidence-backed content for retrieval and citation;
+- `arwp-agent-discovery` — truthful agent/machine discovery surfaces;
+- `arwp-evidence-ci` — contracts, audits, receipts and CI.
+
+The preparation skill should inspect the target repository, establish an audit/growth baseline, implement high-confidence P0/P1 improvements, verify the site's own build/tests plus ARWP checks, and leave credential-dependent work explicit. It must not claim that ARWP or metadata guarantees ranking or AI recommendations.
+
 ## Main public surfaces
 
 - Project: https://dkharlanau.github.io/agent-ready-web-profile/
 - Sitemap: https://dkharlanau.github.io/agent-ready-web-profile/sitemap.xml
 - Markdown sitemap: https://dkharlanau.github.io/agent-ready-web-profile/sitemap.md
 - Agent routing: https://dkharlanau.github.io/agent-ready-web-profile/llms.txt
+- Agent Skills: https://dkharlanau.github.io/agent-ready-web-profile/skills/
+- Growth Profile: https://dkharlanau.github.io/agent-ready-web-profile/growth/
 - Product class: https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json
 - Schema.org product metadata: https://dkharlanau.github.io/agent-ready-web-profile/ai/product.jsonld
 - Competitor/category map: https://dkharlanau.github.io/agent-ready-web-profile/compare/
@@ -52,6 +79,7 @@ node bin/arwp.mjs plan https://example.com --intent=agent
 - ARWP vs ARD: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html
 - Protocol Observatory: https://dkharlanau.github.io/agent-ready-web-profile/observatory/
 - Search + Agent recommendations: https://dkharlanau.github.io/agent-ready-web-profile/recommendations/
+- Evidence Receipts: https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/
 - Trust Center: https://dkharlanau.github.io/agent-ready-web-profile/trust/
 
 ## Discovery model
@@ -69,8 +97,6 @@ Current canonical ARD static discovery:
 - JSON-LD description layer and namespaces.
 
 The predecessor `/.well-known/ai-catalog.json` and `rel="ai-catalog"` remain compatibility signals.
-
-Current ARWP support is deliberately partial: the Resolver checks canonical `ard.json`, accepts HTTP `rel=ard`, falls back to predecessor ai-catalog when needed, and preserves typed ARD resources as evidence. Full in-page JSON-LD namespace interpretation and federated registry search are not yet claimed.
 
 ## Interpretation rules
 
