@@ -1,0 +1,31 @@
+# ARWP Trend Radar
+
+Canonical page: https://dkharlanau.github.io/agent-ready-web-profile/trends/
+Machine-readable snapshot: https://dkharlanau.github.io/agent-ready-web-profile/trends/trends.json
+Reviewed: 2026-09-06
+
+Purpose:
+Track material Search, AI-search, citation and agent-web changes from primary sources and turn confirmed applicable changes into reviewable website actions without claiming that novelty or early adoption guarantees ranking, citation or recommendation outcomes.
+
+Lifecycle:
+- WATCH: emerging, experimental or provider-specific; visible but not a default recommendation.
+- ADOPT: primary-source-backed and currently actionable for applicable sites.
+- MEASURED: ARWP has real longitudinal before/after outcome evidence; correlation is not causation.
+- RETIRED: deprecated/historical mechanism kept to prevent stale optimization advice.
+
+Recent ADOPT changes:
+- OpenAI publisher/developer guidance: OAI-SearchBot vs GPTBot separation, ChatGPT referral tagging, and WAI-ARIA guidance for ChatGPT Agent in Atlas.
+- Google Generative AI Search Console reporting is available to all websites worldwide as of 2026-08-31.
+- Google updated site-reputation policy enforcement in the EEA.
+- Google Preferred Sources has a custom interactive acquisition button and can surface preferred badges in supported AI Mode / AI Overview experiences.
+
+Recent WATCH changes:
+- Cloudflare Browser Run enforces Content Signals `use` semantics for compatible crawl requests.
+- WebMCP remains a browser runtime/origin-trial surface; ARWP requires task eval evidence before broad adoption claims.
+
+Run:
+node bin/arwp-trends.mjs list --since=30 --exclude-retired
+node bin/arwp-trends.mjs list --provider=google --stage=adopt
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json
+
+The Trend Radar has no universal score and does not promise search or AI visibility gains.
