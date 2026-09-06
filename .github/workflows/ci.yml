@@ -20,6 +20,13 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Validate maturity evidence inventory
+        run: |
+          node scripts/maturity-profile-test.mjs --site
+          node bin/arwp-maturity.mjs check docs/maturity/profile.json
+          node --check lib/maturity-profile.mjs
+          node --check bin/arwp-maturity.mjs
+
       - name: Set up Python
         uses: actions/setup-python@v7
         with:

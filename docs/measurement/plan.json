@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "reviewedAt": "2026-09-06",
+  "owner": "Dzmitryi Kharlanau",
+  "purpose": "Decide which useful resources attract qualified discovery and lead to real adoption.",
+  "status": "definitions-published-not-a-collection-claim",
+  "existingIntegration": "Portfolio analytics source exists; runtime, account configuration and coverage are not verified by this plan.",
+  "customEventStatus": "specified-not-instrumented",
+  "unknownIsZero": false,
+  "publicExport": "aggregate-only",
+  "personalDataAllowed": false,
+  "reviewCadence": "Compare complete matched 28-day windows; inspect failures weekly; disclose releases, seasonality and consent coverage.",
+  "metrics": [
+    {
+      "id": "nonbrand_search_clicks",
+      "definition": "Sum clicks for disclosed search queries classified non-brand using a versioned brand-query rule. Do not describe this as all organic clicks.",
+      "source": "Owner Google Search Console export; keep Bing in a separate series",
+      "grain": "day x landing page x search type, with available query classification",
+      "status": "not-measured",
+      "baseline": null,
+      "limitation": "Withheld queries, aggregation, reporting windows and country/device mix affect coverage. No platform-specific AI attribution without an actual supported report."
+    },
+    {
+      "id": "resource_intent_rate",
+      "definition": "Observed consented landing sessions containing dataset_download_click, template_download_click or repository_open, divided by observed consented landing sessions in the same cohort. Zero denominator produces null.",
+      "source": "Owner analytics export after event instrumentation is verified",
+      "grain": "28-day window x landing page x source group",
+      "status": "not-measured",
+      "baseline": null,
+      "limitation": "Clicks are intent proxies, not successful transfers, installations or citations. Consent-limited sessions are not all visitors."
+    },
+    {
+      "id": "verified_independent_adoptions",
+      "definition": "Distinct independently maintained projects with a reviewed public implementation or permissioned evidence of actual use. Exclude the maintainer's reference sites and unverified claims.",
+      "source": "Reviewed adoption ledger with evidence URLs and dates",
+      "grain": "project x 28-day observation window",
+      "status": "not-measured",
+      "baseline": null,
+      "limitation": "Voluntary reporting undercounts adoption. Repository stars, downloads and owner-controlled examples are not independent adoption."
+    }
+  ],
+  "events": [
+    { "name": "dataset_download_click", "resourceKind": "dataset", "status": "specified-not-instrumented" },
+    { "name": "template_download_click", "resourceKind": "template", "status": "specified-not-instrumented" },
+    { "name": "repository_open", "resourceKind": "repository", "status": "specified-not-instrumented" },
+    { "name": "citation_copy", "resourceKind": "citation", "status": "specified-not-instrumented" },
+    { "name": "audit_complete", "resourceKind": "audit", "status": "specified-not-instrumented" }
+  ],
+  "allowedDimensions": ["page_id", "resource_id", "resource_kind", "locale", "source_group"],
+  "dimensionPolicy": "Use publisher-controlled enumerations, not free text or raw URLs. Do not send user-submitted audit targets.",
+  "forbiddenPayloads": ["email", "name", "raw_url", "query_string", "fragment", "raw_referrer", "search_text", "form_content", "submitted_site_url", "voice_or_transcript", "cross_site_user_id"],
+  "guardrails": [
+    { "id": "consent_and_payload", "target": "No unauthorized collection or personal-data payloads", "observed": null, "verification": "Browser network/storage test before consent, after acceptance, rejection and revocation; inspect actual requests." },
+    { "id": "resource_integrity", "target": "No broken linked downloads or mismatched dataset descriptions", "observed": null, "verification": "Local parity checks plus deployed HTTP/content-type and download verification." }
+  ],
+  "ownerGates": ["Verify the existing provider account and page coverage", "Set and document retention and privacy notice", "Instrument events without duplicate page views", "Verify withdrawal prevents future collection", "Export aggregate baseline data before making growth claims"],
+  "sources": [
+    "https://support.google.com/analytics/answer/6366371?hl=en",
+    "https://developers.google.com/tag-platform/security/guides/consent",
+    "https://developers.google.com/search/docs/appearance/ai-features"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "site": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "stage": "pre-stable",
+  "scope": "Optional evidence inventory; not an upstream standard or ranking requirement",
+  "identity": {
+    "graph": "docs/knowledge/graph.json",
+    "subjectId": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
+    "ownerId": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer",
+    "websiteId": "https://dkharlanau.github.io/agent-ready-web-profile/#website"
+  },
+  "policies": {
+    "brand": "TRADEMARKS.md",
+    "brandPage": "docs/trust/brand.html",
+    "license": "LICENSE",
+    "security": "SECURITY.md",
+    "corrections": "docs/trust/corrections.json",
+    "history": "docs/history.json",
+    "reuse": "docs/media/rights.json",
+    "catalog": "docs/datasets/catalog.jsonld"
+  },
+  "datasets": [
+    {
+      "id": "https://dkharlanau.github.io/agent-ready-web-profile/#protocol-observatory",
+      "landingPage": "docs/observatory/index.html",
+      "distribution": "docs/observatory/protocols.json",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "limitations": "Curated dated protocol facts; not a random sample, adoption survey or market-share estimate.",
+      "doi": { "state": "not-issued", "value": null }
+    },
+    {
+      "id": "https://dkharlanau.github.io/agent-ready-web-profile/#crawler-matrix",
+      "landingPage": "docs/crawler-matrix/index.html",
+      "distribution": "docs/crawler-matrix/crawlers.json",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "limitations": "Provider declarations and documented conflicts; not a live crawler-compliance or traffic measurement.",
+      "doi": { "state": "not-issued", "value": null }
+    }
+  ],
+  "citation": {
+    "file": "CITATION.cff",
+    "doi": { "state": "not-issued", "value": null }
+  },
+  "analytics": {
+    "plan": "docs/measurement/plan.json",
+    "instrumentationSource": "scripts/inject-portfolio-analytics.mjs",
+    "collectionState": "existing-source-present-runtime-unverified",
+    "customEvents": "specified-not-instrumented",
+    "searchImpact": "not-measured"
+  },
+  "externalGates": [
+    "Trademark clearance requires jurisdiction, goods/services and a documented registry and broader search; no clearance is claimed.",
+    "DOIs require an actual published archive record and checked identifier/version metadata.",
+    "Analytics needs browser consent/payload tests and owner-side data verification.",
+    "Attestations, independent adoption and search outcomes require separate scoped evidence."
+  ]
+}

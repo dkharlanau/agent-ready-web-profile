@@ -16,6 +16,8 @@ npm run quickstart
 node scripts/growth-hypotheses-test.mjs
 node bin/arwp-hypotheses.mjs check
 node bin/arwp-trends.mjs check
+node scripts/maturity-profile-test.mjs --site
+node bin/arwp-maturity.mjs check docs/maturity/profile.json
 ```
 
 ## Agent Skills routing
@@ -51,6 +53,16 @@ Keep these layers distinct:
 
 A trend does not automatically become a hypothesis. A hypothesis does not automatically become a site action. A site action does not automatically become a success claim.
 
+## Maturity, identity and dataset evidence
+
+For trust pages, brand/trademark files, analytics, entities, datasets or DOI work, read `docs/MATURITY-PROFILE.md` and `skills/arwp-growth-loop/references/maturity.md`.
+
+Inspect existing evidence before creating more files. Reuse canonical entities and fix the actual dataset leaf markup; a graph elsewhere is not a substitute. The optional `docs/maturity/profile.json` inventory is an implementation example, not a platform requirement. Sites without genuine datasets use an empty dataset list.
+
+Keep registered/cleared trademarks, reserved/published DOI, instrumentation/runtime collection, and static checks/observed outcomes separate. Do not add `.zenodo.json` over `CITATION.cff` without reviewing the override. Unknown analytics baselines stay null. Public measurement artifacts must be aggregate-only and exclude personal data or user-submitted URLs. The current event contract is specified, not instrumented.
+
+Use `arwp-maturity` through `node bin/arwp-maturity.mjs` for scoped local checks and unsigned hash inventories. It does not verify security, legal clearance, live HTTP, DOI resolution or ranking. External review gates remain open until actual evidence exists.
+
 ## Interoperability rules remain
 
 1. Prefer upstream standards over new ARWP-native fields.
@@ -65,7 +77,7 @@ A trend does not automatically become a hypothesis. A hypothesis does not automa
 
 ## Public surfaces
 
-Keep `docs/` synchronized where applicable, especially Growth, Trends, Recommendations, Skills, agent instructions, sitemap, machine-readable product/profile surfaces, Trust and Observatory artifacts.
+Keep `docs/` synchronized where applicable, especially Growth, Trends, Recommendations, Skills, agent instructions, sitemap, machine-readable product/profile surfaces, Trust and Observatory artifacts. Keep the Maturity evidence pack, DataCatalog and Measurement definitions linked from Trust and their source pages when changed.
 
 Do not add obsolete `<meta name="keywords">`. Do not claim special AI files are Google ranking requirements.
 
