@@ -18,6 +18,14 @@ Deliver a working repository change, not a checklist. Preserve the site's produc
 
 ARWP must never be presented as a guaranteed Google ranking or AI recommendation mechanism. The goal is to remove technical blockers, implement current platform guidance, expose useful machine-readable surfaces and make improvement measurable.
 
+## Load references only when needed
+
+- Read `references/stack-detection.md` when the framework/deployment/public-root model is unclear.
+- Read `references/file-matrix.md` before creating new machine-readable/public files so you do not cargo-cult every ARWP surface into every site.
+- Load `arwp-ai-search-content` when the main work is article/docs/comparison/answer quality.
+- Load `arwp-agent-discovery` when the main work is protocol/agent discovery.
+- Load `arwp-evidence-ci` when the main work is CI, contracts, receipts or ongoing monitoring.
+
 ## Workflow
 
 1. Inspect the repository before editing.
