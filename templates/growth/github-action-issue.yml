@@ -39,14 +39,41 @@ jobs:
       - name: Install ARWP dependencies
         run: npm ci --prefix .arwp --ignore-scripts --no-audit --no-fund
 
-      - name: Build Growth Profile
-        run: node .arwp/bin/arwp-growth.mjs "$ARWP_TARGET" --json > arwp-growth.json
+      - name: Build Growth Profile and immutable snapshot
+        run: |
+          node .arwp/bin/arwp-growth.mjs "$ARWP_TARGET" --json > arwp-growth.json
+          OBSERVED_AT="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          node .arwp/bin/arwp-growth-history.mjs snapshot arwp-growth.json --observed-at="$OBSERVED_AT" --output=current.growth.snapshot.json
+
+      - name: Recover previous managed snapshot from issue
+        run: |
+          NUMBER="$(gh issue list --state open --search 'in:title [ARWP] Website Growth Backlog' --json number,title --jq '.[] | select(.title == env.ARWP_ISSUE_TITLE) | .number' | head -n 1)"
+          echo "ARWP_ISSUE_NUMBER=$NUMBER" >> "$GITHUB_ENV"
+          if [ -n "$NUMBER" ]; then
+            gh issue view "$NUMBER" --json body --jq .body > previous-issue.md
+            node - <<'NODE'
+          const fs = require('fs');
+          const body = fs.readFileSync('previous-issue.md','utf8');
+          const match = body.match(/<!-- arwp-growth-snapshot-base64:([A-Za-z0-9+/=]+) -->/);
+          if (match) fs.writeFileSync('previous.growth.snapshot.json', Buffer.from(match[1], 'base64'));
+          NODE
+          fi
+
+      - name: Calculate implementation-state diff
+        run: |
+          if [ -f previous.growth.snapshot.json ]; then
+            node .arwp/bin/arwp-growth-history.mjs diff previous.growth.snapshot.json current.growth.snapshot.json --json > growth-diff.json || true
+          else
+            printf '%s\n' '{"firstObservation":true}' > growth-diff.json
+          fi
 
       - name: Build issue body
         run: |
           node - <<'NODE'
           const fs = require('fs');
           const p = JSON.parse(fs.readFileSync('arwp-growth.json','utf8'));
+          const snapshot = JSON.parse(fs.readFileSync('current.growth.snapshot.json','utf8'));
+          const diff = JSON.parse(fs.readFileSync('growth-diff.json','utf8'));
           const high = (p.actions || []).filter(a => a.priority === 'P0' || a.priority === 'P1');
           const optional = (p.actions || []).filter(a => a.priority === 'P2' || a.priority === 'P3');
           const lines = [
@@ -55,14 +82,31 @@ jobs:
             '',
             `Target: ${p.canonicalUrl}`,
             `Growth Profile: ${p.profile}`,
-            `Last generated: ${new Date().toISOString()}`,
+            `Observation: ${snapshot.observedAt}`,
+            `Snapshot: \`${snapshot.snapshotId}\``,
             '',
-            '> This is a prioritized implementation backlog, not a ranking/readiness score. Passing items never guarantees indexing, ranking, AI citation or recommendation.',
-            '',
-            `## P0/P1 actions (${high.length})`,
+            '> This is a prioritized implementation backlog, not a ranking/readiness score. Fewer actions means less observed implementation debt; it does not prove better rankings, citations or recommendations.',
             ''
           ];
-          if (!high.length) lines.push('No current P0/P1 actions from the public-site Growth Profile.');
+          lines.push('## Change since previous run', '');
+          if (diff.firstObservation) {
+            lines.push('First managed observation. The next run will report resolved/new/changed actions.', '');
+          } else {
+            lines.push(`High-priority debt: **${diff.before.debt.highPriority} → ${diff.after.debt.highPriority}** (${diff.summary.highPriorityDebtDelta >= 0 ? '+' : ''}${diff.summary.highPriorityDebtDelta})`, '');
+            if (diff.resolved?.length) {
+              lines.push(`Resolved since previous run (${diff.resolved.length}):`);
+              for (const item of diff.resolved) lines.push(`- ✅ **${item.priority}** ${item.title || item.id}`);
+              lines.push('');
+            }
+            if (diff.added?.length) {
+              lines.push(`New since previous run (${diff.added.length}):`);
+              for (const item of diff.added) lines.push(`- ⚠️ **${item.priority}** ${item.title || item.id}`);
+              lines.push('');
+            }
+            if (!diff.resolved?.length && !diff.added?.length && !diff.changed?.length) lines.push('No Growth action-set changes since the previous observation.', '');
+          }
+          lines.push(`## Current P0/P1 actions (${high.length})`, '');
+          if (!high.length) lines.push('No current P0/P1 actions from the public-site Growth Profile.', '');
           for (const a of high) {
             lines.push(`### ${a.priority} · ${a.title}`, '', a.reason || '', '');
             if (a.implementation?.file) lines.push(`Suggested file/template: \`${a.implementation.file}\``, '');
@@ -71,23 +115,27 @@ jobs:
           }
           lines.push(`## P2/P3 opportunities (${optional.length})`, '');
           for (const a of optional) lines.push(`- **${a.priority}** ${a.title}${a.source ? ` — ${a.source}` : ''}`);
-          lines.push('', '## Evidence boundary', '', 'Public crawling can observe implementation state but cannot see authenticated Google/Bing owner metrics or prove that a platform will recommend the site. Use owner-side measurement for outcomes.');
+          lines.push('', '## Evidence boundary', '', 'Public crawling can observe implementation state but cannot see authenticated Google/Bing owner metrics or prove that a platform will recommend the site. Outcome evidence must be measured separately.');
+          const encoded = Buffer.from(JSON.stringify(snapshot), 'utf8').toString('base64');
+          lines.push('', `<!-- arwp-growth-snapshot-base64:${encoded} -->`);
           fs.writeFileSync('arwp-growth-issue.md', lines.join('\n') + '\n');
           NODE
 
       - name: Create or update one managed issue
         run: |
-          NUMBER="$(gh issue list --state open --search 'in:title [ARWP] Website Growth Backlog' --json number,title --jq '.[] | select(.title == env.ARWP_ISSUE_TITLE) | .number' | head -n 1)"
-          if [ -n "$NUMBER" ]; then
-            gh issue edit "$NUMBER" --body-file arwp-growth-issue.md
+          if [ -n "$ARWP_ISSUE_NUMBER" ]; then
+            gh issue edit "$ARWP_ISSUE_NUMBER" --body-file arwp-growth-issue.md
           else
             gh issue create --title "$ARWP_ISSUE_TITLE" --body-file arwp-growth-issue.md
           fi
 
-      - name: Upload full machine-readable plan
+      - name: Upload machine-readable Growth evidence
         uses: actions/upload-artifact@v6
         with:
           name: arwp-growth-profile
-          path: arwp-growth.json
+          path: |
+            arwp-growth.json
+            current.growth.snapshot.json
+            growth-diff.json
           if-no-files-found: error
           retention-days: 30
