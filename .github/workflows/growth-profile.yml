@@ -22,6 +22,8 @@ on:
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
       - 'scripts/trend-radar-test.mjs'
+      - 'scripts/trend-package-test.mjs'
+      - 'package.json'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
@@ -49,6 +51,8 @@ on:
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
       - 'scripts/trend-radar-test.mjs'
+      - 'scripts/trend-package-test.mjs'
+      - 'package.json'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
@@ -78,13 +82,15 @@ jobs:
           node --check lib/growth-plan.mjs
           node --check bin/arwp-growth.mjs
           node --check scripts/growth-profile-test.mjs
-      - name: Validate Trend Radar registry, lifecycle and public snapshot
+      - name: Validate Trend Radar registry, lifecycle, package surface and public snapshot
         run: |
           node scripts/trend-radar-test.mjs
+          node scripts/trend-package-test.mjs
           node bin/arwp-trends.mjs check
           node --check lib/trend-radar.mjs
           node --check bin/arwp-trends.mjs
           node --check scripts/trend-radar-test.mjs
+          node --check scripts/trend-package-test.mjs
           cmp registry/trends.json docs/trends/trends.json
           grep -q 'Find the Search and AI changes worth acting on' docs/trends/index.html
           grep -q 'WATCH: emerging' docs/trends/llms.txt
