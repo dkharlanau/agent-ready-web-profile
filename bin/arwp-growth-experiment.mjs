@@ -8,9 +8,14 @@ import {
   reviewGrowthExperiment,
   validateGrowthExperiment
 } from '../lib/growth-experiment.mjs';
+import {
+  DEFAULT_GROWTH_EXPERIMENT_DIR,
+  formatGrowthExperimentLedger,
+  loadGrowthExperimentLedger
+} from '../lib/growth-experiment-ledger.mjs';
 
 function usage() {
-  return `arwp-growth-experiment — link Growth hypotheses to before/after implementation and owner evidence\n\nUsage:\n  arwp-growth-experiment create <before.growth.snapshot.json> --id=<id> --hypothesis=<id> --actions=<id,id> [--before-visibility=<file>] [--commit=<sha>] [--change-uri=<uri>] [--implemented-at=<ISO>] [--output=<file>] [--json]\n  arwp-growth-experiment evaluate <experiment.json> <before.growth.snapshot.json> <after.growth.snapshot.json> [--before-visibility=<file>] [--after-visibility=<file>] [--evaluated-at=<ISO>] [--output=<file>] [--json]\n  arwp-growth-experiment review <experiment.json> --decision=<keep|revise|revert|retire|continue-measuring> [--reviewed-at=<ISO>] [--notes=<text>] [--output=<file>] [--json]\n  arwp-growth-experiment validate <experiment.json> [--json]\n\nExperiment outcomes remain observations. ARWP never turns an implementation or metric delta into a ranking/causality claim automatically.\n`;
+  return `arwp-growth-experiment — link Growth hypotheses to before/after implementation and owner evidence\n\nUsage:\n  arwp-growth-experiment create <before.growth.snapshot.json> --id=<id> --hypothesis=<id> --actions=<id,id> [--before-visibility=<file>] [--commit=<sha>] [--change-uri=<uri>] [--implemented-at=<ISO>] [--output=<file>] [--json]\n  arwp-growth-experiment evaluate <experiment.json> <before.growth.snapshot.json> <after.growth.snapshot.json> [--before-visibility=<file>] [--after-visibility=<file>] [--evaluated-at=<ISO>] [--output=<file>] [--json]\n  arwp-growth-experiment review <experiment.json> --decision=<keep|revise|revert|retire|continue-measuring> [--reviewed-at=<ISO>] [--notes=<text>] [--output=<file>] [--json]\n  arwp-growth-experiment validate <experiment.json> [--json]\n  arwp-growth-experiment status [<directory>] [--site=https://...] [--json]\n\nDefault managed ledger directory: ${DEFAULT_GROWTH_EXPERIMENT_DIR}\n\nExperiment outcomes remain observations. ARWP never turns an implementation or metric delta into a ranking/causality claim automatically.\n`;
 }
 
 function optionValue(args, name) {
@@ -59,6 +64,13 @@ function main() {
   }
   const command = args[0];
   const json = args.includes('--json');
+
+  if (command === 'status') {
+    const directory = args[1] && !args[1].startsWith('--') ? args[1] : DEFAULT_GROWTH_EXPERIMENT_DIR;
+    const ledger = loadGrowthExperimentLedger(directory, { site: optionValue(args, 'site') });
+    process.stdout.write(json ? `${JSON.stringify(ledger, null, 2)}\n` : `${formatGrowthExperimentLedger(ledger)}\n`);
+    return ledger.summary.invalid ? 1 : 0;
+  }
 
   if (command === 'validate') {
     if (!args[1]) throw new Error('validate requires an experiment JSON file.');
