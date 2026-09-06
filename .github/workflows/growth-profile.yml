@@ -8,19 +8,23 @@ on:
       - 'registry/growth-verticals.json'
       - 'registry/trends.json'
       - 'schema/growth-policy.schema.json'
+      - 'schema/growth-experiment.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-policy.mjs'
       - 'lib/growth-history.mjs'
+      - 'lib/growth-experiment.mjs'
       - 'lib/trend-radar.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
+      - 'bin/arwp-growth-experiment.mjs'
       - 'bin/arwp-trends.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
+      - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-package-test.mjs'
@@ -28,6 +32,8 @@ on:
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
+      - 'docs/GROWTH-LOOP.md'
+      - 'docs/GROWTH-EXPERIMENTS.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/growth/**'
       - 'docs/trends/**'
@@ -38,19 +44,23 @@ on:
       - 'registry/growth-verticals.json'
       - 'registry/trends.json'
       - 'schema/growth-policy.schema.json'
+      - 'schema/growth-experiment.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-policy.mjs'
       - 'lib/growth-history.mjs'
+      - 'lib/growth-experiment.mjs'
       - 'lib/trend-radar.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
+      - 'bin/arwp-growth-experiment.mjs'
       - 'bin/arwp-trends.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
+      - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-package-test.mjs'
@@ -58,6 +68,8 @@ on:
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
+      - 'docs/GROWTH-LOOP.md'
+      - 'docs/GROWTH-EXPERIMENTS.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/growth/**'
       - 'docs/trends/**'
@@ -108,6 +120,13 @@ jobs:
           node --check lib/growth-history.mjs
           node --check bin/arwp-growth-history.mjs
           node --check scripts/growth-history-test.mjs
+      - name: Validate Growth experiment evidence loop
+        run: |
+          node scripts/growth-experiment-test.mjs
+          node --check lib/growth-experiment.mjs
+          node --check bin/arwp-growth-experiment.mjs
+          node --check scripts/growth-experiment-test.mjs
+          node -e "JSON.parse(require('fs').readFileSync('schema/growth-experiment.schema.json','utf8'));"
       - name: Validate packaged Growth Loop surface
         run: |
           node scripts/growth-package-test.mjs
