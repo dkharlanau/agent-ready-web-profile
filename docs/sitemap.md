@@ -44,13 +44,16 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 
 The foundation research release is a frozen engineering sample, not a representative survey of the public web. It contains 20 independent documentation sites and 100 reviewed intent decisions; owner-controlled reference sites are excluded from the independent aggregate.
 
-## Current standards tracking
+## Current standards and trend tracking
 
+- [Search / AI Trend Radar](https://dkharlanau.github.io/agent-ready-web-profile/trends/)
+- [Trend Radar JSON](https://dkharlanau.github.io/agent-ready-web-profile/trends/trends.json)
 - [Agentic Web Protocol Observatory](https://dkharlanau.github.io/agent-ready-web-profile/observatory/)
 - [Protocol Observatory JSON](https://dkharlanau.github.io/agent-ready-web-profile/observatory/protocols.json)
 - [AI Crawler & Access Matrix](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/)
 - [Search + Agent recommendations](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/)
 - [Recommendations registry](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/registry.json)
+- [Growth Profile](https://dkharlanau.github.io/agent-ready-web-profile/growth/)
 
 ## Evidence and trust
 
@@ -80,6 +83,7 @@ The foundation research release is a frozen engineering sample, not a representa
 - [Repository README](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/README.md)
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md)
 - [Resolver model](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md)
+- [Trend Radar lifecycle](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/TREND-RADAR.md)
 - [ARD v0.91 compatibility](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/ARD-V0.91.md)
 - [Protocol support](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/PROTOCOL-SUPPORT.md)
 - [Benchmark methodology](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BENCHMARK.md)
