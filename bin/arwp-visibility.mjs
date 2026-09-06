@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import fs from 'node:fs';
+import path from 'node:path';
 import {
   compareVisibilitySnapshots,
   formatVisibilityComparison,
@@ -7,6 +9,7 @@ import {
   summarizeVisibilitySnapshot,
   validateVisibilitySnapshot
 } from '../lib/visibility-evidence.mjs';
+import { importVisibilityExport } from '../lib/visibility-import.mjs';
 
 function usage() {
   console.log(`ARWP visibility evidence
@@ -15,8 +18,9 @@ Usage:
   arwp-visibility validate <snapshot.json> [--json]
   arwp-visibility show <snapshot.json> [--json]
   arwp-visibility compare <before.json> <after.json> [--json]
+  arwp-visibility import <export.csv|export.json> --provider=<google|bing|referrals> --site=https://... --start=YYYY-MM-DD --end=YYYY-MM-DD [--captured-at=ISO] [--evidence=URI] [--match=chatgpt.com,openai.com] [--output=snapshot.json] [--json]
 
-Visibility snapshots store aggregate owner-observed evidence. Comparisons report deltas only and never infer ranking or causality from ARWP adoption.`);
+Visibility snapshots store aggregate owner-observed evidence. Import adapters normalize only metrics actually present in owner exports. Comparisons report deltas only and never infer ranking or causality from ARWP adoption.`);
 }
 
 const args = process.argv.slice(2);
@@ -25,8 +29,24 @@ const source = args[1];
 const second = args[2] && !args[2].startsWith('--') ? args[2] : null;
 const jsonOutput = args.includes('--json');
 
+function optionValue(name) {
+  const prefix = `--${name}=`;
+  const inline = args.find(arg => arg.startsWith(prefix));
+  if (inline) return inline.slice(prefix.length);
+  const index = args.indexOf(`--${name}`);
+  if (index >= 0 && args[index + 1] && !args[index + 1].startsWith('--')) return args[index + 1];
+  return null;
+}
+
 function formatError(error) {
   return `${error.instancePath || '/'} ${error.message}`;
+}
+
+function writeSnapshot(snapshot, output) {
+  const absolute = path.resolve(output);
+  fs.mkdirSync(path.dirname(absolute), { recursive: true });
+  fs.writeFileSync(absolute, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
+  return absolute;
 }
 
 function main() {
@@ -34,9 +54,31 @@ function main() {
     usage();
     return 0;
   }
-  if (!['validate', 'show', 'compare'].includes(command) || !source) {
+  if (!['validate', 'show', 'compare', 'import'].includes(command) || !source) {
     usage();
     return 2;
+  }
+
+  if (command === 'import') {
+    const provider = optionValue('provider');
+    const site = optionValue('site');
+    const start = optionValue('start');
+    const end = optionValue('end');
+    if (!provider || !site || !start || !end) throw new Error('import requires --provider, --site, --start and --end.');
+    const result = importVisibilityExport(provider, source, {
+      site,
+      start,
+      end,
+      capturedAt: optionValue('captured-at'),
+      evidence: optionValue('evidence'),
+      match: optionValue('match')
+    });
+    const output = optionValue('output');
+    const written = output ? writeSnapshot(result.snapshot, output) : null;
+    if (jsonOutput) console.log(JSON.stringify({ ...result, written }, null, 2));
+    else if (written) console.log(`WROTE ${written}\nProvider: ${result.snapshot.sources[0].provider}\nStatus: ${result.snapshot.sources[0].status}\nMetrics: ${JSON.stringify(result.snapshot.sources[0].metrics)}`);
+    else console.log(JSON.stringify(result.snapshot, null, 2));
+    return 0;
   }
 
   if (command === 'compare') {
