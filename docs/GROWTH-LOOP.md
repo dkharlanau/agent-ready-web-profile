@@ -19,6 +19,8 @@ SITE BASELINE + CHECKLIST
         ↓
  IMPLEMENT → VERIFY → MEASURE
         ↓
+   EXPERIMENT REVIEW
+        ↓
 KEEP / REVISE / REVERT / RETIRE
         └───────────────↺
 ```
@@ -58,6 +60,27 @@ node bin/arwp-hypotheses.mjs show discover-visual-preview
 
 Default Growth planning excludes `project-experiment` hypotheses. Experiments remain available for explicit research/agent interoperability work.
 
+## Experiment lifecycle
+
+`arwp-growth-experiment` closes the gap between a hypothesis and longitudinal evidence. It binds a known hypothesis to Growth actions that were actually active in a before snapshot, then records implementation-state and optional owner-side visibility evidence after the change.
+
+```bash
+arwp-growth-experiment create before.growth.snapshot.json \
+  --id=experiment-001 \
+  --hypothesis=<hypothesis-id> \
+  --actions=<growth-action-id> \
+  --commit=<commit-sha> \
+  --output=experiment.json
+
+arwp-growth-experiment evaluate experiment.json \
+  before.growth.snapshot.json after.growth.snapshot.json \
+  --before-visibility=before.visibility.json \
+  --after-visibility=after.visibility.json \
+  --output=experiment.measured.json
+```
+
+Evaluation records implementation debt movement and owner-side metric direction, but always marks the result for review. Positive movement is an observation, not automatic evidence of causality or a reason to promote a hypothesis. See `docs/GROWTH-EXPERIMENTS.md`.
+
 ## Decision order
 
 1. Eligibility and policy blockers.
@@ -79,9 +102,11 @@ Default Growth planning excludes `project-experiment` hypotheses. Experiments re
 Use:
 
 - `templates/growth/growth-loop-checklist.md` for baseline/completion review;
-- `templates/growth/hypothesis-ledger.md` for before/after observations and keep/revise/revert decisions;
+- `templates/growth/hypothesis-ledger.md` for lightweight before/after observations and keep/revise/revert decisions;
+- `arwp-growth-history` for immutable implementation-state snapshots and diffs;
+- `arwp-growth-experiment` for versioned hypothesis → action → implementation → outcome records;
 - Evidence Receipts for stable technical observations;
-- owner exports/snapshots for Search/AI outcome evidence.
+- owner exports/visibility snapshots for Search/AI outcome evidence.
 
 Negative or neutral evidence is not a failure of the methodology. It is how weak hypotheses stop accumulating as permanent “SEO best practices.”
 
