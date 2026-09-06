@@ -1,0 +1,65 @@
+name: ARWP Site Quality
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '31 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  arwp-quality:
+    runs-on: ubuntu-latest
+    env:
+      # Replace with the deployed canonical public URL.
+      ARWP_TARGET: https://example.com/
+    steps:
+      - name: Checkout ARWP toolchain
+        uses: actions/checkout@v7
+        with:
+          repository: dkharlanau/agent-ready-web-profile
+          ref: main
+          path: .arwp
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: .arwp/package-lock.json
+
+      - name: Install ARWP dependencies
+        run: npm ci --prefix .arwp --ignore-scripts --no-audit --no-fund
+
+      - name: Run source-backed Search/Agent audit
+        run: node .arwp/bin/arwp.mjs audit "$ARWP_TARGET" --json > arwp-audit.json || true
+
+      - name: Build prioritized Growth Profile
+        run: node .arwp/bin/arwp-growth.mjs "$ARWP_TARGET" --json > arwp-growth.json
+
+      - name: Capture explicit evidence receipt
+        run: node .arwp/bin/arwp-receipt.mjs capture "$ARWP_TARGET" --max-sources=8 --max-bytes=524288 --output=arwp-receipt.json
+
+      - name: Summarize
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const growth = JSON.parse(fs.readFileSync('arwp-growth.json','utf8'));
+          const receipt = JSON.parse(fs.readFileSync('arwp-receipt.json','utf8'));
+          const p = Object.entries(growth.summary?.byPriority || {}).map(([k,v]) => `${k}: ${v}`).join(', ');
+          const top = (growth.actions || []).slice(0,8).map(a => `- ${a.priority} / ${a.lane}: ${a.title}`).join('\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+            `## ARWP Site Quality\n\nTarget: ${growth.canonicalUrl}\n\nGrowth actions: ${growth.summary.totalActions} (${p})\n\n### Top actions\n${top || '- none'}\n\nEvidence receipt: \`${receipt.receiptId}\`\n\nARWP produces no universal score and no ranking/citation guarantee.\n`);
+          NODE
+
+      - name: Upload quality evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: arwp-site-quality
+          path: |
+            arwp-audit.json
+            arwp-growth.json
+            arwp-receipt.json
+          if-no-files-found: error
+          retention-days: 30
