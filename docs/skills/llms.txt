@@ -1,0 +1,17 @@
+# ARWP Agent Skills
+
+Use these portable skills when an AI coding agent should prepare or maintain a website under ARWP.
+
+## Default
+- arwp-prepare-site — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md
+
+## Specialists
+- arwp-ai-search-content — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md
+- arwp-agent-discovery — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-agent-discovery/SKILL.md
+- arwp-evidence-ci — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-evidence-ci/SKILL.md
+
+## Install
+npx skills add dkharlanau/agent-ready-web-profile
+
+## Rule
+Implement and verify real site improvements. Do not claim that ARWP, llms.txt, Schema.org, Agent Skills, or any other metadata mechanism guarantees Google ranking, AI citation, or recommendation placement.
