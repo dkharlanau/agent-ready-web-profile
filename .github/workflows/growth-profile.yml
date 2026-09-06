@@ -21,6 +21,7 @@ on:
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
+      - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-package-test.mjs'
       - 'package.json'
@@ -50,6 +51,7 @@ on:
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
+      - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-package-test.mjs'
       - 'package.json'
@@ -106,6 +108,10 @@ jobs:
           node --check lib/growth-history.mjs
           node --check bin/arwp-growth-history.mjs
           node --check scripts/growth-history-test.mjs
+      - name: Validate packaged Growth Loop surface
+        run: |
+          node scripts/growth-package-test.mjs
+          node --check scripts/growth-package-test.mjs
       - name: Validate shipped templates
         run: |
           node -e "JSON.parse(require('fs').readFileSync('templates/growth/organization.jsonld','utf8')); JSON.parse(require('fs').readFileSync('templates/growth/article.jsonld','utf8'));"
