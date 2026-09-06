@@ -41,14 +41,21 @@ const fetchImpl = async url => {
 const report = await runTrendSourceWatch({
   version: 'test', reviewedThrough: '2026-09-06', guardrails: {}, sources: [
     { id: 'feed', provider: 'google', kind: 'feed', url: 'https://example.test/feed.xml', reviewedThrough: '2026-09-06', keywords: ['generative'] },
-    { id: 'page', provider: 'openai', kind: 'page-update', url: 'https://example.test/page', reviewedThrough: '2026-09-06', keywords: ['agent'] }
+    { id: 'page', provider: 'chrome', kind: 'page-update', url: 'https://example.test/page', reviewedThrough: '2026-09-06', keywords: ['agent'] },
+    { id: 'manual', provider: 'openai', kind: 'manual-page', url: 'https://example.test/manual', reviewedThrough: '2026-09-06', reason: 'Automation blocked; review manually.' }
   ]
 }, { fetchImpl, timeoutMs: 1000 });
 
-assert.equal(report.summary.sources, 2);
+assert.equal(report.summary.sources, 3);
+assert.equal(report.summary.reachable, 2);
+assert.equal(report.summary.manual, 1);
 assert.equal(report.summary.failed, 0);
 assert.equal(report.summary.candidates, 2);
 assert(report.candidates.some(item => item.type === 'feed-item'));
 assert(report.candidates.some(item => item.type === 'page-updated'));
+const manual = report.results.find(item => item.sourceId === 'manual');
+assert.equal(manual.manual, true);
+assert.equal(manual.ok, null);
+assert.match(manual.note, /review manually/i);
 
 console.log('PASS trend-source-watch-test');
