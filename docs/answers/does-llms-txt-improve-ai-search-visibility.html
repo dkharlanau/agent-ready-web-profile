@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Does llms.txt improve Google or AI search visibility in 2026? A source-backed answer separating Google Search ranking, agent/documentation use and current llms.txt v2 capabilities.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Does llms.txt Improve AI Search Visibility in 2026? | ARWP</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/answers/does-llms-txt-improve-ai-search-visibility.html">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="../citation.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Does llms.txt Improve AI Search Visibility in 2026?","dateModified":"2026-09-06","author":{"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"},"mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/answers/does-llms-txt-improve-ai-search-visibility.html","isPartOf":{"@type":"WebSite","name":"Agent-Ready Web Profile","url":"https://dkharlanau.github.io/agent-ready-web-profile/"}}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="./">Answers</a><a href="../recommendations/">Playbook</a><a class="nav-cta" href="../crawler-matrix/">Crawler matrix</a></nav></header>
+<main class="cite-main shell">
+  <section class="cite-hero">
+    <p class="eyebrow">llms.txt · reviewed 2026-09-06</p>
+    <h1>Does llms.txt improve AI search visibility?</h1>
+    <p class="cite-lead"><strong>Not in Google Search.</strong> Google's current documentation explicitly says Google Search ignores <code>llms.txt</code> for visibility and rankings. The file can still be useful as an agent/documentation navigation surface for systems that choose to consume it, so ARWP treats it as an interoperability mechanism rather than an SEO ranking factor.</p>
+    <div class="cite-meta"><span>Google: no ranking effect</span><span>llms.txt v2: proposal</span><span>Useful when actually consumed</span></div>
+  </section>
+
+  <section class="cite-card" id="google"><h2>Google's position is unusually clear</h2>
+    <p>Google's 2026 guide says you do not need <code>llms.txt</code>, Markdown or other special AI files to appear in Google Search or its generative AI features. Google Search does not use those files as a special visibility mechanism; maintaining one neither helps nor harms Google Search rankings.</p>
+    <p>This is useful because it removes a common cargo-cult optimization: publishing an <code>llms.txt</code> file is not a substitute for crawlability, indexability, internal links, useful original content or measurement.</p>
+    <p><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google: optimizing for generative AI features</a> · <a href="https://developers.google.com/search/updates">Google Search documentation updates</a></p>
+  </section>
+
+  <section class="cite-card" id="what-it-is"><h2>What llms.txt can still do</h2>
+    <p><code>llms.txt</code> is an independent proposal for a concise Markdown overview that points agents toward useful resources. Version 2, updated in August 2026, adds clearer path scoping and standard link relations: <code>rel="describedby"</code> can identify the applicable <code>llms.txt</code>, while <code>rel="alternate" type="text/markdown"</code> can identify a Markdown representation of a page.</p>
+    <p>That can be useful for documentation, developer resources or agent workflows that actually look for the convention. Its value is therefore <strong>consumer-dependent</strong>, not a universal Search signal.</p>
+    <p><a href="https://llmstxt.org/">llms.txt v2 proposal</a> · <a href="https://llmstxt.org/changes.html">llms.txt v2 changes</a></p>
+  </section>
+
+  <section class="cite-card" id="chatgpt"><h2>Do not confuse llms.txt with ChatGPT Search access</h2>
+    <p>OpenAI's current publisher guidance tells site owners who want content discoverable in ChatGPT Search to allow <code>OAI-SearchBot</code>. It separately documents <code>GPTBot</code> for training controls. The guidance does not make <code>llms.txt</code> a prerequisite for ChatGPT Search inclusion.</p>
+    <p><a href="https://help.openai.com/en/articles/12627856-publishers-and-developers-faq">OpenAI: Publishers and Developers FAQ</a></p>
+  </section>
+
+  <section class="cite-card" id="when"><h2>When ARWP recommends using it</h2>
+    <ul>
+      <li>The site has documentation or a knowledge surface that benefits from a curated machine-readable entry point.</li>
+      <li>You can keep the file synchronized with canonical content instead of publishing stale links.</li>
+      <li>You have an actual agent/client workflow to test against it.</li>
+      <li>You clearly label the mechanism as optional interoperability, not “AI SEO.”</li>
+    </ul>
+    <p>If those conditions are absent, spend the effort first on Search fundamentals, valuable content, internal discovery and owner-side measurement.</p>
+    <p><a href="./how-to-improve-ai-search-visibility.html">How to improve AI search visibility</a> · <a href="../recommendations/">Open the full ARWP playbook</a></p>
+  </section>
+
+  <p class="reuse-note">Reviewed 6 September 2026. ARWP itself publishes llms.txt for interoperability and agent navigation, but does not claim that the file improves Google Search ranking or AI citation.</p>
+</main>
+</body>
+</html>

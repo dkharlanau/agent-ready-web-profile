@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How to measure AI search visibility in 2026 using Google Search Console generative AI reports, Bing AI Performance and ChatGPT referral analytics, with a before/after experiment model.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>How to Measure AI Search Visibility in 2026 | ARWP</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-measure-ai-search-visibility.html">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="../citation.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Measure AI Search Visibility in 2026","dateModified":"2026-09-06","author":{"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"},"mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-measure-ai-search-visibility.html","isPartOf":{"@type":"WebSite","name":"Agent-Ready Web Profile","url":"https://dkharlanau.github.io/agent-ready-web-profile/"}}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="./">Answers</a><a href="../recommendations/">Playbook</a><a class="nav-cta" href="../measurement/">Measurement</a></nav></header>
+<main class="cite-main shell">
+  <section class="cite-hero">
+    <p class="eyebrow">Measurement · reviewed 2026-09-06</p>
+    <h1>How do you measure AI search visibility?</h1>
+    <p class="cite-lead"><strong>Use platform-owner evidence and first-party analytics, not an “AI readiness score.”</strong> In 2026 the useful signals are becoming measurable: Google exposes generative-AI performance in Search Console, Bing exposes citation activity in AI Performance, and OpenAI adds a ChatGPT UTM source to referral URLs.</p>
+    <div class="cite-meta"><span>Before / after</span><span>Owner data</span><span>Page-level evidence</span></div>
+  </section>
+
+  <section class="cite-card" id="google"><h2>Google: generative AI performance in Search Console</h2>
+    <p>Google introduced dedicated generative-AI performance views for Search and Discover and stated that the rollout reached all websites worldwide on <strong>31 August 2026</strong>. Use these views to observe the pages and impressions associated with Google's generative experiences rather than trying to infer AI visibility from HTML changes alone.</p>
+    <p><a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">Google Search Central: generative AI performance reports</a></p>
+  </section>
+
+  <section class="cite-card" id="bing"><h2>Bing: citations and cited pages</h2>
+    <p>Bing Webmaster Tools AI Performance is documented as a public-preview reporting surface for citation activity across supported Microsoft AI experiences. Track citation trends and the pages being cited, then inspect which page structures and evidence types correlate with durable changes.</p>
+    <p><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">Bing Webmaster: AI Performance</a></p>
+  </section>
+
+  <section class="cite-card" id="chatgpt"><h2>ChatGPT: referral traffic</h2>
+    <p>OpenAI states that ChatGPT automatically includes <code>utm_source=chatgpt.com</code> in referral URLs. Create a dedicated first-party analytics segment for that source and retain the landing page and downstream conversion event where your privacy policy allows it. Referral traffic measures visits; crawler logs do not.</p>
+    <p><a href="https://help.openai.com/en/articles/12627856-publishers-and-developers-faq">OpenAI: Publishers and Developers FAQ</a></p>
+  </section>
+
+  <section class="cite-card" id="experiment"><h2>A useful experiment design</h2>
+    <ol>
+      <li><strong>Define a bounded page group.</strong> Do not change the entire site when you want to learn which intervention mattered.</li>
+      <li><strong>Save a baseline.</strong> Record classic Search impressions/clicks plus available Google generative, Bing citation and ChatGPT referral evidence before the change.</li>
+      <li><strong>Apply one coherent implementation pack.</strong> Examples: internal-link repair, citation structure, author provenance or media/Discover improvements.</li>
+      <li><strong>Verify implementation separately.</strong> A canonical, robots, structured-data or rendering fix is a technical result, not an outcome metric.</li>
+      <li><strong>Compare over time.</strong> Look at absolute values as well as percentage change; compare with similar unchanged pages when possible.</li>
+      <li><strong>Record alternative explanations.</strong> Seasonality, site-wide releases, demand changes and platform changes can move the numbers.</li>
+    </ol>
+  </section>
+
+  <section class="cite-card" id="scorecard"><h2>Minimum outcome scorecard</h2>
+    <p><strong>Search:</strong> non-brand impressions, clicks, indexed priority pages. <strong>Google generative:</strong> generative-AI impressions/pages. <strong>Bing:</strong> citation activity and cited pages. <strong>ChatGPT:</strong> sessions from <code>utm_source=chatgpt.com</code>. <strong>Business:</strong> one meaningful action such as signup, download, contact or tool use.</p>
+    <p>ARWP's own rule is simple: do not promote a recommendation from “implemented” to “measured” without outcome evidence.</p>
+    <p><a href="../recommendations/">Open the full playbook</a> · <a href="../measurement/">Open ARWP measurement resources</a></p>
+  </section>
+
+  <p class="reuse-note">Reviewed 6 September 2026. Metrics from authenticated owner tools are not publicly reproducible by ARWP unless the site owner exports them. Absence of a reported metric is not evidence of zero visibility.</p>
+</main>
+</body>
+</html>

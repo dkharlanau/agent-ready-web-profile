@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A source-backed 2026 checklist for improving website visibility in Google AI Overviews and AI Mode, ChatGPT Search, Bing/Copilot and classic search without unsupported GEO hacks.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <title>How to Improve AI Search Visibility in 2026 | ARWP</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="../citation.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Improve AI Search Visibility in 2026","dateModified":"2026-09-06","author":{"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"},"mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html","isPartOf":{"@type":"WebSite","name":"Agent-Ready Web Profile","url":"https://dkharlanau.github.io/agent-ready-web-profile/"}}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="./">Answers</a><a href="../recommendations/">Playbook</a><a class="nav-cta" href="../growth/">Growth Loop</a></nav></header>
+<main class="cite-main shell">
+  <section class="cite-hero">
+    <p class="eyebrow">Search & AI visibility · reviewed 2026-09-06</p>
+    <h1>How do you improve AI search visibility in 2026?</h1>
+    <p class="cite-lead"><strong>Start with ordinary search eligibility and genuinely useful content, then add the platform-specific controls that match your site.</strong> Google explicitly says there is no special AI-only schema, Markdown format or machine-readable file required for AI Overviews or AI Mode. ChatGPT Search has its own crawler control, while Bing now exposes citation evidence in Webmaster Tools.</p>
+    <div class="cite-meta"><span>Primary sources</span><span>Implementation-first</span><span>No ranking guarantee</span></div>
+  </section>
+
+  <section class="cite-card" id="foundation"><h2>1. Fix discovery and indexing before “AI SEO”</h2>
+    <p>Priority public pages should be crawlable, return a successful response, remain indexable and be reachable through real internal <code>&lt;a href&gt;</code> links. Canonicals, redirects and sitemap URLs should agree. On JavaScript-heavy sites, verify what is present in the rendered page instead of assuming every crawler executes the application the same way.</p>
+    <p><a href="https://developers.google.com/search/docs/appearance/ai-features">Google: AI features and your website</a> · <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Google: crawlable links</a></p>
+  </section>
+
+  <section class="cite-card" id="content"><h2>2. Create information worth retrieving</h2>
+    <p>Google's 2026 generative Search guidance puts unusual weight on non-commodity material: first-hand experience, original analysis, useful evidence, a distinct viewpoint and content that satisfies the user rather than merely reproducing what already exists. Clear sections and descriptive headings help people navigate the page; there is no requirement to manufacture tiny “AI chunks.”</p>
+    <p><strong>Avoid:</strong> creating a separate page for every possible query or fan-out variation. Google explicitly warns that scaled query-variant production intended to manipulate rankings or generative responses can violate its spam policies.</p>
+    <p><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google: optimizing for generative AI features</a></p>
+  </section>
+
+  <section class="cite-card" id="citation"><h2>3. Make important facts easy to locate and verify</h2>
+    <p>Keep the core answer in real text, use stable descriptive headings, give important sections useful fragment IDs, and keep structured data consistent with visible first-party facts. For research, software and editorial sites, resolve authors, datasets, licenses and product identities to stable pages instead of adding unsupported metadata.</p>
+    <p>Bing's AI Performance guidance similarly recommends clear structure, supporting evidence, freshness and consistent facts across text, images and video.</p>
+    <p><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">Bing Webmaster: AI Performance</a></p>
+  </section>
+
+  <section class="cite-card" id="platforms"><h2>4. Add platform-specific controls only when they solve a real problem</h2>
+    <ul>
+      <li><strong>ChatGPT Search:</strong> if discovery is desired, do not accidentally block <code>OAI-SearchBot</code>. OpenAI documents Search crawling separately from <code>GPTBot</code> training controls.</li>
+      <li><strong>Google Discover:</strong> content that suits Discover can benefit from relevant high-quality large images and permissive large-image previews.</li>
+      <li><strong>Local / commerce:</strong> keep Business Profile, Merchant Center and Bing Places facts synchronized with the live site.</li>
+      <li><strong>Frequently changing sites:</strong> accurate sitemap <code>lastmod</code> and, where appropriate, IndexNow can expose real freshness changes without fake timestamp churn.</li>
+    </ul>
+    <p><a href="https://help.openai.com/en/articles/12627856-publishers-and-developers-faq">OpenAI: Publishers and Developers FAQ</a></p>
+  </section>
+
+  <section class="cite-card" id="measure"><h2>5. Measure outcomes instead of declaring the checklist a success</h2>
+    <p>A technical pass means the implementation is observable; it does not prove ranking or citation. Capture a baseline, change a bounded group of pages, verify the implementation, then compare owner-side evidence: Google generative-AI Search Console performance, Bing AI citations and ChatGPT referral traffic.</p>
+    <p><a href="./how-to-measure-ai-search-visibility.html">How to measure AI search visibility</a></p>
+  </section>
+
+  <section class="cite-card" id="apply"><h2>Apply the full playbook</h2>
+    <p>ARWP keeps 34 dated recommendations grouped into 11 implementation packs covering Search foundation, AI citations, freshness, identity/provenance, media, internationalization, local/commerce, ChatGPT, measurement and experimental agent-web work.</p>
+    <p><a href="../recommendations/">Open the Search & AI Visibility Playbook</a> · <a href="../recommendations/registry.json">Open the machine-readable registry</a></p>
+  </section>
+
+  <p class="reuse-note">Reviewed 6 September 2026. This page distinguishes platform requirements from opportunities and experiments. Passing these actions does not guarantee crawling, indexing, ranking, AI citation or traffic.</p>
+</main>
+</body>
+</html>
