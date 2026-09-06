@@ -57,6 +57,9 @@ function record(actionId, provider, kind, evidenceType = 'measurement', extra = 
 }
 
 assert.equal(Object.keys(OWNER_DATA_ACTION_REQUIREMENTS).length, 4);
+assert.equal(OWNER_DATA_ACTION_REQUIREMENTS['growth:google-generative-ai-measurement-global'].collection.mode, 'ui-export');
+assert.equal(OWNER_DATA_ACTION_REQUIREMENTS['growth:bing-ai-citation-measurement'].collection.mode, 'ui-export');
+assert.equal(OWNER_DATA_ACTION_REQUIREMENTS['trend-owner:google-generative-ai-control-global'].collection.mode, 'ui');
 
 const baseline = record('observation:google-search-console-baseline', 'google-search-console', 'search-performance');
 const parsedBaseline = parseOwnerDataReceipt(receipt([baseline]), { canonicalUrl: basePlan.canonicalUrl, now });
@@ -68,11 +71,27 @@ assert.equal(baselineApplied.opportunities.length, 2);
 const opportunityIds = new Set(baselineApplied.opportunities.map(item => item.id));
 assert.ok(opportunityIds.has('growth:preferred-source-acquisition'));
 assert.ok(opportunityIds.has('growth:google-platform-properties'));
-assert.equal(baselineApplied.opportunities.find(item => item.id === 'growth:google-platform-properties')?.status, 'opportunity');
+const platformOpportunity = baselineApplied.opportunities.find(item => item.id === 'growth:google-platform-properties');
+assert.equal(platformOpportunity?.status, 'opportunity');
+assert.equal(platformOpportunity?.ownerDataCollection?.mode, 'ui-export');
 assert.deepEqual(baselineApplied.observations.ownerData.matchedActionIds, []);
 assert.deepEqual(baselineApplied.observations.ownerData.unmatchedRecordIds, ['observation:google-search-console-baseline']);
+assert.equal(baselineApplied.observations.ownerData.activeExternalGates.length, 3);
+assert.deepEqual(
+  baselineApplied.observations.ownerData.activeExternalGates.map(item => [item.actionId, item.collectionMode]),
+  [
+    ['growth:google-generative-ai-measurement-global', 'ui-export'],
+    ['growth:bing-ai-citation-measurement', 'ui-export'],
+    ['trend-owner:google-generative-ai-control-global', 'ui']
+  ]
+);
+assert.equal(baselineApplied.actions.find(item => item.id === 'growth:google-generative-ai-measurement-global')?.ownerDataCollection?.surface, 'Search Console > Performance > Generative AI (Search)');
+assert.equal(baselineApplied.actions.find(item => item.id === 'growth:bing-ai-citation-measurement')?.ownerDataCollection?.surface, 'Bing Webmaster Tools > AI Performance');
+assert.equal(baselineApplied.actions.find(item => item.id === 'trend-owner:google-generative-ai-control-global')?.ownerDataCollection?.surface, 'Search Console > Settings > Generative AI in Search');
 assert.equal(baselineApplied.refinements.optionalOpportunitiesSeparated, 2);
 assert.equal(baselineApplied.refinements.conditionalPlatformPropertiesDefaultOptional, true);
+assert.equal(baselineApplied.refinements.externalOwnerGateCount, 3);
+assert.deepEqual(baselineApplied.refinements.externalOwnerGateModes, { 'ui-export': 2, ui: 1 });
 
 const googleAi = record('growth:google-generative-ai-measurement-global', 'google-search-console', 'generative-ai-performance');
 const googleAiApplied = applyOwnerDataEvidence(basePlan, receipt([googleAi]), { now });
@@ -81,6 +100,7 @@ assert.deepEqual(googleAiApplied.observations.ownerData.matchedActionIds, [googl
 assert.equal(googleAiApplied.ownerDataEvidence[0].independentEvidence, false);
 assert.equal(googleAiApplied.ownerDataEvidence[0].crossSurfaceInference, false);
 assert.equal(googleAiApplied.ownerDataEvidence[0].rankingImpactClaimed, false);
+assert.equal(googleAiApplied.refinements.externalOwnerGateCount, 2);
 
 const wrongKind = record('growth:google-generative-ai-measurement-global', 'google-search-console', 'search-performance');
 assert.equal(
@@ -105,6 +125,7 @@ const includedControl = record(
 );
 const includedApplied = applyOwnerDataEvidence(basePlan, receipt([includedControl]), { now });
 assert.equal(includedApplied.actions.some(item => item.id === includedControl.actionId), false);
+assert.equal(includedApplied.refinements.externalOwnerGateCount, 2);
 
 const excludedControl = { ...includedControl, value: 'excluded' };
 assert.equal(
@@ -129,4 +150,4 @@ JSON.parse(fs.readFileSync('schema/growth-owner-data.schema.json', 'utf8'));
 assert.ok(fs.existsSync('templates/growth/owner-data.json'));
 JSON.parse(fs.readFileSync('templates/growth/owner-data.json', 'utf8'));
 
-console.log('PASS Growth owner-data receipts are provider/kind/freshness scoped, ordinary GSC data cannot close AI actions, and conditional/optional opportunities stay outside active remediation');
+console.log('PASS Growth owner-data receipts are provider/kind/freshness scoped, owner gates expose UI/export collection modes, ordinary GSC data cannot close AI actions, and conditional opportunities stay outside active remediation');
