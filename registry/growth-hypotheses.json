@@ -1,0 +1,185 @@
+{
+  "version": "0.1",
+  "snapshot": "2026-09-06",
+  "reviewedAt": "2026-09-06",
+  "title": "ARWP Search & Recommendation Growth Hypotheses",
+  "goal": "Turn current platform guidance and observed distribution mechanisms into explicit, testable website-growth hypotheses without treating implementation as proof of ranking causation.",
+  "principles": {
+    "primarySourcesPreferred": true,
+    "platformRequirementsBeforeExperiments": true,
+    "noRankingPromise": true,
+    "noUniversalReadinessScore": true,
+    "manualQualityChecksStayManual": true,
+    "ownerMetricsStayExternal": true,
+    "negativeResultsAreEvidence": true,
+    "hypothesesMustBeRevisable": true
+  },
+  "hypotheses": [
+    {
+      "id": "search-foundation-first",
+      "title": "Eligibility failures dominate optional optimization",
+      "hypothesis": "Fixing crawl, HTTP, indexability and snippet blockers before optional AI or agent metadata creates the most defensible path to Search and generative Search eligibility.",
+      "evidenceClass": "platform-requirement",
+      "confidence": "high",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["google-search", "google-ai-overviews", "google-ai-mode", "google-discover"],
+      "checks": [
+        {"id": "http-200", "mode": "automated", "expect": "Priority public pages return HTTP 200."},
+        {"id": "googlebot-access", "mode": "automated", "expect": "Googlebot is not root-blocked."},
+        {"id": "indexable", "mode": "automated", "expect": "No unintended noindex block is present."},
+        {"id": "snippet-eligible", "mode": "automated", "expect": "No unintended snippet-blocking directive is present."}
+      ],
+      "successSignals": ["indexed priority pages", "Search impressions", "supporting-link impressions from generative Search"],
+      "actionRefs": ["audit:google-search-technical-eligibility", "audit:google-ai-search-eligibility"],
+      "sources": ["https://developers.google.com/search/docs/essentials/technical", "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide", "https://developers.google.com/search/docs/appearance/google-discover"]
+    },
+    {
+      "id": "non-commodity-evidence",
+      "title": "Original evidence beats commodity summaries",
+      "hypothesis": "Priority pages with first-hand knowledge, original evidence, useful examples or a distinct point of view are more defensible candidates for Search and AI retrieval than pages that merely restate common material.",
+      "evidenceClass": "platform-guidance",
+      "confidence": "high",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["google-search", "google-ai-overviews", "google-ai-mode", "google-discover", "bing-ai"],
+      "checks": [
+        {"id": "first-hand-value", "mode": "manual", "expect": "The page contributes experience, data, examples, analysis or a non-obvious conclusion."},
+        {"id": "source-support", "mode": "manual", "expect": "Material factual claims have appropriate evidence."},
+        {"id": "purpose-fit", "mode": "manual", "expect": "The page serves a real audience need rather than manufacturing query variants."}
+      ],
+      "successSignals": ["new relevant impressions", "AI citations or supporting links", "stronger engagement on priority pages"],
+      "actionRefs": ["growth:non-commodity-review"],
+      "sources": ["https://developers.google.com/search/docs/fundamentals/ai-optimization-guide", "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content"]
+    },
+    {
+      "id": "answer-addressability",
+      "title": "Addressable sections improve retrieval precision",
+      "hypothesis": "Clear headings, stable section anchors and directly visible answers make important evidence easier for people and retrieval systems to locate and reference.",
+      "evidenceClass": "platform-guidance",
+      "confidence": "medium",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["google-search", "google-ai-overviews", "google-ai-mode", "bing-ai", "agent-retrieval"],
+      "checks": [
+        {"id": "descriptive-headings", "mode": "manual", "expect": "Headings describe the question, decision or evidence in the section."},
+        {"id": "stable-fragments", "mode": "automated", "expect": "Important headings have stable IDs and page code does not clear fragments."}
+      ],
+      "successSignals": ["deep-link traffic", "section-level citations", "more precise agent retrieval"],
+      "actionRefs": ["audit:google-read-more-deep-links"],
+      "sources": ["https://developers.google.com/search/docs/fundamentals/ai-optimization-guide", "https://developers.google.com/search/docs/appearance/snippet"]
+    },
+    {
+      "id": "identity-and-provenance",
+      "title": "Resolvable authorship and entity identity reduce ambiguity",
+      "hypothesis": "Consistent Organization or Person identity, real author pages, visible bylines and accurate structured data make it easier to understand who created or operates the content.",
+      "evidenceClass": "platform-guidance",
+      "confidence": "medium",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["google-search", "google-ai-overviews", "google-ai-mode", "knowledge-graph", "agent-retrieval"],
+      "checks": [
+        {"id": "canonical-entity", "mode": "automated", "expect": "Appropriate Organization, Person or ProfilePage identity exists."},
+        {"id": "author-resolution", "mode": "manual", "expect": "Content with authorship expectations links to real author or profile information."}
+      ],
+      "successSignals": ["consistent entity interpretation", "clear source attribution"],
+      "actionRefs": ["growth:entity-identity", "growth:entity-sameas", "growth:article-authorship"],
+      "sources": ["https://developers.google.com/search/docs/appearance/structured-data/profile-page", "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"]
+    },
+    {
+      "id": "discover-visual-preview",
+      "title": "Strong visual previews improve Discover presentation opportunity",
+      "hypothesis": "For Discover-suitable content, relevant high-quality large images plus permissive large-image previews improve eligibility for stronger visual presentation.",
+      "evidenceClass": "platform-guidance",
+      "confidence": "high",
+      "appliesTo": ["editorial", "research-dataset", "software-product", "documentation"],
+      "targetSurfaces": ["google-discover", "google-images", "google-search"],
+      "checks": [
+        {"id": "representative-image", "mode": "manual", "expect": "Priority content has a relevant representative image."},
+        {"id": "large-image", "mode": "manual", "expect": "Preferred Discover image follows current large-image guidance."},
+        {"id": "large-preview", "mode": "automated", "expect": "Large image preview is allowed unless intentionally restricted."}
+      ],
+      "successSignals": ["Discover impressions", "Discover CTR", "image-result impressions"],
+      "actionRefs": ["growth:multiformat"],
+      "sources": ["https://developers.google.com/search/docs/appearance/google-discover", "https://developers.google.com/search/docs/appearance/google-images"]
+    },
+    {
+      "id": "preferred-source-loop",
+      "title": "Preferred Sources can compound repeat-reader distribution",
+      "hypothesis": "For sites with repeat readers, a Preferred Sources control can increase prominence for users who explicitly select the domain in supported Google surfaces.",
+      "evidenceClass": "platform-feature",
+      "confidence": "high",
+      "appliesTo": ["editorial", "research-dataset", "software-product", "documentation"],
+      "targetSurfaces": ["google-top-stories", "google-ai-overviews", "google-ai-mode"],
+      "checks": [
+        {"id": "cta-present", "mode": "automated", "expect": "A documented Preferred Sources control is present where appropriate."},
+        {"id": "repeat-reader-fit", "mode": "manual", "expect": "The site has a plausible repeat-reader audience."}
+      ],
+      "successSignals": ["preferred-source selections where measurable", "return traffic"],
+      "actionRefs": ["growth:preferred-source-acquisition", "audit:google-preferred-sources"],
+      "sources": ["https://developers.google.com/search/docs/appearance/preferred-sources"]
+    },
+    {
+      "id": "chatgpt-search-access",
+      "title": "Search crawling and training permissions are separate controls",
+      "hypothesis": "Sites targeting ChatGPT Search should avoid unintentionally blocking OAI-SearchBot while making GPTBot training choices separately.",
+      "evidenceClass": "platform-requirement",
+      "confidence": "high",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["chatgpt-search"],
+      "checks": [
+        {"id": "oai-searchbot", "mode": "automated", "expect": "OAI-SearchBot is not unintentionally blocked."},
+        {"id": "training-policy", "mode": "manual", "expect": "GPTBot policy reflects the publisher's training preference."}
+      ],
+      "successSignals": ["ChatGPT referral traffic", "observed ChatGPT citations or links"],
+      "actionRefs": ["audit:openai-oai-searchbot-access", "growth:cloudflare-content-signals"],
+      "sources": ["https://help.openai.com/en/articles/12627856-publishers-and-developers-faq"]
+    },
+    {
+      "id": "freshness-without-fake-recency",
+      "title": "Accurate change signals outperform synthetic freshness",
+      "hypothesis": "Accurate sitemap lastmod, visible or structured update dates and bounded change notification help retrieval systems discover meaningful updates without fake date churn.",
+      "evidenceClass": "platform-guidance",
+      "confidence": "high",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["google-search", "google-ai-overviews", "google-ai-mode", "bing-search", "bing-ai"],
+      "checks": [
+        {"id": "sitemap-lastmod", "mode": "automated", "expect": "Sitemap lastmod is present and syntactically valid where useful."},
+        {"id": "semantic-lastmod", "mode": "manual", "expect": "Freshness dates change only after a significant content change."},
+        {"id": "indexnow", "mode": "configured", "expect": "IndexNow is used only when supported and useful."}
+      ],
+      "successSignals": ["faster recrawl after meaningful updates", "fewer stale-result observations"],
+      "actionRefs": ["audit:google-sitemap-lastmod", "growth:article-dates", "audit:indexnow-change-notification"],
+      "sources": ["https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap", "https://www.indexnow.org/documentation"]
+    },
+    {
+      "id": "platform-ai-measurement",
+      "title": "AI visibility must be measured rather than inferred",
+      "hypothesis": "Owner-side Google generative Search reporting and Bing AI citation data provide a better feedback loop than assuming an ARWP implementation caused visibility changes.",
+      "evidenceClass": "platform-measurement",
+      "confidence": "high",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["google-ai-overviews", "google-ai-mode", "bing-ai", "microsoft-copilot"],
+      "checks": [
+        {"id": "google-owner-report", "mode": "owner-data", "expect": "Capture relevant Google generative Search visibility around material changes."},
+        {"id": "bing-owner-report", "mode": "owner-data", "expect": "Capture citations, cited pages and grounding-query samples where available."}
+      ],
+      "successSignals": ["generative Search impressions", "AI citations", "unique cited priority pages"],
+      "actionRefs": ["growth:google-generative-ai-measurement-global", "growth:bing-ai-citation-measurement"],
+      "sources": ["https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports", "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview"]
+    },
+    {
+      "id": "agent-readable-routes",
+      "title": "Agent readability is an interoperability experiment, not a ranking shortcut",
+      "hypothesis": "Truthful llms.txt, Agent Skills, ARD, API, MCP, A2A or ARWP metadata can reduce integration friction for compatible agents when a real use case exists, but should not displace Search fundamentals or be marketed as a ranking factor.",
+      "evidenceClass": "project-experiment",
+      "confidence": "experimental",
+      "appliesTo": ["all"],
+      "targetSurfaces": ["agent-retrieval", "agent-tools"],
+      "checks": [
+        {"id": "real-capability", "mode": "automated", "expect": "Published agent surfaces resolve and describe capabilities the site actually exposes."},
+        {"id": "use-case", "mode": "manual", "expect": "Agent metadata is justified by a real agent use case."},
+        {"id": "runtime-evidence", "mode": "runtime", "expect": "Runtime-capable interfaces are verified separately from static declarations."}
+      ],
+      "successSignals": ["successful agent task completion", "fewer site-specific integration rules", "stable resolver plans"],
+      "actionRefs": [],
+      "sources": ["https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md", "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/STANDARDS-MAP.md"]
+    }
+  ]
+}

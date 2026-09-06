@@ -1,40 +1,39 @@
-# ARWP Growth Profile
+# ARWP Growth Loop
 
 Canonical: https://dkharlanau.github.io/agent-ready-web-profile/growth/
-Status: experimental product layer, reviewed 2026-09-06
+Status: experimental evidence-backed product layer, reviewed 2026-09-06
 
-ARWP Growth Profile converts source-backed Search, generative-search, citation, identity, measurement and agent-web guidance into a prioritized website improvement backlog.
+Goal:
+Continuously improve Search eligibility, recommendation readiness, citability and agent usability by turning current primary-source research into explicit hypotheses, implementation checks and measurable follow-up evidence.
 
-Core distinction:
-- ARWP Profile: publisher-maintained service map.
-- ARWP Resolver: discovers and selects actual site interfaces with provenance/conflicts.
-- Recommendations Registry: upstream requirements/opportunities.
-- Growth Profile: prioritized implementation backlog for improving a site's observable quality and distribution setup.
+Loop:
+research -> classify -> baseline -> hypothesis -> implement -> verify -> measure -> keep/revise/revert
 
-Priority model:
-- P0 observable eligibility blockers.
-- P1 high-value content-quality, identity, access, freshness and governance work.
-- P2 optional acquisition, measurement and multi-format opportunities.
-- P3 lower-priority experiments.
-
-Important boundaries:
-- no universal quality/readiness score;
-- no ranking guarantee;
-- no AI recommendation/citation guarantee;
-- provider-specific signals remain provider-specific;
-- manual editorial quality stays manual;
-- llms.txt/ARD/agent metadata are interoperability surfaces, not Google ranking signals.
+Layers:
+- Trend Radar: WATCH / ADOPT / MEASURED upstream changes plus owner-only platform controls.
+- Recommendations Registry: dated requirements/opportunities.
+- Growth Hypotheses: applicability, evidence class, checks and success signals.
+- Growth Profile: prioritized site-specific implementation backlog.
+- Agent Skills: repository execution and verification.
+- Measurement: owner-side outcomes kept separate from implementation proof.
 
 Run:
-node bin/arwp-growth.mjs https://example.com --json
+node bin/arwp-trends.mjs list --since=90 --exclude-retired
+node bin/arwp-hypotheses.mjs list --vertical=editorial
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json
 
-Ready-to-use templates:
-- templates/growth/robots.ai-search-open-training-closed.txt
-- templates/growth/organization.jsonld
-- templates/growth/article.jsonld
-- templates/growth/preferred-source.html
-- templates/growth/content-quality-checklist.md
-- templates/growth/github-action.yml
+Default growth skill:
+arwp-growth-loop
+https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-growth-loop/SKILL.md
 
-Source registry:
-https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-opportunities.json
+Machine hypotheses:
+https://dkharlanau.github.io/agent-ready-web-profile/growth/hypotheses.json
+
+Boundaries:
+- no universal quality/readiness score;
+- no ranking / Discover / AI recommendation guarantee;
+- requirements before experiments;
+- manual quality stays manual;
+- authenticated owner controls and owner metrics stay external-owner-data;
+- agent interoperability metadata is not a Google ranking signal;
+- preserve neutral and negative results.

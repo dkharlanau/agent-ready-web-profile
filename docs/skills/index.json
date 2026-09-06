@@ -7,30 +7,11 @@
   "install": "npx skills add dkharlanau/agent-ready-web-profile",
   "repositoryIndex": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/index.json",
   "skills": [
-    {
-      "name": "arwp-prepare-site",
-      "role": "orchestrator",
-      "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md",
-      "useWhen": "Prepare or upgrade an existing website repository to ARWP and current Search/AI/agent quality guidance."
-    },
-    {
-      "name": "arwp-ai-search-content",
-      "role": "content-quality",
-      "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md",
-      "useWhen": "Improve articles, docs, comparison pages and answer pages for usefulness, retrieval and citation."
-    },
-    {
-      "name": "arwp-agent-discovery",
-      "role": "interoperability",
-      "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-agent-discovery/SKILL.md",
-      "useWhen": "Implement truthful llms.txt, Agent Skills, ARD, API/MCP/A2A/WebMCP discovery and optional ARWP profile surfaces."
-    },
-    {
-      "name": "arwp-evidence-ci",
-      "role": "verification",
-      "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-evidence-ci/SKILL.md",
-      "useWhen": "Add assertion contracts, scheduled audits, evidence receipts and regression-safe CI."
-    }
+    {"name":"arwp-growth-loop","role":"growth-orchestrator","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-growth-loop/SKILL.md","useWhen":"Continuously improve Search, recommendation, generative Search, AI-citation or agent visibility using explicit hypotheses and measurement."},
+    {"name":"arwp-prepare-site","role":"site-preparation","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md","useWhen":"Prepare or upgrade an existing website repository to ARWP and current Search/AI/agent technical guidance."},
+    {"name":"arwp-ai-search-content","role":"content-quality","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md","useWhen":"Improve articles, docs, comparison pages and answer pages for usefulness, retrieval and citation."},
+    {"name":"arwp-agent-discovery","role":"interoperability","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-agent-discovery/SKILL.md","useWhen":"Implement truthful llms.txt, Agent Skills, ARD, API/MCP/A2A/WebMCP discovery and optional ARWP profile surfaces."},
+    {"name":"arwp-evidence-ci","role":"verification","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-evidence-ci/SKILL.md","useWhen":"Add assertion contracts, scheduled audits, evidence receipts and regression-safe CI."}
   ],
-  "guardrail": "Skills help implement and verify current quality guidance; they do not guarantee ranking, AI citation, recommendation placement or universal agent readiness."
+  "guardrail": "Skills implement and verify source-backed improvements; they do not guarantee ranking, Discover placement, AI citation, recommendation traffic or universal agent readiness."
 }

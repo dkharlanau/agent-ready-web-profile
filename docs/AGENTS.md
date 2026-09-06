@@ -1,114 +1,63 @@
 # Agent-Ready Web Profile (ARWP)
 
-ARWP is an **agentic web interoperability resolver**: software that discovers the machine- and agent-facing interfaces a website exposes, preserves the evidence and conflicts behind those observations, and selects a suitable interface for a concrete intent.
+ARWP is an evidence-backed website growth and agent-readiness toolkit with an agentic web interoperability Resolver underneath it.
 
-This class name is project-defined. ARWP is not a universal AI-readiness score, an AI visibility tracker, an MCP server, an A2A agent or a replacement for upstream protocols.
+Primary workflow:
 
-## Use ARWP
+`research current Search/recommendation changes -> classify evidence -> select hypotheses -> improve a real site -> verify -> measure -> iterate`
 
-Repository:
-https://github.com/dkharlanau/agent-ready-web-profile
+The Resolver remains the technical foundation for discovering machine- and agent-facing interfaces, preserving evidence/conflicts and selecting a suitable interface for a concrete intent. The publisher ARWP profile remains optional.
 
-Install from a repository checkout:
+## Run the Growth Loop
 
 ```bash
 git clone https://github.com/dkharlanau/agent-ready-web-profile.git
 cd agent-ready-web-profile
 npm ci
+node bin/arwp-trends.mjs list --since=90 --exclude-retired
+node bin/arwp-hypotheses.mjs list --vertical=editorial
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json
 ```
 
-Resolve a public HTTPS website:
+Machine-readable hypotheses:
+https://dkharlanau.github.io/agent-ready-web-profile/growth/hypotheses.json
 
-```bash
-node bin/arwp.mjs resolve https://example.com
-```
-
-Explain evidence and conflicts:
-
-```bash
-node bin/arwp.mjs explain https://example.com
-```
-
-Plan for a concrete intent:
-
-```bash
-node bin/arwp.mjs plan https://example.com --intent=read
-node bin/arwp.mjs plan https://example.com --intent=search
-node bin/arwp.mjs plan https://example.com --intent=structured
-node bin/arwp.mjs plan https://example.com --intent=tools
-node bin/arwp.mjs plan https://example.com --intent=agent
-```
-
-## Prepare a website with an AI agent
-
-ARWP publishes portable Agent Skills. Default workflow:
-
-```text
-arwp-prepare-site
-```
-
-Install the skill package where supported:
+## Use with an AI coding agent
 
 ```bash
 npx skills add dkharlanau/agent-ready-web-profile
 ```
 
-Skill catalog:
-https://dkharlanau.github.io/agent-ready-web-profile/skills/
+Default growth workflow: `arwp-growth-loop`.
 
-Specialists:
+Use `arwp-prepare-site` for initial technical preparation. Specialists remain available for content, agent discovery and evidence/CI.
 
-- `arwp-ai-search-content` — useful/original/evidence-backed content for retrieval and citation;
-- `arwp-agent-discovery` — truthful agent/machine discovery surfaces;
-- `arwp-evidence-ci` — contracts, audits, receipts and CI.
+The growth skill should research primary sources when possible, establish a baseline, select applicable hypotheses, edit the target repository, verify checks and identify owner-side success metrics. Preserve neutral/negative results and never claim causation from implementation alone.
 
-The preparation skill should inspect the target repository, establish an audit/growth baseline, implement high-confidence P0/P1 improvements, verify the site's own build/tests plus ARWP checks, and leave credential-dependent work explicit. It must not claim that ARWP or metadata guarantees ranking or AI recommendations.
+## Resolver remains
 
-## Main public surfaces
-
-- Project: https://dkharlanau.github.io/agent-ready-web-profile/
-- Sitemap: https://dkharlanau.github.io/agent-ready-web-profile/sitemap.xml
-- Markdown sitemap: https://dkharlanau.github.io/agent-ready-web-profile/sitemap.md
-- Agent routing: https://dkharlanau.github.io/agent-ready-web-profile/llms.txt
-- Agent Skills: https://dkharlanau.github.io/agent-ready-web-profile/skills/
-- Growth Profile: https://dkharlanau.github.io/agent-ready-web-profile/growth/
-- Product class: https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json
-- Schema.org product metadata: https://dkharlanau.github.io/agent-ready-web-profile/ai/product.jsonld
-- Competitor/category map: https://dkharlanau.github.io/agent-ready-web-profile/compare/
-- ARWP vs AgentReady/Ora: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-agentready.html
-- ARWP vs ARD: https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html
-- Protocol Observatory: https://dkharlanau.github.io/agent-ready-web-profile/observatory/
-- Search + Agent recommendations: https://dkharlanau.github.io/agent-ready-web-profile/recommendations/
-- Evidence Receipts: https://dkharlanau.github.io/agent-ready-web-profile/evidence/receipts/
-- Trust Center: https://dkharlanau.github.io/agent-ready-web-profile/trust/
-
-## Discovery model
-
-ARWP can use ordinary web and protocol evidence including HTML/HTTP links, Markdown negotiation, llms.txt, ARWP profiles, RFC 9727 API Catalog, RFC 9728 metadata, A2A Agent Cards, Agent Skills, MCP Server Cards and ARD evidence.
-
-### ARD v0.91
-
-ARD is an upstream federated agentic-resource discovery proposal. ARWP should consume ARD rather than create a parallel catalog standard.
-
-Current canonical ARD static discovery:
-
-- `/.well-known/ard.json`;
-- `rel="ard"`;
-- JSON-LD description layer and namespaces.
-
-The predecessor `/.well-known/ai-catalog.json` and `rel="ai-catalog"` remain compatibility signals.
+```bash
+node bin/arwp.mjs resolve https://example.com
+node bin/arwp.mjs explain https://example.com
+node bin/arwp.mjs plan https://example.com --intent=search
+```
 
 ## Interpretation rules
 
-- A metadata URL is not automatically a callable endpoint.
-- A cryptographic signature does not automatically establish trust.
-- Metadata never grants authorization.
-- Crawler access does not guarantee indexing or citation.
-- Passing an ARWP audit does not guarantee search ranking.
-- A draft/proposal is not an RFC or final web standard.
-- AgentReady/Ora and Agent Ready are adjacent readiness/readability products, not evidence that ARWP needs a universal score.
+- Platform requirements outrank optional tactics and experiments.
+- A hypothesis is an assumption/test plan, not a promise.
+- Manual editorial quality cannot be converted into an honest static score.
+- Authenticated Google/Bing/referral outcomes are external owner evidence.
+- Crawler access does not guarantee indexing/citation.
+- Passing ARWP checks does not guarantee ranking or recommendations.
+- Metadata never grants authorization or automatically proves runtime conformance.
+- llms.txt, Agent Skills, ARD, MCP, A2A and ARWP profiles are interoperability surfaces, not ranking signals merely because agents can use them.
 
-## Sitemap
+## Main public surfaces
 
-See the full public map:
-https://dkharlanau.github.io/agent-ready-web-profile/sitemap.md
+- Growth: https://dkharlanau.github.io/agent-ready-web-profile/growth/
+- Trends: https://dkharlanau.github.io/agent-ready-web-profile/trends/
+- Recommendations: https://dkharlanau.github.io/agent-ready-web-profile/recommendations/
+- Agent Skills: https://dkharlanau.github.io/agent-ready-web-profile/skills/
+- Resolver/project: https://dkharlanau.github.io/agent-ready-web-profile/
+- Sitemap: https://dkharlanau.github.io/agent-ready-web-profile/sitemap.md

@@ -1,44 +1,27 @@
 # ARWP Agent Skills
 
-ARWP ships portable Agent Skills so coding agents can prepare and maintain a website without requiring the user to restate the methodology in every prompt.
-
-## Install
-
-Using the open `skills` CLI:
+Install:
 
 ```bash
 npx skills add dkharlanau/agent-ready-web-profile
 ```
 
-Then select the ARWP skill(s) supported by your agent. The exact install target is controlled by the `skills` CLI and the agent environment.
+## Default growth workflow
 
-The default orchestration skill is:
+Use `arwp-growth-loop` when the outcome is Search growth, Discover/recommendation visibility, generative Search/AI citations, current platform adaptation or ongoing evidence-backed website improvement.
 
-```text
-arwp-prepare-site
-```
+`research → classify → baseline → hypothesis → implement → verify → measure → keep/revise/revert`
 
-Specialists:
+## Initial technical preparation
 
-```text
-arwp-ai-search-content
-arwp-agent-discovery
-arwp-evidence-ci
-```
+Use `arwp-prepare-site` when the main task is to prepare or migrate an existing repository to the ARWP/Search/agent technical baseline.
 
-## Recommended use
+## Specialists
 
-Ask the agent to apply `arwp-prepare-site` to the current repository. It should inspect the stack, establish an audit/growth baseline, implement the highest-confidence P0/P1 improvements, add only truthful machine/agent surfaces, verify the site, and leave external/credential-dependent work as explicit gates.
+- `arwp-ai-search-content` — original useful content and answer/comparison pages.
+- `arwp-agent-discovery` — llms.txt, Agent Skills, ARD, OpenAPI/MCP/A2A/WebMCP and ARWP surfaces.
+- `arwp-evidence-ci` — assertion contracts, scheduled audits, receipts and drift-safe CI.
 
-Load the specialist skills when the task is primarily content, interoperability/discovery, or verification/CI.
+When repository edits are possible, inspect the stack, establish a baseline, select only applicable high-confidence work, implement it and run the site's build/tests plus relevant ARWP checks. Leave credential-dependent or owner-side measurement work as explicit gates.
 
-## Design
-
-ARWP follows the Agent Skills progressive-disclosure model:
-
-- lightweight name/description metadata helps agents decide when a skill applies;
-- the full `SKILL.md` loads only when needed;
-- specialist skills keep unrelated methodology out of the active context;
-- scripts/assets can be added later where deterministic execution is more valuable than prose instructions.
-
-Skills do not claim that ARWP adoption guarantees Google ranking, AI citations, recommendation placement, or universal agent readiness.
+Do not claim that ARWP adoption guarantees ranking, Discover placement, AI citations, recommendations or traffic.

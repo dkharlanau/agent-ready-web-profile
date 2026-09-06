@@ -1,8 +1,13 @@
 # ARWP Agent Skills
 
-Use these portable skills when an AI coding agent should prepare or maintain a website under ARWP.
+Use these portable skills when an AI coding agent should improve, prepare or maintain a website under ARWP.
 
-## Default
+## Default growth workflow
+- arwp-growth-loop — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-growth-loop/SKILL.md
+
+Use it for Search growth, Google Discover/recommendations, generative Search, AI citations, current platform adaptation and ongoing evidence-backed website improvement.
+
+## Initial preparation
 - arwp-prepare-site — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md
 
 ## Specialists
@@ -14,4 +19,4 @@ Use these portable skills when an AI coding agent should prepare or maintain a w
 npx skills add dkharlanau/agent-ready-web-profile
 
 ## Rule
-Implement and verify real site improvements. Do not claim that ARWP, llms.txt, Schema.org, Agent Skills, or any other metadata mechanism guarantees Google ranking, AI citation, or recommendation placement.
+Research -> hypothesis -> implement -> verify -> measure. Do not claim that ARWP, llms.txt, Schema.org, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.

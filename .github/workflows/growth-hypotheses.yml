@@ -1,0 +1,46 @@
+name: Growth hypotheses
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/growth-hypotheses.json'
+      - 'docs/growth/hypotheses.json'
+      - 'lib/growth-hypotheses.mjs'
+      - 'lib/growth-plan.mjs'
+      - 'bin/arwp-hypotheses.mjs'
+      - 'scripts/growth-hypotheses-test.mjs'
+      - 'skills/arwp-growth-loop/**'
+      - 'skills/index.json'
+      - 'docs/skills/**'
+      - '.github/workflows/growth-hypotheses.yml'
+  pull_request:
+    paths:
+      - 'registry/growth-hypotheses.json'
+      - 'lib/growth-hypotheses.mjs'
+      - 'lib/growth-plan.mjs'
+      - 'skills/arwp-growth-loop/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate growth hypotheses
+        run: node scripts/growth-hypotheses-test.mjs
+      - name: Validate hypothesis CLI
+        run: node bin/arwp-hypotheses.mjs check
+      - name: Validate skill catalog
+        run: node scripts/agent-skills-test.mjs
+      - name: Validate syntax
+        run: |
+          node --check lib/growth-hypotheses.mjs
+          node --check lib/growth-plan.mjs
+          node --check bin/arwp-hypotheses.mjs

@@ -1,65 +1,14 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="ARWP Growth Profile turns current Search, AI-search, citation and agent-web guidance into a prioritized website improvement plan without a fake readiness score.">
-  <title>ARWP Growth Profile</title>
-  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/growth/">
-  <link rel="stylesheet" href="../citation.css">
-</head>
-<body>
-<main class="cite-main shell">
-  <header class="cite-hero">
-    <p class="eyebrow">ARWP Growth</p>
-    <h1>Connect a site. Get a defensible improvement backlog.</h1>
-    <p class="cite-lead">The Growth Profile combines observable Search/AI-access blockers with current platform guidance, editorial quality contracts, identity metadata, measurement and agent interoperability. It produces priorities, not a universal score.</p>
-  </header>
-
-  <section class="cite-card">
-    <h2>Trend-aware by design</h2>
-    <p>Growth planning now consumes the <a href="../trends/">ARWP Trend Radar</a>. The radar separates emerging <strong>WATCH</strong> signals from primary-source-backed <strong>ADOPT</strong> changes and evidence-backed <strong>MEASURED</strong> changes.</p>
-    <p>Only applicable ADOPT/MEASURED trends enter a site plan. Newness alone never creates a recommendation or ranking claim.</p>
-    <pre><code>node bin/arwp-trends.mjs list --since=30 --exclude-retired
-node bin/arwp-growth.mjs https://example.com --vertical=editorial --json</code></pre>
-  </section>
-
-  <section class="cite-card">
-    <h2>What it optimizes</h2>
-    <div class="term-grid">
-      <div class="term-card"><strong>Search eligibility</strong><span>HTTP/indexability, robots access, snippet eligibility, canonical/freshness foundations.</span></div>
-      <div class="term-card"><strong>AI discoverability</strong><span>OAI-SearchBot access, authenticated platform inclusion controls, provider-specific AI use policy, Preferred Sources and citation-ready sections.</span></div>
-      <div class="term-card"><strong>Entity identity</strong><span>Organization/Person identity, author profile links, sameAs and structured publication metadata.</span></div>
-      <div class="term-card"><strong>Content quality</strong><span>Human review for non-commodity value, first-hand evidence, who/how/why, useful visual proof and topical purpose.</span></div>
-      <div class="term-card"><strong>Measurement</strong><span>Google Generative AI performance, Bing AI Performance, ChatGPT referrals and social/video Search Console properties.</span></div>
-      <div class="term-card"><strong>Agent operability</strong><span>Accessibility/runtime evidence plus ARWP/ARD/MCP/A2A/WebMCP, never mislabeled as Google ranking factors.</span></div>
-    </div>
-  </section>
-
-  <section class="cite-grid">
-    <div class="cite-card"><h2>Run it</h2><pre><code>node bin/arwp-growth.mjs https://example.com
-node bin/arwp-growth.mjs https://example.com --vertical=software-product --json
-node bin/arwp-growth.mjs https://example.com --output=arwp-growth.json</code></pre><p>For a recurring loop, copy <code>templates/growth/github-action.yml</code> into the target website repository and set <code>ARWP_TARGET</code>.</p></div>
-    <div class="cite-card"><h2>Priority model</h2><ul class="cite-list"><li><strong>P0</strong> — observable eligibility blocker.</li><li><strong>P1</strong> — high-value quality, identity, access, freshness or governance action.</li><li><strong>P2</strong> — acquisition, measurement or optional multi-format opportunity.</li><li><strong>P3</strong> — lower-priority experiment.</li></ul><p>No aggregate readiness or ranking score is produced.</p></div>
-  </section>
-
-  <section class="cite-card">
-    <h2>Fresh 2026-09-06 radar signals</h2>
-    <ul class="cite-list">
-      <li>OpenAI publisher/developer guidance: OAI-SearchBot vs GPTBot separation, ChatGPT referral tagging and WAI-ARIA guidance for ChatGPT Agent in Atlas.</li>
-      <li>Google Generative AI Search Console reporting is available to all websites worldwide.</li>
-      <li>Google's Search generative AI control is worldwide: when generative Search visibility is a goal, ARWP now raises an owner-side verification action rather than pretending the setting is publicly crawlable.</li>
-      <li>Google Preferred Sources now has a custom interactive acquisition button and can appear in supported AI Mode / AI Overview surfaces.</li>
-      <li>Google's updated EEA site-reputation enforcement remains relevant to third-party and white-label content.</li>
-      <li>Cloudflare Content Signals <code>use</code> enforcement remains a provider-specific WATCH signal rather than a universal requirement.</li>
-      <li>WebMCP remains a runtime/origin-trial WATCH signal; task eval evidence is required before broader claims.</li>
-    </ul>
-  </section>
-
-  <section class="cite-card"><h2>Ready-to-use files</h2><ul class="cite-list"><li><code>templates/growth/robots.ai-search-open-training-closed.txt</code></li><li><code>templates/growth/organization.jsonld</code></li><li><code>templates/growth/article.jsonld</code></li><li><code>templates/growth/preferred-source.html</code></li><li><code>templates/growth/content-quality-checklist.md</code></li><li><code>templates/growth/github-action.yml</code></li></ul></section>
-
-  <p class="scope-note">Passing ARWP checks never guarantees crawling, indexing, ranking, citation, AI recommendation, traffic or conversion. The product is designed to improve implementation quality, adaptation speed and evidence quality.</p>
-  <p class="reuse-note"><a href="../trends/">Trend Radar</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-PROFILE.md">Technical documentation</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-opportunities.json">Source-backed Growth registry</a></p>
-</main>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="ARWP Growth Loop researches current Search and recommendation changes, turns them into testable website hypotheses, implements high-confidence improvements and measures what happened."><title>ARWP Growth Loop — research, implement, verify, measure</title><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/growth/"><link rel="describedby" type="application/json" href="./hypotheses.json"><link rel="describedby" type="text/plain" href="./llms.txt"><link rel="stylesheet" href="../citation.css"></head>
+<body><main class="cite-main shell">
+<header class="cite-hero"><p class="eyebrow">ARWP Growth Loop</p><h1>Research what changed. Improve the site. Measure what happened.</h1><p class="cite-lead">ARWP turns current Search, AI-search, recommendation, citation and agent-web evidence into explicit hypotheses and a prioritized site backlog. The loop is designed to keep learning instead of accumulating SEO/GEO folklore.</p><div class="direct-answer"><strong>Loop:</strong> research → classify → baseline → hypothesis → implement → verify → measure → keep / revise / revert.</div></header>
+<section class="cite-card"><h2>Four evidence layers</h2><div class="term-grid"><div class="term-card"><strong>Trend Radar</strong><span>Tracks recent primary-source changes, maturity and owner-only controls; separates WATCH from ADOPT/MEASURED.</span></div><div class="term-card"><strong>Recommendations</strong><span>Records dated requirements, guidance, features and measurement surfaces.</span></div><div class="term-card"><strong>Growth hypotheses</strong><span>States why a change may matter, applicable surfaces, checks and observable success signals.</span></div><div class="term-card"><strong>Growth Profile</strong><span>Audits a real site and turns applicable evidence into P0–P3 implementation actions.</span></div></div></section>
+<section class="cite-card"><h2>Connect a site. Get a defensible improvement backlog.</h2><pre><code>node bin/arwp-trends.mjs list --since=90 --exclude-retired
+node bin/arwp-hypotheses.mjs list --vertical=editorial
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json</code></pre><p>The Growth JSON includes the actionable backlog plus the applicable hypothesis program. A hypothesis explains the reason and measurement model; it is not proof the platform will reward the change.</p><p>Where a platform setting can only be checked by the site owner—for example Google's current generative Search control—Growth emits an owner-side verification action instead of pretending public crawling can observe it.</p></section>
+<section class="cite-grid"><article class="cite-card"><h2>Decision order</h2><ol class="cite-list"><li>Fix crawl/index/snippet eligibility blockers.</li><li>Make canonical/freshness signals accurate.</li><li>Improve original evidence and content usefulness.</li><li>Make identity, authorship and sections resolvable.</li><li>Add recommendation/citation opportunities that fit the site.</li><li>Add agent-facing surfaces only for real agent use cases.</li><li>Close the loop with owner-side outcome evidence.</li></ol></article><article class="cite-card"><h2>Evidence classes</h2><ul class="cite-list"><li><strong>platform-requirement</strong> — eligibility/policy foundation.</li><li><strong>platform-guidance</strong> — documented best-practice direction.</li><li><strong>platform-feature</strong> — optional acquisition/distribution mechanism.</li><li><strong>platform-measurement</strong> — owner-side feedback source.</li><li><strong>project-experiment</strong> — research idea kept out of the default plan.</li></ul></article></section>
+<section class="cite-card"><h2>Agent workflow</h2><p>Install the portable skills and use <code>arwp-growth-loop</code> for outcome-driven Search/recommendation work.</p><pre><code>npx skills add dkharlanau/agent-ready-web-profile</code></pre></section>
+<section class="cite-card"><h2>Reusable artifacts</h2><ul class="cite-list"><li><a href="./hypotheses.json"><code>growth/hypotheses.json</code></a> — machine-readable hypotheses.</li><li><code>templates/growth/growth-loop-checklist.md</code> — site review contract.</li><li><code>templates/growth/hypothesis-ledger.md</code> — before/after evidence.</li><li><code>skills/arwp-growth-loop/SKILL.md</code> — executable agent methodology.</li></ul></section>
+<section class="cite-card"><h2>Resolver stays underneath</h2><p>ARWP still resolves HTML/HTTP discovery, optional publisher profiles, APIs, ARD, Agent Skills, MCP, A2A and other supported evidence with provenance/conflicts intact. Growth work uses that interoperability foundation; it does not replace it.</p></section>
+<p class="scope-note">ARWP cannot guarantee crawling, indexing, ranking, Discover placement, AI citations, recommendation traffic or conversion. Success must be measured on the publisher's real surfaces.</p><p class="reuse-note"><a href="../trends/">Trend Radar</a> · <a href="../recommendations/">Recommendations</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-LOOP.md">Methodology</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/skills/arwp-growth-loop/SKILL.md">Agent Skill</a></p>
+</main></body></html>
