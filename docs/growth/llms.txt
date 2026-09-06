@@ -1,0 +1,40 @@
+# ARWP Growth Profile
+
+Canonical: https://dkharlanau.github.io/agent-ready-web-profile/growth/
+Status: experimental product layer, reviewed 2026-09-06
+
+ARWP Growth Profile converts source-backed Search, generative-search, citation, identity, measurement and agent-web guidance into a prioritized website improvement backlog.
+
+Core distinction:
+- ARWP Profile: publisher-maintained service map.
+- ARWP Resolver: discovers and selects actual site interfaces with provenance/conflicts.
+- Recommendations Registry: upstream requirements/opportunities.
+- Growth Profile: prioritized implementation backlog for improving a site's observable quality and distribution setup.
+
+Priority model:
+- P0 observable eligibility blockers.
+- P1 high-value content-quality, identity, access, freshness and governance work.
+- P2 optional acquisition, measurement and multi-format opportunities.
+- P3 lower-priority experiments.
+
+Important boundaries:
+- no universal quality/readiness score;
+- no ranking guarantee;
+- no AI recommendation/citation guarantee;
+- provider-specific signals remain provider-specific;
+- manual editorial quality stays manual;
+- llms.txt/ARD/agent metadata are interoperability surfaces, not Google ranking signals.
+
+Run:
+node bin/arwp-growth.mjs https://example.com --json
+
+Ready-to-use templates:
+- templates/growth/robots.ai-search-open-training-closed.txt
+- templates/growth/organization.jsonld
+- templates/growth/article.jsonld
+- templates/growth/preferred-source.html
+- templates/growth/content-quality-checklist.md
+- templates/growth/github-action.yml
+
+Source registry:
+https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-opportunities.json
