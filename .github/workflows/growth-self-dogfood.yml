@@ -1,0 +1,38 @@
+name: Growth Profile self-dogfood
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 5 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  growth-self:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Evaluate public ARWP site
+        run: |
+          node bin/arwp-growth.mjs https://dkharlanau.github.io/agent-ready-web-profile/ --json > arwp-growth-self.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('arwp-growth-self.json','utf8'));
+          const priorities = Object.entries(p.summary.byPriority || {}).map(([k,v]) => `${k}: ${v}`).join(', ');
+          const top = (p.actions || []).slice(0, 8).map(a => `- ${a.priority} / ${a.lane}: ${a.title}`).join('\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## ARWP Growth self-dogfood\n\nTarget: ${p.canonicalUrl}\n\nActions: ${p.summary.totalActions} (${priorities})\n\n### Top actions\n${top}\n\nNo score or ranking promise is produced.\n`);
+          NODE
+      - name: Upload Growth Profile artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: arwp-growth-self
+          path: arwp-growth-self.json
+          if-no-files-found: error
+          retention-days: 30
