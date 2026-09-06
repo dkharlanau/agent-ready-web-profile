@@ -4,6 +4,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '43 5 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/growth-opportunities.json'
+      - 'lib/growth-profile.mjs'
+      - 'bin/arwp-growth.mjs'
+      - 'templates/growth/**'
+      - 'docs/growth/**'
+      - '.github/workflows/growth-self-dogfood.yml'
 
 permissions:
   contents: read
