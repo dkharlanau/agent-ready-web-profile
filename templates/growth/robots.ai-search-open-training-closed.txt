@@ -1,0 +1,20 @@
+# ARWP Growth Profile template
+# Goal: allow search and real-time AI answer input while expressing no model-training permission
+# where a crawler supports Cloudflare Content Signals.
+#
+# This is provider-specific policy syntax, not a Google ranking directive or universal web standard.
+# Review your legal/content policy before publishing.
+
+User-agent: *
+Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
+
+# OpenAI Search discovery can be allowed independently from GPTBot training.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+# Keep your existing Sitemap lines and crawler-specific rules below.
+# Sitemap: https://example.com/sitemap.xml
