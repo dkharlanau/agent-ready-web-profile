@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildGrowthPlanFromObservations, loadGrowthRegistry, parseContentSignal } from '../lib/growth-profile.mjs';
+import { inferHostingContext, refineGrowthPlan } from '../lib/growth-plan.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const registry = loadGrowthRegistry();
@@ -89,12 +90,35 @@ const minimal = buildGrowthPlanFromObservations({
   registry
 });
 const minimalIds = new Set(minimal.actions.map(item => item.id));
-assert.ok(minimalIds.has('growth:cloudflare-content-signals'));
+assert.ok(minimalIds.has('growth:cloudflare-content-signals'), 'base observation layer may surface provider-specific candidates before refinement');
 assert.ok(minimalIds.has('growth:entity-identity'));
 const contentAction = minimal.actions.find(item => item.id === 'growth:cloudflare-content-signals');
 assert.match(contentAction.implementation.suggestedPolicy, /search=yes, ai-input=yes, ai-train=no, use=reference/);
 assert.match(contentAction.implementation.note, /not a Google ranking signal/i);
 assert.match(minimal.actions.find(item => item.id === 'growth:preferred-source-acquisition').implementation.url, /preferences\/source\?q=minimal\.example/);
+
+assert.equal(inferHostingContext('https://cognitive-biases.github.io/').provider, 'github-pages');
+assert.equal(inferHostingContext('https://example.pages.dev/').provider, 'cloudflare');
+assert.equal(inferHostingContext('https://example.netlify.app/').provider, 'netlify');
+assert.equal(inferHostingContext('https://example.vercel.app/').provider, 'vercel');
+assert.equal(inferHostingContext('https://example.com/').provider, 'unknown');
+
+const refinedUnknown = refineGrowthPlan(minimal);
+assert.equal(refinedUnknown.actions.some(item => item.id === 'growth:cloudflare-content-signals'), false, 'unknown hosting must not receive an unsupported Cloudflare recommendation');
+assert.equal(refinedUnknown.observations.hosting.provider, 'unknown');
+assert.equal(refinedUnknown.refinements.providerSpecificActionsScoped, true);
+
+const githubBase = structuredClone(minimal);
+githubBase.canonicalUrl = 'https://cognitive-biases.github.io/';
+const refinedGithub = refineGrowthPlan(githubBase);
+assert.equal(refinedGithub.observations.hosting.provider, 'github-pages');
+assert.equal(refinedGithub.actions.some(item => item.id === 'growth:cloudflare-content-signals'), false, 'direct GitHub Pages origins must not receive Cloudflare-only remediation');
+
+const cloudflareBase = structuredClone(minimal);
+cloudflareBase.canonicalUrl = 'https://example.pages.dev/';
+const refinedCloudflare = refineGrowthPlan(cloudflareBase);
+assert.equal(refinedCloudflare.observations.hosting.provider, 'cloudflare');
+assert.equal(refinedCloudflare.actions.some(item => item.id === 'growth:cloudflare-content-signals'), true, 'Cloudflare Pages origins may receive the provider-specific Content-Signal opportunity');
 
 for (const template of [
   'templates/growth/robots.ai-search-open-training-closed.txt',
@@ -104,4 +128,4 @@ for (const template of [
   'templates/growth/content-quality-checklist.md'
 ]) assert.ok(fs.existsSync(path.join(root, template)), `${template} must exist`);
 
-console.log('PASS ARWP Growth Profile turns source-backed audit evidence into prioritized, non-scored improvement actions and keeps provider-specific AI policy, editorial quality, measurement and deprecated SEO features correctly scoped');
+console.log('PASS ARWP Growth Profile turns source-backed audit evidence into prioritized, non-scored improvement actions, scopes provider-specific recommendations to public applicability evidence, and keeps editorial quality, measurement and deprecated SEO features correctly bounded');
