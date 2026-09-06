@@ -36,6 +36,7 @@
     "server.json",
     "ai/ai-search-profile.json",
     "scripts/quickstart.mjs",
+    "scripts/trend-source-watch.mjs",
     "SPEC.md",
     "README.md",
     "LICENSE",
