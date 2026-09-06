@@ -1,0 +1,71 @@
+name: ARWP Portfolio Rollout
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/portfolio-sites.json'
+      - 'registry/trends.json'
+      - 'registry/growth-verticals.json'
+      - 'schema/portfolio-sites.schema.json'
+      - 'lib/portfolio-rollout.mjs'
+      - 'bin/arwp-portfolio.mjs'
+      - 'scripts/portfolio-rollout-test.mjs'
+      - 'docs/PORTFOLIO-ROLLOUT.md'
+      - 'package.json'
+      - '.github/workflows/portfolio-rollout.yml'
+  pull_request:
+    paths:
+      - 'registry/portfolio-sites.json'
+      - 'registry/trends.json'
+      - 'registry/growth-verticals.json'
+      - 'schema/portfolio-sites.schema.json'
+      - 'lib/portfolio-rollout.mjs'
+      - 'bin/arwp-portfolio.mjs'
+      - 'scripts/portfolio-rollout-test.mjs'
+      - 'docs/PORTFOLIO-ROLLOUT.md'
+      - 'package.json'
+      - '.github/workflows/portfolio-rollout.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  portfolio-rollout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate owner portfolio and rollout semantics
+        run: |
+          node scripts/portfolio-rollout-test.mjs
+          node bin/arwp-portfolio.mjs check
+          node --check lib/portfolio-rollout.mjs
+          node --check bin/arwp-portfolio.mjs
+          node --check scripts/portfolio-rollout-test.mjs
+          node -e "JSON.parse(require('fs').readFileSync('schema/portfolio-sites.schema.json','utf8')); JSON.parse(require('fs').readFileSync('registry/portfolio-sites.json','utf8'));"
+      - name: Verify deterministic safe default rollout
+        run: |
+          node bin/arwp-portfolio.mjs rollout --json --output=portfolio-rollout.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('portfolio-rollout.json','utf8'));
+          if (!p.candidates.length) throw new Error('expected rollout candidates');
+          if (p.candidates.some(item => item.stage === 'watch' || item.stage === 'retired')) throw new Error('WATCH/retired leaked into default rollout');
+          if (p.candidates.some(item => item.productionMutationAllowed !== false)) throw new Error('portfolio rollout must never authorize production mutation');
+          const managed = new Set(p.candidates.filter(item => item.rolloutMode === 'managed-issue').map(item => item.siteId));
+          if (!managed.has('dkharlanau-sap-knowledge') || !managed.has('metkagram-language-knowledge')) throw new Error('managed rollout sites missing');
+          NODE
+      - name: Upload rollout evidence
+        uses: actions/upload-artifact@v6
+        with:
+          name: arwp-portfolio-rollout
+          path: portfolio-rollout.json
+          if-no-files-found: error
+          retention-days: 30
