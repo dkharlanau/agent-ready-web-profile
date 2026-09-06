@@ -1,0 +1,36 @@
+{
+  "profileVersion": "0.1",
+  "profile": "2026-09-06",
+  "name": "ARWP Growth Profile",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/growth/",
+  "goal": "Turn current source-backed Search, generative-search, citation and agent-web guidance into a prioritized website improvement backlog.",
+  "registry": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-opportunities.json",
+  "documentation": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-PROFILE.md",
+  "cli": {
+    "entrypoint": "bin/arwp-growth.mjs",
+    "example": "node bin/arwp-growth.mjs https://example.com --json"
+  },
+  "templates": {
+    "robotsPolicy": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/robots.ai-search-open-training-closed.txt",
+    "organizationJsonLd": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/organization.jsonld",
+    "articleJsonLd": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/article.jsonld",
+    "preferredSources": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/preferred-source.html",
+    "contentQualityChecklist": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/content-quality-checklist.md",
+    "githubActions": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/github-action.yml"
+  },
+  "priorityModel": {
+    "P0": "observable blocker to a targeted eligibility goal",
+    "P1": "high-value content-quality, identity, access, freshness or governance action",
+    "P2": "optional acquisition, measurement or multi-format opportunity",
+    "P3": "lower-priority experiment"
+  },
+  "guardrails": {
+    "universalScore": false,
+    "rankingGuarantee": false,
+    "aiRecommendationGuarantee": false,
+    "citationGuarantee": false,
+    "providerSpecificSignalsRemainProviderSpecific": true,
+    "manualEditorialQualityRemainsManual": true
+  },
+  "reviewedAt": "2026-09-06"
+}
