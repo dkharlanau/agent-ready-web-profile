@@ -1,0 +1,93 @@
+name: ARWP Growth Backlog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '27 6 * * 1'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  growth-backlog:
+    runs-on: ubuntu-latest
+    env:
+      # Replace with the canonical public website URL.
+      ARWP_TARGET: https://example.com/
+      ARWP_ISSUE_TITLE: '[ARWP] Website Growth Backlog'
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout website repository
+        uses: actions/checkout@v7
+
+      - name: Checkout ARWP
+        uses: actions/checkout@v7
+        with:
+          repository: dkharlanau/agent-ready-web-profile
+          ref: main
+          path: .arwp
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: .arwp/package-lock.json
+
+      - name: Install ARWP dependencies
+        run: npm ci --prefix .arwp --ignore-scripts --no-audit --no-fund
+
+      - name: Build Growth Profile
+        run: node .arwp/bin/arwp-growth.mjs "$ARWP_TARGET" --json > arwp-growth.json
+
+      - name: Build issue body
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('arwp-growth.json','utf8'));
+          const high = (p.actions || []).filter(a => a.priority === 'P0' || a.priority === 'P1');
+          const optional = (p.actions || []).filter(a => a.priority === 'P2' || a.priority === 'P3');
+          const lines = [
+            '<!-- arwp-growth-managed -->',
+            '# ARWP website growth backlog',
+            '',
+            `Target: ${p.canonicalUrl}`,
+            `Growth Profile: ${p.profile}`,
+            `Last generated: ${new Date().toISOString()}`,
+            '',
+            '> This is a prioritized implementation backlog, not a ranking/readiness score. Passing items never guarantees indexing, ranking, AI citation or recommendation.',
+            '',
+            `## P0/P1 actions (${high.length})`,
+            ''
+          ];
+          if (!high.length) lines.push('No current P0/P1 actions from the public-site Growth Profile.');
+          for (const a of high) {
+            lines.push(`### ${a.priority} · ${a.title}`, '', a.reason || '', '');
+            if (a.implementation?.file) lines.push(`Suggested file/template: \`${a.implementation.file}\``, '');
+            if (a.implementation?.url) lines.push(`Suggested URL: ${a.implementation.url}`, '');
+            if (a.source) lines.push(`Primary guidance: ${a.source}`, '');
+          }
+          lines.push(`## P2/P3 opportunities (${optional.length})`, '');
+          for (const a of optional) lines.push(`- **${a.priority}** ${a.title}${a.source ? ` — ${a.source}` : ''}`);
+          lines.push('', '## Evidence boundary', '', 'Public crawling can observe implementation state but cannot see authenticated Google/Bing owner metrics or prove that a platform will recommend the site. Use owner-side measurement for outcomes.');
+          fs.writeFileSync('arwp-growth-issue.md', lines.join('\n') + '\n');
+          NODE
+
+      - name: Create or update one managed issue
+        run: |
+          NUMBER="$(gh issue list --state open --search 'in:title [ARWP] Website Growth Backlog' --json number,title --jq '.[] | select(.title == env.ARWP_ISSUE_TITLE) | .number' | head -n 1)"
+          if [ -n "$NUMBER" ]; then
+            gh issue edit "$NUMBER" --body-file arwp-growth-issue.md
+          else
+            gh issue create --title "$ARWP_ISSUE_TITLE" --body-file arwp-growth-issue.md
+          fi
+
+      - name: Upload full machine-readable plan
+        uses: actions/upload-artifact@v6
+        with:
+          name: arwp-growth-profile
+          path: arwp-growth.json
+          if-no-files-found: error
+          retention-days: 30
