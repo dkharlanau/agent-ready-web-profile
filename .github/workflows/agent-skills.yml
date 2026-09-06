@@ -6,7 +6,9 @@ on:
     paths:
       - 'skills/**'
       - 'docs/skills/**'
+      - 'templates/adoption/**'
       - 'scripts/agent-skills-test.mjs'
+      - 'scripts/agent-skill-inspector-test.mjs'
       - 'AGENTS.md'
       - 'docs/AGENTS.md'
       - '.github/workflows/agent-skills.yml'
@@ -14,7 +16,9 @@ on:
     paths:
       - 'skills/**'
       - 'docs/skills/**'
+      - 'templates/adoption/**'
       - 'scripts/agent-skills-test.mjs'
+      - 'scripts/agent-skill-inspector-test.mjs'
       - 'AGENTS.md'
       - 'docs/AGENTS.md'
       - '.github/workflows/agent-skills.yml'
@@ -33,7 +37,10 @@ jobs:
       - name: Validate portable Agent Skills
         run: |
           node scripts/agent-skills-test.mjs
+          node scripts/agent-skill-inspector-test.mjs
           node --check scripts/agent-skills-test.mjs
+          node --check scripts/agent-skill-inspector-test.mjs
+          node --check skills/arwp-prepare-site/scripts/inspect-repo.mjs
       - name: Validate public skills catalog
         run: |
           node - <<'NODE'
@@ -47,3 +54,16 @@ jobs:
           NODE
           grep -q 'arwp-prepare-site' docs/skills/index.html
           grep -q 'npx skills add dkharlanau/agent-ready-web-profile' docs/skills/llms.txt
+      - name: Validate AI bootstrap bundle
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const m = JSON.parse(fs.readFileSync('templates/adoption/bootstrap-manifest.json','utf8'));
+          if (m.defaultSkill !== 'arwp-prepare-site') throw new Error('Bootstrap default skill drift');
+          for (const group of ['bootstrapArtifacts','conditionalArtifacts']) {
+            for (const item of m[group] || []) if (!fs.existsSync(item.template)) throw new Error(`Missing bootstrap template: ${item.template}`);
+          }
+          if (!m.neverDo.some(x => /meta keywords/i.test(x))) throw new Error('Bootstrap must prohibit meta keywords');
+          NODE
+          grep -q 'ARWP Site Quality' templates/adoption/github-action-quality.yml
+          grep -q 'arwp-prepare-site' templates/adoption/AGENTS-snippet.md
