@@ -23,17 +23,21 @@ try {
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
     'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs',
+    'bin/arwp-growth.mjs', 'bin/arwp-growth-remediation.mjs', 'bin/arwp-trends.mjs',
     'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs',
     'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs', 'lib/ai-search-profile.mjs',
-    'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
+    'lib/growth-remediation.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'schema/claim.schema.json', 'schema/visibility-snapshot.schema.json', 'schema/agent-eval-receipt.schema.json',
+    'schema/growth-remediation-manifest.schema.json',
     'ai/ai-search-profile.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
     'scanner-service/handler.mjs', 'router/federated.mjs', 'router/resolved-federated.mjs', 'router/server.mjs',
     'monitor/runner.mjs', 'monitor/config.schema.json', 'monitor/example.config.json',
     'registry/sites.json', 'registry/directory.schema.json', 'registry/search-agent-recommendations.json', 'server.json',
     'benchmarks/external-runner.mjs', 'benchmarks/corpus/fixture.schema.json',
+    'scripts/trend-source-watch.mjs',
+    'templates/growth/organization.jsonld', 'templates/growth/article.jsonld', 'templates/growth/content-quality-checklist.md',
     'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md', 'docs/AI-SEARCH-PROFILE.md', 'docs/SEARCH-AGENT-RECOMMENDATIONS.md',
-    'README.md', 'SPEC.md', 'LICENSE'
+    'docs/GROWTH-REMEDIATION.md', 'README.md', 'SPEC.md', 'LICENSE'
   ]) assert.ok(paths.has(required), `packed artifact is missing ${required}`);
 
   assert.equal(paths.has('scripts/scanner-test.mjs'), false, 'test scripts must not ship in the npm artifact');
@@ -52,16 +56,20 @@ try {
   const installedVisibilityCli = path.join(installedRoot, 'bin', 'arwp-visibility.mjs');
   const installedAgentEvalCli = path.join(installedRoot, 'bin', 'arwp-agent-eval.mjs');
   const installedIndexNowCli = path.join(installedRoot, 'bin', 'arwp-indexnow.mjs');
-  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedAgentEvalCli, installedIndexNowCli]) {
+  const installedGrowthRemediationCli = path.join(installedRoot, 'bin', 'arwp-growth-remediation.mjs');
+  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedAgentEvalCli, installedIndexNowCli, installedGrowthRemediationCli]) {
     assert.ok(fs.existsSync(cli), `installed CLI entrypoint is missing: ${path.basename(cli)}`);
   }
-  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-agent-eval', 'arwp-indexnow']) {
+  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-agent-eval', 'arwp-indexnow', 'arwp-growth-remediation']) {
     assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', bin)), `npm bin shim is missing: ${bin}`);
   }
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'claim.schema.json')), 'claim schema must ship in the npm artifact');
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'visibility-snapshot.schema.json')), 'visibility schema must ship in the npm artifact');
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'agent-eval-receipt.schema.json')), 'agent eval schema must ship in the npm artifact');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'growth-remediation-manifest.schema.json')), 'growth remediation schema must ship in the npm artifact');
   assert.ok(fs.existsSync(path.join(installedRoot, 'registry', 'search-agent-recommendations.json')), 'recommendation registry must ship in the npm artifact');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'scripts', 'trend-source-watch.mjs')), 'managed Growth Trend watcher must ship in the npm artifact');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'templates', 'growth', 'organization.jsonld')), 'Growth remediation templates must ship in the npm artifact');
   const installedPackage = JSON.parse(fs.readFileSync(path.join(installedRoot, 'package.json'), 'utf8'));
   assert.equal(installedPackage.mcpName, 'io.github.dkharlanau/agent-ready-web-profile');
   assert.equal(installedPackage.scripts['resolver:mcp'], 'node resolver/server.mjs');
@@ -71,6 +79,7 @@ try {
   assert.equal(installedPackage.scripts.visibility, 'node bin/arwp-visibility.mjs');
   assert.equal(installedPackage.scripts['agent-eval'], 'node bin/arwp-agent-eval.mjs');
   assert.equal(installedPackage.scripts.indexnow, 'node bin/arwp-indexnow.mjs');
+  assert.equal(installedPackage.scripts['growth-remediation'], 'node bin/arwp-growth-remediation.mjs');
 
   const installedServer = JSON.parse(fs.readFileSync(path.join(installedRoot, 'server.json'), 'utf8'));
   assert.equal(installedServer.name, installedPackage.mcpName);
@@ -88,11 +97,33 @@ try {
   for (const [cli, expected] of [
     [installedVisibilityCli, /visibility evidence/i],
     [installedAgentEvalCli, /browser agent evaluation receipts/i],
-    [installedIndexNowCli, /IndexNow helper/i]
+    [installedIndexNowCli, /IndexNow helper/i],
+    [installedGrowthRemediationCli, /proposal-only/i]
   ]) {
     const cliHelp = execFileSync(process.execPath, [cli, '--help'], { cwd: consumerDir, encoding: 'utf8' });
     assert.match(cliHelp, expected);
   }
+
+  const growthPlanPath = path.join(consumerDir, 'growth-plan.json');
+  const remediationPath = path.join(consumerDir, 'remediation.json');
+  fs.writeFileSync(growthPlanPath, JSON.stringify({
+    profile: '2026-09-06',
+    canonicalUrl: 'https://example.com/',
+    actions: [{
+      id: 'growth:entity-identity', priority: 'P1', lane: 'entity-identity', title: 'Publish identity',
+      status: 'recommended', reason: 'Package smoke fixture.', source: 'https://developers.google.com/search/docs/appearance/structured-data/organization',
+      implementation: { template: 'templates/growth/organization.jsonld', placement: 'homepage' }
+    }]
+  }, null, 2));
+  execFileSync(process.execPath, [installedGrowthRemediationCli, growthPlanPath, `--output=${remediationPath}`], { cwd: consumerDir, encoding: 'utf8' });
+  const remediation = JSON.parse(fs.readFileSync(remediationPath, 'utf8'));
+  assert.equal(remediation.version, '0.1');
+  assert.equal(remediation.summary.total, 1);
+  assert.equal(remediation.items[0].disposition, 'structured-data-proposal');
+  assert.match(remediation.items[0].implementation.templateSha256, /^sha256:[a-f0-9]{64}$/);
+  assert.match(remediation.items[0].implementation.snippet, /REPLACE_WITH_ORGANIZATION_NAME/);
+  assert.equal(remediation.guardrails.writesTargetRepository, false);
+  assert.equal(remediation.guardrails.requiresExplicitAuthorizationBeforeMutation, true);
 
   const directoryOutput = execFileSync(process.execPath, [installedCli, 'directory', '--json'], { cwd: installedRoot, encoding: 'utf8' });
   const directory = JSON.parse(directoryOutput);
