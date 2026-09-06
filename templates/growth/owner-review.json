@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/growth-owner-review.schema.json",
+  "version": "0.1",
+  "site": "https://example.com/",
+  "evidenceClass": "owner-controlled",
+  "guardrails": {
+    "notIndependentEvidence": true,
+    "noRankingClaim": true,
+    "manualJudgmentPreserved": true
+  },
+  "reviews": [
+    {
+      "actionId": "growth:non-commodity-review",
+      "status": "completed",
+      "decision": "keep",
+      "reviewedAt": "2026-09-06",
+      "reviewer": "Site editor",
+      "summary": "Priority pages were manually reviewed for original evidence, usefulness and thin-query duplication risk.",
+      "scope": [
+        "https://example.com/",
+        "https://example.com/research/"
+      ],
+      "evidence": [
+        "https://example.com/about/editorial/"
+      ]
+    }
+  ]
+}

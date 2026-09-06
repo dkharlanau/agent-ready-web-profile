@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildGrowthPlanFromObservations, loadGrowthRegistry, parseContentSignal } from '../lib/growth-profile.mjs';
-import { inferHostingContext, refineGrowthPlan } from '../lib/growth-plan.mjs';
+import { inferHostingContext, parseOwnerReviewReceipt, refineGrowthPlan } from '../lib/growth-plan.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const registry = loadGrowthRegistry();
@@ -120,12 +120,96 @@ const refinedCloudflare = refineGrowthPlan(cloudflareBase);
 assert.equal(refinedCloudflare.observations.hosting.provider, 'cloudflare');
 assert.equal(refinedCloudflare.actions.some(item => item.id === 'growth:cloudflare-content-signals'), true, 'Cloudflare Pages origins may receive the provider-specific Content-Signal opportunity');
 
+const ownerReceiptPayload = {
+  version: '0.1',
+  site: 'https://minimal.example/',
+  evidenceClass: 'owner-controlled',
+  guardrails: {
+    notIndependentEvidence: true,
+    noRankingClaim: true,
+    manualJudgmentPreserved: true
+  },
+  reviews: [
+    {
+      actionId: 'growth:non-commodity-review',
+      status: 'completed',
+      decision: 'keep',
+      reviewedAt: '2026-09-06',
+      reviewer: 'Example editor',
+      summary: 'Priority pages were manually reviewed for original evidence, usefulness and thin-query duplication risk.',
+      scope: ['https://minimal.example/', 'https://minimal.example/research/'],
+      evidence: ['https://minimal.example/review/non-commodity.html']
+    },
+    {
+      actionId: 'growth:site-reputation-policy',
+      status: 'completed',
+      decision: 'keep',
+      reviewedAt: '2026-09-06',
+      summary: 'Third-party publishing boundaries were reviewed and documented.',
+      scope: ['https://minimal.example/'],
+      evidence: ['https://minimal.example/trust/']
+    },
+    {
+      actionId: 'growth:google-platform-properties',
+      status: 'completed',
+      decision: 'keep',
+      reviewedAt: '2026-09-06',
+      summary: 'This owner receipt intentionally tries to close an external-owner-data action and must not be allowed to do so.',
+      scope: ['https://minimal.example/'],
+      evidence: ['https://minimal.example/owner-note.html']
+    }
+  ]
+};
+const ownerReceipt = {
+  ok: true,
+  url: 'https://minimal.example/ai/growth-review.json',
+  text: JSON.stringify(ownerReceiptPayload)
+};
+const parsedOwnerReceipt = parseOwnerReviewReceipt(ownerReceipt, { canonicalUrl: minimal.canonicalUrl, now: new Date('2026-09-07T00:00:00Z') });
+assert.equal(parsedOwnerReceipt.valid, true);
+assert.equal(parsedOwnerReceipt.evidenceClass, 'owner-controlled');
+assert.equal(parsedOwnerReceipt.reviewCount, 3);
+
+const refinedWithOwnerReview = refineGrowthPlan(minimal, { ownerReview: ownerReceipt, now: new Date('2026-09-07T00:00:00Z') });
+assert.equal(refinedWithOwnerReview.actions.some(item => item.id === 'growth:non-commodity-review'), false, 'completed owner review should close the repeated manual content-review task');
+assert.equal(refinedWithOwnerReview.actions.some(item => item.id === 'growth:site-reputation-policy'), false, 'completed owner review should close the repeated manual governance task');
+assert.equal(refinedWithOwnerReview.actions.some(item => item.id === 'growth:google-platform-properties'), true, 'owner-controlled receipts must not close external owner-data actions');
+assert.deepEqual(refinedWithOwnerReview.observations.ownerReview.matchedManualActionIds.sort(), ['growth:non-commodity-review', 'growth:site-reputation-policy']);
+assert.equal(refinedWithOwnerReview.ownerReviewEvidence.length, 2);
+assert.ok(refinedWithOwnerReview.ownerReviewEvidence.every(item => item.evidenceClass === 'owner-controlled' && item.independentEvidence === false && item.rankingImpactClaimed === false));
+assert.equal(refinedWithOwnerReview.refinements.ownerReviewReceiptsApplied, 2);
+assert.equal(refinedWithOwnerReview.refinements.ownerReviewEvidenceIsIndependent, false);
+
+const revisePayload = structuredClone(ownerReceiptPayload);
+revisePayload.reviews = [{ ...revisePayload.reviews[0], decision: 'revise' }];
+const refinedRevise = refineGrowthPlan(minimal, {
+  ownerReview: { ok: true, url: ownerReceipt.url, text: JSON.stringify(revisePayload) },
+  now: new Date('2026-09-07T00:00:00Z')
+});
+assert.equal(refinedRevise.actions.some(item => item.id === 'growth:non-commodity-review'), true, 'a revise decision must keep the manual work active');
+
+const invalidOwnerPayload = structuredClone(ownerReceiptPayload);
+invalidOwnerPayload.evidenceClass = 'independent';
+const invalidOwner = parseOwnerReviewReceipt({ ok: true, url: ownerReceipt.url, text: JSON.stringify(invalidOwnerPayload) }, { canonicalUrl: minimal.canonicalUrl, now: new Date('2026-09-07T00:00:00Z') });
+assert.equal(invalidOwner.valid, false);
+assert.ok(invalidOwner.issues.includes('evidence-class-must-be-owner-controlled'));
+const refinedInvalidOwner = refineGrowthPlan(minimal, {
+  ownerReview: { ok: true, url: ownerReceipt.url, text: JSON.stringify(invalidOwnerPayload) },
+  now: new Date('2026-09-07T00:00:00Z')
+});
+assert.equal(refinedInvalidOwner.actions.some(item => item.id === 'growth:non-commodity-review'), true, 'invalid/self-upgraded evidence must not close manual actions');
+
 for (const template of [
   'templates/growth/robots.ai-search-open-training-closed.txt',
   'templates/growth/organization.jsonld',
   'templates/growth/article.jsonld',
   'templates/growth/preferred-source.html',
-  'templates/growth/content-quality-checklist.md'
+  'templates/growth/content-quality-checklist.md',
+  'templates/growth/owner-review.json'
 ]) assert.ok(fs.existsSync(path.join(root, template)), `${template} must exist`);
+for (const schema of ['schema/growth-owner-review.schema.json']) {
+  assert.ok(fs.existsSync(path.join(root, schema)), `${schema} must exist`);
+  JSON.parse(fs.readFileSync(path.join(root, schema), 'utf8'));
+}
 
-console.log('PASS ARWP Growth Profile turns source-backed audit evidence into prioritized, non-scored improvement actions, scopes provider-specific recommendations to public applicability evidence, and keeps editorial quality, measurement and deprecated SEO features correctly bounded');
+console.log('PASS ARWP Growth Profile turns source-backed audit evidence into prioritized, non-scored improvement actions, scopes provider-specific recommendations, and accepts bounded owner-controlled review receipts without upgrading them to independent or ranking evidence');

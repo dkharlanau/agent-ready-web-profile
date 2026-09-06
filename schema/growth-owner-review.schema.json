@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/growth-owner-review.schema.json",
+  "title": "ARWP Growth owner review receipt v0.1",
+  "description": "Owner-controlled evidence that a manual ARWP Growth review was performed. This receipt may close repeated manual-review backlog items but is never independent evidence, a quality certification, or a ranking/citation claim.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "site", "evidenceClass", "guardrails", "reviews"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "evidenceClass": { "const": "owner-controlled" },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["notIndependentEvidence", "noRankingClaim", "manualJudgmentPreserved"],
+      "properties": {
+        "notIndependentEvidence": { "const": true },
+        "noRankingClaim": { "const": true },
+        "manualJudgmentPreserved": { "const": true }
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/review" }
+    }
+  },
+  "$defs": {
+    "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actionId", "status", "decision", "reviewedAt", "summary", "scope", "evidence"],
+      "properties": {
+        "actionId": { "type": "string", "pattern": "^growth:[A-Za-z0-9._:-]+$" },
+        "status": { "const": "completed" },
+        "decision": { "enum": ["keep", "revise", "revert", "retire"] },
+        "reviewedAt": { "type": "string", "format": "date" },
+        "reviewer": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 1200 },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/httpsUrl" }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/httpsUrl" }
+        }
+      }
+    }
+  }
+}
