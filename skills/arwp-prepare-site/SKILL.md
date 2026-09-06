@@ -18,6 +18,16 @@ Deliver a working repository change, not a checklist. Preserve the site's produc
 
 ARWP must never be presented as a guaranteed Google ranking or AI recommendation mechanism. The goal is to remove technical blockers, implement current platform guidance, expose useful machine-readable surfaces and make improvement measurable.
 
+## Fast start
+
+Run the deterministic repository inspector before broad manual exploration when executable skill scripts are available:
+
+```bash
+node scripts/inspect-repo.mjs <target-repository>
+```
+
+The helper reads only repository signals plus `package.json`, uses no network, and does not read secrets. Use its framework/public-root/source-of-truth hints to decide where changes belong; do not treat the report as deployed-site evidence.
+
 ## Load references only when needed
 
 - Read `references/stack-detection.md` when the framework/deployment/public-root model is unclear.
@@ -29,6 +39,7 @@ ARWP must never be presented as a guaranteed Google ranking or AI recommendation
 ## Workflow
 
 1. Inspect the repository before editing.
+   - Run the local inspector if available, then verify its signals against the actual project.
    - Identify framework, build system, deployment target, public root, routes, metadata conventions, sitemap/robots ownership and content model.
    - Read existing `AGENTS.md`, SEO config, JSON-LD, manifests, feeds, `llms.txt`, skills, API/OpenAPI/MCP/A2A/WebMCP surfaces and analytics hooks.
    - Reuse the existing design system and content architecture.
