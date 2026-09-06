@@ -12,12 +12,16 @@
     "add-contracts-evidence",
     "run-site-and-arwp-verification"
   ],
+  "bootstrapArtifacts": [
+    {"id":"agent-instructions","template":"templates/adoption/AGENTS-snippet.md","condition":"target repository uses or benefits from coding-agent instructions"},
+    {"id":"site-quality-workflow","template":"templates/adoption/github-action-quality.yml","condition":"GitHub Actions is available and a deployed canonical URL exists"}
+  ],
   "conditionalArtifacts": [
     {"id":"organization-jsonld","template":"templates/growth/organization.jsonld","condition":"organization or brand identity is materially useful"},
     {"id":"article-jsonld","template":"templates/growth/article.jsonld","condition":"article/docs template has visible author/date/provenance fields"},
     {"id":"preferred-sources","template":"templates/growth/preferred-source.html","condition":"publisher/editorial site wants an explicit Google Preferred Sources CTA"},
     {"id":"ai-use-policy","template":"templates/growth/robots.ai-search-open-training-closed.txt","condition":"publisher has an explicit AI-use policy and controls the authoritative robots/CDN layer"},
-    {"id":"growth-workflow","template":"templates/growth/github-action.yml","condition":"GitHub Actions is available and a deployed public target exists"},
+    {"id":"growth-workflow","template":"templates/growth/github-action.yml","condition":"team wants a lightweight recurring Growth Profile artifact"},
     {"id":"growth-issue-workflow","template":"templates/growth/github-action-issue.yml","condition":"team wants recurring actionable GitHub issues and accepts write permissions"}
   ],
   "alwaysReview": [
