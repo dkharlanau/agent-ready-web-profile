@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkharlanau.github.io/agent-ready-web-profile/schema/growth-owner-data.schema.json",
+  "title": "ARWP Growth owner-data receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "site", "evidenceClass", "generatedAt", "guardrails", "records"],
+  "properties": {
+    "$schema": {"type": "string", "format": "uri"},
+    "version": {"const": "0.1"},
+    "site": {"type": "string", "pattern": "^https://"},
+    "evidenceClass": {"const": "owner-data"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["notIndependentEvidence", "noRankingClaim", "noCrossSurfaceInference", "noProviderInference", "sensitiveDataOmitted"],
+      "properties": {
+        "notIndependentEvidence": {"const": true},
+        "noRankingClaim": {"const": true},
+        "noCrossSurfaceInference": {"const": true},
+        "noProviderInference": {"const": true},
+        "sensitiveDataOmitted": {"const": true}
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["actionId", "evidenceType", "provider", "kind", "status", "observedAt", "summary", "scope", "evidence"],
+        "properties": {
+          "actionId": {"type": "string", "pattern": "^(?:growth|trend-owner|observation):[A-Za-z0-9._:-]+$"},
+          "evidenceType": {"enum": ["measurement", "owner-state"]},
+          "provider": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "kind": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "status": {"enum": ["observed", "verified", "not-applicable"]},
+          "observedAt": {"type": "string", "format": "date-time"},
+          "dataThrough": {"type": "string", "format": "date"},
+          "summary": {"type": "string", "minLength": 1},
+          "scope": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^https://"}},
+          "evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^https://"}},
+          "value": {},
+          "sourceDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+        }
+      }
+    }
+  }
+}
