@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/growth-experiment.schema.json",
+  "title": "ARWP Growth Experiment v0.1",
+  "description": "Versioned record linking one growth hypothesis to implementation-state evidence and optional owner-side visibility observations without inferring ranking or causality.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "id", "site", "hypothesisId", "actionIds", "createdAt", "status", "evidence", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,119}$" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "hypothesisId": { "type": "string", "minLength": 2, "maxLength": 160 },
+    "actionIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 2, "maxLength": 200 }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "status": { "type": "string", "enum": ["planned", "implemented", "measured", "reviewed", "stopped"] },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commitSha": { "type": "string", "pattern": "^[a-f0-9]{7,64}$" },
+        "changeUri": { "type": "string", "format": "uri" },
+        "implementedAt": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["beforeGrowth"],
+      "properties": {
+        "beforeGrowth": { "$ref": "#/$defs/growthEvidence" },
+        "afterGrowth": { "$ref": "#/$defs/growthEvidence" },
+        "beforeVisibility": { "$ref": "#/$defs/visibilityEvidence" },
+        "afterVisibility": { "$ref": "#/$defs/visibilityEvidence" }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluatedAt", "actionResults", "implementationDiff", "outcomeState", "reviewRequired", "interpretation"],
+      "properties": {
+        "evaluatedAt": { "type": "string", "format": "date-time" },
+        "actionResults": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "state"],
+            "properties": {
+              "id": { "type": "string" },
+              "state": { "type": "string", "enum": ["resolved", "changed", "still-open", "not-observed-before"] }
+            }
+          }
+        },
+        "implementationDiff": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["actionsAdded", "actionsResolved", "actionsChanged", "highPriorityDebtDelta"],
+          "properties": {
+            "actionsAdded": { "type": "integer" },
+            "actionsResolved": { "type": "integer" },
+            "actionsChanged": { "type": "integer" },
+            "highPriorityDebtDelta": { "type": "integer" }
+          }
+        },
+        "visibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["comparableMetrics", "positive", "negative", "unchanged"],
+          "properties": {
+            "comparableMetrics": { "type": "integer", "minimum": 0 },
+            "positive": { "type": "integer", "minimum": 0 },
+            "negative": { "type": "integer", "minimum": 0 },
+            "unchanged": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "outcomeState": {
+          "type": "string",
+          "enum": ["owner-evidence-unavailable", "positive-observation", "negative-observation", "mixed-observation", "no-change-observation"]
+        },
+        "reviewRequired": { "const": true },
+        "interpretation": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "reviewedAt"],
+      "properties": {
+        "decision": { "type": "string", "enum": ["keep", "revise", "revert", "retire", "continue-measuring"] },
+        "reviewedAt": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string", "maxLength": 3000 }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["noRankingGuarantee", "noCausalityInference", "preserveNegativeResults", "humanReviewBeforePromotion"],
+      "properties": {
+        "noRankingGuarantee": { "const": true },
+        "noCausalityInference": { "const": true },
+        "preserveNegativeResults": { "const": true },
+        "humanReviewBeforePromotion": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "growthEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshotId", "digest", "observedAt", "highPriorityDebt"],
+      "properties": {
+        "snapshotId": { "type": "string", "pattern": "^urn:sha256:[a-f0-9]{64}$" },
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "highPriorityDebt": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "visibilityEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["digest", "capturedAt", "period"],
+      "properties": {
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "period": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {
+            "start": { "type": "string", "format": "date" },
+            "end": { "type": "string", "format": "date" }
+          }
+        }
+      }
+    }
+  }
+}
