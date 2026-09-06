@@ -1,0 +1,37 @@
+{
+  "version": "0.1",
+  "standard": "Agent Skills",
+  "specification": "https://agentskills.io/specification",
+  "repository": "https://github.com/dkharlanau/agent-ready-web-profile",
+  "skills": [
+    {
+      "name": "arwp-prepare-site",
+      "path": "skills/arwp-prepare-site/SKILL.md",
+      "role": "orchestrator",
+      "description": "End-to-end repository preparation for ARWP, search quality, AI-search/citation readiness and agent interoperability."
+    },
+    {
+      "name": "arwp-ai-search-content",
+      "path": "skills/arwp-ai-search-content/SKILL.md",
+      "role": "content-quality",
+      "description": "Improve articles, docs, comparisons and answer pages for human usefulness, retrieval and citation without AI filler or ranking promises."
+    },
+    {
+      "name": "arwp-agent-discovery",
+      "path": "skills/arwp-agent-discovery/SKILL.md",
+      "role": "interoperability",
+      "description": "Implement truthful agent discovery surfaces such as llms.txt, Agent Skills, ARD, MCP/A2A/OpenAPI and optional ARWP profiles."
+    },
+    {
+      "name": "arwp-evidence-ci",
+      "path": "skills/arwp-evidence-ci/SKILL.md",
+      "role": "verification",
+      "description": "Add assertion contracts, scheduled audits, evidence receipts and regression-safe CI."
+    }
+  ],
+  "composition": {
+    "default": "arwp-prepare-site",
+    "specialists": ["arwp-ai-search-content", "arwp-agent-discovery", "arwp-evidence-ci"],
+    "principle": "Load specialist skills only when their workflow is relevant; keep the orchestrator focused on outcomes and verification."
+  }
+}
