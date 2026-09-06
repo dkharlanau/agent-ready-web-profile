@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="ARWP Growth Policy lets a website explicitly declare Search/AI goals, rights preferences and site class before ARWP compiles an implementation backlog."><title>ARWP Growth Policy</title><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/growth/policy.html"><link rel="describedby" type="application/json" href="./policy.example.json"><link rel="stylesheet" href="../citation.css"></head><body><main class="cite-main shell"><header class="cite-hero"><p class="eyebrow">ARWP Growth · Owner intent</p><h1>Tell ARWP what the site is actually trying to achieve.</h1><p class="cite-lead">A crawler cannot decide whether you want ChatGPT Search, model training, Preferred Sources or commerce/local guidance. Growth Policy makes those decisions explicit before ARWP turns evidence into implementation work.</p></header><section class="cite-grid"><div class="cite-card"><h2>Policy controls</h2><ul class="cite-list"><li>Google Search target</li><li>Google generative Search target</li><li>ChatGPT Search target</li><li>Bing AI target</li><li>browser-agent target</li><li>model-training allow/deny/unspecified</li><li>real-time AI input allow/deny/unspecified</li><li>content reuse: immediate/reference/full/unspecified</li><li>publisher/author identity expectations</li><li>measurement surfaces</li><li>Preferred Sources opt-in</li></ul></div><div class="cite-card"><h2>Site class</h2><p>Select one primary class so vertical requirements do not pollute the universal baseline.</p><ul class="cite-list"><li>documentation</li><li>editorial</li><li>software-product</li><li>commerce</li><li>local-business</li><li>research-dataset</li><li>general</li></ul></div></section><section class="cite-card"><h2>Example</h2><pre><code>{
+  "policyVersion": "0.1",
+  "target": "https://example.com/",
+  "siteClass": "software-product",
+  "goals": {
+    "googleSearch": true,
+    "googleGenerativeSearch": true,
+    "chatgptSearch": true
+  },
+  "aiUsagePolicy": {
+    "modelTraining": "deny",
+    "realTimeAiInput": "allow",
+    "contentReuse": "reference",
+    "emitCloudflareContentSignals": true
+  }
+}</code></pre><p><a href="./policy.example.json">Download the complete example JSON</a>.</p></section><section class="cite-card"><h2>Compile it</h2><pre><code>node bin/arwp-growth.mjs https://example.com --json &gt; arwp-growth.json
+node bin/arwp-growth-policy.mjs validate growth-policy.json
+node bin/arwp-growth-policy.mjs compile arwp-growth.json growth-policy.json --json</code></pre><p>The implementation manifest filters out actions the owner did not select and emits a desired state for crawler policy, structured identity, measurement and optional Preferred Sources.</p></section><p class="scope-note">Growth Policy is owner intent, not platform approval. Its output must be merged with existing legal, security, crawler and business requirements.</p><p class="reuse-note"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-POLICY.md">Technical documentation</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/schema/growth-policy.schema.json">JSON Schema</a></p></main></body></html>
