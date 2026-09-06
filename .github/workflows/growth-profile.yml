@@ -6,43 +6,55 @@ on:
     paths:
       - 'registry/growth-opportunities.json'
       - 'registry/growth-verticals.json'
+      - 'registry/trends.json'
       - 'schema/growth-policy.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-policy.mjs'
       - 'lib/growth-history.mjs'
+      - 'lib/trend-radar.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
+      - 'bin/arwp-trends.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
+      - 'scripts/trend-radar-test.mjs'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
+      - 'docs/TREND-RADAR.md'
       - 'docs/growth/**'
+      - 'docs/trends/**'
       - '.github/workflows/growth-profile.yml'
   pull_request:
     paths:
       - 'registry/growth-opportunities.json'
       - 'registry/growth-verticals.json'
+      - 'registry/trends.json'
       - 'schema/growth-policy.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-policy.mjs'
       - 'lib/growth-history.mjs'
+      - 'lib/trend-radar.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
+      - 'bin/arwp-trends.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
+      - 'scripts/trend-radar-test.mjs'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
+      - 'docs/TREND-RADAR.md'
       - 'docs/growth/**'
+      - 'docs/trends/**'
       - '.github/workflows/growth-profile.yml'
 
 permissions:
@@ -66,6 +78,16 @@ jobs:
           node --check lib/growth-plan.mjs
           node --check bin/arwp-growth.mjs
           node --check scripts/growth-profile-test.mjs
+      - name: Validate Trend Radar registry, lifecycle and public snapshot
+        run: |
+          node scripts/trend-radar-test.mjs
+          node bin/arwp-trends.mjs check
+          node --check lib/trend-radar.mjs
+          node --check bin/arwp-trends.mjs
+          node --check scripts/trend-radar-test.mjs
+          cmp registry/trends.json docs/trends/trends.json
+          grep -q 'Find the Search and AI changes worth acting on' docs/trends/index.html
+          grep -q 'WATCH: emerging' docs/trends/llms.txt
       - name: Validate Growth Policy contract, verticals and compiler
         run: |
           node scripts/growth-policy-test.mjs
