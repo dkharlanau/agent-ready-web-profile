@@ -3,14 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ARWP Resolver discovers how a website can actually be used by agents across ARWP, APIs, agents.json, A2A, Agent Skills, MCP and other evidence-backed interfaces.">
+  <meta name="description" content="ARWP Growth Loop turns current Search, recommendation and AI-platform evidence into testable website improvements while preserving the Resolver and agentic-web interoperability foundation.">
   <meta name="theme-color" content="#10120f">
-  <meta property="og:title" content="ARWP Resolver — resolve how a website can be used by agents">
-  <meta property="og:description" content="One evidence-backed service map across the machine and agent interfaces a website actually exposes.">
+  <meta property="og:title" content="ARWP Growth Loop — evidence-backed website growth">
+  <meta property="og:description" content="Research current Search and recommendation changes, select explicit hypotheses, improve a real site, verify the implementation and measure owner-side outcomes.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dkharlanau.github.io/agent-ready-web-profile/">
-  <title>ARWP Resolver — resolve how a website can be used by agents</title>
+  <title>ARWP Growth Loop — evidence-backed website growth</title>
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/">
+  <link rel="describedby" type="application/json" href="./growth/hypotheses.json">
+  <link rel="describedby" type="application/json" href="./skills/index.json">
   <link rel="describedby" type="application/json" href="./ai/site-profile.json">
   <link rel="describedby" type="text/plain" href="./llms.txt" hreflang="en">
   <link rel="describedby" type="text/plain" href="./de/llms.txt" hreflang="de">
@@ -58,9 +60,9 @@
         "name": "Agent-Ready Web Profile",
         "alternateName": "ARWP",
         "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
-        "description": "Evidence-backed agentic web interoperability resolver, scanner, Growth Profile and conformance tooling for discovering, improving and verifying website interfaces.",
+        "description": "Evidence-backed website growth, Search and recommendation research, agentic-web interoperability resolution, scanning and verification tooling.",
         "applicationCategory": "DeveloperApplication",
-        "applicationSubCategory": "Agentic Web Interoperability Resolver",
+        "applicationSubCategory": "Search & Recommendation Growth / Agentic Web Interoperability",
         "softwareVersion": "0.2.0",
         "isAccessibleForFree": true,
         "license": "https://www.apache.org/licenses/LICENSE-2.0",
@@ -94,8 +96,10 @@
   <header class="topbar">
     <a class="brand" href="#top" aria-label="ARWP home"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
     <nav aria-label="Primary navigation">
+      <a href="./growth/">Growth</a>
+      <a href="./trends/">Trends</a>
+      <a href="./skills/">Skills</a>
       <a href="#resolver">Resolver</a>
-      <a href="#examples">Examples</a>
       <a href="#adopt">Try it</a>
       <a href="#directory">Directory</a>
       <a href="./observatory/">Observatory</a>
@@ -108,35 +112,35 @@
   <main id="main">
     <section id="top" class="hero shell">
       <div class="hero-copy">
-        <p class="eyebrow">ARWP Resolver · experimental interoperability tooling</p>
-        <h1>Resolve how a website can actually be used by agents.</h1>
-        <p class="hero-lead">A site may expose HTML, <code>llms.txt</code>, datasets, APIs, <code>agents.json</code>, Agent Skills, MCP, A2A and trust metadata at the same time. ARWP reads those surfaces, preserves where every claim came from, reports conflicts, and selects the best interface for the task.</p>
+        <p class="eyebrow">ARWP Growth Loop · evidence-backed Search, recommendations & agent-readiness</p>
+        <h1>Turn platform changes into verified website improvements.</h1>
+        <p class="hero-lead">ARWP researches current Search, Discover, AI-answer/citation and agent-web changes, classifies the evidence, turns applicable mechanisms into explicit hypotheses, audits a real site, implements the highest-confidence work, and separates technical verification from owner-side outcome measurement. The Resolver still answers the narrower question: <strong>Resolve how a website can actually be used by agents.</strong></p>
         <div class="hero-actions">
-          <a class="button primary" href="#adopt">Resolve a website</a>
-          <a class="button secondary" href="./RESOLVER.md">Resolver model</a>
+          <a class="button primary" href="./growth/">Run the Growth Loop</a>
+          <a class="button secondary" href="./growth/hypotheses.json">Inspect hypotheses</a>
         </div>
         <div class="hero-proof" aria-label="Key properties">
+          <span>Primary-source research</span>
+          <span>Explicit testable hypotheses</span>
           <span>No format war required</span>
-          <span>Upstream standards stay upstream</span>
-          <span>Evidence and conflicts stay visible</span>
         </div>
       </div>
-      <div class="service-map" aria-label="ARWP Resolver flow">
-        <div class="service-map__label">ONE SITE · MANY SURFACES</div>
+      <div class="service-map" aria-label="ARWP Growth Loop">
+        <div class="service-map__label">SEARCH · RECOMMENDATIONS · AI · AGENTS</div>
         <div class="service-map__grid">
-          <span>ARWP</span><span>agents.*</span><span>API</span><span>SKILLS</span><span>MCP</span><span>A2A</span>
+          <span>SEARCH</span><span>DISCOVER</span><span>GEN AI</span><span>BING AI</span><span>CHATGPT</span><span>AGENTS</span>
         </div>
         <div class="service-map__arrow">↓</div>
-        <strong>ARWP RESOLVER</strong>
+        <strong>ARWP GROWTH LOOP</strong>
         <div class="service-map__arrow">↓</div>
-        <code>evidence-backed service map</code>
-        <p>Then plan for <strong>read · search · structured · tools · agent</strong>.</p>
+        <code>research → hypothesis → implement → verify → measure</code>
+        <p>Resolver, profile, protocol, evidence and runtime tooling stay underneath.</p>
       </div>
     </section>
 
     <section id="resolver" class="shell problem-section">
       <div class="section-heading wide">
-        <p class="eyebrow">The practical problem</p>
+        <p class="eyebrow">The interoperability foundation</p>
         <h2>The web does not need another manifest that pretends every other discovery mechanism will disappear.</h2>
       </div>
       <div class="before-after">
@@ -292,7 +296,20 @@
 
     <section class="roadmap-section">
       <div class="shell">
-        <div class="section-heading split"><div><p class="eyebrow">Next evidence gate</p><h2>Benchmark utility before expanding the format.</h2></div><p>ARWP should earn its next profile revision through observed interoperability failures, not new AI vocabulary.</p></div>
+        <div class="section-heading split"><div><p class="eyebrow">Growth operating model</p><h2>Research → hypothesis → verify → measure.</h2></div><p>ARWP now treats website growth as an evidence loop. A technically correct change is not automatically a ranking or recommendation success.</p></div>
+        <div class="roadmap-grid">
+          <article><span class="priority">G0</span><h3>Research</h3><ul><li>Review current primary sources</li><li>Track changes in Trend Radar</li><li>Separate requirements from experiments</li><li>Retire stale guidance</li></ul></article>
+          <article><span class="priority">G1</span><h3>Hypothesize</h3><ul><li>Choose applicable mechanisms</li><li>Record confidence and target surface</li><li>Define automated/manual checks</li><li>Define observable success signals</li></ul></article>
+          <article><span class="priority">G2</span><h3>Implement</h3><ul><li>Fix eligibility blockers first</li><li>Improve original evidence and structure</li><li>Use recommendation features only when relevant</li><li>Keep agent metadata truthful</li></ul></article>
+          <article><span class="priority">G3</span><h3>Measure</h3><ul><li>Keep owner data external</li><li>Compare before/after evidence</li><li>Preserve neutral and negative results</li><li>Keep, revise, revert or retire</li></ul></article>
+        </div>
+        <p class="directory-machine"><a href="./growth/">Growth Loop →</a> · <a href="./trends/">Trend Radar →</a> · <a href="./growth/hypotheses.json">Hypotheses JSON →</a> · <a href="./skills/">Agent Skills →</a></p>
+      </div>
+    </section>
+
+    <section class="roadmap-section">
+      <div class="shell">
+        <div class="section-heading split"><div><p class="eyebrow">Technical evidence gate</p><h2>Benchmark utility before expanding the format.</h2></div><p>The interoperability foundation should earn its next profile revision through observed failures, not new AI vocabulary.</p></div>
         <div class="roadmap-grid">
           <article><span class="priority">R0</span><h3>Improve decisions</h3><ul><li class="done">Frozen 20-site corpus</li><li class="done">Regret diagnostics</li><li>Explicit abstention outcomes</li><li>Publish negative results</li></ul></article>
           <article><span class="priority">R1</span><h3>Verify runtime</h3><ul><li class="done">Multi-standard resolver</li><li class="done">MCP runtime reconciliation</li><li class="done">A2A signature verification</li><li>Independent compatibility evidence</li></ul></article>
@@ -304,9 +321,9 @@
     </section>
 
     <section class="shell boundaries">
-      <div class="section-heading split"><div><p class="eyebrow">Boundaries</p><h2>Interoperability, not another readiness score.</h2></div><p>Resolver output should remain inspectable.</p></div>
+      <div class="section-heading split"><div><p class="eyebrow">Boundaries</p><h2>Growth discipline and interoperability, not another readiness score.</h2></div><p>Implementation evidence and outcome evidence stay separate.</p></div>
       <div class="boundary-grid">
-        <p><strong>Not an SEO ranking mechanism.</strong> Ordinary web fundamentals still matter.</p>
+        <p><strong>Not a ranking guarantee.</strong> Search, Discover, citation and recommendation outcomes must be measured on real publisher surfaces.</p>
         <p><strong>Not a permission layer.</strong> Metadata never grants access or authorization.</p>
         <p><strong>Not another MCP/A2A/OAuth/API standard.</strong> Native protocol metadata remains authoritative for its own semantics.</p>
         <p><strong>Not a speculative catalog.</strong> New ARWP fields need concrete integration failures.</p>
@@ -315,8 +332,8 @@
   </main>
 
   <footer class="footer shell">
-    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Resolver</div>
-    <div class="footer-links"><a href="./RESOLVER.md">Resolver</a><a href="./observatory/">Observatory</a><a href="./answers/">Answers</a><a href="./concepts/">Concepts</a><a href="./BENCHMARK.md">Benchmark</a><a href="./trust/">Trust</a><a href="./media/">Open media</a><a href="./history.html">History</a><a href="./LOCALIZATION.md">Agent locales</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md">Profile spec</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></div>
+    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Growth + Resolver</div>
+    <div class="footer-links"><a href="./growth/">Growth</a><a href="./trends/">Trends</a><a href="./skills/">Skills</a><a href="./RESOLVER.md">Resolver</a><a href="./observatory/">Observatory</a><a href="./answers/">Answers</a><a href="./concepts/">Concepts</a><a href="./BENCHMARK.md">Benchmark</a><a href="./trust/">Trust</a><a href="./media/">Open media</a><a href="./history.html">History</a><a href="./LOCALIZATION.md">Agent locales</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md">Profile spec</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></div>
     <p>Apache-2.0 · Active development · Experimental profile v0.1 · Resolver toolchain 0.2.x</p>
   </footer>
 
