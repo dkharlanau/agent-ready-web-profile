@@ -1,0 +1,60 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-sites.schema.json",
+  "version": "0.1",
+  "updatedAt": "2026-09-06",
+  "description": "Owner-controlled rollout portfolio for applying reviewed ARWP Growth trends to relevant websites. Membership is operational metadata, not independent adoption evidence or a quality ranking.",
+  "guardrails": {
+    "ownerControlledEvidence": true,
+    "watchIsNotDefaultRollout": true,
+    "siteAuditRequiredBeforeMutation": true,
+    "noProductionMutation": true,
+    "noRankingInference": true
+  },
+  "sites": [
+    {
+      "id": "dkharlanau-sap-knowledge",
+      "name": "Dzmitryi Kharlanau — SAP Knowledge",
+      "canonicalUrl": "https://dkharlanau.github.io/",
+      "repository": "dkharlanau/dkharlanau.github.io",
+      "verticals": ["documentation", "editorial", "software-product"],
+      "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-usability", "agent-discovery"],
+      "rollout": { "enabled": true, "mode": "managed-issue" }
+    },
+    {
+      "id": "metkagram-language-knowledge",
+      "name": "Metkagram",
+      "canonicalUrl": "https://metkagram.github.io/",
+      "repository": "metkagram/metkagram.github.io",
+      "verticals": ["software-product", "documentation", "research-dataset"],
+      "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-usability", "agent-discovery"],
+      "rollout": { "enabled": true, "mode": "managed-issue" }
+    },
+    {
+      "id": "brali-practical-knowledge",
+      "name": "Brali Practical Knowledge Library",
+      "canonicalUrl": "https://brali-lifeos.github.io/",
+      "repository": "Brali-LifeOS/brali-lifeos.github.io",
+      "verticals": ["editorial", "documentation"],
+      "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-discovery"],
+      "rollout": { "enabled": true, "mode": "proposal-only" }
+    },
+    {
+      "id": "cognitive-biases-knowledge",
+      "name": "Cognitive Biases Knowledge Library",
+      "canonicalUrl": "https://cognitive-biases.github.io/",
+      "repository": "Cognitive-Biases/cognitive-biases.github.io",
+      "verticals": ["editorial", "research-dataset"],
+      "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-discovery"],
+      "rollout": { "enabled": true, "mode": "proposal-only" }
+    },
+    {
+      "id": "cbt-cards-public-reflection",
+      "name": "CBT Cards Public Reflection Resource",
+      "canonicalUrl": "https://cbt-cards.github.io/",
+      "repository": "CBT-cards/cbt-cards.github.io",
+      "verticals": ["editorial"],
+      "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-discovery"],
+      "rollout": { "enabled": true, "mode": "proposal-only" }
+    }
+  ]
+}
