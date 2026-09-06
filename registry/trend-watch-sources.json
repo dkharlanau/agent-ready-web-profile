@@ -8,6 +8,15 @@
       "kind": "feed",
       "url": "https://developers.google.com/search/updates/search_docs_updates.rss",
       "reviewedThrough": "2026-09-06",
+      "trendIds": [
+        "google-generative-ai-performance-global",
+        "google-generative-ai-control-global",
+        "google-site-reputation-policy-eea-2026-08",
+        "google-preferred-sources-custom-button",
+        "google-social-video-platform-properties",
+        "google-generative-ai-optimization-guide",
+        "google-faq-rich-result-retired"
+      ],
       "keywords": ["ai", "generative", "search console", "preferred source", "structured data", "crawler", "robots", "index", "citation", "social", "video", "ranking", "spam", "reputation", "canonical", "hreflang", "author", "event", "dataset"]
     },
     {
@@ -16,6 +25,15 @@
       "kind": "discover-feed",
       "url": "https://developers.google.com/search/blog",
       "reviewedThrough": "2026-09-06",
+      "trendIds": [
+        "google-generative-ai-performance-global",
+        "google-generative-ai-control-global",
+        "google-site-reputation-policy-eea-2026-08",
+        "google-preferred-sources-custom-button",
+        "google-social-video-platform-properties",
+        "google-generative-ai-optimization-guide",
+        "google-faq-rich-result-retired"
+      ],
       "keywords": ["ai", "generative", "search console", "crawler", "index", "ranking", "structured data", "agent", "citation", "content", "spam", "canonical", "author", "event", "dataset"]
     },
     {
@@ -24,6 +42,7 @@
       "kind": "discover-feed",
       "url": "https://blogs.bing.com/webmaster",
       "reviewedThrough": "2026-09-06",
+      "trendIds": ["bing-ai-performance-citations"],
       "keywords": ["ai", "copilot", "citation", "grounding", "indexnow", "search", "crawler", "ranking", "webmaster", "structured data", "snippet"]
     },
     {
@@ -32,6 +51,7 @@
       "kind": "page-update",
       "url": "https://schema.org/version/latest",
       "reviewedThrough": "2026-09-06",
+      "trendIds": [],
       "keywords": ["DefinedTerm", "DefinedTermSet", "Person", "Organization", "Event", "Dataset", "SoftwareApplication", "Product", "CreativeWork", "sameAs", "schema"]
     },
     {
@@ -40,6 +60,7 @@
       "kind": "page-update",
       "url": "https://www.indexnow.org/documentation",
       "reviewedThrough": "2026-09-06",
+      "trendIds": [],
       "keywords": ["indexnow", "url changed", "updated", "deleted", "key", "endpoint", "search engine"]
     },
     {
@@ -48,6 +69,7 @@
       "kind": "page-update",
       "url": "https://developer.chrome.com/docs/ai/webmcp",
       "reviewedThrough": "2026-09-06",
+      "trendIds": ["webmcp-origin-trial-evals"],
       "keywords": ["webmcp", "agent", "origin trial", "tool", "security", "eval"]
     },
     {
@@ -56,6 +78,7 @@
       "kind": "page-update",
       "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
       "reviewedThrough": "2026-09-06",
+      "trendIds": ["openai-publisher-agent-guidance-refresh"],
       "keywords": ["oai-searchbot", "gptbot", "chatgpt search", "agent", "atlas", "aria", "crawler"]
     },
     {
@@ -64,6 +87,7 @@
       "kind": "page-update",
       "url": "https://developers.cloudflare.com/changelog/",
       "reviewedThrough": "2026-09-06",
+      "trendIds": ["cloudflare-content-use-reference-enforcement"],
       "keywords": ["ai", "crawler", "robots", "content signal", "content-signal", "browser run", "bot"]
     }
   ],
