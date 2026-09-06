@@ -5,7 +5,7 @@
 
 **Research what can improve a website's Search and recommendation visibility, turn it into explicit hypotheses, implement the highest-confidence changes, verify them, and measure what actually happened.**
 
-ARWP keeps its existing agentic-web Resolver, publisher profile, scanner, protocol work, benchmarks and evidence tooling. The primary operational product is now a repeatable website Growth Loop for Search, generative Search, recommendation/citation surfaces and compatible agents.
+ARWP keeps its existing agentic-web Resolver, publisher profile, scanner, protocol work, benchmarks and evidence tooling. The product focus is now broader: use that technical foundation inside a repeatable website Growth Loop for Search, generative Search, recommendations/citation surfaces and compatible agents.
 
 ```text
 PRIMARY-SOURCE RESEARCH
@@ -26,7 +26,7 @@ KEEP / REVISE / REVERT / RETIRE
         └───────────────↺
 ```
 
-ARWP does **not** promise ranking, Discover placement, AI citation, recommendation traffic or conversion. The goal is to make website improvement evidence-backed, testable and adaptive instead of accumulating SEO/GEO cargo cult.
+ARWP does **not** promise ranking, Discover placement, AI citation, recommendation traffic or conversion. The goal is to make website improvement more evidence-backed, testable and adaptive instead of accumulating SEO/GEO cargo cult.
 
 ## Product layers
 
@@ -36,10 +36,9 @@ ARWP does **not** promise ranking, Discover placement, AI citation, recommendati
 - **Recommendations Registry** records dated upstream requirements, guidance, features and measurement opportunities.
 - **Growth Hypotheses** state why a change may matter, where it applies, how to check it and what success signal to observe.
 - **Growth Profile** audits a real site and produces a prioritized P0–P3 backlog.
-- **Growth History** preserves implementation-state snapshots and diffs.
-- **Growth Experiments** link hypotheses and actions to before/after evidence and explicit human review.
+- **Growth History + Experiments** preserve implementation-state changes and link hypotheses/actions to before/after evidence.
 - **Owner Evidence Imports** normalize Google generative Search, Bing AI Performance and AI/referral exports into aggregate visibility snapshots.
-- **Trend Learning** creates review-required `WATCH → ADOPT` and evidence-gated `ADOPT → MEASURED` proposals without silently mutating maturity.
+- **Trend Learning** creates review-required `WATCH → ADOPT` and evidence-gated `ADOPT → MEASURED` proposals without silently changing maturity.
 - **Agent Skills** let coding agents research, edit the target repository, verify checks and preserve evidence.
 
 ### 2. Resolver — interoperability foundation
@@ -58,27 +57,27 @@ cd agent-ready-web-profile
 npm ci
 
 # What changed recently?
-arwp-trends list --since=90 --exclude-retired
+node bin/arwp-trends.mjs list --since=90 --exclude-retired
 
 # What hypotheses apply?
-arwp-hypotheses list --vertical=editorial
+node bin/arwp-hypotheses.mjs list --vertical=editorial
 
 # What should this real site do now?
-arwp-growth https://example.com --vertical=editorial --json
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json
 
-# Import owner-side Search/AI outcome evidence.
-arwp-visibility import google.csv --provider=google \
+# Normalize an owner-provided Search/AI export.
+node bin/arwp-visibility.mjs import google.csv --provider=google \
   --site=https://example.com/ --start=2026-08-01 --end=2026-08-31 \
   --output=google.visibility.json
 
-# Turn source changes into reviewable Trend lifecycle proposals.
-arwp-trends propose trend-watch.json --output=trend-promotions.json
+# Turn primary-source changes into explicit review proposals.
+node bin/arwp-trends.mjs propose trend-watch.json --output=trend-promotions.json
 
-# Check which ADOPT trends have real reviewed longitudinal evidence.
-arwp-trends measure experiments/ --output=trend-measurement.json
+# Check whether reviewed experiments justify a MEASURED review proposal.
+node bin/arwp-trends.mjs measure experiments/ --output=trend-measurement.json
 ```
 
-The Growth JSON carries both the actionable backlog and the applicable non-experimental `hypothesisProgram`. See [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) for the operating model and [`docs/GROWTH-LEARNING.md`](docs/GROWTH-LEARNING.md) for owner evidence and Trend lifecycle review.
+The Growth JSON now carries both the actionable backlog and the applicable non-experimental `hypothesisProgram`.
 
 ## Growth hypotheses
 
@@ -96,19 +95,128 @@ A hypothesis is deliberately more explicit than a checklist item. It contains:
 Validate or inspect it:
 
 ```bash
-arwp-hypotheses check
-arwp-hypotheses list --vertical=editorial
-arwp-hypotheses show <hypothesis-id>
+node bin/arwp-hypotheses.mjs check
+node bin/arwp-hypotheses.mjs show discover-visual-preview
 ```
 
-## Growth learning boundary
+Default Growth planning excludes `project-experiment`. Agent-readable metadata remains available for real interoperability use cases without being turned into a Search ranking claim.
 
-A source-watch candidate is not a recommendation. A reviewed `WATCH → ADOPT` proposal is not an automatic registry mutation. An `ADOPT → MEASURED` proposal requires reviewed Growth Experiment evidence with before/after owner metrics, and `MEASURED` means observations exist — not that the effect was positive or caused by ARWP. Negative, mixed and unchanged outcomes remain part of the evidence set.
+## Agent Skill: execute the loop
 
-## Resolver and interoperability
+```bash
+npx skills add dkharlanau/agent-ready-web-profile
+```
 
-The project still includes the bounded scanner, multi-standard Resolver, source-authority/conflict model, MCP gateway/server, A2A/ARD/Agent Skills integrations, evidence receipts, benchmarks, drift monitoring and independent interoperability work. Those capabilities remain the technical foundation behind the Growth Loop and continue to evolve without being presented as ranking signals.
+Default outcome-driven skill:
+
+```text
+arwp-growth-loop
+```
+
+It runs:
+
+`research → classify → baseline → hypothesis → implement → verify → measure → keep/revise/revert`
+
+Use `arwp-prepare-site` for initial technical adoption. Specialists remain available for content quality, agent discovery and evidence/CI.
+
+## What the Growth layer covers
+
+- crawl, HTTP, robots, indexability and snippet eligibility;
+- canonical URLs, sitemap and meaningful freshness;
+- original/non-commodity content and first-hand evidence;
+- deep-linkable sections and internal links;
+- Organization/Person/author identity and provenance;
+- image/video evidence and Discover-friendly previews where relevant;
+- bounded acquisition features such as Preferred Sources where applicable;
+- OAI-SearchBot and provider-specific crawler/access policy without conflating Search and model training;
+- Google/Bing/ChatGPT owner-side measurement inputs;
+- truthful agent-readable routes and runtime interfaces;
+- governance against fake freshness and speculative protocol adoption.
+
+Manual editorial quality stays manual. Authenticated platform metrics stay external-owner-data. Experimental mechanisms stay experimental.
+
+## Durable checklist and learning ledger
+
+- [`templates/growth/growth-loop-checklist.md`](templates/growth/growth-loop-checklist.md) — baseline/completion review.
+- [`templates/growth/hypothesis-ledger.md`](templates/growth/hypothesis-ledger.md) — lightweight before/after evidence and keep/revise/revert decisions.
+- `arwp-growth-history` — immutable implementation-state snapshots and diffs.
+- `arwp-growth-experiment` — versioned hypothesis → action → implementation → outcome records.
+- `arwp-visibility import` — aggregate owner-provided Google/Bing/referral evidence.
+- `arwp-trends propose|review|measure` — explicit Trend maturity evidence and review flow.
+
+A technically correct change can have neutral or negative external impact. ARWP treats that as valid evidence, not as something to hide. `MEASURED` means longitudinal evidence exists; it is not a positive-effect or causality label.
+
+See [`docs/GROWTH-LEARNING.md`](docs/GROWTH-LEARNING.md).
+
+## Resolver commands remain
+
+```bash
+node bin/arwp.mjs resolve https://example.com
+node bin/arwp.mjs explain https://example.com
+node bin/arwp.mjs plan https://example.com --intent=search
+node bin/arwp.mjs resolve-many targets.txt --concurrency=4 --json
+node bin/arwp.mjs snapshot https://example.com --output=example.snapshot.json
+node bin/arwp.mjs drift before.snapshot.json after.snapshot.json --json
+npm run resolver:mcp
+```
+
+Supported planning intents remain `read`, `search`, `structured`, `tools` and `agent`.
+
+The Resolver continues to normalize ordinary web discovery plus compatible ARWP, HTTP `Link`, Markdown negotiation, `agents.*`, RFC 9727 API Catalog, RFC 9728 Protected Resource Metadata, A2A, Agent Skills, ARD evidence and compatible MCP metadata. Source authority and conflicts remain visible.
+
+See [`docs/RESOLVER.md`](docs/RESOLVER.md).
+
+## Profile and existing runtime tooling remain
+
+```bash
+node bin/arwp.mjs scan https://example.com
+node bin/arwp.mjs init https://example.com
+node bin/arwp.mjs validate ai/site-profile.json
+node bin/arwp.mjs verify https://example.com/ai/site-profile.json
+node bin/arwp.mjs health https://example.com
+npm run monitor:resolver
+```
+
+The bounded hosted scanner/resolver service, MCP gateway, federation/router, snapshots/drift, runtime reconciliation, A2A signature verification, browser-agent receipts, IndexNow and visibility evidence tooling remain part of the repository.
+
+## Evidence before claims
+
+- passing a check does not prove ranking or indexing;
+- owner-controlled reference sites are implementation evidence, not independent adoption;
+- benchmark improvements are not evidence of Search/AI visibility gains;
+- static metadata never grants authorization or security trust;
+- new drafts and vendor mechanisms keep their actual maturity level;
+- source-watch candidates are not recommendations;
+- reviewed Trend proposals do not silently mutate `registry/trends.json`;
+- negative benchmark/experiment results must remain visible.
+
+The frozen Resolver decision-quality corpus and benchmark tooling remain in [`benchmarks/`](benchmarks/). See [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
+
+## North Stars
+
+Primary product North Star:
+
+> **How reliably can ARWP turn current Search/recommendation/AI platform changes into site-specific, verified improvements with measurable follow-up evidence?**
+
+Technical foundation North Star:
+
+> **How many external sites can the Resolver correctly understand and route without site-specific integration code?**
+
+The Growth Loop and Resolver support each other: research tells a publisher what to improve; the Resolver/evidence stack prevents the agent-facing side from becoming speculative metadata.
+
+## Key docs
+
+- [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) — operating model.
+- [`docs/GROWTH-LEARNING.md`](docs/GROWTH-LEARNING.md) — owner evidence and Trend lifecycle review.
+- [`docs/GROWTH-PROFILE.md`](docs/GROWTH-PROFILE.md) — planner and priorities.
+- [`docs/TREND-RADAR.md`](docs/TREND-RADAR.md) — change lifecycle.
+- [`docs/TREND-HISTORY.md`](docs/TREND-HISTORY.md) — immutable Trend snapshots/diffs.
+- [`docs/SEARCH-AGENT-RECOMMENDATIONS.md`](docs/SEARCH-AGENT-RECOMMENDATIONS.md) — dated upstream rules.
+- [`docs/RESOLVER.md`](docs/RESOLVER.md) — interoperability model.
+- [`SPEC.md`](SPEC.md) — optional publisher profile contract.
+
+Public Growth page: https://dkharlanau.github.io/agent-ready-web-profile/growth/
 
 ## License
 
-Apache-2.0.
+Apache License 2.0. See [`LICENSE`](LICENSE).
