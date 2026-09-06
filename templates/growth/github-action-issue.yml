@@ -53,7 +53,15 @@ jobs:
           if [ -n "$ARWP_ISSUE_NUMBER" ]; then
             BODY="$(gh issue view "$ARWP_ISSUE_NUMBER" --json body --jq .body 2>/dev/null || true)"
           else
-            BODY="$(gh issue list --state open --search 'ARWP website growth backlog in:title' --json body --limit 1 --jq '.[0].body // ""' 2>/dev/null || true)"
+            gh issue list --state open --search "$ARWP_ISSUE_TITLE in:title" --json number,title,body --limit 20 > managed-issues.json
+            BODY="$(
+              ARWP_ISSUE_TITLE="$ARWP_ISSUE_TITLE" node - <<'NODE'
+          const fs = require('fs');
+          const issues = JSON.parse(fs.readFileSync('managed-issues.json', 'utf8'));
+          const match = issues.find(issue => issue.title === process.env.ARWP_ISSUE_TITLE);
+          if (match?.body) process.stdout.write(match.body);
+          NODE
+            )"
           fi
           BODY="$BODY" node - <<'NODE'
           const fs = require('fs');
@@ -172,7 +180,15 @@ jobs:
           if [ -n "$ARWP_ISSUE_NUMBER" ]; then
             gh issue edit "$ARWP_ISSUE_NUMBER" --body-file arwp-growth-issue.md
           else
-            ISSUE_NUMBER="$(gh issue list --state open --search "$ARWP_ISSUE_TITLE in:title" --json number,title --limit 20 --jq '.[] | select(.title == env.ARWP_ISSUE_TITLE) | .number' | head -n1)"
+            gh issue list --state open --search "$ARWP_ISSUE_TITLE in:title" --json number,title --limit 20 > managed-issues.json
+            ISSUE_NUMBER="$(
+              ARWP_ISSUE_TITLE="$ARWP_ISSUE_TITLE" node - <<'NODE'
+          const fs = require('fs');
+          const issues = JSON.parse(fs.readFileSync('managed-issues.json', 'utf8'));
+          const match = issues.find(issue => issue.title === process.env.ARWP_ISSUE_TITLE);
+          if (match?.number != null) process.stdout.write(String(match.number));
+          NODE
+            )"
             if [ -n "$ISSUE_NUMBER" ]; then
               gh issue edit "$ISSUE_NUMBER" --body-file arwp-growth-issue.md
             else
