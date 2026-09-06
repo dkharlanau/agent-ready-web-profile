@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ARWP Trend Radar tracks material Search, AI-search, citation and agent-web changes from primary sources and separates WATCH, ADOPT, MEASURED and retired mechanisms.">
+  <title>ARWP Trend Radar</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/trends/">
+  <link rel="stylesheet" href="../citation.css">
+  <style>
+    .trend-controls{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}.trend-controls button{border:1px solid currentColor;background:transparent;border-radius:999px;padding:.45rem .8rem;cursor:pointer}.trend-controls button[aria-pressed="true"]{font-weight:700}.trend-meta{display:flex;gap:.55rem;flex-wrap:wrap;font-size:.88rem;opacity:.8}.trend-card h3{margin-bottom:.45rem}.trend-badge{font-weight:700;letter-spacing:.04em}.trend-grid{display:grid;gap:1rem}.trend-source{overflow-wrap:anywhere}.trend-empty{padding:1rem 0}
+  </style>
+</head>
+<body>
+<main class="cite-main shell">
+  <header class="cite-hero">
+    <p class="eyebrow">ARWP Trend Intelligence</p>
+    <h1>Find the Search and AI changes worth acting on before they become stale checklist items.</h1>
+    <p class="cite-lead">Trend Radar watches primary-source changes across Search, AI-search, citation measurement and agent-web surfaces. It separates emerging signals from confirmed actions and never treats “new” as evidence of ranking impact.</p>
+  </header>
+
+  <section class="cite-grid">
+    <div class="cite-card"><h2>WATCH</h2><p>Emerging or provider-specific. Track it, test it, but do not push it into every site's default backlog.</p></div>
+    <div class="cite-card"><h2>ADOPT</h2><p>Primary-source-backed and currently actionable for applicable site types. These can enter Growth plans.</p></div>
+    <div class="cite-card"><h2>MEASURED</h2><p>Reserved for real longitudinal ARWP before/after evidence. Correlation remains separate from causation.</p></div>
+  </section>
+
+  <section class="cite-card">
+    <h2>Current radar</h2>
+    <p>Snapshot <strong>2026-09-06</strong>. “Early” is an ARWP attention window for prioritizing review; it is not a first-mover ranking claim.</p>
+    <div class="trend-controls" aria-label="Filter trends">
+      <button type="button" data-stage="all" aria-pressed="true">All</button>
+      <button type="button" data-stage="adopt" aria-pressed="false">Adopt</button>
+      <button type="button" data-stage="watch" aria-pressed="false">Watch</button>
+      <button type="button" data-stage="measured" aria-pressed="false">Measured</button>
+      <button type="button" data-stage="retired" aria-pressed="false">Retired</button>
+    </div>
+    <div id="trend-summary" class="scope-note">Loading machine-readable radar…</div>
+    <div id="trend-list" class="trend-grid" aria-live="polite"></div>
+  </section>
+
+  <section class="cite-card">
+    <h2>Use it in Growth planning</h2>
+    <pre><code>node bin/arwp-trends.mjs list --since=30 --exclude-retired
+node bin/arwp-trends.mjs list --provider=google --stage=adopt
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json</code></pre>
+    <p>The Growth planner attaches only applicable <strong>ADOPT/MEASURED</strong> trends. WATCH remains visible here until evidence justifies promotion.</p>
+  </section>
+
+  <p class="reuse-note"><a href="./trends.json">Trend Radar JSON</a> · <a href="./llms.txt">Agent-readable summary</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/TREND-RADAR.md">Method and lifecycle</a> · <a href="../growth/">Growth Profile</a></p>
+</main>
+<script>
+const state={data:null,stage:'all'};
+const list=document.getElementById('trend-list');
+const summary=document.getElementById('trend-summary');
+const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+function ageDays(date){return Math.max(0,Math.floor((Date.now()-Date.parse(date))/86400000))}
+function attention(t){if(t.stage==='retired')return'retired';const age=ageDays(t.detectedAt),w=Number(t.attentionWindowDays||0);if(!w)return'established';if(age<=w)return'early';if(age<=w*2)return'active';return'established'}
+function render(){if(!state.data)return;const trends=state.data.trends.filter(t=>state.stage==='all'||t.stage===state.stage).sort((a,b)=>Date.parse(b.detectedAt)-Date.parse(a.detectedAt));summary.textContent=`${trends.length} trend${trends.length===1?'':'s'} shown · source review ${state.data.reviewedAt}`;list.innerHTML=trends.map(t=>`<article class="cite-card trend-card"><div class="trend-meta"><span class="trend-badge">${esc(t.stage.toUpperCase())}</span><span>${esc(attention(t).toUpperCase())}</span><span>${esc(t.provider)}</span><span>${esc(t.detectedAt)}</span></div><h3>${esc(t.title)}</h3><p>${esc(t.change)}</p><p><strong>Why it matters:</strong> ${esc(t.whyItMatters)}</p><p class="trend-source"><a href="${esc(t.source)}">Primary source</a></p>${t.notes?`<p class="scope-note">${esc(t.notes)}</p>`:''}</article>`).join('')||'<p class="trend-empty">No trends in this stage.</p>'}
+document.querySelectorAll('[data-stage]').forEach(button=>button.addEventListener('click',()=>{state.stage=button.dataset.stage;document.querySelectorAll('[data-stage]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));render()}));
+fetch('./trends.json').then(response=>{if(!response.ok)throw new Error(`HTTP ${response.status}`);return response.json()}).then(data=>{state.data=data;render()}).catch(error=>{summary.textContent='Trend Radar data could not be loaded.';list.innerHTML=`<p class="trend-empty">${esc(error.message)}</p>`});
+</script>
+</body>
+</html>
