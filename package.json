@@ -19,7 +19,8 @@
     "arwp-growth-history": "bin/arwp-growth-history.mjs",
     "arwp-hypotheses": "bin/arwp-hypotheses.mjs",
     "arwp-growth-experiment": "bin/arwp-growth-experiment.mjs",
-    "arwp-trends": "bin/arwp-trends.mjs"
+    "arwp-trends": "bin/arwp-trends.mjs",
+    "arwp-trend-history": "bin/arwp-trend-history.mjs"
   },
   "files": [
     "bin/",
@@ -57,7 +58,8 @@
     "docs/GROWTH-POLICY.md",
     "docs/GROWTH-LOOP.md",
     "docs/LOOP-STATUS.md",
-    "docs/GROWTH-EXPERIMENTS.md"
+    "docs/GROWTH-EXPERIMENTS.md",
+    "docs/TREND-HISTORY.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
@@ -76,7 +78,8 @@
     "growth-experiment": "node bin/arwp-growth-experiment.mjs",
     "test:growth": "node scripts/growth-profile-test.mjs && node scripts/growth-policy-test.mjs && node scripts/growth-history-test.mjs && node scripts/growth-hypotheses-test.mjs && node scripts/growth-experiment-test.mjs && node bin/arwp-hypotheses.mjs check && node --check lib/growth-profile.mjs && node --check lib/growth-plan.mjs && node --check lib/growth-policy.mjs && node --check lib/growth-history.mjs && node --check lib/growth-hypotheses.mjs && node --check bin/arwp-growth.mjs && node --check bin/arwp-growth-policy.mjs && node --check bin/arwp-growth-history.mjs && node --check bin/arwp-hypotheses.mjs && node --check lib/growth-experiment.mjs && node --check bin/arwp-growth-experiment.mjs && node --check scripts/growth-experiment-test.mjs",
     "trends": "node bin/arwp-trends.mjs",
-    "test:trends": "node scripts/trend-radar-test.mjs && node bin/arwp-trends.mjs check && node --check lib/trend-radar.mjs && node --check lib/growth-plan.mjs && node --check bin/arwp-trends.mjs && node --check bin/arwp-growth.mjs",
+    "trend-history": "node bin/arwp-trend-history.mjs",
+    "test:trends": "node scripts/trend-radar-test.mjs && node scripts/trend-history-test.mjs && node bin/arwp-trends.mjs check && node --check lib/trend-radar.mjs && node --check lib/growth-plan.mjs && node --check bin/arwp-trends.mjs && node --check bin/arwp-growth.mjs && node --check lib/trend-history.mjs && node --check bin/arwp-trend-history.mjs && node --check scripts/trend-history-test.mjs",
     "test:ard": "node scripts/ard-v091-test.mjs && node scripts/ard-registry-test.mjs && node scripts/ard-site-test.mjs && node scripts/ard-cli-test.mjs && node --check lib/ard-v091.mjs && node --check lib/ard-registry.mjs && node --check lib/ard-site.mjs && node --check bin/arwp-ard.mjs",
     "test:receipt": "node scripts/evidence-receipt-test.mjs && node scripts/evidence-receipt-cli-test.mjs && node --check lib/evidence-receipt.mjs && node --check bin/arwp-receipt.mjs",
     "test:assert": "node scripts/assertion-contract-test.mjs && node scripts/assertion-cli-test.mjs && node --check lib/assertion-contract.mjs && node --check bin/arwp-assert.mjs",
@@ -165,7 +168,8 @@
     "generative-search",
     "growth-loop",
     "growth-hypotheses",
-    "growth-experiments"
+    "growth-experiments",
+    "trend-history"
   ],
   "publishConfig": {
     "access": "public"
