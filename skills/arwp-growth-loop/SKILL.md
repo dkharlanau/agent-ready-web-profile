@@ -78,3 +78,15 @@ Use `templates/growth/growth-loop-checklist.md`, `templates/growth/site-adoption
 ## Core rule
 
 ARWP never guarantees ranking, Discover placement, AI citation, recommendation traffic or conversion. The goal is faster adaptation, stronger implementation discipline and better evidence about what works for the actual site.
+
+## Search appearance review
+
+After building relevant HTML, run the explicit local check and read `docs/SEARCH-APPEARANCE.md`:
+
+```bash
+node bin/arwp-search-appearance.mjs <built-page.html> --url=https://example.com/
+```
+
+Use the actual public URL represented by that file. A project or locale subdirectory does not have separate Google site-name or Search-favicon scope. Never overwrite hostname-wide branding during a project rollout. Inspect existing WebSite nodes, preserve conflicting identity evidence, and check genuine alternate names before adding markup. Review malformed JSON-LD even on non-root pages.
+
+The report is static evidence, not a rendered-DOM, image-byte, robots or Search-appearance validation. Keep absent/unsupported declarations distinct from failed checks and actual outcomes. This command is not yet automatically invoked by the live `arwp-growth` audit. Carry its review actions into the site's adoption record explicitly, and retain owner-side appearance observation as a separate follow-up.

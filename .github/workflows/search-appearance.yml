@@ -1,0 +1,55 @@
+name: Search appearance checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/search-appearance.mjs'
+      - 'bin/arwp-search-appearance.mjs'
+      - 'scripts/search-appearance-test.mjs'
+      - 'docs/SEARCH-APPEARANCE.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'package.json'
+      - '.github/workflows/search-appearance.yml'
+  pull_request:
+    paths:
+      - 'lib/search-appearance.mjs'
+      - 'bin/arwp-search-appearance.mjs'
+      - 'scripts/search-appearance-test.mjs'
+      - 'docs/SEARCH-APPEARANCE.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'package.json'
+      - '.github/workflows/search-appearance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: search-appearance-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  offline-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Syntax and deterministic offline fixtures
+        run: |
+          node --check lib/search-appearance.mjs
+          node --check bin/arwp-search-appearance.mjs
+          node --check scripts/search-appearance-test.mjs
+          node scripts/search-appearance-test.mjs
+      - name: Verify CLI is shipped and runs without installed dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm pack --ignore-scripts --json > "$RUNNER_TEMP/appearance-pack.json"
+          TARBALL=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))[0].filename)' "$RUNNER_TEMP/appearance-pack.json")
+          mkdir -p "$RUNNER_TEMP/appearance-package"
+          tar -xzf "$TARBALL" -C "$RUNNER_TEMP/appearance-package"
+          node "$RUNNER_TEMP/appearance-package/package/bin/arwp-search-appearance.mjs" --help
