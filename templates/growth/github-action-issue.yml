@@ -18,6 +18,8 @@ env:
   # Commit reviewed Growth Experiment JSON records here if you want the managed issue
   # to surface implementation / measurement / review follow-up. ARWP never writes this directory.
   ARWP_EXPERIMENT_DIR: .arwp-evidence/growth/experiments
+  # Primary-source Trend watching is bounded. Failure stays visible as unavailable evidence.
+  ARWP_TREND_TIMEOUT_MS: '12000'
 
 jobs:
   growth:
@@ -88,22 +90,89 @@ jobs:
 
       - name: Inspect persistent Growth experiment ledger
         run: |
+          mkdir -p "$ARWP_EXPERIMENT_DIR"
           CANONICAL_URL="$(node -e "const fs=require('fs'); process.stdout.write(JSON.parse(fs.readFileSync('arwp-growth.json','utf8')).canonicalUrl)")"
           node .arwp/bin/arwp-growth-experiment.mjs status "$ARWP_EXPERIMENT_DIR" --site="$CANONICAL_URL" --json > arwp-experiment-status.json || true
           if [ ! -s arwp-experiment-status.json ]; then
             printf '%s\n' '{"version":"0.1","summary":{"total":0,"attentionRequired":0,"invalid":1},"attention":[],"invalid":[{"error":"experiment ledger status could not be generated"}]}' > arwp-experiment-status.json
           fi
 
-      - name: Build issue body
+      - name: Build Trend review queues
+        run: |
+          node .arwp/scripts/trend-source-watch.mjs --output=arwp-trend-watch.json --timeout="$ARWP_TREND_TIMEOUT_MS" || true
+          if [ -s arwp-trend-watch.json ]; then
+            node .arwp/bin/arwp-trends.mjs propose arwp-trend-watch.json --output=arwp-trend-promotions.json || true
+          fi
+          if [ ! -s arwp-trend-promotions.json ]; then
+            printf '%s\n' '{"version":"0.1","proposals":[],"unavailable":true}' > arwp-trend-promotions.json
+          fi
+
+          node .arwp/bin/arwp-trends.mjs measure "$ARWP_EXPERIMENT_DIR" --output=arwp-trend-measurement.json || true
+          if [ ! -s arwp-trend-measurement.json ]; then
+            printf '%s\n' '{"version":"0.1","trends":[],"proposals":[],"unavailable":true}' > arwp-trend-measurement.json
+          fi
+
+      - name: Build issue body and material fingerprint
         run: |
           node - <<'NODE'
+          const crypto = require('crypto');
           const fs = require('fs');
           const p = JSON.parse(fs.readFileSync('arwp-growth.json','utf8'));
           const snapshot = JSON.parse(fs.readFileSync('current.growth.snapshot.json','utf8'));
           const diff = JSON.parse(fs.readFileSync('growth-diff.json','utf8'));
           const experiments = JSON.parse(fs.readFileSync('arwp-experiment-status.json','utf8'));
+          const promotions = JSON.parse(fs.readFileSync('arwp-trend-promotions.json','utf8'));
+          const measurement = JSON.parse(fs.readFileSync('arwp-trend-measurement.json','utf8'));
           const high = (p.actions || []).filter(a => a.priority === 'P0' || a.priority === 'P1');
           const optional = (p.actions || []).filter(a => a.priority === 'P2' || a.priority === 'P3');
+          const pendingPromotions = (promotions.proposals || []).filter(item => item.status === 'review-required');
+          const pendingMeasurement = (measurement.proposals || []).filter(item => item.status === 'review-required');
+
+          const stable = value => {
+            if (Array.isArray(value)) return value.map(stable);
+            if (!value || typeof value !== 'object') return value;
+            return Object.fromEntries(Object.keys(value).sort().map(key => [key, stable(value[key])]));
+          };
+          const material = stable({
+            canonicalUrl: p.canonicalUrl,
+            profile: p.profile,
+            actions: (p.actions || []).map(a => ({
+              id: a.id,
+              priority: a.priority,
+              title: a.title,
+              reason: a.reason || null,
+              source: a.source || null,
+              implementation: a.implementation || null
+            })).sort((a, b) => String(a.id).localeCompare(String(b.id))),
+            experimentAttention: (experiments.attention || []).map(item => ({
+              id: item.id,
+              attention: item.attention,
+              hypothesisId: item.hypothesisId,
+              actionIds: [...(item.actionIds || [])].sort()
+            })).sort((a, b) => String(a.id).localeCompare(String(b.id))),
+            experimentInvalid: (experiments.invalid || []).map(item => ({
+              file: item.file || null,
+              id: item.id || null,
+              error: item.error || null
+            })).sort((a, b) => `${a.file}|${a.id}`.localeCompare(`${b.file}|${b.id}`)),
+            watchToAdopt: pendingPromotions.map(item => ({
+              id: item.id,
+              trendId: item.trendId,
+              evidenceCandidates: (item.evidenceCandidates || []).map(candidate => ({
+                sourceId: candidate.sourceId,
+                url: candidate.url,
+                publishedAt: candidate.publishedAt
+              })).sort((a, b) => `${a.sourceId}|${a.url}|${a.publishedAt}`.localeCompare(`${b.sourceId}|${b.url}|${b.publishedAt}`))
+            })).sort((a, b) => String(a.id).localeCompare(String(b.id))),
+            adoptToMeasured: pendingMeasurement.map(item => ({
+              id: item.id,
+              trendId: item.trendId,
+              evidenceExperimentIds: [...(item.evidenceExperimentIds || [])].sort(),
+              sites: [...(item.sites || [])].sort()
+            })).sort((a, b) => String(a.id).localeCompare(String(b.id)))
+          });
+          const materialSha = crypto.createHash('sha256').update(JSON.stringify(material)).digest('hex');
+
           const lines = [
             '<!-- arwp-growth-managed -->',
             '# ARWP website growth backlog',
@@ -116,28 +185,43 @@ jobs:
             '> This is a prioritized implementation backlog, not a ranking/readiness score. Fewer actions means less observed implementation debt; it does not prove better rankings, citations or recommendations.',
             ''
           ];
-          lines.push('## Change since previous run', '');
+          lines.push('## Change since previous material update', '');
           if (diff.firstObservation) {
-            lines.push('First managed observation. The next run will report resolved/new/changed actions.', '');
+            lines.push('First managed observation. A later material change will report resolved/new/changed actions.', '');
           } else {
             lines.push(`High-priority debt: **${diff.before.debt.highPriority} → ${diff.after.debt.highPriority}** (${diff.summary.highPriorityDebtDelta >= 0 ? '+' : ''}${diff.summary.highPriorityDebtDelta})`, '');
             if (diff.resolved?.length) {
-              lines.push(`Resolved since previous run (${diff.resolved.length}):`);
+              lines.push(`Resolved since previous material update (${diff.resolved.length}):`);
               for (const item of diff.resolved) lines.push(`- ✅ **${item.priority}** ${item.title || item.id}`);
               lines.push('');
             }
             if (diff.added?.length) {
-              lines.push(`New since previous run (${diff.added.length}):`);
+              lines.push(`New since previous material update (${diff.added.length}):`);
               for (const item of diff.added) lines.push(`- ⚠️ **${item.priority}** ${item.title || item.id}`);
               lines.push('');
             }
             if (diff.changed?.length) {
-              lines.push(`Changed since previous run (${diff.changed.length}):`);
+              lines.push(`Changed since previous material update (${diff.changed.length}):`);
               for (const item of diff.changed) lines.push(`- **${item.id}** — ${Object.keys(item.changes || {}).join(', ')}`);
               lines.push('');
             }
-            if (!diff.resolved?.length && !diff.added?.length && !diff.changed?.length) lines.push('No Growth action-set changes since the previous observation.', '');
+            if (!diff.resolved?.length && !diff.added?.length && !diff.changed?.length) lines.push('No Growth action-set changes since the previous material update.', '');
           }
+
+          lines.push('## Trend review queue', '');
+          lines.push(`WATCH → ADOPT review: **${pendingPromotions.length}** · ADOPT → MEASURED review: **${pendingMeasurement.length}**`, '');
+          if (promotions.unavailable) lines.push('- WATCH → ADOPT source-watch evidence is unavailable for this run; no absence claim is made.');
+          for (const item of pendingPromotions) {
+            lines.push(`- **REVIEW WATCH → ADOPT** \`${item.trendId}\` — ${item.evidenceCandidates?.length || 0} primary-source change candidate(s); proposal \`${item.id}\``);
+          }
+          if (measurement.unavailable) lines.push('- ADOPT → MEASURED evidence aggregation is unavailable for this run; no absence claim is made.');
+          for (const item of pendingMeasurement) {
+            lines.push(`- **REVIEW ADOPT → MEASURED** \`${item.trendId}\` — owner-evidence experiments: ${(item.evidenceExperimentIds || []).length}; sites: ${(item.sites || []).length}`);
+          }
+          if (!pendingPromotions.length && !pendingMeasurement.length && !promotions.unavailable && !measurement.unavailable) {
+            lines.push('No Trend lifecycle transitions currently require human review.');
+          }
+          lines.push('', 'Trend proposals are evidence queues only. This workflow never changes `registry/trends.json` or interprets MEASURED as a positive or causal effect.', '');
 
           lines.push('## Experiment follow-up', '');
           const s = experiments.summary || {};
@@ -169,17 +253,17 @@ jobs:
           for (const a of optional) lines.push(`- **${a.priority}** ${a.title}${a.source ? ` — ${a.source}` : ''}`);
           lines.push('', '## Evidence boundary', '', 'Public crawling can observe implementation state but cannot see authenticated Google/Bing owner metrics or prove that a platform will recommend the site. Outcome evidence must be measured separately. Experiment records are read from the repository and never modified by this workflow.');
           const encoded = Buffer.from(JSON.stringify(snapshot), 'utf8').toString('base64');
-          lines.push('', `<!-- arwp-growth-snapshot-base64:${encoded} -->`);
+          lines.push('', `<!-- arwp-growth-material-sha256:${materialSha} -->`);
+          lines.push(`<!-- arwp-growth-snapshot-base64:${encoded} -->`);
           fs.writeFileSync('arwp-growth-issue.md', lines.join('\n') + '\n');
           NODE
 
-      - name: Create or update one managed issue
+      - name: Create or update one managed issue only on material change
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if [ -n "$ARWP_ISSUE_NUMBER" ]; then
-            gh issue edit "$ARWP_ISSUE_NUMBER" --body-file arwp-growth-issue.md
-          else
+          ISSUE_NUMBER="$ARWP_ISSUE_NUMBER"
+          if [ -z "$ISSUE_NUMBER" ]; then
             gh issue list --state open --search "$ARWP_ISSUE_TITLE in:title" --json number,title --limit 20 > managed-issues.json
             ISSUE_NUMBER="$(
               ARWP_ISSUE_TITLE="$ARWP_ISSUE_TITLE" node - <<'NODE'
@@ -189,11 +273,19 @@ jobs:
           if (match?.number != null) process.stdout.write(String(match.number));
           NODE
             )"
-            if [ -n "$ISSUE_NUMBER" ]; then
-              gh issue edit "$ISSUE_NUMBER" --body-file arwp-growth-issue.md
-            else
-              gh issue create --title "$ARWP_ISSUE_TITLE" --body-file arwp-growth-issue.md
+          fi
+
+          NEW_FINGERPRINT="$(grep -o 'arwp-growth-material-sha256:[0-9a-f]\{64\}' arwp-growth-issue.md | head -n1 | cut -d: -f2)"
+          if [ -n "$ISSUE_NUMBER" ]; then
+            EXISTING_BODY="$(gh issue view "$ISSUE_NUMBER" --json body --jq .body 2>/dev/null || true)"
+            OLD_FINGERPRINT="$(printf '%s' "$EXISTING_BODY" | grep -o 'arwp-growth-material-sha256:[0-9a-f]\{64\}' | head -n1 | cut -d: -f2 || true)"
+            if [ -n "$NEW_FINGERPRINT" ] && [ "$NEW_FINGERPRINT" = "$OLD_FINGERPRINT" ]; then
+              echo "No material Growth/Trend/experiment change; managed issue left untouched."
+              exit 0
             fi
+            gh issue edit "$ISSUE_NUMBER" --body-file arwp-growth-issue.md
+          else
+            gh issue create --title "$ARWP_ISSUE_TITLE" --body-file arwp-growth-issue.md
           fi
 
       - name: Upload machine-readable Growth evidence
@@ -205,5 +297,8 @@ jobs:
             current.growth.snapshot.json
             growth-diff.json
             arwp-experiment-status.json
+            arwp-trend-watch.json
+            arwp-trend-promotions.json
+            arwp-trend-measurement.json
           if-no-files-found: error
           retention-days: 30
