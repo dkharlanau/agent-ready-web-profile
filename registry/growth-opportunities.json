@@ -1,0 +1,207 @@
+{
+  "version": "0.1",
+  "profile": "2026-09-06",
+  "reviewedAt": "2026-09-06",
+  "title": "ARWP Growth Profile",
+  "goal": "Turn source-backed Search, generative-search, citation and agent-web guidance into a prioritized website improvement plan without promising ranking or recommendation outcomes.",
+  "guardrails": {
+    "noRankingPromise": true,
+    "noAiRecommendationPromise": true,
+    "noUniversalQualityScore": true,
+    "providerSpecificSignalsStayProviderSpecific": true,
+    "manualQualityJudgmentsStayManual": true,
+    "obsoleteSeoFeaturesAreNotCargoCulted": true
+  },
+  "lanes": ["eligibility", "content-quality", "entity-identity", "citation", "freshness", "ai-access", "measurement", "agent-operability", "governance"],
+  "opportunities": [
+    {
+      "id": "google-non-commodity-evidence",
+      "lane": "content-quality",
+      "priority": "P1",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "manual-contract",
+      "title": "Make important pages non-commodity and evidence-led",
+      "claim": "Google's 2026 generative-search guide says unique, expert-led, non-commodity content and first-hand perspective are more important than AI-only markup, chunking or keyword variants.",
+      "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-who-how-why",
+      "lane": "content-quality",
+      "priority": "P1",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "partially-automated",
+      "title": "Make authorship and production evidence explicit",
+      "claim": "Google's people-first guidance recommends making it clear who created content, adding accurate bylines where expected, linking to author background, and explaining how content was produced when that context helps readers.",
+      "source": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-entity-identity",
+      "lane": "entity-identity",
+      "priority": "P1",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "automated-heuristic",
+      "title": "Publish one coherent entity identity",
+      "claim": "Google recommends Organization structured data with applicable identity properties such as name, URL, logo and sameAs; author/profile structured data can help disambiguate creators where applicable.",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+      "additionalSources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/article",
+        "https://developers.google.com/search/docs/appearance/structured-data/profile-page"
+      ],
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-publication-dates",
+      "lane": "freshness",
+      "priority": "P1",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "automated-heuristic",
+      "title": "Keep visible and structured publication dates consistent",
+      "claim": "Google recommends prominent user-visible publication/update dates and consistent datePublished/dateModified structured data where applicable; dates should reflect real publication or significant updates.",
+      "source": "https://developers.google.com/search/docs/appearance/publication-dates",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "cloudflare-content-signals",
+      "lane": "ai-access",
+      "priority": "P1",
+      "authority": "provider-specific-convention",
+      "status": "active-provider-extension",
+      "testability": "automated-heuristic",
+      "title": "Separate AI search/reference access from model training preferences",
+      "claim": "Cloudflare Content Signals distinguish search, ai-input and ai-train uses, and its newer use directive can express immediate/reference/full reuse. Cloudflare's crawl endpoint now enforces these signals for compatible requests.",
+      "source": "https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/",
+      "additionalSources": [
+        "https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/"
+      ],
+      "sourceReviewedAt": "2026-09-06",
+      "notes": "This is a Cloudflare-defined policy mechanism, not a Google ranking requirement or universal web standard."
+    },
+    {
+      "id": "openai-search-vs-training-separation",
+      "lane": "ai-access",
+      "priority": "P0-when-targeted",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "automated-heuristic",
+      "title": "Allow OAI-SearchBot independently from GPTBot training policy",
+      "claim": "OpenAI documents OAI-SearchBot for ChatGPT Search discovery separately from GPTBot training controls, allowing publishers to choose search visibility without making the same choice for training.",
+      "source": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-preferred-sources-acquisition",
+      "lane": "citation",
+      "priority": "P2",
+      "authority": "platform-feature",
+      "status": "active",
+      "testability": "automated-heuristic",
+      "title": "Give loyal readers a Preferred Sources action",
+      "claim": "Google Preferred Sources is globally available for Top Stories and can highlight selected sources in AI Mode and AI Overviews where those features are available.",
+      "source": "https://developers.google.com/search/docs/appearance/preferred-sources",
+      "sourceReviewedAt": "2026-09-06",
+      "notes": "User preference can increase prominence for users who selected the source; it is not a general ranking guarantee."
+    },
+    {
+      "id": "google-generative-ai-measurement-global",
+      "lane": "measurement",
+      "priority": "P1",
+      "authority": "platform-tooling",
+      "status": "active-global",
+      "testability": "external-owner-data",
+      "title": "Track generative Search visibility as a first-class KPI",
+      "claim": "As of August 31, 2026 Google says Generative AI performance insights in Search Console are rolled out to all websites worldwide.",
+      "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "bing-ai-citation-measurement",
+      "lane": "measurement",
+      "priority": "P1",
+      "authority": "platform-tooling",
+      "status": "public-preview",
+      "testability": "external-owner-data",
+      "title": "Track citations and grounding queries in Bing AI Performance",
+      "claim": "Bing Webmaster Tools AI Performance reports cited pages, citation activity and grounding queries across supported Microsoft AI experiences.",
+      "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-platform-properties",
+      "lane": "measurement",
+      "priority": "P2",
+      "authority": "platform-tooling",
+      "status": "active-global",
+      "testability": "external-owner-data",
+      "title": "Measure the brand's social/video search footprint",
+      "claim": "Google Search Console platform properties are globally available for Instagram, TikTok, X and YouTube, enabling creators to measure how those surfaces perform in Search, Discover and Google News.",
+      "source": "https://developers.google.com/search/blog/2026/07/platform-properties-social-video-guide",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-multiformat-content",
+      "lane": "citation",
+      "priority": "P2",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "automated-heuristic",
+      "title": "Support important pages with relevant original visual media",
+      "claim": "Google's generative-search guide says relevant high-quality images and video create additional opportunities for a site to appear beyond web-page links.",
+      "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-faq-rich-result-deprecated",
+      "lane": "governance",
+      "priority": "P2",
+      "authority": "platform-deprecation",
+      "status": "deprecated-for-google-rich-results",
+      "testability": "automated-heuristic",
+      "title": "Do not add FAQ markup solely for a Google rich-result advantage",
+      "claim": "Google deprecated FAQ rich results starting May 7, 2026. FAQPage markup may still have non-Google or semantic uses, but it should not be sold as a current Google rich-result growth tactic.",
+      "source": "https://developers.google.com/search/updates",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-site-reputation-abuse",
+      "lane": "governance",
+      "priority": "P1",
+      "authority": "platform-spam-policy",
+      "status": "active",
+      "testability": "manual-contract",
+      "title": "Protect topical reputation from third-party parasite content",
+      "claim": "Google's site reputation abuse policy targets third-party content published primarily to exploit the host site's ranking signals; Google updated its EEA enforcement approach in August 2026 but the underlying quality concern remains.",
+      "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-deep-link-sections",
+      "lane": "citation",
+      "priority": "P1",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "automated-heuristic",
+      "title": "Make evidence-bearing sections directly addressable",
+      "claim": "Google's 2026 Read more guidance recommends visible target content and preserving URL fragments so Search can deep-link users to relevant page sections.",
+      "source": "https://developers.google.com/search/docs/appearance/snippet",
+      "sourceReviewedAt": "2026-09-06"
+    },
+    {
+      "id": "google-no-ai-markup-cargo-cult",
+      "lane": "governance",
+      "priority": "P1",
+      "authority": "platform-guidance",
+      "status": "active",
+      "testability": "manual-contract",
+      "title": "Treat AI-only files as interoperability, not Google ranking signals",
+      "claim": "Google explicitly says llms.txt and other special AI markup are not needed for Google Search and do not help or harm Google visibility; ARWP should use such files only where another consumer has a real interoperability use case.",
+      "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "sourceReviewedAt": "2026-09-06"
+    }
+  ]
+}
