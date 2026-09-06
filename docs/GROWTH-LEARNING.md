@@ -96,6 +96,29 @@ Positive, negative, mixed and unchanged results all remain in the evidence set. 
 
 Neither `arwp-trends review` nor `arwp-trends measure` rewrites `registry/trends.json`. A maintainer must review the actual source/evidence and make a normal repository change if the lifecycle stage should move. That makes Trend history/diff capture the transition and prevents generated evidence from becoming an unreviewed policy change.
 
+## 5. Managed review issue
+
+The reusable `templates/growth/github-action-issue.yml` can run the learning loop as one bounded weekly review surface for a target website.
+
+It now combines four distinct queues rather than mixing them into a score:
+
+1. current P0/P1 implementation debt from the Growth Profile;
+2. persistent Growth Experiments awaiting implementation, measurement or human review;
+3. primary-source `WATCH -> ADOPT` Trend proposals;
+4. evidence-backed `ADOPT -> MEASURED` review proposals.
+
+The workflow saves the Growth plan, immutable Growth snapshot, implementation diff, experiment ledger status, Trend source-watch report, Trend promotion proposals and Trend measurement report as machine-readable workflow artifacts.
+
+Trend source-watch failures remain explicit unavailable evidence; they are never converted into “no changes.” The workflow does not mutate Trend maturity, experiment records, editorial content, robots policy or owner-platform settings.
+
+### Material-change suppression
+
+The managed issue includes a SHA-256 material fingerprint derived from the current Growth actions, experiment attention/invalid states and both Trend review queues. Observation timestamps and snapshot IDs are intentionally excluded.
+
+If the next scheduled run has the same material fingerprint, the workflow uploads fresh machine-readable evidence but leaves the GitHub issue untouched. This avoids weekly notification/edit noise while keeping the previous issue snapshot as the comparison baseline for the next real change.
+
+A changed primary-source candidate, Growth action, experiment state, invalid evidence record or measurement proposal changes the fingerprint and updates the issue. The fingerprint is a change detector only; it is not a trust, readiness or ranking score.
+
 ## Boundaries
 
 - Source-watch candidates are not recommendations.
