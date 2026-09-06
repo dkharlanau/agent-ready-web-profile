@@ -1,0 +1,48 @@
+name: ARWP Growth Profile
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/growth-opportunities.json'
+      - 'lib/growth-profile.mjs'
+      - 'bin/arwp-growth.mjs'
+      - 'scripts/growth-profile-test.mjs'
+      - 'templates/growth/**'
+      - 'docs/GROWTH-PROFILE.md'
+      - '.github/workflows/growth-profile.yml'
+  pull_request:
+    paths:
+      - 'registry/growth-opportunities.json'
+      - 'lib/growth-profile.mjs'
+      - 'bin/arwp-growth.mjs'
+      - 'scripts/growth-profile-test.mjs'
+      - 'templates/growth/**'
+      - 'docs/GROWTH-PROFILE.md'
+      - '.github/workflows/growth-profile.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  growth-profile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate Growth Profile registry, planner and templates
+        run: |
+          node scripts/growth-profile-test.mjs
+          node --check lib/growth-profile.mjs
+          node --check bin/arwp-growth.mjs
+          node --check scripts/growth-profile-test.mjs
+      - name: Validate shipped templates
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('templates/growth/organization.jsonld','utf8')); JSON.parse(require('fs').readFileSync('templates/growth/article.jsonld','utf8'));"
+          grep -q 'Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference' templates/growth/robots.ai-search-open-training-closed.txt
+          grep -q 'google.com/preferences/source?q=example.com' templates/growth/preferred-source.html
