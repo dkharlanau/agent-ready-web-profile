@@ -1,0 +1,42 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-06",
+  "purpose": "Keep vertical-specific Search and agent recommendations out of the universal baseline. A site activates one primary class and may opt into additional modules when they truthfully apply.",
+  "verticals": {
+    "documentation": {
+      "focus": ["stable deep links", "llms/readable content where useful", "API/agent discovery", "version freshness", "code/examples"],
+      "recommendedStructuredData": ["SoftwareApplication or TechArticle where genuinely applicable"],
+      "notes": "Do not invent Product/Article markup solely for Search appearance."
+    },
+    "editorial": {
+      "focus": ["author identity", "datePublished/dateModified", "first-hand evidence", "original images/video", "publisher identity"],
+      "recommendedStructuredData": ["Article", "NewsArticle", "BlogPosting", "Person/ProfilePage", "Organization"],
+      "notes": "FAQ rich results were deprecated by Google in 2026; FAQ markup is not a current Google growth shortcut."
+    },
+    "software-product": {
+      "focus": ["product identity", "documentation", "release/change history", "support/trust surfaces", "agent/API interfaces", "real examples"],
+      "recommendedStructuredData": ["SoftwareApplication", "WebApplication", "Organization or Person"],
+      "notes": "Agent interfaces and llms.txt are interoperability features, not Google ranking factors."
+    },
+    "commerce": {
+      "focus": ["Product data quality", "Merchant Center/feed freshness", "inventory/price consistency", "shipping/returns", "commerce agent protocols where actually supported"],
+      "recommendedStructuredData": ["Product", "Offer", "Organization"],
+      "notes": "Commerce/UCP support should be a separate adapter/module, not a universal ARWP requirement."
+    },
+    "local-business": {
+      "focus": ["local entity consistency", "address/hours/contact accuracy", "Business Profile", "LocalBusiness structured data", "original location/media evidence"],
+      "recommendedStructuredData": ["LocalBusiness", "Organization"],
+      "notes": "Local recommendations require geographic/business context and should not be generalized to non-local sites."
+    },
+    "research-dataset": {
+      "focus": ["dataset identity", "methodology", "provenance", "license", "citation", "versioning", "download/API access"],
+      "recommendedStructuredData": ["Dataset", "ScholarlyArticle or Article where applicable", "Person/Organization"],
+      "notes": "Negative results, sampling limitations and version history are evidence features, not defects to hide."
+    },
+    "general": {
+      "focus": ["technical eligibility", "canonical entity identity", "useful original content", "deep links", "freshness", "measurement"],
+      "recommendedStructuredData": ["WebSite", "Organization or Person where applicable"],
+      "notes": "Use a more specific vertical when the site has a clear primary purpose."
+    }
+  }
+}
