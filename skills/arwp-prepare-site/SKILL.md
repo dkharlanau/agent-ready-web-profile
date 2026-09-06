@@ -28,10 +28,13 @@ node scripts/inspect-repo.mjs <target-repository>
 
 The helper reads only repository signals plus `package.json`, uses no network, and does not read secrets. Use its framework/public-root/source-of-truth hints to decide where changes belong; do not treat the report as deployed-site evidence.
 
+If the skill is installed but the ARWP CLI/templates are not present, read `references/toolchain-bootstrap.md` and use an isolated temporary ARWP checkout rather than improvising commands or templates.
+
 ## Load references only when needed
 
 - Read `references/stack-detection.md` when the framework/deployment/public-root model is unclear.
 - Read `references/file-matrix.md` before creating new machine-readable/public files so you do not cargo-cult every ARWP surface into every site.
+- Read `references/toolchain-bootstrap.md` when the ARWP CLI/templates are not already available in the target environment.
 - Load `arwp-ai-search-content` when the main work is article/docs/comparison/answer quality.
 - Load `arwp-agent-discovery` when the main work is protocol/agent discovery.
 - Load `arwp-evidence-ci` when the main work is CI, contracts, receipts or ongoing monitoring.
