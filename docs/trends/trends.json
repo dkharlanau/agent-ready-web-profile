@@ -78,6 +78,25 @@
       "notes": "Measurement availability does not imply ARWP caused any observed movement."
     },
     {
+      "id": "google-generative-ai-control-global",
+      "provider": "google",
+      "detectedAt": "2026-08-31",
+      "stage": "adopt",
+      "confidence": "high",
+      "maturity": "platform-control",
+      "title": "Verify the site's Search generative AI inclusion setting",
+      "change": "Google rolled the Search generative AI control out to all websites worldwide. Search Console owners can explicitly include or exclude a property from AI Overviews, AI Mode and generative AI features in Discover.",
+      "whyItMatters": "If a property is excluded, Google says its links and content are prevented from appearing in supported generative AI features and from helping ground those responses. For sites targeting AI visibility, this is now an explicit owner-side eligibility decision rather than something ARWP should infer from public HTML.",
+      "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+      "sourceReviewedAt": "2026-09-06",
+      "surfaces": ["search-console", "ai-overviews", "ai-mode", "generative-discover", "grounding", "ai-access"],
+      "appliesTo": ["general", "documentation", "editorial", "software-product", "commerce", "local-business", "research-dataset"],
+      "attentionWindowDays": 90,
+      "actionRefs": [],
+      "measurementRefs": ["google-generative-ai-performance"],
+      "notes": "This is an authenticated owner-side control and cannot be reliably assessed by public crawling. The default is inclusion, but ARWP should still ask the owner to verify it when generative Search visibility is a target."
+    },
+    {
       "id": "google-site-reputation-policy-eea-2026-08",
       "provider": "google",
       "detectedAt": "2026-08-28",
