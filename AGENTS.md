@@ -25,6 +25,23 @@ node scripts/classification-test.mjs
 npm run test:site
 ```
 
+## Agent Skills routing
+
+ARWP ships portable Agent Skills under `skills/`. Use them instead of inventing a new ad-hoc site-optimization workflow.
+
+- `arwp-prepare-site` — default orchestrator for preparing/upgrading an existing website repository under ARWP, Search/AI-search quality guidance and agent interoperability.
+- `arwp-ai-search-content` — specialist for useful, original, evidence-backed articles/docs/comparison/answer pages.
+- `arwp-agent-discovery` — specialist for truthful llms.txt, Agent Skills, ARD, OpenAPI/MCP/A2A/WebMCP and ARWP publisher surfaces.
+- `arwp-evidence-ci` — specialist for assertion contracts, scheduled audits, receipts and drift-safe CI.
+
+Portable install:
+
+```bash
+npx skills add dkharlanau/agent-ready-web-profile
+```
+
+If the task is to prepare another website, prefer `arwp-prepare-site`, inspect the target repository first, implement high-confidence reversible changes autonomously, run verification, and leave credential-dependent or consequential gates explicit. Do not stop at a recommendation list when repository edits are possible.
+
 ## Core product rules
 
 1. Prefer upstream standards/specifications over new ARWP-native fields.
@@ -85,6 +102,8 @@ Keep these surfaces synchronized where applicable:
 - `docs/citation-index.json`
 - `docs/compare/alternatives.json`
 - `docs/observatory/protocols.json`
+- `docs/growth/`
+- `docs/skills/`
 
 Canonical source copies also exist outside `docs/` for some machine-readable artifacts. Tests should fail when public and source copies drift.
 
