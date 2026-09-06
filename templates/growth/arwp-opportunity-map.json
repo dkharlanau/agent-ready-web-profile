@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "site": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "brandTerms": ["ARWP", "Agent Ready Web Profile", "Agent Web Profile"],
+  "opportunities": [
+    {
+      "id": "query-page-opportunity-planner",
+      "intent": "Choose which existing search landing page to improve using a query-page export, without inventing search volume.",
+      "queries": ["search console query page opportunity analysis", "prioritize pages from search console"],
+      "targetUrl": "https://dkharlanau.github.io/agent-ready-web-profile/growth/opportunities/",
+      "pageState": "existing",
+      "businessValue": 5,
+      "effort": 2,
+      "conversion": "Run the offline planner with a reviewed map and inspect the resulting tasks.",
+      "evidence": [
+        {"type": "tool", "status": "available", "reference": "bin/arwp-opportunities.mjs"},
+        {"type": "worked-example", "status": "available", "reference": "scripts/search-opportunities-test.mjs"}
+      ],
+      "internalLinksFrom": ["https://dkharlanau.github.io/agent-ready-web-profile/growth/"]
+    },
+    {
+      "id": "static-site-search-audit",
+      "intent": "Audit a static site or GitHub Pages project and turn observed search eligibility issues into implementation tasks.",
+      "queries": ["github pages seo audit", "static website search visibility audit"],
+      "targetUrl": "https://dkharlanau.github.io/agent-ready-web-profile/growth/",
+      "pageState": "existing",
+      "businessValue": 5,
+      "effort": 2,
+      "conversion": "Run arwp-growth on an owned public site and verify one proposed change.",
+      "evidence": [
+        {"type": "tool", "status": "available", "reference": "bin/arwp-growth.mjs"},
+        {"type": "tool", "status": "available", "reference": "bin/arwp-search-appearance.mjs"}
+      ],
+      "internalLinksFrom": ["https://dkharlanau.github.io/agent-ready-web-profile/"]
+    },
+    {
+      "id": "agent-interface-choice",
+      "intent": "Choose between llms.txt, MCP, A2A and WebMCP for an actual website integration rather than treating them as interchangeable SEO features.",
+      "queries": ["llms.txt vs mcp", "mcp a2a webmcp differences"],
+      "targetUrl": "https://dkharlanau.github.io/agent-ready-web-profile/answers/mcp-vs-a2a-vs-webmcp-vs-llms-txt.html",
+      "pageState": "existing",
+      "businessValue": 4,
+      "effort": 2,
+      "conversion": "Select an interface for a concrete integration and test its discovery with the Resolver.",
+      "evidence": [
+        {"type": "tool", "status": "available", "reference": "bin/arwp.mjs"},
+        {"type": "worked-example", "status": "available", "reference": "docs/RESOLVER.md"}
+      ],
+      "internalLinksFrom": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/"]
+    },
+    {
+      "id": "ai-crawler-policy",
+      "intent": "Review crawler policies by purpose without conflating search discovery with model training permissions.",
+      "queries": ["ai search crawler robots policy", "search bots vs training bots robots.txt"],
+      "targetUrl": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/",
+      "pageState": "existing",
+      "businessValue": 4,
+      "effort": 3,
+      "conversion": "Review a publisher-approved crawler policy and verify the deployed robots rules.",
+      "evidence": [
+        {"type": "worked-example", "status": "available", "reference": "docs/crawler-matrix/index.html"}
+      ],
+      "internalLinksFrom": ["https://dkharlanau.github.io/agent-ready-web-profile/recommendations/"]
+    }
+  ]
+}

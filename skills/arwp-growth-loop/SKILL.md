@@ -79,6 +79,19 @@ Use `templates/growth/growth-loop-checklist.md`, `templates/growth/site-adoption
 
 ARWP never guarantees ranking, Discover placement, AI citation, recommendation traffic or conversion. The goal is faster adaptation, stronger implementation discipline and better evidence about what works for the actual site.
 
+## Search opportunity selection
+
+After eligibility fixes, read `docs/SEARCH-OPPORTUNITIES.md`. Build a small reviewed map of real user needs, existing landing pages, original assets and useful next actions. Prefer improving a complete existing answer to generating pages for query variants.
+
+```bash
+node bin/arwp-opportunities.mjs templates/growth/arwp-opportunity-map.json
+node bin/arwp-opportunities.mjs <site-map.json> --search-console=<private-query-page.json> --json
+```
+
+The bundled map is a self-pilot with hypothetical queries and no verified demand. Adapt it only after inspecting the target repository. Joint final query+page data is required for owner-observed prioritization; separate Queries and Pages exports or aggregate visibility snapshots cannot be joined into that evidence. Missing data stays unknown. Keep real exports and reports private.
+
+Use the queue as a project heuristic, not a ranking score. Review overlapping URLs manually; do not automatically merge, redirect or noindex. Verify that declared original assets and internal links actually exist. Implement one substantive useful improvement, verify the built page and next action, record its commit, then use the existing experiment/visibility workflow for outcomes. Do not replace the live Growth audit or the owner-measurement gate with this offline planner.
+
 ## Search appearance review
 
 After building relevant HTML, run the explicit local check and read `docs/SEARCH-APPEARANCE.md`:

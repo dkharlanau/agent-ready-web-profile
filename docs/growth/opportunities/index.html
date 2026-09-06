@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search Console query-to-page opportunity planner — ARWP</title>
+<meta name="description" content="Choose which search landing page to improve with an offline query-to-page planner. Review non-brand impressions, overlapping pages and original evidence without invented ranking scores.">
+<link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/growth/opportunities/">
+<link rel="stylesheet" href="../../citation.css">
+</head>
+<body><main class="cite-main shell">
+<header class="cite-hero">
+<p class="eyebrow">ARWP · Search opportunity planning</p>
+<h1>Which search landing page should you improve next?</h1>
+<p class="cite-lead">Start with a real user need, an existing page and something useful that only your project can provide. Add Search Console evidence when you have it. Do not turn missing data into a keyword-volume estimate.</p>
+<div class="direct-answer"><strong>This tool produces a review queue.</strong> It matches an editor-reviewed query map to a joint query-and-page export, separates declared brand terms and identifies pages to inspect. It does not forecast rankings, create articles or merge pages.</div>
+</header>
+<section class="cite-card" id="run"><h2>Run an example without an account or API key</h2>
+<p>Use Node.js 20 or later from the repository checkout. The example maps four ARWP user needs to actual project destinations. Its query phrases are hypotheses, not verified search volumes.</p>
+<pre><code>git clone https://github.com/dkharlanau/agent-ready-web-profile.git
+cd agent-ready-web-profile
+node bin/arwp-opportunities.mjs templates/growth/arwp-opportunity-map.json
+node --test scripts/search-opportunities-test.mjs</code></pre>
+<p>The planner itself needs no dependency installation and makes no network requests. Without owner data it reports <code>no-owner-data</code>, leaves observations unknown and proposes baseline/evidence checks.</p>
+<p><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/arwp-opportunity-map.json">Inspect the worked map</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/scripts/search-opportunities-test.mjs">Inspect the executable tests</a></p></section>
+<section class="cite-card" id="owner-data"><h2>Use a joint query-and-page export, not two unrelated tables</h2>
+<p>Google's Search Analytics API can group rows by both query and page. Use final web data, one period and one country/device segment. Do not join the independent totals from the Queries and Pages CSV tabs: that would invent which query belongs to which page.</p>
+<pre><code>node bin/arwp-opportunities.mjs my-map.json \
+  --search-console=private/query-page.json \
+  --output=private/review.json --json</code></pre>
+<p>The directory must exist and the output file must be new. Keep owner exports and reports private. The tool accepts a documented JSON wrapper around the query-page response, not an arbitrary Search Console CSV.</p>
+<p><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/SEARCH-OPPORTUNITIES.md">Read the complete input contract and limitations</a> · <a href="https://developers.google.com/webmaster-tools/v1/searchanalytics/query">Google Search Analytics API reference</a></p></section>
+<section class="cite-card" id="interpret"><h2>What the evidence can—and cannot—tell you</h2>
+<p><strong>An existing page has non-brand impressions.</strong> Review whether it answers the task, offers an original worked example and makes the next action possible. The default position band above 3 through 20 is a scheduling heuristic, not a Google rule or an expected win.</p>
+<p><strong>Several pages appear for the same query.</strong> Inspect intent, device/country and canonical URLs. They may serve different needs. The tool emits a review task, never an automatic merge, redirect or noindex instruction.</p>
+<p><strong>A query has no matching rows.</strong> The export may omit data, or the site may have little visibility. That is not proof of zero demand. Keep the query as a research hypothesis.</p>
+<p><strong>A page has many clicks.</strong> Clicks do not establish product use. Specify and verify a useful next action: complete a diagnostic, run a tool, try a worked example or finish a product task.</p>
+<p><a href="https://support.google.com/webmasters/answer/7576553?hl=en">Google explains impressions, CTR, average position and page-versus-property aggregation.</a></p></section>
+<section class="cite-card" id="proof"><h2>A concrete example: improve the answer, not the page count</h2>
+<p>For a static-site audit, the useful contribution is a runnable diagnostic with an explanation of failed checks. For a protocol comparison, it is a reproducible interface-selection example. For a voice-practice product, a possible contribution is a working practice exercise—but only when that exercise exists and its claims have been checked.</p>
+<p>One complete answer can serve related query variants. There is no need to generate a near-duplicate page for every phrase. Google recommends original, useful content and explicitly warns against scaled query-variant pages created to manipulate visibility.</p>
+<p><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Read Google's guidance for generative Search.</a></p></section>
+<section class="cite-card" id="loop"><h2>Close the loop with outcomes</h2>
+<p>Choose one existing page. Record the proposed change and its commit. Verify the built page, evidence and next action. Compare complete before/after windows with matching filters, while recording seasonality and other changes. Keep neutral and negative results.</p>
+<p>The planner's ranking and conversion impact fields are deliberately unknown. The existing ARWP visibility and experiment tools hold the separate outcome evidence; a passing test is not evidence of traffic growth.</p></section>
+<p class="scope-note">Offline planning tool. No SERP scraping, account authentication, website verification or automatic publication. Source review: September 6, 2026. Search demand and ranking impact of this guide are not yet measured.</p>
+<p class="reuse-note"><a href="../">Growth Loop</a> · <a href="../../measurement/">Measurement definitions</a> · <a href="../../recommendations/">Source-backed recommendations</a> · <a href="../../">ARWP</a></p>
+</main></body></html>

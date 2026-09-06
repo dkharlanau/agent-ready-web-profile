@@ -1,0 +1,48 @@
+name: Search opportunity planning
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/search-opportunities.mjs'
+      - 'bin/arwp-opportunities.mjs'
+      - 'scripts/search-opportunities-test.mjs'
+      - 'templates/growth/arwp-opportunity-map.json'
+      - 'docs/SEARCH-OPPORTUNITIES.md'
+      - 'docs/growth/opportunities/**'
+      - '.github/workflows/search-opportunities.yml'
+  pull_request:
+    paths:
+      - 'lib/search-opportunities.mjs'
+      - 'bin/arwp-opportunities.mjs'
+      - 'scripts/search-opportunities-test.mjs'
+      - 'templates/growth/arwp-opportunity-map.json'
+      - 'docs/SEARCH-OPPORTUNITIES.md'
+      - 'docs/growth/opportunities/**'
+      - '.github/workflows/search-opportunities.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: search-opportunities-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  offline-planner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node --test scripts/search-opportunities-test.mjs
+      - run: node bin/arwp-opportunities.mjs templates/growth/arwp-opportunity-map.json --json
+      - name: Verify the planner is present in the npm package
+        run: |
+          npm pack --ignore-scripts --json > "$RUNNER_TEMP/arwp-pack.json"
+          node --input-type=module -e '
+            import fs from "node:fs";
+            const [pack] = JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP + "/arwp-pack.json", "utf8"));
+            const files = new Set(pack.files.map(file => file.path));
+            for (const file of ["bin/arwp-opportunities.mjs", "lib/search-opportunities.mjs", "templates/growth/arwp-opportunity-map.json"])
+              if (!files.has(file)) throw new Error("Missing packaged file: " + file);
+          '
