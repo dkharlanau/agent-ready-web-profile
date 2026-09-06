@@ -11,7 +11,7 @@ const basePlan = {
   actions: [
     { id: 'growth:google-generative-ai-measurement-global', priority: 'P1', lane: 'measurement', status: 'external-owner-data', title: 'Google AI measurement' },
     { id: 'growth:bing-ai-citation-measurement', priority: 'P1', lane: 'measurement', status: 'external-owner-data', title: 'Bing AI measurement' },
-    { id: 'growth:google-platform-properties', priority: 'P2', lane: 'measurement', status: 'external-owner-data', title: 'Platform properties' },
+    { id: 'growth:google-platform-properties', priority: 'P2', lane: 'measurement', status: 'external-owner-data', title: 'Platform properties', reason: 'Requires authenticated owner-side measurement.' },
     { id: 'trend-owner:google-generative-ai-control-global', priority: 'P1', lane: 'ai-access', status: 'external-owner-data', title: 'Google AI inclusion' },
     { id: 'growth:preferred-source-acquisition', priority: 'P2', lane: 'citation', status: 'opportunity', title: 'Preferred Sources' }
   ]
@@ -63,12 +63,16 @@ const parsedBaseline = parseOwnerDataReceipt(receipt([baseline]), { canonicalUrl
 assert.equal(parsedBaseline.valid, true);
 const baselineApplied = applyOwnerDataEvidence(basePlan, receipt([baseline]), { now });
 assert.equal(baselineApplied.ownerDataEvidence.length, 0, 'ordinary GSC Search performance must not close AI owner-data actions');
-assert.equal(baselineApplied.actions.length, 4);
-assert.equal(baselineApplied.opportunities.length, 1);
-assert.equal(baselineApplied.opportunities[0].id, 'growth:preferred-source-acquisition');
+assert.equal(baselineApplied.actions.length, 3, 'conditional platform properties must not remain active by default');
+assert.equal(baselineApplied.opportunities.length, 2);
+const opportunityIds = new Set(baselineApplied.opportunities.map(item => item.id));
+assert.ok(opportunityIds.has('growth:preferred-source-acquisition'));
+assert.ok(opportunityIds.has('growth:google-platform-properties'));
+assert.equal(baselineApplied.opportunities.find(item => item.id === 'growth:google-platform-properties')?.status, 'opportunity');
 assert.deepEqual(baselineApplied.observations.ownerData.matchedActionIds, []);
 assert.deepEqual(baselineApplied.observations.ownerData.unmatchedRecordIds, ['observation:google-search-console-baseline']);
-assert.equal(baselineApplied.refinements.optionalOpportunitiesSeparated, 1);
+assert.equal(baselineApplied.refinements.optionalOpportunitiesSeparated, 2);
+assert.equal(baselineApplied.refinements.conditionalPlatformPropertiesDefaultOptional, true);
 
 const googleAi = record('growth:google-generative-ai-measurement-global', 'google-search-console', 'generative-ai-performance');
 const googleAiApplied = applyOwnerDataEvidence(basePlan, receipt([googleAi]), { now });
@@ -125,4 +129,4 @@ JSON.parse(fs.readFileSync('schema/growth-owner-data.schema.json', 'utf8'));
 assert.ok(fs.existsSync('templates/growth/owner-data.json'));
 JSON.parse(fs.readFileSync('templates/growth/owner-data.json', 'utf8'));
 
-console.log('PASS Growth owner-data receipts are provider/kind/freshness scoped, ordinary GSC data cannot close AI actions, and optional opportunities stay outside active remediation');
+console.log('PASS Growth owner-data receipts are provider/kind/freshness scoped, ordinary GSC data cannot close AI actions, and conditional/optional opportunities stay outside active remediation');
