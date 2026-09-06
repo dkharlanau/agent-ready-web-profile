@@ -1,0 +1,60 @@
+{
+  "version": "0.1",
+  "reviewedThrough": "2026-09-06",
+  "sources": [
+    {
+      "id": "google-search-doc-updates",
+      "provider": "google",
+      "kind": "feed",
+      "url": "https://developers.google.com/search/updates/search_docs_updates.rss",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["ai", "generative", "search console", "preferred source", "structured data", "crawler", "robots", "index", "citation", "social", "video", "ranking", "spam", "reputation"]
+    },
+    {
+      "id": "google-search-blog",
+      "provider": "google",
+      "kind": "discover-feed",
+      "url": "https://developers.google.com/search/blog",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["ai", "generative", "search console", "crawler", "index", "ranking", "structured data", "agent", "citation", "content", "spam"]
+    },
+    {
+      "id": "bing-webmaster-blog",
+      "provider": "bing",
+      "kind": "discover-feed",
+      "url": "https://blogs.bing.com/webmaster",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["ai", "copilot", "citation", "grounding", "indexnow", "search", "crawler", "ranking", "webmaster"]
+    },
+    {
+      "id": "chrome-webmcp",
+      "provider": "chrome",
+      "kind": "page-update",
+      "url": "https://developer.chrome.com/docs/ai/webmcp",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["webmcp", "agent", "origin trial", "tool", "security", "eval"]
+    },
+    {
+      "id": "openai-publishers-developers",
+      "provider": "openai",
+      "kind": "page-update",
+      "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["oai-searchbot", "gptbot", "chatgpt search", "agent", "atlas", "aria", "crawler"]
+    },
+    {
+      "id": "cloudflare-ai-bots-changelog",
+      "provider": "cloudflare",
+      "kind": "page-update",
+      "url": "https://developers.cloudflare.com/changelog/",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["ai", "crawler", "robots", "content signal", "content-signal", "browser run", "bot"]
+    }
+  ],
+  "guardrails": {
+    "candidateIsNotRecommendation": true,
+    "promotionRequiresReview": true,
+    "primarySourceOnly": true,
+    "noAutomaticAdoptPromotion": true
+  }
+}
