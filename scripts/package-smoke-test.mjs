@@ -130,8 +130,11 @@ try {
   assert.equal(directory.sites.length, 5, 'installed CLI must ship with the initial ARWP directory');
 
   const recommendations = JSON.parse(fs.readFileSync(path.join(installedRoot, 'registry', 'search-agent-recommendations.json'), 'utf8'));
+  assert.equal(recommendations.version, '0.2');
   assert.equal(recommendations.ruleset, '2026.09');
-  assert.equal(recommendations.rules.length, 15);
+  assert.equal(recommendations.revision, '2026-09-06');
+  assert.equal(recommendations.rules.length, 34);
+  assert.equal(recommendations.implementationPacks.length, 11);
   assert.equal(recommendations.methodology.noRankingPromise, true);
 
   const profilePath = path.join(consumerDir, 'site-profile.json');
