@@ -41,6 +41,8 @@ Do not infer Google/Bing/ChatGPT visibility from repository metadata.
 
 When page semantics are relevant, inventory the important route archetypes and identify reusable canonical entities before editing templates. Classify pages such as site-home, organization, article-editorial, author-profile, event, dataset, software-application, product, video-watch, glossary-term/glossary-index, community-qa and collection-list. Do not install a universal JSON-LD bundle.
 
+For portfolio or repeated site rollouts, follow `docs/SITE-ROLLOUT-PLAYBOOK.md` and start a site-specific record from `templates/growth/site-adoption-record.md`. Reuse the decision order and evidence contract; do not blindly copy provider-specific markup or crawler policy from a reference site.
+
 3. **Select hypotheses, not cargo cult.** Choose the smallest applicable hypothesis set that has a clear implementation change, checkable completion condition and observable success signal. Platform requirements and high-confidence guidance come before optional features or experiments.
 
 Structured-data correctness is a baseline contract, not an excuse to maximize schema volume. Remove obsolete feature-only markup when appropriate and never fabricate authors, dates, prices, ratings, reviews, event facts, organization facts or dataset provenance.
@@ -71,7 +73,7 @@ For semantic/template changes also parse generated JSON-LD, compare it with the 
 
 7. **Keep, revise, revert or retire.** Preserve negative results. Keep a correct change when evidence is neutral/positive, revise a weak implementation or measurement design, revert harmful changes, and retire a hypothesis when upstream guidance or evidence invalidates it.
 
-Use `templates/growth/growth-loop-checklist.md` and `templates/growth/hypothesis-ledger.md` when a durable review trail is useful.
+Use `templates/growth/growth-loop-checklist.md`, `templates/growth/site-adoption-record.md` and `templates/growth/hypothesis-ledger.md` when a durable review trail is useful.
 
 ## Core rule
 
