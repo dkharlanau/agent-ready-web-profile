@@ -1,0 +1,49 @@
+name: ARWP Agent Skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+      - 'docs/skills/**'
+      - 'scripts/agent-skills-test.mjs'
+      - 'AGENTS.md'
+      - 'docs/AGENTS.md'
+      - '.github/workflows/agent-skills.yml'
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'docs/skills/**'
+      - 'scripts/agent-skills-test.mjs'
+      - 'AGENTS.md'
+      - 'docs/AGENTS.md'
+      - '.github/workflows/agent-skills.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  agent-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Validate portable Agent Skills
+        run: |
+          node scripts/agent-skills-test.mjs
+          node --check scripts/agent-skills-test.mjs
+      - name: Validate public skills catalog
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const source = JSON.parse(fs.readFileSync('skills/index.json','utf8'));
+          const publicIndex = JSON.parse(fs.readFileSync('docs/skills/index.json','utf8'));
+          const a = source.skills.map(x => x.name).sort();
+          const b = publicIndex.skills.map(x => x.name).sort();
+          if (JSON.stringify(a) !== JSON.stringify(b)) throw new Error('Public skills catalog drifted from source skills index');
+          if (publicIndex.install !== 'npx skills add dkharlanau/agent-ready-web-profile') throw new Error('Unexpected install command');
+          NODE
+          grep -q 'arwp-prepare-site' docs/skills/index.html
+          grep -q 'npx skills add dkharlanau/agent-ready-web-profile' docs/skills/llms.txt
