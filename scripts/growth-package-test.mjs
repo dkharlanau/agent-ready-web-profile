@@ -42,6 +42,7 @@ for (const file of [
   'lib/growth-hypotheses.mjs',
   'lib/growth-experiment.mjs',
   'lib/trend-radar.mjs',
+  'scripts/trend-source-watch.mjs',
   'registry/growth-opportunities.json',
   'registry/growth-verticals.json',
   'registry/growth-hypotheses.json',
@@ -59,6 +60,7 @@ for (const file of [
 
 for (const publishedPath of [
   'bin/', 'lib/', 'schema/', 'registry/',
+  'scripts/trend-source-watch.mjs',
   'docs/GROWTH-PROFILE.md', 'docs/GROWTH-POLICY.md', 'docs/GROWTH-LOOP.md', 'docs/GROWTH-EXPERIMENTS.md', 'docs/TREND-RADAR.md'
 ]) {
   assert(pkg.files.includes(publishedPath), `${publishedPath} must be present in package files`);
