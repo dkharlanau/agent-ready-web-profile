@@ -5,9 +5,17 @@
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/growth/",
   "goal": "Turn current source-backed Search, generative-search, citation and agent-web guidance into a prioritized website improvement backlog.",
   "registry": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-opportunities.json",
+  "verticalRegistry": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-verticals.json",
   "documentation": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-PROFILE.md",
+  "policy": {
+    "publicPage": "https://dkharlanau.github.io/agent-ready-web-profile/growth/policy.html",
+    "schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/growth-policy.schema.json",
+    "example": "https://dkharlanau.github.io/agent-ready-web-profile/growth/policy.example.json"
+  },
   "cli": {
-    "entrypoint": "bin/arwp-growth.mjs",
+    "growth": "bin/arwp-growth.mjs",
+    "policy": "bin/arwp-growth-policy.mjs",
+    "history": "bin/arwp-growth-history.mjs",
     "example": "node bin/arwp-growth.mjs https://example.com --json"
   },
   "templates": {
@@ -16,13 +24,27 @@
     "articleJsonLd": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/article.jsonld",
     "preferredSources": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/preferred-source.html",
     "contentQualityChecklist": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/content-quality-checklist.md",
-    "githubActions": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/github-action.yml"
+    "githubActionsReadOnly": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/github-action.yml",
+    "githubActionsManagedIssue": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/github-action-issue.yml"
   },
   "priorityModel": {
     "P0": "observable blocker to a targeted eligibility goal",
     "P1": "high-value content-quality, identity, access, freshness or governance action",
     "P2": "optional acquisition, measurement or multi-format opportunity",
     "P3": "lower-priority experiment"
+  },
+  "history": {
+    "snapshotVersion": "0.1",
+    "tracks": ["actions added", "actions resolved", "priority/status changes", "P0/P1 debt delta", "selected observable metadata changes"],
+    "outcomeMetricsSeparate": true
+  },
+  "selfDogfood": {
+    "initialActionCount": 17,
+    "refinedActionCountBeforeHomepageIdentity": 8,
+    "p0BeforeHomepageIdentity": 0,
+    "homepageEntityIdentityPublished": true,
+    "homepageEntityIdentityDeploy": "https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/34015298462",
+    "nextLiveRunShouldVerifyIdentityActionResolved": true
   },
   "guardrails": {
     "universalScore": false,
