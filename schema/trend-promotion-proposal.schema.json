@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/trend-promotion-proposal.schema.json",
+  "title": "ARWP Trend Promotion Proposal v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generatedAt", "sourceWatch", "proposals", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "sourceWatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generatedAt", "reviewedThrough"],
+      "properties": {
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "reviewedThrough": { "type": "string", "format": "date" }
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "trendId", "provider", "currentStage", "proposedStage", "status", "rationale", "primarySource", "evidenceCandidates", "affectedActionRefs", "affectedMeasurementRefs", "review"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "trendId": { "type": "string", "minLength": 1 },
+          "provider": { "type": "string", "minLength": 1 },
+          "currentStage": { "const": "watch" },
+          "proposedStage": { "const": "adopt" },
+          "status": { "type": "string", "enum": ["review-required", "approved", "rejected", "deferred"] },
+          "rationale": { "type": "string", "minLength": 1 },
+          "primarySource": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "evidenceCandidates": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["sourceId", "type", "url", "publishedAt"],
+              "properties": {
+                "sourceId": { "type": "string" },
+                "type": { "type": "string" },
+                "title": { "type": ["string", "null"] },
+                "summary": { "type": ["string", "null"] },
+                "url": { "type": "string", "format": "uri" },
+                "publishedAt": { "type": "string", "format": "date-time" }
+              }
+            }
+          },
+          "affectedActionRefs": { "type": "array", "items": { "type": "string" } },
+          "affectedMeasurementRefs": { "type": "array", "items": { "type": "string" } },
+          "review": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["decision"],
+            "properties": {
+              "decision": { "type": "string", "enum": ["pending", "approve", "reject", "defer"] },
+              "reviewer": { "type": "string", "minLength": 1 },
+              "reviewedAt": { "type": "string", "format": "date-time" },
+              "note": { "type": "string", "maxLength": 2000 }
+            }
+          }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidateIsNotRecommendation", "approvalDoesNotMutateRegistry", "promotionRequiresReview", "noRankingInference"],
+      "properties": {
+        "candidateIsNotRecommendation": { "const": true },
+        "approvalDoesNotMutateRegistry": { "const": true },
+        "promotionRequiresReview": { "const": true },
+        "noRankingInference": { "const": true }
+      }
+    }
+  }
+}
