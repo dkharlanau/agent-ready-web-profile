@@ -50,7 +50,7 @@ assert.equal(refinedIds.has('audit:google-generative-ai-measurement'), false);
 assert.equal(refinedIds.has('audit:webmcp-runtime-tools'), false);
 assert.equal(refinedIds.has('audit:google-sitemap-lastmod'), false, 'healthy canonical-path sitemap resolves a root-scope sitemap warning');
 assert.equal(refined.observations.localSitemap.usedToResolveRootScopeWarning, true);
-assert.equal(refined.summary.totalActions, 5);
+assert.equal(refined.summary.totalActions, 6);
 
 const manifest = compileGrowthPolicy(refined, example);
 assert.equal(manifest.siteClass, 'software-product');
