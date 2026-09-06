@@ -1,0 +1,45 @@
+{
+  "version": "0.1",
+  "title": "ARWP AI Site Bootstrap Bundle",
+  "goal": "Give an AI coding agent a deterministic starting point for preparing an existing website repository under ARWP without cargo-culting every optional surface.",
+  "defaultSkill": "arwp-prepare-site",
+  "requiredSequence": [
+    "inspect-stack",
+    "baseline-audit-growth",
+    "fix-p0-search-blockers",
+    "fix-p1-entity-content-freshness",
+    "add-useful-agent-surfaces",
+    "add-contracts-evidence",
+    "run-site-and-arwp-verification"
+  ],
+  "conditionalArtifacts": [
+    {"id":"organization-jsonld","template":"templates/growth/organization.jsonld","condition":"organization or brand identity is materially useful"},
+    {"id":"article-jsonld","template":"templates/growth/article.jsonld","condition":"article/docs template has visible author/date/provenance fields"},
+    {"id":"preferred-sources","template":"templates/growth/preferred-source.html","condition":"publisher/editorial site wants an explicit Google Preferred Sources CTA"},
+    {"id":"ai-use-policy","template":"templates/growth/robots.ai-search-open-training-closed.txt","condition":"publisher has an explicit AI-use policy and controls the authoritative robots/CDN layer"},
+    {"id":"growth-workflow","template":"templates/growth/github-action.yml","condition":"GitHub Actions is available and a deployed public target exists"},
+    {"id":"growth-issue-workflow","template":"templates/growth/github-action-issue.yml","condition":"team wants recurring actionable GitHub issues and accepts write permissions"}
+  ],
+  "alwaysReview": [
+    "canonical URLs",
+    "HTTP/indexability/noindex",
+    "robots ownership and crawler intent",
+    "XML sitemap and meaningful lastmod",
+    "title/description/social metadata",
+    "visible authorship/date/provenance where relevant",
+    "entity/product class and JSON-LD",
+    "internal links and comparison/category pages",
+    "llms.txt/AGENTS.md/sitemap.md usefulness",
+    "real API/MCP/A2A/WebMCP/ARD capabilities",
+    "measurement and evidence boundaries"
+  ],
+  "neverDo": [
+    "add meta keywords",
+    "invent runtime capabilities",
+    "publish private/internal endpoints",
+    "add FAQ schema solely for ranking hopes",
+    "claim ARWP or special AI files guarantee ranking/citation/recommendation",
+    "mark runtime/browser checks passed without runtime evidence",
+    "treat public observation as publisher adoption"
+  ]
+}
