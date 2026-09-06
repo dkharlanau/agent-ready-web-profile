@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/growth-policy.schema.json",
+  "title": "ARWP Growth Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policyVersion", "target", "goals", "siteClass"],
+  "properties": {
+    "policyVersion": { "const": "0.1" },
+    "target": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "siteClass": {
+      "enum": ["documentation", "editorial", "software-product", "commerce", "local-business", "research-dataset", "general"]
+    },
+    "goals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["googleSearch", "googleGenerativeSearch", "chatgptSearch"],
+      "properties": {
+        "googleSearch": { "type": "boolean" },
+        "googleGenerativeSearch": { "type": "boolean" },
+        "chatgptSearch": { "type": "boolean" },
+        "bingAi": { "type": "boolean", "default": true },
+        "browserAgents": { "type": "boolean", "default": false }
+      }
+    },
+    "aiUsagePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "modelTraining": { "enum": ["allow", "deny", "unspecified"] },
+        "realTimeAiInput": { "enum": ["allow", "deny", "unspecified"] },
+        "contentReuse": { "enum": ["immediate", "reference", "full", "unspecified"] },
+        "emitCloudflareContentSignals": { "type": "boolean", "default": false }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "publisherType": { "enum": ["Organization", "Person", "unspecified"] },
+        "requireSameAs": { "type": "boolean", "default": true },
+        "requireAuthorProfiles": { "type": "boolean", "default": false }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "googleSearchConsole": { "type": "boolean", "default": true },
+        "googleGenerativeAi": { "type": "boolean", "default": true },
+        "bingAiPerformance": { "type": "boolean", "default": true },
+        "socialVideoProperties": { "type": "boolean", "default": false }
+      }
+    },
+    "preferredSources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean", "default": false },
+        "domain": { "type": "string" }
+      }
+    }
+  }
+}
