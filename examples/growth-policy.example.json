@@ -1,0 +1,34 @@
+{
+  "$schema": "../schema/growth-policy.schema.json",
+  "policyVersion": "0.1",
+  "target": "https://example.com/",
+  "siteClass": "software-product",
+  "goals": {
+    "googleSearch": true,
+    "googleGenerativeSearch": true,
+    "chatgptSearch": true,
+    "bingAi": true,
+    "browserAgents": true
+  },
+  "aiUsagePolicy": {
+    "modelTraining": "deny",
+    "realTimeAiInput": "allow",
+    "contentReuse": "reference",
+    "emitCloudflareContentSignals": true
+  },
+  "identity": {
+    "publisherType": "Organization",
+    "requireSameAs": true,
+    "requireAuthorProfiles": true
+  },
+  "measurement": {
+    "googleSearchConsole": true,
+    "googleGenerativeAi": true,
+    "bingAiPerformance": true,
+    "socialVideoProperties": true
+  },
+  "preferredSources": {
+    "enabled": true,
+    "domain": "example.com"
+  }
+}
