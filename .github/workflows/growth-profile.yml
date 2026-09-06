@@ -9,6 +9,7 @@ on:
       - 'registry/trends.json'
       - 'schema/growth-policy.schema.json'
       - 'schema/growth-experiment.schema.json'
+      - 'schema/growth-remediation-manifest.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
@@ -16,12 +17,14 @@ on:
       - 'lib/growth-history.mjs'
       - 'lib/growth-experiment.mjs'
       - 'lib/growth-experiment-ledger.mjs'
+      - 'lib/growth-remediation.mjs'
       - 'lib/trend-radar.mjs'
       - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
       - 'bin/arwp-growth-experiment.mjs'
+      - 'bin/arwp-growth-remediation.mjs'
       - 'bin/arwp-trends.mjs'
       - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
@@ -29,6 +32,7 @@ on:
       - 'scripts/growth-history-test.mjs'
       - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-experiment-ledger-test.mjs'
+      - 'scripts/growth-remediation-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-history-test.mjs'
@@ -39,6 +43,7 @@ on:
       - 'docs/GROWTH-POLICY.md'
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
+      - 'docs/GROWTH-REMEDIATION.md'
       - 'docs/GROWTH-LEARNING.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/TREND-HISTORY.md'
@@ -52,6 +57,7 @@ on:
       - 'registry/trends.json'
       - 'schema/growth-policy.schema.json'
       - 'schema/growth-experiment.schema.json'
+      - 'schema/growth-remediation-manifest.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
@@ -59,12 +65,14 @@ on:
       - 'lib/growth-history.mjs'
       - 'lib/growth-experiment.mjs'
       - 'lib/growth-experiment-ledger.mjs'
+      - 'lib/growth-remediation.mjs'
       - 'lib/trend-radar.mjs'
       - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
       - 'bin/arwp-growth-experiment.mjs'
+      - 'bin/arwp-growth-remediation.mjs'
       - 'bin/arwp-trends.mjs'
       - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
@@ -72,6 +80,7 @@ on:
       - 'scripts/growth-history-test.mjs'
       - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-experiment-ledger-test.mjs'
+      - 'scripts/growth-remediation-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-history-test.mjs'
@@ -82,6 +91,7 @@ on:
       - 'docs/GROWTH-POLICY.md'
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
+      - 'docs/GROWTH-REMEDIATION.md'
       - 'docs/GROWTH-LEARNING.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/TREND-HISTORY.md'
@@ -149,6 +159,14 @@ jobs:
           node --check scripts/growth-experiment-ledger-test.mjs
           node bin/arwp-growth-experiment.mjs --help | grep -q 'status \[<directory>\]'
           node -e "JSON.parse(require('fs').readFileSync('schema/growth-experiment.schema.json','utf8'));"
+      - name: Validate proposal-only Growth remediation
+        run: |
+          node scripts/growth-remediation-test.mjs
+          node --check lib/growth-remediation.mjs
+          node --check bin/arwp-growth-remediation.mjs
+          node --check scripts/growth-remediation-test.mjs
+          node bin/arwp-growth-remediation.mjs --help | grep -q 'proposal-only'
+          node -e "JSON.parse(require('fs').readFileSync('schema/growth-remediation-manifest.schema.json','utf8'));"
       - name: Validate packaged Growth Loop surface
         run: |
           node scripts/growth-package-test.mjs
