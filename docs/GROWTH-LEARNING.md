@@ -46,7 +46,7 @@ arwp-visibility import analytics.csv \
   --output=ai-referrals.visibility.json
 ```
 
-Adapters normalize only supported aggregate metrics that are actually present. Unknown fields stay in the original owner export; ARWP does not invent missing numbers. An unrecognized export remains `partial` rather than being converted into zero evidence.
+Adapters normalize only supported aggregate metrics that are actually present. Unknown fields stay in the original owner export; ARWP does not invent missing numbers. An unrecognized export remains `partial` rather than being converted into zero evidence. The explicit `start`/`end` period is the comparison window; experiment notes should record material confounders that the export itself does not capture.
 
 ## 2. Review primary-source Trend changes
 
@@ -90,7 +90,11 @@ ARWP links experiments to trends through the trend's Growth `actionRefs`. An `AD
 - contains both before and after owner-side visibility evidence;
 - has at least one comparable owner metric.
 
-Positive, negative, mixed and unchanged results all remain in the evidence set. A negative result does not disappear, and a positive result is not automatically called causal.
+Positive, negative, mixed and unchanged results all remain in the evidence set. A negative result does not disappear, and a positive result is not automatically called causal. The report also counts human review decisions and distinct sites so evidence breadth remains inspectable instead of being collapsed into one score.
+
+## 4. Keep maturity changes explicit
+
+Neither `arwp-trends review` nor `arwp-trends measure` rewrites `registry/trends.json`. A maintainer must review the actual source/evidence and make a normal repository change if the lifecycle stage should move. That makes Trend history/diff capture the transition and prevents generated evidence from becoming an unreviewed policy change.
 
 ## Boundaries
 
@@ -100,3 +104,4 @@ Positive, negative, mixed and unchanged results all remain in the evidence set. 
 - Repository adoption counts are not outcome evidence.
 - Owner data stays aggregate in the normalized snapshot.
 - The original export remains the source of truth for dimensions ARWP does not normalize.
+- Time sequence alone never establishes that ARWP caused a Search, citation, recommendation, traffic or conversion change.
