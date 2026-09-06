@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
-import { buildGrowthPlan, formatGrowthPlan } from '../lib/growth-profile.mjs';
+import { buildGrowthPlan, formatGrowthPlan } from '../lib/growth-plan.mjs';
 
 function usage() {
   return `arwp-growth — prioritized Search / AI-search / citation improvement planner
