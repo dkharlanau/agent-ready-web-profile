@@ -160,6 +160,14 @@ jobs:
           grep -q 'google.com/preferences/source?q=example.com' templates/growth/preferred-source.html
           grep -q 'issues: write' templates/growth/github-action-issue.yml
           grep -q 'ARWP_EXPERIMENT_DIR: .arwp-evidence/growth/experiments' templates/growth/github-action-issue.yml
+          grep -q "ARWP_TREND_TIMEOUT_MS: '12000'" templates/growth/github-action-issue.yml
+          grep -q 'Build Trend review queues' templates/growth/github-action-issue.yml
+          grep -q 'WATCH → ADOPT review' templates/growth/github-action-issue.yml
+          grep -q 'ADOPT → MEASURED review' templates/growth/github-action-issue.yml
+          grep -q 'arwp-growth-material-sha256' templates/growth/github-action-issue.yml
+          grep -q 'managed issue left untouched' templates/growth/github-action-issue.yml
+          grep -q 'arwp-trend-promotions.json' templates/growth/github-action-issue.yml
+          grep -q 'arwp-trend-measurement.json' templates/growth/github-action-issue.yml
           grep -q 'Experiment follow-up' templates/growth/github-action-issue.yml
           grep -q 'arwp-experiment-status.json' templates/growth/github-action-issue.yml
           grep -q 'issue.title === process.env.ARWP_ISSUE_TITLE' templates/growth/github-action-issue.yml
