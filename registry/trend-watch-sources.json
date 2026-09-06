@@ -13,8 +13,9 @@
     {
       "id": "google-search-blog",
       "provider": "google",
-      "kind": "discover-feed",
-      "url": "https://developers.google.com/search/blog",
+      "kind": "feed",
+      "url": "https://feeds.feedburner.com/blogspot/amDG",
+      "canonicalPage": "https://developers.google.com/search/blog",
       "reviewedThrough": "2026-09-06",
       "keywords": ["ai", "generative", "search console", "crawler", "index", "ranking", "structured data", "agent", "citation", "content", "spam"]
     },
@@ -37,9 +38,10 @@
     {
       "id": "openai-publishers-developers",
       "provider": "openai",
-      "kind": "page-update",
+      "kind": "manual-page",
       "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
       "reviewedThrough": "2026-09-06",
+      "reason": "The official Help Center currently rejects the GitHub Actions watcher with HTTP 403. Keep the source in the radar, but require explicit primary-source review instead of reporting a daily transport failure.",
       "keywords": ["oai-searchbot", "gptbot", "chatgpt search", "agent", "atlas", "aria", "crawler"]
     },
     {
@@ -55,6 +57,7 @@
     "candidateIsNotRecommendation": true,
     "promotionRequiresReview": true,
     "primarySourceOnly": true,
-    "noAutomaticAdoptPromotion": true
+    "noAutomaticAdoptPromotion": true,
+    "manualSourcesRemainVisible": true
   }
 }
