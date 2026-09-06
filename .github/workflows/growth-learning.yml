@@ -18,6 +18,10 @@ on:
       - 'bin/arwp-trend-promotion.mjs'
       - 'schema/trend-promotion-proposal.schema.json'
       - 'scripts/trend-promotion-test.mjs'
+      - 'lib/trend-measurement.mjs'
+      - 'schema/trend-measurement-evidence.schema.json'
+      - 'scripts/trend-measurement-test.mjs'
+      - 'bin/arwp-trends.mjs'
       - '.github/workflows/growth-learning.yml'
   pull_request:
     paths:
@@ -35,6 +39,10 @@ on:
       - 'bin/arwp-trend-promotion.mjs'
       - 'schema/trend-promotion-proposal.schema.json'
       - 'scripts/trend-promotion-test.mjs'
+      - 'lib/trend-measurement.mjs'
+      - 'schema/trend-measurement-evidence.schema.json'
+      - 'scripts/trend-measurement-test.mjs'
+      - 'bin/arwp-trends.mjs'
       - '.github/workflows/growth-learning.yml'
   workflow_dispatch:
 
@@ -67,7 +75,18 @@ jobs:
           node --check lib/trend-promotion.mjs
           node --check bin/arwp-trend-promotion.mjs
           node --check scripts/trend-promotion-test.mjs
-          node bin/arwp-trend-promotion.mjs --help | grep -q 'WATCH -> ADOPT'
+          node bin/arwp-trends.mjs --help | grep -q 'WATCH -> ADOPT'
+          node bin/arwp-trends.mjs --help | grep -q 'propose <source-watch.json>'
+      - name: Validate Trend MEASURED evidence gate
+        run: |
+          node scripts/trend-measurement-test.mjs
+          node --check lib/trend-measurement.mjs
+          node --check scripts/trend-measurement-test.mjs
+          node --check bin/arwp-trends.mjs
+          node bin/arwp-trends.mjs --help | grep -q 'measure <experiment.json|experiment-directory>'
+          grep -q 'noAutomaticMeasuredPromotion' schema/trend-measurement-evidence.schema.json
+          grep -q 'negativeAndNeutralResultsIncluded' schema/trend-measurement-evidence.schema.json
+          grep -q 'measuredMeansObservedNotPositive' schema/trend-measurement-evidence.schema.json
       - name: Guard against silent promotion
         run: |
           grep -q 'approvalDoesNotMutateRegistry' schema/trend-promotion-proposal.schema.json
