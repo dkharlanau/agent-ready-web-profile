@@ -15,6 +15,7 @@ on:
       - 'lib/growth-policy.mjs'
       - 'lib/growth-history.mjs'
       - 'lib/growth-experiment.mjs'
+      - 'lib/growth-experiment-ledger.mjs'
       - 'lib/trend-radar.mjs'
       - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
@@ -27,6 +28,7 @@ on:
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
       - 'scripts/growth-experiment-test.mjs'
+      - 'scripts/growth-experiment-ledger-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-history-test.mjs'
@@ -37,6 +39,7 @@ on:
       - 'docs/GROWTH-POLICY.md'
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
+      - 'docs/GROWTH-LEARNING.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/TREND-HISTORY.md'
       - 'docs/growth/**'
@@ -55,6 +58,7 @@ on:
       - 'lib/growth-policy.mjs'
       - 'lib/growth-history.mjs'
       - 'lib/growth-experiment.mjs'
+      - 'lib/growth-experiment-ledger.mjs'
       - 'lib/trend-radar.mjs'
       - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
@@ -67,6 +71,7 @@ on:
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
       - 'scripts/growth-experiment-test.mjs'
+      - 'scripts/growth-experiment-ledger-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-history-test.mjs'
@@ -77,6 +82,7 @@ on:
       - 'docs/GROWTH-POLICY.md'
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
+      - 'docs/GROWTH-LEARNING.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/TREND-HISTORY.md'
       - 'docs/growth/**'
@@ -132,12 +138,16 @@ jobs:
           node --check lib/growth-history.mjs
           node --check bin/arwp-growth-history.mjs
           node --check scripts/growth-history-test.mjs
-      - name: Validate Growth experiment evidence loop
+      - name: Validate Growth experiment evidence loop and managed ledger
         run: |
           node scripts/growth-experiment-test.mjs
+          node scripts/growth-experiment-ledger-test.mjs
           node --check lib/growth-experiment.mjs
+          node --check lib/growth-experiment-ledger.mjs
           node --check bin/arwp-growth-experiment.mjs
           node --check scripts/growth-experiment-test.mjs
+          node --check scripts/growth-experiment-ledger-test.mjs
+          node bin/arwp-growth-experiment.mjs --help | grep -q 'status \[<directory>\]'
           node -e "JSON.parse(require('fs').readFileSync('schema/growth-experiment.schema.json','utf8'));"
       - name: Validate packaged Growth Loop surface
         run: |
@@ -149,6 +159,10 @@ jobs:
           grep -q 'Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference' templates/growth/robots.ai-search-open-training-closed.txt
           grep -q 'google.com/preferences/source?q=example.com' templates/growth/preferred-source.html
           grep -q 'issues: write' templates/growth/github-action-issue.yml
+          grep -q 'ARWP_EXPERIMENT_DIR: .arwp-evidence/growth/experiments' templates/growth/github-action-issue.yml
+          grep -q 'Experiment follow-up' templates/growth/github-action-issue.yml
+          grep -q 'arwp-experiment-status.json' templates/growth/github-action-issue.yml
+          grep -q 'issue.title === process.env.ARWP_ISSUE_TITLE' templates/growth/github-action-issue.yml
       - name: Validate public Growth Profile surfaces
         run: |
           node -e "const p=JSON.parse(require('fs').readFileSync('docs/growth/profile.json','utf8')); if (p.profile !== '2026-09-06' || p.guardrails.rankingGuarantee !== false || p.guardrails.aiRecommendationGuarantee !== false) process.exit(1);"
