@@ -4,6 +4,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '11 5 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/trend-watch-sources.json'
+      - 'registry/trends.json'
+      - 'lib/trend-source-watch.mjs'
+      - 'scripts/trend-source-watch.mjs'
+      - 'scripts/trend-source-watch-test.mjs'
+      - '.github/workflows/trend-radar-watch.yml'
 
 permissions:
   contents: read
@@ -63,7 +72,7 @@ jobs:
             const failedText = failed.length
               ? `\n\nSource reachability warnings:\n${failed.map(item => `- ${item.sourceId}: ${item.error || item.status || 'unreachable'}`).join('\n')}`
               : '';
-            const body = `## Primary-source review candidates\n\nThe scheduled ARWP Trend Radar found **${report.summary.candidates}** item(s) newer than the current review cutoff (${report.reviewedThrough}).\n\n${rows}${failedText}\n\n## Review rule\n\nThese are **candidates, not recommendations**. Review the primary source, decide whether the change is relevant to website visibility/citation/agent operability, then update \`registry/trends.json\` as WATCH/ADOPT/RETIRED only with evidence. Never auto-promote to ADOPT.\n\nWorkflow: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = `## Primary-source review candidates\n\nThe scheduled ARWP Trend Radar found **${report.summary.candidates}** item(s) newer than the current review cutoff (${report.reviewedThrough}).\n\n${rows}${failedText}\n\n## Review rule\n\nThese are **candidates, not recommendations**. Review the primary source, decide whether the change is relevant to website visibility/citation/agent operability, then update \`registry/trends.json\` as WATCH/ADOPT/RETIRED only with evidence. Never auto-promote to ADOPT.\n\nWorkflow: ${process.env.GITHUB_SERVER_URL}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
