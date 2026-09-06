@@ -57,11 +57,14 @@ for (const expected of ['arwp audit', 'arwp-growth', 'arwp assert', 'Evidence Re
   assert.match(prepare, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `orchestrator must reference ${expected}`);
 }
 assert.match(prepare, /Do not stop at a plan/i, 'orchestrator must be implementation-oriented');
+assert.match(prepare, /references\/stack-detection\.md/);
+assert.match(prepare, /references\/file-matrix\.md/);
 
 const content = fs.readFileSync(path.join(skillsRoot, 'arwp-ai-search-content', 'SKILL.md'), 'utf8');
 assert.match(content, /non-commodity/i);
 assert.match(content, /primary sources/i);
-assert.match(content, /generic FAQ schema/i);
+assert.match(content, /FAQ only when real recurring questions exist/i);
+assert.match(content, /schema bait/i);
 
 const discovery = fs.readFileSync(path.join(skillsRoot, 'arwp-agent-discovery', 'SKILL.md'), 'utf8');
 for (const mechanism of ['Agent Skills', 'ARD', 'MCP', 'A2A', 'WebMCP', 'OpenAPI']) assert.match(discovery, new RegExp(mechanism, 'i'));
