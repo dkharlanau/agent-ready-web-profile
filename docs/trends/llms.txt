@@ -16,6 +16,7 @@ Lifecycle:
 Recent ADOPT changes:
 - OpenAI publisher/developer guidance: OAI-SearchBot vs GPTBot separation, ChatGPT referral tagging, and WAI-ARIA guidance for ChatGPT Agent in Atlas.
 - Google Generative AI Search Console reporting is available to all websites worldwide as of 2026-08-31.
+- Google Search generative AI control is available worldwide: owners can explicitly include or exclude a property from supported AI Overviews, AI Mode and generative Discover surfaces. Because this is authenticated owner state, ARWP asks the owner to verify it instead of pretending public crawling can observe it.
 - Google updated site-reputation policy enforcement in the EEA.
 - Google Preferred Sources has a custom interactive acquisition button and can surface preferred badges in supported AI Mode / AI Overview experiences.
 
