@@ -1,0 +1,248 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-06",
+  "title": "ARWP Page Semantics Profile",
+  "scope": "Source-backed page-type, structured-data, identity and URL-routing rules for repository agents preparing public websites.",
+  "guardrails": {
+    "classifyBeforeMarkup": true,
+    "visibleContentBeforeMetadata": true,
+    "noUniversalSchemaBundle": true,
+    "noRankingOrRichResultPromise": true,
+    "autofixOnlyFromGroundedFirstPartyFacts": true,
+    "doNotInventOwnerData": true
+  },
+  "remediationContract": [
+    "problem",
+    "evidence",
+    "risk",
+    "recommendedChange",
+    "files",
+    "autofix",
+    "verification",
+    "source"
+  ],
+  "entityGraph": {
+    "idPolicy": "Use stable absolute canonical URLs and stable fragments when useful (#website, #organization, #person, #term); reuse the same @id for the same entity.",
+    "sameAs": "Only unambiguous identity aliases, never topical/category links.",
+    "relations": [
+      "mainEntity",
+      "author",
+      "publisher",
+      "about",
+      "mentions",
+      "isPartOf",
+      "subjectOf",
+      "inDefinedTermSet",
+      "hasDefinedTerm"
+    ]
+  },
+  "rules": [
+    {
+      "id": "structured-data-visible-parity",
+      "applies": "any structured data",
+      "rule": "Choose markup after page classification. Properties must be accurate and supported by visible first-party content; fewer complete/accurate properties beat large inaccurate graphs.",
+      "autofix": "grounded-only",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+      "more": [
+        "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+      ]
+    },
+    {
+      "id": "site-publisher-identity",
+      "applies": "site home/publisher",
+      "rule": "Use one coherent WebSite identity and one real publisher Person/Organization identity; use the most specific organization subtype when it genuinely applies.",
+      "autofix": "existing-identity-only",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/site-names",
+      "more": [
+        "https://developers.google.com/search/docs/appearance/structured-data/organization"
+      ]
+    },
+    {
+      "id": "authorship-profile-identity",
+      "applies": "attributable editorial content",
+      "rule": "Keep visible authorship, Article-family author Person/Organization, author.url and real ProfilePage identity consistent. Never invent biography or credentials.",
+      "autofix": "existing-author-data-only",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/article",
+      "more": [
+        "https://developers.google.com/search/docs/appearance/structured-data/profile-page"
+      ]
+    },
+    {
+      "id": "publication-date-consistency",
+      "applies": "dated content",
+      "rule": "Keep visible Published/Updated labels, datePublished/dateModified and sitemap lastmod truthful; do not churn freshness timestamps on every build.",
+      "autofix": "requires-content-history-evidence",
+      "source": "https://developers.google.com/search/docs/appearance/publication-dates",
+      "more": [
+        "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+      ]
+    },
+    {
+      "id": "event-leaf-pages",
+      "applies": "real events",
+      "rule": "When targeting Google event features, each event needs a unique useful leaf URL focused on one event; visible name/start/location must match Event markup.",
+      "autofix": "existing-event-data-only",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/event"
+    },
+    {
+      "id": "dataset-provenance",
+      "applies": "genuine datasets",
+      "rule": "Use Dataset for dataset-shaped assets and preserve creator/publisher, identifier, license, distribution and provenance when known; citation is for related publications, not the dataset's own identity.",
+      "autofix": "existing-dataset-metadata-only",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/dataset"
+    },
+    {
+      "id": "canonical-sitemap-contract",
+      "applies": "indexable routes",
+      "rule": "Canonical tags, internal links and sitemap inventory should converge on intended canonical URLs; keep redirects, noindex and accidental duplicate variants out of the canonical sitemap.",
+      "autofix": "safe-after-route-inventory",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/canonicalization",
+      "more": [
+        "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+      ]
+    },
+    {
+      "id": "hreflang-localization-contract",
+      "applies": "real localized/regional variants",
+      "rule": "Use separate localized URLs and one maintainable hreflang mechanism with reciprocal plus self references. HTML, headers and sitemap are alternatives, not stackable ranking layers.",
+      "autofix": "requires-localized-route-map",
+      "source": "https://developers.google.com/search/docs/specialty/international/localized-versions"
+    },
+    {
+      "id": "search-ai-preview-controls",
+      "applies": "snippet/AI-preview policy",
+      "rule": "Treat nosnippet, max-snippet, data-nosnippet and max-image-preview as intentional publisher controls; surface restrictive settings rather than silently applying them.",
+      "autofix": "policy-dependent",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+      "more": [
+        "https://blogs.bing.com/webmaster/October-2025/Bing-Introduces-Support-for-the-data-nosnippet-HTML-Attribute",
+        "https://developers.google.com/search/docs/appearance/google-discover"
+      ]
+    },
+    {
+      "id": "defined-term-graph",
+      "applies": "real glossary/taxonomy/controlled vocabulary",
+      "rule": "Use DefinedTerm and DefinedTermSet for stable term identity, definitions and membership when the site has a genuine vocabulary; this is semantic graphing, not a Google rich-result promise.",
+      "autofix": "existing-term-content-only",
+      "source": "https://schema.org/DefinedTerm",
+      "more": [
+        "https://schema.org/DefinedTermSet",
+        "https://schema.org/version/latest"
+      ]
+    },
+    {
+      "id": "structured-data-cargo-cult",
+      "applies": "legacy or generated SEO markup",
+      "rule": "Remove obsolete feature-only markup when it has no semantic value. Do not add universal FAQ/HowTo, fake reviews/ratings/offers, or SearchAction solely for the retired Google sitelinks search box.",
+      "autofix": "safe-only-for-clearly-obsolete-feature-only-markup",
+      "source": "https://developers.google.com/search/blog/2024/10/sitelinks-search-box",
+      "more": [
+        "https://developers.google.com/search/blog/2023/08/howto-faq-changes",
+        "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "site-home",
+      "types": ["WebSite"],
+      "adjacent": ["Organization", "Person"],
+      "createMissing": "no",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/site-names"
+    },
+    {
+      "id": "organization",
+      "types": ["Organization"],
+      "adjacent": ["LocalBusiness"],
+      "createMissing": "only-if-useful-to-users",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/organization"
+    },
+    {
+      "id": "article-editorial",
+      "types": ["Article", "BlogPosting", "NewsArticle", "TechArticle"],
+      "createMissing": "no",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/article"
+    },
+    {
+      "id": "author-profile",
+      "types": ["ProfilePage"],
+      "mainEntity": ["Person", "Organization"],
+      "createMissing": "only-for-real-recurring-contributor-with-useful-first-party-profile-data",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/profile-page"
+    },
+    {
+      "id": "event",
+      "types": ["Event"],
+      "createMissing": "yes-when-real-event-lacks-useful-detail-page",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/event"
+    },
+    {
+      "id": "dataset",
+      "types": ["Dataset"],
+      "adjacent": ["DataDownload", "DataCatalog"],
+      "createMissing": "yes-when-real-dataset-lacks-stable-description-page",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/dataset"
+    },
+    {
+      "id": "software-application",
+      "types": ["SoftwareApplication"],
+      "createMissing": "only-for-real-software-product-surface",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/software-app"
+    },
+    {
+      "id": "product",
+      "types": ["Product"],
+      "createMissing": "only-for-real-product-surface",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/product-snippet"
+    },
+    {
+      "id": "video-watch",
+      "types": ["VideoObject"],
+      "createMissing": "yes-only-for-important-real-video-without-watch-page",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/video"
+    },
+    {
+      "id": "breadcrumb",
+      "types": ["BreadcrumbList"],
+      "createMissing": "no",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb"
+    },
+    {
+      "id": "glossary-term",
+      "types": ["DefinedTerm"],
+      "createMissing": "only-if-definition-page-has-user-value",
+      "source": "https://schema.org/DefinedTerm"
+    },
+    {
+      "id": "glossary-index",
+      "types": ["DefinedTermSet"],
+      "createMissing": "only-if-real-vocabulary-hub-has-user-value",
+      "source": "https://schema.org/DefinedTermSet"
+    },
+    {
+      "id": "community-qa",
+      "types": ["QAPage", "DiscussionForumPosting"],
+      "createMissing": "no-synthetic-conversion",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/qapage",
+      "more": ["https://developers.google.com/search/docs/appearance/structured-data/discussion-forum"]
+    },
+    {
+      "id": "collection-list",
+      "types": ["ItemList"],
+      "createMissing": "only-if-hub-improves-navigation",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/carousels-beta"
+    }
+  ],
+  "antiPatterns": [
+    "universal JSON-LD bundle",
+    "machine-only facts absent from visible content",
+    "invented authors/reviewers/dates/prices/availability/ratings/reviews/event facts",
+    "conflicting duplicate entity nodes",
+    "SearchAction only for retired sitelinks search box",
+    "FAQPage/HowTo added universally for rich-result hopes",
+    "dateModified/lastmod churn on every build",
+    "redirect/noindex/non-canonical URLs in canonical sitemap",
+    "sameAs used for topical links",
+    "thin author/event/glossary pages created only for bots"
+  ]
+}

@@ -29,6 +29,8 @@ node bin/arwp-hypotheses.mjs list --vertical=general
 
 When network access exists, review current primary sources for the target surfaces. Prefer official platform documentation and specifications. Classify a mechanism as platform requirement, platform guidance, platform feature, platform measurement, or project experiment. Newness alone is not evidence.
 
+For page-level structured data, identity, canonicalization, authorship, events, datasets, localization or terminology, load `registry/page-semantics-profiles.json` (or the published `recommendations/page-semantics.json`). Treat it as an implementation-routing profile, not as a ranking hypothesis.
+
 2. **Establish the site baseline.** Inspect framework, deployment, public root, routes, content architecture, metadata, sitemap/robots, structured data, images/video, crawler policy, existing agent surfaces and owner-side metrics where available. Then run:
 
 ```bash
@@ -37,20 +39,33 @@ node bin/arwp-growth.mjs https://example.com --vertical=<vertical> --json
 
 Do not infer Google/Bing/ChatGPT visibility from repository metadata.
 
+When page semantics are relevant, inventory the important route archetypes and identify reusable canonical entities before editing templates. Classify pages such as site-home, organization, article-editorial, author-profile, event, dataset, software-application, product, video-watch, glossary-term/glossary-index, community-qa and collection-list. Do not install a universal JSON-LD bundle.
+
 3. **Select hypotheses, not cargo cult.** Choose the smallest applicable hypothesis set that has a clear implementation change, checkable completion condition and observable success signal. Platform requirements and high-confidence guidance come before optional features or experiments.
+
+Structured-data correctness is a baseline contract, not an excuse to maximize schema volume. Remove obsolete feature-only markup when appropriate and never fabricate authors, dates, prices, ratings, reviews, event facts, organization facts or dataset provenance.
 
 4. **Implement highest-confidence changes.** Typical order:
    - Search/AI/Discover eligibility blockers;
    - canonical URLs, sitemap and meaningful freshness;
+   - canonical/sitemap/indexability consistency and reciprocal/self `hreflang` for real localized variants;
    - non-commodity content and original evidence;
    - resolvable identity, authorship and provenance;
+   - stable WebSite/publisher/author/product/dataset/term identities and page-specific JSON-LD grounded in visible first-party facts;
+   - unique useful event leaf pages for real events when targeting event features;
+   - real Dataset provenance and DefinedTerm/DefinedTermSet graphs where the site's content model actually contains them;
    - deep-linkable sections and internal links;
    - relevant large images/video when a target surface benefits;
    - Preferred Sources or other bounded acquisition features when applicable;
+   - snippet/AI-preview controls only when they match publisher policy;
    - crawler/freshness mechanisms that match publisher policy;
    - agent interoperability only for real agent use cases.
 
+For each material route-level change, record `problem → evidence → risk → recommendedChange → files → autofix → verification → source`. Autofix only when the required facts already exist. Otherwise leave an explicit owner-data gate.
+
 5. **Verify.** Run the site's own build/tests/lint and relevant ARWP checks. For each selected hypothesis, distinguish `pass`, `fail`, `manual-pass`, `manual-fail`, `external-owner-data`, `not-applicable` and `watch`. Never call a manual or owner-data check automated.
+
+For semantic/template changes also parse generated JSON-LD, compare it with the rendered visible content, and check canonical/indexability/sitemap/hreflang consistency on changed routes. Use current feature-specific external validators or Search Console/Bing tools where owner access exists.
 
 6. **Measure.** Where owner data exists, compare the relevant Google Search/generative/Discover signals, Bing AI citations and grounding-query samples, ChatGPT referral traffic/citations, image/video discovery, conversions and agent task completion. Choose a sensible before/after window. Do not automatically attribute movement to ARWP.
 

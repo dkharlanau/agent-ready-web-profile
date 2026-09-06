@@ -8,16 +8,15 @@
       "kind": "feed",
       "url": "https://developers.google.com/search/updates/search_docs_updates.rss",
       "reviewedThrough": "2026-09-06",
-      "keywords": ["ai", "generative", "search console", "preferred source", "structured data", "crawler", "robots", "index", "citation", "social", "video", "ranking", "spam", "reputation"]
+      "keywords": ["ai", "generative", "search console", "preferred source", "structured data", "crawler", "robots", "index", "citation", "social", "video", "ranking", "spam", "reputation", "canonical", "hreflang", "author", "event", "dataset"]
     },
     {
       "id": "google-search-blog",
       "provider": "google",
-      "kind": "feed",
-      "url": "https://feeds.feedburner.com/blogspot/amDG",
-      "canonicalPage": "https://developers.google.com/search/blog",
+      "kind": "discover-feed",
+      "url": "https://developers.google.com/search/blog",
       "reviewedThrough": "2026-09-06",
-      "keywords": ["ai", "generative", "search console", "crawler", "index", "ranking", "structured data", "agent", "citation", "content", "spam"]
+      "keywords": ["ai", "generative", "search console", "crawler", "index", "ranking", "structured data", "agent", "citation", "content", "spam", "canonical", "author", "event", "dataset"]
     },
     {
       "id": "bing-webmaster-blog",
@@ -25,7 +24,23 @@
       "kind": "discover-feed",
       "url": "https://blogs.bing.com/webmaster",
       "reviewedThrough": "2026-09-06",
-      "keywords": ["ai", "copilot", "citation", "grounding", "indexnow", "search", "crawler", "ranking", "webmaster"]
+      "keywords": ["ai", "copilot", "citation", "grounding", "indexnow", "search", "crawler", "ranking", "webmaster", "structured data", "snippet"]
+    },
+    {
+      "id": "schemaorg-latest-release",
+      "provider": "schema.org",
+      "kind": "page-update",
+      "url": "https://schema.org/version/latest",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["DefinedTerm", "DefinedTermSet", "Person", "Organization", "Event", "Dataset", "SoftwareApplication", "Product", "CreativeWork", "sameAs", "schema"]
+    },
+    {
+      "id": "indexnow-documentation",
+      "provider": "indexnow",
+      "kind": "page-update",
+      "url": "https://www.indexnow.org/documentation",
+      "reviewedThrough": "2026-09-06",
+      "keywords": ["indexnow", "url changed", "updated", "deleted", "key", "endpoint", "search engine"]
     },
     {
       "id": "chrome-webmcp",
@@ -38,10 +53,9 @@
     {
       "id": "openai-publishers-developers",
       "provider": "openai",
-      "kind": "manual-page",
+      "kind": "page-update",
       "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
       "reviewedThrough": "2026-09-06",
-      "reason": "The official Help Center currently rejects the GitHub Actions watcher with HTTP 403. Keep the source in the radar, but require explicit primary-source review instead of reporting a daily transport failure.",
       "keywords": ["oai-searchbot", "gptbot", "chatgpt search", "agent", "atlas", "aria", "crawler"]
     },
     {
@@ -57,7 +71,6 @@
     "candidateIsNotRecommendation": true,
     "promotionRequiresReview": true,
     "primarySourceOnly": true,
-    "noAutomaticAdoptPromotion": true,
-    "manualSourcesRemainVisible": true
+    "noAutomaticAdoptPromotion": true
   }
 }
