@@ -16,17 +16,20 @@ on:
       - 'lib/growth-history.mjs'
       - 'lib/growth-experiment.mjs'
       - 'lib/trend-radar.mjs'
+      - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
       - 'bin/arwp-growth-experiment.mjs'
       - 'bin/arwp-trends.mjs'
+      - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
       - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
+      - 'scripts/trend-history-test.mjs'
       - 'scripts/trend-package-test.mjs'
       - 'package.json'
       - 'templates/growth/**'
@@ -35,6 +38,7 @@ on:
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
       - 'docs/TREND-RADAR.md'
+      - 'docs/TREND-HISTORY.md'
       - 'docs/growth/**'
       - 'docs/trends/**'
       - '.github/workflows/growth-profile.yml'
@@ -52,17 +56,20 @@ on:
       - 'lib/growth-history.mjs'
       - 'lib/growth-experiment.mjs'
       - 'lib/trend-radar.mjs'
+      - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
       - 'bin/arwp-growth-history.mjs'
       - 'bin/arwp-growth-experiment.mjs'
       - 'bin/arwp-trends.mjs'
+      - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
       - 'scripts/growth-history-test.mjs'
       - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
+      - 'scripts/trend-history-test.mjs'
       - 'scripts/trend-package-test.mjs'
       - 'package.json'
       - 'templates/growth/**'
@@ -71,6 +78,7 @@ on:
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
       - 'docs/TREND-RADAR.md'
+      - 'docs/TREND-HISTORY.md'
       - 'docs/growth/**'
       - 'docs/trends/**'
       - '.github/workflows/growth-profile.yml'
@@ -96,14 +104,18 @@ jobs:
           node --check lib/growth-plan.mjs
           node --check bin/arwp-growth.mjs
           node --check scripts/growth-profile-test.mjs
-      - name: Validate Trend Radar registry, lifecycle, package surface and public snapshot
+      - name: Validate Trend Radar registry, lifecycle, package surface and history
         run: |
           node scripts/trend-radar-test.mjs
+          node scripts/trend-history-test.mjs
           node scripts/trend-package-test.mjs
           node bin/arwp-trends.mjs check
           node --check lib/trend-radar.mjs
+          node --check lib/trend-history.mjs
           node --check bin/arwp-trends.mjs
+          node --check bin/arwp-trend-history.mjs
           node --check scripts/trend-radar-test.mjs
+          node --check scripts/trend-history-test.mjs
           node --check scripts/trend-package-test.mjs
           cmp registry/trends.json docs/trends/trends.json
           grep -q 'Find the Search and AI changes worth acting on' docs/trends/index.html
