@@ -29,14 +29,16 @@ KEEP / REVISE / REVERT / RETIRE
 
 ARWP may create site-specific work for classic Search, Google generative Search, Discover and image/video surfaces, Bing AI/Microsoft surfaces, ChatGPT Search/referrals, and compatible agent retrieval/tooling. Provider-specific guidance remains provider-specific.
 
-## Four evidence layers
+## Evidence layers
 
 1. `registry/search-agent-recommendations.json` records dated upstream requirements and opportunities.
 2. `registry/trends.json` records recent changes and WATCH/ADOPT/MEASURED status.
 3. `registry/growth-hypotheses.json` states why a mechanism may matter, where it applies, how to test it and what outcome signal to observe.
 4. `arwp-growth` audits a real site and produces concrete P0–P3 actions.
+5. Growth snapshots and experiments record implementation state over time.
+6. Owner-side visibility snapshots record aggregate Search/AI outcomes that public crawling cannot infer.
 
-Owner-side performance is a fifth, external layer. It must not be inferred from repository metadata.
+These layers are deliberately separate. A trend is not a hypothesis, an implementation is not an outcome, and an observed outcome is not automatic causality.
 
 ## Hypothesis lifecycle
 
@@ -53,9 +55,9 @@ A hypothesis is not a ranking claim. It has:
 Use:
 
 ```bash
-node bin/arwp-hypotheses.mjs check
-node bin/arwp-hypotheses.mjs list --vertical=editorial
-node bin/arwp-hypotheses.mjs show discover-visual-preview
+arwp-hypotheses check
+arwp-hypotheses list --vertical=editorial
+arwp-hypotheses show discover-visual-preview
 ```
 
 Default Growth planning excludes `project-experiment` hypotheses. Experiments remain available for explicit research/agent interoperability work.
@@ -81,6 +83,50 @@ arwp-growth-experiment evaluate experiment.json \
 
 Evaluation records implementation debt movement and owner-side metric direction, but always marks the result for review. Positive movement is an observation, not automatic evidence of causality or a reason to promote a hypothesis. See `docs/GROWTH-EXPERIMENTS.md`.
 
+## Owner-side evidence import
+
+Owner exports can be normalized into the existing visibility contract without requiring API credentials:
+
+```bash
+arwp-visibility import google.csv --provider=google \
+  --site=https://example.com/ --start=2026-08-01 --end=2026-08-31 \
+  --output=google.visibility.json
+
+arwp-visibility import bing.csv --provider=bing \
+  --site=https://example.com/ --start=2026-08-01 --end=2026-08-31 \
+  --output=bing.visibility.json
+
+arwp-visibility import analytics.csv --provider=referrals \
+  --site=https://example.com/ --start=2026-08-01 --end=2026-08-31 \
+  --match=chatgpt.com,perplexity.ai --output=referrals.visibility.json
+```
+
+Only recognized aggregate metrics are normalized. Unknown dimensions remain in the original export; missing metrics are not converted to zero.
+
+## Trend lifecycle review
+
+Primary-source monitoring can create review proposals for current `WATCH` trends:
+
+```bash
+node scripts/trend-source-watch.mjs --output=trend-watch.json
+arwp-trends propose trend-watch.json --output=trend-promotions.json
+arwp-trends review trend-promotions.json \
+  --id=<proposal-id> --decision=approve --reviewer=<name> \
+  --output=trend-promotions.reviewed.json
+```
+
+Approval records a human decision but deliberately does not mutate `registry/trends.json`.
+
+After reviewed Growth experiments accumulate, ARWP can check whether an `ADOPT` trend has real owner-side longitudinal evidence:
+
+```bash
+arwp-trends measure experiments/ --output=trend-measurement.json
+```
+
+An `ADOPT -> MEASURED` proposal requires a reviewed linked experiment with before/after owner visibility evidence and at least one comparable metric. Positive, negative, mixed and unchanged observations all remain in the evidence set. `MEASURED` means evidence exists; it is not a positive-effect label.
+
+See `docs/GROWTH-LEARNING.md` for the complete workflow.
+
 ## Decision order
 
 1. Eligibility and policy blockers.
@@ -105,8 +151,9 @@ Use:
 - `templates/growth/hypothesis-ledger.md` for lightweight before/after observations and keep/revise/revert decisions;
 - `arwp-growth-history` for immutable implementation-state snapshots and diffs;
 - `arwp-growth-experiment` for versioned hypothesis → action → implementation → outcome records;
-- Evidence Receipts for stable technical observations;
-- owner exports/visibility snapshots for Search/AI outcome evidence.
+- `arwp-visibility import` for aggregate owner-side Search/AI evidence;
+- `arwp-trends propose|review|measure` for explicit Trend lifecycle evidence;
+- Evidence Receipts for stable technical observations.
 
 Negative or neutral evidence is not a failure of the methodology. It is how weak hypotheses stop accumulating as permanent “SEO best practices.”
 
