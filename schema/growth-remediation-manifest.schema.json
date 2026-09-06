@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/growth-remediation-manifest.schema.json",
+  "title": "ARWP Growth Remediation Manifest v0.1",
+  "description": "Proposal-only remediation plan derived from an ARWP Growth plan. It may carry reviewed template snippets, but never authorizes or performs target-repository mutation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "site", "profile", "summary", "items", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "profile": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "withSnippet", "byDisposition"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "withSnippet": { "type": "integer", "minimum": 0 },
+        "byDisposition": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 200,
+      "items": { "$ref": "#/$defs/item" }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "writesTargetRepository",
+        "requiresExplicitAuthorizationBeforeMutation",
+        "robotsPolicyNeedsHumanReview",
+        "structuredDataNeedsHumanReview",
+        "editorialContentNeedsHumanReview",
+        "externalOwnerControlsNeverAutomated",
+        "templatePlaceholdersRemainUnresolved",
+        "noRankingGuarantee"
+      ],
+      "properties": {
+        "writesTargetRepository": { "const": false },
+        "requiresExplicitAuthorizationBeforeMutation": { "const": true },
+        "robotsPolicyNeedsHumanReview": { "const": true },
+        "structuredDataNeedsHumanReview": { "const": true },
+        "editorialContentNeedsHumanReview": { "const": true },
+        "externalOwnerControlsNeverAutomated": { "const": true },
+        "templatePlaceholdersRemainUnresolved": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actionId", "priority", "lane", "title", "status", "disposition", "automation", "humanReviewRequired", "reason", "implementation", "warnings"],
+      "properties": {
+        "actionId": { "type": "string", "minLength": 2, "maxLength": 200 },
+        "priority": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "lane": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "status": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "policy-review",
+            "structured-data-proposal",
+            "template-proposal",
+            "external-link-proposal",
+            "external-owner-review",
+            "manual-review",
+            "advisory",
+            "blocked-unsafe-reference"
+          ]
+        },
+        "automation": { "const": "proposal-only" },
+        "humanReviewRequired": { "const": true },
+        "reason": { "type": "string", "maxLength": 4000 },
+        "source": { "type": "string", "format": "uri" },
+        "implementation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["targetKind"],
+          "properties": {
+            "targetKind": { "type": "string", "enum": ["file", "template", "url", "field", "surface", "advisory"] },
+            "target": { "type": "string", "maxLength": 1000 },
+            "templateRef": { "type": "string", "maxLength": 500 },
+            "templateSha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+            "snippet": { "type": "string", "maxLength": 100000 },
+            "placement": { "type": "string", "maxLength": 1000 },
+            "note": { "type": "string", "maxLength": 4000 }
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 1000 }
+        }
+      }
+    }
+  }
+}
