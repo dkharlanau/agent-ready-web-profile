@@ -5,21 +5,37 @@ on:
     branches: [main]
     paths:
       - 'registry/growth-opportunities.json'
+      - 'registry/growth-verticals.json'
+      - 'schema/growth-policy.schema.json'
+      - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
+      - 'lib/growth-plan.mjs'
+      - 'lib/growth-policy.mjs'
       - 'bin/arwp-growth.mjs'
+      - 'bin/arwp-growth-policy.mjs'
       - 'scripts/growth-profile-test.mjs'
+      - 'scripts/growth-policy-test.mjs'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
+      - 'docs/GROWTH-POLICY.md'
       - 'docs/growth/**'
       - '.github/workflows/growth-profile.yml'
   pull_request:
     paths:
       - 'registry/growth-opportunities.json'
+      - 'registry/growth-verticals.json'
+      - 'schema/growth-policy.schema.json'
+      - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
+      - 'lib/growth-plan.mjs'
+      - 'lib/growth-policy.mjs'
       - 'bin/arwp-growth.mjs'
+      - 'bin/arwp-growth-policy.mjs'
       - 'scripts/growth-profile-test.mjs'
+      - 'scripts/growth-policy-test.mjs'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
+      - 'docs/GROWTH-POLICY.md'
       - 'docs/growth/**'
       - '.github/workflows/growth-profile.yml'
 
@@ -41,8 +57,15 @@ jobs:
         run: |
           node scripts/growth-profile-test.mjs
           node --check lib/growth-profile.mjs
+          node --check lib/growth-plan.mjs
           node --check bin/arwp-growth.mjs
           node --check scripts/growth-profile-test.mjs
+      - name: Validate Growth Policy contract, verticals and compiler
+        run: |
+          node scripts/growth-policy-test.mjs
+          node --check lib/growth-policy.mjs
+          node --check bin/arwp-growth-policy.mjs
+          node --check scripts/growth-policy-test.mjs
       - name: Validate shipped templates
         run: |
           node -e "JSON.parse(require('fs').readFileSync('templates/growth/organization.jsonld','utf8')); JSON.parse(require('fs').readFileSync('templates/growth/article.jsonld','utf8'));"
