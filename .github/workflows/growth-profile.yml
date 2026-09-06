@@ -11,10 +11,13 @@ on:
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-policy.mjs'
+      - 'lib/growth-history.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
+      - 'bin/arwp-growth-history.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
+      - 'scripts/growth-history-test.mjs'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
@@ -29,10 +32,13 @@ on:
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-policy.mjs'
+      - 'lib/growth-history.mjs'
       - 'bin/arwp-growth.mjs'
       - 'bin/arwp-growth-policy.mjs'
+      - 'bin/arwp-growth-history.mjs'
       - 'scripts/growth-profile-test.mjs'
       - 'scripts/growth-policy-test.mjs'
+      - 'scripts/growth-history-test.mjs'
       - 'templates/growth/**'
       - 'docs/GROWTH-PROFILE.md'
       - 'docs/GROWTH-POLICY.md'
@@ -66,13 +72,21 @@ jobs:
           node --check lib/growth-policy.mjs
           node --check bin/arwp-growth-policy.mjs
           node --check scripts/growth-policy-test.mjs
+      - name: Validate Growth history and implementation-state diff
+        run: |
+          node scripts/growth-history-test.mjs
+          node --check lib/growth-history.mjs
+          node --check bin/arwp-growth-history.mjs
+          node --check scripts/growth-history-test.mjs
       - name: Validate shipped templates
         run: |
           node -e "JSON.parse(require('fs').readFileSync('templates/growth/organization.jsonld','utf8')); JSON.parse(require('fs').readFileSync('templates/growth/article.jsonld','utf8'));"
           grep -q 'Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference' templates/growth/robots.ai-search-open-training-closed.txt
           grep -q 'google.com/preferences/source?q=example.com' templates/growth/preferred-source.html
+          grep -q 'issues: write' templates/growth/github-action-issue.yml
       - name: Validate public Growth Profile surfaces
         run: |
           node -e "const p=JSON.parse(require('fs').readFileSync('docs/growth/profile.json','utf8')); if (p.profile !== '2026-09-06' || p.guardrails.rankingGuarantee !== false || p.guardrails.aiRecommendationGuarantee !== false) process.exit(1);"
           grep -q 'Connect a site. Get a defensible improvement backlog.' docs/growth/index.html
           grep -q 'no universal quality/readiness score' docs/growth/llms.txt
+          grep -q 'Tell ARWP what the site is actually trying to achieve.' docs/growth/policy.html
