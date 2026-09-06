@@ -15,7 +15,7 @@ The portfolio layer is operational metadata. It is not an adoption directory, qu
 - rollout mode;
 - optional provider allowlists and trend exclusions.
 
-The current owner portfolio contains five public sites. Two are configured for managed Growth operation and three remain proposal-only until explicitly promoted.
+The current owner portfolio contains five public sites. Three are configured for managed Growth operation and two remain proposal-only until explicitly promoted.
 
 ## Rollout rules
 

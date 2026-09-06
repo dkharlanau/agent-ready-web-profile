@@ -45,7 +45,7 @@
       "repository": "Cognitive-Biases/cognitive-biases.github.io",
       "verticals": ["editorial", "research-dataset"],
       "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-discovery"],
-      "rollout": { "enabled": true, "mode": "proposal-only" }
+      "rollout": { "enabled": true, "mode": "managed-issue" }
     },
     {
       "id": "cbt-cards-public-reflection",

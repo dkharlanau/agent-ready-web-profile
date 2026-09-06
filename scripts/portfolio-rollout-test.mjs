@@ -13,7 +13,7 @@ const now = '2026-09-06T12:00:00Z';
 const validation = validatePortfolioRegistry(portfolio);
 assert.equal(validation.valid, true, JSON.stringify(validation));
 assert.equal(portfolio.sites.length, 5);
-assert.equal(portfolio.sites.filter(site => site.rollout.mode === 'managed-issue').length, 2);
+assert.equal(portfolio.sites.filter(site => site.rollout.mode === 'managed-issue').length, 3);
 
 const rollout = buildPortfolioRollout(portfolio, trends, { now });
 assert.ok(rollout.candidates.length > 0);
@@ -25,6 +25,7 @@ assert.ok(rollout.candidates.every(item => item.requiresSiteAudit === true));
 assert.ok(rollout.candidates.every(item => item.evidenceClass === 'owner-controlled-portfolio'));
 assert.ok(rollout.candidates.some(item => item.siteId === 'dkharlanau-sap-knowledge' && item.rolloutMode === 'managed-issue'));
 assert.ok(rollout.candidates.some(item => item.siteId === 'metkagram-language-knowledge' && item.rolloutMode === 'managed-issue'));
+assert.ok(rollout.candidates.some(item => item.siteId === 'cognitive-biases-knowledge' && item.rolloutMode === 'managed-issue'));
 assert.ok(!rollout.candidates.some(item => item.stage === 'watch' || item.stage === 'retired'));
 
 const watchWithoutOptIn = buildPortfolioRollout(portfolio, trends, {

@@ -60,7 +60,7 @@ jobs:
           if (p.candidates.some(item => item.stage === 'watch' || item.stage === 'retired')) throw new Error('WATCH/retired leaked into default rollout');
           if (p.candidates.some(item => item.productionMutationAllowed !== false)) throw new Error('portfolio rollout must never authorize production mutation');
           const managed = new Set(p.candidates.filter(item => item.rolloutMode === 'managed-issue').map(item => item.siteId));
-          if (!managed.has('dkharlanau-sap-knowledge') || !managed.has('metkagram-language-knowledge')) throw new Error('managed rollout sites missing');
+          if (!managed.has('dkharlanau-sap-knowledge') || !managed.has('metkagram-language-knowledge') || !managed.has('cognitive-biases-knowledge')) throw new Error('managed rollout sites missing');
           NODE
       - name: Upload rollout evidence
         uses: actions/upload-artifact@v6
