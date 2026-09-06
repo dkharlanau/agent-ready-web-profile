@@ -1,3 +1,64 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="ARWP Growth Profile turns current Search, AI-search, citation and agent-web guidance into a prioritized website improvement plan without a fake readiness score."><title>ARWP Growth Profile</title><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/growth/"><link rel="stylesheet" href="../citation.css"></head><body><main class="cite-main shell"><header class="cite-hero"><p class="eyebrow">ARWP Growth</p><h1>Connect a site. Get a defensible improvement backlog.</h1><p class="cite-lead">The Growth Profile combines observable Search/AI-access blockers with current platform guidance, editorial quality contracts, identity metadata, measurement and agent interoperability. It produces priorities, not a universal score.</p></header><section class="cite-card"><h2>What it optimizes</h2><div class="term-grid"><div class="term-card"><strong>Search eligibility</strong><span>HTTP/indexability, robots access, snippet eligibility, canonical/freshness foundations.</span></div><div class="term-card"><strong>AI discoverability</strong><span>OAI-SearchBot access, provider-specific AI use policy, Preferred Sources and citation-ready sections.</span></div><div class="term-card"><strong>Entity identity</strong><span>Organization/Person identity, author profile links, sameAs and structured publication metadata.</span></div><div class="term-card"><strong>Content quality</strong><span>Human review for non-commodity value, first-hand evidence, who/how/why, useful visual proof and topical purpose.</span></div><div class="term-card"><strong>Measurement</strong><span>Google Generative AI performance, Bing AI Performance and social/video Search Console properties.</span></div><div class="term-card"><strong>Agent operability</strong><span>ARWP/ARD/MCP/A2A/WebMCP as interoperability capabilities, never mislabeled as Google ranking factors.</span></div></div></section><section class="cite-grid"><div class="cite-card"><h2>Run it</h2><pre><code>node bin/arwp-growth.mjs https://example.com
-node bin/arwp-growth.mjs https://example.com --json
-node bin/arwp-growth.mjs https://example.com --output=arwp-growth.json</code></pre><p>For a recurring loop, copy <code>templates/growth/github-action.yml</code> into the target website repository and set <code>ARWP_TARGET</code>.</p></div><div class="cite-card"><h2>Priority model</h2><ul class="cite-list"><li><strong>P0</strong> — observable eligibility blocker.</li><li><strong>P1</strong> — high-value quality, identity, access, freshness or governance action.</li><li><strong>P2</strong> — acquisition, measurement or optional multi-format opportunity.</li><li><strong>P3</strong> — lower-priority experiment.</li></ul><p>No aggregate readiness or ranking score is produced.</p></div></section><section class="cite-card"><h2>2026-09-06 additions</h2><ul class="cite-list"><li>Google's non-commodity / first-hand content guidance and explicit rejection of AI-only markup/chunking cargo cults.</li><li>Google Generative AI Search Console reporting now rolled out worldwide.</li><li>Google Search Console platform properties for Instagram, TikTok, X and YouTube.</li><li>Google Preferred Sources in supported AI Mode / AI Overview surfaces.</li><li>Google Read more fragment/deep-link guidance.</li><li>Google FAQ rich-result deprecation awareness.</li><li>Google's updated site reputation abuse policy.</li><li>OpenAI OAI-SearchBot vs GPTBot separation.</li><li>Cloudflare Content Signals plus newer <code>use=reference</code> semantics and enforcement by compatible crawl tooling.</li><li>Bing AI citation/grounding-query measurement.</li></ul></section><section class="cite-card"><h2>Ready-to-use files</h2><ul class="cite-list"><li><code>templates/growth/robots.ai-search-open-training-closed.txt</code></li><li><code>templates/growth/organization.jsonld</code></li><li><code>templates/growth/article.jsonld</code></li><li><code>templates/growth/preferred-source.html</code></li><li><code>templates/growth/content-quality-checklist.md</code></li><li><code>templates/growth/github-action.yml</code></li></ul></section><p class="scope-note">Passing ARWP checks never guarantees crawling, indexing, ranking, citation, AI recommendation, traffic or conversion. The product is designed to improve implementation quality and make evidence measurable.</p><p class="reuse-note"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-PROFILE.md">Technical documentation</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-opportunities.json">Source-backed registry</a></p></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ARWP Growth Profile turns current Search, AI-search, citation and agent-web guidance into a prioritized website improvement plan without a fake readiness score.">
+  <title>ARWP Growth Profile</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/growth/">
+  <link rel="stylesheet" href="../citation.css">
+</head>
+<body>
+<main class="cite-main shell">
+  <header class="cite-hero">
+    <p class="eyebrow">ARWP Growth</p>
+    <h1>Connect a site. Get a defensible improvement backlog.</h1>
+    <p class="cite-lead">The Growth Profile combines observable Search/AI-access blockers with current platform guidance, editorial quality contracts, identity metadata, measurement and agent interoperability. It produces priorities, not a universal score.</p>
+  </header>
+
+  <section class="cite-card">
+    <h2>Trend-aware by design</h2>
+    <p>Growth planning now consumes the <a href="../trends/">ARWP Trend Radar</a>. The radar separates emerging <strong>WATCH</strong> signals from primary-source-backed <strong>ADOPT</strong> changes and evidence-backed <strong>MEASURED</strong> changes.</p>
+    <p>Only applicable ADOPT/MEASURED trends enter a site plan. Newness alone never creates a recommendation or ranking claim.</p>
+    <pre><code>node bin/arwp-trends.mjs list --since=30 --exclude-retired
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json</code></pre>
+  </section>
+
+  <section class="cite-card">
+    <h2>What it optimizes</h2>
+    <div class="term-grid">
+      <div class="term-card"><strong>Search eligibility</strong><span>HTTP/indexability, robots access, snippet eligibility, canonical/freshness foundations.</span></div>
+      <div class="term-card"><strong>AI discoverability</strong><span>OAI-SearchBot access, provider-specific AI use policy, Preferred Sources and citation-ready sections.</span></div>
+      <div class="term-card"><strong>Entity identity</strong><span>Organization/Person identity, author profile links, sameAs and structured publication metadata.</span></div>
+      <div class="term-card"><strong>Content quality</strong><span>Human review for non-commodity value, first-hand evidence, who/how/why, useful visual proof and topical purpose.</span></div>
+      <div class="term-card"><strong>Measurement</strong><span>Google Generative AI performance, Bing AI Performance, ChatGPT referrals and social/video Search Console properties.</span></div>
+      <div class="term-card"><strong>Agent operability</strong><span>Accessibility/runtime evidence plus ARWP/ARD/MCP/A2A/WebMCP, never mislabeled as Google ranking factors.</span></div>
+    </div>
+  </section>
+
+  <section class="cite-grid">
+    <div class="cite-card"><h2>Run it</h2><pre><code>node bin/arwp-growth.mjs https://example.com
+node bin/arwp-growth.mjs https://example.com --vertical=software-product --json
+node bin/arwp-growth.mjs https://example.com --output=arwp-growth.json</code></pre><p>For a recurring loop, copy <code>templates/growth/github-action.yml</code> into the target website repository and set <code>ARWP_TARGET</code>.</p></div>
+    <div class="cite-card"><h2>Priority model</h2><ul class="cite-list"><li><strong>P0</strong> — observable eligibility blocker.</li><li><strong>P1</strong> — high-value quality, identity, access, freshness or governance action.</li><li><strong>P2</strong> — acquisition, measurement or optional multi-format opportunity.</li><li><strong>P3</strong> — lower-priority experiment.</li></ul><p>No aggregate readiness or ranking score is produced.</p></div>
+  </section>
+
+  <section class="cite-card">
+    <h2>Fresh 2026-09-06 radar signals</h2>
+    <ul class="cite-list">
+      <li>OpenAI publisher/developer guidance: OAI-SearchBot vs GPTBot separation, ChatGPT referral tagging and WAI-ARIA guidance for ChatGPT Agent in Atlas.</li>
+      <li>Google Generative AI Search Console reporting is available to all websites worldwide.</li>
+      <li>Google Preferred Sources now has a custom interactive acquisition button and can appear in supported AI Mode / AI Overview surfaces.</li>
+      <li>Google's updated EEA site-reputation enforcement remains relevant to third-party and white-label content.</li>
+      <li>Cloudflare Content Signals <code>use</code> enforcement remains a provider-specific WATCH signal rather than a universal requirement.</li>
+      <li>WebMCP remains a runtime/origin-trial WATCH signal; task eval evidence is required before broader claims.</li>
+    </ul>
+  </section>
+
+  <section class="cite-card"><h2>Ready-to-use files</h2><ul class="cite-list"><li><code>templates/growth/robots.ai-search-open-training-closed.txt</code></li><li><code>templates/growth/organization.jsonld</code></li><li><code>templates/growth/article.jsonld</code></li><li><code>templates/growth/preferred-source.html</code></li><li><code>templates/growth/content-quality-checklist.md</code></li><li><code>templates/growth/github-action.yml</code></li></ul></section>
+
+  <p class="scope-note">Passing ARWP checks never guarantees crawling, indexing, ranking, citation, AI recommendation, traffic or conversion. The product is designed to improve implementation quality, adaptation speed and evidence quality.</p>
+  <p class="reuse-note"><a href="../trends/">Trend Radar</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-PROFILE.md">Technical documentation</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/registry/growth-opportunities.json">Source-backed Growth registry</a></p>
+</main>
+</body>
+</html>
