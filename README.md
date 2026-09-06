@@ -36,6 +36,7 @@ ARWP does **not** promise ranking, Discover placement, AI citation, recommendati
 - **Recommendations Registry** records dated upstream requirements, guidance, features and measurement opportunities.
 - **Growth Hypotheses** state why a change may matter, where it applies, how to check it and what success signal to observe.
 - **Growth Profile** audits a real site and produces a prioritized P0–P3 backlog.
+- **Safe Remediation** turns that backlog into proposal-only implementation manifests with bounded snippets and explicit human review gates.
 - **Growth History + Experiments** preserve implementation-state changes and link hypotheses/actions to before/after evidence.
 - **Owner Evidence Imports** normalize Google generative Search, Bing AI Performance and AI/referral exports into aggregate visibility snapshots.
 - **Trend Learning** creates review-required `WATCH → ADOPT` and evidence-gated `ADOPT → MEASURED` proposals without silently changing maturity.
@@ -63,7 +64,10 @@ node bin/arwp-trends.mjs list --since=90 --exclude-retired
 node bin/arwp-hypotheses.mjs list --vertical=editorial
 
 # What should this real site do now?
-node bin/arwp-growth.mjs https://example.com --vertical=editorial --json
+node bin/arwp-growth.mjs https://example.com --vertical=editorial --json > growth.json
+
+# Turn the backlog into a proposal-only implementation manifest.
+node bin/arwp-growth-remediation.mjs growth.json --output=remediation.json
 
 # Normalize an owner-provided Search/AI export.
 node bin/arwp-visibility.mjs import google.csv --provider=google \
@@ -77,7 +81,7 @@ node bin/arwp-trends.mjs propose trend-watch.json --output=trend-promotions.json
 node bin/arwp-trends.mjs measure experiments/ --output=trend-measurement.json
 ```
 
-The Growth JSON now carries both the actionable backlog and the applicable non-experimental `hypothesisProgram`.
+The Growth JSON carries both the actionable backlog and the applicable non-experimental `hypothesisProgram`. The remediation manifest never edits the target repository: robots policy, structured data, editorial content and authenticated owner controls remain explicit review boundaries.
 
 ## Growth hypotheses
 
@@ -141,6 +145,7 @@ Manual editorial quality stays manual. Authenticated platform metrics stay exter
 - [`templates/growth/hypothesis-ledger.md`](templates/growth/hypothesis-ledger.md) — lightweight before/after evidence and keep/revise/revert decisions.
 - `arwp-growth-history` — immutable implementation-state snapshots and diffs.
 - `arwp-growth-experiment` — versioned hypothesis → action → implementation → outcome records.
+- `arwp-growth-remediation` — proposal-only implementation manifests with shipped-template SHA-256 provenance and no target-repository writes.
 - `arwp-visibility import` — aggregate owner-provided Google/Bing/referral evidence.
 - `arwp-trends propose|review|measure` — explicit Trend maturity evidence and review flow.
 
@@ -188,6 +193,7 @@ The bounded hosted scanner/resolver service, MCP gateway, federation/router, sna
 - new drafts and vendor mechanisms keep their actual maturity level;
 - source-watch candidates are not recommendations;
 - reviewed Trend proposals do not silently mutate `registry/trends.json`;
+- generated remediation manifests never authorize publication or repository mutation;
 - negative benchmark/experiment results must remain visible.
 
 The frozen Resolver decision-quality corpus and benchmark tooling remain in [`benchmarks/`](benchmarks/). See [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
@@ -209,6 +215,7 @@ The Growth Loop and Resolver support each other: research tells a publisher what
 - [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) — operating model.
 - [`docs/GROWTH-LEARNING.md`](docs/GROWTH-LEARNING.md) — owner evidence and Trend lifecycle review.
 - [`docs/GROWTH-PROFILE.md`](docs/GROWTH-PROFILE.md) — planner and priorities.
+- [`docs/GROWTH-REMEDIATION.md`](docs/GROWTH-REMEDIATION.md) — proposal-only patch/snippet boundary.
 - [`docs/TREND-RADAR.md`](docs/TREND-RADAR.md) — change lifecycle.
 - [`docs/TREND-HISTORY.md`](docs/TREND-HISTORY.md) — immutable Trend snapshots/diffs.
 - [`docs/SEARCH-AGENT-RECOMMENDATIONS.md`](docs/SEARCH-AGENT-RECOMMENDATIONS.md) — dated upstream rules.
