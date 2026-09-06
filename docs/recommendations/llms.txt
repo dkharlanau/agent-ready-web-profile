@@ -1,41 +1,72 @@
-# ARWP Search + Agent Recommendations
+# ARWP Search + AI Visibility Recommendations
 
-> Dated, source-backed implementation guidance for keeping public websites discoverable, citable, fresh, semantically explicit and agent-operable across classic search, generative search and browser-agent ecosystems.
+> A dated, source-backed implementation playbook for making public websites easier to discover, retrieve, cite and operate across classic search, Google generative Search, ChatGPT Search, Bing/Copilot and browser agents.
 
-This surface is non-normative implementation guidance. It does not promise crawling, indexing, ranking, citation, rich results or agent success and does not collapse evidence into a readiness score.
+Reviewed: `2026-09-06`
+Registry version: `0.2`
+Rules: `34`
+
+ARWP does not promise crawling, indexing, ranking, rich results, AI citation or agent success. Requirements, opportunities, measurements and experiments remain separate.
 
 ## Start here
 
-- [Human guide](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/): Current Search + Agent recommendations and status model.
-- [Machine-readable ruleset](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/registry.json): Current dated rules, priorities, upstream status, testability and primary sources.
-- [Page Semantics Profile](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/page-semantics.json): Page-type routing, entity graph, autofix boundaries and anti-cargo-cult rules.
-- [Ruleset history](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/history/index.json): Immutable historical snapshots; prior recommendations are not silently rewritten.
-- [Implementation guide](https://dkharlanau.github.io/agent-ready-web-profile/SEARCH-AGENT-RECOMMENDATIONS.md): Audit, page semantics, freshness, visibility and runtime-evidence workflow.
-- [Product strategy](https://dkharlanau.github.io/agent-ready-web-profile/SEARCH-AGENT-STRATEGY.md): Why ARWP resolves upstream mechanisms instead of inventing another universal manifest.
+- [Search & AI Visibility Playbook](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/): Human guide, implementation packs and searchable rule catalog.
+- [Machine-readable registry](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/registry.json): Current rules, actions, verification steps, priorities, maturity and primary sources.
+- [Page Semantics Profile](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/page-semantics.json): Route-aware structured-data and entity guidance.
+- [Ruleset history](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/history/index.json): Immutable dated snapshots.
+- [Growth loop](https://dkharlanau.github.io/agent-ready-web-profile/growth/): Baseline, hypotheses, remediation, owner evidence and experiment review.
 
-## Current page semantics layer
+## Recommended order
 
-Reviewed: `2026-09-06`
+1. Search eligibility: crawl access, HTTP 200, indexability and snippet eligibility.
+2. Internal discovery: crawlable links to every priority page.
+3. URL consistency: canonical, redirects, sitemap and localized variants agree.
+4. Renderability: important content and links remain available as text/rendered HTML.
+5. Content value: first-hand evidence, data, examples, experience or a distinct conclusion.
+6. Citation structure: clear sections, stable anchors, factual parity and supporting evidence.
+7. Media: relevant large images, useful alt/context and discoverable video surfaces when appropriate.
+8. Identity/provenance: real authors, stable profiles, dataset identifiers/licenses and grounded software/product facts.
+9. Platform-specific mechanisms: OAI-SearchBot, Preferred Sources, IndexNow, local/commerce owner data.
+10. Measurement: Google generative-AI Search Console views, Bing AI Performance and ChatGPT referral analytics.
+11. Agent experiments: ARIA/Atlas compatibility, WebMCP runtime evals and emerging protocol watch items.
 
-The Page Semantics Profile adds source-backed rules for:
+## High-signal 2026 updates
 
-- structured-data visible parity;
-- site and publisher identity;
-- Article authors and ProfilePage identity;
-- publication/update-date consistency;
-- unique Event leaf pages;
-- Dataset provenance;
-- canonical+sitemap alignment;
-- hreflang localization;
-- snippet and AI-preview controls;
-- DefinedTerm/DefinedTermSet graphs;
-- removal of obsolete/cargo-cult structured data.
+### Google generative Search
 
-It also routes real page types to WebSite, Organization, Article-family types, ProfilePage, Event, Dataset, SoftwareApplication, Product, VideoObject, BreadcrumbList, DefinedTerm, DefinedTermSet, QAPage/DiscussionForumPosting and ItemList.
+Google's current guidance says normal SEO foundations remain the basis for AI Overviews and AI Mode. No special AI-only schema or machine-readable file is required. The 2026 guidance emphasizes useful non-commodity content, clear sections/headings, crawlability, textual content, images/video and normal technical Search practices.
 
-## Agent remediation model
+Google Search Console now provides dedicated generative-AI performance views for Search and Discover; Google states the rollout reached all websites worldwide on 31 August 2026.
 
-A repository agent should convert a material finding into:
+### ChatGPT Search and Atlas
+
+OpenAI documents separate controls for OAI-SearchBot discovery and GPTBot training. ChatGPT referral URLs include `utm_source=chatgpt.com`, which can be measured in first-party analytics.
+
+OpenAI also documents that ChatGPT Agent in Atlas uses ARIA labels and roles to understand interactive page structure. ARWP therefore treats accessibility semantics as both an accessibility requirement and an agent-compatibility surface, without replacing native HTML or runtime testing.
+
+### Bing and Copilot
+
+Bing Webmaster Tools AI Performance is in public preview and exposes citation activity for supported Microsoft AI experiences. Bing recommends clear headings/tables/FAQ where useful, evidence-supported claims, freshness and consistency across text, images and video.
+
+### Agent web
+
+WebMCP remains a Chrome origin-trial mechanism and requires browser-runtime evaluation and security review. IETF AIPREF Content-Usage and the W3C Introduction Layer remain watch/experimental items rather than stable ranking requirements.
+
+## Implementation packs
+
+- `search-foundation`: eligibility, internal links, canonical consistency, rendering, text and sitemap freshness.
+- `ai-citation`: AI eligibility, original evidence, clear sections, deep links, structured-data parity and Bing citation clarity.
+- `freshness`: truthful `lastmod` plus bounded IndexNow use.
+- `identity-provenance`: authors, profile identity, Dataset and SoftwareApplication where real.
+- `media-discover`: Discover images, image context/alt and video discovery.
+- `international`: real localized variants with reciprocal hreflang.
+- `local-commerce`: Google owner data plus Bing Places where applicable.
+- `chatgpt`: OAI-SearchBot, referral measurement and ARIA/Atlas compatibility.
+- `measurement`: Google, Bing and ChatGPT owner-side evidence.
+- `agent-experiments`: WebMCP, AIPREF, W3C Introduction Layer and ARWP runtime truth.
+- `anti-cargo-cult`: no query-variant page factories, fake facts or speculative ranking claims.
+
+## Repository-agent remediation model
 
 `problem → evidence → risk → recommendedChange → files → autofix → verification → source`
 
@@ -43,40 +74,22 @@ Autofix requires grounded first-party facts. Missing authorship, biography, orga
 
 The intended loop is:
 
-`audit → classify page → map entities → patch → build/render → verify → record evidence`
-
-## Existing Search + Agent ruleset
-
-Ruleset: `2026.09`
-
-Existing layers remain:
-
-- classic search technical eligibility;
-- generative-search eligibility and platform opportunities;
-- citation/deep-link addressability;
-- freshness and change notification;
-- browser-agent runtime evidence;
-- owner-observed AI visibility measurement;
-- emerging-governance watch items.
-
-Notable existing items include Google Preferred Sources, Read more deep-link guidance, accurate sitemap `lastmod`, OAI-SearchBot access separation, IndexNow, Google/Bing AI visibility measurement, WebMCP runtime/evals, draft IETF AIPREF `Content-Usage`, and W3C Introduction Layer incubation.
+`baseline → choose a bounded pack → patch → build/render → verify → collect owner evidence → compare → keep/revise/revert`
 
 ## Evidence semantics
 
 - `pass` / `fail`: directly observable checks with bounded evidence.
 - `warn`: heuristic issue or optional opportunity worth review.
-- `observed`: an experimental/draft signal was actually present.
-- `not-assessed`: requires route-wide semantic review, manual judgment, authenticated owner data or browser runtime evidence.
-- `not-applicable`: the optional mechanism is not adopted or does not apply.
-- `watch`: upstream work is still in incubation.
-
-Static metadata is never upgraded into browser/protocol runtime conformance. Authenticated Google/Bing metrics are never inferred from public crawling. A successful IndexNow receipt is not proof of indexing. Schema.org semantics are not presented as Google rich-result guarantees. Experimental standards remain labelled experimental.
+- `observed`: a draft/experimental signal was actually present.
+- `not-assessed`: needs route-wide review, manual judgment, authenticated owner data or browser runtime.
+- `not-applicable`: optional mechanism does not apply.
+- `watch`: upstream work is still incubating.
 
 ## CLI
 
 ```text
-arwp audit https://example.com
 arwp audit https://example.com --json
+arwp-growth https://example.com --json
 arwp-visibility compare before.json after.json
 arwp-agent-eval show agent-eval.json
 arwp-indexnow payload https://example.com --urls-file=changed-urls.txt
@@ -84,4 +97,4 @@ arwp-indexnow payload https://example.com --urls-file=changed-urls.txt
 
 ## Maintenance
 
-The repository runs scheduled upstream source watchers. Reachability is only a maintenance signal; material source changes require review before the ruleset changes. New reviewed snapshots are preserved instead of silently rewriting history.
+Scheduled source watchers track upstream changes. Reachability alone never changes a recommendation. Material source changes require review and a new dated snapshot; prior snapshots remain immutable.
