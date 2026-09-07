@@ -1,14 +1,22 @@
 SHORT
 
-Agent-Ready Web Profile (ARWP) is an open-source interoperability resolver for discovering and normalizing the web, data, API and agent-facing interfaces a public website exposes.
+SiteCurrent is an adaptive website improvement system built on the open-source Agent-Ready Web Profile (ARWP) project. It turns current Search, AI and agent guidance into site-specific, verifiable improvements.
 
 STANDARD
 
-Agent-Ready Web Profile (ARWP) is an open-source experimental interoperability project for discovering how public websites can actually be used by software and AI agents. The ARWP Resolver normalizes ordinary web discovery, llms.txt, structured data, APIs and agent-facing protocols while preserving source evidence and conflicts, then plans an interface for a concrete intent such as reading, searching, structured access, tools or agent interaction.
+SiteCurrent watches how Search, generative discovery, AI citation surfaces and web-agent practices change, checks what actually applies to a target website, and turns that evidence into concrete upgrade work: exact change surfaces, implementation recipes, verification contracts and follow-up measurement. Deterministic or explicitly grounded work can be promoted into digest-gated repository changes and reviewable pull requests, while editorial, policy, authenticated owner and runtime/security decisions stay gated. Agent-Ready Web Profile (ARWP) remains the open-source technical project, package and interoperability foundation.
+
+TAGLINE
+
+Keep your site ready for what finds it next.
+
+RHYTHM
+
+Found. Understood. Cited. Used.
 
 STATUS
 
-ARWP is in active, pre-stable development. The profile contract is version 0.1 and the current repository toolchain is 0.2.0. The latest tagged release is v0.1.0.
+SiteCurrent / ARWP is in active, pre-stable development. The current repository toolchain is 0.2.0. SiteCurrent was introduced as the product-facing brand on 2026-09-07; ARWP remains the technical project identity.
 
 SOURCE
 
