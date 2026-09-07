@@ -9,6 +9,9 @@ import {
 } from '../lib/search-maturity.mjs';
 
 const corpus = JSON.parse(fs.readFileSync(new URL('./search-maturity/pilot-2026-09-07.json', import.meta.url), 'utf8'));
+const publicCorpus = JSON.parse(fs.readFileSync(new URL('../docs/search-maturity/pilot-2026-09-07.json', import.meta.url), 'utf8'));
+assert.deepEqual(publicCorpus, corpus, 'public Search Maturity pilot must exactly mirror the reviewed benchmark corpus');
+
 const validation = validateSearchMaturityCorpus(corpus);
 assert.equal(validation.valid, true, validation.errors.join('\n'));
 
@@ -37,6 +40,21 @@ assert.equal(actions.length, diff.gaps.length);
 assert.ok(actions.every((action) => action.status === 'manual-review' && action.proposal === null));
 assert.ok(actions.every((action) => action.verificationRequired && action.outcomeMeasurementRequired));
 
+const before = JSON.parse(fs.readFileSync(new URL('./search-maturity/targets/arwp-ai-search-visibility-before-2026-09-07.json', import.meta.url), 'utf8'));
+const after = JSON.parse(fs.readFileSync(new URL('./search-maturity/targets/arwp-ai-search-visibility-after-2026-09-07.json', import.meta.url), 'utf8'));
+const beforeDiff = compareTargetToSearchMaturityCohort(before, cohort);
+const afterDiff = compareTargetToSearchMaturityCohort(after, cohort);
+
+assert.deepEqual(
+  beforeDiff.gaps.map((gap) => gap.dimension).sort(),
+  ['evidenceDensity', 'firstPartyEvidence'],
+  'pre-change ARWP dogfood should expose the two reviewed cohort gaps'
+);
+assert.ok(!afterDiff.gaps.some((gap) => gap.dimension === 'evidenceDensity'));
+assert.ok(!afterDiff.gaps.some((gap) => gap.dimension === 'firstPartyEvidence'));
+assert.equal(after.guardrails.implementationImprovementNotSearchOutcome, true);
+assert.equal(after.changeCommit, '5df6dcb1b6d0d4e74bfb1665b5ab3a7e644b1191');
+
 const invalid = structuredClone(corpus);
 invalid.observations[0].observationSurface.rank = 1;
 delete invalid.observations[0].observationSurface.rankEvidence;
@@ -47,5 +65,7 @@ assert.ok(invalidResult.errors.some((error) => error.includes('rank requires ran
 console.log('PASS search maturity benchmark', {
   observations: corpus.observations.length,
   dimensions: SEARCH_MATURITY_DIMENSIONS.length,
-  gaps: diff.gaps.length
+  genericGaps: diff.gaps.length,
+  dogfoodBeforeGaps: beforeDiff.gaps.length,
+  dogfoodAfterGaps: afterDiff.gaps.length
 });
