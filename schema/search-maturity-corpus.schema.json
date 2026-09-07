@@ -62,12 +62,6 @@
         "features": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "retrievalClarity", "topicalFocus", "answerFirst", "evidenceDensity", "firstPartyEvidence",
-            "authorEntityIdentity", "siteTransparency", "semanticStructure", "structuredDataIntegrity",
-            "internalTopicalGraph", "freshnessIntegrity", "urlStability", "multimodalEvidence",
-            "externalCorroboration", "utilitySurface", "agentAccessibility"
-          ],
           "properties": {
             "retrievalClarity": { "$ref": "#/$defs/feature" },
             "topicalFocus": { "$ref": "#/$defs/feature" },
