@@ -43,6 +43,7 @@ for (const file of [
   'lib/growth-plan-vertical.mjs',
   'lib/growth-vertical-evidence.mjs',
   'lib/growth-vertical-site.mjs',
+  'lib/growth-vertical-extended.mjs',
   'lib/growth-policy.mjs',
   'lib/growth-history.mjs',
   'lib/growth-hypotheses.mjs',
@@ -51,8 +52,10 @@ for (const file of [
   'lib/growth-pr-delivery.mjs',
   'bin/arwp-growth-pr.mjs',
   'schema/growth-pr-delivery.schema.json',
+  'schema/growth-owner-data.schema.json',
   'lib/trend-radar.mjs',
   'scripts/trend-source-watch.mjs',
+  'scripts/growth-commerce-local-test.mjs',
   'registry/growth-opportunities.json',
   'registry/growth-verticals.json',
   'registry/growth-hypotheses.json',
@@ -61,6 +64,7 @@ for (const file of [
   'schema/growth-experiment.schema.json',
   'schema/growth-remediation-manifest.schema.json',
   'templates/growth/organization.jsonld',
+  'templates/growth/owner-data.json',
   'docs/GROWTH-PROFILE.md',
   'docs/GROWTH-POLICY.md',
   'docs/GROWTH-LOOP.md',
@@ -81,11 +85,16 @@ for (const publishedPath of [
 }
 
 assert(pkg.files.includes('bin/'), 'review-only PR CLI must ship via bin/');
-assert(pkg.files.includes('lib/'), 'PR delivery implementation must ship via lib/');
-assert(pkg.files.includes('schema/'), 'PR delivery schema must ship via schema/');
+assert(pkg.files.includes('lib/'), 'vertical and PR delivery implementations must ship via lib/');
+assert(pkg.files.includes('schema/'), 'owner-data and PR-delivery schemas must ship via schema/');
+assert(pkg.files.includes('templates/growth/'), 'owner-data and remediation templates must ship via templates/growth/');
 
+const verticals = JSON.parse(fs.readFileSync('registry/growth-verticals.json', 'utf8'));
 const hypotheses = JSON.parse(fs.readFileSync('registry/growth-hypotheses.json', 'utf8'));
 const trends = JSON.parse(fs.readFileSync('registry/trends.json', 'utf8'));
+assert.equal(verticals.version, '0.3');
+assert(verticals.verticals.commerce.checks.some(item => item.id === 'commerce-ucp-discovery'));
+assert(verticals.verticals['local-business'].checks.some(item => item.id === 'local-business-owner-profile'));
 assert.equal(hypotheses.version, '0.1');
 assert(Array.isArray(hypotheses.hypotheses) && hypotheses.hypotheses.length > 0, 'hypothesis registry must be non-empty');
 assert(Array.isArray(trends.trends) && trends.trends.length > 0, 'trend registry must be non-empty');
