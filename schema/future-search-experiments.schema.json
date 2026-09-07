@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/future-search-experiments.schema.json",
+  "title": "ARWP Future Search Experiments Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "reviewedAt", "title", "purpose", "methodology", "maturity", "experiments"],
+  "properties": {
+    "version": { "const": "0.1" },
+    "reviewedAt": { "type": "string", "format": "date" },
+    "title": { "type": "string", "minLength": 1 },
+    "purpose": { "type": "string", "minLength": 1 },
+    "methodology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["principle", "separateFromPlatformRequirements", "noRankingClaimWithoutPlatformEvidence", "noInventedFacts", "visibleFactParityForEmbeddedMarkup", "aggregateMachineIndexesAreOptional", "measureExternalOutcomesSeparately"],
+      "properties": {
+        "principle": { "type": "string", "minLength": 1 },
+        "separateFromPlatformRequirements": { "const": true },
+        "noRankingClaimWithoutPlatformEvidence": { "const": true },
+        "noInventedFacts": { "const": true },
+        "visibleFactParityForEmbeddedMarkup": { "const": true },
+        "aggregateMachineIndexesAreOptional": { "const": true },
+        "measureExternalOutcomesSeparately": { "const": true }
+      }
+    },
+    "maturity": {
+      "type": "array",
+      "const": ["foundation", "experiment", "watch"]
+    },
+    "experiments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "maturity", "confidence", "layer", "title", "rationale", "appliesTo", "implementation", "verification", "sources"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "maturity": { "enum": ["foundation", "experiment", "watch"] },
+          "confidence": { "enum": ["high", "medium", "low"] },
+          "layer": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "rationale": { "type": "string", "minLength": 1 },
+          "appliesTo": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "implementation": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "candidateRelations": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "candidateTypes": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "verification": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "sources": { "type": "array", "minItems": 1, "items": { "type": "string", "format": "uri", "pattern": "^https://" } }
+        }
+      }
+    }
+  }
+}
