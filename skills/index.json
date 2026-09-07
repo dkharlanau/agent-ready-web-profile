@@ -7,13 +7,14 @@
     {"name":"arwp-growth-loop","path":"skills/arwp-growth-loop/SKILL.md","role":"growth-orchestrator","description":"Evidence-backed ongoing website growth loop for Search, recommendations, generative Search, AI citations and agent readability: research, hypothesize, implement, verify and measure."},
     {"name":"arwp-prepare-site","path":"skills/arwp-prepare-site/SKILL.md","role":"site-preparation","description":"End-to-end repository preparation for ARWP, search quality, AI-search/citation readiness and agent interoperability."},
     {"name":"arwp-ai-search-content","path":"skills/arwp-ai-search-content/SKILL.md","role":"content-quality","description":"Improve articles, docs, comparisons and answer pages for human usefulness, retrieval and citation without AI filler or ranking promises."},
+    {"name":"arwp-dataset-publication","path":"skills/arwp-dataset-publication/SKILL.md","role":"dataset-publication","description":"Audit and prepare genuine website corpora for versioned dataset releases, checksums, external archival publication and DOI-backed citation."},
     {"name":"arwp-agent-discovery","path":"skills/arwp-agent-discovery/SKILL.md","role":"interoperability","description":"Implement truthful agent discovery surfaces such as llms.txt, Agent Skills, ARD, MCP/A2A/OpenAPI and optional ARWP profiles."},
     {"name":"arwp-evidence-ci","path":"skills/arwp-evidence-ci/SKILL.md","role":"verification","description":"Add assertion contracts, scheduled audits, evidence receipts and regression-safe CI."}
   ],
   "composition": {
     "default": "arwp-growth-loop",
     "sitePreparation": "arwp-prepare-site",
-    "specialists": ["arwp-ai-search-content", "arwp-agent-discovery", "arwp-evidence-ci"],
-    "principle": "Use the growth orchestrator for outcome-driven Search/recommendation improvement, the preparation skill for initial technical adoption, and load specialists only when relevant."
+    "specialists": ["arwp-ai-search-content", "arwp-dataset-publication", "arwp-agent-discovery", "arwp-evidence-ci"],
+    "principle": "Use the growth orchestrator for outcome-driven Search/recommendation improvement, the preparation skill for initial technical adoption, and load specialists only when relevant. Dataset publication applies only when a genuine reusable corpus exists."
   }
 }
