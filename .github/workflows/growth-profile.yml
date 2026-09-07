@@ -10,6 +10,7 @@ on:
       - 'schema/growth-policy.schema.json'
       - 'schema/growth-experiment.schema.json'
       - 'schema/growth-remediation-manifest.schema.json'
+      - 'schema/growth-pr-delivery.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
@@ -21,6 +22,7 @@ on:
       - 'lib/growth-experiment.mjs'
       - 'lib/growth-experiment-ledger.mjs'
       - 'lib/growth-remediation.mjs'
+      - 'lib/growth-pr-delivery.mjs'
       - 'lib/trend-radar.mjs'
       - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
@@ -28,6 +30,7 @@ on:
       - 'bin/arwp-growth-history.mjs'
       - 'bin/arwp-growth-experiment.mjs'
       - 'bin/arwp-growth-remediation.mjs'
+      - 'bin/arwp-growth-pr.mjs'
       - 'bin/arwp-trends.mjs'
       - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
@@ -38,6 +41,7 @@ on:
       - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-experiment-ledger-test.mjs'
       - 'scripts/growth-remediation-test.mjs'
+      - 'scripts/growth-pr-delivery-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-history-test.mjs'
@@ -49,6 +53,7 @@ on:
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
       - 'docs/GROWTH-REMEDIATION.md'
+      - 'docs/GROWTH-PR-DELIVERY.md'
       - 'docs/GROWTH-LEARNING.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/TREND-HISTORY.md'
@@ -63,6 +68,7 @@ on:
       - 'schema/growth-policy.schema.json'
       - 'schema/growth-experiment.schema.json'
       - 'schema/growth-remediation-manifest.schema.json'
+      - 'schema/growth-pr-delivery.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
       - 'lib/growth-plan.mjs'
@@ -74,6 +80,7 @@ on:
       - 'lib/growth-experiment.mjs'
       - 'lib/growth-experiment-ledger.mjs'
       - 'lib/growth-remediation.mjs'
+      - 'lib/growth-pr-delivery.mjs'
       - 'lib/trend-radar.mjs'
       - 'lib/trend-history.mjs'
       - 'bin/arwp-growth.mjs'
@@ -81,6 +88,7 @@ on:
       - 'bin/arwp-growth-history.mjs'
       - 'bin/arwp-growth-experiment.mjs'
       - 'bin/arwp-growth-remediation.mjs'
+      - 'bin/arwp-growth-pr.mjs'
       - 'bin/arwp-trends.mjs'
       - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
@@ -91,6 +99,7 @@ on:
       - 'scripts/growth-experiment-test.mjs'
       - 'scripts/growth-experiment-ledger-test.mjs'
       - 'scripts/growth-remediation-test.mjs'
+      - 'scripts/growth-pr-delivery-test.mjs'
       - 'scripts/growth-package-test.mjs'
       - 'scripts/trend-radar-test.mjs'
       - 'scripts/trend-history-test.mjs'
@@ -102,6 +111,7 @@ on:
       - 'docs/GROWTH-LOOP.md'
       - 'docs/GROWTH-EXPERIMENTS.md'
       - 'docs/GROWTH-REMEDIATION.md'
+      - 'docs/GROWTH-PR-DELIVERY.md'
       - 'docs/GROWTH-LEARNING.md'
       - 'docs/TREND-RADAR.md'
       - 'docs/TREND-HISTORY.md'
@@ -184,6 +194,14 @@ jobs:
           node --check scripts/growth-remediation-test.mjs
           node bin/arwp-growth-remediation.mjs --help | grep -q 'proposal-only'
           node -e "JSON.parse(require('fs').readFileSync('schema/growth-remediation-manifest.schema.json','utf8'));"
+      - name: Validate review-only target PR delivery
+        run: |
+          node scripts/growth-pr-delivery-test.mjs
+          node --check lib/growth-pr-delivery.mjs
+          node --check bin/arwp-growth-pr.mjs
+          node --check scripts/growth-pr-delivery-test.mjs
+          node bin/arwp-growth-pr.mjs --help | grep -q 'review-only'
+          node -e "JSON.parse(require('fs').readFileSync('schema/growth-pr-delivery.schema.json','utf8'));"
       - name: Validate packaged Growth Loop surface
         run: |
           node scripts/growth-package-test.mjs
