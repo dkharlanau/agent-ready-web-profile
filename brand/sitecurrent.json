@@ -1,0 +1,43 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "brand": {
+    "name": "SiteCurrent",
+    "pronunciation": "site current",
+    "category": "adaptive website improvement system",
+    "primaryTagline": "Keep your site ready for what finds it next.",
+    "benefitRhythm": ["Found", "Understood", "Cited", "Used"],
+    "oneLine": "SiteCurrent watches how Search, AI and web agents change, checks what actually applies to a website, and turns that into specific, verifiable improvements down to repository changes when safe."
+  },
+  "architecture": {
+    "productBrand": "SiteCurrent",
+    "technicalProject": "Agent-Ready Web Profile",
+    "technicalShortName": "ARWP",
+    "repositoryPackageIdentity": "agent-ready-web-profile",
+    "relationshipLine": "SiteCurrent — adaptive website improvement, powered by ARWP."
+  },
+  "messages": {
+    "hero": "The web changes. Your site should keep up.",
+    "technicalHero": "Current guidance. Exact site changes. Proof after the change.",
+    "productHero": "Your website should not age faster than the web around it.",
+    "defaultCta": "See what your site needs now",
+    "technicalCta": "Run the upgrade graph"
+  },
+  "palette": {
+    "currentInk": "#0B1020",
+    "currentMint": "#63E6BE",
+    "currentIce": "#E9FFF8",
+    "currentWhite": "#FFFFFF",
+    "currentSlate": "#687083"
+  },
+  "assets": {
+    "mark": "https://dkharlanau.github.io/agent-ready-web-profile/media/sitecurrent-mark.svg",
+    "lockup": "https://dkharlanau.github.io/agent-ready-web-profile/media/sitecurrent-lockup.svg"
+  },
+  "guardrails": {
+    "noRankingGuarantee": true,
+    "noCitationGuarantee": true,
+    "productBrandDoesNotRenameTechnicalProtocol": true,
+    "commercialTrademarkClearanceCompleted": false
+  }
+}
