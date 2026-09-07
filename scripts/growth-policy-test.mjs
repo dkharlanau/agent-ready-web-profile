@@ -17,6 +17,8 @@ const validateSchema = ajv.compile(schema);
 assert.equal(validateSchema(example), true, JSON.stringify(validateSchema.errors));
 assert.equal(validateGrowthPolicy(example).valid, true);
 assert.ok(Object.keys(verticals.verticals).includes(example.siteClass));
+assert.equal(verticals.version, '0.2');
+assert.equal(Object.values(verticals.verticals).every(vertical => Array.isArray(vertical.checks) && vertical.checks.length >= 3), true, 'every vertical should provide actionable evidence checks');
 
 const noisyPlan = {
   canonicalUrl: 'https://example.com/docs/',
@@ -59,6 +61,10 @@ assert.match(manifest.desiredState.robotsIntent, /User-agent: GPTBot\nDisallow: 
 assert.equal(manifest.desiredState.contentSignal, 'Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference');
 assert.equal(manifest.desiredState.preferredSourcesUrl, 'https://www.google.com/preferences/source?q=example.com');
 assert.ok(manifest.desiredState.structuredData.verticalRecommended.includes('SoftwareApplication'));
+assert.equal(manifest.desiredState.vertical.registryVersion, '0.2');
+assert.equal(manifest.desiredState.vertical.reviewedAt, '2026-09-07');
+assert.ok(manifest.desiredState.vertical.checks.some(item => item.id === 'software-product-release-history' && item.priority === 'P1'));
+assert.ok(manifest.desiredState.vertical.checks.some(item => item.id === 'software-product-agent-interfaces'));
 assert.ok(manifest.actions.some(item => item.id === 'growth:google-generative-ai-measurement-global'));
 assert.ok(manifest.actions.some(item => item.id === 'growth:preferred-source-acquisition'));
 assert.equal(manifest.guardrails.noRankingGuarantee, true);
@@ -78,4 +84,4 @@ bad.siteClass = 'magic-seo';
 assert.equal(validateGrowthPolicy(bad).valid, false);
 assert.throws(() => compileGrowthPolicy(refined, bad), /Invalid Growth Policy/);
 
-console.log('PASS Growth Policy schema and compiler keep owner goals explicit, verticalize recommendations, suppress irrelevant actions, and compile rights/search intent without producing ranking guarantees');
+console.log('PASS Growth Policy schema and compiler expose actionable vertical evidence modules, keep owner goals explicit, suppress irrelevant actions, and compile rights/search intent without producing ranking guarantees');
