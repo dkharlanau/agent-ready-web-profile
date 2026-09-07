@@ -9,12 +9,17 @@ import { loadTrendRegistry } from '../lib/trend-radar.mjs';
 
 const portfolio = loadPortfolioRegistry();
 const trends = loadTrendRegistry();
-const now = '2026-09-06T12:00:00Z';
+const now = '2026-09-07T12:00:00Z';
 
 const validation = validatePortfolioRegistry(portfolio);
 assert.equal(validation.valid, true, JSON.stringify(validation));
-assert.equal(portfolio.sites.length, 5);
+assert.equal(portfolio.sites.length, 6);
 assert.equal(portfolio.sites.filter(site => site.rollout.mode === 'managed-issue').length, 3);
+const ptichi = portfolio.sites.find(site => site.id === 'ptichi-fresh-site');
+assert.ok(ptichi);
+assert.equal(ptichi.canonicalUrl, 'https://ptichi.com/');
+assert.equal(ptichi.repository, 'dkharlanau/ptichi-site');
+assert.equal(ptichi.rollout.mode, 'proposal-only');
 
 const rollout = buildPortfolioRollout(portfolio, trends, { now });
 assert.ok(rollout.candidates.length > 0);
@@ -27,6 +32,7 @@ assert.ok(rollout.candidates.every(item => item.evidenceClass === 'owner-control
 assert.ok(rollout.candidates.some(item => item.siteId === 'dkharlanau-sap-knowledge' && item.rolloutMode === 'managed-issue'));
 assert.ok(rollout.candidates.some(item => item.siteId === 'metkagram-language-knowledge' && item.rolloutMode === 'managed-issue'));
 assert.ok(rollout.candidates.some(item => item.siteId === 'cognitive-biases-knowledge' && item.rolloutMode === 'managed-issue'));
+assert.ok(rollout.candidates.some(item => item.siteId === 'ptichi-fresh-site' && item.rolloutMode === 'proposal-only'));
 assert.ok(!rollout.candidates.some(item => item.stage === 'watch' || item.stage === 'retired'));
 
 const proposals = buildPortfolioProposals(portfolio, trends, { now });
@@ -41,6 +47,7 @@ assert.ok(proposals.proposals.every(item => item.delivery.liveSiteAuditRequired 
 assert.ok(proposals.proposals.every(item => item.suggestedIssue.body.includes('This is a review artifact only.')));
 assert.ok(proposals.proposals.some(item => item.site.id === 'dkharlanau-sap-knowledge' && item.delivery.recommendedChannel === 'managed-issue-review'));
 assert.ok(proposals.proposals.some(item => item.site.id === 'brali-practical-knowledge' && item.delivery.recommendedChannel === 'proposal-only-review'));
+assert.ok(proposals.proposals.some(item => item.site.id === 'ptichi-fresh-site' && item.delivery.recommendedChannel === 'proposal-only-review'));
 
 const proposalsAgain = buildPortfolioProposals(portfolio, trends, { now });
 assert.deepEqual(
@@ -71,7 +78,7 @@ const watch = buildPortfolioRollout(portfolio, trends, {
 });
 assert.deepEqual(
   [...new Set(watch.candidates.map(item => item.siteId))].sort(),
-  ['dkharlanau-sap-knowledge', 'metkagram-language-knowledge'],
+  ['dkharlanau-sap-knowledge', 'metkagram-language-knowledge', 'ptichi-fresh-site'],
   'general is a real vertical, not a wildcard; WebMCP WATCH should map only to portfolio sites whose explicit verticals match its appliesTo set'
 );
 assert.ok(watch.candidates.every(item => item.recommendationStatus === 'watch-only'));
@@ -101,4 +108,4 @@ const invalidResult = validatePortfolioRegistry(invalid);
 assert.equal(invalidResult.valid, false);
 assert.ok(invalidResult.semanticErrors.some(error => /Duplicate portfolio repository/.test(error)));
 
-console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
+console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across 6 sites including Ptichi and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
