@@ -1,0 +1,118 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "releaseTarget": "next-stratified-independent-release",
+  "purpose": "Define the sampling strata and deterministic selection rules before collecting the next State of the Agentic Web release so the corpus cannot be reshaped after observing protocol or Resolver outcomes.",
+  "representativeOfPublicWeb": false,
+  "assignmentPolicy": {
+    "oneStratumPerCanonicalHost": true,
+    "canonicalHostDeduplication": true,
+    "ownerControlledExcludedFromIndependentAggregate": true,
+    "explicitEligibilityRequired": true,
+    "priority": [
+      "agent-native",
+      "research-dataset",
+      "developer-api",
+      "documentation",
+      "knowledge-editorial"
+    ],
+    "note": "Priority resolves overlap only after a reviewer records all eligible strata. It is not inferred from Resolver output or protocol observations collected for the study."
+  },
+  "selectionPolicy": {
+    "frameFrozenBeforeOutcomeReview": true,
+    "deterministicSelection": "sha256-release-seed-canonical-host",
+    "unreachableSelectedSitesRemainInDenominator": true,
+    "selectedFailuresAreNotSilentlyReplaced": true,
+    "negativeResultsRetained": true,
+    "shortfallsReported": true,
+    "selectionUsesResolverOutput": false,
+    "selectionUsesProtocolOutcome": false
+  },
+  "targetDesign": {
+    "targetSitesPerStratum": 10,
+    "targetIndependentSites": 50,
+    "intentsPerSite": 5,
+    "targetDecisionCases": 250,
+    "intents": ["read", "search", "structured", "tools", "agent"],
+    "note": "Targets define the next release design, not a claim of statistical representativeness. A stratum shortfall is published rather than backfilled after outcome review."
+  },
+  "requiredCandidateEvidence": [
+    "stable candidate id",
+    "canonical URL",
+    "dated discovery source",
+    "independent versus owner-controlled status",
+    "reviewed eligible strata",
+    "eligibility rationale recorded before outcome collection"
+  ],
+  "strata": [
+    {
+      "id": "documentation",
+      "title": "Documentation and developer documentation",
+      "definition": "Public sites whose primary reviewed purpose is durable product, software, framework or technical documentation, excluding sites assigned to the higher-priority agent-native or developer-api strata.",
+      "samplingFrame": "Freeze a dated list of independently owned public documentation roots discovered from public project/product documentation references before protocol outcome collection.",
+      "selectionRule": "From eligible independent canonical hosts assigned to this stratum, sort by SHA-256(releaseSeed + NUL + canonicalHost) and take the first targetSitesPerStratum records without replacing selected failures.",
+      "knownBias": [
+        "Public technical documentation over-represents digitally mature publishers.",
+        "English-language and developer-facing sources may be easier to discover than small regional documentation sites.",
+        "The stratum measures public agent-facing evidence, not private documentation or authenticated portals."
+      ]
+    },
+    {
+      "id": "developer-api",
+      "title": "Developer and API portals",
+      "definition": "Public developer portals whose reviewed primary purpose is API or integration consumption, with developer navigation or public API descriptions as a first-class surface.",
+      "samplingFrame": "Freeze a dated list of independently owned public developer/API portal roots from primary product documentation and public API/developer references before outcome collection.",
+      "selectionRule": "From eligible independent canonical hosts assigned to this stratum, sort by SHA-256(releaseSeed + NUL + canonicalHost) and take the first targetSitesPerStratum records without replacing selected failures.",
+      "knownBias": [
+        "Public API portals bias toward vendors that intentionally expose developer ecosystems.",
+        "Private partner APIs and authenticated enterprise portals are outside observable scope.",
+        "An API portal may also contain ordinary documentation; overlap is resolved by the fixed assignment priority."
+      ]
+    },
+    {
+      "id": "knowledge-editorial",
+      "title": "Public knowledge bases and editorial reference sites",
+      "definition": "Public independently owned sites whose reviewed primary purpose is durable explanatory, reference or editorial knowledge rather than product documentation, API delivery or dataset publication.",
+      "samplingFrame": "Freeze a dated candidate frame of public knowledge/reference/editorial roots from public indexes and first-party canonical pages before protocol outcome collection.",
+      "selectionRule": "From eligible independent canonical hosts assigned to this stratum, sort by SHA-256(releaseSeed + NUL + canonicalHost) and take the first targetSitesPerStratum records without replacing selected failures.",
+      "knownBias": [
+        "Editorial/reference boundaries are heterogeneous and require recorded eligibility rationale.",
+        "Large searchable publishers may be easier to discover than niche independent knowledge bases.",
+        "Content quality is not inferred from agent-interface availability."
+      ]
+    },
+    {
+      "id": "research-dataset",
+      "title": "Datasets and research publications",
+      "definition": "Public sites whose reviewed primary purpose includes publishing research artifacts, datasets, methodology, citation metadata or durable downloadable/retrievable research outputs.",
+      "samplingFrame": "Freeze a dated list of independent public research/dataset publication roots from primary dataset/research landing pages and public scholarly/data references before outcome collection.",
+      "selectionRule": "From eligible independent canonical hosts assigned to this stratum, sort by SHA-256(releaseSeed + NUL + canonicalHost) and take the first targetSitesPerStratum records without replacing selected failures.",
+      "knownBias": [
+        "Institutional repositories and commercial data portals differ materially in metadata practice.",
+        "DOI-indexed or repository-hosted research may be easier to discover than independent research sites.",
+        "Availability of a download does not establish machine-actionable licensing or provenance quality."
+      ]
+    },
+    {
+      "id": "agent-native",
+      "title": "Agent-native and AI-native products with declared agent interfaces",
+      "definition": "Public product sites with a first-party declaration of an agent-facing interface or agent interoperability surface such as MCP, A2A, Agent Skills, WebMCP, ARD or another explicitly documented agent interface.",
+      "samplingFrame": "Freeze a dated candidate frame from first-party public declarations of agent interfaces and independently owned product roots before runtime or Resolver outcome collection.",
+      "selectionRule": "From eligible independent canonical hosts assigned to this stratum, sort by SHA-256(releaseSeed + NUL + canonicalHost) and take the first targetSitesPerStratum records without replacing selected failures.",
+      "knownBias": [
+        "This intentionally selects publishers already declaring agent interfaces and therefore must never be used as a general-web adoption estimate.",
+        "Fast-moving agent products can change between candidate-frame freeze and evidence capture; both dates must be retained.",
+        "A declared interface is not treated as functional until the study records the corresponding bounded evidence or not-assessed state."
+      ]
+    }
+  ],
+  "guardrails": {
+    "noReadinessScore": true,
+    "noGeneralWebAdoptionInference": true,
+    "noRankingInference": true,
+    "noGroundTruthFromResolverOutput": true,
+    "noHostnameSpecificResolverExceptions": true,
+    "ownerControlledReferencesMayBeReportedSeparately": true,
+    "frozenReleasesAreAppendOnly": true
+  }
+}
