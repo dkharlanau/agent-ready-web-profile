@@ -61,7 +61,7 @@
       "name": "CBT Cards Public Reflection Resource",
       "canonicalUrl": "https://cbt-cards.github.io/",
       "repository": "CBT-cards/cbt-cards.github.io",
-      "verticals": ["editorial"],
+      "verticals": ["editorial", "research-dataset"],
       "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-discovery"],
       "rollout": { "enabled": true, "mode": "proposal-only" }
     }
