@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ARWP now treats substantial website corpora as separate dataset products and audits their metadata, versioning, methodology, release integrity, external archival publication and DOI citation state.">
+<title>Dataset publication & DOI — ARWP update</title>
+<link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/updates/2026-09-07-dataset-doi-profile.html">
+<link rel="stylesheet" href="../arwp.css">
+</head><body>
+<main class="shell" style="max-width:900px;padding:64px 24px">
+<p class="eyebrow">ARWP update · 7 September 2026</p>
+<h1>Dataset-bearing websites now get a separate publication audit.</h1>
+<p>ARWP no longer treats a directory of JSON files or a generic <code>CITATION.cff</code> as sufficient dataset maturity. When a site contains a genuine reusable corpus, the dataset is evaluated as its own versioned and citable data product.</p>
+<h2>What the module checks</h2>
+<ul>
+<li>canonical Schema.org Dataset metadata;</li>
+<li>explicit release version and reuse rights;</li>
+<li>methodology, provenance and limitations;</li>
+<li>stable downloadable distributions;</li>
+<li>frozen-release integrity/checksum evidence;</li>
+<li>an externally issued DOI or equivalent persistent archive identifier.</li>
+</ul>
+<p>A genuine corpus with no observed DOI is reported as <code>dataset-doi-missing</code>. ARWP recommends preparing and freezing the intended release, publishing it through an external archive such as Zenodo, verifying the issued DOI, then exposing that DOI consistently in Dataset metadata and citation surfaces.</p>
+<h2>What this does not mean</h2>
+<p>ARWP does not recommend inventing thin datasets for ordinary websites. DOI publication is a citation, provenance and reproducibility mechanism; it is not a Search ranking factor, quality certificate or guarantee that an AI system will cite the site.</p>
+<p><a href="../DATASET-PUBLICATION.md">Dataset Publication documentation</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile">Source repository</a></p>
+</main></body></html>
