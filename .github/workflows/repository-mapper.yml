@@ -7,15 +7,20 @@ on:
       - 'schema/site-state-graph.schema.json'
       - 'schema/mapped-transform-preparation.schema.json'
       - 'schema/braid-graph.schema.json'
+      - 'schema/transformation-pack-registry.schema.json'
+      - 'registry/transformation-packs.json'
       - 'lib/repository-mapper.mjs'
       - 'lib/repository-mapper-frameworks.mjs'
       - 'lib/repository-mapper-astro.mjs'
+      - 'lib/repository-mapper-nextjs.mjs'
       - 'lib/repository-map-braid.mjs'
       - 'lib/mapped-transform-preparation.mjs'
+      - 'lib/transformation-pack.mjs'
       - 'bin/arwp-map-repo.mjs'
       - 'fixtures/repository-mapper/**'
       - 'scripts/repository-mapper-test.mjs'
       - 'scripts/repository-mapper-astro-test.mjs'
+      - 'scripts/repository-mapper-nextjs-test.mjs'
       - 'scripts/mapped-transform-preparation-test.mjs'
       - 'docs/REPOSITORY-MAPPER.md'
       - '.github/workflows/repository-mapper.yml'
@@ -24,15 +29,20 @@ on:
       - 'schema/site-state-graph.schema.json'
       - 'schema/mapped-transform-preparation.schema.json'
       - 'schema/braid-graph.schema.json'
+      - 'schema/transformation-pack-registry.schema.json'
+      - 'registry/transformation-packs.json'
       - 'lib/repository-mapper.mjs'
       - 'lib/repository-mapper-frameworks.mjs'
       - 'lib/repository-mapper-astro.mjs'
+      - 'lib/repository-mapper-nextjs.mjs'
       - 'lib/repository-map-braid.mjs'
       - 'lib/mapped-transform-preparation.mjs'
+      - 'lib/transformation-pack.mjs'
       - 'bin/arwp-map-repo.mjs'
       - 'fixtures/repository-mapper/**'
       - 'scripts/repository-mapper-test.mjs'
       - 'scripts/repository-mapper-astro-test.mjs'
+      - 'scripts/repository-mapper-nextjs-test.mjs'
       - 'scripts/mapped-transform-preparation-test.mjs'
       - 'docs/REPOSITORY-MAPPER.md'
       - '.github/workflows/repository-mapper.yml'
@@ -59,14 +69,16 @@ jobs:
         run: |
           node scripts/repository-mapper-test.mjs
           node scripts/repository-mapper-astro-test.mjs
+          node scripts/repository-mapper-nextjs-test.mjs
           node scripts/mapped-transform-preparation-test.mjs
           node --check lib/repository-mapper.mjs
           node --check lib/repository-mapper-frameworks.mjs
           node --check lib/repository-mapper-astro.mjs
+          node --check lib/repository-mapper-nextjs.mjs
           node --check lib/repository-map-braid.mjs
           node --check lib/mapped-transform-preparation.mjs
           node --check bin/arwp-map-repo.mjs
-          node -e "const fs=require('fs'); for (const file of ['schema/site-state-graph.schema.json','schema/mapped-transform-preparation.schema.json','schema/braid-graph.schema.json','fixtures/repository-mapper/astro-official-basics.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
+          node -e "const fs=require('fs'); for (const file of ['schema/site-state-graph.schema.json','schema/mapped-transform-preparation.schema.json','schema/braid-graph.schema.json','schema/transformation-pack-registry.schema.json','registry/transformation-packs.json','fixtures/repository-mapper/astro-official-basics.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
 
       - name: Dogfood current ARWP GitHub Pages source
         run: |
@@ -80,3 +92,35 @@ jobs:
             --out=/tmp/arwp-site-state.json
           node bin/arwp-map-repo.mjs validate /tmp/arwp-site-state.json
           node -e "const fs=require('fs'); const x=JSON.parse(fs.readFileSync('/tmp/arwp-site-state.json','utf8')); if(x.summary.resolvedRoutes < 5) throw new Error('Dogfood map resolved too few ARWP docs routes'); if(!x.guardrails.noPathGuessing) throw new Error('noPathGuessing guardrail missing'); console.log(JSON.stringify(x.summary));"
+
+      - name: Dogfood owned Ptichi Next.js source
+        run: |
+          git clone --depth=1 https://github.com/dkharlanau/ptichi-site.git /tmp/ptichi-site
+          node bin/arwp-map-repo.mjs compile \
+            --root=/tmp/ptichi-site \
+            --repository=dkharlanau/ptichi-site \
+            --site=https://ptichi.com \
+            --base-path=/ \
+            --base-ref=main \
+            --adapter=nextjs \
+            --out=/tmp/ptichi-site-state.json
+          node bin/arwp-map-repo.mjs validate /tmp/ptichi-site-state.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const x = JSON.parse(fs.readFileSync('/tmp/ptichi-site-state.json', 'utf8'));
+          if (x.adapter.id !== 'nextjs') throw new Error(`Expected nextjs adapter, got ${x.adapter.id}`);
+          const byKey = new Map(x.ownership.map(item => [item.surfaceKey, item]));
+          const expected = new Map([
+            ['machine:/sitemap.xml', 'src/app/sitemap.ts'],
+            ['machine:/robots.txt', 'src/app/robots.ts'],
+            ['machine:/manifest.webmanifest', 'src/app/manifest.ts']
+          ]);
+          for (const [key, owner] of expected) {
+            const surface = byKey.get(key);
+            if (!surface || surface.state !== 'resolved' || surface.ownerPath !== owner) throw new Error(`${key} was not mapped to ${owner}`);
+          }
+          if (byKey.get('machine:/robots.txt').mutationClass !== 'policy-gated') throw new Error('robots policy boundary was weakened');
+          if (!x.warnings.some(w => w.code === 'next-route-unresolved')) throw new Error('Ptichi dynamic [locale] route should remain unresolved');
+          if (!x.warnings.some(w => w.code === 'next-redirects-not-executed')) throw new Error('Ptichi redirects should be recorded as non-executed config evidence');
+          console.log(JSON.stringify({ adapter: x.adapter, summary: x.summary, machineSurfaces: [...expected.keys()] }));
+          NODE
