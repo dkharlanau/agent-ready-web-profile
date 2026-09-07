@@ -146,7 +146,10 @@
         "branch": { "type": "string", "minLength": 1 },
         "commitSha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
         "pullRequestNumber": { "type": "integer", "minimum": 1 },
-        "pullRequestUrl": { "type": ["string", "null"], "format": "uri" }
+        "pullRequestUrl": { "type": ["string", "null"], "format": "uri" },
+        "mergeCommitSha": { "type": ["string", "null"], "pattern": "^[a-f0-9]{40}$" },
+        "mergedAt": { "type": ["string", "null"], "format": "date-time" },
+        "mergeEvidenceRefs": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
       }
     },
     "mutation": {
