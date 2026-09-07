@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "kind": "search-maturity-target",
+  "site": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "url": "https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html",
+  "intentFamily": "ai-search-optimization",
+  "reviewedAt": "2026-09-07T13:55:00Z",
+  "ownership": "project-reference",
+  "stage": "after",
+  "changeCommit": "5df6dcb1b6d0d4e74bfb1665b5ab3a7e644b1191",
+  "features": {
+    "retrievalClarity": {"state":"strong","confidence":"high","observations":["The H1 asks the exact user question and the lead gives a direct answer before supporting detail."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "topicalFocus": {"state":"strong","confidence":"high","observations":["Title, canonical URL, H1 and the numbered sections stay focused on improving AI Search visibility."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "answerFirst": {"state":"strong","confidence":"high","observations":["The primary recommendation appears in the hero lead before the implementation and research sections."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "evidenceDensity": {"state":"strong","confidence":"high","observations":["The page now exposes exact pilot denominators and state thresholds in a table, links current primary platform sources, and links the raw reviewed corpus and methodology."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html","https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/pilot-2026-09-07.json"]},
+    "firstPartyEvidence": {"state":"strong","confidence":"high","observations":["The answer now contains ARWP's own five-reference Search Maturity pilot results and links the reusable raw observation corpus instead of relying only on platform synthesis."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html","https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/"]},
+    "authorEntityIdentity": {"state":"strong","confidence":"high","observations":["TechArticle JSON-LD names Dzmitryi Kharlanau and links the maintainer GitHub identity."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "siteTransparency": {"state":"strong","confidence":"high","observations":["The answer exposes review date, pilot sample boundary and ranking caveat; the Trust Center exposes maintainer identity, evidence policy, corrections, provenance and limitations."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html","https://dkharlanau.github.io/agent-ready-web-profile/trust/"]},
+    "semanticStructure": {"state":"strong","confidence":"high","observations":["The page uses a single H1, numbered H2 sections, a semantic pilot table, lists, links and a truthful TechArticle object with citations."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "structuredDataIntegrity": {"state":"strong","confidence":"high","observations":["Visible headline, maintainer identity, modification date, canonical article URL and cited primary sources agree with TechArticle JSON-LD."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "internalTopicalGraph": {"state":"strong","confidence":"high","observations":["The answer now links the measurement answer, Search/AI playbook, Search Maturity research surface and raw corpus without adding query-variant pages."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html","https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/"]},
+    "freshnessIntegrity": {"state":"strong","confidence":"high","observations":["The visible reviewed date and dateModified changed because a real source-backed evidence section and dataset links were added."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "urlStability": {"state":"strong","confidence":"high","observations":["The existing canonical answer URL was strengthened rather than replaced by a new keyword/query variant."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "externalCorroboration": {"state":"strong","confidence":"high","observations":["Material platform claims remain linked to current Google, Bing and OpenAI primary sources."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]},
+    "utilitySurface": {"state":"strong","confidence":"high","observations":["The page now exposes a reusable JSON reference corpus in addition to the machine-readable recommendation registry and implementation playbook."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/pilot-2026-09-07.json","https://dkharlanau.github.io/agent-ready-web-profile/recommendations/registry.json"]},
+    "agentAccessibility": {"state":"present","confidence":"medium","observations":["The static answer uses native headings, table and links; runtime browser-agent/accessibility conformance is not inferred from static markup."],"sources":["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]}
+  },
+  "guardrails": {
+    "projectReferenceNotIndependentEvidence": true,
+    "implementationImprovementNotSearchOutcome": true,
+    "unmeasuredDimensionsRemainUnknown": true,
+    "statesAreObservationsNotRankingFactors": true
+  }
+}
