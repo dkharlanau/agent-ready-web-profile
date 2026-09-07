@@ -10,7 +10,9 @@ on:
       - 'lib/change-receipt-braid.mjs'
       - 'bin/arwp-change-receipt.mjs'
       - 'scripts/change-receipt-test.mjs'
+      - 'scripts/change-receipt-package-test.mjs'
       - 'docs/CHANGE-RECEIPTS.md'
+      - 'package.json'
       - '.github/workflows/change-receipts.yml'
   pull_request:
     paths:
@@ -20,7 +22,9 @@ on:
       - 'lib/change-receipt-braid.mjs'
       - 'bin/arwp-change-receipt.mjs'
       - 'scripts/change-receipt-test.mjs'
+      - 'scripts/change-receipt-package-test.mjs'
       - 'docs/CHANGE-RECEIPTS.md'
+      - 'package.json'
       - '.github/workflows/change-receipts.yml'
 
 permissions:
@@ -50,3 +54,6 @@ jobs:
           node --check bin/arwp-change-receipt.mjs
           node -e "const fs=require('fs'); for (const file of ['schema/change-receipt.schema.json','schema/braid-graph.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
           node bin/arwp-change-receipt.mjs --help | grep -q 'immutable evidence snapshots'
+
+      - name: Validate packaged Change Receipt surface
+        run: node scripts/change-receipt-package-test.mjs
