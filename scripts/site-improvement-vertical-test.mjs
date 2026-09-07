@@ -45,7 +45,7 @@ const report = analyzeVerticalEvidence({ vertical: 'software-product', canonical
 const merged = mergeVerticalEvidencePlan(basePlan(), report, { maxActions: 5 });
 assert.equal(merged.verticalEvidence.vertical, 'software-product');
 assert.equal(merged.sourceSummary.verticalEvidenceVersion, '0.1');
-assert.equal(merged.sourceSummary.verticalEvidenceRegistryVersion, '0.2');
+assert.equal(merged.sourceSummary.verticalEvidenceRegistryVersion, '0.3');
 assert.equal(merged.sourceSummary.verticalEvidenceChecks, 4);
 assert.ok(merged.sourceSummary.verticalEvidenceActions >= 3);
 assert.ok(merged.actions.some(item => item.id === 'vertical:growth:vertical:software-product-identity'));
