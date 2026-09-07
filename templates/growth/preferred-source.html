@@ -1,8 +1,14 @@
 <!-- ARWP Growth Profile template.
-     Replace example.com with your domain or subdomain.
-     Google Preferred Sources is a user-preference mechanism, not a general ranking guarantee. -->
-<a href="https://www.google.com/preferences/source?q=example.com"
-   rel="noopener"
-   target="_blank">
-  Add us as a Preferred Source on Google
-</a>
+     Google Preferred Sources is a user-preference mechanism, not a general ranking guarantee.
+     Use only when the publication's domain/subdomain is eligible in Google's source preferences tool.
+     The interactive button is Google's recommended implementation as of 2026-08-20.
+     Replace example.com only in the noscript fallback; the JS flow resolves the current eligible site. -->
+<script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
+<div google-add-preferred-source-btn></div>
+<noscript>
+  <a href="https://www.google.com/preferences/source?q=example.com"
+     rel="noopener"
+     target="_blank">
+    Add us as a Preferred Source on Google
+  </a>
+</noscript>
