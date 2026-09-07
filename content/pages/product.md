@@ -1,25 +1,20 @@
-# Agent-Ready Web Profile — Product
+# SignalBraid · ARWP
+
+**Weave the signals. Ship the change.**
 
 Canonical HTML: https://dkharlanau.github.io/agent-ready-web-profile/product/
 
-ARWP is an open-source adaptive website improvement system for Search, generative discovery, AI citations and agentic-web interoperability.
+SignalBraid · ARWP is the product-facing identity for the open-source adaptive website improvement system built by Agent-Ready Web Profile (ARWP).
 
-It is designed to go beyond a static SEO/GEO score. ARWP maintains dated best-practice intelligence, determines which mechanisms actually apply to a target site, compiles them into a concrete upgrade graph, resolves safe changes to exact repository files, verifies the resulting implementation and keeps outcome measurement separate from implementation claims.
+It is designed to go beyond a static SEO/GEO score. The system maintains dated best-practice intelligence, determines which mechanisms actually apply to a target site, braids current Search, AI, agent-web and repository evidence into a concrete upgrade graph, resolves safe changes to exact repository files, verifies the resulting implementation and keeps outcome measurement separate from implementation claims.
+
+> **Detect. Braid. Change. Prove.**
 
 ```text
-CURRENT GUIDANCE
-      ↓
-TARGET-SITE AUDIT
-      ↓
-APPLICABILITY + DEBT
-      ↓
-ADAPTIVE UPGRADE GRAPH
-      ↓
-TARGET TRANSFORMATION
-      ↓
-BUILD / VERIFY / DEPLOY
-      ↓
-MEASURE / LEARN / RE-REVIEW
+SEARCH SIGNALS ─────╮
+AI SIGNALS ─────────┼──► BRAID ► EXACT CHANGE ► VERIFY ► MEASURE
+AGENT SIGNALS ──────┤
+TARGET-SITE EVIDENCE╯
 ```
 
 ## Core capabilities
@@ -51,14 +46,22 @@ A production transform can be delivered through a new GitHub branch and pull req
 
 ## Product boundary
 
-ARWP distinguishes four things that many audit products collapse together:
+SignalBraid · ARWP distinguishes four things that many audit products collapse together:
 
 1. **upstream knowledge** — what current platforms/specifications actually say;
 2. **applicability** — whether the mechanism is relevant to this target site;
 3. **implementation evidence** — whether the technical change is really present and correct;
 4. **outcome evidence** — what Search, AI citation, referral or agent metrics did afterward.
 
-A technically correct change can produce neutral or negative external outcomes. ARWP keeps that evidence instead of converting it into a vanity readiness score.
+A technically correct change can produce neutral or negative external outcomes. The system keeps that evidence instead of converting it into a vanity readiness score.
+
+## Brand relationship
+
+- **SignalBraid** — product brand and human-facing metaphor.
+- **ARWP** — technical project identity and the suffix in the canonical lockup.
+- **Agent-Ready Web Profile** — repository, package and interoperability foundation.
+
+Canonical presentation: **SignalBraid · ARWP**.
 
 ## Availability
 
@@ -71,4 +74,4 @@ The architecture also leaves a clean future boundary for hosted continuous monit
 
 ## Structured-data boundary
 
-ARWP uses SoftwareApplication semantics. Google SoftwareApplication rich-result eligibility also requires a genuine rating or review; ARWP does not fabricate either.
+ARWP uses SoftwareApplication semantics. Google SoftwareApplication rich-result eligibility also requires a genuine rating or review; the project does not fabricate either.
