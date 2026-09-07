@@ -1,0 +1,113 @@
+{
+  "version": "0.1",
+  "kind": "search-maturity-target",
+  "site": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "url": "https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html",
+  "intentFamily": "ai-search-optimization",
+  "reviewedAt": "2026-09-07T13:45:00Z",
+  "ownership": "project-reference",
+  "stage": "before",
+  "features": {
+    "retrievalClarity": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["The H1 asks the exact user question and the lead gives a direct answer before supporting detail."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "topicalFocus": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["Title, canonical URL, H1 and the five numbered sections stay focused on improving AI Search visibility."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "answerFirst": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["The primary recommendation appears in the hero lead before the implementation sections."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "evidenceDensity": {
+      "state": "present",
+      "confidence": "high",
+      "observations": ["The page links primary Google, Bing and OpenAI sources, but before this change it did not expose its own compact empirical comparison or dataset on-page."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "firstPartyEvidence": {
+      "state": "weak",
+      "confidence": "high",
+      "observations": ["Before dogfood, the page mostly synthesized platform documentation; ARWP first-party benchmark evidence existed elsewhere but was not connected to this answer."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "authorEntityIdentity": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["TechArticle JSON-LD names Dzmitryi Kharlanau and links the maintainer GitHub identity."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "siteTransparency": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["The answer exposes review date and ranking caveat; the linked ARWP Trust Center exposes maintainer identity, evidence policy, corrections, provenance and limitations."],
+      "sources": [
+        "https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html",
+        "https://dkharlanau.github.io/agent-ready-web-profile/trust/"
+      ]
+    },
+    "semanticStructure": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["The page uses a single H1, numbered H2 sections, semantic lists, links and a truthful TechArticle object."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "structuredDataIntegrity": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["Visible headline, maintainer identity, modification date and canonical article URL agree with TechArticle JSON-LD."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "internalTopicalGraph": {
+      "state": "present",
+      "confidence": "high",
+      "observations": ["The answer links the measurement answer and Search/AI visibility playbook, but does not manufacture query-variant pages."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "freshnessIntegrity": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["The visible reviewed date and dateModified reflect a real source-backed content review rather than synthetic date churn."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "urlStability": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["The page has one explicit canonical URL and a descriptive stable answer path."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "externalCorroboration": {
+      "state": "strong",
+      "confidence": "high",
+      "observations": ["Material platform claims are linked to current Google, Bing and OpenAI primary sources."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    },
+    "utilitySurface": {
+      "state": "present",
+      "confidence": "medium",
+      "observations": ["The page links a machine-readable recommendation registry and implementation playbook, while the answer itself is primarily editorial guidance."],
+      "sources": [
+        "https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html",
+        "https://dkharlanau.github.io/agent-ready-web-profile/recommendations/registry.json"
+      ]
+    },
+    "agentAccessibility": {
+      "state": "present",
+      "confidence": "medium",
+      "observations": ["The static answer primarily uses native headings and links; runtime accessibility/browser-agent conformance was not inferred from static markup."],
+      "sources": ["https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"]
+    }
+  },
+  "guardrails": {
+    "projectReferenceNotIndependentEvidence": true,
+    "unmeasuredDimensionsRemainUnknown": true,
+    "statesAreObservationsNotRankingFactors": true
+  }
+}
