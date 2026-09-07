@@ -1,0 +1,96 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "title": "ARWP Search Maturity pilot reference corpus",
+  "methodology": "https://dkharlanau.github.io/agent-ready-web-profile/SEARCH-MATURITY-BENCHMARK.md",
+  "observations": [
+    {
+      "id": "2026-09-07-ai-search-promptwatch",
+      "query": "AI search optimization 2026",
+      "intentFamily": "ai-search-optimization",
+      "observedAt": "2026-09-07T12:30:00Z",
+      "observationSurface": {"provider":"OpenAI web search research","surface":"web search retrieval","locale":"en","device":null,"note":"Returned in the 2026-09-07 research search. Exact Google/Bing rank was not measured."},
+      "referencePage": {"url":"https://promptwatch.com/blog/ai-search-optimization","title":"AI Search Optimization: The Complete 2026 Guide (GEO, AEO & SEO)","domain":"promptwatch.com","publishedAt":"2026-08-04","updatedAt":null,"ownership":"independent"},
+      "features": {
+        "retrievalClarity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["A direct definition of AI search optimization appears near the top of the page."],"sources":[]},
+        "topicalFocus":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["The title, H1 and section structure stay tightly focused on AI search optimization."],"sources":[]},
+        "answerFirst":{"state":"strong","confidence":"high","evidenceClass":"documented-platform","observations":["A definition and TL;DR precede most supporting detail."],"sources":[]},
+        "evidenceDensity":{"state":"strong","confidence":"medium","evidenceClass":"observed-correlation","observations":["The page exposes numerical claims, a comparison table and named supporting sources."],"sources":[]},
+        "firstPartyEvidence":{"state":"present","confidence":"medium","evidenceClass":"observed-correlation","observations":["The article links to first-party crawler research from the publisher."],"sources":[]},
+        "authorEntityIdentity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["A named author, role and biography are visible."],"sources":[]},
+        "siteTransparency":{"state":"present","confidence":"medium","evidenceClass":"observed-correlation","observations":["Publisher product context, author and publication date are visible."],"sources":[]},
+        "semanticStructure":{"state":"strong","confidence":"high","evidenceClass":"documented-platform","observations":["Breadcrumb, H1, table of contents, headings and tables expose a clear document hierarchy."],"sources":[]}
+      }
+    },
+    {
+      "id": "2026-09-07-ai-search-semrush",
+      "query": "AI search optimization 2026",
+      "intentFamily": "ai-search-optimization",
+      "observedAt": "2026-09-07T12:30:00Z",
+      "observationSurface": {"provider":"OpenAI web search research","surface":"web search retrieval","locale":"en","device":null,"note":"Returned in the 2026-09-07 research search. Exact Google/Bing rank was not measured."},
+      "referencePage": {"url":"https://www.semrush.com/blog/ai-search-optimization/","title":"How to optimize for AI search results in 2026","domain":"semrush.com","publishedAt":"2026-05-06","updatedAt":null,"ownership":"independent"},
+      "features": {
+        "retrievalClarity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["Purpose and definition are visible before the detailed tactics."],"sources":[]},
+        "topicalFocus":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["URL, title, H1 and sections are tightly scoped to AI search optimization."],"sources":[]},
+        "answerFirst":{"state":"strong","confidence":"high","evidenceClass":"documented-platform","observations":["A direct definition and summary precede the detailed guidance."],"sources":[]},
+        "evidenceDensity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["The page uses percentages, charts and explicit source links rather than unsupported prose alone."],"sources":[]},
+        "firstPartyEvidence":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["The article incorporates Semrush first-party research and product data."],"sources":[]},
+        "authorEntityIdentity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["Named author and contributor identities are visible."],"sources":[]},
+        "siteTransparency":{"state":"strong","confidence":"medium","evidenceClass":"observed-correlation","observations":["Publication date, authorship, company identity and research provenance are explicit."],"sources":[]},
+        "semanticStructure":{"state":"strong","confidence":"high","evidenceClass":"documented-platform","observations":["Breadcrumb, H1, table of contents and nested sections create a strong extractable hierarchy."],"sources":[]}
+      }
+    },
+    {
+      "id": "2026-09-07-ai-search-boostgeo-study",
+      "query": "AI website readiness 2026",
+      "intentFamily": "ai-search-optimization",
+      "observedAt": "2026-09-07T12:30:00Z",
+      "observationSurface": {"provider":"OpenAI web search research","surface":"web search retrieval","locale":"en","device":null,"note":"Returned in the 2026-09-07 research search. Exact Google/Bing rank was not measured."},
+      "referencePage": {"url":"https://www.boostgeo.com/research-ai-website-readiness-study-2026","title":"The 2026 AI Website Readiness Study","domain":"boostgeo.com","publishedAt":"2026-08-28","updatedAt":null,"ownership":"independent"},
+      "features": {
+        "retrievalClarity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["The sample, scope and headline finding are exposed near the start."],"sources":[]},
+        "topicalFocus":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["The page is a focused research artifact rather than a broad marketing landing page."],"sources":[]},
+        "answerFirst":{"state":"differentiated","confidence":"high","evidenceClass":"documented-platform","observations":["Headline metrics and a research summary precede the detailed methodology."],"sources":[]},
+        "evidenceDensity":{"state":"differentiated","confidence":"high","evidenceClass":"observed-correlation","observations":["Counts, distributions and denominators are exposed throughout the study."],"sources":[]},
+        "firstPartyEvidence":{"state":"differentiated","confidence":"high","evidenceClass":"observed-correlation","observations":["The study exposes a frozen reviewed cohort and reusable sample/chart data."],"sources":[]},
+        "siteTransparency":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["Methodology, limitations and sample register are explicit."],"sources":[]},
+        "semanticStructure":{"state":"strong","confidence":"high","evidenceClass":"documented-platform","observations":["Summary, findings and methodology are separated into explicit sections."],"sources":[]}
+      }
+    },
+    {
+      "id": "2026-09-07-ai-search-pepper",
+      "query": "generative engine optimization 2026",
+      "intentFamily": "ai-search-optimization",
+      "observedAt": "2026-09-07T12:30:00Z",
+      "observationSurface": {"provider":"OpenAI web search research","surface":"web search retrieval","locale":"en","device":null,"note":"Returned in the 2026-09-07 research search. Exact Google/Bing rank was not measured."},
+      "referencePage": {"url":"https://www.pepper.inc/blog/generative-engine-optimization/","title":"What is generative engine optimization? The complete 2026 guide","domain":"pepper.inc","publishedAt":"2026-08-17","updatedAt":null,"ownership":"independent"},
+      "features": {
+        "retrievalClarity":{"state":"strong","confidence":"medium","evidenceClass":"observed-correlation","observations":["A direct GEO definition appears near the start."],"sources":[]},
+        "topicalFocus":{"state":"strong","confidence":"medium","evidenceClass":"observed-correlation","observations":["The URL, title and category are focused on generative engine optimization."],"sources":[]},
+        "answerFirst":{"state":"present","confidence":"medium","evidenceClass":"documented-platform","observations":["A direct definition is visible before the broader explanation."],"sources":[]},
+        "evidenceDensity":{"state":"present","confidence":"low","evidenceClass":"observed-correlation","observations":["Quantitative operating-scale claims are visible, but this review did not fully validate their supporting method."],"sources":[]},
+        "firstPartyEvidence":{"state":"present","confidence":"low","evidenceClass":"observed-correlation","observations":["First-party scale evidence is present, with method depth left for later review."],"sources":[]},
+        "authorEntityIdentity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["Named author and publication date are visible."],"sources":[]},
+        "siteTransparency":{"state":"present","confidence":"medium","evidenceClass":"observed-correlation","observations":["Company, category, author and publication date are explicit."],"sources":[]},
+        "semanticStructure":{"state":"present","confidence":"medium","evidenceClass":"documented-platform","observations":["Title, category and direct definition expose a usable document structure."],"sources":[]}
+      }
+    },
+    {
+      "id": "2026-09-07-ai-search-agent-ready",
+      "query": "agent-ready website 2026",
+      "intentFamily": "ai-search-optimization",
+      "observedAt": "2026-09-07T12:30:00Z",
+      "observationSurface": {"provider":"OpenAI web search research","surface":"web search retrieval","locale":"en","device":null,"note":"Returned in the 2026-09-07 research search. Exact Google/Bing rank was not measured."},
+      "referencePage": {"url":"https://agent-ready.dev/what-is-an-agent-ready-website","title":"What is an agent-ready website? Definition and evidence","domain":"agent-ready.dev","publishedAt":"2026-08-22","updatedAt":null,"ownership":"independent"},
+      "features": {
+        "retrievalClarity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["The definition and conceptual model appear near the top."],"sources":[]},
+        "topicalFocus":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["The page is narrowly scoped to a definition-and-evidence intent."],"sources":[]},
+        "answerFirst":{"state":"strong","confidence":"high","evidenceClass":"documented-platform","observations":["A direct definition precedes the research detail."],"sources":[]},
+        "evidenceDensity":{"state":"strong","confidence":"high","evidenceClass":"observed-correlation","observations":["Task, step, token and corpus measurements are exposed as inspectable claims."],"sources":[]},
+        "firstPartyEvidence":{"state":"strong","confidence":"medium","evidenceClass":"observed-correlation","observations":["The page cites its own corpus alongside external research."],"sources":[]},
+        "siteTransparency":{"state":"strong","confidence":"medium","evidenceClass":"observed-correlation","observations":["Claims, caveats and measurement boundaries are visibly separated."],"sources":[]},
+        "semanticStructure":{"state":"strong","confidence":"medium","evidenceClass":"documented-platform","observations":["Definition, evidence and FAQ-like sections provide extractable structure."],"sources":[]}
+      }
+    }
+  ]
+}
