@@ -1,0 +1,61 @@
+name: Search Maturity Benchmark
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/search-maturity.mjs'
+      - 'bin/arwp-search-maturity.mjs'
+      - 'schema/search-maturity-corpus.schema.json'
+      - 'benchmarks/search-maturity/**'
+      - 'benchmarks/search-maturity-test.mjs'
+      - 'docs/SEARCH-MATURITY-BENCHMARK.md'
+      - 'skills/arwp-search-maturity/**'
+      - '.github/workflows/search-maturity.yml'
+  pull_request:
+    paths:
+      - 'lib/search-maturity.mjs'
+      - 'bin/arwp-search-maturity.mjs'
+      - 'schema/search-maturity-corpus.schema.json'
+      - 'benchmarks/search-maturity/**'
+      - 'benchmarks/search-maturity-test.mjs'
+      - 'docs/SEARCH-MATURITY-BENCHMARK.md'
+      - 'skills/arwp-search-maturity/**'
+      - '.github/workflows/search-maturity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit and syntax checks
+        run: |
+          node benchmarks/search-maturity-test.mjs
+          node --check lib/search-maturity.mjs
+          node --check bin/arwp-search-maturity.mjs
+          node --check benchmarks/search-maturity-test.mjs
+      - name: Validate pilot corpus
+        run: |
+          node bin/arwp-search-maturity.mjs check benchmarks/search-maturity/pilot-2026-09-07.json
+          node bin/arwp-search-maturity.mjs cohort benchmarks/search-maturity/pilot-2026-09-07.json --intent=ai-search-optimization --output=/tmp/search-maturity-cohort.json
+          test -s /tmp/search-maturity-cohort.json
+      - name: Guard rank provenance
+        run: |
+          node --input-type=module <<'EOF'
+          import fs from 'node:fs';
+          const corpus = JSON.parse(fs.readFileSync('benchmarks/search-maturity/pilot-2026-09-07.json', 'utf8'));
+          for (const observation of corpus.observations) {
+            const surface = observation.observationSurface || {};
+            if (surface.rank != null && !surface.rankEvidence) {
+              throw new Error(`${observation.id}: rank exists without rankEvidence`);
+            }
+          }
+          console.log('PASS rank provenance guard');
+          EOF
