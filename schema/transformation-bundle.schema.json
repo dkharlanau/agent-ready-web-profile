@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/transformation-bundle.schema.json",
+  "title": "ARWP Target-Site Transformation Bundle v0.1",
+  "description": "Deterministic, digest-gated production-path changes compiled from an Adaptive Site Upgrade graph. The bundle authorizes nothing by itself.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generatedAt", "site", "repository", "sourceUpgrade", "policy", "summary", "operations", "gatedRecommendations", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "baseRef", "baseCommitSha"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "baseRef": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "sourceUpgrade": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "generatedAt", "sha256", "selectedRecommendationIds"],
+      "properties": {
+        "version": { "type": "string" },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "selectedRecommendationIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["delivery", "allowedPaths", "blockedPrefixes", "maxFiles", "maxTotalBytes"],
+      "properties": {
+        "delivery": { "const": "production-pr-first" },
+        "allowedPaths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/path" } },
+        "blockedPrefixes": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "maxFiles": { "type": "integer", "minimum": 1, "maximum": 60 },
+        "maxTotalBytes": { "type": "integer", "minimum": 1, "maximum": 5242880 }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operations", "files", "bytes", "gatedRecommendations", "byOperation"],
+      "properties": {
+        "operations": { "type": "integer", "minimum": 0 },
+        "files": { "type": "integer", "minimum": 0 },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "gatedRecommendations": { "type": "integer", "minimum": 0 },
+        "byOperation": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "maxItems": 60,
+      "items": { "$ref": "#/$defs/operation" }
+    },
+    "gatedRecommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["recommendationId", "automationClass", "reason"],
+        "properties": {
+          "recommendationId": { "type": "string", "minLength": 1 },
+          "automationClass": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["explicitPathAllowlist", "digestPreconditions", "noDirectMainWrite", "newBranchOnly", "noForcePush", "policyChangesNeverAutoPromoted", "editorialChangesNeverAutoPromoted", "ownerPlatformChangesNeverAutoPromoted", "runtimeChangesNeverAutoPromoted", "reviewDueKnowledgeNeverExecutes", "noRankingGuarantee"],
+      "properties": {
+        "explicitPathAllowlist": { "const": true },
+        "digestPreconditions": { "const": true },
+        "noDirectMainWrite": { "const": true },
+        "newBranchOnly": { "const": true },
+        "noForcePush": { "const": true },
+        "policyChangesNeverAutoPromoted": { "const": true },
+        "editorialChangesNeverAutoPromoted": { "const": true },
+        "ownerPlatformChangesNeverAutoPromoted": { "const": true },
+        "runtimeChangesNeverAutoPromoted": { "const": true },
+        "reviewDueKnowledgeNeverExecutes": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "path": { "type": "string", "minLength": 1, "maxLength": 500, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!\\.git(?:/|$)).+" },
+    "digest": { "type": ["string", "null"], "pattern": "^sha256:[0-9a-f]{64}$" },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "recommendationId", "automationClass", "operation", "path", "mediaType", "precondition", "after", "groundedEvidence", "verification", "humanReviewRequired"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{1,160}$" },
+        "recommendationId": { "type": "string", "minLength": 1 },
+        "automationClass": { "enum": ["mechanical", "grounded-template"] },
+        "operation": { "enum": ["create-file", "replace-file", "replace-exact", "insert-before-exact", "insert-after-exact"] },
+        "path": { "$ref": "#/$defs/path" },
+        "mediaType": { "type": "string", "minLength": 1 },
+        "precondition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["exists", "sha256"],
+          "properties": {
+            "exists": { "type": "boolean" },
+            "sha256": { "$ref": "#/$defs/digest" },
+            "match": { "type": ["string", "null"] },
+            "matchCount": { "type": ["integer", "null"], "minimum": 1, "maximum": 20 }
+          }
+        },
+        "after": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["sha256", "content"],
+          "properties": {
+            "sha256": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+            "content": { "type": "string", "maxLength": 2097152 }
+          }
+        },
+        "groundedEvidence": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "verification": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "humanReviewRequired": { "type": "boolean" }
+      }
+    }
+  }
+}
