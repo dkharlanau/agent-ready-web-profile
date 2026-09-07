@@ -41,9 +41,11 @@ node bin/arwp-portfolio.mjs list
 node bin/arwp-portfolio.mjs rollout --json
 node bin/arwp-portfolio.mjs rollout --site=metkagram-language-knowledge --provider=google --json
 node bin/arwp-portfolio.mjs rollout --trend=webmcp-origin-trial-evals --include-watch --json
+node bin/arwp-portfolio.mjs propose --json
+node bin/arwp-portfolio.mjs propose --site=dkharlanau/dkharlanau.github.io --provider=google --json
 ```
 
-Each candidate carries:
+Each rollout candidate carries:
 
 - site/repository identity;
 - matched verticals;
@@ -53,6 +55,26 @@ Each candidate carries:
 - an explicit next step;
 - `productionMutationAllowed: false`;
 - owner-controlled evidence classification.
+
+## Target-specific proposal bundles
+
+`arwp-portfolio propose` converts the filtered rollout candidates into deterministic review artifacts grouped by target repository.
+
+Each proposal includes:
+
+- a stable proposal ID derived from the target and mapped trend evidence rather than the execution time;
+- target site/repository identity and rollout mode;
+- the exact Trend Radar candidates, primary sources, matched verticals and ARWP action/measurement references;
+- a suggested GitHub issue title and review body;
+- an explicit live-site audit requirement before any action is kept;
+- `githubMutationAllowed: false` and `productionMutationAllowed: false`;
+- an explicit requirement for separate target-repository authorization before any later GitHub write.
+
+The command does **not** create an issue. This boundary is intentional: vertical/trend matching is enough to decide where to investigate, but not enough to decide what must change on a deployed site.
+
+Explicitly requested unknown site IDs or repositories are returned in `unknownTargets`. ARWP emits no generic fallback proposal for them.
+
+Proposal IDs remain stable for the same target and same mapped Trend evidence even if the command is rerun later. This allows downstream review systems to de-duplicate proposals without pretending that a proposal is implementation evidence.
 
 ## Rollout modes
 
@@ -71,9 +93,13 @@ owner portfolio vertical mapping
         ↓
 target-specific rollout candidate
         ↓
+review-only proposal bundle
+        ↓
 current public-site Growth audit
         ↓
 keep only actions actually active on that site
+        ↓
+explicit target-repository authorization when a GitHub write is desired
         ↓
 implementation / owner-control review
         ↓
@@ -81,6 +107,16 @@ Growth Experiment + visibility evidence
 ```
 
 A portfolio match is intentionally weaker than a site audit. It tells ARWP where to look, not what to patch.
+
+## CI evidence
+
+The dedicated `ARWP Portfolio Rollout` workflow validates both layers:
+
+- default rollout excludes WATCH/retired trends and never authorizes production mutation;
+- proposal generation produces target-specific review artifacts without GitHub mutation;
+- proposal IDs are deterministic for unchanged evidence;
+- an unknown target is reported and receives no generic proposal;
+- JSON rollout/proposal/unknown-target outputs are retained as workflow artifacts.
 
 ## Guardrails
 
@@ -90,3 +126,4 @@ A portfolio match is intentionally weaker than a site audit. It tells ARWP where
 - Retired trends never roll out.
 - WATCH trends remain opt-in research candidates.
 - Site-specific implementation still depends on the live Growth Profile and repository context.
+- Suggested issue text is a review artifact, not permission to create or mutate a target-repository issue.
