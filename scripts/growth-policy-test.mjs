@@ -17,8 +17,10 @@ const validateSchema = ajv.compile(schema);
 assert.equal(validateSchema(example), true, JSON.stringify(validateSchema.errors));
 assert.equal(validateGrowthPolicy(example).valid, true);
 assert.ok(Object.keys(verticals.verticals).includes(example.siteClass));
-assert.equal(verticals.version, '0.2');
+assert.equal(verticals.version, '0.3');
 assert.equal(Object.values(verticals.verticals).every(vertical => Array.isArray(vertical.checks) && vertical.checks.length >= 3), true, 'every vertical should provide actionable evidence checks');
+assert.ok(verticals.verticals.commerce.checks.some(item => item.id === 'commerce-ucp-discovery' && /\.well-known\/ucp/.test(item.evidence)));
+assert.ok(verticals.verticals['local-business'].checks.some(item => item.id === 'local-business-owner-profile' && /Business Profile/.test(item.title)));
 
 const noisyPlan = {
   canonicalUrl: 'https://example.com/docs/',
@@ -61,7 +63,7 @@ assert.match(manifest.desiredState.robotsIntent, /User-agent: GPTBot\nDisallow: 
 assert.equal(manifest.desiredState.contentSignal, 'Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference');
 assert.equal(manifest.desiredState.preferredSourcesUrl, 'https://www.google.com/preferences/source?q=example.com');
 assert.ok(manifest.desiredState.structuredData.verticalRecommended.includes('SoftwareApplication'));
-assert.equal(manifest.desiredState.vertical.registryVersion, '0.2');
+assert.equal(manifest.desiredState.vertical.registryVersion, '0.3');
 assert.equal(manifest.desiredState.vertical.reviewedAt, '2026-09-07');
 assert.ok(manifest.desiredState.vertical.checks.some(item => item.id === 'software-product-release-history' && item.priority === 'P1'));
 assert.ok(manifest.desiredState.vertical.checks.some(item => item.id === 'software-product-agent-interfaces'));
