@@ -28,10 +28,14 @@ jobs:
         run: |
           node research/state-of-agentic-web/test.mjs
           node research/state-of-agentic-web/sampling-test.mjs
+          node research/state-of-agentic-web/reference-sites-test.mjs
           node --check research/state-of-agentic-web/build.mjs
           node --check research/state-of-agentic-web/sampling.mjs
           node --check research/state-of-agentic-web/sampling-test.mjs
+          node --check research/state-of-agentic-web/reference-sites.mjs
+          node --check research/state-of-agentic-web/reference-sites-test.mjs
           node -e "const p=JSON.parse(require('fs').readFileSync('research/state-of-agentic-web/sampling-plan.json','utf8')); if(p.representativeOfPublicWeb!==false) throw new Error('sampling plan must remain explicitly non-representative');"
+          node -e "const r=JSON.parse(require('fs').readFileSync('research/state-of-agentic-web/reference-sites.json','utf8')); if(r.aggregatePolicy.includedInIndependentAggregate!==false) throw new Error('owner reference cohort leaked into independent aggregate');"
       - name: Rebuild committed research outputs
         run: node research/state-of-agentic-web/build.mjs
       - name: Upload generated research outputs
@@ -47,6 +51,14 @@ jobs:
           path: |
             research/state-of-agentic-web/sampling-plan.json
             research/state-of-agentic-web/sampling.mjs
+          if-no-files-found: error
+      - name: Upload owner-controlled comparison cohort
+        uses: actions/upload-artifact@v6
+        with:
+          name: state-of-agentic-web-owner-reference-cohort
+          path: |
+            research/state-of-agentic-web/reference-sites.json
+            research/state-of-agentic-web/reference-sites.mjs
           if-no-files-found: error
       - name: Verify release outputs are reproducible
         run: |
