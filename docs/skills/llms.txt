@@ -10,13 +10,21 @@ Use it for Search growth, Google Discover/recommendations, generative Search, AI
 ## Initial preparation
 - arwp-prepare-site — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md
 
+## Adaptive implementation
+- arwp-adaptive-upgrade — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-adaptive-upgrade/SKILL.md
+- arwp-target-transformation — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-target-transformation/SKILL.md
+
 ## Specialists
 - arwp-ai-search-content — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md
+- arwp-future-search — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-future-search/SKILL.md
+- arwp-dataset-publication — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-dataset-publication/SKILL.md
 - arwp-agent-discovery — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-agent-discovery/SKILL.md
 - arwp-evidence-ci — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-evidence-ci/SKILL.md
+
+Use arwp-future-search after current crawl/index/canonical/content/identity foundations are healthy. It may implement truthful broader Schema.org semantics and experimental machine graphs even when they are not current ranking requirements, but each mechanism keeps explicit maturity and verification.
 
 ## Install
 npx skills add dkharlanau/agent-ready-web-profile
 
 ## Rule
-Research -> hypothesis -> implement -> verify -> measure. Do not claim that ARWP, llms.txt, Schema.org, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
+Research -> classify current vs experimental -> implement -> verify -> measure. Do not claim that ARWP, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
