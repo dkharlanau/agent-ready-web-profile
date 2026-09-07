@@ -1,0 +1,54 @@
+name: ARWP Commerce and Local Growth
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/growth-verticals.json'
+      - 'lib/growth-vertical-evidence.mjs'
+      - 'lib/growth-vertical-site.mjs'
+      - 'lib/growth-vertical-extended.mjs'
+      - 'lib/growth-owner-data.mjs'
+      - 'lib/growth-plan-vertical.mjs'
+      - 'lib/site-improvement-vertical.mjs'
+      - 'scripts/growth-commerce-local-test.mjs'
+      - 'schema/growth-owner-data.schema.json'
+      - 'templates/growth/owner-data.json'
+      - '.github/workflows/growth-commerce-local.yml'
+  pull_request:
+    paths:
+      - 'registry/growth-verticals.json'
+      - 'lib/growth-vertical-evidence.mjs'
+      - 'lib/growth-vertical-site.mjs'
+      - 'lib/growth-vertical-extended.mjs'
+      - 'lib/growth-owner-data.mjs'
+      - 'lib/growth-plan-vertical.mjs'
+      - 'lib/site-improvement-vertical.mjs'
+      - 'scripts/growth-commerce-local-test.mjs'
+      - 'schema/growth-owner-data.schema.json'
+      - 'templates/growth/owner-data.json'
+      - '.github/workflows/growth-commerce-local.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  commerce-local:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate commerce/local owner evidence and UCP discovery
+        run: |
+          node scripts/growth-commerce-local-test.mjs
+          node --check lib/growth-vertical-extended.mjs
+          node --check lib/growth-plan-vertical.mjs
+          node --check lib/site-improvement-vertical.mjs
+          node --check scripts/growth-commerce-local-test.mjs
+          node -e "const v=JSON.parse(require('fs').readFileSync('registry/growth-verticals.json','utf8')); if(v.version!=='0.3') process.exit(1);"
+          node -e "JSON.parse(require('fs').readFileSync('schema/growth-owner-data.schema.json','utf8'));"
