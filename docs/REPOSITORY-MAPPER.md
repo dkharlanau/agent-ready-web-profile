@@ -1,145 +1,141 @@
 # SignalBraid Repository Mapper / Site State Graph
 
-Status: **v0.1 foundation · static HTML + Jekyll · 2026-09-07**.
+Status: **v0.1 · static HTML + Jekyll + Astro · 2026-09-07**.
 
-Repository Mapper is the `Map` layer between an Adaptive Upgrade recommendation and a deterministic repository transformation.
+Repository Mapper is the `Map` layer between an Adaptive Upgrade recommendation and a deterministic repository transformation. Its narrow question is:
 
-Its job is deliberately narrow:
+> Given a repository and site source root, which repository file can be proven to own a public route or machine/metadata surface?
 
-> **Given a repository and the site source root, which repository file can be proven to own a rendered route or machine/metadata surface?**
-
-It does not choose editorial truth, authorize mutation, infer ranking impact or guess a source path when ownership is ambiguous.
-
-## Why this layer exists
-
-Before Repository Mapper, ARWP could already:
-
-1. audit a deployed site;
-2. compile target-specific Adaptive Upgrade recommendations;
-3. apply an exact digest-gated Transformation Bundle once an agent supplied the owning file.
-
-The weak link was step 2 → 3. Crawling a page can show that a canonical, title or JSON-LD surface exists, but cannot by itself prove which repository source owns that value.
-
-Repository Mapper records that ownership evidence explicitly.
+It records `resolved | ambiguous | unresolved` ownership with source digests and build-path evidence. It does not choose editorial truth, authorize mutation, execute target build code, infer ranking impact, or guess missing ownership.
 
 ```text
-public route / metadata surface
+public route / machine surface
           ↓
-Site State Graph ownership claim
+Site State Graph
           ↓
 resolved | ambiguous | unresolved
           ↓
-exact repo source + build path + source fact
+exact repository source + SHA-256 + build path
           ↓
-BraidGraph repo-file → renders → surface
-          ↓
-optional transformation path hint
+BraidGraph / Transformation preparation
 ```
 
-Only `resolved` ownership produces a BraidGraph `renders` edge.
+Only resolved ownership is eligible for downstream source-path hints. Those hints still do not authorize mutation.
 
 ## Supported adapters
 
 ### `static-html`
 
-Deterministic direct-file mapping for plain/static HTML and GitHub Pages repositories where source HTML is versioned.
-
-Examples:
+Direct mapping for versioned HTML/static GitHub Pages sources.
 
 ```text
 index.html       → /
 guide/index.html → /guide/
 about.html       → /about.html
-robots.txt       → /robots.txt
 ```
 
-The adapter extracts direct ownership for:
-
-- document route;
-- `<title>`;
-- meta description;
-- canonical link;
-- robots meta;
-- JSON-LD presence;
-- `robots.txt`;
-- sitemap XML;
-- `llms.txt`;
-- selected agent/API discovery files.
+The adapter can record document ownership plus literal title, description, canonical, robots meta, JSON-LD presence and selected machine files.
 
 ### `jekyll`
 
-Deterministic/explicit mapping for Jekyll pages.
+Evidence-backed Jekyll mapping using `_config.yml` / `_config.yaml`, Jekyll repository signals, explicit front-matter `permalink`, ordinary Jekyll page conventions, and `_layouts` / `_includes` build dependencies.
 
-The adapter uses:
+Post/collection routes that require unresolved configuration or plugin execution remain `unresolved`; the mapper does not run Liquid or Jekyll to manufacture ownership evidence.
 
-- `_config.yml` / `_config.yaml` and Jekyll repository signals;
-- explicit front-matter `permalink` when present;
-- Jekyll page path convention for ordinary page files;
-- `_layouts` and `_includes` as build-path evidence;
-- front-matter scalar values as first-party source facts.
+### `astro`
 
-A post/collection path that needs additional Jekyll configuration is **not guessed**. Without an explicit resolvable permalink, it remains `unresolved`.
+Astro v0.1 maps only framework-native ownership that can be established without executing Astro or target repository code.
+
+Evidence sources:
+
+- `astro.config.mjs|js|ts|cjs` and/or an `astro` package dependency;
+- documented file-based routing from static files in `src/pages` (or an inspectable literal `srcDir`);
+- inspectable literal `build.format`, `output`, `site`, `base`, `trailingSlash`, `srcDir` and `publicDir` options;
+- exact relative `.astro` imports for component/layout build-path evidence;
+- exact machine files copied from `public/`.
+
+Supported page-source extensions are `.astro`, `.md`, `.mdx` (only when `@astrojs/mdx` is proven from package dependencies), and `.html`.
+
+Route path calculation respects `build.format`:
+
+```text
+# directory (default)
+src/pages/index.astro       → /
+src/pages/about.astro       → /about/
+src/pages/about/index.astro → /about/   # collision if both exist
+
+# file
+src/pages/about.astro       → /about.html
+src/pages/about/index.astro → /about.html
+
+# preserve
+src/pages/about.astro       → /about.html
+src/pages/about/index.astro → /about/
+```
+
+Astro routes fail closed when exact public ownership requires behavior the mapper refuses to execute:
+
+- bracket/dynamic routes such as `[slug].astro`;
+- `getStaticPaths()` expansion;
+- on-demand/server rendering unless a route has an inspectable `export const prerender = true` override;
+- per-page computed `prerender` expressions;
+- i18n routing;
+- computed/uninspectable critical config values;
+- integration-generated routes and redirects (reported as warnings, not invented as file routes).
+
+A static file route may still record literal canonical/JSON-LD/title/description/robots source ownership when directly visible in the page source. Dynamic metadata expressions are not reduced to invented values.
+
+## Astro evidence receipt
+
+`fixtures/repository-mapper/astro-official-basics.json` pins the independently reviewable upstream evidence used for this adapter:
+
+- `withastro/astro` commit `9870f95601690d9d98799b6fa78a0bc76165ee06`;
+- the official `examples/basics/astro.config.mjs` blob;
+- the official `examples/basics/src/pages/index.astro` blob;
+- current Astro routing/configuration documentation URLs.
+
+The fixture is an evidence manifest, not vendored framework source. CI does not fetch or execute upstream Astro code.
 
 ## Compile
-
-For a GitHub Pages project served from `docs/`:
 
 ```bash
 node bin/arwp-map-repo.mjs compile \
   --root=. \
-  --site-root=docs \
+  --site-root=. \
   --repository=owner/site \
-  --site=https://owner.github.io \
-  --base-path=/site/ \
+  --site=https://example.com \
+  --base-path=/ \
   --base-ref=main \
   --base-sha=<40-character-sha> \
+  --adapter=auto \
   --out=.arwp/site-state.json
 ```
 
-`--site-root` is repository-relative and defaults to `.`.
+Supported `--adapter` values:
 
-Supported `--adapter` values are `auto`, `static-html`, and `jekyll`. `auto` is preferred when the mapper can detect the stack from repository evidence.
+```text
+auto | static-html | jekyll | astro
+```
 
-## Validate
+`auto` first uses explicit framework evidence. If Astro and Jekyll signals coexist at the same site root, auto-detection stops with an error instead of selecting one silently.
+
+For Astro, a literal `site` or `base` in `astro.config.*` must agree with the requested public site/base path. Conflict is a hard failure because an ownership graph with the wrong public identity is unsafe.
+
+## Validate and resolve
 
 ```bash
 node bin/arwp-map-repo.mjs validate .arwp/site-state.json
-```
 
-Validation includes both JSON Schema and semantic checks:
-
-- a `resolved` route/ownership claim must reference a file actually present in the graph;
-- an `ambiguous` or `unresolved` claim must not silently select `ownerPath`;
-- repository/base/site evidence remains explicit.
-
-## Resolve ownership
-
-Exact surface key:
-
-```bash
-node bin/arwp-map-repo.mjs resolve .arwp/site-state.json \
-  --surface=metadata:/:canonical
-```
-
-Route + surface type:
-
-```bash
 node bin/arwp-map-repo.mjs resolve .arwp/site-state.json \
   --route=/ \
   --type=canonical
 ```
 
-If the surface is absent, the answer is `unresolved`, not a guessed file path.
+Validation includes JSON Schema plus semantic checks: resolved route/surface owners must exist in `files[]`, while ambiguous/unresolved claims must not silently select an owner.
 
 ## Ambiguity is a first-class result
 
-If two Jekyll files both declare:
-
-```yaml
-permalink: /about/
-```
-
-Repository Mapper records both candidates and sets:
+If two sources map to the same public route, for example Astro `src/pages/about.astro` and `src/pages/about/index.astro` under `build.format: 'directory'`, the graph records both candidates:
 
 ```json
 {
@@ -148,168 +144,101 @@ Repository Mapper records both candidates and sets:
 }
 ```
 
-That ambiguity is preserved downstream. BraidGraph receives the surface but **no `renders` edge** until ownership is resolved by better evidence.
-
-## Source facts
-
-Jekyll front matter and direct static HTML metadata can emit first-party source facts with an exact repository path and locator.
-
-Example:
-
-```json
-{
-  "key": "product_name",
-  "value": "SignalBraid",
-  "routePath": "/",
-  "sourcePath": "index.md",
-  "locator": {
-    "line": 7,
-    "field": "product_name"
-  },
-  "evidenceClass": "frontmatter"
-}
-```
-
-A fact is source evidence. It is not automatically permission to publish, rewrite or infer adjacent claims.
+Downstream layers must preserve this state. More automation is not a valid reason to erase ambiguity.
 
 ## Build-path evidence
 
-For Jekyll, a resolved route can preserve a deterministic build chain such as:
+Jekyll can preserve a route chain such as:
 
 ```text
-index.md
-  → _layouts/default.html
-  → _includes/head.html
-  → _config.yml
+index.md → _layouts/default.html → _includes/head.html → _config.yml
 ```
 
-The route owner remains `index.md`; layouts/includes are build dependencies, not silently promoted to value ownership.
+Astro can preserve explicit relative component/layout dependencies such as:
 
-## Adaptive Upgrade ownership hints
+```text
+src/pages/index.astro
+  → src/layouts/Base.astro
+  → src/components/Head.astro
+  → astro.config.mjs
+  → package.json
+```
 
-Repository Mapper can resolve known recommendation target vocabulary against mapped surfaces:
+Only exact relative `.astro` imports that resolve to scanned files are followed. Alias imports, computed imports and framework execution are not guessed.
+
+## Machine surfaces
+
+Static/Jekyll machine files and Astro `public/` machine files can map to source ownership for surfaces such as:
+
+- `robots.txt`;
+- sitemap XML;
+- `llms.txt`;
+- selected agent discovery files;
+- OpenAPI descriptions.
+
+Mutation classes remain explicit. For example, crawler policy stays policy-gated and an `llms.txt` editorial surface is not silently reclassified as mechanical just to enable automation.
+
+## Adaptive Upgrade and BraidGraph integration
 
 ```bash
-node bin/arwp-map-repo.mjs upgrade-hints \
-  adaptive-upgrade.json \
-  .arwp/site-state.json
+node bin/arwp-map-repo.mjs upgrade-hints adaptive-upgrade.json .arwp/site-state.json
+node bin/arwp-map-repo.mjs prepare-transform adaptive-upgrade.json .arwp/site-state.json
+node bin/arwp-map-repo.mjs braid braid.json .arwp/site-state.json --out=braid-with-map.json
 ```
 
-The output can identify one exact owner for known surfaces such as canonical, title, description, robots, sitemap, JSON-LD, `llms.txt`, OpenAPI and agent discovery.
+Allowed path hints are emitted only from one proven owner and compatible automation/mutation classes. Exact operation content, before-state digest, grounding, verification and authorization remain Transformation Engine responsibilities.
 
-`allowedPathHints` are emitted only when:
+## Filesystem and execution safety
 
-- one mapped surface has one proven owner;
-- the recommendation automation class is `mechanical` or `grounded-template`;
-- the mapped surface is not policy-gated, editorial, runtime, owner-platform or blocked.
-
-An allowed-path hint is still **not a Transformation Bundle**. Exact operation content, before-state digest, grounding and authorization remain Transformation Engine responsibilities.
-
-## BraidGraph integration
-
-Merge proven repository ownership into an existing BraidGraph:
-
-```bash
-node bin/arwp-map-repo.mjs braid \
-  braid.json \
-  .arwp/site-state.json \
-  --out=braid-with-map.json
-```
-
-Then inspect the mapping evidence:
-
-```bash
-node bin/arwp-map-repo.mjs braid-report braid-with-map.json
-```
-
-The integration:
-
-- records the exact Site State Graph digest in `inputs.repositoryMap`;
-- refuses site/repository/base-commit conflicts;
-- reuses compatible Transformation Bundle repo-file nodes when possible;
-- refuses a file digest that conflicts with the Transformation Bundle before-state;
-- creates `repo-file → renders → surface` only from `resolved` ownership;
-- preserves ambiguous surfaces without inventing a file owner;
-- carries repository source facts as provenance-bearing BraidGraph fact nodes.
-
-A graph that already references a different Repository Map cannot silently replace it. Compile a fresh graph so historical evidence is not overwritten.
-
-## Mutation classes
-
-Repository Mapper records a surface/file mutation class for downstream policy decisions:
-
-- `mechanical`;
-- `grounded-template`;
-- `editorial`;
-- `policy-gated`;
-- `runtime`;
-- `owner-platform`;
-- `blocked`.
-
-Examples:
-
-- canonical: `grounded-template`;
-- title/description: `editorial`;
-- robots controls: `policy-gated`;
-- structured data: `grounded-template`.
-
-These labels constrain automation; they do not authorize it.
-
-## Filesystem safety
-
-The mapper is local and read-only.
+Repository Mapper is local and read-only.
 
 - symbolic links are not followed;
-- `..` repository paths are rejected;
-- generated/output directories such as `_site`, `.next`, `dist` and `build` are skipped as ownership sources;
+- repository escape via `..` is rejected;
+- generated/output directories such as `_site`, `dist`, `.astro`, `.next`, `build` and `out` are excluded as source authority;
 - file count and file size are bounded;
 - no shell command from the target repository is executed;
-- the mapper does not build Jekyll or execute Liquid/plugins to manufacture ownership evidence.
-
-This is intentional: the Map layer should be safer than arbitrary framework execution.
+- Jekyll/Liquid/Astro/plugin/integration code is not executed to manufacture ownership evidence;
+- server/runtime state is not relabeled as static file ownership.
 
 ## Current limitations
 
-v0.1 deliberately does not claim support for:
+The mapper deliberately does not claim general support for:
 
-- Next.js ownership where routes depend on runtime/server components or generated manifests;
-- Astro/Docusaurus ownership without dedicated adapters;
-- WordPress/Shopify content ownership as local files;
-- Jekyll collection/post routing that requires unresolved config/plugin execution;
-- Liquid-computed metadata values that do not have a direct source fact.
-
-Those should be added as evidence-backed adapters, not generic path heuristics.
+- Astro dynamic routes, i18n route rewriting, computed critical config or integration-generated routes;
+- Next.js ownership where routes/metadata depend on runtime/server components or generated manifests;
+- Docusaurus until a dedicated adapter has reproducible source-ownership evidence;
+- WordPress/Shopify/CMS content as local-file ownership;
+- Jekyll collection/post routing that needs unresolved config/plugin execution;
+- computed metadata whose source value cannot be established directly.
 
 ## Verification
 
 Dedicated CI covers:
 
-- static GitHub Pages fixture;
-- Jekyll fixture;
-- duplicate-route ambiguity;
-- unresolved Jekyll content;
-- front-matter fact ownership;
-- mutation gating;
-- BraidGraph `renders` integration;
-- mismatched site rejection;
-- generated-output exclusion;
-- symlink exclusion where the platform permits symlink creation.
-
-The workflow also dogfoods the current ARWP `docs/` GitHub Pages source on every relevant change.
+- static GitHub Pages mapping;
+- Jekyll mapping, front-matter ownership and duplicate/unresolved routes;
+- Astro static route mapping and adapter auto-detection;
+- Astro layout/component build paths;
+- Astro `public/` machine-surface ownership;
+- Astro dynamic route fail-closed behavior;
+- Astro server/prerender boundaries;
+- Astro unsupported config fail-closed behavior;
+- Astro route-collision ambiguity;
+- generated-output and symlink exclusion;
+- BraidGraph and mapped-transform preparation regression;
+- current ARWP GitHub Pages dogfood.
 
 ## Guardrails
 
 - mapped ownership is evidence, not authorization;
-- ambiguity is preserved;
+- ambiguity and unsupported runtime state remain explicit;
 - generated output is not preferred over source;
-- missing ownership remains unknown;
 - policy/editorial decisions remain gated;
 - no ranking, recommendation or AI-citation guarantee follows from a successful map.
 
 ## Next adapters
 
-1. harden static/Jekyll against more real-site fixtures;
-2. Next.js only where source ownership is provable from framework-native evidence;
-3. Astro;
-4. Docusaurus/documentation generators;
-5. explicit CMS/API ownership adapters for systems where content is not file-owned.
+1. harden Astro/Jekyll against more real-world evidence manifests;
+2. Docusaurus/documentation generators;
+3. selected Next.js patterns only where source ownership is provable without arbitrary application execution;
+4. explicit CMS/API ownership adapters where content is not file-owned.

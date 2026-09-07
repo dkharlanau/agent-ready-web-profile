@@ -8,10 +8,14 @@ on:
       - 'schema/mapped-transform-preparation.schema.json'
       - 'schema/braid-graph.schema.json'
       - 'lib/repository-mapper.mjs'
+      - 'lib/repository-mapper-frameworks.mjs'
+      - 'lib/repository-mapper-astro.mjs'
       - 'lib/repository-map-braid.mjs'
       - 'lib/mapped-transform-preparation.mjs'
       - 'bin/arwp-map-repo.mjs'
+      - 'fixtures/repository-mapper/**'
       - 'scripts/repository-mapper-test.mjs'
+      - 'scripts/repository-mapper-astro-test.mjs'
       - 'scripts/mapped-transform-preparation-test.mjs'
       - 'docs/REPOSITORY-MAPPER.md'
       - '.github/workflows/repository-mapper.yml'
@@ -21,10 +25,14 @@ on:
       - 'schema/mapped-transform-preparation.schema.json'
       - 'schema/braid-graph.schema.json'
       - 'lib/repository-mapper.mjs'
+      - 'lib/repository-mapper-frameworks.mjs'
+      - 'lib/repository-mapper-astro.mjs'
       - 'lib/repository-map-braid.mjs'
       - 'lib/mapped-transform-preparation.mjs'
       - 'bin/arwp-map-repo.mjs'
+      - 'fixtures/repository-mapper/**'
       - 'scripts/repository-mapper-test.mjs'
+      - 'scripts/repository-mapper-astro-test.mjs'
       - 'scripts/mapped-transform-preparation-test.mjs'
       - 'docs/REPOSITORY-MAPPER.md'
       - '.github/workflows/repository-mapper.yml'
@@ -50,12 +58,15 @@ jobs:
       - name: Validate Repository Mapper
         run: |
           node scripts/repository-mapper-test.mjs
+          node scripts/repository-mapper-astro-test.mjs
           node scripts/mapped-transform-preparation-test.mjs
           node --check lib/repository-mapper.mjs
+          node --check lib/repository-mapper-frameworks.mjs
+          node --check lib/repository-mapper-astro.mjs
           node --check lib/repository-map-braid.mjs
           node --check lib/mapped-transform-preparation.mjs
           node --check bin/arwp-map-repo.mjs
-          node -e "const fs=require('fs'); for (const file of ['schema/site-state-graph.schema.json','schema/mapped-transform-preparation.schema.json','schema/braid-graph.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
+          node -e "const fs=require('fs'); for (const file of ['schema/site-state-graph.schema.json','schema/mapped-transform-preparation.schema.json','schema/braid-graph.schema.json','fixtures/repository-mapper/astro-official-basics.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
 
       - name: Dogfood current ARWP GitHub Pages source
         run: |

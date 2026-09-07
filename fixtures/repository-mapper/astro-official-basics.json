@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "framework": "astro",
+  "reviewedAt": "2026-09-07",
+  "upstream": {
+    "repository": "withastro/astro",
+    "commit": "9870f95601690d9d98799b6fa78a0bc76165ee06",
+    "fixtureRoot": "examples/basics",
+    "files": [
+      {
+        "path": "examples/basics/astro.config.mjs",
+        "gitBlobSha": "e762ba5cf616b20d817d2ba33183df1f8fc0fbc5",
+        "observation": "Astro config exists and exports an empty defineConfig object, so documented defaults apply."
+      },
+      {
+        "path": "examples/basics/src/pages/index.astro",
+        "gitBlobSha": "c04f3602b5521c56580c70dd0846b2c559be7193",
+        "observation": "A static index.astro page exists under src/pages and owns the root file route."
+      }
+    ]
+  },
+  "documentationEvidence": [
+    "https://docs.astro.build/en/guides/routing/",
+    "https://docs.astro.build/en/reference/configuration-reference/"
+  ],
+  "reviewedContracts": [
+    "Static supported files below src/pages use file-based routing.",
+    "Dynamic bracket routes require getStaticPaths or runtime evaluation and are not reduced by the mapper.",
+    "build.format changes generated path shape and defaults to directory.",
+    "output defaults to static; server output can require runtime rendering."
+  ],
+  "boundary": "This manifest pins review evidence only. CI does not fetch or execute upstream Astro code."
+}

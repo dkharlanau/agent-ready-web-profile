@@ -2,11 +2,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-  compileSiteStateGraph,
   validateSiteStateGraph,
   resolveMappedSurface,
   resolveUpgradeOwnership
 } from '../lib/repository-mapper.mjs';
+import { compileRepositorySiteStateGraph } from '../lib/repository-mapper-frameworks.mjs';
 import { mergeRepositoryMapIntoBraidGraph, repositoryMapBraidReport } from '../lib/repository-map-braid.mjs';
 import {
   prepareMappedTransformationSpec,
@@ -18,7 +18,7 @@ function usage() {
   console.log(`SignalBraid Repository Mapper
 
 Usage:
-  arwp-map-repo compile --root=<repo> --repository=<owner/name> --site=<https://site> [--site-root=docs] [--base-path=/project/] [--base-ref=main] [--base-sha=<40-sha>] [--adapter=auto|static-html|jekyll] [--out=site-state.json]
+  arwp-map-repo compile --root=<repo> --repository=<owner/name> --site=<https://site> [--site-root=docs] [--base-path=/project/] [--base-ref=main] [--base-sha=<40-sha>] [--adapter=auto|static-html|jekyll|astro] [--out=site-state.json]
   arwp-map-repo validate <site-state.json>
   arwp-map-repo resolve <site-state.json> (--surface=<surface-key> | --route=</path/> [--type=canonical])
   arwp-map-repo upgrade-hints <adaptive-upgrade.json> <site-state.json>
@@ -27,7 +27,7 @@ Usage:
   arwp-map-repo braid <braid.json> <site-state.json> [--out=braid-with-map.json]
   arwp-map-repo braid-report <braid-with-map.json>
 
-Repository mapping records proven/explicit ownership and ambiguity. Transform preparation resolves safe candidate paths and current digests, but it never invents an after-state or authorizes mutation.`);
+Repository mapping records proven/explicit ownership and ambiguity. Astro auto-detection is evidence-backed and maps only inspectable static file routes; dynamic/runtime/uninspectable routes fail closed. Transform preparation resolves safe candidate paths and current digests, but it never invents an after-state or authorizes mutation.`);
 }
 
 function parse(argv) {
@@ -72,7 +72,7 @@ function main() {
   if (command === 'compile') {
     if (!flags.repository) throw new Error('--repository=<owner/name> is required.');
     if (!flags.site) throw new Error('--site=<https://site> is required.');
-    const graph = compileSiteStateGraph({
+    const graph = compileRepositorySiteStateGraph({
       root: typeof flags.root === 'string' ? flags.root : '.',
       siteRoot: typeof flags['site-root'] === 'string' ? flags['site-root'] : '.',
       repository: {
