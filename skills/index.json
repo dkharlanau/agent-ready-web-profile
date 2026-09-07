@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "standard": "Agent Skills",
   "specification": "https://agentskills.io/specification",
   "repository": "https://github.com/dkharlanau/agent-ready-web-profile",
@@ -9,6 +9,7 @@
     {"name":"arwp-target-transformation","path":"skills/arwp-target-transformation/SKILL.md","role":"target-transformation","description":"Resolve adaptive upgrade recommendations to exact target-repository files and deliver deterministic, digest-gated production changes through local rollback-aware application or a new GitHub PR."},
     {"name":"arwp-prepare-site","path":"skills/arwp-prepare-site/SKILL.md","role":"site-preparation","description":"End-to-end repository preparation for ARWP, search quality, AI-search/citation readiness and agent interoperability."},
     {"name":"arwp-ai-search-content","path":"skills/arwp-ai-search-content/SKILL.md","role":"content-quality","description":"Improve articles, docs, comparisons and answer pages for human usefulness, retrieval and citation without AI filler or ranking promises."},
+    {"name":"arwp-future-search","path":"skills/arwp-future-search/SKILL.md","role":"future-search-experimentation","description":"Prepare healthy sites for emerging Search/AI/agent systems using governed future-ready semantics, semantic/evidence graphs, retrieval feedback and browser-agent operability beyond today's documented rich-result requirements."},
     {"name":"arwp-dataset-publication","path":"skills/arwp-dataset-publication/SKILL.md","role":"dataset-publication","description":"Audit and prepare genuine website corpora for versioned dataset releases, checksums, external archival publication and DOI-backed citation."},
     {"name":"arwp-agent-discovery","path":"skills/arwp-agent-discovery/SKILL.md","role":"interoperability","description":"Implement truthful agent discovery surfaces such as llms.txt, Agent Skills, ARD, MCP/A2A/OpenAPI and optional ARWP profiles."},
     {"name":"arwp-evidence-ci","path":"skills/arwp-evidence-ci/SKILL.md","role":"verification","description":"Add assertion contracts, scheduled audits, evidence receipts and regression-safe CI."}
@@ -18,7 +19,8 @@
     "sitePreparation": "arwp-prepare-site",
     "upgradeCompiler": "arwp-adaptive-upgrade",
     "transformationDelivery": "arwp-target-transformation",
-    "specialists": ["arwp-adaptive-upgrade", "arwp-target-transformation", "arwp-ai-search-content", "arwp-dataset-publication", "arwp-agent-discovery", "arwp-evidence-ci"],
-    "principle": "Use the growth orchestrator to detect and prioritize evidence-backed work, the adaptive upgrade skill to translate applicable debt into concrete change contracts, then target transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
+    "futureSearch": "arwp-future-search",
+    "specialists": ["arwp-adaptive-upgrade", "arwp-target-transformation", "arwp-ai-search-content", "arwp-future-search", "arwp-dataset-publication", "arwp-agent-discovery", "arwp-evidence-ci"],
+    "principle": "Use the growth orchestrator to fix current eligibility and evidence-backed priorities first; compile target-specific upgrades; invoke the future-search specialist only for grounded, reversible semantic/retrieval experiments after foundations are healthy; then use target transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
   }
 }
