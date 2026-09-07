@@ -18,6 +18,8 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 - [ARWP vs AgentReady / Ora](https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-agentready.html)
 - [ARWP vs Agentic Resource Discovery (ARD)](https://dkharlanau.github.io/agent-ready-web-profile/compare/arwp-vs-ard.html)
 - [Static metadata vs runtime evidence](https://dkharlanau.github.io/agent-ready-web-profile/compare/static-metadata-vs-runtime-evidence.html)
+- [WebMCP vs MCP](https://dkharlanau.github.io/agent-ready-web-profile/compare/webmcp-vs-mcp.html)
+- [llms.txt vs agents.* vs ARWP profile](https://dkharlanau.github.io/agent-ready-web-profile/compare/llms-txt-vs-agents-vs-arwp-profile.html)
 - [Machine-readable product class](https://dkharlanau.github.io/agent-ready-web-profile/ai/product-classification.json)
 - [Schema.org product metadata](https://dkharlanau.github.io/agent-ready-web-profile/ai/product.jsonld)
 - [Machine-readable alternatives map](https://dkharlanau.github.io/agent-ready-web-profile/compare/alternatives.json)
