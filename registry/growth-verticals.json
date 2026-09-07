@@ -1,5 +1,5 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "reviewedAt": "2026-09-07",
   "purpose": "Keep vertical-specific Search and agent recommendations out of the universal baseline. A site activates one primary class and may opt into additional modules when they truthfully apply.",
   "verticals": {
@@ -38,21 +38,22 @@
       "focus": ["Product data quality", "Merchant Center/feed freshness", "inventory/price consistency", "shipping/returns", "commerce agent protocols where actually supported"],
       "recommendedStructuredData": ["Product", "Offer", "Organization"],
       "checks": [
-        {"id":"commerce-product-offer-parity","priority":"P1","title":"Keep visible Product/Offer facts consistent with structured data","evidence":"Price, currency, availability, identifiers and offer facts agree between the page and structured data."},
-        {"id":"commerce-feed-freshness","priority":"P1","title":"Reconcile page, feed and owner-platform inventory/price state","evidence":"Merchant/feed freshness and owner-platform state are verified separately from public crawl observations."},
-        {"id":"commerce-policy-surfaces","priority":"P1","title":"Make shipping, returns and seller identity easy to verify","evidence":"Stable public policy pages and seller identity are linked from relevant product/checkout surfaces."}
+        {"id":"commerce-product-offer-parity","priority":"P1","title":"Keep visible Product/Offer facts consistent with structured data","evidence":"Price, currency, availability, identifiers and offer facts agree between the page and structured data.","source":"https://support.google.com/merchants/answer/6069143"},
+        {"id":"commerce-feed-freshness","priority":"P1","title":"Reconcile page, feed and Merchant Center inventory/price state","evidence":"Authenticated Merchant Center evidence confirms current product-data freshness and page/feed parity; public crawling alone cannot establish this.","source":"https://support.google.com/merchants/answer/12157888"},
+        {"id":"commerce-policy-surfaces","priority":"P1","title":"Make shipping, returns and seller identity easy to verify","evidence":"Stable public policy pages and seller identity are linked from relevant product/checkout surfaces."},
+        {"id":"commerce-ucp-discovery","priority":"P2","title":"Expose UCP discovery only when the business actually implements agentic commerce","evidence":"A valid origin-level /.well-known/ucp manifest advertises implemented services/capabilities; absence is not a defect for ordinary commerce sites.","source":"https://developers.googleblog.com/under-the-hood-universal-commerce-protocol-ucp/"}
       ],
-      "notes": "Commerce/UCP support should be a separate adapter/module, not a universal ARWP requirement."
+      "notes": "Merchant/feed state is authenticated owner evidence. UCP is optional agentic-commerce interoperability and must not become a universal commerce/Search requirement."
     },
     "local-business": {
       "focus": ["local entity consistency", "address/hours/contact accuracy", "Business Profile", "LocalBusiness structured data", "original location/media evidence"],
       "recommendedStructuredData": ["LocalBusiness", "Organization"],
       "checks": [
         {"id":"local-business-identity","priority":"P1","title":"Keep name, address, contact and hours consistent on owned surfaces","evidence":"Canonical location/contact facts are visible and agree with LocalBusiness/Organization structured data where used."},
-        {"id":"local-business-owner-profile","priority":"P1","title":"Verify external business-profile state as owner data","evidence":"Authenticated business-profile category, address, hours and status are reviewed without inferring them from the public website alone."},
+        {"id":"local-business-owner-profile","priority":"P1","title":"Verify Google Business Profile identity, address, hours and category as owner data","evidence":"Authenticated Business Profile state is checked against the real business and owned-site facts; public website crawling does not prove the owner-side profile state.","source":"https://support.google.com/business/answer/3038177"},
         {"id":"local-business-location-evidence","priority":"P2","title":"Use real location/service evidence rather than generic local landing pages","evidence":"Location pages contain truthful local details, services, media or other first-party evidence and are not doorway variants."}
       ],
-      "notes": "Local recommendations require geographic/business context and should not be generalized to non-local sites."
+      "notes": "Local recommendations require geographic/business context. Google Business Profile is one provider-specific owner-data adapter, not a universal local-business requirement."
     },
     "research-dataset": {
       "focus": ["dataset identity", "methodology", "provenance", "license", "citation", "versioning", "download/API access"],
