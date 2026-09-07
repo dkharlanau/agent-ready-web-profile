@@ -10,13 +10,15 @@ import {
   changeReceiptStatus
 } from '../lib/change-receipt.mjs';
 import { mergeChangeReceiptIntoBraidGraph, changeReceiptBraidReport } from '../lib/change-receipt-braid.mjs';
+import { artifactAdapterSummary } from '../lib/change-receipt-adapters.mjs';
 
 function usage() {
   console.log(`SignalBraid Change Receipt
 
 Usage:
   arwp-change-receipt create <transform-bundle.json> <braid.json> [--execution-kind=local|github-pr --execution=<json>] [--evidence-receipt=<json> --evidence-role=<role>] [--verifications=<json>] [--outcomes=<json>] [--deployment=<json>] [--review=<json>] [--out=<json>]
-  arwp-change-receipt revise <receipt.json> [--execution-kind=local|github-pr --execution=<json>] [--mutation=<json>] [--braid=<current-braid.json>] [--evidence-receipt=<json> --evidence-role=<role>] [--verifications=<json>] [--outcomes=<json>] [--deployment=<json>] [--review=<json>] [--out=<json>]
+  arwp-change-receipt revise <receipt.json> [--execution-kind=local|github-pr --execution=<json>] [--mutation=<json>] [--braid=<current-braid.json>] [--evidence-receipt=<json> --evidence-role=<role>] [--verifications=<json>] [--outcomes=<json>] [--visibility=<a.json,b.json>] [--agent-eval=<a.json,b.json>] [--growth-experiment=<a.json,b.json>] [--operation-id=<id>] [--deployment=<json>] [--review=<json>] [--out=<json>]
+  arwp-change-receipt adapt <receipt.json> [--visibility=<a.json,b.json>] [--agent-eval=<a.json,b.json>] [--growth-experiment=<a.json,b.json>] [--operation-id=<id>]
   arwp-change-receipt validate <receipt.json>
   arwp-change-receipt verify <receipt.json>
   arwp-change-receipt verify-revision <previous.json> <current.json>
@@ -24,7 +26,7 @@ Usage:
   arwp-change-receipt braid <braid.json> <receipt.json> [--out=<json>]
   arwp-change-receipt braid-report <braid.json>
 
-Change Receipts are immutable evidence snapshots. New verification/deployment/outcome/re-review evidence creates a new revision; historical receipts are never rewritten.`);
+Canonical outcome adapters preserve provider/task/experiment evidence without inferring causality. Change Receipts are immutable evidence snapshots: new verification/deployment/outcome/re-review evidence creates a new revision; historical receipts are never rewritten.`);
 }
 
 function parse(argv) {
@@ -55,6 +57,15 @@ function listFromFile(filename, label) {
   const value = optionalJson(filename, label);
   if (value === undefined) return [];
   return Array.isArray(value) ? value : [value];
+}
+
+function pathList(value) {
+  if (typeof value !== 'string') return [];
+  return [...new Set(value.split(',').map(item => item.trim()).filter(Boolean))];
+}
+
+function jsonList(value, label) {
+  return pathList(value).map((filename, index) => readJson(filename, `${label} ${index + 1}`));
 }
 
 function write(value, filename = null) {
@@ -91,6 +102,22 @@ function commonEvidenceOptions(flags) {
   };
 }
 
+function canonicalAdapters(receipt, flags) {
+  return artifactAdapterSummary(receipt, {
+    visibilitySnapshots: jsonList(flags.visibility, 'Visibility Snapshot'),
+    agentEvalReceipts: jsonList(flags['agent-eval'], 'Agent Eval receipt'),
+    growthExperiments: jsonList(flags['growth-experiment'], 'Growth Experiment'),
+    operationId: typeof flags['operation-id'] === 'string' ? flags['operation-id'] : null
+  });
+}
+
+function mergeReview(manual, adapted) {
+  if (manual === undefined) return adapted;
+  if (adapted === undefined) return manual;
+  if (JSON.stringify(manual) !== JSON.stringify(adapted)) throw new Error('Manual --review conflicts with a review decision imported from Growth Experiment evidence.');
+  return manual;
+}
+
 function main() {
   const { positionals, flags } = parse(process.argv.slice(2));
   const command = positionals[0];
@@ -111,17 +138,26 @@ function main() {
   if (command === 'revise') {
     const previous = readJson(positionals[1], 'Change Receipt');
     const common = commonEvidenceOptions(flags);
+    const adapted = canonicalAdapters(previous, flags);
+    const combinedOutcomes = [...common.outcomes, ...adapted.outcomes];
+    const review = mergeReview(common.review, adapted.review);
     const updates = {
       ...(common.execution ? { execution: common.execution } : {}),
       ...(common.evidenceReceipts.length ? { evidenceReceipts: common.evidenceReceipts } : {}),
       ...(common.verifications.length ? { verifications: common.verifications } : {}),
-      ...(common.outcomes.length ? { outcomes: common.outcomes } : {}),
+      ...(combinedOutcomes.length ? { outcomes: combinedOutcomes } : {}),
       ...(common.deployment !== undefined ? { deployment: common.deployment } : {}),
-      ...(common.review !== undefined ? { review: common.review } : {}),
+      ...(review !== undefined ? { review } : {}),
       ...(typeof flags.mutation === 'string' ? { mutation: readJson(flags.mutation, 'Mutation transition evidence') } : {}),
       ...(typeof flags.braid === 'string' ? { braidGraph: readJson(flags.braid, 'Current BraidGraph') } : {})
     };
     write(reviseChangeReceipt(previous, updates), flags.out);
+    return;
+  }
+
+  if (command === 'adapt') {
+    const receipt = readJson(positionals[1], 'Change Receipt');
+    write(canonicalAdapters(receipt, flags), flags.out);
     return;
   }
 
