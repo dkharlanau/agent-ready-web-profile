@@ -43,7 +43,10 @@ try {
   assert.equal(pkg.scripts.surfaces, 'node bin/arwp-surfaces.mjs');
   const registry = JSON.parse(fs.readFileSync(path.join(installed, 'registry', 'search-surface-blueprint.json'), 'utf8'));
   assert.equal(registry.ruleset, '2026.09.07');
-  assert.equal(registry.checks.length, 44);
+  assert.equal(registry.checks.length, 69);
+  assert.equal(registry.methodology.automationIsEvidenceDependent, true);
+  assert.ok(registry.checks.some(item => item.id === 'google-mobile-first-content-parity'));
+  assert.ok(registry.checks.some(item => item.id === 'google-site-reputation-abuse-guardrail'));
   console.log(`PASS improvement npm package surface (${pack.filename})`);
 } finally {
   fs.rmSync(temp, { recursive: true, force: true });
