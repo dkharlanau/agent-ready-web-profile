@@ -33,7 +33,7 @@ Read:
 ## Workflow
 
 1. **Define the intent family first.** Do not benchmark unrelated high-authority sites merely because they rank for something.
-2. **Capture the visibility observation exactly.** Preserve provider/surface, query, locale/device when known and observation time. Store a numeric rank only when separate evidence proves that rank.
+2. **Capture the visibility observation exactly.** Preserve provider/surface, query, locale/device when known and observation time. Store a numeric rank only when explicit `rankEvidence` independently supports that exact rank.
 3. **Separate ownership.** Independent references can inform the external cohort. ARWP-owned/project-reference sites remain implementation/dogfood evidence.
 4. **Review only observable dimensions.** Use the 16 Search Maturity dimensions. Omit anything not actually checked; omission is `unknown`, never failure.
 5. **Classify evidence.** Keep `documented-platform`, `observed-correlation`, `experiment` and `unknown` distinct.
@@ -53,7 +53,7 @@ Record:
 - publication date if observable;
 - observation timestamp;
 - `retrievalAgeAtObservation`;
-- exact rank only with explicit rank evidence.
+- exact rank only with explicit `rankEvidence`.
 
 Never rename `age at observation` to `time to rank`.
 
