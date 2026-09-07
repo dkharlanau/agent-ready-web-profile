@@ -50,10 +50,19 @@ jobs:
           node --check lib/entity-remediation.mjs
           node --check bin/arwp-entity-remediation.mjs
 
+      - name: Validate Search Surface Blueprint
+        run: |
+          node scripts/search-surface-test.mjs
+          node --check lib/search-surface-core.mjs
+          node --check lib/search-surface.mjs
+          node --check lib/site-improvement-deep.mjs
+          node --check bin/arwp-surfaces.mjs
+
       - name: Validate unified Site Improvement Plan
         run: |
           node scripts/site-improvement-test.mjs
           node --check lib/site-improvement.mjs
+          node --check lib/site-improvement-deep.mjs
           node --check bin/arwp-improve.mjs
 
       - name: Validate adaptive content profile
