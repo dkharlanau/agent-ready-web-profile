@@ -69,6 +69,13 @@ jobs:
           node --check bin/arwp-improve.mjs
           node --check scripts/site-improvement-vertical-test.mjs
 
+      - name: Validate dataset publication and DOI audit
+        run: |
+          node scripts/dataset-publication-test.mjs
+          node --check lib/dataset-publication.mjs
+          node --check bin/arwp-dataset.mjs
+          node --check scripts/dataset-publication-test.mjs
+
       - name: Validate adaptive content profile
         run: |
           node scripts/content-profile-test.mjs
