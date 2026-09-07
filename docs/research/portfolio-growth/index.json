@@ -1,0 +1,23 @@
+{
+  "version": "0.1",
+  "evidenceClass": "owner-controlled-public-observation",
+  "runs": [
+    {
+      "runId": "20260907T090335Z",
+      "observedAt": "2026-09-07T09:03:35.000Z",
+      "enabledSites": 5,
+      "captured": 5,
+      "unavailable": 0,
+      "awaitingOwnerMeasurement": 5,
+      "diffFromPrevious": null
+    }
+  ],
+  "guardrails": {
+    "noIndependentAdoptionInference": true,
+    "ownerMetricsSeparate": true,
+    "noMissingMetricZeros": true,
+    "noRankingCausality": true
+  },
+  "latestRunId": "20260907T090335Z",
+  "updatedAt": "2026-09-07T09:03:35.000Z"
+}
