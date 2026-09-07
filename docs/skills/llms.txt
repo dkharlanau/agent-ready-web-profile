@@ -7,6 +7,11 @@ Use these portable skills when an AI coding agent should improve, prepare or mai
 
 Use it for Search growth, Google Discover/recommendations, generative Search, AI citations, current platform adaptation and ongoing evidence-backed website improvement.
 
+## Reference benchmarking
+- arwp-search-maturity — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-search-maturity/SKILL.md
+
+Use it to compare a target site with timestamped independent Search/AI reference cohorts. Repeated features remain observational evidence unless stronger evidence exists; numeric rank requires explicit rank evidence.
+
 ## Initial preparation
 - arwp-prepare-site — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md
 
@@ -27,4 +32,4 @@ Use arwp-future-search after current crawl/index/canonical/content/identity foun
 npx skills add dkharlanau/agent-ready-web-profile
 
 ## Rule
-Research -> classify current vs experimental -> implement -> verify -> measure. Do not claim that ARWP, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
+Research -> classify current vs observational vs experimental -> benchmark when useful -> implement -> verify -> measure. Do not claim that ARWP, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
