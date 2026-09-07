@@ -39,8 +39,8 @@ const graph = compileNextSiteStateGraph({
 assert.equal(graph.adapter.id, 'nextjs');
 assert.equal(graph.adapter.confidence, 'explicit-config');
 assert.equal(graph.routes.find(route => route.routePath === '/').ownerPath, 'src/app/page.tsx');
-assert.equal(graph.routes.find(route => route.routePath === '/about/').ownerPath, 'src/app/about/page.tsx');
-assert.equal(graph.routes.find(route => route.routePath === '/pricing/').ownerPath, 'src/app/(marketing)/pricing/page.tsx');
+assert.equal(graph.routes.find(route => route.routePath === '/about').ownerPath, 'src/app/about/page.tsx');
+assert.equal(graph.routes.find(route => route.routePath === '/pricing').ownerPath, 'src/app/(marketing)/pricing/page.tsx');
 assert.equal(graph.routes.filter(route => route.state === 'unresolved').length, 1);
 assert.equal(graph.routes.find(route => route.routePath === '/').buildPath[0], 'src/app/page.tsx');
 assert.ok(graph.routes.find(route => route.routePath === '/').buildPath.includes('src/app/layout.tsx'));
@@ -115,6 +115,22 @@ const baseGraph = compileNextSiteStateGraph({ root: baseRoot, repository: { full
 assert.equal(baseGraph.routes[0].state, 'unresolved');
 assert.ok(baseGraph.warnings.some(warning => warning.code === 'next-basepath-not-literal'));
 
+const trailingRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-next-trailing-'));
+write(trailingRoot, 'package.json', JSON.stringify({ dependencies: { next: '16.3.4' } }));
+write(trailingRoot, 'next.config.ts', `export default { trailingSlash: true };\n`);
+write(trailingRoot, 'app/about/page.tsx', `export default function Page(){ return null; }\n`);
+const trailingGraph = compileNextSiteStateGraph({ root: trailingRoot, repository: { fullName: 'owner/trailing' }, site: { origin: 'https://trailing.example', basePath: '/' } });
+assert.equal(trailingGraph.routes[0].routePath, '/about/');
+assert.equal(trailingGraph.routes[0].url, 'https://trailing.example/about/');
+
+const computedTrailingRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-next-computed-trailing-'));
+write(computedTrailingRoot, 'package.json', JSON.stringify({ dependencies: { next: '16.3.4' } }));
+write(computedTrailingRoot, 'next.config.ts', `const trailingSlash = process.env.TRAILING === '1'; export default { trailingSlash };\n`);
+write(computedTrailingRoot, 'app/about/page.tsx', `export default function Page(){ return null; }\n`);
+const computedTrailing = compileNextSiteStateGraph({ root: computedTrailingRoot, repository: { fullName: 'owner/computed-trailing' }, site: { origin: 'https://computed.example', basePath: '/' } });
+assert.equal(computedTrailing.routes[0].state, 'unresolved');
+assert.ok(computedTrailing.warnings.some(warning => warning.code === 'next-trailing-slash-not-literal'));
+
 const rewritesRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-next-rewrites-'));
 write(rewritesRoot, 'package.json', JSON.stringify({ dependencies: { next: '16.3.4' } }));
 write(rewritesRoot, 'next.config.mjs', `export default { async rewrites() { return [{ source: '/a', destination: '/b' }]; } };\n`);
@@ -122,6 +138,15 @@ write(rewritesRoot, 'app/page.tsx', `export default function Page(){ return null
 const rewrites = compileNextSiteStateGraph({ root: rewritesRoot, repository: { fullName: 'owner/rewrites' }, site: { origin: 'https://rewrites.example', basePath: '/' } });
 assert.equal(rewrites.routes[0].state, 'unresolved');
 assert.ok(rewrites.routes[0].evidence.includes('next:rewrites-present'));
+
+const generatedSitemapRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-next-generated-sitemaps-'));
+write(generatedSitemapRoot, 'package.json', JSON.stringify({ dependencies: { next: '16.3.4' } }));
+write(generatedSitemapRoot, 'app/page.tsx', `export default function Page(){ return null; }\n`);
+write(generatedSitemapRoot, 'app/sitemap.ts', `export async function generateSitemaps(){ return [{ id: 0 }]; }\nexport default async function sitemap({ id }) { return [{ url: 'https://multi.example/' + id }]; }\n`);
+const generatedSitemapGraph = compileNextSiteStateGraph({ root: generatedSitemapRoot, repository: { fullName: 'owner/generated-sitemaps' }, site: { origin: 'https://multi.example', basePath: '/' } });
+assert.equal(generatedSitemapGraph.ownership.some(item => item.surfaceKey === 'machine:/sitemap.xml'), false);
+assert.ok(generatedSitemapGraph.ownership.some(item => item.surfaceType === 'sitemap' && item.state === 'unresolved'));
+assert.ok(generatedSitemapGraph.warnings.some(warning => warning.code === 'next-dynamic-sitemap-unmapped'));
 
 const pagesOnly = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-next-pages-'));
 write(pagesOnly, 'package.json', JSON.stringify({ dependencies: { next: '16.3.4' } }));
@@ -132,4 +157,4 @@ const conflicting = fixture();
 write(conflicting, 'astro.config.mjs', `export default {};\n`);
 assert.throws(() => detectRepositoryMapperAdapter({ root: conflicting }), /conflicting framework signals/);
 
-console.log('PASS Next.js Repository Mapper resolves only inspectable App Router routes/metadata surfaces, preserves dynamic/config ambiguity, excludes generated output, and gates grounded machine-surface transforms with exact digest ownership');
+console.log('PASS Next.js Repository Mapper resolves only inspectable App Router routes/metadata surfaces, honors URL normalization, preserves dynamic/config ambiguity, excludes generated output, and gates grounded machine-surface transforms with exact digest ownership');
