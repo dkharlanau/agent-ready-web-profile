@@ -1,0 +1,123 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/transformation-pack-registry.schema.json",
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "packs": [
+    {
+      "id": "static-html-core-v0.1",
+      "version": "0.1",
+      "status": "active",
+      "description": "Fail-closed operation preparation for directly owned static HTML pages and machine surfaces.",
+      "adapters": ["static-html"],
+      "recipes": [
+        {
+          "id": "canonical-link",
+          "mode": "html-canonical-link",
+          "ownershipScope": "route",
+          "automationClass": "mechanical",
+          "allowedFileRoles": ["page-source"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["canonicalUrl"],
+          "requiresReviewedGrounding": false,
+          "verification": [
+            "re-map the repository and verify canonical ownership/value",
+            "re-run the relevant Search Surface checks"
+          ]
+        },
+        {
+          "id": "source-backed-jsonld",
+          "mode": "html-jsonld-script",
+          "ownershipScope": "route",
+          "automationClass": "grounded-template",
+          "allowedFileRoles": ["page-source"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["jsonld"],
+          "requiresReviewedGrounding": true,
+          "verification": [
+            "parse the generated JSON-LD as JSON",
+            "re-map the repository and verify the JSON-LD surface",
+            "re-run structured-data and site improvement checks"
+          ]
+        },
+        {
+          "id": "machine-surface-replace",
+          "mode": "machine-file-replace",
+          "ownershipScope": "surface",
+          "automationClass": "grounded-template",
+          "surfaceTypes": ["sitemap", "llms", "agent-discovery", "api-description", "other-machine-surface"],
+          "allowedFileRoles": ["machine-surface", "data"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["content"],
+          "requiresReviewedGrounding": true,
+          "verification": [
+            "re-map the repository and verify the machine surface remains source-owned",
+            "re-run the protocol/search checks relevant to the changed surface"
+          ]
+        }
+      ],
+      "guardrails": {
+        "exactOwnershipRequired": true,
+        "digestPreconditionRequired": true,
+        "noPathGuessing": true,
+        "noProductionMutation": true,
+        "noEditorialGeneration": true,
+        "noPolicyMutation": true,
+        "noOwnerPlatformMutation": true,
+        "noRuntimeMutation": true,
+        "unsupportedFailsClosed": true,
+        "noRankingGuarantee": true
+      }
+    },
+    {
+      "id": "jekyll-core-v0.1",
+      "version": "0.1",
+      "status": "active",
+      "description": "Fail-closed operation preparation for Jekyll source files only when Repository Mapper proves exact ownership.",
+      "adapters": ["jekyll"],
+      "recipes": [
+        {
+          "id": "source-backed-jsonld",
+          "mode": "html-jsonld-script",
+          "ownershipScope": "route",
+          "automationClass": "grounded-template",
+          "allowedFileRoles": ["page-source", "content"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["jsonld"],
+          "requiresReviewedGrounding": true,
+          "verification": [
+            "build or render the Jekyll page using the target repository verification contract",
+            "parse the generated JSON-LD as JSON",
+            "re-map the repository and verify route ownership did not drift"
+          ]
+        },
+        {
+          "id": "machine-surface-replace",
+          "mode": "machine-file-replace",
+          "ownershipScope": "surface",
+          "automationClass": "grounded-template",
+          "surfaceTypes": ["sitemap", "llms", "agent-discovery", "api-description", "other-machine-surface"],
+          "allowedFileRoles": ["machine-surface", "data"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["content"],
+          "requiresReviewedGrounding": true,
+          "verification": [
+            "build or render the Jekyll site using the target repository verification contract",
+            "re-map the repository and verify the machine surface remains source-owned"
+          ]
+        }
+      ],
+      "guardrails": {
+        "exactOwnershipRequired": true,
+        "digestPreconditionRequired": true,
+        "noPathGuessing": true,
+        "noProductionMutation": true,
+        "noEditorialGeneration": true,
+        "noPolicyMutation": true,
+        "noOwnerPlatformMutation": true,
+        "noRuntimeMutation": true,
+        "unsupportedFailsClosed": true,
+        "noRankingGuarantee": true
+      }
+    }
+  ]
+}
