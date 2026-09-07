@@ -1,10 +1,8 @@
 # SignalBraid Patch — Verified Transformation Packs
 
-Status: **v0.1 foundation · 2026-09-07**
+Status: **v0.1 · static HTML + Jekyll + Astro · 2026-09-07**
 
 Transformation Packs are the stack-specific preparation layer between **SignalBraid Map** and the existing **Transformation Engine**.
-
-They solve one narrow problem:
 
 ```text
 Site State Graph
@@ -20,76 +18,81 @@ ready | no-op | blocked
 existing Transformation Engine operation spec
 ```
 
-A pack does **not** write a repository, open a PR, authorize mutation, infer Search impact, or replace the Transformation Engine.
+A pack does **not** write a repository, open a PR, authorize production mutation, infer Search impact, or replace the Transformation Engine.
 
 ## Why packs exist
 
-A generic recommendation such as “wire canonical metadata” is not enough to edit a real repository safely.
+A recommendation such as “add canonical metadata” is not enough to edit a real repository safely. The visible page may be owned by a direct HTML file, a Jekyll source, an Astro page, a layout, runtime state, or several ambiguous sources. A file may also have changed since it was mapped.
 
-The source may be:
-
-- directly owned by a static HTML file;
-- generated from Jekyll source;
-- ambiguous between multiple files;
-- already correct;
-- changed since Repository Mapper captured it;
-- controlled by editorial/policy/runtime/owner state rather than a safe mechanical source file.
-
-Transformation Packs encode the narrow recipes that can be prepared deterministically for a known stack while failing closed everywhere else.
+Transformation Packs encode only the narrow operations that can be prepared deterministically for an evidenced stack. Unsupported ownership remains blocked rather than guessed.
 
 ## Shipped packs
 
-The v0.1 registry is `registry/transformation-packs.json`.
+The reviewed registry is `registry/transformation-packs.json`.
 
 ### `static-html-core-v0.1`
 
-Supported preparation recipes:
-
-- `canonical-link` — inserts a same-route, same-origin canonical link only when no canonical already exists and one exact `</head>` anchor is present;
-- `source-backed-jsonld` — inserts reviewed, source-grounded JSON-LD only when no existing mapped JSON-LD surface already owns the route;
-- `machine-surface-replace` — replaces an exactly mapped machine surface only with reviewed grounding.
+- `canonical-link` — same-origin, same-route canonical insertion when no canonical exists and exactly one source `</head>` anchor is present;
+- `source-backed-jsonld` — reviewed, grounded JSON-LD insertion with conflict checks;
+- `machine-surface-replace` — replacement of exactly mapped safe machine surfaces.
 
 ### `jekyll-core-v0.1`
 
-Supported preparation recipes:
+- `source-backed-jsonld` — only when the mapped Jekyll source itself exposes the exact insertion anchor;
+- `machine-surface-replace` — only for exactly mapped machine surfaces and reviewed grounding.
 
-- `source-backed-jsonld` — only for mapped Jekyll source files that themselves expose the exact HTML insertion anchor; ordinary Markdown pages without an owned `<head>` fail closed;
-- `machine-surface-replace` — replaces exactly mapped machine surfaces such as a source-owned `llms.txt` after reviewed grounding.
+The pack does not guess `_layouts`, `_includes`, themes or plugin-generated output as mutation ownership.
 
-The Jekyll pack intentionally does not guess whether `_layouts`, plugins, includes, themes or generated output should be edited. More framework-native recipes require explicit ownership evidence first.
+### `astro-core-v0.1`
+
+Astro uses the evidence-backed Repository Mapper adapter introduced in `docs/REPOSITORY-MAPPER.md`.
+
+- `canonical-link` — available only for a resolved static Astro route whose exact owner is a safe page source and whose source contains one deterministic `</head>` anchor;
+- `source-backed-jsonld` — same ownership/anchor requirement plus reviewed grounding;
+- `machine-surface-replace` — only for safe, exactly mapped Astro `public/` machine surfaces such as sitemap, agent-discovery or API-description files.
+
+The Astro pack intentionally blocks:
+
+- dynamic bracket routes and `getStaticPaths()`-dependent ownership;
+- server/on-demand routes without proven static prerendering;
+- i18n/computed routing state not reduced by Repository Mapper;
+- Markdown/MDX page sources classified as editorial;
+- layout-owned `<head>` state when the route source itself has no exact insertion anchor;
+- `robots.txt` policy mutation;
+- `llms.txt` when mapped as editorial;
+- conflicting or ambiguous route ownership.
+
+This gives the project three independently tested stack packs without weakening Map → Patch boundaries.
 
 ## Safety contract
 
-Every pack requires the current Site State Graph to validate.
-
 Before returning `ready`, preparation verifies:
 
-1. the pack supports the detected Repository Mapper adapter;
-2. route/surface ownership is `resolved`;
-3. the selected owner exists in `files[]`;
-4. generated output is not selected as source authority;
-5. file role and mutation class are allowlisted by the recipe;
-6. caller-supplied current source content hashes to the exact mapped SHA-256;
-7. required recipe inputs exist;
-8. `grounded-template` work carries reviewed grounding and evidence references;
-9. recipe-specific conflict checks pass.
+1. the Site State Graph validates;
+2. the pack supports the mapped adapter;
+3. route/surface ownership is exactly `resolved`;
+4. the selected owner exists in `files[]`;
+5. generated output is not selected as source authority;
+6. file role and mutation class are allowlisted by the recipe;
+7. caller-supplied current source content hashes to the exact mapped SHA-256;
+8. required recipe inputs are present;
+9. `grounded-template` work carries reviewed grounding and evidence references;
+10. recipe-specific conflict and anchor checks pass.
 
-Any failed precondition returns `blocked`; an already-correct target returns `no-op`.
+A failed precondition returns `blocked`. An already-correct target returns `no-op`.
 
-Packs never relax these existing Transformation Engine boundaries:
+Packs never relax Transformation Engine boundaries:
 
 - explicit path allowlist;
 - digest preconditions;
-- policy/editorial/owner-platform/runtime changes stay gated;
-- production execution needs separate authorization;
-- GitHub PR delivery stays separate;
-- no Search ranking, recommendation or citation uplift is predicted.
+- policy/editorial/runtime/owner-platform gates;
+- separate production authorization;
+- separate GitHub delivery;
+- no ranking, recommendation or citation guarantee.
 
-## Canonical recipe boundary
+## Canonical boundary
 
-`canonical-link` is deliberately conservative.
-
-It prepares an insertion only when:
+`canonical-link` prepares an insertion only when:
 
 - the requested canonical uses HTTPS;
 - it is same-origin;
@@ -97,36 +100,29 @@ It prepares an insertion only when:
 - no canonical link currently exists;
 - the source contains exactly one closing head tag.
 
-An existing different canonical is **not overwritten**. Multiple canonicals are not repaired automatically. Cross-origin and cross-route canonical choices remain owner review because they can encode intentional consolidation/migration decisions.
+An existing different canonical is not overwritten. Multiple canonicals, cross-origin canonicals and cross-route consolidation remain owner review.
 
 ## JSON-LD boundary
 
-`source-backed-jsonld` requires:
+`source-backed-jsonld` requires parseable JSON input, `reviewedGrounding=true`, at least one evidence reference, exact source ownership/digest and one deterministic source insertion anchor.
 
-- parseable JSON input;
-- `reviewedGrounding=true`;
-- at least one grounding evidence reference;
-- exact source ownership and digest;
-- no existing resolved JSON-LD surface for that route;
-- one deterministic insertion anchor.
-
-The pack serializes the supplied reviewed object; it does not invent entity facts, authorship, offers, ratings, dates or capabilities.
+If Repository Mapper already records a resolved JSON-LD surface for that route, preparation blocks for review instead of appending another graph. The pack serializes supplied reviewed data; it does not invent authorship, offers, ratings, dates, entities or capabilities.
 
 ## Machine-surface boundary
 
-`machine-surface-replace` is allowed only for a surface already discovered and owned by Repository Mapper and explicitly allowlisted in the recipe.
+`machine-surface-replace` acts only on an already mapped source-owned surface and only when its surface type and mutation class are allowlisted by the stack pack.
 
-The pack does not create a new agent/API capability merely because a filename would be useful. New surface creation remains a separately grounded recommendation and transformation decision.
+A useful filename is not evidence that a new capability should exist. Creating new discovery/API surfaces remains a separately grounded recommendation and transformation decision.
 
 ## CLI
 
 List packs:
 
 ```bash
-node bin/arwp-transform-pack.mjs list --adapter=static-html
+node bin/arwp-transform-pack.mjs list --adapter=astro
 ```
 
-Validate the shipped registry:
+Validate the registry:
 
 ```bash
 node bin/arwp-transform-pack.mjs validate
@@ -136,16 +132,16 @@ Prepare a canonical operation:
 
 ```bash
 node bin/arwp-transform-pack.mjs prepare site-state.json \
-  --pack=static-html-core-v0.1 \
+  --pack=astro-core-v0.1 \
   --recipe=canonical-link \
   --recommendation=canonical-discovery \
   --route=/ \
-  --before=index.html \
+  --before=src/pages/index.astro \
   --inputs=canonical-input.json \
   --out=prepared-operation.json
 ```
 
-Example `canonical-input.json`:
+Example input:
 
 ```json
 {
@@ -155,25 +151,17 @@ Example `canonical-input.json`:
 
 A `ready` result contains `operationSpec`, which is input for the existing Transformation Engine. The CLI itself performs no target mutation.
 
-For grounded work:
+For grounded work, add:
 
-```bash
-node bin/arwp-transform-pack.mjs prepare site-state.json \
-  --pack=jekyll-core-v0.1 \
-  --recipe=machine-surface-replace \
-  --recommendation=machine-discovery \
-  --surface=machine:/llms.txt \
-  --before=llms.txt \
-  --inputs=llms-input.json \
-  --reviewed-grounding \
-  --grounding=repo:README.md
+```text
+--reviewed-grounding --grounding=repo:path/to/evidence
 ```
 
 ## Result states
 
 ### `ready`
 
-All pack preconditions passed. The returned operation spec can be handed to Transformation Engine, which still performs its own validation and authorization gates.
+All pack preconditions passed. The operation spec can be handed to Transformation Engine, which still performs its own validation and authorization gates.
 
 ### `no-op`
 
@@ -181,46 +169,44 @@ The exact requested state is already present. No mutation spec is produced.
 
 ### `blocked`
 
-The pack cannot justify a safe deterministic operation. Typical reasons include:
+The pack cannot justify a safe deterministic operation. Examples:
 
 - `ambiguous-route-ownership`;
+- `unresolved-route-ownership`;
 - `source-digest-drift`;
 - `existing-canonical-needs-review`;
-- `multiple-canonicals-need-review`;
+- `existing-jsonld-needs-review`;
 - `cross-origin-canonical-needs-owner-review`;
 - `mutation-class-not-allowed`;
+- `unsupported-surface-type`;
 - `reviewed-grounding-required`;
 - `generated-output-not-source-authority`;
+- `exact-single-head-close-required`;
 - `adapter-not-supported`.
 
-Blocked is a valid outcome, not a pack failure to be bypassed.
+Blocked is a valid outcome, not a condition to bypass.
 
-## Test contract
+## Verification contract
 
-The v0.1 regression verifies:
+Regression coverage now includes:
 
-- valid registry semantics;
-- static HTML canonical preparation;
-- direct handoff into Transformation Engine;
-- canonical token-list detection and deterministic no-op;
-- conflicting canonical fail-closed behavior;
-- source digest drift rejection;
-- ambiguous ownership rejection;
-- editorial mutation rejection;
-- reviewed grounding for JSON-LD;
-- grounded Jekyll machine-surface replacement;
-- no-op machine replacement;
-- adapter mismatch rejection.
+- static HTML canonical/JSON-LD preparation;
+- Jekyll grounded machine-surface preparation;
+- Astro real Mapper → Pack → Transformation Engine handoff;
+- Astro canonical and grounded JSON-LD operations;
+- Astro `public/` sitemap replacement;
+- Astro server/runtime route blocking;
+- Astro layout-owned-head blocking when no direct source anchor exists;
+- Astro editorial `llms.txt` blocking;
+- existing JSON-LD conflict blocking;
+- ambiguity, source drift, conflicting canonical and gated mutation classes;
+- deterministic no-op behavior;
+- npm package-surface verification.
 
-## Next expansion
+## Remaining #61 work
 
-Issue #61 tracks Transformation Packs. Issue #71 tracks additional Repository Mapper adapters.
+The original three-stack requirement is now met: static HTML, Jekyll and Astro each have a verified pack.
 
-Next adapters should be added in this order only when ownership evidence exists:
+Issue #61 remains open until the second outcome is demonstrated: **safe transformation coverage must measurably increase on real portfolio sites**. That should be proven with before/after coverage receipts from representative repositories rather than inferred from synthetic tests.
 
-1. real-world Jekyll hardening;
-2. Astro;
-3. Docusaurus;
-4. selected Next.js patterns where route/metadata ownership is provable without arbitrary application execution.
-
-The #61 completion target remains at least three independently verified stack packs. v0.1 therefore establishes the architecture and first two packs; it does not claim the epic is complete.
+Next work therefore shifts from adding generic recipes to dogfooding the packs on real sites, recording `ready / no-op / blocked` coverage and using blocked reasons to decide whether another adapter/recipe is justified.

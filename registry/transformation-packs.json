@@ -118,6 +118,72 @@
         "unsupportedFailsClosed": true,
         "noRankingGuarantee": true
       }
+    },
+    {
+      "id": "astro-core-v0.1",
+      "version": "0.1",
+      "status": "active",
+      "description": "Fail-closed preparation for exactly mapped static Astro page sources and public machine surfaces; dynamic/runtime/layout-owned state is never guessed.",
+      "adapters": ["astro"],
+      "recipes": [
+        {
+          "id": "canonical-link",
+          "mode": "html-canonical-link",
+          "ownershipScope": "route",
+          "automationClass": "mechanical",
+          "allowedFileRoles": ["page-source"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["canonicalUrl"],
+          "requiresReviewedGrounding": false,
+          "verification": [
+            "run the target Astro build or render verification contract",
+            "re-map the repository and verify route/canonical ownership did not drift",
+            "re-run the relevant Search Surface checks"
+          ]
+        },
+        {
+          "id": "source-backed-jsonld",
+          "mode": "html-jsonld-script",
+          "ownershipScope": "route",
+          "automationClass": "grounded-template",
+          "allowedFileRoles": ["page-source"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["jsonld"],
+          "requiresReviewedGrounding": true,
+          "verification": [
+            "run the target Astro build or render verification contract",
+            "parse the rendered JSON-LD as JSON",
+            "re-map the repository and verify route/JSON-LD ownership did not drift"
+          ]
+        },
+        {
+          "id": "machine-surface-replace",
+          "mode": "machine-file-replace",
+          "ownershipScope": "surface",
+          "automationClass": "grounded-template",
+          "surfaceTypes": ["sitemap", "agent-discovery", "api-description", "other-machine-surface"],
+          "allowedFileRoles": ["machine-surface", "data"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["content"],
+          "requiresReviewedGrounding": true,
+          "verification": [
+            "run the target Astro build or render verification contract",
+            "re-map the repository and verify the public machine surface remains source-owned"
+          ]
+        }
+      ],
+      "guardrails": {
+        "exactOwnershipRequired": true,
+        "digestPreconditionRequired": true,
+        "noPathGuessing": true,
+        "noProductionMutation": true,
+        "noEditorialGeneration": true,
+        "noPolicyMutation": true,
+        "noOwnerPlatformMutation": true,
+        "noRuntimeMutation": true,
+        "unsupportedFailsClosed": true,
+        "noRankingGuarantee": true
+      }
     }
   ]
 }

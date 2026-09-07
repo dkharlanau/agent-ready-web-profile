@@ -7,11 +7,13 @@ on:
       - 'schema/transformation-pack-registry.schema.json'
       - 'registry/transformation-packs.json'
       - 'lib/transformation-pack.mjs'
+      - 'lib/repository-mapper.mjs'
+      - 'lib/repository-mapper-astro.mjs'
+      - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform-pack.mjs'
       - 'scripts/transformation-pack-test.mjs'
+      - 'scripts/transformation-pack-astro-test.mjs'
       - 'docs/TRANSFORMATION-PACKS.md'
-      - 'lib/transformation-engine.mjs'
-      - 'lib/repository-mapper.mjs'
       - 'schema/transformation-bundle.schema.json'
       - 'schema/site-state-graph.schema.json'
       - 'package.json'
@@ -21,11 +23,13 @@ on:
       - 'schema/transformation-pack-registry.schema.json'
       - 'registry/transformation-packs.json'
       - 'lib/transformation-pack.mjs'
+      - 'lib/repository-mapper.mjs'
+      - 'lib/repository-mapper-astro.mjs'
+      - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform-pack.mjs'
       - 'scripts/transformation-pack-test.mjs'
+      - 'scripts/transformation-pack-astro-test.mjs'
       - 'docs/TRANSFORMATION-PACKS.md'
-      - 'lib/transformation-engine.mjs'
-      - 'lib/repository-mapper.mjs'
       - 'schema/transformation-bundle.schema.json'
       - 'schema/site-state-graph.schema.json'
       - 'package.json'
@@ -52,12 +56,15 @@ jobs:
       - name: Validate Transformation Packs
         run: |
           node scripts/transformation-pack-test.mjs
+          node scripts/transformation-pack-astro-test.mjs
           node --check lib/transformation-pack.mjs
+          node --check lib/repository-mapper-astro.mjs
           node --check bin/arwp-transform-pack.mjs
           node -e "for (const file of ['schema/transformation-pack-registry.schema.json','registry/transformation-packs.json']) JSON.parse(require('fs').readFileSync(file,'utf8'));"
           node bin/arwp-transform-pack.mjs validate | grep -q '"valid": true'
           node bin/arwp-transform-pack.mjs list --adapter=static-html | grep -q 'static-html-core-v0.1'
           node bin/arwp-transform-pack.mjs list --adapter=jekyll | grep -q 'jekyll-core-v0.1'
+          node bin/arwp-transform-pack.mjs list --adapter=astro | grep -q 'astro-core-v0.1'
 
       - name: Verify npm package surface
         run: |
