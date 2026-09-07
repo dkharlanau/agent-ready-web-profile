@@ -1,0 +1,12 @@
+{
+  "version": "0.1",
+  "ruleset": "2026.09.07",
+  "reviewedAt": "2026-09-07",
+  "title": "ARWP Search Surface Blueprint public index",
+  "sourceOfTruth": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/registry/search-surface-blueprint.json",
+  "documentation": "https://dkharlanau.github.io/agent-ready-web-profile/surfaces/",
+  "checks": 44,
+  "siteKinds": ["software-product", "service-business", "editorial-news", "documentation-research", "ecommerce", "portfolio", "local-business"],
+  "surfaceDefinitions": ["home", "product", "services", "docs", "updates", "changelog", "roadmap", "case-study", "evidence", "research", "dataset", "profile", "about", "events", "comparison", "trust", "media", "topic-hub"],
+  "guardrails": {"noRankingPromise": true, "pageTypesAreConditional": true, "newsAndRoadmapAreNotUniversalRequirements": true, "schemaSemanticsDoNotImplyGoogleRichResults": true}
+}
