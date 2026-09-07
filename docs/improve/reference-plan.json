@@ -1,0 +1,97 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-improvement-plan.schema.json",
+  "version": "0.1",
+  "generatedAt": "2026-09-07T05:30:00.000Z",
+  "site": "https://example.com/",
+  "scope": "bounded-prioritized-improvement-plan-not-ranking-score",
+  "summary": {
+    "candidates": 7,
+    "selected": 4,
+    "suppressed": 3,
+    "byPriority": {"P1": 3, "P2": 1},
+    "byLane": {"entity-graph": 1, "technical-search": 1, "search-access": 1, "internal-links": 1}
+  },
+  "actions": [
+    {
+      "order": 1,
+      "id": "entity:property:dataset:license:https://example.com/#dataset",
+      "sourceKind": "entity-remediation",
+      "priority": "P1",
+      "lane": "entity-graph",
+      "title": "Dataset has no explicit license.",
+      "reason": "Add license only when grounded in first-party evidence.",
+      "evidenceClass": "grounded-first-party",
+      "evidence": [{"file": "source/facts.jsonld", "property": "license"}],
+      "target": {"file": "public/dataset.jsonld", "pointer": "/@graph/0"},
+      "proposal": {"type": "json-patch"},
+      "verification": ["Re-run Entity Graph Gap Report and confirm the license gap is resolved without new identity conflicts."],
+      "measurement": ["structured-data validation after deployment", "page/query impressions and clicks for the affected entity page"],
+      "dependencies": ["human-review-visible-fact-parity"]
+    },
+    {
+      "order": 2,
+      "id": "page:canonical:https://example.com/guide/",
+      "sourceKind": "page-graph",
+      "priority": "P1",
+      "lane": "technical-search",
+      "title": "Add or repair the canonical URL",
+      "reason": "No crawlable canonical link was observed on the sampled page.",
+      "evidenceClass": "direct-observation",
+      "evidence": ["https://example.com/guide/"],
+      "target": {"url": "https://example.com/guide/"},
+      "proposal": null,
+      "verification": ["Re-fetch the canonical page and verify the observed condition is resolved."],
+      "measurement": ["Search Console page/query impressions and clicks for the affected page", "crawl/index coverage where applicable"],
+      "dependencies": []
+    },
+    {
+      "order": 3,
+      "id": "growth:audit:search-access",
+      "sourceKind": "growth",
+      "priority": "P1",
+      "lane": "search-access",
+      "title": "Preserve crawl/index eligibility",
+      "reason": "Source-backed Search eligibility action from the Growth plan.",
+      "evidenceClass": "source-backed",
+      "evidence": ["https://example.com/robots.txt"],
+      "target": {"url": "https://example.com/"},
+      "proposal": {"url": "https://example.com/"},
+      "verification": ["Re-run the originating ARWP audit after deployment and preserve before/after evidence."],
+      "measurement": ["owner-side Search evidence", "keep/revise/revert decision after an observation window"],
+      "dependencies": []
+    },
+    {
+      "order": 4,
+      "id": "link:inbound:https://example.com/orphan/",
+      "sourceKind": "page-graph",
+      "priority": "P2",
+      "lane": "internal-links",
+      "title": "Add a contextual internal path to this page",
+      "reason": "No inbound internal link from another sampled page was observed.",
+      "evidenceClass": "direct-observation",
+      "evidence": ["https://example.com/orphan/"],
+      "target": {"url": "https://example.com/orphan/"},
+      "proposal": null,
+      "verification": ["Re-run the bounded page graph and confirm at least one relevant sampled page links to this canonical URL with meaningful anchor text."],
+      "measurement": ["crawl/index coverage", "page-level impressions and clicks"],
+      "dependencies": []
+    }
+  ],
+  "sourceSummary": {"growthActions": 2, "entityRemediationItems": 1, "pageGraphActions": 4},
+  "prioritization": {
+    "method": "priority-then-evidence-then-actionability-with-lane-diversity",
+    "universalNumericScore": false,
+    "priorityOrder": ["P0", "P1", "P2", "P3"],
+    "evidenceOrder": ["grounded-first-party", "direct-observation", "source-backed", "manual-review", "advisory"],
+    "maxActions": 4
+  },
+  "guardrails": {
+    "noRankingPromise": true,
+    "noUniversalReadinessScore": true,
+    "noAutomaticRepositoryMutation": true,
+    "noInventedFacts": true,
+    "humanReviewForStructuredDataAndEditorialChanges": true,
+    "boundedCrawlDoesNotProveWholeSiteCoverage": true,
+    "measurementDoesNotProveCausality": true
+  }
+}
