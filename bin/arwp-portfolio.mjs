@@ -7,9 +7,13 @@ import {
   loadPortfolioRegistry,
   validatePortfolioRegistry
 } from '../lib/portfolio-rollout.mjs';
+import {
+  buildPortfolioProposals,
+  formatPortfolioProposals
+} from '../lib/portfolio-proposals.mjs';
 
 function usage() {
-  return `arwp-portfolio — map reviewed Trend Radar changes to owner-controlled sites without generic production mutation\n\nUsage:\n  arwp-portfolio check [--json]\n  arwp-portfolio list [--json]\n  arwp-portfolio rollout [--site=<id|owner/repo>] [--trend=<id>] [--provider=<id>] [--stage=<adopt,measured>] [--include-watch] [--output=<file>] [--json]\n\nDefault rollout includes ADOPT and MEASURED only. WATCH requires --include-watch and remains watch-only. Every candidate still requires target-site audit/owner review before any production change.\n`;
+  return `arwp-portfolio — map reviewed Trend Radar changes to owner-controlled sites without generic production mutation\n\nUsage:\n  arwp-portfolio check [--json]\n  arwp-portfolio list [--json]\n  arwp-portfolio rollout [--site=<id|owner/repo>] [--trend=<id>] [--provider=<id>] [--stage=<adopt,measured>] [--include-watch] [--output=<file>] [--json]\n  arwp-portfolio propose [--site=<id|owner/repo>] [--trend=<id>] [--provider=<id>] [--stage=<adopt,measured>] [--include-watch] [--output=<file>] [--json]\n\nDefault rollout includes ADOPT and MEASURED only. WATCH requires --include-watch and remains watch-only. The propose command generates target-specific review artifacts only; it never creates GitHub issues or authorizes production changes.\n`;
 }
 
 function optionValue(args, name) {
@@ -19,6 +23,16 @@ function optionValue(args, name) {
   const index = args.indexOf(`--${name}`);
   if (index >= 0 && args[index + 1] && !args[index + 1].startsWith('--')) return args[index + 1];
   return null;
+}
+
+function rolloutOptions(args) {
+  return {
+    site: optionValue(args, 'site'),
+    trend: optionValue(args, 'trend'),
+    provider: optionValue(args, 'provider'),
+    stage: optionValue(args, 'stage'),
+    includeWatch: args.includes('--include-watch')
+  };
 }
 
 function write(value, args, text = null) {
@@ -66,14 +80,14 @@ function main() {
   }
 
   if (command === 'rollout') {
-    const result = buildPortfolioRollout(portfolio, undefined, {
-      site: optionValue(args, 'site'),
-      trend: optionValue(args, 'trend'),
-      provider: optionValue(args, 'provider'),
-      stage: optionValue(args, 'stage'),
-      includeWatch: args.includes('--include-watch')
-    });
+    const result = buildPortfolioRollout(portfolio, undefined, rolloutOptions(args));
     write(result, args, formatPortfolioRollout(result));
+    return 0;
+  }
+
+  if (command === 'propose') {
+    const result = buildPortfolioProposals(portfolio, undefined, rolloutOptions(args));
+    write(result, args, formatPortfolioProposals(result));
     return 0;
   }
 
