@@ -22,12 +22,28 @@ function parseFrontmatter(text, file) {
 
 assert.equal(index.version, '0.1');
 assert.equal(index.standard, 'Agent Skills');
-assert.equal(index.skills.length, 5);
+assert.ok(index.skills.length >= 5, 'ARWP must retain its core multi-skill architecture');
 assert.equal(index.composition.default, 'arwp-growth-loop');
 assert.equal(index.composition.sitePreparation, 'arwp-prepare-site');
+assert.equal(index.composition.upgradeCompiler, 'arwp-adaptive-upgrade');
+assert.equal(index.composition.transformationDelivery, 'arwp-target-transformation');
+
+const expectedCoreSkills = [
+  'arwp-growth-loop',
+  'arwp-adaptive-upgrade',
+  'arwp-target-transformation',
+  'arwp-prepare-site',
+  'arwp-ai-search-content',
+  'arwp-dataset-publication',
+  'arwp-agent-discovery',
+  'arwp-evidence-ci'
+];
+const indexedNames = index.skills.map(skill => skill.name);
+for (const name of expectedCoreSkills) assert.ok(indexedNames.includes(name), `skills/index.json must include ${name}`);
 
 const directories = fs.readdirSync(skillsRoot, { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
-assert.deepEqual(directories, index.skills.map(skill => skill.name).sort(), 'skills/index.json must list every skill directory exactly once');
+assert.deepEqual(directories, [...indexedNames].sort(), 'skills/index.json must list every skill directory exactly once');
+assert.equal(new Set(indexedNames).size, indexedNames.length, 'skill names must be unique');
 
 for (const skill of index.skills) {
   assert.match(skill.name, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
@@ -46,6 +62,12 @@ for (const skill of index.skills) {
 const growth = fs.readFileSync(path.join(skillsRoot, 'arwp-growth-loop', 'SKILL.md'), 'utf8');
 for (const expected of ['arwp-trends', 'arwp-hypotheses', 'arwp-growth', 'research', 'measure', 'negative results']) assert.match(growth, new RegExp(expected, 'i'));
 
+const adaptive = fs.readFileSync(path.join(skillsRoot, 'arwp-adaptive-upgrade', 'SKILL.md'), 'utf8');
+for (const expected of ['knowledge', 'verification', 'measurement', 'review-due']) assert.match(adaptive, new RegExp(expected, 'i'));
+
+const transform = fs.readFileSync(path.join(skillsRoot, 'arwp-target-transformation', 'SKILL.md'), 'utf8');
+for (const expected of ['digest', 'allowedPaths', 'rollback', 'policy-gated', 'target-repository-transform-pr']) assert.match(transform, new RegExp(expected, 'i'));
+
 const prepare = fs.readFileSync(path.join(skillsRoot, 'arwp-prepare-site', 'SKILL.md'), 'utf8');
 for (const expected of ['arwp audit', 'arwp-growth', 'arwp assert', 'Evidence Receipts']) assert.match(prepare, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
 assert.match(prepare, /Do not stop at a plan/i);
@@ -55,9 +77,11 @@ assert.match(prepare, /references\/file-matrix\.md/);
 const content = fs.readFileSync(path.join(skillsRoot, 'arwp-ai-search-content', 'SKILL.md'), 'utf8');
 assert.match(content, /non-commodity/i);
 assert.match(content, /primary sources/i);
+const dataset = fs.readFileSync(path.join(skillsRoot, 'arwp-dataset-publication', 'SKILL.md'), 'utf8');
+for (const expected of ['dataset', 'DOI', 'version']) assert.match(dataset, new RegExp(expected, 'i'));
 const discovery = fs.readFileSync(path.join(skillsRoot, 'arwp-agent-discovery', 'SKILL.md'), 'utf8');
 for (const mechanism of ['Agent Skills', 'ARD', 'MCP', 'A2A', 'WebMCP', 'OpenAPI']) assert.match(discovery, new RegExp(mechanism, 'i'));
 const evidence = fs.readFileSync(path.join(skillsRoot, 'arwp-evidence-ci', 'SKILL.md'), 'utf8');
 assert.match(evidence, /read-only/i);
 
-console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration and evidence-safe workflows`);
+console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration, adaptive upgrade intelligence, safe transformation delivery and evidence-safe workflows`);
