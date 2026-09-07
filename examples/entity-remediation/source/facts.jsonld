@@ -1,0 +1,12 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@id": "https://example.com/#dataset",
+      "@type": "Dataset",
+      "name": "Cases Dataset",
+      "creator": {"@id": "https://example.com/#publisher"},
+      "license": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ]
+}

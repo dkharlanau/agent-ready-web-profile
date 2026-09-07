@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ARWP Entity Graph Remediation Engine turns structured-data entity gaps into grounded, review-required repository patch proposals without inventing facts or changing files.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Entity Graph Remediation Engine | ARWP</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/entities/remediation/">
+  <link rel="describedby" type="application/json" href="https://dkharlanau.github.io/agent-ready-web-profile/entities/remediation/reference-manifest.json">
+  <link rel="describedby" type="application/json" href="https://dkharlanau.github.io/agent-ready-web-profile/page-manifest.json">
+  <link rel="alternate" type="text/markdown" href="https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/content/pages/entity-graph-remediation.md">
+  <link rel="stylesheet" href="https://dkharlanau.github.io/agent-ready-web-profile/citation.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://dkharlanau.github.io/agent-ready-web-profile/entities/remediation/#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/entities/remediation/","headline":"ARWP Entity Graph Remediation Engine","description":"Proposal-only remediation for observed entity graph gaps, optionally grounded in bounded first-party repository evidence.","dateModified":"2026-09-07","author":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},"about":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#software"},"isPartOf":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#website"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ARWP","item":"https://dkharlanau.github.io/agent-ready-web-profile/"},{"@type":"ListItem","position":2,"name":"Entities","item":"https://dkharlanau.github.io/agent-ready-web-profile/entities/"},{"@type":"ListItem","position":3,"name":"Remediation","item":"https://dkharlanau.github.io/agent-ready-web-profile/entities/remediation/"}]}]}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="../">Entities</a><a href="../gaps/">Gap Report</a><a href="../../recommendations/">Playbook</a><a class="nav-cta" href="../../growth/">Growth Loop</a></nav></header>
+<main class="cite-main shell">
+  <section class="cite-hero"><p class="eyebrow">Entity graph · implementation proposals</p><h1>Turn entity gaps into grounded repository proposals.</h1><p class="cite-lead"><strong>ARWP can now connect an observed structured-data gap to first-party repository evidence without pretending that a machine should invent the missing fact.</strong> The output is a review-required remediation manifest, never an automatic mutation.</p><div class="cite-meta"><span>Read-only repo scan</span><span>Grounded values only</span><span>No automatic writes</span></div></section>
+  <section class="cite-card"><h2>What changes when repository evidence is available?</h2><p>A gap such as <code>Dataset.license</code> remains manual when ARWP cannot find a license. If the same Dataset already has a license in another first-party JSON-LD source, the engine may emit a JSON Patch proposal pointing to the exact evidence file, target file, JSON pointer and existing value.</p></section>
+  <section class="cite-card"><h2>Remediation lanes</h2><ul><li><strong>Grounded JSON patch proposal</strong> — a value already exists in first-party structured evidence.</li><li><strong>Grounded structured-data proposal</strong> — evidence exists but the target is embedded HTML JSON-LD.</li><li><strong>Verify deployment</strong> — the repository already appears fixed; check build/deployment drift.</li><li><strong>Content / entity-page / relationship / identity review</strong> — human judgment remains necessary.</li><li><strong>Missing evidence review</strong> — ARWP refuses to guess.</li></ul></section>
+  <section class="cite-card"><h2>Run the loop</h2><pre><code>node bin/arwp-entities.mjs https://example.com --output=entity-gap-report.json
+node bin/arwp-entity-remediation.mjs entity-gap-report.json --repo-root=../site --output=entity-remediation.json</code></pre><p>The repository scan is bounded and skips dependencies, generated build directories and symlinks.</p></section>
+  <section class="cite-card"><h2>Safety boundary</h2><p>Generated operations are evidence-carrying proposals only. The engine never writes files, applies JSON Patch, deploys code, or invents authors, licenses, people, prices, ratings, reviews, events, credentials or relationships. HTML and Markdown remain review-only.</p></section>
+  <section class="cite-card"><h2>Inspectable reference</h2><p><a href="./reference-manifest.json">Synthetic reference remediation manifest</a> · <a href="../gaps/reference-report.json">source gap report</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/ENTITY-GRAPH-REMEDIATION.md">methodology</a></p></section>
+  <p class="reuse-note">This is an implementation-safety tool, not an SEO score, certification or ranking guarantee.</p>
+</main>
+</body>
+</html>

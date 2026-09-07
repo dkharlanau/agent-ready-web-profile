@@ -44,6 +44,12 @@ jobs:
           node --check lib/entity-gap.mjs
           node --check bin/arwp-entities.mjs
 
+      - name: Validate entity graph remediation engine
+        run: |
+          node scripts/entity-remediation-test.mjs
+          node --check lib/entity-remediation.mjs
+          node --check bin/arwp-entity-remediation.mjs
+
       - name: Validate adaptive content profile
         run: |
           node scripts/content-profile-test.mjs

@@ -1,0 +1,126 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/entity-remediation-manifest.schema.json",
+  "version": "0.1",
+  "generatedAt": "2026-09-07T04:50:00.000Z",
+  "site": "https://example.com/",
+  "sourceReport": {
+    "reportVersion": "0.1",
+    "scope": "bounded-observed-entity-graph-not-ranking-score",
+    "generatedAt": "2026-09-07T00:00:00.000Z",
+    "source": "synthetic-reference-fixture",
+    "gaps": 5
+  },
+  "summary": {
+    "total": 5,
+    "withPatch": 2,
+    "groundedByRepository": 3,
+    "byDisposition": {
+      "missing-evidence-review": 1,
+      "grounded-json-patch-proposal": 2,
+      "relationship-review": 1,
+      "verify-deployment": 1
+    },
+    "repository": {
+      "filesScanned": 3,
+      "truncated": false,
+      "parseErrors": 0
+    }
+  },
+  "items": [
+    {
+      "gapId": "property:article:author:https://example.com/#guide",
+      "priority": "P1",
+      "family": "Article",
+      "entityId": "https://example.com/#guide",
+      "entityName": "Implementation Guide",
+      "problem": "Article-family entity has no explicit author relation.",
+      "recommendation": "Add author only when the fact is known and grounded.",
+      "disposition": "missing-evidence-review",
+      "automation": "proposal-only",
+      "humanReviewRequired": true,
+      "evidence": [],
+      "warnings": ["no-grounded-first-party-value-observed"]
+    },
+    {
+      "gapId": "property:dataset:creator|publisher:https://example.com/#dataset",
+      "priority": "P1",
+      "family": "Dataset",
+      "entityId": "https://example.com/#dataset",
+      "entityName": "Cases Dataset",
+      "problem": "Dataset has neither creator nor publisher relation.",
+      "recommendation": "Add creator or publisher only when the fact is known and grounded.",
+      "disposition": "grounded-json-patch-proposal",
+      "automation": "proposal-only",
+      "humanReviewRequired": true,
+      "evidence": [{"file":"source/facts.jsonld","format":"json","pointer":"/@graph/0","matchStrength":"exact-id","property":"creator","value":{"@id":"https://example.com/#publisher"}}],
+      "warnings": ["apply-only-after-visible-content-and-identity-parity-review"],
+      "target": {"file":"public/dataset.jsonld","format":"json","pointer":"/@graph/0"},
+      "proposal": {"type":"json-patch","operations":[{"op":"add","path":"/@graph/0/creator","value":{"@id":"https://example.com/#publisher"}}]}
+    },
+    {
+      "gapId": "property:dataset:license:https://example.com/#dataset",
+      "priority": "P1",
+      "family": "Dataset",
+      "entityId": "https://example.com/#dataset",
+      "entityName": "Cases Dataset",
+      "problem": "Dataset has no explicit license.",
+      "recommendation": "Add license only when the fact is known and grounded.",
+      "disposition": "grounded-json-patch-proposal",
+      "automation": "proposal-only",
+      "humanReviewRequired": true,
+      "evidence": [{"file":"source/facts.jsonld","format":"json","pointer":"/@graph/0","matchStrength":"exact-id","property":"license","value":"https://creativecommons.org/licenses/by/4.0/"}],
+      "warnings": ["apply-only-after-visible-content-and-identity-parity-review"],
+      "target": {"file":"public/dataset.jsonld","format":"json","pointer":"/@graph/0"},
+      "proposal": {"type":"json-patch","operations":[{"op":"add","path":"/@graph/0/license","value":"https://creativecommons.org/licenses/by/4.0/"}]}
+    },
+    {
+      "gapId": "orphan:https://example.com/#guide",
+      "priority": "P2",
+      "family": "Article",
+      "entityId": "https://example.com/#guide",
+      "entityName": "Implementation Guide",
+      "problem": "Entity is structurally isolated from the other observed entities.",
+      "recommendation": "Add truthful relations only when grounded.",
+      "disposition": "relationship-review",
+      "automation": "proposal-only",
+      "humanReviewRequired": true,
+      "evidence": [],
+      "warnings": ["relationship-target-must-be-grounded-before-adding-a-link"]
+    },
+    {
+      "gapId": "orphan:https://example.com/#dataset",
+      "priority": "P2",
+      "family": "Dataset",
+      "entityId": "https://example.com/#dataset",
+      "entityName": "Cases Dataset",
+      "problem": "Entity is structurally isolated from the other observed entities.",
+      "recommendation": "Add truthful relations only when grounded.",
+      "disposition": "verify-deployment",
+      "automation": "proposal-only",
+      "humanReviewRequired": true,
+      "evidence": [{"file":"source/facts.jsonld","format":"json","pointer":"/@graph/0","matchStrength":"exact-id","property":"creator","value":{"@id":"https://example.com/#publisher"}}],
+      "warnings": ["repository-state-and-deployed-state-appear-to-differ"],
+      "proposal": {"type":"verification","check":"Repository evidence already contains relation creator; verify deployed structured data."}
+    }
+  ],
+  "repositoryEvidence": {"repoRoot":"synthetic-reference-repository","filesScanned":3,"truncated":false,"parseErrors":[]},
+  "guardrails": {
+    "writesTargetRepository": false,
+    "appliesPatches": false,
+    "repoScanReadOnly": true,
+    "allChangesProposalOnly": true,
+    "humanReviewRequired": true,
+    "groundedValuesRequireFirstPartyRepositoryEvidence": true,
+    "htmlAndMarkdownNeverAutoPatched": true,
+    "noInventedFacts": true,
+    "noInventedPeopleCredentialsRatingsReviewsPricesLicensesEventsOrRelationships": true,
+    "noRankingOrRichResultGuarantee": true
+  },
+  "doesNotProve": [
+    "that a proposed patch is semantically correct without human review",
+    "that repository state matches the deployed website",
+    "search ranking, rich-result eligibility, AI citation, or recommendation inclusion",
+    "identity authority beyond the supplied first-party evidence",
+    "that a missing fact should exist when the real-world relationship is absent"
+  ]
+}

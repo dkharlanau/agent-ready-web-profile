@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkharlanau.github.io/agent-ready-web-profile/schema/entity-remediation-manifest.schema.json",
+  "title": "ARWP Entity Graph Remediation Manifest",
+  "type": "object",
+  "required": ["version", "generatedAt", "site", "sourceReport", "summary", "items", "guardrails", "doesNotProve"],
+  "properties": {
+    "$schema": {"type": "string", "format": "uri"},
+    "version": {"const": "0.1"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "site": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "sourceReport": {
+      "type": "object",
+      "required": ["reportVersion", "scope", "gaps"],
+      "properties": {
+        "reportVersion": {"type": "string"},
+        "scope": {"const": "bounded-observed-entity-graph-not-ranking-score"},
+        "generatedAt": {"type": ["string", "null"]},
+        "source": {"type": ["string", "null"]},
+        "gaps": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["total", "withPatch", "groundedByRepository", "byDisposition", "repository"],
+      "properties": {
+        "total": {"type": "integer", "minimum": 0},
+        "withPatch": {"type": "integer", "minimum": 0},
+        "groundedByRepository": {"type": "integer", "minimum": 0},
+        "byDisposition": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "repository": {
+          "type": ["object", "null"],
+          "properties": {
+            "filesScanned": {"type": "integer", "minimum": 0},
+            "truncated": {"type": "boolean"},
+            "parseErrors": {"type": "integer", "minimum": 0}
+          },
+          "required": ["filesScanned", "truncated", "parseErrors"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["gapId", "priority", "family", "entityId", "problem", "recommendation", "disposition", "automation", "humanReviewRequired", "evidence", "warnings"],
+        "properties": {
+          "gapId": {"type": "string"},
+          "priority": {"enum": ["P0", "P1", "P2", "P3"]},
+          "family": {"type": "string"},
+          "entityId": {"type": "string"},
+          "entityName": {"type": ["string", "null"]},
+          "problem": {"type": "string"},
+          "recommendation": {"type": "string"},
+          "disposition": {"enum": ["grounded-json-patch-proposal", "grounded-structured-data-proposal", "verify-deployment", "content-review", "entity-page-review", "relationship-review", "identity-review", "missing-evidence-review", "advisory"]},
+          "automation": {"const": "proposal-only"},
+          "humanReviewRequired": {"const": true},
+          "target": {
+            "type": "object",
+            "properties": {
+              "file": {"type": "string"},
+              "format": {"type": "string"},
+              "pointer": {"type": "string"}
+            },
+            "required": ["file", "format", "pointer"],
+            "additionalProperties": false
+          },
+          "proposal": {"type": "object", "additionalProperties": true},
+          "evidence": {"type": "array", "items": {"type": "object", "additionalProperties": true}},
+          "warnings": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "repositoryEvidence": {
+      "type": ["object", "null"],
+      "properties": {
+        "repoRoot": {"type": "string"},
+        "filesScanned": {"type": "integer", "minimum": 0},
+        "truncated": {"type": "boolean"},
+        "parseErrors": {"type": "array", "items": {"type": "object"}}
+      },
+      "required": ["repoRoot", "filesScanned", "truncated", "parseErrors"],
+      "additionalProperties": false
+    },
+    "guardrails": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "doesNotProve": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}
