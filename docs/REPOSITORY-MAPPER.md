@@ -58,26 +58,28 @@ Dynamic bracket routes, `getStaticPaths()` expansion, unresolved i18n/configurat
 
 ### `nextjs`
 
-Next.js v0.1 is intentionally narrower than a general Next.js parser. It supports **App Router source ownership only** and does not execute Next.js, React, Server Components, route handlers, middleware/proxy code, or application imports.
+Next.js v0.1 is intentionally narrower than a general Next.js parser. It supports **App Router source ownership only** and does not execute Next.js, React, Server Components, route handlers, proxy/middleware code, or application imports.
 
 Detection evidence:
 
 - `next.config.js|mjs|cjs|ts` and/or a `next` package dependency;
 - exactly one App Router source root: `app/` or `src/app/`.
 
-Static App Router page ownership is resolved only when the file path itself proves the public path:
+Static App Router page ownership is resolved only when the file path itself proves the route. Next.js defaults to the non-trailing-slash URL spelling, so without `trailingSlash: true`:
 
 ```text
-src/app/page.tsx                    → /
-src/app/about/page.tsx              → /about/
-src/app/(marketing)/pricing/page.tsx → /pricing/
+src/app/page.tsx                     → /
+src/app/about/page.tsx               → /about
+src/app/(marketing)/pricing/page.tsx → /pricing
 ```
+
+With literal `trailingSlash: true`, non-file page routes become `/about/`, `/pricing/`, and so on. Computed `trailingSlash` or `skipTrailingSlashRedirect` state fails closed because v0.1 will not guess the canonical route spelling.
 
 Route groups such as `(marketing)` do not become URL segments. Bracket routes such as `[locale]`, `[slug]` or catch-all segments remain `unresolved`; no concrete path is invented. Parallel/intercepting routing is also unresolved.
 
 The adapter records exact ancestor `layout.*`, `next.config.*` and `package.json` files in the page build path where present. It detects `generateMetadata()` but does **not** infer field-level metadata values from executable code.
 
-Root App Router metadata routes are source-owned directly:
+Root App Router metadata routes are source-owned directly when their output path is deterministic:
 
 ```text
 src/app/sitemap.ts  → /sitemap.xml
@@ -87,11 +89,15 @@ src/app/manifest.ts → /manifest.webmanifest
 
 `robots.ts` remains `policy-gated`. Mapping a crawler-policy source never turns it into an automatically mutable surface.
 
+A `sitemap.ts/js` exporting `generateSitemaps()` is not mapped to ordinary `/sitemap.xml`; Next.js generates ID-specific sitemap paths in that mode, so v0.1 records the sitemap surface as unresolved rather than inventing IDs.
+
 Routing fails closed when a critical value is not inspectable:
 
 - computed `basePath`;
+- computed/ambiguous trailing-slash behavior;
 - rewrites that can change public route interpretation;
 - dynamic/parallel/intercepting segments;
+- `generateSitemaps()` output IDs;
 - Pages Router-only repositories in v0.1.
 
 Redirects and response headers are recorded as warnings rather than executed. A literal configured `basePath` must agree with the requested site base path. Generated `.next/`, `out/`, `dist/`, `build/` and `.vercel/` output is excluded as source authority.
@@ -168,7 +174,7 @@ Only dependencies the adapter can establish without arbitrary target-code execut
 Mapped source-owned machine surfaces may include:
 
 - `robots.txt` / Next.js `robots.ts`;
-- sitemap XML / Next.js `sitemap.ts`;
+- sitemap XML / deterministic Next.js `sitemap.ts`;
 - `llms.txt` where the stack exposes an actual file-owned surface;
 - selected agent-discovery files;
 - OpenAPI descriptions;
@@ -207,6 +213,7 @@ The mapper deliberately does not claim general support for:
 - Next.js concrete expansion of bracket, parallel or intercepting routes;
 - Next.js field-level ownership produced by `generateMetadata()` or arbitrary Server Component execution;
 - Next.js rewrite/runtime semantics beyond preserving them as a blocker/warning;
+- Next.js `generateSitemaps()` ID expansion;
 - Docusaurus until its dedicated adapter has reproducible source-ownership evidence;
 - WordPress/Shopify/CMS content as local-file ownership;
 - Jekyll collection/post routing that needs unresolved config/plugin execution.
@@ -219,18 +226,20 @@ Dedicated CI covers:
 - Jekyll front-matter/build ownership;
 - Astro route/config/layout/public ownership and fail-closed boundaries;
 - Next.js App Router static page ownership;
+- Next.js default and `trailingSlash: true` URL normalization;
+- computed trailing-slash/base-path blocking;
 - Next.js route-group handling and dynamic route blocking;
-- Next.js computed base-path and rewrites blocking;
-- Next.js root metadata-route ownership;
-- Next.js policy boundary for `robots.ts`;
+- rewrites blocking;
+- deterministic root metadata-route ownership;
+- `generateSitemaps()` fail-closed behavior;
+- policy boundary for `robots.ts`;
 - Pages Router-only rejection and conflicting-framework detection;
 - deterministic no-op / reviewed grounding / digest-drift behavior for the Next.js transformation pack;
 - generated-output and symlink exclusion;
 - BraidGraph and mapped-transform preparation regression;
-- current ARWP GitHub Pages dogfood;
-- read-only live ownership dogfood against the owner-controlled `dkharlanau/ptichi-site` repository.
+- current ARWP GitHub Pages dogfood.
 
-The Ptichi dogfood proves source ownership only. It does not mutate Ptichi, does not claim ranking impact and does not turn unresolved locale routes into inferred routes.
+The adapter was additionally checked against the current owner-controlled private `dkharlanau/ptichi-site` repository through the connected GitHub integration during development: its root `sitemap.ts`, `robots.ts` and `manifest.ts` ownership is inspectable while locale bracket routes remain unresolved. That private source is deliberately **not** copied into ARWP fixtures and ARWP CI does not request cross-repository secrets.
 
 ## Guardrails
 
@@ -238,6 +247,7 @@ The Ptichi dogfood proves source ownership only. It does not mutate Ptichi, does
 - ambiguity and unsupported runtime state remain explicit;
 - generated output is not preferred over source;
 - policy/editorial decisions remain gated;
+- private target source is not copied into public fixtures merely to make CI convenient;
 - no ranking, recommendation or AI-citation guarantee follows from a successful map.
 
 ## Next adapters
