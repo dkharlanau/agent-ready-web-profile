@@ -1,15 +1,40 @@
 {
-  "version": "0.1",
-  "lastReviewed": "2026-09-05",
+  "version": "0.2",
+  "lastReviewed": "2026-09-07",
   "canonicalMediaPage": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
   "defaultLicense": "CC-BY-4.0",
   "rightsManifest": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
-  "attribution": "Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/",
-  "assets": [],
+  "attribution": "Source: SiteCurrent / Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/",
+  "assets": [
+    {
+      "id": "sitecurrent-mark",
+      "title": "SiteCurrent current-node mark",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/sitecurrent-mark.svg",
+      "mediaType": "image/svg+xml",
+      "license": "CC-BY-4.0",
+      "sourcePage": "https://dkharlanau.github.io/agent-ready-web-profile/product/",
+      "alt": "SiteCurrent logo mark: two directional current strokes around a stable website node",
+      "reviewedAt": "2026-09-07",
+      "sha256": "1b11ebb65bde523cf9b70e6fd80fd70d1d5babc57ab68d39cde01da0aa425412",
+      "thirdPartyContent": false
+    },
+    {
+      "id": "sitecurrent-lockup",
+      "title": "SiteCurrent product lockup",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/media/sitecurrent-lockup.svg",
+      "mediaType": "image/svg+xml",
+      "license": "CC-BY-4.0",
+      "sourcePage": "https://dkharlanau.github.io/agent-ready-web-profile/product/",
+      "alt": "SiteCurrent wordmark with current-node mark and Adaptive Website Improvement descriptor",
+      "reviewedAt": "2026-09-07",
+      "sha256": "e28164a56429bfc6580b3d16241bfeb8201ffd196f9d9e79c7214a74dbda2585",
+      "thirdPartyContent": false
+    }
+  ],
   "plannedAssetFamilies": [
     {
-      "id": "brand-marks",
-      "purpose": "Press/news/project identification",
+      "id": "brand-variants",
+      "purpose": "Dark, light and compact SiteCurrent brand variants",
       "formats": ["svg", "png"],
       "variants": ["dark", "light", "transparent"]
     },
@@ -35,7 +60,7 @@
     },
     {
       "id": "product-screenshots",
-      "purpose": "Current public site/resolver screenshots for editorial use",
+      "purpose": "Current public SiteCurrent/ARWP product screenshots for editorial use",
       "formats": ["png"]
     }
   ],
@@ -52,5 +77,5 @@
     "sha256 when generated/released",
     "thirdPartyContent=false unless separately cleared"
   ],
-  "note": "The catalog intentionally lists no asset as available until the corresponding file is actually published and reviewed."
+  "note": "SiteCurrent is the product brand; Agent-Ready Web Profile (ARWP) remains the technical project and package identity."
 }
