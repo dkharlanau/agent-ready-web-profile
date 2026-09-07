@@ -46,6 +46,29 @@ Reference profiles and examples must distinguish:
 
 Do not upgrade a capability on paper.
 
+## Search/data disclosure gate
+
+Before adding Search Maturity observations, experiments, datasets, automation or a new technical mechanism, classify the work **before merge**. Public documentation should describe the boundary without requiring private implementation details.
+
+Allowed disclosure classes are:
+
+- **open-core / public methodology** — schemas, validators, transparent cohort math, basic CLI, interoperability contracts and deliberately limited reviewed/synthetic fixtures needed for adoption;
+- **commercial/private** — continuously refreshed query/SERP/AI observations, private competitor cohorts, longitudinal outcome history, large negative-results sets, owner-data connectors, portfolio monitoring and learned recommendation priors;
+- **confidential R&D** — a genuinely novel similarity, attribution, decision or transformation mechanism that should remain undisclosed until an explicit IP decision is made;
+- **defensive publication** — a mechanism intentionally published to establish public prior art rather than kept confidential or pursued for patent protection.
+
+Ask these questions before publishing:
+
+1. Is the material already public/common knowledge, or is it needed for open interoperability/adoption?
+2. Does it contain a refreshed/live corpus, private query set, competitor cohort, owner-only measurement, large negative-results set or operational know-how?
+3. Does it reveal learned priors, recommendation ranking logic or cross-site outcome history that can remain behind a public interface?
+4. Could it contain a novel technical mechanism that merits confidential/IP review before disclosure?
+5. Is publication intentional, and is Apache-2.0 the intended grant for this contribution?
+
+For Search Intervention records, `public-methodology` and `public-fixture` must keep `containsLiveCorpus:false` and `containsLearnedPriors:false`. Use synthetic or deliberately limited reviewed fixtures for OSS tests. Real dogfood evidence belongs in the target's private evidence store unless there is an explicit publication decision.
+
+If classification is uncertain, do not include the sensitive implementation/data in the public PR. The public issue may describe the interface, problem and review gate without candidate patent claims or confidential algorithms.
+
 ## Schema changes
 
 A core schema change should include:
@@ -97,6 +120,14 @@ npm install
 npm test
 ```
 
+For Search Maturity / intervention changes also run:
+
+```bash
+node benchmarks/search-maturity-test.mjs
+node benchmarks/search-intervention-test.mjs
+node bin/arwp-search-intervention.mjs check benchmarks/search-intervention/example-public-safe.json
+```
+
 For live verification of the reference suite:
 
 ```bash
@@ -118,3 +149,5 @@ Experimental upstream technologies must be labelled as experimental when that st
 ## Licensing
 
 Unless explicitly stated otherwise, contributions intentionally submitted to this repository are accepted under the Apache License 2.0, consistent with the repository `LICENSE`.
+
+That license applies to material intentionally published here. Do not submit confidential R&D, private owner evidence or proprietary live corpora merely because an interface/schema referring to them is public.
