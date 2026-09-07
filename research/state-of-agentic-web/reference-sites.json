@@ -1,0 +1,80 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "purpose": "Owner-controlled reference cohort for comparing ARWP observations across the user's own public sites without mixing those observations into the independent State of the Agentic Web aggregate.",
+  "aggregatePolicy": {
+    "ownerControlled": true,
+    "includedInIndependentAggregate": false,
+    "comparisonOnly": true,
+    "siteHistoryTreatedAsContext": true,
+    "noRankingCausality": true,
+    "negativeAndMissingResultsRetained": true
+  },
+  "comparisonDimensions": [
+    "growth-plan debt and resolution",
+    "search-surface and entity evidence",
+    "agent discovery and interoperability evidence",
+    "owner visibility evidence when available",
+    "implementation velocity over time"
+  ],
+  "sites": [
+    {
+      "id": "arwp-self-reference",
+      "name": "Agent Ready Web Profile",
+      "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+      "repository": "dkharlanau/agent-ready-web-profile",
+      "baselineClass": "existing-site",
+      "comparisonRole": "protocol-rich self-dogfood reference"
+    },
+    {
+      "id": "dkharlanau-sap-knowledge",
+      "name": "Dzmitryi Kharlanau — SAP Knowledge",
+      "canonicalUrl": "https://dkharlanau.github.io/",
+      "repository": "dkharlanau/dkharlanau.github.io",
+      "baselineClass": "existing-site",
+      "comparisonRole": "mature knowledge and professional reference"
+    },
+    {
+      "id": "metkagram-language-knowledge",
+      "name": "Metkagram",
+      "canonicalUrl": "https://metkagram.github.io/",
+      "repository": "metkagram/metkagram.github.io",
+      "baselineClass": "existing-site",
+      "comparisonRole": "software, documentation and research reference"
+    },
+    {
+      "id": "brali-practical-knowledge",
+      "name": "Brali Practical Knowledge Library",
+      "canonicalUrl": "https://brali-lifeos.github.io/",
+      "repository": "Brali-LifeOS/brali-lifeos.github.io",
+      "baselineClass": "existing-site",
+      "comparisonRole": "editorial and documentation reference"
+    },
+    {
+      "id": "cognitive-biases-knowledge",
+      "name": "Cognitive Biases Knowledge Library",
+      "canonicalUrl": "https://cognitive-biases.github.io/",
+      "repository": "Cognitive-Biases/cognitive-biases.github.io",
+      "baselineClass": "existing-site",
+      "comparisonRole": "knowledge and research-dataset reference"
+    },
+    {
+      "id": "cbt-cards-public-reflection",
+      "name": "CBT Cards Public Reflection Resource",
+      "canonicalUrl": "https://cbt-cards.github.io/",
+      "repository": "CBT-cards/cbt-cards.github.io",
+      "baselineClass": "existing-site",
+      "comparisonRole": "editorial reference"
+    },
+    {
+      "id": "ptichi-fresh-site",
+      "name": "Ptichi",
+      "canonicalUrl": "https://ptichi.com/",
+      "repository": "dkharlanau/ptichi-site",
+      "baselineClass": "new-site",
+      "firstPublicEvidenceAt": "2026-09-05",
+      "comparisonRole": "fresh-domain baseline for observing early Search, AI-discovery and agent-readiness trajectory",
+      "note": "Ptichi is intentionally useful as a fresh-site control because it has very little accumulated site history. Do not interpret later movement as caused by ARWP without independent evidence."
+    }
+  ]
+}
