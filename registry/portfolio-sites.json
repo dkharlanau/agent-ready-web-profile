@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-sites.schema.json",
   "version": "0.1",
-  "updatedAt": "2026-09-06",
+  "updatedAt": "2026-09-07",
   "description": "Owner-controlled rollout portfolio for applying reviewed ARWP Growth trends to relevant websites. Membership is operational metadata, not independent adoption evidence or a quality ranking.",
   "guardrails": {
     "ownerControlledEvidence": true,
@@ -19,6 +19,15 @@
       "verticals": ["documentation", "editorial", "software-product"],
       "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-usability", "agent-discovery"],
       "rollout": { "enabled": true, "mode": "managed-issue" }
+    },
+    {
+      "id": "ptichi-fresh-site",
+      "name": "Ptichi",
+      "canonicalUrl": "https://ptichi.com/",
+      "repository": "dkharlanau/ptichi-site",
+      "verticals": ["software-product", "documentation", "editorial", "research-dataset"],
+      "goals": ["search", "generative-search", "ai-citations", "acquisition", "measurement", "agent-usability", "agent-discovery"],
+      "rollout": { "enabled": true, "mode": "proposal-only" }
     },
     {
       "id": "metkagram-language-knowledge",
