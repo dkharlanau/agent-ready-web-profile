@@ -9,6 +9,7 @@ on:
       - 'registry/growth-verticals.json'
       - 'schema/portfolio-sites.schema.json'
       - 'lib/portfolio-rollout.mjs'
+      - 'lib/portfolio-proposals.mjs'
       - 'bin/arwp-portfolio.mjs'
       - 'scripts/portfolio-rollout-test.mjs'
       - 'docs/PORTFOLIO-ROLLOUT.md'
@@ -21,6 +22,7 @@ on:
       - 'registry/growth-verticals.json'
       - 'schema/portfolio-sites.schema.json'
       - 'lib/portfolio-rollout.mjs'
+      - 'lib/portfolio-proposals.mjs'
       - 'bin/arwp-portfolio.mjs'
       - 'scripts/portfolio-rollout-test.mjs'
       - 'docs/PORTFOLIO-ROLLOUT.md'
@@ -47,6 +49,7 @@ jobs:
           node scripts/portfolio-rollout-test.mjs
           node bin/arwp-portfolio.mjs check
           node --check lib/portfolio-rollout.mjs
+          node --check lib/portfolio-proposals.mjs
           node --check bin/arwp-portfolio.mjs
           node --check scripts/portfolio-rollout-test.mjs
           node -e "JSON.parse(require('fs').readFileSync('schema/portfolio-sites.schema.json','utf8')); JSON.parse(require('fs').readFileSync('registry/portfolio-sites.json','utf8'));"
@@ -62,10 +65,28 @@ jobs:
           const managed = new Set(p.candidates.filter(item => item.rolloutMode === 'managed-issue').map(item => item.siteId));
           if (!managed.has('dkharlanau-sap-knowledge') || !managed.has('metkagram-language-knowledge') || !managed.has('cognitive-biases-knowledge')) throw new Error('managed rollout sites missing');
           NODE
+      - name: Verify deterministic review-only proposals
+        run: |
+          node bin/arwp-portfolio.mjs propose --json --output=portfolio-proposals.json
+          node bin/arwp-portfolio.mjs propose --site=unknown-owner/unknown-site --json --output=portfolio-unknown.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('portfolio-proposals.json','utf8'));
+          if (!p.proposals.length) throw new Error('expected target-specific proposals');
+          if (p.guardrails.githubMutationAllowed !== false || p.guardrails.productionMutationAllowed !== false) throw new Error('proposal bundle crossed mutation boundary');
+          if (p.proposals.some(item => item.delivery.githubMutationAllowed !== false || item.delivery.productionMutationAllowed !== false)) throw new Error('proposal delivery crossed mutation boundary');
+          if (p.proposals.some(item => !item.suggestedIssue?.title || !item.suggestedIssue?.body)) throw new Error('proposal missing review issue artifact');
+          const unknown = JSON.parse(fs.readFileSync('portfolio-unknown.json','utf8'));
+          if (unknown.proposals.length !== 0) throw new Error('unknown target must not receive a generic proposal');
+          if (unknown.unknownTargets.join(',') !== 'unknown-owner/unknown-site') throw new Error('unknown target was not reported explicitly');
+          NODE
       - name: Upload rollout evidence
         uses: actions/upload-artifact@v6
         with:
           name: arwp-portfolio-rollout
-          path: portfolio-rollout.json
+          path: |
+            portfolio-rollout.json
+            portfolio-proposals.json
+            portfolio-unknown.json
           if-no-files-found: error
           retention-days: 30
