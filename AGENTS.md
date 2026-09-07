@@ -1,12 +1,13 @@
 # Agent-Ready Web Profile — agent instructions
 
-ARWP has three connected layers:
+ARWP has four connected layers:
 
 1. **Growth Loop — primary operational workflow.** Research current Search/recommendation/AI changes, classify the evidence, turn applicable mechanisms into explicit hypotheses, inspect a target website, implement the highest-confidence changes, verify them and measure owner-side outcomes.
-2. **Future Search Lab — governed experimental workflow.** After current foundations are healthy, explore truthful open-web semantics, entity/evidence graphs, retrieval feedback and browser-agent operability that may matter to future Search/AI systems even when no current ranking benefit is documented.
-3. **Resolver / interoperability foundation.** Discover how a public website can actually be read, searched or operated by agents without requiring universal adoption of an ARWP-specific manifest.
+2. **Search Maturity Benchmark — governed reference-comparison workflow.** Observe currently visible independent pages for a real intent, profile only evidence that was actually reviewed, identify repeated cohort patterns and compare those patterns with a target site without relabeling correlations as ranking factors.
+3. **Future Search Lab — governed experimental workflow.** After current foundations are healthy, explore truthful open-web semantics, entity/evidence graphs, retrieval feedback and browser-agent operability that may matter to future Search/AI systems even when no current ranking benefit is documented.
+4. **Resolver / interoperability foundation.** Discover how a public website can actually be read, searched or operated by agents without requiring universal adoption of an ARWP-specific manifest.
 
-The optional publisher profile, Resolver, scanner, benchmarks, gateways, evidence receipts and protocol work remain supported. The broader future-search scope does not license speculative ranking claims or indiscriminate metadata growth.
+The optional publisher profile, Resolver, scanner, benchmarks, gateways, evidence receipts and protocol work remain supported. The broader Search/Future scope does not license speculative ranking claims or indiscriminate metadata growth.
 
 ## Install and verify
 
@@ -18,6 +19,8 @@ node scripts/growth-hypotheses-test.mjs
 node bin/arwp-hypotheses.mjs check
 node bin/arwp-trends.mjs check
 node scripts/future-search-test.mjs
+node benchmarks/search-maturity-test.mjs
+node bin/arwp-search-maturity.mjs check benchmarks/search-maturity/pilot-2026-09-07.json
 node scripts/maturity-profile-test.mjs --site
 node bin/arwp-maturity.mjs check docs/maturity/profile.json
 ```
@@ -25,6 +28,7 @@ node bin/arwp-maturity.mjs check docs/maturity/profile.json
 ## Agent Skills routing
 
 - `arwp-growth-loop` — **default for Search growth, Discover/recommendations, generative Search/AI citations, current platform adaptation or ongoing website improvement.**
+- `arwp-search-maturity` — competitive/reference reverse-engineering, high-visibility reference cohorts, fast-riser analysis and evidence-bearing target-vs-reference gaps.
 - `arwp-prepare-site` — initial technical preparation/adoption of an existing website repository.
 - `arwp-adaptive-upgrade` — compile applicable current evidence into target-specific change contracts.
 - `arwp-target-transformation` — resolve grounded upgrades to exact target files and reviewable deterministic changes.
@@ -53,11 +57,27 @@ Keep these layers distinct:
 - `registry/search-agent-recommendations.json` — dated upstream current rules;
 - `registry/trends.json` — WATCH/ADOPT/MEASURED upstream changes;
 - `registry/growth-hypotheses.json` — why a current change might matter and how to test it;
+- `benchmarks/search-maturity/` — timestamped independent/reference observations and observable feature evidence;
 - `registry/future-search-experiments.json` — governed future-ready mechanisms whose value may be interoperability/retrieval rather than a documented ranking feature;
 - `lib/growth-profile.mjs` / `lib/growth-plan.mjs` — real-site observations/actions;
 - owner-side measurements / ledgers — outcome evidence.
 
-A trend does not automatically become a hypothesis. A hypothesis does not automatically become a site action. A future-search experiment does not automatically become a requirement. A site action does not automatically become a success claim.
+A trend does not automatically become a hypothesis. A hypothesis does not automatically become a site action. A repeated reference-cohort feature does not automatically become a ranking factor. A future-search experiment does not automatically become a requirement. A site action does not automatically become a success claim.
+
+## Search Maturity rules
+
+1. Use `arwp-search-maturity` when the question is what currently visible pages/sites systematically do differently from a target site.
+2. Define a real query/intent family before selecting reference pages. Do not build a cohort from unrelated famous domains.
+3. Timestamp every visibility observation and record the actual provider/surface. Do not call generic web-search order a Google/Bing rank.
+4. A numeric `rank` requires explicit `rankEvidence`. Publication date plus observation time is age-at-retrieval, not time-to-rank/index.
+5. Review only observable dimensions. Missing/unreviewed dimensions remain `unknown`; they are not failures or zeros.
+6. Keep `documented-platform`, `observed-correlation`, `experiment` and `unknown` separate. Correlation cannot silently become causality.
+7. Prefer distributions and repeated patterns over one composite maturity/readiness score.
+8. Separate `ownership=independent` references from `ownership=project-reference` dogfood sites.
+9. Do not copy competitor prose, design, assets, author constructs, fake freshness, link patterns or page factories. Reproduce only underlying user/evidence value when independently justified.
+10. Route accepted target gaps through the normal Growth/Upgrade/Transformation/Proof gates, then measure Search, AI retrieval/citation, referral and business outcomes separately.
+11. Preserve misses, counterexamples and negative before/after results; do not curate the corpus only to support a preferred theory.
+12. Keep proprietary refreshed cohorts, learned priors and genuinely novel confidential R&D out of the public repo when an explicit commercial/IP boundary requires it.
 
 ## Future Search rules
 
@@ -96,10 +116,12 @@ Use `arwp-maturity` through `node bin/arwp-maturity.mjs` for scoped local checks
 
 ## Public surfaces
 
-Keep `docs/` synchronized where applicable, especially Growth, Future Search, Trends, Recommendations, Skills, agent instructions, sitemap, machine-readable product/profile surfaces, Trust and Observatory artifacts. Keep the Maturity evidence pack, DataCatalog and Measurement definitions linked from Trust and their source pages when changed.
+Keep `docs/` synchronized where applicable, especially Growth, Search Maturity, Future Search, Trends, Recommendations, Skills, agent instructions, sitemap, machine-readable product/profile surfaces, Trust and Observatory artifacts. Keep the Maturity evidence pack, DataCatalog and Measurement definitions linked from Trust and their source pages when changed.
 
 Do not add obsolete `<meta name="keywords">`. Do not claim special AI files or the optional semantic index are Google ranking requirements.
 
-## Security
+## Security and disclosure
 
 Do not bypass access controls or automate side-effectful agent actions from discovery metadata. Do not put credentials, cookies or private URLs in fixtures/receipts. Runtime evidence remains opt-in and scoped.
+
+Before publishing a potentially novel technical mechanism, ask whether the detailed algorithm belongs in open core, hosted/private implementation, confidential R&D or intentional defensive publication. Do not publish candidate patent claims or confidential learned priors just to document progress.
