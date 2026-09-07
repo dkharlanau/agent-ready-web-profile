@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { validateBraidGraph, impactBraidGraph, missingBraidEvidence } from '../lib/braid-graph.mjs';
+import { validateBraidGraph, findBraidNode, impactBraidGraph, missingBraidEvidence } from '../lib/braid-graph.mjs';
 import { enrichBraidHistory, revisionDigest } from '../lib/braid-history.mjs';
 
 const sourceId = 'source:current-guidance:111111111111';
@@ -157,11 +157,20 @@ assert.equal(enriched.nodes.filter(node => node.state === 'superseded').length, 
 assert.equal(enriched.nodes.filter(node => node.type === 'rule' && node.state === 'review-due').length, 1);
 assert.equal(enriched.nodes.find(node => node.id === measurementId).state, 'negative');
 
+// Human selectors must resolve the current version even though historical nodes keep the same rule/source identity.
+assert.equal(findBraidNode(enriched, { rule: 'canonical-discovery' })?.id, ruleId);
+assert.equal(findBraidNode(enriched, { source: 'https://example.org/guidance' })?.id, sourceId);
+
 const ruleImpact = impactBraidGraph(enriched, { rule: 'canonical-discovery' });
 assert.ok(ruleImpact.affected.nodes.some(node => node.type === 'recommendation'));
 assert.ok(ruleImpact.affected.nodes.some(node => node.type === 'transform'));
 assert.ok(ruleImpact.affected.nodes.some(node => node.type === 'measurement' && node.state === 'negative'));
 assert.ok(ruleImpact.affected.nodes.some(node => node.type === 'rule' && node.state === 'superseded'));
+
+const sourceImpact = impactBraidGraph(enriched, { source: 'https://example.org/guidance' });
+assert.ok(sourceImpact.affected.nodes.some(node => node.id === ruleId));
+assert.ok(sourceImpact.affected.nodes.some(node => node.type === 'source' && node.state === 'superseded'));
+assert.ok(sourceImpact.affected.nodes.some(node => node.type === 'recommendation'));
 
 const missing = missingBraidEvidence(enriched);
 assert.equal(missing.missingVerification, 1);
