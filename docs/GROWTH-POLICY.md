@@ -80,7 +80,7 @@ It does not directly overwrite `robots.txt` or any production file.
 
 ## Site classes and vertical evidence
 
-The current registry (`registry/growth-verticals.json`, v0.2) separates:
+The current registry (`registry/growth-verticals.json`, v0.3) separates:
 
 - `documentation`;
 - `editorial`;
@@ -90,7 +90,7 @@ The current registry (`registry/growth-verticals.json`, v0.2) separates:
 - `research-dataset`;
 - `general`.
 
-A vertical is a scope filter, not an industry score. Each vertical now carries concrete expected evidence checks rather than only prose focus areas.
+A vertical is a scope filter, not an industry score. Each vertical carries concrete expected evidence checks rather than only prose focus areas.
 
 `arwp-growth --vertical=...` evaluates those checks using a bounded relevant-surface sample selected from the canonical entry page and canonical-path sitemap. The adapter may inspect product, changelog, docs, methodology, dataset, citation or similar relevant URLs when they are actually discoverable, rather than assuming the homepage contains every signal.
 
@@ -108,9 +108,12 @@ Current remediation boundary:
 
 - software-product, research-dataset and documentation checks can generate guarded vertical backlog items when bounded evidence is concretely partial/missing;
 - editorial authorship/dates are observable, but first-hand quality remains manual;
-- commerce Product/Offer and policy links are observable, while Merchant/feed freshness stays owner-side;
-- LocalBusiness/address/contact can be observed publicly, while external Business Profile state stays owner-side;
+- commerce Product/Offer and policy links are observable; Merchant Center page/feed parity is an explicit owner-data gate;
+- LocalBusiness/address/contact can be observed publicly; Google Business Profile parity is an explicit owner-data gate;
+- UCP discovery is checked at the origin-level `/.well-known/ucp` path only for declared agentic-commerce interoperability; a 404 is not a defect and ARWP never invokes checkout from discovery;
 - absence of an API/agent interface never tells ARWP to invent one.
+
+Owner receipts remain provider- and kind-scoped. The commerce gate requires fresh `google-merchant-center / product-page-data-parity` evidence with `value=aligned`. The local-business gate requires fresh `google-business-profile / profile-site-parity` evidence with `value=consistent`. Search Console data cannot substitute for Merchant Center state, and a public website crawl cannot substitute for authenticated Business Profile state.
 
 A missing signal in the bounded sample is not proof of whole-site absence. Every generated vertical action therefore requires checking the relevant canonical surface before editing content or structured data.
 
