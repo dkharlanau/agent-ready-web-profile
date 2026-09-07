@@ -1,11 +1,12 @@
 # Agent-Ready Web Profile
 
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
+[![Adaptive Site Upgrade validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
-**Research what can improve a website's Search and recommendation visibility, turn it into explicit hypotheses, implement the highest-confidence changes, verify them, and measure what actually happened.**
+**Research what can improve a website's Search and recommendation visibility, detect what actually applies to the target site, compile exact changes, verify them, and measure what happened.**
 
-ARWP keeps its existing agentic-web Resolver, publisher profile, scanner, protocol work, benchmarks and evidence tooling. The product focus is now broader: use that technical foundation inside a repeatable website Growth Loop for Search, generative Search, recommendations/citation surfaces and compatible agents.
+ARWP keeps its existing agentic-web Resolver, publisher profile, scanner, protocol work, benchmarks and evidence tooling. The product focus is broader: use that technical foundation inside a continuously refreshed website Growth Loop that can tell an implementation agent not only **what is missing**, but **what to change, where, why, how to verify it, and what evidence to measure afterwards**.
 
 ```text
 PRIMARY-SOURCE RESEARCH
@@ -16,17 +17,21 @@ EVIDENCE CLASSIFICATION
         ↓
  GROWTH HYPOTHESES
         ↓
-SITE BASELINE + CHECKLIST
+SITE BASELINE + VERTICAL EVIDENCE
+        ↓
+ADAPTIVE SITE UPGRADE GRAPH
+        ↓
+ EXACT TARGETS + CHANGE RECIPES
         ↓
  IMPLEMENT → VERIFY → MEASURE
         ↓
    EXPERIMENT REVIEW
         ↓
 KEEP / REVISE / REVERT / RETIRE
-        └───────────────↺
+        └────────────────────────↺
 ```
 
-ARWP does **not** promise ranking, Discover placement, AI citation, recommendation traffic or conversion. The goal is to make website improvement more evidence-backed, testable and adaptive instead of accumulating SEO/GEO cargo cult.
+ARWP does **not** promise ranking, Discover placement, AI citation, recommendation traffic or conversion. The goal is to make website improvement more evidence-backed, target-specific, testable and adaptive instead of accumulating SEO/GEO cargo cult.
 
 ## Product layers
 
@@ -36,11 +41,14 @@ ARWP does **not** promise ranking, Discover placement, AI citation, recommendati
 - **Recommendations Registry** records dated upstream requirements, guidance, features and measurement opportunities.
 - **Growth Hypotheses** state why a change may matter, where it applies, how to check it and what success signal to observe.
 - **Growth Profile** audits a real site and produces a prioritized P0–P3 backlog.
-- **Safe Remediation** turns that backlog into proposal-only implementation manifests with bounded snippets and explicit human review gates.
+- **Adaptive Site Upgrade Engine** compiles current Growth evidence into dependency-aware target-site change recipes with exact surfaces, automation class, source freshness, verification contracts and measurement signals.
+- **Safe Remediation** turns the backlog into proposal-only implementation manifests with bounded snippets and explicit human review gates.
 - **Growth History + Experiments** preserve implementation-state changes and link hypotheses/actions to before/after evidence.
 - **Owner Evidence Imports** normalize Google generative Search, Bing AI Performance and AI/referral exports into aggregate visibility snapshots.
 - **Trend Learning** creates review-required `WATCH → ADOPT` and evidence-gated `ADOPT → MEASURED` proposals without silently changing maturity.
-- **Agent Skills** let coding agents research, edit the target repository, verify checks and preserve evidence.
+- **Agent Skills** let coding agents research, classify, compile upgrades, edit the target repository, verify checks and preserve evidence.
+
+The intelligence itself is versioned. Adaptive upgrade packs carry `sourceReviewedAt` and `reviewAfterDays`; stale advice becomes `review-due` instead of silently remaining a permanent recommendation.
 
 ### 2. Resolver — interoperability foundation
 
@@ -66,6 +74,22 @@ node bin/arwp-hypotheses.mjs list --vertical=editorial
 # What should this real site do now?
 node bin/arwp-growth.mjs https://example.com --vertical=editorial --json > growth.json
 
+# Audit + compile exact target-site upgrades in one pass.
+node bin/arwp-growth.mjs https://example.com \
+  --vertical=research-dataset \
+  --upgrade \
+  --goals=search,generative-search,ai-citations,measurement
+
+# Compile an existing Growth Plan into an upgrade graph.
+node bin/arwp-upgrade.mjs compile growth.json \
+  --verticals=editorial \
+  --goals=search,generative-search,ai-citations,measurement \
+  --output=upgrade.json
+
+# Model which known implementation gaps selected upgrades would address.
+node bin/arwp-upgrade.mjs simulate upgrade.json \
+  --accept=foundation,citation-ready-content
+
 # Turn the backlog into a proposal-only implementation manifest.
 node bin/arwp-growth-remediation.mjs growth.json --output=remediation.json
 
@@ -81,7 +105,31 @@ node bin/arwp-trends.mjs propose trend-watch.json --output=trend-promotions.json
 node bin/arwp-trends.mjs measure experiments/ --output=trend-measurement.json
 ```
 
-The Growth JSON carries both the actionable backlog and the applicable non-experimental `hypothesisProgram`. The remediation manifest never edits the target repository: robots policy, structured data, editorial content and authenticated owner controls remain explicit review boundaries.
+The Growth JSON carries both the actionable backlog and the applicable non-experimental `hypothesisProgram`. The Adaptive Upgrade Graph adds the implementation contract: exact targets, recipes, dependencies, knowledge freshness, verification and measurement. Remediation and upgrade planning do not by themselves authorize unsafe production mutation: robots policy, structured data truth, editorial content and authenticated owner controls remain explicit review boundaries.
+
+## Adaptive Site Upgrade Engine
+
+Canonical intelligence: [`registry/adaptive-upgrade-packs.json`](registry/adaptive-upgrade-packs.json)
+
+Product model:
+
+```text
+upstream evidence
+  ↔ rule freshness/history
+  ↔ target-site classification
+  ↔ applicability
+  ↔ exact change recipe
+  ↔ repository/site surface
+  ↔ verification
+  ↔ owner/runtime outcome evidence
+  ↔ next experiment
+```
+
+Current packs cover Search/generative eligibility, citation-ready content, identity/provenance, ChatGPT Search policy, browser-agent accessibility, real dataset publication and DOI lifecycle, Preferred Sources, Google generative Search measurement, Bing citation/grounding-query/intent/topic/Citation Share feedback, content-use policy, real agent interfaces and the change-evidence loop.
+
+A real reusable corpus can activate `dataset-publication-pid`; an ordinary website should not manufacture a dataset or DOI to satisfy the profile. A software product can activate agent-operability work; a static article library should not be told to expose fake tools.
+
+See [`docs/ADAPTIVE-SITE-UPGRADE.md`](docs/ADAPTIVE-SITE-UPGRADE.md).
 
 ## Growth hypotheses
 
@@ -119,9 +167,9 @@ arwp-growth-loop
 
 It runs:
 
-`research → classify → baseline → hypothesis → implement → verify → measure → keep/revise/revert`
+`research → classify → baseline → hypothesis → upgrade graph → implement → verify → measure → keep/revise/revert`
 
-Use `arwp-prepare-site` for initial technical adoption. Specialists remain available for content quality, agent discovery and evidence/CI.
+Use `arwp-adaptive-upgrade` when the site has already been inspected and the next job is to turn evidence into exact changes. Use `arwp-prepare-site` for initial technical adoption. Specialists remain available for content quality, genuine dataset publication, agent discovery and evidence/CI.
 
 ## What the Growth layer covers
 
@@ -133,9 +181,11 @@ Use `arwp-prepare-site` for initial technical adoption. Specialists remain avail
 - image/video evidence and Discover-friendly previews where relevant;
 - bounded acquisition features such as Preferred Sources where applicable;
 - OAI-SearchBot and provider-specific crawler/access policy without conflating Search and model training;
+- semantic accessibility and runtime evidence for interactive browser agents where relevant;
+- genuine dataset release identity, methodology, versioning, checksums and verified persistent identifiers when a real corpus exists;
 - Google/Bing/ChatGPT owner-side measurement inputs;
 - truthful agent-readable routes and runtime interfaces;
-- governance against fake freshness and speculative protocol adoption.
+- governance against fake freshness, speculative protocol adoption and stale best-practice advice.
 
 Manual editorial quality stays manual. Authenticated platform metrics stay external-owner-data. Experimental mechanisms stay experimental.
 
@@ -143,6 +193,7 @@ Manual editorial quality stays manual. Authenticated platform metrics stay exter
 
 - [`templates/growth/growth-loop-checklist.md`](templates/growth/growth-loop-checklist.md) — baseline/completion review.
 - [`templates/growth/hypothesis-ledger.md`](templates/growth/hypothesis-ledger.md) — lightweight before/after evidence and keep/revise/revert decisions.
+- `arwp-upgrade` — target-specific evidence-to-change graph plus implementation-debt simulation.
 - `arwp-growth-history` — immutable implementation-state snapshots and diffs.
 - `arwp-growth-experiment` — versioned hypothesis → action → implementation → outcome records.
 - `arwp-growth-remediation` — proposal-only implementation manifests with shipped-template SHA-256 provenance and no target-repository writes.
@@ -193,7 +244,8 @@ The bounded hosted scanner/resolver service, MCP gateway, federation/router, sna
 - new drafts and vendor mechanisms keep their actual maturity level;
 - source-watch candidates are not recommendations;
 - reviewed Trend proposals do not silently mutate `registry/trends.json`;
-- generated remediation manifests never authorize publication or repository mutation;
+- generated remediation manifests and upgrade graphs never authorize unsafe production mutation;
+- a DOI is a persistent citation identifier, not a ranking factor or quality certificate;
 - negative benchmark/experiment results must remain visible.
 
 The frozen Resolver decision-quality corpus and benchmark tooling remain in [`benchmarks/`](benchmarks/). See [`docs/BENCHMARK.md`](docs/BENCHMARK.md).
@@ -202,23 +254,29 @@ The frozen Resolver decision-quality corpus and benchmark tooling remain in [`be
 
 Primary product North Star:
 
-> **How reliably can ARWP turn current Search/recommendation/AI platform changes into site-specific, verified improvements with measurable follow-up evidence?**
+> **How reliably can ARWP turn current Search/recommendation/AI platform changes into the right site-specific changes, verify them, and connect them to measurable follow-up evidence?**
+
+Upgrade-engine North Star:
+
+> **How much target-site implementation debt can ARWP correctly address without generic advice, invented facts, stale rules or unsafe mutation?**
 
 Technical foundation North Star:
 
 > **How many external sites can the Resolver correctly understand and route without site-specific integration code?**
 
-The Growth Loop and Resolver support each other: research tells a publisher what to improve; the Resolver/evidence stack prevents the agent-facing side from becoming speculative metadata.
+The Growth Loop, Adaptive Upgrade Engine and Resolver support each other: research tells a publisher what changed; the upgrade graph converts applicable evidence into concrete work; the Resolver/evidence stack prevents the agent-facing side from becoming speculative metadata.
 
 ## Key docs
 
 - [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) — operating model.
+- [`docs/ADAPTIVE-SITE-UPGRADE.md`](docs/ADAPTIVE-SITE-UPGRADE.md) — evidence-to-change engine and commercial product direction.
 - [`docs/GROWTH-LEARNING.md`](docs/GROWTH-LEARNING.md) — owner evidence and Trend lifecycle review.
 - [`docs/GROWTH-PROFILE.md`](docs/GROWTH-PROFILE.md) — planner and priorities.
 - [`docs/GROWTH-REMEDIATION.md`](docs/GROWTH-REMEDIATION.md) — proposal-only patch/snippet boundary.
 - [`docs/TREND-RADAR.md`](docs/TREND-RADAR.md) — change lifecycle.
 - [`docs/TREND-HISTORY.md`](docs/TREND-HISTORY.md) — immutable Trend snapshots/diffs.
 - [`docs/SEARCH-AGENT-RECOMMENDATIONS.md`](docs/SEARCH-AGENT-RECOMMENDATIONS.md) — dated upstream rules.
+- [`docs/DATASET-PUBLICATION.md`](docs/DATASET-PUBLICATION.md) — genuine corpus publication and DOI boundary.
 - [`docs/RESOLVER.md`](docs/RESOLVER.md) — interoperability model.
 - [`SPEC.md`](SPEC.md) — optional publisher profile contract.
 
