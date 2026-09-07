@@ -59,7 +59,7 @@ jobs:
           node --check lib/change-receipt-adapters.mjs
           node --check bin/arwp-change-receipt.mjs
           node -e "const fs=require('fs'); for (const file of ['schema/change-receipt.schema.json','schema/braid-graph.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
-          node bin/arwp-change-receipt.mjs --help | grep -q 'canonical outcome adapters'
+          node bin/arwp-change-receipt.mjs --help | grep -qi 'canonical outcome adapters'
 
       - name: Validate packaged Change Receipt surface
         run: node scripts/change-receipt-package-test.mjs
