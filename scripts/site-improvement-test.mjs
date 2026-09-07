@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { analyzePageGraphPages, buildSiteImprovementPlanFromEvidence } from '../lib/site-improvement.mjs';
+import { analyzeContentDifferentiationPages } from '../lib/content-differentiation.mjs';
 
 const pages = [
   {
@@ -27,6 +28,34 @@ assert.ok(pageGraph.actions.some(action => action.id === 'page:lang:https://exam
 assert.ok(pageGraph.actions.some(action => action.id === 'link:inbound:https://example.com/orphan/'));
 assert.ok(pageGraph.actions.some(action => action.id === 'link:anchor:https://example.com/guide/'));
 assert.equal(pageGraph.actions.filter(action => action.id.startsWith('page:duplicate-title:')).length, 2);
+
+const filler = 'A useful but generic explanatory sentence for the reader with enough detail to form a substantive informational page. '.repeat(18);
+const differentiation = analyzeContentDifferentiationPages([
+  {
+    url: 'https://example.com/guide/deep/',
+    html: `<html><head><title>Deep guide</title></head><body><main><h1>Deep guide</h1><h2>Context</h2><p>${filler}</p><h2>Approach</h2><p>${filler}</p><p>${filler}</p></main></body></html>`
+  },
+  {
+    url: 'https://example.com/analysis/',
+    html: `<html><head><title>Analysis results</title></head><body><main><h1>Analysis</h1><h2>Method</h2><p>${filler} 25% improved.</p><h2>Results</h2><p>${filler} 40% improved.</p><p>${filler}</p></main></body></html>`
+  },
+  {
+    url: 'https://example.com/benchmark/',
+    html: `<html><head><title>Benchmark results</title></head><body><main><h1>Benchmark</h1><h2>Method</h2><p>${filler}</p><h2>Results</h2><p>${filler}</p><p>${filler}</p><table><tr><td>A</td><td>42</td></tr></table><a href="https://source.example/report">Source</a></main></body></html>`
+  }
+]);
+assert.equal(differentiation.scope, 'bounded-observable-content-differentiation-signals-not-quality-score');
+assert.equal(differentiation.guardrails.noContentQualityScore, true);
+assert.equal(differentiation.guardrails.queryFanOutIsNotAPageFactory, true);
+assert.ok(differentiation.actions.some(action => action.id === 'content:unique-contribution:https://example.com/guide/deep/'));
+assert.ok(differentiation.actions.some(action => action.id === 'content:quantitative-grounding:https://example.com/analysis/'));
+assert.ok(differentiation.actions.some(action => action.id === 'content:proof-surface:https://example.com/analysis/'));
+assert.equal(differentiation.actions.some(action => action.id === 'content:proof-surface:https://example.com/benchmark/'), false, 'visible proof assets should suppress the research proof-surface review trigger');
+for (const action of differentiation.actions) {
+  assert.equal(action.evidenceClass, 'manual-review');
+  assert.equal(action.proposal, null);
+  assert.match(action.sourceCheck, /developers\.google\.com\/search\/docs\/fundamentals\/ai-optimization-guide/);
+}
 
 const growthPlan = {
   canonicalUrl: 'https://example.com/',
@@ -86,4 +115,4 @@ assert.equal(validate(plan), true, JSON.stringify(validate.errors));
 assert.throws(() => buildSiteImprovementPlanFromEvidence({ canonicalUrl: 'http://example.com/' }), /HTTPS/);
 assert.throws(() => buildSiteImprovementPlanFromEvidence({ canonicalUrl: 'https://example.com/' }, { maxActions: 0 }), /between 1 and 25/);
 
-console.log(`PASS Site Improvement Plan: ${pageGraph.actions.length} page/link observations -> ${plan.summary.selected}/${plan.summary.candidates} selected actions without a universal score`);
+console.log(`PASS Site Improvement Plan: ${pageGraph.actions.length} page/link observations, ${differentiation.actions.length} content-differentiation review triggers -> ${plan.summary.selected}/${plan.summary.candidates} selected actions without a universal score`);
