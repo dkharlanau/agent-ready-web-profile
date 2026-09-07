@@ -6,9 +6,13 @@ on:
     paths:
       - 'schema/watch-targets.schema.json'
       - 'schema/watch-impact-bundle.schema.json'
+      - 'schema/watch-proof-queue-bundle.schema.json'
       - 'lib/braid-watch.mjs'
+      - 'lib/change-receipt-watch.mjs'
+      - 'lib/change-receipt-braid.mjs'
       - 'bin/arwp-watch.mjs'
       - 'scripts/braid-watch-test.mjs'
+      - 'scripts/change-receipt-watch-test.mjs'
       - 'scripts/braid-watch-package-test.mjs'
       - 'docs/SIGNALBRAID-WATCH.md'
       - 'package.json'
@@ -17,9 +21,13 @@ on:
     paths:
       - 'schema/watch-targets.schema.json'
       - 'schema/watch-impact-bundle.schema.json'
+      - 'schema/watch-proof-queue-bundle.schema.json'
       - 'lib/braid-watch.mjs'
+      - 'lib/change-receipt-watch.mjs'
+      - 'lib/change-receipt-braid.mjs'
       - 'bin/arwp-watch.mjs'
       - 'scripts/braid-watch-test.mjs'
+      - 'scripts/change-receipt-watch-test.mjs'
       - 'scripts/braid-watch-package-test.mjs'
       - 'docs/SIGNALBRAID-WATCH.md'
       - 'package.json'
@@ -43,13 +51,16 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
 
-      - name: Validate Watch blast radius
+      - name: Validate Watch blast radius and Proof queues
         run: |
           node scripts/braid-watch-test.mjs
+          node scripts/change-receipt-watch-test.mjs
           node --check lib/braid-watch.mjs
+          node --check lib/change-receipt-watch.mjs
           node --check bin/arwp-watch.mjs
-          node -e "const fs=require('fs'); for (const file of ['schema/watch-targets.schema.json','schema/watch-impact-bundle.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
+          node -e "const fs=require('fs'); for (const file of ['schema/watch-targets.schema.json','schema/watch-impact-bundle.schema.json','schema/watch-proof-queue-bundle.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
           node bin/arwp-watch.mjs --help | grep -q 'review queues only'
+          node bin/arwp-watch.mjs --help | grep -q 'proof-queues'
 
       - name: Validate packaged Watch surface
         run: node scripts/braid-watch-package-test.mjs

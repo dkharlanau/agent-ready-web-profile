@@ -22,8 +22,10 @@ try {
   for (const required of [
     'bin/arwp-watch.mjs',
     'lib/braid-watch.mjs',
+    'lib/change-receipt-watch.mjs',
     'schema/watch-targets.schema.json',
     'schema/watch-impact-bundle.schema.json',
+    'schema/watch-proof-queue-bundle.schema.json',
     'docs/SIGNALBRAID-WATCH.md'
   ]) assert.ok(paths.has(required), `SignalBraid Watch npm surface is missing ${required}`);
 
@@ -41,11 +43,14 @@ try {
   assert.equal(installedPackage.scripts.watch, 'node bin/arwp-watch.mjs');
   assert.match(installedPackage.scripts['test:watch'] || '', /braid-watch-test\.mjs/);
   assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', 'arwp-watch')), 'npm bin shim arwp-watch is missing');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'lib', 'change-receipt-watch.mjs')), 'Proof queue helper must ship in npm package');
 
   const cli = path.join(installedRoot, 'bin', 'arwp-watch.mjs');
   const help = execFileSync(process.execPath, [cli, '--help'], { cwd: consumerDir, encoding: 'utf8' });
   assert.match(help, /review queues only/i);
   assert.match(help, /changed-since/);
+  assert.match(help, /proof-queues/);
+  assert.match(help, /validate-proof-queues/);
   assert.match(help, /validate-bundle/);
 
   console.log(`PASS SignalBraid Watch npm package surface (${pack.filename})`);

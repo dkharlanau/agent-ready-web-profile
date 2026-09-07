@@ -84,9 +84,46 @@ It does **not** invent a change date from:
 
 For current `review-due` or `retired` states without a recorded revision event, use explicit `impact --rule` or `impact --source`.
 
+## Proof portfolio queues
+
+Reverse impact answers “what implementation may be affected by an upstream rule/source change?”. Proof queues answer the separate operational question “which already executed changes need attention now?”.
+
+```bash
+node bin/arwp-watch.mjs proof-queues watch-targets.json \
+  --portfolio=registry/portfolio-sites.json \
+  --out=watch-proof-queues.json
+```
+
+The mode consumes the latest Change Receipt revision for every `changeId` already indexed in each target BraidGraph and aggregates the existing Proof queues:
+
+- `failedVerification`;
+- `missingVerification`;
+- `reReviewRequired`;
+- `mergedButUnmeasured`;
+- `rolledBack`.
+
+A change can belong to more than one queue. Watch emits it once and preserves every membership in `queues[]` plus an explicit reason/priority per queue. This prevents a deployed change that is both unmeasured and due for knowledge re-review from becoming duplicate portfolio rows.
+
+Priority remains a decision tree, not a hidden score. It combines the queue type with the operator-declared target importance. Examples:
+
+- failed verification on a critical/high target → `P0`;
+- missing verification or knowledge re-review on a high target → `P1`;
+- merged-but-unmeasured on a high/normal target → `P2`;
+- low-importance measurement/re-review gaps → `P3`.
+
+Every row keeps `priorityFactors[]`, the full receipt state, all queue memberships and a prose rationale. Missing owner outcome evidence stays `unknown`; it is never converted to zero or failure.
+
+The machine contract is `schema/watch-proof-queue-bundle.schema.json` and can be checked with:
+
+```bash
+node bin/arwp-watch.mjs validate-proof-queues watch-proof-queues.json
+```
+
+For a compact human view use `--text`.
+
 ## Review classifications
 
-Watch emits one of four review classes:
+Watch emits one of four reverse-impact review classes:
 
 ### `re-review`
 
@@ -118,6 +155,8 @@ Examples:
 - browser/runtime/security behavior.
 
 These stay human/owner-gated even if the dependency graph is exact.
+
+Proof portfolio rows use narrower operational classifications instead: `verification-failure`, `verification-gap`, `knowledge-re-review`, `measurement-gap`, and `rollback-review`.
 
 ## Priority is a decision tree, not a score
 
@@ -169,23 +208,29 @@ The v0.1 bundle does not silently suppress repeated alerts from that history; it
 
 ## Portfolio integration
 
-`--portfolio=registry/portfolio-sites.json` enriches impact rows with matching `portfolioSiteId` when the Watch target matches by explicit ID, canonical URL or repository.
+`--portfolio=registry/portfolio-sites.json` enriches reverse-impact and Proof queue rows with a matching `portfolioSiteId` when the Watch target matches by explicit ID, canonical URL or repository. Proof queue rows also retain the matched portfolio name when present.
 
-Watch does not duplicate Portfolio Rollout proposal logic from the Growth layer. Portfolio metadata annotates the graph impact; it does not create target-site mutations.
+Watch does not duplicate Portfolio Rollout proposal logic from the Growth layer. Portfolio metadata annotates graph evidence; it does not create target-site mutations.
 
 ## Unaffected / excluded sites
 
-Unaffected targets are omitted from `impacts[]` and listed separately in `excludedSites[]` with an inspectable reason:
+Unaffected reverse-impact targets are omitted from `impacts[]` and listed separately in `excludedSites[]` with an inspectable reason:
 
 - `disabled`;
 - `trigger-not-present`;
 - `no-recorded-change-since`.
 
-This keeps the actionable blast radius compact without hiding why a portfolio member was excluded.
+Proof queue mode uses:
+
+- `disabled`;
+- `no-change-receipts`;
+- `no-proof-queue-items`.
+
+This keeps the actionable portfolio compact without hiding why a member was excluded.
 
 ## Output
 
-The machine contract is:
+The reverse-impact machine contract is:
 
 `schema/watch-impact-bundle.schema.json`
 
@@ -195,7 +240,7 @@ Validate it:
 node bin/arwp-watch.mjs validate-bundle watch-impact.json
 ```
 
-Human review view:
+Human reverse-impact review view:
 
 ```bash
 node bin/arwp-watch.mjs changed-since watch-targets.json \
@@ -206,9 +251,11 @@ node bin/arwp-watch.mjs changed-since watch-targets.json \
 ## Guardrails
 
 - impact is not breakage proof;
+- Proof queue membership is not outcome causality;
 - production mutation is always false in Watch output;
 - priority is explainable and non-composite;
 - history remains versioned;
+- missing owner outcome evidence remains unknown, not zero;
 - negative/no-change evidence remains visible;
 - owner/policy/editorial/runtime work stays gated;
-- no ranking/citation guarantee or causal claim is produced by graph reachability.
+- no ranking/citation guarantee or causal claim is produced by graph reachability or Proof queue membership.
