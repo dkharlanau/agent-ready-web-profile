@@ -4,6 +4,8 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { analyzePageGraphPages, buildSiteImprovementPlanFromEvidence } from '../lib/site-improvement.mjs';
 import { analyzeContentDifferentiationPages } from '../lib/content-differentiation.mjs';
+import { analyzeAgentAccessibilityPages } from '../lib/agent-accessibility.mjs';
+import { mergeSearchSurfacePlan } from '../lib/site-improvement-deep.mjs';
 
 const pages = [
   {
@@ -57,6 +59,29 @@ for (const action of differentiation.actions) {
   assert.match(action.sourceCheck, /developers\.google\.com\/search\/docs\/fundamentals\/ai-optimization-guide/);
 }
 
+const agentAccessibility = analyzeAgentAccessibilityPages([
+  {
+    url: 'https://example.com/app/',
+    html: '<html><body><main><button><svg></svg></button><input id="query"><div role="switch" aria-label="Mode"></div><span onclick="toggle()">Toggle</span></main></body></html>'
+  },
+  {
+    url: 'https://example.com/good-app/',
+    html: '<html><body><main><button aria-label="Search"><svg></svg></button><label for="query-good">Query</label><input id="query-good"><div role="switch" aria-label="Mode" aria-checked="false"></div><a href="/docs/">Documentation</a></main></body></html>'
+  }
+]);
+assert.equal(agentAccessibility.scope, 'bounded-static-interactive-semantics-review-not-wcag-or-agent-runtime-certification');
+assert.equal(agentAccessibility.guardrails.noWcagComplianceClaim, true);
+assert.equal(agentAccessibility.guardrails.noSearchRankingSignalClaim, true);
+assert.ok(agentAccessibility.actions.some(action => action.id === 'agent-accessibility:control-names:https://example.com/app/'));
+assert.ok(agentAccessibility.actions.some(action => action.id === 'agent-accessibility:role-state:https://example.com/app/'));
+assert.ok(agentAccessibility.actions.some(action => action.id === 'agent-accessibility:click-targets:https://example.com/app/'));
+assert.equal(agentAccessibility.actions.some(action => action.id.includes('https://example.com/good-app/')), false, 'named native controls and a stateful role with rendered state should not trigger the bounded heuristics');
+for (const action of agentAccessibility.actions) {
+  assert.equal(action.evidenceClass, 'manual-review');
+  assert.equal(action.proposal, null);
+  assert.match(action.sourceCheck, /help\.openai\.com\/en\/articles\/12627856-publishers-and-developers-faq/);
+}
+
 const growthPlan = {
   canonicalUrl: 'https://example.com/',
   actions: [
@@ -106,13 +131,34 @@ assert.equal(plan.guardrails.noRankingPromise, true);
 assert.equal(plan.guardrails.noAutomaticRepositoryMutation, true);
 assert.doesNotMatch(JSON.stringify(plan), /"(?:seoScore|readinessScore|rankingScore|universalScore)"/i);
 
+const syntheticSurfaces = {
+  actions: [],
+  registrySummary: { checks: 0 },
+  summary: { surfacesObserved: [], pagesObserved: 0, actions: 0 },
+  ruleset: 'test',
+  siteKind: { kind: 'general' },
+  guardrails: {}
+};
+const deepPlan = mergeSearchSurfacePlan(plan, syntheticSurfaces, {
+  maxActions: 25,
+  contentDifferentiation: differentiation,
+  agentAccessibility
+});
+assert.ok(deepPlan.actions.some(action => action.id.startsWith('content:')));
+assert.ok(deepPlan.actions.some(action => action.id.startsWith('agent-accessibility:')));
+assert.equal(deepPlan.sourceSummary.contentDifferentiationActions, differentiation.actions.length);
+assert.equal(deepPlan.sourceSummary.agentAccessibilityActions, agentAccessibility.actions.length);
+assert.equal(deepPlan.guardrails.contentDifferentiationIsReviewSignalNotQualityScore, true);
+assert.equal(deepPlan.guardrails.agentAccessibilityIsRuntimeReviewNotRankingSignal, true);
+
 const ajv = new Ajv2020({ allErrors: true, strict: true });
 addFormats(ajv);
 const schema = JSON.parse(fs.readFileSync('schema/site-improvement-plan.schema.json', 'utf8'));
 const validate = ajv.compile(schema);
 assert.equal(validate(plan), true, JSON.stringify(validate.errors));
+assert.equal(validate(deepPlan), true, JSON.stringify(validate.errors));
 
 assert.throws(() => buildSiteImprovementPlanFromEvidence({ canonicalUrl: 'http://example.com/' }), /HTTPS/);
 assert.throws(() => buildSiteImprovementPlanFromEvidence({ canonicalUrl: 'https://example.com/' }, { maxActions: 0 }), /between 1 and 25/);
 
-console.log(`PASS Site Improvement Plan: ${pageGraph.actions.length} page/link observations, ${differentiation.actions.length} content-differentiation review triggers -> ${plan.summary.selected}/${plan.summary.candidates} selected actions without a universal score`);
+console.log(`PASS Site Improvement Plan: ${pageGraph.actions.length} page/link observations, ${differentiation.actions.length} content-differentiation reviews, ${agentAccessibility.actions.length} agent-accessibility reviews -> deep plan ${deepPlan.summary.selected}/${deepPlan.summary.candidates} selected without a universal score`);
