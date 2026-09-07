@@ -114,6 +114,8 @@ Current remediation boundary:
 
 A missing signal in the bounded sample is not proof of whole-site absence. Every generated vertical action therefore requires checking the relevant canonical surface before editing content or structured data.
 
+The same evidence layer is used by `arwp-improve`. If `--vertical` is omitted, the unified planner can conservatively map unambiguous Search Surface site kinds such as `software-product`, `ecommerce`, `local-business` and `editorial-news` to the matching Growth vertical. Ambiguous `documentation-research` defaults to documentation and can be overridden with `--vertical=research-dataset`.
+
 The universal baseline stays small and stable while vertical modules can evolve independently.
 
 ## Rights / AI policy
