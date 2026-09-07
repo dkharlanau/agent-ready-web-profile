@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-growth-run.schema.json",
+  "title": "ARWP owner-controlled portfolio Growth observation run v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "runId", "observedAt", "evidenceClass", "portfolioUpdatedAt", "summary", "sites", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "runId": { "type": "string", "pattern": "^[0-9]{8}T[0-9]{6}Z$" },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "evidenceClass": { "const": "owner-controlled-public-observation" },
+    "portfolioUpdatedAt": { "type": "string", "format": "date" },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabledSites", "captured", "unavailable", "awaitingOwnerMeasurement"],
+      "properties": {
+        "enabledSites": { "type": "integer", "minimum": 0 },
+        "captured": { "type": "integer", "minimum": 0 },
+        "unavailable": { "type": "integer", "minimum": 0 },
+        "awaitingOwnerMeasurement": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "sites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["siteId", "name", "canonicalUrl", "repository", "vertical", "rolloutMode", "status", "measurementState"],
+        "properties": {
+          "siteId": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "name": { "type": "string", "minLength": 1, "maxLength": 240 },
+          "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+          "vertical": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "rolloutMode": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "status": { "enum": ["captured", "unavailable"] },
+          "measurementState": { "const": "awaiting-owner-measurement" },
+          "snapshot": { "type": ["object", "null"] },
+          "verticalEvidence": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+              "coverage": { "type": ["string", "null"] },
+              "pagesObserved": { "type": "integer", "minimum": 0 },
+              "summary": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+            }
+          },
+          "ownerDataState": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+              "observed": { "type": "boolean" },
+              "valid": { "type": "boolean" },
+              "recordCount": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "error": { "type": ["string", "null"], "maxLength": 4000 }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ownerControlledPortfolio", "publicEvidenceOnly", "noIndependentAdoptionInference", "noMissingMetricZeros", "ownerMetricsSeparate", "noRankingCausality", "failuresRemainVisible"],
+      "properties": {
+        "ownerControlledPortfolio": { "const": true },
+        "publicEvidenceOnly": { "const": true },
+        "noIndependentAdoptionInference": { "const": true },
+        "noMissingMetricZeros": { "const": true },
+        "ownerMetricsSeparate": { "const": true },
+        "noRankingCausality": { "const": true },
+        "failuresRemainVisible": { "const": true }
+      }
+    }
+  }
+}
