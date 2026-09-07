@@ -1,0 +1,109 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "brand": "SignalBraid · ARWP",
+  "technicalFoundation": "Agent-Ready Web Profile",
+  "tagline": "Weave the signals. Ship the change.",
+  "category": "evidence-to-change website operations",
+  "northStar": "Turn meaningful upstream web changes into the right site-specific implementation, prove what happened, and identify every site that needs re-review when the evidence changes again.",
+  "keyPrimitive": {
+    "name": "BraidGraph",
+    "purpose": "Versioned evidence-to-change graph linking upstream sources, rule versions, target-site state, repository ownership, recommendations, transformations, verification and outcome evidence.",
+    "reverseImpact": true
+  },
+  "modules": [
+    {
+      "id": "radar",
+      "name": "SignalBraid Radar",
+      "verb": "Detect",
+      "question": "What changed upstream?",
+      "status": "active-foundation",
+      "existingAssets": ["Trend Radar", "Recommendations Registry", "Growth Hypotheses", "source freshness/history"],
+      "next": ["semantic source diffs", "source-change graph nodes", "proposed rule revisions"]
+    },
+    {
+      "id": "map",
+      "name": "SignalBraid Map",
+      "verb": "Map",
+      "question": "What does this site actually have and where is it owned?",
+      "status": "next-core",
+      "existingAssets": ["site audit", "vertical evidence", "entity graph", "scanner/resolver"],
+      "next": ["Site State Graph", "Repository Mapper", "rendered-surface to source-file ownership", "stack/build/deploy detection", "fact source-of-truth mapping"]
+    },
+    {
+      "id": "plan",
+      "name": "SignalBraid Plan",
+      "verb": "Decide",
+      "question": "What actually applies here now?",
+      "status": "active",
+      "existingAssets": ["Growth Plan", "Adaptive Site Upgrade Engine", "automation classes", "review-due knowledge gates"],
+      "next": ["consume BraidGraph site state", "portfolio policy inputs"]
+    },
+    {
+      "id": "patch",
+      "name": "SignalBraid Patch",
+      "verb": "Change",
+      "question": "What can change safely and exactly?",
+      "status": "active-v0.1",
+      "existingAssets": ["Target-Site Transformation Engine", "SHA-256 preconditions", "path allowlists", "rollback", "PR-first production delivery"],
+      "next": ["verified stack adapters", "Repository Mapper integration", "unified change receipt"]
+    },
+    {
+      "id": "proof",
+      "name": "SignalBraid Proof",
+      "verb": "Prove",
+      "question": "Did implementation pass and what evidence followed?",
+      "status": "partial-foundation",
+      "existingAssets": ["Evidence Receipts", "Growth History", "Growth Experiments", "visibility imports", "agent eval receipts"],
+      "next": ["Unified Change Receipt", "deployment evidence", "missing-outcome-evidence queries"]
+    },
+    {
+      "id": "watch",
+      "name": "SignalBraid Watch",
+      "verb": "Watch",
+      "question": "What needs attention now across the portfolio?",
+      "status": "next-commercial-core",
+      "existingAssets": ["drift", "history", "trend lifecycle", "portfolio evidence primitives"],
+      "next": ["reverse rule-impact analysis", "multi-site blast radius", "scheduled re-review", "policy drift", "prioritized change waves"]
+    },
+    {
+      "id": "connect",
+      "name": "SignalBraid Connect",
+      "verb": "Observe",
+      "question": "What happened outside the repository?",
+      "status": "extension",
+      "existingAssets": ["owner visibility import format"],
+      "next": ["Google connector", "Bing AI Performance connector", "Cloudflare AI crawler connector", "referral analytics", "deployment/build provider evidence"]
+    }
+  ],
+  "durableDifferentiators": [
+    "source-backed rule supply chain with freshness and retirement",
+    "site-specific applicability instead of one universal readiness score",
+    "rendered-surface to canonical source-file ownership as a first-class problem",
+    "deterministic repository mutations with preconditions, rollback and PR-first delivery",
+    "separation of implementation proof from external outcome evidence",
+    "reverse blast-radius analysis when upstream rules change",
+    "cross-surface scope spanning Search, AI citations, crawler policy, datasets, provenance and real agent interfaces"
+  ],
+  "productBets": [
+    {"priority": "P0", "id": "braidgraph-compiler", "title": "BraidGraph schema and compiler"},
+    {"priority": "P0", "id": "repository-mapper", "title": "Repository Mapper and Site State Graph"},
+    {"priority": "P0", "id": "reverse-impact", "title": "Reverse source/rule impact analysis"},
+    {"priority": "P0", "id": "unified-change-receipt", "title": "Unified Change Receipt"},
+    {"priority": "P1", "id": "portfolio-policy", "title": "Portfolio policy-as-code"},
+    {"priority": "P1", "id": "stack-packs", "title": "Verified stack transformation packs"},
+    {"priority": "P1", "id": "semantic-source-diff", "title": "Semantic source-diff watcher"},
+    {"priority": "P1", "id": "owner-connectors", "title": "First-party owner evidence connectors"},
+    {"priority": "P2", "id": "cohort-evidence", "title": "Page-cohort outcome evidence helper"},
+    {"priority": "P2", "id": "transformation-benchmark", "title": "Public transformation regression benchmark"}
+  ],
+  "guardrails": {
+    "noRankingGuarantee": true,
+    "noCitationGuarantee": true,
+    "noUniversalScore": true,
+    "noInventedFacts": true,
+    "policyAndEditorialRemainGated": true,
+    "negativeResultsPreserved": true,
+    "historicalRuleVersionsPreserved": true
+  }
+}
