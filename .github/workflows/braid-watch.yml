@@ -9,7 +9,9 @@ on:
       - 'lib/braid-watch.mjs'
       - 'bin/arwp-watch.mjs'
       - 'scripts/braid-watch-test.mjs'
+      - 'scripts/braid-watch-package-test.mjs'
       - 'docs/SIGNALBRAID-WATCH.md'
+      - 'package.json'
       - '.github/workflows/braid-watch.yml'
   pull_request:
     paths:
@@ -18,7 +20,9 @@ on:
       - 'lib/braid-watch.mjs'
       - 'bin/arwp-watch.mjs'
       - 'scripts/braid-watch-test.mjs'
+      - 'scripts/braid-watch-package-test.mjs'
       - 'docs/SIGNALBRAID-WATCH.md'
+      - 'package.json'
       - '.github/workflows/braid-watch.yml'
 
 permissions:
@@ -46,3 +50,6 @@ jobs:
           node --check bin/arwp-watch.mjs
           node -e "const fs=require('fs'); for (const file of ['schema/watch-targets.schema.json','schema/watch-impact-bundle.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
           node bin/arwp-watch.mjs --help | grep -q 'review queues only'
+
+      - name: Validate packaged Watch surface
+        run: node scripts/braid-watch-package-test.mjs
