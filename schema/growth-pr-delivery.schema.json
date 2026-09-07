@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/growth-pr-delivery.schema.json",
+  "title": "ARWP Growth review-only PR delivery bundle v0.1",
+  "description": "A target-repository pull-request delivery plan that may commit ARWP review artifacts only under .arwp/proposals/. It never authorizes or applies production-site mutations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "repository", "site", "sourceManifest", "branch", "pullRequest", "files", "gatedItems", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$", "maxLength": 200 },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "sourceManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["remediationVersion", "generatedAt", "sha256"],
+      "properties": {
+        "remediationVersion": { "const": "0.1" },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "branch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^arwp/growth-proposal-[0-9]{8}-[a-f0-9]{8}$", "maxLength": 100 },
+        "base": { "type": ["string", "null"], "minLength": 1, "maxLength": 200 }
+      }
+    },
+    "pullRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "body"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "body": { "type": "string", "minLength": 1, "maxLength": 20000 }
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 60,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "mediaType", "content", "sha256", "reviewOnly"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^\\.arwp/proposals/[A-Za-z0-9._/-]+$", "maxLength": 500 },
+          "mediaType": { "type": "string", "minLength": 1, "maxLength": 100 },
+          "content": { "type": "string", "maxLength": 200000 },
+          "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "reviewOnly": { "const": true }
+        }
+      }
+    },
+    "gatedItems": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["actionId", "disposition", "humanReviewRequired", "warnings"],
+        "properties": {
+          "actionId": { "type": "string", "minLength": 2, "maxLength": 200 },
+          "disposition": { "type": "string", "minLength": 2, "maxLength": 80 },
+          "humanReviewRequired": { "const": true },
+          "warnings": { "type": "array", "maxItems": 20, "items": { "type": "string", "minLength": 1, "maxLength": 1000 } }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewArtifactsOnly",
+        "writesProductionPaths",
+        "requiresExplicitAuthorization",
+        "openPrCommandRequiresToken",
+        "robotsPolicyNeverApplied",
+        "structuredDataNeverApplied",
+        "editorialContentNeverApplied",
+        "externalOwnerControlsNeverApplied",
+        "branchMustNotExist",
+        "noForcePush",
+        "noRankingGuarantee"
+      ],
+      "properties": {
+        "reviewArtifactsOnly": { "const": true },
+        "writesProductionPaths": { "const": false },
+        "requiresExplicitAuthorization": { "const": true },
+        "openPrCommandRequiresToken": { "const": true },
+        "robotsPolicyNeverApplied": { "const": true },
+        "structuredDataNeverApplied": { "const": true },
+        "editorialContentNeverApplied": { "const": true },
+        "externalOwnerControlsNeverApplied": { "const": true },
+        "branchMustNotExist": { "const": true },
+        "noForcePush": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  }
+}
