@@ -5,7 +5,10 @@ on:
     branches: [main]
     paths:
       - 'lib/search-maturity.mjs'
+      - 'lib/search-maturity-adaptive-bridge.mjs'
       - 'lib/search-intervention.mjs'
+      - 'lib/adaptive-upgrade.mjs'
+      - 'registry/adaptive-upgrade-packs.json'
       - 'bin/arwp-search-maturity.mjs'
       - 'bin/arwp-search-intervention.mjs'
       - 'schema/search-maturity-corpus.schema.json'
@@ -13,15 +16,21 @@ on:
       - 'benchmarks/search-maturity/**'
       - 'benchmarks/search-intervention/**'
       - 'benchmarks/search-maturity-test.mjs'
+      - 'benchmarks/search-maturity-adaptive-bridge-test.mjs'
       - 'benchmarks/search-intervention-test.mjs'
+      - 'benchmarks/search-intervention-arwp-test.mjs'
       - 'docs/SEARCH-MATURITY-BENCHMARK.md'
+      - 'docs/SEARCH-MATURITY-DOGFOOD.md'
       - 'docs/SEARCH-INTERVENTION-LEDGER.md'
       - 'skills/arwp-search-maturity/**'
       - '.github/workflows/search-maturity.yml'
   pull_request:
     paths:
       - 'lib/search-maturity.mjs'
+      - 'lib/search-maturity-adaptive-bridge.mjs'
       - 'lib/search-intervention.mjs'
+      - 'lib/adaptive-upgrade.mjs'
+      - 'registry/adaptive-upgrade-packs.json'
       - 'bin/arwp-search-maturity.mjs'
       - 'bin/arwp-search-intervention.mjs'
       - 'schema/search-maturity-corpus.schema.json'
@@ -29,8 +38,11 @@ on:
       - 'benchmarks/search-maturity/**'
       - 'benchmarks/search-intervention/**'
       - 'benchmarks/search-maturity-test.mjs'
+      - 'benchmarks/search-maturity-adaptive-bridge-test.mjs'
       - 'benchmarks/search-intervention-test.mjs'
+      - 'benchmarks/search-intervention-arwp-test.mjs'
       - 'docs/SEARCH-MATURITY-BENCHMARK.md'
+      - 'docs/SEARCH-MATURITY-DOGFOOD.md'
       - 'docs/SEARCH-INTERVENTION-LEDGER.md'
       - 'skills/arwp-search-maturity/**'
       - '.github/workflows/search-maturity.yml'
@@ -50,21 +62,27 @@ jobs:
       - name: Unit and syntax checks
         run: |
           node benchmarks/search-maturity-test.mjs
+          node benchmarks/search-maturity-adaptive-bridge-test.mjs
           node benchmarks/search-intervention-test.mjs
+          node benchmarks/search-intervention-arwp-test.mjs
           node --check lib/search-maturity.mjs
+          node --check lib/search-maturity-adaptive-bridge.mjs
           node --check lib/search-intervention.mjs
           node --check bin/arwp-search-maturity.mjs
           node --check bin/arwp-search-intervention.mjs
           node --check benchmarks/search-maturity-test.mjs
+          node --check benchmarks/search-maturity-adaptive-bridge-test.mjs
           node --check benchmarks/search-intervention-test.mjs
+          node --check benchmarks/search-intervention-arwp-test.mjs
       - name: Validate pilot corpus
         run: |
           node bin/arwp-search-maturity.mjs check benchmarks/search-maturity/pilot-2026-09-07.json
           node bin/arwp-search-maturity.mjs cohort benchmarks/search-maturity/pilot-2026-09-07.json --intent=ai-search-optimization --output=/tmp/search-maturity-cohort.json
           test -s /tmp/search-maturity-cohort.json
-      - name: Validate public-safe intervention fixture
+      - name: Validate intervention records
         run: |
           node bin/arwp-search-intervention.mjs check benchmarks/search-intervention/example-public-safe.json
+          node bin/arwp-search-intervention.mjs check benchmarks/search-intervention/arwp-ai-search-visibility-2026-09-07.json
       - name: Guard rank provenance
         run: |
           node --input-type=module <<'EOF'

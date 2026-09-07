@@ -1,0 +1,81 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/search-intervention.schema.json",
+  "version": "0.1",
+  "kind": "search-intervention",
+  "id": "arwp:ai-search-visibility:evidence-system:2026-09-07",
+  "site": {
+    "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "siteClass": "technical-b2b-open-source-documentation",
+    "ownership": "owner-controlled"
+  },
+  "intent": {
+    "family": "ai-search-optimization",
+    "locale": "en",
+    "queryCohortRef": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/benchmarks/search-maturity/pilot-2026-09-07.json"
+  },
+  "hypothesis": "Strengthening observable evidence density and first-party evidence on the existing ARWP answer may be associated with better relevant retrieval or visibility outcomes. Implementation improvement is not treated as an outcome or as causal proof.",
+  "disclosure": {
+    "class": "public-methodology",
+    "containsLiveCorpus": false,
+    "containsLearnedPriors": false,
+    "ipReviewRequired": false
+  },
+  "baseline": {
+    "capturedAt": "2026-09-07T13:41:15Z",
+    "surfaces": [
+      {
+        "name": "Pre-change Search Maturity target profile",
+        "provenanceClass": "owner-evidence",
+        "evidenceRefs": [
+          "https://github.com/dkharlanau/agent-ready-web-profile/blob/1f32e4a88c1b0b75bada49fb26596eb41645a288/benchmarks/search-maturity/targets/arwp-ai-search-visibility-before-2026-09-07.json"
+        ]
+      },
+      {
+        "name": "Reviewed independent Search Maturity pilot cohort",
+        "provenanceClass": "research-observation",
+        "evidenceRefs": [
+          "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/benchmarks/search-maturity/pilot-2026-09-07.json"
+        ]
+      }
+    ],
+    "notes": "The pre-change implementation profile had cohort gaps in evidenceDensity and firstPartyEvidence. Outcome baselines are not inferred from implementation state."
+  },
+  "intervention": {
+    "status": "source-implemented",
+    "changedUrls": [
+      "https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-improve-ai-search-visibility.html"
+    ],
+    "changedDimensions": ["evidenceDensity", "firstPartyEvidence"],
+    "implementedAt": "2026-09-07T13:42:34Z",
+    "commitSha": "5df6dcb1b6d0d4e74bfb1665b5ab3a7e644b1191",
+    "verification": {
+      "state": "source-implemented",
+      "evidenceRefs": [
+        "https://github.com/dkharlanau/agent-ready-web-profile/commit/5df6dcb1b6d0d4e74bfb1665b5ab3a7e644b1191",
+        "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/benchmarks/search-maturity/targets/arwp-ai-search-visibility-after-2026-09-07.json"
+      ]
+    }
+  },
+  "outcomeWindows": [
+    {"days": 7, "dueAt": "2026-09-14T13:42:34Z"},
+    {"days": 14, "dueAt": "2026-09-21T13:42:34Z"},
+    {"days": 28, "dueAt": "2026-10-05T13:42:34Z"}
+  ],
+  "observations": [],
+  "confounders": [
+    "Search and answer-engine results vary across time, locale, provider and model.",
+    "Crawl and indexing delays can shift observations independently of the source change.",
+    "Other ARWP site changes can occur during the follow-up windows.",
+    "The reviewed reference cohort is small and is not causal evidence.",
+    "No unchanged control URL is established for this intervention."
+  ],
+  "disposition": "inconclusive",
+  "confidence": "low",
+  "guardrails": {
+    "noRankingGuarantee": true,
+    "noCausalityInference": true,
+    "preserveNegativeResults": true,
+    "separateOutcomeChannels": true,
+    "humanReviewBeforeLearning": true
+  }
+}
