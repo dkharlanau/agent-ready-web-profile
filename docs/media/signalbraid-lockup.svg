@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 150" role="img" aria-labelledby="title desc">
+  <title id="title">SignalBraid · ARWP</title>
+  <desc id="desc">Three signal strands braid into one verified outgoing path beside the SignalBraid ARWP wordmark.</desc>
+  <rect width="760" height="150" rx="24" fill="#FCFDFB"/>
+  <g transform="translate(28 24)" fill="none" stroke-linecap="round" stroke-width="8">
+    <path d="M4 18 C34 18 34 50 64 50 C94 50 94 82 124 82 C151 82 158 62 184 62" stroke="#FF5A36"/>
+    <path d="M4 50 C34 50 34 82 64 82 C94 82 94 18 124 18 C151 18 158 62 184 62" stroke="#16181D"/>
+    <path d="M4 82 C34 82 34 18 64 18 C94 18 94 50 124 50 C151 50 158 62 184 62" stroke="#7C5CFC"/>
+    <path d="M184 62 H224" stroke="#16181D" stroke-width="11"/>
+    <path d="M214 51 L227 62 L214 73" stroke="#16181D" stroke-width="11" stroke-linejoin="round"/>
+  </g>
+  <text x="290" y="72" fill="#16181D" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="45" font-weight="760" letter-spacing="-1.5">SignalBraid</text>
+  <text x="550" y="72" fill="#6A6F78" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="650">· ARWP</text>
+  <text x="292" y="105" fill="#6A6F78" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="560" letter-spacing="1.4">WEAVE THE SIGNALS. SHIP THE CHANGE.</text>
+</svg>
