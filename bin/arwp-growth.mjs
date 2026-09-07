@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
-import { buildGrowthPlan, formatGrowthPlan } from '../lib/growth-plan.mjs';
+import { buildGrowthPlan, formatGrowthPlan } from '../lib/growth-plan-vertical.mjs';
 
 function usage() {
   return `arwp-growth — prioritized Search / AI-search / citation improvement planner
@@ -14,7 +14,7 @@ Examples:
   arwp-growth https://example.com --vertical=editorial --json
   arwp-growth https://example.com --output=arwp-growth.json
 
-The Growth Profile includes applicable ADOPT/MEASURED Trend Radar changes, but does not output a universal quality/readiness score and does not guarantee ranking, AI citation or recommendation outcomes.
+The Growth Profile includes applicable ADOPT/MEASURED Trend Radar changes plus bounded vertical entry-page evidence, but does not output a universal quality/readiness score and does not guarantee ranking, AI citation or recommendation outcomes.
 `;
 }
 
