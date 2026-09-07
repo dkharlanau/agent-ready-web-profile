@@ -25,22 +25,24 @@ The implementation includes:
 - `schema/braid-graph.schema.json` — strict graph contract;
 - `lib/braid-graph.mjs` — compiler, validation and graph queries;
 - `bin/arwp-braid.mjs` — compile/validate/explain/impact/missing-evidence CLI;
-- `scripts/braid-graph-test.mjs` — deterministic regression coverage;
+- `lib/braid-history.mjs` + `bin/arwp-braid-history.mjs` — explicit append-style source/rule revision evidence and `supersedes` history;
+- `scripts/braid-graph-test.mjs` + `scripts/braid-history-test.mjs` — deterministic regression coverage including review-due, superseded and negative-evidence cases;
+- `skills/arwp-braidgraph/SKILL.md` — canonical agent workflow for provenance, impact and evidence-debt questions;
 - `.github/workflows/braid-graph.yml` — dedicated CI.
 
-The compiler currently consumes the existing Adaptive Site Upgrade graph and optional Transformation Bundle. It can also attach normalized implementation verification and external outcome measurement records without collapsing either into the other.
+The compiler consumes the existing Adaptive Site Upgrade graph and optional Transformation Bundle. It can also attach normalized implementation verification and external outcome measurement records without collapsing either into the other. The history layer enriches a valid graph with explicit prior source/rule versions without rewriting the original artifact.
 
-Repository Mapper, richer source revision propagation and portfolio-level graph composition remain separate follow-on layers.
+Repository Mapper, direct receipt adapters and portfolio-level graph composition remain separate follow-on layers.
 
 ## Node types
 
 ### `source`
 
-A versioned upstream source URL used by a rule. The current compiler preserves the reviewed source date and authority supplied by the Adaptive Upgrade artifact.
+A versioned upstream source URL used by a rule. The current compiler preserves the reviewed source date and authority supplied by the Adaptive Upgrade artifact. Historical source nodes can be added from explicit revision evidence and retain their own version/state.
 
 ### `rule`
 
-A versioned ARWP recommendation/rule identity. Rule state preserves `current`, `review-due` or an explicit unresolved dependency state.
+A versioned ARWP recommendation/rule identity. Rule state preserves `current`, `review-due`, explicit unresolved dependency state, or historical states such as `superseded`/`retired` when revision evidence records them.
 
 ### `site`
 
@@ -64,7 +66,7 @@ A target-specific application of a rule, versioned by the exact Adaptive Upgrade
 
 ### `transform`
 
-A deterministic planned repository operation from a Transformation Bundle. A bundle proves an intended operation and its preconditions; it does not prove merge or deployment. Therefore v0.1 transform nodes compile with state `planned` unless later execution evidence is supplied through a future receipt adapter.
+A deterministic planned repository operation from a Transformation Bundle. A bundle proves an intended operation and its preconditions; it does not prove merge or deployment. Therefore v0.1 transform nodes compile with state `planned` unless later execution evidence is supplied through a Change Receipt adapter.
 
 ### `verification`
 
@@ -72,7 +74,7 @@ Implementation evidence such as a build, test, audit or runtime check. Verificat
 
 ### `measurement`
 
-External outcome evidence such as Search, citation, referral or runtime observations. Measurements carry evidence class and remain observational.
+External outcome evidence such as Search, citation, referral or runtime observations. Measurements carry evidence class and remain observational. Negative, unchanged and mixed measurements remain valid evidence states rather than being filtered out.
 
 ### `policy`
 
@@ -81,35 +83,36 @@ The Transformation Bundle policy/allowlist and its safety guardrails.
 ## Edge types
 
 ```text
-source ──supports──────► rule
-source ──supersedes────► source/rule
-rule ──applies-to──────► recommendation
-site ──has-surface─────► surface
-repo-file ──renders────► surface              # reserved for Repository Mapper evidence
-fact ──grounds─────────► recommendation
-recommendation ──targets► surface/repo-file
+source/rule ──supersedes──► prior source/rule version
+source ──supports─────────► rule
+rule ──applies-to─────────► recommendation
+site ──has-surface────────► surface
+repo-file ──renders───────► surface              # reserved for Repository Mapper evidence
+fact ──grounds────────────► recommendation
+recommendation ──targets──► surface/repo-file
 recommendation ──depends-on► rule/recommendation
-transform ──implements─► recommendation
-transform ──mutates────► repo-file
-verification ──verifies► transform
-measurement ──observes─► site/surface/transform
-policy ──allows/blocks─► transform/recommendation
+transform ──implements────► recommendation
+transform ──mutates───────► repo-file
+verification ──verifies───► transform
+measurement ──observes────► site/surface/transform
+policy ──allows/blocks────► transform/recommendation
 ```
 
-Every edge has a stable ID, state, optional observation time and provenance.
+Every edge has a stable ID, state, optional observation time and provenance. In the history layer, the newer/current source or rule points to the explicitly recorded prior version with `supersedes`; the prior node is retained rather than mutated away.
 
 ## Versioning model
 
 BraidGraph IDs separate stable identity from evidence versions.
 
 - site and repository-file identities remain stable for the same canonical site/repository path;
-- source nodes include the reviewed source version/date in their identity;
-- rule nodes include the registry version;
+- current source nodes include the reviewed source version/date in their identity;
+- current rule nodes include the registry version;
+- historical source/rule nodes use the explicit prior `versionKey` supplied by revision evidence;
 - recommendation nodes include the exact Adaptive Upgrade digest;
 - transform nodes preserve the exact Transformation Bundle operation ID;
 - verification and measurement records are appendable evidence events.
 
-A future source/rule revision therefore creates new evidence instead of silently rewriting the interpretation that existed when an earlier recommendation or transform was created.
+A source/rule revision therefore creates new evidence instead of silently rewriting the interpretation that existed when an earlier recommendation or transform was created.
 
 ## Compile a graph
 
@@ -167,6 +170,46 @@ Measurement records require an explicit target:
 
 Missing owner evidence stays unknown. It is never converted to zero.
 
+## Add explicit source/rule revision history
+
+Keep revision evidence in a separate reviewed JSON array and enrich the graph:
+
+```bash
+node bin/arwp-braid-history.mjs apply \
+  .arwp/braid-graph.json \
+  .arwp/braid-revisions.json \
+  --out=.arwp/braid-graph-with-history.json
+```
+
+A revision record is explicit evidence, not a guessed diff:
+
+```json
+{
+  "id": "canonical-rule-revision-2026-09-07",
+  "entityType": "rule",
+  "currentRef": "canonical-discovery",
+  "previousVersionKey": "0.1:2026-08-01",
+  "previousState": "superseded",
+  "observedAt": "2026-09-07T12:20:00Z",
+  "previousData": {
+    "sourceReviewedAt": "2026-08-01"
+  },
+  "evidence": [
+    "https://example.org/guidance#revision"
+  ]
+}
+```
+
+The enrichment layer:
+
+- refuses a history record whose current source/rule is not present;
+- refuses a previous version key equal to the current version;
+- preserves the current graph and adds an explicit historical node plus `supersedes` edge;
+- keeps review-due, negative/neutral measurement and other existing states intact;
+- produces a deterministic revision digest with `node bin/arwp-braid-history.mjs digest <revisions.json>`.
+
+A `supersedes` relationship means the old version is historical evidence. It does not itself prove that every downstream implementation is now wrong.
+
 ## Validate
 
 ```bash
@@ -195,11 +238,11 @@ node bin/arwp-braid.mjs explain .arwp/braid-graph.json --transform=<operation-id
 ## Source/rule impact
 
 ```bash
-node bin/arwp-braid.mjs impact .arwp/braid-graph.json --rule=canonical-discovery
-node bin/arwp-braid.mjs impact .arwp/braid-graph.json --source=https://example.org/current-guidance
+node bin/arwp-braid.mjs impact .arwp/braid-graph-with-history.json --rule=canonical-discovery
+node bin/arwp-braid.mjs impact .arwp/braid-graph-with-history.json --source=https://example.org/current-guidance
 ```
 
-Impact traversal walks the evidence graph through dependent recommendations, transforms, repository paths, verification and measurements. An affected node means **re-review candidate**, not breakage and not authorization to mutate production.
+Impact traversal walks the evidence graph through dependent recommendations, transforms, repository paths, verification/measurements and explicit historical `supersedes` nodes. An affected node means **re-review candidate**, not breakage and not authorization to mutate production.
 
 ## Find changes with missing evidence
 
@@ -212,7 +255,15 @@ For each transform, the queue distinguishes:
 - missing implementation verification;
 - missing transform-linked outcome measurement.
 
-This is intentionally strict. A successful build does not count as a Search/AI outcome, and a site-level traffic metric is not silently attributed to one transform.
+This is intentionally strict. A successful build does not count as a Search/AI outcome, and a site-level traffic metric is not silently attributed to one transform. A negative/unchanged outcome counts as observed evidence and remains visible; it is not treated as missing simply because the result was not positive.
+
+## Agent workflow
+
+Use the portable Agent Skill:
+
+`skills/arwp-braidgraph/SKILL.md`
+
+The skill makes BraidGraph the canonical provenance/impact/evidence-debt model for agents. It routes unresolved rendered-surface ownership to Repository Mapper and actual mutation/deployment proof to Target Transformation / Change Receipts rather than letting an agent invent relationships.
 
 ## Safety and epistemic boundaries
 
@@ -240,7 +291,11 @@ Attach executed mutation, verification, deployment and later outcome evidence to
 
 ### SignalBraid Watch
 
-Use source/rule revisions and BraidGraph reverse traversal to generate portfolio re-review queues.
+Consume explicit source/rule revision history plus BraidGraph reverse traversal to generate portfolio re-review queues.
+
+### Direct evidence adapters
+
+Normalize existing Evidence Receipts, visibility snapshots, agent-eval receipts and Growth Experiments into the graph without duplicating their canonical payloads.
 
 ### Portfolio graph
 
