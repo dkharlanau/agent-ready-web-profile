@@ -23,25 +23,31 @@ That is SignalBraid:
 
 ```text
 SEARCH ─────╮
-AI ─────────┼──► BRAID ► EXACT CHANGE ► VERIFY ► MEASURE
+AI ─────────┼──► BRAID ► EXACT CHANGE ► VERIFY ► WATCH
 AGENTS ─────┤
 SITE DATA ──╯
 ```
 
 ## Product rhythm
 
-> **Detect. Braid. Change. Prove.**
+The short product rhythm is:
 
-- **Detect** — identify a meaningful change or evidence gap.
-- **Braid** — combine current guidance, applicability, site type, repository evidence and constraints.
-- **Change** — turn that evidence into exact, safe site work and reviewable repository changes where appropriate.
+> **Detect. Map. Decide. Change. Prove. Watch.**
+
+- **Detect / Radar** — identify a meaningful upstream change or evidence gap.
+- **Map** — understand the real target site, source repository and source-of-truth ownership.
+- **Decide / Plan** — braid current guidance, site type, applicability, repository evidence and constraints into the right target-specific work.
+- **Change / Patch** — turn grounded evidence into exact, safe site work and reviewable repository changes where appropriate.
 - **Prove** — verify implementation and keep later outcome evidence separate from technical success.
+- **Watch** — reverse the graph when rules or sites drift and identify what needs re-review.
+
+The word **braid** remains the brand metaphor; the six-step rhythm is the operational product line.
 
 ## Primary promise
 
 > **Weave the signals. Ship the change.**
 
-The line captures the distinction from a static audit: SignalBraid is intended to connect discovery of a signal to a concrete, verifiable site change.
+The line captures the distinction from a static audit: SignalBraid is intended to connect discovery of a signal to a concrete, verifiable site change and preserve enough lineage to revisit that change when the evidence moves again.
 
 ## One-line description
 
@@ -51,9 +57,9 @@ The line captures the distinction from a static audit: SignalBraid is intended t
 
 Most website tools take a snapshot, generate a score and leave the owner with a list.
 
-SignalBraid is built around a continuing evidence-to-change loop. It watches current guidance, determines what actually applies to the target site, rejects irrelevant tactics, combines the useful signals with repository evidence, compiles exact changes, verifies the implementation and preserves what happened afterward.
+SignalBraid is built around a continuing evidence-to-change loop. It watches current guidance, maps the actual target site, determines what really applies, rejects irrelevant tactics, combines the useful signals with repository evidence, compiles exact changes, verifies the implementation and preserves what happened afterward.
 
-The benefit is not another readiness number. It is a shorter path from **something changed on the web** to **we know whether this site should change, what should change, and whether the implementation passed**.
+The stronger benefit is not another readiness number. It is a shorter and more accountable path from **something changed on the web** to **we know whether this site should change, what should change, whether it passed, and which sites need re-review if the rule changes again**.
 
 ## Benefit language
 
@@ -69,20 +75,24 @@ Applicable signals become exact target surfaces, dependencies, recipes and verif
 ### Less false confidence
 A successful build proves implementation, not ranking or citation uplift. Outcome evidence remains a separate layer, including neutral and negative results.
 
+### Less portfolio drift
+Once BraidGraph and Watch are implemented, an upstream rule change should reveal which sites, old recommendations and repository paths are candidates for re-review.
+
 ## Category
 
 Preferred category:
 
-> **Adaptive website improvement system**
+> **Evidence-to-change website operations**
 
 Useful secondary descriptions:
 
-- evidence-to-change engine;
+- adaptive website improvement system;
 - web signal intelligence;
+- website change intelligence;
 - continuous Search / AI / agent website operations;
 - target-site upgrade intelligence.
 
-Avoid leading with **SEO tool**, **GEO checker**, **AI visibility score** or **autonomous content generator**. They describe fragments of the system and erase the signal-to-change loop.
+Avoid leading with **SEO tool**, **GEO checker**, **AI visibility score** or **autonomous content generator**. They describe fragments of the system and erase the signal-to-change and reverse-impact loop.
 
 ## Voice
 
@@ -91,9 +101,10 @@ SignalBraid should sound curious, sharp and technically literate.
 Prefer:
 
 - “A new signal appeared. Does it matter here?”
-- “These three signals point to one target-site change.”
+- “These signals point to one target-site change.”
 - “This change is grounded in repository evidence.”
 - “Implementation passed. Outcome is still unknown.”
+- “The upstream rule changed; these sites now need re-review.”
 
 Avoid ranking guarantees, vague AI superlatives and claims that every new mechanism matters to every site.
 
@@ -112,6 +123,20 @@ Suggested system:
 Canonical text lockup ends with **ARWP**:
 
 > **SignalBraid · ARWP**
+
+## Product naming system
+
+Use simple functional module names beneath the master brand rather than inventing a new brand for every feature:
+
+- **SignalBraid Radar**
+- **SignalBraid Map**
+- **SignalBraid Plan**
+- **SignalBraid Patch**
+- **SignalBraid Proof**
+- **SignalBraid Watch**
+- **SignalBraid Connect**
+
+ARWP remains the technical foundation and does not need to be repeated in every module name when the full lockup is already visible.
 
 ## Naming boundary
 
