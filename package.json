@@ -21,7 +21,10 @@
     "arwp-growth-experiment": "bin/arwp-growth-experiment.mjs",
     "arwp-growth-remediation": "bin/arwp-growth-remediation.mjs",
     "arwp-trends": "bin/arwp-trends.mjs",
-    "arwp-trend-history": "bin/arwp-trend-history.mjs"
+    "arwp-trend-history": "bin/arwp-trend-history.mjs",
+    "arwp-entities": "bin/arwp-entities.mjs",
+    "arwp-entity-remediation": "bin/arwp-entity-remediation.mjs",
+    "arwp-improve": "bin/arwp-improve.mjs"
   },
   "files": [
     "bin/",
@@ -63,7 +66,10 @@
     "docs/LOOP-STATUS.md",
     "docs/GROWTH-EXPERIMENTS.md",
     "docs/GROWTH-REMEDIATION.md",
-    "docs/TREND-HISTORY.md"
+    "docs/TREND-HISTORY.md",
+    "docs/ENTITY-GRAPH-GAP-REPORT.md",
+    "docs/ENTITY-GRAPH-REMEDIATION.md",
+    "docs/SITE-IMPROVEMENT-PLAN.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
@@ -81,6 +87,10 @@
     "hypotheses": "node bin/arwp-hypotheses.mjs",
     "growth-experiment": "node bin/arwp-growth-experiment.mjs",
     "growth-remediation": "node bin/arwp-growth-remediation.mjs",
+    "entities": "node bin/arwp-entities.mjs",
+    "entity-remediation": "node bin/arwp-entity-remediation.mjs",
+    "improve": "node bin/arwp-improve.mjs",
+    "test:improvement": "node scripts/entity-gap-test.mjs && node scripts/entity-remediation-test.mjs && node scripts/site-improvement-test.mjs && node --check lib/entity-gap.mjs && node --check lib/entity-remediation.mjs && node --check lib/site-improvement.mjs && node --check bin/arwp-entities.mjs && node --check bin/arwp-entity-remediation.mjs && node --check bin/arwp-improve.mjs",
     "test:growth": "node scripts/growth-profile-test.mjs && node scripts/growth-policy-test.mjs && node scripts/growth-history-test.mjs && node scripts/growth-hypotheses-test.mjs && node scripts/growth-experiment-test.mjs && node scripts/growth-remediation-test.mjs && node bin/arwp-hypotheses.mjs check && node --check lib/growth-profile.mjs && node --check lib/growth-plan.mjs && node --check lib/growth-policy.mjs && node --check lib/growth-history.mjs && node --check lib/growth-hypotheses.mjs && node --check bin/arwp-growth.mjs && node --check bin/arwp-growth-policy.mjs && node --check bin/arwp-growth-history.mjs && node --check bin/arwp-hypotheses.mjs && node --check lib/growth-experiment.mjs && node --check bin/arwp-growth-experiment.mjs && node --check lib/growth-remediation.mjs && node --check bin/arwp-growth-remediation.mjs && node --check scripts/growth-experiment-test.mjs && node --check scripts/growth-remediation-test.mjs",
     "trends": "node bin/arwp-trends.mjs",
     "trend-history": "node bin/arwp-trend-history.mjs",
@@ -175,6 +185,10 @@
     "growth-hypotheses",
     "growth-experiments",
     "growth-remediation",
+    "entity-graph",
+    "structured-data",
+    "internal-links",
+    "site-improvement",
     "trend-history"
   ],
   "publishConfig": {
