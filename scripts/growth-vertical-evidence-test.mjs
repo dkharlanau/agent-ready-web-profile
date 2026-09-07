@@ -23,7 +23,7 @@ const software = analyzeVerticalEvidence({
   html: softwareHtml
 });
 assert.equal(software.version, '0.1');
-assert.equal(software.registryVersion, '0.2');
+assert.equal(software.registryVersion, '0.3');
 assert.equal(software.coverage, 'audited-entry-page-public-evidence');
 assert.equal(software.checks.length, 4);
 assert.equal(software.checks.find(item => item.id === 'software-product-identity').status, 'observed');
@@ -87,7 +87,7 @@ const commerce = analyzeVerticalEvidence({
   html: '<!doctype html><html><body><a href="/shipping/">Shipping</a><a href="/returns/">Returns</a></body></html>'
 });
 assert.equal(commerce.checks.find(item => item.id === 'commerce-feed-freshness').status, 'external-owner-data');
-assert.equal(verticalEvidenceActions(commerce).length, 0, 'first adapter release must not turn owner/feed checks into public-crawl remediation');
+assert.equal(verticalEvidenceActions(commerce).length, 0, 'public entry-page evidence must not turn owner/feed checks into crawl-only remediation');
 
 const basePlan = {
   profile: '2026-09-06',
