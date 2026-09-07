@@ -1,41 +1,78 @@
 {
-  "version": "0.1",
-  "reviewedAt": "2026-09-06",
+  "version": "0.2",
+  "reviewedAt": "2026-09-07",
   "purpose": "Keep vertical-specific Search and agent recommendations out of the universal baseline. A site activates one primary class and may opt into additional modules when they truthfully apply.",
   "verticals": {
     "documentation": {
       "focus": ["stable deep links", "llms/readable content where useful", "API/agent discovery", "version freshness", "code/examples"],
       "recommendedStructuredData": ["SoftwareApplication or TechArticle where genuinely applicable"],
+      "checks": [
+        {"id":"documentation-version-context","priority":"P1","title":"Make version and freshness context explicit","evidence":"Visible version/current-support context plus stable version or release-history URLs where the product is versioned."},
+        {"id":"documentation-deep-links","priority":"P1","title":"Keep important tasks addressable with stable crawlable deep links","evidence":"Representative task/API/example pages are reachable through ordinary href links and canonical URLs."},
+        {"id":"documentation-examples","priority":"P2","title":"Pair reference material with runnable or concrete examples","evidence":"Examples accurately match the documented version and do not depend on hidden UI state for basic retrieval."}
+      ],
       "notes": "Do not invent Product/Article markup solely for Search appearance."
     },
     "editorial": {
       "focus": ["author identity", "datePublished/dateModified", "first-hand evidence", "original images/video", "publisher identity"],
       "recommendedStructuredData": ["Article", "NewsArticle", "BlogPosting", "Person/ProfilePage", "Organization"],
+      "checks": [
+        {"id":"editorial-authorship","priority":"P1","title":"Resolve article authors to stable author/profile identities","evidence":"Visible byline and matching Article author URL/ProfilePage or other truthful identity reference."},
+        {"id":"editorial-publication-history","priority":"P1","title":"Keep publication and significant-update dates visible and consistent","evidence":"Visible dates agree with datePublished/dateModified and are changed only for meaningful editorial updates."},
+        {"id":"editorial-original-evidence","priority":"P1","title":"Expose first-hand evidence and original media where it materially supports the article","evidence":"Primary documents, observations, images, data or methodology are linked or explained on the canonical page."}
+      ],
       "notes": "FAQ rich results were deprecated by Google in 2026; FAQ markup is not a current Google growth shortcut."
     },
     "software-product": {
       "focus": ["product identity", "documentation", "release/change history", "support/trust surfaces", "agent/API interfaces", "real examples"],
       "recommendedStructuredData": ["SoftwareApplication", "WebApplication", "Organization or Person"],
+      "checks": [
+        {"id":"software-product-identity","priority":"P1","title":"Keep product identity and software metadata canonical","evidence":"Canonical product page names the product consistently and uses SoftwareApplication/WebApplication only when visible facts support it."},
+        {"id":"software-product-release-history","priority":"P1","title":"Publish stable release or change history","evidence":"Current version/status can be traced to a changelog, release page or other stable dated history without fabricating release markup."},
+        {"id":"software-product-docs-support","priority":"P1","title":"Expose documentation, examples and support/trust as crawlable product-adjacent surfaces","evidence":"Product page and navigation provide ordinary links to real docs/examples/support/trust surfaces that exist."},
+        {"id":"software-product-agent-interfaces","priority":"P2","title":"Advertise agent/API interfaces only when implemented","evidence":"Any API, MCP, A2A, WebMCP, Agent Skill or project-specific declaration maps to an implemented and appropriately scoped capability."}
+      ],
       "notes": "Agent interfaces and llms.txt are interoperability features, not Google ranking factors."
     },
     "commerce": {
       "focus": ["Product data quality", "Merchant Center/feed freshness", "inventory/price consistency", "shipping/returns", "commerce agent protocols where actually supported"],
       "recommendedStructuredData": ["Product", "Offer", "Organization"],
+      "checks": [
+        {"id":"commerce-product-offer-parity","priority":"P1","title":"Keep visible Product/Offer facts consistent with structured data","evidence":"Price, currency, availability, identifiers and offer facts agree between the page and structured data."},
+        {"id":"commerce-feed-freshness","priority":"P1","title":"Reconcile page, feed and owner-platform inventory/price state","evidence":"Merchant/feed freshness and owner-platform state are verified separately from public crawl observations."},
+        {"id":"commerce-policy-surfaces","priority":"P1","title":"Make shipping, returns and seller identity easy to verify","evidence":"Stable public policy pages and seller identity are linked from relevant product/checkout surfaces."}
+      ],
       "notes": "Commerce/UCP support should be a separate adapter/module, not a universal ARWP requirement."
     },
     "local-business": {
       "focus": ["local entity consistency", "address/hours/contact accuracy", "Business Profile", "LocalBusiness structured data", "original location/media evidence"],
       "recommendedStructuredData": ["LocalBusiness", "Organization"],
+      "checks": [
+        {"id":"local-business-identity","priority":"P1","title":"Keep name, address, contact and hours consistent on owned surfaces","evidence":"Canonical location/contact facts are visible and agree with LocalBusiness/Organization structured data where used."},
+        {"id":"local-business-owner-profile","priority":"P1","title":"Verify external business-profile state as owner data","evidence":"Authenticated business-profile category, address, hours and status are reviewed without inferring them from the public website alone."},
+        {"id":"local-business-location-evidence","priority":"P2","title":"Use real location/service evidence rather than generic local landing pages","evidence":"Location pages contain truthful local details, services, media or other first-party evidence and are not doorway variants."}
+      ],
       "notes": "Local recommendations require geographic/business context and should not be generalized to non-local sites."
     },
     "research-dataset": {
       "focus": ["dataset identity", "methodology", "provenance", "license", "citation", "versioning", "download/API access"],
       "recommendedStructuredData": ["Dataset", "ScholarlyArticle or Article where applicable", "Person/Organization"],
+      "checks": [
+        {"id":"research-dataset-identity","priority":"P1","title":"Give each dataset/research release a stable canonical identity","evidence":"Canonical landing page and Dataset metadata identify the same release, creator/publisher and scope."},
+        {"id":"research-dataset-methodology-provenance","priority":"P1","title":"Publish methodology, provenance and limitations beside the data","evidence":"Sampling/collection method, source provenance, caveats and negative results are available from stable URLs."},
+        {"id":"research-dataset-citation-license","priority":"P1","title":"Make citation, license and version history explicit","evidence":"License, preferred citation, release/version identifier and prior-version history are directly retrievable."},
+        {"id":"research-dataset-access","priority":"P2","title":"Provide stable download or API access when the dataset is actually distributable","evidence":"Documented download/API URLs resolve to the declared version and format; restricted data is not falsely advertised as public."}
+      ],
       "notes": "Negative results, sampling limitations and version history are evidence features, not defects to hide."
     },
     "general": {
       "focus": ["technical eligibility", "canonical entity identity", "useful original content", "deep links", "freshness", "measurement"],
       "recommendedStructuredData": ["WebSite", "Organization or Person where applicable"],
+      "checks": [
+        {"id":"general-canonical-identity","priority":"P1","title":"Keep one canonical site/entity identity","evidence":"Canonical URL, visible site name and Organization/Person identity are coherent where applicable."},
+        {"id":"general-deep-links","priority":"P1","title":"Expose important information through crawlable stable links","evidence":"Important destinations are reachable through ordinary links and do not depend on site search or client-only interaction."},
+        {"id":"general-freshness-measurement","priority":"P2","title":"Separate real freshness from visibility measurement","evidence":"Material updates carry truthful dates while Search/AI outcomes are measured independently rather than inferred from markup."}
+      ],
       "notes": "Use a more specific vertical when the site has a clear primary purpose."
     }
   }
