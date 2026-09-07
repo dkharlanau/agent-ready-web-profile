@@ -4,19 +4,23 @@ on:
   push:
     branches: [main]
     paths:
+      - 'package.json'
       - 'schema/transformation-bundle.schema.json'
       - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform.mjs'
       - 'scripts/transformation-engine-test.mjs'
+      - 'scripts/transformation-package-smoke-test.mjs'
       - 'skills/arwp-target-transformation/**'
       - 'docs/TARGET-SITE-TRANSFORMATION.md'
       - '.github/workflows/transformation-engine.yml'
   pull_request:
     paths:
+      - 'package.json'
       - 'schema/transformation-bundle.schema.json'
       - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform.mjs'
       - 'scripts/transformation-engine-test.mjs'
+      - 'scripts/transformation-package-smoke-test.mjs'
       - 'skills/arwp-target-transformation/**'
       - 'docs/TARGET-SITE-TRANSFORMATION.md'
       - '.github/workflows/transformation-engine.yml'
@@ -42,7 +46,12 @@ jobs:
       - name: Validate transformation engine
         run: |
           node scripts/transformation-engine-test.mjs
+          node scripts/transformation-package-smoke-test.mjs
           node --check lib/transformation-engine.mjs
           node --check bin/arwp-transform.mjs
+          node --check scripts/transformation-package-smoke-test.mjs
           node -e "JSON.parse(require('fs').readFileSync('schema/transformation-bundle.schema.json','utf8'))"
           node bin/arwp-transform.mjs --help
+
+      - name: Smoke-test installable package
+        run: npm run test:package
