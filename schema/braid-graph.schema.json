@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/braid-graph.schema.json",
   "title": "ARWP BraidGraph v0.1",
-  "description": "Versioned evidence-to-change graph linking upstream source evidence, target recommendations, repository changes, verification and outcome measurements without inferring causality.",
+  "description": "Versioned evidence-to-change graph linking upstream source evidence, target recommendations, repository changes, Change Receipts, verification and outcome measurements without inferring causality.",
   "type": "object",
   "additionalProperties": false,
   "required": ["version", "generatedAt", "site", "repository", "inputs", "nodes", "edges", "summary", "guardrails"],
@@ -90,7 +90,7 @@
       "required": ["id", "type", "versionKey", "state", "data", "provenance"],
       "properties": {
         "id": { "type": "string", "minLength": 3, "maxLength": 220 },
-        "type": { "enum": ["source", "rule", "site", "surface", "repo-file", "fact", "recommendation", "transform", "verification", "measurement", "policy"] },
+        "type": { "enum": ["source", "rule", "site", "surface", "repo-file", "fact", "recommendation", "transform", "change-receipt", "verification", "measurement", "policy"] },
         "versionKey": { "type": "string", "minLength": 1, "maxLength": 160 },
         "state": { "type": "string", "minLength": 1, "maxLength": 80 },
         "data": { "type": "object", "additionalProperties": true },
