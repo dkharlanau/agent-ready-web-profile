@@ -61,9 +61,13 @@ jobs:
       - name: Validate unified Site Improvement Plan
         run: |
           node scripts/site-improvement-test.mjs
+          node scripts/site-improvement-vertical-test.mjs
           node --check lib/site-improvement.mjs
           node --check lib/site-improvement-deep.mjs
+          node --check lib/site-improvement-vertical.mjs
+          node --check lib/growth-vertical-evidence.mjs
           node --check bin/arwp-improve.mjs
+          node --check scripts/site-improvement-vertical-test.mjs
 
       - name: Validate adaptive content profile
         run: |
