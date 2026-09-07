@@ -95,6 +95,9 @@ jobs:
       - name: Smoke-test npm package
         run: npm run test:package
 
+      - name: Smoke-test improvement package surface
+        run: node scripts/package-improvement-smoke-test.mjs
+
       - name: Validate examples through CLI
         run: |
           node bin/arwp.mjs validate examples/minimal.site-profile.json
