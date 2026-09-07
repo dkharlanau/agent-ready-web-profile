@@ -23,6 +23,8 @@ try {
     'bin/arwp-change-receipt.mjs',
     'lib/change-receipt.mjs',
     'lib/change-receipt-braid.mjs',
+    'lib/change-receipt-adapters.mjs',
+    'lib/change-receipt-transition.mjs',
     'schema/change-receipt.schema.json',
     'docs/CHANGE-RECEIPTS.md'
   ]) assert.ok(paths.has(required), `Change Receipt npm surface is missing ${required}`);
@@ -41,11 +43,14 @@ try {
   assert.equal(installedPackage.scripts['change-receipt'], 'node bin/arwp-change-receipt.mjs');
   assert.equal(installedPackage.scripts['test:change-receipt'].includes('scripts/change-receipt-test.mjs'), true);
   assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', 'arwp-change-receipt')), 'npm bin shim arwp-change-receipt is missing');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'lib', 'change-receipt-transition.mjs')), 'transition hardening helper must ship in npm package');
 
   const cli = path.join(installedRoot, 'bin', 'arwp-change-receipt.mjs');
   const help = execFileSync(process.execPath, [cli, '--help'], { cwd: consumerDir, encoding: 'utf8' });
   assert.match(help, /immutable evidence snapshots/i);
   assert.match(help, /verify-revision/);
+  assert.match(help, /inspect-transition/);
+  assert.match(help, /mergeCommitSha/);
   assert.match(help, /braid-report/);
 
   console.log(`PASS Change Receipt npm package surface (${pack.filename})`);

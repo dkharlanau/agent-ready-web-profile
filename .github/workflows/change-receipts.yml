@@ -9,9 +9,11 @@ on:
       - 'lib/change-receipt.mjs'
       - 'lib/change-receipt-braid.mjs'
       - 'lib/change-receipt-adapters.mjs'
+      - 'lib/change-receipt-transition.mjs'
       - 'bin/arwp-change-receipt.mjs'
       - 'scripts/change-receipt-test.mjs'
       - 'scripts/change-receipt-adapters-test.mjs'
+      - 'scripts/change-receipt-transition-test.mjs'
       - 'scripts/change-receipt-package-test.mjs'
       - 'docs/CHANGE-RECEIPTS.md'
       - 'package.json'
@@ -23,9 +25,11 @@ on:
       - 'lib/change-receipt.mjs'
       - 'lib/change-receipt-braid.mjs'
       - 'lib/change-receipt-adapters.mjs'
+      - 'lib/change-receipt-transition.mjs'
       - 'bin/arwp-change-receipt.mjs'
       - 'scripts/change-receipt-test.mjs'
       - 'scripts/change-receipt-adapters-test.mjs'
+      - 'scripts/change-receipt-transition-test.mjs'
       - 'scripts/change-receipt-package-test.mjs'
       - 'docs/CHANGE-RECEIPTS.md'
       - 'package.json'
@@ -53,13 +57,15 @@ jobs:
         run: |
           node scripts/change-receipt-test.mjs
           node scripts/change-receipt-adapters-test.mjs
+          node scripts/change-receipt-transition-test.mjs
           node scripts/braid-graph-test.mjs
           node --check lib/change-receipt.mjs
           node --check lib/change-receipt-braid.mjs
           node --check lib/change-receipt-adapters.mjs
+          node --check lib/change-receipt-transition.mjs
           node --check bin/arwp-change-receipt.mjs
           node -e "const fs=require('fs'); for (const file of ['schema/change-receipt.schema.json','schema/braid-graph.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
-          node bin/arwp-change-receipt.mjs --help | grep -qi 'canonical outcome adapters'
+          node bin/arwp-change-receipt.mjs --help | grep -qi 'mergeCommitSha'
 
       - name: Validate packaged Change Receipt surface
         run: node scripts/change-receipt-package-test.mjs

@@ -3,12 +3,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   createChangeReceipt,
-  reviseChangeReceipt,
   validateChangeReceipt,
   verifyChangeReceipt,
   verifyChangeReceiptRevision,
   changeReceiptStatus
 } from '../lib/change-receipt.mjs';
+import {
+  reviseChangeReceiptWithTransitionEvidence,
+  inspectGitHubTransitionEvidence
+} from '../lib/change-receipt-transition.mjs';
 import { mergeChangeReceiptIntoBraidGraph, changeReceiptBraidReport } from '../lib/change-receipt-braid.mjs';
 import { artifactAdapterSummary } from '../lib/change-receipt-adapters.mjs';
 
@@ -19,12 +22,15 @@ Usage:
   arwp-change-receipt create <transform-bundle.json> <braid.json> [--execution-kind=local|github-pr --execution=<json>] [--evidence-receipt=<json> --evidence-role=<role>] [--verifications=<json>] [--outcomes=<json>] [--deployment=<json>] [--review=<json>] [--out=<json>]
   arwp-change-receipt revise <receipt.json> [--execution-kind=local|github-pr --execution=<json>] [--mutation=<json>] [--braid=<current-braid.json>] [--evidence-receipt=<json> --evidence-role=<role>] [--verifications=<json>] [--outcomes=<json>] [--visibility=<a.json,b.json>] [--agent-eval=<a.json,b.json>] [--growth-experiment=<a.json,b.json>] [--operation-id=<id>] [--deployment=<json>] [--review=<json>] [--out=<json>]
   arwp-change-receipt adapt <receipt.json> [--visibility=<a.json,b.json>] [--agent-eval=<a.json,b.json>] [--growth-experiment=<a.json,b.json>] [--operation-id=<id>]
+  arwp-change-receipt inspect-transition <receipt.json>
   arwp-change-receipt validate <receipt.json>
   arwp-change-receipt verify <receipt.json>
   arwp-change-receipt verify-revision <previous.json> <current.json>
   arwp-change-receipt status <receipt.json>
   arwp-change-receipt braid <braid.json> <receipt.json> [--out=<json>]
   arwp-change-receipt braid-report <braid.json>
+
+For a merged transition, the --mutation JSON must include state=merged, mergeCommitSha, mergedAt/observedAt and explicit evidenceRefs/evidence/mergeUrl. A deployed transition must follow a hardened merged revision and provide deployment.state=deployed with the same commit SHA and explicit deployment evidence.
 
 Canonical outcome adapters preserve provider/task/experiment evidence without inferring causality. Change Receipts are immutable evidence snapshots: new verification/deployment/outcome/re-review evidence creates a new revision; historical receipts are never rewritten.`);
 }
@@ -151,13 +157,18 @@ function main() {
       ...(typeof flags.mutation === 'string' ? { mutation: readJson(flags.mutation, 'Mutation transition evidence') } : {}),
       ...(typeof flags.braid === 'string' ? { braidGraph: readJson(flags.braid, 'Current BraidGraph') } : {})
     };
-    write(reviseChangeReceipt(previous, updates), flags.out);
+    write(reviseChangeReceiptWithTransitionEvidence(previous, updates), flags.out);
     return;
   }
 
   if (command === 'adapt') {
     const receipt = readJson(positionals[1], 'Change Receipt');
     write(canonicalAdapters(receipt, flags), flags.out);
+    return;
+  }
+
+  if (command === 'inspect-transition') {
+    write(inspectGitHubTransitionEvidence(readJson(positionals[1], 'Change Receipt')));
     return;
   }
 
