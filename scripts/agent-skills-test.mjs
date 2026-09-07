@@ -20,20 +20,24 @@ function parseFrontmatter(text, file) {
   return out;
 }
 
-assert.equal(index.version, '0.1');
+assert.equal(index.version, '0.2');
 assert.equal(index.standard, 'Agent Skills');
 assert.ok(index.skills.length >= 5, 'ARWP must retain its core multi-skill architecture');
 assert.equal(index.composition.default, 'arwp-growth-loop');
+assert.equal(index.composition.searchMaturity, 'arwp-search-maturity');
 assert.equal(index.composition.sitePreparation, 'arwp-prepare-site');
 assert.equal(index.composition.upgradeCompiler, 'arwp-adaptive-upgrade');
 assert.equal(index.composition.transformationDelivery, 'arwp-target-transformation');
+assert.equal(index.composition.futureSearch, 'arwp-future-search');
 
 const expectedCoreSkills = [
   'arwp-growth-loop',
+  'arwp-search-maturity',
   'arwp-adaptive-upgrade',
   'arwp-target-transformation',
   'arwp-prepare-site',
   'arwp-ai-search-content',
+  'arwp-future-search',
   'arwp-dataset-publication',
   'arwp-agent-discovery',
   'arwp-evidence-ci'
@@ -62,6 +66,9 @@ for (const skill of index.skills) {
 const growth = fs.readFileSync(path.join(skillsRoot, 'arwp-growth-loop', 'SKILL.md'), 'utf8');
 for (const expected of ['arwp-trends', 'arwp-hypotheses', 'arwp-growth', 'research', 'measure', 'negative results']) assert.match(growth, new RegExp(expected, 'i'));
 
+const searchMaturity = fs.readFileSync(path.join(skillsRoot, 'arwp-search-maturity', 'SKILL.md'), 'utf8');
+for (const expected of ['reference cohort', 'rankEvidence', 'unknown', 'correlation', 'negative results']) assert.match(searchMaturity, new RegExp(expected, 'i'));
+
 const adaptive = fs.readFileSync(path.join(skillsRoot, 'arwp-adaptive-upgrade', 'SKILL.md'), 'utf8');
 for (const expected of ['knowledge', 'verification', 'measurement', 'review-due']) assert.match(adaptive, new RegExp(expected, 'i'));
 
@@ -77,6 +84,8 @@ assert.match(prepare, /references\/file-matrix\.md/);
 const content = fs.readFileSync(path.join(skillsRoot, 'arwp-ai-search-content', 'SKILL.md'), 'utf8');
 assert.match(content, /non-commodity/i);
 assert.match(content, /primary sources/i);
+const futureSearch = fs.readFileSync(path.join(skillsRoot, 'arwp-future-search', 'SKILL.md'), 'utf8');
+for (const expected of ['semantic', 'evidence graph', 'ranking']) assert.match(futureSearch, new RegExp(expected, 'i'));
 const dataset = fs.readFileSync(path.join(skillsRoot, 'arwp-dataset-publication', 'SKILL.md'), 'utf8');
 for (const expected of ['dataset', 'DOI', 'version']) assert.match(dataset, new RegExp(expected, 'i'));
 const discovery = fs.readFileSync(path.join(skillsRoot, 'arwp-agent-discovery', 'SKILL.md'), 'utf8');
@@ -84,4 +93,4 @@ for (const mechanism of ['Agent Skills', 'ARD', 'MCP', 'A2A', 'WebMCP', 'OpenAPI
 const evidence = fs.readFileSync(path.join(skillsRoot, 'arwp-evidence-ci', 'SKILL.md'), 'utf8');
 assert.match(evidence, /read-only/i);
 
-console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration, adaptive upgrade intelligence, safe transformation delivery and evidence-safe workflows`);
+console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration, reference-cohort learning, adaptive upgrade intelligence, future-search experimentation, safe transformation delivery and evidence-safe workflows`);
