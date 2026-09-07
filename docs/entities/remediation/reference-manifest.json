@@ -21,7 +21,7 @@
       "verify-deployment": 1
     },
     "repository": {
-      "filesScanned": 3,
+      "filesScanned": 4,
       "truncated": false,
       "parseErrors": 0
     }
@@ -80,7 +80,7 @@
       "entityId": "https://example.com/#guide",
       "entityName": "Implementation Guide",
       "problem": "Entity is structurally isolated from the other observed entities.",
-      "recommendation": "Add truthful relations only when grounded.",
+      "recommendation": "Add truthful relations such as author, provider, publisher, about, isPartOf, inDefinedTermSet, or isRelatedTo.",
       "disposition": "relationship-review",
       "automation": "proposal-only",
       "humanReviewRequired": true,
@@ -94,7 +94,7 @@
       "entityId": "https://example.com/#dataset",
       "entityName": "Cases Dataset",
       "problem": "Entity is structurally isolated from the other observed entities.",
-      "recommendation": "Add truthful relations only when grounded.",
+      "recommendation": "Add truthful relations such as author, provider, publisher, about, isPartOf, inDefinedTermSet, or isRelatedTo.",
       "disposition": "verify-deployment",
       "automation": "proposal-only",
       "humanReviewRequired": true,
@@ -103,7 +103,7 @@
       "proposal": {"type":"verification","check":"Repository evidence already contains relation creator; verify deployed structured data."}
     }
   ],
-  "repositoryEvidence": {"repoRoot":"synthetic-reference-repository","filesScanned":3,"truncated":false,"parseErrors":[]},
+  "repositoryEvidence": {"repoRoot":"synthetic-reference-repository","filesScanned":4,"truncated":false,"parseErrors":[]},
   "guardrails": {
     "writesTargetRepository": false,
     "appliesPatches": false,
