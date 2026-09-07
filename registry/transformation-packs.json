@@ -184,6 +184,43 @@
         "unsupportedFailsClosed": true,
         "noRankingGuarantee": true
       }
+    },
+    {
+      "id": "nextjs-app-router-v0.1",
+      "version": "0.1",
+      "status": "experimental",
+      "description": "Fail-closed preparation for deterministic Next.js App Router metadata routes. Dynamic route expansion, computed metadata and policy/runtime surfaces remain outside automatic mutation.",
+      "adapters": ["nextjs"],
+      "recipes": [
+        {
+          "id": "machine-surface-replace",
+          "mode": "machine-file-replace",
+          "ownershipScope": "surface",
+          "automationClass": "grounded-template",
+          "surfaceTypes": ["sitemap", "agent-discovery", "api-description", "other-machine-surface"],
+          "allowedFileRoles": ["machine-surface", "data"],
+          "allowedMutationClasses": ["mechanical", "grounded-template"],
+          "requiredInputs": ["content"],
+          "requiresReviewedGrounding": true,
+          "verification": [
+            "run the target Next.js build and repository checks",
+            "re-map the repository and verify the metadata route remains source-owned",
+            "re-run the protocol/search checks relevant to the changed surface"
+          ]
+        }
+      ],
+      "guardrails": {
+        "exactOwnershipRequired": true,
+        "digestPreconditionRequired": true,
+        "noPathGuessing": true,
+        "noProductionMutation": true,
+        "noEditorialGeneration": true,
+        "noPolicyMutation": true,
+        "noOwnerPlatformMutation": true,
+        "noRuntimeMutation": true,
+        "unsupportedFailsClosed": true,
+        "noRankingGuarantee": true
+      }
     }
   ]
 }

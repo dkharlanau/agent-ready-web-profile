@@ -8,11 +8,14 @@ on:
       - 'registry/transformation-packs.json'
       - 'lib/transformation-pack.mjs'
       - 'lib/repository-mapper.mjs'
+      - 'lib/repository-mapper-frameworks.mjs'
       - 'lib/repository-mapper-astro.mjs'
+      - 'lib/repository-mapper-nextjs.mjs'
       - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform-pack.mjs'
       - 'scripts/transformation-pack-test.mjs'
       - 'scripts/transformation-pack-astro-test.mjs'
+      - 'scripts/repository-mapper-nextjs-test.mjs'
       - 'docs/TRANSFORMATION-PACKS.md'
       - 'schema/transformation-bundle.schema.json'
       - 'schema/site-state-graph.schema.json'
@@ -24,11 +27,14 @@ on:
       - 'registry/transformation-packs.json'
       - 'lib/transformation-pack.mjs'
       - 'lib/repository-mapper.mjs'
+      - 'lib/repository-mapper-frameworks.mjs'
       - 'lib/repository-mapper-astro.mjs'
+      - 'lib/repository-mapper-nextjs.mjs'
       - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform-pack.mjs'
       - 'scripts/transformation-pack-test.mjs'
       - 'scripts/transformation-pack-astro-test.mjs'
+      - 'scripts/repository-mapper-nextjs-test.mjs'
       - 'docs/TRANSFORMATION-PACKS.md'
       - 'schema/transformation-bundle.schema.json'
       - 'schema/site-state-graph.schema.json'
@@ -57,14 +63,17 @@ jobs:
         run: |
           node scripts/transformation-pack-test.mjs
           node scripts/transformation-pack-astro-test.mjs
+          node scripts/repository-mapper-nextjs-test.mjs
           node --check lib/transformation-pack.mjs
           node --check lib/repository-mapper-astro.mjs
+          node --check lib/repository-mapper-nextjs.mjs
           node --check bin/arwp-transform-pack.mjs
           node -e "for (const file of ['schema/transformation-pack-registry.schema.json','registry/transformation-packs.json']) JSON.parse(require('fs').readFileSync(file,'utf8'));"
           node bin/arwp-transform-pack.mjs validate | grep -q '"valid": true'
           node bin/arwp-transform-pack.mjs list --adapter=static-html | grep -q 'static-html-core-v0.1'
           node bin/arwp-transform-pack.mjs list --adapter=jekyll | grep -q 'jekyll-core-v0.1'
           node bin/arwp-transform-pack.mjs list --adapter=astro | grep -q 'astro-core-v0.1'
+          node bin/arwp-transform-pack.mjs list --adapter=nextjs | grep -q 'nextjs-app-router-v0.1'
 
       - name: Verify npm package surface
         run: |
@@ -76,6 +85,7 @@ jobs:
             'schema/transformation-pack-registry.schema.json',
             'registry/transformation-packs.json',
             'lib/transformation-pack.mjs',
+            'lib/repository-mapper-nextjs.mjs',
             'bin/arwp-transform-pack.mjs'
           ]) {
             if (!files.has(required)) throw new Error(`npm package is missing ${required}`);

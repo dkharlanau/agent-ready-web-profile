@@ -1,6 +1,6 @@
 # SignalBraid Repository Mapper / Site State Graph
 
-Status: **v0.1 · static HTML + Jekyll + Astro · 2026-09-07**.
+Status: **v0.1 · static HTML + Jekyll + Astro + Next.js App Router · 2026-09-07**.
 
 Repository Mapper is the `Map` layer between an Adaptive Upgrade recommendation and a deterministic repository transformation. Its narrow question is:
 
@@ -46,55 +46,61 @@ Post/collection routes that require unresolved configuration or plugin execution
 
 Astro v0.1 maps only framework-native ownership that can be established without executing Astro or target repository code.
 
-Evidence sources:
+Evidence sources include:
 
 - `astro.config.mjs|js|ts|cjs` and/or an `astro` package dependency;
-- documented file-based routing from static files in `src/pages` (or an inspectable literal `srcDir`);
-- inspectable literal `build.format`, `output`, `site`, `base`, `trailingSlash`, `srcDir` and `publicDir` options;
+- documented file-based routing from static files in `src/pages`;
+- inspectable literal routing/build configuration;
 - exact relative `.astro` imports for component/layout build-path evidence;
 - exact machine files copied from `public/`.
 
-Supported page-source extensions are `.astro`, `.md`, `.mdx` (only when `@astrojs/mdx` is proven from package dependencies), and `.html`.
+Dynamic bracket routes, `getStaticPaths()` expansion, unresolved i18n/configuration, and runtime/server output fail closed unless static ownership is directly inspectable. Generated `dist/`, `.astro/`, `build/` and similar output is never preferred as source authority.
 
-Route path calculation respects `build.format`:
+### `nextjs`
+
+Next.js v0.1 is intentionally narrower than a general Next.js parser. It supports **App Router source ownership only** and does not execute Next.js, React, Server Components, route handlers, proxy/middleware code, or application imports.
+
+Detection evidence:
+
+- `next.config.js|mjs|cjs|ts` and/or a `next` package dependency;
+- exactly one App Router source root: `app/` or `src/app/`.
+
+Static App Router page ownership is resolved only when the file path itself proves the route. Next.js defaults to the non-trailing-slash URL spelling, so without `trailingSlash: true`:
 
 ```text
-# directory (default)
-src/pages/index.astro       → /
-src/pages/about.astro       → /about/
-src/pages/about/index.astro → /about/   # collision if both exist
-
-# file
-src/pages/about.astro       → /about.html
-src/pages/about/index.astro → /about.html
-
-# preserve
-src/pages/about.astro       → /about.html
-src/pages/about/index.astro → /about/
+src/app/page.tsx                     → /
+src/app/about/page.tsx               → /about
+src/app/(marketing)/pricing/page.tsx → /pricing
 ```
 
-Astro routes fail closed when exact public ownership requires behavior the mapper refuses to execute:
+With literal `trailingSlash: true`, non-file page routes become `/about/`, `/pricing/`, and so on. Computed `trailingSlash` or `skipTrailingSlashRedirect` state fails closed because v0.1 will not guess the canonical route spelling.
 
-- bracket/dynamic routes such as `[slug].astro`;
-- `getStaticPaths()` expansion;
-- on-demand/server rendering unless a route has an inspectable `export const prerender = true` override;
-- per-page computed `prerender` expressions;
-- i18n routing;
-- computed/uninspectable critical config values;
-- integration-generated routes and redirects (reported as warnings, not invented as file routes).
+Route groups such as `(marketing)` do not become URL segments. Bracket routes such as `[locale]`, `[slug]` or catch-all segments remain `unresolved`; no concrete path is invented. Parallel/intercepting routing is also unresolved.
 
-A static file route may still record literal canonical/JSON-LD/title/description/robots source ownership when directly visible in the page source. Dynamic metadata expressions are not reduced to invented values.
+The adapter records exact ancestor `layout.*`, `next.config.*` and `package.json` files in the page build path where present. It detects `generateMetadata()` but does **not** infer field-level metadata values from executable code.
 
-## Astro evidence receipt
+Root App Router metadata routes are source-owned directly when their output path is deterministic:
 
-`fixtures/repository-mapper/astro-official-basics.json` pins the independently reviewable upstream evidence used for this adapter:
+```text
+src/app/sitemap.ts  → /sitemap.xml
+src/app/robots.ts   → /robots.txt
+src/app/manifest.ts → /manifest.webmanifest
+```
 
-- `withastro/astro` commit `9870f95601690d9d98799b6fa78a0bc76165ee06`;
-- the official `examples/basics/astro.config.mjs` blob;
-- the official `examples/basics/src/pages/index.astro` blob;
-- current Astro routing/configuration documentation URLs.
+`robots.ts` remains `policy-gated`. Mapping a crawler-policy source never turns it into an automatically mutable surface.
 
-The fixture is an evidence manifest, not vendored framework source. CI does not fetch or execute upstream Astro code.
+A `sitemap.ts/js` exporting `generateSitemaps()` is not mapped to ordinary `/sitemap.xml`; Next.js generates ID-specific sitemap paths in that mode, so v0.1 records the sitemap surface as unresolved rather than inventing IDs.
+
+Routing fails closed when a critical value is not inspectable:
+
+- computed `basePath`;
+- computed/ambiguous trailing-slash behavior;
+- rewrites that can change public route interpretation;
+- dynamic/parallel/intercepting segments;
+- `generateSitemaps()` output IDs;
+- Pages Router-only repositories in v0.1.
+
+Redirects and response headers are recorded as warnings rather than executed. A literal configured `basePath` must agree with the requested site base path. Generated `.next/`, `out/`, `dist/`, `build/` and `.vercel/` output is excluded as source authority.
 
 ## Compile
 
@@ -114,12 +120,12 @@ node bin/arwp-map-repo.mjs compile \
 Supported `--adapter` values:
 
 ```text
-auto | static-html | jekyll | astro
+auto | static-html | jekyll | astro | nextjs
 ```
 
-`auto` first uses explicit framework evidence. If Astro and Jekyll signals coexist at the same site root, auto-detection stops with an error instead of selecting one silently.
+`auto` uses explicit framework evidence first. If more than one supported framework signal coexists at the same site root, detection stops with an error rather than choosing one silently.
 
-For Astro, a literal `site` or `base` in `astro.config.*` must agree with the requested public site/base path. Conflict is a hard failure because an ownership graph with the wrong public identity is unsafe.
+For Astro, literal `site` / `base` identity must agree with the requested public site. For Next.js, literal `basePath` must agree with the requested base path. Identity conflicts are hard failures because a graph tied to the wrong public URL is unsafe.
 
 ## Validate and resolve
 
@@ -135,7 +141,7 @@ Validation includes JSON Schema plus semantic checks: resolved route/surface own
 
 ## Ambiguity is a first-class result
 
-If two sources map to the same public route, for example Astro `src/pages/about.astro` and `src/pages/about/index.astro` under `build.format: 'directory'`, the graph records both candidates:
+If several sources could own the same public surface, the graph records candidates instead of selecting one opportunistically:
 
 ```json
 {
@@ -148,35 +154,33 @@ Downstream layers must preserve this state. More automation is not a valid reaso
 
 ## Build-path evidence
 
-Jekyll can preserve a route chain such as:
+Examples:
 
 ```text
+# Jekyll
 index.md → _layouts/default.html → _includes/head.html → _config.yml
+
+# Astro
+src/pages/index.astro → src/layouts/Base.astro → astro.config.mjs → package.json
+
+# Next.js App Router
+src/app/about/page.tsx → src/app/layout.tsx → next.config.ts → package.json
 ```
 
-Astro can preserve explicit relative component/layout dependencies such as:
-
-```text
-src/pages/index.astro
-  → src/layouts/Base.astro
-  → src/components/Head.astro
-  → astro.config.mjs
-  → package.json
-```
-
-Only exact relative `.astro` imports that resolve to scanned files are followed. Alias imports, computed imports and framework execution are not guessed.
+Only dependencies the adapter can establish without arbitrary target-code execution are recorded.
 
 ## Machine surfaces
 
-Static/Jekyll machine files and Astro `public/` machine files can map to source ownership for surfaces such as:
+Mapped source-owned machine surfaces may include:
 
-- `robots.txt`;
-- sitemap XML;
-- `llms.txt`;
-- selected agent discovery files;
-- OpenAPI descriptions.
+- `robots.txt` / Next.js `robots.ts`;
+- sitemap XML / deterministic Next.js `sitemap.ts`;
+- `llms.txt` where the stack exposes an actual file-owned surface;
+- selected agent-discovery files;
+- OpenAPI descriptions;
+- Next.js manifest metadata routes.
 
-Mutation classes remain explicit. For example, crawler policy stays policy-gated and an `llms.txt` editorial surface is not silently reclassified as mechanical just to enable automation.
+Mutation classes remain explicit. Crawler policy stays policy-gated and editorial surfaces are not reclassified as mechanical simply to increase automation coverage.
 
 ## Adaptive Upgrade and BraidGraph integration
 
@@ -194,39 +198,48 @@ Repository Mapper is local and read-only.
 
 - symbolic links are not followed;
 - repository escape via `..` is rejected;
-- generated/output directories such as `_site`, `dist`, `.astro`, `.next`, `build` and `out` are excluded as source authority;
+- generated/output directories are excluded as source authority;
 - file count and file size are bounded;
 - no shell command from the target repository is executed;
-- Jekyll/Liquid/Astro/plugin/integration code is not executed to manufacture ownership evidence;
-- server/runtime state is not relabeled as static file ownership.
+- framework/plugin/application code is not executed to manufacture ownership evidence;
+- server/runtime state is not relabeled as deterministic file ownership.
 
 ## Current limitations
 
 The mapper deliberately does not claim general support for:
 
 - Astro dynamic routes, i18n route rewriting, computed critical config or integration-generated routes;
-- Next.js ownership where routes/metadata depend on runtime/server components or generated manifests;
-- Docusaurus until a dedicated adapter has reproducible source-ownership evidence;
+- Next.js Pages Router in v0.1;
+- Next.js concrete expansion of bracket, parallel or intercepting routes;
+- Next.js field-level ownership produced by `generateMetadata()` or arbitrary Server Component execution;
+- Next.js rewrite/runtime semantics beyond preserving them as a blocker/warning;
+- Next.js `generateSitemaps()` ID expansion;
+- Docusaurus until its dedicated adapter has reproducible source-ownership evidence;
 - WordPress/Shopify/CMS content as local-file ownership;
-- Jekyll collection/post routing that needs unresolved config/plugin execution;
-- computed metadata whose source value cannot be established directly.
+- Jekyll collection/post routing that needs unresolved config/plugin execution.
 
 ## Verification
 
 Dedicated CI covers:
 
 - static GitHub Pages mapping;
-- Jekyll mapping, front-matter ownership and duplicate/unresolved routes;
-- Astro static route mapping and adapter auto-detection;
-- Astro layout/component build paths;
-- Astro `public/` machine-surface ownership;
-- Astro dynamic route fail-closed behavior;
-- Astro server/prerender boundaries;
-- Astro unsupported config fail-closed behavior;
-- Astro route-collision ambiguity;
+- Jekyll front-matter/build ownership;
+- Astro route/config/layout/public ownership and fail-closed boundaries;
+- Next.js App Router static page ownership;
+- Next.js default and `trailingSlash: true` URL normalization;
+- computed trailing-slash/base-path blocking;
+- Next.js route-group handling and dynamic route blocking;
+- rewrites blocking;
+- deterministic root metadata-route ownership;
+- `generateSitemaps()` fail-closed behavior;
+- policy boundary for `robots.ts`;
+- Pages Router-only rejection and conflicting-framework detection;
+- deterministic no-op / reviewed grounding / digest-drift behavior for the Next.js transformation pack;
 - generated-output and symlink exclusion;
 - BraidGraph and mapped-transform preparation regression;
 - current ARWP GitHub Pages dogfood.
+
+The adapter was additionally checked against the current owner-controlled private `dkharlanau/ptichi-site` repository through the connected GitHub integration during development: its root `sitemap.ts`, `robots.ts` and `manifest.ts` ownership is inspectable while locale bracket routes remain unresolved. That private source is deliberately **not** copied into ARWP fixtures and ARWP CI does not request cross-repository secrets.
 
 ## Guardrails
 
@@ -234,11 +247,11 @@ Dedicated CI covers:
 - ambiguity and unsupported runtime state remain explicit;
 - generated output is not preferred over source;
 - policy/editorial decisions remain gated;
+- private target source is not copied into public fixtures merely to make CI convenient;
 - no ranking, recommendation or AI-citation guarantee follows from a successful map.
 
 ## Next adapters
 
-1. harden Astro/Jekyll against more real-world evidence manifests;
-2. Docusaurus/documentation generators;
-3. selected Next.js patterns only where source ownership is provable without arbitrary application execution;
-4. explicit CMS/API ownership adapters where content is not file-owned.
+1. Docusaurus/documentation generators with reproducible route/source ownership;
+2. harden Next.js against additional patterns only when they stay non-executing and fail-closed;
+3. explicit CMS/API ownership adapters where content is not file-owned.

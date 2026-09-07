@@ -35,7 +35,7 @@
       "additionalProperties": false,
       "required": ["id", "version", "detection", "confidence"],
       "properties": {
-        "id": { "enum": ["static-html", "jekyll", "astro"] },
+        "id": { "enum": ["static-html", "jekyll", "astro", "nextjs"] },
         "version": { "const": "0.1" },
         "detection": { "type": "array", "items": { "type": "string", "minLength": 1 } },
         "confidence": { "enum": ["deterministic", "explicit-config"] }
@@ -119,7 +119,7 @@
       "required": ["path", "evidenceClass", "confidence", "evidence"],
       "properties": {
         "path": { "type": "string", "minLength": 1 },
-        "evidenceClass": { "enum": ["direct-static-path", "explicit-permalink", "jekyll-page-convention", "machine-file-path", "astro-file-route", "astro-dynamic-route", "astro-public-file"] },
+        "evidenceClass": { "enum": ["direct-static-path", "explicit-permalink", "jekyll-page-convention", "machine-file-path", "astro-file-route", "astro-dynamic-route", "astro-public-file", "next-app-route", "next-dynamic-route", "next-metadata-route"] },
         "confidence": { "enum": ["deterministic", "explicit", "ambiguous"] },
         "evidence": { "type": "array", "items": { "type": "string", "minLength": 1 } }
       }
