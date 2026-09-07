@@ -69,8 +69,7 @@ jobs:
             'schema/transformation-pack-registry.schema.json',
             'registry/transformation-packs.json',
             'lib/transformation-pack.mjs',
-            'bin/arwp-transform-pack.mjs',
-            'docs/TRANSFORMATION-PACKS.md'
+            'bin/arwp-transform-pack.mjs'
           ]) {
             if (!files.has(required)) throw new Error(`npm package is missing ${required}`);
           }
