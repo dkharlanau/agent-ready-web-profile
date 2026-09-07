@@ -1,0 +1,183 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "title": "ARWP Future Search Experiments",
+  "purpose": "Track machine-readable, semantic, retrieval and browser-agent mechanisms that may improve future search interoperability even when no current ranking benefit is documented.",
+  "methodology": {
+    "principle": "Future-ready does not mean speculative markup volume. Prefer open standards, stable identifiers, truthful entity relations, inspectable evidence and reversible experiments.",
+    "separateFromPlatformRequirements": true,
+    "noRankingClaimWithoutPlatformEvidence": true,
+    "noInventedFacts": true,
+    "visibleFactParityForEmbeddedMarkup": true,
+    "aggregateMachineIndexesAreOptional": true,
+    "measureExternalOutcomesSeparately": true
+  },
+  "maturity": ["foundation", "experiment", "watch"],
+  "experiments": [
+    {
+      "id": "schemaorg-beyond-current-google-gallery",
+      "maturity": "foundation",
+      "confidence": "high",
+      "layer": "structured-data",
+      "title": "Use applicable Schema.org semantics beyond today's Google rich-result gallery",
+      "rationale": "Google documents that Schema.org objects and properties it does not currently require may still be useful to other search engines, services, tools and platforms, and some may enable future Search features.",
+      "appliesTo": ["all-sites"],
+      "implementation": [
+        "Classify the real page and entity first.",
+        "Use the most specific truthful Schema.org types and properties supported by visible or grounded first-party facts.",
+        "Prefer stable @id references so the same entity is not recreated differently across pages.",
+        "Keep current rich-result eligibility separate from broader semantic value."
+      ],
+      "candidateRelations": ["mainEntity", "about", "mentions", "isPartOf", "hasPart", "subjectOf", "citation", "isBasedOn", "sameAs", "author", "publisher", "provider", "maintainer"],
+      "verification": ["Parse JSON-LD.", "Verify referenced @id nodes resolve consistently inside the site graph.", "Compare embedded facts with visible page facts."],
+      "sources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+        "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+        "https://schema.org/version/latest/"
+      ]
+    },
+    {
+      "id": "semantic-page-entity-index",
+      "maturity": "experiment",
+      "confidence": "medium",
+      "layer": "semantic-index",
+      "title": "Publish a bounded semantic index of canonical pages and reusable entities",
+      "rationale": "A deterministic page-to-entity graph gives crawlers, retrieval systems and agents one compact machine-readable map without replacing canonical HTML or claiming special search discovery behavior.",
+      "appliesTo": ["documentation", "software-product", "research-dataset", "editorial", "general"],
+      "implementation": [
+        "Generate an optional JSON-LD graph from the canonical page manifest and entity catalog.",
+        "Represent canonical pages as WebPage-family nodes with stable page @id values, isPartOf WebSite and mainEntity references.",
+        "Represent the page inventory as an ItemList.",
+        "Do not make the aggregate file a substitute for page-local structured data or visible navigation."
+      ],
+      "candidateTypes": ["WebSite", "WebPage", "CollectionPage", "ProfilePage", "TechArticle", "ItemList", "ListItem"],
+      "verification": ["No duplicate @id values.", "Every indexed page is HTTPS and canonical.", "Every declared mainEntity is either present in the entity catalog or explicitly external.", "No noindex/non-canonical route enters the index."],
+      "sources": [
+        "https://schema.org/WebPage",
+        "https://schema.org/ItemList",
+        "https://schema.org/version/latest/"
+      ]
+    },
+    {
+      "id": "evidence-relation-graph",
+      "maturity": "experiment",
+      "confidence": "medium",
+      "layer": "evidence-graph",
+      "title": "Connect claims, methods, datasets, software and publications with explicit evidence relations",
+      "rationale": "Future retrieval systems benefit when a page's subject and supporting first-party artifacts can be followed through stable graph relations instead of inferred only from prose.",
+      "appliesTo": ["research-dataset", "software-product", "documentation", "editorial"],
+      "implementation": [
+        "Use citation and isBasedOn only for real source relationships.",
+        "Use hasPart/isPartOf for genuine collections and component resources.",
+        "Use subjectOf to connect a reusable entity to pages or creative works about it.",
+        "Expose real downloadable data/code/artifacts as their own entities when they have durable identity."
+      ],
+      "candidateRelations": ["citation", "isBasedOn", "hasPart", "isPartOf", "subjectOf", "mainEntity", "about"],
+      "verification": ["Every relation has an inspectable source or visible counterpart.", "No decorative citations or synthetic evidence nodes.", "Identifiers remain stable across releases where the entity identity is stable."],
+      "sources": ["https://schema.org/CreativeWork", "https://schema.org/Dataset", "https://schema.org/SoftwareApplication"]
+    },
+    {
+      "id": "schemaorg-equivalence-awareness",
+      "maturity": "watch",
+      "confidence": "medium",
+      "layer": "vocabulary-interoperability",
+      "title": "Track Schema.org equivalence mappings to adjacent open vocabularies",
+      "rationale": "Schema.org 30.0 added equivalence annotations and exports involving GS1, Dublin Core and Open Graph. ARWP should use those mappings to improve interoperability decisions rather than invent duplicate proprietary fields.",
+      "appliesTo": ["all-sites"],
+      "implementation": [
+        "Record the reviewed Schema.org release in semantic tooling.",
+        "Prefer upstream equivalent properties/types when integrating external metadata vocabularies.",
+        "Do not emit redundant fields merely because multiple vocabularies exist."
+      ],
+      "verification": ["Re-review Schema.org release notes before promoting a mapping into an implementation rule.", "Preserve source vocabulary and mapping provenance."],
+      "sources": ["https://schema.org/docs/releases.html", "https://schema.org/version/latest/"]
+    },
+    {
+      "id": "intent-to-evidence-feedback-graph",
+      "maturity": "experiment",
+      "confidence": "high",
+      "layer": "retrieval-feedback",
+      "title": "Map observed search and AI retrieval intents to canonical pages and evidence assets",
+      "rationale": "Bing AI Performance exposes grounding-query samples and page-level citation activity. Joint Search Console query+page evidence can provide a complementary owner-side signal. The useful unit is intent → canonical answer → evidence asset, not keyword → new page.",
+      "appliesTo": ["all-indexable-sites"],
+      "implementation": [
+        "Map owner-observed query/grounding phrases to existing canonical pages.",
+        "Record which evidence asset or answer section supports the page.",
+        "Strengthen the canonical page before creating a new URL for a query variant.",
+        "Keep Google, Bing and referral datasets separate in provenance even when reviewed together."
+      ],
+      "verification": ["No independent query/page totals are falsely joined.", "No grounding query automatically creates a page.", "Before/after owner evidence retains provider, period and filters."],
+      "sources": [
+        "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+        "https://developers.google.com/webmaster-tools/v1/searchanalytics/query"
+      ]
+    },
+    {
+      "id": "agent-operable-native-semantics",
+      "maturity": "foundation",
+      "confidence": "high",
+      "layer": "browser-agent",
+      "title": "Make real interactive capabilities understandable through native semantics and accurate ARIA",
+      "rationale": "OpenAI documents that ChatGPT Agent in Atlas uses ARIA labels and roles to interpret interactive elements. Native semantic HTML plus accurate role/name/state information also improves accessibility and reduces ambiguity for other browser agents.",
+      "appliesTo": ["interactive-app", "software-product", "commerce"],
+      "implementation": [
+        "Prefer native button, link and form controls.",
+        "Expose accurate accessible names and states for custom controls.",
+        "Verify rendered behavior with keyboard/accessibility tooling and browser-agent tasks.",
+        "Do not add decorative ARIA only for agents."
+      ],
+      "verification": ["Static bounded semantic review.", "Rendered accessibility-tree review.", "Browser-agent task completion evidence."],
+      "sources": ["https://help.openai.com/en/articles/12627856-publishers-and-developers-faq", "https://www.w3.org/WAI/ARIA/apg/"]
+    },
+    {
+      "id": "truthful-action-semantics",
+      "maturity": "watch",
+      "confidence": "low",
+      "layer": "structured-actions",
+      "title": "Describe real user actions only when the capability exists and can be verified",
+      "rationale": "Action-oriented structured semantics may become more useful as search and agents move from retrieval to operation, but declaring an action that is not truly available is worse than omitting it.",
+      "appliesTo": ["interactive-app", "software-product", "commerce"],
+      "implementation": [
+        "Use Action/potentialAction semantics only for a real user-visible capability with an accurate target.",
+        "Never use SearchAction solely for the retired sitelinks search box.",
+        "Keep authorization, side effects and runtime safety outside static discovery metadata."
+      ],
+      "verification": ["The action target exists.", "The visible UI exposes the same capability.", "Runtime invocation is separately authorized and tested."],
+      "sources": ["https://schema.org/Action", "https://schema.org/potentialAction", "https://developers.google.com/search/blog/2024/10/sitelinks-search-box"]
+    },
+    {
+      "id": "change-notification-mesh",
+      "maturity": "foundation",
+      "confidence": "medium",
+      "layer": "freshness-discovery",
+      "title": "Use truthful freshness plus supported change-notification mechanisms",
+      "rationale": "Future search benefits from fast and correct change discovery. Sitemap lastmod, IndexNow and provider-specific APIs are complementary mechanisms, not reasons to manufacture recency.",
+      "appliesTo": ["frequently-changing-sites"],
+      "implementation": [
+        "Keep sitemap lastmod aligned with meaningful content changes.",
+        "Use IndexNow where the publisher/search-engine ecosystem supports it.",
+        "Preserve provider-specific submission receipts when possible.",
+        "Never touch timestamps merely to look fresh."
+      ],
+      "verification": ["lastmod is grounded in actual content/release history.", "Submitted URLs belong to the verified host.", "Notification success is not treated as indexing proof."],
+      "sources": ["https://www.indexnow.org/documentation", "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"]
+    },
+    {
+      "id": "persistent-identity-provenance",
+      "maturity": "foundation",
+      "confidence": "high",
+      "layer": "identity-provenance",
+      "title": "Prefer durable identifiers and explicit provenance for reusable public assets",
+      "rationale": "Stable identity reduces ambiguity across citations, mirrors, versions and machine graphs. Persistent identifiers are useful when they correspond to real external records, not when fabricated for maturity optics.",
+      "appliesTo": ["research-dataset", "software-product", "editorial", "documentation"],
+      "implementation": [
+        "Reuse stable canonical @id values for site entities.",
+        "Use DOI, ORCID, ROR, SWHID or other persistent identifiers only when the real external record exists and is verified.",
+        "Separate entity identity from version identity where the asset is versioned.",
+        "Expose license, creator/publisher and version where they are real and relevant."
+      ],
+      "verification": ["External identifiers resolve.", "Identifier ownership/subject matches the declared entity.", "Versioned assets retain reproducible checksums where appropriate."],
+      "sources": ["https://schema.org/identifier", "https://schema.org/version", "https://schema.org/license"]
+    }
+  ]
+}
