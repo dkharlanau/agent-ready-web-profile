@@ -40,11 +40,17 @@ assert.equal(typeof pkg.scripts?.['test:trends'], 'string');
 for (const file of [
   'lib/growth-profile.mjs',
   'lib/growth-plan.mjs',
+  'lib/growth-plan-vertical.mjs',
+  'lib/growth-vertical-evidence.mjs',
+  'lib/growth-vertical-site.mjs',
   'lib/growth-policy.mjs',
   'lib/growth-history.mjs',
   'lib/growth-hypotheses.mjs',
   'lib/growth-experiment.mjs',
   'lib/growth-remediation.mjs',
+  'lib/growth-pr-delivery.mjs',
+  'bin/arwp-growth-pr.mjs',
+  'schema/growth-pr-delivery.schema.json',
   'lib/trend-radar.mjs',
   'scripts/trend-source-watch.mjs',
   'registry/growth-opportunities.json',
@@ -60,6 +66,7 @@ for (const file of [
   'docs/GROWTH-LOOP.md',
   'docs/GROWTH-EXPERIMENTS.md',
   'docs/GROWTH-REMEDIATION.md',
+  'docs/GROWTH-PR-DELIVERY.md',
   'docs/TREND-RADAR.md'
 ]) {
   assert.equal(fs.existsSync(file), true, `${file} must exist`);
@@ -72,6 +79,10 @@ for (const publishedPath of [
 ]) {
   assert(pkg.files.includes(publishedPath), `${publishedPath} must be present in package files`);
 }
+
+assert(pkg.files.includes('bin/'), 'review-only PR CLI must ship via bin/');
+assert(pkg.files.includes('lib/'), 'PR delivery implementation must ship via lib/');
+assert(pkg.files.includes('schema/'), 'PR delivery schema must ship via schema/');
 
 const hypotheses = JSON.parse(fs.readFileSync('registry/growth-hypotheses.json', 'utf8'));
 const trends = JSON.parse(fs.readFileSync('registry/trends.json', 'utf8'));
