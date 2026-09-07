@@ -1,6 +1,7 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "project": "Agent-Ready Web Profile",
+  "productBrand": "SiteCurrent",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "policyUrl": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
   "assetCatalog": "https://dkharlanau.github.io/agent-ready-web-profile/media/assets.json",
@@ -12,15 +13,16 @@
     "url": "https://creativecommons.org/licenses/by/4.0/"
   },
   "appliesTo": [
-    "ARWP-authored press facts and boilerplate",
-    "ARWP-authored research charts and diagrams explicitly marked for open reuse",
-    "ARWP-authored screenshots and media assets explicitly included in the media pack",
-    "ARWP-authored explanatory text explicitly marked CC BY 4.0"
+    "SiteCurrent/ARWP-authored press facts and boilerplate",
+    "SiteCurrent/ARWP-authored research charts and diagrams explicitly marked for open reuse",
+    "SiteCurrent/ARWP-authored screenshots and media assets explicitly included in the media pack",
+    "SiteCurrent/ARWP-authored explanatory text explicitly marked CC BY 4.0"
   ],
   "doesNotApplyTo": [
     "software source code, which remains licensed under Apache-2.0",
     "third-party logos, trademarks, screenshots, quotations or other third-party material unless separately marked",
-    "material whose page or file declares a different license"
+    "material whose page or file declares a different license",
+    "trademark rights in the SiteCurrent or ARWP names and marks"
   ],
   "permissions": {
     "press": true,
@@ -42,7 +44,7 @@
   },
   "attribution": {
     "requiredForPublicReuse": true,
-    "preferredText": "Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/",
+    "preferredText": "Source: SiteCurrent / Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/",
     "sourceUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
     "licenseText": "CC BY 4.0",
     "aiGuidance": "For AI/ML training, dataset inclusion, embeddings or RAG, preserve the canonical source URL in dataset/model cards, provenance metadata, citations, output attribution or another reasonable attribution surface when the workflow provides one."
@@ -55,11 +57,18 @@
     "licenseIsNotCrawlerAccess": true,
     "rule": "This permission describes copyright reuse of covered material. Automated fetchers must still follow the site's applicable robots/crawler access policy and other technical access controls."
   },
+  "brandBoundary": {
+    "productBrand": "SiteCurrent",
+    "technicalProject": "Agent-Ready Web Profile (ARWP)",
+    "trademarkLicenseGrantedByThisManifest": false,
+    "commercialTrademarkClearanceClaimed": false
+  },
   "notes": [
     "No separate email or written permission is required for covered material.",
-    "Reuse must not imply endorsement, certification or partnership by ARWP.",
+    "Reuse must not imply endorsement, certification or partnership by SiteCurrent/ARWP.",
+    "Copyright reuse permission does not establish trademark registration or clearance.",
     "Trademark and personality/publicity rights, if any, are not granted by this copyright license.",
     "This manifest is a project reuse declaration and does not replace the CC BY 4.0 legal code."
   ],
-  "lastReviewed": "2026-09-05"
+  "lastReviewed": "2026-09-07"
 }
