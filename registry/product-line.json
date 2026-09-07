@@ -18,8 +18,8 @@
       "verb": "Detect",
       "question": "What changed upstream?",
       "status": "active-foundation",
-      "existingAssets": ["Trend Radar", "Recommendations Registry", "Growth Hypotheses", "source freshness/history"],
-      "next": ["semantic source diffs", "source-change graph nodes", "proposed rule revisions"]
+      "existingAssets": ["Trend Radar", "Recommendations Registry", "Growth Hypotheses", "source freshness/history", "BraidGraph source/rule revision history"],
+      "next": ["semantic source diffs", "automatic proposed rule revisions"]
     },
     {
       "id": "map",
@@ -27,7 +27,7 @@
       "verb": "Map",
       "question": "What does this site actually have and where is it owned?",
       "status": "next-core",
-      "existingAssets": ["site audit", "vertical evidence", "entity graph", "scanner/resolver"],
+      "existingAssets": ["site audit", "vertical evidence", "entity graph", "scanner/resolver", "BraidGraph surface/repo-file target nodes"],
       "next": ["Site State Graph", "Repository Mapper", "rendered-surface to source-file ownership", "stack/build/deploy detection", "fact source-of-truth mapping"]
     },
     {
@@ -36,8 +36,8 @@
       "verb": "Decide",
       "question": "What actually applies here now?",
       "status": "active",
-      "existingAssets": ["Growth Plan", "Adaptive Site Upgrade Engine", "automation classes", "review-due knowledge gates"],
-      "next": ["consume BraidGraph site state", "portfolio policy inputs"]
+      "existingAssets": ["Growth Plan", "Adaptive Site Upgrade Engine", "automation classes", "review-due knowledge gates", "BraidGraph rule/recommendation lineage"],
+      "next": ["consume Repository Mapper site state", "portfolio policy inputs"]
     },
     {
       "id": "patch",
@@ -45,7 +45,7 @@
       "verb": "Change",
       "question": "What can change safely and exactly?",
       "status": "active-v0.1",
-      "existingAssets": ["Target-Site Transformation Engine", "SHA-256 preconditions", "path allowlists", "rollback", "PR-first production delivery"],
+      "existingAssets": ["Target-Site Transformation Engine", "SHA-256 preconditions", "path allowlists", "rollback", "PR-first production delivery", "BraidGraph transform/repo-file lineage"],
       "next": ["verified stack adapters", "Repository Mapper integration", "unified change receipt"]
     },
     {
@@ -54,8 +54,8 @@
       "verb": "Prove",
       "question": "Did implementation pass and what evidence followed?",
       "status": "partial-foundation",
-      "existingAssets": ["Evidence Receipts", "Growth History", "Growth Experiments", "visibility imports", "agent eval receipts"],
-      "next": ["Unified Change Receipt", "deployment evidence", "missing-outcome-evidence queries"]
+      "existingAssets": ["Evidence Receipts", "Growth History", "Growth Experiments", "visibility imports", "agent eval receipts", "BraidGraph verification/measurement separation and missing-evidence query"],
+      "next": ["Unified Change Receipt", "deployment evidence", "direct receipt/visibility/experiment graph adapters"]
     },
     {
       "id": "watch",
@@ -63,8 +63,8 @@
       "verb": "Watch",
       "question": "What needs attention now across the portfolio?",
       "status": "next-commercial-core",
-      "existingAssets": ["drift", "history", "trend lifecycle", "portfolio evidence primitives"],
-      "next": ["reverse rule-impact analysis", "multi-site blast radius", "scheduled re-review", "policy drift", "prioritized change waves"]
+      "existingAssets": ["drift", "history", "trend lifecycle", "portfolio evidence primitives", "BraidGraph single-site source/rule impact traversal", "explicit superseded source/rule history"],
+      "next": ["multi-site blast radius", "scheduled re-review", "policy drift", "prioritized change waves", "managed alerts"]
     },
     {
       "id": "connect",
@@ -72,24 +72,24 @@
       "verb": "Observe",
       "question": "What happened outside the repository?",
       "status": "extension",
-      "existingAssets": ["owner visibility import format"],
+      "existingAssets": ["owner visibility import format", "normalized BraidGraph measurement input"],
       "next": ["Google connector", "Bing AI Performance connector", "Cloudflare AI crawler connector", "referral analytics", "deployment/build provider evidence"]
     }
   ],
   "durableDifferentiators": [
-    "source-backed rule supply chain with freshness and retirement",
+    "source-backed rule supply chain with freshness, supersession and retirement history",
     "site-specific applicability instead of one universal readiness score",
     "rendered-surface to canonical source-file ownership as a first-class problem",
     "deterministic repository mutations with preconditions, rollback and PR-first delivery",
+    "versioned evidence lineage from source/rule through recommendation and transform",
     "separation of implementation proof from external outcome evidence",
     "reverse blast-radius analysis when upstream rules change",
     "cross-surface scope spanning Search, AI citations, crawler policy, datasets, provenance and real agent interfaces"
   ],
   "productBets": [
-    {"priority": "P0", "id": "braidgraph-compiler", "title": "BraidGraph schema and compiler"},
     {"priority": "P0", "id": "repository-mapper", "title": "Repository Mapper and Site State Graph"},
-    {"priority": "P0", "id": "reverse-impact", "title": "Reverse source/rule impact analysis"},
-    {"priority": "P0", "id": "unified-change-receipt", "title": "Unified Change Receipt"},
+    {"priority": "P0", "id": "unified-change-receipt", "title": "Unified Change Receipt and BraidGraph evidence adapters"},
+    {"priority": "P0", "id": "signalbraid-watch", "title": "Portfolio Watch over BraidGraph source/rule impact"},
     {"priority": "P1", "id": "portfolio-policy", "title": "Portfolio policy-as-code"},
     {"priority": "P1", "id": "stack-packs", "title": "Verified stack transformation packs"},
     {"priority": "P1", "id": "semantic-source-diff", "title": "Semantic source-diff watcher"},
