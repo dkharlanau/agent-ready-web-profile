@@ -1,0 +1,70 @@
+name: ARWP Portfolio Growth Evidence
+
+on:
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/portfolio-sites.json'
+      - 'registry/growth-verticals.json'
+      - 'lib/portfolio-growth-evidence.mjs'
+      - 'lib/growth-plan-vertical.mjs'
+      - 'lib/growth-vertical-evidence.mjs'
+      - 'lib/growth-vertical-site.mjs'
+      - 'lib/growth-vertical-extended.mjs'
+      - 'lib/growth-history.mjs'
+      - 'scripts/portfolio-growth-capture.mjs'
+      - 'scripts/portfolio-growth-evidence-test.mjs'
+      - 'schema/portfolio-growth-run.schema.json'
+      - '.github/workflows/portfolio-growth-evidence.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-growth-evidence
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate longitudinal evidence contract
+        run: |
+          node scripts/portfolio-growth-evidence-test.mjs
+          node --check lib/portfolio-growth-evidence.mjs
+          node --check scripts/portfolio-growth-capture.mjs
+          node -e "JSON.parse(require('fs').readFileSync('schema/portfolio-growth-run.schema.json','utf8'));"
+      - name: Capture owner-controlled public portfolio observations
+        env:
+          ARWP_OUTPUT_DIR: docs/research/portfolio-growth
+        run: |
+          observed_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          node scripts/portfolio-growth-capture.mjs \
+            --output-dir="$ARWP_OUTPUT_DIR" \
+            --observed-at="$observed_at" \
+            --concurrency=2
+      - name: Commit immutable observation run
+        run: |
+          git add docs/research/portfolio-growth
+          if git diff --cached --quiet; then
+            echo 'No new portfolio Growth evidence to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'evidence(growth): capture portfolio longitudinal observation'
+          git pull --rebase origin main
+          git push origin HEAD:main
