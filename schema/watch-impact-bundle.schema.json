@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/watch-impact-bundle.schema.json",
+  "title": "SignalBraid Watch Impact Bundle v0.1",
+  "description": "Deterministic multi-site reverse-impact review bundle derived from BraidGraph. Impact means re-review candidate, never automatic breakage or mutation authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generatedAt", "mode", "query", "triggerEvents", "impacts", "excludedSites", "summary", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "mode": { "enum": ["explicit-impact", "changed-since"] },
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rule": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"], "format": "uri" },
+        "changedSince": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "triggerEvents": { "type": "array", "items": { "$ref": "#/$defs/trigger" } },
+    "impacts": { "type": "array", "items": { "$ref": "#/$defs/impact" } },
+    "excludedSites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["siteId", "site", "reason"],
+        "properties": {
+          "siteId": { "type": "string", "minLength": 1 },
+          "site": { "type": ["string", "null"], "format": "uri" },
+          "reason": { "enum": ["disabled", "trigger-not-present", "no-recorded-change-since"] }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targets", "impactedSites", "impactRows", "excludedSites", "byPriority", "byClassification"],
+      "properties": {
+        "targets": { "type": "integer", "minimum": 0 },
+        "impactedSites": { "type": "integer", "minimum": 0 },
+        "impactRows": { "type": "integer", "minimum": 0 },
+        "excludedSites": { "type": "integer", "minimum": 0 },
+        "byPriority": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "byClassification": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["impactIsReviewCandidateNotBreakage", "productionMutationAuthorized", "priorityIsExplainableNotScore", "historyPreserved", "negativeAndNoChangeEvidencePreserved", "ownerPolicyEditorialRemainGated", "noRankingGuarantee"],
+      "properties": {
+        "impactIsReviewCandidateNotBreakage": { "const": true },
+        "productionMutationAuthorized": { "const": false },
+        "priorityIsExplainableNotScore": { "const": true },
+        "historyPreserved": { "const": true },
+        "negativeAndNoChangeEvidencePreserved": { "const": true },
+        "ownerPolicyEditorialRemainGated": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "nodeType", "nodeId", "ref", "state", "observedAt", "edgeId"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["explicit", "supersedes-event"] },
+        "nodeType": { "enum": ["source", "rule"] },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "ref": { "type": "string", "minLength": 1 },
+        "state": { "type": "string", "minLength": 1 },
+        "observedAt": { "type": ["string", "null"], "format": "date-time" },
+        "edgeId": { "type": ["string", "null"] }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId", "state", "automationClass"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "state": { "type": "string", "minLength": 1 },
+        "automationClass": { "type": ["string", "null"] }
+      }
+    },
+    "transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "operationId", "state", "path"],
+      "properties": {
+        "nodeId": { "type": "string", "minLength": 1 },
+        "operationId": { "type": ["string", "null"] },
+        "state": { "type": "string", "minLength": 1 },
+        "path": { "type": ["string", "null"] }
+      }
+    },
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "receiptId", "revision", "mutationState", "verificationStatus", "outcomeStatus", "reReviewRequired", "reviewDecision"],
+      "properties": {
+        "nodeId": { "type": "string", "minLength": 1 },
+        "receiptId": { "type": ["string", "null"] },
+        "revision": { "type": "integer", "minimum": 0 },
+        "mutationState": { "type": "string", "minLength": 1 },
+        "verificationStatus": { "type": "string", "minLength": 1 },
+        "outcomeStatus": { "type": "string", "minLength": 1 },
+        "reReviewRequired": { "type": "boolean" },
+        "reviewDecision": { "type": "string", "minLength": 1 }
+      }
+    },
+    "impact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["siteId", "site", "repository", "portfolioSiteId", "importance", "triggerId", "classification", "priority", "priorityFactors", "recommendations", "transforms", "repoPaths", "surfaces", "changeReceipts", "policyNodeIds", "ownerReviewReasons", "historicalEvidenceNodeIds", "rationale"],
+      "properties": {
+        "siteId": { "type": "string", "minLength": 1 },
+        "site": { "type": "string", "format": "uri" },
+        "repository": { "type": ["string", "null"] },
+        "portfolioSiteId": { "type": ["string", "null"] },
+        "importance": { "enum": ["critical", "high", "normal", "low"] },
+        "triggerId": { "type": "string", "minLength": 1 },
+        "classification": { "enum": ["re-review", "likely-update", "retire-candidate", "blocked-owner-review"] },
+        "priority": { "enum": ["P0", "P1", "P2", "P3"] },
+        "priorityFactors": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "recommendations": { "type": "array", "items": { "$ref": "#/$defs/recommendation" } },
+        "transforms": { "type": "array", "items": { "$ref": "#/$defs/transform" } },
+        "repoPaths": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "surfaces": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "changeReceipts": { "type": "array", "items": { "$ref": "#/$defs/receipt" } },
+        "policyNodeIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "ownerReviewReasons": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "historicalEvidenceNodeIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
