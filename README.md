@@ -9,6 +9,7 @@
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
 [![Adaptive Site Upgrade validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml)
 [![Target-Site Transformation validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/transformation-engine.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/transformation-engine.yml)
+[![BraidGraph validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
 SignalBraid is the product-facing layer of **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
@@ -94,18 +95,35 @@ See [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md).
 
 ## BraidGraph — the shared product primitive
 
-The proposed **BraidGraph** links source evidence, rule versions, site state, repository ownership, recommendations, transformations, verification and later measurements.
+The implemented **BraidGraph v0.1** links source evidence, rule versions, target recommendations/surfaces, exact repository transformations, verification and later measurements. An explicit history layer preserves prior source/rule versions and `supersedes` relationships instead of rewriting old evidence.
 
 It is not one giant score and it is not a replacement for source artifacts. It is a relationship/index layer over evidence-bearing artifacts.
 
-Useful queries include:
+Useful queries now include:
 
 - Why was this file changed?
 - Which primary source supports this recommendation?
-- Which target sites depend on a rule that is now stale?
-- Which merged transformations still lack owner-side outcome evidence?
-- Which rendered page is owned by which source file?
+- Which downstream recommendations/transforms should be re-reviewed because a source/rule changed?
+- Which transformations still lack implementation verification or transform-linked outcome evidence?
+- Which historical source/rule version was superseded?
 - Which automation class or policy blocks this change?
+
+```bash
+node bin/arwp-braid.mjs compile \
+  --upgrade=upgrade.json \
+  --transform=transform.bundle.json \
+  --out=braid.json
+
+node bin/arwp-braid.mjs explain braid.json --path=index.html
+node bin/arwp-braid.mjs impact braid.json --rule=canonical-discovery
+node bin/arwp-braid.mjs missing-evidence braid.json
+
+node bin/arwp-braid-history.mjs apply \
+  braid.json revisions.json \
+  --out=braid-with-history.json
+```
+
+Agents should use [`skills/arwp-braidgraph/SKILL.md`](skills/arwp-braidgraph/SKILL.md) for provenance, change-impact and evidence-debt questions rather than creating a second isolated graph.
 
 See [`docs/BRAIDGRAPH.md`](docs/BRAIDGRAPH.md).
 
@@ -182,6 +200,8 @@ A passing implementation proves implementation. It does **not** prove ranking, i
 
 Neutral and negative results are valid evidence.
 
+BraidGraph already keeps implementation verification and external measurements as separate node/edge classes and can report which transform-level evidence is still missing.
+
 ### 6. Watch — **What needs attention now?**
 
 The next high-leverage portfolio layer.
@@ -190,10 +210,10 @@ Example:
 
 > Google/OpenAI/Bing changes a rule. Which sites, recommendations and repository paths in this portfolio are affected?
 
-Watch should provide:
+The BraidGraph foundation already provides per-graph source/rule impact traversal plus explicit superseded history. Watch should operationalize that across sites with:
 
 - source/rule drift alerts;
-- reverse impact analysis;
+- portfolio reverse-impact queues;
 - multi-site re-audit waves;
 - policy drift;
 - merged-change-without-evidence detection;
@@ -214,11 +234,14 @@ Owner-data adapters should bring external observations into BraidGraph without p
 
 - Search/AI Recommendations Registry;
 - Trend Radar + source-backed hypotheses;
+- Search Maturity reference benchmarking and intervention evidence;
 - vertical/site-type evidence;
 - Growth Plan and P0–P3 actions;
 - Adaptive Site Upgrade Graph;
 - Target-Site Transformation Engine;
 - deterministic local apply/rollback and production PR delivery;
+- BraidGraph v0.1 compiler, schema, explain/impact/missing-evidence queries and source/rule revision history;
+- BraidGraph Agent Skill and public skill catalog;
 - entity/provenance tooling;
 - crawler policy matrix;
 - owner visibility evidence imports;
@@ -229,23 +252,19 @@ Owner-data adapters should bring external observations into BraidGraph without p
 
 ## Highest-value next builds
 
-### P0 — BraidGraph compiler
-
-Create one canonical relationship graph over existing ARWP artifacts rather than adding another isolated report.
-
 ### P0 — Repository Mapper
 
 Resolve rendered public surfaces to their source repository files, framework ownership, facts and mutation classes.
 
-This is the biggest blocker to promoting more grounded recommendations into safe deterministic PRs.
+This is now the biggest blocker to promoting more grounded recommendations into safe deterministic PRs and to populating trustworthy `repo-file → renders → surface` BraidGraph edges.
 
-### P0 — Reverse impact analysis
+### P0 — Unified Change Receipt + evidence adapters
 
-Given a changed, retired or `review-due` rule, compute affected sites, recommendations, previous transforms and source files.
+Every executed transformation should preserve source/rule version, before/after digests, verification results, deployment evidence and outstanding measurement requirements, then map those canonical artifacts into BraidGraph without duplicating their payloads.
 
-### P0 — Unified Change Receipt
+### P0 — SignalBraid Watch
 
-Every transformation should preserve source rule version, before/after digests, verification results, deployment evidence and outstanding measurement requirements.
+Turn BraidGraph source/rule revisions and reverse impact traversal into portfolio re-review queues, alerts and bounded remediation waves.
 
 ### P1 — Portfolio policy-as-code
 
@@ -276,7 +295,7 @@ Reproducible fixtures showing whether specific transformations close intended im
 ### Open core
 
 - single-site Radar / Map / Plan / Patch / Proof primitives;
-- open BraidGraph schema/compiler;
+- open BraidGraph schema/compiler/history/query layer;
 - open CLI, schemas and Agent Skills;
 - deterministic transformation engine;
 - local verification/evidence.
@@ -328,13 +347,14 @@ Supported planning intents remain `read`, `search`, `structured`, `tools` and `a
 - source-watch candidates are not recommendations;
 - `review-due` knowledge cannot silently remain accepted best practice;
 - generated upgrade graphs never authorize unsafe production mutation;
+- BraidGraph reachability/history does not prove breakage or causality;
 - a DOI is a persistent citation identifier, not a ranking factor or quality certificate;
 - negative benchmark/experiment results remain visible.
 
 ## Key docs
 
 - [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md) — product line, market boundary and packaging.
-- [`docs/BRAIDGRAPH.md`](docs/BRAIDGRAPH.md) — shared evidence-to-change graph design.
+- [`docs/BRAIDGRAPH.md`](docs/BRAIDGRAPH.md) — implemented evidence-to-change graph, revision history and query model.
 - [`docs/BRAND-SIGNALBRAID.md`](docs/BRAND-SIGNALBRAID.md) — product brand system.
 - [`docs/ADAPTIVE-SITE-UPGRADE.md`](docs/ADAPTIVE-SITE-UPGRADE.md) — target-specific upgrade compiler.
 - [`docs/TARGET-SITE-TRANSFORMATION.md`](docs/TARGET-SITE-TRANSFORMATION.md) — deterministic repository transformation boundary.
