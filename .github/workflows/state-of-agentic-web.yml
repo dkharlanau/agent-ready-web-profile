@@ -27,7 +27,11 @@ jobs:
       - name: Validate research model
         run: |
           node research/state-of-agentic-web/test.mjs
+          node research/state-of-agentic-web/sampling-test.mjs
           node --check research/state-of-agentic-web/build.mjs
+          node --check research/state-of-agentic-web/sampling.mjs
+          node --check research/state-of-agentic-web/sampling-test.mjs
+          node -e "const p=JSON.parse(require('fs').readFileSync('research/state-of-agentic-web/sampling-plan.json','utf8')); if(p.representativeOfPublicWeb!==false) throw new Error('sampling plan must remain explicitly non-representative');"
       - name: Rebuild committed research outputs
         run: node research/state-of-agentic-web/build.mjs
       - name: Upload generated research outputs
@@ -35,6 +39,14 @@ jobs:
         with:
           name: state-of-agentic-web-generated
           path: docs/research/state-of-agentic-web/
+          if-no-files-found: error
+      - name: Upload stratified sampling contract
+        uses: actions/upload-artifact@v6
+        with:
+          name: state-of-agentic-web-sampling-contract
+          path: |
+            research/state-of-agentic-web/sampling-plan.json
+            research/state-of-agentic-web/sampling.mjs
           if-no-files-found: error
       - name: Verify release outputs are reproducible
         run: |
