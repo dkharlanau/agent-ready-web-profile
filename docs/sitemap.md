@@ -43,8 +43,13 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 - [Foundation release JSON](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.json)
 - [Foundation release CSV](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/2026-09-05-foundation.csv)
 - [Research release index](https://dkharlanau.github.io/agent-ready-web-profile/research/state-of-agentic-web/releases/index.json)
+- [Portfolio Growth longitudinal observations](https://dkharlanau.github.io/agent-ready-web-profile/research/portfolio-growth/)
+- [Portfolio Growth run index](https://dkharlanau.github.io/agent-ready-web-profile/research/portfolio-growth/index.json)
+- [Portfolio Growth baseline — 2026-09-07](https://dkharlanau.github.io/agent-ready-web-profile/research/portfolio-growth/runs/20260907T090335Z.json)
 
-The foundation research release is a frozen engineering sample, not a representative survey of the public web. It contains 20 independent documentation sites and 100 reviewed intent decisions; owner-controlled reference sites are excluded from the independent aggregate.
+The State of the Agentic Web foundation release is a frozen engineering sample, not a representative survey of the public web. It contains 20 independent documentation sites and 100 reviewed intent decisions; owner-controlled reference sites are excluded from the independent aggregate.
+
+The Portfolio Growth series is intentionally a different evidence class: owner-controlled public observations across five registered portfolio sites. It tracks implementation-state changes and failures over time. Owner Search/AI outcome evidence remains separate and missing metrics are never converted to zero.
 
 ## Current standards and trend tracking
 
