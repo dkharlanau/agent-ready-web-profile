@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/search-maturity-corpus.schema.json",
+  "title": "ARWP Search Maturity Reference Corpus",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "reviewedAt", "title", "methodology", "observations"],
+  "properties": {
+    "version": { "const": "0.1" },
+    "reviewedAt": { "type": "string", "format": "date" },
+    "title": { "type": "string", "minLength": 1 },
+    "methodology": { "type": "string", "format": "uri" },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/observation" }
+    }
+  },
+  "$defs": {
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "query", "intentFamily", "observedAt", "observationSurface", "referencePage", "features"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$" },
+        "query": { "type": "string", "minLength": 1 },
+        "intentFamily": { "type": "string", "minLength": 1 },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "observationSurface": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provider", "surface", "note"],
+          "properties": {
+            "provider": { "type": "string", "minLength": 1 },
+            "surface": { "type": "string", "minLength": 1 },
+            "locale": { "type": ["string", "null"] },
+            "device": { "type": ["string", "null"] },
+            "rank": { "type": "integer", "minimum": 1 },
+            "rankEvidence": { "type": "string", "format": "uri" },
+            "note": { "type": "string", "minLength": 1 }
+          },
+          "allOf": [
+            {
+              "if": { "required": ["rank"] },
+              "then": { "required": ["rankEvidence"] }
+            }
+          ]
+        },
+        "referencePage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["url", "ownership"],
+          "properties": {
+            "url": { "type": "string", "format": "uri" },
+            "title": { "type": ["string", "null"] },
+            "domain": { "type": ["string", "null"] },
+            "publishedAt": { "type": ["string", "null"], "format": "date" },
+            "updatedAt": { "type": ["string", "null"], "format": "date" },
+            "ownership": { "enum": ["independent", "project-reference"] }
+          }
+        },
+        "features": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "retrievalClarity", "topicalFocus", "answerFirst", "evidenceDensity", "firstPartyEvidence",
+            "authorEntityIdentity", "siteTransparency", "semanticStructure", "structuredDataIntegrity",
+            "internalTopicalGraph", "freshnessIntegrity", "urlStability", "multimodalEvidence",
+            "externalCorroboration", "utilitySurface", "agentAccessibility"
+          ],
+          "properties": {
+            "retrievalClarity": { "$ref": "#/$defs/feature" },
+            "topicalFocus": { "$ref": "#/$defs/feature" },
+            "answerFirst": { "$ref": "#/$defs/feature" },
+            "evidenceDensity": { "$ref": "#/$defs/feature" },
+            "firstPartyEvidence": { "$ref": "#/$defs/feature" },
+            "authorEntityIdentity": { "$ref": "#/$defs/feature" },
+            "siteTransparency": { "$ref": "#/$defs/feature" },
+            "semanticStructure": { "$ref": "#/$defs/feature" },
+            "structuredDataIntegrity": { "$ref": "#/$defs/feature" },
+            "internalTopicalGraph": { "$ref": "#/$defs/feature" },
+            "freshnessIntegrity": { "$ref": "#/$defs/feature" },
+            "urlStability": { "$ref": "#/$defs/feature" },
+            "multimodalEvidence": { "$ref": "#/$defs/feature" },
+            "externalCorroboration": { "$ref": "#/$defs/feature" },
+            "utilitySurface": { "$ref": "#/$defs/feature" },
+            "agentAccessibility": { "$ref": "#/$defs/feature" }
+          }
+        }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "confidence", "evidenceClass", "observations", "sources"],
+      "properties": {
+        "state": { "enum": ["absent", "weak", "present", "strong", "differentiated", "unknown"] },
+        "confidence": { "enum": ["low", "medium", "high"] },
+        "evidenceClass": { "enum": ["documented-platform", "observed-correlation", "experiment", "unknown"] },
+        "observations": { "type": "array", "maxItems": 8, "items": { "type": "string", "minLength": 1 } },
+        "sources": { "type": "array", "maxItems": 8, "items": { "type": "string", "format": "uri" } }
+      }
+    }
+  }
+}
