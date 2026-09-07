@@ -54,7 +54,7 @@ Schema: `schema/growth-policy.schema.json`.
 First create the evidence-backed Growth Profile:
 
 ```bash
-node bin/arwp-growth.mjs https://example.com --json > arwp-growth.json
+node bin/arwp-growth.mjs https://example.com --vertical=software-product --json > arwp-growth.json
 ```
 
 Then apply the owner's policy:
@@ -69,8 +69,7 @@ node bin/arwp-growth-policy.mjs compile \
 The resulting implementation manifest contains:
 
 - only actions relevant to the declared goals;
-- the site's selected vertical module;
-- vertical-specific evidence checks that say what should be verified rather than treating a site class as a label;
+- the site's selected vertical module and expected evidence checks;
 - desired Search/AI crawler intent;
 - optional provider-specific Content-Signal policy;
 - publisher/author structured-data expectations;
@@ -79,7 +78,7 @@ The resulting implementation manifest contains:
 
 It does not directly overwrite `robots.txt` or any production file.
 
-## Site classes
+## Site classes and vertical evidence
 
 The current registry (`registry/growth-verticals.json`, v0.2) separates:
 
@@ -91,11 +90,31 @@ The current registry (`registry/growth-verticals.json`, v0.2) separates:
 - `research-dataset`;
 - `general`.
 
-A vertical is a scope filter, not an industry score. The universal baseline should stay small and stable while vertical modules can evolve independently.
+A vertical is a scope filter, not an industry score. Each vertical now carries concrete expected evidence checks rather than only prose focus areas.
 
-Since registry v0.2, each vertical also carries explicit evidence checks. For example, `software-product` asks separately for canonical product identity, stable release/change history, crawlable docs/support/trust surfaces, and truthful implemented agent/API interfaces. `research-dataset` separates dataset identity, methodology/provenance, citation/license/version history and actual data access. Commerce and local-business checks explicitly preserve the boundary between public crawl evidence and authenticated owner-platform state.
+`arwp-growth --vertical=...` evaluates those checks using a bounded relevant-surface sample selected from the canonical entry page and canonical-path sitemap. The adapter may inspect product, changelog, docs, methodology, dataset, citation or similar relevant URLs when they are actually discoverable, rather than assuming the homepage contains every signal.
 
-These checks are desired evidence, not automatic pass/fail claims. If ARWP cannot observe a condition from a bounded public audit, it must remain a manual or owner-data verification instead of being guessed.
+The implementation deliberately distinguishes:
+
+- `observed` public evidence;
+- `partial` public evidence;
+- `not-observed` within the bounded sample;
+- `manual` editorial/context review;
+- `external-owner-data` for authenticated platform/feed/business-profile state;
+- `not-applicable-or-not-observed` where absence must not create a requirement;
+- `unavailable` when evidence could not be captured.
+
+Current remediation boundary:
+
+- software-product, research-dataset and documentation checks can generate guarded vertical backlog items when bounded evidence is concretely partial/missing;
+- editorial authorship/dates are observable, but first-hand quality remains manual;
+- commerce Product/Offer and policy links are observable, while Merchant/feed freshness stays owner-side;
+- LocalBusiness/address/contact can be observed publicly, while external Business Profile state stays owner-side;
+- absence of an API/agent interface never tells ARWP to invent one.
+
+A missing signal in the bounded sample is not proof of whole-site absence. Every generated vertical action therefore requires checking the relevant canonical surface before editing content or structured data.
+
+The universal baseline stays small and stable while vertical modules can evolve independently.
 
 ## Rights / AI policy
 
@@ -129,9 +148,9 @@ The intended deployment loop becomes:
 ```text
 Growth Policy (owner intent)
         ↓
-ARWP audit + Growth Profile (public evidence + current guidance)
+ARWP audit + Growth Profile + bounded vertical evidence
         ↓
-Implementation manifest (only relevant actions + vertical evidence checks)
+Implementation manifest (only relevant actions)
         ↓
 site changes
         ↓
