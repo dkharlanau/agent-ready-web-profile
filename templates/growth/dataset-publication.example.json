@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "datasetId": "example-corpus",
+  "canonicalMetadata": "https://example.com/data/dataset.jsonld",
+  "publicationState": "doi-not-issued",
+  "releaseVersion": null,
+  "archive": {
+    "preferredProvider": "Zenodo",
+    "recordUrl": null
+  },
+  "persistentIdentifier": {
+    "type": "DOI",
+    "state": "not-issued",
+    "value": null,
+    "resolverUrl": null
+  },
+  "releaseBoundary": {
+    "include": [],
+    "reviewBeforeArchive": true
+  },
+  "citation": {
+    "cff": "https://example.com/CITATION.cff"
+  },
+  "methodologyAndProvenance": [],
+  "license": null,
+  "integrity": {
+    "requiredAtRelease": true,
+    "algorithm": "SHA-256",
+    "state": "pending-release-freeze"
+  },
+  "activation": {
+    "externalOwnerActionRequired": true,
+    "steps": [
+      "Choose a release version.",
+      "Freeze reviewed public distributions and compute SHA-256 checksums.",
+      "Publish the frozen release through an appropriate external archive.",
+      "Verify the issued DOI and archived record.",
+      "Expose the exact DOI in Dataset metadata and citation surfaces."
+    ]
+  }
+}
