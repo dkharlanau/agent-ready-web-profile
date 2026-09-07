@@ -1,0 +1,66 @@
+name: ARWP Future Search Lab
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/future-search-experiments.json'
+      - 'registry/page-manifest.json'
+      - 'registry/entity-catalog.jsonld'
+      - 'schema/future-search-experiments.schema.json'
+      - 'lib/semantic-index.mjs'
+      - 'bin/arwp-semantic-index.mjs'
+      - 'scripts/future-search-test.mjs'
+      - 'skills/arwp-future-search/**'
+      - 'skills/index.json'
+      - 'skills/README.md'
+      - 'docs/FUTURE-SEARCH-LAB.md'
+      - 'AGENTS.md'
+      - '.github/workflows/future-search.yml'
+  pull_request:
+    paths:
+      - 'registry/future-search-experiments.json'
+      - 'registry/page-manifest.json'
+      - 'registry/entity-catalog.jsonld'
+      - 'schema/future-search-experiments.schema.json'
+      - 'lib/semantic-index.mjs'
+      - 'bin/arwp-semantic-index.mjs'
+      - 'scripts/future-search-test.mjs'
+      - 'skills/arwp-future-search/**'
+      - 'skills/index.json'
+      - 'skills/README.md'
+      - 'docs/FUTURE-SEARCH-LAB.md'
+      - 'AGENTS.md'
+      - '.github/workflows/future-search.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate Future Search registry and semantic index compiler
+        run: |
+          node scripts/future-search-test.mjs
+          node --check lib/semantic-index.mjs
+          node --check bin/arwp-semantic-index.mjs
+          node --check scripts/future-search-test.mjs
+      - name: Exercise semantic index CLI
+        run: |
+          node bin/arwp-semantic-index.mjs build registry/page-manifest.json registry/entity-catalog.jsonld --output=/tmp/arwp-semantic-index.jsonld
+          node bin/arwp-semantic-index.mjs check /tmp/arwp-semantic-index.jsonld
+      - name: Validate Future Search skill routing
+        run: |
+          node -e "const i=JSON.parse(require('fs').readFileSync('skills/index.json','utf8')); if(i.version!=='0.2'||!i.skills.some(s=>s.name==='arwp-future-search')||i.composition.futureSearch!=='arwp-future-search') process.exit(1)"
+          grep -q '^name: arwp-future-search$' skills/arwp-future-search/SKILL.md
+          grep -q 'registry/future-search-experiments.json' skills/arwp-future-search/SKILL.md
+          grep -q 'Future Search Lab' docs/FUTURE-SEARCH-LAB.md
+          grep -q 'Future Search rules' AGENTS.md
