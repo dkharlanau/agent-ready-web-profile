@@ -1,0 +1,31 @@
+{
+  "version": "0.1",
+  "observedAt": "2026-09-07",
+  "evidenceClass": "owner-controlled-public-repository-observation",
+  "targets": [
+    {
+      "site": "https://cbt-cards.github.io/",
+      "repository": "CBT-cards/cbt-cards.github.io",
+      "datasetBearing": true,
+      "observedCorpusExamples": ["data/practice.json", "data/knowledge.jsonl", "data/practice-evidence.json", "data/practice-ontology.json", "data/practice-relations.json", "data/agent-evals.jsonl"],
+      "citationMetadata": "CITATION.cff",
+      "doiState": "not-issued",
+      "nextExternalAction": "freeze reviewed release and publish through an owner-authorized persistent archive"
+    },
+    {
+      "site": "https://metkagram.github.io/",
+      "repository": "metkagram/metkagram.github.io",
+      "datasetBearing": true,
+      "observedCorpusExamples": ["data/pattern-annotations.json.gz", "data/contrasts.json", "data/choice-drills.json", "data/discovery-topics.json", "data/frame-families.json"],
+      "citationMetadata": "CITATION.cff",
+      "releaseVersion": "1.0.0",
+      "doiState": "not-issued",
+      "nextExternalAction": "freeze 1.0.0 release and publish through an owner-authorized persistent archive"
+    }
+  ],
+  "guardrails": [
+    "Targets are owner-controlled examples, not independent ARWP adoption evidence.",
+    "No DOI is claimed until the external archive issues and resolves it.",
+    "Dataset publication is not treated as a Search ranking factor."
+  ]
+}
