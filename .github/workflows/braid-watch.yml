@@ -1,0 +1,55 @@
+name: SignalBraid Watch validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'schema/watch-targets.schema.json'
+      - 'schema/watch-impact-bundle.schema.json'
+      - 'lib/braid-watch.mjs'
+      - 'bin/arwp-watch.mjs'
+      - 'scripts/braid-watch-test.mjs'
+      - 'scripts/braid-watch-package-test.mjs'
+      - 'docs/SIGNALBRAID-WATCH.md'
+      - 'package.json'
+      - '.github/workflows/braid-watch.yml'
+  pull_request:
+    paths:
+      - 'schema/watch-targets.schema.json'
+      - 'schema/watch-impact-bundle.schema.json'
+      - 'lib/braid-watch.mjs'
+      - 'bin/arwp-watch.mjs'
+      - 'scripts/braid-watch-test.mjs'
+      - 'scripts/braid-watch-package-test.mjs'
+      - 'docs/SIGNALBRAID-WATCH.md'
+      - 'package.json'
+      - '.github/workflows/braid-watch.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate Watch blast radius
+        run: |
+          node scripts/braid-watch-test.mjs
+          node --check lib/braid-watch.mjs
+          node --check bin/arwp-watch.mjs
+          node -e "const fs=require('fs'); for (const file of ['schema/watch-targets.schema.json','schema/watch-impact-bundle.schema.json']) JSON.parse(fs.readFileSync(file,'utf8'));"
+          node bin/arwp-watch.mjs --help | grep -q 'review queues only'
+
+      - name: Validate packaged Watch surface
+        run: node scripts/braid-watch-package-test.mjs
