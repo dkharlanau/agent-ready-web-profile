@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "title": "ARWP Agent Skills",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/skills/",
   "standard": "Agent Skills",
@@ -12,9 +12,10 @@
     {"name":"arwp-target-transformation","role":"target-transformation","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-target-transformation/SKILL.md","useWhen":"Adaptive upgrades are selected and the agent has resolved exact target-repository files and grounded facts, so deterministic changes can be compiled, simulated, rolled back locally or delivered in a new production-path GitHub PR."},
     {"name":"arwp-prepare-site","role":"site-preparation","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md","useWhen":"Prepare or upgrade an existing website repository to ARWP and current Search/AI/agent technical guidance."},
     {"name":"arwp-ai-search-content","role":"content-quality","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md","useWhen":"Improve articles, docs, comparison pages and answer pages for usefulness, retrieval and citation."},
+    {"name":"arwp-future-search","role":"future-search-experimentation","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-future-search/SKILL.md","useWhen":"Current foundations are healthy and the site should be prepared for emerging Search/AI/agent systems with governed broader Schema.org semantics, semantic/evidence graphs, retrieval feedback and browser-agent operability."},
     {"name":"arwp-dataset-publication","role":"dataset-publication","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-dataset-publication/SKILL.md","useWhen":"A target site has a genuine reusable corpus that should become a versioned, externally archived and DOI-citable dataset release."},
     {"name":"arwp-agent-discovery","role":"interoperability","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-agent-discovery/SKILL.md","useWhen":"Implement truthful llms.txt, Agent Skills, ARD, API/MCP/A2A/WebMCP discovery and optional ARWP profile surfaces."},
     {"name":"arwp-evidence-ci","role":"verification","url":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-evidence-ci/SKILL.md","useWhen":"Add assertion contracts, scheduled audits, evidence receipts and regression-safe CI."}
   ],
-  "guardrail": "Skills implement and verify source-backed improvements. Target transformation is digest-gated, path-allowlisted and PR-first; policy/editorial/owner/runtime decisions remain gated. Dataset DOI publication applies only to genuine reusable corpora and is for citation/reproducibility, not a ranking promise."
+  "guardrail": "Skills implement and verify source-backed or explicitly governed experimental improvements. Future Search experiments do not become ranking requirements merely because they use Schema.org or machine-readable indexes. Target transformation is digest-gated, path-allowlisted and PR-first; policy/editorial/owner/runtime decisions remain gated. Dataset DOI publication applies only to genuine reusable corpora and is for citation/reproducibility, not a ranking promise."
 }
