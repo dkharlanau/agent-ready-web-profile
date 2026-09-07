@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="ARWP Search Maturity Benchmark: a reproducible reference-cohort method for comparing observable evidence patterns on currently retrievable Search and AI pages without claiming hidden ranking factors.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<title>Search Maturity Benchmark | SignalBraid · ARWP</title>
+<link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/">
+<link rel="describedby" type="application/json" href="./pilot-2026-09-07.json">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<link rel="stylesheet" href="../citation.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebPage",
+      "@id":"https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/#page",
+      "url":"https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/",
+      "name":"Search Maturity Benchmark",
+      "description":"A reproducible reference-cohort method for observable Search and AI maturity patterns.",
+      "mainEntity":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/#dataset"},
+      "isPartOf":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#website"}
+    },
+    {
+      "@type":"Dataset",
+      "@id":"https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/#dataset",
+      "name":"ARWP Search Maturity pilot reference corpus — 2026-09-07",
+      "description":"Five timestamped independent reference-page observations for AI-search-related intents, with sparse reviewed maturity dimensions and explicit evidence classes. The pilot does not contain measured Google or Bing ranks.",
+      "url":"https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/",
+      "dateModified":"2026-09-07",
+      "creator":{"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"},
+      "license":"https://creativecommons.org/licenses/by/4.0/",
+      "isAccessibleForFree":true,
+      "keywords":["AI search optimization","search maturity","generative search","reference cohort","AI citation visibility"],
+      "variableMeasured":["retrieval clarity","topical focus","answer-first structure","evidence density","first-party evidence","author entity identity","site transparency","semantic structure"],
+      "distribution":{
+        "@type":"DataDownload",
+        "encodingFormat":"application/json",
+        "contentUrl":"https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/pilot-2026-09-07.json"
+      },
+      "measurementTechnique":"Manual review of timestamped web-search retrieval observations using the ARWP Search Maturity v0.1 feature contract",
+      "citation":[
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+        "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a"
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a><nav aria-label="Search Maturity navigation"><a href="../answers/how-to-improve-ai-search-visibility.html">AI Search answer</a><a href="../trust/">Trust</a><a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav></header>
+<main class="cite-main shell">
+<section class="cite-hero">
+<p class="eyebrow">SignalBraid · Search Maturity · pilot 0.1</p>
+<h1>Reverse-engineer evidence patterns, not “secret ranking factors.”</h1>
+<p class="cite-lead">Search Maturity compares a target page with a timestamped cohort of currently retrievable independent pages. It records only what was actually reviewed, keeps missing dimensions unknown, and separates documented platform guidance from observed correlation and experiments.</p>
+<div class="cite-meta"><span>5 independent references</span><span>16-dimensional contract</span><span>Raw JSON</span><span>No magic score</span></div>
+</section>
+
+<section class="cite-card">
+<h2>The pilot finding</h2>
+<p>Across the five reviewed references in the first AI-search cohort, retrieval clarity and topical focus were strong on all five pages. Answer-first structure, evidence density and semantic structure were present on all five and strong-or-better on four. First-party evidence was present on all five and strong-or-better on three.</p>
+<p>This is a <strong>candidate pattern from a deliberately small pilot</strong>, not evidence that any dimension is a ranking factor. Exact Google/Bing positions were not measured, so the corpus does not store them.</p>
+</section>
+
+<section class="cite-card">
+<h2>Why this is different from an SEO score</h2>
+<table>
+<thead><tr><th>Typical score</th><th>Search Maturity</th></tr></thead>
+<tbody>
+<tr><td>Collapses signals to 0–100</td><td>Keeps per-dimension state, sample coverage and uncertainty.</td></tr>
+<tr><td>Unknown often becomes failure</td><td>Unmeasured means <code>unknown</code>.</td></tr>
+<tr><td>May imply causal weights</td><td>Separates platform documentation, correlation and experiment evidence.</td></tr>
+<tr><td>Static checklist</td><td>Timestamped cohorts can be repeated and compared longitudinally.</td></tr>
+<tr><td>Ends at recommendations</td><td>Accepted gaps route into ARWP implementation, verification and outcome measurement.</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="cite-card">
+<h2>Observable dimensions</h2>
+<p>The v0.1 contract covers retrieval clarity, topical focus, answer-first structure, evidence density, first-party evidence, author/entity identity, site transparency, semantic structure, structured-data integrity, internal topical graph, freshness integrity, URL stability, multimodal evidence, external corroboration, utility surfaces and browser-agent accessibility.</p>
+<p>A dimension can remain unmeasured. More fields do not make an observation better.</p>
+</section>
+
+<section class="cite-card">
+<h2>Inspect the evidence</h2>
+<p><a href="./pilot-2026-09-07.json">Download the pilot corpus (JSON)</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/SEARCH-MATURITY-BENCHMARK.md">Read the methodology</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/schema/search-maturity-corpus.schema.json">Inspect the corpus schema</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/lib/search-maturity.mjs">Inspect cohort logic</a></p>
+</section>
+
+<section class="cite-card">
+<h2>Current dogfood experiment</h2>
+<p>The first target is ARWP's own <a href="../answers/how-to-improve-ai-search-visibility.html">AI Search visibility answer</a>. Its pre-change profile identified two repeated cohort gaps: first-party evidence and evidence density. The page was then changed by exposing the pilot results and raw corpus instead of adding generic prose. The next step is owner-side longitudinal visibility measurement; implementation improvement alone is not counted as Search success.</p>
+</section>
+
+<p class="reuse-note">Reviewed 7 September 2026 · Dataset annotations are ARWP-authored observations of public pages. Reference-site content remains owned by its publishers. The dataset and methodology do not claim ranking causality.</p>
+</main>
+</body>
+</html>
