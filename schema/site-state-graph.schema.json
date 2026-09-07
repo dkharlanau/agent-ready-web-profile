@@ -13,11 +13,12 @@
     "repository": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["fullName", "baseRef", "baseCommitSha"],
+      "required": ["fullName", "baseRef", "baseCommitSha", "siteRoot"],
       "properties": {
         "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
         "baseRef": { "type": "string", "minLength": 1 },
-        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" }
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+        "siteRoot": { "type": "string", "minLength": 1 }
       }
     },
     "site": {
