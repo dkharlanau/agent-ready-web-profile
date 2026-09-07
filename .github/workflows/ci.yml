@@ -50,6 +50,12 @@ jobs:
           node --check lib/entity-remediation.mjs
           node --check bin/arwp-entity-remediation.mjs
 
+      - name: Validate unified Site Improvement Plan
+        run: |
+          node scripts/site-improvement-test.mjs
+          node --check lib/site-improvement.mjs
+          node --check bin/arwp-improve.mjs
+
       - name: Validate adaptive content profile
         run: |
           node scripts/content-profile-test.mjs
