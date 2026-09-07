@@ -8,6 +8,7 @@ on:
       - 'schema/adaptive-upgrade-graph.schema.json'
       - 'lib/adaptive-upgrade.mjs'
       - 'bin/arwp-upgrade.mjs'
+      - 'bin/arwp-growth.mjs'
       - 'scripts/adaptive-upgrade-test.mjs'
       - 'skills/arwp-adaptive-upgrade/**'
       - 'docs/ADAPTIVE-SITE-UPGRADE.md'
@@ -18,6 +19,7 @@ on:
       - 'schema/adaptive-upgrade-graph.schema.json'
       - 'lib/adaptive-upgrade.mjs'
       - 'bin/arwp-upgrade.mjs'
+      - 'bin/arwp-growth.mjs'
       - 'scripts/adaptive-upgrade-test.mjs'
       - 'skills/arwp-adaptive-upgrade/**'
       - 'docs/ADAPTIVE-SITE-UPGRADE.md'
@@ -46,5 +48,6 @@ jobs:
           node scripts/adaptive-upgrade-test.mjs
           node --check lib/adaptive-upgrade.mjs
           node --check bin/arwp-upgrade.mjs
+          node --check bin/arwp-growth.mjs
           node -e "const fs=require('fs'); JSON.parse(fs.readFileSync('registry/adaptive-upgrade-packs.json','utf8')); JSON.parse(fs.readFileSync('schema/adaptive-upgrade-graph.schema.json','utf8'));"
           node bin/arwp-upgrade.mjs packs
