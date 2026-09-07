@@ -8,6 +8,11 @@ import {
   resolveUpgradeOwnership
 } from '../lib/repository-mapper.mjs';
 import { mergeRepositoryMapIntoBraidGraph, repositoryMapBraidReport } from '../lib/repository-map-braid.mjs';
+import {
+  prepareMappedTransformationSpec,
+  validateMappedTransformationPreparation,
+  formatMappedTransformationPreparation
+} from '../lib/mapped-transform-preparation.mjs';
 
 function usage() {
   console.log(`SignalBraid Repository Mapper
@@ -17,10 +22,12 @@ Usage:
   arwp-map-repo validate <site-state.json>
   arwp-map-repo resolve <site-state.json> (--surface=<surface-key> | --route=</path/> [--type=canonical])
   arwp-map-repo upgrade-hints <adaptive-upgrade.json> <site-state.json>
+  arwp-map-repo prepare-transform <adaptive-upgrade.json> <site-state.json> [--recommendations=id1,id2] [--out=mapped-transform.json] [--text]
+  arwp-map-repo validate-transform-prep <mapped-transform.json>
   arwp-map-repo braid <braid.json> <site-state.json> [--out=braid-with-map.json]
   arwp-map-repo braid-report <braid-with-map.json>
 
-Repository mapping records proven/explicit ownership and ambiguity. It never authorizes mutation, follows symlinks, or guesses an owner for unresolved routes.`);
+Repository mapping records proven/explicit ownership and ambiguity. Transform preparation resolves safe candidate paths and current digests, but it never invents an after-state or authorizes mutation.`);
 }
 
 function parse(argv) {
@@ -47,6 +54,11 @@ function writeJson(value, filename = null) {
   const text = `${JSON.stringify(value, null, 2)}\n`;
   if (filename) fs.writeFileSync(path.resolve(filename), text, 'utf8');
   else process.stdout.write(text);
+}
+
+function commaList(value) {
+  if (typeof value !== 'string') return [];
+  return [...new Set(value.split(',').map(item => item.trim()).filter(Boolean))];
 }
 
 function main() {
@@ -101,6 +113,28 @@ function main() {
     const upgrade = readJson(positionals[1], 'Adaptive Upgrade graph');
     const graph = readJson(positionals[2], 'Site State Graph');
     writeJson(resolveUpgradeOwnership(upgrade, graph));
+    return;
+  }
+
+  if (command === 'prepare-transform') {
+    const upgrade = readJson(positionals[1], 'Adaptive Upgrade graph');
+    const graph = readJson(positionals[2], 'Site State Graph');
+    const preparation = prepareMappedTransformationSpec(upgrade, graph, {
+      recommendationIds: commaList(flags.recommendations)
+    });
+    if (flags.text === true) {
+      process.stdout.write(`${formatMappedTransformationPreparation(preparation)}\n`);
+      return;
+    }
+    writeJson(preparation, typeof flags.out === 'string' ? flags.out : null);
+    return;
+  }
+
+  if (command === 'validate-transform-prep') {
+    const preparation = readJson(positionals[1], 'Mapped Transformation Preparation');
+    const validation = validateMappedTransformationPreparation(preparation);
+    writeJson(validation);
+    if (!validation.valid) process.exitCode = 1;
     return;
   }
 

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/mapped-transform-preparation.schema.json",
+  "title": "SignalBraid Mapped Transformation Preparation v0.1",
+  "description": "Read-only handoff from proven repository ownership to a Transformation Engine spec skeleton. It resolves paths and current digests but does not invent operation content or authorize mutation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generatedAt", "site", "repository", "sourceEvidence", "specSkeleton", "candidates", "summary", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "repository": { "$ref": "#/$defs/repository" },
+    "sourceEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adaptiveUpgradeDigest", "siteStateDigest"],
+      "properties": {
+        "adaptiveUpgradeDigest": { "$ref": "#/$defs/digest" },
+        "siteStateDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "specSkeleton": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "allowedPaths", "operations"],
+      "properties": {
+        "repository": { "$ref": "#/$defs/transformRepository" },
+        "allowedPaths": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "operations": { "type": "array", "maxItems": 0 }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/candidate" }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommendationsConsidered", "readyCandidates", "blockedCandidates", "allowedPaths", "productionBasePinned"],
+      "properties": {
+        "recommendationsConsidered": { "type": "integer", "minimum": 0 },
+        "readyCandidates": { "type": "integer", "minimum": 0 },
+        "blockedCandidates": { "type": "integer", "minimum": 0 },
+        "allowedPaths": { "type": "integer", "minimum": 0 },
+        "productionBasePinned": { "type": "boolean" }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mapEvidenceDoesNotAuthorizeMutation", "ambiguousOwnershipBlocked", "policyEditorialRuntimeOwnerBlocked", "afterStateNotInvented", "groundingStillRequired", "transformationEngineRevalidatesPreconditions", "noRankingGuarantee"],
+      "properties": {
+        "mapEvidenceDoesNotAuthorizeMutation": { "const": true },
+        "ambiguousOwnershipBlocked": { "const": true },
+        "policyEditorialRuntimeOwnerBlocked": { "const": true },
+        "afterStateNotInvented": { "const": true },
+        "groundingStillRequired": { "const": true },
+        "transformationEngineRevalidatesPreconditions": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "baseRef", "baseCommitSha", "siteRoot"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "baseRef": { "type": "string", "minLength": 1 },
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+        "siteRoot": { "type": "string", "minLength": 1 }
+      }
+    },
+    "transformRepository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "baseRef", "baseCommitSha"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "baseRef": { "type": "string", "minLength": 1 },
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recommendationId", "automationClass", "path", "state", "blockers", "currentSha256", "surfaceKeys", "targetLabels", "operationChoices", "requiresBeforeContent", "requiresAfterState", "requiresGrounding", "verification"],
+      "properties": {
+        "recommendationId": { "type": "string", "minLength": 1 },
+        "automationClass": { "type": ["string", "null"] },
+        "path": { "type": ["string", "null"] },
+        "state": { "enum": ["ready", "blocked"] },
+        "blockers": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "currentSha256": { "type": ["string", "null"], "pattern": "^sha256:[0-9a-f]{64}$" },
+        "surfaceKeys": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "targetLabels": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "operationChoices": { "type": "array", "uniqueItems": true, "items": { "enum": ["replace-file", "replace-exact", "insert-before-exact", "insert-after-exact"] } },
+        "requiresBeforeContent": { "const": true },
+        "requiresAfterState": { "const": true },
+        "requiresGrounding": { "type": "boolean" },
+        "verification": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}
