@@ -1,26 +1,10 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
-import { buildSiteImprovementPlan, formatSiteImprovementPlan } from '../lib/site-improvement.mjs';
+import { buildSiteImprovementPlan, formatSiteImprovementPlan } from '../lib/site-improvement-deep.mjs';
 
 function usage() {
-  return `arwp-improve — unified evidence-backed Site Improvement Plan
-
-Usage:
-  arwp-improve <https://site.example> [--repo-root=PATH] [--max-actions=N] [--max-pages=N] [--json] [--output=FILE]
-
-Combines:
-  - Search / AI-search Growth actions;
-  - Entity Graph gaps and grounded remediation evidence;
-  - bounded page semantics and internal-link observations.
-
-Prioritization is deterministic but is not a ranking/readiness score. ARWP does not predict traffic or ranking lift.
-
-Examples:
-  arwp-improve https://example.com
-  arwp-improve https://example.com --repo-root=../website --max-actions=8
-  arwp-improve https://example.com --repo-root=. --output=site-improvement.json
-`;
+  return `arwp-improve — unified evidence-backed Site Improvement Plan\n\nUsage:\n  arwp-improve <https://site.example> [--repo-root=PATH] [--max-actions=N] [--max-pages=N] [--site-kind=KIND] [--json] [--output=FILE]\n\nCombines:\n  - Search / AI-search Growth actions;\n  - Entity Graph gaps and grounded remediation evidence;\n  - bounded page semantics and internal-link observations;\n  - conditional Search Surface Blueprint checks and page archetypes.\n\nPrioritization is deterministic but is not a ranking/readiness score. ARWP does not predict traffic or ranking lift.\n\nExamples:\n  arwp-improve https://example.com\n  arwp-improve https://example.com --repo-root=../website --max-actions=8\n  arwp-improve https://example.com --site-kind=software-product --output=site-improvement.json\n`;
 }
 
 function optionValue(args, name) {
@@ -72,7 +56,8 @@ async function main() {
     maxFileBytes: positiveInteger(args, 'max-file-bytes', 1024 * 1024, 10 * 1024 * 1024),
     timeoutMs: positiveNumber(args, 'timeout', 8000),
     maxBytes: positiveNumber(args, 'max-bytes', 256 * 1024),
-    vertical: optionValue(args, 'vertical') || 'general'
+    vertical: optionValue(args, 'vertical') || 'general',
+    siteKind: optionValue(args, 'site-kind') || 'auto'
   });
   const output = optionValue(args, 'output');
   if (output) process.stdout.write(`WROTE ${writeJson(output, plan)}\n`);
