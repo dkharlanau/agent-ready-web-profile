@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkharlanau.github.io/agent-ready-web-profile/schema/entity-gap-report.schema.json",
+  "title": "ARWP Entity Graph Gap Report",
+  "type": "object",
+  "required": ["reportVersion", "canonicalUrl", "scope", "pages", "entities", "gaps", "summary", "guardrails", "doesNotProve"],
+  "properties": {
+    "reportVersion": {"const": "0.1"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "canonicalUrl": {"type": ["string", "null"], "format": "uri"},
+    "scope": {"const": "bounded-observed-entity-graph-not-ranking-score"},
+    "source": {"type": "string"},
+    "pages": {"type": "array"},
+    "entityFamilies": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "entities": {"type": "array"},
+    "gaps": {"type": "array"},
+    "summary": {"type": "object"},
+    "parseErrors": {"type": "array"},
+    "guardrails": {"type": "object"},
+    "doesNotProve": {"type": "array", "items": {"type": "string"}},
+    "discovery": {"type": "object"}
+  },
+  "additionalProperties": true
+}

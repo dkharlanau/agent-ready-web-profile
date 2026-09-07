@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ARWP Entity Graph Gap Report finds missing stable entity IDs, visible-content parity, canonical entity pages and structured relations without producing an SEO score.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Entity Graph Gap Report — ARWP</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/entities/gaps/">
+  <link rel="describedby" type="application/json" href="./reference-report.json">
+  <link rel="describedby" type="application/json" href="../../page-manifest.json">
+  <link rel="stylesheet" href="../../citation.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"TechArticle","@id":"https://dkharlanau.github.io/agent-ready-web-profile/entities/gaps/#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/entities/gaps/","headline":"Entity Graph Gap Report","description":"A bounded structural audit for stable entity identity, visible grounding, canonical entity pages and relations.","dateModified":"2026-09-07","author":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"},"isPartOf":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#website"},"about":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#software"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ARWP","item":"https://dkharlanau.github.io/agent-ready-web-profile/"},{"@type":"ListItem","position":2,"name":"Entities","item":"https://dkharlanau.github.io/agent-ready-web-profile/entities/"},{"@type":"ListItem","position":3,"name":"Gap Report","item":"https://dkharlanau.github.io/agent-ready-web-profile/entities/gaps/"}]}]}</script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="../../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="../">Entities</a><a href="../../product/">Product</a><a href="../../services/">Services</a><a href="../../recommendations/">Playbook</a><a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav></header>
+<main class="cite-main shell">
+  <section class="cite-hero"><p class="eyebrow">Entity graph · implementation gap analysis</p><h1>Find the missing connections, not another SEO score.</h1><p class="cite-lead"><strong>Entity Graph Gap Report</strong> samples a bounded set of pages, reads observed JSON-LD, and turns identity, visible-content and relationship gaps into a concrete P0–P3 backlog.</p><div class="cite-meta"><span>Stable @id</span><span>Visible parity</span><span>Entity pages</span><span>Relations</span></div></section>
+  <section class="cite-card"><h2>Run against a real site</h2><pre><code>node bin/arwp-entities.mjs https://example.com
+node bin/arwp-entities.mjs https://example.com --max-pages=20 --json
+node bin/arwp-entities.mjs https://example.com --output=entity-gap-report.json</code></pre><p>The crawl is bounded to same-site HTML discovered from the start page, crawlable links and sitemap URLs. A missing page outside that sample is not declared absent from the whole website.</p></section>
+  <section class="cite-card"><h2>What it detects</h2><p>Person, Organization, Product, SoftwareApplication/WebApplication, Service, Dataset, Event-family, DefinedTerm and Article-family entities. For each entity ARWP checks stable identity, visible grounding, a useful observed entity page and graph relations.</p><p>Family-aware checks include Service provider, Dataset creator/publisher and license, Article author, Event start/location and DefinedTerm vocabulary membership.</p></section>
+  <section class="cite-card"><h2>What the report refuses to claim</h2><p>This is <strong>not a ranking score</strong>, rich-result score, AI-citation probability, trust certificate or conversion model. It records structural evidence only. Closing a gap becomes a hypothesis whose outcome must be measured separately.</p></section>
+  <section class="cite-card"><h2>Reference output</h2><p><a href="./reference-report.json">Open the machine-readable reference report</a>. It demonstrates the output contract and explicit limitations without presenting ARWP's own graph as independent proof of search performance.</p><p><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/ENTITY-GRAPH-GAP-REPORT.md">Implementation documentation</a> · <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/schema/entity-gap-report.schema.json">JSON Schema</a></p></section>
+</main>
+</body>
+</html>

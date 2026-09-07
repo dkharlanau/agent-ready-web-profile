@@ -1,0 +1,26 @@
+{
+  "reportVersion": "0.1",
+  "generatedAt": "2026-09-07T00:00:00.000Z",
+  "canonicalUrl": "https://example.com/",
+  "scope": "bounded-observed-entity-graph-not-ranking-score",
+  "source": "synthetic-reference-fixture",
+  "pages": [
+    {"url":"https://example.com/","canonicalUrl":"https://example.com/","status":200,"jsonLdNodes":2,"parseErrors":0},
+    {"url":"https://example.com/services/","canonicalUrl":"https://example.com/services/","status":200,"jsonLdNodes":1,"parseErrors":0},
+    {"url":"https://example.com/data/","canonicalUrl":"https://example.com/data/","status":200,"jsonLdNodes":1,"parseErrors":0},
+    {"url":"https://example.com/guide/","canonicalUrl":"https://example.com/guide/","status":200,"jsonLdNodes":1,"parseErrors":0}
+  ],
+  "entityFamilies": {"Organization":1,"Service":1,"Dataset":1,"Article":1},
+  "entities": [],
+  "gaps": [
+    {"id":"property:article:author:https://example.com/#guide","priority":"P1","family":"Article","entityId":"https://example.com/#guide","entityName":"Implementation Guide","problem":"Article-family entity has no explicit author relation.","recommendation":"Add author only when the fact is known and grounded.","evidence":["https://example.com/guide/"]},
+    {"id":"property:dataset:creator|publisher:https://example.com/#dataset","priority":"P1","family":"Dataset","entityId":"https://example.com/#dataset","entityName":"Cases Dataset","problem":"Dataset has neither creator nor publisher relation.","recommendation":"Add creator or publisher only when the fact is known and grounded.","evidence":["https://example.com/data/"]},
+    {"id":"property:dataset:license:https://example.com/#dataset","priority":"P1","family":"Dataset","entityId":"https://example.com/#dataset","entityName":"Cases Dataset","problem":"Dataset has no explicit license.","recommendation":"Add license only when the fact is known and grounded.","evidence":["https://example.com/data/"]},
+    {"id":"orphan:https://example.com/#guide","priority":"P2","family":"Article","entityId":"https://example.com/#guide","entityName":"Implementation Guide","problem":"Entity is structurally isolated from the other observed entities.","recommendation":"Add truthful relations such as author, provider, publisher, about, isPartOf, inDefinedTermSet, or isRelatedTo.","evidence":["https://example.com/guide/"]},
+    {"id":"orphan:https://example.com/#dataset","priority":"P2","family":"Dataset","entityId":"https://example.com/#dataset","entityName":"Cases Dataset","problem":"Entity is structurally isolated from the other observed entities.","recommendation":"Add truthful relations such as author, provider, publisher, about, isPartOf, inDefinedTermSet, or isRelatedTo.","evidence":["https://example.com/data/"]}
+  ],
+  "summary": {"pagesObserved":4,"entitiesObserved":4,"familiesObserved":4,"stableIds":{"observed":4,"total":4},"entityPages":{"observed":4,"total":4},"visibleNameParity":{"observed":4,"total":4},"relations":{"observed":2,"unresolvedInternal":0},"gaps":{"P0":0,"P1":3,"P2":2,"P3":0},"jsonLdParseErrors":0},
+  "parseErrors": [],
+  "guardrails": {"noRankingPromise":true,"noUniversalSchemaBundle":true,"visibleFactsBeforeMetadata":true,"missingEntityTypeIsNotAutomaticallyAGap":true,"noThinEntityPages":true,"noInventedRatingsReviewsPricesPeopleEventsOrCredentials":true},
+  "doesNotProve": ["search ranking or rich-result eligibility","AI citation or recommendation inclusion","identity authority outside observed first-party pages","completeness beyond the bounded crawl","business legitimacy, trustworthiness, or conversion impact"]
+}
