@@ -1,0 +1,48 @@
+name: Target-Site Transformation validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'schema/transformation-bundle.schema.json'
+      - 'lib/transformation-engine.mjs'
+      - 'bin/arwp-transform.mjs'
+      - 'scripts/transformation-engine-test.mjs'
+      - 'skills/arwp-target-transformation/**'
+      - 'docs/TARGET-SITE-TRANSFORMATION.md'
+      - '.github/workflows/transformation-engine.yml'
+  pull_request:
+    paths:
+      - 'schema/transformation-bundle.schema.json'
+      - 'lib/transformation-engine.mjs'
+      - 'bin/arwp-transform.mjs'
+      - 'scripts/transformation-engine-test.mjs'
+      - 'skills/arwp-target-transformation/**'
+      - 'docs/TARGET-SITE-TRANSFORMATION.md'
+      - '.github/workflows/transformation-engine.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate transformation engine
+        run: |
+          node scripts/transformation-engine-test.mjs
+          node --check lib/transformation-engine.mjs
+          node --check bin/arwp-transform.mjs
+          node -e "JSON.parse(require('fs').readFileSync('schema/transformation-bundle.schema.json','utf8'))"
+          node bin/arwp-transform.mjs --help
