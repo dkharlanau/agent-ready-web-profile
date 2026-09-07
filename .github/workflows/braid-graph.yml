@@ -1,0 +1,45 @@
+name: BraidGraph validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'schema/braid-graph.schema.json'
+      - 'lib/braid-graph.mjs'
+      - 'bin/arwp-braid.mjs'
+      - 'scripts/braid-graph-test.mjs'
+      - 'docs/BRAIDGRAPH.md'
+      - '.github/workflows/braid-graph.yml'
+  pull_request:
+    paths:
+      - 'schema/braid-graph.schema.json'
+      - 'lib/braid-graph.mjs'
+      - 'bin/arwp-braid.mjs'
+      - 'scripts/braid-graph-test.mjs'
+      - 'docs/BRAIDGRAPH.md'
+      - '.github/workflows/braid-graph.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate BraidGraph
+        run: |
+          node scripts/braid-graph-test.mjs
+          node --check lib/braid-graph.mjs
+          node --check bin/arwp-braid.mjs
+          node -e "const fs=require('fs'); JSON.parse(fs.readFileSync('schema/braid-graph.schema.json','utf8'));"
