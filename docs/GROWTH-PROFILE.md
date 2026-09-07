@@ -133,9 +133,7 @@ Use when Article/NewsArticle/BlogPosting structured data is appropriate. `dateMo
 
 `templates/growth/preferred-source.html`
 
-For an eligible domain/subdomain that plausibly has repeat readers, this template now uses Google's recommended interactive Preferred Sources JavaScript button (`publisher.js` + `google-add-preferred-source-btn`) and keeps the deeplink as a `noscript` fallback. The interactive flow can return a reader to the page they left and localizes automatically by default.
-
-Do not add the control blindly: first verify that the publication appears in Google's source preferences tool. Subdirectory-only properties are not eligible as separate Preferred Sources. This remains a user preference/acquisition mechanism, not a general ranking guarantee.
+This provides a simple link to Google's Preferred Sources preference flow. It helps only users who explicitly select the domain/subdomain and is not a general ranking guarantee.
 
 ### Non-commodity content review
 
@@ -149,7 +147,7 @@ The current profile includes primary-source changes reviewed on 2026-09-06, incl
 
 - Google Generative AI Search guidance emphasizing unique, expert-led, non-commodity content and explicitly rejecting AI-only markup/chunking cargo cults;
 - worldwide rollout of Google Search Console Generative AI performance insights as of 2026-08-31;
-- Google Preferred Sources availability in AI Mode / AI Overviews where supported, plus the 2026-08-20 recommended interactive button flow;
+- Google Preferred Sources availability in AI Mode / AI Overviews where supported;
 - Google Search Console platform properties for Instagram, TikTok, X and YouTube;
 - Google's April 2026 Read more deep-link guidance;
 - Google FAQ rich-result deprecation in May 2026;

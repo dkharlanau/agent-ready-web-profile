@@ -74,16 +74,10 @@ assert.ok(historyIndex.snapshots[0].url.endsWith('/compare/history/2026-09-05-r3
 const product = readJson('docs/ai/product.jsonld');
 assert.equal(product['@context'], 'https://schema.org');
 const software = product['@graph'].find(item => Array.isArray(item['@type']) && item['@type'].includes('SoftwareApplication'));
-assert.ok(software, 'Schema.org graph must describe the SiteCurrent/ARWP software product');
-assert.equal(software.name, 'SiteCurrent');
-assert.ok(Array.isArray(software.alternateName) && software.alternateName.includes('Agent-Ready Web Profile') && software.alternateName.includes('ARWP'));
-assert.equal(software.applicationSubCategory, 'Adaptive Website Improvement');
+assert.ok(software, 'Schema.org graph must describe ARWP as software');
+assert.equal(software.applicationSubCategory, 'Agentic Web Interoperability Resolver');
 assert.equal(software.softwareVersion, '0.2.0');
-assert.equal(software.brand?.name, 'SiteCurrent');
-assert.equal(software.brand?.slogan, 'Keep your site ready for what finds it next.');
-assert.ok(software.featureList.includes('adaptive upgrade graphs'));
-assert.ok(software.featureList.includes('multi-protocol agentic-web discovery'));
-assert.ok(software.about.some(item => item.name === 'adaptive website improvement system'));
+assert.ok(software.featureList.includes('source authority and conflict preservation'));
 assert.ok(software.about.some(item => item.name === 'agentic web interoperability resolver'));
 
 const compareHtml = read('docs/compare/index.html');
@@ -158,4 +152,4 @@ assert.match(citation, /- "agent readiness"/);
 assert.match(citation, /- "web interoperability"/);
 assert.match(citation, /project-defined rather than/i);
 
-console.log('PASS SiteCurrent product metadata preserves the ARWP technical classification, source-backed competitor map, immutable r1/r2/r3 history and canonical comparison surfaces without inventing rankings or fake robots authority');
+console.log('PASS ARWP publishes a source-backed competitor map, immutable r1/r2/r3 comparison history, direct ARD v0.91/AgentReady pages, explicit machine-readable product class and canonical sitemap without inventing rankings or fake robots authority');
