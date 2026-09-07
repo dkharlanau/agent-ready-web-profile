@@ -133,7 +133,7 @@ The Next.js experimental pack does not expose arbitrary JSON-LD TSX insertion in
 
 A useful filename is not evidence that a new capability should exist. Creating new discovery/API surfaces remains a separately grounded recommendation and transformation decision.
 
-For Next.js, the first live portfolio ownership case is Ptichi: `src/app/sitemap.ts`, `src/app/robots.ts`, and `src/app/manifest.ts` are mapped as explicit App Router metadata sources. The pack can prepare a grounded sitemap/manifest replacement, while `robots.ts` remains blocked by the policy mutation class. The CI dogfood is read-only; it does not mutate Ptichi.
+For Next.js, Ptichi was the first real portfolio ownership case inspected through the connected GitHub integration: `src/app/sitemap.ts`, `src/app/robots.ts`, and `src/app/manifest.ts` are explicit App Router metadata sources. The pack can prepare a grounded sitemap/manifest replacement, while `robots.ts` remains blocked by the policy mutation class. Because Ptichi is private, ARWP does not copy its source into public fixtures and CI does not request a cross-repository secret.
 
 ## CLI
 
@@ -209,7 +209,8 @@ Regression coverage includes:
 - Next.js deterministic no-op behavior;
 - Next.js sitemap operation preparation;
 - policy-gated `robots.ts` ownership;
-- live read-only Ptichi mapping in Repository Mapper CI;
+- a structural Next.js regression that mirrors the observed Ptichi ownership pattern without copying private source;
+- real Ptichi ownership checked through the connected GitHub integration during development;
 - npm package-surface verification.
 
 ## Remaining #61 work
