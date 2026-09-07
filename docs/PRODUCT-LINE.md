@@ -41,7 +41,7 @@ This review is a capability map, not a winner ranking. Vendor capabilities chang
 
 ## The unique product primitive: BraidGraph
 
-The strongest defensible primitive is not a score, prompt database or generated file. It is a versioned graph that connects the whole evidence-to-change chain:
+The implemented **BraidGraph v0.1** is the versioned graph connecting the evidence-to-change chain:
 
 ```text
 UPSTREAM SOURCE
@@ -63,15 +63,16 @@ VERIFICATION RECEIPT
 OUTCOME EVIDENCE
 ```
 
-Call this **BraidGraph**.
+The graph also works in reverse and preserves explicit source/rule history:
 
-The graph must also work in reverse. That is where the product becomes much more valuable:
-
-- an upstream rule changes → which sites are now affected?
-- a recommendation becomes `review-due` → which previous changes depended on it?
+- an upstream rule changes → which recommendations/transforms are candidates for re-review?
+- a recommendation becomes `review-due` → which previous work depended on it?
 - a file changed → which source-backed recommendation justified it?
 - an implementation passed → which outcome signals are still missing?
+- a prior source/rule version was superseded → can the historical interpretation still be inspected?
 - a portfolio policy changes → which repositories need a reviewable patch?
+
+The open v0.1 implementation ships schema validation, deterministic compilation from Adaptive Upgrade + Transformation Bundle artifacts, `explain`, `impact`, `missing-evidence`, explicit `supersedes` history and a portable Agent Skill. It does not infer causality or production authorization.
 
 This is closer to dependency management and change-impact analysis for websites than to a conventional SEO audit.
 
@@ -83,7 +84,7 @@ This is closer to dependency management and change-impact analysis for websites 
 
 Tracks meaningful Search, AI-search, crawler, dataset/PID and agent-web changes from primary sources.
 
-Current ARWP assets already provide Trend Radar, recommendation registries, source snapshots and knowledge freshness. The next step is to make source change events first-class BraidGraph nodes with semantic diffs and explicit affected-rule edges.
+Current ARWP assets provide Trend Radar, recommendation registries, source snapshots, knowledge freshness and explicit BraidGraph source/rule revision history. The next step is semantic source diffing that proposes reviewed rule revisions rather than reacting to raw timestamp/text churn.
 
 **Value:** stop manually chasing platform blogs and stale checklists.
 
@@ -105,7 +106,7 @@ It should map:
 - existing analytics/owner evidence adapters;
 - repository paths that are safe, gated or forbidden to mutate.
 
-The critical capability is **rendered surface → owning source file** resolution. That removes the current manual gap between an upgrade recommendation and a deterministic target transformation.
+The critical capability is **rendered surface → owning source file** resolution. That removes the current manual gap between an upgrade recommendation and a deterministic target transformation and fills trustworthy BraidGraph `renders` ownership edges.
 
 **Value:** the system understands the actual site before prescribing changes.
 
@@ -115,7 +116,7 @@ The critical capability is **rendered surface → owning source file** resolutio
 
 The Adaptive Site Upgrade Engine is this layer.
 
-It combines current rules, site evidence, vertical/site type, goals and dependencies into a target-specific upgrade graph. It explicitly distinguishes `recommended`, `conditional`, `not-applicable` and `review-due` work instead of giving every site the same checklist.
+It combines current rules, site evidence, vertical/site type, goals and dependencies into a target-specific upgrade graph. It explicitly distinguishes `recommended`, `conditional`, `not-applicable` and `review-due` work instead of giving every site the same checklist. BraidGraph can preserve rule/recommendation lineage after compilation.
 
 **Value:** fewer cargo-cult fixes; higher relevance of every change.
 
@@ -123,7 +124,7 @@ It combines current rules, site evidence, vertical/site type, goals and dependen
 
 **Status:** active v0.1 / expanding.
 
-The Target-Site Transformation Engine converts deterministic work into path-allowlisted, digest-gated operations and production-path pull requests.
+The Target-Site Transformation Engine converts deterministic work into path-allowlisted, digest-gated operations and production-path pull requests. BraidGraph records the exact transform/repository-path relationship without treating the planned operation as a deployment.
 
 Future transformation packs should be stack-aware:
 
@@ -155,15 +156,17 @@ A proof object should answer:
 - what Search/AI/referral/runtime evidence was observed later;
 - whether the change was kept, revised, reverted or retired.
 
-A successful build is implementation proof, not ranking proof.
+BraidGraph v0.1 already separates verification nodes from external measurement nodes and reports transform-level missing verification/outcome evidence. The remaining P0 is to adapt the canonical receipt/deployment/visibility/experiment artifacts into that graph without duplicating them.
+
+A successful build is implementation proof, not ranking proof. Neutral and negative results are valid evidence.
 
 **Value:** every important change remains explainable months later.
 
 ### 6. SignalBraid Watch — **Watch**
 
-**Status:** next commercial/high-leverage layer.
+**Status:** next commercial/high-leverage layer, with single-graph impact foundation active.
 
-Portfolio mode turns BraidGraph into continuous change-impact monitoring.
+BraidGraph now supports explicit superseded source/rule history and per-graph reverse impact traversal. Portfolio mode should turn that primitive into continuous change-impact monitoring.
 
 Example questions:
 
@@ -173,7 +176,7 @@ Example questions:
 
 > Which repository patches were merged but still have no owner-side outcome evidence?
 
-This layer should support scheduled source re-review, multi-site drift, portfolio policy, alerts and prioritized change waves.
+This layer should add multi-site composition, scheduled source re-review, portfolio policy, alerts and prioritized change waves.
 
 **Value:** one team can maintain many sites without re-auditing everything manually after every platform change.
 
@@ -202,6 +205,7 @@ Best for developers and individual sites:
 - Map/site inspection primitives;
 - Plan/upgrade graph;
 - Patch/PR transformation engine;
+- BraidGraph schema/compiler/history/query layer;
 - Proof receipts and local evidence;
 - open schemas, CLI and Agent Skills.
 
@@ -232,27 +236,19 @@ The paid value is **maintenance, automation, governance, evidence and scale** �
 
 ## Highest-value new product bets
 
-### P0 — BraidGraph schema and compiler
-
-Create the canonical graph linking source → rule → site evidence → recommendation → repo surface → transform → verification → outcome.
-
-This becomes the shared data model behind all product layers.
-
 ### P0 — Repository Mapper
 
 Automatically resolve rendered public surfaces to source repository owners/files, framework-aware build paths and mutation classes.
 
-This is the missing bridge that allows more `grounded-template` work to become safe deterministic transformation bundles.
+This is the missing bridge that allows more `grounded-template` work to become safe deterministic transformation bundles and turns BraidGraph target references into verified ownership edges.
 
-### P0 — Reverse impact analysis
+### P0 — Unified Change Receipt + evidence adapters
 
-Given a changed/retired/review-due source rule, compute affected sites, recommendations, previous transforms and files.
+Every executed transformation should emit one durable receipt with source rule version, before/after digests, verification results, deployment evidence and follow-up measurement requirements. Existing Evidence Receipts, visibility snapshots, agent-eval and experiment artifacts should then map into BraidGraph without becoming duplicate sources of truth.
 
-This is the foundation for SignalBraid Watch.
+### P0 — SignalBraid Watch portfolio layer
 
-### P0 — Unified Change Receipt
-
-Every transformation should emit one durable receipt with source rule version, before/after digests, verification results, deployment evidence and follow-up measurement requirements.
+Compose per-site BraidGraphs and turn source/rule revision impact into bounded multi-site re-review queues, alerts and remediation waves.
 
 ### P1 — Portfolio policy-as-code
 
