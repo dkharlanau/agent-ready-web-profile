@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkharlanau.github.io/agent-ready-web-profile/schema/search-surface-report.schema.json",
+  "title": "ARWP Search Surface Blueprint Report",
+  "type": "object",
+  "required": ["reportVersion", "ruleset", "generatedAt", "canonicalUrl", "scope", "siteKind", "pages", "actions", "summary", "registrySummary", "guardrails"],
+  "properties": {
+    "reportVersion": {"const": "0.1"},
+    "ruleset": {"const": "2026.09.07"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "canonicalUrl": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "scope": {"const": "bounded-conditional-search-surface-architecture-not-ranking-score"},
+    "siteKind": {"type":"object","required":["kind","confidence"],"properties":{"kind":{"enum":["software-product","service-business","editorial-news","documentation-research","ecommerce","portfolio","local-business"]},"confidence":{"type":"string","minLength":1}},"additionalProperties":true},
+    "pages": {"type":"array","items":{"type":"object"}},
+    "actions": {"type":"array","items":{"type":"object","required":["id","priority","lane","title","reason","evidenceClass","evidence","verification","measurement","sourceCheck"],"properties":{"id":{"type":"string","minLength":1},"priority":{"enum":["P0","P1","P2","P3"]},"lane":{"type":"string","minLength":1},"title":{"type":"string","minLength":1},"reason":{"type":"string","minLength":1},"evidenceClass":{"enum":["direct-observation","source-backed","manual-review","advisory"]},"evidence":{"type":"array"},"verification":{"type":"array","minItems":1,"items":{"type":"string"}},"measurement":{"type":"array","minItems":1,"items":{"type":"string"}},"sourceCheck":{"type":"string","minLength":1}},"additionalProperties":true}},
+    "summary": {"type":"object","required":["pagesObserved","siteKind","siteKindConfidence","surfacesObserved","actions","byPriority","byLane"],"properties":{"pagesObserved":{"type":"integer","minimum":1},"siteKind":{"type":"string"},"siteKindConfidence":{"type":"string"},"surfacesObserved":{"type":"array","items":{"type":"string"}},"actions":{"type":"integer","minimum":0},"byPriority":{"type":"object"},"byLane":{"type":"object"}},"additionalProperties":true},
+    "registrySummary": {"type":"object","required":["checks","siteKinds","surfaceDefinitions"],"properties":{"checks":{"type":"integer","minimum":1},"siteKinds":{"type":"integer","minimum":1},"surfaceDefinitions":{"type":"integer","minimum":1}},"additionalProperties":false},
+    "guardrails": {"type":"object","required":["noRankingPromise","noUniversalReadinessScore","missingOptionalSurfaceIsNotAnSEOFailure","pageTypesAreConditional","newsAndRoadmapAreNotUniversalRequirements","schemaSemanticsDoNotImplyGoogleRichResults","boundedCrawlIsNotWholeSiteProof"],"properties":{"noRankingPromise":{"const":true},"noUniversalReadinessScore":{"const":true},"missingOptionalSurfaceIsNotAnSEOFailure":{"const":true},"pageTypesAreConditional":{"const":true},"newsAndRoadmapAreNotUniversalRequirements":{"const":true},"schemaSemanticsDoNotImplyGoogleRichResults":{"const":true},"boundedCrawlIsNotWholeSiteProof":{"const":true}},"additionalProperties":true}
+  },
+  "not": {"required":["score"]},
+  "additionalProperties": true
+}
