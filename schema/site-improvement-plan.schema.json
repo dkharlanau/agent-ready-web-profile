@@ -48,7 +48,13 @@
     "prioritization": {
       "type": "object",
       "required": ["method", "universalNumericScore", "priorityOrder", "evidenceOrder", "maxActions"],
-      "properties": {"universalNumericScore": {"const": false}},
+      "properties": {
+        "method": {"const": "priority-then-evidence-then-actionability-with-lane-diversity"},
+        "universalNumericScore": {"const": false},
+        "priorityOrder": {"type": "array", "const": ["P0", "P1", "P2", "P3"]},
+        "evidenceOrder": {"type": "array", "const": ["grounded-first-party", "direct-observation", "source-backed", "manual-review", "advisory"]},
+        "maxActions": {"type": "integer", "minimum": 1, "maximum": 25}
+      },
       "additionalProperties": true
     },
     "guardrails": {
