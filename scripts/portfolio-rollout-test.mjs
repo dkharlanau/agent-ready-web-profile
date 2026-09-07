@@ -4,6 +4,7 @@ import {
   loadPortfolioRegistry,
   validatePortfolioRegistry
 } from '../lib/portfolio-rollout.mjs';
+import { buildPortfolioProposals } from '../lib/portfolio-proposals.mjs';
 import { loadTrendRegistry } from '../lib/trend-radar.mjs';
 
 const portfolio = loadPortfolioRegistry();
@@ -28,6 +29,34 @@ assert.ok(rollout.candidates.some(item => item.siteId === 'metkagram-language-kn
 assert.ok(rollout.candidates.some(item => item.siteId === 'cognitive-biases-knowledge' && item.rolloutMode === 'managed-issue'));
 assert.ok(!rollout.candidates.some(item => item.stage === 'watch' || item.stage === 'retired'));
 
+const proposals = buildPortfolioProposals(portfolio, trends, { now });
+assert.ok(proposals.proposals.length > 0);
+assert.equal(proposals.guardrails.githubMutationAllowed, false);
+assert.equal(proposals.guardrails.productionMutationAllowed, false);
+assert.equal(proposals.guardrails.explicitTargetAuthorizationRequired, true);
+assert.equal(proposals.guardrails.unknownTargetsAreReportedNotForced, true);
+assert.ok(proposals.proposals.every(item => item.delivery.githubMutationAllowed === false));
+assert.ok(proposals.proposals.every(item => item.delivery.productionMutationAllowed === false));
+assert.ok(proposals.proposals.every(item => item.delivery.liveSiteAuditRequired === true));
+assert.ok(proposals.proposals.every(item => item.suggestedIssue.body.includes('This is a review artifact only.')));
+assert.ok(proposals.proposals.some(item => item.site.id === 'dkharlanau-sap-knowledge' && item.delivery.recommendedChannel === 'managed-issue-review'));
+assert.ok(proposals.proposals.some(item => item.site.id === 'brali-practical-knowledge' && item.delivery.recommendedChannel === 'proposal-only-review'));
+
+const proposalsAgain = buildPortfolioProposals(portfolio, trends, { now });
+assert.deepEqual(
+  proposalsAgain.proposals.map(item => item.proposalId),
+  proposals.proposals.map(item => item.proposalId),
+  'proposal IDs must be deterministic for the same portfolio/trend evidence'
+);
+
+const unknown = buildPortfolioProposals(portfolio, trends, {
+  now,
+  site: 'unknown-owner/unknown-site'
+});
+assert.deepEqual(unknown.unknownTargets, ['unknown-owner/unknown-site']);
+assert.equal(unknown.proposals.length, 0);
+assert.equal(unknown.summary.candidates, 0);
+
 const watchWithoutOptIn = buildPortfolioRollout(portfolio, trends, {
   now,
   stage: 'watch',
@@ -47,6 +76,14 @@ assert.deepEqual(
 );
 assert.ok(watch.candidates.every(item => item.recommendationStatus === 'watch-only'));
 
+const watchProposals = buildPortfolioProposals(portfolio, trends, {
+  now,
+  includeWatch: true,
+  trend: 'webmcp-origin-trial-evals'
+});
+assert.ok(watchProposals.proposals.length > 0);
+assert.ok(watchProposals.proposals.flatMap(item => item.candidates).every(item => item.recommendationStatus === 'watch-only'));
+
 const excludedPortfolio = structuredClone(portfolio);
 const target = excludedPortfolio.sites.find(site => site.id === 'dkharlanau-sap-knowledge');
 target.rollout.excludeTrendIds = ['google-generative-ai-optimization-guide'];
@@ -64,4 +101,4 @@ const invalidResult = validatePortfolioRegistry(invalid);
 assert.equal(invalidResult.valid, false);
 assert.ok(invalidResult.semanticErrors.some(error => /Duplicate portfolio repository/.test(error)));
 
-console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across ${Object.keys(rollout.summary.bySite).length} sites without generic production mutation`);
+console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
