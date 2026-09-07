@@ -25,6 +25,7 @@ The output is a hypothesis generator and prioritization input. It is not a list 
 Read:
 
 - `docs/SEARCH-MATURITY-BENCHMARK.md`;
+- `docs/INTERNAL-DISCOVERY-EVIDENCE.md` when reviewing `internalTopicalGraph`;
 - `schema/search-maturity-corpus.schema.json`;
 - the relevant reviewed corpus under `benchmarks/search-maturity/`;
 - current primary platform guidance;
@@ -43,6 +44,19 @@ Read:
 9. **Route accepted work through existing ARWP machinery.** Growth hypothesis → Adaptive Upgrade → safe transformation/manual edit → verification receipt.
 10. **Measure external outcomes separately.** Search visibility, AI retrieval/citation, referral traffic and business outcomes are different signals.
 11. **Preserve negative results.** A change with no effect is useful evidence and should influence future priors.
+
+### Internal topical graph evidence
+
+When reviewing `internalTopicalGraph`:
+
+- prefer rendered/runtime or matching build-artifact anchors over repository-source guesses;
+- classify redirect-only aliases as URL transitions, not weak content nodes;
+- count shared-renderer links in source mode only when route → renderer → visible anchor behavior is deterministic and inspectable;
+- keep uncertain renderer/source relationships `unknown` instead of scoring them absent;
+- distinguish contextual/hub/action links from global navigation and footer reachability;
+- keep canonical owner identity, redirects, sitemap state and link relationships as separate observations.
+
+Use `docs/INTERNAL-DISCOVERY-EVIDENCE.md` for the full contract.
 
 ## Fast-riser handling
 
@@ -83,6 +97,7 @@ Do not force all dimensions onto every site type.
 - Do not optimize the benchmark by selecting only supporting examples.
 - Do not collapse unknown into zero.
 - Do not hide misses or negative experiments.
+- Do not score redirect aliases as isolated weak pages or literal source imports as rendered links when the renderer contract is unverified.
 - Do not publish confidential algorithms, learned proprietary priors or candidate patent claims merely to document R&D.
 - Do not let a single composite score drive changes.
 
