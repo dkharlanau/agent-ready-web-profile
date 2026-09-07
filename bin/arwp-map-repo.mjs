@@ -18,7 +18,7 @@ function usage() {
   console.log(`SignalBraid Repository Mapper
 
 Usage:
-  arwp-map-repo compile --root=<repo> --repository=<owner/name> --site=<https://site> [--site-root=docs] [--base-path=/project/] [--base-ref=main] [--base-sha=<40-sha>] [--adapter=auto|static-html|jekyll|astro] [--out=site-state.json]
+  arwp-map-repo compile --root=<repo> --repository=<owner/name> --site=<https://site> [--site-root=docs] [--base-path=/project/] [--base-ref=main] [--base-sha=<40-sha>] [--adapter=auto|static-html|jekyll|astro|nextjs] [--out=site-state.json]
   arwp-map-repo validate <site-state.json>
   arwp-map-repo resolve <site-state.json> (--surface=<surface-key> | --route=</path/> [--type=canonical])
   arwp-map-repo upgrade-hints <adaptive-upgrade.json> <site-state.json>
@@ -27,7 +27,7 @@ Usage:
   arwp-map-repo braid <braid.json> <site-state.json> [--out=braid-with-map.json]
   arwp-map-repo braid-report <braid-with-map.json>
 
-Repository mapping records proven/explicit ownership and ambiguity. Astro auto-detection is evidence-backed and maps only inspectable static file routes; dynamic/runtime/uninspectable routes fail closed. Transform preparation resolves safe candidate paths and current digests, but it never invents an after-state or authorizes mutation.`);
+Repository mapping records proven/explicit ownership and ambiguity. Framework auto-detection is evidence-backed. Astro and Next.js adapters map only inspectable source ownership; dynamic/runtime/uninspectable routes fail closed. Transform preparation resolves safe candidate paths and current digests, but it never invents an after-state or authorizes mutation.`);
 }
 
 function parse(argv) {
