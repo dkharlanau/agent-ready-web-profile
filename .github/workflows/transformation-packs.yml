@@ -5,8 +5,10 @@ on:
     branches: [main]
     paths:
       - 'schema/transformation-pack-registry.schema.json'
+      - 'schema/transformation-pack-coverage.schema.json'
       - 'registry/transformation-packs.json'
       - 'lib/transformation-pack.mjs'
+      - 'lib/transformation-pack-coverage.mjs'
       - 'lib/repository-mapper.mjs'
       - 'lib/repository-mapper-frameworks.mjs'
       - 'lib/repository-mapper-astro.mjs'
@@ -14,9 +16,11 @@ on:
       - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform-pack.mjs'
       - 'scripts/transformation-pack-test.mjs'
+      - 'scripts/transformation-pack-coverage-test.mjs'
       - 'scripts/transformation-pack-astro-test.mjs'
       - 'scripts/repository-mapper-nextjs-test.mjs'
       - 'docs/TRANSFORMATION-PACKS.md'
+      - 'docs/TRANSFORMATION-PACK-COVERAGE.md'
       - 'schema/transformation-bundle.schema.json'
       - 'schema/site-state-graph.schema.json'
       - 'package.json'
@@ -24,8 +28,10 @@ on:
   pull_request:
     paths:
       - 'schema/transformation-pack-registry.schema.json'
+      - 'schema/transformation-pack-coverage.schema.json'
       - 'registry/transformation-packs.json'
       - 'lib/transformation-pack.mjs'
+      - 'lib/transformation-pack-coverage.mjs'
       - 'lib/repository-mapper.mjs'
       - 'lib/repository-mapper-frameworks.mjs'
       - 'lib/repository-mapper-astro.mjs'
@@ -33,9 +39,11 @@ on:
       - 'lib/transformation-engine.mjs'
       - 'bin/arwp-transform-pack.mjs'
       - 'scripts/transformation-pack-test.mjs'
+      - 'scripts/transformation-pack-coverage-test.mjs'
       - 'scripts/transformation-pack-astro-test.mjs'
       - 'scripts/repository-mapper-nextjs-test.mjs'
       - 'docs/TRANSFORMATION-PACKS.md'
+      - 'docs/TRANSFORMATION-PACK-COVERAGE.md'
       - 'schema/transformation-bundle.schema.json'
       - 'schema/site-state-graph.schema.json'
       - 'package.json'
@@ -62,13 +70,15 @@ jobs:
       - name: Validate Transformation Packs
         run: |
           node scripts/transformation-pack-test.mjs
+          node scripts/transformation-pack-coverage-test.mjs
           node scripts/transformation-pack-astro-test.mjs
           node scripts/repository-mapper-nextjs-test.mjs
           node --check lib/transformation-pack.mjs
+          node --check lib/transformation-pack-coverage.mjs
           node --check lib/repository-mapper-astro.mjs
           node --check lib/repository-mapper-nextjs.mjs
           node --check bin/arwp-transform-pack.mjs
-          node -e "for (const file of ['schema/transformation-pack-registry.schema.json','registry/transformation-packs.json']) JSON.parse(require('fs').readFileSync(file,'utf8'));"
+          node -e "for (const file of ['schema/transformation-pack-registry.schema.json','schema/transformation-pack-coverage.schema.json','registry/transformation-packs.json']) JSON.parse(require('fs').readFileSync(file,'utf8'));"
           node bin/arwp-transform-pack.mjs validate | grep -q '"valid": true'
           node bin/arwp-transform-pack.mjs list --adapter=static-html | grep -q 'static-html-core-v0.1'
           node bin/arwp-transform-pack.mjs list --adapter=jekyll | grep -q 'jekyll-core-v0.1'
@@ -83,8 +93,10 @@ jobs:
           const files = new Set(report.files.map(item => item.path));
           for (const required of [
             'schema/transformation-pack-registry.schema.json',
+            'schema/transformation-pack-coverage.schema.json',
             'registry/transformation-packs.json',
             'lib/transformation-pack.mjs',
+            'lib/transformation-pack-coverage.mjs',
             'lib/repository-mapper-nextjs.mjs',
             'bin/arwp-transform-pack.mjs'
           ]) {

@@ -7,16 +7,22 @@ import {
   prepareTransformationPackOperation,
   validateTransformationPackRegistry
 } from '../lib/transformation-pack.mjs';
+import {
+  summarizeTransformationPackCoverage,
+  validateTransformationPackCoverageManifest
+} from '../lib/transformation-pack-coverage.mjs';
 
 function usage() {
   console.log(`SignalBraid Transformation Packs
 
 Usage:
-  arwp-transform-pack list [--adapter=static-html|jekyll] [--status=active|experimental|retired]
+  arwp-transform-pack list [--adapter=static-html|jekyll|astro|nextjs] [--status=active|experimental|retired]
   arwp-transform-pack validate [registry.json]
   arwp-transform-pack prepare <site-state.json> --pack=<pack-id> --recipe=<recipe-id> --recommendation=<id> (--route=<path> | --surface=<key>) --before=<source-file> [--inputs=<inputs.json>] [--grounding=<ref,ref>] [--reviewed-grounding] [--out=<result.json>]
+  arwp-transform-pack coverage <coverage-manifest.json> [--validate-only] [--out=<report.json>]
 
-prepare is read-only. A ready result is an operation spec for the existing Transformation Engine; it is not production mutation authorization.`);
+prepare is read-only. A ready result is an operation spec for the existing Transformation Engine; it is not production mutation authorization.
+coverage summarizes observed preparation outcomes. It is not a readiness score, ranking prediction or mutation authorization.`);
 }
 
 function parse(argv) {
@@ -89,6 +95,19 @@ function main() {
       reviewedGrounding: flags['reviewed-grounding'] === true
     };
     write(prepareTransformationPackOperation(siteState, request), flags.out);
+    return;
+  }
+
+  if (command === 'coverage') {
+    const manifest = readJson(positionals[1], 'Transformation Pack coverage manifest');
+    const validation = validateTransformationPackCoverageManifest(manifest);
+    if (flags['validate-only'] === true) {
+      write(validation, flags.out);
+      if (!validation.valid) process.exitCode = 1;
+      return;
+    }
+    if (!validation.valid) throw new Error(`Invalid Transformation Pack coverage manifest: ${validation.errors.join('; ')}`);
+    write(summarizeTransformationPackCoverage(manifest), flags.out);
     return;
   }
 
