@@ -15,7 +15,9 @@ The portfolio layer is operational metadata. It is not an adoption directory, qu
 - rollout mode;
 - optional provider allowlists and trend exclusions.
 
-The current owner portfolio contains five public sites. Three are configured for managed Growth operation and two remain proposal-only until explicitly promoted.
+The current owner portfolio contains six public sites. Three are configured for managed Growth operation and three are proposal-only until explicitly promoted.
+
+`https://ptichi.com/` is included as a proposal-only target. Ptichi is intentionally treated as a fresh-site baseline in the separate State of the Agentic Web owner reference cohort because its first recorded public release is 2026-09-05. Freshness is context for comparison, not evidence that ARWP caused later Search or AI-discovery movement.
 
 ## Rollout rules
 
@@ -40,6 +42,7 @@ node bin/arwp-portfolio.mjs check
 node bin/arwp-portfolio.mjs list
 node bin/arwp-portfolio.mjs rollout --json
 node bin/arwp-portfolio.mjs rollout --site=metkagram-language-knowledge --provider=google --json
+node bin/arwp-portfolio.mjs rollout --site=ptichi-fresh-site --json
 node bin/arwp-portfolio.mjs rollout --trend=webmcp-origin-trial-evals --include-watch --json
 node bin/arwp-portfolio.mjs propose --json
 node bin/arwp-portfolio.mjs propose --site=dkharlanau/dkharlanau.github.io --provider=google --json
@@ -108,6 +111,12 @@ Growth Experiment + visibility evidence
 
 A portfolio match is intentionally weaker than a site audit. It tells ARWP where to look, not what to patch.
 
+## Owner-controlled research comparison
+
+`research/state-of-agentic-web/reference-sites.json` keeps the user's own sites in a separate comparison cohort. It includes the five previously registered GitHub-hosted portfolio sites, ARWP itself, and Ptichi.
+
+The comparison cohort can be used for longitudinal checks such as Growth debt, Search/agent surfaces, implementation velocity and owner visibility evidence. It is explicitly excluded from the independent State of the Agentic Web aggregate.
+
 ## CI evidence
 
 The dedicated `ARWP Portfolio Rollout` workflow validates both layers:
@@ -117,6 +126,8 @@ The dedicated `ARWP Portfolio Rollout` workflow validates both layers:
 - proposal IDs are deterministic for unchanged evidence;
 - an unknown target is reported and receives no generic proposal;
 - JSON rollout/proposal/unknown-target outputs are retained as workflow artifacts.
+
+The State of the Agentic Web research workflow separately validates that owner reference sites, including Ptichi, cannot enter the independent aggregate.
 
 ## Guardrails
 
