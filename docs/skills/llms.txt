@@ -19,6 +19,11 @@ Use it to compare a target site with timestamped independent Search/AI reference
 - arwp-adaptive-upgrade — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-adaptive-upgrade/SKILL.md
 - arwp-target-transformation — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-target-transformation/SKILL.md
 
+## Evidence-to-change provenance
+- arwp-braidgraph — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-braidgraph/SKILL.md
+
+Use it to explain why a repository change exists, trace source/rule lineage, preserve superseded history, compute re-review blast radius and separate missing implementation verification from missing Search/AI outcome evidence.
+
 ## Specialists
 - arwp-ai-search-content — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md
 - arwp-future-search — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-future-search/SKILL.md
@@ -32,4 +37,4 @@ Use arwp-future-search after current crawl/index/canonical/content/identity foun
 npx skills add dkharlanau/agent-ready-web-profile
 
 ## Rule
-Research -> classify current vs observational vs experimental -> benchmark when useful -> implement -> verify -> measure. Do not claim that ARWP, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
+Research -> classify current vs observational vs experimental -> benchmark when useful -> implement -> trace provenance/impact when needed -> verify -> measure. Do not claim that ARWP, BraidGraph adjacency, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.

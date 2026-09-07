@@ -28,6 +28,7 @@ assert.equal(index.composition.searchMaturity, 'arwp-search-maturity');
 assert.equal(index.composition.sitePreparation, 'arwp-prepare-site');
 assert.equal(index.composition.upgradeCompiler, 'arwp-adaptive-upgrade');
 assert.equal(index.composition.transformationDelivery, 'arwp-target-transformation');
+assert.equal(index.composition.provenanceGraph, 'arwp-braidgraph');
 assert.equal(index.composition.futureSearch, 'arwp-future-search');
 
 const expectedCoreSkills = [
@@ -35,6 +36,7 @@ const expectedCoreSkills = [
   'arwp-search-maturity',
   'arwp-adaptive-upgrade',
   'arwp-target-transformation',
+  'arwp-braidgraph',
   'arwp-prepare-site',
   'arwp-ai-search-content',
   'arwp-future-search',
@@ -75,6 +77,9 @@ for (const expected of ['knowledge', 'verification', 'measurement', 'review-due'
 const transform = fs.readFileSync(path.join(skillsRoot, 'arwp-target-transformation', 'SKILL.md'), 'utf8');
 for (const expected of ['digest', 'allowedPaths', 'rollback', 'policy-gated', 'target-repository-transform-pr']) assert.match(transform, new RegExp(expected, 'i'));
 
+const braid = fs.readFileSync(path.join(skillsRoot, 'arwp-braidgraph', 'SKILL.md'), 'utf8');
+for (const expected of ['impact', 'missing-evidence', 'superseded', 'causality', 'review-due', 'negative']) assert.match(braid, new RegExp(expected, 'i'));
+
 const prepare = fs.readFileSync(path.join(skillsRoot, 'arwp-prepare-site', 'SKILL.md'), 'utf8');
 for (const expected of ['arwp audit', 'arwp-growth', 'arwp assert', 'Evidence Receipts']) assert.match(prepare, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
 assert.match(prepare, /Do not stop at a plan/i);
@@ -93,4 +98,4 @@ for (const mechanism of ['Agent Skills', 'ARD', 'MCP', 'A2A', 'WebMCP', 'OpenAPI
 const evidence = fs.readFileSync(path.join(skillsRoot, 'arwp-evidence-ci', 'SKILL.md'), 'utf8');
 assert.match(evidence, /read-only/i);
 
-console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration, reference-cohort learning, adaptive upgrade intelligence, future-search experimentation, safe transformation delivery and evidence-safe workflows`);
+console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration, reference-cohort learning, adaptive upgrade intelligence, BraidGraph provenance, future-search experimentation, safe transformation delivery and evidence-safe workflows`);

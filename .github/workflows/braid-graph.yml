@@ -6,16 +6,22 @@ on:
     paths:
       - 'schema/braid-graph.schema.json'
       - 'lib/braid-graph.mjs'
+      - 'lib/braid-history.mjs'
       - 'bin/arwp-braid.mjs'
+      - 'bin/arwp-braid-history.mjs'
       - 'scripts/braid-graph-test.mjs'
+      - 'scripts/braid-history-test.mjs'
       - 'docs/BRAIDGRAPH.md'
       - '.github/workflows/braid-graph.yml'
   pull_request:
     paths:
       - 'schema/braid-graph.schema.json'
       - 'lib/braid-graph.mjs'
+      - 'lib/braid-history.mjs'
       - 'bin/arwp-braid.mjs'
+      - 'bin/arwp-braid-history.mjs'
       - 'scripts/braid-graph-test.mjs'
+      - 'scripts/braid-history-test.mjs'
       - 'docs/BRAIDGRAPH.md'
       - '.github/workflows/braid-graph.yml'
 
@@ -40,6 +46,9 @@ jobs:
       - name: Validate BraidGraph
         run: |
           node scripts/braid-graph-test.mjs
+          node scripts/braid-history-test.mjs
           node --check lib/braid-graph.mjs
+          node --check lib/braid-history.mjs
           node --check bin/arwp-braid.mjs
+          node --check bin/arwp-braid-history.mjs
           node -e "const fs=require('fs'); JSON.parse(fs.readFileSync('schema/braid-graph.schema.json','utf8'));"
