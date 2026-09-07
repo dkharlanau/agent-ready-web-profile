@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/braid-graph.schema.json",
+  "title": "ARWP BraidGraph v0.1",
+  "description": "Versioned evidence-to-change graph linking upstream source evidence, target recommendations, repository changes, verification and outcome measurements without inferring causality.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generatedAt", "site", "repository", "inputs", "nodes", "edges", "summary", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "repository": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["fullName", "baseRef", "baseCommitSha"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "baseRef": { "type": "string", "minLength": 1 },
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adaptiveUpgrade"],
+      "properties": {
+        "adaptiveUpgrade": { "$ref": "#/$defs/inputArtifact" },
+        "transformationBundle": { "$ref": "#/$defs/inputArtifact" },
+        "verificationEvidence": { "$ref": "#/$defs/inputArtifact" },
+        "measurementEvidence": { "$ref": "#/$defs/inputArtifact" }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/edge" }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "edges", "byNodeType", "byEdgeType", "reviewDueRules", "transforms", "verifiedTransforms", "measuredTransforms"],
+      "properties": {
+        "nodes": { "type": "integer", "minimum": 0 },
+        "edges": { "type": "integer", "minimum": 0 },
+        "byNodeType": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "byEdgeType": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "reviewDueRules": { "type": "integer", "minimum": 0 },
+        "transforms": { "type": "integer", "minimum": 0 },
+        "verifiedTransforms": { "type": "integer", "minimum": 0 },
+        "measuredTransforms": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graphIsIndexNotAuthority", "recommendationIsNotAuthorization", "verificationIsNotOutcome", "measurementIsNotCausality", "historyIsVersioned", "ownerEvidenceMayRemainPrivate", "noRankingGuarantee"],
+      "properties": {
+        "graphIsIndexNotAuthority": { "const": true },
+        "recommendationIsNotAuthorization": { "const": true },
+        "verificationIsNotOutcome": { "const": true },
+        "measurementIsNotCausality": { "const": true },
+        "historyIsVersioned": { "const": true },
+        "ownerEvidenceMayRemainPrivate": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "inputArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "version", "digest"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "generatedAt": { "type": ["string", "null"], "format": "date-time" },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "versionKey", "state", "data", "provenance"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 220 },
+        "type": { "enum": ["source", "rule", "site", "surface", "repo-file", "fact", "recommendation", "transform", "verification", "measurement", "policy"] },
+        "versionKey": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "state": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "data": { "type": "object", "additionalProperties": true },
+        "provenance": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["artifact", "ref"],
+            "properties": {
+              "artifact": { "type": "string", "minLength": 1 },
+              "ref": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "from", "to", "state", "provenance"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 220 },
+        "type": { "enum": ["supports", "supersedes", "applies-to", "has-surface", "renders", "grounds", "targets", "depends-on", "implements", "mutates", "verifies", "observes", "allows", "blocks"] },
+        "from": { "type": "string", "minLength": 1 },
+        "to": { "type": "string", "minLength": 1 },
+        "state": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "observedAt": { "type": ["string", "null"], "format": "date-time" },
+        "provenance": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["artifact", "ref"],
+            "properties": {
+              "artifact": { "type": "string", "minLength": 1 },
+              "ref": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}
