@@ -3,6 +3,15 @@
   "evidenceClass": "owner-controlled-public-observation",
   "runs": [
     {
+      "runId": "20260907T095036Z",
+      "observedAt": "2026-09-07T09:50:36.000Z",
+      "enabledSites": 6,
+      "captured": 6,
+      "unavailable": 0,
+      "awaitingOwnerMeasurement": 6,
+      "diffFromPrevious": "20260907T091710Z--20260907T095036Z"
+    },
+    {
       "runId": "20260907T091710Z",
       "observedAt": "2026-09-07T09:17:10.000Z",
       "enabledSites": 6,
@@ -27,6 +36,6 @@
     "noMissingMetricZeros": true,
     "noRankingCausality": true
   },
-  "latestRunId": "20260907T091710Z",
-  "updatedAt": "2026-09-07T09:17:10.000Z"
+  "latestRunId": "20260907T095036Z",
+  "updatedAt": "2026-09-07T09:50:36.000Z"
 }
