@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dkharlanau.github.io/agent-ready-web-profile/schema/site-improvement-plan.schema.json",
+  "title": "ARWP Site Improvement Plan",
+  "type": "object",
+  "required": ["version", "generatedAt", "site", "scope", "summary", "actions", "sourceSummary", "prioritization", "guardrails"],
+  "properties": {
+    "version": {"const": "0.1"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "site": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "scope": {"const": "bounded-prioritized-improvement-plan-not-ranking-score"},
+    "summary": {
+      "type": "object",
+      "required": ["candidates", "selected", "suppressed", "byPriority", "byLane"],
+      "properties": {
+        "candidates": {"type": "integer", "minimum": 0},
+        "selected": {"type": "integer", "minimum": 0, "maximum": 25},
+        "suppressed": {"type": "integer", "minimum": 0},
+        "byPriority": {"type": "object"},
+        "byLane": {"type": "object"}
+      },
+      "additionalProperties": true
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 25,
+      "items": {
+        "type": "object",
+        "required": ["order", "id", "sourceKind", "priority", "lane", "title", "reason", "evidenceClass", "evidence", "verification", "measurement", "dependencies"],
+        "properties": {
+          "order": {"type": "integer", "minimum": 1},
+          "id": {"type": "string", "minLength": 1},
+          "sourceKind": {"enum": ["growth", "entity-remediation", "page-graph"]},
+          "priority": {"enum": ["P0", "P1", "P2", "P3"]},
+          "lane": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "reason": {"type": "string"},
+          "evidenceClass": {"enum": ["grounded-first-party", "direct-observation", "source-backed", "manual-review", "advisory"]},
+          "evidence": {"type": "array"},
+          "verification": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "measurement": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "dependencies": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": true
+      }
+    },
+    "sourceSummary": {"type": "object"},
+    "prioritization": {
+      "type": "object",
+      "required": ["method", "universalNumericScore", "priorityOrder", "evidenceOrder", "maxActions"],
+      "properties": {"universalNumericScore": {"const": false}},
+      "additionalProperties": true
+    },
+    "guardrails": {
+      "type": "object",
+      "required": ["noRankingPromise", "noUniversalReadinessScore", "noAutomaticRepositoryMutation", "noInventedFacts", "measurementDoesNotProveCausality"],
+      "properties": {
+        "noRankingPromise": {"const": true},
+        "noUniversalReadinessScore": {"const": true},
+        "noAutomaticRepositoryMutation": {"const": true},
+        "noInventedFacts": {"const": true},
+        "measurementDoesNotProveCausality": {"const": true}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
