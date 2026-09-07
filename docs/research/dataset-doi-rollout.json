@@ -1,0 +1,22 @@
+{
+  "version": "0.1",
+  "updatedAt": "2026-09-07",
+  "module": "dataset-publication",
+  "referenceSites": {
+    "cbt-cards": {
+      "repositoryPrepared": true,
+      "datasetMetadata": true,
+      "publicationManifest": true,
+      "releaseVersion": null,
+      "doiState": "not-issued"
+    },
+    "metkagram": {
+      "repositoryPrepared": true,
+      "datasetMetadata": true,
+      "publicationManifest": true,
+      "releaseVersion": "1.0.0",
+      "doiState": "not-issued"
+    }
+  },
+  "remainingExternalStep": "owner-authorized persistent archive publication and DOI verification"
+}
