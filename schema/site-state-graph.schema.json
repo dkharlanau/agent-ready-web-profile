@@ -105,6 +105,14 @@
   "$defs": {
     "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
     "mutationClass": { "enum": ["mechanical", "grounded-template", "editorial", "policy-gated", "runtime", "owner-platform", "blocked"] },
+    "value": {
+      "anyOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" }
+      ]
+    },
     "candidate": {
       "type": "object",
       "additionalProperties": false,
@@ -157,7 +165,7 @@
         "candidates": { "type": "array", "items": { "$ref": "#/$defs/candidate" } },
         "mutationClass": { "$ref": "#/$defs/mutationClass" },
         "evidenceClass": { "enum": ["direct-source", "frontmatter-source", "machine-file-path", "ambiguous", "unresolved"] },
-        "value": { "type": ["string", "number", "boolean", "null"] },
+        "value": { "$ref": "#/$defs/value" },
         "locator": {
           "type": ["object", "null"],
           "additionalProperties": false,
@@ -175,7 +183,7 @@
       "required": ["key", "value", "routePath", "sourcePath", "locator", "evidenceClass"],
       "properties": {
         "key": { "type": "string", "minLength": 1 },
-        "value": { "type": ["string", "number", "boolean", "null"] },
+        "value": { "$ref": "#/$defs/value" },
         "routePath": { "type": ["string", "null"], "pattern": "^/.*" },
         "sourcePath": { "type": "string", "minLength": 1 },
         "locator": {
