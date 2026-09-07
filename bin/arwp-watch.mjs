@@ -7,6 +7,11 @@ import {
   validateWatchImpactBundle,
   formatWatchImpactBundle
 } from '../lib/braid-watch.mjs';
+import {
+  buildWatchProofQueueBundle,
+  validateWatchProofQueueBundle,
+  formatWatchProofQueueBundle
+} from '../lib/change-receipt-watch.mjs';
 
 function usage() {
   console.log(`SignalBraid Watch
@@ -15,10 +20,12 @@ Usage:
   arwp-watch impact <watch-targets.json> --rule=<rule-id> [--portfolio=<portfolio-sites.json>] [--out=<bundle.json>] [--text]
   arwp-watch impact <watch-targets.json> --source=<https://source> [--portfolio=<portfolio-sites.json>] [--out=<bundle.json>] [--text]
   arwp-watch changed-since <watch-targets.json> --since=<ISO-date-or-time> [--portfolio=<portfolio-sites.json>] [--out=<bundle.json>] [--text]
+  arwp-watch proof-queues <watch-targets.json> [--portfolio=<portfolio-sites.json>] [--out=<bundle.json>] [--text]
   arwp-watch validate-targets <watch-targets.json>
   arwp-watch validate-bundle <watch-impact-bundle.json>
+  arwp-watch validate-proof-queues <watch-proof-queue-bundle.json>
 
-Watch consumes existing BraidGraphs. It produces review queues only: impact does not mean breakage and never authorizes production mutation.`);
+Watch consumes existing BraidGraphs. Reverse impact and Proof portfolio modes produce review queues only: evidence does not mean breakage, does not prove ranking/citation impact and never authorizes production mutation.`);
 }
 
 function parse(argv) {
@@ -73,9 +80,9 @@ function write(value, filename = null) {
   else process.stdout.write(text);
 }
 
-function output(bundle, flags) {
+function output(bundle, flags, formatter) {
   if (flags.text === true) {
-    process.stdout.write(`${formatWatchImpactBundle(bundle)}\n`);
+    process.stdout.write(`${formatter(bundle)}\n`);
     return;
   }
   write(bundle, flags.out);
@@ -104,6 +111,21 @@ function main() {
     return;
   }
 
+  if (command === 'validate-proof-queues') {
+    const validation = validateWatchProofQueueBundle(readJson(positionals[1], 'Watch Proof queue bundle'));
+    write(validation);
+    if (!validation.valid) process.exitCode = 1;
+    return;
+  }
+
+  if (command === 'proof-queues') {
+    const manifestFile = positionals[1];
+    const targets = loadTargets(manifestFile);
+    const portfolio = typeof flags.portfolio === 'string' ? readJson(flags.portfolio, 'Portfolio registry') : null;
+    output(buildWatchProofQueueBundle(targets, { portfolio }), flags, formatWatchProofQueueBundle);
+    return;
+  }
+
   if (command === 'impact' || command === 'changed-since') {
     const manifestFile = positionals[1];
     const targets = loadTargets(manifestFile);
@@ -118,7 +140,7 @@ function main() {
       if (Number(hasRule) + Number(hasSource) !== 1) throw new Error('impact requires exactly one of --rule or --source.');
       query = hasRule ? { rule: flags.rule } : { source: flags.source };
     }
-    output(buildWatchImpactBundle(targets, query, { portfolio }), flags);
+    output(buildWatchImpactBundle(targets, query, { portfolio }), flags, formatWatchImpactBundle);
     return;
   }
 
