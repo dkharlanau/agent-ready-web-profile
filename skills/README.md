@@ -12,6 +12,14 @@ Use `arwp-growth-loop` when the outcome is Search growth, Discover/recommendatio
 
 `research → classify → baseline → hypothesis → implement → verify → measure → keep/revise/revert`
 
+## Reference benchmarking
+
+Use `arwp-search-maturity` when the task is to reverse-engineer what currently visible independent Search/AI reference pages repeatedly do differently from a target site.
+
+`intent → timestamped references → observed feature vector → cohort pattern → target gap → applicability review → experiment → measure`
+
+The benchmark keeps unmeasured dimensions `unknown`, requires explicit evidence before recording numeric rank and does not turn repeated correlations into Google/Bing ranking factors.
+
 ## Initial technical preparation
 
 Use `arwp-prepare-site` when the main task is to prepare or migrate an existing repository to the ARWP/Search/agent technical baseline.
@@ -29,8 +37,8 @@ Use `arwp-prepare-site` when the main task is to prepare or migrate an existing 
 - `arwp-agent-discovery` — llms.txt, Agent Skills, ARD, OpenAPI/MCP/A2A/WebMCP and ARWP surfaces.
 - `arwp-evidence-ci` — assertion contracts, scheduled audits, receipts and drift-safe CI.
 
-Use Future Search only after current eligibility/foundation work is healthy. A mechanism can be valuable for open machine interoperability even when it is not a documented Google ranking requirement, but every experiment must stay grounded, reversible and separately measured.
+Use Search Maturity for reference evidence, Growth for prioritization/current rules, and Future Search only after current eligibility/foundation work is healthy. A mechanism can be valuable for open machine interoperability even when it is not a documented Google ranking requirement, but every experiment must stay grounded, reversible and separately measured.
 
 When repository edits are possible, inspect the stack, establish a baseline, select only applicable high-confidence work, implement it and run the site's build/tests plus relevant ARWP checks. Leave credential-dependent or owner-side measurement work as explicit gates.
 
-Do not claim that ARWP adoption, a semantic index, Schema.org volume, `llms.txt`, Agent Skills or other metadata guarantees ranking, Discover placement, AI citations, recommendations or traffic.
+Do not claim that ARWP adoption, a reference-cohort pattern, semantic index, Schema.org volume, `llms.txt`, Agent Skills or other metadata guarantees ranking, Discover placement, AI citations, recommendations or traffic.
