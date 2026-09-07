@@ -1,0 +1,482 @@
+{
+  "version": "0.1",
+  "ruleset": "2026.09.07",
+  "reviewedAt": "2026-09-07",
+  "title": "ARWP Adaptive Site Upgrade Intelligence",
+  "purpose": "Compile source-backed Search, AI-search, citation, dataset, agent and measurement guidance into target-site change recipes. This registry extends the recommendation registry with implementation intelligence; it is not a ranking-factor catalog.",
+  "principles": {
+    "targetSiteChangesAreContextual": true,
+    "sourceBackedRulesOnly": true,
+    "staleRulesRequireReview": true,
+    "ownerDataSeparatedFromPublicEvidence": true,
+    "truthClaimsNeverInvented": true,
+    "noUniversalScore": true,
+    "noRankingPromise": true,
+    "measurementAfterVerification": true,
+    "retiredRulesStayVisible": true
+  },
+  "automationClasses": {
+    "mechanical": "A deterministic repository change may eventually be auto-applied after repository-specific verification.",
+    "grounded-template": "ARWP can prepare structure or snippets, but factual values must be grounded in the target site.",
+    "policy-gated": "The change expresses publisher policy or rights and requires explicit owner review.",
+    "editorial": "Human/editorial judgment is required; ARWP can identify the gap and evidence contract but must not manufacture experience or expertise.",
+    "owner-platform": "Authenticated external platform state is required and cannot be inferred from public crawling.",
+    "runtime": "The recommendation concerns interactive agent behavior and needs browser/runtime evaluation."
+  },
+  "packs": [
+    {
+      "id": "foundation",
+      "title": "Search and generative-search foundation",
+      "priority": "P0",
+      "lane": "eligibility",
+      "authority": "platform-guidance",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 45,
+      "sources": [
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+        "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a"
+      ],
+      "appliesTo": ["all"],
+      "goals": ["search", "generative-search", "ai-citations"],
+      "trigger": {
+        "mode": "debt",
+        "actionIds": [
+          "audit:google-search-technical-eligibility",
+          "audit:google-ai-search-eligibility",
+          "audit:google-crawlable-internal-links",
+          "audit:google-canonical-consistency",
+          "audit:google-javascript-renderability",
+          "audit:google-important-content-textual",
+          "audit:google-sitemap-lastmod"
+        ],
+        "actionPrefixes": ["audit:search-"]
+      },
+      "change": {
+        "automationClass": "grounded-template",
+        "targets": ["robots.txt", "canonical HTML", "HTTP response", "sitemap.xml", "priority internal links"],
+        "recipe": [
+          "Remove unintended crawl/index/snippet blockers from priority public URLs.",
+          "Keep canonical URLs, HTTP status and internal href links unambiguous.",
+          "Keep important page content available as rendered text.",
+          "Publish accurate sitemap lastmod only for meaningful changes."
+        ]
+      },
+      "verification": {
+        "checks": ["HTTP 200", "crawler access", "indexability", "snippet eligibility", "canonical consistency", "crawlable internal links", "sitemap validity"],
+        "successState": "Priority pages are technically eligible for the intended Search surfaces; eligibility is not an indexing or ranking guarantee."
+      },
+      "measurement": {
+        "signals": ["Search impressions", "indexed priority pages", "generative Search impressions"],
+        "ownerDataRequired": true
+      },
+      "dependencies": []
+    },
+    {
+      "id": "citation-ready-content",
+      "title": "Evidence-addressable, non-commodity content",
+      "priority": "P1",
+      "lane": "citation",
+      "authority": "platform-guidance",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 45,
+      "sources": [
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+        "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c"
+      ],
+      "appliesTo": ["editorial", "documentation", "research-dataset", "software-product", "general"],
+      "goals": ["search", "generative-search", "ai-citations"],
+      "trigger": {
+        "mode": "hybrid",
+        "actionIds": ["growth:non-commodity-review", "audit:google-read-more-deep-links", "audit:google-structured-data-visible-parity"],
+        "actionPrefixes": ["growth:vertical:research-dataset-methodology", "growth:vertical:documentation-examples"]
+      },
+      "change": {
+        "automationClass": "editorial",
+        "targets": ["priority answer pages", "research pages", "documentation pages"],
+        "recipe": [
+          "Lead with a directly useful answer or decision context instead of generic introductory filler.",
+          "Add first-hand evidence, original examples, data, methodology or a distinct conclusion where truthful.",
+          "Use descriptive headings and stable fragment IDs for evidence-bearing sections.",
+          "Make claims traceable to primary or appropriately authoritative sources.",
+          "Do not manufacture query-variant pages or AI-only text blocks."
+        ]
+      },
+      "verification": {
+        "checks": ["manual evidence review", "stable deep links", "visible structured-data parity", "source traceability"],
+        "successState": "The page contains human-useful, addressable evidence that can be retrieved without inventing special AI markup."
+      },
+      "measurement": {
+        "signals": ["cited priority pages", "grounding-query coverage", "deep-link referrals", "engagement on priority pages"],
+        "ownerDataRequired": true
+      },
+      "dependencies": ["foundation"]
+    },
+    {
+      "id": "entity-proof-graph",
+      "title": "Resolvable identity and provenance graph",
+      "priority": "P1",
+      "lane": "entity-identity",
+      "authority": "platform-guidance-plus-project-method",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 60,
+      "sources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/profile-page",
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "appliesTo": ["all"],
+      "goals": ["search", "generative-search", "ai-citations", "agent-discovery"],
+      "trigger": {
+        "mode": "debt",
+        "actionIds": ["growth:entity-identity", "growth:entity-sameas", "growth:article-authorship"],
+        "actionPrefixes": ["growth:vertical:research-dataset-identity", "growth:vertical:software-product-identity", "growth:vertical:editorial-authorship"]
+      },
+      "change": {
+        "automationClass": "grounded-template",
+        "targets": ["canonical entity page", "author/profile pages", "JSON-LD", "trust/citation surfaces"],
+        "recipe": [
+          "Choose one canonical Person/Organization/Product/Dataset identity per real entity.",
+          "Link visible bylines and product/dataset facts to stable identity pages.",
+          "Use sameAs only for identities actually controlled by or clearly representing the entity.",
+          "Keep machine-readable identity facts consistent with visible page facts."
+        ]
+      },
+      "verification": {
+        "checks": ["entity ID consistency", "visible-byline parity", "sameAs verification", "structured-data parity"],
+        "successState": "Important creators, products and datasets resolve to stable, non-conflicting identities."
+      },
+      "measurement": {
+        "signals": ["entity consistency across cited pages", "author/source attribution quality"],
+        "ownerDataRequired": false
+      },
+      "dependencies": ["foundation"]
+    },
+    {
+      "id": "chatgpt-search-policy",
+      "title": "ChatGPT Search discovery separated from training policy",
+      "priority": "P1",
+      "lane": "ai-access",
+      "authority": "platform-guidance",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 30,
+      "sources": ["https://help.openai.com/en/articles/12627856-publishers-and-developers-faq"],
+      "appliesTo": ["all"],
+      "goals": ["generative-search", "ai-citations"],
+      "trigger": {
+        "mode": "hybrid",
+        "actionIds": ["audit:openai-oai-searchbot-access"],
+        "actionPrefixes": ["growth:openai-", "trend-owner:openai-"]
+      },
+      "change": {
+        "automationClass": "policy-gated",
+        "targets": ["robots.txt", "publisher crawl policy"],
+        "recipe": [
+          "If ChatGPT Search visibility is desired, ensure OAI-SearchBot is not unintentionally blocked for intended public content.",
+          "Set GPTBot training preference independently; do not treat search discovery and model training as one switch.",
+          "Preserve noindex where the publisher does not want a page surfaced even as a bare link."
+        ]
+      },
+      "verification": {
+        "checks": ["OAI-SearchBot policy", "GPTBot policy", "page-level noindex intent"],
+        "successState": "Search discovery and training preferences match explicit publisher intent."
+      },
+      "measurement": {
+        "signals": ["ChatGPT referral traffic with utm_source=chatgpt.com", "observed ChatGPT citations"],
+        "ownerDataRequired": true
+      },
+      "dependencies": ["foundation"]
+    },
+    {
+      "id": "agent-accessibility",
+      "title": "Interactive pages operable through semantic accessibility signals",
+      "priority": "P1",
+      "lane": "agent-operability",
+      "authority": "platform-guidance",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 30,
+      "sources": ["https://help.openai.com/en/articles/12627856-publishers-and-developers-faq"],
+      "appliesTo": ["software-product", "commerce", "local-business"],
+      "goals": ["agent-usability", "agent-discovery"],
+      "trigger": {
+        "mode": "goal",
+        "actionIds": ["audit:openai-atlas-aria-agent-accessibility"],
+        "actionPrefixes": ["growth:agent-"]
+      },
+      "change": {
+        "automationClass": "runtime",
+        "targets": ["buttons", "links", "forms", "menus", "dialogs", "responsive interaction surfaces"],
+        "recipe": [
+          "Prefer native semantic HTML for controls and navigation.",
+          "Add descriptive accessible names, roles, states and label associations where native semantics are insufficient.",
+          "Remove click-only non-semantic interaction traps and unstable layout shifts around key actions.",
+          "Test real task completion at narrow viewport sizes and through the accessibility tree."
+        ]
+      },
+      "verification": {
+        "checks": ["accessibility tree inspection", "keyboard path", "label/control association", "agent task-completion eval"],
+        "successState": "Key user tasks expose stable semantics that both assistive technology and browser agents can interpret."
+      },
+      "measurement": {
+        "signals": ["agent task completion", "interaction failure rate", "accessibility defects"],
+        "ownerDataRequired": false
+      },
+      "dependencies": ["foundation"]
+    },
+    {
+      "id": "dataset-publication-pid",
+      "title": "Publish real data products as citable, versioned dataset releases",
+      "priority": "P1",
+      "lane": "dataset-trust",
+      "authority": "repository-archiving-and-pid-guidance",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 60,
+      "sources": [
+        "https://help.zenodo.org/docs/github/",
+        "https://help.zenodo.org/docs/github/archive-software/github-upload/",
+        "https://schema.datacite.org/meta/kernel-4/"
+      ],
+      "appliesTo": ["research-dataset"],
+      "goals": ["search", "generative-search", "ai-citations", "agent-discovery"],
+      "trigger": {
+        "mode": "applicable",
+        "actionIds": [],
+        "actionPrefixes": ["growth:vertical:research-dataset-"]
+      },
+      "condition": "Only for a genuine reusable/distributable corpus. Never create a decorative dataset solely to pass ARWP.",
+      "change": {
+        "automationClass": "grounded-template",
+        "targets": ["dataset landing page", "Dataset JSON-LD", "CITATION.cff", "frozen release manifest", "checksums", "Zenodo/DataCite record"],
+        "recipe": [
+          "Define a stable dataset identity, creator/publisher, scope, license, methodology, limitations and version.",
+          "Freeze the release distributions and record SHA-256 checksums before archive publication.",
+          "Publish the release through an archival repository such as Zenodo when appropriate and verify the issued DOI before exposing it as canonical citation metadata.",
+          "Link versions and related outputs using persistent identifiers where available; DataCite 4.7 can relate DOI records to SWHIDs.",
+          "Keep DOI state explicit as not-issued until an external resolver confirms it."
+        ]
+      },
+      "verification": {
+        "checks": ["Dataset metadata parity", "distribution URLs", "release version", "license", "methodology", "SHA-256", "external DOI resolution"],
+        "successState": "A real dataset release is independently resolvable and citable; DOI presence is not treated as a ranking factor or quality certificate."
+      },
+      "measurement": {
+        "signals": ["dataset referrals", "dataset citations", "reuse links", "AI citations to dataset landing/research pages"],
+        "ownerDataRequired": true
+      },
+      "dependencies": ["entity-proof-graph", "citation-ready-content"]
+    },
+    {
+      "id": "preferred-source-acquisition",
+      "title": "Expose Google Preferred Sources for repeat-reader sites",
+      "priority": "P2",
+      "lane": "acquisition",
+      "authority": "platform-feature",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 30,
+      "sources": ["https://developers.google.com/search/docs/appearance/preferred-sources"],
+      "appliesTo": ["editorial", "documentation", "research-dataset"],
+      "goals": ["search", "generative-search", "acquisition"],
+      "trigger": {
+        "mode": "hybrid",
+        "actionIds": ["growth:preferred-source-acquisition", "audit:google-preferred-sources"],
+        "actionPrefixes": []
+      },
+      "condition": "Use only when a repeat-reader relationship is plausible and the site can be selected at domain/subdomain level.",
+      "change": {
+        "automationClass": "grounded-template",
+        "targets": ["subscription/follow CTA", "site header/footer or relevant editorial surface"],
+        "recipe": [
+          "Add the official Preferred Sources control or documented source-selection link in a context where returning readers can understand it.",
+          "Do not describe the control as a general ranking boost."
+        ]
+      },
+      "verification": {
+        "checks": ["official control loads", "correct domain/subdomain", "visible user context"],
+        "successState": "Users can intentionally select the site as a Preferred Source where Google supports the feature."
+      },
+      "measurement": {
+        "signals": ["return traffic", "preferred-source selections where measurable", "AI/Top Stories visibility"],
+        "ownerDataRequired": true
+      },
+      "dependencies": ["foundation"]
+    },
+    {
+      "id": "google-genai-measurement-loop",
+      "title": "Close the loop with Google generative Search owner data",
+      "priority": "P1",
+      "lane": "measurement",
+      "authority": "platform-tooling",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 30,
+      "sources": ["https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports"],
+      "appliesTo": ["all"],
+      "goals": ["measurement", "generative-search", "ai-citations"],
+      "trigger": {
+        "mode": "goal",
+        "actionIds": ["growth:google-generative-ai-measurement-global", "audit:google-generative-ai-measurement"],
+        "actionPrefixes": []
+      },
+      "change": {
+        "automationClass": "owner-platform",
+        "targets": ["Search Console export/import", "ARWP owner-data receipt"],
+        "recipe": [
+          "Capture a pre-change baseline for relevant pages and dates.",
+          "Import generative Search and Discover visibility data after material changes.",
+          "Compare observation windows without claiming that a site change caused the movement."
+        ]
+      },
+      "verification": {
+        "checks": ["authenticated owner data", "date-window consistency", "page-level mapping"],
+        "successState": "Implementation state and Google generative visibility are tracked as separate evidence classes."
+      },
+      "measurement": {
+        "signals": ["generative Search impressions", "generative Discover impressions", "priority pages receiving impressions"],
+        "ownerDataRequired": true
+      },
+      "dependencies": ["foundation"]
+    },
+    {
+      "id": "bing-citation-intelligence-loop",
+      "title": "Turn Bing AI citations, grounding queries, intents and topics into the next content backlog",
+      "priority": "P1",
+      "lane": "measurement",
+      "authority": "platform-tooling",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 30,
+      "sources": ["https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c"],
+      "appliesTo": ["all"],
+      "goals": ["measurement", "generative-search", "ai-citations"],
+      "trigger": {
+        "mode": "goal",
+        "actionIds": ["growth:bing-ai-citation-measurement", "audit:bing-ai-performance-measurement"],
+        "actionPrefixes": []
+      },
+      "change": {
+        "automationClass": "owner-platform",
+        "targets": ["Bing AI Performance export/import", "topic-intent gap analysis", "ARWP hypothesis backlog"],
+        "recipe": [
+          "Import cited pages and grounding-query exports.",
+          "Where available, preserve Bing intent, topic, Citation Share and compare-period fields as owner-side evidence rather than generic SEO scores.",
+          "Map grounding queries and topics to existing canonical pages before proposing new content.",
+          "Create new content recommendations only for real unmet user intent or missing evidence depth; avoid one-page-per-query factories.",
+          "Use Citation Share as relative citation presence, not ranking, authority or causality."
+        ]
+      },
+      "verification": {
+        "checks": ["authenticated Bing export", "query-to-page mapping", "intent/topic gap review", "duplicate-content guardrail"],
+        "successState": "AI citation observations generate a traceable, non-spammy next experiment backlog."
+      },
+      "measurement": {
+        "signals": ["total citations", "cited pages", "grounding queries", "intent coverage", "topic coverage", "Citation Share"],
+        "ownerDataRequired": true
+      },
+      "dependencies": ["citation-ready-content"]
+    },
+    {
+      "id": "content-use-policy",
+      "title": "Declare AI content-use intent without pretending it is universal",
+      "priority": "P2",
+      "lane": "governance",
+      "authority": "provider-specific-convention",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 30,
+      "sources": ["https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/"],
+      "appliesTo": ["all"],
+      "goals": ["agent-discovery", "generative-search"],
+      "trigger": {
+        "mode": "debt",
+        "actionIds": ["growth:cloudflare-content-signals"],
+        "actionPrefixes": []
+      },
+      "condition": "Provider-specific. Apply only where the target delivery stack or intended consumers support the mechanism.",
+      "change": {
+        "automationClass": "policy-gated",
+        "targets": ["robots.txt or provider policy surface"],
+        "recipe": [
+          "Express search/reference/training preferences only after publisher rights and distribution intent are clear.",
+          "Keep provider-specific Content Signals separate from Google/OpenAI crawler semantics.",
+          "Record why the selected use level is appropriate for the site."
+        ]
+      },
+      "verification": {
+        "checks": ["provider applicability", "policy syntax", "publisher intent review"],
+        "successState": "Content-use policy is explicit, scoped and not misrepresented as a universal web standard."
+      },
+      "measurement": {
+        "signals": ["crawler-policy conformance", "provider crawl behavior"],
+        "ownerDataRequired": false
+      },
+      "dependencies": []
+    },
+    {
+      "id": "agent-interface-contract",
+      "title": "Expose agent/API interfaces only when there is a real capability",
+      "priority": "P2",
+      "lane": "agent-operability",
+      "authority": "interoperability-method",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 45,
+      "sources": ["https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/STANDARDS-MAP.md"],
+      "appliesTo": ["software-product", "documentation"],
+      "goals": ["agent-usability", "agent-discovery"],
+      "trigger": {
+        "mode": "hybrid",
+        "actionIds": [],
+        "actionPrefixes": ["growth:vertical:software-product-agent-interfaces"]
+      },
+      "condition": "Absence is not a defect when the product exposes no safe agent/API capability.",
+      "change": {
+        "automationClass": "runtime",
+        "targets": ["OpenAPI", "MCP", "A2A", "WebMCP", "Agent Skills", "optional ARWP profile"],
+        "recipe": [
+          "Start from an implemented task/capability, not from a fashionable discovery file.",
+          "Publish the smallest truthful discovery contract that maps to the runtime capability.",
+          "Keep static declaration evidence separate from successful runtime task evidence."
+        ]
+      },
+      "verification": {
+        "checks": ["declaration resolves", "runtime endpoint exists", "authorization boundary", "task-completion eval"],
+        "successState": "Agent discovery leads to a real, appropriately scoped capability rather than a dead manifest."
+      },
+      "measurement": {
+        "signals": ["agent task completion", "resolver success", "runtime conformance"],
+        "ownerDataRequired": false
+      },
+      "dependencies": ["agent-accessibility"]
+    },
+    {
+      "id": "change-evidence-loop",
+      "title": "Preserve why every site change was recommended and whether it worked",
+      "priority": "P1",
+      "lane": "governance",
+      "authority": "arwp-method",
+      "sourceReviewedAt": "2026-09-07",
+      "reviewAfterDays": 90,
+      "sources": ["https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/GROWTH-LOOP.md"],
+      "appliesTo": ["all"],
+      "goals": ["search", "generative-search", "ai-citations", "measurement", "agent-usability", "agent-discovery", "acquisition"],
+      "trigger": {
+        "mode": "applicable",
+        "actionIds": [],
+        "actionPrefixes": []
+      },
+      "change": {
+        "automationClass": "mechanical",
+        "targets": ["ARWP change manifest", "verification receipt", "measurement window", "rollback/review history"],
+        "recipe": [
+          "Record the upstream source/rule version that caused the recommendation.",
+          "Record the exact target surfaces changed and the verification result.",
+          "Keep implementation success separate from Search/AI outcome evidence.",
+          "Preserve negative results and retire stale practices instead of silently deleting history."
+        ]
+      },
+      "verification": {
+        "checks": ["rule provenance", "change target record", "verification receipt", "measurement state", "review decision"],
+        "successState": "Every applied recommendation is auditable from upstream evidence to target-site change and later outcome review."
+      },
+      "measurement": {
+        "signals": ["closed implementation debt", "verified changes", "reverted/retired hypotheses", "owner outcome evidence"],
+        "ownerDataRequired": false
+      },
+      "dependencies": []
+    }
+  ]
+}
