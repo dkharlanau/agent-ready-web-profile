@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/watch-proof-queue-bundle.schema.json",
+  "title": "SignalBraid Watch Proof Queue Bundle v0.1",
+  "description": "Deterministic portfolio review queue derived from latest Change Receipt states already indexed in target BraidGraphs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "mode", "summary", "attention", "excludedSites", "interpretation"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "mode": { "const": "change-receipt-queues" },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targets", "enabledTargets", "sitesWithAttention", "changesWithAttention", "excludedSites", "byPriority", "byQueue"],
+      "properties": {
+        "targets": { "type": "integer", "minimum": 1 },
+        "enabledTargets": { "type": "integer", "minimum": 0 },
+        "sitesWithAttention": { "type": "integer", "minimum": 0 },
+        "changesWithAttention": { "type": "integer", "minimum": 0 },
+        "excludedSites": { "type": "integer", "minimum": 0 },
+        "byPriority": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "P0": { "type": "integer", "minimum": 0 },
+            "P1": { "type": "integer", "minimum": 0 },
+            "P2": { "type": "integer", "minimum": 0 },
+            "P3": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "byQueue": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "failedVerification": { "type": "integer", "minimum": 0 },
+            "missingVerification": { "type": "integer", "minimum": 0 },
+            "reReviewRequired": { "type": "integer", "minimum": 0 },
+            "mergedButUnmeasured": { "type": "integer", "minimum": 0 },
+            "rolledBack": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "attention": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/attentionRow" }
+    },
+    "excludedSites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["siteId", "site", "reason"],
+        "properties": {
+          "siteId": { "type": "string", "minLength": 1 },
+          "site": { "type": ["string", "null"], "format": "uri" },
+          "reason": { "enum": ["disabled", "no-change-receipts", "no-proof-queue-items"] }
+        }
+      }
+    },
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["queueMembershipIsReviewEvidenceNotOutcomeCausality", "missingOutcomeIsUnknownNotZero", "verificationFailureIsImplementationEvidence", "reReviewDoesNotMeanBroken", "productionMutationAuthorized"],
+      "properties": {
+        "queueMembershipIsReviewEvidenceNotOutcomeCausality": { "const": true },
+        "missingOutcomeIsUnknownNotZero": { "const": true },
+        "verificationFailureIsImplementationEvidence": { "const": true },
+        "reReviewDoesNotMeanBroken": { "const": true },
+        "productionMutationAuthorized": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "reason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["queue", "classification", "priority"],
+      "properties": {
+        "queue": { "enum": ["failedVerification", "missingVerification", "reReviewRequired", "mergedButUnmeasured", "rolledBack"] },
+        "classification": { "enum": ["verification-failure", "verification-gap", "knowledge-re-review", "measurement-gap", "rollback-review"] },
+        "priority": { "enum": ["P0", "P1", "P2", "P3"] }
+      }
+    },
+    "attentionRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["siteId", "site", "repository", "portfolioSiteId", "portfolioName", "importance", "changeId", "receiptId", "revision", "mutationState", "verificationStatus", "deploymentState", "outcomeStatus", "reReviewRequired", "reviewDecision", "queues", "reasons", "priority", "priorityFactors", "rationale"],
+      "properties": {
+        "siteId": { "type": "string", "minLength": 1 },
+        "site": { "type": "string", "format": "uri" },
+        "repository": { "type": ["string", "null"] },
+        "portfolioSiteId": { "type": ["string", "null"] },
+        "portfolioName": { "type": ["string", "null"] },
+        "importance": { "enum": ["critical", "high", "normal", "low"] },
+        "changeId": { "type": ["string", "null"] },
+        "receiptId": { "type": ["string", "null"] },
+        "revision": { "type": "integer", "minimum": 0 },
+        "mutationState": { "type": "string", "minLength": 1 },
+        "verificationStatus": { "type": "string", "minLength": 1 },
+        "deploymentState": { "type": "string", "minLength": 1 },
+        "outcomeStatus": { "type": "string", "minLength": 1 },
+        "reReviewRequired": { "type": "boolean" },
+        "reviewDecision": { "type": "string", "minLength": 1 },
+        "queues": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["failedVerification", "missingVerification", "reReviewRequired", "mergedButUnmeasured", "rolledBack"] }
+        },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/reason" }
+        },
+        "priority": { "enum": ["P0", "P1", "P2", "P3"] },
+        "priorityFactors": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
