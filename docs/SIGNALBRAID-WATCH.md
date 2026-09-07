@@ -1,0 +1,214 @@
+# SignalBraid Watch — Reverse Impact
+
+Status: **v0.1 foundation · 2026-09-07**
+
+SignalBraid Watch turns BraidGraph from a provenance/explanation graph into a maintenance queue.
+
+Instead of re-auditing every site after every Search/AI/platform change, Watch asks:
+
+```text
+changed source / rule
+        ↓
+recorded BraidGraph dependencies
+        ↓
+affected recommendations
+        ↓
+previous transforms / Change Receipts
+        ↓
+exact repository paths + public surfaces
+        ↓
+review classification + explicit priority factors
+```
+
+Impact means **candidate for re-review**. It does not mean the implementation is broken, does not prove a ranking/citation effect and never authorizes production mutation.
+
+## Target manifest
+
+Watch operates on already-built BraidGraph artifacts.
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/watch-targets.schema.json",
+  "version": "0.1",
+  "sites": [
+    {
+      "id": "site-a",
+      "graph": "graphs/site-a.braid.json",
+      "importance": "high",
+      "enabled": true,
+      "portfolioSiteId": "site-a"
+    }
+  ]
+}
+```
+
+`importance` is explicit operator metadata: `critical`, `high`, `normal` or `low`. Watch does not infer business importance from traffic, rankings, domain authority or AI visibility.
+
+CLI graph paths are relative to the manifest directory and cannot escape it through `..`, absolute paths or symlink traversal.
+
+## Explicit impact
+
+```bash
+node bin/arwp-watch.mjs impact watch-targets.json \
+  --rule=canonical-discovery \
+  --portfolio=registry/portfolio-sites.json \
+  --out=watch-impact.json
+```
+
+or by exact source URL:
+
+```bash
+node bin/arwp-watch.mjs impact watch-targets.json \
+  --source=https://example.org/current-guidance \
+  --out=watch-impact.json
+```
+
+When historical rule/source versions coexist, Watch prefers the non-historical current node for an explicit selector. Historical nodes remain reachable as provenance.
+
+## Changed since
+
+```bash
+node bin/arwp-watch.mjs changed-since watch-targets.json \
+  --since=2026-09-07T00:00:00Z \
+  --out=watch-impact.json
+```
+
+`changed-since` is deliberately evidence-strict. It reacts to dated `supersedes` edges already recorded in BraidGraph.
+
+It does **not** invent a change date from:
+
+- lexical version strings;
+- page modification times without a recorded rule/source revision;
+- Git history alone;
+- a source being currently `review-due` with no dated transition event.
+
+For current `review-due` or `retired` states without a recorded revision event, use explicit `impact --rule` or `impact --source`.
+
+## Review classifications
+
+Watch emits one of four review classes:
+
+### `re-review`
+
+The trigger applies, but the graph does not justify assuming an update is required.
+
+Typical case: a current rule is `review-due`, or a revision has no recorded transform downstream.
+
+### `likely-update`
+
+A dated supersession/revision reaches existing transform or Change Receipt evidence.
+
+This means an implementation probably deserves comparison with current guidance. It is still not automatic breakage.
+
+### `retire-candidate`
+
+The current rule is explicitly `retired` and recorded implementations depend on it.
+
+Retirement does not itself authorize deletion or rollback.
+
+### `blocked-owner-review`
+
+Affected work crosses a policy/editorial/owner-platform/runtime boundary or a policy node.
+
+Examples:
+
+- crawler/content-use policy;
+- editorial claims/authorship decisions;
+- Search Console/Merchant/Business Profile state;
+- browser/runtime/security behavior.
+
+These stay human/owner-gated even if the dependency graph is exact.
+
+## Priority is a decision tree, not a score
+
+Watch does not create another opaque 0–100 urgency metric.
+
+Priority is `P0`–`P3` using inspectable factors such as:
+
+- trigger state (`retired`, `review-due`, recorded supersession);
+- explicit site importance;
+- whether a transform exists;
+- whether an executed Change Receipt exists;
+- whether owner/policy review is required.
+
+Examples:
+
+- critical site + recorded revision + executed change → `P0`;
+- superseded/retired dependency with executed change → `P1`;
+- review-due dependency with an implementation → `P1/P2` depending on explicit importance;
+- no transform recorded → typically `P3` informational re-review.
+
+Every impact row carries `priorityFactors[]` and a prose `rationale` explaining the classification.
+
+## Exact impact surfaces
+
+Where BraidGraph has the evidence, Watch includes:
+
+- affected recommendation IDs and automation classes;
+- transform operation IDs/states;
+- exact repository paths from Repository Mapper / Transformation evidence;
+- public surface identifiers;
+- Change Receipt revisions and their mutation/verification/outcome/re-review/review states;
+- policy node IDs;
+- historical/superseded evidence node IDs.
+
+This is why Map and Proof matter: reverse impact can point to `index.html`, a canonical surface and a prior negative outcome instead of only saying “SEO rule changed.”
+
+## Preserve previous negative/no-change reviews
+
+Watch does not delete a prior `negative`, `neutral`, `keep`, `revert` or other reviewed outcome merely because a new upstream event occurred.
+
+Historical evidence remains in the reachable Change Receipt/BraidGraph chain so reviewers can see:
+
+- whether the same implementation was already reviewed;
+- whether an earlier change produced no external movement;
+- whether the previous decision was to keep/revert/continue measuring;
+- whether the current event is genuinely a new source/rule revision.
+
+The v0.1 bundle does not silently suppress repeated alerts from that history; it preserves the evidence for deterministic review. A future suppression/deduplication layer must be evidence-keyed to an exact trigger version/event, not a fuzzy “we saw this before” heuristic.
+
+## Portfolio integration
+
+`--portfolio=registry/portfolio-sites.json` enriches impact rows with matching `portfolioSiteId` when the Watch target matches by explicit ID, canonical URL or repository.
+
+Watch does not duplicate Portfolio Rollout proposal logic from the Growth layer. Portfolio metadata annotates the graph impact; it does not create target-site mutations.
+
+## Unaffected / excluded sites
+
+Unaffected targets are omitted from `impacts[]` and listed separately in `excludedSites[]` with an inspectable reason:
+
+- `disabled`;
+- `trigger-not-present`;
+- `no-recorded-change-since`.
+
+This keeps the actionable blast radius compact without hiding why a portfolio member was excluded.
+
+## Output
+
+The machine contract is:
+
+`schema/watch-impact-bundle.schema.json`
+
+Validate it:
+
+```bash
+node bin/arwp-watch.mjs validate-bundle watch-impact.json
+```
+
+Human review view:
+
+```bash
+node bin/arwp-watch.mjs changed-since watch-targets.json \
+  --since=2026-09-07T00:00:00Z \
+  --text
+```
+
+## Guardrails
+
+- impact is not breakage proof;
+- production mutation is always false in Watch output;
+- priority is explainable and non-composite;
+- history remains versioned;
+- negative/no-change evidence remains visible;
+- owner/policy/editorial/runtime work stays gated;
+- no ranking/citation guarantee or causal claim is produced by graph reachability.
