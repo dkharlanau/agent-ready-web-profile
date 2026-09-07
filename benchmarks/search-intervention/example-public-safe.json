@@ -1,0 +1,73 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/search-intervention.schema.json",
+  "version": "0.1",
+  "kind": "search-intervention",
+  "id": "fixture.example.external-corroboration",
+  "site": {
+    "url": "https://example.com/",
+    "siteClass": "technical-b2b",
+    "ownership": "owner-controlled"
+  },
+  "intent": {
+    "family": "explain-technical-concept",
+    "locale": "en"
+  },
+  "hypothesis": "Adding inspectable source provenance to one existing canonical answer will improve evidence quality without creating another URL.",
+  "disclosure": {
+    "class": "public-fixture",
+    "containsLiveCorpus": false,
+    "containsLearnedPriors": false,
+    "ipReviewRequired": false
+  },
+  "baseline": {
+    "capturedAt": "2026-09-07T00:00:00.000Z",
+    "surfaces": [
+      {
+        "name": "synthetic owner evidence",
+        "provenanceClass": "synthetic-fixture",
+        "evidenceRefs": ["urn:sha256:0000000000000000000000000000000000000000000000000000000000000000"]
+      }
+    ],
+    "notes": "Synthetic fixture only; not a live SERP or AI observation."
+  },
+  "intervention": {
+    "status": "source-implemented",
+    "changedUrls": ["https://example.com/explain-technical/"],
+    "changedDimensions": ["externalCorroboration"],
+    "implementedAt": "2026-09-07T01:00:00.000Z",
+    "commitSha": "0123456789abcdef",
+    "verification": {
+      "state": "source-implemented",
+      "evidenceRefs": ["urn:sha256:1111111111111111111111111111111111111111111111111111111111111111"]
+    }
+  },
+  "controls": {
+    "urls": ["https://example.com/control/"],
+    "notes": "Unchanged comparable canonical page."
+  },
+  "outcomeWindows": [
+    { "days": 7 },
+    { "days": 14 },
+    { "days": 28 }
+  ],
+  "observations": [
+    {
+      "phase": "baseline",
+      "channel": "classic-search-visibility",
+      "observedAt": "2026-09-07T00:00:00.000Z",
+      "state": "not-observed",
+      "evidenceRefs": [],
+      "notes": "No live search evidence is included in this public fixture."
+    }
+  ],
+  "confounders": ["Synthetic fixture; no causal or visibility inference is possible."],
+  "disposition": "inconclusive",
+  "confidence": "low",
+  "guardrails": {
+    "noRankingGuarantee": true,
+    "noCausalityInference": true,
+    "preserveNegativeResults": true,
+    "separateOutcomeChannels": true,
+    "humanReviewBeforeLearning": true
+  }
+}
