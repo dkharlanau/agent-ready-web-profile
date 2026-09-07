@@ -28,6 +28,7 @@
       "properties": {
         "adaptiveUpgrade": { "$ref": "#/$defs/inputArtifact" },
         "transformationBundle": { "$ref": "#/$defs/inputArtifact" },
+        "repositoryMap": { "$ref": "#/$defs/inputArtifact" },
         "verificationEvidence": { "$ref": "#/$defs/inputArtifact" },
         "measurementEvidence": { "$ref": "#/$defs/inputArtifact" }
       }

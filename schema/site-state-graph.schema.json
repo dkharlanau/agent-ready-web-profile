@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-state-graph.schema.json",
+  "title": "SignalBraid Site State Graph v0.1",
+  "description": "Repository-backed site-state and ownership graph. Records deterministic/explicit rendered-surface ownership, build dependencies, ambiguity and mutation classes without guessing missing ownership.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generatedAt", "repository", "site", "adapter", "files", "routes", "ownership", "facts", "warnings", "summary", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "baseRef", "baseCommitSha", "siteRoot"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "baseRef": { "type": "string", "minLength": 1 },
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+        "siteRoot": { "type": "string", "minLength": 1 }
+      }
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "basePath"],
+      "properties": {
+        "origin": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "basePath": { "type": "string", "pattern": "^/.*" }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "detection", "confidence"],
+      "properties": {
+        "id": { "enum": ["static-html", "jekyll"] },
+        "version": { "const": "0.1" },
+        "detection": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "confidence": { "enum": ["deterministic", "explicit-config"] }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/file" }
+    },
+    "routes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/route" }
+    },
+    "ownership": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ownership" }
+    },
+    "facts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fact" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "minLength": 1 },
+          "message": { "type": "string", "minLength": 1 },
+          "path": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "routes", "resolvedRoutes", "ambiguousRoutes", "unresolvedRoutes", "ownershipClaims", "resolvedOwnership", "ambiguousOwnership", "unresolvedOwnership", "facts"],
+      "properties": {
+        "files": { "type": "integer", "minimum": 0 },
+        "routes": { "type": "integer", "minimum": 0 },
+        "resolvedRoutes": { "type": "integer", "minimum": 0 },
+        "ambiguousRoutes": { "type": "integer", "minimum": 0 },
+        "unresolvedRoutes": { "type": "integer", "minimum": 0 },
+        "ownershipClaims": { "type": "integer", "minimum": 0 },
+        "resolvedOwnership": { "type": "integer", "minimum": 0 },
+        "ambiguousOwnership": { "type": "integer", "minimum": 0 },
+        "unresolvedOwnership": { "type": "integer", "minimum": 0 },
+        "facts": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["noPathGuessing", "ambiguityPreserved", "generatedOutputNotPreferred", "ownershipIsNotAuthorization", "policyAndEditorialRemainGated", "symlinksNotFollowed", "noRankingGuarantee"],
+      "properties": {
+        "noPathGuessing": { "const": true },
+        "ambiguityPreserved": { "const": true },
+        "generatedOutputNotPreferred": { "const": true },
+        "ownershipIsNotAuthorization": { "const": true },
+        "policyAndEditorialRemainGated": { "const": true },
+        "symlinksNotFollowed": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "mutationClass": { "enum": ["mechanical", "grounded-template", "editorial", "policy-gated", "runtime", "owner-platform", "blocked"] },
+    "value": {
+      "anyOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" }
+      ]
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "evidenceClass", "confidence", "evidence"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "evidenceClass": { "enum": ["direct-static-path", "explicit-permalink", "jekyll-page-convention", "machine-file-path"] },
+        "confidence": { "enum": ["deterministic", "explicit", "ambiguous"] },
+        "evidence": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes", "role", "mutationClass", "generated"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/digest" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "role": { "enum": ["page-source", "layout", "include", "machine-surface", "build-config", "data", "content", "generated-output", "other"] },
+        "mutationClass": { "$ref": "#/$defs/mutationClass" },
+        "generated": { "type": "boolean" }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "routePath", "url", "state", "ownerPath", "candidates", "buildPath", "evidence"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "routePath": { "type": ["string", "null"], "pattern": "^/.*" },
+        "url": { "type": ["string", "null"], "format": "uri" },
+        "state": { "enum": ["resolved", "ambiguous", "unresolved"] },
+        "ownerPath": { "type": ["string", "null"] },
+        "candidates": { "type": "array", "items": { "$ref": "#/$defs/candidate" } },
+        "buildPath": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "evidence": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surfaceKey", "surfaceType", "routePath", "state", "ownerPath", "candidates", "mutationClass", "evidenceClass", "value", "locator", "evidence"],
+      "properties": {
+        "surfaceKey": { "type": "string", "minLength": 1 },
+        "surfaceType": { "enum": ["document", "title", "description", "canonical", "robots-meta", "jsonld", "robots-file", "sitemap", "llms", "agent-discovery", "api-description", "other-machine-surface"] },
+        "routePath": { "type": ["string", "null"], "pattern": "^/.*" },
+        "state": { "enum": ["resolved", "ambiguous", "unresolved"] },
+        "ownerPath": { "type": ["string", "null"] },
+        "candidates": { "type": "array", "items": { "$ref": "#/$defs/candidate" } },
+        "mutationClass": { "$ref": "#/$defs/mutationClass" },
+        "evidenceClass": { "enum": ["direct-source", "frontmatter-source", "machine-file-path", "ambiguous", "unresolved"] },
+        "value": { "$ref": "#/$defs/value" },
+        "locator": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "line": { "type": ["integer", "null"], "minimum": 1 },
+            "field": { "type": ["string", "null"] }
+          }
+        },
+        "evidence": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "value", "routePath", "sourcePath", "locator", "evidenceClass"],
+      "properties": {
+        "key": { "type": "string", "minLength": 1 },
+        "value": { "$ref": "#/$defs/value" },
+        "routePath": { "type": ["string", "null"], "pattern": "^/.*" },
+        "sourcePath": { "type": "string", "minLength": 1 },
+        "locator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["line", "field"],
+          "properties": {
+            "line": { "type": ["integer", "null"], "minimum": 1 },
+            "field": { "type": "string", "minLength": 1 }
+          }
+        },
+        "evidenceClass": { "enum": ["direct-html", "frontmatter"] }
+      }
+    }
+  }
+}
