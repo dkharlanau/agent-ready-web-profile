@@ -1,6 +1,6 @@
 # ARWP Growth Profile
 
-Status: experimental product layer on `main` · reviewed 2026-09-06
+Status: experimental product layer on `main` · reviewed 2026-09-07
 
 The **ARWP Growth Profile** turns source-backed Search, generative-search, citation and agent-web guidance into a prioritized improvement plan for a public website.
 
@@ -17,7 +17,8 @@ The Growth Profile does **not** output a universal quality/readiness score and d
 
 ```bash
 node bin/arwp-growth.mjs https://example.com
-node bin/arwp-growth.mjs https://example.com --json
+node bin/arwp-growth.mjs https://example.com --vertical=software-product
+node bin/arwp-growth.mjs https://example.com/research/ --vertical=research-dataset --json
 node bin/arwp-growth.mjs https://example.com --output=arwp-growth.json
 ```
 
@@ -38,6 +39,41 @@ The planner reuses the existing Search + Agent audit and adds 2026-specific grow
 - FAQ rich-result deprecation awareness;
 - site reputation abuse guardrails;
 - agent interoperability surfaces without pretending they are Google ranking factors.
+
+## Vertical evidence adapters
+
+`--vertical` is now an evidence selector, not just a label for Trend Radar filtering. The current registry separates:
+
+- `software-product`;
+- `research-dataset`;
+- `documentation`;
+- `editorial`;
+- `commerce`;
+- `local-business`;
+- `general`.
+
+ARWP inspects a **bounded relevant-surface sample** for the chosen vertical. It starts from the canonical entry page, reads same-origin links plus the canonical-path sitemap when available, selects at most a small number of URLs that look relevant to that vertical, and aggregates evidence across those pages.
+
+Examples of observable evidence:
+
+- software: `SoftwareApplication` / `WebApplication`, release or changelog surfaces, docs/examples/support links, real API/agent declarations;
+- research/dataset: `Dataset`, methodology/provenance, citation/license/version evidence, public download/API surfaces;
+- documentation: version/freshness signals, crawlable deep links, examples/code;
+- editorial: author/date structured evidence while first-hand quality stays manual where necessary;
+- commerce: public Product/Offer and shipping/returns signals while merchant/feed freshness stays owner-side evidence;
+- local business: public LocalBusiness/address/contact evidence while external Business Profile state stays owner-side evidence.
+
+Status values deliberately preserve uncertainty: `observed`, `partial`, `not-observed`, `manual`, `external-owner-data`, `not-applicable-or-not-observed`, or `unavailable`.
+
+Three guardrails are important:
+
+1. **not observed in the bounded sample is not proof of site-wide absence**;
+2. a missing API/agent interface is not a recommendation to invent one;
+3. authenticated platform/feed/business-profile state is never inferred from public crawling.
+
+For `software-product`, `research-dataset` and `documentation`, sufficiently concrete `partial` / `not-observed` findings can enter the practical Growth backlog. For the more context-sensitive editorial, commerce and local-business checks, ARWP currently keeps uncertain findings as observation/manual/owner-data evidence instead of over-automating remediation.
+
+The same vertical evidence layer is consumed by `arwp-improve`, where it competes with Search Surface, Entity Graph, page semantics/internal-link and ordinary Growth actions in one deterministic backlog.
 
 ## Priority model
 
