@@ -1,0 +1,45 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-07",
+  "purpose": "Define when ARWP should require a target-site dataset publication workflow and what evidence is needed before considering the dataset persistently citable.",
+  "activation": {
+    "requiresGenuineCorpus": true,
+    "signals": [
+      "multiple reusable structured data distributions",
+      "curated knowledge or annotation records",
+      "research observations or benchmark/evaluation cases",
+      "cards, exercises or other structured content with independent reuse value",
+      "existing Dataset/CITATION metadata describing data rather than only software"
+    ],
+    "nonSignals": [
+      "one incidental JSON configuration file",
+      "analytics exports not intended for publication",
+      "private or user-generated personal data",
+      "a fabricated dataset created only to satisfy Search or AI metadata checks"
+    ]
+  },
+  "requiredEvidence": [
+    {"id":"canonical-dataset-metadata","priority":"P1"},
+    {"id":"dataset-version","priority":"P1"},
+    {"id":"dataset-license","priority":"P1"},
+    {"id":"dataset-methodology-provenance-limitations","priority":"P1"},
+    {"id":"dataset-distributions","priority":"P1"},
+    {"id":"release-integrity-sha256","priority":"P2"},
+    {"id":"external-persistent-identifier-doi","priority":"P1"}
+  ],
+  "persistentIdentifier": {
+    "preferredPattern": "externally-issued DOI for a frozen dataset release",
+    "exampleProvider": "Zenodo",
+    "beforeIssuanceState": "doi-not-issued",
+    "allowPlaceholderDoi": false,
+    "verifyResolutionBeforeActivation": true,
+    "preserveVersionIdentity": true
+  },
+  "guardrails": {
+    "notRankingFactor": true,
+    "notQualityCertificate": true,
+    "notAiCitationGuarantee": true,
+    "doNotArchivePrivateData": true,
+    "doNotConflateLiveMutableCorpusWithFrozenRelease": true
+  }
+}
