@@ -1,6 +1,6 @@
 # ARWP Growth Policy
 
-Status: experimental contract v0.1 · reviewed 2026-09-06
+Status: experimental contract v0.1 · reviewed 2026-09-07
 
 A generic website audit cannot know the publisher's business goal, rights policy or target search/AI surfaces. The **Growth Policy** makes those choices explicit before ARWP turns a Growth Profile into an implementation manifest.
 
@@ -70,6 +70,7 @@ The resulting implementation manifest contains:
 
 - only actions relevant to the declared goals;
 - the site's selected vertical module;
+- vertical-specific evidence checks that say what should be verified rather than treating a site class as a label;
 - desired Search/AI crawler intent;
 - optional provider-specific Content-Signal policy;
 - publisher/author structured-data expectations;
@@ -80,7 +81,7 @@ It does not directly overwrite `robots.txt` or any production file.
 
 ## Site classes
 
-The current registry (`registry/growth-verticals.json`) separates:
+The current registry (`registry/growth-verticals.json`, v0.2) separates:
 
 - `documentation`;
 - `editorial`;
@@ -91,6 +92,10 @@ The current registry (`registry/growth-verticals.json`) separates:
 - `general`.
 
 A vertical is a scope filter, not an industry score. The universal baseline should stay small and stable while vertical modules can evolve independently.
+
+Since registry v0.2, each vertical also carries explicit evidence checks. For example, `software-product` asks separately for canonical product identity, stable release/change history, crawlable docs/support/trust surfaces, and truthful implemented agent/API interfaces. `research-dataset` separates dataset identity, methodology/provenance, citation/license/version history and actual data access. Commerce and local-business checks explicitly preserve the boundary between public crawl evidence and authenticated owner-platform state.
+
+These checks are desired evidence, not automatic pass/fail claims. If ARWP cannot observe a condition from a bounded public audit, it must remain a manual or owner-data verification instead of being guessed.
 
 ## Rights / AI policy
 
@@ -126,7 +131,7 @@ Growth Policy (owner intent)
         ↓
 ARWP audit + Growth Profile (public evidence + current guidance)
         ↓
-Implementation manifest (only relevant actions)
+Implementation manifest (only relevant actions + vertical evidence checks)
         ↓
 site changes
         ↓
