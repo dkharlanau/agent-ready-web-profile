@@ -2,7 +2,7 @@
 
 Status: **v0.1 active** · reviewed **2026-09-07**.
 
-ARWP is evolving from a website audit into an **evidence-to-change operating system for public websites**.
+ARWP is evolving from a website audit into an **evidence-to-change operating system for public websites**. Product-facing, this sits inside **SignalBraid · ARWP**.
 
 The core question is no longer only:
 
@@ -13,6 +13,27 @@ It is:
 > Given what this site actually is, what should be changed now, where should it be changed, which upstream evidence justifies the recommendation, how can the change be verified, and what should be measured afterwards?
 
 That distinction is the product.
+
+## SignalBraid product loop
+
+```text
+RADAR       What changed upstream?
+  ↓
+MAP         What does this site actually have and where is it owned?
+  ↓
+PLAN        What applies here now?
+  ↓
+PATCH       What can change safely and exactly?
+  ↓
+PROOF       Did implementation pass and what evidence followed?
+  ↓
+WATCH       What drifted or became affected when rules changed again?
+  └──────────────────────────────────────────────────────────────↺
+```
+
+The Adaptive Site Upgrade Engine is primarily the **Plan** layer. The Target-Site Transformation Engine is the **Patch** layer. Trend/source intelligence feeds **Radar**; evidence receipts and owner-data observations feed **Proof**. The next major architectural work is **Map** and **Watch**.
+
+See [`PRODUCT-LINE.md`](PRODUCT-LINE.md) and [`BRAIDGRAPH.md`](BRAIDGRAPH.md).
 
 ## Product loop
 
@@ -155,7 +176,7 @@ This is particularly relevant to card libraries, structured knowledge bases, ben
 
 ## AI citation feedback becomes a planning signal
 
-Bing Webmaster Tools now exposes citation activity, cited pages and grounding queries, with preview layers for intents, topics, Citation Share and period comparison.
+Bing Webmaster Tools exposes citation activity, cited pages and grounding queries, with additional intent/topic/share views evolving over time.
 
 ARWP's `bing-citation-intelligence-loop` treats these as owner-side observations that can feed the next backlog:
 
@@ -175,7 +196,7 @@ This avoids the obvious failure mode of turning every query variant into another
 
 ## Mutation model
 
-ARWP currently separates four levels:
+ARWP separates four levels:
 
 ### 1. Detect
 Public, bounded inspection discovers evidence and gaps.
@@ -187,7 +208,7 @@ The Adaptive Upgrade Engine produces precise desired-state changes.
 Remediation/PR delivery can create durable review artifacts in an explicitly authorized target repository.
 
 ### 4. Apply
-Production mutation remains gated. Future apply modes should begin only with deterministic mechanical transformations and must retain:
+Production mutation begins only with deterministic mechanical or grounded transformations and retains:
 
 - explicit repository authorization;
 - path allowlists;
@@ -198,41 +219,98 @@ Production mutation remains gated. Future apply modes should begin only with det
 
 The product should become more autonomous **by proving which classes of changes are safe**, not by pretending every recommendation can be blindly auto-fixed.
 
-## Product moat
+## Product moat: from upgrade graph to BraidGraph
 
-The defensible asset is not an `llms.txt` generator and not a 0–100 GEO score.
+The defensible asset is not an `llms.txt` generator, not a prompt-monitoring dashboard and not a 0–100 GEO score.
 
-It is the maintained system connecting:
+The stronger system is **BraidGraph**, linking:
 
 ```text
-upstream evidence
-  ↔ rule freshness/history
-  ↔ site classification
+upstream source
+  ↔ rule version + freshness/history
+  ↔ site state + repository ownership
   ↔ applicability
-  ↔ exact change recipe
-  ↔ repository/site surface
-  ↔ verification
-  ↔ outcome evidence
+  ↔ recommendation
+  ↔ exact repository/site surface
+  ↔ deterministic transform
+  ↔ verification receipt
+  ↔ owner/runtime outcome evidence
   ↔ next experiment
 ```
 
-That system becomes more valuable as ARWP accumulates reviewed rule changes, negative results, target-site implementation histories and reusable transformation contracts.
+The graph must work backwards as well as forwards.
+
+A source/rule revision should be able to produce a **blast-radius query**:
+
+```text
+changed rule
+   ↓
+affected recommendations
+   ↓
+affected sites
+   ↓
+previous transforms
+   ↓
+repo files / surfaces needing re-review
+```
+
+That reverse impact path is a more durable differentiation than merely producing recommendations. It turns upstream platform drift into portfolio-specific website operations.
+
+## Current competitive boundary
+
+By September 2026, leading AI-search products already cover prompt monitoring, citations, sentiment, competitor share, recommendations and increasingly content/action automation. Agent-experience platforms can also serve AI-specific content layers; crawler platforms can enforce access policy; readiness scanners can gate technical regressions.
+
+SignalBraid should therefore compete on a different chain:
+
+> **source-backed rule supply chain → target applicability → canonical source-file resolution → safe reversible change → verification → outcome evidence → reverse impact when the rule changes again**.
+
+This is intentionally broader than content optimization and narrower than pretending to control Search/AI outcomes.
+
+Detailed market map and product packaging: [`PRODUCT-LINE.md`](PRODUCT-LINE.md).
 
 ## Commercial path
 
-The open core can remain useful while commercial layers emerge around operation rather than unverifiable promises:
+The open core can remain useful while commercial layers emerge around operation rather than unverifiable promises.
+
+### Open core
+
+- Radar/recommendation registries;
+- single-site Map/Plan/Patch primitives;
+- open BraidGraph schema/compiler;
+- deterministic transformation engine;
+- local receipts and verification;
+- open Agent Skills and CLI.
+
+### Hosted / Pro
 
 - managed continuously refreshed intelligence feed;
-- portfolio monitoring and drift alerts;
-- private/company rule packs and governance policies;
+- SignalBraid Watch portfolio monitoring and rule-impact alerts;
+- scheduled source re-review and site drift;
 - repository PR/remediation automation;
-- owner-data adapters for Search Console, Bing and analytics;
+- owner-data adapters for Google, Bing, Cloudflare and analytics;
 - historical before/after evidence and executive reporting;
-- team review workflows and policy approval gates;
-- hosted multi-site dashboard/API;
-- verified transformation packs for specific stacks such as GitHub Pages, Next.js, WordPress or documentation generators.
+- verified transformation packs for common stacks.
 
-A paid edition should sell **maintenance, automation, evidence and scale**, not a promise to rank.
+### Team / Enterprise
+
+- private/company rule packs;
+- policy-as-code;
+- team review and approval gates;
+- automation governance;
+- portfolio audit history;
+- organization-level crawler/content-use policy controls.
+
+A paid edition should sell **maintenance, automation, governance, evidence and scale**, not a promise to rank.
+
+## Highest-leverage next builds
+
+1. **BraidGraph compiler** — canonical graph linking existing ARWP artifacts.
+2. **Repository Mapper** — rendered surface → owning source file/fact/build path.
+3. **Reverse impact analysis** — changed source/rule → affected sites/files/transforms.
+4. **Unified Change Receipt** — rule version + digests + verification + measurement state.
+5. **Portfolio Watch** — multi-site drift and rule-impact waves.
+6. **Verified stack transformation packs** — tested adapters instead of generic editing.
+7. **Owner evidence connectors** — Google/Bing/Cloudflare/referral evidence with provenance.
 
 ## Current primary sources
 
@@ -242,6 +320,6 @@ A paid edition should sell **maintenance, automation, evidence and scale**, not 
 - OpenAI publisher/developer guidance: https://help.openai.com/en/articles/12627856-publishers-and-developers-faq
 - Bing AI Performance: https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c
 - Bing Webmaster Guidelines: https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a
-- Cloudflare Content Signals `use` enforcement: https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/
+- Cloudflare AI Crawl Control: https://developers.cloudflare.com/ai-crawl-control/
 - Zenodo GitHub/software archiving: https://help.zenodo.org/docs/github/
 - DataCite Metadata Schema 4.7: https://schema.datacite.org/meta/kernel-4/
