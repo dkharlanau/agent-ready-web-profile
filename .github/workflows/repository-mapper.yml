@@ -1,0 +1,63 @@
+name: Repository Mapper validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'schema/site-state-graph.schema.json'
+      - 'schema/braid-graph.schema.json'
+      - 'lib/repository-mapper.mjs'
+      - 'lib/repository-map-braid.mjs'
+      - 'bin/arwp-map-repo.mjs'
+      - 'scripts/repository-mapper-test.mjs'
+      - 'docs/REPOSITORY-MAPPER.md'
+      - '.github/workflows/repository-mapper.yml'
+  pull_request:
+    paths:
+      - 'schema/site-state-graph.schema.json'
+      - 'schema/braid-graph.schema.json'
+      - 'lib/repository-mapper.mjs'
+      - 'lib/repository-map-braid.mjs'
+      - 'bin/arwp-map-repo.mjs'
+      - 'scripts/repository-mapper-test.mjs'
+      - 'docs/REPOSITORY-MAPPER.md'
+      - '.github/workflows/repository-mapper.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate Repository Mapper
+        run: |
+          node scripts/repository-mapper-test.mjs
+          node --check lib/repository-mapper.mjs
+          node --check lib/repository-map-braid.mjs
+          node --check bin/arwp-map-repo.mjs
+          node -e "const fs=require('fs'); JSON.parse(fs.readFileSync('schema/site-state-graph.schema.json','utf8')); JSON.parse(fs.readFileSync('schema/braid-graph.schema.json','utf8'));"
+
+      - name: Dogfood current ARWP GitHub Pages source
+        run: |
+          node bin/arwp-map-repo.mjs compile \
+            --root=. \
+            --site-root=docs \
+            --repository=dkharlanau/agent-ready-web-profile \
+            --site=https://dkharlanau.github.io \
+            --base-path=/agent-ready-web-profile/ \
+            --base-ref=main \
+            --out=/tmp/arwp-site-state.json
+          node bin/arwp-map-repo.mjs validate /tmp/arwp-site-state.json
+          node -e "const fs=require('fs'); const x=JSON.parse(fs.readFileSync('/tmp/arwp-site-state.json','utf8')); if(x.summary.resolvedRoutes < 5) throw new Error('Dogfood map resolved too few ARWP docs routes'); if(!x.guardrails.noPathGuessing) throw new Error('noPathGuessing guardrail missing'); console.log(JSON.stringify(x.summary));"
