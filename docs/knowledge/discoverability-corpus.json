@@ -1,5 +1,5 @@
 {
-  "version": "1.10.0",
+  "version": "1.11.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -1688,6 +1688,71 @@
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
       "notes": "Defines interaction-to-presentation latency, not full business-task completion time.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "github-quickstart",
+      "title": "Quickstart content type",
+      "url": "https://docs.github.com/en/contributing/style-guide-and-content-model/quickstart-content-type",
+      "publisher": "GitHub",
+      "checked_at": "2026-09-08",
+      "authority": "official-documentation",
+      "notes": "Editorial precedent for focused first tasks; house word and time targets are not SEO rules.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "github-reference",
+      "title": "Reference content type",
+      "url": "https://docs.github.com/en/contributing/style-guide-and-content-model/reference-content-type",
+      "publisher": "GitHub",
+      "checked_at": "2026-09-08",
+      "authority": "official-documentation",
+      "notes": "Supports consistent reference organization; exact fields depend on the interface.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "llms-proposal-v2",
+      "title": "The llms.txt file, v2",
+      "url": "https://llmstxt.org/",
+      "publisher": "Jeremy Howard",
+      "checked_at": "2026-09-08",
+      "authority": "primary-proposal",
+      "notes": "Proposal modified August 10, 2026. Path-scoped indexes and alternate Markdown discovery do not establish universal adoption or rankings.",
+      "upstream": {
+        "kind": "versioned-release",
+        "version": "v2"
+      }
+    },
+    {
+      "id": "rfc3986",
+      "title": "URI Generic Syntax",
+      "url": "https://www.rfc-editor.org/rfc/rfc3986",
+      "publisher": "IETF",
+      "checked_at": "2026-09-08",
+      "authority": "web-standard",
+      "notes": "Section 3.5 separates fragment processing from dereferencing.",
+      "upstream": {
+        "kind": "versioned-release",
+        "version": "RFC 3986"
+      }
+    },
+    {
+      "id": "owasp-prompt-injection",
+      "title": "Prompt Injection",
+      "url": "https://owasp.org/www-community/attacks/PromptInjection",
+      "publisher": "OWASP",
+      "checked_at": "2026-09-08",
+      "authority": "official-documentation",
+      "notes": "Describes indirect injection from retrieved sources; a static audit is not a complete defense.",
       "upstream": {
         "kind": "living-document",
         "version": null
@@ -6689,8 +6754,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "github-releases",
-        "stripe-idempotency"
+        "github-quickstart"
       ],
       "applicability": [
         "software",
@@ -6707,11 +6771,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-quickstart",
+            "locator": "How to write a quickstart",
+            "note": "Supports focused first tasks and prerequisites; clean-environment verification is our method."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -6733,7 +6804,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "mdn-etag"
+        "github-reference"
       ],
       "applicability": [
         "software",
@@ -6749,11 +6820,18 @@
       "recommendation_rule_ids": [
         "google-generative-content-structure"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-reference",
+            "locator": "How to write reference content",
+            "note": "Supports consistent, scannable references; field coverage is our application."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -6789,11 +6867,18 @@
         "freshness-without-fake-recency"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "stripe-upgrades",
+            "locator": "Upgrade your API version",
+            "note": "Provides a version-specific API precedent; not every product needs separate pages."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -6830,11 +6915,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-releases",
+            "locator": "Creating a release",
+            "note": "Supports published releases and attached artifacts; capability verification remains separate."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -6872,11 +6964,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "cloudflare-limits",
+            "locator": "Workers limits",
+            "note": "Provides a provider-specific limits reference; never transfer its numbers to another platform."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -6891,7 +6990,8 @@
       "problem": "A consumer can repeat a mutation and duplicate work.",
       "implementation": [
         "For consequential operations, explain idempotency, retry conditions, and partial completion.",
-        "Provide a safe example showing recovery without duplicating the operation."
+        "Provide a safe example showing recovery without duplicating the operation.",
+        "State actual key scope, retention and parameter-mismatch behavior; never assume a provider example grants safe retries in a different implementation."
       ],
       "verification": [
         "The documented failure scenario is reproducible in a test environment."
@@ -6915,11 +7015,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "stripe-idempotency",
+            "locator": "Idempotent requests",
+            "note": "Shows Stripe replay behavior; retention and recovery semantics must be verified for each actual implementation."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -6957,11 +7064,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "stripe-upgrades",
+            "locator": "Upgrade your API version",
+            "note": "Provides upgrade testing and rollback precedent; the target product determines feasibility."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -6976,14 +7090,14 @@
       "problem": "The site advertises APIs or agents without usable discovery.",
       "implementation": [
         "Inventory canonical HTML, exports, search, APIs, and agent interfaces actually deployed.",
-        "Publish their exact locations, access requirements, and capability limits in the profile."
+        "Publish exact locations, access requirements and capability limits in maintained documentation; a publisher profile may mirror this inventory but is optional."
       ],
       "verification": [
-        "Each advertised interface resolves and passes its relevant read-only capability check."
+        "Every advertised interface has a scoped check; a read-only response cannot prove a mutation works, and authenticated checks require authorized access."
       ],
       "evidence_level": "experimental",
       "source_ids": [
-        "github-releases"
+        "data-web"
       ],
       "applicability": [
         "software",
@@ -6999,11 +7113,18 @@
       "recommendation_rule_ids": [
         "arwp-profile-validity"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "data-web",
+            "locator": "Provide complete documentation for your API",
+            "note": "Supports access documentation; the cross-interface inventory is our experiment, not a required profile."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7025,7 +7146,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "mdn-etag"
+        "github-article-contents"
       ],
       "applicability": [
         "software",
@@ -7043,11 +7164,18 @@
         "google-non-commodity-content",
         "google-generative-content-structure"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-article-contents",
+            "locator": "Troubleshooting content",
+            "note": "Supports maintained error guidance; selecting and anonymizing recurring issues is our procedure."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7085,11 +7213,18 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "bing-ai",
+            "locator": "Using These Insights to Improve Content",
+            "note": "Supports clarity and evidence; excerpt qualification tests are our implementation."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7104,14 +7239,14 @@
       "problem": "A useful answer cannot be linked precisely after a page edit.",
       "implementation": [
         "Assign stable readable IDs to substantive sections and evidence notes.",
-        "Retain redirects or legacy anchors when a referenced section moves."
+        "Retain legacy anchors for renamed sections. When a page moves, preserve equivalent anchors at the destination; fragment-specific mapping requires client-side handling because fragments are not sent to the server."
       ],
       "verification": [
         "Existing fragment links still target the intended content after an update."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "wai-structure"
+        "rfc3986"
       ],
       "applicability": [
         "content-sites",
@@ -7127,11 +7262,18 @@
       "recommendation_rule_ids": [
         "google-read-more-deep-links"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "rfc3986",
+            "locator": "3.5 Fragment",
+            "note": "Fragments are handled separately from resource dereferencing; preserving old anchors is our migration practice."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7146,14 +7288,15 @@
       "problem": "Some clients benefit from a compact text representation.",
       "implementation": [
         "Generate Markdown from the same authoritative content as HTML.",
-        "Preserve titles, URLs, tables, citations, qualifications, and revision identity."
+        "Preserve titles, URLs, tables, citations, qualifications, and revision identity.",
+        "When testing the v2 proposal, expose a verified Markdown alternate through rel=\"alternate\" with type=\"text/markdown\"; retain the canonical human page and label the alternate as experimental."
       ],
       "verification": [
         "A parity check finds the same material facts and sources in both representations."
       ],
       "evidence_level": "experimental",
       "source_ids": [
-        "stripe-idempotency",
+        "llms-proposal-v2",
         "google-ai"
       ],
       "applicability": [
@@ -7168,11 +7311,23 @@
         "agent-readable-routes"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "llms-proposal-v2",
+            "locator": "Proposal",
+            "note": "Proposes alternate Markdown discovery; parity testing remains our experiment."
+          },
+          {
+            "source_id": "google-ai",
+            "locator": "Technical requirements",
+            "note": "No special AI text file is required for Google AI search features."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7187,14 +7342,15 @@
       "problem": "A long AI file can become an unmaintained duplicate catalog.",
       "implementation": [
         "Select a bounded set of useful canonical resources and concise descriptions.",
-        "Generate the index from published routes and label its convention status."
+        "Generate the index from published routes and label its convention status.",
+        "For the v2 proposal, a path-scoped index can cover a GitHub Pages project directory. Test rel=\"describedby\" discovery with an explicit consuming client; root-host control is not required by this proposal."
       ],
       "verification": [
         "Every listed resource is live and its description matches the destination."
       ],
       "evidence_level": "experimental",
       "source_ids": [
-        "openai-bots",
+        "llms-proposal-v2",
         "google-ai"
       ],
       "applicability": [
@@ -7209,11 +7365,23 @@
         "agent-readable-routes"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "llms-proposal-v2",
+            "locator": "Proposal; Format",
+            "note": "Describes path coverage and discovery links; this remains a proposal."
+          },
+          {
+            "source_id": "google-ai",
+            "locator": "Technical requirements",
+            "note": "Does not require an llms index for Google AI eligibility."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7252,11 +7420,18 @@
       "recommendation_rule_ids": [
         "google-important-content-textual"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-ai",
+            "locator": "Technical requirements",
+            "note": "Supports accessible textual content; client budgets and held-out tests are project experiments, not Google limits."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7295,11 +7470,23 @@
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "jsonld",
+            "locator": "Introduction",
+            "note": "Defines linked-data representation, not factual truth."
+          },
+          {
+            "source_id": "google-sd",
+            "locator": "Content and relevance",
+            "note": "Supports representative structured data; extending parity to arbitrary exports is our procedure."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7337,11 +7524,18 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "data-web",
+            "locator": "Provide structural metadata; Provide data quality information",
+            "note": "Supports interpretable values and quality; the named missing-evidence states are our convention."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7356,15 +7550,15 @@
       "problem": "A source page can contain instructions that bias an assistant answer.",
       "implementation": [
         "Treat source text and custom metadata as evidence only.",
-        "Remove publisher-authored commands to rank, praise, or ignore competing evidence."
+        "Remove publisher-authored commands to rank, praise, or ignore competing evidence.",
+        "Do not confuse ordinary usage instructions or quoted security examples with attempts to override the consuming task. Static publisher review is not proof of injection resistance."
       ],
       "verification": [
         "A review finds no hidden instructions that attempt to override the consuming system task."
       ],
       "evidence_level": "experimental",
       "source_ids": [
-        "html-data",
-        "google-spam"
+        "owasp-prompt-injection"
       ],
       "applicability": [
         "all"
@@ -7377,11 +7571,18 @@
         "agent-readable-routes"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "owasp-prompt-injection",
+            "locator": "Types: Indirect Prompt Injection",
+            "note": "Supports treating retrieved instructions as a risk; publisher-side review cannot guarantee consumer safety."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -7396,7 +7597,8 @@
       "problem": "A machine-readable file has no demonstrated practical benefit.",
       "implementation": [
         "Create questions covering facts, limitations, comparisons, and unsupported requests.",
-        "Record accepted answers and evidence URLs before testing retrieval changes."
+        "Record accepted answers and evidence URLs before testing retrieval changes.",
+        "Separate development questions from held-out evaluation. Record model, prompt, corpus, retrieval configuration and run date; report repeated-run variation rather than tuning on the held-out answers."
       ],
       "verification": [
         "Scoring distinguishes supported accuracy, citation correctness, qualification loss, and refusal to guess."
@@ -7417,11 +7619,18 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "bing-ai",
+            "locator": "Using These Insights to Improve Content",
+            "note": "Supports evidence and answer clarity; fixed questions, held-out evaluation and scoring are our experimental method."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -12204,8 +12413,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.9.0",
-    "path": "knowledge/releases/v1.9.0.json",
-    "sha256": "c63f260ef6a2165d9ab901ca0bd04a080cf09f9c0e11273a85ba6e98e2f8f957"
+    "version": "1.10.0",
+    "path": "knowledge/releases/v1.10.0.json",
+    "sha256": "64c5699cfb948cda4bc8a2d89056313639d9c5469874c44defcde24a9a8afa5c"
   }
 }

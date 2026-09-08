@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T12:37:19.900682+00:00",
+  "checked_at": "2026-09-08T12:41:22.413197+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1491,6 +1491,50 @@
       "content_type": "text/html; charset=utf-8",
       "result": "retrieved",
       "sha256": "0ede3c86defef4bee3fffab6ee6ec0403973face36063f75ef7b8b9d237d5546"
+    },
+    {
+      "source_id": "github-quickstart",
+      "requested_url": "https://docs.github.com/en/contributing/style-guide-and-content-model/quickstart-content-type",
+      "checked_at": "2026-09-08T12:41:21.328805+00:00",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/contributing/style-guide-and-content-model/quickstart-content-type",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "a072cfa1856bc670437c288c1e5a6db2b9573f524deaa59899e038d777cb6afb"
+    },
+    {
+      "source_id": "github-reference",
+      "requested_url": "https://docs.github.com/en/contributing/style-guide-and-content-model/reference-content-type",
+      "checked_at": "2026-09-08T12:41:21.329070+00:00",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/contributing/style-guide-and-content-model/reference-content-type",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "8b0ff82220ec0560a152f39b8ce43cecf744b845fb7f578c6511b0600579ab54"
+    },
+    {
+      "source_id": "llms-proposal-v2",
+      "requested_url": "https://llmstxt.org/",
+      "checked_at": "2026-09-08T12:41:21.329207+00:00",
+      "result": "retrieval-failed",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "source_id": "rfc3986",
+      "requested_url": "https://www.rfc-editor.org/rfc/rfc3986",
+      "checked_at": "2026-09-08T12:41:21.329327+00:00",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/info/rfc3986/",
+      "content_type": "text/html;charset=utf-8",
+      "result": "retrieved",
+      "sha256": "374566719159fd8c5c902506e28c005e3af3cbc0b4d67cfd351a8133ac8cfcc4"
+    },
+    {
+      "source_id": "owasp-prompt-injection",
+      "requested_url": "https://owasp.org/www-community/attacks/PromptInjection",
+      "checked_at": "2026-09-08T12:41:21.515188+00:00",
+      "result": "retrieval-failed",
+      "error": "HTTP Error 403: Forbidden"
     }
   ]
 }

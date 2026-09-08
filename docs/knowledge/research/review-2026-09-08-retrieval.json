@@ -1,0 +1,393 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "corpus_before": "1.10.0",
+  "corpus_after": "1.11.0",
+  "scope": "Individual documentation and retrieval review. Proposal and experimental status preserved; no ranking or client-adoption claim.",
+  "changes": [
+    {
+      "id": "arwp-documentation-quickstart",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "github-releases",
+        "stripe-idempotency"
+      ],
+      "current_sources": [
+        "github-quickstart"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "github-quickstart",
+          "locator": "How to write a quickstart",
+          "note": "Supports focused first tasks and prerequisites; clean-environment verification is our method."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-reference-shape",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "mdn-etag"
+      ],
+      "current_sources": [
+        "github-reference"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "github-reference",
+          "locator": "How to write reference content",
+          "note": "Supports consistent, scannable references; field coverage is our application."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-versions",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "stripe-upgrades"
+      ],
+      "current_sources": [
+        "stripe-upgrades"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "stripe-upgrades",
+          "locator": "Upgrade your API version",
+          "note": "Provides a version-specific API precedent; not every product needs separate pages."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-release-proof",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "github-releases"
+      ],
+      "current_sources": [
+        "github-releases"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "github-releases",
+          "locator": "Creating a release",
+          "note": "Supports published releases and attached artifacts; capability verification remains separate."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-limits",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "cloudflare-limits"
+      ],
+      "current_sources": [
+        "cloudflare-limits"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "cloudflare-limits",
+          "locator": "Workers limits",
+          "note": "Provides a provider-specific limits reference; never transfer its numbers to another platform."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-failure-semantics",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "stripe-idempotency"
+      ],
+      "current_sources": [
+        "stripe-idempotency"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "stripe-idempotency",
+          "locator": "Idempotent requests",
+          "note": "Shows Stripe replay behavior; retention and recovery semantics must be verified for each actual implementation."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-migration-guide",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "stripe-upgrades"
+      ],
+      "current_sources": [
+        "stripe-upgrades"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "stripe-upgrades",
+          "locator": "Upgrade your API version",
+          "note": "Provides upgrade testing and rollback precedent; the target product determines feasibility."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-interface-map",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "github-releases"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide complete documentation for your API",
+          "note": "Supports access documentation; the cross-interface inventory is our experiment, not a required profile."
+        }
+      ]
+    },
+    {
+      "id": "arwp-documentation-public-support",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "mdn-etag"
+      ],
+      "current_sources": [
+        "github-article-contents"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "github-article-contents",
+          "locator": "Troubleshooting content",
+          "note": "Supports maintained error guidance; selecting and anonymizing recurring issues is our procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-self-contained",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "bing-ai"
+      ],
+      "current_sources": [
+        "bing-ai"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "bing-ai",
+          "locator": "Using These Insights to Improve Content",
+          "note": "Supports clarity and evidence; excerpt qualification tests are our implementation."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-stable-fragments",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "wai-structure"
+      ],
+      "current_sources": [
+        "rfc3986"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "rfc3986",
+          "locator": "3.5 Fragment",
+          "note": "Fragments are handled separately from resource dereferencing; preserving old anchors is our migration practice."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-markdown-parity",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "stripe-idempotency",
+        "google-ai"
+      ],
+      "current_sources": [
+        "llms-proposal-v2",
+        "google-ai"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "llms-proposal-v2",
+          "locator": "Proposal",
+          "note": "Proposes alternate Markdown discovery; parity testing remains our experiment."
+        },
+        {
+          "source_id": "google-ai",
+          "locator": "Technical requirements",
+          "note": "No special AI text file is required for Google AI search features."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-llms-index",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "openai-bots",
+        "google-ai"
+      ],
+      "current_sources": [
+        "llms-proposal-v2",
+        "google-ai"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "llms-proposal-v2",
+          "locator": "Proposal; Format",
+          "note": "Describes path coverage and discovery links; this remains a proposal."
+        },
+        {
+          "source_id": "google-ai",
+          "locator": "Technical requirements",
+          "note": "Does not require an llms index for Google AI eligibility."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-text-budget",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-ai"
+      ],
+      "current_sources": [
+        "google-ai"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "google-ai",
+          "locator": "Technical requirements",
+          "note": "Supports accessible textual content; client budgets and held-out tests are project experiments, not Google limits."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-json-parity",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "jsonld",
+        "google-sd"
+      ],
+      "current_sources": [
+        "jsonld",
+        "google-sd"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "jsonld",
+          "locator": "Introduction",
+          "note": "Defines linked-data representation, not factual truth."
+        },
+        {
+          "source_id": "google-sd",
+          "locator": "Content and relevance",
+          "note": "Supports representative structured data; extending parity to arbitrary exports is our procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-unknowns",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide structural metadata; Provide data quality information",
+          "note": "Supports interpretable values and quality; the named missing-evidence states are our convention."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-source-boundary",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "html-data",
+        "google-spam"
+      ],
+      "current_sources": [
+        "owasp-prompt-injection"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "owasp-prompt-injection",
+          "locator": "Types: Indirect Prompt Injection",
+          "note": "Supports treating retrieved instructions as a risk; publisher-side review cannot guarantee consumer safety."
+        }
+      ]
+    },
+    {
+      "id": "arwp-retrieval-retrieval-fixtures",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "bing-ai"
+      ],
+      "current_sources": [
+        "bing-ai"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "bing-ai",
+          "locator": "Using These Insights to Improve Content",
+          "note": "Supports evidence and answer clarity; fixed questions, held-out evaluation and scoring are our experimental method."
+        }
+      ]
+    }
+  ],
+  "remaining_individually_unreviewed": 26
+}

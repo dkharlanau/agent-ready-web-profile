@@ -1,6 +1,6 @@
 # Catalog review: fixing the evidence, not just adding patterns
 
-Review edition 1.3.0 · 8 September 2026 · corpus 1.10.0.
+Review edition 1.4.0 · 8 September 2026 · corpus 1.11.0.
 
 The commercial pass individually reviewed 23 previously unreviewed comparison, service and localization practices. Nine needed source or instruction corrections. Fourteen gained scoped review notes without operational changes. All 23 remain **inferred**: reading a source does not turn a project workflow into a documented ranking mechanism.
 
@@ -28,7 +28,7 @@ Review-only changes advance the pattern patch version. Changed instructions or s
 
 ## Remaining work
 
-The library still contains 219 patterns. Individual review coverage is now 175; 44 historical records remain unreviewed. The source register has 125 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
+The library still contains 219 patterns. Individual review coverage is now 193; 26 historical records remain unreviewed. The source register has 130 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
 
 The next passes should apply the same test to technical access, architecture, datasets, media, editorial and measurement practices: direct support, valid analogy or unsupported assertion? Keep useful project proposals explicitly inferred; replace unrelated evidence and revise operational mistakes before increasing the reviewed count.
 
@@ -63,3 +63,13 @@ Seven corrections and four scoped reviews. [Inspect the decisions](./knowledge/r
 Responsive images need a usable fallback source. Transcripts need meaningful audio information and, where appropriate, visual descriptions; they do not alone certify accessibility. Figure qualifiers depend on the chart. Media credits follow the actual rights terms. Mobile review includes zoom and reflow, with scoped scrolling for two-dimensional tables. LCP, INP and full task completion measure different things.
 
 Sources: [image delivery](https://developers.google.com/search/docs/appearance/google-images), [transcripts](https://www.w3.org/WAI/media/av/transcripts/), [image metadata](https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata), [reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html), [INP](https://web.dev/articles/inp). A better score alone does not establish search gains.
+
+## Documentation and retrieval pass: 18 records
+
+Ten corrections and eight scoped reviews. [Inspect the decisions](./knowledge/research/review-2026-09-08-retrieval.json). The complete 1.10.0 predecessor is retained.
+
+Quickstart, reference and support patterns now cite relevant editorial guidance. The service inventory no longer requires an ARWP profile, and read-only checks do not prove mutations. Retry behavior is implementation-specific. Legacy section anchors need deliberate preservation: servers do not receive the fragment. Held-out questions stay separate from tuning questions. Ordinary product instructions are not automatically prompt injection.
+
+The llms.txt v2 proposal, modified August 10, 2026, adds a useful experiment for project sites: path-scoped indexes and discoverable Markdown alternatives. It remains a proposal with no universal client-adoption or ranking claim.
+
+Sources: [quickstarts](https://docs.github.com/en/contributing/style-guide-and-content-model/quickstart-content-type), [reference content](https://docs.github.com/en/contributing/style-guide-and-content-model/reference-content-type), [URI fragments](https://www.rfc-editor.org/rfc/rfc3986#section-3.5), [llms.txt v2](https://llmstxt.org/), [indirect prompt injection](https://owasp.org/www-community/attacks/PromptInjection).
