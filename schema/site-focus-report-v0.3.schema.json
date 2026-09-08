@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-report-v0.3.schema.json",
+  "title": "Cite Goose Site Focus Report v0.3",
+  "type": "object",
+  "required": ["version", "canonicalUrl", "declaredFocus", "declaredAlignment", "experienceContract", "pageContracts", "transformationHandoff", "guardrails"],
+  "properties": {
+    "version": { "const": "0.3" },
+    "intentVersion": { "const": "0.3" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "scope": { "type": "string" },
+    "observedSiteThesis": { "type": "object" },
+    "declaredFocus": { "type": "object" },
+    "declaredAlignment": { "type": "object" },
+    "metrics": { "type": "object" },
+    "navigation": { "type": "object" },
+    "siteFindings": { "type": "array" },
+    "pageContracts": { "type": "array", "minItems": 1 },
+    "experienceContract": {
+      "type": "object",
+      "required": ["homepage", "lanes", "navigation", "visual", "performance", "sources"],
+      "properties": {
+        "homepage": {
+          "type": "object",
+          "required": ["primaryLane", "observedHomeLane", "laneStatus", "requiredSignals", "signals"],
+          "properties": {
+            "primaryLane": { "type": "string" },
+            "observedHomeLane": { "type": ["string", "null"] },
+            "laneStatus": { "enum": ["aligned", "mismatch", "not-observed"] },
+            "requiredSignals": { "type": "array" },
+            "signals": { "type": "array" }
+          },
+          "additionalProperties": true
+        },
+        "lanes": {
+          "type": "object",
+          "required": ["declared", "coverage", "contractGaps"],
+          "properties": {
+            "declared": { "type": "integer", "minimum": 1 },
+            "coverage": { "type": "array" },
+            "contractGaps": { "type": "array" }
+          },
+          "additionalProperties": true
+        },
+        "navigation": {
+          "type": "object",
+          "required": ["budget", "observedPrimaryItems", "status", "representedLanes"],
+          "properties": {
+            "budget": { "type": "integer", "minimum": 1 },
+            "observedPrimaryItems": { "type": "integer", "minimum": 0 },
+            "status": { "enum": ["within-budget", "over-budget"] },
+            "representedLanes": { "type": "array" }
+          },
+          "additionalProperties": true
+        },
+        "visual": {
+          "type": "object",
+          "required": ["principles", "assessmentState"],
+          "properties": {
+            "principles": { "type": "array", "minItems": 2 },
+            "assessmentState": { "const": "owner-declared-not-static-quality-scored" }
+          },
+          "additionalProperties": true
+        },
+        "performance": {
+          "type": "object",
+          "required": ["budget", "assessmentState"],
+          "properties": {
+            "budget": { "type": "object" },
+            "assessmentState": { "const": "field-data-required" }
+          },
+          "additionalProperties": true
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["id", "url", "supports"],
+            "properties": {
+              "id": { "type": "string" },
+              "url": { "type": "string", "format": "uri" },
+              "supports": { "type": "string" },
+              "reviewedAt": { "type": "string", "format": "date" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "transformationHandoff": {
+      "type": "object",
+      "required": ["mode", "executable", "candidates", "acceptedDecisionRequiredBeforeTransformation", "destructiveOperationsAllowed"],
+      "properties": {
+        "mode": { "const": "proposal-only" },
+        "executable": { "const": false },
+        "candidates": { "type": "array" },
+        "acceptedDecisionRequiredBeforeTransformation": { "const": true },
+        "destructiveOperationsAllowed": { "const": false },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "guardrails": {
+      "type": "object",
+      "required": ["declaredIntentDoesNotProveObservedQuality", "transformationHandoffIsProposalOnly", "performanceBudgetRequiresFieldEvidence", "visualPrinciplesAreOwnerIntentNotQualityEvidence", "noCompositeFocusExperienceScore"],
+      "properties": {
+        "declaredIntentDoesNotProveObservedQuality": { "const": true },
+        "transformationHandoffIsProposalOnly": { "const": true },
+        "performanceBudgetRequiresFieldEvidence": { "const": true },
+        "visualPrinciplesAreOwnerIntentNotQualityEvidence": { "const": true },
+        "noCompositeFocusExperienceScore": { "const": true }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
