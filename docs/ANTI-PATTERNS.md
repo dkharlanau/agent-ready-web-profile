@@ -1,8 +1,8 @@
 # Bad signals, better replacements
 
-Edition 1.0.0 · reviewed 8 September 2026 · companion to pattern corpus 1.4.0.
+Edition 1.1.0 · reviewed 8 September 2026 · companion to pattern corpus 1.5.0.
 
-These 24 synthetic counterexamples help a reviewer catch weak implementation before rollout. They are not findings about a real website. Each has a replacement, a verification step and a legitimate case that must not be misclassified.
+These 28 synthetic counterexamples help a reviewer catch weak implementation before rollout. They are not findings about a real website. Each has a replacement, a verification step and a legitimate case that must not be misclassified.
 
 [Download the versioned catalog](./knowledge/research/anti-patterns.json) · [Positive patterns](./discoverability.html) · [Evidence Relay](./EVIDENCE-RELAY.html)
 
@@ -304,3 +304,51 @@ The sources support the bounded reason stated on each card. Examples, replacemen
 - **Do not misclassify:** Validation is necessary evidence for its own bounded contract.
 
 [Source and scope](https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html).
+
+## One preview for every question
+
+`anti-universal-preview@1.0.0` · quality-risk
+
+- **Bad example:** Every tutorial uses the same logo-only promotional image.
+- **Why review it:** Preview guidance favors a representative page image.
+- **Replace with:** Choose a relevant visual for the specific page.
+- **Verify:** Inspect actual image and page context.
+- **Do not misclassify:** A logo can legitimately identify an organization; that is a different job.
+
+[Source and scope](https://developers.google.com/search/docs/appearance/google-images).
+
+## Metadata mistaken for permission
+
+`anti-imagined-license@1.0.0` · measurement-risk
+
+- **Bad example:** An ImageObject claims reuse rights that the publisher never obtained.
+- **Why review it:** Metadata does not grant image rights.
+- **Replace with:** Verify rights and state the actual terms.
+- **Verify:** Match the asset to its rights record and visible credits.
+- **Do not misclassify:** Accurate third-party attribution is useful where reuse is permitted.
+
+[Source and scope](https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata).
+
+## The answer behind Run
+
+`anti-click-only-answer@1.0.0` · quality-risk
+
+- **Bad example:** The entire answer is fetched only after clicking a tool button.
+- **Why review it:** Search rendering should not depend on a user interaction.
+- **Replace with:** Provide the explanation and a worked example before interaction.
+- **Verify:** Inspect the page without clicks and test the tool separately.
+- **Do not misclassify:** Optional computation may still require user inputs.
+
+[Source and scope](https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading).
+
+## A canonical that never reaches the PDF
+
+`anti-pdf-canonical-fiction@1.0.0` · measurement-risk
+
+- **Bad example:** A checklist claims PDF canonicalization because the HTML landing page has a canonical tag.
+- **Why review it:** HTML metadata does not set the downloadable response header.
+- **Replace with:** Check live headers and host support; distinguish duplicate from distinct artifacts.
+- **Verify:** Fetch actual response headers and compare document scope.
+- **Do not misclassify:** A distinct downloadable asset does not automatically need the HTML canonical.
+
+[Source and scope](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls).

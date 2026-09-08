@@ -112,4 +112,7 @@ Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/site
 
 - [Evidence Relay](https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html): functional maturity emulation, appropriate distribution venues, DOI evidence and executable coverage-aware artifact analytics.
 
-- [Anti-patterns](https://dkharlanau.github.io/agent-ready-web-profile/ANTI-PATTERNS.html): 24 versioned negative examples, replacements, verification and false-positive boundaries.
+- [Anti-patterns](https://dkharlanau.github.io/agent-ready-web-profile/ANTI-PATTERNS.html): 28 versioned negative examples, replacements, verification and false-positive boundaries.
+
+- [Asset workshop](https://dkharlanau.github.io/agent-ready-web-profile/ASSET-WORKSHOP.html): practical asset packs, source-scoped delivery practices and gap-review questions.
+- [Reusable figure and data](https://dkharlanau.github.io/agent-ready-web-profile/examples/asset-kits/): SVG, CSV, visible table and frozen source versions.

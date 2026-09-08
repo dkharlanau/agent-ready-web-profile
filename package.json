@@ -99,7 +99,9 @@
     "docs/EDITORIAL-SEARCH-LAB.md",
     "docs/EVIDENCE-RELAY.md",
     "docs/knowledge/research/",
-    "docs/ANTI-PATTERNS.md"
+    "docs/ANTI-PATTERNS.md",
+    "docs/ASSET-WORKSHOP.md",
+    "docs/examples/asset-kits/"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",

@@ -47,3 +47,5 @@ Freeze the page/query cohort and useful-action definition before observing resul
 Continue with the highest-value unblocked change, document regressions and null results, and revise a hypothesis when evidence contradicts it. Do not rewrite the same page repeatedly before a meaningful observation window exists.
 
 For the September 2026 editorial expansion, read [the field guide](../../EDITORIAL-SEARCH-LAB.md) when choosing article formats, voice, openings or section-level markup. Its source conflict notes distinguish provider guidance from experimental extraction checks.
+
+For usable downloads and media, read `docs/ASSET-WORKSHOP.md` from the repository root (published as `ASSET-WORKSHOP.html`). Reuse `templates/growth/asset-kits/asset-brief.md` and the synthetic canonical pair when appropriate. Keep examples distinct from target-site evidence; check actual hosting capabilities before proposing download response headers.

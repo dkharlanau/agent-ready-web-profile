@@ -1,6 +1,6 @@
 # Negative-signal review
 
-Catalog: anti-patterns 1.0.0 (knowledge/research/anti-patterns.json)
+Catalog: anti-patterns 1.1.0 (knowledge/research/anti-patterns.json)
 Site / route sample:
 Reviewed at / reviewer:
 Sampling method and coverage limitations:

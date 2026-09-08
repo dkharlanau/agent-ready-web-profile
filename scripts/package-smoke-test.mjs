@@ -22,6 +22,7 @@ try {
 
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
+    'docs/ASSET-WORKSHOP.md', 'docs/examples/asset-kits/review-coverage.csv', 'templates/growth/asset-kits/canonical-pair/check.py',
     'docs/EVIDENCE-RELAY.md', 'templates/growth/evidence-relay.example.json',
     'skills/arwp-search-maturity/scripts/evidence-relay.mjs', 'docs/knowledge/research/doi-reading-corpus.json',
     'docs/EDITORIAL-SEARCH-LAB.md', 'templates/growth/editorial-research-brief.md',

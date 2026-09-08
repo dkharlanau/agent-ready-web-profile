@@ -4,6 +4,11 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Asset workshop (corpus 1.5.0)
+
+- Added four individually reviewed delivery patterns: representative previews, image licensing, interaction-free loading and non-HTML canonical response handling. Corpus: 209 patterns, 114 sources, 93 individually reviewed.
+- Added three reusable packs, including a runnable synthetic canonical regression and a figure with CSV, table and frozen source data. Anti-pattern companion 1.1.0 now has 28 examples and preserves its predecessor. No new ranking or demand outcome is asserted.
+
 ### Anti-pattern review edition 1.0.0
 
 - Added 24 synthetic negative examples with scoped source support, replacements, manual verification and legitimate countercases. Added a versioned JSON catalog and reusable site-review template; integrated the content and maturity skills. Positive pattern corpus remains 1.4.0.

@@ -1,7 +1,7 @@
 {
-  "version": "1.1.0",
+  "version": "1.0.0",
   "reviewed_at": "2026-09-08",
-  "compatible_pattern_corpus": "1.5.0",
+  "compatible_pattern_corpus": "1.4.0",
   "scope": "Negative examples for manual review; not observed incidents, an automated site verdict, a penalty prediction or a ranking score.",
   "sources": [
     {
@@ -28,26 +28,6 @@
       "id": "relay",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html",
       "support_scope": "Project analytical method; not a platform rule"
-    },
-    {
-      "id": "google-canonical",
-      "url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-      "support_scope": "Canonical signals consolidate duplicates; the publisher preference is not proof of the search engine-selected canonical."
-    },
-    {
-      "id": "google-images",
-      "url": "https://developers.google.com/search/docs/appearance/google-images",
-      "support_scope": "Supports descriptive context, accessible images, stable delivery, and applicable image metadata; no visibility guarantee."
-    },
-    {
-      "id": "google-image-license",
-      "url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata",
-      "support_scope": "Supports truthful image-specific metadata and scoped feature eligibility; metadata does not grant rights."
-    },
-    {
-      "id": "google-lazy-content",
-      "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading",
-      "support_scope": "Supports loading important content without requiring user interaction and testing rendered output."
     }
   ],
   "anti_patterns": [
@@ -482,82 +462,6 @@
       "reviewed_at": "2026-09-08",
       "example_status": "synthetic",
       "review_status": "manual-required"
-    },
-    {
-      "id": "anti-universal-preview",
-      "version": "1.0.0",
-      "category": "media",
-      "classification": "quality-risk",
-      "title": "One preview for every question",
-      "bad_example": "Every tutorial uses the same logo-only promotional image.",
-      "reason": "Preview guidance favors a representative page image.",
-      "replacement": "Choose a relevant visual for the specific page.",
-      "verification": "Inspect actual image and page context.",
-      "false_positive_boundary": "A logo can legitimately identify an organization; that is a different job.",
-      "source_ids": [
-        "google-images"
-      ],
-      "reviewed_at": "2026-09-08",
-      "example_status": "synthetic",
-      "review_status": "manual-required"
-    },
-    {
-      "id": "anti-imagined-license",
-      "version": "1.0.0",
-      "category": "evidence",
-      "classification": "measurement-risk",
-      "title": "Metadata mistaken for permission",
-      "bad_example": "An ImageObject claims reuse rights that the publisher never obtained.",
-      "reason": "Metadata does not grant image rights.",
-      "replacement": "Verify rights and state the actual terms.",
-      "verification": "Match the asset to its rights record and visible credits.",
-      "false_positive_boundary": "Accurate third-party attribution is useful where reuse is permitted.",
-      "source_ids": [
-        "google-image-license"
-      ],
-      "reviewed_at": "2026-09-08",
-      "example_status": "synthetic",
-      "review_status": "manual-required"
-    },
-    {
-      "id": "anti-click-only-answer",
-      "version": "1.0.0",
-      "category": "content",
-      "classification": "quality-risk",
-      "title": "The answer behind Run",
-      "bad_example": "The entire answer is fetched only after clicking a tool button.",
-      "reason": "Search rendering should not depend on a user interaction.",
-      "replacement": "Provide the explanation and a worked example before interaction.",
-      "verification": "Inspect the page without clicks and test the tool separately.",
-      "false_positive_boundary": "Optional computation may still require user inputs.",
-      "source_ids": [
-        "google-lazy-content"
-      ],
-      "reviewed_at": "2026-09-08",
-      "example_status": "synthetic",
-      "review_status": "manual-required"
-    },
-    {
-      "id": "anti-pdf-canonical-fiction",
-      "version": "1.0.0",
-      "category": "architecture",
-      "classification": "measurement-risk",
-      "title": "A canonical that never reaches the PDF",
-      "bad_example": "A checklist claims PDF canonicalization because the HTML landing page has a canonical tag.",
-      "reason": "HTML metadata does not set the downloadable response header.",
-      "replacement": "Check live headers and host support; distinguish duplicate from distinct artifacts.",
-      "verification": "Fetch actual response headers and compare document scope.",
-      "false_positive_boundary": "A distinct downloadable asset does not automatically need the HTML canonical.",
-      "source_ids": [
-        "google-canonical"
-      ],
-      "reviewed_at": "2026-09-08",
-      "example_status": "synthetic",
-      "review_status": "manual-required"
     }
-  ],
-  "previous_release": {
-    "path": "anti-patterns-v1.0.0.json",
-    "sha256": "0480334da1e712b2b94a099d7c9cf3ec135d6b96f738f8f1afd7911e7e04c607"
-  }
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T11:36:47.661823+00:00",
+  "checked_at": "2026-09-08T12:06:10.163244+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1231,6 +1231,46 @@
       "title": "Enabling Large Language Models to Generate Text with Citations - ACL Anthology",
       "result": "retrieved",
       "sha256": "b9d4beee7ed0dde4be31ba41cb9441b5921495ad55576da91614ee343a0fc210"
+    },
+    {
+      "source_id": "google-canonical",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "checked_at": "2026-09-08T12:06:07.198528+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "2d8b34716c355b30aa6d71a7448f94729d15594480793ce657fed5ac343c7f82"
+    },
+    {
+      "source_id": "google-images",
+      "requested_url": "https://developers.google.com/search/docs/appearance/google-images",
+      "checked_at": "2026-09-08T12:06:08.049888+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/google-images",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "f8e3c5a043d41763c2cb9b219a6213cdbbd6bb2cc45c27c10db16eabb184d32c"
+    },
+    {
+      "source_id": "google-image-license",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata",
+      "checked_at": "2026-09-08T12:06:08.670180+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "128d5c5244b5cb539456f0f2c599f87ea5b2920ba18d8091397cf81a626d4169"
+    },
+    {
+      "source_id": "google-lazy-content",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading",
+      "checked_at": "2026-09-08T12:06:09.440565+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "1c1fad794e12e9406817a8238c61fafacdea011c7a88a7d1c750d0b59753f78e"
     }
   ]
 }
