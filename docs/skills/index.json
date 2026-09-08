@@ -14,6 +14,12 @@
       "useWhen": "Continuously improve Search, recommendation, generative Search, AI-citation or agent visibility using explicit hypotheses and measurement."
     },
     {
+      "name": "arwp-site-focus",
+      "role": "site-focus-and-information-architecture",
+      "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-site-focus/SKILL.md",
+      "useWhen": "A site is being created, redesigned or feels too broad: define its problem territory, primary audience, explicit scope and anti-scope, problem-led navigation, visual system and performance budget before expanding content."
+    },
+    {
       "name": "arwp-search-maturity",
       "role": "search-maturity-reference-benchmark",
       "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-search-maturity/SKILL.md",
@@ -86,5 +92,5 @@
       "useWhen": "Inspect or verify many local website repositories and public profiles from one versioned workspace before selecting a focused Growth Loop target."
     }
   ],
-  "guardrail": "Skills implement and verify source-backed or explicitly governed experimental improvements. Search Maturity cohort patterns are observational until stronger evidence exists and do not become ranking factors or competitor-copy instructions. BraidGraph records provenance, history, impact and evidence debt but does not authorize mutation or infer causality from adjacency. Future Search experiments do not become ranking requirements merely because they use Schema.org or machine-readable indexes. Target transformation is digest-gated, path-allowlisted and PR-first; policy/editorial/owner/runtime decisions remain gated. Dataset DOI publication applies only to genuine reusable corpora and is for citation/reproducibility, not a ranking promise. Portfolio fleet operations preserve dirty worktrees and keep local, live, release and outcome evidence separate."
+  "guardrail": "Skills implement and verify source-backed or explicitly governed experimental improvements. Site Focus house limits are clarity heuristics, not ranking factors or platform requirements. Search Maturity cohort patterns are observational until stronger evidence exists and do not become ranking factors or competitor-copy instructions. BraidGraph records provenance, history, impact and evidence debt but does not authorize mutation or infer causality from adjacency. Future Search experiments do not become ranking requirements merely because they use Schema.org or machine-readable indexes. Target transformation is digest-gated, path-allowlisted and PR-first; policy/editorial/owner/runtime decisions remain gated. Dataset DOI publication applies only to genuine reusable corpora and is for citation/reproducibility, not a ranking promise. Portfolio fleet operations preserve dirty worktrees and keep local, live, release and outcome evidence separate."
 }
