@@ -13,6 +13,10 @@ Use this skill before `arwp-discoverability`, `arwp-ai-search-content`, broad co
 
 This is a product/design gate, not a claimed search ranking factor. The numeric limits below are Cite Goose house heuristics intended to force clarity; test them against the actual audience and task rather than presenting them as platform requirements.
 
+## Workflow
+
+Run the focus gate before content expansion, Search/AI optimization or visual feature work. Define the site thesis and boundary first, then choose the smallest problem-led information architecture that supports the real audience, and only after that route work to the other ARWP specialists.
+
 ## 1. Write the site thesis
 
 Produce one sentence with four parts:
