@@ -6,6 +6,7 @@
   "type": "object",
   "required": ["version", "canonicalUrl", "thesis", "scope", "problemLanes", "primaryNavigation", "routeRules"],
   "properties": {
+    "$schema": { "type": "string", "format": "uri" },
     "version": { "const": "0.2" },
     "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
     "thesis": {
