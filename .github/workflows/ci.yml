@@ -38,6 +38,11 @@ jobs:
       - name: Run contract tests
         run: npm test
 
+      - name: Validate problem-first Site Focus
+        run: |
+          node scripts/site-focus-test.mjs
+          node --check scripts/site-focus-test.mjs
+
       - name: Validate entity graph gap engine
         run: |
           node scripts/entity-gap-test.mjs
