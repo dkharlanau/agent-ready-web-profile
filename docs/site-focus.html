@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cite Goose site-focus playbook: define one problem territory, explicit scope and anti-scope, a small problem-led navigation, a distinctive visual system and a performance budget before expanding content.">
+  <meta name="description" content="Cite Goose site-focus playbook and executable Focus Engine: define one problem territory, explicit scope and anti-scope, inspect page contracts, navigation, duplicate intent and scope drift before expanding content.">
   <meta name="theme-color" content="#eff600">
   <title>Site Focus — Cite Goose</title>
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/site-focus.html">
@@ -15,7 +15,7 @@
     "@context":"https://schema.org",
     "@type":"TechArticle",
     "headline":"Site Focus: define the problem before optimizing the site",
-    "description":"A Cite Goose house playbook for problem territory, scope, anti-scope, information architecture, visual identity and performance budgets.",
+    "description":"A Cite Goose house playbook and executable diagnostic for problem territory, scope, anti-scope, page contracts, information architecture, visual identity and performance budgets.",
     "dateModified":"2026-09-08",
     "mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/site-focus.html",
     "isPartOf":{"@type":"WebSite","name":"Cite Goose","url":"https://dkharlanau.github.io/agent-ready-web-profile/"}
@@ -35,6 +35,24 @@
         <p class="eyebrow">SITE FOCUS / HOUSE PLAYBOOK</p>
         <h1>Own a problem.<br>Draw the boundary.</h1>
         <p>A site becomes harder to understand when every adjacent topic gets promoted into a first-class section. Define the problem territory first. Then let content, navigation, design and Search/AI work serve that territory.</p>
+      </div>
+    </section>
+
+    <section class="focus-guide-section">
+      <div class="goose-shell">
+        <p class="eyebrow">EXECUTABLE DIAGNOSTIC</p>
+        <h2>Inspect the structure before arguing about it.</h2>
+        <p>The Site Focus Engine samples a public site or generated repository output and produces independent diagnostics instead of one opaque score: navigation breadth, route territories, audience signals, duplicate-intent pairs, orphan candidates, pages without proof/action signals and a Page Contract Map.</p>
+        <div class="focus-contract"><code>arwp-focus https://example.com
+arwp-focus https://example.com --max-pages=30 --json
+arwp-focus https://example.com/project/ --repo-root=. --output=site-focus.json</code></div>
+        <div class="focus-grid" style="margin-top:28px">
+          <article><h3>KEEP / NARROW</h3><p>Keep a coherent page, or tighten a page whose job and next action are unclear.</p></article>
+          <article><h3>MERGE / DEFER</h3><p>Surface overlapping intent or a low-thesis-overlap page for human review before more optimization work.</p></article>
+          <article><h3>No auto-delete</h3><p><code>REMOVE</code> and <code>SPLIT</code> are never automatic. URL history, redirects, traffic and the real product boundary still require review.</p></article>
+        </div>
+        <p class="focus-note"><strong>No focus/readiness/ranking score.</strong> Similarity thresholds and navigation limits are Cite Goose review heuristics, not Search or AI platform requirements.</p>
+        <p><a href="./SITE-FOCUS-ENGINE.md">Read the engine contract →</a></p>
       </div>
     </section>
 
@@ -119,7 +137,7 @@ parent_hub: one canonical owning section</code></div>
       <div class="goose-shell">
         <p class="eyebrow">AGENT LOOP GATE</p>
         <h2>Run focus before expansion.</h2>
-        <p>When a site is new, being redesigned or has become broad, start with the <code>arwp-site-focus</code> skill. Record the site thesis, scope/anti-scope, problem lanes, primary navigation and page contract. Only then route the work into discoverability, content, technical eligibility, evidence or measurement specialists.</p>
+        <p>When a site is new, being redesigned or has become broad, start with the <code>arwp-site-focus</code> skill and the executable Focus report. Record the intended site thesis, scope/anti-scope, problem lanes, primary navigation and page contract. Only then route the work into discoverability, content, technical eligibility, evidence or measurement specialists.</p>
         <p><a class="goose-button" href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/skills/arwp-site-focus/SKILL.md">Read the agent skill</a></p>
       </div>
     </section>
