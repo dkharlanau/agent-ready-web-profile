@@ -1,4 +1,4 @@
-name: Site Focus v0.2
+name: Site Focus v0.3
 
 on:
   push:
@@ -10,7 +10,9 @@ on:
       - 'schema/site-focus*.json'
       - 'scripts/site-focus*.mjs'
       - 'docs/SITE-FOCUS-ENGINE.md'
+      - 'docs/SITE-FOCUS-V0.3.md'
       - 'docs/site-focus.html'
+      - 'docs/examples/site-focus*.json'
       - '.github/workflows/site-focus-v2.yml'
   pull_request:
     paths:
@@ -20,7 +22,9 @@ on:
       - 'schema/site-focus*.json'
       - 'scripts/site-focus*.mjs'
       - 'docs/SITE-FOCUS-ENGINE.md'
+      - 'docs/SITE-FOCUS-V0.3.md'
       - 'docs/site-focus.html'
+      - 'docs/examples/site-focus*.json'
       - '.github/workflows/site-focus-v2.yml'
 
 permissions:
@@ -44,15 +48,20 @@ jobs:
       - name: Validate Site Focus v0.1 compatibility
         run: node scripts/site-focus-engine-test.mjs
 
-      - name: Validate declared-intent Site Focus v0.2
+      - name: Validate declared-intent Site Focus v0.2 compatibility
+        run: node scripts/site-focus-v2-test.mjs
+
+      - name: Validate problem and experience contract v0.3
         run: |
-          node scripts/site-focus-v2-test.mjs
+          node scripts/site-focus-v3-test.mjs
           node --check lib/site-focus-intent.mjs
           node --check lib/site-focus-v2.mjs
+          node --check lib/site-focus-v3.mjs
           node --check bin/arwp-focus.mjs
           node --check scripts/site-focus-v2-test.mjs
+          node --check scripts/site-focus-v3-test.mjs
 
       - name: Dogfood Cite Goose declared intent
         run: |
           node bin/arwp-focus.mjs https://dkharlanau.github.io/agent-ready-web-profile/ --repo-root=. --max-pages=30 --json > /tmp/cite-goose-focus.json
-          node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('/tmp/cite-goose-focus.json','utf8')); if(r.version!=='0.2') throw new Error('expected v0.2'); if(!r.declaredFocus) throw new Error('declared focus missing'); if('score' in r) throw new Error('opaque score forbidden'); if(r.transformationHandoff?.executable!==false) throw new Error('handoff must remain proposal-only'); console.log('PASS Cite Goose v0.2 dogfood', JSON.stringify({pages:r.metrics.pagesObserved, findings:r.siteFindings.length, handoff:r.transformationHandoff.candidates.length}));"
+          node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('/tmp/cite-goose-focus.json','utf8')); if(!['0.2','0.3'].includes(r.version)) throw new Error('unexpected Site Focus version '+r.version); if(!r.declaredFocus) throw new Error('declared focus missing'); if('score' in r) throw new Error('opaque score forbidden'); if(r.transformationHandoff?.executable!==false) throw new Error('handoff must remain proposal-only'); if(r.version==='0.3' && !r.experienceContract) throw new Error('v0.3 experience contract missing'); console.log('PASS Cite Goose Site Focus dogfood', JSON.stringify({version:r.version,pages:r.metrics.pagesObserved,findings:r.siteFindings.length,handoff:r.transformationHandoff.candidates.length}));"
