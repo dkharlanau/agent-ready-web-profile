@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-report.schema.json",
+  "title": "Cite Goose Site Focus Report",
+  "type": "object",
+  "required": ["version", "canonicalUrl", "scope", "observedSiteThesis", "metrics", "pageContracts", "guardrails"],
+  "properties": {
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "scope": { "type": "string", "minLength": 20 },
+    "observedSiteThesis": {
+      "type": "object",
+      "required": ["title", "h1", "description", "tokens"],
+      "properties": {
+        "title": { "type": ["string", "null"] },
+        "h1": { "type": ["string", "null"] },
+        "description": { "type": ["string", "null"] },
+        "tokens": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      },
+      "additionalProperties": false
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["pagesObserved", "primaryNavDestinations", "routeTerritories", "audienceSignals", "pagesWithoutClearJob", "duplicateIntentPairs", "orphanCandidates", "outOfScopeCandidates", "pagesWithoutProof", "pagesWithoutUsefulAction", "technicalNavDestinations"],
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "navigation": { "type": "object" },
+    "territories": { "type": "array" },
+    "audienceSignals": { "type": "array" },
+    "duplicateIntentClusters": { "type": "array" },
+    "orphanCandidates": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "outOfScopeCandidates": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "pagesWithoutClearJob": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "pagesWithoutProof": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "pagesWithoutUsefulAction": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "dispositions": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "siteFindings": { "type": "array" },
+    "pageContracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["url", "pageJobSignal", "proof", "primaryActionCandidates", "inboundLinksInSample", "routeTerritory", "decision", "confidence", "similarityToThesis", "reasons"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "file": { "type": ["string", "null"] },
+          "title": { "type": ["string", "null"] },
+          "h1": { "type": ["string", "null"] },
+          "pageJobSignal": { "type": ["string", "null"] },
+          "parentHub": { "type": ["string", "null"] },
+          "proof": { "type": "object" },
+          "primaryActionCandidates": { "type": "array" },
+          "inboundLinksInSample": { "type": "integer", "minimum": 0 },
+          "routeTerritory": { "type": "string" },
+          "decision": { "enum": ["KEEP", "NARROW", "MERGE", "DEFER"] },
+          "confidence": { "enum": ["heuristic-low", "heuristic-medium"] },
+          "similarityToThesis": { "type": "number", "minimum": 0, "maximum": 1 },
+          "reasons": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+        },
+        "additionalProperties": true
+      }
+    },
+    "discovery": { "type": ["object", "null"] },
+    "guardrails": {
+      "type": "object",
+      "required": ["noOpaqueScore", "removeNeverAutomatic", "splitRequiresManualReview", "lowSimilarityIsNotRemovalEvidence", "technicalTermsAreNotAutomaticallyBadNavigation", "sampledPagesAreNotACompleteSiteInventoryUnlessDiscoveryProvesCoverage"],
+      "properties": {
+        "noOpaqueScore": { "const": true },
+        "removeNeverAutomatic": { "const": true },
+        "splitRequiresManualReview": { "const": true },
+        "lowSimilarityIsNotRemovalEvidence": { "const": true },
+        "technicalTermsAreNotAutomaticallyBadNavigation": { "const": true },
+        "sampledPagesAreNotACompleteSiteInventoryUnlessDiscoveryProvesCoverage": { "const": true }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}
