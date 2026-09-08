@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-09-08T07:59:56.851063+00:00",
-  "scope": "HTTP reachability and document identity check. This is separate from the editorial source review; HTTP success alone does not establish claim support. Source content was reviewed with web browsing on 2026-09-08.",
+  "checked_at": "2026-09-08T09:17:09.827879Z",
+  "scope": "HTTP reachability and document identity receipt assembled from each source acquisition time. Existing 60 acquisitions are preserved; 31 newly acquired sources include response-byte hashes. Semantic support is recorded separately in individual pattern review.support. HTTP success alone does not establish claim support, runtime implementation or outcomes.",
   "sources": [
     {
       "source_id": "google-ai",
@@ -9,7 +9,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/ai-features",
       "content_type": "text/html; charset=utf-8",
-      "title": "AI Features and Your Website | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "AI Features and Your Website | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -19,7 +19,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
       "content_type": "text/html; charset=utf-8",
-      "title": "Creating Helpful, Reliable, People-First Content | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Creating Helpful, Reliable, People-First Content | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -29,7 +29,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/essentials/spam-policies",
       "content_type": "text/html; charset=utf-8",
-      "title": "Spam Policies for Google Web Search | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Spam Policies for Google Web Search | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -39,7 +39,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
       "content_type": "text/html; charset=utf-8",
-      "title": "Robots.txt Introduction and Guide | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Robots.txt Introduction and Guide | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -49,7 +49,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
       "content_type": "text/html; charset=utf-8",
-      "title": "Robots Meta Tags Specifications | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Robots Meta Tags Specifications | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -59,7 +59,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
       "content_type": "text/html; charset=utf-8",
-      "title": "How to Specify a Canonical with rel=\"canonical\" and Other Methods | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "How to Specify a Canonical with rel=\"canonical\" and Other Methods | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -69,7 +69,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
       "content_type": "text/html; charset=utf-8",
-      "title": "Build and Submit a Sitemap | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Build and Submit a Sitemap | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -79,7 +79,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
       "content_type": "text/html; charset=utf-8",
-      "title": "Understand JavaScript SEO Basics | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Understand JavaScript SEO Basics | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -89,7 +89,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/essentials/technical",
       "content_type": "text/html; charset=utf-8",
-      "title": "Google Search Technical Requirements | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Google Search Technical Requirements | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -99,7 +99,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
       "content_type": "text/html; charset=utf-8",
-      "title": "General Structured Data Guidelines | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "General Structured Data Guidelines | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -109,7 +109,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/structured-data/article",
       "content_type": "text/html; charset=utf-8",
-      "title": "Learn About Article Schema Markup | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Learn About Article Schema Markup | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -119,7 +119,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/structured-data/dataset",
       "content_type": "text/html; charset=utf-8",
-      "title": "Dataset Structured Data | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Dataset Structured Data | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -129,7 +129,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
       "content_type": "text/html; charset=utf-8",
-      "title": "Organization Schema Markup | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Organization Schema Markup | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -139,7 +139,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb",
       "content_type": "text/html; charset=utf-8",
-      "title": "How To Add Breadcrumb (BreadcrumbList) Markup | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "How To Add Breadcrumb (BreadcrumbList) Markup | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -149,7 +149,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/structured-data/product",
       "content_type": "text/html; charset=utf-8",
-      "title": "Intro to Product Structured Data on Google | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Intro to Product Structured Data on Google | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -159,7 +159,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
       "content_type": "text/html; charset=utf-8",
-      "title": "Local Business (LocalBusiness) Structured Data | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Local Business (LocalBusiness) Structured Data | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -169,7 +169,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
       "content_type": "text/html; charset=utf-8",
-      "title": "How To Write Reviews | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "How To Write Reviews | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -179,7 +179,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/title-link",
       "content_type": "text/html; charset=utf-8",
-      "title": "Influencing Title Links in Google Search | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Influencing Title Links in Google Search | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -189,7 +189,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/snippet",
       "content_type": "text/html; charset=utf-8",
-      "title": "How to Write Meta Descriptions | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "How to Write Meta Descriptions | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -199,7 +199,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
       "content_type": "text/html; charset=utf-8",
-      "title": "SEO Link Best Practices for Google | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "SEO Link Best Practices for Google | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -209,7 +209,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/specialty/international/localized-versions",
       "content_type": "text/html; charset=utf-8",
-      "title": "Localized Versions of your Pages | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Localized Versions of your Pages | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -219,7 +219,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites",
       "content_type": "text/html; charset=utf-8",
-      "title": "Managing Multi-Regional and Multilingual Sites | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Managing Multi-Regional and Multilingual Sites | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -229,7 +229,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
       "content_type": "text/html; charset=utf-8",
-      "title": "Site Moves and Migrations | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Site Moves and Migrations | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -239,7 +239,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/crawling/docs/faceted-navigation",
       "content_type": "text/html; charset=utf-8",
-      "title": "Managing crawling of faceted navigation URLs | Google Crawling Infrastructure \u00a0|\u00a0 Crawling infrastructure \u00a0|\u00a0 Google for Developers",
+      "title": "Managing crawling of faceted navigation URLs | Google Crawling Infrastructure  |  Crawling infrastructure  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -249,7 +249,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes",
       "content_type": "text/html; charset=utf-8",
-      "title": "How HTTP Status Codes Affect Google's Crawlers | Google Crawling Infrastructure \u00a0|\u00a0 Crawling infrastructure \u00a0|\u00a0 Google for Developers",
+      "title": "How HTTP Status Codes Affect Google's Crawlers | Google Crawling Infrastructure  |  Crawling infrastructure  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -259,7 +259,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/google-images",
       "content_type": "text/html; charset=utf-8",
-      "title": "Image SEO Best Practices | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Image SEO Best Practices | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -269,7 +269,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/video",
       "content_type": "text/html; charset=utf-8",
-      "title": "Video SEO Best Practices | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Video SEO Best Practices | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -279,7 +279,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/appearance/page-experience",
       "content_type": "text/html; charset=utf-8",
-      "title": "Understanding Google Page Experience | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Understanding Google Page Experience | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -289,7 +289,7 @@
       "status": 200,
       "final_url": "https://web.dev/articles/vitals",
       "content_type": "text/html; charset=utf-8",
-      "title": "Web Vitals \u00a0|\u00a0 Articles \u00a0|\u00a0 web.dev",
+      "title": "Web Vitals  |  Articles  |  web.dev",
       "result": "retrieved"
     },
     {
@@ -299,7 +299,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/updates",
       "content_type": "text/html; charset=utf-8",
-      "title": "Latest Google Search Documentation Updates | Google Search Central \u00a0|\u00a0 What's new \u00a0|\u00a0 Google for Developers",
+      "title": "Latest Google Search Documentation Updates | Google Search Central  |  What's new  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -329,7 +329,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
       "content_type": "text/html; charset=utf-8",
-      "title": "Search Analytics: query \u00a0|\u00a0 Search Console API \u00a0|\u00a0 Google for Developers",
+      "title": "Search Analytics: query  |  Search Console API  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -339,7 +339,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops",
       "content_type": "text/html; charset=utf-8",
-      "title": "Debug Google Search Traffic Drops | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Debug Google Search Traffic Drops | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -349,7 +349,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl",
       "content_type": "text/html; charset=utf-8",
-      "title": "Ask Google to Recrawl Your Website | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Ask Google to Recrawl Your Website | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -359,7 +359,7 @@
       "status": 200,
       "final_url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
       "content_type": "text/html; charset=utf-8",
-      "title": "Qualify Outbound Links for SEO | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "title": "Qualify Outbound Links for SEO | Google Search Central  |  Documentation  |  Google for Developers",
       "result": "retrieved"
     },
     {
@@ -579,7 +579,7 @@
       "status": 200,
       "final_url": "https://developers.cloudflare.com/workers/platform/limits/",
       "content_type": "text/html",
-      "title": "Limits \u00b7 Cloudflare Workers docs",
+      "title": "Limits · Cloudflare Workers docs",
       "result": "retrieved"
     },
     {
@@ -601,6 +601,409 @@
       "content_type": "text/html; charset=utf-8",
       "title": "Introducing Search Generative AI performance reports in Search Console &nbsp;|&nbsp; Google Search Central Blog &nbsp;|&nbsp; Google for Developers",
       "result": "retrieved"
+    },
+    {
+      "source_id": "ietf-deprecation",
+      "requested_url": "https://www.rfc-editor.org/rfc/rfc9745.html",
+      "checked_at": "2026-09-08T09:05:32.013989Z",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc9745.html",
+      "content_type": "text/html",
+      "title": "RFC 9745: Deprecation HTTP response header",
+      "result": "retrieved",
+      "sha256": "8150e1ee41db02fd719d99671d7e6d113d641ffb1301fafeaf75eef52467a887",
+      "byte_count": 60096,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "ietf-sunset",
+      "requested_url": "https://www.rfc-editor.org/rfc/rfc8594.html",
+      "checked_at": "2026-09-08T09:05:32.014680Z",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc8594.html",
+      "content_type": "text/html",
+      "title": "RFC 8594: Sunset HTTP header",
+      "result": "retrieved",
+      "sha256": "8832dda1b5388a822fa960ec64f95d7da85a10540edc3073b170927dd89397fc",
+      "byte_count": 29480,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "github-immutable-releases",
+      "requested_url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases",
+      "checked_at": "2026-09-08T09:05:32.014845Z",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Immutable releases",
+      "result": "retrieved",
+      "sha256": "2d01fa78ced48491e7ed060500cbb6116bc4074a6e4d3a8fd8634b8609e4f243",
+      "byte_count": 559061,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "github-release-integrity",
+      "requested_url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/verify-release-integrity",
+      "checked_at": "2026-09-08T09:05:32.014981Z",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/verify-release-integrity",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Verify release integrity",
+      "result": "retrieved",
+      "sha256": "291f54a4cf80fc3a1907e30e403a553596acc40c06ab0dd6dd73a67606b8b2ce",
+      "byte_count": 563214,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "mdn-if-match",
+      "requested_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match",
+      "checked_at": "2026-09-08T09:05:32.015327Z",
+      "status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match",
+      "content_type": "text/html",
+      "title": "If-Match HTTP header",
+      "result": "retrieved",
+      "sha256": "4e318207bc03b45b3bd9d1e33008494700a6254f9fe6ba7a3fa98268b62e51f9",
+      "byte_count": 214102,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "mdn-vary",
+      "requested_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Vary",
+      "checked_at": "2026-09-08T09:05:32.015590Z",
+      "status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Vary",
+      "content_type": "text/html",
+      "title": "Vary HTTP header",
+      "result": "retrieved",
+      "sha256": "2eb71e698a34cd9b6303e742f806343a7e769f43e4683d7b2dd14ab99e9e45c8",
+      "byte_count": 211927,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "mdn-range-requests",
+      "requested_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests",
+      "checked_at": "2026-09-08T09:05:32.432778Z",
+      "status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests",
+      "content_type": "text/html",
+      "title": "HTTP range requests",
+      "result": "retrieved",
+      "sha256": "f2fe6282fb9ace5ec70c50b318e01fb7c8be8cc62c2ecd1f3a49717dda728305",
+      "byte_count": 214959,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "ietf-profile-link",
+      "requested_url": "https://www.rfc-editor.org/rfc/rfc6906.html",
+      "checked_at": "2026-09-08T09:05:32.485711Z",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc6906.html",
+      "content_type": "text/html",
+      "title": "RFC 6906: profile link relation",
+      "result": "retrieved",
+      "sha256": "8b5be9fb384f870dedb7b9eea2b09b1d189a66725701d4a0b6c36fbc160252b0",
+      "byte_count": 23101,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "ietf-problem-details",
+      "requested_url": "https://www.rfc-editor.org/rfc/rfc9457.html",
+      "checked_at": "2026-09-08T09:05:32.651743Z",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc9457.html",
+      "content_type": "text/html",
+      "title": "RFC 9457: Problem Details for HTTP APIs",
+      "result": "retrieved",
+      "sha256": "f705945670a08239544e8ce53ba8a8c41d4b67ccfcd1a36c0eb4ee851a35bbab",
+      "byte_count": 94720,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "openapi-link-object",
+      "requested_url": "https://spec.openapis.org/oas/v3.2.0.html#link-object",
+      "checked_at": "2026-09-08T09:05:32.674309Z",
+      "status": 200,
+      "final_url": "https://spec.openapis.org/oas/v3.2.0.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "OpenAPI 3.2.0 Link Object",
+      "result": "retrieved",
+      "sha256": "15f12e539a3ac811c5f18950bc9cff296b43a22ad4d50b4db8d533f37ebc1d23",
+      "byte_count": 672716,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-label-in-name",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html",
+      "checked_at": "2026-09-08T09:05:32.706098Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WCAG 2.2 Understanding: Label in Name",
+      "result": "retrieved",
+      "sha256": "56c1f7c367df6b55119d34ce09bb1a036b14a1b3236212470dbbd8ac24f5f290",
+      "byte_count": 64633,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-status-messages",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+      "checked_at": "2026-09-08T09:05:32.733939Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WCAG 2.2 Understanding: Status Messages",
+      "result": "retrieved",
+      "sha256": "d5a085f7be8814e4f01520db08d41d09b62491f40dc0fb6fb4941ec762cf3746",
+      "byte_count": 60299,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-drag-alternative",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html",
+      "checked_at": "2026-09-08T09:05:32.790443Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WCAG 2.2 Understanding: Dragging Movements",
+      "result": "retrieved",
+      "sha256": "c3905630a35b6e8246aba32c1769f3ff82b217d464d41e4b1b2a34b9df5771c6",
+      "byte_count": 48929,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-focus-obscured",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
+      "checked_at": "2026-09-08T09:05:32.804323Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WCAG 2.2 Understanding: Focus Not Obscured (Minimum)",
+      "result": "retrieved",
+      "sha256": "9515bdd0faab14d62528c5b1af1ea03383409c651b551c4e9b708c6f5bc8b607",
+      "byte_count": 49534,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-modal-dialog",
+      "requested_url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "checked_at": "2026-09-08T09:05:32.978239Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "ARIA Authoring Practices: Modal Dialog Pattern",
+      "result": "retrieved",
+      "sha256": "3dbf9a60ab0c78cff4409e1832b425bfc08a812ff6f8fa22f6ff9aac27aef344",
+      "byte_count": 43147,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-redundant-entry",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
+      "checked_at": "2026-09-08T09:05:33.004428Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WCAG 2.2 Understanding: Redundant Entry",
+      "result": "retrieved",
+      "sha256": "d945ac6dea17b9b57ce2d530a1381e935fa231059b10c2edf9219c4dd3cd6706",
+      "byte_count": 39069,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-accessible-auth",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
+      "checked_at": "2026-09-08T09:05:33.014425Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WCAG 2.2 Understanding: Accessible Authentication (Minimum)",
+      "result": "retrieved",
+      "sha256": "3c6496948b93fda1f7e45b0094853bf39141c01f615c340367dda5cee6871629",
+      "byte_count": 64231,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "w3c-dcat-series",
+      "requested_url": "https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/",
+      "checked_at": "2026-09-08T09:05:33.033683Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "DCAT Version 3: Dataset series",
+      "result": "retrieved",
+      "sha256": "068b43f7814525ea784b7d565ada8de2b4538f5377517c4f0ec9b162a34dedfb",
+      "byte_count": 664822,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "w3c-csvw-metadata",
+      "requested_url": "https://www.w3.org/TR/tabular-metadata/",
+      "checked_at": "2026-09-08T09:05:33.033880Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/TR/tabular-metadata/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Metadata Vocabulary for Tabular Data",
+      "result": "retrieved",
+      "sha256": "f067ee63d1bc32c57e2075499aa415474b69b240c664aad91ffb071dcad15bfc",
+      "byte_count": 331392,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "mlcommons-croissant",
+      "requested_url": "https://docs.mlcommons.org/croissant/docs/croissant-spec.html",
+      "checked_at": "2026-09-08T09:05:33.175335Z",
+      "status": 200,
+      "final_url": "https://docs.mlcommons.org/croissant/docs/croissant-spec.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Croissant Format Specification 1.0",
+      "result": "retrieved",
+      "sha256": "582b0890520bc8c3df238110a511603edd21c257a2b8f6400827fd30db1ad74a",
+      "byte_count": 179898,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "fair-signposting",
+      "requested_url": "https://signposting.org/FAIR/",
+      "checked_at": "2026-09-08T09:05:33.194826Z",
+      "status": 200,
+      "final_url": "https://signposting.org/FAIR/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "FAIR Signposting Profile",
+      "result": "retrieved",
+      "sha256": "2fbeab9f41dad9c4de71a319e69ecb73bc60c4c7d8b6f23de86acc153ffbd451",
+      "byte_count": 85948,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "google-product-variants",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants",
+      "checked_at": "2026-09-08T09:05:33.222746Z",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Product variant structured data",
+      "result": "retrieved",
+      "sha256": "54475c9ecc8d2f5f326634796266c951fc863818e2733f3744b4e712fd2663b9",
+      "byte_count": 238937,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "google-return-policy",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/return-policy",
+      "checked_at": "2026-09-08T09:05:33.249566Z",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/return-policy",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Merchant return policy structured data",
+      "result": "retrieved",
+      "sha256": "ccd9010124c9de96f0c0f5b5bc6e88eebef04f6c88568ca64f965d81659640d9",
+      "byte_count": 217526,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "google-product-pros-cons",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/product-snippet",
+      "checked_at": "2026-09-08T09:05:33.364378Z",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/product-snippet",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Product snippets: editorial pros and cons",
+      "result": "retrieved",
+      "sha256": "c6d7a47234b5fff85f4df38e2eaf9343ca78a532af9e8d1ce9d46c1d051d561c",
+      "byte_count": 257570,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "google-benchmark-statistics",
+      "requested_url": "https://google.github.io/benchmark/user_guide.html",
+      "checked_at": "2026-09-08T09:05:33.395745Z",
+      "status": 200,
+      "final_url": "https://google.github.io/benchmark/user_guide.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Google Benchmark user guide: repetitions and random interleaving",
+      "result": "retrieved",
+      "sha256": "85ec24f1ae52453bb6a38d9cafdc3bd702b6fd9122f8dbcce87edb089fa07345",
+      "byte_count": 173346,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "json-schema-dialect",
+      "requested_url": "https://json-schema.org/understanding-json-schema/reference/schema",
+      "checked_at": "2026-09-08T09:05:33.573244Z",
+      "status": 200,
+      "final_url": "https://json-schema.org/understanding-json-schema/reference/schema",
+      "content_type": "text/html; charset=utf-8",
+      "title": "JSON Schema: Dialect and vocabulary declaration",
+      "result": "retrieved",
+      "sha256": "2efa55bab725095f0c13023e3cf43abd5743bd6b1bd7162efe492d3cc31e14f0",
+      "byte_count": 149965,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "json-schema-resource-id",
+      "requested_url": "https://json-schema.org/understanding-json-schema/structuring",
+      "checked_at": "2026-09-08T09:05:33.610192Z",
+      "status": 200,
+      "final_url": "https://json-schema.org/understanding-json-schema/structuring",
+      "content_type": "text/html; charset=utf-8",
+      "title": "JSON Schema: Modular schema combination",
+      "result": "retrieved",
+      "sha256": "8bbe59267492f9aebcde015c0100950b6d3c6caee3d18b74aca783c446a45ebd",
+      "byte_count": 418875,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "ietf-memento",
+      "requested_url": "https://www.rfc-editor.org/rfc/rfc7089.html",
+      "checked_at": "2026-09-08T09:05:33.797487Z",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc7089.html",
+      "content_type": "text/html",
+      "title": "RFC 7089: Memento time-based resource access",
+      "result": "retrieved",
+      "sha256": "7ad0c8a7721a4006e4471d05c7da1ef01c303388870cd2666053c3b3ac93aea7",
+      "byte_count": 128647,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-regions",
+      "requested_url": "https://www.w3.org/WAI/tutorials/page-structure/regions/",
+      "checked_at": "2026-09-08T09:10:46.205955Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/tutorials/page-structure/regions/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WAI Page Structure: Page Regions",
+      "result": "retrieved",
+      "sha256": "c242e1470003e6e850256b2b1b733ca9b76da5510692cd49af58808ffa8565f9",
+      "byte_count": 50198,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-region-labels",
+      "requested_url": "https://www.w3.org/WAI/tutorials/page-structure/labels/",
+      "checked_at": "2026-09-08T09:10:46.472923Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/tutorials/page-structure/labels/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WAI Page Structure: Labeling Regions",
+      "result": "retrieved",
+      "sha256": "f0c09ab96fa1dfa936d458f27a712b56fa3217154a5c98b05f537cd5768cec5f",
+      "byte_count": 43159,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "wai-skip-g1",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Techniques/general/G1",
+      "checked_at": "2026-09-08T09:10:46.685391Z",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Techniques/general/G1",
+      "content_type": "text/html; charset=utf-8",
+      "title": "WCAG Technique G1: Skip to main content",
+      "result": "retrieved",
+      "sha256": "c002002c181672b659f8daf0cf09c05fe669bb6706882f634dcd34890a779f3b",
+      "byte_count": 32777,
+      "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
     }
   ]
 }

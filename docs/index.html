@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="ARWP Growth Loop turns current Search, recommendation and AI-platform evidence into testable website improvements while preserving the Resolver and agentic-web interoperability foundation.">
-  <meta name="theme-color" content="#10120f">
-  <meta property="og:title" content="ARWP Growth Loop — evidence-backed website growth">
-  <meta property="og:description" content="Research current Search and recommendation changes, select explicit hypotheses, improve a real site, verify the implementation and measure owner-side outcomes.">
+  <meta name="description" content="Source-backed patterns and practical tools for search and AI discoverability. Choose a useful change, verify it, and measure what happens.">
+  <meta name="theme-color" content="#eff600">
+  <meta property="og:title" content="Cite Goose — Make your site worth citing.">
+  <meta property="og:description" content="Practical patterns. Traceable sources. Changes you can measure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dkharlanau.github.io/agent-ready-web-profile/">
-  <title>ARWP Growth Loop — evidence-backed website growth</title>
+  <title>Cite Goose — Make your site worth citing.</title>
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/">
   <link rel="describedby" type="application/json" href="./growth/hypotheses.json">
   <link rel="describedby" type="application/json" href="./skills/index.json">
@@ -18,6 +18,8 @@
   <link rel="describedby" type="text/plain" href="./de/llms.txt" hreflang="de">
   <link rel="describedby" type="text/plain" href="./ru/llms.txt" hreflang="ru">
   <link rel="stylesheet" href="./arwp.css">
+  <link rel="preload" href="./media/cite-goose/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./cite-goose.css">
 <!-- portfolio-consent-analytics -->
 <script>
 (function(w,d,id){
@@ -57,8 +59,8 @@
       {
         "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
         "@type": ["SoftwareApplication", "WebApplication"],
-        "name": "Agent-Ready Web Profile",
-        "alternateName": "ARWP",
+        "name": "Cite Goose",
+        "alternateName": ["Agent-Ready Web Profile", "ARWP"],
         "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
         "description": "Evidence-backed website growth, Search and recommendation research, agentic-web interoperability resolution, scanning and verification tooling.",
         "applicationCategory": "DeveloperApplication",
@@ -72,8 +74,8 @@
       {
         "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website",
         "@type": "WebSite",
-        "name": "Agent-Ready Web Profile",
-        "alternateName": "ARWP",
+        "name": "Cite Goose",
+        "alternateName": ["Agent-Ready Web Profile", "ARWP"],
         "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
         "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},
         "publisher": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer"}
@@ -82,7 +84,7 @@
   }
   </script>
 </head>
-<body data-scanner-endpoint="">
+<body class="home-page" data-scanner-endpoint="">
 <div id="portfolio-analytics-consent" role="dialog" aria-label="Analytics preference" style="position:fixed;z-index:2147483647;right:16px;bottom:16px;max-width:390px;padding:16px;border:1px solid #d0d7de;border-radius:12px;background:#fff;color:#1f2328;font:14px/1.45 system-ui,sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.18)">
   <strong style="display:block;margin-bottom:6px">Optional analytics</strong>
   <span>Allow anonymous usage measurement with Google Analytics? No analytics request is sent before you accept.</span>
@@ -93,55 +95,17 @@
 </div>
 <script>(function(){try{if(localStorage.getItem('portfolio-analytics-consent-v1')){var n=document.getElementById('portfolio-analytics-consent');if(n)n.remove();}}catch(e){}})();</script>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="ARWP home"><span class="brand-mark" aria-hidden="true">A/</span><span>ARWP</span></a>
-    <nav aria-label="Primary navigation">
-      <a href="./growth/">Growth</a>
-      <a href="./trends/">Trends</a>
-      <a href="./skills/">Skills</a>
-      <a href="#resolver">Resolver</a>
-      <a href="#adopt">Try it</a>
-      <a href="#directory">Directory</a>
-      <a href="./observatory/">Observatory</a>
-      <a href="./trust/">Trust</a>
-      <a href="#evidence">Evidence</a>
-      <a class="nav-cta" href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a>
-    </nav>
-  </header>
+  <header class="goose-header"><a class="goose-brand" href="./"><strong>Cite Goose</strong><span>AGENT-READY<br>WEB PROFILE</span></a><nav aria-label="Primary"><a href="./discoverability.html">Patterns</a><a href="./growth/">Growth Loop</a><a href="./trust/">Evidence</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav></header>
 
   <main id="main">
-    <section id="top" class="hero shell">
-      <div class="hero-copy">
-        <p class="eyebrow">ARWP Growth Loop · evidence-backed Search, recommendations & agent-readiness</p>
-        <h1>Turn platform changes into verified website improvements.</h1>
-        <p class="hero-lead">ARWP researches current Search, Discover, AI-answer/citation and agent-web changes, classifies the evidence, turns applicable mechanisms into explicit hypotheses, audits a real site, implements the highest-confidence work, and separates technical verification from owner-side outcome measurement. The Resolver still answers the narrower question: <strong>Resolve how a website can actually be used by agents.</strong></p>
-        <div class="hero-actions">
-          <a class="button primary" href="./growth/">Run the Growth Loop</a>
-          <a class="button secondary" href="./growth/hypotheses.json">Inspect hypotheses</a>
-        </div>
-        <div class="hero-proof" aria-label="Key properties">
-          <span>Primary-source research</span>
-          <span>Explicit testable hypotheses</span>
-          <span>No format war required</span>
-        </div>
-      </div>
-      <div class="service-map" aria-label="ARWP Growth Loop">
-        <div class="service-map__label">SEARCH · RECOMMENDATIONS · AI · AGENTS</div>
-        <div class="service-map__grid">
-          <span>SEARCH</span><span>DISCOVER</span><span>GEN AI</span><span>BING AI</span><span>CHATGPT</span><span>AGENTS</span>
-        </div>
-        <div class="service-map__arrow">↓</div>
-        <strong>ARWP GROWTH LOOP</strong>
-        <div class="service-map__arrow">↓</div>
-        <code>research → hypothesis → implement → verify → measure</code>
-        <p>Resolver, profile, protocol, evidence and runtime tooling stay underneath.</p>
-      </div>
-    </section>
+    <section id="top" class="goose-hero goose-shell"><div class="goose-hero-copy"><p class="eyebrow">A PRACTICAL FIELD GUIDE TO SEARCH &amp; AI DISCOVERY</p><h1>Make your site<br>worth citing.</h1><p class="goose-lead">Give people a useful answer. Give machines a clear path.<br class="desktop-break"> Build both with patterns you can inspect and test.</p><div class="goose-actions"><a class="goose-button" href="./discoverability.html">Find a pattern</a><a class="goose-text-link" href="./growth/">Run the Growth Loop</a></div><dl class="goose-edition"><div><dt>Patterns</dt><dd>169</dd></div><div><dt>Sources</dt><dd>91</dd></div><div><dt>Corpus release</dt><dd>1.2.0</dd></div><div><dt>Core</dt><dd>Open source</dd></div></dl></div><img class="goose-hero-art" src="./media/cite-goose/hero.webp" alt="An illustrated goose carrying a note: Show your sources." width="1024" height="1024" fetchpriority="high"></section>
+
+    <section class="goose-start goose-shell" aria-labelledby="goose-start-title"><div class="goose-start-head"><div><p class="eyebrow">FROM A GOOD IDEA TO A CHECKED CHANGE</p><h2 id="goose-start-title">Useful beats noisy.</h2></div><p>Original answers, honest comparisons, coherent data and usable interfaces. Pick the gap your site actually has.</p></div><div class="goose-steps"><article><span class="step-number">01 / CHOOSE</span><h3>Find your next move.</h3><p>Browse patterns by problem and evidence. Each has implementation steps, checks and a reason to try it.</p><a href="./discoverability.html">Explore the pattern library</a></article><article><span class="step-number">02 / VERIFY</span><h3>Keep the receipts.</h3><p>Follow a source to the relevant section. Pin the pattern version. Record what changed and what passed.</p><a href="./discoverability.html#evidence-guide">Understand the evidence labels</a></article><article><span class="step-number">03 / LEARN</span><h3>Measure what matters.</h3><p>Connect technical checks with actual search, citation and useful-action results. Keep neutral results too.</p><a href="./growth/">Start an improvement loop</a></article></div></section>
 
     <section id="resolver" class="shell problem-section">
       <div class="section-heading wide">
         <p class="eyebrow">The interoperability foundation</p>
-        <h2>The web does not need another manifest that pretends every other discovery mechanism will disappear.</h2>
+        <h2>Help agents find their way around.</h2>
       </div>
       <div class="before-after">
         <article class="flow-card muted-card">
@@ -168,7 +132,7 @@
           <strong>Integration starts from inspectable evidence.</strong>
         </article>
       </div>
-      <p class="big-statement">ARWP does not make an AI smarter. <strong>It removes guessing about how a website can be used.</strong></p>
+      <p class="big-statement">A clear answer needs a clear route. <strong>Make your content and tools easier to find and use.</strong></p>
     </section>
 
     <section class="outcomes-section">
@@ -253,7 +217,7 @@
 
     <section id="examples" class="shell examples-section">
       <div class="section-heading split">
-        <div><p class="eyebrow">Working references</p><h2>Five real websites already publish ARWP profiles.</h2></div>
+        <div><p class="eyebrow">Working references</p><h2>Explore the working reference sites.</h2></div>
         <p>They remain useful implementation fixtures, but owner-controlled examples are not counted as independent adoption evidence.</p>
       </div>
       <div id="reference-cards" class="reference-grid" aria-live="polite"><p class="loading">Loading the public directory…</p></div>
@@ -265,7 +229,7 @@
 
     <section id="directory" class="shell directory-section">
       <div class="section-heading split">
-        <div><p class="eyebrow">ARWP Directory</p><h2>Reference/adoption registry today; resolver corpus next.</h2></div>
+        <div><p class="eyebrow">ARWP Directory</p><h2>Inspect a real implementation.</h2></div>
         <p>The current directory records sites that publish ARWP. The next research corpus may include sites with no ARWP profile when upstream discovery is sufficient.</p>
       </div>
       <div class="directory-tools" role="group" aria-label="Filter ARWP sites">
@@ -321,21 +285,21 @@
     </section>
 
     <section class="shell boundaries">
-      <div class="section-heading split"><div><p class="eyebrow">Boundaries</p><h2>Growth discipline and interoperability, not another readiness score.</h2></div><p>Implementation evidence and outcome evidence stay separate.</p></div>
+      <div class="section-heading split"><div><p class="eyebrow">Boundaries</p><h2>Know what each result proves.</h2></div><p>Implementation evidence and outcome evidence stay separate.</p></div>
       <div class="boundary-grid">
-        <p><strong>Not a ranking guarantee.</strong> Search, Discover, citation and recommendation outcomes must be measured on real publisher surfaces.</p>
-        <p><strong>Not a permission layer.</strong> Metadata never grants access or authorization.</p>
-        <p><strong>Not another MCP/A2A/OAuth/API standard.</strong> Native protocol metadata remains authoritative for its own semantics.</p>
-        <p><strong>Not a speculative catalog.</strong> New ARWP fields need concrete integration failures.</p>
+        <p><strong>Search outcomes.</strong> Measure search, citation and recommendation changes on real publisher surfaces.</p>
+        <p><strong>Access permissions.</strong> Discovery metadata describes a capability. The actual service controls access.</p>
+        <p><strong>Native standards.</strong> MCP, A2A, OAuth and API metadata retain their own semantics.</p>
+        <p><strong>Concrete need.</strong> Extend the profile when a real integration failure justifies it.</p>
       </div>
     </section>
   </main>
 
   <footer class="footer shell">
-    <div><span class="brand-mark" aria-hidden="true">A/</span> Agent-Ready Web Profile / Growth + Resolver</div>
-    <div class="footer-links"><a href="./growth/">Growth</a><a href="./trends/">Trends</a><a href="./skills/">Skills</a><a href="./RESOLVER.md">Resolver</a><a href="./observatory/">Observatory</a><a href="./answers/">Answers</a><a href="./concepts/">Concepts</a><a href="./BENCHMARK.md">Benchmark</a><a href="./trust/">Trust</a><a href="./media/">Open media</a><a href="./discoverability.html">Practice library</a>
+    <div>Cite Goose</div>
+    <div class="footer-links"><a href="./growth/">Growth</a><a href="./trends/">Trends</a><a href="./skills/">Skills</a><a href="./RESOLVER.md">Resolver</a><a href="./observatory/">Observatory</a><a href="./answers/">Answers</a><a href="./concepts/">Concepts</a><a href="./BENCHMARK.md">Benchmark</a><a href="./trust/">Trust</a><a href="./media/">Open media</a><a href="./discoverability.html">Pattern library</a>
       <a href="./history.html">History</a><a href="./LOCALIZATION.md">Agent locales</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md">Profile spec</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></div>
-    <p>Apache-2.0 · Active development · Experimental profile v0.1 · Resolver toolchain 0.2.x</p>
+    <p>Cite Goose / Agent-Ready Web Profile · Apache-2.0 · Experimental profile v0.1 · Toolchain 0.2.x</p>
   </footer>
 
   <script src="./arwp.js"></script>

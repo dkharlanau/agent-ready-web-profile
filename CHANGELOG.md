@@ -4,6 +4,14 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Cite Goose / discoverability corpus 1.2.0 — 2026-09-08
+
+- Introduced Cite Goose as the public product name, with a new illustrated homepage and responsive pattern library. Repository, package, CLI commands and canonical URLs retain their ARWP identifiers.
+- Expanded the corpus from 144 to 169 patterns and from 60 to 91 primary sources. Each pattern carries its own version, lifecycle and review status; 53 have individual source-support reviews and 116 remain explicitly unreviewed.
+- Added exact source locators and review notes, upstream document version metadata, an immutable 1.1.0 baseline and validation of semantic version changes.
+- Added corpus fingerprints and pattern-version pins to exported plans, with a visible JSON preview and clipboard fallback. Existing unpinned configurations remain compatible; stale or conflicting pins fail validation.
+- Preserved evidence classes and historical IDs. Source support, implementation checks and measured Search/AI outcomes remain separate.
+
 ### Discoverability implementation library
 
 - Added 144 source-backed practices with native Growth hypothesis and recommendation routing, checkable implementation steps and explicit uncertainty.

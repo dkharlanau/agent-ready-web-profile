@@ -44,12 +44,12 @@ for (const file of [
 }
 
 const html = fs.readFileSync(htmlPath, 'utf8');
-assert.match(html, /Resolve how a website can actually be used by agents/i);
-assert.match(html, /It removes guessing about how a website can be used/i);
+assert.match(html, /<h1>Make your site<br>worth citing\.<\/h1>/i);
+assert.match(html, /Help agents find their way around/i);
 assert.match(html, /Without a resolver/i);
 assert.match(html, /With ARWP Resolver/i);
-assert.match(html, /No format war required/i);
-assert.match(html, /Five real websites already publish ARWP profiles/i);
+assert.match(html, /href="\.\/discoverability\.html">Find a pattern/i);
+assert.match(html, /Explore the working reference sites/i);
 assert.match(html, /ARWP Directory/i);
 assert.match(html, /Federated router/i);
 assert.match(html, /Benchmark utility before expanding the format/i);

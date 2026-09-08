@@ -4,8 +4,8 @@
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
       "@type": ["SoftwareApplication", "WebApplication"],
-      "name": "Agent-Ready Web Profile",
-      "alternateName": "ARWP",
+      "name": "Cite Goose",
+      "alternateName": ["Agent-Ready Web Profile", "ARWP"],
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/product/",
       "mainEntityOfPage": "https://dkharlanau.github.io/agent-ready-web-profile/product/",
       "description": "Evidence-backed agentic web interoperability resolver, scanner and conformance tooling that discovers heterogeneous website interfaces, preserves provenance and conflicts, routes concrete intents to suitable interfaces, and supports Search and AI visibility growth workflows.",
@@ -33,8 +33,8 @@
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website",
       "@type": "WebSite",
-      "name": "Agent-Ready Web Profile",
-      "alternateName": "ARWP",
+      "name": "Cite Goose",
+      "alternateName": ["Agent-Ready Web Profile", "ARWP"],
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
       "inLanguage": ["en", "de", "ru"],
       "about": {"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#software"},

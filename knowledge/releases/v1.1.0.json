@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.1.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -75,11 +75,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports ordinary search eligibility and snippet requirements for AI features. No extra AI markup is required; inclusion is not guaranteed. For dedicated owner-side generative-AI reporting, use the separate google-generative-ai-report reference and native measurement rule.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports ordinary search eligibility and snippet requirements for AI features. No extra AI markup is required; inclusion is not guaranteed. For dedicated owner-side generative-AI reporting, use the separate google-generative-ai-report reference and native measurement rule."
     },
     {
       "id": "google-helpful",
@@ -88,11 +84,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports original value and transparent authorship and production methods. ARWP editorial workflows are implementation proposals, not a disclosed ranking formula.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports original value and transparent authorship and production methods. ARWP editorial workflows are implementation proposals, not a disclosed ranking formula."
     },
     {
       "id": "google-spam",
@@ -101,11 +93,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports rejecting scaled low-value content, doorway pages, link spam, cloaking, and deceptive practices; applies to generative search responses too.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports rejecting scaled low-value content, doorway pages, link spam, cloaking, and deceptive practices; applies to generative search responses too."
     },
     {
       "id": "google-robots",
@@ -114,11 +102,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Crawl management does not equal guaranteed deindexing or access control.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Crawl management does not equal guaranteed deindexing or access control."
     },
     {
       "id": "google-meta",
@@ -127,11 +111,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports noindex and snippet controls. Crawlers must access a page to observe page-level directives.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports noindex and snippet controls. Crawlers must access a page to observe page-level directives."
     },
     {
       "id": "google-canonical",
@@ -140,11 +120,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Canonical signals consolidate duplicates; the publisher preference is not proof of the search engine-selected canonical.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Canonical signals consolidate duplicates; the publisher preference is not proof of the search engine-selected canonical."
     },
     {
       "id": "google-sitemap",
@@ -153,11 +129,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports canonical URL lists and meaningful lastmod. Submission is a discovery hint, not indexing evidence.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports canonical URL lists and meaningful lastmod. Submission is a discovery hint, not indexing evidence."
     },
     {
       "id": "google-js",
@@ -166,11 +138,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports inspecting rendering, links, status handling, and indexable content; server HTML is an ARWP interoperability choice rather than a universal Google requirement.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports inspecting rendering, links, status handling, and indexable content; server HTML is an ARWP interoperability choice rather than a universal Google requirement."
     },
     {
       "id": "google-technical",
@@ -179,11 +147,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports crawl access, successful status, and indexable content as eligibility requirements; does not promise serving.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports crawl access, successful status, and indexable content as eligibility requirements; does not promise serving."
     },
     {
       "id": "google-sd",
@@ -192,11 +156,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Markup must represent visible, relevant content and use supported properties. Syntax or Rich Results Test success cannot prove truthful claims or rich-result appearance.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Markup must represent visible, relevant content and use supported properties. Syntax or Rich Results Test success cannot prove truthful claims or rich-result appearance."
     },
     {
       "id": "google-article",
@@ -205,11 +165,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports article author, date, headline, and image properties where accurate; no authorship credential is created by markup.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports article author, date, headline, and image properties where accurate; no authorship credential is created by markup."
     },
     {
       "id": "google-dataset",
@@ -218,11 +174,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Describes dataset discovery metadata including provenance and distribution. Dataset eligibility is not ordinary search ranking or verified data quality.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Describes dataset discovery metadata including provenance and distribution. Dataset eligibility is not ordinary search ranking or verified data quality."
     },
     {
       "id": "google-organization",
@@ -231,11 +183,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports identifying real organizations and applicable properties. Do not invent registration, membership, addresses, or corporate scale.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports identifying real organizations and applicable properties. Do not invent registration, membership, addresses, or corporate scale."
     },
     {
       "id": "google-breadcrumb",
@@ -244,11 +192,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Describes page hierarchy markup, not keyword paths or a guaranteed search presentation.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Describes page hierarchy markup, not keyword paths or a guaranteed search presentation."
     },
     {
       "id": "google-product",
@@ -257,11 +201,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Separates product snippets and merchant listings; select the applicable feature guide and satisfy its current requirements.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Separates product snippets and merchant listings; select the applicable feature guide and satisfy its current requirements."
     },
     {
       "id": "google-local",
@@ -270,11 +210,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports accurate location-specific business information. An online-only service must not invent a physical location.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports accurate location-specific business information. An online-only service must not invent a physical location."
     },
     {
       "id": "google-reviews",
@@ -283,11 +219,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports first-hand evidence, relevant quantitative criteria, trade-offs, and comparisons. ARWP scorecards and experiment designs remain publisher proposals.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports first-hand evidence, relevant quantitative criteria, trade-offs, and comparisons. ARWP scorecards and experiment designs remain publisher proposals."
     },
     {
       "id": "google-title",
@@ -296,11 +228,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports descriptive distinctive titles and consistency with visible headings. Google may generate a different title link.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports descriptive distinctive titles and consistency with visible headings. Google may generate a different title link."
     },
     {
       "id": "google-snippet",
@@ -309,11 +237,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports page-specific descriptions and preview controls; supplied descriptions are not guaranteed to be displayed.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports page-specific descriptions and preview controls; supplied descriptions are not guaranteed to be displayed."
     },
     {
       "id": "google-links",
@@ -322,11 +246,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports real href links, contextual anchors, and links to important pages. No fixed internal-link count is prescribed.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports real href links, contextual anchors, and links to important pages. No fixed internal-link count is prescribed."
     },
     {
       "id": "google-hreflang",
@@ -335,11 +255,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports reciprocal language alternate annotations and valid regional codes where variants exist.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports reciprocal language alternate annotations and valid regional codes where variants exist."
     },
     {
       "id": "google-international",
@@ -348,11 +264,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports distinct language URLs and explicit navigation. Translation alone is not evidence of local service availability.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports distinct language URLs and explicit navigation. Translation alone is not evidence of local service availability."
     },
     {
       "id": "google-move",
@@ -361,11 +273,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports explicit URL mapping, redirects, updated references, and migration monitoring; traffic fluctuations remain possible.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports explicit URL mapping, redirects, updated references, and migration monitoring; traffic fluctuations remain possible."
     },
     {
       "id": "google-facets",
@@ -374,11 +282,7 @@
       "publisher": "Google Crawling Infrastructure",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Current destination of the Search Central guide. Supports controlling unbounded URL combinations; not blanket deletion of useful filtered pages.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Current destination of the Search Central guide. Supports controlling unbounded URL combinations; not blanket deletion of useful filtered pages."
     },
     {
       "id": "google-http",
@@ -387,11 +291,7 @@
       "publisher": "Google Crawling Infrastructure",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Current destination of the Search Central guide. Successful HTTP transport does not prove the content is useful or indexed.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Current destination of the Search Central guide. Successful HTTP transport does not prove the content is useful or indexed."
     },
     {
       "id": "google-images",
@@ -400,11 +300,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports descriptive context, accessible images, stable delivery, and applicable image metadata; no visibility guarantee.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports descriptive context, accessible images, stable delivery, and applicable image metadata; no visibility guarantee."
     },
     {
       "id": "google-video",
@@ -413,11 +309,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports dedicated watch pages where appropriate and stable accessible media. An indexed page does not establish video indexing.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports dedicated watch pages where appropriate and stable accessible media. An indexed page does not establish video indexing."
     },
     {
       "id": "google-experience",
@@ -426,11 +318,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports useful page experience without treating a single score as a complete ranking or quality measure.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports useful page experience without treating a single score as a complete ranking or quality measure."
     },
     {
       "id": "web-vitals",
@@ -439,11 +327,7 @@
       "publisher": "Google web.dev",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports LCP, INP, CLS and field assessment at the 75th percentile by device. Lab results must not be presented as field measurements.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports LCP, INP, CLS and field assessment at the 75th percentile by device. Lab results must not be presented as field measurements."
     },
     {
       "id": "google-updates",
@@ -452,11 +336,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-changelog",
-      "notes": "The FAQ rich result was discontinued starting 2026-05-07 and its documentation later removed. Useful visible FAQs can still serve readers.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "The FAQ rich result was discontinued starting 2026-05-07 and its documentation later removed. Useful visible FAQs can still serve readers."
     },
     {
       "id": "indexnow",
@@ -465,11 +345,7 @@
       "publisher": "IndexNow",
       "checked_at": "2026-09-08",
       "authority": "protocol-documentation",
-      "notes": "Supports notifying participating engines of changed URLs using key verification. Acceptance is not crawling, indexing, or ranking; do not describe it as Google submission.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports notifying participating engines of changed URLs using key verification. Acceptance is not crawling, indexing, or ranking; do not describe it as Google submission."
     },
     {
       "id": "gsc-metrics",
@@ -478,11 +354,7 @@
       "publisher": "Google Search Console",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Defines provider-specific metrics and aggregation. Average position is not a stable universal rank or an AI recommendation share.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Defines provider-specific metrics and aggregation. Average position is not a stable universal rank or an AI recommendation share."
     },
     {
       "id": "gsc-api",
@@ -491,11 +363,7 @@
       "publisher": "Google Search Console",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports dimensions, filters, and API queries. Returned rows are not guaranteed to cover every query; privacy and service limits affect completeness.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports dimensions, filters, and API queries. Returned rows are not guaranteed to cover every query; privacy and service limits affect completeness."
     },
     {
       "id": "google-drops",
@@ -504,11 +372,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports segmentation and checking technical, demand, and system changes before causal conclusions.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports segmentation and checking technical, demand, and system changes before causal conclusions."
     },
     {
       "id": "google-recrawl",
@@ -517,11 +381,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports URL Inspection requests for selected URLs and sitemaps for larger sets; repeated requests do not force earlier crawling.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports URL Inspection requests for selected URLs and sitemaps for larger sets; repeated requests do not force earlier crawling."
     },
     {
       "id": "google-outbound",
@@ -530,11 +390,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Supports sponsored and ugc link relationship labels; a disclosed relationship is not an independent endorsement.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports sponsored and ugc link relationship labels; a disclosed relationship is not an independent endorsement."
     },
     {
       "id": "openai-bots",
@@ -543,11 +399,7 @@
       "publisher": "OpenAI",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "OAI-SearchBot controls automatic search crawling; GPTBot concerns foundation-model training; ChatGPT-User serves user requests. Published IP lists support verification. Allowing access cannot promise citation.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "OAI-SearchBot controls automatic search crawling; GPTBot concerns foundation-model training; ChatGPT-User serves user requests. Published IP lists support verification. Allowing access cannot promise citation."
     },
     {
       "id": "bing-ai",
@@ -556,11 +408,7 @@
       "publisher": "Microsoft Bing",
       "checked_at": "2026-09-08",
       "authority": "official-product-announcement",
-      "notes": "Describes citation counts, cited pages, sampled grounding queries, and supported Microsoft surfaces. These metrics do not indicate rank, placement, authority, or other providers.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Describes citation counts, cited pages, sampled grounding queries, and supported Microsoft surfaces. These metrics do not indicate rank, placement, authority, or other providers."
     },
     {
       "id": "jsonld",
@@ -569,11 +417,7 @@
       "publisher": "W3C",
       "checked_at": "2026-09-08",
       "authority": "web-standard",
-      "notes": "Supports linked-data identifiers and graphs. JSON-LD standard conformance alone does not create search-engine recognition of a property.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "JSON-LD 1.1, W3C Recommendation 2020-07-16"
-      }
+      "notes": "Supports linked-data identifiers and graphs. JSON-LD standard conformance alone does not create search-engine recognition of a property."
     },
     {
       "id": "html-data",
@@ -582,11 +426,7 @@
       "publisher": "WHATWG",
       "checked_at": "2026-09-08",
       "authority": "web-standard",
-      "notes": "Allows application-private data-* metadata. ARWP evidence attributes are a local editorial convention, not search-engine instructions or a ranking feature.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Allows application-private data-* metadata. ARWP evidence attributes are a local editorial convention, not search-engine instructions or a ranking feature."
     },
     {
       "id": "data-web",
@@ -595,11 +435,7 @@
       "publisher": "W3C",
       "checked_at": "2026-09-08",
       "authority": "web-standard",
-      "notes": "Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "W3C Recommendation 2017-01-31"
-      }
+      "notes": "Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims."
     },
     {
       "id": "schema-person",
@@ -608,11 +444,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Vocabulary for real published identity and relationships. knowsAbout suggests a topic, not proof of expertise.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Vocabulary for real published identity and relationships. knowsAbout suggests a topic, not proof of expertise."
     },
     {
       "id": "schema-sameas",
@@ -621,11 +453,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Identity-equivalent references only; a related resource or admired brand is not the same entity.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Identity-equivalent references only; a related resource or admired brand is not the same entity."
     },
     {
       "id": "schema-service",
@@ -634,11 +462,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Vocabulary for services, providers, and areas served; no general Service rich-result promise.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Vocabulary for services, providers, and areas served; no general Service rich-result promise."
     },
     {
       "id": "schema-software",
@@ -647,11 +471,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Vocabulary for application facts. Search feature eligibility must be checked independently.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Vocabulary for application facts. Search feature eligibility must be checked independently."
     },
     {
       "id": "schema-term",
@@ -660,11 +480,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Vocabulary for a defined concept and its term set; not a special AI search feature.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Vocabulary for a defined concept and its term set; not a special AI search feature."
     },
     {
       "id": "schema-download",
@@ -673,11 +489,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Vocabulary for dataset download representation and media properties; a described download must actually exist.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Vocabulary for dataset download representation and media properties; a described download must actually exist."
     },
     {
       "id": "schema-claim",
@@ -686,11 +498,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Represents a claim. Encoding a statement does not establish truth or independent fact-checking.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Represents a claim. Encoding a statement does not establish truth or independent fact-checking."
     },
     {
       "id": "schema-citation",
@@ -699,11 +507,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "CreativeWork citation relationships can reference works or text. A citation alone is not evidence of agreement.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "CreativeWork citation relationships can reference works or text. A citation alone is not evidence of agreement."
     },
     {
       "id": "schema-dataset",
@@ -712,11 +516,7 @@
       "publisher": "Schema.org",
       "checked_at": "2026-09-08",
       "authority": "vocabulary-reference",
-      "notes": "Vocabulary including measurements, coverage, and parts. Structured metadata is not verification of scientific validity.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Vocabulary including measurements, coverage, and parts. Structured metadata is not verification of scientific validity."
     },
     {
       "id": "wai-tables",
@@ -725,11 +525,7 @@
       "publisher": "W3C WAI",
       "checked_at": "2026-09-08",
       "authority": "official-accessibility-guidance",
-      "notes": "Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect."
     },
     {
       "id": "wai-images",
@@ -738,11 +534,7 @@
       "publisher": "W3C WAI",
       "checked_at": "2026-09-08",
       "authority": "official-accessibility-guidance",
-      "notes": "Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect."
     },
     {
       "id": "wai-structure",
@@ -751,11 +543,7 @@
       "publisher": "W3C WAI",
       "checked_at": "2026-09-08",
       "authority": "official-accessibility-guidance",
-      "notes": "Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect."
     },
     {
       "id": "mdn-cite",
@@ -764,11 +552,7 @@
       "publisher": "MDN",
       "checked_at": "2026-09-08",
       "authority": "platform-documentation",
-      "notes": "Explains cite as the title of a referenced work; the actual clickable source belongs in an anchor.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Explains cite as the title of a referenced work; the actual clickable source belongs in an anchor."
     },
     {
       "id": "mdn-etag",
@@ -777,11 +561,7 @@
       "publisher": "MDN",
       "checked_at": "2026-09-08",
       "authority": "platform-documentation",
-      "notes": "Documents HTTP validation; observed documentation includes syntax, examples, specifications, and compatibility links. Their layout is an editorial pattern, not a proven ranking cause.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Documents HTTP validation; observed documentation includes syntax, examples, specifications, and compatibility links. Their layout is an editorial pattern, not a proven ranking cause."
     },
     {
       "id": "stripe-idempotency",
@@ -790,11 +570,7 @@
       "publisher": "Stripe",
       "checked_at": "2026-09-08",
       "authority": "observed-first-party-pattern",
-      "notes": "Observed executable request plus failure and retry boundaries. This is product documentation evidence; borrowing the structure does not prove discoverability lift.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Observed executable request plus failure and retry boundaries. This is product documentation evidence; borrowing the structure does not prove discoverability lift."
     },
     {
       "id": "stripe-upgrades",
@@ -803,11 +579,7 @@
       "publisher": "Stripe",
       "checked_at": "2026-09-08",
       "authority": "observed-first-party-pattern",
-      "notes": "Observed version-aware upgrade guidance and breaking-change handling. Do not transplant Stripe-specific product behavior.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Observed version-aware upgrade guidance and breaking-change handling. Do not transplant Stripe-specific product behavior."
     },
     {
       "id": "cloudflare-limits",
@@ -816,11 +588,7 @@
       "publisher": "Cloudflare",
       "checked_at": "2026-09-08",
       "authority": "observed-first-party-pattern",
-      "notes": "Observed explicit resource limits and plan distinctions. Use the disclosure pattern with your own verified numbers, never copy limits as facts about another product.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Observed explicit resource limits and plan distinctions. Use the disclosure pattern with your own verified numbers, never copy limits as facts about another product."
     },
     {
       "id": "github-releases",
@@ -829,11 +597,7 @@
       "publisher": "GitHub",
       "checked_at": "2026-09-08",
       "authority": "observed-first-party-pattern",
-      "notes": "Observed prerequisites, CLI/browser routes, release assets, and prerelease distinctions. Actual publication must be verified separately.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Observed prerequisites, CLI/browser routes, release assets, and prerelease distinctions. Actual publication must be verified separately."
     },
     {
       "id": "google-generative-ai-report",
@@ -842,414 +606,7 @@
       "publisher": "Google Search Central",
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
-      "notes": "Documents dedicated generative-AI impression and page reporting for Search and Discover, with worldwide rollout noted as of 2026-08-31. These observations remain included in overall performance. Authenticated property data is required; do not infer separate AI metrics from aggregate Web exports or assume API availability.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "ietf-deprecation",
-      "title": "RFC 9745: Deprecation HTTP response header",
-      "url": "https://www.rfc-editor.org/rfc/rfc9745.html",
-      "publisher": "IETF / RFC Editor",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "Defines the resource-scoped Deprecation date and deprecation documentation link; a signal does not itself change resource behavior.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "RFC 9745"
-      }
-    },
-    {
-      "id": "ietf-sunset",
-      "title": "RFC 8594: Sunset HTTP header",
-      "url": "https://www.rfc-editor.org/rfc/rfc8594.html",
-      "publisher": "IETF / RFC Editor",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "Sunset signals expected resource unavailability, distinct from deprecation or cache expiry.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "RFC 8594"
-      }
-    },
-    {
-      "id": "github-immutable-releases",
-      "title": "Immutable releases",
-      "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases",
-      "publisher": "GitHub",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Published immutable releases protect tags and assets and have release attestations; release title and notes remain editable.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "github-release-integrity",
-      "title": "Verify release integrity",
-      "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/verify-release-integrity",
-      "publisher": "GitHub",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Documents gh release verify and verify-asset; generated source archives cannot be checked with verify-asset.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "mdn-if-match",
-      "title": "If-Match HTTP header",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match",
-      "publisher": "MDN Web Docs",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Strong ETag preconditions can prevent conflicting updates; stale conditions fail instead of overwriting a newer representation.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "mdn-vary",
-      "title": "Vary HTTP header",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Vary",
-      "publisher": "MDN Web Docs",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Vary names request headers affecting representation selection; use consistently, including default and 304 responses.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "mdn-range-requests",
-      "title": "HTTP range requests",
-      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests",
-      "publisher": "MDN Web Docs",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Documents partial 206 responses, Content-Range, 416 and If-Range validation; unsupported range requests may return the entire body.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "ietf-profile-link",
-      "title": "RFC 6906: profile link relation",
-      "url": "https://www.rfc-editor.org/rfc/rfc6906.html",
-      "publisher": "RFC Editor",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "The profile relation identifies additional representation conventions without changing the underlying media-type semantics.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "RFC 6906"
-      }
-    },
-    {
-      "id": "ietf-problem-details",
-      "title": "RFC 9457: Problem Details for HTTP APIs",
-      "url": "https://www.rfc-editor.org/rfc/rfc9457.html",
-      "publisher": "IETF / RFC Editor",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "Defines problem type identity and structured details; clients should not parse prose detail, and implementations must avoid leaking internals.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "RFC 9457"
-      }
-    },
-    {
-      "id": "openapi-link-object",
-      "title": "OpenAPI 3.2.0 Link Object",
-      "url": "https://spec.openapis.org/oas/v3.2.0.html#link-object",
-      "publisher": "OpenAPI Initiative",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "Design-time links map responses to operations through operationId or operationRef and runtime expressions; they do not guarantee successful invocation.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "OpenAPI 3.2.0"
-      }
-    },
-    {
-      "id": "wai-label-in-name",
-      "title": "WCAG 2.2 Understanding: Label in Name",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "For text-labelled controls the accessible name includes the visible label, supporting speech activation; the Understanding document is informative.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-status-messages",
-      "title": "WCAG 2.2 Understanding: Status Messages",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Status changes are programmatically determinable for assistive technology without requiring focus to move.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-drag-alternative",
-      "title": "WCAG 2.2 Understanding: Dragging Movements",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Author-provided dragging has an equivalent single-pointer alternative unless essential; keyboard support is a separate requirement.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-focus-obscured",
-      "title": "WCAG 2.2 Understanding: Focus Not Obscured (Minimum)",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Author-created content must not entirely hide the component receiving keyboard focus; this is narrower than full visibility.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-modal-dialog",
-      "title": "ARIA Authoring Practices: Modal Dialog Pattern",
-      "url": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Describes initial focus, contained Tab sequence, Escape dismissal and logical focus restoration for modal dialogs.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-redundant-entry",
-      "title": "WCAG 2.2 Understanding: Redundant Entry",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Repeated information in the same process is populated or selectable, with essential, security and validity exceptions.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-accessible-auth",
-      "title": "WCAG 2.2 Understanding: Accessible Authentication (Minimum)",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Credential paste and password-manager assistance can avoid memory or transcription burdens; these alone do not establish full authentication conformance.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "w3c-dcat-series",
-      "title": "DCAT Version 3: Dataset series",
-      "url": "https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/",
-      "publisher": "W3C",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "DatasetSeries and inSeries describe related datasets, such as annual releases, with series metadata reflecting member coverage.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "DCAT 3, Recommendation 2024-08-22"
-      }
-    },
-    {
-      "id": "w3c-csvw-metadata",
-      "title": "Metadata Vocabulary for Tabular Data",
-      "url": "https://www.w3.org/TR/tabular-metadata/",
-      "publisher": "W3C",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "Defines machine-readable column types, null tokens, required values and CSV dialect metadata.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "Recommendation 2015-12-17"
-      }
-    },
-    {
-      "id": "mlcommons-croissant",
-      "title": "Croissant Format Specification 1.0",
-      "url": "https://docs.mlcommons.org/croissant/docs/croissant-spec.html",
-      "publisher": "MLCommons",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "Describes physical FileObject/FileSet distributions, checksums and RecordSet field mappings for loading real datasets.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "Croissant 1.0"
-      }
-    },
-    {
-      "id": "fair-signposting",
-      "title": "FAIR Signposting Profile",
-      "url": "https://signposting.org/FAIR/",
-      "publisher": "Signposting authors",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "Typed links distinguish scholarly landing pages, persistent citation identifiers, metadata and downloadable content.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "20231002"
-      }
-    },
-    {
-      "id": "google-product-variants",
-      "title": "Product variant structured data",
-      "url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants",
-      "publisher": "Google Search Central",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "ProductGroup, variesBy, hasVariant and productGroupID describe genuine product variants and their selectable URLs.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "google-return-policy",
-      "title": "Merchant return policy structured data",
-      "url": "https://developers.google.com/search/docs/appearance/structured-data/return-policy",
-      "publisher": "Google Search Central",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "MerchantReturnPolicy describes actual applicable countries, return windows, methods and fees; policy values must reflect the merchant offer.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "google-product-pros-cons",
-      "title": "Product snippets: editorial pros and cons",
-      "url": "https://developers.google.com/search/docs/appearance/structured-data/product-snippet",
-      "publisher": "Google Search Central",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Pros-and-cons appearance is eligible only for editorial product reviews; requires at least two visible statements, not merchant or customer reviews.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "google-benchmark-statistics",
-      "title": "Google Benchmark user guide: repetitions and random interleaving",
-      "url": "https://google.github.io/benchmark/user_guide.html",
-      "publisher": "Google Benchmark maintainers",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Repeated runs report dispersion; optional random interleaving reduces sensitivity to changing system state.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "json-schema-dialect",
-      "title": "JSON Schema: Dialect and vocabulary declaration",
-      "url": "https://json-schema.org/understanding-json-schema/reference/schema",
-      "publisher": "JSON Schema project",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Root $schema declares the dialect; externally referenced schemas need their own declarations and custom assertion keywords need supporting implementations.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "json-schema-resource-id",
-      "title": "JSON Schema: Modular schema combination",
-      "url": "https://json-schema.org/understanding-json-schema/structuring",
-      "publisher": "JSON Schema project",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "$id sets the schema base identifier for reference resolution; an identifier is not automatically a fetchable endpoint.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "ietf-memento",
-      "title": "RFC 7089: Memento time-based resource access",
-      "url": "https://www.rfc-editor.org/rfc/rfc7089.html",
-      "publisher": "RFC Editor",
-      "checked_at": "2026-09-08",
-      "authority": "primary-specification",
-      "notes": "TimeGate datetime negotiation and TimeMaps connect current resources with actual archived prior states.",
-      "upstream": {
-        "kind": "versioned-release",
-        "version": "RFC 7089"
-      }
-    },
-    {
-      "id": "wai-regions",
-      "title": "WAI Page Structure: Page Regions",
-      "url": "https://www.w3.org/WAI/tutorials/page-structure/regions/",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Native header, footer, nav and main elements identify their page regions. Repeated navigation areas can carry labels. Informative implementation guidance; not a standalone accessibility certification.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-region-labels",
-      "title": "WAI Page Structure: Labeling Regions",
-      "url": "https://www.w3.org/WAI/tutorials/page-structure/labels/",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Distinct labels identify repeated region types; unique regions do not need redundant labels. Informative implementation guidance; not a standalone accessibility certification.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-skip-g1",
-      "title": "WCAG Technique G1: Skip to main content",
-      "url": "https://www.w3.org/WAI/WCAG22/Techniques/general/G1",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "A skip link moves keyboard focus to the main content and must be visible at least when focused. G1 is one sufficient technique, not the only conforming solution. Informative implementation guidance; not a standalone accessibility certification.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
+      "notes": "Documents dedicated generative-AI impression and page reporting for Search and Discover, with worldwide rollout noted as of 2026-08-31. These observations remain included in overall performance. Authenticated property data is required; do not infer separate AI metrics from aggregate Web exports or assume API availability."
     }
   ],
   "tactics": [
@@ -1281,25 +638,7 @@
       ],
       "recommendation_rule_ids": [
         "google-search-technical-eligibility"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-http",
-            "locator": "HTTP status codes > 2xx (success), 3xx (redirection), 4xx (client errors)",
-            "note": "Success responses enter further processing, including possible soft-404 treatment for error content. Removed URLs returning 404/410 are not indexed. Redirects lead to the final response."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-robots",
@@ -1308,10 +647,10 @@
       "problem": "A wildcard block can disable intended discovery.",
       "implementation": [
         "Fetch the deployed root robots.txt.",
-        "Evaluate priority paths for each intended crawler using that provider's current documentation; record unknown when crawler-specific behavior has not been verified."
+        "Evaluate priority paths against Googlebot, Bingbot, and intended search agents."
       ],
       "verification": [
-        "Record allow, disallow, or unknown per crawler and path, including the matching rule and provider documentation used."
+        "Record allow or disallow per crawler and path, including the matching rule."
       ],
       "evidence_level": "documented",
       "source_ids": [
@@ -1331,25 +670,7 @@
       "recommendation_rule_ids": [
         "google-search-technical-eligibility",
         "openai-oai-searchbot-access"
-      ],
-      "pattern_version": "1.1.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-robots",
-            "locator": "Introduction; Understand the limitations of a robots.txt file",
-            "note": "Robots rules manage access, cannot secure content, and do not reliably remove URLs from results. Google explicitly cautions that crawler interpretations differ."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-snippet",
@@ -1380,30 +701,7 @@
       ],
       "recommendation_rule_ids": [
         "google-ai-search-eligibility"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-ai",
-            "locator": "Technical requirements for appearing in AI features",
-            "note": "Google AI supporting links require an indexed page eligible for a Search snippet, without additional technical requirements or a promise of inclusion."
-          },
-          {
-            "source_id": "google-meta",
-            "locator": "Valid indexing and serving rules > noindex, nosnippet, max-snippet",
-            "note": "Meta directives and HTTP headers constrain indexing and preview use. Restrictive conflicts take precedence; nosnippet also restricts direct input to Google AI features."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-searchbot",
@@ -1433,25 +731,7 @@
       ],
       "recommendation_rule_ids": [
         "openai-oai-searchbot-access"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "openai-bots",
-            "locator": "Overview; OAI-SearchBot and GPTBot table rows",
-            "note": "OpenAI distinguishes search and model-training crawlers and makes their robots policies independent. It recommends permitting searchbot plus published IP ranges for intended search access."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-edge",
@@ -1484,18 +764,7 @@
       "recommendation_rule_ids": [
         "google-search-technical-eligibility",
         "openai-oai-searchbot-access"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-html",
@@ -1527,18 +796,7 @@
       "recommendation_rule_ids": [
         "google-javascript-renderability",
         "google-important-content-textual"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-sitemap",
@@ -1570,25 +828,7 @@
       "recommendation_rule_ids": [
         "google-canonical-consistency",
         "google-sitemap-lastmod"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-sitemap",
-            "locator": "Referenced URLs properties; Additional notes about XML sitemaps; How to create a sitemap",
-            "note": "Sitemaps should contain preferred canonical absolute URLs. Accurate lastmod refers to significant page changes. Google permits CMS, database-driven, manual and automatic generation."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-notifications",
@@ -1618,25 +858,7 @@
       ],
       "recommendation_rule_ids": [
         "indexnow-change-notification"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "indexnow",
-            "locator": "Submitting One URL; Submitting set of URLs; Verifying ownership via the key",
-            "note": "IndexNow accepts added, updated and deleted URLs and checks host ownership through a key file. A successful response acknowledges receipt, not indexing."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-access-inspect",
@@ -1668,18 +890,7 @@
       "recommendation_rule_ids": [
         "google-search-technical-eligibility",
         "google-canonical-consistency"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-intent-owner",
@@ -1711,18 +922,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "google-scaled-query-variant-guardrail"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-hub",
@@ -1753,18 +953,7 @@
       ],
       "recommendation_rule_ids": [
         "google-crawlable-internal-links"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-anchors",
@@ -1794,25 +983,7 @@
       ],
       "recommendation_rule_ids": [
         "google-crawlable-internal-links"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-links",
-            "locator": "Make your links crawlable; Write good anchor text",
-            "note": "Google recommends resolvable href anchors and contextual, concise, descriptive labels; script-only events are unreliable for extracting links. Keyword stuffing is discouraged."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-orphans",
@@ -1842,25 +1013,7 @@
       ],
       "recommendation_rule_ids": [
         "google-crawlable-internal-links"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-links",
-            "locator": "Internal links: cross-reference your own content",
-            "note": "Important pages should receive at least one internal link. Contextual links to useful related resources are encouraged; no universal ideal link count is prescribed."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-canonical",
@@ -1890,25 +1043,7 @@
       ],
       "recommendation_rule_ids": [
         "google-canonical-consistency"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-canonical",
-            "locator": "Best practices",
-            "note": "Google advises using consistent canonical preferences across methods and internal links, including self-referential canonical links. Inconsistent sitemap and canonical targets should be avoided."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-facets",
@@ -1939,25 +1074,7 @@
       ],
       "recommendation_rule_ids": [
         "google-canonical-consistency"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-facets",
-            "locator": "Managing crawling; Prevent crawling; Ensure the faceted navigation URLs are optimal for the web",
-            "note": "Facets can create costly URL spaces. Google separates useful indexable combinations from blocked unnecessary ones; stable filter ordering, no duplicates and404 for invalid/no-result combinations are recommended."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-collections",
@@ -1990,18 +1107,7 @@
       "recommendation_rule_ids": [
         "google-javascript-renderability",
         "google-crawlable-internal-links"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-breadcrumbs",
@@ -2032,25 +1138,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-breadcrumb",
-            "locator": "Guidelines; BreadcrumbList; ListItem",
-            "note": "Google recommends meaningful user paths rather than literal URL mirroring, ordered BreadcrumbList entries and valid item URLs."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-architecture-migration",
@@ -2080,25 +1168,7 @@
       ],
       "recommendation_rule_ids": [
         "google-canonical-consistency"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-move",
-            "locator": "Redirect best practices; Start the site move",
-            "note": "Google advises direct equivalent destination redirects, updated canonical references and redirect tests. Irrelevant mass redirects to a homepage may be treated as soft404s."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-decision-lead",
@@ -2131,18 +1201,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "google-generative-content-structure"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-worked-example",
@@ -2173,18 +1232,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-prerequisites",
@@ -2215,18 +1263,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-failure-atlas",
@@ -2259,18 +1296,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-counterexample",
@@ -2301,18 +1327,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-method-note",
@@ -2343,18 +1358,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-progressive-depth",
@@ -2385,18 +1389,7 @@
       ],
       "recommendation_rule_ids": [
         "google-generative-content-structure"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-glossary",
@@ -2427,18 +1420,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-editorial-faq",
@@ -2471,18 +1453,7 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity",
         "google-scaled-query-variant-guardrail"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-evidence-claim-ledger",
@@ -2515,18 +1486,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-evidence-inline-links",
@@ -2558,18 +1518,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-evidence-evidence-attrs",
@@ -2599,18 +1548,7 @@
         "non-commodity-evidence",
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-evidence-units",
@@ -2642,18 +1580,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-evidence-negative-results",
@@ -2683,18 +1610,7 @@
         "non-commodity-evidence",
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-evidence-dates",
@@ -2726,18 +1642,7 @@
       ],
       "recommendation_rule_ids": [
         "google-sitemap-lastmod"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-evidence-corrections",
@@ -2769,18 +1674,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-evidence-independence",
@@ -2812,18 +1706,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-evidence-expiry",
@@ -2852,18 +1735,7 @@
       "growth_hypothesis_ids": [
         "freshness-without-fake-recency"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-entities-identity",
@@ -2893,18 +1765,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-author",
@@ -2935,30 +1796,7 @@
       ],
       "recommendation_rule_ids": [
         "google-article-author-resolution"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-article",
-            "locator": "Article objects > author, author.name, author.url",
-            "note": "Article author metadata can identify a person or organization and link to a page that disambiguates the author; internal author pages may use ProfilePage markup."
-          },
-          {
-            "source_id": "schema-person",
-            "locator": "Person type and JSON-LD Person identity examples",
-            "note": "Schema.org provides the Person vocabulary and identity relationships; these properties do not certify credentials."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-organization",
@@ -2988,25 +1826,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-organization",
-            "locator": "Introduction; Technical guidelines; Structured data type definitions",
-            "note": "Organization metadata helps describe and distinguish a publisher. Google recommends the most specific applicable type, relevant properties and placement on a home/about page."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-sameas",
@@ -3036,25 +1856,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-sameas",
-            "locator": "Property definition",
-            "note": "sameAs points to a reference that identifies the same item unambiguously, including an appropriate official, Wikipedia or Wikidata page."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-service-model",
@@ -3084,18 +1886,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-software-model",
@@ -3126,18 +1917,7 @@
       "recommendation_rule_ids": [
         "google-software-app-structured-data",
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-work-relations",
@@ -3169,18 +1949,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-term-graph",
@@ -3213,18 +1982,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-entities-graph-parity",
@@ -3254,18 +2012,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-landing",
@@ -3297,25 +2044,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-dataset",
-            "locator": "Sitemap best practices; Source and provenance; Dataset definitions; DataDownload",
-            "note": "Google recommends Dataset metadata on canonical landing pages, provenance links and descriptive metadata. Download distribution identifies the accessible data location and format."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-dictionary",
@@ -3345,18 +2074,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-downloads",
@@ -3387,18 +2105,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-provenance",
@@ -3429,18 +2136,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-versions",
@@ -3472,18 +2168,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-quality",
@@ -3513,18 +2198,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-coverage",
@@ -3555,18 +2229,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-license",
@@ -3597,18 +2260,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-datasets-query-examples",
@@ -3641,18 +2293,7 @@
       ],
       "recommendation_rule_ids": [
         "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-decision-criteria",
@@ -3684,18 +2325,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-source-cells",
@@ -3726,18 +2356,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-same-scenario",
@@ -3768,18 +2387,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-fit-cases",
@@ -3810,18 +2418,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-total-cost",
@@ -3853,18 +2450,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-switching",
@@ -3895,18 +2481,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-limitations",
@@ -3938,18 +2513,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-ownership",
@@ -3981,18 +2545,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-comparisons-alternatives",
@@ -4024,18 +2577,7 @@
       "recommendation_rule_ids": [
         "google-scaled-query-variant-guardrail",
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-deliverable",
@@ -4065,18 +2607,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-eligibility",
@@ -4107,18 +2638,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-availability",
@@ -4149,18 +2669,7 @@
       "recommendation_rule_ids": [
         "google-local-commerce-freshness",
         "bing-local-business-freshness"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-location",
@@ -4168,12 +2677,11 @@
       "title": "Represent real locations honestly",
       "problem": "City pages can imply branches that do not exist.",
       "implementation": [
-        "Document actual physical locations and matching public contact details.",
-        "Describe online service coverage separately; an online service area does not establish a physical branch or LocalBusiness rich-result eligibility.",
+        "Document the actual physical location or online service area.",
         "Use location-specific facts only where the service genuinely differs or operates."
       ],
       "verification": [
-        "Each public location claim has operational evidence; any LocalBusiness markup satisfies the actual-location and required physical-address conditions."
+        "Each public location claim has operational evidence and matching contact details."
       ],
       "evidence_level": "documented",
       "source_ids": [
@@ -4192,25 +2700,7 @@
       "recommendation_rule_ids": [
         "google-local-commerce-freshness",
         "bing-local-business-freshness"
-      ],
-      "pattern_version": "1.1.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-local",
-            "locator": "LocalBusiness > Required properties > address and name",
-            "note": "The documented LocalBusiness search feature describes actual business locations and requires their physical address. The guide does not establish an online-only service area as a physical branch."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-terms",
@@ -4240,18 +2730,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-process",
@@ -4281,18 +2760,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-sample",
@@ -4323,18 +2791,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-case-consent",
@@ -4365,18 +2822,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-services-contact",
@@ -4407,18 +2853,7 @@
       ],
       "recommendation_rule_ids": [
         "openai-atlas-aria-agent-accessibility"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-original-visual",
@@ -4450,18 +2885,7 @@
       ],
       "recommendation_rule_ids": [
         "google-image-context-alt"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-alt",
@@ -4491,25 +2915,7 @@
       ],
       "recommendation_rule_ids": [
         "google-image-context-alt"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-images",
-            "locator": "Images Tutorial > Informative, Decorative, Functional and Complex images",
-            "note": "WAI ties alternatives to image purpose: information gets an equivalent, actions get functional labels, decoration uses empty alt, and complex content needs a fuller textual equivalent."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-image-delivery",
@@ -4540,25 +2946,7 @@
       ],
       "recommendation_rule_ids": [
         "google-image-context-alt"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-images",
-            "locator": "Use HTML image elements; Responsive images; Use descriptive filenames, titles, and alt text",
-            "note": "Google discovers img src URLs, does not index CSS backgrounds, values nearby relevant context and recommends reusing a consistent URL for the same image."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-responsive-images",
@@ -4589,18 +2977,7 @@
       ],
       "recommendation_rule_ids": [
         "google-image-context-alt"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-watch-page",
@@ -4631,25 +3008,7 @@
       ],
       "recommendation_rule_ids": [
         "google-video-discovery"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-video",
-            "locator": "Ensure your videos can be indexed; Use stable URLs; Create a dedicated watch page",
-            "note": "A watch page centers viewing one video, with a specific title/description. Stable thumbnail/media URLs aid processing. An indexed watch page alone does not prove video indexing."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-transcript",
@@ -4681,18 +3040,7 @@
       ],
       "recommendation_rule_ids": [
         "google-important-content-textual"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-media-consistency",
@@ -4723,18 +3071,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-captions",
@@ -4768,18 +3105,7 @@
       "recommendation_rule_ids": [
         "google-image-context-alt",
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-media-media-rights",
@@ -4809,18 +3135,7 @@
       ],
       "recommendation_rule_ids": [
         "google-image-context-alt"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experience-heading-outline",
@@ -4850,25 +3165,7 @@
       ],
       "recommendation_rule_ids": [
         "google-generative-content-structure"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-structure",
-            "locator": "Page Structure Tutorial > Headings; Why is this important?",
-            "note": "WAI recommends descriptive headings nested according to section relationships and importance to support navigation and orientation."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experience-landmarks",
@@ -4884,10 +3181,7 @@
       ],
       "evidence_level": "documented",
       "source_ids": [
-        "wai-structure",
-        "wai-regions",
-        "wai-region-labels",
-        "wai-skip-g1"
+        "wai-structure"
       ],
       "applicability": [
         "all"
@@ -4902,40 +3196,7 @@
       ],
       "recommendation_rule_ids": [
         "openai-atlas-aria-agent-accessibility"
-      ],
-      "pattern_version": "1.1.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-structure",
-            "locator": "Page Structure Tutorial > Regions and Labeling",
-            "note": "Meaningful page regions and labels support direct navigation to important content."
-          },
-          {
-            "source_id": "wai-regions",
-            "locator": "Page header, Page footer, Navigation, Main content",
-            "note": "Native header, footer, nav and main elements identify their page regions. Repeated navigation areas can carry labels."
-          },
-          {
-            "source_id": "wai-region-labels",
-            "locator": "Overview; Using aria-labelledby",
-            "note": "Distinct labels identify repeated region types; unique regions do not need redundant labels."
-          },
-          {
-            "source_id": "wai-skip-g1",
-            "locator": "Description; Tests > Procedure",
-            "note": "A skip link moves keyboard focus to the main content and must be visible at least when focused. G1 is one sufficient technique, not the only conforming solution."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experience-tables",
@@ -4966,25 +3227,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-tables",
-            "locator": "Tables Tutorial; Caption & Summary; Why is this important?",
-            "note": "Real header/data markup and suitable scope or header-ID relationships preserve table context. Captions identify the topic and screen readers can announce associated headers."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experience-mobile-reading",
@@ -5015,18 +3258,7 @@
       ],
       "recommendation_rule_ids": [
         "openai-atlas-aria-agent-accessibility"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experience-field-vitals",
@@ -5054,25 +3286,7 @@
       "growth_hypothesis_ids": [
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "web-vitals",
-            "locator": "Core Web Vitals; Lab tools to measure Core Web Vitals",
-            "note": "Core Web Vitals use field LCP, INP and CLS, assessed at the75th percentile with mobile/desktop segmentation. Lab measurements help development and diagnosis but cannot replace field data."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-experience-content-first",
@@ -5103,18 +3317,7 @@
       ],
       "recommendation_rule_ids": [
         "google-javascript-renderability"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experience-interaction",
@@ -5143,18 +3346,7 @@
       "growth_hypothesis_ids": [
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-experience-layout-stability",
@@ -5182,18 +3374,7 @@
       "growth_hypothesis_ids": [
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-experience-obstruction",
@@ -5222,18 +3403,7 @@
         "answer-addressability",
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-localization-language-urls",
@@ -5263,25 +3433,7 @@
       ],
       "recommendation_rule_ids": [
         "google-localized-hreflang"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-international",
-            "locator": "Use different URLs for different language versions; Make sure the page language is obvious",
-            "note": "Google recommends separate language URLs over cookie/browser-dependent substitution. Main content should match the language, rather than only translated boilerplate."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-hreflang",
@@ -5311,25 +3463,7 @@
       ],
       "recommendation_rule_ids": [
         "google-localized-hreflang"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-hreflang",
-            "locator": "Guidelines for all methods; Supported language and region codes",
-            "note": "Language variants should identify themselves and reciprocal fully qualified alternatives. Nonreciprocal pairs may be ignored; valid language/optional region codes must be used."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-locale-choice",
@@ -5359,25 +3493,7 @@
       ],
       "recommendation_rule_ids": [
         "google-localized-hreflang"
-      ],
-      "pattern_version": "1.0.1",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-international",
-            "locator": "Let the user switch the page language",
-            "note": "Google discourages inferred-language redirects that block other variants and suggests links letting visitors choose a language version."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-local-facts",
@@ -5408,18 +3524,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-translation-review",
@@ -5450,18 +3555,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-equivalence",
@@ -5493,18 +3587,7 @@
       "recommendation_rule_ids": [
         "google-localized-hreflang",
         "google-canonical-consistency"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-term-alignment",
@@ -5535,18 +3618,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-regional-evidence",
@@ -5577,18 +3649,7 @@
       ],
       "recommendation_rule_ids": [
         "google-generative-ai-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-localization-locale-drift",
@@ -5617,18 +3678,7 @@
       "growth_hypothesis_ids": [
         "freshness-without-fake-recency"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-documentation-quickstart",
@@ -5661,18 +3711,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-documentation-reference-shape",
@@ -5703,18 +3742,7 @@
       ],
       "recommendation_rule_ids": [
         "google-generative-content-structure"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-documentation-versions",
@@ -5743,18 +3771,7 @@
       "growth_hypothesis_ids": [
         "freshness-without-fake-recency"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-documentation-release-proof",
@@ -5784,18 +3801,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-documentation-limits",
@@ -5826,18 +3832,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-documentation-failure-semantics",
@@ -5869,18 +3864,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-documentation-migration-guide",
@@ -5911,18 +3895,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-documentation-interface-map",
@@ -5953,18 +3926,7 @@
       ],
       "recommendation_rule_ids": [
         "arwp-profile-validity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-documentation-public-support",
@@ -5997,18 +3959,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "google-generative-content-structure"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-retrieval-self-contained",
@@ -6039,18 +3990,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-retrieval-stable-fragments",
@@ -6081,18 +4021,7 @@
       ],
       "recommendation_rule_ids": [
         "google-read-more-deep-links"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-retrieval-markdown-parity",
@@ -6122,18 +4051,7 @@
       "growth_hypothesis_ids": [
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-retrieval-llms-index",
@@ -6163,18 +4081,7 @@
       "growth_hypothesis_ids": [
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-retrieval-text-budget",
@@ -6206,18 +4113,7 @@
       ],
       "recommendation_rule_ids": [
         "google-important-content-textual"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-retrieval-json-parity",
@@ -6249,18 +4145,7 @@
       ],
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-retrieval-unknowns",
@@ -6291,18 +4176,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-retrieval-source-boundary",
@@ -6331,18 +4205,7 @@
       "growth_hypothesis_ids": [
         "agent-readable-routes"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-retrieval-retrieval-fixtures",
@@ -6371,18 +4234,7 @@
         "agent-readable-routes",
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-measurement-baseline",
@@ -6416,18 +4268,7 @@
       "recommendation_rule_ids": [
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-measurement-metric-contract",
@@ -6459,18 +4300,7 @@
       "recommendation_rule_ids": [
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-measurement-gsc-segments",
@@ -6501,18 +4331,7 @@
       ],
       "recommendation_rule_ids": [
         "google-generative-ai-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-measurement-bing-citations",
@@ -6520,7 +4339,7 @@
       "title": "Track supported Bing AI citation observations",
       "problem": "AI visibility is often reported without provider evidence.",
       "implementation": [
-        "Record available AI Performance citation and cited-page data for the owned property using a native export when offered, otherwise retain a dated dashboard observation.",
+        "Export available AI Performance citation and cited-page data for the owned property.",
         "Record supported surfaces, period, and sampled-query limitations."
       ],
       "verification": [
@@ -6542,25 +4361,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-performance-measurement"
-      ],
-      "pattern_version": "1.1.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "bing-ai",
-            "locator": "What the dashboard measures > Total Citations, Average Cited Pages, Grounding queries, Page-level citation activity",
-            "note": "Bing reports citation activity for supported AI surfaces and selected periods. Grounding queries are sampled; counts do not describe rank, authority, placement or universal AI visibility."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-measurement-referrals",
@@ -6590,18 +4391,7 @@
       ],
       "recommendation_rule_ids": [
         "openai-chatgpt-referral-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-measurement-conversions",
@@ -6633,18 +4423,7 @@
       ],
       "recommendation_rule_ids": [
         "openai-chatgpt-referral-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-measurement-index-status",
@@ -6676,18 +4455,7 @@
       ],
       "recommendation_rule_ids": [
         "google-search-technical-eligibility"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-measurement-query-panel",
@@ -6715,18 +4483,7 @@
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-measurement-external-references",
@@ -6758,18 +4515,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experiments-hypothesis",
@@ -6797,18 +4543,7 @@
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-experiments-cohort",
@@ -6838,18 +4573,7 @@
       ],
       "recommendation_rule_ids": [
         "google-generative-ai-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experiments-single-slice",
@@ -6877,18 +4601,7 @@
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-experiments-holdout",
@@ -6916,18 +4629,7 @@
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-experiments-answer-format",
@@ -6960,18 +4662,7 @@
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experiments-comparison-page",
@@ -7003,18 +4694,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "google-scaled-query-variant-guardrail"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experiments-observation-window",
@@ -7046,18 +4726,7 @@
       "recommendation_rule_ids": [
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-experiments-rollback",
@@ -7086,18 +4755,7 @@
         "agent-readable-routes",
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-experiments-experiment-record",
@@ -7125,18 +4783,7 @@
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-governance-applicability",
@@ -7166,18 +4813,7 @@
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-governance-release-gate",
@@ -7210,18 +4846,7 @@
       "recommendation_rule_ids": [
         "google-search-technical-eligibility",
         "arwp-profile-validity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-governance-fact-gate",
@@ -7254,18 +4879,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-governance-source-review",
@@ -7293,18 +4907,7 @@
       "growth_hypothesis_ids": [
         "freshness-without-fake-recency"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-governance-content-pruning",
@@ -7336,18 +4939,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content",
         "google-canonical-consistency"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-governance-portfolio-links",
@@ -7380,18 +4972,7 @@
       "recommendation_rule_ids": [
         "google-crawlable-internal-links",
         "google-scaled-query-variant-guardrail"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     },
     {
       "id": "arwp-governance-contribution-path",
@@ -7421,18 +5002,7 @@
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-governance-monitor",
@@ -7460,18 +5030,7 @@
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      "recommendation_rule_ids": []
     },
     {
       "id": "arwp-governance-evidence-level",
@@ -7503,1235 +5062,7 @@
       "recommendation_rule_ids": [
         "google-ai-search-eligibility",
         "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-documentation-deprecation-signal",
-      "category": "documentation",
-      "title": "Signal deprecation and shutdown separately",
-      "problem": "Clients cannot discover a retirement schedule from the resource response.",
-      "implementation": [
-        "Expose a resource-scoped Deprecation date and deprecation documentation link.",
-        "Use Sunset only for an actual shutdown plan; its date must not precede deprecation."
-      ],
-      "verification": [
-        "Fetch the retiring resource and parse both date formats; check the linked migration scope."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "ietf-deprecation",
-        "ietf-sunset"
-      ],
-      "applicability": [
-        "apis",
-        "versioned-resources"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Runtime retirement signals may help clients migrate before a resource disappears. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Using Sunset as cache expiry or treating a deprecation signal as immediate removal.",
-      "measurement": "Count retiring endpoints with a valid, consistent schedule and working migration link.",
-      "growth_hypothesis_ids": [
-        "freshness-without-fake-recency",
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "ietf-deprecation",
-            "locator": "Sections 2–5: header syntax and scope; deprecation links; Sunset; resource behavior",
-            "note": "Defines the resource-scoped Deprecation date and deprecation documentation link; a signal does not itself change resource behavior."
-          },
-          {
-            "source_id": "ietf-sunset",
-            "locator": "Sections 3–4: Sunset response header and distinction from caching",
-            "note": "Sunset signals expected resource unavailability, distinct from deprecation or cache expiry."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-documentation-release-integrity",
-      "category": "documentation",
-      "title": "Verify the bytes of an immutable release",
-      "problem": "A release link alone cannot establish that downloaded assets match the published artifact.",
-      "implementation": [
-        "For repositories using immutable releases, publish complete assets from a draft.",
-        "Verify the release attestation and downloaded asset with the documented GitHub CLI commands."
-      ],
-      "verification": [
-        "Record the verified tag, commit and asset digest; reject a modified test asset."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "github-immutable-releases",
-        "github-release-integrity"
-      ],
-      "applicability": [
-        "software",
-        "github-releases"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Artifact verification may reduce installation of altered or misidentified release files. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Calling editable release notes immutable or claiming generated source archives pass verify-asset.",
-      "measurement": "Measure verified downloadable assets divided by sampled release assets.",
-      "growth_hypothesis_ids": [
-        "identity-and-provenance",
-        "non-commodity-evidence"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "github-immutable-releases",
-            "locator": "Immutable release guarantees; release attestations; editable release information",
-            "note": "Published immutable releases protect tags and assets and have release attestations; release title and notes remain editable."
-          },
-          {
-            "source_id": "github-release-integrity",
-            "locator": "Verify a release; Verify a release asset; generated source archives limitation",
-            "note": "Documents gh release verify and verify-asset; generated source archives cannot be checked with verify-asset."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-documentation-conditional-edits",
-      "category": "documentation",
-      "title": "Reject edits based on stale resource versions",
-      "problem": "Concurrent clients can overwrite a newer change using an older copy.",
-      "implementation": [
-        "Return a strong ETag for editable resources and implement If-Match preconditions.",
-        "Return a conflict-recovery path when the precondition fails."
-      ],
-      "verification": [
-        "Two clients read one revision; after the first update, the second stale write fails without modifying data."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "mdn-if-match"
-      ],
-      "applicability": [
-        "apis",
-        "mutable-resources"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Enforced revision preconditions may prevent silent loss of concurrent edits. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Documenting optimistic concurrency while the server ignores the precondition.",
-      "measurement": "Track lost updates and stale writes correctly rejected in a concurrent-client test.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "mdn-if-match",
-            "locator": "Header semantics: strong comparison, lost updates and failed preconditions; Examples",
-            "note": "Strong ETag preconditions can prevent conflicting updates; stale conditions fail instead of overwriting a newer representation."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-retrieval-negotiated-cache",
-      "category": "retrieval",
-      "title": "Keep negotiated representations separate in caches",
-      "problem": "A cached JSON response can be served to an HTML reader when formats share a URL.",
-      "implementation": [
-        "When Accept changes the response, emit the actual Content-Type and Vary: Accept.",
-        "Preserve variation metadata on default and 304 responses."
-      ],
-      "verification": [
-        "Request HTML then JSON through the same cache, reverse the order and verify each format."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "mdn-vary"
-      ],
-      "applicability": [
-        "content-negotiation",
-        "apis"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Correct cache variation may prevent consumers receiving the wrong representation. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Adding format negotiation without testing the production CDN cache key.",
-      "measurement": "Count cross-format cache mismatches in the request matrix.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "mdn-vary",
-            "locator": "Header description: request-dependent representation selection; consistent default and 304 responses",
-            "note": "Vary names request headers affecting representation selection; use consistently, including default and 304 responses."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-datasets-resumable-download",
-      "category": "datasets",
-      "title": "Resume large downloads against the same bytes",
-      "problem": "An interrupted export must restart, or resumed segments can mix different revisions.",
-      "implementation": [
-        "Enable byte ranges only for supported downloads and expose correct range metadata.",
-        "Use If-Range validators when resuming changing resources."
-      ],
-      "verification": [
-        "Reassemble two ranges and compare the full digest; a changed validator returns the full representation."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "mdn-range-requests"
-      ],
-      "applicability": [
-        "large-downloads",
-        "datasets"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Validated resumption may improve completion of interrupted large downloads. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Advertising byte ranges while always returning unrelated or truncated bytes.",
-      "measurement": "Measure successful interrupted-download recovery and digest matches.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "mdn-range-requests",
-            "locator": "Conditional range requests; Partial request responses; If-Range",
-            "note": "Documents partial 206 responses, Content-Range, 416 and If-Range validation; unsupported range requests may return the entire body."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-retrieval-profile-link",
-      "category": "retrieval",
-      "title": "Identify representation conventions with a profile link",
-      "problem": "A generic JSON media type does not identify the conventions a client must interpret.",
-      "implementation": [
-        "For a real representation profile, expose Link rel=profile to its description.",
-        "Keep the media type semantics valid without knowledge of the profile."
-      ],
-      "verification": [
-        "Resolve the advertised profile and validate a response against its documented conventions."
-      ],
-      "evidence_level": "inferred",
-      "source_ids": [
-        "ietf-profile-link"
-      ],
-      "applicability": [
-        "apis",
-        "profiled-representations"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Explicit profile conventions may reduce incompatible interpretation by participating clients. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Treating a profile link as browser support, authorization or proof of conformance.",
-      "measurement": "Track advertised profiles that resolve and match sampled responses.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "ietf-profile-link",
-            "locator": "Abstract and Section 3: profile link relation semantics",
-            "note": "The profile relation identifies additional representation conventions without changing the underlying media-type semantics."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-documentation-problem-types",
-      "category": "documentation",
-      "title": "Give API failures stable machine-readable types",
-      "problem": "Consumers parse changing error prose to decide what failed.",
-      "implementation": [
-        "Use application/problem+json with a stable type URI and appropriate HTTP status.",
-        "Put machine-readable details in defined extensions and keep sensitive internals out."
-      ],
-      "verification": [
-        "Change localized error prose while the consumer still handles the same type; verify actual status parity."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "ietf-problem-details"
-      ],
-      "applicability": [
-        "apis"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Stable problem types may make API recovery less dependent on error wording. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Returning every error as HTTP 200 or exposing internal traces as problem detail.",
-      "measurement": "Measure failures classified by stable type without parsing prose.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "ietf-problem-details",
-            "locator": "Section 3.1: type/status/detail members; Section 5: security considerations",
-            "note": "Defines problem type identity and structured details; clients should not parse prose detail, and implementations must avoid leaking internals."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-documentation-operation-links",
-      "category": "documentation",
-      "title": "Connect related API operations through response values",
-      "problem": "A consumer must guess which response field becomes the next operation parameter.",
-      "implementation": [
-        "In the supported OpenAPI version, link a response to operationId or operationRef.",
-        "Map parameters using explicit runtime expressions and document required authorization."
-      ],
-      "verification": [
-        "Resolve the operation and expression against a representative response; run the allowed workflow in a test environment."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "openapi-link-object"
-      ],
-      "applicability": [
-        "apis",
-        "openapi"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Explicit parameter bindings may reduce integration errors between related API operations. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Inventing operations or treating a design-time link as guaranteed invocation.",
-      "measurement": "Track valid response-to-operation bindings and authorized test-workflow completion.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "openapi-link-object",
-            "locator": "Section 4.20: Link Object; runtime expressions; invocation limitation",
-            "note": "Design-time links map responses to operations through operationId or operationRef and runtime expressions; they do not guarantee successful invocation."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-experience-label-name",
-      "category": "experience",
-      "title": "Make visible control labels usable as accessible names",
-      "problem": "A user names a visible button but speech control cannot find it.",
-      "implementation": [
-        "Keep visible label text within the computed accessible name.",
-        "Prefer native labelling; review ARIA overrides that replace visible text."
-      ],
-      "verification": [
-        "Compare the accessibility tree and visible labels for primary controls, then activate them by name."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "wai-label-in-name"
-      ],
-      "applicability": [
-        "interactive-sites"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Matching labels may improve voice and name-based control activation. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Replacing a clear visible label with a different hidden marketing phrase.",
-      "measurement": "Measure label/name mismatches and successful name-based activation.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [
-        "openai-atlas-aria-agent-accessibility"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-label-in-name",
-            "locator": "SC 2.5.3: Success Criterion and Intent; accessible name calculation",
-            "note": "For text-labelled controls the accessible name includes the visible label, supporting speech activation; the Understanding document is informative."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-experience-status-announcement",
-      "category": "experience",
-      "title": "Expose completion and error status without moving focus",
-      "problem": "A task finishes visually but its result is absent from the accessible state.",
-      "implementation": [
-        "Mark status messages with the appropriate role or properties.",
-        "Announce useful progress and results without moving focus for ordinary status changes."
-      ],
-      "verification": [
-        "Complete the task with a screen reader; confirm the status is announced and focus remains usable."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "wai-status-messages"
-      ],
-      "applicability": [
-        "interactive-sites",
-        "forms"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Accessible status changes may help users recognize task completion and failure. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Making every keystroke an assertive announcement or relying on a disappearing toast alone.",
-      "measurement": "Measure meaningful status transitions announced once without focus disruption.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [
-        "openai-atlas-aria-agent-accessibility"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-status-messages",
-            "locator": "SC 4.1.3: Success Criterion and Intent; status without receiving focus",
-            "note": "Status changes are programmatically determinable for assistive technology without requiring focus to move."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-experience-drag-alternative",
-      "category": "experience",
-      "title": "Offer a single-pointer alternative to dragging",
-      "problem": "A reorder or selection task requires precise dragging.",
-      "implementation": [
-        "Provide click or tap controls for the same result, such as move buttons.",
-        "Check keyboard operation separately from the pointer alternative."
-      ],
-      "verification": [
-        "Complete each drag task using only clicks or taps, with no held pointer movement."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "wai-drag-alternative"
-      ],
-      "applicability": [
-        "interactive-sites",
-        "drag-controls"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "A non-drag alternative may allow more users to complete the same manipulation task. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Calling keyboard support sufficient for the single-pointer requirement.",
-      "measurement": "Measure drag tasks with an equivalent non-drag pointer path.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-drag-alternative",
-            "locator": "SC 2.5.7: Success Criterion and Intent; separate keyboard and single-pointer requirements",
-            "note": "Author-provided dragging has an equivalent single-pointer alternative unless essential; keyboard support is a separate requirement."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-experience-focus-visible-area",
-      "category": "experience",
-      "title": "Keep the focused control out from behind overlays",
-      "problem": "Sticky UI can hide the component reached by keyboard navigation.",
-      "implementation": [
-        "Test focus positions with sticky headers, banners and consent controls open.",
-        "Adjust layout or scrolling so the focused component is not entirely obscured."
-      ],
-      "verification": [
-        "Tab through the primary flow at narrow widths and zoom with persistent overlays present."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "wai-focus-obscured"
-      ],
-      "applicability": [
-        "interactive-sites",
-        "sticky-ui"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Keeping focused controls visible may reduce keyboard navigation failures. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Passing a screenshot check while tabbing still places focus behind a banner.",
-      "measurement": "Count keyboard-focused components entirely hidden by author-created content.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-focus-obscured",
-            "locator": "SC 2.4.11: Success Criterion, notes and intent; focused component not entirely hidden",
-            "note": "Author-created content must not entirely hide the component receiving keyboard focus; this is narrower than full visibility."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-experience-modal-focus",
-      "category": "experience",
-      "title": "Complete the keyboard lifecycle of a modal dialog",
-      "problem": "Opening or closing a modal strands focus or exposes inactive background controls.",
-      "implementation": [
-        "Move focus into the modal and contain its tab sequence.",
-        "Provide Escape and visible dismissal, then restore focus to a logical target."
-      ],
-      "verification": [
-        "Open, traverse and dismiss the modal entirely by keyboard; inspect the focus target after each step."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "wai-modal-dialog"
-      ],
-      "applicability": [
-        "interactive-sites",
-        "modal-dialogs"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "A complete modal focus lifecycle may reduce stranded or misplaced keyboard focus. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Adding aria-modal without implementing actual modal behavior.",
-      "measurement": "Measure modal flows that preserve logical focus and a working exit.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [
-        "openai-atlas-aria-agent-accessibility"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-modal-dialog",
-            "locator": "Keyboard Interaction; initial focus and focus restoration notes; WAI-ARIA properties",
-            "note": "Describes initial focus, contained Tab sequence, Escape dismissal and logical focus restoration for modal dialogs."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-experience-reuse-entry",
-      "category": "experience",
-      "title": "Reuse information already entered in the same process",
-      "problem": "A multi-step task asks users to remember and retype data it already holds.",
-      "implementation": [
-        "Populate repeated values or make earlier information selectable.",
-        "Retain required re-entry only for essential, security or invalidated-data cases."
-      ],
-      "verification": [
-        "Complete a multi-step form and list every repeated entry with its reuse path or documented exception."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "wai-redundant-entry"
-      ],
-      "applicability": [
-        "forms",
-        "multi-step-flows"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Reusing valid entered information may reduce avoidable multi-step form effort. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Copying stale values into a new process or claiming the rule requires permanent storage.",
-      "measurement": "Count avoidable repeated entries per completed process.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-redundant-entry",
-            "locator": "SC 3.3.7: Success Criterion and its essential/security/validity exceptions",
-            "note": "Repeated information in the same process is populated or selectable, with essential, security and validity exceptions."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-experience-auth-assistance",
-      "category": "experience",
-      "title": "Allow credential assistance in sign-in flows",
-      "problem": "Blocking paste or password managers makes sign-in depend on recall and transcription.",
-      "implementation": [
-        "Allow credential paste and compatible password-manager completion.",
-        "Evaluate the full authentication flow against the relevant criterion and exceptions."
-      ],
-      "verification": [
-        "Test paste, autofill and the next authentication step with the actual supported browser."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "wai-accessible-auth"
-      ],
-      "applicability": [
-        "authentication",
-        "forms"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Credential assistance may reduce sign-in barriers caused by recall and transcription. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Calling one working password field proof that every authentication step is accessible.",
-      "measurement": "Measure supported authentication paths without unnecessary recall or transcription.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-accessible-auth",
-            "locator": "SC 3.3.8: Copy and paste; password-manager examples",
-            "note": "Credential paste and password-manager assistance can avoid memory or transcription burdens; these alone do not establish full authentication conformance."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-datasets-series-members",
-      "category": "datasets",
-      "title": "Distinguish a dataset series from its member datasets",
-      "problem": "An annual collection is described as one changing file, losing member coverage.",
-      "implementation": [
-        "Use DCAT DatasetSeries and inSeries for actual related datasets.",
-        "Keep member coverage explicit and derive series coverage from its members."
-      ],
-      "verification": [
-        "Query the catalog for series membership and check the aggregate temporal and spatial coverage."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "w3c-dcat-series"
-      ],
-      "applicability": [
-        "dataset-catalogs",
-        "recurring-datasets"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Explicit series membership may improve correct interpretation of recurring dataset coverage. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Calling file formats or every correction a separate dataset series.",
-      "measurement": "Measure correctly linked members and discrepancies between series and member coverage.",
-      "growth_hypothesis_ids": [
-        "identity-and-provenance",
-        "non-commodity-evidence"
-      ],
-      "recommendation_rule_ids": [
-        "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "w3c-dcat-series",
-            "locator": "DatasetSeries; inSeries; Dataset series metadata and coverage inheritance",
-            "note": "DatasetSeries and inSeries describe related datasets, such as annual releases, with series metadata reflecting member coverage."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-datasets-csvw-contract",
-      "category": "datasets",
-      "title": "Publish executable parsing rules beside CSV data",
-      "problem": "The same blank, zero or quoted value is interpreted differently by consumers.",
-      "implementation": [
-        "Supply CSVW column datatypes, null tokens, required fields and dialect.",
-        "Validate the actual download with a consumer using that metadata."
-      ],
-      "verification": [
-        "Parse a fixture containing null, zero, quoted delimiters and non-ASCII text; compare typed values."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "w3c-csvw-metadata"
-      ],
-      "applicability": [
-        "csv-datasets"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Executable CSV metadata may reduce incompatible typing and missing-value interpretation. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Publishing a prose dictionary while relying on undocumented parser guesses.",
-      "measurement": "Measure typed parsing agreement and rejected contract violations.",
-      "growth_hypothesis_ids": [
-        "non-commodity-evidence",
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [
-        "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "w3c-csvw-metadata",
-            "locator": "Column datatype/null/required properties; Dialect Descriptions",
-            "note": "Defines machine-readable column types, null tokens, required values and CSV dialect metadata."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-datasets-croissant-records",
-      "category": "datasets",
-      "title": "Map physical dataset files to loadable records",
-      "problem": "Download links do not explain how files and columns form the records a consumer needs.",
-      "implementation": [
-        "Describe real FileObject or FileSet resources and checksums in Croissant.",
-        "Map RecordSet fields to source files and validate a small consumer load."
-      ],
-      "verification": [
-        "Verify file digests and load sampled records using the declared field mappings."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "mlcommons-croissant"
-      ],
-      "applicability": [
-        "ml-datasets",
-        "multi-file-datasets"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "File-to-record mappings may reduce manual dataset loading and reconstruction errors. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Adding Croissant to ordinary content pages or promising universal assistant ingestion.",
-      "measurement": "Measure correctly loaded fields and failed file-to-record mappings.",
-      "growth_hypothesis_ids": [
-        "non-commodity-evidence",
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [
-        "google-dataset-provenance"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "mlcommons-croissant",
-            "locator": "FileObject and FileSet distributions; sha256; RecordSet field source mappings",
-            "note": "Describes physical FileObject/FileSet distributions, checksums and RecordSet field mappings for loading real datasets."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-datasets-fair-links",
-      "category": "datasets",
-      "title": "Distinguish citation, metadata and content links",
-      "problem": "A repository client cannot tell which landing-page links identify data versus its description.",
-      "implementation": [
-        "For scholarly outputs, expose FAIR Signposting relations such as cite-as, describedby and item.",
-        "Keep identifiers and relations scoped to the actual scholarly object or content resource."
-      ],
-      "verification": [
-        "Traverse typed links from landing page to metadata and files; confirm the persistent identifier resolves appropriately."
-      ],
-      "evidence_level": "inferred",
-      "source_ids": [
-        "fair-signposting"
-      ],
-      "applicability": [
-        "research-repositories",
-        "dataset-repositories"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Typed repository links may improve reliable discovery of a scholarly object and its files. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Inventing a DOI or labelling every navigation link as downloadable content.",
-      "measurement": "Measure successful typed traversal to actual metadata and content.",
-      "growth_hypothesis_ids": [
-        "identity-and-provenance",
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "fair-signposting",
-            "locator": "Section 2: profile levels; landing-page cite-as/describedby/item relations; Section 3 examples",
-            "note": "Typed links distinguish scholarly landing pages, persistent citation identifiers, metadata and downloadable content."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-entities-product-variants",
-      "category": "entities",
-      "title": "Represent genuine product variants as one group",
-      "problem": "Selectable variants have inconsistent parent identity, URLs or offer facts.",
-      "implementation": [
-        "Use ProductGroup with actual variation dimensions and stable group identity.",
-        "Ensure variant URLs select the matching product, price and availability."
-      ],
-      "verification": [
-        "Open each sampled variant URL and compare its selection and offer to the structured data."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "google-product-variants"
-      ],
-      "applicability": [
-        "commerce",
-        "product-variants"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Consistent variant grouping may improve interpretation of the real selectable offer. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Using variant markup to create fictional offers or unrelated keyword pages.",
-      "measurement": "Measure variant URL, identity and offer mismatches.",
-      "growth_hypothesis_ids": [
-        "identity-and-provenance"
-      ],
-      "recommendation_rule_ids": [
-        "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-product-variants",
-            "locator": "ProductGroup / variesBy / hasVariant / productGroupID; single-page and multi-page variant examples",
-            "note": "ProductGroup, variesBy, hasVariant and productGroupID describe genuine product variants and their selectable URLs."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-services-return-policy",
-      "category": "services",
-      "title": "Encode the return policy customers actually receive",
-      "problem": "A merchant policy is vague or conflicts across checkout, policy page and markup.",
-      "implementation": [
-        "Describe actual applicable countries, return window, methods and fees.",
-        "Use MerchantReturnPolicy only for a real merchant policy and maintain page parity."
-      ],
-      "verification": [
-        "Compare sampled market and product cases with checkout terms and rendered policy values."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "google-return-policy"
-      ],
-      "applicability": [
-        "commerce",
-        "merchant-policies"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Policy parity may reduce contradictory merchant return information. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Inventing free returns or using merchant markup as a substitute for policy review.",
-      "measurement": "Count material policy mismatches across structured and customer-visible surfaces.",
-      "growth_hypothesis_ids": [
-        "identity-and-provenance"
-      ],
-      "recommendation_rule_ids": [
-        "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-return-policy",
-            "locator": "MerchantReturnPolicy required and recommended properties; applicableCountry, return window, methods and fees",
-            "note": "MerchantReturnPolicy describes actual applicable countries, return windows, methods and fees; policy values must reflect the merchant offer."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-comparisons-editorial-pros-cons",
-      "category": "comparisons",
-      "title": "Apply pros-and-cons markup only to eligible editorial reviews",
-      "problem": "Merchant or customer reviews are incorrectly presented as eligible editorial comparison results.",
-      "implementation": [
-        "Confirm the page is an editorial product review with genuine visible statements.",
-        "Map at least two statements to positiveNotes or negativeNotes without changing their meaning."
-      ],
-      "verification": [
-        "Check editorial eligibility and visible statement parity, then run the relevant rich-result validator."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "google-product-pros-cons"
-      ],
-      "applicability": [
-        "editorial-product-reviews"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Eligible editorial markup may enable a supported product snippet appearance; display is not guaranteed. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Applying editorial pros-and-cons markup to a merchant sales page or fabricated review.",
-      "measurement": "Track eligible reviewed pages with valid, visible statement mappings; observe appearance separately.",
-      "growth_hypothesis_ids": [
-        "non-commodity-evidence"
-      ],
-      "recommendation_rule_ids": [
-        "google-structured-data-visible-parity"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-product-pros-cons",
-            "locator": "Guidelines: editorial-only pros and cons; positiveNotes/negativeNotes; two-statement requirement",
-            "note": "Pros-and-cons appearance is eligible only for editorial product reviews; requires at least two visible statements, not merchant or customer reviews."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-comparisons-order-dispersion",
-      "category": "comparisons",
-      "title": "Expose run-order sensitivity and dispersion in performance comparisons",
-      "problem": "A single timing or fixed run order can hide variability and changing system state.",
-      "implementation": [
-        "Repeat equivalent benchmark runs and interleave their order where supported.",
-        "Retain per-run results and report dispersion with the summary."
-      ],
-      "verification": [
-        "Inspect the run order and raw results; confirm the published summary includes variability."
-      ],
-      "evidence_level": "inferred",
-      "source_ids": [
-        "google-benchmark-statistics"
-      ],
-      "applicability": [
-        "software-benchmarks",
-        "performance-comparisons"
-      ],
-      "effort": "large",
-      "impact_hypothesis": "Repeated interleaved runs may expose conclusions that depend on noise or execution order. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Publishing only the fastest run or treating microbenchmark timings as product adoption.",
-      "measurement": "Measure dispersion and changes in conclusions under repeated interleaved runs.",
-      "growth_hypothesis_ids": [
-        "non-commodity-evidence"
-      ],
-      "recommendation_rule_ids": [
-        "google-non-commodity-content"
-      ],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-benchmark-statistics",
-            "locator": "Random Interleaving; Statistics: Reporting Mean, Median, Standard Deviation and Coefficient of Variation",
-            "note": "Repeated runs report dispersion; optional random interleaving reduces sensitivity to changing system state."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-documentation-schema-dialect",
-      "category": "documentation",
-      "title": "Pin schema dialect and reference identity",
-      "problem": "A validator silently assumes a dialect or fails to resolve external schema resources.",
-      "implementation": [
-        "Declare $schema in each external schema resource and use stable $id values.",
-        "Load referenced schemas into the supported validator and test required custom assertions."
-      ],
-      "verification": [
-        "Validate positive and negative fixtures with the named dialect and the complete reference registry."
-      ],
-      "evidence_level": "documented",
-      "source_ids": [
-        "json-schema-dialect",
-        "json-schema-resource-id"
-      ],
-      "applicability": [
-        "json-schemas",
-        "apis",
-        "datasets"
-      ],
-      "effort": "medium",
-      "impact_hypothesis": "Explicit dialects and reference registries may reduce silent validation incompatibility. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Treating an unknown custom keyword as enforced or assuming every $id is an HTTP endpoint.",
-      "measurement": "Count unresolved references, unsupported assertions and dialect-dependent validation differences.",
-      "growth_hypothesis_ids": [
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "json-schema-dialect",
-            "locator": "$schema declaration; external schema resources; custom vocabulary implementation support",
-            "note": "Root $schema declares the dialect; externally referenced schemas need their own declarations and custom assertion keywords need supporting implementations."
-          },
-          {
-            "source_id": "json-schema-resource-id",
-            "locator": "Schema Identification; Base URI; $id; identifier versus retrieval URI",
-            "note": "$id sets the schema base identifier for reference resolution; an identifier is not automatically a fetchable endpoint."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
-    },
-    {
-      "id": "arwp-retrieval-archived-datetime",
-      "category": "retrieval",
-      "title": "Experiment with datetime access to real archived states",
-      "problem": "A consumer knows when a claim was made but cannot discover the resource state from that time.",
-      "implementation": [
-        "Where real archives exist, expose Memento TimeGate and TimeMap relations.",
-        "Return the actual archived datetime and preserve the distinction from the current resource."
-      ],
-      "verification": [
-        "Request two dates and verify each returned capture timestamp and immutable archived content."
-      ],
-      "evidence_level": "experimental",
-      "source_ids": [
-        "ietf-memento"
-      ],
-      "applicability": [
-        "web-archives",
-        "versioned-repositories"
-      ],
-      "effort": "large",
-      "impact_hypothesis": "Datetime negotiation may make actual historical states easier for participating archive clients to locate. Any Search or AI recommendation effect remains unmeasured.",
-      "anti_pattern": "Fabricating historical snapshots or implying current assistants automatically negotiate datetime.",
-      "measurement": "Measure successful capture discovery and requested-versus-returned date differences.",
-      "growth_hypothesis_ids": [
-        "freshness-without-fake-recency",
-        "agent-readable-routes"
-      ],
-      "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
-      "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "ietf-memento",
-            "locator": "Abstract; Memento, TimeGate and TimeMap resource definitions; datetime negotiation",
-            "note": "TimeGate datetime negotiation and TimeMaps connect current resources with actual archived prior states."
-          }
-        ]
-      },
-      "lifecycle": {
-        "status": "active",
-        "replacement_ids": [],
-        "reason": null
-      }
+      ]
     }
   ],
   "integration": {
@@ -8744,10 +5075,5 @@
       "revision": "2026-09-06"
     },
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
-  },
-  "previous_release": {
-    "version": "1.1.0",
-    "path": "knowledge/releases/v1.1.0.json",
-    "sha256": "88d4583c696c981a174270131bd0504aaf00909d32f9524920923aff04f9c641"
   }
 }
