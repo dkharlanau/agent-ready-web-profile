@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cite Goose site-focus playbook and executable Focus Engine: define one problem territory, explicit scope and anti-scope, inspect page contracts, navigation, duplicate intent and scope drift before expanding content.">
+  <meta name="description" content="Cite Goose Site Focus v0.2: declare one problem boundary, compare intended and observed architecture, map page roles and review drift before expanding content or discoverability work.">
   <meta name="theme-color" content="#eff600">
   <title>Site Focus — Cite Goose</title>
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/site-focus.html">
@@ -14,8 +14,8 @@
   {
     "@context":"https://schema.org",
     "@type":"TechArticle",
-    "headline":"Site Focus: define the problem before optimizing the site",
-    "description":"A Cite Goose house playbook and executable diagnostic for problem territory, scope, anti-scope, page contracts, information architecture, visual identity and performance budgets.",
+    "headline":"Site Focus v0.2: declared intent versus observed site architecture",
+    "description":"A Cite Goose product/design gate and executable diagnostic for problem territory, scope, page roles, navigation drift, locale equivalence and page contracts.",
     "dateModified":"2026-09-08",
     "mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/site-focus.html",
     "isPartOf":{"@type":"WebSite","name":"Cite Goose","url":"https://dkharlanau.github.io/agent-ready-web-profile/"}
@@ -32,9 +32,46 @@
   <main id="main">
     <section class="focus-guide-hero">
       <div class="goose-shell">
-        <p class="eyebrow">SITE FOCUS / HOUSE PLAYBOOK</p>
+        <p class="eyebrow">SITE FOCUS / V0.2</p>
         <h1>Own a problem.<br>Draw the boundary.</h1>
-        <p>A site becomes harder to understand when every adjacent topic gets promoted into a first-class section. Define the problem territory first. Then let content, navigation, design and Search/AI work serve that territory.</p>
+        <p>First declare what the site is meant to solve. Then observe what it actually exposes. Cite Goose compares the two without turning product strategy into another opaque SEO score.</p>
+      </div>
+    </section>
+
+    <section class="focus-guide-section">
+      <div class="goose-shell">
+        <p class="eyebrow">DECLARE → OBSERVE → COMPARE</p>
+        <h2>Give the engine a product boundary.</h2>
+        <p>Version 0.2 adds <code>.arwp/site-focus.json</code>: an owner-declared thesis, IN / ADJACENT / OUT scope, problem lanes, primary navigation contract and route roles. Repository mode finds it automatically; live mode can receive it explicitly.</p>
+        <div class="focus-contract"><code>arwp-focus https://example.com --focus-profile=.arwp/site-focus.json
+arwp-focus https://example.com --focus-profile=.arwp/site-focus.json --json
+arwp-focus https://example.com/project/ --repo-root=. --output=site-focus-report.json</code></div>
+        <div class="focus-grid" style="margin-top:28px">
+          <article><h3>Declared truth</h3><p>Primary problem, audience, useful outcome, proof, action, scope and intended navigation come from the owner contract.</p></article>
+          <article><h3>Observed truth</h3><p>Homepage wording, links, page jobs, proof/action signals and sampled graph structure still come from the actual site.</p></article>
+          <article><h3>Drift</h3><p>The report shows missing or unexpected navigation, unclassified routes and thesis wording drift without pretending those signals are ranking factors.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="focus-guide-section">
+      <div class="goose-shell">
+        <p class="eyebrow">PAGE ROLES</p>
+        <h2>Depth is allowed. Competing identities are the problem.</h2>
+        <div class="focus-grid">
+          <article><h3>Problem / commercial</h3><p>Pages that directly solve the primary problem or carry the product/commercial continuation.</p></article>
+          <article><h3>Proof / trust</h3><p>Projects, research, experiments, evidence, methodology and utility pages can support the thesis without sharing homepage vocabulary.</p></article>
+          <article><h3>Technical reference</h3><p>APIs, schemas, protocols and deep implementation material stay available without becoming another first-order product identity.</p></article>
+        </div>
+        <p class="focus-note"><strong>Route families are not problem territories.</strong> A focused multilingual product can have many content families; a studio can have hundreds of routes. The engine now asks what role those routes play.</p>
+      </div>
+    </section>
+
+    <section class="focus-guide-section">
+      <div class="goose-shell">
+        <p class="eyebrow">LOCALE EQUIVALENCE</p>
+        <h2>Translations are not duplicate-intent pages.</h2>
+        <p>When locale prefixes are declared, structurally equivalent localized routes are removed from <code>MERGE</code> noise. This only fixes the product-focus diagnostic; canonical and hreflang correctness still belongs to technical Search validation.</p>
       </div>
     </section>
 
@@ -42,13 +79,10 @@
       <div class="goose-shell">
         <p class="eyebrow">EXECUTABLE DIAGNOSTIC</p>
         <h2>Inspect the structure before arguing about it.</h2>
-        <p>The Site Focus Engine samples a public site or generated repository output and produces independent diagnostics instead of one opaque score: navigation breadth, route territories, audience signals, duplicate-intent pairs, orphan candidates, pages without proof/action signals and a Page Contract Map.</p>
-        <div class="focus-contract"><code>arwp-focus https://example.com
-arwp-focus https://example.com --max-pages=30 --json
-arwp-focus https://example.com/project/ --repo-root=. --output=site-focus.json</code></div>
+        <p>The Site Focus Engine produces independent diagnostics instead of one opaque score: navigation breadth and drift, route-role coverage, audience signals, duplicate-intent pairs, orphan candidates, pages without proof/action signals and a Page Contract Map.</p>
         <div class="focus-grid" style="margin-top:28px">
           <article><h3>KEEP / NARROW</h3><p>Keep a coherent page, or tighten a page whose job and next action are unclear.</p></article>
-          <article><h3>MERGE / DEFER</h3><p>Surface overlapping intent or a low-thesis-overlap page for human review before more optimization work.</p></article>
+          <article><h3>MERGE / DEFER</h3><p>Surface non-locale intent overlap or declared scope-placement conflicts for human review.</p></article>
           <article><h3>No auto-delete</h3><p><code>REMOVE</code> and <code>SPLIT</code> are never automatic. URL history, redirects, traffic and the real product boundary still require review.</p></article>
         </div>
         <p class="focus-note"><strong>No focus/readiness/ranking score.</strong> Similarity thresholds and navigation limits are Cite Goose review heuristics, not Search or AI platform requirements.</p>
@@ -110,13 +144,9 @@ parent_hub: one canonical owning section</code></div>
 
     <section class="focus-guide-section">
       <div class="goose-shell">
-        <p class="eyebrow">HOMEPAGE</p>
-        <h2>Make it a decision surface, not a sitemap dump.</h2>
-        <div class="focus-grid">
-          <article><h3>Problem + boundary</h3><p>State the problem, promise and anti-scope early enough that a first-time visitor knows whether this resource is for them.</p></article>
-          <article><h3>Three routes</h3><p>Organize first-order choices around user problems or outcomes. Internal technologies should usually remain one level deeper.</p></article>
-          <article><h3>Proof + action</h3><p>Show why the promise is credible, then make one next useful step visually dominant. Deep reference material stays available without competing with it.</p></article>
-        </div>
+        <p class="eyebrow">TRANSFORMATION HANDOFF</p>
+        <h2>Focus can propose. It cannot mutate.</h2>
+        <p>Accepted <code>NARROW</code>, <code>MERGE</code> and declared-scope review decisions can now be passed forward as proposal-only Target Transformation candidates. The handoff is explicitly non-executable until a human accepts the decision and exact repository targets, redirect/history implications and verification steps are resolved.</p>
       </div>
     </section>
 
@@ -137,7 +167,7 @@ parent_hub: one canonical owning section</code></div>
       <div class="goose-shell">
         <p class="eyebrow">AGENT LOOP GATE</p>
         <h2>Run focus before expansion.</h2>
-        <p>When a site is new, being redesigned or has become broad, start with the <code>arwp-site-focus</code> skill and the executable Focus report. Record the intended site thesis, scope/anti-scope, problem lanes, primary navigation and page contract. Only then route the work into discoverability, content, technical eligibility, evidence or measurement specialists.</p>
+        <p>When a site is new, being redesigned or has become broad, start with the <code>arwp-site-focus</code> skill and executable Focus report. Declare the intended thesis and boundary, compare them with observed routes, then route accepted work into discoverability, content, technical eligibility, evidence, transformation or measurement specialists.</p>
         <p><a class="goose-button" href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/skills/arwp-site-focus/SKILL.md">Read the agent skill</a></p>
       </div>
     </section>
@@ -145,7 +175,7 @@ parent_hub: one canonical owning section</code></div>
 
   <footer class="goose-footer goose-shell">
     <a class="goose-brand" href="./"><strong>Cite Goose</strong></a>
-    <p>Site Focus is a product/design heuristic. Search, recommendation and citation outcomes still require separate evidence and measurement.</p>
+    <p>Site Focus is a product/design diagnostic. Search, recommendation and citation outcomes still require separate evidence and measurement.</p>
     <a href="./discoverability.html">Pattern library →</a>
   </footer>
 </body>
