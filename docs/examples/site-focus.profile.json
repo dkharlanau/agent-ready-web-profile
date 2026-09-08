@@ -1,0 +1,104 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-profile.schema.json",
+  "version": "0.2",
+  "canonicalUrl": "https://example.com/",
+  "thesis": {
+    "primaryProblem": "Project teams need one reliable public place to understand, evaluate and use the project.",
+    "primaryAudience": "People evaluating or using the project.",
+    "usefulOutcome": "Understand the project, verify its evidence and choose the next useful action.",
+    "distinctEvidence": "First-party documentation, working examples, source-linked claims and reproducible project evidence.",
+    "primaryAction": "Choose the relevant project task and continue to the matching page."
+  },
+  "scope": {
+    "in": [
+      "the primary project problem",
+      "usage guidance",
+      "evidence that supports the project promise"
+    ],
+    "adjacent": [
+      "technical reference",
+      "research and implementation details"
+    ],
+    "out": [
+      "unrelated products",
+      "generic content published only for traffic"
+    ]
+  },
+  "problemLanes": [
+    {
+      "id": "understand",
+      "label": "Understand",
+      "job": "Understand the problem and the project's approach."
+    },
+    {
+      "id": "use",
+      "label": "Use",
+      "job": "Take the next useful action with the project."
+    },
+    {
+      "id": "verify",
+      "label": "Verify",
+      "job": "Inspect evidence, limitations and change history."
+    }
+  ],
+  "primaryNavigation": [
+    "/guide/",
+    "/examples/",
+    "/evidence/",
+    "/about/"
+  ],
+  "routeRules": [
+    {
+      "match": { "path": "/" },
+      "role": "problem-commercial",
+      "scope": "IN",
+      "lane": "understand",
+      "note": "Primary site narrative."
+    },
+    {
+      "match": { "pathPrefix": "/guide" },
+      "role": "problem-commercial",
+      "scope": "IN",
+      "lane": "use",
+      "note": "Primary usage path."
+    },
+    {
+      "match": { "pathPrefix": "/examples" },
+      "role": "proof-portfolio",
+      "scope": "IN",
+      "lane": "verify",
+      "note": "Worked proof and examples."
+    },
+    {
+      "match": { "pathPrefix": "/evidence" },
+      "role": "proof-portfolio",
+      "scope": "IN",
+      "lane": "verify",
+      "note": "Evidence and measurement surface."
+    },
+    {
+      "match": { "pathPrefix": "/api" },
+      "role": "technical-reference",
+      "scope": "ADJACENT",
+      "lane": "use",
+      "note": "Implementation depth; not another first-order product problem."
+    },
+    {
+      "match": { "pathPrefix": "/about" },
+      "role": "trust-utility",
+      "scope": "IN",
+      "lane": "verify",
+      "note": "Identity and project context."
+    }
+  ],
+  "locales": {
+    "default": "en",
+    "prefixes": {
+      "de": "/de"
+    }
+  },
+  "notes": [
+    "House heuristics are starting constraints, not ranking factors.",
+    "Localized equivalents should not become MERGE candidates solely because their page jobs match."
+  ]
+}
