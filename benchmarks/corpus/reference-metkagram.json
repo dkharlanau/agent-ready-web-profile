@@ -13,14 +13,20 @@
       "https://metkagram.github.io/api/v1/schemas/api-response.json",
       "https://metkagram.github.io/data/catalog.json"
     ],
-    "tools": [],
+    "tools": [
+      {
+        "protocol": "MCP",
+        "transport": "stdio",
+        "url": "https://github.com/metkagram/metkagram.github.io/blob/main/public/connectors/metkagram-mcp.mjs"
+      }
+    ],
     "agent": []
   },
   "evidence": [
     {
       "url": "https://metkagram.github.io/ai/site-profile.json",
       "sourceType": "project-reference-arwp-profile",
-      "note": "Owner-controlled reference site publishes an ARWP profile with retrieval, OpenAPI, schema and provenance surfaces."
+      "note": "Owner-controlled reference site publishes an ARWP profile with retrieval, OpenAPI, schema, provenance and local read-only MCP declarations."
     },
     {
       "url": "https://metkagram.github.io/api/v1/openapi.json",
@@ -28,5 +34,5 @@
       "note": "Public OpenAPI description is the primary reviewed structured interface for this reference fixture."
     }
   ],
-  "note": "Owner-controlled implementation fixture. The static MCP-compatible description is deliberately not accepted as a live MCP tool."
+  "note": "Owner-controlled implementation fixture. The repository-backed read-only stdio MCP bridge is accepted as a local tool; no hosted remote MCP endpoint is claimed."
 }
