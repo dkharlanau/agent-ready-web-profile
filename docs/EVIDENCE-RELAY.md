@@ -8,6 +8,8 @@ This edition adds ten implementation patterns, a fit-based distribution register
 
 [Pattern library](./discoverability.html) · [Distribution register](./knowledge/research/distribution-venues.json) · [DOI reading corpus](./knowledge/research/doi-reading-corpus.json) · [Existing maturity profile](./MATURITY-PROFILE.md)
 
+[Review the anti-patterns](./ANTI-PATTERNS.html) before adopting maturity, distribution or measurement tactics.
+
 ## Functional emulation: copy the useful capability
 
 Use the existing [Search Maturity workflow](./SEARCH-MATURITY-BENCHMARK.md) to select several independent reference pages for one actual audience intent. Record the query, surface, date, locale and observable evidence. Include weaker examples and counterexamples. A source appearing in our research results does not establish a Google rank or explain why it ranks.

@@ -28,6 +28,8 @@ That is the product boundary.
 
 Read the [September editorial research guide](docs/EDITORIAL-SEARCH-LAB.md) for 26 new patterns covering article voice, openings, decision thresholds, section graphs and AI reporting.
 
+[Anti-pattern field guide](docs/ANTI-PATTERNS.md) adds 24 versioned negative examples with remedies, verification and false-positive boundaries.
+
 [Evidence Relay](docs/EVIDENCE-RELAY.md) adds functional maturity emulation, fit-based distribution, a reviewed DOI reading corpus and an executable artifact-cohort calculator.
 
 ## The product loop

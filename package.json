@@ -98,7 +98,8 @@
     "docs/SITE-ROLLOUT-PLAYBOOK.md",
     "docs/EDITORIAL-SEARCH-LAB.md",
     "docs/EVIDENCE-RELAY.md",
-    "docs/knowledge/research/"
+    "docs/knowledge/research/",
+    "docs/ANTI-PATTERNS.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",

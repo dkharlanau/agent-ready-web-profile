@@ -4,6 +4,10 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Anti-pattern review edition 1.0.0
+
+- Added 24 synthetic negative examples with scoped source support, replacements, manual verification and legitimate countercases. Added a versioned JSON catalog and reusable site-review template; integrated the content and maturity skills. Positive pattern corpus remains 1.4.0.
+
 ### Functional maturity and Evidence Relay (corpus 1.4.0)
 
 - Added ten reviewed patterns, eight primary-source records, five candidate distribution venues and four bibliographically verified DOI references. The library now contains 205 patterns and 112 sources, with 89 individual source-support reviews.

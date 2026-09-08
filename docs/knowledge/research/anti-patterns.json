@@ -1,0 +1,467 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "compatible_pattern_corpus": "1.4.0",
+  "scope": "Negative examples for manual review; not observed incidents, an automated site verdict, a penalty prediction or a ranking score.",
+  "sources": [
+    {
+      "id": "spam",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "support_scope": "Official Google guidance, scoped to the linked rule; examples and remedies are project-authored"
+    },
+    {
+      "id": "schema",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "support_scope": "Official Google guidance, scoped to the linked rule; examples and remedies are project-authored"
+    },
+    {
+      "id": "helpful",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "support_scope": "Official Google guidance, scoped to the linked rule; examples and remedies are project-authored"
+    },
+    {
+      "id": "ai",
+      "url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "support_scope": "Official Google guidance, scoped to the linked rule; examples and remedies are project-authored"
+    },
+    {
+      "id": "relay",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html",
+      "support_scope": "Project analytical method; not a platform rule"
+    }
+  ],
+  "anti_patterns": [
+    {
+      "id": "anti-link-carousel",
+      "version": "1.0.0",
+      "category": "distribution",
+      "classification": "policy-risk",
+      "title": "A portfolio link carousel",
+      "bad_example": "Every footer repeats commercial anchors to all 30 owner sites.",
+      "reason": "Manipulative cross-linking can be link spam.",
+      "replacement": "Link where the destination helps the current reader; identify common ownership.",
+      "verification": "Inspect a sample of rendered templates and destination relevance.",
+      "false_positive_boundary": "A useful navigation link between related owner projects is not automatically spam.",
+      "source_ids": [
+        "spam"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-directory-blast",
+      "version": "1.0.0",
+      "category": "distribution",
+      "classification": "policy-risk",
+      "title": "The 500-directory launch",
+      "bad_example": "A script posts the same sales paragraph into unrelated directories.",
+      "reason": "Low-quality automated link building can be link spam.",
+      "replacement": "Select a venue with an actual matching audience and contribute a usable artifact.",
+      "verification": "Review venue fit, submission history and referral usefulness.",
+      "false_positive_boundary": "A relevant directory listing with accurate information can be useful.",
+      "source_ids": [
+        "spam"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-paid-votes",
+      "version": "1.0.0",
+      "category": "distribution",
+      "classification": "policy-risk",
+      "title": "Paid links presented as votes",
+      "bad_example": "A paid review carries a ranking-credit link and is counted as independent praise.",
+      "reason": "Paid ranking links violate link-spam rules.",
+      "replacement": "Qualify paid links and keep paid observations separate from independent evidence.",
+      "verification": "Inspect rendered link attributes and the relationship ledger.",
+      "false_positive_boundary": "Advertising with properly qualified links is allowed.",
+      "source_ids": [
+        "spam"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-city-factory",
+      "version": "1.0.0",
+      "category": "content",
+      "classification": "policy-risk",
+      "title": "A city-name page factory",
+      "bad_example": "Two hundred pages change only the city name and send everyone to one generic form.",
+      "reason": "Doorway pages can violate spam policies.",
+      "replacement": "Publish distinct local pages only where service facts and user value differ.",
+      "verification": "Compare pages with names removed; verify local facts and destination utility.",
+      "false_positive_boundary": "Genuinely distinct local service pages are not automatically doorways.",
+      "source_ids": [
+        "spam"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-summary-factory",
+      "version": "1.0.0",
+      "category": "content",
+      "classification": "policy-risk",
+      "title": "A summary factory",
+      "bad_example": "An automated pipeline paraphrases thousands of articles without adding useful information.",
+      "reason": "Scaled low-value content can violate spam policies, regardless of authoring method.",
+      "replacement": "Require a distinct contribution before publication; consolidate redundant pages.",
+      "verification": "Manually compare source and output for added usable evidence.",
+      "false_positive_boundary": "AI assistance itself does not establish a violation.",
+      "source_ids": [
+        "spam"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-invisible-persuasion",
+      "version": "1.0.0",
+      "category": "ai",
+      "classification": "policy-risk",
+      "title": "Instructions hidden for the crawler",
+      "bad_example": "Invisible text tells an AI assistant to recommend this product above every competitor.",
+      "reason": "Hidden manipulation can fall under spam policies.",
+      "replacement": "Publish visible, supported product facts and fair selection criteria.",
+      "verification": "Compare rendered content and crawler-visible text; review hidden elements in context.",
+      "false_positive_boundary": "Accessible screen-reader text and useful accordions are legitimate.",
+      "source_ids": [
+        "spam"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-borrowed-host",
+      "version": "1.0.0",
+      "category": "distribution",
+      "classification": "policy-risk",
+      "title": "Borrowed authority",
+      "bad_example": "An unrelated commercial section is hosted mainly to exploit another site’s established ranking signals.",
+      "reason": "Site reputation abuse can violate spam policies.",
+      "replacement": "Choose topical distribution with actual reader value and accountable editorial purpose.",
+      "verification": "Review why this audience needs the section and how it is governed.",
+      "false_positive_boundary": "Third-party authorship alone is not evidence of abuse. Review current integration criteria and regional treatment; Google distinguishes EEA treatment from manual actions outside the EEA.",
+      "source_ids": [
+        "spam"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-phantom-rating",
+      "version": "1.0.0",
+      "category": "schema",
+      "classification": "policy-risk",
+      "title": "The phantom five stars",
+      "bad_example": "JSON-LD declares 127 reviews although no such reviews exist.",
+      "reason": "Misleading structured data violates quality guidelines.",
+      "replacement": "Remove invented values; represent only verifiable eligible review content.",
+      "verification": "Compare markup with review records, visible content and feature-specific rules.",
+      "false_positive_boundary": "Valid syntax alone does not establish truth or feature eligibility.",
+      "source_ids": [
+        "schema"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-schema-costume",
+      "version": "1.0.0",
+      "category": "schema",
+      "classification": "policy-risk",
+      "title": "A schema costume",
+      "bad_example": "A sales landing page declares itself a Dataset but has no dataset to access.",
+      "reason": "Markup must represent the actual page content.",
+      "replacement": "Choose a truthful type and expose the real object before describing it.",
+      "verification": "Open the distribution, inspect fields and compare the visible page with JSON-LD.",
+      "false_positive_boundary": "A legitimate dataset page may also describe a related product.",
+      "source_ids": [
+        "schema"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-schema-avalanche",
+      "version": "1.0.0",
+      "category": "schema",
+      "classification": "unsupported-shortcut",
+      "title": "Schema by the kilogram",
+      "bad_example": "Every page receives a huge generic graph advertised as an AI ranking boost.",
+      "reason": "Google documents no special schema requirement for AI features.",
+      "replacement": "Keep a small accurate page-specific graph with an actual consumer.",
+      "verification": "Resolve entity IDs and trace every assertion to a visible fact.",
+      "false_positive_boundary": "Useful open-web semantics can be valuable without a Google ranking claim.",
+      "source_ids": [
+        "ai"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-magic-agent-file",
+      "version": "1.0.0",
+      "category": "ai",
+      "classification": "unsupported-shortcut",
+      "title": "The magic agent file",
+      "bad_example": "A team calls the site AI-optimized solely because it added llms.txt.",
+      "reason": "Google says no new AI text file is needed for its AI features.",
+      "replacement": "Maintain useful canonical content and use agent files for identified consumers.",
+      "verification": "Test the consumer task; keep indexing and citation outcomes separate.",
+      "false_positive_boundary": "Other agents may use such files; Google guidance is not universal agent behavior.",
+      "source_ids": [
+        "ai"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-fake-freshness",
+      "version": "1.0.0",
+      "category": "editorial",
+      "classification": "quality-risk",
+      "title": "The daily date reset",
+      "bad_example": "An unchanged article shows a new updated date every morning.",
+      "reason": "Google warns against changing dates just to seem fresh.",
+      "replacement": "Tie update dates to meaningful changes and preserve the change history.",
+      "verification": "Compare revisions and the visible change note.",
+      "false_positive_boundary": "A substantial correction warrants a real update date.",
+      "source_ids": [
+        "helpful"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-word-quota",
+      "version": "1.0.0",
+      "category": "editorial",
+      "classification": "unsupported-shortcut",
+      "title": "The compulsory 2,000 words",
+      "bad_example": "A short answer is padded until a plugin reaches its target length.",
+      "reason": "Google does not have a preferred word count.",
+      "replacement": "End when the reader can complete the task; retain necessary caveats.",
+      "verification": "Ask a reviewer to perform the task and mark redundant passages.",
+      "false_positive_boundary": "Long material is appropriate for a task requiring depth.",
+      "source_ids": [
+        "helpful"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-headline-debt",
+      "version": "1.0.0",
+      "category": "editorial",
+      "classification": "quality-risk",
+      "title": "A title the page cannot repay",
+      "bad_example": "The title promises a definitive benchmark; the page contains only opinions.",
+      "reason": "Helpful-content guidance favors descriptive, non-exaggerated headings.",
+      "replacement": "Match title scope to the actual evidence and limitations.",
+      "verification": "List each title promise and locate its supporting section.",
+      "false_positive_boundary": "A distinctive title can still accurately describe the material.",
+      "source_ids": [
+        "helpful"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-voice-without-work",
+      "version": "1.0.0",
+      "category": "editorial",
+      "classification": "quality-risk",
+      "title": "Expert voice without the work",
+      "bad_example": "We rigorously tested everything appears above an untested comparison.",
+      "reason": "Reliability requires credible support for the claimed process.",
+      "replacement": "Describe what was actually tested, by whom, under which conditions.",
+      "verification": "Request the test record; narrow wording when it is absent.",
+      "false_positive_boundary": "Clear expert interpretation is useful when labeled as interpretation.",
+      "source_ids": [
+        "helpful"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-invented-history",
+      "version": "1.0.0",
+      "category": "maturity",
+      "classification": "measurement-risk",
+      "title": "A borrowed past",
+      "bad_example": "A new project adds three years of fictional releases and an invented reviewer.",
+      "reason": "Fabricated history cannot support maturity claims.",
+      "replacement": "Start a real changelog and publish the first reproducible example.",
+      "verification": "Trace each claimed release and reviewer contribution to actual records.",
+      "false_positive_boundary": "A young project can have excellent functionality immediately.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-doi-confetti",
+      "version": "1.0.0",
+      "category": "evidence",
+      "classification": "measurement-risk",
+      "title": "DOI confetti",
+      "bad_example": "Ten scholarly identifiers decorate a pricing page without supporting its claims.",
+      "reason": "Bibliographic identity is not claim support or endorsement.",
+      "replacement": "Attach each citation to the precise claim it supports, with scope.",
+      "verification": "Read the relevant passage and record supported, unsupported or unreviewed.",
+      "false_positive_boundary": "A relevant bibliography is useful when its role is clear.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-self-citation-loop",
+      "version": "1.0.0",
+      "category": "evidence",
+      "classification": "measurement-risk",
+      "title": "The self-citation loop",
+      "bad_example": "Five owner sites cite each other and the report calls this five independent adopters.",
+      "reason": "Common ownership does not establish independent adoption.",
+      "replacement": "Record owner groups and deduplicate mirrored works.",
+      "verification": "Review ownership evidence and keep unknown relationships unknown.",
+      "false_positive_boundary": "Cross-project reuse can be valuable when labeled as internal reuse.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-reserved-is-published",
+      "version": "1.0.0",
+      "category": "evidence",
+      "classification": "measurement-risk",
+      "title": "A reserved DOI presented as publication",
+      "bad_example": "The release claims archived and citable while the record remains unpublished.",
+      "reason": "Reservation and a published verified object are different states.",
+      "replacement": "Label the current state and verify the public deposited object before claiming publication.",
+      "verification": "Resolve the identifier and inspect the exact public object and version.",
+      "false_positive_boundary": "Reserving an identifier during preparation is legitimate.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-citation-equals-truth",
+      "version": "1.0.0",
+      "category": "analytics",
+      "classification": "measurement-risk",
+      "title": "A citation counted as a correct answer",
+      "bad_example": "An AI answer links the page but states the opposite of its evidence.",
+      "reason": "Exposure and supported citation are different observations.",
+      "replacement": "Review claim support and report unsupported citations separately.",
+      "verification": "Compare answer, cited passage, source version and observation date.",
+      "false_positive_boundary": "An unsupported citation still records exposure, not correctness.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-unknown-equals-zero",
+      "version": "1.0.0",
+      "category": "analytics",
+      "classification": "measurement-risk",
+      "title": "The invented zero",
+      "bad_example": "A disconnected monitoring source produces a report saying zero failures.",
+      "reason": "Missing coverage cannot establish absence of an event.",
+      "replacement": "Report unknown coverage and defer a rate until its denominator is observed.",
+      "verification": "Inspect coverage windows and missing-source states.",
+      "false_positive_boundary": "Zero is valid within a completed, explicitly covered window.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-premature-cohort",
+      "version": "1.0.0",
+      "category": "analytics",
+      "classification": "measurement-risk",
+      "title": "The day-one verdict",
+      "bad_example": "Yesterday’s release is judged against assets observed for a full month.",
+      "reason": "Unequal observation windows distort comparisons.",
+      "replacement": "Compare completed post-release windows and show immature assets separately.",
+      "verification": "Check release dates, observation cutoffs and cohort inclusion.",
+      "false_positive_boundary": "Early observations are useful when explicitly provisional.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-launch-caused-growth",
+      "version": "1.0.0",
+      "category": "analytics",
+      "classification": "measurement-risk",
+      "title": "The launch gets all the credit",
+      "bad_example": "Traffic rose after a schema change, so the report attributes the entire gain to schema.",
+      "reason": "Sequence alone does not establish causation.",
+      "replacement": "Record concurrent changes, compare suitable controls and preserve uncertainty.",
+      "verification": "Review seasonality, campaigns, query mix and unchanged comparable pages.",
+      "false_positive_boundary": "A before/after view is descriptive evidence when labeled correctly.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    },
+    {
+      "id": "anti-green-check-growth",
+      "version": "1.0.0",
+      "category": "analytics",
+      "classification": "measurement-risk",
+      "title": "Green checks sold as growth",
+      "bad_example": "A validator passes and the dashboard declares improved AI recommendations.",
+      "reason": "Implementation checks do not measure discovery outcomes.",
+      "replacement": "Show validation, publication, indexing, citation and useful action separately.",
+      "verification": "Trace each outcome label to an actual provider or reviewed observation.",
+      "false_positive_boundary": "Validation is necessary evidence for its own bounded contract.",
+      "source_ids": [
+        "relay"
+      ],
+      "reviewed_at": "2026-09-08",
+      "example_status": "synthetic",
+      "review_status": "manual-required"
+    }
+  ]
+}

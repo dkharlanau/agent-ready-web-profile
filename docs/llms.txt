@@ -219,3 +219,5 @@ ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/
 - [Editorial research lab](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-SEARCH-LAB.html): versioned article formats, voice, headings, section semantics and scoped AI measurement guidance.
 
 - [Evidence Relay](https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html): functional maturity emulation, appropriate distribution venues, DOI evidence and executable coverage-aware artifact analytics.
+
+- [Anti-patterns](https://dkharlanau.github.io/agent-ready-web-profile/ANTI-PATTERNS.html): 24 versioned negative examples, replacements, verification and false-positive boundaries.

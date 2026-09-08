@@ -111,3 +111,5 @@ Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/site
 - [Editorial research lab](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-SEARCH-LAB.html)
 
 - [Evidence Relay](https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html): functional maturity emulation, appropriate distribution venues, DOI evidence and executable coverage-aware artifact analytics.
+
+- [Anti-patterns](https://dkharlanau.github.io/agent-ready-web-profile/ANTI-PATTERNS.html): 24 versioned negative examples, replacements, verification and false-positive boundaries.

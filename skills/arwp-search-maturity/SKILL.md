@@ -12,6 +12,8 @@ metadata:
 
 Use this specialist when the Growth Loop needs a **reference cohort**, not another generic checklist.
 
+Use `docs/ANTI-PATTERNS.md` to review fabricated maturity, weak evidence and measurement errors; preserve unknown states and legitimate countercases. Record findings with `templates/growth/anti-pattern-review.md`.
+
 ## Goal
 
 Turn volatile Search/AI observations into an explainable comparison:

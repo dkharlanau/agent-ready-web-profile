@@ -16,6 +16,8 @@ Use this skill to improve content quality for humans first, while making the con
 
 Do not rewrite content into generic "AI SEO" prose. Google explicitly emphasizes useful, original, non-commodity content rather than special AI-only markup. Treat special AI files as supporting surfaces, not ranking shortcuts.
 
+Before editing, use `docs/ANTI-PATTERNS.md` and `knowledge/research/anti-patterns.json` to review applicable negative examples. Record context and false-positive boundaries using `templates/growth/anti-pattern-review.md`; automated text matches cannot prove low quality.
+
 ## Workflow
 
 1. Identify the page's real job.
