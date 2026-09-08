@@ -1,0 +1,606 @@
+{
+  "checked_at": "2026-09-08T07:59:56.851063+00:00",
+  "scope": "HTTP reachability and document identity check. This is separate from the editorial source review; HTTP success alone does not establish claim support. Source content was reviewed with web browsing on 2026-09-08.",
+  "sources": [
+    {
+      "source_id": "google-ai",
+      "requested_url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "checked_at": "2026-09-08T07:36:42.799532+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "content_type": "text/html; charset=utf-8",
+      "title": "AI Features and Your Website | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-helpful",
+      "requested_url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "checked_at": "2026-09-08T07:36:42.800034+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Creating Helpful, Reliable, People-First Content | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-spam",
+      "requested_url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "checked_at": "2026-09-08T07:36:42.800183+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Spam Policies for Google Web Search | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-robots",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
+      "checked_at": "2026-09-08T07:36:42.800342+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/robots/intro",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Robots.txt Introduction and Guide | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-meta",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+      "checked_at": "2026-09-08T07:36:42.800496+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Robots Meta Tags Specifications | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-canonical",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "checked_at": "2026-09-08T07:36:42.800683+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "content_type": "text/html; charset=utf-8",
+      "title": "How to Specify a Canonical with rel=\"canonical\" and Other Methods | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-sitemap",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "checked_at": "2026-09-08T07:36:42.800812+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Build and Submit a Sitemap | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-js",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "checked_at": "2026-09-08T07:36:42.800938+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Understand JavaScript SEO Basics | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-technical",
+      "requested_url": "https://developers.google.com/search/docs/essentials/technical",
+      "checked_at": "2026-09-08T07:36:43.943780+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/essentials/technical",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Google Search Technical Requirements | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-sd",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "checked_at": "2026-09-08T07:36:44.068095+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "content_type": "text/html; charset=utf-8",
+      "title": "General Structured Data Guidelines | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-article",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+      "checked_at": "2026-09-08T07:36:44.075327+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Learn About Article Schema Markup | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-dataset",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/dataset",
+      "checked_at": "2026-09-08T07:36:44.083675+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/dataset",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Dataset Structured Data | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-organization",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+      "checked_at": "2026-09-08T07:36:44.088691+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Organization Schema Markup | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-breadcrumb",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb",
+      "checked_at": "2026-09-08T07:36:44.115679+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb",
+      "content_type": "text/html; charset=utf-8",
+      "title": "How To Add Breadcrumb (BreadcrumbList) Markup | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-product",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/product",
+      "checked_at": "2026-09-08T07:36:44.613968+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/product",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Intro to Product Structured Data on Google | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-local",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
+      "checked_at": "2026-09-08T07:36:44.721353+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Local Business (LocalBusiness) Structured Data | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-reviews",
+      "requested_url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
+      "checked_at": "2026-09-08T07:36:44.744046+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
+      "content_type": "text/html; charset=utf-8",
+      "title": "How To Write Reviews | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-title",
+      "requested_url": "https://developers.google.com/search/docs/appearance/title-link",
+      "checked_at": "2026-09-08T07:36:44.774688+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/title-link",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Influencing Title Links in Google Search | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-snippet",
+      "requested_url": "https://developers.google.com/search/docs/appearance/snippet",
+      "checked_at": "2026-09-08T07:36:44.833096+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/snippet",
+      "content_type": "text/html; charset=utf-8",
+      "title": "How to Write Meta Descriptions | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-links",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+      "checked_at": "2026-09-08T07:36:44.884677+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+      "content_type": "text/html; charset=utf-8",
+      "title": "SEO Link Best Practices for Google | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-hreflang",
+      "requested_url": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "checked_at": "2026-09-08T07:36:45.028543+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Localized Versions of your Pages | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-international",
+      "requested_url": "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites",
+      "checked_at": "2026-09-08T07:36:45.055251+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Managing Multi-Regional and Multilingual Sites | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-move",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+      "checked_at": "2026-09-08T07:36:45.312923+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Site Moves and Migrations | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-facets",
+      "requested_url": "https://developers.google.com/crawling/docs/faceted-navigation",
+      "checked_at": "2026-09-08T07:36:45.651014+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/crawling/docs/faceted-navigation",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Managing crawling of faceted navigation URLs | Google Crawling Infrastructure \u00a0|\u00a0 Crawling infrastructure \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-http",
+      "requested_url": "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes",
+      "checked_at": "2026-09-08T07:36:45.726442+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes",
+      "content_type": "text/html; charset=utf-8",
+      "title": "How HTTP Status Codes Affect Google's Crawlers | Google Crawling Infrastructure \u00a0|\u00a0 Crawling infrastructure \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-images",
+      "requested_url": "https://developers.google.com/search/docs/appearance/google-images",
+      "checked_at": "2026-09-08T07:36:45.867783+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/google-images",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Image SEO Best Practices | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-video",
+      "requested_url": "https://developers.google.com/search/docs/appearance/video",
+      "checked_at": "2026-09-08T07:36:45.966128+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/video",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Video SEO Best Practices | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-experience",
+      "requested_url": "https://developers.google.com/search/docs/appearance/page-experience",
+      "checked_at": "2026-09-08T07:36:45.975166+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/page-experience",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Understanding Google Page Experience | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "web-vitals",
+      "requested_url": "https://web.dev/articles/vitals",
+      "checked_at": "2026-09-08T07:36:46.142503+00:00",
+      "status": 200,
+      "final_url": "https://web.dev/articles/vitals",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Web Vitals \u00a0|\u00a0 Articles \u00a0|\u00a0 web.dev",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-updates",
+      "requested_url": "https://developers.google.com/search/updates",
+      "checked_at": "2026-09-08T07:36:46.172231+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/updates",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Latest Google Search Documentation Updates | Google Search Central \u00a0|\u00a0 What's new \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "indexnow",
+      "requested_url": "https://www.indexnow.org/documentation",
+      "checked_at": "2026-09-08T07:36:46.200358+00:00",
+      "status": 200,
+      "final_url": "https://www.indexnow.org/documentation",
+      "content_type": "text/html",
+      "title": "Documentation | IndexNow.org",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "gsc-metrics",
+      "requested_url": "https://support.google.com/webmasters/answer/7042828",
+      "checked_at": "2026-09-08T07:36:46.587386+00:00",
+      "status": 200,
+      "final_url": "https://support.google.com/webmasters/answer/7042828",
+      "content_type": "text/html; charset=UTF-8",
+      "title": "What are impressions, position, and clicks? - Search Console Help",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "gsc-api",
+      "requested_url": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+      "checked_at": "2026-09-08T07:36:46.775929+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Search Analytics: query \u00a0|\u00a0 Search Console API \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-drops",
+      "requested_url": "https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops",
+      "checked_at": "2026-09-08T07:36:46.871031+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Debug Google Search Traffic Drops | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-recrawl",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl",
+      "checked_at": "2026-09-08T07:36:46.914820+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Ask Google to Recrawl Your Website | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-outbound",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "checked_at": "2026-09-08T07:36:46.996128+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Qualify Outbound Links for SEO | Google Search Central \u00a0|\u00a0 Documentation \u00a0|\u00a0 Google for Developers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "openai-bots",
+      "requested_url": "https://developers.openai.com/api/docs/bots",
+      "checked_at": "2026-09-08T07:36:47.019995+00:00",
+      "status": 200,
+      "final_url": "https://developers.openai.com/api/docs/bots",
+      "content_type": "text/markdown; charset=utf-8",
+      "title": "Overview of OpenAI Crawlers",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "bing-ai",
+      "requested_url": "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+      "checked_at": "2026-09-08T07:36:47.237265+00:00",
+      "status": 200,
+      "final_url": "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Introducing AI Performance in Bing Webmaster Tools Public Preview  ...",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "jsonld",
+      "requested_url": "https://www.w3.org/TR/json-ld11/",
+      "checked_at": "2026-09-08T07:36:47.349147+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/TR/json-ld11/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "JSON-LD 1.1",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "html-data",
+      "requested_url": "https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes",
+      "checked_at": "2026-09-08T07:36:47.358424+00:00",
+      "status": 200,
+      "final_url": "https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes",
+      "content_type": "text/html; charset=utf-8",
+      "title": "HTML Standard",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "data-web",
+      "requested_url": "https://www.w3.org/TR/dwbp/",
+      "checked_at": "2026-09-08T07:36:47.393455+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/TR/dwbp/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Data on the Web Best Practices",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-person",
+      "requested_url": "https://schema.org/Person",
+      "checked_at": "2026-09-08T07:36:47.721445+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/Person",
+      "content_type": "text/html",
+      "title": "Person - Schema.org Type",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-sameas",
+      "requested_url": "https://schema.org/sameAs",
+      "checked_at": "2026-09-08T07:36:47.863499+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/sameAs",
+      "content_type": "text/html",
+      "title": "sameAs - Schema.org Property",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-service",
+      "requested_url": "https://schema.org/Service",
+      "checked_at": "2026-09-08T07:36:47.995478+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/Service",
+      "content_type": "text/html",
+      "title": "Service - Schema.org Type",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-software",
+      "requested_url": "https://schema.org/SoftwareApplication",
+      "checked_at": "2026-09-08T07:36:48.025367+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/SoftwareApplication",
+      "content_type": "text/html",
+      "title": "SoftwareApplication - Schema.org Type",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-term",
+      "requested_url": "https://schema.org/DefinedTerm",
+      "checked_at": "2026-09-08T07:36:48.031920+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/DefinedTerm",
+      "content_type": "text/html",
+      "title": "DefinedTerm - Schema.org Type",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-download",
+      "requested_url": "https://schema.org/DataDownload",
+      "checked_at": "2026-09-08T07:36:48.134097+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/DataDownload",
+      "content_type": "text/html",
+      "title": "DataDownload - Schema.org Type",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-claim",
+      "requested_url": "https://schema.org/Claim",
+      "checked_at": "2026-09-08T07:36:48.183580+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/Claim",
+      "content_type": "text/html",
+      "title": "Claim - Schema.org Type",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-citation",
+      "requested_url": "https://schema.org/citation",
+      "checked_at": "2026-09-08T07:36:48.256070+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/citation",
+      "content_type": "text/html",
+      "title": "citation - Schema.org Property",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "schema-dataset",
+      "requested_url": "https://schema.org/Dataset",
+      "checked_at": "2026-09-08T07:36:48.282236+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/Dataset",
+      "content_type": "text/html",
+      "title": "Dataset - Schema.org Type",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "wai-tables",
+      "requested_url": "https://www.w3.org/WAI/tutorials/tables/",
+      "checked_at": "2026-09-08T07:36:48.329481+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/tutorials/tables/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Tables Tutorial | Web Accessibility Initiative (WAI) | W3C",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "wai-images",
+      "requested_url": "https://www.w3.org/WAI/tutorials/images/",
+      "checked_at": "2026-09-08T07:36:48.389608+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/tutorials/images/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Images Tutorial | Web Accessibility Initiative (WAI) | W3C",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "wai-structure",
+      "requested_url": "https://www.w3.org/WAI/tutorials/page-structure/",
+      "checked_at": "2026-09-08T07:36:48.398824+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/tutorials/page-structure/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Page Structure Tutorial | Web Accessibility Initiative (WAI) | W3C",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "mdn-cite",
+      "requested_url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite",
+      "checked_at": "2026-09-08T07:36:48.534608+00:00",
+      "status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite",
+      "content_type": "text/html",
+      "title": "<cite> HTML citation element - HTML | MDN",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "mdn-etag",
+      "requested_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag",
+      "checked_at": "2026-09-08T07:36:48.552742+00:00",
+      "status": 200,
+      "final_url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag",
+      "content_type": "text/html",
+      "title": "ETag header - HTTP | MDN",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "stripe-idempotency",
+      "requested_url": "https://docs.stripe.com/api/idempotent_requests",
+      "checked_at": "2026-09-08T07:36:48.582707+00:00",
+      "status": 200,
+      "final_url": "https://docs.stripe.com/api/idempotent_requests",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Idempotent requests | Stripe API Reference",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "stripe-upgrades",
+      "requested_url": "https://docs.stripe.com/upgrades",
+      "checked_at": "2026-09-08T07:36:48.612313+00:00",
+      "status": 200,
+      "final_url": "https://docs.stripe.com/upgrades",
+      "content_type": "text/html; charset=utf-8",
+      "title": "API-Upgrades | Stripe-Dokumentation",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "cloudflare-limits",
+      "requested_url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "checked_at": "2026-09-08T07:36:48.618811+00:00",
+      "status": 200,
+      "final_url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "content_type": "text/html",
+      "title": "Limits \u00b7 Cloudflare Workers docs",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "github-releases",
+      "requested_url": "https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository",
+      "checked_at": "2026-09-08T07:36:48.624073+00:00",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Managing releases in a repository - GitHub Docs",
+      "result": "retrieved"
+    },
+    {
+      "source_id": "google-generative-ai-report",
+      "requested_url": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+      "checked_at": "2026-09-08T07:59:56.851063+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Introducing Search Generative AI performance reports in Search Console &nbsp;|&nbsp; Google Search Central Blog &nbsp;|&nbsp; Google for Developers",
+      "result": "retrieved"
+    }
+  ]
+}

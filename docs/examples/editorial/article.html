@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Start with a readable answer before adding AI discovery files</title>
+<meta name="description" content="A source-backed publishing example that separates search eligibility from an experiment in machine reading.">
+<link rel="canonical" href="https://example.com/guides/readable-answer/">
+<link rel="stylesheet" href="editorial.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://example.com/guides/readable-answer/#page","url":"https://example.com/guides/readable-answer/","name":"Start with a readable answer before adding AI discovery files","mainEntity":{"@id":"https://example.com/guides/readable-answer/#article"}},{"@type":"Article","@id":"https://example.com/guides/readable-answer/#article","headline":"Start with a readable answer before adding AI discovery files","inLanguage":"en","publisher":{"@id":"https://example.com/#publisher"},"citation":{"@id":"https://developers.google.com/search/docs/appearance/ai-features"},"mainEntityOfPage":{"@id":"https://example.com/guides/readable-answer/#page"}},{"@type":"Organization","@id":"https://example.com/#publisher","name":"Example Documentation","description":"Fictional publisher identity used only in this educational fixture."}]}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the article</a>
+<main id="main"><article>
+<p class="eyebrow">Editorial pattern · Documentation publishing</p>
+<p class="notice">Educational fixture. Example Documentation is a fictional publisher; example.com is a reserved example domain. This file is marked noindex. The source claims below are real; no ranking experiment has been performed.</p>
+<h1>Start with a readable answer before adding AI discovery files</h1>
+<p class="meta">For documentation maintainers · Sources checked <time datetime="2026-09-08">8 September 2026</time></p>
+<div class="answer"><p>First make the page answer a real reader question, with its important qualifications and sources available as text. Then test whether an additional machine-readable representation helps the clients you actually support.</p></div>
+<p id="claim-eligibility" data-claim-id="eligibility" data-evidence="documented" data-evidence-id="claim-eligibility" data-source-ids="google-ai">For a page to be eligible as a supporting link in Google's AI search features, it must be indexed and eligible for a search snippet. Eligibility does not guarantee that the page will be shown. <a href="#source-google-ai" aria-label="Source 1: Google AI search guidance">[1]</a></p>
+<h2 id="smallest-check">Run one small check</h2>
+<ol>
+<li>Choose one public guide and a question it should answer.</li>
+<li>Fetch the deployed page as ordinary HTML, extract its readable text, and identify the answer, its main condition, and its evidence link.</li>
+<li>Open the rendered page at a narrow viewport. Check that a reader can find the same answer and use the source link.</li>
+<li>If you offer Markdown or a JSON summary, compare those facts with the HTML. Record missing qualifications and contradictory values.</li>
+</ol>
+<p>This is an ARWP verification proposal. It tests whether representations retain the answer; it does not measure Google indexing or ranking. JavaScript-rendered sites need an additional rendered-content check.</p>
+<h2 id="what-to-add">Add a representation only for a clear use</h2>
+<p id="claim-extra-files" data-claim-id="extra-files" data-evidence="documented" data-evidence-id="claim-extra-files" data-source-ids="google-ai">Google says additional AI text files and special schema are unnecessary for these search features. <a href="#source-google-ai" aria-label="Source 1: Google AI search guidance">[1]</a> A separate representation can still be a reasonable interoperability experiment for a client that reads it.</p>
+<p id="claim-private-data" data-claim-id="private-data" data-evidence="documented" data-evidence-id="claim-private-data" data-source-ids="html-data">HTML permits private application metadata in <code>data-*</code> attributes. <a href="#source-html-data" aria-label="Source 2: HTML custom data attributes">[2]</a> The evidence attributes in this example are a local editorial convention. They provide no instruction to recommend this page and no documented ranking advantage.</p>
+<h2 id="exception">When this check is not enough</h2>
+<p>A complete extracted answer can still be outdated, unsupported, or blocked by the actual crawler policy. A server response from a normal client cannot establish how a verified crawler was treated. Check claims, access policy, and provider observations independently.</p>
+<h2 id="method">Method and original contribution</h2>
+<p>The external claims were checked against the primary sources below. The four-step verification sequence and the HTML-to-receipt link convention are original ARWP proposals. This example contains no measured search result, customer result, or product-performance assertion.</p>
+<p><a href="article.receipt.json">Inspect the matching editorial receipt</a> or <a href="comparison.html">compare the purposes of HTML, JSON-LD, and Markdown</a>.</p>
+<h2 id="sources">Sources</h2>
+<ol aria-label="Sources">
+<li id="source-google-ai"><cite><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a></cite> — Google Search Central. Supports the eligibility and additional-file statements. Checked <time datetime="2026-09-08">8 September 2026</time>. <a href="#claim-eligibility" aria-label="Return to eligibility claim">↩</a></li>
+<li id="source-html-data"><cite><a href="https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes">HTML: custom data attributes</a></cite> — WHATWG. Supports private application metadata, not search impact. Checked <time datetime="2026-09-08">8 September 2026</time>. <a href="#claim-private-data" aria-label="Return to private data claim">↩</a></li>
+</ol>
+<footer><p>Publisher fixture: Example Documentation. Replace the fictional identity and canonical URL, review the sources, and deliberately choose the indexing policy before using this pattern on a real site.</p></footer>
+</article></main>
+</body>
+</html>

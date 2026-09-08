@@ -125,3 +125,7 @@ Do not add obsolete `<meta name="keywords">`. Do not claim special AI files or t
 Do not bypass access controls or automate side-effectful agent actions from discovery metadata. Do not put credentials, cookies or private URLs in fixtures/receipts. Runtime evidence remains opt-in and scoped.
 
 Before publishing a potentially novel technical mechanism, ask whether the detailed algorithm belongs in open core, hosted/private implementation, confidential R&D or intentional defensive publication. Do not publish candidate patent claims or confidential learned priors just to document progress.
+
+## Implementation practice library
+
+Use `arwp-discoverability` inside the default Growth Loop for concrete editorial, comparison, technical and measurement practices. The library at `discoverability.html` and `knowledge/discoverability-corpus.json` routes to existing hypotheses and rules. Exported selections are plans, not verified changes or outcome receipts. Rebuild with `npm run build:discoverability` after changing the corpus or templates; retain every existing sitemap route.

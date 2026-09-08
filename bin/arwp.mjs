@@ -8,6 +8,7 @@ import { formatScanSummary, scanSite } from '../lib/scanner.mjs';
 import { formatHealthReport, healthReport } from '../lib/health.mjs';
 import { checkProtocolArtifacts } from '../lib/protocol-checks.mjs';
 import { auditSite, formatAuditReport } from '../lib/site-audit.mjs';
+import { loadCorpus, searchTactics, createAdoptionPlan, validateEditorialReceipt } from '../lib/discoverability.mjs';
 import { resolveSite, explainResolvedSite, planResolvedSite, DEFAULT_RESOLVER_MAX_BYTES } from '../lib/resolver.mjs';
 import { resolveMany } from '../lib/resolver-batch.mjs';
 import { createResolverSnapshot, diffResolverSnapshots } from '../lib/resolver-snapshot.mjs';
@@ -20,6 +21,9 @@ function usage() {
   console.log(`Agent-Ready Web Profile CLI ${toolVersion}
 
 Usage:
+  arwp discoverability [--search=<words>] [--category=<id>] [--evidence=<level>] [--hypothesis=<id>] [--rule=<id>] [--limit=<n>] [--json]
+  arwp adoption-plan <adoption.json> [--output=<plan.json>] [--force] [--json]
+  arwp editorial-check <receipt.json> [--json]
   arwp validate <profile.json> [--json]
   arwp verify <profile.json|https://...> [--json] [--timeout=<ms>] [--concurrency=<n>]
   arwp scan <https://site.example> [--json] [--timeout=<ms>] [--max-bytes=<n>]
@@ -41,6 +45,9 @@ Usage:
   arwp router-mcp
 
 Commands:
+  discoverability    Select source-backed practices linked to native Growth hypotheses and recommendation rules.
+  adoption-plan      Prepare a bounded practice selection for the existing Growth Loop; outcomes remain unmeasured.
+  editorial-check    Check claim/source and comparison receipt consistency; source support still needs review.
   validate           Validate one local ARWP profile against the v0.1 schema and semantic checks.
   verify             Validate a local or remote profile and probe every declared public URL.
   scan               Inspect a public HTTPS website and report bounded, directly observed interoperability evidence.
@@ -173,6 +180,52 @@ async function main() {
   if (command === '--version' || command === '-v') {
     console.log(toolVersion);
     return 0;
+  }
+  if (command === 'discoverability') {
+    const result = searchTactics(loadCorpus(), {
+      category: optionValue('category'), evidence: optionValue('evidence'), search: optionValue('search'),
+      hypothesis: optionValue('hypothesis'), rule: optionValue('rule'),
+      limit: numericOption('limit', 20)
+    });
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else {
+      console.log(`Discoverability practices: ${result.returned} of ${result.total} matches (corpus ${result.corpus_version})`);
+      console.log(result.scope);
+      for (const tactic of result.tactics) {
+        console.log(`\n${tactic.id}  ${tactic.title} [${tactic.evidence_level}; ${tactic.effort}]`);
+        console.log(tactic.problem);
+        for (const step of tactic.implementation) console.log(`  Do: ${step}`);
+        for (const check of tactic.verification) console.log(`  Check: ${check}`);
+        console.log(`  Measure: ${tactic.measurement}`);
+        console.log(`  Growth hypotheses: ${tactic.growth_hypothesis_ids.join(', ')}`);
+        console.log(`  Recommendation rules: ${tactic.recommendation_rule_ids.join(', ') || 'No current matching rule'}`);
+        for (const id of tactic.source_ids) console.log(`  Source: ${result.sources.find(item => item.id === id).url}`);
+      }
+    }
+    return 0;
+  }
+  if (command === 'adoption-plan') {
+    if (!source || source.startsWith('--')) throw new Error('adoption-plan requires a local adoption.json.');
+    const plan = createAdoptionPlan(readJsonFile(source), loadCorpus());
+    const output = optionValue('output');
+    if (output) {
+      if (fs.existsSync(path.resolve(output)) && !args.includes('--force')) throw new Error('Output exists; choose a new path or use --force.');
+      const written = writeJsonOutput(plan, output);
+      if (jsonOutput) console.log(JSON.stringify({ written, plan }, null, 2));
+      else console.log(`WROTE ${written}\n${plan.tasks.length} planned tasks; outcomes remain unmeasured.`);
+    } else console.log(JSON.stringify(plan, null, 2));
+    return 0;
+  }
+  if (command === 'editorial-check') {
+    if (!source || source.startsWith('--')) throw new Error('editorial-check requires a local receipt.json.');
+    const result = validateEditorialReceipt(readJsonFile(source));
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else {
+      console.log(`${result.valid ? 'PASS' : 'FAIL'} ${source}`);
+      console.log(result.scope);
+      for (const error of result.errors) console.error(`  ${error}`);
+    }
+    return result.valid ? 0 : 1;
   }
   if (command === 'resolver-mcp') {
     await import('../resolver/server.mjs');

@@ -209,3 +209,9 @@ AI Search & Citation Profile version: 0.1 (non-normative project profile).
 ## Boundaries
 
 ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/OAuth/OpenAPI, proof that an undeclared runtime capability exists, security certificate, or external endorsement. The AI Search & Citation Profile is likewise not a guarantee of inclusion, citation or ranking in any search/AI product. Machine-readable reuse permission applies only to material explicitly covered by the rights manifest and does not override third-party rights. Prefer observed and protocol-native evidence, publish original useful material, preserve source authority and negative results, keep planned surfaces distinct from active ones, and do not claim DOI/attestation/adoption before the relevant external evidence exists. When a localized routing surface and the canonical English technical documentation differ, use the canonical English technical documentation for project-defined semantics.
+
+## Implementation practice library
+
+- [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 144 concrete practices with sources, verification and native hypothesis/rule routing.
+- [Machine-readable corpus](https://dkharlanau.github.io/agent-ready-web-profile/knowledge/discoverability-corpus.json): planning material; no measured ranking effects are implied.
+- [Editorial receipt contract](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-RECEIPTS.md): visible claim-source relationships for useful articles and comparisons.

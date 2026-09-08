@@ -81,3 +81,7 @@ Do not rewrite content into generic "AI SEO" prose. Google explicitly emphasizes
 ## Completion standard
 
 A good ARWP content change should leave the page more useful even if no AI system ever reads it. It should also make the page's answer, entity, evidence, date, source relationships and canonical location easier for machines to identify.
+
+## Worked article and comparison evidence
+
+Use [the practice library](../../docs/DISCOVERABILITY-PLAYBOOK.md) for decision-oriented article shapes, cell-level comparison sources and visible footnotes. The [editorial receipt contract](../../docs/EDITORIAL-RECEIPTS.md) records the question, original contribution, useful action and source support; run `arwp editorial-check receipt.json` to detect broken references. This local convention cannot establish source entailment, actual rendered content or ranking benefit. Inspect those separately. The [article](../../docs/examples/editorial/article.html) and [comparison](../../docs/examples/editorial/comparison.html) are explicitly noindex fixtures with reserved example identities; adapt only verified facts.

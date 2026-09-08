@@ -4,6 +4,12 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Discoverability implementation library
+
+- Added 144 source-backed practices with native Growth hypothesis and recommendation routing, checkable implementation steps and explicit uncertainty.
+- Added searchable public library, exact-site scoped selection plans, editorial receipt validation and worked noindex article/comparison examples with visible source footnotes.
+- Kept Growth Loop orchestration and BraidGraph provenance authoritative; selections do not establish implementation or Search/AI outcomes.
+
 ### Resolver interoperability layer
 
 - Reframed the toolchain so an ARWP profile is one useful publisher input rather than a required universal manifest.

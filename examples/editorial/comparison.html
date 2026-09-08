@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>HTML, JSON-LD, or Markdown: which publishing surface comes first?</title>
+<meta name="description" content="A dated comparison of three publishing approaches, with source-supported capabilities and explicit editorial judgments.">
+<link rel="canonical" href="https://example.com/compare/publishing-surfaces/"><link rel="stylesheet" href="editorial.css">
+</head>
+<body><a class="skip" href="#main">Skip to the comparison</a><main id="main"><article>
+<p class="eyebrow">Comparison pattern · Publishing infrastructure</p>
+<p class="notice">Educational fixture. This is an ARWP-authored comparison of publishing approaches, not an independent product test. It contains no performance scores or observed ranking results.</p>
+<h1>HTML, JSON-LD, or Markdown: which publishing surface comes first?</h1>
+<p class="meta">For maintainers of public documentation · As of <time datetime="2026-09-08">8 September 2026</time></p>
+<div class="answer"><p>Our editorial recommendation is to establish a useful canonical page first, add truthful structured facts where they serve a defined consumer, and test an alternate text representation when a supported client benefits from it.</p></div>
+<h2 id="method">Criteria and method</h2>
+<p>We compare the reader job served, the evidence each approach can carry, and its practical limitation. The factual descriptions below come from the linked primary documentation. The “use it when” column is an ARWP judgment. We did not conduct a speed, retrieval, or ranking benchmark.</p>
+<div class="table-scroll" role="region" aria-label="Publishing approach comparison" tabindex="0"><table>
+<caption>Capabilities and limits checked on 8 September 2026</caption>
+<thead><tr><th scope="col">Approach</th><th scope="col">Documented basis</th><th scope="col">Use it when — editorial judgment</th><th scope="col">Limitation</th></tr></thead>
+<tbody>
+<tr><th scope="row">Canonical page with accessible text</th><td id="claim-text" data-claim-id="text" data-evidence="documented" data-source-ids="google-ai">Google recommends important content in text and ordinary search eligibility for AI features. <a href="#source-google-ai" aria-label="Source 1: Google AI search guidance">[1]</a></td><td>You need a primary answer that people can read, navigate, and cite.</td><td>Useful HTML and technical eligibility do not guarantee indexing or selection.</td></tr>
+<tr><th scope="row">JSON-LD beside visible content</th><td id="claim-jsonld" data-claim-id="jsonld" data-evidence="documented" data-source-ids="google-sd">Google supports JSON-LD structured data and requires it to represent the relevant visible content. <a href="#source-google-sd" aria-label="Source 2: Google structured data guidance">[2]</a></td><td>A supported consumer needs precise entity relationships or applicable structured facts.</td><td>Valid syntax cannot prove truth, and valid markup does not guarantee a rich result.</td></tr>
+<tr><th scope="row">Maintained alternate Markdown</th><td id="claim-markdown" data-claim-id="markdown" data-evidence="documented" data-source-ids="openai-bots">OpenAI's documentation advertises Markdown versions by appending <code>.md</code> to a documentation page URL. This is an observed publisher pattern. <a href="#source-openai-bots" aria-label="Source 3: OpenAI documentation page">[3]</a></td><td>A client you support reads Markdown more reliably and a parity test confirms the benefit.</td><td>The observation does not establish an industry requirement or ranking effect; a separate representation needs maintenance.</td></tr>
+</tbody></table></div>
+<h2 id="fit">Choose by the actual task</h2>
+<ul><li><strong>The answer is missing or unclear:</strong> improve the canonical page and verify it with a reader task.</li><li><strong>An entity consumer confuses identities:</strong> test a small graph with stable IDs and visible factual support.</li><li><strong>A specific client loses information during HTML extraction:</strong> compare a generated Markdown version against the same held-out questions.</li></ul>
+<p>These approaches can complement each other. The comparison helps prioritize work; it does not name a universal winner.</p>
+<h2 id="switching">Implementation and maintenance cost</h2>
+<p>Before adding a format, decide its authoritative source and how updates reach it. Use one changed claim to test propagation across the page, graph, and export. Leave unknown performance effects unknown until measured.</p>
+<p><a href="comparison.receipt.json">Inspect criteria and claims in the comparison receipt</a>. For a page-level pattern, use the <a href="article.html">readable-answer example</a>.</p>
+<h2 id="sources">Sources and support boundaries</h2>
+<ol aria-label="Sources">
+<li id="source-google-ai"><cite><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a></cite> — Google Search Central. Supports text and eligibility facts, not ARWP's priority judgment. <a href="#claim-text" aria-label="Return to text claim">↩</a></li>
+<li id="source-google-sd"><cite><a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">General structured data guidelines</a></cite> — Google Search Central. Supports format, visibility, and rich-result limitations. <a href="#claim-jsonld" aria-label="Return to JSON-LD claim">↩</a></li>
+<li id="source-openai-bots"><cite><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI crawlers</a></cite> — OpenAI. The page advertises its alternate Markdown representation; that observation is not a causal performance result. <a href="#claim-markdown" aria-label="Return to Markdown observation">↩</a></li>
+</ol>
+<footer><p>All sources checked 8 September 2026. Replace the example.com canonical and deliberately review indexing before adapting this fixture. For actual product or service comparisons, collect current cell-level evidence about every named option.</p></footer>
+</article></main></body></html>
