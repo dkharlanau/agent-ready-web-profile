@@ -40,6 +40,9 @@ const profile = {
 };
 
 assert.equal(validateSiteFocusProfile(profile).valid, true);
+const publicExample = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'examples', 'site-focus.profile.json'), 'utf8'));
+const publicExampleValidation = validateSiteFocusProfile(publicExample);
+assert.equal(publicExampleValidation.valid, true, JSON.stringify(publicExampleValidation.errors));
 
 const home = `<!doctype html><html><head><title>Voice practice — Ptichi</title><meta name="description" content="Practical rehearsal for clearer expressive speech."><link rel="canonical" href="https://example.com/"></head><body><nav><a href="/practice/">Practice</a><a href="/science/">Science</a><a href="/about/">About</a><a href="/extra/">Extra</a></nav><h1>Practice a clearer speaking voice</h1><a href="/practice/">Start practice</a></body></html>`;
 const practice = `<!doctype html><html><head><title>Voice practice drills</title><meta name="description" content="Voice rehearsal drills for clear speech."><link rel="canonical" href="https://example.com/practice/"></head><body><h1>Voice practice drills</h1><a href="/practice/session/">Start session</a></body></html>`;
@@ -102,4 +105,4 @@ try {
   fs.rmSync(tmp, { recursive: true, force: true });
 }
 
-console.log('PASS Site Focus v0.2 compares declared intent with observed structure, assigns route roles, suppresses locale-equivalent merge noise and emits proposal-only transformation handoff candidates');
+console.log('PASS Site Focus v0.2 compares declared intent with observed structure, assigns route roles, suppresses locale-equivalent merge noise, validates the public copyable profile and emits proposal-only transformation handoff candidates');
