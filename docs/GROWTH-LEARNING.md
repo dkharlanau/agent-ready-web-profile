@@ -23,8 +23,9 @@ None of these transitions is a ranking guarantee. `MEASURED` means real longitud
 ARWP accepts owner-provided CSV or JSON exports before requiring any OAuth/API integration.
 
 ```bash
-arwp-visibility import google.csv \
+arwp-visibility import google-generative-ai.csv \
   --provider=google \
+  --report-scope=generative-ai \
   --site=https://example.com/ \
   --start=2026-08-01 \
   --end=2026-08-31 \
@@ -47,6 +48,8 @@ arwp-visibility import analytics.csv \
 ```
 
 Adapters normalize only supported aggregate metrics that are actually present. Unknown fields stay in the original owner export; ARWP does not invent missing numbers. An unrecognized export remains `partial` rather than being converted into zero evidence. The explicit `start`/`end` period is the comparison window; experiment notes should record material confounders that the export itself does not capture.
+
+For Google, generic `Impressions` columns are ambiguous and rejected unless the owner supplies `--report-scope=generative-ai` (`reportScope: 'generative-ai'` in the JavaScript API). Use this only for an export from the dedicated generative AI report. The option records the owner's report context; it does not verify provenance. Keep the original export and its property, report, filters and effective dates as evidence. Ordinary Web Search exports cannot be imported as AI visibility. Explicit `AI Impressions`, `Generative AI Impressions` and `Generative Search Impressions` columns remain supported without the option. Unsupported explicit report scopes are rejected.
 
 ## 2. Review primary-source Trend changes
 

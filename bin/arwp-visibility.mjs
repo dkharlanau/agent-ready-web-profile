@@ -18,9 +18,9 @@ Usage:
   arwp-visibility validate <snapshot.json> [--json]
   arwp-visibility show <snapshot.json> [--json]
   arwp-visibility compare <before.json> <after.json> [--json]
-  arwp-visibility import <export.csv|export.json> --provider=<google|bing|referrals> --site=https://... --start=YYYY-MM-DD --end=YYYY-MM-DD [--captured-at=ISO] [--evidence=URI] [--match=chatgpt.com,openai.com] [--output=snapshot.json] [--json]
+  arwp-visibility import <export.csv|export.json> --provider=<google|bing|referrals> --site=https://... --start=YYYY-MM-DD --end=YYYY-MM-DD [--report-scope=generative-ai] [--captured-at=ISO] [--evidence=URI] [--match=chatgpt.com,openai.com] [--output=snapshot.json] [--json]
 
-Visibility snapshots store aggregate owner-observed evidence. Import adapters normalize only metrics actually present in owner exports. Comparisons report deltas only and never infer ranking or causality from ARWP adoption.`);
+Visibility snapshots store aggregate owner-observed evidence. Import adapters normalize only metrics actually present in owner exports. Google exports with generic Impressions require --report-scope=generative-ai and must come from the dedicated generative AI report; ordinary Web Search exports are unsupported. Explicit AI impression columns do not require this option. Comparisons report deltas only and never infer ranking or causality from ARWP adoption.`);
 }
 
 const args = process.argv.slice(2);
@@ -69,6 +69,7 @@ function main() {
       site,
       start,
       end,
+      reportScope: optionValue('report-scope'),
       capturedAt: optionValue('captured-at'),
       evidence: optionValue('evidence'),
       match: optionValue('match')
