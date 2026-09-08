@@ -1,6 +1,6 @@
 # Catalog review: fixing the evidence, not just adding patterns
 
-Review edition 1.1.0 · 8 September 2026 · corpus 1.8.0.
+Review edition 1.2.0 · 8 September 2026 · corpus 1.9.0.
 
 The commercial pass individually reviewed 23 previously unreviewed comparison, service and localization practices. Nine needed source or instruction corrections. Fourteen gained scoped review notes without operational changes. All 23 remain **inferred**: reading a source does not turn a project workflow into a documented ranking mechanism.
 
@@ -28,7 +28,7 @@ Review-only changes advance the pattern patch version. Changed instructions or s
 
 ## Remaining work
 
-The library still contains 219 patterns. Individual review coverage is now 146; 73 historical records remain unreviewed. The source register has 121 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
+The library still contains 219 patterns. Individual review coverage is now 164; 55 historical records remain unreviewed. The source register has 122 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
 
 The next passes should apply the same test to technical access, architecture, datasets, media, editorial and measurement practices: direct support, valid analogy or unsupported assertion? Keep useful project proposals explicitly inferred; replace unrelated evidence and revise operational mistakes before increasing the reviewed count.
 
@@ -45,3 +45,13 @@ Six instruction or source corrections and fourteen scoped reviews preserve the i
 Sources: [JavaScript processing](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics), [URL Inspection](https://support.google.com/webmasters/answer/9012289), [pagination](https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading), [mainEntity](https://schema.org/mainEntity), [data publishing](https://www.w3.org/TR/dwbp/).
 
 Use the [technical evidence worksheet](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/technical-evidence-review.md) before applying these patterns across a portfolio.
+
+## Editorial and evidence pass: 18 records
+
+Nine corrections and nine scoped reviews. [Inspect the versioned decisions](./knowledge/research/review-2026-09-08-editorial.json). The complete 1.8.0 predecessor is preserved.
+
+Answer-first is task-dependent, not a paragraph or viewport quota. Method notes should explain material production choices; a generic AI badge is insufficient. General worked examples, prerequisites and troubleshooting no longer cite unrelated Stripe or release-management pages. Application-specific HTML annotations are publicly readable, not a place for confidential evidence. Numerical qualifiers depend on the measurement. Corrections update current findings while preserving historical release identity.
+
+Sources: [people-first guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content), [GitHub article structure](https://docs.github.com/en/contributing/style-guide-and-content-model/contents-of-a-github-docs-article), [custom HTML data](https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes), [data versioning](https://www.w3.org/TR/dwbp/). These support scoped practices, not guaranteed rankings.
+
+The [editorial interview worksheet](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/editorial-interview.md) converts the review into a reusable page brief.

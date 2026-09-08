@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T12:21:37.705071+00:00",
+  "checked_at": "2026-09-08T12:33:13.654128+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1421,6 +1421,46 @@
       "content_type": "text/html; charset=utf-8",
       "result": "retrieved",
       "sha256": "ec47a64a4dadd098a2084cd48c18755219a2d73d994c852349720f6ca8b4cf50"
+    },
+    {
+      "source_id": "google-url-inspection",
+      "requested_url": "https://support.google.com/webmasters/answer/9012289",
+      "checked_at": "2026-09-08T12:33:12.738339+00:00",
+      "status": 200,
+      "final_url": "https://support.google.com/webmasters/answer/9012289",
+      "content_type": "text/html; charset=UTF-8",
+      "result": "retrieved",
+      "sha256": "f65659ea4be73f8687fd106045b697e00efb997b62bba5c2c885560c622db591"
+    },
+    {
+      "source_id": "google-pagination",
+      "requested_url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading",
+      "checked_at": "2026-09-08T12:33:12.738640+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "d0e58d34a261c4d747fae8041afdfd1c623db0a430240ff0ec3dda39c6f845f5"
+    },
+    {
+      "source_id": "schema-main-entity",
+      "requested_url": "https://schema.org/mainEntity",
+      "checked_at": "2026-09-08T12:33:12.738771+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/mainEntity",
+      "content_type": "text/html",
+      "result": "retrieved",
+      "sha256": "e7d715d3bb0878dde998632f95daccdeb1d366dd5c5b3d323148f27cc5205a81"
+    },
+    {
+      "source_id": "github-article-contents",
+      "requested_url": "https://docs.github.com/en/contributing/style-guide-and-content-model/contents-of-a-github-docs-article",
+      "checked_at": "2026-09-08T12:33:12.738884+00:00",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/contributing/style-guide-and-content-model/contents-of-a-github-docs-article",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "3c6b718bdc3393d988840c07f8e8afa972023a81de91d80e3065ee14a97f29c7"
     }
   ]
 }

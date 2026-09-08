@@ -1,0 +1,411 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "corpus_before": "1.8.0",
+  "corpus_after": "1.9.0",
+  "scope": "Individual editorial and evidence support review. No ranking or citation outcome validation; experimental annotations remain experimental.",
+  "changes": [
+    {
+      "id": "arwp-editorial-decision-lead",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-helpful"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "People-first content",
+          "note": "Supports reader usefulness; answer-first order is our task-dependent convention."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-worked-example",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "stripe-idempotency"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Content and quality questions; How",
+          "note": "Supports original evidence and explained testing; reproducibility tolerances are our procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-prerequisites",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "github-releases"
+      ],
+      "current_sources": [
+        "github-article-contents"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "github-article-contents",
+          "locator": "Prerequisites; Permissions statements",
+          "note": "Supports prerequisites before procedures; this is editorial precedent, not a ranking requirement."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-failure-atlas",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "stripe-idempotency"
+      ],
+      "current_sources": [
+        "github-article-contents"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "github-article-contents",
+          "locator": "Troubleshooting content",
+          "note": "Supports help with errors; discriminating checks and recovery evidence are our method."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-counterexample",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-reviews"
+      ],
+      "current_sources": [
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Benefits and drawbacks; comparable options",
+          "note": "Supports meaningful limits for reviews; extending this to general advice is an inference."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-method-note",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-helpful"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "How the content was created",
+          "note": "Supports explaining material production methods where readers would expect it; no universal AI badge requirement."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-progressive-depth",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "wai-structure"
+      ],
+      "current_sources": [
+        "wai-structure"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "wai-structure",
+          "locator": "Headings; Content Structure",
+          "note": "Supports logical navigation; progressive depth is our design proposal, not an accessibility certification."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-glossary",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-term"
+      ],
+      "current_sources": [
+        "schema-term"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-term",
+          "locator": "DefinedTerm definition",
+          "note": "Supports explicit term meaning; point-of-use placement is our editorial convention."
+        }
+      ]
+    },
+    {
+      "id": "arwp-editorial-faq",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-updates",
+        "bing-ai"
+      ],
+      "current_sources": [
+        "google-updates",
+        "bing-ai"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-updates",
+          "locator": "FAQ rich result deprecation, May and June 2026",
+          "note": "Confirms feature retirement; useful questions remain an editorial choice."
+        },
+        {
+          "source_id": "bing-ai",
+          "locator": "Using These Insights to Improve Content",
+          "note": "Recommends clear FAQ structure; it does not promise a citation for each answer."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-claim-ledger",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-claim",
+        "data-web"
+      ],
+      "current_sources": [
+        "schema-claim",
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-claim",
+          "locator": "Claim definition",
+          "note": "Represents a claim, not its truth."
+        },
+        {
+          "source_id": "data-web",
+          "locator": "Data Provenance",
+          "note": "Supports provenance; a claim ledger and review owner are our application."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-inline-links",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-citation",
+        "mdn-cite"
+      ],
+      "current_sources": [
+        "schema-citation",
+        "mdn-cite"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-citation",
+          "locator": "Property definition",
+          "note": "Defines citation relationships; adjacent placement is our convention."
+        },
+        {
+          "source_id": "mdn-cite",
+          "locator": "Usage notes",
+          "note": "The cite element represents a work title; it does not verify a claim."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-evidence-attrs",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "html-data"
+      ],
+      "current_sources": [
+        "html-data"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "html-data",
+          "locator": "Embedding custom non-visible data with data-* attributes",
+          "note": "Supports application-specific annotations; private means application-specific, not confidential."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-units",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide structural metadata",
+          "note": "Supports interpreting data; sentence-level qualifiers are our editorial application."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-negative-results",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide data quality information",
+          "note": "Supports quality disclosure; retention and denominator reconciliation are our research protocol."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-dates",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-article",
+        "data-web"
+      ],
+      "current_sources": [
+        "google-article",
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-article",
+          "locator": "datePublished and dateModified",
+          "note": "Defines publication and modification metadata, not an observation-date field."
+        },
+        {
+          "source_id": "data-web",
+          "locator": "Data Provenance; Data Versioning",
+          "note": "Supports lineage and version history; the three internal field names are our convention."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-corrections",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide version history; Gather feedback from data consumers",
+          "note": "Supports recorded changes and feedback; coordinated correction propagation is our procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-independence",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-helpful",
+        "google-outbound"
+      ],
+      "current_sources": [
+        "google-helpful",
+        "google-outbound"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Expertise questions; Who",
+          "note": "Supports trustworthy sourcing; relationship categories are our disclosure convention."
+        },
+        {
+          "source_id": "google-outbound",
+          "locator": "sponsored and nofollow",
+          "note": "Link qualification and visible disclosure have different roles."
+        }
+      ]
+    },
+    {
+      "id": "arwp-evidence-expiry",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "stripe-upgrades"
+      ],
+      "current_sources": [
+        "google-helpful",
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Content and quality questions",
+          "note": "Supports accurate information; volatility-based review scheduling is our method."
+        },
+        {
+          "source_id": "data-web",
+          "locator": "Data Versioning",
+          "note": "Supports tracking changes; semantic citation revalidation extends this practice."
+        }
+      ]
+    }
+  ],
+  "remaining_individually_unreviewed": 55
+}

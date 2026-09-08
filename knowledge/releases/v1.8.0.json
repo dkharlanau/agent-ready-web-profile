@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.8.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -1640,19 +1640,6 @@
         "kind": "living-document",
         "version": null
       }
-    },
-    {
-      "id": "github-article-contents",
-      "title": "Contents of a GitHub Docs article",
-      "url": "https://docs.github.com/en/contributing/style-guide-and-content-model/contents-of-a-github-docs-article",
-      "publisher": "GitHub",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Editorial precedent for prerequisites and troubleshooting. GitHub house style is not a universal SEO requirement.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
     }
   ],
   "tactics": [
@@ -2561,11 +2548,11 @@
       "title": "Open with the decision and its boundary",
       "problem": "An introduction can delay the reason the reader arrived.",
       "implementation": [
-        "For decision-oriented pages, state the practical answer near the start; use a different opening when the reader task requires context or narrative.",
+        "State the practical answer in the opening paragraph.",
         "Name the audience, assumption, and condition that would change it."
       ],
       "verification": [
-        "A reviewer can locate the answer, audience and main exception early in the reading path; no universal viewport or paragraph quota is required."
+        "A reviewer can identify answer, audience, and main exception without scrolling."
       ],
       "evidence_level": "inferred",
       "source_ids": [
@@ -2587,18 +2574,11 @@
         "google-non-commodity-content",
         "google-generative-content-structure"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "People-first content",
-            "note": "Supports reader usefulness; answer-first order is our task-dependent convention."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2620,7 +2600,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "google-helpful"
+        "stripe-idempotency"
       ],
       "applicability": [
         "documentation",
@@ -2636,18 +2616,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "Content and quality questions; How",
-            "note": "Supports original evidence and explained testing; reproducibility tolerances are our procedure."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2669,7 +2642,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "github-article-contents"
+        "github-releases"
       ],
       "applicability": [
         "documentation",
@@ -2685,18 +2658,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "github-article-contents",
-            "locator": "Prerequisites; Permissions statements",
-            "note": "Supports prerequisites before procedures; this is editorial precedent, not a ranking requirement."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2718,7 +2684,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "github-article-contents"
+        "stripe-idempotency"
       ],
       "applicability": [
         "documentation",
@@ -2736,18 +2702,11 @@
         "google-non-commodity-content",
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "github-article-contents",
-            "locator": "Troubleshooting content",
-            "note": "Supports help with errors; discriminating checks and recovery evidence are our method."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2785,18 +2744,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-reviews",
-            "locator": "Benefits and drawbacks; comparable options",
-            "note": "Supports meaningful limits for reviews; extending this to general advice is an inference."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2810,7 +2762,7 @@
       "title": "Explain how the answer was produced",
       "problem": "A fluent article can hide its evidence and production process.",
       "implementation": [
-        "Explain material research, testing or AI assistance where it helps readers assess how the answer was produced; use a method note when appropriate.",
+        "Add a short method note identifying research, testing, and material AI assistance.",
         "Link the relevant inputs and separate observed facts from interpretation."
       ],
       "verification": [
@@ -2834,18 +2786,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "How the content was created",
-            "note": "Supports explaining material production methods where readers would expect it; no universal AI badge requirement."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2883,18 +2828,11 @@
       "recommendation_rule_ids": [
         "google-generative-content-structure"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-structure",
-            "locator": "Headings; Content Structure",
-            "note": "Supports logical navigation; progressive depth is our design proposal, not an accessibility certification."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2932,18 +2870,11 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-term",
-            "locator": "DefinedTerm definition",
-            "note": "Supports explicit term meaning; point-of-use placement is our editorial convention."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2983,23 +2914,11 @@
         "bing-ai-citation-clarity",
         "google-scaled-query-variant-guardrail"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-updates",
-            "locator": "FAQ rich result deprecation, May and June 2026",
-            "note": "Confirms feature retirement; useful questions remain an editorial choice."
-          },
-          {
-            "source_id": "bing-ai",
-            "locator": "Using These Insights to Improve Content",
-            "note": "Recommends clear FAQ structure; it does not promise a citation for each answer."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3039,23 +2958,11 @@
         "google-non-commodity-content",
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-claim",
-            "locator": "Claim definition",
-            "note": "Represents a claim, not its truth."
-          },
-          {
-            "source_id": "data-web",
-            "locator": "Data Provenance",
-            "note": "Supports provenance; a claim ledger and review owner are our application."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3094,23 +3001,11 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-citation",
-            "locator": "Property definition",
-            "note": "Defines citation relationships; adjacent placement is our convention."
-          },
-          {
-            "source_id": "mdn-cite",
-            "locator": "Usage notes",
-            "note": "The cite element represents a work title; it does not verify a claim."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3121,12 +3016,11 @@
     {
       "id": "arwp-evidence-evidence-attrs",
       "category": "evidence",
-      "title": "Use application-specific evidence attributes as an editorial aid",
+      "title": "Use private evidence attributes as an editorial aid",
       "problem": "Internal QA cannot reliably associate paragraphs with claim records.",
       "implementation": [
         "Add data-evidence-id and data-source-ids to claim containers.",
-        "Keep the complete claim and clickable source visible in semantic HTML.",
-        "Treat shipped attributes as publicly readable source code. Use non-sensitive IDs; keep confidential ledger data outside the published document."
+        "Keep the complete claim and clickable source visible in semantic HTML."
       ],
       "verification": [
         "A local extractor joins the attributes to the ledger without changing visible meaning."
@@ -3148,18 +3042,11 @@
         "agent-readable-routes"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "html-data",
-            "locator": "Embedding custom non-visible data with data-* attributes",
-            "note": "Supports application-specific annotations; private means application-specific, not confidential."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3173,11 +3060,11 @@
       "title": "Keep units and denominators beside numbers",
       "problem": "A detached percentage can be repeated with the wrong meaning.",
       "implementation": [
-        "State the applicable unit, population, time window and method beside each key measurement; add denominator and base count for rates or percentages.",
+        "Write population, time window, denominator, unit, and method with each key number.",
         "Retain these fields in table exports and summaries."
       ],
       "verification": [
-        "An extracted measurement retains its necessary interpretation; denominators are required for rates, not invented for counts or prices."
+        "A number extracted with its enclosing sentence retains the population and unit."
       ],
       "evidence_level": "inferred",
       "source_ids": [
@@ -3198,18 +3085,11 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Provide structural metadata",
-            "note": "Supports interpreting data; sentence-level qualifiers are our editorial application."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3246,18 +3126,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Provide data quality information",
-            "note": "Supports quality disclosure; retention and denominator reconciliation are our research protocol."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3296,23 +3169,11 @@
       "recommendation_rule_ids": [
         "google-sitemap-lastmod"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-article",
-            "locator": "datePublished and dateModified",
-            "note": "Defines publication and modification metadata, not an observation-date field."
-          },
-          {
-            "source_id": "data-web",
-            "locator": "Data Provenance; Data Versioning",
-            "note": "Supports lineage and version history; the three internal field names are our convention."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3327,11 +3188,10 @@
       "problem": "A wrong claim can persist in copied summaries and exports.",
       "implementation": [
         "Provide a practical way to report an error.",
-        "Log the corrected claim, correction date, reason, and affected data versions.",
-        "Publish corrected releases and a linked correction notice while preserving historical release bytes; label superseded findings rather than silently rewriting cited artifacts."
+        "Log the corrected claim, correction date, reason, and affected data versions."
       ],
       "verification": [
-        "An authorized local test correction reaches current page, graph and release pointers; historical artifacts retain their identity and a discoverable correction path."
+        "A test correction reaches the page, graph, and downloadable evidence consistently."
       ],
       "evidence_level": "inferred",
       "source_ids": [
@@ -3352,18 +3212,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Provide version history; Gather feedback from data consumers",
-            "note": "Supports recorded changes and feedback; coordinated correction propagation is our procedure."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3402,23 +3255,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "Expertise questions; Who",
-            "note": "Supports trustworthy sourcing; relationship categories are our disclosure convention."
-          },
-          {
-            "source_id": "google-outbound",
-            "locator": "sponsored and nofollow",
-            "note": "Link qualification and visible disclosure have different roles."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3440,8 +3281,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "google-helpful",
-        "data-web"
+        "stripe-upgrades"
       ],
       "applicability": [
         "content-sites",
@@ -3455,23 +3295,11 @@
         "freshness-without-fake-recency"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "Content and quality questions",
-            "note": "Supports accurate information; volatility-based review scheduling is our method."
-          },
-          {
-            "source_id": "data-web",
-            "locator": "Data Versioning",
-            "note": "Supports tracking changes; semantic citation revalidation extends this practice."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -12064,8 +11892,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.8.0",
-    "path": "knowledge/releases/v1.8.0.json",
-    "sha256": "6d2dcf4457cdd004481aa52c0e3de016a938d466d6f58cad2546399dbc13f5b6"
+    "version": "1.7.0",
+    "path": "knowledge/releases/v1.7.0.json",
+    "sha256": "f7f90f0814ac7bbd502595ae6fe07ac40963e81dc8f50a9bec8b2a68f48bb755"
   }
 }
