@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.7.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -1601,45 +1601,6 @@
         "kind": "living-document",
         "version": null
       }
-    },
-    {
-      "id": "google-url-inspection",
-      "title": "URL Inspection tool",
-      "url": "https://support.google.com/webmasters/answer/9012289",
-      "publisher": "Google",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Indexed observations and live tests have different coverage; neither guarantees appearance.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "google-pagination",
-      "title": "Pagination and incremental page loading",
-      "url": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading",
-      "publisher": "Google",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Supports sequential crawlable links and distinct page URLs and canonicals.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "schema-main-entity",
-      "title": "mainEntity",
-      "url": "https://schema.org/mainEntity",
-      "publisher": "Schema.org",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Defines the primary entity described by a creative work, not a ranking benefit.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
     }
   ],
   "tactics": [
@@ -1875,23 +1836,11 @@
         "google-search-technical-eligibility",
         "openai-oai-searchbot-access"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "openai-bots",
-            "locator": "OAI-SearchBot and published IP ranges",
-            "note": "Supports provider-specific access; edge log review is our operational method."
-          },
-          {
-            "source_id": "google-ai",
-            "locator": "Technical requirements",
-            "note": "Supports crawl access; an HTTP probe does not prove indexing."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -1906,8 +1855,7 @@
       "problem": "Some clients cannot recover essential content from a client-only shell.",
       "implementation": [
         "Fetch a representative article without executing JavaScript.",
-        "Render the main answer, source links, and page identity in initial HTML.",
-        "Treat initial HTML as a reliability choice for the intended clients; Google can render JavaScript, so compare initial and rendered output before diagnosing a blocker."
+        "Render the main answer, source links, and page identity in initial HTML."
       ],
       "verification": [
         "A plain HTML extraction contains the answer and its qualifications."
@@ -1931,18 +1879,11 @@
         "google-javascript-renderability",
         "google-important-content-textual"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-js",
-            "locator": "How Google processes JavaScript",
-            "note": "Google renders JavaScript; initial HTML is our broader-client reliability choice."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2055,15 +1996,15 @@
       "problem": "Local validation cannot identify the selected indexed version.",
       "implementation": [
         "Select a small cohort covering templates and known failures.",
-        "Use authorized URL Inspection evidence to record indexed and live states separately.",
-        "Record the indexed Google-selected canonical separately; a live test cannot predict canonical selection or guarantee search appearance."
+        "Use authorized URL Inspection evidence to record indexed and live states separately."
       ],
       "verification": [
         "Each observation has URL, timestamp, inspection type, and evidence status."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "google-url-inspection"
+        "google-recrawl",
+        "google-canonical"
       ],
       "applicability": [
         "all"
@@ -2079,18 +2020,11 @@
         "google-search-technical-eligibility",
         "google-canonical-consistency"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-url-inspection",
-            "locator": "About the indexed URL status; Inspect a live URL",
-            "note": "Indexed and live observations differ; a live pass does not establish indexed canonical selection."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2129,23 +2063,11 @@
         "google-non-commodity-content",
         "google-scaled-query-variant-guardrail"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "People-first content",
-            "note": "Supports useful task coverage; one primary page per task is our maintenance convention."
-          },
-          {
-            "source_id": "google-canonical",
-            "locator": "Reasons to specify a canonical URL",
-            "note": "Duplicate consolidation does not require merging distinct tasks."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2183,18 +2105,11 @@
       "recommendation_rule_ids": [
         "google-crawlable-internal-links"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-links",
-            "locator": "Internal links",
-            "note": "Supports relevant crawlable links; a staged hub is our design proposal."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -2401,15 +2316,16 @@
       "title": "Make long collections reachable without scrolling",
       "problem": "Infinite scroll may hide records from simple clients.",
       "implementation": [
-        "Expose sequential anchor href links and distinct page URLs with appropriate page-specific canonicals.",
-        "Preserve record identity, stable ordering and bounded traversal; document intentional repeated entries."
+        "Expose stable collection pages or bounded next-page href links.",
+        "Preserve record identity and avoid repeated entries across pages."
       ],
       "verification": [
-        "A bounded non-JavaScript walk reaches the intended public record set; deduplicate by stable ID and report missing records, loops and repeated entries separately."
+        "A non-JavaScript walk reaches every intended public record exactly once."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "google-pagination"
+        "google-js",
+        "google-links"
       ],
       "applicability": [
         "catalogs",
@@ -2426,18 +2342,11 @@
         "google-javascript-renderability",
         "google-crawlable-internal-links"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-pagination",
-            "locator": "Link pages sequentially; Use URLs correctly",
-            "note": "Supports reachable pagination and page-specific canonicals; complete traversal is our test."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3313,7 +3222,7 @@
       "title": "Use stable IDs for the same entity",
       "problem": "Different pages describe one entity as several disconnected objects.",
       "implementation": [
-        "Choose a stable public IRI for each real entity; a suitable URL or fragment identifier can be used.",
+        "Choose a canonical public identity URL and stable fragment ID.",
         "Reuse it in relevant page graphs and resolve naming conflicts centrally."
       ],
       "verification": [
@@ -3336,18 +3245,11 @@
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "jsonld",
-            "locator": "Node identifiers",
-            "note": "Supports IRI identity; a fragment is optional and central reconciliation is our method."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3534,18 +3436,11 @@
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-service",
-            "locator": "provider, audience, areaServed",
-            "note": "Defines service relationships; truthful selection and extraction tests remain implementation work."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3583,18 +3478,11 @@
         "google-software-app-structured-data",
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-software",
-            "locator": "applicationCategory, operatingSystem, softwareVersion",
-            "note": "Defines software facts; release parity is our check, not proof of rich-result eligibility."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3608,7 +3496,7 @@
       "title": "Connect the page, work, and evidence",
       "problem": "A page URL and an underlying article or dataset have different roles.",
       "implementation": [
-        "Use mainEntity when the WebPage describes a genuine primary work; do not manufacture separate nodes for every page or mention.",
+        "Give the WebPage a mainEntity link to the actual work.",
         "Link the work to its author, publisher, and cited evidence by stable IDs."
       ],
       "verification": [
@@ -3617,8 +3505,7 @@
       "evidence_level": "inferred",
       "source_ids": [
         "jsonld",
-        "schema-citation",
-        "schema-main-entity"
+        "schema-citation"
       ],
       "applicability": [
         "content-sites",
@@ -3634,28 +3521,11 @@
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "jsonld",
-            "locator": "Node identifiers",
-            "note": "Identifies nodes; resolving a reference does not validate its meaning."
-          },
-          {
-            "source_id": "schema-citation",
-            "locator": "Property definition",
-            "note": "Represents citations, not independent verification of their claims."
-          },
-          {
-            "source_id": "schema-main-entity",
-            "locator": "Property definition",
-            "note": "Use for the primary described entity, not every mentioned item."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3695,18 +3565,11 @@
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-term",
-            "locator": "termCode and inDefinedTermSet",
-            "note": "Supports term identity and membership; alias review is our editorial procedure."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3743,18 +3606,11 @@
       "recommendation_rule_ids": [
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-sd",
-            "locator": "Content and relevance",
-            "note": "Supports representative visible markup; property comparison is our release check."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3841,18 +3697,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Provide structural metadata",
-            "note": "Supports structure descriptions; field coverage testing is our method."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3890,18 +3739,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-download",
-            "locator": "contentUrl and encodingFormat",
-            "note": "Describes distributions; live parsing and version parity require separate checks."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3939,18 +3781,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Provide data provenance information",
-            "note": "Supports lineage; sampled row tracing is our procedure."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -3989,18 +3824,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Data Versioning",
-            "note": "Supports version history; immutable artifacts are our reproducibility implementation."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -4037,18 +3865,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Provide data quality information",
-            "note": "Supports published quality evidence; constraint choice is domain-specific."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -4086,18 +3907,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "schema-dataset",
-            "locator": "spatialCoverage and temporalCoverage",
-            "note": "Describes scope; representativeness requires separate evidence."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -4135,23 +3949,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-dataset",
-            "locator": "license",
-            "note": "Supports license metadata, not legal rights verification."
-          },
-          {
-            "source_id": "data-web",
-            "locator": "Provide a license",
-            "note": "Supports explicit reuse terms; authorization remains a separate gate."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -4165,7 +3967,7 @@
       "title": "Show questions the data can answer",
       "problem": "A large table gives little help with useful analysis.",
       "implementation": [
-        "Select a small task-appropriate set of real questions within the dataset scope; there is no prescribed question count.",
+        "Select three real questions within the dataset scope.",
         "Publish reproducible queries, small outputs, and limits of interpretation."
       ],
       "verification": [
@@ -4173,7 +3975,8 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "data-web"
+        "schema-dataset",
+        "stripe-idempotency"
       ],
       "applicability": [
         "datasets",
@@ -4190,18 +3993,11 @@
       "recommendation_rule_ids": [
         "google-dataset-provenance"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Provide documentation for your API; Data Enrichment",
-            "note": "Supports usable documentation and complementary views; reproducible dataset questions are our proposed application."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -11892,8 +11688,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.7.0",
-    "path": "knowledge/releases/v1.7.0.json",
-    "sha256": "f7f90f0814ac7bbd502595ae6fe07ac40963e81dc8f50a9bec8b2a68f48bb755"
+    "version": "1.6.0",
+    "path": "knowledge/releases/v1.6.0.json",
+    "sha256": "85d6c848282cf7434a6ae325de592208735b30688a4c1f56412eb11b15dc498c"
   }
 }

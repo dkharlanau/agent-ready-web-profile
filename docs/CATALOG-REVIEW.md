@@ -1,8 +1,8 @@
 # Catalog review: fixing the evidence, not just adding patterns
 
-Review edition 1.0.0 · 8 September 2026 · corpus 1.7.0.
+Review edition 1.1.0 · 8 September 2026 · corpus 1.8.0.
 
-This pass individually reviewed 23 previously unreviewed comparison, service and localization practices. Nine needed source or instruction corrections. Fourteen gained scoped review notes without operational changes. All 23 remain **inferred**: reading a source does not turn a project workflow into a documented ranking mechanism.
+The commercial pass individually reviewed 23 previously unreviewed comparison, service and localization practices. Nine needed source or instruction corrections. Fourteen gained scoped review notes without operational changes. All 23 remain **inferred**: reading a source does not turn a project workflow into a documented ranking mechanism.
 
 [Inspect the changed records](./knowledge/research/review-2026-09-08-commercial.json) · [Pattern library](./discoverability.html) · [Source-review worksheet](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/source-support-review.md)
 
@@ -28,6 +28,20 @@ Review-only changes advance the pattern patch version. Changed instructions or s
 
 ## Remaining work
 
-The library still contains 219 patterns. Individual review coverage is now 126; 93 historical records remain unreviewed. The source register has 118 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
+The library still contains 219 patterns. Individual review coverage is now 146; 73 historical records remain unreviewed. The source register has 121 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
 
 The next passes should apply the same test to technical access, architecture, datasets, media, editorial and measurement practices: direct support, valid analogy or unsupported assertion? Keep useful project proposals explicitly inferred; replace unrelated evidence and revise operational mistakes before increasing the reviewed count.
+
+## Technical pass: 20 more records
+
+Six instruction or source corrections and fourteen scoped reviews preserve the inferred status of every practice. The corpus freezes its complete 1.7.0 predecessor. [Inspect all changes](./knowledge/research/review-2026-09-08-technical.json).
+
+- Initial HTML is a client-reliability choice; Google can render JavaScript.
+- Live URL tests do not establish the indexed canonical or promise search appearance.
+- Collection tests measure reachable unique records, omissions, loops and repetitions separately; legitimate repetition is not automatic failure.
+- Stable entity IRIs do not require fragments, and mainEntity must describe a real primary subject.
+- Dataset worked examples have no magic count. The unrelated Stripe idempotency citation was removed.
+
+Sources: [JavaScript processing](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics), [URL Inspection](https://support.google.com/webmasters/answer/9012289), [pagination](https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading), [mainEntity](https://schema.org/mainEntity), [data publishing](https://www.w3.org/TR/dwbp/).
+
+Use the [technical evidence worksheet](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/templates/growth/technical-evidence-review.md) before applying these patterns across a portfolio.

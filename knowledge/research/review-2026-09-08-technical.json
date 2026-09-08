@@ -1,0 +1,447 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "corpus_before": "1.7.0",
+  "corpus_after": "1.8.0",
+  "scope": "Individual technical access, architecture, entity and dataset support review. No ranking or citation outcome validation.",
+  "changes": [
+    {
+      "id": "arwp-access-edge",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "openai-bots",
+        "google-ai"
+      ],
+      "current_sources": [
+        "openai-bots",
+        "google-ai"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "openai-bots",
+          "locator": "OAI-SearchBot and published IP ranges",
+          "note": "Supports provider-specific access; edge log review is our operational method."
+        },
+        {
+          "source_id": "google-ai",
+          "locator": "Technical requirements",
+          "note": "Supports crawl access; an HTTP probe does not prove indexing."
+        }
+      ]
+    },
+    {
+      "id": "arwp-access-html",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-js"
+      ],
+      "current_sources": [
+        "google-js"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-js",
+          "locator": "How Google processes JavaScript",
+          "note": "Google renders JavaScript; initial HTML is our broader-client reliability choice."
+        }
+      ]
+    },
+    {
+      "id": "arwp-access-inspect",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-recrawl",
+        "google-canonical"
+      ],
+      "current_sources": [
+        "google-url-inspection"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-url-inspection",
+          "locator": "About the indexed URL status; Inspect a live URL",
+          "note": "Indexed and live observations differ; a live pass does not establish indexed canonical selection."
+        }
+      ]
+    },
+    {
+      "id": "arwp-architecture-intent-owner",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-helpful",
+        "google-canonical"
+      ],
+      "current_sources": [
+        "google-helpful",
+        "google-canonical"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "People-first content",
+          "note": "Supports useful task coverage; one primary page per task is our maintenance convention."
+        },
+        {
+          "source_id": "google-canonical",
+          "locator": "Reasons to specify a canonical URL",
+          "note": "Duplicate consolidation does not require merging distinct tasks."
+        }
+      ]
+    },
+    {
+      "id": "arwp-architecture-hub",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-links"
+      ],
+      "current_sources": [
+        "google-links"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-links",
+          "locator": "Internal links",
+          "note": "Supports relevant crawlable links; a staged hub is our design proposal."
+        }
+      ]
+    },
+    {
+      "id": "arwp-architecture-collections",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-js",
+        "google-links"
+      ],
+      "current_sources": [
+        "google-pagination"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-pagination",
+          "locator": "Link pages sequentially; Use URLs correctly",
+          "note": "Supports reachable pagination and page-specific canonicals; complete traversal is our test."
+        }
+      ]
+    },
+    {
+      "id": "arwp-entities-identity",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "jsonld"
+      ],
+      "current_sources": [
+        "jsonld"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "jsonld",
+          "locator": "Node identifiers",
+          "note": "Supports IRI identity; a fragment is optional and central reconciliation is our method."
+        }
+      ]
+    },
+    {
+      "id": "arwp-entities-service-model",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-service"
+      ],
+      "current_sources": [
+        "schema-service"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-service",
+          "locator": "provider, audience, areaServed",
+          "note": "Defines service relationships; truthful selection and extraction tests remain implementation work."
+        }
+      ]
+    },
+    {
+      "id": "arwp-entities-software-model",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-software"
+      ],
+      "current_sources": [
+        "schema-software"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-software",
+          "locator": "applicationCategory, operatingSystem, softwareVersion",
+          "note": "Defines software facts; release parity is our check, not proof of rich-result eligibility."
+        }
+      ]
+    },
+    {
+      "id": "arwp-entities-work-relations",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "jsonld",
+        "schema-citation"
+      ],
+      "current_sources": [
+        "jsonld",
+        "schema-citation",
+        "schema-main-entity"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "jsonld",
+          "locator": "Node identifiers",
+          "note": "Identifies nodes; resolving a reference does not validate its meaning."
+        },
+        {
+          "source_id": "schema-citation",
+          "locator": "Property definition",
+          "note": "Represents citations, not independent verification of their claims."
+        },
+        {
+          "source_id": "schema-main-entity",
+          "locator": "Property definition",
+          "note": "Use for the primary described entity, not every mentioned item."
+        }
+      ]
+    },
+    {
+      "id": "arwp-entities-term-graph",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-term"
+      ],
+      "current_sources": [
+        "schema-term"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-term",
+          "locator": "termCode and inDefinedTermSet",
+          "note": "Supports term identity and membership; alias review is our editorial procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-entities-graph-parity",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-sd"
+      ],
+      "current_sources": [
+        "google-sd"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-sd",
+          "locator": "Content and relevance",
+          "note": "Supports representative visible markup; property comparison is our release check."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-dictionary",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide structural metadata",
+          "note": "Supports structure descriptions; field coverage testing is our method."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-downloads",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-download"
+      ],
+      "current_sources": [
+        "schema-download"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-download",
+          "locator": "contentUrl and encodingFormat",
+          "note": "Describes distributions; live parsing and version parity require separate checks."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-provenance",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide data provenance information",
+          "note": "Supports lineage; sampled row tracing is our procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-versions",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Data Versioning",
+          "note": "Supports version history; immutable artifacts are our reproducibility implementation."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-quality",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide data quality information",
+          "note": "Supports published quality evidence; constraint choice is domain-specific."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-coverage",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-dataset"
+      ],
+      "current_sources": [
+        "schema-dataset"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-dataset",
+          "locator": "spatialCoverage and temporalCoverage",
+          "note": "Describes scope; representativeness requires separate evidence."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-license",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-dataset",
+        "data-web"
+      ],
+      "current_sources": [
+        "google-dataset",
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-dataset",
+          "locator": "license",
+          "note": "Supports license metadata, not legal rights verification."
+        },
+        {
+          "source_id": "data-web",
+          "locator": "Provide a license",
+          "note": "Supports explicit reuse terms; authorization remains a separate gate."
+        }
+      ]
+    },
+    {
+      "id": "arwp-datasets-query-examples",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "schema-dataset",
+        "stripe-idempotency"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Provide documentation for your API; Data Enrichment",
+          "note": "Supports usable documentation and complementary views; reproducible dataset questions are our proposed application."
+        }
+      ]
+    }
+  ],
+  "remaining_individually_unreviewed": 73
+}
