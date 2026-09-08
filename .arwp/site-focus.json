@@ -1,5 +1,6 @@
 {
-  "version": "0.2",
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-profile-v0.3.schema.json",
+  "version": "0.3",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "thesis": {
     "primaryProblem": "Website owners need to decide which Search, AI-search and agent-web improvements actually help a useful site become easier to find, use, cite and verify.",
@@ -30,10 +31,39 @@
     ]
   },
   "problemLanes": [
-    { "id": "be-found", "label": "Be found", "job": "Help people, crawlers and agents reach the useful surface." },
-    { "id": "be-used", "label": "Be used", "job": "Make the answer clear, useful, attributable and machine-readable." },
-    { "id": "be-proven", "label": "Be proven", "job": "Separate implementation checks from real outcome evidence." }
+    {
+      "id": "be-found",
+      "label": "Be found",
+      "job": "Help people, crawlers and agents reach the useful surface.",
+      "audience": "A site owner whose useful pages are difficult for Search, AI systems or agents to discover reliably.",
+      "problem": "Useful site surfaces exist, but discovery, identity, routing or retrieval evidence is weak or ambiguous.",
+      "desiredOutcome": "Make the right public surface easier to discover and retrieve without inventing artificial content volume.",
+      "primaryAction": "Inspect discoverability and choose one evidence-backed discovery change."
+    },
+    {
+      "id": "be-used",
+      "label": "Be used",
+      "job": "Make the answer clear, useful, attributable and machine-readable.",
+      "audience": "A site owner whose pages are reachable but not sufficiently clear, attributable or useful once retrieved.",
+      "problem": "A reachable page can still be hard to understand, cite, navigate or connect to the user's actual task.",
+      "desiredOutcome": "Give each important page a clear job, useful evidence, explicit attribution and a bounded next action.",
+      "primaryAction": "Review the page contract or select a usefulness pattern."
+    },
+    {
+      "id": "be-proven",
+      "label": "Be proven",
+      "job": "Separate implementation checks from real outcome evidence.",
+      "audience": "A maintainer who needs to know whether a website change was implemented correctly and whether it later helped.",
+      "problem": "Technical completion is often mistaken for proof of ranking, citation, recommendation traffic or conversion impact.",
+      "desiredOutcome": "Preserve implementation receipts and later Search, AI, runtime or owner outcomes as distinct evidence classes.",
+      "primaryAction": "Verify the change and attach later measurement evidence separately."
+    }
   ],
+  "homepage": {
+    "primaryLane": "be-found",
+    "supportingLanes": ["be-used", "be-proven"],
+    "requiredSignals": ["problem", "audience", "outcome", "evidence", "action"]
+  },
   "primaryNavigation": [
     "/site-focus.html",
     "/discoverability.html",
@@ -54,8 +84,26 @@
     { "match": { "pathPrefix": "/skills" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "be-used", "note": "Agent-facing implementation guidance." },
     { "match": { "pathPrefix": "/examples" }, "role": "proof-portfolio", "scope": "ADJACENT", "lane": "be-used", "note": "Examples are proof/supporting material." }
   ],
+  "experience": {
+    "visualPrinciples": [
+      "Bright high-contrast identity without decorative clutter.",
+      "Strong typographic hierarchy with evidence-led diagrams and visible state changes.",
+      "A simple first screen with technical depth progressively disclosed underneath.",
+      "Motion only when it explains state, causality or progression rather than decorating the page."
+    ],
+    "navigation": {
+      "maxPrimaryItems": 5,
+      "consistentAcrossPages": true
+    },
+    "performance": {
+      "lcpMsP75Max": 2500,
+      "inpMsP75Max": 200,
+      "clsP75Max": 0.1
+    }
+  },
   "notes": [
     "The four internal navigation destinations are the declared contract; the external GitHub link may remain a utility action without becoming another problem lane.",
-    "Route families are implementation architecture, not a proxy for the number of problems the site owns."
+    "Route families are implementation architecture, not a proxy for the number of problems the site owns.",
+    "Visual principles are owner intent, not a beauty score. Performance budgets require real field evidence and are not inferred from static HTML."
   ]
 }
