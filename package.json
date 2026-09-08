@@ -7,6 +7,7 @@
   "mcpName": "io.github.dkharlanau/agent-ready-web-profile",
   "bin": {
     "arwp": "bin/arwp.mjs",
+    "arwp-focus": "bin/arwp-focus.mjs",
     "arwp-ai-search": "bin/arwp-ai-search.mjs",
     "arwp-visibility": "bin/arwp-visibility.mjs",
     "arwp-agent-eval": "bin/arwp-agent-eval.mjs",
@@ -85,6 +86,7 @@
     "docs/ENTITY-GRAPH-GAP-REPORT.md",
     "docs/ENTITY-GRAPH-REMEDIATION.md",
     "docs/SITE-IMPROVEMENT-PLAN.md",
+    "docs/SITE-FOCUS-ENGINE.md",
     "docs/PORTFOLIO-FLEET.md",
     "knowledge/",
     "skills/",
@@ -108,6 +110,7 @@
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
     "quickstart": "node scripts/quickstart.mjs",
+    "focus": "node bin/arwp-focus.mjs",
     "ai-search-profile": "node bin/arwp-ai-search.mjs",
     "visibility": "node bin/arwp-visibility.mjs",
     "agent-eval": "node bin/arwp-agent-eval.mjs",
@@ -130,6 +133,7 @@
     "entity-remediation": "node bin/arwp-entity-remediation.mjs",
     "improve": "node bin/arwp-improve.mjs",
     "surfaces": "node bin/arwp-surfaces.mjs",
+    "test:focus": "node scripts/site-focus-engine-test.mjs && node --check lib/site-focus.mjs && node --check bin/arwp-focus.mjs",
     "test:transform": "node scripts/transformation-engine-test.mjs && node --check lib/transformation-engine.mjs && node --check bin/arwp-transform.mjs",
     "test:change-receipt": "node scripts/change-receipt-test.mjs && node --check lib/change-receipt.mjs && node --check lib/change-receipt-braid.mjs && node --check bin/arwp-change-receipt.mjs",
     "test:watch": "node scripts/braid-watch-test.mjs && node --check lib/braid-watch.mjs && node --check bin/arwp-watch.mjs",
@@ -244,6 +248,8 @@
     "site-improvement",
     "search-surface",
     "site-architecture",
+    "site-focus",
+    "information-architecture",
     "changelog",
     "roadmap",
     "trend-history"
