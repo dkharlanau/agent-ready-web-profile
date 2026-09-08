@@ -95,7 +95,8 @@
     "docs/knowledge/discoverability-corpus.json",
     "docs/knowledge/source-link-checks.json",
     "docs/skills/arwp-discoverability/",
-    "docs/SITE-ROLLOUT-PLAYBOOK.md"
+    "docs/SITE-ROLLOUT-PLAYBOOK.md",
+    "docs/EDITORIAL-SEARCH-LAB.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",

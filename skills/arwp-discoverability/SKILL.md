@@ -45,3 +45,5 @@ Validate the actual generated output and the user journey. Apply changes within 
 Freeze the page/query cohort and useful-action definition before observing results. Keep technical checks, search impressions/clicks, AI citations/recommendations and product actions separate. Use comparable complete windows; represent missing access and unmeasured outcomes explicitly. AI checks need exact prompts, model/surface, date, locale, citations and raw answer evidence; a brand-seeded prompt is not an unprompted recommendation. See [measurement protocol](../../docs/DISCOVERABILITY-BENCHMARKS.md).
 
 Continue with the highest-value unblocked change, document regressions and null results, and revise a hypothesis when evidence contradicts it. Do not rewrite the same page repeatedly before a meaningful observation window exists.
+
+For the September 2026 editorial expansion, read [the field guide](../../docs/EDITORIAL-SEARCH-LAB.md) when choosing article formats, voice, openings or section-level markup. Its source conflict notes distinguish provider guidance from experimental extraction checks.

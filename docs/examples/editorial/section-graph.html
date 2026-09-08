@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>An inspectable section graph — Cite Goose example</title>
+<link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html">
+<style>body{font:1.1rem/1.65 system-ui,sans-serif;max-width:50rem;margin:3rem auto;padding:0 1.2rem;color:#182025;background:#fffef5}a{color:#164ea8}pre{overflow:auto;background:#f0f0e7;padding:1rem}h1,h2{line-height:1.2}aside{border-left:5px solid #ccd600;padding-left:1rem}:target{background:#f8ffb0}</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {"@type":"WebPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html","name":"An inspectable section graph","mainEntity":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#article"}},
+    {"@type":"Article","@id":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#article","headline":"An inspectable section graph","hasPart":[{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#method"},{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#limits"}]},
+    {"@type":"WebPageElement","@id":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#method","url":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#method","name":"Connect an article to its visible sections","citation":["https://schema.org/WebPageElement","https://schema.org/hasPart"]},
+    {"@type":"WebPageElement","@id":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#limits","url":"https://dkharlanau.github.io/agent-ready-web-profile/examples/editorial/section-graph.html#limits","name":"What this graph does not establish","citation":["https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"]}
+  ]
+}
+</script></head><body>
+<nav aria-label="Example navigation"><a href="../../discoverability.html#arwp-entities-section-graph">Section graph pattern</a> · <a href="../../EDITORIAL-SEARCH-LAB.html">Writing field guide</a></nav>
+<main id="page"><article id="article"><h1>An inspectable section graph</h1>
+<aside><strong>Implementation demonstration · noindex.</strong> This page demonstrates relationships and source links. It reports no ranking, citation, customer or benchmark outcome. It deliberately omits unknown author and date properties.</aside>
+<p>A consuming tool can associate each section with the sources used there. The same section locations are available to a person through ordinary links: <a href="#method">method</a> and <a href="#limits">limits</a>.</p>
+<section id="method" aria-labelledby="method-heading"><h2 id="method-heading">Connect an article to its visible sections</h2>
+<p>Schema.org provides a page-element type and a relation for a work's included parts. This example uses a section's fragment URL as its graph identifier. Sources: <a href="https://schema.org/WebPageElement">WebPageElement</a> and <a href="https://schema.org/hasPart">hasPart</a>.</p>
+<p>Inspect the JSON-LD script in this file. The article references the two section nodes. Each section contains only the sources actually linked in its visible content.</p>
+<pre><code>Article → hasPart → section fragment → citation → source URL</code></pre>
+<p>To adapt this example, generate the rendered section IDs and graph IDs from your actual section records. Retain visible source links even when a consuming tool reads JSON-LD.</p></section>
+<section id="limits" aria-labelledby="limits-heading"><h2 id="limits-heading">What this graph does not establish</h2>
+<p>A valid graph describes relationships; it does not prove that a cited source supports every claim. Google says special structured data is not required for generative search. See the <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">AI optimization guide</a>.</p>
+<p>Add this optional section graph only for an actual consuming workflow. Measure that workflow's ability to find the right section and source; observe Search or AI outcomes separately.</p></section>
+</article></main></body></html>

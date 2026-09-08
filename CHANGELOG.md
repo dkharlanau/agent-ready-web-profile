@@ -4,6 +4,14 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Editorial research edition 1.3.0
+
+- Added 26 reviewed patterns and 13 primary-source records: 195 patterns and 104 sources in total, with 79 individual reviews and 116 explicitly unreviewed records.
+- Added task-sensitive openings, voice and heading guidance, version-change analyses, conditional comparisons, evidence graphs and citation-correctness experiments.
+- Added a research field guide, reusable editorial brief and noindex section-graph demonstration.
+- Preserved corpus 1.2.0 as a byte-exact checksum-anchored predecessor; retained all 169 preceding pattern records unchanged.
+- Kept Google and Microsoft guidance scoped, property settings owner-observed, and Search/AI outcomes unmeasured.
+
 ### Portfolio fleet operations — 2026-09-08
 
 - Added the `arwp-portfolio-fleet` skill and installable `arwp-portfolio` CLI for one-manifest operation across many local website repositories.

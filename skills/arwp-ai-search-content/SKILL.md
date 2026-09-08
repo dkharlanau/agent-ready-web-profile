@@ -2,8 +2,8 @@
 name: arwp-ai-search-content
 description: Improve website content for search, AI search, citation, and recommendation surfaces without AI-generated filler. Use when asked to optimize articles, docs, landing pages, comparisons, answer pages, or knowledge content for Google Search, AI Overviews/AI Mode, ChatGPT Search, Bing/Copilot citations, or ARWP content quality. Preserve human usefulness, evidence, originality, and clear entity/topic structure.
 license: Apache-2.0
-compatibility: Works on Markdown, HTML, MDX, CMS-exported content, documentation sites, and static/generated pages.
 metadata:
+  compatibility: Works on Markdown, HTML, MDX, CMS-exported content, documentation sites, and static/generated pages.
   standard: agent-skills
   arwp-role: content-quality
 ---
@@ -25,7 +25,7 @@ Do not rewrite content into generic "AI SEO" prose. Google explicitly emphasizes
    - If nothing is distinctive, add evidence/value before adding more words.
 
 2. Make the answer retrievable.
-   - Put a concise direct answer near the relevant heading, not hidden in an accordion.
+   - Put a direct answer near its relevant question when that serves the reader; keep meaningful narrative context. Do not enforce a chunk size, word count or FAQ quota.
    - Use descriptive H2/H3 sections with stable IDs where the framework supports them.
    - Keep important facts in visible page content.
    - Use tables only when they genuinely clarify comparisons or dense data.
@@ -85,3 +85,11 @@ A good ARWP content change should leave the page more useful even if no AI syste
 ## Worked article and comparison evidence
 
 Use [the practice library](../../docs/DISCOVERABILITY-PLAYBOOK.md) for decision-oriented article shapes, cell-level comparison sources and visible footnotes. The [editorial receipt contract](../../docs/EDITORIAL-RECEIPTS.md) records the question, original contribution, useful action and source support; run `arwp editorial-check receipt.json` to detect broken references. This local convention cannot establish source entailment, actual rendered content or ranking benefit. Inspect those separately. The [article](../../docs/examples/editorial/article.html) and [comparison](../../docs/examples/editorial/comparison.html) are explicitly noindex fixtures with reserved example identities; adapt only verified facts.
+
+## Research edition 1.0.0 (8 September 2026)
+
+When choosing voice, titles, openings or passage-level markup, read [the editorial field guide](../../docs/EDITORIAL-SEARCH-LAB.md) and use [the research brief](../../templates/growth/editorial-research-brief.md). Select the format from the reader task and real evidence; keep first-person experience, sourced facts and interpretation distinguishable. Test one question where the recommendation should reverse before scaling a format.
+
+Keep provider scope explicit: Google's current guide rejects mandatory chunking and AI-only writing; Microsoft clarity suggestions do not become universal punctuation or length checks. Selective section graphs and Web Annotation are optional consumer-specific semantics. Check speakable's actual feature scope; it is not a generic citation instruction.
+
+For measurement, inspect effective Search generative AI property inclusion with owner access and preserve inheritance. Dedicated AI impressions overlap overall Search reporting. Missing reports remain unavailable, and citation frequency does not establish recommendation correctness. Recheck the guide's primary sources when applying these temporally changing controls.

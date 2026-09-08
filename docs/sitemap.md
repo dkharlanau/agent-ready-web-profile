@@ -107,3 +107,5 @@ Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/site
 - [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 169 concrete practices with sources, verification and native hypothesis/rule routing.
 - [Machine-readable corpus](https://dkharlanau.github.io/agent-ready-web-profile/knowledge/discoverability-corpus.json): planning material; no measured ranking effects are implied.
 - [Editorial receipt contract](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-RECEIPTS.md): visible claim-source relationships for useful articles and comparisons.
+
+- [Editorial research lab](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-SEARCH-LAB.html)

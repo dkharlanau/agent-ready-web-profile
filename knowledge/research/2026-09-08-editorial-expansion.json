@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "method": "agent-assisted primary-source reading and corpus gap review",
+  "corpus_version": "1.3.0",
+  "new_pattern_ids": [
+    "arwp-editorial-title-promise",
+    "arwp-editorial-heading-job",
+    "arwp-editorial-voice-role",
+    "arwp-editorial-opening-shape",
+    "arwp-editorial-evidence-first-outline",
+    "arwp-editorial-version-delta",
+    "arwp-editorial-field-diary",
+    "arwp-editorial-followup-facet",
+    "arwp-editorial-disagreement-map",
+    "arwp-editorial-sentence-status",
+    "arwp-comparisons-decision-threshold",
+    "arwp-comparisons-design-consequence",
+    "arwp-retrieval-qualifier-stress-test",
+    "arwp-entities-section-graph",
+    "arwp-retrieval-annotation-selectors",
+    "arwp-entities-article-role-parity",
+    "arwp-entities-discussion-boundary",
+    "arwp-media-speakable-eligibility",
+    "arwp-access-google-ai-property-control",
+    "arwp-measurement-ai-report-overlap",
+    "arwp-measurement-ai-report-absence",
+    "arwp-measurement-citation-correctness",
+    "arwp-experience-agent-state-continuity",
+    "arwp-governance-provider-scope",
+    "arwp-experiments-useful-artifact",
+    "arwp-governance-review-trigger"
+  ],
+  "new_source_ids": [
+    "google-ai-optimization",
+    "google-ai-exploration",
+    "google-style-tone",
+    "google-style-headings",
+    "microsoft-ai-content",
+    "google-ai-control",
+    "google-ai-report-help",
+    "schema-page-element",
+    "schema-has-part",
+    "w3c-web-annotation",
+    "google-speakable",
+    "google-discussion",
+    "webdev-agent-ux"
+  ],
+  "scope": "Source support and implementation proposals only. No ranking, indexing, citation or revenue outcome was tested. Existing 169 pattern records are preserved unchanged.",
+  "conflicts": [
+    {
+      "sources": [
+        "google-ai-optimization",
+        "microsoft-ai-content"
+      ],
+      "resolution": "Use readable sections for the reader. Do not encode a universal chunk length, punctuation ban or AI voice requirement."
+    },
+    {
+      "sources": [
+        "google-ai",
+        "google-ai-control",
+        "google-ai-report-help"
+      ],
+      "resolution": "Older general AI-feature text is incomplete for the newer property control and dedicated reporting. Check their dedicated current documentation and authenticated property state."
+    }
+  ],
+  "newness": "May-August 2026 platform developments are distinguished from older current writing guidance and the 2017 annotation standard. A new library pattern is not necessarily a newly invented technique."
+}

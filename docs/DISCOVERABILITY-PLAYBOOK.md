@@ -2,7 +2,7 @@
 
 ARWP helps publishers make useful work easier to find, understand, verify, and use. The goal is relevant discovery followed by a successful reader task. A profile file, a large entity graph, or a passing technical check cannot establish search position or AI recommendation performance.
 
-The [corpus](./knowledge/discoverability-corpus.json) contains **169 distinct patterns in 16 categories**, backed by 91 sources, with implementation steps, observable checks, applicability, effort, anti-patterns, source references, and an outcome metric. Start with a real site problem and choose a small set. The corpus is an operating library, not a demand to apply every pattern to every site.
+The [corpus](./knowledge/discoverability-corpus.json) contains **195 distinct patterns in 16 categories**, backed by 104 sources, with implementation steps, observable checks, applicability, effort, anti-patterns, source references, and an outcome metric. Start with a real site problem and choose a small set. The corpus is an operating library, not a demand to apply every pattern to every site.
 
 ## Know what the evidence establishes
 
@@ -12,7 +12,7 @@ The [corpus](./knowledge/discoverability-corpus.json) contains **169 distinct pa
 | `inferred` | ARWP proposes an implementation or workflow based on documented principles or observed first-party patterns. | The provider endorses the complete workflow or its impact. |
 | `experimental` | A bounded idea needs a client, reader, or external outcome test. | A required search standard or an established ranking signal. |
 
-The 2026-09-08 edition includes **49 documented, 108 inferred, and 12 experimental patterns**. Source notes identify exactly what each reference can support. A technically documented tactic still carries an **impact hypothesis**, not a causal promise. A source's `checked_at` records source review or retrieval; the separate [HTTP reference report](./knowledge/source-link-checks.json) tests reachability and identity only.
+The 2026-09-08 edition includes **57 documented, 122 inferred, and 16 experimental patterns**. Source notes identify exactly what each reference can support. A technically documented tactic still carries an **impact hypothesis**, not a causal promise. A source's `checked_at` records source review or retrieval; the separate [HTTP reference report](./knowledge/source-link-checks.json) tests reachability and identity only.
 
 Google's current guidance requires ordinary search eligibility for supporting links in its AI features; additional AI files or special schema are unnecessary. Measurement surfaces evolve: use the dated native measurement rules and check the available owner reports before selecting a comparison. These facts do not imply inclusion for a particular site. [Google: AI features and your website](https://developers.google.com/search/docs/appearance/ai-features).
 
@@ -22,7 +22,7 @@ Bing AI Performance measures citations and cited pages within its supported expe
 
 ## Keep evidence and versions together
 
-Corpus release **1.2.0** assigns each pattern a stable ID, independent semantic version, lifecycle and review passport. **53 patterns have an agent-assisted source-support and implementation review** with a section locator and a concise support note; **116 explicitly remain individually unreviewed**. An unreviewed date stays null. A source retrieval date never fills it automatically.
+Corpus release **1.3.0** assigns each pattern a stable ID, independent semantic version, lifecycle and review passport. **79 patterns have an agent-assisted source-support and implementation review** with a section locator and a concise support note; **116 explicitly remain individually unreviewed**. An unreviewed date stays null. A source retrieval date never fills it automatically.
 
 Upstream releases are identified where the source publishes a fixed version; living documents retain that distinction. The original 1.1.0 corpus is preserved as an immutable baseline. Exported selections pin the current corpus fingerprint and selected pattern versions. The CLI rejects stale pins before creating a new plan. See [the version contract](./DISCOVERABILITY-VERSIONING.md) for revision rules, review scope and compatibility.
 
@@ -135,3 +135,7 @@ For GitHub documentation sites, begin with useful entry tasks, working examples,
 Keep the portfolio baseline comparable, but retain site-specific outcomes. A dataset download, completed practice exercise, and qualified service inquiry are different actions. Do not combine them into one unexplained score. Cross-link owned projects where doing so advances a reader's task, and retain the shared-ownership context.
 
 An operating report should distinguish **planned → implemented → locally verified → published → live verified → externally observed**. Rankings, recommendations, referrals, and business outcomes belong in the last stage and require their own observations.
+
+## September editorial research edition
+
+Read [Write the page that is worth opening](./EDITORIAL-SEARCH-LAB.md) for the 26 new patterns, provider-specific evidence, article formats, opening and heading examples, voice choices, section graphs and a measurable execution brief. Corpus 1.3.0 preserves the exact 1.2.0 release and its 169 pattern records.

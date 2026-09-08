@@ -22,6 +22,9 @@ try {
 
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
+    'docs/EDITORIAL-SEARCH-LAB.md', 'templates/growth/editorial-research-brief.md',
+    'docs/examples/editorial/section-graph.html', 'knowledge/releases/v1.2.0.json',
+    'knowledge/research/2026-09-08-editorial-expansion.json',
     'knowledge/discoverability-corpus.json', 'knowledge/source-link-checks.json', 'lib/discoverability.mjs',
     'skills/arwp-discoverability/SKILL.md', 'docs/examples/editorial/article.receipt.json',
     'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs',

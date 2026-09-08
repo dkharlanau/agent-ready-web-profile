@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-09-08T09:17:09.827879Z",
-  "scope": "HTTP reachability and document identity receipt assembled from each source acquisition time. Existing 60 acquisitions are preserved; 31 newly acquired sources include response-byte hashes. Semantic support is recorded separately in individual pattern review.support. HTTP success alone does not establish claim support, runtime implementation or outcomes.",
+  "checked_at": "2026-09-08T11:19:09.227067+00:00",
+  "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
       "source_id": "google-ai",
@@ -1004,6 +1004,145 @@
       "sha256": "c002002c181672b659f8daf0cf09c05fe669bb6706882f634dcd34890a779f3b",
       "byte_count": 32777,
       "identity_method": "Primary page identity and support read through web browsing; label from source catalog."
+    },
+    {
+      "source_id": "google-ai-optimization",
+      "requested_url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "checked_at": "2026-09-08T11:19:07.293877+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Google&apos;s Guide to Optimizing for Generative AI Features on Google Search | Google Search Central &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers",
+      "result": "retrieved",
+      "sha256": "c5c2acc189b86d66622e0484ea5fbfcab0260c64a99c3b20ed46df815d0f3194"
+    },
+    {
+      "source_id": "google-ai-exploration",
+      "requested_url": "https://blog.google/products-and-platforms/products/search/explore-web-generative-ai-search/",
+      "checked_at": "2026-09-08T11:19:07.294477+00:00",
+      "status": 200,
+      "final_url": "https://blog.google/products-and-platforms/products/search/explore-web-generative-ai-search/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "How AI Mode and AI Overviews help you explore the web",
+      "result": "retrieved",
+      "sha256": "8bb0cb8888cb51f64baffb630a582b9f169b98aa03bfe7ef80da6437f79c9d03"
+    },
+    {
+      "source_id": "google-style-tone",
+      "requested_url": "https://developers.google.com/style/tone",
+      "checked_at": "2026-09-08T11:19:07.294644+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/style/tone",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Voice and tone &nbsp;|&nbsp; Google developer documentation style guide &nbsp;|&nbsp; Google for Developers",
+      "result": "retrieved",
+      "sha256": "03292c7e24b80643386cd82bc458d26d3c757a318df524017845921cfc79a803"
+    },
+    {
+      "source_id": "google-style-headings",
+      "requested_url": "https://developers.google.com/style/headings",
+      "checked_at": "2026-09-08T11:19:07.294779+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/style/headings",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Headings and titles &nbsp;|&nbsp; Google developer documentation style guide &nbsp;|&nbsp; Google for Developers",
+      "result": "retrieved",
+      "sha256": "fb4758ed62bb8b834f3817312de56c6f524bdc862f912e88e4f3bc11fc61c3d7"
+    },
+    {
+      "source_id": "microsoft-ai-content",
+      "requested_url": "https://about.ads.microsoft.com/en/blog/post/october-2025/optimizing-your-content-for-inclusion-in-ai-search-answers",
+      "checked_at": "2026-09-08T11:19:07.294909+00:00",
+      "result": "retrieval-failed",
+      "error": "URLError"
+    },
+    {
+      "source_id": "google-ai-control",
+      "requested_url": "https://support.google.com/webmasters/answer/16908024",
+      "checked_at": "2026-09-08T11:19:07.357111+00:00",
+      "status": 200,
+      "final_url": "https://support.google.com/webmasters/answer/16908024",
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Search generative AI control - Search Console Help",
+      "result": "retrieved",
+      "sha256": "69389aa639074c3c44f88b3b32dab46bff1ee733c46b390ff17a128b8b35c681"
+    },
+    {
+      "source_id": "google-ai-report-help",
+      "requested_url": "https://support.google.com/webmasters/answer/16984139",
+      "checked_at": "2026-09-08T11:19:07.828483+00:00",
+      "status": 200,
+      "final_url": "https://support.google.com/webmasters/answer/16984139",
+      "content_type": "text/html; charset=UTF-8",
+      "title": "Generative AI performance report (Search) - Search Console Help",
+      "result": "retrieved",
+      "sha256": "db15ed160c3a2ca8874a004c5b6f11ee36a826f59d4e271b194001754806529b"
+    },
+    {
+      "source_id": "schema-page-element",
+      "requested_url": "https://schema.org/WebPageElement",
+      "checked_at": "2026-09-08T11:19:07.949246+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/WebPageElement",
+      "content_type": "text/html",
+      "title": "WebPageElement - Schema.org Type",
+      "result": "retrieved",
+      "sha256": "4438a41f9aadf120ff883d38d30a885127b71e69b6c3d760fe5bbb0483aad3be"
+    },
+    {
+      "source_id": "schema-has-part",
+      "requested_url": "https://schema.org/hasPart",
+      "checked_at": "2026-09-08T11:19:08.036707+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/hasPart",
+      "content_type": "text/html",
+      "title": null,
+      "result": "retrieved",
+      "sha256": "32cdcc49006c51c722427eca649912c65d5a111a4998200e8e152c41f20a61db"
+    },
+    {
+      "source_id": "w3c-web-annotation",
+      "requested_url": "https://www.w3.org/TR/annotation-model/",
+      "checked_at": "2026-09-08T11:19:08.046364+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/TR/annotation-model/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Web Annotation Data Model",
+      "result": "retrieved",
+      "sha256": "a7513e022f56c0a6f4e99ac11aec03f3451d1ff1ce14054780b3ccfb38fa7980"
+    },
+    {
+      "source_id": "google-speakable",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/speakable",
+      "checked_at": "2026-09-08T11:19:08.053420+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/speakable",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Speakable (BETA) Schema Markup | Google Search Central &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers",
+      "result": "retrieved",
+      "sha256": "1e563219b86a73daf74c18247d8ad06cb5d75508fa2fad00a532f8766df43e16"
+    },
+    {
+      "source_id": "google-discussion",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/discussion-forum",
+      "checked_at": "2026-09-08T11:19:08.316590+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/discussion-forum",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Discussion Forum (DiscussionForumPosting, SocialMediaPosting) Schema Markup | Google Search Central &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers",
+      "result": "retrieved",
+      "sha256": "4f2dc534aeaa5c083efff7b81d1964957a498677b77b331265e88953264c892c"
+    },
+    {
+      "source_id": "webdev-agent-ux",
+      "requested_url": "https://web.dev/articles/ai-agent-site-ux",
+      "checked_at": "2026-09-08T11:19:08.390510+00:00",
+      "status": 200,
+      "final_url": "https://web.dev/articles/ai-agent-site-ux",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Build agent-friendly websites &nbsp;|&nbsp; web.dev",
+      "result": "retrieved",
+      "sha256": "35ff1da4b7a30fe07853890f024e1ddc60d80d746c053600ce962ab2df2e7ef6"
     }
   ]
 }
