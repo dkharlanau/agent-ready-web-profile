@@ -1,0 +1,258 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "corpus_before": "1.9.0",
+  "corpus_after": "1.10.0",
+  "scope": "Individual media and page-experience source review. No ranking, legal or accessibility certification.",
+  "changes": [
+    {
+      "id": "arwp-media-original-visual",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-images"
+      ],
+      "current_sources": [
+        "google-images"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-images",
+          "locator": "Optimize the image landing pages; Add high-quality photos",
+          "note": "Supports contextual useful images; original process evidence is our editorial proposal."
+        }
+      ]
+    },
+    {
+      "id": "arwp-media-responsive-images",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-images",
+        "web-vitals"
+      ],
+      "current_sources": [
+        "google-images",
+        "web-vitals"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-images",
+          "locator": "Responsive images",
+          "note": "Supports responsive variants and a fallback src; label-legibility inspection is our procedure."
+        },
+        {
+          "source_id": "web-vitals",
+          "locator": "Core Web Vitals",
+          "note": "Defines loading and stability metrics; image bytes alone do not establish user experience."
+        }
+      ]
+    },
+    {
+      "id": "arwp-media-transcript",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-ai",
+        "wai-structure"
+      ],
+      "current_sources": [
+        "wai-transcripts"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "wai-transcripts",
+          "locator": "Introduction; Creating Transcripts",
+          "note": "Supports speech, meaningful non-speech and applicable visual equivalents; transcript sampling is our review method."
+        }
+      ]
+    },
+    {
+      "id": "arwp-media-media-consistency",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "bing-ai"
+      ],
+      "current_sources": [
+        "bing-ai"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "bing-ai",
+          "locator": "Using These Insights to Improve Content",
+          "note": "Supports accurate current content; cross-format claim comparison is our workflow."
+        }
+      ]
+    },
+    {
+      "id": "arwp-media-captions",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "wai-images",
+        "wai-tables"
+      ],
+      "current_sources": [
+        "wai-images",
+        "wai-tables"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "wai-images",
+          "locator": "Complex images",
+          "note": "Supports conveying essential chart information; caption fields depend on the figure."
+        },
+        {
+          "source_id": "wai-tables",
+          "locator": "Captions and Summaries",
+          "note": "Supports identifiable tables; complete evidence alternatives still need manual review."
+        }
+      ]
+    },
+    {
+      "id": "arwp-media-media-rights",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-images"
+      ],
+      "current_sources": [
+        "google-image-license"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-image-license",
+          "locator": "Structured data and IPTC photo metadata",
+          "note": "Supports creator, credit and licensing metadata; this cannot establish permission or legal clearance."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experience-mobile-reading",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-experience"
+      ],
+      "current_sources": [
+        "google-experience",
+        "wai-reflow"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-experience",
+          "locator": "Self-assess your content",
+          "note": "Supports usable mobile content, not a ranking promise."
+        },
+        {
+          "source_id": "wai-reflow",
+          "locator": "Intent; Examples",
+          "note": "Allows scoped two-dimensional content while surrounding prose reflows; device testing is our application."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experience-content-first",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "web-vitals",
+        "google-js"
+      ],
+      "current_sources": [
+        "web-vitals",
+        "google-js"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "web-vitals",
+          "locator": "Core Web Vitals",
+          "note": "LCP is a loading metric, not proof that the reader has a usable answer."
+        },
+        {
+          "source_id": "google-js",
+          "locator": "How Google processes JavaScript",
+          "note": "Supports renderability checks; optional-widget failure testing is our engineering procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experience-interaction",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "web-vitals"
+      ],
+      "current_sources": [
+        "web-inp"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "web-inp",
+          "locator": "What is INP?; Details on how INP is calculated",
+          "note": "Measures latency to the next paint for qualifying interactions; task completion needs separate timing."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experience-layout-stability",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "web-vitals"
+      ],
+      "current_sources": [
+        "web-vitals"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "web-vitals",
+          "locator": "Core Web Vitals",
+          "note": "Defines CLS; reserving space and testing misclicks are our implementation practices."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experience-obstruction",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-experience"
+      ],
+      "current_sources": [
+        "google-experience"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-experience",
+          "locator": "Self-assess your content",
+          "note": "Supports avoiding intrusive interstitials; entry-state and dismissal testing is our method."
+        }
+      ]
+    }
+  ],
+  "remaining_individually_unreviewed": 44
+}

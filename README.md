@@ -2,7 +2,7 @@
 
 **Make your site worth citing.**
 
-Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **219 patterns, 122 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 164 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
+Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **219 patterns, 125 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 175 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
 
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
 [![Adaptive Site Upgrade validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml)

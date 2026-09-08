@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T12:33:13.654128+00:00",
+  "checked_at": "2026-09-08T12:37:19.900682+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1461,6 +1461,36 @@
       "content_type": "text/html; charset=utf-8",
       "result": "retrieved",
       "sha256": "3c6b718bdc3393d988840c07f8e8afa972023a81de91d80e3065ee14a97f29c7"
+    },
+    {
+      "source_id": "wai-transcripts",
+      "requested_url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "checked_at": "2026-09-08T12:37:19.199286+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/media/av/transcripts/",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "46826235e2f52e0ae624b71836801c6805012265001652f9478b4480df6d7643"
+    },
+    {
+      "source_id": "wai-reflow",
+      "requested_url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+      "checked_at": "2026-09-08T12:37:19.199879+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "d322027ca3f1f43f516687120442c60f02ee3f82b09cb26933c9ee7abfeabb33"
+    },
+    {
+      "source_id": "web-inp",
+      "requested_url": "https://web.dev/articles/inp",
+      "checked_at": "2026-09-08T12:37:19.200152+00:00",
+      "status": 200,
+      "final_url": "https://web.dev/articles/inp",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "0ede3c86defef4bee3fffab6ee6ec0403973face36063f75ef7b8b9d237d5546"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.10.0",
+  "version": "1.9.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -1649,45 +1649,6 @@
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
       "notes": "Editorial precedent for prerequisites and troubleshooting. GitHub house style is not a universal SEO requirement.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-transcripts",
-      "title": "Transcripts",
-      "url": "https://www.w3.org/WAI/media/av/transcripts/",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Distinguishes basic and descriptive transcripts and media-specific accessibility needs.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "wai-reflow",
-      "title": "Understanding Reflow",
-      "url": "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
-      "publisher": "W3C WAI",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Explains reflow with scoped two-dimensional content exceptions; this is Understanding guidance, not a new conformance certificate.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "web-inp",
-      "title": "Interaction to Next Paint",
-      "url": "https://web.dev/articles/inp",
-      "publisher": "Google",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Defines interaction-to-presentation latency, not full business-task completion time.",
       "upstream": {
         "kind": "living-document",
         "version": null
@@ -5347,18 +5308,11 @@
       "recommendation_rule_ids": [
         "google-image-context-alt"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-images",
-            "locator": "Optimize the image landing pages; Add high-quality photos",
-            "note": "Supports contextual useful images; original process evidence is our editorial proposal."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -5470,8 +5424,7 @@
       "problem": "Heavy images slow first content while tiny versions lose useful evidence.",
       "implementation": [
         "Create appropriately sized variants and specify dimensions.",
-        "Use responsive image markup and inspect legibility at small viewports.",
-        "Keep a real img src fallback alongside srcset or picture; inspect the selected resource and readable detail at the tested viewport and pixel density."
+        "Use responsive image markup and inspect legibility at small viewports."
       ],
       "verification": [
         "The selected image fits the viewport and avoids avoidable layout movement."
@@ -5494,23 +5447,11 @@
       "recommendation_rule_ids": [
         "google-image-context-alt"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-images",
-            "locator": "Responsive images",
-            "note": "Supports responsive variants and a fallback src; label-legibility inspection is our procedure."
-          },
-          {
-            "source_id": "web-vitals",
-            "locator": "Core Web Vitals",
-            "note": "Defines loading and stability metrics; image bytes alone do not establish user experience."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -5574,15 +5515,15 @@
       "problem": "Audio-only evidence is hard to search, quote, or access.",
       "implementation": [
         "Transcribe the published recording and review names, units, and technical terms.",
-        "Link transcript sections to the corresponding recording times where supported.",
-        "Include meaningful non-speech audio and, for a descriptive video transcript, essential visual information. Review applicable caption and audio-description needs separately; a transcript alone does not certify accessibility."
+        "Link transcript sections to the corresponding recording times where supported."
       ],
       "verification": [
         "Sampled transcript passages match the actual recording and retain important qualifications."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "wai-transcripts"
+        "google-ai",
+        "wai-structure"
       ],
       "applicability": [
         "video-sites",
@@ -5598,18 +5539,11 @@
       "recommendation_rule_ids": [
         "google-important-content-textual"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-transcripts",
-            "locator": "Introduction; Creating Transcripts",
-            "note": "Supports speech, meaningful non-speech and applicable visual equivalents; transcript sampling is our review method."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -5647,18 +5581,11 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "bing-ai",
-            "locator": "Using These Insights to Improve Content",
-            "note": "Supports accurate current content; cross-format claim comparison is our workflow."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -5672,7 +5599,7 @@
       "title": "Explain chart encodings and evidence in captions",
       "problem": "A chart detached from its axes can tell the wrong story.",
       "implementation": [
-        "Explain the chart encodings and applicable unit, population, period and source in the caption or clearly associated description; do not invent fields irrelevant to the figure.",
+        "State population, unit, period, source, and reading instruction in the caption.",
         "Provide a text or table alternative for the material values."
       ],
       "verification": [
@@ -5699,23 +5626,11 @@
         "google-image-context-alt",
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "wai-images",
-            "locator": "Complex images",
-            "note": "Supports conveying essential chart information; caption fields depend on the figure."
-          },
-          {
-            "source_id": "wai-tables",
-            "locator": "Captions and Summaries",
-            "note": "Supports identifiable tables; complete evidence alternatives still need manual review."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -5733,11 +5648,11 @@
         "Display required attribution and carry it into downloadable variants."
       ],
       "verification": [
-        "Public media have reviewed provenance and any required attribution; a credit may be unnecessary under the actual terms, and metadata never proves permission."
+        "Every public media asset has a matching rights record and required visible credit."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "google-image-license"
+        "google-images"
       ],
       "applicability": [
         "all"
@@ -5752,18 +5667,11 @@
       "recommendation_rule_ids": [
         "google-image-context-alt"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-image-license",
-            "locator": "Structured data and IPTC photo metadata",
-            "note": "Supports creator, credit and licensing metadata; this cannot establish permission or legal clearance."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -5942,16 +5850,14 @@
       "problem": "Desktop quality can hide clipped tables and unusable navigation.",
       "implementation": [
         "Render priority templates at narrow widths with realistic content.",
-        "Fix text clipping, table access, and touch-obstructing overlays.",
-        "Test zoom and reflow as well as narrow widths. Give genuinely two-dimensional tables a usable local scroll region while surrounding text reflows."
+        "Fix text clipping, table access, and touch-obstructing overlays."
       ],
       "verification": [
         "The main answer, evidence, and next action are usable without page-level horizontal overflow."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "google-experience",
-        "wai-reflow"
+        "google-experience"
       ],
       "applicability": [
         "all"
@@ -5967,23 +5873,11 @@
       "recommendation_rule_ids": [
         "openai-atlas-aria-agent-accessibility"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-experience",
-            "locator": "Self-assess your content",
-            "note": "Supports usable mobile content, not a ranking promise."
-          },
-          {
-            "source_id": "wai-reflow",
-            "locator": "Intent; Examples",
-            "note": "Allows scoped two-dimensional content while surrounding prose reflows; device testing is our application."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -6044,8 +5938,7 @@
       "problem": "Widgets can delay the answer while the page shell loads.",
       "implementation": [
         "Identify the actual largest content element and blocking resources.",
-        "Defer nonessential scripts and prioritize necessary content assets.",
-        "Check when the actual answer becomes usable separately from LCP; the largest painted element may be a hero image rather than the answer."
+        "Defer nonessential scripts and prioritize necessary content assets."
       ],
       "verification": [
         "The main answer remains available when optional widgets fail."
@@ -6068,23 +5961,11 @@
       "recommendation_rule_ids": [
         "google-javascript-renderability"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "web-vitals",
-            "locator": "Core Web Vitals",
-            "note": "LCP is a loading metric, not proof that the reader has a usable answer."
-          },
-          {
-            "source_id": "google-js",
-            "locator": "How Google processes JavaScript",
-            "note": "Supports renderability checks; optional-widget failure testing is our engineering procedure."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -6106,7 +5987,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "web-inp"
+        "web-vitals"
       ],
       "applicability": [
         "javascript-sites",
@@ -6115,23 +5996,16 @@
       "effort": "medium",
       "impact_hypothesis": "Responsive interaction may improve successful use after discovery.",
       "anti_pattern": "Reporting low INP from an idle page with no realistic interaction.",
-      "measurement": "Track field INP separately from full task completion latency and correctness. Missing interaction observations are unknown, not zero; a fast next paint does not prove an asynchronous task finished.",
+      "measurement": "Track field INP and completion latency for the target action.",
       "growth_hypothesis_ids": [
         "agent-readable-routes"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "web-inp",
-            "locator": "What is INP?; Details on how INP is calculated",
-            "note": "Measures latency to the next paint for qualifying interactions; task completion needs separate timing."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -6166,18 +6040,11 @@
         "agent-readable-routes"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "web-vitals",
-            "locator": "Core Web Vitals",
-            "note": "Defines CLS; reserving space and testing misclicks are our implementation practices."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -6213,18 +6080,11 @@
         "agent-readable-routes"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-experience",
-            "locator": "Self-assess your content",
-            "note": "Supports avoiding intrusive interstitials; entry-state and dismissal testing is our method."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -12204,8 +12064,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.9.0",
-    "path": "knowledge/releases/v1.9.0.json",
-    "sha256": "c63f260ef6a2165d9ab901ca0bd04a080cf09f9c0e11273a85ba6e98e2f8f957"
+    "version": "1.8.0",
+    "path": "knowledge/releases/v1.8.0.json",
+    "sha256": "6d2dcf4457cdd004481aa52c0e3de016a938d466d6f58cad2546399dbc13f5b6"
   }
 }
