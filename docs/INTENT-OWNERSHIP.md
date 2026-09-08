@@ -129,6 +129,27 @@ node bin/arwp-intent-ownership.mjs apply-proof \
 
 The proof must cover exactly the canonical-page inventory in the ledger. This prevents a partial or stale surface sample from silently rewriting only convenient pages.
 
+## Readiness gate
+
+A successful `probe` means the bounded observation was captured and validated. It does **not** mean the site's served intent ownership is ready.
+
+Gate the observed ledger separately:
+
+```bash
+node bin/arwp-intent-ownership.mjs gate \
+  intent-ownership.observed.json
+```
+
+The gate passes only when every intent family whose disposition is `serve` has exactly one owner and that owner's current ledger state is `indexable`. It fails on `unowned`, `fragmented` and `blocked-owner` families. Reviewed `decline` families are intentionally excluded from the readiness requirement.
+
+This split is deliberate:
+
+- `probe` is observational and should preserve evidence even when production is unhealthy;
+- `gate` is deterministic policy over the resulting ledger and is appropriate for CI/release decisions;
+- deployment-commit parity remains a separate receipt because a technically healthy URL does not identify the source revision that produced it.
+
+The gate still does not prove actual Google indexing, ranking, AI citation or Google-selected canonical, and it authorizes no production mutation.
+
 ## Action semantics
 
 The report can queue:
@@ -166,7 +187,8 @@ Use Intent Ownership before turning a Search Maturity gap into new content:
 7. create a new canonical page only when a genuinely distinct, in-scope user job remains unserved;
 8. verify canonical/internal-link/sitemap behavior;
 9. capture public production-surface technical eligibility separately from actual Search indexing;
-10. measure Search/AI outcomes separately.
+10. gate served owners on the observed ledger without treating a successful probe as readiness;
+11. measure Search/AI outcomes separately.
 
 This avoids a common failure mode: converting query fan-out or long-tail observations into a thin page factory.
 
@@ -176,6 +198,7 @@ This avoids a common failure mode: converting query fan-out or long-tail observa
 - A deliberately declined intent does not create a URL.
 - An off-owner observation does not prove cannibalization.
 - A public surface proof does not prove actual Google indexing, Google-selected canonical, ranking or deployed commit identity.
+- A readiness gate does not prove actual Google indexing, ranking, AI citation or deployment commit identity.
 - A declared owner does not prove Search ranking, AI citation or retrieval.
 - Google/Bing/referral metrics remain provider-scoped.
 - Redirects, canonicals and production content changes require review.
