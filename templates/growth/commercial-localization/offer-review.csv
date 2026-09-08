@@ -1,0 +1,4 @@
+example_status,offer_id,currency,billing_basis,recurring_amount,setup_amount,commitment_months,first_year_total,source_status
+synthetic,annual-plan,USD,annual-prepaid,240,60,12,300,fictional-input
+synthetic,monthly-plan,USD,monthly,30,0,1,360,fictional-input
+synthetic,quoted-service,USD,quote-only,,,,unknown,no-quote-observed

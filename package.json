@@ -101,7 +101,8 @@
     "docs/knowledge/research/",
     "docs/ANTI-PATTERNS.md",
     "docs/ASSET-WORKSHOP.md",
-    "docs/examples/asset-kits/"
+    "docs/examples/asset-kits/",
+    "docs/COMMERCIAL-LOCALIZATION.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",

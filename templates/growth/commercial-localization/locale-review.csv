@@ -1,0 +1,3 @@
+example_status,entity_id,page_url,content_language,offer_currency,canonical_url,translation_review,availability_review
+synthetic,example-software,https://example.com/en-us/tool/,en-US,USD,https://example.com/en-us/tool/,pending,pending
+synthetic,example-software,https://example.com/de-de/tool/,de-DE,EUR,https://example.com/de-de/tool/,pending,pending

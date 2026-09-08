@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T12:06:10.163244+00:00",
+  "checked_at": "2026-09-08T12:15:35.276034+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1271,6 +1271,36 @@
       "content_type": "text/html; charset=utf-8",
       "result": "retrieved",
       "sha256": "1c1fad794e12e9406817a8238c61fafacdea011c7a88a7d1c750d0b59753f78e"
+    },
+    {
+      "source_id": "google-url-structure",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/url-structure",
+      "checked_at": "2026-09-08T12:15:32.716866+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/url-structure",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "0dd62381949265eed0442fd0fca85082cb4bdbb4d35d0dde69c5405a53a70c34"
+    },
+    {
+      "source_id": "google-software-app",
+      "requested_url": "https://developers.google.com/search/docs/appearance/structured-data/software-app",
+      "checked_at": "2026-09-08T12:15:33.903382+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/appearance/structured-data/software-app",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "6f007c8ca2cecf144fdffebd6b3e43d484bed935feccd282b4790aee78883913"
+    },
+    {
+      "source_id": "schema-unit-price",
+      "requested_url": "https://schema.org/UnitPriceSpecification",
+      "checked_at": "2026-09-08T12:15:34.895693+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/UnitPriceSpecification",
+      "content_type": "text/html",
+      "result": "retrieved",
+      "sha256": "c01f5050a89ec936371ac4df5864405f006ef581c8c67e950d4ae750dcc84bca"
     }
   ]
 }

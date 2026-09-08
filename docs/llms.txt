@@ -224,3 +224,5 @@ ARWP is not an SEO ranking mechanism, permission layer, replacement for MCP/A2A/
 
 - [Asset workshop](https://dkharlanau.github.io/agent-ready-web-profile/ASSET-WORKSHOP.html): practical asset packs, source-scoped delivery practices and gap-review questions.
 - [Reusable figure and data](https://dkharlanau.github.io/agent-ready-web-profile/examples/asset-kits/): SVG, CSV, visible table and frozen source versions.
+
+- [Names, locales and offers](https://dkharlanau.github.io/agent-ready-web-profile/COMMERCIAL-LOCALIZATION.html): naming, localized content, pricing facts and feature eligibility with review fixtures.

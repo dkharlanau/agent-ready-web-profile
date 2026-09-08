@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -1545,6 +1545,45 @@
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
       "notes": "Supports loading important content without requiring user interaction and testing rendered output.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "google-url-structure",
+      "title": "URL structure best practices",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/url-structure",
+      "publisher": "Google Search Central",
+      "checked_at": "2026-09-08",
+      "authority": "official-documentation",
+      "notes": "Supports readable, encoded and consistent URL construction; not a mandate to migrate working URLs.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "google-software-app",
+      "title": "Software app structured data",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/software-app",
+      "publisher": "Google Search Central",
+      "checked_at": "2026-09-08",
+      "authority": "official-documentation",
+      "notes": "Feature-specific eligibility and actual offer facts; do not invent reviews to satisfy requirements.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "schema-unit-price",
+      "title": "UnitPriceSpecification vocabulary",
+      "url": "https://schema.org/UnitPriceSpecification",
+      "publisher": "Schema.org",
+      "checked_at": "2026-09-08",
+      "authority": "official-documentation",
+      "notes": "Development vocabulary page reviewed as a living document, not a pinned release or a Google feature contract.",
       "upstream": {
         "kind": "living-document",
         "version": null
@@ -10974,6 +11013,476 @@
         "replacement_ids": [],
         "reason": null
       }
+    },
+    {
+      "id": "arwp-editorial-title-language",
+      "category": "editorial",
+      "title": "Match title language and script to the page",
+      "problem": "English titles persist on otherwise translated pages.",
+      "implementation": [
+        "Use a title in the primary language and writing system; preserve genuine product names where appropriate."
+      ],
+      "verification": [
+        "Review title, prominent heading and main content together."
+      ],
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-title"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Translating the title while leaving the page in another language.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-title",
+            "locator": "Language and writing-system guidance",
+            "note": "Supports title-language consistency, not a fixed title template."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-architecture-url-spelling",
+      "category": "architecture",
+      "title": "Choose readable URL spelling before publication",
+      "problem": "Mixed case and unclear separators create avoidable URL variants.",
+      "implementation": [
+        "Use descriptive path segments, hyphens where appropriate and correct escaping; choose a consistent case policy. Preserve established URLs unless a migration is justified."
+      ],
+      "verification": [
+        "Test encoded links and case behavior on the actual static host."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-url-structure"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Renaming working URLs just to chase a speculative keyword boost.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "search-foundation-first"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-url-structure",
+            "locator": "Readable URLs, percent encoding, hyphens and case sensitivity",
+            "note": "Supports URL construction; the avoid-unnecessary-migration rule is project judgment."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-localization-content-language",
+      "category": "localization",
+      "title": "Localize the answer rather than only the interface",
+      "problem": "A translated navigation shell surrounds unchanged foreign-language content.",
+      "implementation": [
+        "Review the main explanation, task instructions and navigation as one language experience; keep code and actual names accurate."
+      ],
+      "verification": [
+        "Have a competent reader complete the task in the target language."
+      ],
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-international"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Declaring a locale through lang while leaving the useful answer untranslated.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-international",
+            "locator": "Make sure the page language is obvious",
+            "note": "Google uses visible content to determine language; lang remains useful for accessibility but is not its language detector."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-localization-currency-route",
+      "category": "localization",
+      "title": "Give purchasable currency offers distinct URLs",
+      "problem": "The same product URL changes its offer currency only through a cookie.",
+      "implementation": [
+        "For products sold in multiple currencies, expose separate offer URLs and keep each visible price and graph aligned. Do not create fake regional offers."
+      ],
+      "verification": [
+        "Fetch each offer URL without cookies and compare displayed and structured currencies."
+      ],
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-product-pros-cons"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Making locale copies for regions where the product cannot actually be purchased.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-product-pros-cons",
+            "locator": "Product technical guidelines: multiple currencies",
+            "note": "Scoped to Google product guidance, not an obligation to duplicate every informational page by currency."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-services-billing-components",
+      "category": "services",
+      "title": "Explain subscription commitment beside the headline price",
+      "problem": "A monthly equivalent hides an annual commitment or setup charge.",
+      "implementation": [
+        "State billing period, commitment, unit, setup and renewal components visibly; use applicable UnitPriceSpecification fields only when supported by real facts and the consumer."
+      ],
+      "verification": [
+        "Recompute the first invoice and committed-period total from the terms."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "schema-unit-price"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Representing an annual prepaid plan as an unrestricted monthly offer.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-unit-price",
+            "locator": "billingDuration, billingStart, referenceQuantity and priceCurrency",
+            "note": "Vocabulary supports price components. The invoice reconciliation is a project review procedure; Google support must be checked separately."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-services-quote-state",
+      "category": "services",
+      "title": "Keep quote-only services distinct from free offers",
+      "problem": "A contact-for-quote service is emitted with price zero.",
+      "implementation": [
+        "Describe the service and quote process; omit invented numeric price assertions. State minimum scope or genuine starting-price conditions in visible text."
+      ],
+      "verification": [
+        "Compare the service page, offer graph and actual quoting process."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "schema-service"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Using zero as a placeholder for an unknown price.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-service",
+            "locator": "Service: offers and service description",
+            "note": "The vocabulary models services and offers; the unknown-vs-free distinction is a truthfulness implementation rule, not a rich-result promise."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-entities-software-eligibility",
+      "category": "entities",
+      "title": "Separate a software description from Google feature eligibility",
+      "problem": "A valid SoftwareApplication graph is presented as rich-result approval.",
+      "implementation": [
+        "Check the current Google required fields and real review evidence; retain truthful semantics even if feature eligibility is incomplete."
+      ],
+      "verification": [
+        "Record syntax, factual parity and feature eligibility independently."
+      ],
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-software-app"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Inventing a five-star review to satisfy a validator.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-software-app",
+            "locator": "Required SoftwareApplication properties",
+            "note": "Google requires name, offers.price and rating or review for the documented feature. Missing facts must not be manufactured."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-services-free-tier-scope",
+      "category": "services",
+      "title": "State exactly what a zero-price software offer includes",
+      "problem": "A free download conceals that the described workflow requires payment.",
+      "implementation": [
+        "Identify the actual free app offer and its limits; show paid features, trial expiry or required paid services beside the relevant capability claims."
+      ],
+      "verification": [
+        "Complete the advertised free task under the stated limits."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-software-app"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Calling a time-limited paid-service trial permanently free.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-software-app",
+            "locator": "offers.price for apps available without payment",
+            "note": "Zero represents an app available without payment. The task-level check is a project proposal, not a claim that all freemium apps are ineligible."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-comparisons-price-basis",
+      "category": "comparisons",
+      "title": "Normalize competitor price comparisons without hiding assumptions",
+      "problem": "An annual effective rate is compared with a competitor monthly cancellable rate.",
+      "implementation": [
+        "Compare the same currency, date, commitment and usage scenario; show original prices and assumptions. Leave quote-only or inaccessible competitor prices unknown."
+      ],
+      "verification": [
+        "Recalculate each row and preserve source date, taxes scope and material exclusions."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "schema-unit-price"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Selecting incompatible pricing plans solely to make the publisher look cheapest.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-unit-price",
+            "locator": "Price currency, reference quantity and billing duration",
+            "note": "Vocabulary motivates a common comparison basis; it does not validate competitor claims or rank effects."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-entities-product-offer-aggregation",
+      "category": "entities",
+      "title": "Use AggregateOffer only for actual aggregated offers",
+      "problem": "A single made-up from-price is presented as an aggregate of several offers.",
+      "implementation": [
+        "Use AggregateOffer for real aggregated offers and accurate bounds; use the appropriate variant model for variants."
+      ],
+      "verification": [
+        "Trace lowPrice, highPrice and offerCount to the actual underlying offers."
+      ],
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-product-pros-cons"
+      ],
+      "applicability": [
+        "localized-sites",
+        "software",
+        "service-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.",
+      "anti_pattern": "Using AggregateOffer as a generic decoration for service price ranges.",
+      "measurement": "Track factual/technical correctness, relevant search observations and useful actions separately.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-product-pros-cons",
+            "locator": "AggregateOffer definition and variant exclusion",
+            "note": "Google distinguishes an aggregation of offers from a group of product variants."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
     }
   ],
   "integration": {
@@ -10988,8 +11497,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.4.0",
-    "path": "knowledge/releases/v1.4.0.json",
-    "sha256": "f127fa37bdf1052c71000df0b197e7dc49d2d3353b1ca6edd0a7215b24ad6925"
+    "version": "1.5.0",
+    "path": "knowledge/releases/v1.5.0.json",
+    "sha256": "8fff92c8669fb171a18bb22ad9597baf4e200f2c82656c5598670b5be073f47b"
   }
 }

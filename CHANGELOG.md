@@ -4,6 +4,11 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Names, locales and offers (corpus 1.6.0)
+
+- Added ten individually reviewed patterns and three source passports covering titles, URL construction, locale content, currencies, billing, quote-only services, software eligibility and competitor price comparability. Preserved all 209 preceding patterns.
+- Added a review guide and synthetic CSV worksheets. Totals: 219 patterns, 117 sources, 103 individually reviewed; no outcome lift is asserted.
+
 ### Asset workshop (corpus 1.5.0)
 
 - Added four individually reviewed delivery patterns: representative previews, image licensing, interaction-free loading and non-HTML canonical response handling. Corpus: 209 patterns, 114 sources, 93 individually reviewed.
