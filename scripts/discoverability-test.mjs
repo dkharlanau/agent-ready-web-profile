@@ -3,9 +3,10 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { loadCorpus, validateCorpus, validateCorpusMappings, loadDiscoverabilityRegistries, searchTactics, createAdoptionPlan, validateEditorialReceipt } from '../lib/discoverability.mjs';
+import { loadCorpus, validateCorpus, validateCorpusMappings, loadDiscoverabilityRegistries, searchTactics, createAdoptionPlan, validateEditorialReceipt, validateCorpusVersioning, validateReleaseBytes, loadPreviousDiscoverabilityRelease, corpusFingerprint, DISCOVERABILITY_RELEASES } from '../lib/discoverability.mjs';
 
 const corpus = loadCorpus();
+for (const tactic of corpus.tactics) if (tactic.review.reviewed_at !== null) assert.ok(Array.isArray(tactic.review.support) && tactic.review.support.length > 0, `${tactic.id}: shipped individual reviews expose a public source locator and bounded support note.`);
 if (process.argv.includes('--site')) {
   const published = new URL('../docs/knowledge/discoverability-corpus.json', import.meta.url);
   assert.deepEqual(JSON.parse(fs.readFileSync(published, 'utf8')), corpus, 'Publish the actual current corpus in the Pages artifact. Run build:discoverability after corpus changes.');
@@ -42,7 +43,16 @@ assert.equal(validateCorpus({ version: '1', updated_at: '2026-09-08', categories
 
 const registries = loadDiscoverabilityRegistries();
 assert.equal(validateCorpusMappings(corpus, registries).valid, true);
-assert.equal(corpus.tactics.length, 144, 'Preserve all existing portable tactic IDs.');
+const previousRelease = loadPreviousDiscoverabilityRelease(corpus.previous_release);
+const legacyBytes = fs.readFileSync(new URL('../knowledge/releases/v1.1.0.json', import.meta.url));
+const legacyRelease = validateReleaseBytes(legacyBytes, { version: '1.1.0', path: 'knowledge/releases/v1.1.0.json', sha256: DISCOVERABILITY_RELEASES['1.1.0'] });
+assert.equal(legacyRelease.valid, true);
+assert.equal(legacyRelease.corpus.tactics.length, 144, 'The immutable 1.1.0 baseline has 144 published patterns.');
+for (const prior of legacyRelease.corpus.tactics) {
+  const current = corpus.tactics.find(t => t.id === prior.id);
+  assert.ok(current, `Preserve the published stable ID ${prior.id}; new patterns are welcome.`);
+  if (corpus.previous_release.version === '1.1.0') for (const field of ['evidence_level', 'growth_hypothesis_ids', 'recommendation_rule_ids']) assert.deepEqual(current[field], prior[field], `${prior.id}: passport adoption must preserve its existing native evidence class and routing.`);
+}
 const baseline = corpus.tactics.find(t => t.id === 'arwp-measurement-baseline');
 assert.ok(baseline.growth_hypothesis_ids.includes('platform-ai-measurement'));
 assert.ok(baseline.recommendation_rule_ids.includes('google-generative-ai-measurement'));
@@ -76,6 +86,9 @@ assert.equal(plan.deployed_at, null);
 assert.equal(plan.baseline.search, 'not_measured');
 assert.match(plan.corpus_sha256, /^[a-f0-9]{64}$/);
 assert.equal(plan.tasks[0].status, 'planned');
+assert.equal(plan.tactic_versions[first.id], first.pattern_version);
+assert.deepEqual(plan.tasks[0].review, first.review);
+assert.deepEqual(plan.tasks[0].lifecycle, first.lifecycle);
 assert.equal(plan.growth_loop.kind, 'practice-selection');
 assert.deepEqual(plan.growth_loop.hypothesis_ids, first.growth_hypothesis_ids);
 assert.deepEqual(plan.growth_loop.recommendation_rule_ids, first.recommendation_rule_ids);
@@ -86,6 +99,96 @@ assert.throws(() => createAdoptionPlan({ ...config, tactic_ids: ['unknown'] }, c
 assert.throws(() => createAdoptionPlan({ ...config, tactic_ids: [first.id, first.id] }, corpus), /unique/);
 for (const url of ['https://example.com/project-other/', 'https://other.example/project/', 'http://example.com/project/']) assert.throws(() => createAdoptionPlan({ ...config, page_urls: [url] }, corpus));
 assert.throws(() => createAdoptionPlan({ ...config, site_url: 'https://user:secret@example.com/' }, corpus));
+
+const pinnedConfig = { ...config, corpus_version: corpus.version, corpus_sha256: corpusFingerprint(corpus), tactic_versions: { [first.id]: first.pattern_version } };
+assert.equal(createAdoptionPlan(pinnedConfig, corpus).corpus_sha256, corpusFingerprint(corpus));
+for (const pins of [
+  { corpus_version: previousRelease.version }, { corpus_version: null }, { corpus_version: '01.2.0' },
+  { corpus_sha256: '0'.repeat(64) }, { corpus_sha256: null },
+  { tactic_versions: {} }, { tactic_versions: [] }, { tactic_versions: null },
+  { tactic_versions: { [first.id]: '0.0.1' } },
+  { tactic_versions: { [first.id]: first.pattern_version, invented: '1.0.0' } }
+]) assert.throws(() => createAdoptionPlan({ ...config, ...pins }, corpus), /pin|tactic_versions/);
+
+const historyBytes = fs.readFileSync(new URL(`../${corpus.previous_release.path}`, import.meta.url));
+assert.equal(validateReleaseBytes(historyBytes, corpus.previous_release).valid, true);
+assert.equal(corpus.previous_release.sha256, DISCOVERABILITY_RELEASES[corpus.previous_release.version]);
+assert.equal(validateReleaseBytes(Buffer.concat([historyBytes, Buffer.from('\n')]), corpus.previous_release).valid, false, 'Even a byte-only change to a released artifact violates its historical checksum.');
+assert.equal(validateReleaseBytes(historyBytes, { ...corpus.previous_release, sha256: '0'.repeat(64) }).valid, false, 'A caller cannot replace the code-reviewed checksum anchor.');
+assert.throws(() => loadPreviousDiscoverabilityRelease({ ...corpus.previous_release, path: '../package.json' }), /path/);
+const missingHistory = structuredClone(corpus); missingHistory.previous_release.version = '9.9.9';
+assert.equal(validateCorpus(missingHistory).valid, false);
+
+const nextVersion = (version, kind) => {
+  const [major, minor, patch] = version.split('.').map(Number);
+  return kind === 'major' ? `${major + 1}.0.0` : kind === 'minor' ? `${major}.${minor + 1}.0` : `${major}.${minor}.${patch + 1}`;
+};
+const changedPattern = structuredClone(corpus);
+changedPattern.version = nextVersion(corpus.version, 'minor');
+changedPattern.tactics[0].implementation.push('A newly required implementation step.');
+assert.ok(validateCorpusVersioning(changedPattern, corpus).errors.some(e => /minor pattern_version bump/.test(e)), 'Changing the actual instructions with an unchanged version must fail.');
+changedPattern.tactics[0].pattern_version = nextVersion(first.pattern_version, 'patch');
+assert.equal(validateCorpusVersioning(changedPattern, corpus).valid, false, 'An operational change needs more than a review-only patch.');
+changedPattern.tactics[0].pattern_version = nextVersion(first.pattern_version, 'minor');
+assert.equal(validateCorpusVersioning(changedPattern, corpus).valid, true, 'A compatible instruction addition plus corresponding pattern and corpus minor bumps is accepted.');
+changedPattern.version = corpus.version;
+assert.ok(validateCorpusVersioning(changedPattern, corpus).errors.some(e => /Corpus version requires/.test(e)));
+
+const addedPattern = structuredClone(corpus);
+addedPattern.version = nextVersion(corpus.version, 'minor');
+addedPattern.tactics.push({ ...structuredClone(first), id: 'arwp-test-new-pattern', title: 'Distinct new pattern', pattern_version: '1.0.0', review: { reviewed_at: corpus.updated_at, scope: 'source-support-and-implementation', method: 'agent-assisted' } });
+assert.equal(validateCorpusVersioning(addedPattern, corpus).valid, true, 'Release validation permits new stable IDs; it does not enforce a frozen 144-item inventory.');
+addedPattern.version = nextVersion(corpus.version, 'patch');
+assert.equal(validateCorpusVersioning(addedPattern, corpus).valid, false, 'Adding a new pattern requires a corpus minor version.');
+addedPattern.version = nextVersion(corpus.version, 'minor');
+addedPattern.tactics.at(-1).review = { reviewed_at: null, scope: 'not-individually-reviewed', method: null };
+assert.ok(validateCorpusVersioning(addedPattern, corpus).errors.some(e => /newly published pattern needs/.test(e)), 'The legacy unknown-review allowance does not justify publishing unreviewed new guidance.');
+
+const changedReview = structuredClone(corpus);
+changedReview.version = nextVersion(corpus.version, 'patch');
+changedReview.tactics[0].review = first.review.reviewed_at === null
+  ? { reviewed_at: corpus.updated_at, scope: 'source-support-and-implementation', method: 'agent-assisted' }
+  : { reviewed_at: null, scope: 'not-individually-reviewed', method: null };
+assert.ok(validateCorpusVersioning(changedReview, corpus).errors.some(e => /patch pattern_version bump/.test(e)));
+changedReview.tactics[0].pattern_version = nextVersion(first.pattern_version, 'patch');
+assert.equal(validateCorpusVersioning(changedReview, corpus).valid, true);
+
+const retired = structuredClone(corpus);
+retired.version = nextVersion(corpus.version, 'major');
+retired.tactics[0].pattern_version = nextVersion(first.pattern_version, 'major');
+retired.tactics[0].lifecycle = { status: 'retired', replacement_ids: [corpus.tactics[1].id], reason: 'The former implementation is superseded.' };
+assert.equal(validateCorpusVersioning(retired, corpus).valid, true);
+assert.throws(() => createAdoptionPlan(config, retired), /retired/);
+retired.tactics.shift();
+assert.ok(validateCorpusVersioning(retired, corpus).errors.some(e => /stable IDs/.test(e)), 'Major releases still retain retired IDs and their explanation.');
+
+for (const mutate of [
+  c => { c.tactics[0].review = { reviewed_at: '2026-02-30', scope: 'source-support-and-implementation', method: 'agent-assisted' }; },
+  c => { c.tactics[0].review = { reviewed_at: '2099-01-01', scope: 'source-support-and-implementation', method: 'agent-assisted' }; },
+  c => { c.tactics[0].review = { reviewed_at: null, scope: 'source-support-and-implementation', method: 'human' }; },
+  c => { c.tactics[0].review = { reviewed_at: corpus.updated_at, scope: 'source-support-and-implementation', method: 'agent-assisted', support: [{ source_id: 'unknown', locator: 'Section', note: 'Bounded support.' }] }; },
+  c => { c.tactics[0].review = { reviewed_at: corpus.updated_at, scope: 'source-support-and-implementation', method: 'agent-assisted', support: [{ source_id: first.source_ids[0], locator: '', note: 'Bounded support.' }] }; },
+  c => { c.tactics[0].review = { reviewed_at: null, scope: 'not-individually-reviewed', method: null, support: [] }; },
+  c => { c.tactics[0].pattern_version = '1.01.0'; },
+  c => { c.sources[0].upstream = { kind: 'living-document', version: 'latest' }; },
+  c => { c.sources[0].upstream = { kind: 'versioned-release', version: null }; },
+  c => { c.sources[0].upstream = { kind: 'versioned-release', version: 'latest' }; },
+  c => { c.tactics[0].lifecycle = { status: 'retired', replacement_ids: ['unknown'], reason: 'Superseded.' }; }
+]) { const changed = structuredClone(corpus); mutate(changed); assert.equal(validateCorpus(changed).valid, false); }
+const cyclic = structuredClone(corpus);
+for (const [index, replacement] of [[0, 1], [1, 0]]) cyclic.tactics[index].lifecycle = { status: 'retired', replacement_ids: [cyclic.tactics[replacement].id], reason: 'Superseded.' };
+assert.ok(validateCorpus(cyclic).errors.some(e => /cycle/.test(e)));
+const foreignSupport = structuredClone(corpus);
+foreignSupport.tactics[0].review = { reviewed_at: corpus.updated_at, scope: 'source-support-and-implementation', method: 'agent-assisted', support: [{ source_id: corpus.sources.find(s => !first.source_ids.includes(s.id)).id, locator: 'Section', note: 'Support from an unrelated source.' }] };
+assert.ok(validateCorpus(foreignSupport).errors.some(e => /referenced source_id/.test(e)), 'A source existing elsewhere in the catalog is not automatically support for this pattern.');
+const duplicateSupport = structuredClone(corpus);
+const trace = { source_id: first.source_ids[0], locator: 'A relevant section', note: 'The bounded source statement.' };
+duplicateSupport.tactics[0].review = { reviewed_at: corpus.updated_at, scope: 'source-support-and-implementation', method: 'agent-assisted', support: [trace, trace] };
+assert.ok(validateCorpus(duplicateSupport).errors.some(e => /duplicate review support/.test(e)));
+const sourceDrift = structuredClone(corpus);
+sourceDrift.version = nextVersion(corpus.version, 'minor');
+sourceDrift.sources.find(s => s.id === first.source_ids[0]).notes += ' A materially changed source support boundary.';
+assert.ok(validateCorpusVersioning(sourceDrift, corpus).errors.some(e => e.startsWith(`${first.id}:`) && /minor/.test(e)), 'A changed supporting source cannot silently retain dependent pattern versions.');
 
 const receipt = {
   page_url: 'https://example.com/guide/', reviewed_at: '2026-09-08', audience: 'Maintainers', question: 'How do I check a claim?',
@@ -113,5 +216,11 @@ try {
   const original = fs.readFileSync(output, 'utf8');
   assert.equal(spawnSync(process.execPath, [cli, 'adoption-plan', source, `--output=${output}`]).status, 2);
   assert.equal(fs.readFileSync(output, 'utf8'), original, 'Existing plans must survive accidental reruns.');
+  fs.writeFileSync(source, JSON.stringify({ ...pinnedConfig, corpus_version: previousRelease.version }));
+  const rejectedOutput = path.join(temp, 'stale-plan.json');
+  const rejected = spawnSync(process.execPath, [cli, 'adoption-plan', source, `--output=${rejectedOutput}`], { encoding: 'utf8' });
+  assert.equal(rejected.status, 2);
+  assert.match(rejected.stderr, /corpus_version/);
+  assert.equal(fs.existsSync(rejectedOutput), false, 'A stale version pin fails before creating an output artifact.');
 } finally { fs.rmSync(temp, { recursive: true, force: true }); }
 console.log(`PASS discoverability: ${corpus.tactics.length} tactics, native registry mappings, explicit selection, unmeasured outcomes and CLI overwrite protection${process.argv.includes('--site') ? ', with published corpus and editorial artifacts' : ' (add --site for published artifact checks)'}`);

@@ -1,0 +1,10 @@
+{
+  "font": "Inter Tight",
+  "distribution": "Latin variable WOFF2",
+  "weights": "400\u2013900",
+  "retrieved_at": "2026-09-08",
+  "source": "https://fonts.gstatic.com/s/intertight/v9/NGSwv5HMAFg6IuGlBNMjxLsH8ahuQ2e8.woff2",
+  "upstream": "https://github.com/google/fonts/tree/main/ofl/intertight",
+  "license": "OFL.txt",
+  "sha256": "83d548cd73ef2e039167db3adb5ea9d7a7870466ffc8a162c9820bc348938aaf"
+}

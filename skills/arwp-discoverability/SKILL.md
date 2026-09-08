@@ -2,9 +2,9 @@
 name: arwp-discoverability
 description: Select concrete implementation practices from the ARWP discoverability corpus and validate editorial evidence receipts for articles and comparisons. Use as a specialist within arwp-growth-loop after the site problem and measurement scope are known.
 license: Apache-2.0
-compatibility: Node.js >=20 for local corpus and receipt validation.
 metadata:
   standard: agent-skills
+  runtime: Node.js >=20 for local corpus and receipt validation.
   arwp-role: discoverability-practices
 ---
 
@@ -21,6 +21,10 @@ Start with `arwp-growth-loop`; it remains the default orchestrator. This special
 Inspect repository instructions, dirty state, the canonical hostname/path and the authoritative build output. Read the site's actual offer, content and measurement scope. Prefer fixing lost access or an existing useful landing page before adding another page. Preserve edits owned by other work.
 
 Search the corpus with `node bin/arwp.mjs discoverability --search="comparison" --json` from the ARWP checkout (or `arwp` from an installed package). Read the implementation, verification, source notes and evidence level for the few matching tactics. `documented` means the linked guidance supports the practice; it does not establish a ranking effect. Recheck sources when advice, feature eligibility or prices may have changed.
+
+Read the selected pattern's `pattern_version`, `lifecycle`, `review` and `review.support` before applying it. A null review date is unknown, not failed or verified. Check the linked section and support note for the exact proposed mechanism. Follow a deprecated pattern's replacement when applicable; do not silently select retired guidance.
+
+Prefer the library's version-pinned export. For manual configs, copy `corpus_version`, the canonical fingerprint `corpus_sha256`, and the selected `tactic_versions` from the actual corpus using the [version contract](../../docs/DISCOVERABILITY-VERSIONING.md). When pins fail validation, inspect the change and reselect applicable revisions; do not delete pins just to make an old plan pass. Preserve historical plans as they were issued.
 
 Create a local adoption config containing `site_url`, `audience`, `useful_action`, explicit `tactic_ids` and optional `page_urls`. Run `arwp adoption-plan <config.json> --output=<new-plan.json>`. This produces a planned experiment, never an implementation or outcome receipt.
 

@@ -2,7 +2,8 @@
   "version": "0.3",
   "reviewedAt": "2026-09-05",
   "project": {
-    "name": "Agent-Ready Web Profile",
+    "name": "Cite Goose",
+    "aliases": ["Agent-Ready Web Profile", "ARWP"],
     "shortName": "ARWP",
     "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
     "repository": "https://github.com/dkharlanau/agent-ready-web-profile",

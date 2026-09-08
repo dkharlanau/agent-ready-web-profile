@@ -1,8 +1,8 @@
 # Project name and third-party marks
 
-Policy date: 2026-09-06. Maintainer: Dzmitryi Kharlanau.
+Policy date: 2026-09-08. Maintainer: Dzmitryi Kharlanau.
 
-The public project name is **Agent-Ready Web Profile**, abbreviated **ARWP**. Canonical project: https://dkharlanau.github.io/agent-ready-web-profile/ ; source: https://github.com/dkharlanau/agent-ready-web-profile .
+The public product name is **Cite Goose**. **Agent-Ready Web Profile** and **ARWP** remain its technical project names and aliases; repository, package, CLI and canonical identifiers retain their existing names. Canonical project: https://dkharlanau.github.io/agent-ready-web-profile/ ; source: https://github.com/dkharlanau/agent-ready-web-profile .
 
 ## Status and scope
 
@@ -12,9 +12,9 @@ The software license remains Apache-2.0. Its trademark provision is separate fro
 
 ## Accurate references
 
-Use the project name to identify the actual project, source or compatible implementation. Link to the canonical project when attribution is appropriate. Describe a modified distribution as a fork or adaptation and distinguish its maintainer. Please choose a distinct brand for an independent product rather than implying that it is the official ARWP distribution.
+Use the project name to identify the actual project, source or compatible implementation. Link to the canonical project when attribution is appropriate. Describe a modified distribution as a fork or adaptation and distinguish its maintainer. Please choose a distinct brand for an independent product rather than implying that it is the official Cite Goose / ARWP distribution.
 
-Do not imply endorsement, partnership, certification or approval by ARWP or by an upstream provider. Compatibility with a protocol is not an affiliation. Third-party names in documentation identify their respective products or standards; this repository does not grant rights in those marks.
+Do not imply endorsement, partnership, certification or approval by Cite Goose, ARWP or by an upstream provider. Compatibility with a protocol is not an affiliation. Third-party names in documentation identify their respective products or standards; this repository does not grant rights in those marks.
 
 ## Review before a commercial brand commitment
 

@@ -1,10 +1,8 @@
-<p align="center">
-  <img src="docs/media/signalbraid-lockup.svg" alt="SignalBraid · ARWP" width="620">
-</p>
+# Cite Goose
 
-# SignalBraid · ARWP
+**Make your site worth citing.**
 
-**Weave the signals. Ship the change.**
+Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **169 patterns, 91 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 53 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
 
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
 [![Adaptive Site Upgrade validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml)
@@ -12,7 +10,7 @@
 [![BraidGraph validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
-SignalBraid is the product-facing layer of **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
+Cite Goose is the product-facing layer of **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
 
 Most tools answer one of two questions:
 
@@ -22,7 +20,7 @@ or:
 
 > What is technically wrong with my site right now?
 
-SignalBraid is aimed at the harder operational question:
+Cite Goose is aimed at the harder operational question:
 
 > **What changed upstream, does it actually matter to this site, what exact site/repository change follows from it, can that change be made safely, how do we verify it, and which sites need attention when the rule changes again?**
 
@@ -51,7 +49,7 @@ WATCH       detect drift + rule-change blast radius
 
 By 2026, strong AI-search products already monitor prompts, mentions, citations, sentiment, competitors and share of voice. Several now add recommendations, content workflows and agentic execution. Agent-experience products can serve AI-optimized content; crawler platforms can enforce access policy; agent-readiness scanners can score technical readiness; open-source AEO/GEO tools can gate regressions in CI.
 
-SignalBraid should not win by cloning those surfaces.
+Cite Goose should not win by cloning those surfaces.
 
 Its stronger differentiation is the complete evidence lineage:
 
@@ -262,7 +260,7 @@ This is now the biggest blocker to promoting more grounded recommendations into 
 
 Every executed transformation should preserve source/rule version, before/after digests, verification results, deployment evidence and outstanding measurement requirements, then map those canonical artifacts into BraidGraph without duplicating their payloads.
 
-### P0 — SignalBraid Watch
+### P0 — Cite Goose Watch
 
 Turn BraidGraph source/rule revisions and reverse impact traversal into portfolio re-review queues, alerts and bounded remediation waves.
 
@@ -303,7 +301,7 @@ Reproducible fixtures showing whether specific transformations close intended im
 ### Hosted / Pro
 
 - managed continuously refreshed intelligence;
-- SignalBraid Watch portfolio mode;
+- Cite Goose Watch portfolio mode;
 - scheduled re-audits and source-impact alerts;
 - owner-data connectors;
 - verified stack transformation packs;
@@ -323,7 +321,7 @@ Paid value should be **maintenance, automation, governance, evidence and scale**
 
 ## The technical foundation remains ARWP
 
-SignalBraid is the product brand. **Agent-Ready Web Profile (ARWP)** remains the repository/package and interoperability foundation.
+Cite Goose is the product brand. **Agent-Ready Web Profile (ARWP)** remains the repository/package and interoperability foundation.
 
 The Resolver still discovers heterogeneous website interfaces, preserves provenance/conflicts and selects a suitable interface for a concrete intent without requiring every site to adopt ARWP.
 
@@ -355,7 +353,8 @@ Supported planning intents remain `read`, `search`, `structured`, `tools` and `a
 
 - [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md) — product line, market boundary and packaging.
 - [`docs/BRAIDGRAPH.md`](docs/BRAIDGRAPH.md) — implemented evidence-to-change graph, revision history and query model.
-- [`docs/BRAND-SIGNALBRAID.md`](docs/BRAND-SIGNALBRAID.md) — product brand system.
+- [`docs/BRAND-CITE-GOOSE.md`](docs/BRAND-CITE-GOOSE.md) — current Cite Goose identity, asset provenance and evidence labels.
+- [`docs/BRAND-SIGNALBRAID.md`](docs/BRAND-SIGNALBRAID.md) — previous SignalBraid visual direction, retained as a historical reference.
 - [`docs/ADAPTIVE-SITE-UPGRADE.md`](docs/ADAPTIVE-SITE-UPGRADE.md) — target-specific upgrade compiler.
 - [`docs/TARGET-SITE-TRANSFORMATION.md`](docs/TARGET-SITE-TRANSFORMATION.md) — deterministic repository transformation boundary.
 - [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) — research/hypothesis/measurement loop.
@@ -365,15 +364,17 @@ Supported planning intents remain `read`, `search`, `structured`, `tools` and `a
 
 ## Brand relationship
 
-- **SignalBraid** — product brand.
-- **ARWP** — technical project identity and suffix in the canonical lockup.
+The [brand policy](docs/trust/brand.html) identifies the current product without claiming trademark registration or clearance.
+
+- **Cite Goose** — product brand.
+- **ARWP** — the established technical abbreviation.
 - **Agent-Ready Web Profile** — repository, npm package and interoperability foundation.
 
-Canonical presentation: **SignalBraid · ARWP**.
+Canonical product name: **Cite Goose**. **Agent-Ready Web Profile** and **ARWP** remain technical aliases.
 
 ## North Star
 
-> **Can SignalBraid turn a meaningful upstream web change into the right site-specific implementation, prove what happened, and identify every site that needs re-review when the evidence changes again?**
+> **Can Cite Goose turn a meaningful upstream web change into the right site-specific implementation, prove what happened, and identify every site that needs re-review when the evidence changes again?**
 
 ## License
 
@@ -381,7 +382,7 @@ Apache License 2.0. See [`LICENSE`](LICENSE).
 
 ## Choose a concrete implementation practice
 
-The [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html) adds **144 practices across 16 categories** to the existing Growth Loop. Each practice has implementation steps, verification, source scope, an impact hypothesis and native rule/hypothesis routing. It covers decision-oriented articles, fair comparisons, visible evidence footnotes, coherent entities and useful user actions.
+The [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html) adds versioned, source-backed practices to the existing Growth Loop. Each practice has implementation steps, verification, source scope, an impact hypothesis and native rule/hypothesis routing. It covers decision-oriented articles, fair comparisons, visible evidence footnotes, coherent entities and useful user actions.
 
 ```bash
 arwp discoverability --search="comparison" --json
