@@ -55,6 +55,8 @@
           "label": {"type": "string", "minLength": 1},
           "locale": {"type": "string", "minLength": 2},
           "ownershipConfidence": {"enum": ["low", "medium", "high"]},
+          "intentDisposition": {"enum": ["serve", "decline"]},
+          "dispositionReason": {"type": "string", "minLength": 1},
           "ownerUrls": {"type": "array", "items": {"type": "string", "format": "uri", "pattern": "^https://"}},
           "supportingPages": {"type": "array", "items": {"type": "string", "format": "uri", "pattern": "^https://"}},
           "evidenceAssets": {
@@ -88,7 +90,19 @@
               }
             }
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "required": ["intentDisposition"],
+              "properties": {"intentDisposition": {"const": "decline"}}
+            },
+            "then": {
+              "required": ["dispositionReason"],
+              "properties": {"ownerUrls": {"maxItems": 0}}
+            }
+          }
+        ]
       }
     },
     "guardrails": {

@@ -55,6 +55,18 @@
       "supportingPages": [],
       "evidenceAssets": [],
       "observations": []
+    },
+    {
+      "id": "declined-navigation-mismatch",
+      "label": "A reviewed phrase family this site intentionally does not own",
+      "locale": "en",
+      "ownershipConfidence": "high",
+      "intentDisposition": "decline",
+      "dispositionReason": "The phrase is navigational for another product; existing pages overlap lexically but do not satisfy that user job.",
+      "ownerUrls": [],
+      "supportingPages": ["https://example.com/guide/status-updates/"],
+      "evidenceAssets": [],
+      "observations": []
     }
   ],
   "guardrails": {

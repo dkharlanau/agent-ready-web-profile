@@ -35,7 +35,7 @@ Read:
 ## Workflow
 
 1. **Define the intent family first.** Do not benchmark unrelated high-authority sites merely because they rank for something.
-2. **Resolve intent ownership before creating URLs.** When owner Search/AI evidence exists, map the intent family to zero/one/multiple reviewed canonical owners with `arwp-intent-ownership`. Strengthen an existing owner first; query or fan-out variation is not a page-creation instruction.
+2. **Resolve intent ownership before creating URLs.** When owner Search/AI evidence exists, map the intent family to a reviewed disposition and zero/one/multiple canonical owners with `arwp-intent-ownership`. Strengthen an existing owner first; query or fan-out variation is not a page-creation instruction. Deliberately decline query mismatches instead of turning them into owner gaps.
 3. **Capture the visibility observation exactly.** Preserve provider/surface, query, locale/device when known and observation time. Store a numeric rank only when explicit `rankEvidence` independently supports that exact rank.
 4. **Separate ownership.** Independent references can inform the external cohort. ARWP-owned/project-reference sites remain implementation/dogfood evidence.
 5. **Review only observable dimensions.** Use the 16 Search Maturity dimensions. Omit anything not actually checked; omission is `unknown`, never failure.
@@ -52,9 +52,11 @@ Read:
 When query, grounding or referral observations are being used to decide content architecture:
 
 - declare the bounded intent family before reviewing phrases;
+- explicitly decide whether the site should serve or decline that family;
 - keep Google, Bing, referral and manual observations provider-scoped;
 - treat exactly one indexable reviewed owner as `owned`;
-- treat zero owners as a review gap, not an automatic new-page request;
+- treat zero owners on a served family as a review gap, not an automatic new-page request;
+- treat reviewed query/navigational mismatches as `declined`, with no canonical owner and an explicit reason;
 - treat multiple owners as `fragmented`, not automatic proof of cannibalization;
 - treat off-owner observations as a routing/relevance review signal, not proof of ranking harm;
 - preserve live owner query cohorts in private target evidence rather than public ARWP fixtures.
@@ -110,6 +112,7 @@ Do not force all dimensions onto every site type.
 - Do not fabricate rank, traffic, citations, backlinks, authorship, dates or evidence.
 - Do not encode a cohort feature as a Google/Bing ranking factor unless the platform documents that claim.
 - Do not create one page per query variant.
+- Do not turn a reviewed query mismatch into a content gap merely because it generated impressions or retrieval.
 - Do not infer keyword cannibalization merely because an observed query/grounding phrase lands off the reviewed owner.
 - Do not optimize the benchmark by selecting only supporting examples.
 - Do not collapse unknown into zero.
@@ -142,7 +145,7 @@ node bin/arwp-intent-ownership.mjs report \
 - the reference cohort is timestamped and reviewable;
 - independent and owner-controlled evidence are separated;
 - unmeasured features remain unknown;
-- query/grounding variation maps to reviewed canonical ownership before any new-page decision;
+- query/grounding variation maps to reviewed canonical ownership or explicit decline before any new-page decision;
 - repeated cohort patterns are explainable without a magic score;
 - target gaps retain evidence class and uncertainty;
 - accepted actions enter existing verification/measurement gates;

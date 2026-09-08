@@ -25,6 +25,7 @@ A ledger records:
 - owner-controlled site identity;
 - the reviewed canonical-page inventory and index state;
 - bounded intent families;
+- the intent disposition: serve it or deliberately decline ownership;
 - zero, one or multiple reviewed owner candidates;
 - supporting pages;
 - real evidence assets;
@@ -47,13 +48,32 @@ node bin/arwp-intent-ownership.mjs report \
 : Exactly one declared owner exists and its reviewed page state is `indexable`.
 
 `unowned`
-: No owner is declared. Review whether an existing page can own the intent before considering a new URL.
+: The site intends to serve the family, but no owner is declared. Review whether an existing page can own it before considering a new URL.
+
+`declined`
+: The family was reviewed and the site deliberately does not claim it. This is appropriate for query mismatch, another product's navigational intent, or a user job the site should not serve. A declined family must have no owner and must retain a reason.
 
 `fragmented`
 : Multiple owner candidates are declared. This is a review queue, not automatic evidence that pages should be merged, redirected or canonicalized.
 
 `blocked-owner`
 : Exactly one owner is declared but the reviewed page state is `noindex`, `redirect` or `unknown`.
+
+## Deliberate non-ownership
+
+Zero owners does not always mean a content gap. Dogfood on real owner-query maps exposed an important failure mode: a lexically related page can receive impressions for a phrase that does not match the page's actual job. Turning every such phrase into `review-owner-gap` recreates the thin-page factory this layer is meant to prevent.
+
+Use:
+
+```json
+{
+  "intentDisposition": "decline",
+  "dispositionReason": "The phrase is navigational for another product; current pages only overlap lexically.",
+  "ownerUrls": []
+}
+```
+
+`intentDisposition` defaults to `serve` for backward compatibility. `decline` is a reviewed architecture decision, not a negative ranking claim. It can be revisited when the product scope changes or stronger user evidence appears.
 
 ## Owner-side observations
 
@@ -71,14 +91,14 @@ It does **not** prove keyword cannibalization, ranking loss or a need for redire
 
 The report can queue:
 
-- `review-owner-gap` — no owner is declared;
+- `review-owner-gap` — a served intent has no owner;
 - `review-fragmented-ownership` — multiple owner candidates exist;
 - `review-blocked-owner` — the declared owner is not currently indexable in the reviewed ledger;
 - `review-observed-off-owner` — provider evidence reaches another canonical page;
 - `strengthen-evidence-path` — a valid owner has no recorded first-party evidence assets;
 - `measure-owner` — ownership exists but external visibility evidence is still absent.
 
-These are review actions. None authorizes production mutation.
+A `declined` family creates no owner-gap action by itself. These are review actions. None authorizes production mutation.
 
 ## Privacy and disclosure
 
@@ -96,18 +116,21 @@ Public records must set `containsLiveQueries:false`. Real portfolio query cohort
 Use Intent Ownership before turning a Search Maturity gap into new content:
 
 1. define the intent family;
-2. inspect current canonical ownership;
-3. inspect owner-side query/grounding observations when available;
-4. strengthen the existing owner and evidence path first;
-5. create a new canonical page only when a genuinely distinct user job remains unserved;
-6. verify canonical/internal-link/sitemap behavior;
-7. measure Search/AI outcomes separately.
+2. decide whether the site should actually serve that user job;
+3. inspect current canonical ownership;
+4. inspect owner-side query/grounding observations when available;
+5. decline semantic/query mismatches instead of manufacturing a page;
+6. strengthen the existing owner and evidence path first;
+7. create a new canonical page only when a genuinely distinct, in-scope user job remains unserved;
+8. verify canonical/internal-link/sitemap behavior;
+9. measure Search/AI outcomes separately.
 
 This avoids a common failure mode: converting query fan-out or long-tail observations into a thin page factory.
 
 ## Hard boundaries
 
 - Query variation does not automatically create a URL.
+- A deliberately declined intent does not create a URL.
 - An off-owner observation does not prove cannibalization.
 - A declared owner does not prove Search ranking, AI citation or retrieval.
 - Google/Bing/referral metrics remain provider-scoped.
