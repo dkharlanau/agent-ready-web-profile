@@ -1,28 +1,159 @@
 # Cite Goose Site Focus Engine
 
-The Site Focus Engine turns the `arwp-site-focus` product/design gate into an executable, reviewable report. It is deliberately **not** a ranking score, readiness score or automated content-pruning system.
+The Site Focus Engine turns the `arwp-site-focus` product/design gate into an executable, reviewable system. It is deliberately **not** a ranking score, readiness score or automated content-pruning system.
 
-## Why it exists
+Version 0.2 adds an owner-declared Site Focus profile so Cite Goose can compare **what the site is meant to be** with **what the sampled site currently exposes**.
 
-A technically sophisticated site can still be hard to understand because it serves too many problem territories, mixes audiences, exposes internal technologies as primary navigation, publishes near-duplicate routes or accumulates pages with no distinct job.
+## The operating model
 
-Search, AI-search and agent-readiness tooling should not hide that product problem by adding more metadata or content.
+```text
+DECLARE
+  ↓
+OBSERVE
+  ↓
+COMPARE
+  ↓
+MAP PAGE ROLES
+  ↓
+REVIEW DRIFT
+  ↓
+ACCEPT A DECISION
+  ↓
+PROPOSAL-ONLY TRANSFORMATION HANDOFF
+```
 
-The engine answers a narrower operational question:
+The engine keeps two kinds of truth separate:
 
-> What does this sampled site appear to be about, how wide is its first-order architecture, which page contracts are unclear or overlapping, and which pages deserve human review before more optimization work is added?
+- **declared intent** — product boundary supplied by the site owner;
+- **observed evidence** — title/H1/description, links, route families, proof/action signals and sampled graph structure.
+
+Declared intent does not prove that the implementation is good. Observed lexical difference does not prove that the product strategy is wrong.
+
+## Why v0.2 exists
+
+The first dogfood cycle exposed an important failure mode in v0.1: route families are not problem territories.
+
+A focused site can legitimately have many content families. A studio or portfolio can legitimately have hundreds of routes. Technical/reference and proof pages may also use vocabulary very different from the homepage without being out of scope.
+
+Therefore v0.2 does not treat route count as product breadth. It asks whether routes have a declared role and whether the observed implementation drifts from the declared boundary.
+
+## Site Focus profile
+
+Put the owner contract at:
+
+```text
+.arwp/site-focus.json
+```
+
+Repository mode auto-discovers that path. A root-level `site-focus.json` is the fallback. Live mode can use an explicit local profile:
+
+```bash
+arwp-focus https://example.com --focus-profile=.arwp/site-focus.json
+```
+
+The profile schema is `schema/site-focus-profile.schema.json`.
+
+Core fields:
+
+```json
+{
+  "version": "0.2",
+  "canonicalUrl": "https://example.com/",
+  "thesis": {
+    "primaryProblem": "...",
+    "primaryAudience": "...",
+    "usefulOutcome": "...",
+    "distinctEvidence": "...",
+    "primaryAction": "..."
+  },
+  "scope": {
+    "in": ["..."],
+    "adjacent": ["..."],
+    "out": ["..."]
+  },
+  "problemLanes": [
+    { "id": "lane", "label": "Lane", "job": "..." }
+  ],
+  "primaryNavigation": ["/one/", "/two/"],
+  "routeRules": []
+}
+```
+
+The profile is product intent, not Search configuration. Its numeric architecture limits remain Cite Goose house heuristics rather than platform requirements.
+
+## Page roles
+
+v0.2 supports explicit route roles:
+
+- `problem-commercial` — solves the primary problem or carries the commercial/product continuation;
+- `proof-portfolio` — cases, research, experiments, datasets or projects that reduce uncertainty;
+- `trust-utility` — about, policy, evidence, methodology, contact or similar trust/support surfaces;
+- `technical-reference` — APIs, schemas, protocol docs, implementation details and other technical depth;
+- `localization-equivalent` — an explicitly managed localized representation when needed by a route rule.
+
+Each route rule also has `IN`, `ADJACENT` or `OUT` scope.
+
+A declared supporting role can legitimately have low homepage lexical similarity. That is no longer enough for automatic `DEFER`.
+
+## Locale equivalence
+
+For multilingual sites, declare locale prefixes:
+
+```json
+{
+  "locales": {
+    "default": "en",
+    "prefixes": {
+      "ru": "/ru",
+      "de": "/de"
+    }
+  }
+}
+```
+
+Pages with the same normalized route below different locale prefixes are treated as locale-equivalent for duplicate-intent review. The engine suppresses that pair from `MERGE` noise.
+
+This does **not** prove that canonical/hreflang implementation is correct. Search technical validation remains separate.
+
+## Declared ↔ observed drift
+
+v0.2 records independent drift evidence instead of a composite score.
+
+### Thesis wording
+
+The engine compares meaningful tokens from the declared problem/audience/outcome/evidence/action with observed homepage title/H1/description tokens.
+
+It reports:
+
+- overlap tokens;
+- missing declared tokens;
+- additional observed tokens;
+- transparent token coverage;
+- `aligned`, `partial-review` or `drift-review` status.
+
+Token coverage is a wording diagnostic, **not a focus score** and not proof of user comprehension.
+
+### Navigation contract
+
+The report compares declared primary navigation with sampled homepage navigation:
+
+- matches;
+- declared destinations not observed;
+- observed destinations not declared.
+
+This makes a six-item menu on a five-destination declared architecture visible as drift without pretending that six links are universally bad.
+
+### Route-role coverage
+
+Every sampled page receives the most-specific matching route rule. Unclassified routes are surfaced for review rather than silently being interpreted as another product territory.
 
 ## Run it
 
-From the repository checkout:
-
 ```bash
-node bin/arwp-focus.mjs https://example.com
-node bin/arwp-focus.mjs https://example.com --max-pages=30 --json
-node bin/arwp-focus.mjs https://example.com/project/ --repo-root=. --output=site-focus.json
+arwp-focus https://example.com
+arwp-focus https://example.com --focus-profile=.arwp/site-focus.json --max-pages=30 --json
+arwp-focus https://example.com/project/ --repo-root=. --output=site-focus-report.json
 ```
-
-The packaged binary is `arwp-focus` once installed from a release that includes this engine.
 
 ### Live mode
 
@@ -34,103 +165,79 @@ Without `--repo-root`, the engine uses bounded public discovery:
 4. fetch at most `--max-pages` HTML pages;
 5. retain candidate discovery sources in the report.
 
-A bounded sample is not a complete inventory unless its discovery evidence establishes coverage.
+A bounded sample is not a complete inventory unless discovery evidence establishes coverage.
 
 ### Repository mode
 
-With `--repo-root`, the engine looks for generated/static HTML under the first available conventional public root:
+With `--repo-root`, v0.1 observation logic looks for generated/static HTML under the first available conventional public root:
 
 `docs/` → `public/` → `dist/` → `build/` → `_site/` → repository root fallback.
 
-Repository mode is useful before deployment because page contracts can be mapped back to local files. It does not establish that the generated files are live.
+v0.2 then applies the declared-intent layer. Repository mode can map observed contracts back to files when static HTML exists.
 
-## Report structure
+Framework source routes that have not been rendered to HTML are not equivalent to observed public pages; use live mode or a generated production output for stronger coverage.
 
-### Observed site thesis
+## Page Contract Map
 
-The engine records homepage title, H1 and meta description plus a normalized token set. This is **observed wording**, not a model-generated brand strategy.
+Every sampled page keeps the v0.1 evidence and receives v0.2 intent fields:
 
-### Transparent metrics
-
-The report publishes independent counts rather than one composite score:
-
-- pages observed;
-- primary navigation destinations;
-- sampled route territories;
-- explicit audience signals;
-- pages without a clear job signal;
-- duplicate-intent pairs;
-- orphan candidates in the sampled graph;
-- low-thesis-overlap / out-of-scope candidates;
-- pages without proof signals;
-- pages without useful-action candidates;
-- technology-labeled primary navigation destinations.
-
-A count is a diagnostic input. It is not evidence of ranking impact.
-
-### Page Contract Map
-
-Every sampled page receives a compact contract:
-
-- URL and local file when repository mode can resolve one;
-- title and H1;
-- `pageJobSignal`;
-- parent route territory;
-- proof signals;
-- action candidates;
+- URL and local file when resolvable;
+- title, H1 and observed page-job signal;
+- proof and useful-action candidates;
 - sampled inbound-link count;
-- lexical similarity to the observed homepage thesis;
-- review disposition and explicit reasons.
+- route family;
+- locale and locale-equivalent key;
+- declared role, scope and problem lane;
+- `KEEP / NARROW / MERGE / DEFER` decision;
+- explicit reasons.
 
-## Review dispositions
+## Decisions and safety
 
-The engine currently emits four bounded dispositions:
+`KEEP` means no current bounded focus conflict requires action.
 
-- `KEEP` — no sampled focus conflict exceeded the current heuristic thresholds;
-- `NARROW` — page-job/action evidence is incomplete and the page should be clarified before expansion;
-- `MERGE` — another sampled page has a substantially overlapping title/H1/description signature;
-- `DEFER` — lexical overlap with the observed homepage thesis is very low and the page deserves scope review.
+`NARROW` means the page contract is incomplete or unclear.
 
-`DEFER` does **not** mean delete.
+`MERGE` means non-locale-equivalent sampled intent overlap deserves consolidation review.
 
-`REMOVE` is never emitted automatically. `SPLIT` is never emitted automatically. Both decisions require product/editorial review, traffic/history evidence, redirect implications and the real business boundary.
+`DEFER` means scope/placement deserves review. A declared `OUT` rule can make that conclusion stronger, but it still does not mean delete.
 
-## Current heuristics
+`REMOVE` is never emitted automatically.
 
-The engine intentionally exposes simple heuristics that can be challenged and improved:
+`SPLIT` is never emitted automatically.
 
-- lexical token overlap uses Jaccard similarity over title, H1 and description tokens;
-- duplicate-intent review currently starts at `0.62` signature similarity;
-- low-thesis-overlap review currently starts below `0.08` for pages with at least three meaningful signature tokens;
-- the Cite Goose house rule flags primary navigation above five destinations for review;
-- a technology-led navigation finding appears when at least 40% of sampled primary navigation labels are implementation terms such as API/MCP/schema/protocol/benchmark.
+Both require product/editorial review, traffic/history evidence, redirect implications and the real business boundary.
 
-These thresholds are **project heuristics**, not Search/AI platform requirements. They belong in experiments and dogfood review, not in marketing claims.
+## Transformation handoff
 
-## Proof and action detection
+v0.2 closes the conceptual gap between Focus and Target Transformation without allowing focus heuristics to mutate a repository.
 
-A page gets a lightweight `proof.present` signal when the sampled HTML contains one or more observable indicators such as external source links, code blocks, tables, figures or explicit evidence/method/data language.
+The report emits a `transformationHandoff`:
 
-This does not assess whether the evidence is correct.
+```text
+mode: proposal-only
+executable: false
+acceptedDecisionRequiredBeforeTransformation: true
+destructiveOperationsAllowed: false
+```
 
-Action candidates are visible links whose labels contain action verbs such as `start`, `try`, `find`, `download`, `contact`, `compare`, `run`, `check` or `use`. This is only a page-contract heuristic; a page can have a valid job without one of those literal verbs.
+Candidate actions currently include:
 
-## Orphan candidates
+- clarify a `NARROW` page contract;
+- review consolidation/redirect history for `MERGE`;
+- review placement for owner-declared `OUT` pages.
 
-Inbound links are calculated only within the sampled page graph. A page with zero sampled inbound links is an **orphan candidate**, not a confirmed orphan. Full-site crawl coverage or repository routing evidence is required for a stronger claim.
+A later Target Transformation step may compile an **accepted** decision into exact repository operations. Focus itself cannot do that.
 
-## Dogfood protocol
+## Dogfood state
 
-Before changing thresholds:
+Cite Goose now carries `.arwp/site-focus.json` and validates it against generated `docs/` output in the dedicated `Site Focus v0.2` workflow.
 
-1. freeze the engine version and target-site sample;
-2. run the report on Cite Goose itself and at least two materially different sites;
-3. manually review each `MERGE`, `DEFER`, navigation and audience finding;
-4. record false positives and false negatives;
-5. change one heuristic at a time;
-6. preserve prior reports when comparing revisions.
+The same declaration contract has been added to two intentionally different dogfood sites:
 
-Recommended first external dogfood targets are a focused content/product site and a broader technical/project site. The goal is not to maximize the number of warnings; it is to make scope-review decisions more accurate.
+- Ptichi — one speech-practice territory with multilingual entity families;
+- MetalHatsCats — a broader public-systems studio where projects/research/experiments are supporting proof rather than automatically separate problem territories.
+
+The contrast is intentional. Thresholds should improve because the engine survives different legitimate site shapes, not because it maximizes warnings.
 
 ## Relationship to the rest of Cite Goose
 
@@ -148,6 +255,4 @@ VERIFY
 MEASURE
 ```
 
-Focus should run before broad content/discoverability expansion when the site thesis, audience or information architecture is unclear. It does not replace technical Search eligibility, source review, BraidGraph provenance, Target Transformation, owner-side measurements or the Growth Loop.
-
-A future integration may allow accepted `MERGE`, `NARROW` or manually approved `SPLIT` decisions to compile into Target Transformation recipes. That integration must preserve redirect/history requirements and must not make destructive changes from a focus heuristic alone.
+Focus should run before broad content/discoverability expansion when the thesis, audience, scope or information architecture is unclear. It does not replace technical Search eligibility, source review, provenance, owner-side measurement or the Growth Loop.
