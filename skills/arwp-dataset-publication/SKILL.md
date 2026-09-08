@@ -2,8 +2,8 @@
 name: arwp-dataset-publication
 description: Audit and prepare a genuine website corpus for versioned dataset publication, archival DOI citation, provenance and machine-readable discovery without treating DOI or metadata as ranking factors.
 license: Apache-2.0
-compatibility: Requires access to the target website corpus or repository. External archive owner access is required only for the final DOI issuance step.
 metadata:
+  compatibility: Requires access to the target website corpus or repository. External archive owner access is required only for the final DOI issuance step.
   standard: agent-skills
   arwp-role: dataset-publication
 ---
@@ -65,3 +65,5 @@ Never invent a DOI-shaped placeholder.
 - no documentation claims that DOI publication itself improves Search ranking or guarantees AI citation.
 
 If external archive credentials or owner authorization are unavailable, complete every preparatory step possible, leave `doi-not-issued` truthful, and create a narrowly scoped owner action describing exactly what remains.
+
+For artifact selection, typed research relationships and venue fit, read [Evidence Relay](../../docs/EVIDENCE-RELAY.md). Its external DOI reading corpus is research support, not a list of identifiers to assign to the target site. Inspect current archive and journal eligibility before proposing publication.

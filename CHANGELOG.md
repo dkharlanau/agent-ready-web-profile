@@ -4,6 +4,12 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Functional maturity and Evidence Relay (corpus 1.4.0)
+
+- Added ten reviewed patterns, eight primary-source records, five candidate distribution venues and four bibliographically verified DOI references. The library now contains 205 patterns and 112 sources, with 89 individual source-support reviews.
+- Added an original project synthesis for functional maturity emulation and coverage-aware artifact cohorts, with a local calculator and synthetic tests. No tracker, external submission, DOI issuance or outcome claim is included.
+- Preserved the exact 1.3.0 corpus and all previous pattern records.
+
 ### Editorial research edition 1.3.0
 
 - Added 26 reviewed patterns and 13 primary-source records: 195 patterns and 104 sources in total, with 79 individual reviews and 116 explicitly unreviewed records.

@@ -2,8 +2,8 @@
 name: arwp-search-maturity
 description: Reverse-engineer observable, evidence-bearing patterns from currently visible Search/AI reference pages, compare them with a target site, and route repeated gaps into evidence-backed experiments without pretending correlations are ranking factors. Use when the goal is competitive/reference analysis, site maturity benchmarking, fast-riser analysis or finding repeatable characteristics of discoverable pages.
 license: Apache-2.0
-compatibility: Requires a reviewed Search Maturity corpus or enough current evidence to build one. Network access is recommended for fresh visibility observations; owner Search/AI data improves outcome validation.
 metadata:
+  compatibility: Requires a reviewed Search Maturity corpus or enough current evidence to build one. Network access is recommended for fresh visibility observations; owner Search/AI data improves outcome validation.
   standard: agent-skills
   arwp-role: search-maturity-reference-benchmark
 ---
@@ -170,3 +170,9 @@ node bin/arwp-intent-ownership.mjs gate \
 - production probe, ownership gate and deployment parity remain separate evidence layers;
 - ranking/citation causality is not inferred from correlation;
 - negative outcomes remain available for future learning.
+
+## Functional emulation and Evidence Relay
+
+When asked to reproduce maturity, find publication venues, connect DOI evidence or redesign growth analytics, read [Evidence Relay](../../docs/EVIDENCE-RELAY.md). Reproduce an observable useful function with the target site's own artifacts; do not imitate history or independent reputation. The venue register contains candidates and eligibility requirements, not completed submissions. Read DOI records for the exact supported claim; identifiers do not confer endorsement.
+
+For a reviewed artifact cohort, run `node skills/arwp-search-maturity/scripts/evidence-relay.mjs <private-ledger.json>` from the ARWP checkout. The script uses existing BraidGraph node references and evidence receipt references; it is not a second graph. It reports monitored yields, unknown coverage, immature assets, independent owner groups and citation support. Keep the synthetic example labeled; first-observed lags are not first-indexing times. Do not turn parallel stage observations into a visitor funnel or causal attribution.

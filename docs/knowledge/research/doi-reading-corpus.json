@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "purpose": "A small curated reading corpus for method design, not a citation-padding list or project DOI registry. Metadata identity was checked through Crossref.",
+  "records": [
+    {
+      "id": "geo",
+      "doi": "10.1145/3637528.3671900",
+      "title": "GEO: Generative Engine Optimization",
+      "publisher": "ACM",
+      "published": [
+        [
+          2024,
+          8,
+          24
+        ]
+      ],
+      "source_url": "https://arxiv.org/abs/2311.09735",
+      "metadata_url": "https://api.crossref.org/works/10.1145%2F3637528.3671900",
+      "metadata_checked_at": "2026-09-08T11:34:27.226514+00:00",
+      "metadata_sha256": "e0300bed320ae4de0b0aa1cc28b8cbf66096304d8154fa94cdba5e45e5e9a306",
+      "review_scope": "publisher-or-author abstract and bibliographic metadata; not full-study replication",
+      "supports": "GEO compares content interventions in its studied generative-engine setup.",
+      "does_not_support": "Use as an experiment design reference; reported lifts do not predict current Google or ChatGPT outcomes.",
+      "relationship_to_project": "external-reference-not-endorsement"
+    },
+    {
+      "id": "alce",
+      "doi": "10.18653/v1/2023.emnlp-main.398",
+      "title": "Enabling Large Language Models to Generate Text with Citations",
+      "publisher": "Association for Computational Linguistics",
+      "published": [
+        [
+          2023
+        ]
+      ],
+      "source_url": "https://aclanthology.org/2023.emnlp-main.398/",
+      "metadata_url": "https://api.crossref.org/works/10.18653%2Fv1%2F2023.emnlp-main.398",
+      "metadata_checked_at": "2026-09-08T11:34:27.763328+00:00",
+      "metadata_sha256": "61e314f6a8965e77d0ee62967174c16ae762bdced34a415eb806674131326a0c",
+      "review_scope": "publisher-or-author abstract and bibliographic metadata; not full-study replication",
+      "supports": "ALCE separates generated-answer correctness and citation quality.",
+      "does_not_support": "A benchmark metric is not a commercial search ranking factor or proof of current model behavior.",
+      "relationship_to_project": "external-reference-not-endorsement"
+    },
+    {
+      "id": "lost-middle",
+      "doi": "10.1162/tacl_a_00638",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "publisher": "MIT Press",
+      "published": [
+        [
+          2024
+        ]
+      ],
+      "source_url": "https://aclanthology.org/2024.tacl-1.9/",
+      "metadata_url": "https://api.crossref.org/works/10.1162%2Ftacl_a_00638",
+      "metadata_checked_at": "2026-09-08T11:34:28.286207+00:00",
+      "metadata_sha256": "1831af04b5438fb94ba02bad102d94893d4d6f016f534887a415a3e384dc863f",
+      "review_scope": "publisher-or-author abstract and bibliographic metadata; not full-study replication",
+      "supports": "The studied models show sensitivity to evidence position in long inputs.",
+      "does_not_support": "Use held-out extraction tests; do not infer a universal page layout or paragraph size.",
+      "relationship_to_project": "external-reference-not-endorsement"
+    },
+    {
+      "id": "fair",
+      "doi": "10.1038/sdata.2016.18",
+      "title": "The FAIR Guiding Principles for scientific data management and stewardship",
+      "publisher": "Springer Science and Business Media LLC",
+      "published": [
+        [
+          2016,
+          3,
+          15
+        ]
+      ],
+      "source_url": "https://www.nature.com/articles/sdata201618",
+      "metadata_url": "https://api.crossref.org/works/10.1038%2Fsdata.2016.18",
+      "metadata_checked_at": "2026-09-08T11:34:28.928492+00:00",
+      "metadata_sha256": "c27592d6809a941d8515301dfc60fd45a35b4ffb339a57d9555f00185c20c41e",
+      "review_scope": "publisher-or-author abstract and bibliographic metadata; not full-study replication",
+      "supports": "FAIR defines principles for findable, accessible, interoperable and reusable data.",
+      "does_not_support": "FAIR principles do not establish peer review, trustworthiness, or an SEO effect.",
+      "relationship_to_project": "external-reference-not-endorsement"
+    }
+  ]
+}

@@ -22,6 +22,8 @@ try {
 
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
+    'docs/EVIDENCE-RELAY.md', 'templates/growth/evidence-relay.example.json',
+    'skills/arwp-search-maturity/scripts/evidence-relay.mjs', 'docs/knowledge/research/doi-reading-corpus.json',
     'docs/EDITORIAL-SEARCH-LAB.md', 'templates/growth/editorial-research-brief.md',
     'docs/examples/editorial/section-graph.html', 'knowledge/releases/v1.2.0.json',
     'knowledge/research/2026-09-08-editorial-expansion.json',
@@ -56,6 +58,9 @@ try {
   });
 
   const installedRoot = path.join(consumerDir, 'node_modules', 'agent-ready-web-profile');
+  const relay = JSON.parse(execFileSync(process.execPath, [path.join(installedRoot, 'skills/arwp-search-maturity/scripts/evidence-relay.mjs'), path.join(installedRoot, 'templates/growth/evidence-relay.example.json')], { encoding: 'utf8' }));
+  assert.equal(relay.dataStatus, 'synthetic');
+  assert.equal(relay.stages.independent_reuse.uniqueEvidence, 1);
   const installedCli = path.join(installedRoot, 'bin', 'arwp.mjs');
   const installedAiSearchCli = path.join(installedRoot, 'bin', 'arwp-ai-search.mjs');
   const installedVisibilityCli = path.join(installedRoot, 'bin', 'arwp-visibility.mjs');

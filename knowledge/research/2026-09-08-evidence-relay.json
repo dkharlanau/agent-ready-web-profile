@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "corpus_version": "1.4.0",
+  "reviewed_at": "2026-09-08",
+  "method": "agent-assisted primary-source and abstract review",
+  "new_pattern_ids": [
+    "arwp-governance-functional-emulation",
+    "arwp-evidence-replication-kit",
+    "arwp-governance-maintenance-response",
+    "arwp-datasets-citation-unit",
+    "arwp-datasets-typed-doi-relations",
+    "arwp-documentation-citation-affordance",
+    "arwp-datasets-consumer-native-release",
+    "arwp-governance-venue-fit",
+    "arwp-evidence-independent-owner-groups",
+    "arwp-measurement-evidence-relay"
+  ],
+  "scope": "Implementation rationale, venue eligibility, bibliographic identity and local analytics semantics. No ranked reference cohort, DOI deposit, community submission or growth outcome is asserted.",
+  "originality": "Project synthesis of existing provenance, citation-quality and cohort ideas; no scientific novelty or effectiveness claim.",
+  "measurement_state": "Calculator implemented; production instrumentation and owner observations not supplied in this release."
+}

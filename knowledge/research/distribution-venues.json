@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "scope": "Fit-based distribution research. No accounts, submissions, messages or DOI deposits were made.",
+  "venues": [
+    {
+      "id": "zenodo",
+      "artifact": "Frozen research dataset, software or report",
+      "source_url": "https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/",
+      "eligibility": "Real reusable research object, rights, reproducible version and publication review",
+      "evidence": "Published record resolving to the intended object",
+      "status": "candidate",
+      "placement_relationship": "publisher-controlled-until-independently-reviewed",
+      "ranking_effect": "not-established"
+    },
+    {
+      "id": "github",
+      "artifact": "Reusable code and citation metadata",
+      "source_url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files",
+      "eligibility": "Actual repository and correct citation object",
+      "evidence": "Successful fresh install and accurate citation export",
+      "status": "candidate",
+      "placement_relationship": "publisher-controlled-until-independently-reviewed",
+      "ranking_effect": "not-established"
+    },
+    {
+      "id": "hugging-face",
+      "artifact": "Dataset usable by the ML/data audience",
+      "source_url": "https://huggingface.co/docs/hub/datasets-cards",
+      "eligibility": "Suitable licensed data and working consumer example",
+      "evidence": "A third party can load the versioned distribution",
+      "status": "candidate",
+      "placement_relationship": "publisher-controlled-until-independently-reviewed",
+      "ranking_effect": "not-established"
+    },
+    {
+      "id": "joss",
+      "artifact": "Research software for scholarly review",
+      "source_url": "https://joss.readthedocs.io/en/latest/review_criteria.html",
+      "eligibility": "Current research-software scope, substantive work, public history and review criteria",
+      "evidence": "Acceptance only after the independent journal process",
+      "status": "candidate",
+      "placement_relationship": "publisher-controlled-until-independently-reviewed",
+      "ranking_effect": "not-established"
+    },
+    {
+      "id": "show-hn",
+      "artifact": "Substantive personally built working demo",
+      "source_url": "https://news.ycombinator.com/showhn.html",
+      "eligibility": "Tryable artifact and current community guidelines",
+      "evidence": "Relevant discussion and observed demo completion",
+      "status": "candidate",
+      "placement_relationship": "publisher-controlled-until-independently-reviewed",
+      "ranking_effect": "not-established"
+    }
+  ]
+}

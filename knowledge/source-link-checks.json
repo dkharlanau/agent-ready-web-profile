@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T11:19:09.227067+00:00",
+  "checked_at": "2026-09-08T11:36:47.661823+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1143,6 +1143,94 @@
       "title": "Build agent-friendly websites &nbsp;|&nbsp; web.dev",
       "result": "retrieved",
       "sha256": "35ff1da4b7a30fe07853890f024e1ddc60d80d746c053600ce962ab2df2e7ef6"
+    },
+    {
+      "source_id": "zenodo-doi",
+      "requested_url": "https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/",
+      "checked_at": "2026-09-08T11:36:44.257216+00:00",
+      "status": 200,
+      "final_url": "https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Digital Object Identifier (DOI) | Zenodo",
+      "result": "retrieved",
+      "sha256": "aa750d22e4cbb9ae0c1c9ccec8e988bd04c76af87cdeeb78915821ada0c1fccd"
+    },
+    {
+      "source_id": "github-cff",
+      "requested_url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files",
+      "checked_at": "2026-09-08T11:36:44.258052+00:00",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files",
+      "content_type": "text/html; charset=utf-8",
+      "title": "About CITATION files - GitHub Docs",
+      "result": "retrieved",
+      "sha256": "f39da07ca3a0c5da442a0a66609587f813f04ba4695013b4c1d096ae66a02c8d"
+    },
+    {
+      "source_id": "hf-dataset-cards",
+      "requested_url": "https://huggingface.co/docs/hub/datasets-cards",
+      "checked_at": "2026-09-08T11:36:44.258243+00:00",
+      "status": 200,
+      "final_url": "https://huggingface.co/docs/hub/datasets-cards",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Dataset Cards · Hugging Face",
+      "result": "retrieved",
+      "sha256": "9f244ed50dc83568003ef75bc0ac3fbd77dc136142c932792fcf44b6a2ac0e36"
+    },
+    {
+      "source_id": "joss-review",
+      "requested_url": "https://joss.readthedocs.io/en/latest/review_criteria.html",
+      "checked_at": "2026-09-08T11:36:44.258385+00:00",
+      "status": 200,
+      "final_url": "https://joss.readthedocs.io/en/latest/review_criteria.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Review criteria &mdash; JOSS documentation",
+      "result": "retrieved",
+      "sha256": "aa6aaee8aa3d77075e921c2d652d7e00854b7e7090b71a0b122f7616a3a1aa36"
+    },
+    {
+      "source_id": "hn-show",
+      "requested_url": "https://news.ycombinator.com/showhn.html",
+      "checked_at": "2026-09-08T11:36:44.258512+00:00",
+      "status": 200,
+      "final_url": "https://news.ycombinator.com/showhn.html",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Show HN Guidelines",
+      "result": "retrieved",
+      "sha256": "77d9a0c08b3ca02c40601559a61b5df09ccf8f04147d1f756e5a2f3361a9892d"
+    },
+    {
+      "source_id": "datacite-work-relations",
+      "requested_url": "https://support.datacite.org/docs/connecting-to-works",
+      "checked_at": "2026-09-08T11:36:44.586104+00:00",
+      "status": 200,
+      "final_url": "https://support.datacite.org/docs/connecting-to-works",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Connecting to Works",
+      "result": "retrieved",
+      "sha256": "8ad7ec34afa94fc3093bfa8f51ff6d06875199aa6cc2946c243d9aa163f8d0bb"
+    },
+    {
+      "source_id": "datacite-citation-events",
+      "requested_url": "https://support.datacite.org/docs/consuming-citations-and-references",
+      "checked_at": "2026-09-08T11:36:44.664401+00:00",
+      "status": 200,
+      "final_url": "https://support.datacite.org/docs/consuming-citations-and-references",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Consuming Citations and References",
+      "result": "retrieved",
+      "sha256": "55e621f0eea930da8a2465fcd0894f833496411ffb896f1393ee657e63cc2514"
+    },
+    {
+      "source_id": "alce-publication",
+      "requested_url": "https://aclanthology.org/2023.emnlp-main.398/",
+      "checked_at": "2026-09-08T11:36:44.760767+00:00",
+      "status": 200,
+      "final_url": "https://aclanthology.org/2023.emnlp-main.398/",
+      "content_type": "text/html; charset=utf-8",
+      "title": "Enabling Large Language Models to Generate Text with Citations - ACL Anthology",
+      "result": "retrieved",
+      "sha256": "b9d4beee7ed0dde4be31ba41cb9441b5921495ad55576da91614ee343a0fc210"
     }
   ]
 }

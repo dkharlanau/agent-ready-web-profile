@@ -1,0 +1,108 @@
+{
+  "version": "1.0.0",
+  "dataStatus": "synthetic",
+  "asOf": "2026-09-08",
+  "windowDays": 28,
+  "assets": [
+    {
+      "id": "demo-kit",
+      "braidNodeId": "fixture:demo-kit",
+      "releasedAt": "2026-08-01",
+      "coverage": [
+        {
+          "stage": "discovered",
+          "from": "2026-08-01",
+          "to": "2026-09-01",
+          "evidenceRef": "fixture:coverage-discovered"
+        },
+        {
+          "stage": "independent_reuse",
+          "from": "2026-08-01",
+          "to": "2026-09-01",
+          "evidenceRef": "fixture:coverage-independent_reuse"
+        },
+        {
+          "stage": "ai_citation",
+          "from": "2026-08-01",
+          "to": "2026-09-01",
+          "evidenceRef": "fixture:coverage-ai_citation"
+        },
+        {
+          "stage": "useful_action",
+          "from": "2026-08-01",
+          "to": "2026-09-01",
+          "evidenceRef": "fixture:coverage-useful_action"
+        }
+      ]
+    },
+    {
+      "id": "unmonitored",
+      "braidNodeId": "fixture:unmonitored",
+      "releasedAt": "2026-08-01",
+      "coverage": []
+    },
+    {
+      "id": "recent",
+      "braidNodeId": "fixture:recent",
+      "releasedAt": "2026-09-01",
+      "coverage": []
+    }
+  ],
+  "observations": [
+    {
+      "id": "discovery",
+      "assetId": "demo-kit",
+      "stage": "discovered",
+      "actorGroup": "engine-sample",
+      "relationship": "unknown",
+      "evidenceRef": "fixture:discovery",
+      "observedAt": "2026-08-10"
+    },
+    {
+      "id": "rerun",
+      "assetId": "demo-kit",
+      "stage": "independent_reuse",
+      "actorGroup": "external-project",
+      "relationship": "independent",
+      "evidenceRef": "fixture:rerun",
+      "observedAt": "2026-08-10"
+    },
+    {
+      "id": "mirror",
+      "assetId": "demo-kit",
+      "stage": "independent_reuse",
+      "actorGroup": "external-project",
+      "relationship": "independent",
+      "evidenceRef": "fixture:rerun",
+      "observedAt": "2026-08-10"
+    },
+    {
+      "id": "sponsored",
+      "assetId": "demo-kit",
+      "stage": "independent_reuse",
+      "actorGroup": "sponsor",
+      "relationship": "paid",
+      "evidenceRef": "fixture:paid",
+      "observedAt": "2026-08-10"
+    },
+    {
+      "id": "citation",
+      "assetId": "demo-kit",
+      "stage": "ai_citation",
+      "actorGroup": "engine-sample",
+      "relationship": "unknown",
+      "evidenceRef": "fixture:answer",
+      "observedAt": "2026-08-10",
+      "verdict": "unsupported"
+    },
+    {
+      "id": "action",
+      "assetId": "demo-kit",
+      "stage": "useful_action",
+      "actorGroup": "consented-aggregate",
+      "relationship": "unknown",
+      "evidenceRef": "fixture:completion",
+      "observedAt": "2026-08-10"
+    }
+  ]
+}

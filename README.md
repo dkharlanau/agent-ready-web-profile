@@ -2,7 +2,7 @@
 
 **Make your site worth citing.**
 
-Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **195 patterns, 104 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 79 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
+Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **205 patterns, 112 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 89 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
 
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
 [![Adaptive Site Upgrade validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml)
@@ -27,6 +27,8 @@ Cite Goose is aimed at the harder operational question:
 That is the product boundary.
 
 Read the [September editorial research guide](docs/EDITORIAL-SEARCH-LAB.md) for 26 new patterns covering article voice, openings, decision thresholds, section graphs and AI reporting.
+
+[Evidence Relay](docs/EVIDENCE-RELAY.md) adds functional maturity emulation, fit-based distribution, a reviewed DOI reading corpus and an executable artifact-cohort calculator.
 
 ## The product loop
 
