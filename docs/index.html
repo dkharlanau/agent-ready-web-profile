@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Source-backed patterns and practical tools for search and AI discoverability. Choose a useful change, verify it, and measure what happens.">
+  <meta name="description" content="Cite Goose helps focused websites become easier to discover, understand and cite: define the problem territory, choose evidence-backed changes, verify implementation and measure what happens.">
   <meta name="theme-color" content="#eff600">
   <meta property="og:title" content="Cite Goose — Make your site worth citing.">
-  <meta property="og:description" content="Practical patterns. Traceable sources. Changes you can measure.">
+  <meta property="og:description" content="Own a problem. Draw the boundary. Make the useful parts easier to find, use and cite.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dkharlanau.github.io/agent-ready-web-profile/">
   <title>Cite Goose — Make your site worth citing.</title>
@@ -17,34 +17,11 @@
   <link rel="describedby" type="text/plain" href="./llms.txt" hreflang="en">
   <link rel="describedby" type="text/plain" href="./de/llms.txt" hreflang="de">
   <link rel="describedby" type="text/plain" href="./ru/llms.txt" hreflang="ru">
+  <link rel="describedby" type="application/ld+json" href="./ai/product.jsonld">
+  <link rel="describedby" type="application/json" href="./growth/profile.json">
   <link rel="stylesheet" href="./arwp.css">
   <link rel="preload" href="./media/cite-goose/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="./cite-goose.css">
-<!-- portfolio-consent-analytics -->
-<script>
-(function(w,d,id){
-  var key='portfolio-analytics-consent-v1';
-  function load(){
-    if(w.__portfolioAnalyticsLoaded)return;
-    w.__portfolioAnalyticsLoaded=true;
-    w.dataLayer=w.dataLayer||[];
-    w.gtag=w.gtag||function(){w.dataLayer.push(arguments);};
-    w.gtag('js',new Date());
-    w.gtag('config',id,{anonymize_ip:true});
-    var s=d.createElement('script');
-    s.async=true;
-    s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(id);
-    d.head.appendChild(s);
-  }
-  w.portfolioAnalyticsConsent={
-    grant:function(){try{localStorage.setItem(key,'granted');}catch(e){} load(); var n=d.getElementById('portfolio-analytics-consent');if(n)n.remove();},
-    deny:function(){try{localStorage.setItem(key,'denied');}catch(e){} var n=d.getElementById('portfolio-analytics-consent');if(n)n.remove();}
-  };
-  try{if(localStorage.getItem(key)==='granted')load();}catch(e){}
-})(window,document,'G-T2TS9NCN2N');
-</script>
-  <link rel="describedby" type="application/ld+json" href="./ai/product.jsonld">
-  <link rel="describedby" type="application/json" href="./growth/profile.json">
   <script type="application/ld+json" id="arwp-growth-entity-identity">
   {
     "@context": "https://schema.org",
@@ -83,222 +60,163 @@
     ]
   }
   </script>
+  <script>
+  (function(w,d,id){
+    var key='portfolio-analytics-consent-v1';
+    function load(){
+      if(w.__portfolioAnalyticsLoaded)return;
+      w.__portfolioAnalyticsLoaded=true;
+      w.dataLayer=w.dataLayer||[];
+      w.gtag=w.gtag||function(){w.dataLayer.push(arguments);};
+      w.gtag('js',new Date());
+      w.gtag('config',id,{anonymize_ip:true});
+      var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(id);d.head.appendChild(s);
+    }
+    w.portfolioAnalyticsConsent={
+      grant:function(){try{localStorage.setItem(key,'granted');}catch(e){} load();var n=d.getElementById('portfolio-analytics-consent');if(n)n.remove();},
+      deny:function(){try{localStorage.setItem(key,'denied');}catch(e){} var n=d.getElementById('portfolio-analytics-consent');if(n)n.remove();}
+    };
+    try{if(localStorage.getItem(key)==='granted')load();}catch(e){}
+  })(window,document,'G-T2TS9NCN2N');
+  </script>
 </head>
 <body class="home-page" data-scanner-endpoint="">
-<div id="portfolio-analytics-consent" role="dialog" aria-label="Analytics preference" style="position:fixed;z-index:2147483647;right:16px;bottom:16px;max-width:390px;padding:16px;border:1px solid #d0d7de;border-radius:12px;background:#fff;color:#1f2328;font:14px/1.45 system-ui,sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.18)">
-  <strong style="display:block;margin-bottom:6px">Optional analytics</strong>
-  <span>Allow anonymous usage measurement with Google Analytics? No analytics request is sent before you accept.</span>
-  <span style="display:flex;gap:8px;margin-top:12px">
-    <button type="button" onclick="portfolioAnalyticsConsent.grant()" style="padding:7px 12px;border:0;border-radius:8px;background:#0969da;color:#fff;cursor:pointer">Allow</button>
-    <button type="button" onclick="portfolioAnalyticsConsent.deny()" style="padding:7px 12px;border:1px solid #d0d7de;border-radius:8px;background:#fff;color:#1f2328;cursor:pointer">No thanks</button>
-  </span>
-</div>
-<script>(function(){try{if(localStorage.getItem('portfolio-analytics-consent-v1')){var n=document.getElementById('portfolio-analytics-consent');if(n)n.remove();}}catch(e){}})();</script>
+  <div id="portfolio-analytics-consent" role="dialog" aria-label="Analytics preference" style="position:fixed;z-index:2147483647;right:16px;bottom:16px;max-width:390px;padding:16px;border:1px solid #d0d7de;border-radius:12px;background:#fff;color:#1f2328;font:14px/1.45 system-ui,sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.18)">
+    <strong style="display:block;margin-bottom:6px">Optional analytics</strong>
+    <span>Allow anonymous usage measurement with Google Analytics? No analytics request is sent before you accept.</span>
+    <span style="display:flex;gap:8px;margin-top:12px">
+      <button type="button" onclick="portfolioAnalyticsConsent.grant()" style="padding:7px 12px;border:0;border-radius:8px;background:#0969da;color:#fff;cursor:pointer">Allow</button>
+      <button type="button" onclick="portfolioAnalyticsConsent.deny()" style="padding:7px 12px;border:1px solid #d0d7de;border-radius:8px;background:#fff;color:#1f2328;cursor:pointer">No thanks</button>
+    </span>
+  </div>
+  <script>(function(){try{if(localStorage.getItem('portfolio-analytics-consent-v1')){var n=document.getElementById('portfolio-analytics-consent');if(n)n.remove();}}catch(e){}})();</script>
+
   <a class="skip" href="#main">Skip to content</a>
-  <header class="goose-header"><a class="goose-brand" href="./"><strong>Cite Goose</strong><span>AGENT-READY<br>WEB PROFILE</span></a><nav aria-label="Primary"><a href="./discoverability.html">Patterns</a><a href="./growth/">Growth Loop</a><a href="./trust/">Evidence</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav></header>
+  <header class="goose-header">
+    <a class="goose-brand" href="./"><strong>Cite Goose</strong><span>AGENT-READY<br>WEB PROFILE</span></a>
+    <nav aria-label="Primary"><a href="#focus">Focus</a><a href="./discoverability.html">Patterns</a><a href="./growth/">Growth Loop</a><a href="./trust/">Evidence</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></nav>
+  </header>
 
   <main id="main">
-    <section id="top" class="goose-hero goose-shell"><div class="goose-hero-copy"><p class="eyebrow">A PRACTICAL FIELD GUIDE TO SEARCH &amp; AI DISCOVERY</p><h1>Make your site<br>worth citing.</h1><p class="goose-lead">Give people a useful answer. Give machines a clear path.<br class="desktop-break"> Build both with patterns you can inspect and test.</p><div class="goose-actions"><a class="goose-button" href="./discoverability.html">Find a pattern</a><a class="goose-text-link" href="./growth/">Run the Growth Loop</a></div><dl class="goose-edition"><div><dt>Patterns</dt><dd>219</dd></div><div><dt>Sources</dt><dd>132</dd></div><div><dt>Corpus release</dt><dd>1.12.0</dd></div><div><dt>Core</dt><dd>Open source</dd></div></dl></div><img class="goose-hero-art" src="./media/cite-goose/hero.webp" alt="An illustrated goose carrying a note: Show your sources." width="1024" height="1024" fetchpriority="high"></section>
-
-    <section class="goose-start goose-shell" aria-labelledby="goose-start-title"><div class="goose-start-head"><div><p class="eyebrow">FROM A GOOD IDEA TO A CHECKED CHANGE</p><h2 id="goose-start-title">Useful beats noisy.</h2></div><p>Original answers, honest comparisons, coherent data and usable interfaces. Pick the gap your site actually has.</p></div><div class="goose-steps"><article><span class="step-number">01 / CHOOSE</span><h3>Find your next move.</h3><p>Browse patterns by problem and evidence. Each has implementation steps, checks and a reason to try it.</p><a href="./discoverability.html">Explore the pattern library</a></article><article><span class="step-number">02 / VERIFY</span><h3>Keep the receipts.</h3><p>Follow a source to the relevant section. Pin the pattern version. Record what changed and what passed.</p><a href="./discoverability.html#evidence-guide">Understand the evidence labels</a></article><article><span class="step-number">03 / LEARN</span><h3>Measure what matters.</h3><p>Connect technical checks with actual search, citation and useful-action results. Keep neutral results too.</p><a href="./growth/">Start an improvement loop</a></article></div></section>
-
-    <section id="resolver" class="shell problem-section">
-      <div class="section-heading wide">
-        <p class="eyebrow">The interoperability foundation</p>
-        <h2>Help agents find their way around.</h2>
+    <section id="top" class="goose-hero goose-shell">
+      <div class="goose-hero-copy">
+        <p class="eyebrow">A PRACTICAL FIELD GUIDE TO SEARCH &amp; AI DISCOVERY</p>
+        <h1>Make your site<br>worth citing.</h1>
+        <p class="goose-lead">Start with the problem your site should own. Then improve only the content, evidence and technical surfaces that help people — and machines — solve it.</p>
+        <div class="goose-actions"><a class="goose-button" href="./discoverability.html">Find a pattern</a><a class="goose-text-link" href="#focus">Define the boundary</a></div>
+        <dl class="goose-edition"><div><dt>Patterns</dt><dd>219</dd></div><div><dt>Sources</dt><dd>132</dd></div><div><dt>Problem lanes</dt><dd>3</dd></div><div><dt>Core</dt><dd>Open source</dd></div></dl>
       </div>
-      <div class="before-after">
-        <article class="flow-card muted-card">
-          <p class="flow-label">Without a resolver</p>
-          <ol>
-            <li>Search or scrape the site</li>
-            <li>Guess which discovery file matters</li>
-            <li>Read several incompatible metadata shapes</li>
-            <li>Silently choose when declarations disagree</li>
-            <li>Lose why an interface was trusted</li>
-          </ol>
-          <strong>Integration depends on site-specific logic.</strong>
-        </article>
-        <div class="versus" aria-hidden="true">→</div>
-        <article class="flow-card accent-card">
-          <p class="flow-label">With ARWP Resolver</p>
-          <ol>
-            <li>Observe bounded public discovery</li>
-            <li>Normalize existing standards and conventions</li>
-            <li>Keep source authority with every interface</li>
-            <li>Surface conflicts instead of hiding them</li>
-            <li>Plan the best interface for the intent</li>
-          </ol>
-          <strong>Integration starts from inspectable evidence.</strong>
-        </article>
+      <img class="goose-hero-art" src="./media/cite-goose/hero.webp" alt="An illustrated goose carrying a note: Show your sources." width="1024" height="1024" fetchpriority="high">
+    </section>
+
+    <section id="focus" class="focus-manifesto">
+      <div class="goose-shell">
+        <div class="focus-head">
+          <div><p class="eyebrow">SITE FOCUS / BEFORE OPTIMIZATION</p><h2>Own a problem.<br>Draw the boundary.</h2></div>
+          <p class="focus-intro">A useful resource gets weaker when every adjacent topic becomes a first-class section. Scope is part of the product: say what belongs, what stays subordinate and what does not belong here.</p>
+        </div>
+        <div class="focus-rulebar" aria-label="Cite Goose site-focus house rules">
+          <div class="focus-rule"><b>1</b><span>primary problem territory</span></div>
+          <div class="focus-rule"><b>≤3</b><span>homepage problem lanes</span></div>
+          <div class="focus-rule"><b>≤5</b><span>primary nav destinations</span></div>
+          <div class="focus-rule"><b>1</b><span>dominant action per page</span></div>
+        </div>
+        <div class="scope-split">
+          <div class="scope-column yes"><span class="scope-label">CITE GOOSE / WE DO</span><h3>Turn a useful, focused site into a better discovery surface.</h3><ul><li>Decide which Search, AI and agent-web changes actually apply.</li><li>Improve access, answer quality, evidence and machine-readable routes.</li><li>Keep source support and implementation verification inspectable.</li><li>Measure search, citation, recommendation and useful-action outcomes separately.</li></ul></div>
+          <div class="scope-column no"><span class="scope-label">CITE GOOSE / WE DO NOT</span><h3>Become another everything-about-SEO content mill.</h3><ul><li>No guaranteed rankings, citations or recommendation claims.</li><li>No generic publishing volume as a substitute for a site thesis.</li><li>No universal AI manifest that replaces native standards.</li><li>No opaque readiness score that hides what actually changed.</li></ul></div>
+        </div>
+        <a class="scope-link" href="./site-focus.html">Use the Site Focus playbook →</a>
       </div>
-      <p class="big-statement">A clear answer needs a clear route. <strong>Make your content and tools easier to find and use.</strong></p>
+    </section>
+
+    <section class="problem-lanes goose-shell" aria-labelledby="lanes-title">
+      <div class="problem-lanes-head"><div><p class="eyebrow">THREE PROBLEMS, NOT THIRTY FEATURES</p><h2 id="lanes-title">Choose the gap your site has.</h2></div><p>The homepage routes work by problem. Protocols, schemas, tools and research stay available one level deeper instead of competing as separate product identities.</p></div>
+      <div class="lane-grid">
+        <a class="lane-card" href="./discoverability.html"><span class="lane-kicker">01 / BE FOUND</span><h3>Can they reach the useful thing?</h3><p>Fix crawlability, discoverable routes, internal structure and the specific technical surfaces that make sense for the site.</p><strong>Find an applicable pattern →</strong></a>
+        <a class="lane-card" href="./discoverability.html"><span class="lane-kicker">02 / BE USED</span><h3>Is the answer worth using?</h3><p>Strengthen original evidence, direct answers, comparisons, data, tools and page structure instead of adding filler.</p><strong>Improve the useful surface →</strong></a>
+        <a class="lane-card" href="./growth/"><span class="lane-kicker">03 / BE PROVEN</span><h3>Did the change help?</h3><p>Separate implementation checks from real search, citation, recommendation and useful-action outcomes. Keep neutral results too.</p><strong>Run the Growth Loop →</strong></a>
+      </div>
+      <p class="focus-note"><strong>House heuristic, not a ranking rule:</strong> one core problem, up to three first-order lanes, up to five primary navigation destinations and one dominant action per page. Change the architecture when the site's real audience gives you a better reason.</p>
+    </section>
+
+    <section class="goose-start goose-shell" aria-labelledby="goose-start-title">
+      <div class="goose-start-head"><div><p class="eyebrow">FROM FOCUS TO EVIDENCE</p><h2 id="goose-start-title">Useful beats noisy.</h2></div><p>Do less, but make each change explainable: why this page exists, why this pattern applies and what signal will tell you whether it worked.</p></div>
+      <div class="goose-steps">
+        <article><span class="step-number">01 / SCOPE</span><h3>Write the site thesis.</h3><p>Define the audience, problem, useful outcome, IN/ADJACENT/OUT boundary and the page job before adding another route.</p><a href="./site-focus.html">Open Site Focus</a></article>
+        <article><span class="step-number">02 / CHANGE</span><h3>Use evidence, not folklore.</h3><p>Select a small number of applicable patterns. Keep sources, versions, implementation checks and limitations attached.</p><a href="./discoverability.html">Explore the pattern library</a></article>
+        <article><span class="step-number">03 / LEARN</span><h3>Measure what matters.</h3><p>Connect technical checks with actual search, citation and useful-action results. Preserve null and negative outcomes.</p><a href="./growth/">Start an improvement loop</a></article>
+      </div>
     </section>
 
     <section class="outcomes-section">
       <div class="shell">
-        <div class="section-heading split">
-          <div><p class="eyebrow">Resolve, do not replace</p><h2>Existing standards keep their own semantics.</h2></div>
-          <p>The resolver treats the ARWP profile as one useful publisher source — not as a mandatory universal manifest.</p>
-        </div>
+        <div class="section-heading split"><div><p class="eyebrow">EVIDENCE MODEL</p><h2>Useful claims need visible limits.</h2></div><p>Cite Goose keeps source support, implementation verification and outcome evidence separate. A technically correct change is not automatically a ranking or recommendation win.</p></div>
         <div class="outcome-grid">
-          <article><span>RFC</span><h3>API & authorization</h3><p>RFC 9727 API Catalog and RFC 9728 Protected Resource Metadata are resolved as IETF-standard evidence rather than copied into new ARWP semantics.</p></article>
-          <article><span>A2A</span><h3>Agent discovery</h3><p>A2A Agent Cards remain the protocol-native description of a callable agent and its supported interfaces.</p></article>
-          <article><span>SKILL</span><h3>Portable procedures</h3><p>Agent Skills discovery points to the real Skill artifacts; ARWP does not turn instructions into a transport.</p></article>
-          <article><span>MCP</span><h3>Tools</h3><p>MCP metadata is preserved separately from live runtime conformance. Experimental Server Cards remain labeled experimental.</p></article>
+          <article><span>SOURCE</span><h3>Why try it?</h3><p>Primary guidance, reviewed research or explicitly labeled project hypothesis.</p></article>
+          <article><span>CHECK</span><h3>Did we build it?</h3><p>Generated output, links, semantics, accessibility and repository checks.</p></article>
+          <article><span>RESULT</span><h3>Did behavior change?</h3><p>Search, citations, recommendations and product actions remain separate observed outcomes.</p></article>
+          <article><span>LIMIT</span><h3>What is not proven?</h3><p>Unknown, unmeasured and neutral results stay visible rather than being converted into success language.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="shell surfaces-section" aria-labelledby="normalized-title">
-      <div class="section-heading split">
-        <div><p class="eyebrow">Normalized output</p><h2 id="normalized-title">One service map, with the evidence still attached.</h2></div>
-        <p>The normalized map is resolver output. It is not a new normative replacement schema.</p>
-      </div>
-      <div class="surface-grid">
-        <article><span class="surface-code">CONTENT</span><h3>Readable surfaces</h3><p>HTML discovery, sitemaps, feeds and <code>llms.txt</code>.</p></article>
-        <article><span class="surface-code">DATA</span><h3>Data</h3><p>Catalogs, schemas, releases and publisher distributions.</p></article>
-        <article><span class="surface-code">SEARCH</span><h3>Retrieval</h3><p>Publisher-maintained search and RAG indexes when available.</p></article>
-        <article><span class="surface-code">API</span><h3>Structured APIs</h3><p>OpenAPI and API Catalog evidence.</p></article>
-        <article><span class="surface-code">TOOL</span><h3>Tools</h3><p>MCP and browser-tool interfaces without conflating their runtimes.</p></article>
-        <article><span class="surface-code">SKILL</span><h3>Skills</h3><p>Portable procedures and discovery indexes.</p></article>
-        <article><span class="surface-code">AGENT</span><h3>Agents</h3><p>A2A discovery and callable interface metadata.</p></article>
-        <article><span class="surface-code">TRUST</span><h3>Trust & auth</h3><p>Provenance, review, licensing, security and protected-resource metadata.</p></article>
-      </div>
-    </section>
-
-    <section id="adopt" class="adopt-section">
-      <div class="shell adopt-layout">
-        <div>
-          <p class="eyebrow">Try the resolver</p>
-          <h2>Start from a website, not from a schema.</h2>
-          <p class="section-copy">The bounded resolver can discover useful surfaces even when the site has no ARWP profile. A publisher profile remains valuable when the site wants to explicitly declare retrieval, trust or integration surfaces that ordinary discovery cannot prove.</p>
-          <div class="adopt-points">
-            <p><strong>Resolve</strong> — normalize available discovery.</p>
-            <p><strong>Explain</strong> — see evidence and conflicts in plain language.</p>
-            <p><strong>Plan</strong> — select an interface for a concrete intent.</p>
-            <p><strong>Profile</strong> — optionally publish a stable publisher-maintained ARWP map.</p>
+    <section class="technical-basement" aria-label="Technical depth">
+      <details id="resolver">
+        <summary><span>Technical depth / Resolver</span><span>Agents, APIs, standards</span></summary>
+        <div class="technical-content">
+          <div class="section-heading wide"><p class="eyebrow">THE INTEROPERABILITY FOUNDATION</p><h2>Help agents find their way around.</h2></div>
+          <div class="before-after">
+            <article class="flow-card muted-card"><p class="flow-label">Without a resolver</p><ol><li>Search or scrape the site</li><li>Guess which discovery file matters</li><li>Read incompatible metadata shapes</li><li>Silently choose when declarations disagree</li><li>Lose why an interface was trusted</li></ol><strong>Integration depends on site-specific logic.</strong></article>
+            <div class="versus" aria-hidden="true">→</div>
+            <article class="flow-card accent-card"><p class="flow-label">With ARWP Resolver</p><ol><li>Observe bounded public discovery</li><li>Normalize existing standards and conventions</li><li>Keep source authority with every interface</li><li>Surface conflicts instead of hiding them</li><li>Plan the best interface for the intent</li></ol><strong>Integration starts from inspectable evidence.</strong></article>
+          </div>
+          <div class="scanner-card" style="margin-top:28px">
+            <div class="scanner-head"><span>Website resolver</span><span id="scanner-mode" class="status-pill">CLI ready</span></div>
+            <label for="site-url">Public HTTPS website</label>
+            <div class="input-row"><input id="site-url" name="site-url" type="url" value="https://example.com" inputmode="url" autocomplete="url" spellcheck="false"><button id="prepare" type="button">Prepare</button></div>
+            <p id="url-message" class="form-message" aria-live="polite"></p>
+            <div id="scan-results" class="scan-results" hidden></div>
+            <div id="command-panel" class="command-panel">
+              <div class="command-label"><span>Resolve all discovery</span><button class="copy" data-copy="resolve-command" type="button">Copy</button></div><pre id="resolve-command"><code>node bin/arwp.mjs resolve https://example.com</code></pre>
+              <div class="command-label"><span>Explain what was found</span><button class="copy" data-copy="explain-command" type="button">Copy</button></div><pre id="explain-command"><code>node bin/arwp.mjs explain https://example.com</code></pre>
+              <div class="command-label"><span>Plan for search</span><button class="copy" data-copy="plan-command" type="button">Copy</button></div><pre id="plan-command"><code>node bin/arwp.mjs plan https://example.com --intent=search</code></pre>
+              <div class="command-label"><span>Observe / bootstrap ARWP profile</span><button class="copy" data-copy="scan-command" type="button">Copy</button></div><pre id="scan-command"><code>node bin/arwp.mjs scan https://example.com</code></pre><pre id="init-command"><code>node bin/arwp.mjs init https://example.com</code></pre>
+            </div>
+            <button id="download-profile" class="button primary full" type="button" hidden>Download site-profile.json</button>
+            <p class="scanner-note">The resolver treats ARWP as one publisher source, not a mandatory universal manifest. Native standards keep their own semantics.</p>
           </div>
         </div>
-        <div class="scanner-card">
-          <div class="scanner-head"><span>Website resolver</span><span id="scanner-mode" class="status-pill">CLI ready</span></div>
-          <label for="site-url">Public HTTPS website</label>
-          <div class="input-row"><input id="site-url" name="site-url" type="url" value="https://example.com" inputmode="url" autocomplete="url" spellcheck="false"><button id="prepare" type="button">Prepare</button></div>
-          <p id="url-message" class="form-message" aria-live="polite"></p>
-          <div id="scan-results" class="scan-results" hidden></div>
-          <div id="command-panel" class="command-panel">
-            <div class="command-label"><span>Resolve all discovery</span><button class="copy" data-copy="resolve-command" type="button">Copy</button></div>
-            <pre id="resolve-command"><code>node bin/arwp.mjs resolve https://example.com</code></pre>
-            <div class="command-label"><span>Explain what was found</span><button class="copy" data-copy="explain-command" type="button">Copy</button></div>
-            <pre id="explain-command"><code>node bin/arwp.mjs explain https://example.com</code></pre>
-            <div class="command-label"><span>Plan for search</span><button class="copy" data-copy="plan-command" type="button">Copy</button></div>
-            <pre id="plan-command"><code>node bin/arwp.mjs plan https://example.com --intent=search</code></pre>
-            <div class="command-label"><span>Observe / bootstrap ARWP profile</span><button class="copy" data-copy="scan-command" type="button">Copy</button></div>
-            <pre id="scan-command"><code>node bin/arwp.mjs scan https://example.com</code></pre>
-            <pre id="init-command"><code>node bin/arwp.mjs init https://example.com</code></pre>
+      </details>
+
+      <details id="examples">
+        <summary><span>Technical depth / References</span><span>Implementations, directory</span></summary>
+        <div class="technical-content">
+          <div class="section-heading split"><div><p class="eyebrow">WORKING REFERENCES</p><h2>Explore the working reference sites.</h2></div><p>Owner-controlled examples are implementation fixtures, not independent adoption evidence.</p></div>
+          <div id="reference-cards" class="reference-grid" aria-live="polite"><p class="loading">Loading the public directory…</p></div>
+          <div class="profile-demo"><div><p class="eyebrow">Publisher profile example</p><h3 id="profile-demo-name">Choose a reference site</h3><p id="profile-demo-summary">The profile is one explicit source the resolver can consume.</p></div><div class="profile-url-box"><code id="profile-demo-url">/ai/site-profile.json</code><button class="copy compact" data-copy="profile-demo-url" type="button">Copy</button></div></div>
+          <div class="section-heading split" style="margin-top:44px"><div><p class="eyebrow">ARWP Directory</p><h2>Inspect a real implementation.</h2></div><p>The directory records current reference sites that publish ARWP.</p></div>
+          <div class="directory-tools" role="group" aria-label="Filter ARWP sites"><button class="filter active" data-filter="all" type="button">All</button><button class="filter" data-filter="retrieval" type="button">Retrieval</button><button class="filter" data-filter="openapi" type="button">OpenAPI</button><button class="filter" data-filter="agentSkills" type="button">Agent Skills</button><button class="filter" data-filter="mcp" type="button">MCP</button><button class="filter" data-filter="trust" type="button">Trust</button></div>
+          <div id="directory-list" class="directory-list"></div>
+          <p class="directory-machine"><a href="./directory.json">Machine-readable directory JSON →</a></p>
+        </div>
+      </details>
+
+      <details id="research-depth">
+        <summary><span>Technical depth / Research infrastructure</span><span>Router, benchmark, standards</span></summary>
+        <div class="technical-content">
+          <div class="connect-grid">
+            <article class="connect-card"><span class="surface-code">FED</span><h3>Federated router</h3><p>Search across resolved heterogeneous sites while preserving interface evidence.</p><a class="text-link" href="https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router">View router →</a></article>
+            <article class="connect-card"><span class="surface-code">BENCH</span><h3>Benchmark utility before expanding the format.</h3><p>The interoperability foundation should earn additions through observed failures and independent evidence, not new AI vocabulary.</p><a class="text-link" href="./BENCHMARK.md">Benchmark methodology →</a></article>
+            <article class="connect-card"><span class="surface-code">STD</span><h3>Resolve, do not replace.</h3><p>RFC, A2A, Agent Skills, MCP, OAuth and API metadata keep their own semantics and authority.</p><a class="text-link" href="./RESOLVER.md">Resolver contract →</a></article>
           </div>
-          <button id="download-profile" class="button primary full" type="button" hidden>Download site-profile.json</button>
-          <p class="scanner-note">GitHub Pages cannot safely resolve arbitrary external sites server-side. The repository includes one bounded hosted service with fixed <code>/scan</code>, <code>/resolve</code>, <code>/explain</code> and <code>/plan</code> routes. Until that HTTPS runtime is deployed, this UI prepares local commands.</p>
         </div>
-      </div>
-    </section>
-
-    <section id="evidence" class="shell evidence">
-      <div class="section-number">E</div>
-      <div><p class="eyebrow">Evidence model</p><h2>Not every discovery source has the same status.</h2></div>
-      <div class="evidence-list">
-        <p><span class="signal detected">ietf-standard</span> RFC 9727 / RFC 9728.</p>
-        <p><span class="signal detected">upstream</span> Protocol-native discovery such as A2A.</p>
-        <p><span class="signal warning">community</span> Useful conventions such as agents.txt / agents.json.</p>
-        <p><span class="signal unassessed">experimental</span> Current MCP Server Card / AI Catalog work.</p>
-        <p><span class="signal detected">publisher</span> Valid ARWP profile.</p>
-      </div>
-    </section>
-
-    <section id="examples" class="shell examples-section">
-      <div class="section-heading split">
-        <div><p class="eyebrow">Working references</p><h2>Explore the working reference sites.</h2></div>
-        <p>They remain useful implementation fixtures, but owner-controlled examples are not counted as independent adoption evidence.</p>
-      </div>
-      <div id="reference-cards" class="reference-grid" aria-live="polite"><p class="loading">Loading the public directory…</p></div>
-      <div class="profile-demo">
-        <div><p class="eyebrow">Publisher profile example</p><h3 id="profile-demo-name">Choose a reference site</h3><p id="profile-demo-summary">The profile is one explicit source the resolver can consume.</p></div>
-        <div class="profile-url-box"><code id="profile-demo-url">/ai/site-profile.json</code><button class="copy compact" data-copy="profile-demo-url" type="button">Copy</button></div>
-      </div>
-    </section>
-
-    <section id="directory" class="shell directory-section">
-      <div class="section-heading split">
-        <div><p class="eyebrow">ARWP Directory</p><h2>Inspect a real implementation.</h2></div>
-        <p>The current directory records sites that publish ARWP. The next research corpus may include sites with no ARWP profile when upstream discovery is sufficient.</p>
-      </div>
-      <div class="directory-tools" role="group" aria-label="Filter ARWP sites">
-        <button class="filter active" data-filter="all" type="button">All</button>
-        <button class="filter" data-filter="retrieval" type="button">Retrieval</button>
-        <button class="filter" data-filter="openapi" type="button">OpenAPI</button>
-        <button class="filter" data-filter="agentSkills" type="button">Agent Skills</button>
-        <button class="filter" data-filter="mcp" type="button">MCP</button>
-        <button class="filter" data-filter="trust" type="button">Trust</button>
-      </div>
-      <div id="directory-list" class="directory-list"></div>
-      <p class="directory-machine"><a href="./directory.json">Machine-readable directory JSON →</a></p>
-    </section>
-
-    <section class="connect-section">
-      <div class="shell">
-        <div class="section-heading split">
-          <div><p class="eyebrow">Agent-consumable resolver</p><h2>Expose resolution itself as MCP.</h2></div>
-          <p>The resolver MCP server lets an agent inspect another site's discovery surfaces without encoding every standard into the client.</p>
-        </div>
-        <div class="connect-grid">
-          <article class="connect-card"><span class="surface-code">RESOLVE</span><h3>Resolve site</h3><p>Normalize discovery and preserve source authority.</p><pre id="resolver-mcp-command"><code>npm run resolver:mcp</code></pre><button class="copy" data-copy="resolver-mcp-command" type="button">Copy command</button></article>
-          <article class="connect-card"><span class="surface-code">PLAN</span><h3>Plan interface</h3><p>Select for read, search, structured access, tools or agent interaction — with fallbacks.</p><a class="text-link" href="./RESOLVER.md">Read resolver contract →</a></article>
-          <article class="connect-card"><span class="surface-code">FED</span><h3>Federated router</h3><p>Current federation searches ARWP-declared retrieval. Next it will operate on resolved heterogeneous sites.</p><a class="text-link" href="https://github.com/dkharlanau/agent-ready-web-profile/tree/main/router">View router →</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="roadmap-section">
-      <div class="shell">
-        <div class="section-heading split"><div><p class="eyebrow">Growth operating model</p><h2>Research → hypothesis → verify → measure.</h2></div><p>ARWP now treats website growth as an evidence loop. A technically correct change is not automatically a ranking or recommendation success.</p></div>
-        <div class="roadmap-grid">
-          <article><span class="priority">G0</span><h3>Research</h3><ul><li>Review current primary sources</li><li>Track changes in Trend Radar</li><li>Separate requirements from experiments</li><li>Retire stale guidance</li></ul></article>
-          <article><span class="priority">G1</span><h3>Hypothesize</h3><ul><li>Choose applicable mechanisms</li><li>Record confidence and target surface</li><li>Define automated/manual checks</li><li>Define observable success signals</li></ul></article>
-          <article><span class="priority">G2</span><h3>Implement</h3><ul><li>Fix eligibility blockers first</li><li>Improve original evidence and structure</li><li>Use recommendation features only when relevant</li><li>Keep agent metadata truthful</li></ul></article>
-          <article><span class="priority">G3</span><h3>Measure</h3><ul><li>Keep owner data external</li><li>Compare before/after evidence</li><li>Preserve neutral and negative results</li><li>Keep, revise, revert or retire</li></ul></article>
-        </div>
-        <p class="directory-machine"><a href="./growth/">Growth Loop →</a> · <a href="./trends/">Trend Radar →</a> · <a href="./growth/hypotheses.json">Hypotheses JSON →</a> · <a href="./skills/">Agent Skills →</a></p>
-      </div>
-    </section>
-
-    <section class="roadmap-section">
-      <div class="shell">
-        <div class="section-heading split"><div><p class="eyebrow">Technical evidence gate</p><h2>Benchmark utility before expanding the format.</h2></div><p>The interoperability foundation should earn its next profile revision through observed failures, not new AI vocabulary.</p></div>
-        <div class="roadmap-grid">
-          <article><span class="priority">R0</span><h3>Improve decisions</h3><ul><li class="done">Frozen 20-site corpus</li><li class="done">Regret diagnostics</li><li>Explicit abstention outcomes</li><li>Publish negative results</li></ul></article>
-          <article><span class="priority">R1</span><h3>Verify runtime</h3><ul><li class="done">Multi-standard resolver</li><li class="done">MCP runtime reconciliation</li><li class="done">A2A signature verification</li><li>Independent compatibility evidence</li></ul></article>
-          <article><span class="priority">R2</span><h3>Resolve the web</h3><ul><li class="done">Resolver-aware corpus</li><li class="done">Snapshots and drift</li><li class="done">Conflict monitoring</li><li class="done">Resolver-backed federation</li></ul></article>
-          <article><span class="priority">R3</span><h3>Govern by evidence</h3><ul><li>Upstream watcher</li><li>Durable evidence receipts</li><li>Independent consumers</li><li>New profile fields only if needed</li></ul></article>
-        </div>
-        <p class="directory-machine"><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/ROADMAP.md">Full evidence-driven roadmap →</a> · <a href="./BENCHMARK.md">Benchmark methodology →</a> · <a href="./README-R4.md">Decision-quality notes →</a></p>
-      </div>
-    </section>
-
-    <section class="shell boundaries">
-      <div class="section-heading split"><div><p class="eyebrow">Boundaries</p><h2>Know what each result proves.</h2></div><p>Implementation evidence and outcome evidence stay separate.</p></div>
-      <div class="boundary-grid">
-        <p><strong>Search outcomes.</strong> Measure search, citation and recommendation changes on real publisher surfaces.</p>
-        <p><strong>Access permissions.</strong> Discovery metadata describes a capability. The actual service controls access.</p>
-        <p><strong>Native standards.</strong> MCP, A2A, OAuth and API metadata retain their own semantics.</p>
-        <p><strong>Concrete need.</strong> Extend the profile when a real integration failure justifies it.</p>
-      </div>
+      </details>
     </section>
   </main>
 
   <footer class="footer shell">
     <div>Cite Goose</div>
-    <div class="footer-links"><a href="./growth/">Growth</a><a href="./trends/">Trends</a><a href="./skills/">Skills</a><a href="./RESOLVER.md">Resolver</a><a href="./observatory/">Observatory</a><a href="./answers/">Answers</a><a href="./concepts/">Concepts</a><a href="./BENCHMARK.md">Benchmark</a><a href="./trust/">Trust</a><a href="./media/">Open media</a><a href="./discoverability.html">Pattern library</a>
-      <a href="./history.html">History</a><a href="./LOCALIZATION.md">Agent locales</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md">Profile spec</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></div>
+    <div class="footer-links"><a href="./site-focus.html">Site Focus</a><a href="./growth/">Growth</a><a href="./trends/">Trends</a><a href="./skills/">Skills</a><a href="./RESOLVER.md">Resolver</a><a href="./observatory/">Observatory</a><a href="./answers/">Answers</a><a href="./concepts/">Concepts</a><a href="./BENCHMARK.md">Benchmark</a><a href="./trust/">Trust</a><a href="./media/">Open media</a><a href="./discoverability.html">Pattern library</a><a href="./history.html">History</a><a href="./LOCALIZATION.md">Agent locales</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md">Profile spec</a><a href="https://github.com/dkharlanau/agent-ready-web-profile">GitHub</a></div>
     <p>Cite Goose / Agent-Ready Web Profile · Apache-2.0 · Experimental profile v0.1 · Toolchain 0.2.x</p>
   </footer>
 
