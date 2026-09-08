@@ -9,6 +9,7 @@ on:
       - 'benchmarks/corpus/reference-*.json'
       - 'benchmarks/corpus/fixture.schema.json'
       - 'benchmarks/external-runner.mjs'
+      - 'benchmarks/reference-profile-matrix.mjs'
       - 'lib/resolver.mjs'
       - 'lib/resolver-adapters.mjs'
       - 'lib/scanner.mjs'
@@ -86,6 +87,10 @@ jobs:
           fs.writeFileSync('benchmark-results/reference-sites.json', `${JSON.stringify(report, null, 2)}\n`);
           NODE
 
+      - name: Build reference AI-search module matrix
+        if: always()
+        run: node benchmarks/reference-profile-matrix.mjs --output=benchmark-results/reference-profile-matrix.json
+
       - name: Write job summary
         if: always()
         run: |
@@ -113,6 +118,20 @@ jobs:
             const result = site.strategyResults?.['resolver-union'];
             lines.push(`| ${site.id} | ${result?.correct ?? 0} | ${result?.total ?? 5} |`);
           }
+
+          if (fs.existsSync('benchmark-results/reference-profile-matrix.json')) {
+            const matrix = JSON.parse(fs.readFileSync('benchmark-results/reference-profile-matrix.json', 'utf8'));
+            lines.push('', '## AI-search profile module inventory', '', '| Site | Active | Planned | N/A | P1 planned |', '| --- | ---: | ---: | ---: | --- |');
+            for (const site of matrix.results || []) {
+              if (site.status !== 'resolved') {
+                lines.push(`| ${site.id} | n/a | n/a | n/a | profile fetch failed |`);
+                continue;
+              }
+              lines.push(`| ${site.id} | ${site.counts?.active ?? 0} | ${site.counts?.planned ?? 0} | ${site.counts?.notApplicable ?? 0} | ${(site.p1Planned || []).join(', ') || 'none'} |`);
+            }
+            lines.push('', '> Module inventory is descriptive only. A larger active count is not a readiness, ranking, trust, adoption or quality score.');
+          }
+
           lines.push('', '> Owner-controlled implementation evidence only. These sites validate our publication patterns and regression behavior; they are not independent adoption evidence.');
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
           NODE
@@ -128,6 +147,7 @@ jobs:
           name: arwp-reference-benchmark-${{ github.run_id }}
           path: |
             benchmark-results/reference-sites.json
+            benchmark-results/reference-profile-matrix.json
             benchmark-results/with-references.json
           if-no-files-found: warn
           retention-days: 90
