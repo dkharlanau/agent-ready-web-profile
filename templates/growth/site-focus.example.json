@@ -1,0 +1,58 @@
+{
+  "version": "0.1",
+  "site": "https://example.com/",
+  "siteThesis": {
+    "primaryAudience": "Replace with one primary audience",
+    "primaryProblem": "Replace with the concrete problem territory this resource owns",
+    "mechanism": "Replace with the distinctive evidence, tool, workflow or experience provided",
+    "usefulOutcome": "Replace with what a successful visitor can understand, decide or do",
+    "primaryAction": "Replace with the dominant next useful action"
+  },
+  "scope": {
+    "in": [
+      "Pages, tools or evidence that directly solve the primary problem"
+    ],
+    "adjacent": [
+      "Supporting material that remains subordinate to the main problem territory"
+    ],
+    "out": [
+      "Related ideas that do not materially strengthen the primary problem or proof"
+    ],
+    "weDo": [
+      "Describe the few outcomes this site intentionally provides"
+    ],
+    "weDoNot": [
+      "Describe tempting adjacent topics the site intentionally does not become"
+    ]
+  },
+  "problemLanes": [
+    {
+      "id": "lane-1",
+      "label": "Primary user problem or outcome",
+      "job": "What this first-order route helps the visitor accomplish"
+    }
+  ],
+  "primaryNavigation": [
+    "Keep the intended first-order destinations small and problem-led"
+  ],
+  "pageContracts": [
+    {
+      "url": "https://example.com/example-page/",
+      "pageJob": "One clear job",
+      "primaryQuestion": "One question this page answers",
+      "inScope": ["Material required for that job"],
+      "outOfScope": ["Material owned by another page or outside the site boundary"],
+      "proof": ["Source, data, example, tool, case or first-hand evidence"],
+      "primaryAction": "One next useful action",
+      "parentHub": "lane-1",
+      "reviewDecision": "KEEP"
+    }
+  ],
+  "reviewPolicy": {
+    "allowedAutomatedDispositions": ["KEEP", "NARROW", "MERGE", "DEFER"],
+    "removeRequiresManualApproval": true,
+    "splitRequiresManualApproval": true,
+    "redirectAndHistoryReviewRequiredForMerge": true,
+    "focusHeuristicsAreRankingFactors": false
+  }
+}
