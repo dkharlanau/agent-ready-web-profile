@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-profile-v0.3.schema.json",
+  "title": "Cite Goose Site Focus Profile v0.3",
+  "description": "Owner-declared problem, segment, homepage, navigation and experience contract. It expresses product intent and budgets; it is not a ranking configuration or visual-quality score.",
+  "type": "object",
+  "required": ["version", "canonicalUrl", "thesis", "scope", "problemLanes", "homepage", "primaryNavigation", "routeRules", "experience"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.3" },
+    "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "thesis": {
+      "type": "object",
+      "required": ["primaryProblem", "primaryAudience", "usefulOutcome", "distinctEvidence", "primaryAction"],
+      "properties": {
+        "primaryProblem": { "type": "string", "minLength": 8 },
+        "primaryAudience": { "type": "string", "minLength": 3 },
+        "usefulOutcome": { "type": "string", "minLength": 8 },
+        "distinctEvidence": { "type": "string", "minLength": 8 },
+        "primaryAction": { "type": "string", "minLength": 3 }
+      },
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "object",
+      "required": ["in", "adjacent", "out"],
+      "properties": {
+        "in": { "type": "array", "items": { "type": "string", "minLength": 2 }, "uniqueItems": true },
+        "adjacent": { "type": "array", "items": { "type": "string", "minLength": 2 }, "uniqueItems": true },
+        "out": { "type": "array", "items": { "type": "string", "minLength": 2 }, "uniqueItems": true }
+      },
+      "additionalProperties": false
+    },
+    "problemLanes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "job", "audience", "problem", "desiredOutcome", "primaryAction"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "label": { "type": "string", "minLength": 2 },
+          "job": { "type": "string", "minLength": 4 },
+          "audience": { "type": "string", "minLength": 3 },
+          "problem": { "type": "string", "minLength": 8 },
+          "desiredOutcome": { "type": "string", "minLength": 8 },
+          "primaryAction": { "type": "string", "minLength": 3 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "homepage": {
+      "type": "object",
+      "required": ["primaryLane", "supportingLanes", "requiredSignals"],
+      "properties": {
+        "primaryLane": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "supportingLanes": {
+          "type": "array",
+          "maxItems": 5,
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "uniqueItems": true
+        },
+        "requiredSignals": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "items": { "enum": ["problem", "audience", "outcome", "evidence", "action"] },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "primaryNavigation": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "routeRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["match", "role", "scope"],
+        "properties": {
+          "match": {
+            "type": "object",
+            "minProperties": 1,
+            "maxProperties": 1,
+            "properties": {
+              "path": { "type": "string", "pattern": "^/" },
+              "pathPrefix": { "type": "string", "pattern": "^/" }
+            },
+            "additionalProperties": false
+          },
+          "role": {
+            "enum": ["problem-commercial", "proof-portfolio", "trust-utility", "technical-reference", "localization-equivalent"]
+          },
+          "scope": { "enum": ["IN", "ADJACENT", "OUT"] },
+          "lane": { "type": ["string", "null"] },
+          "note": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "experience": {
+      "type": "object",
+      "required": ["visualPrinciples", "navigation", "performance"],
+      "properties": {
+        "visualPrinciples": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 8 },
+          "uniqueItems": true
+        },
+        "navigation": {
+          "type": "object",
+          "required": ["maxPrimaryItems", "consistentAcrossPages"],
+          "properties": {
+            "maxPrimaryItems": { "type": "integer", "minimum": 1, "maximum": 12 },
+            "consistentAcrossPages": { "const": true }
+          },
+          "additionalProperties": false
+        },
+        "performance": {
+          "type": "object",
+          "required": ["lcpMsP75Max", "inpMsP75Max", "clsP75Max"],
+          "properties": {
+            "lcpMsP75Max": { "type": "integer", "minimum": 1, "maximum": 2500 },
+            "inpMsP75Max": { "type": "integer", "minimum": 1, "maximum": 200 },
+            "clsP75Max": { "type": "number", "minimum": 0, "maximum": 0.1 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "locales": {
+      "type": "object",
+      "required": ["default", "prefixes"],
+      "properties": {
+        "default": { "type": "string", "minLength": 2 },
+        "prefixes": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "pattern": "^/" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}
