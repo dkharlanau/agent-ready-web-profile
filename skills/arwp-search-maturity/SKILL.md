@@ -44,8 +44,11 @@ Read:
 8. **Compare the target.** A target gap is interesting only when the reference pattern is sufficiently repeated and the target evidence is real.
 9. **Perform applicability review.** Ask whether closing the gap improves the actual user/evidence artifact. Reject cosmetic copying and cargo cult.
 10. **Route accepted work through existing ARWP machinery.** Growth hypothesis → Adaptive Upgrade → safe transformation/manual edit → verification receipt.
-11. **Measure external outcomes separately.** Search visibility, AI retrieval/citation, referral traffic and business outcomes are different signals.
-12. **Preserve negative results.** A change with no effect is useful evidence and should influence future priors.
+11. **Probe owner production surfaces after source changes.** Capture the bounded HTTP/robots/noindex/canonical observation in a derived ledger. A successful probe means evidence was collected, not that production is ready.
+12. **Gate served intent owners separately.** Run the deterministic ownership gate over the observed ledger. A served family must have exactly one currently `indexable` owner; preserve the proof artifact on failure. Reviewed `decline` families are intentionally excluded.
+13. **Verify source→production parity separately.** Technical owner eligibility does not identify the deployed commit. Use deployment/change receipts when that distinction matters.
+14. **Measure external outcomes separately.** Search visibility, AI retrieval/citation, referral traffic and business outcomes are different signals.
+15. **Preserve negative results.** A change with no effect is useful evidence and should influence future priors.
 
 ### Intent ownership evidence
 
@@ -59,6 +62,10 @@ When query, grounding or referral observations are being used to decide content 
 - treat reviewed query/navigational mismatches as `declined`, with no canonical owner and an explicit reason;
 - treat multiple owners as `fragmented`, not automatic proof of cannibalization;
 - treat off-owner observations as a routing/relevance review signal, not proof of ranking harm;
+- probe the public canonical inventory before claiming current technical eligibility;
+- use `gate` on the observed ledger when CI/release policy requires every served family to be owned;
+- preserve probe artifacts even when the gate fails so the failure stays inspectable;
+- keep deployment commit parity independent from public HTTP eligibility;
 - preserve live owner query cohorts in private target evidence rather than public ARWP fixtures.
 
 Use `docs/INTENT-OWNERSHIP.md` for the full contract.
@@ -114,6 +121,8 @@ Do not force all dimensions onto every site type.
 - Do not create one page per query variant.
 - Do not turn a reviewed query mismatch into a content gap merely because it generated impressions or retrieval.
 - Do not infer keyword cannibalization merely because an observed query/grounding phrase lands off the reviewed owner.
+- Do not treat successful `probe` execution as proof that served intent owners are ready; use the separate gate.
+- Do not treat a passing ownership gate as proof of actual Google indexing, ranking, AI citation or deployed commit identity.
 - Do not optimize the benchmark by selecting only supporting examples.
 - Do not collapse unknown into zero.
 - Do not hide misses or negative experiments.
@@ -138,6 +147,14 @@ node bin/arwp-search-maturity.mjs diff \
 
 node bin/arwp-intent-ownership.mjs report \
   intent-ownership.json
+
+node bin/arwp-intent-ownership.mjs probe \
+  intent-ownership.json \
+  --proof-output=surface-proof.json \
+  --ledger-output=intent-ownership.observed.json
+
+node bin/arwp-intent-ownership.mjs gate \
+  intent-ownership.observed.json
 ```
 
 ## Done when
@@ -149,5 +166,7 @@ node bin/arwp-intent-ownership.mjs report \
 - repeated cohort patterns are explainable without a magic score;
 - target gaps retain evidence class and uncertainty;
 - accepted actions enter existing verification/measurement gates;
+- current served owner readiness is based on an observed production ledger, not source assumptions;
+- production probe, ownership gate and deployment parity remain separate evidence layers;
 - ranking/citation causality is not inferred from correlation;
 - negative outcomes remain available for future learning.
