@@ -11,6 +11,7 @@ const css = fs.readFileSync(path.join(docs, 'cite-goose.css'), 'utf8');
 const brand = fs.readFileSync(path.join(docs, 'BRAND-CITE-GOOSE.md'), 'utf8');
 const sitemap = fs.readFileSync(path.join(docs, 'sitemap.xml'), 'utf8');
 const skill = fs.readFileSync(path.join(root, 'skills', 'arwp-site-focus', 'SKILL.md'), 'utf8');
+const v3Guide = fs.readFileSync(path.join(docs, 'SITE-FOCUS-V0.3.md'), 'utf8');
 const skillIndex = JSON.parse(fs.readFileSync(path.join(root, 'skills', 'index.json'), 'utf8'));
 const publicSkillIndex = JSON.parse(fs.readFileSync(path.join(docs, 'skills', 'index.json'), 'utf8'));
 
@@ -44,12 +45,22 @@ assert.match(guide, /Every route needs a job/i);
 assert.match(guide, /Be memorable without becoming heavy/i);
 
 assert.match(skill, /Use this skill before `arwp-discoverability`/i);
+assert.match(skill, /Prefer Site Focus v0\.3/i);
 assert.match(skill, /primary_problem/i);
 assert.match(skill, /we_do_not/i);
-assert.match(skill, /up to 3.*problem lanes/i);
+assert.match(skill, /one primary homepage problem lane plus up to two supporting lanes/i);
 assert.match(skill, /up to 5.*primary navigation destinations/i);
 assert.match(skill, /performance budgets before design expands/i);
-assert.match(skill, /house heuristics intended to force clarity/i);
+assert.match(skill, /house heuristics or owner-declared budgets/i);
+assert.match(skill, /field-data-required/i);
+assert.match(skill, /never turn them into a composite readiness\/focus\/beauty score/i);
+
+assert.match(v3Guide, /problem lanes/i);
+assert.match(v3Guide, /homepage ownership/i);
+assert.match(v3Guide, /navigation budget/i);
+assert.match(v3Guide, /owner-declared-not-static-quality-scored/i);
+assert.match(v3Guide, /field-data-required/i);
+assert.match(v3Guide, /Existing v0\.2 profiles remain supported/i);
 
 assert.ok(skillIndex.skills.some(item => item.name === 'arwp-site-focus' && item.role === 'site-focus-and-information-architecture'));
 assert.equal(skillIndex.composition.siteFocus, 'arwp-site-focus');
@@ -60,4 +71,4 @@ assert.match(brand, /own a problem, not a pile of adjacent topics/i);
 assert.match(brand, /up to 3 homepage problem lanes/i);
 assert.match(sitemap, /site-focus\.html/);
 
-console.log('PASS Cite Goose keeps one visible problem territory, explicit anti-scope, small problem-led navigation, bright lightweight design rules and a reusable Site Focus agent gate');
+console.log('PASS Cite Goose keeps one visible problem territory, explicit anti-scope, small problem-led navigation, v0.3 homepage/experience contracts, bright lightweight design rules and a reusable Site Focus agent gate');
