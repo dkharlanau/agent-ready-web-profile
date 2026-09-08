@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-workspace.schema.json",
+  "title": "ARWP portfolio workspace v0.1",
+  "description": "Local checkout and public-endpoint inventory for repeatable multi-site inspection. It does not authorize repository or production mutation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "name", "sites"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "sites": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/site" }
+    }
+  },
+  "$defs": {
+    "relativePath": { "type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+" },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "argv"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,79}$" },
+        "argv": { "type": "array", "minItems": 1, "maxItems": 40, "items": { "type": "string", "maxLength": 1000 } },
+        "cwd": { "$ref": "#/$defs/relativePath" },
+        "timeoutMs": { "type": "integer", "minimum": 1000, "maximum": 900000 }
+      }
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "checkout"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{0,127}$" },
+        "checkout": { "type": "string", "minLength": 1 },
+        "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "profilePath": { "$ref": "#/$defs/relativePath" },
+        "publicProfilePath": { "$ref": "#/$defs/relativePath" },
+        "discoveryFiles": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/relativePath" } },
+        "checks": { "type": "array", "items": { "$ref": "#/$defs/check" } }
+      }
+    }
+  }
+}

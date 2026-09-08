@@ -45,6 +45,18 @@ WATCH       detect drift + rule-change blast radius
 
 **Detect. Map. Decide. Change. Prove. Watch.**
 
+## Run many sites as one portfolio
+
+The `arwp-portfolio-fleet` skill and `arwp-portfolio` CLI remove repeated checkout-by-checkout triage. Keep a private workspace manifest with each site's local checkout, canonical URL, profile path and reviewed test commands, then inspect the whole fleet in one bounded run:
+
+```bash
+arwp-portfolio fleet-init portfolio-inventory.json --output=portfolio-workspace.json
+arwp-portfolio fleet-inspect portfolio-workspace.json --output=inspection.json --json
+arwp-portfolio fleet-live portfolio-workspace.json --output=live.json --json
+```
+
+`fleet-verify` skips dirty worktrees by default, executes argument arrays without a shell and stores command-output hashes instead of logs. No fleet command commits, pushes or deploys. See the [portfolio fleet guide](docs/PORTFOLIO-FLEET.md).
+
 ## Why this is not another GEO dashboard
 
 By 2026, strong AI-search products already monitor prompts, mentions, citations, sentiment, competitors and share of voice. Several now add recommendations, content workflows and agentic execution. Agent-experience products can serve AI-optimized content; crawler platforms can enforce access policy; agent-readiness scanners can score technical readiness; open-source AEO/GEO tools can gate regressions in CI.

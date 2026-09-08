@@ -32,6 +32,8 @@ Default growth workflow: `arwp-growth-loop`.
 
 Use `arwp-prepare-site` for initial technical preparation. Specialists remain available for content, agent discovery and evidence/CI.
 
+Use `arwp-portfolio-fleet` when several local site repositories need one bounded inventory, verification run or live-profile report before selecting a single Growth target.
+
 The growth skill should research primary sources when possible, establish a baseline, select applicable hypotheses, edit the target repository, verify checks and identify owner-side success metrics. Preserve neutral/negative results and never claim causation from implementation alone.
 
 ## Resolver remains

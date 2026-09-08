@@ -48,6 +48,8 @@ node bin/arwp-portfolio.mjs propose --json
 node bin/arwp-portfolio.mjs propose --site=dkharlanau/dkharlanau.github.io --provider=google --json
 ```
 
+For local operations across a larger set of checkouts, use the separate [portfolio workspace workflow](./PORTFOLIO-FLEET.md). It adds read-only Git/profile inventory, reviewed local checks and bounded public profile checks without changing the six-site trend-mapping registry.
+
 Each rollout candidate carries:
 
 - site/repository identity;

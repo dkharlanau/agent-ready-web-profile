@@ -42,7 +42,8 @@ const expectedCoreSkills = [
   'arwp-future-search',
   'arwp-dataset-publication',
   'arwp-agent-discovery',
-  'arwp-evidence-ci'
+  'arwp-evidence-ci',
+  'arwp-portfolio-fleet'
 ];
 const indexedNames = index.skills.map(skill => skill.name);
 for (const name of expectedCoreSkills) assert.ok(indexedNames.includes(name), `skills/index.json must include ${name}`);
