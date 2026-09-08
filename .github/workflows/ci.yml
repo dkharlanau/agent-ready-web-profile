@@ -41,7 +41,11 @@ jobs:
       - name: Validate problem-first Site Focus
         run: |
           node scripts/site-focus-test.mjs
+          node scripts/site-focus-engine-test.mjs
           node --check scripts/site-focus-test.mjs
+          node --check scripts/site-focus-engine-test.mjs
+          node --check lib/site-focus.mjs
+          node --check bin/arwp-focus.mjs
 
       - name: Validate entity graph gap engine
         run: |
