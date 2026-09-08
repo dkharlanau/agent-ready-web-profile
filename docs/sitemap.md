@@ -6,11 +6,22 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 
 ## Start here
 
-- [ARWP home](https://dkharlanau.github.io/agent-ready-web-profile/)
+- [Cite Goose home](https://dkharlanau.github.io/agent-ready-web-profile/)
+- [Site Focus — problem, scope and page architecture](https://dkharlanau.github.io/agent-ready-web-profile/site-focus.html)
 - [Agent instructions](https://dkharlanau.github.io/agent-ready-web-profile/AGENTS.md)
 - [Canonical llms.txt](https://dkharlanau.github.io/agent-ready-web-profile/llms.txt)
 - [Product history](https://dkharlanau.github.io/agent-ready-web-profile/history.html)
 - [Trust Center](https://dkharlanau.github.io/agent-ready-web-profile/trust/)
+
+## Primary problem routes
+
+Cite Goose keeps its first-order public narrative intentionally small. These are problem routes rather than a list of internal modules:
+
+- **Be found** — [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): technical eligibility, retrieval and applicable discovery patterns.
+- **Be used** — [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): direct answers, evidence, comparisons, data, tools and useful page structure.
+- **Be proven** — [Growth Loop](https://dkharlanau.github.io/agent-ready-web-profile/growth/): verify implementation and observe Search, citation, recommendation and useful-action outcomes separately.
+
+Technical protocols, resolver internals, directories, benchmarks and research remain available below this problem-first layer.
 
 ## Product classification and comparisons
 
@@ -89,6 +100,8 @@ The Portfolio Growth series is intentionally a different evidence class: owner-c
 
 - [Repository README](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/README.md)
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md)
+- [Cite Goose visual identity and focus rules](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BRAND-CITE-GOOSE.md)
+- [Site Focus Agent Skill](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/skills/arwp-site-focus/SKILL.md)
 - [Resolver model](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md)
 - [Trend Radar lifecycle](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/TREND-RADAR.md)
 - [ARD v0.91 compatibility](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/ARD-V0.91.md)
@@ -104,19 +117,13 @@ Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/site
 
 ## Implementation practice library
 
-- [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 169 concrete practices with sources, verification and native hypothesis/rule routing.
+- [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 219 concrete practices with sources, verification and native hypothesis/rule routing.
 - [Machine-readable corpus](https://dkharlanau.github.io/agent-ready-web-profile/knowledge/discoverability-corpus.json): planning material; no measured ranking effects are implied.
 - [Editorial receipt contract](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-RECEIPTS.md): visible claim-source relationships for useful articles and comparisons.
-
 - [Editorial research lab](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-SEARCH-LAB.html)
-
 - [Evidence Relay](https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html): functional maturity emulation, appropriate distribution venues, DOI evidence and executable coverage-aware artifact analytics.
-
 - [Anti-patterns](https://dkharlanau.github.io/agent-ready-web-profile/ANTI-PATTERNS.html): 28 versioned negative examples, replacements, verification and false-positive boundaries.
-
 - [Asset workshop](https://dkharlanau.github.io/agent-ready-web-profile/ASSET-WORKSHOP.html): practical asset packs, source-scoped delivery practices and gap-review questions.
 - [Reusable figure and data](https://dkharlanau.github.io/agent-ready-web-profile/examples/asset-kits/): SVG, CSV, visible table and frozen source versions.
-
 - [Names, locales and offers](https://dkharlanau.github.io/agent-ready-web-profile/COMMERCIAL-LOCALIZATION.html): naming, localized content, pricing facts and feature eligibility with review fixtures.
-
 - [Catalog review](https://dkharlanau.github.io/agent-ready-web-profile/CATALOG-REVIEW.html): individual source-support decisions, corrections and remaining review scope.
