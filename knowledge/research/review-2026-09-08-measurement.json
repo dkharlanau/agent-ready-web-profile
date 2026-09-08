@@ -1,0 +1,621 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "corpus_before": "1.11.0",
+  "corpus_after": "1.12.0",
+  "scope": "Individual measurement, experiment and governance review. No observed outcome or causal-effect certification.",
+  "changes": [
+    {
+      "id": "arwp-measurement-baseline",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "gsc-metrics",
+        "gsc-api",
+        "google-generative-ai-report"
+      ],
+      "current_sources": [
+        "gsc-metrics",
+        "gsc-api",
+        "google-generative-ai-report"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "gsc-metrics",
+          "locator": "Metrics and data limitations",
+          "note": "Defines search observations; freezing a baseline is our procedure."
+        },
+        {
+          "source_id": "gsc-api",
+          "locator": "Request and response",
+          "note": "Defines available dimensions and incomplete rows."
+        },
+        {
+          "source_id": "google-generative-ai-report",
+          "locator": "Separate generative AI performance report",
+          "note": "Supports separate provider evidence, not inference from public crawling."
+        }
+      ]
+    },
+    {
+      "id": "arwp-measurement-metric-contract",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "gsc-metrics",
+        "google-generative-ai-report"
+      ],
+      "current_sources": [
+        "gsc-metrics",
+        "google-generative-ai-report"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "gsc-metrics",
+          "locator": "Metrics",
+          "note": "Defines provider counts and aggregation; reproducing a custom report requires preserving its scope."
+        },
+        {
+          "source_id": "google-generative-ai-report",
+          "locator": "Report scope",
+          "note": "Generative AI evidence must retain its separate report identity."
+        }
+      ]
+    },
+    {
+      "id": "arwp-measurement-gsc-segments",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "gsc-api",
+        "google-generative-ai-report"
+      ],
+      "current_sources": [
+        "gsc-api",
+        "google-generative-ai-report"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "gsc-api",
+          "locator": "Dimensions and filters",
+          "note": "Supports available segments; brand and intent classification are our rules."
+        },
+        {
+          "source_id": "google-generative-ai-report",
+          "locator": "Report scope",
+          "note": "Do not assume every Web segment is available in the separate report."
+        }
+      ]
+    },
+    {
+      "id": "arwp-measurement-referrals",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-ai"
+      ],
+      "current_sources": [
+        "ga-traffic-sources"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "ga-traffic-sources",
+          "locator": "Traffic-source dimensions",
+          "note": "Supports observed attribution; referral labels do not prove human identity or complete AI attribution."
+        }
+      ]
+    },
+    {
+      "id": "arwp-measurement-conversions",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-ai"
+      ],
+      "current_sources": [
+        "ga-debugview"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "ga-debugview",
+          "locator": "Monitor events in DebugView",
+          "note": "Supports debug reception checks; business meaning and production counting require separate validation."
+        }
+      ]
+    },
+    {
+      "id": "arwp-measurement-index-status",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-technical",
+        "google-recrawl"
+      ],
+      "current_sources": [
+        "google-technical",
+        "google-url-inspection"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-technical",
+          "locator": "Technical requirements",
+          "note": "Eligibility is not guaranteed indexing."
+        },
+        {
+          "source_id": "google-url-inspection",
+          "locator": "About the indexed URL status",
+          "note": "Provides provider observation with time and scope, not a local check."
+        }
+      ]
+    },
+    {
+      "id": "arwp-measurement-query-panel",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "bing-ai"
+      ],
+      "current_sources": [
+        "bing-ai"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "bing-ai",
+          "locator": "AI Performance metrics",
+          "note": "Defines provider reporting; a repeated manual answer panel is our separate experiment."
+        }
+      ]
+    },
+    {
+      "id": "arwp-measurement-external-references",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-helpful",
+        "google-outbound"
+      ],
+      "current_sources": [
+        "google-helpful",
+        "google-outbound"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Expertise questions",
+          "note": "Supports clear sourcing; independence verification is our method."
+        },
+        {
+          "source_id": "google-outbound",
+          "locator": "Qualify outbound links",
+          "note": "Supports link qualification, not proof of independent endorsement."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-hypothesis",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-drops"
+      ],
+      "current_sources": [
+        "google-drops"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-drops",
+          "locator": "Analyze your Search traffic drop",
+          "note": "Supports contextual diagnosis; preregistration and falsifiability are our research procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-cohort",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "gsc-api"
+      ],
+      "current_sources": [
+        "gsc-api"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "gsc-api",
+          "locator": "Request and response limitations",
+          "note": "Supports scoped extraction; fixed cohort methodology is our proposal."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-single-slice",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-drops"
+      ],
+      "current_sources": [
+        "google-drops"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-drops",
+          "locator": "Algorithmic changes and technical issues",
+          "note": "Recognizes multiple drivers; small change bundles are our attribution discipline."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-holdout",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-drops"
+      ],
+      "current_sources": [
+        "google-drops"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "google-drops",
+          "locator": "Seasonality and changing interests",
+          "note": "Supports considering external variation; comparison groups and causal assumptions are our experimental design."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-answer-format",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "bing-ai"
+      ],
+      "current_sources": [
+        "bing-ai"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "bing-ai",
+          "locator": "Using These Insights to Improve Content",
+          "note": "Supports clarity and evidence; controlled format evaluation is our experiment."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-comparison-page",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-reviews",
+        "google-spam"
+      ],
+      "current_sources": [
+        "google-reviews",
+        "google-spam"
+      ],
+      "evidence_level": "experimental",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Evidence and decision-making factors",
+          "note": "Supports substantive comparisons; single-page piloting is our workflow."
+        },
+        {
+          "source_id": "google-spam",
+          "locator": "Scaled content abuse",
+          "note": "Addresses manipulative low-value scaling, not a universal page-count threshold."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-observation-window",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "gsc-metrics",
+        "google-drops"
+      ],
+      "current_sources": [
+        "gsc-metrics",
+        "google-drops"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "gsc-metrics",
+          "locator": "Data availability",
+          "note": "Supports accounting for reporting completeness."
+        },
+        {
+          "source_id": "google-drops",
+          "locator": "Seasonality and changing interests",
+          "note": "Supports contextual windows; stopping rules are our design choice."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-rollback",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-experience"
+      ],
+      "current_sources": [
+        "google-experience"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-experience",
+          "locator": "Self-assess your content",
+          "note": "Supports experience review; rollback triggers are our engineering process."
+        }
+      ]
+    },
+    {
+      "id": "arwp-experiments-experiment-record",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Data Provenance; Data Versioning",
+          "note": "Supports traceable records; full experiment logging is our application."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-applicability",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-helpful"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "People-first content",
+          "note": "Supports actual reader value; tactic selection and ownership are our workflow."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-release-gate",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "github-releases",
+        "google-technical"
+      ],
+      "current_sources": [
+        "github-releases",
+        "google-technical"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "github-releases",
+          "locator": "Managing releases",
+          "note": "Supports release artifacts; live verification is separate."
+        },
+        {
+          "source_id": "google-technical",
+          "locator": "Technical requirements",
+          "note": "Supports public access conditions, not an exact deployed-version receipt."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-fact-gate",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-sd",
+        "google-helpful"
+      ],
+      "current_sources": [
+        "google-sd",
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-sd",
+          "locator": "Content and relevance",
+          "note": "Requires representative markup, not invented facts."
+        },
+        {
+          "source_id": "google-helpful",
+          "locator": "Expertise questions",
+          "note": "Supports credible sourcing; a prepublication gate is our process."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-source-review",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-updates"
+      ],
+      "current_sources": [
+        "google-updates"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-updates",
+          "locator": "Documentation changelog",
+          "note": "Provides upstream changes; mapping owners and affected records is our procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-content-pruning",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-helpful",
+        "google-move"
+      ],
+      "current_sources": [
+        "google-helpful",
+        "google-move"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Avoid search-engine-first content",
+          "note": "Supports usefulness, not deleting pages solely for freshness."
+        },
+        {
+          "source_id": "google-move",
+          "locator": "Map old URLs to new URLs",
+          "note": "Supports relevant migration handling, not redirecting unrelated pages together."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-portfolio-links",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-links",
+        "google-spam"
+      ],
+      "current_sources": [
+        "google-links",
+        "google-spam"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-links",
+          "locator": "Internal and external links",
+          "note": "Supports useful contextual links."
+        },
+        {
+          "source_id": "google-spam",
+          "locator": "Link spam",
+          "note": "Defines manipulative link practices; portfolio ownership alone does not determine value."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-contribution-path",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "data-web"
+      ],
+      "current_sources": [
+        "data-web"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "data-web",
+          "locator": "Gather feedback from data consumers",
+          "note": "Supports a feedback route; review criteria and authorized test submissions are our implementation."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-monitor",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-drops"
+      ],
+      "current_sources": [
+        "google-drops"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-drops",
+          "locator": "Analyze your Search traffic drop",
+          "note": "Supports investigating changes; alert scheduling and suppression are our operational method."
+        }
+      ]
+    },
+    {
+      "id": "arwp-governance-evidence-level",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-ai",
+        "google-sd"
+      ],
+      "current_sources": [
+        "google-ai",
+        "google-sd"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-ai",
+          "locator": "Technical requirements",
+          "note": "No special optimization guarantees AI appearance."
+        },
+        {
+          "source_id": "google-sd",
+          "locator": "General guidelines",
+          "note": "Correct markup does not guarantee rich results; evidence-level labels are our governance convention."
+        }
+      ]
+    }
+  ],
+  "remaining_individually_unreviewed": 0
+}

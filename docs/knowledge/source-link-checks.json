@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T12:41:22.413197+00:00",
+  "checked_at": "2026-09-08T12:45:23.622192+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1535,6 +1535,26 @@
       "checked_at": "2026-09-08T12:41:21.515188+00:00",
       "result": "retrieval-failed",
       "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "source_id": "ga-traffic-sources",
+      "requested_url": "https://support.google.com/analytics/answer/15612152?hl=en",
+      "checked_at": "2026-09-08T12:45:22.938207+00:00",
+      "status": 200,
+      "final_url": "https://support.google.com/analytics/answer/15612152?hl=en",
+      "content_type": "text/html; charset=UTF-8",
+      "result": "retrieved",
+      "sha256": "072f715eb74b6e752d7ae82eb105137d37356e5631dc12194faa6df157191d53"
+    },
+    {
+      "source_id": "ga-debugview",
+      "requested_url": "https://support.google.com/analytics/answer/7201382?hl=en",
+      "checked_at": "2026-09-08T12:45:22.938536+00:00",
+      "status": 200,
+      "final_url": "https://support.google.com/analytics/answer/7201382?hl=en",
+      "content_type": "text/html; charset=UTF-8",
+      "result": "retrieved",
+      "sha256": "61e58b736cea1770cd3ffec951123a2ffd9b9a9e5a3394b2ce2ad18366f153bf"
     }
   ]
 }

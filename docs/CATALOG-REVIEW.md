@@ -1,6 +1,6 @@
 # Catalog review: fixing the evidence, not just adding patterns
 
-Review edition 1.4.0 · 8 September 2026 · corpus 1.11.0.
+Review edition 1.5.0 · 8 September 2026 · corpus 1.12.0.
 
 The commercial pass individually reviewed 23 previously unreviewed comparison, service and localization practices. Nine needed source or instruction corrections. Fourteen gained scoped review notes without operational changes. All 23 remain **inferred**: reading a source does not turn a project workflow into a documented ranking mechanism.
 
@@ -28,9 +28,9 @@ Review-only changes advance the pattern patch version. Changed instructions or s
 
 ## Remaining work
 
-The library still contains 219 patterns. Individual review coverage is now 193; 26 historical records remain unreviewed. The source register has 130 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
+The library still contains 219 patterns. Individual review coverage is now 219; no records remain individually unreviewed. The source register has 132 entries. This report does not certify the entire catalog or every prior reviewed record as permanently current. It also does not claim search, AI citation or revenue gains.
 
-The next passes should apply the same test to technical access, architecture, datasets, media, editorial and measurement practices: direct support, valid analogy or unsupported assertion? Keep useful project proposals explicitly inferred; replace unrelated evidence and revise operational mistakes before increasing the reviewed count.
+Completed passes below apply the same test across the remaining categories: direct support, valid analogy or unsupported assertion? Useful proposals remain explicitly inferred. The final integration audit must check current public counts, navigation, shipped artifacts and source/version consistency.
 
 ## Technical pass: 20 more records
 
@@ -73,3 +73,13 @@ Quickstart, reference and support patterns now cite relevant editorial guidance.
 The llms.txt v2 proposal, modified August 10, 2026, adds a useful experiment for project sites: path-scoped indexes and discoverable Markdown alternatives. It remains a proposal with no universal client-adoption or ranking claim.
 
 Sources: [quickstarts](https://docs.github.com/en/contributing/style-guide-and-content-model/quickstart-content-type), [reference content](https://docs.github.com/en/contributing/style-guide-and-content-model/reference-content-type), [URI fragments](https://www.rfc-editor.org/rfc/rfc3986#section-3.5), [llms.txt v2](https://llmstxt.org/), [indirect prompt injection](https://owasp.org/www-community/attacks/PromptInjection).
+
+## Measurement, experiments and governance: 26 records
+
+Eleven corrections and fifteen scoped reviews complete individual review coverage. [Inspect the decisions](./knowledge/research/review-2026-09-08-measurement.json). The complete 1.11.0 predecessor remains available.
+
+Referral attribution is not human verification. Debug receipt is not production counting or a qualified lead. Report dimensions must actually exist in that provider dataset. Cohorts retain missing and failed pages; matched subsets are a sensitivity view. Comparison groups require defensible assumptions before causal claims. Fixed stopping rules discourage stopping on lucky results. Public records exclude confidential and personal evidence. Low traffic alone does not justify deleting useful pages.
+
+Sources: [traffic-source dimensions](https://support.google.com/analytics/answer/15612152?hl=en), [event debugging](https://support.google.com/analytics/answer/7201382?hl=en), [Search Analytics API](https://developers.google.com/webmaster-tools/v1/searchanalytics/query), [traffic diagnosis](https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops), [data publishing](https://www.w3.org/TR/dwbp/). The experiment-design rules are project procedures, not claimed platform ranking mechanisms.
+
+Individual review coverage is complete; integration, publication and end-to-end task coverage must still be audited separately. A reviewed source can drift later, and no review date proves acquisition impact.

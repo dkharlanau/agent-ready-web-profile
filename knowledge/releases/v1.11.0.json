@@ -1,5 +1,5 @@
 {
-  "version": "1.12.0",
+  "version": "1.11.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -1753,32 +1753,6 @@
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
       "notes": "Describes indirect injection from retrieved sources; a static audit is not a complete defense.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "ga-traffic-sources",
-      "title": "About traffic-source dimensions",
-      "url": "https://support.google.com/analytics/answer/15612152?hl=en",
-      "publisher": "Google",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Defines source attribution; it does not identify every human or AI visit.",
-      "upstream": {
-        "kind": "living-document",
-        "version": null
-      }
-    },
-    {
-      "id": "ga-debugview",
-      "title": "Monitor events in DebugView",
-      "url": "https://support.google.com/analytics/answer/7201382?hl=en",
-      "publisher": "Google",
-      "checked_at": "2026-09-08",
-      "authority": "official-documentation",
-      "notes": "Supports event debugging; debug reception does not prove production reporting or business qualification.",
       "upstream": {
         "kind": "living-document",
         "version": null
@@ -7697,28 +7671,11 @@
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "gsc-metrics",
-            "locator": "Metrics and data limitations",
-            "note": "Defines search observations; freezing a baseline is our procedure."
-          },
-          {
-            "source_id": "gsc-api",
-            "locator": "Request and response",
-            "note": "Defines available dimensions and incomplete rows."
-          },
-          {
-            "source_id": "google-generative-ai-report",
-            "locator": "Separate generative AI performance report",
-            "note": "Supports separate provider evidence, not inference from public crawling."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -7757,23 +7714,11 @@
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "gsc-metrics",
-            "locator": "Metrics",
-            "note": "Defines provider counts and aggregation; reproducing a custom report requires preserving its scope."
-          },
-          {
-            "source_id": "google-generative-ai-report",
-            "locator": "Report scope",
-            "note": "Generative AI evidence must retain its separate report identity."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -7788,8 +7733,7 @@
       "problem": "An aggregate traffic change can hide opposite audience trends.",
       "implementation": [
         "Define a versioned brand-query rule and bounded intent groups.",
-        "Compare consistent page, device, and country segments using available GSC data.",
-        "Use only dimensions actually exposed by each report. Do not infer a report-specific breakdown from aggregate Web data or join incompatible scopes as if they were the same observations."
+        "Compare consistent page, device, and country segments using available GSC data."
       ],
       "verification": [
         "Segment totals explain documented differences without pretending query rows are exhaustive."
@@ -7812,23 +7756,11 @@
       "recommendation_rule_ids": [
         "google-generative-ai-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "gsc-api",
-            "locator": "Dimensions and filters",
-            "note": "Supports available segments; brand and intent classification are our rules."
-          },
-          {
-            "source_id": "google-generative-ai-report",
-            "locator": "Report scope",
-            "note": "Do not assume every Web segment is available in the separate report."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -7891,15 +7823,14 @@
       "problem": "Bot requests and human referrals can be mixed together.",
       "implementation": [
         "Group known referral hosts and explicit campaign parameters in authorized analytics.",
-        "Retain unknown and unattributed traffic separately from identifiable AI referrals.",
-        "Keep session, first-user and event attribution scopes distinct. Version the host rules and treat campaign labels as declared provenance rather than independent proof."
+        "Retain unknown and unattributed traffic separately from identifiable AI referrals."
       ],
       "verification": [
-        "Session attribution, verified crawler logs and unclassified observations are separate. A referral host or campaign label does not prove a human visit or establish complete AI traffic coverage."
+        "The report separates human sessions, crawler requests, and unclassified traffic."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "ga-traffic-sources"
+        "google-ai"
       ],
       "applicability": [
         "all"
@@ -7914,18 +7845,11 @@
       "recommendation_rule_ids": [
         "openai-chatgpt-referral-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "ga-traffic-sources",
-            "locator": "Traffic-source dimensions",
-            "note": "Supports observed attribution; referral labels do not prove human identity or complete AI attribution."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -7943,11 +7867,11 @@
         "Validate the event and document counting and consent constraints."
       ],
       "verification": [
-        "An authorized test action follows the defined counting rule; debug receipt, production reporting and business qualification are verified separately. Duplicate sends and missing observations are reported."
+        "A known test action is counted once in the intended reporting path."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "ga-debugview"
+        "google-ai"
       ],
       "applicability": [
         "services",
@@ -7964,18 +7888,11 @@
       "recommendation_rule_ids": [
         "openai-chatgpt-referral-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "ga-debugview",
-            "locator": "Monitor events in DebugView",
-            "note": "Supports debug reception checks; business meaning and production counting require separate validation."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -7998,7 +7915,7 @@
       "evidence_level": "inferred",
       "source_ids": [
         "google-technical",
-        "google-url-inspection"
+        "google-recrawl"
       ],
       "applicability": [
         "all"
@@ -8014,23 +7931,11 @@
       "recommendation_rule_ids": [
         "google-search-technical-eligibility"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-technical",
-            "locator": "Technical requirements",
-            "note": "Eligibility is not guaranteed indexing."
-          },
-          {
-            "source_id": "google-url-inspection",
-            "locator": "About the indexed URL status",
-            "note": "Provides provider observation with time and scope, not a local check."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8045,8 +7950,7 @@
       "problem": "One favorable prompt response can look like broad market leadership.",
       "implementation": [
         "Freeze representative unbranded prompts, language, location, provider, and task settings.",
-        "Capture dated answers, actual source URLs, and recommendations over repeated runs.",
-        "Record controllable settings and leave unobservable personalization unknown. Treat this bounded panel as a sample, not a platform-wide recommendation probability."
+        "Capture dated answers, actual source URLs, and recommendations over repeated runs."
       ],
       "verification": [
         "Results retain failures and distinguish cited, mentioned, recommended, and absent states."
@@ -8066,18 +7970,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "bing-ai",
-            "locator": "AI Performance metrics",
-            "note": "Defines provider reporting; a repeated manual answer panel is our separate experiment."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8116,23 +8013,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "Expertise questions",
-            "note": "Supports clear sourcing; independence verification is our method."
-          },
-          {
-            "source_id": "google-outbound",
-            "locator": "Qualify outbound links",
-            "note": "Supports link qualification, not proof of independent endorsement."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8167,18 +8052,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-drops",
-            "locator": "Analyze your Search traffic drop",
-            "note": "Supports contextual diagnosis; preregistration and falsifiability are our research procedure."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8208,25 +8086,18 @@
       "effort": "medium",
       "impact_hypothesis": "Stable cohorts may reduce composition bias.",
       "anti_pattern": "Comparing all new pages after a release with only old successful pages before it.",
-      "measurement": "Report outcomes for the fixed starting cohort and describe missing observations; show matched-URL sensitivity results separately so dropped or failing pages do not disappear from the result.",
+      "measurement": "Measure cohort retention and report outcomes on matched URLs.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [
         "google-generative-ai-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "gsc-api",
-            "locator": "Request and response limitations",
-            "note": "Supports scoped extraction; fixed cohort methodology is our proposal."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8261,18 +8132,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-drops",
-            "locator": "Algorithmic changes and technical issues",
-            "note": "Recognizes multiple drivers; small change bundles are our attribution discipline."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8287,8 +8151,7 @@
       "problem": "Seasonality can resemble improvement from a new tactic.",
       "implementation": [
         "Choose comparable unmodified pages or a staggered rollout when feasible.",
-        "Compare trends and document selection differences and spillover risks.",
-        "Record baseline trends, assignment mechanism and confounders. A matched group or staggered rollout alone does not establish causality; absent a defensible identification design, label differences observational."
+        "Compare trends and document selection differences and spillover risks."
       ],
       "verification": [
         "Interpretation states whether the design supports only association or stronger causal inference."
@@ -8308,18 +8171,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-drops",
-            "locator": "Seasonality and changing interests",
-            "note": "Supports considering external variation; comparison groups and causal assumptions are our experimental design."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8359,18 +8215,11 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "bing-ai",
-            "locator": "Using These Insights to Improve Content",
-            "note": "Supports clarity and evidence; controlled format evaluation is our experiment."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8409,23 +8258,11 @@
         "google-non-commodity-content",
         "google-scaled-query-variant-guardrail"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-reviews",
-            "locator": "Evidence and decision-making factors",
-            "note": "Supports substantive comparisons; single-page piloting is our workflow."
-          },
-          {
-            "source_id": "google-spam",
-            "locator": "Scaled content abuse",
-            "note": "Addresses manipulative low-value scaling, not a universal page-count threshold."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8440,8 +8277,7 @@
       "problem": "Immediate post-deploy movement can be noise or incomplete reporting.",
       "implementation": [
         "Define a reasonable observation window and check provider reporting lag.",
-        "Review at fixed checkpoints with enough context for normal demand variation.",
-        "Set checkpoints and stopping criteria before viewing results. Do not stop on the first favorable fluctuation; distinguish operational monitoring from outcome inference."
+        "Review at fixed checkpoints with enough context for normal demand variation."
       ],
       "verification": [
         "A result with insufficient exposure or volume is labeled inconclusive."
@@ -8465,23 +8301,11 @@
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "gsc-metrics",
-            "locator": "Data availability",
-            "note": "Supports accounting for reporting completeness."
-          },
-          {
-            "source_id": "google-drops",
-            "locator": "Seasonality and changing interests",
-            "note": "Supports contextual windows; stopping rules are our design choice."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8517,18 +8341,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-experience",
-            "locator": "Self-assess your content",
-            "note": "Supports experience review; rollback triggers are our engineering process."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8543,8 +8360,7 @@
       "problem": "A result headline can overstate weak evidence.",
       "implementation": [
         "Retain hypothesis, cohort, dates, code revision, measurements, exceptions, and conclusion.",
-        "Include null outcomes and distinguish local retrieval tests from external search behavior.",
-        "Publish only disclosure-safe aggregate evidence. Keep confidential research, credentials, personal records and submitted URLs out of public artifacts; document any reproducibility limits."
+        "Include null outcomes and distinguish local retrieval tests from external search behavior."
       ],
       "verification": [
         "A reviewer can reconstruct the experiment and identify its inference limits."
@@ -8564,18 +8380,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Data Provenance; Data Versioning",
-            "note": "Supports traceable records; full experiment logging is our application."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8612,18 +8421,11 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "People-first content",
-            "note": "Supports actual reader value; tactic selection and ownership are our workflow."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8663,23 +8465,11 @@
         "google-search-technical-eligibility",
         "arwp-profile-validity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "github-releases",
-            "locator": "Managing releases",
-            "note": "Supports release artifacts; live verification is separate."
-          },
-          {
-            "source_id": "google-technical",
-            "locator": "Technical requirements",
-            "note": "Supports public access conditions, not an exact deployed-version receipt."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8719,23 +8509,11 @@
         "google-non-commodity-content",
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-sd",
-            "locator": "Content and relevance",
-            "note": "Requires representative markup, not invented facts."
-          },
-          {
-            "source_id": "google-helpful",
-            "locator": "Expertise questions",
-            "note": "Supports credible sourcing; a prepublication gate is our process."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8770,18 +8548,11 @@
         "freshness-without-fake-recency"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-updates",
-            "locator": "Documentation changelog",
-            "note": "Provides upstream changes; mapping owners and affected records is our procedure."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8796,8 +8567,7 @@
       "problem": "An expanding archive can accumulate redundant or obsolete answers.",
       "implementation": [
         "Review pages with overlapping scope, broken methods, or obsolete offers.",
-        "Update, merge with a true equivalent, archive, or remove based on reader value and evidence.",
-        "Low traffic alone is not evidence of low value. Preserve useful niche references and historical obligations; redirect only to a genuine successor and check important inbound journeys."
+        "Update, merge with a true equivalent, archive, or remove based on reader value and evidence."
       ],
       "verification": [
         "Each action has a documented rationale and correct link/redirect handling."
@@ -8821,23 +8591,11 @@
         "google-non-commodity-content",
         "google-canonical-consistency"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-helpful",
-            "locator": "Avoid search-engine-first content",
-            "note": "Supports usefulness, not deleting pages solely for freshness."
-          },
-          {
-            "source_id": "google-move",
-            "locator": "Map old URLs to new URLs",
-            "note": "Supports relevant migration handling, not redirecting unrelated pages together."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8877,23 +8635,11 @@
         "google-crawlable-internal-links",
         "google-scaled-query-variant-guardrail"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-links",
-            "locator": "Internal and external links",
-            "note": "Supports useful contextual links."
-          },
-          {
-            "source_id": "google-spam",
-            "locator": "Link spam",
-            "note": "Defines manipulative link practices; portfolio ownership alone does not determine value."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8911,7 +8657,7 @@
         "Provide a source-backed example and review expectations."
       ],
       "verification": [
-        "An authorized test or controlled local fixture verifies routing and status; do not submit unsolicited public issues merely to test the workflow."
+        "A test contribution reaches the intended queue and its status is understandable."
       ],
       "evidence_level": "inferred",
       "source_ids": [
@@ -8930,18 +8676,11 @@
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "data-web",
-            "locator": "Gather feedback from data consumers",
-            "note": "Supports a feedback route; review criteria and authorized test submissions are our implementation."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -8976,18 +8715,11 @@
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-drops",
-            "locator": "Analyze your Search traffic drop",
-            "note": "Supports investigating changes; alert scheduling and suppression are our operational method."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -9026,23 +8758,11 @@
         "google-ai-search-eligibility",
         "google-structured-data-visible-parity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.0.0",
       "review": {
-        "reviewed_at": "2026-09-08",
-        "scope": "source-support-and-implementation",
-        "method": "agent-assisted",
-        "support": [
-          {
-            "source_id": "google-ai",
-            "locator": "Technical requirements",
-            "note": "No special optimization guarantees AI appearance."
-          },
-          {
-            "source_id": "google-sd",
-            "locator": "General guidelines",
-            "note": "Correct markup does not guarantee rich results; evidence-level labels are our governance convention."
-          }
-        ]
+        "reviewed_at": null,
+        "scope": "not-individually-reviewed",
+        "method": null
       },
       "lifecycle": {
         "status": "active",
@@ -12693,8 +12413,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.11.0",
-    "path": "knowledge/releases/v1.11.0.json",
-    "sha256": "42bbf773b6be520257e0daf5608ce7e2b263d5bf7fbc242c8cfb237bf6461272"
+    "version": "1.10.0",
+    "path": "knowledge/releases/v1.10.0.json",
+    "sha256": "64c5699cfb948cda4bc8a2d89056313639d9c5469874c44defcde24a9a8afa5c"
   }
 }
