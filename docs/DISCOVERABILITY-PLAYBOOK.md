@@ -2,7 +2,7 @@
 
 ARWP helps publishers make useful work easier to find, understand, verify, and use. The goal is relevant discovery followed by a successful reader task. A profile file, a large entity graph, or a passing technical check cannot establish search position or AI recommendation performance.
 
-The [corpus](./knowledge/discoverability-corpus.json) contains **219 distinct patterns in 16 categories**, backed by 117 sources, with implementation steps, observable checks, applicability, effort, anti-patterns, source references, and an outcome metric. Start with a real site problem and choose a small set. The corpus is an operating library, not a demand to apply every pattern to every site.
+The [corpus](./knowledge/discoverability-corpus.json) contains **219 distinct patterns in 16 categories**, backed by 118 sources, with implementation steps, observable checks, applicability, effort, anti-patterns, source references, and an outcome metric. Start with a real site problem and choose a small set. The corpus is an operating library, not a demand to apply every pattern to every site.
 
 ## Know what the evidence establishes
 
@@ -22,7 +22,7 @@ Bing AI Performance measures citations and cited pages within its supported expe
 
 ## Keep evidence and versions together
 
-Corpus release **1.6.0** assigns each pattern a stable ID, independent semantic version, lifecycle and review passport. **103 patterns have an agent-assisted source-support and implementation review** with a section locator and a concise support note; **116 explicitly remain individually unreviewed**. An unreviewed date stays null. A source retrieval date never fills it automatically.
+Corpus release **1.7.0** assigns each pattern a stable ID, independent semantic version, lifecycle and review passport. **126 patterns have an agent-assisted source-support and implementation review** with a section locator and a concise support note; **93 explicitly remain individually unreviewed**. An unreviewed date stays null. A source retrieval date never fills it automatically.
 
 Upstream releases are identified where the source publishes a fixed version; living documents retain that distinction. The original 1.1.0 corpus is preserved as an immutable baseline. Exported selections pin the current corpus fingerprint and selected pattern versions. The CLI rejects stale pins before creating a new plan. See [the version contract](./DISCOVERABILITY-VERSIONING.md) for revision rules, review scope and compatibility.
 
@@ -147,3 +147,5 @@ Read [Write the page that is worth opening](./EDITORIAL-SEARCH-LAB.md) for the 2
 [Asset workshop](./ASSET-WORKSHOP.md): four delivery patterns, three reusable packs and a question-led gap review.
 
 [Names, locales and offers](./COMMERCIAL-LOCALIZATION.md): ten reviewed practices and commercial/localization review fixtures.
+
+[Catalog review](./CATALOG-REVIEW.md): 23 historical records reviewed, nine source/instruction corrections and explicit remaining review scope.

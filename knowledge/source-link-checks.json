@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-08T12:15:35.276034+00:00",
+  "checked_at": "2026-09-08T12:21:37.705071+00:00",
   "scope": "Dated HTTP reachability and document identity acquisitions. Historical acquisitions are retained. Semantic support lives separately in pattern review.support; HTTP success does not prove source support or outcomes.",
   "sources": [
     {
@@ -1301,6 +1301,126 @@
       "content_type": "text/html",
       "result": "retrieved",
       "sha256": "c01f5050a89ec936371ac4df5864405f006ef581c8c67e950d4ae750dcc84bca"
+    },
+    {
+      "source_id": "google-helpful",
+      "requested_url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "checked_at": "2026-09-08T12:21:35.614329+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "97c2efc0e70706b34d80b8bb38dd4a81e00904d042d91680b8491ebb8b7096f9"
+    },
+    {
+      "source_id": "google-spam",
+      "requested_url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "checked_at": "2026-09-08T12:21:35.614713+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "cb11bd84ce9bdee869b6acf7cbc50629e42be53b8749d20ff34ecc0a803986c1"
+    },
+    {
+      "source_id": "google-canonical",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "checked_at": "2026-09-08T12:21:35.614861+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "fa30e2204ec050cedd36d9328f3207943ff45d9ef2894054a991e70b43a75cb5"
+    },
+    {
+      "source_id": "google-reviews",
+      "requested_url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
+      "checked_at": "2026-09-08T12:21:35.614993+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/specialty/ecommerce/write-high-quality-reviews",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "d276775ebac2fb92b99e2cc0a2e017e79779b838d8de8ba4b2330f75c24bce6a"
+    },
+    {
+      "source_id": "google-hreflang",
+      "requested_url": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "checked_at": "2026-09-08T12:21:36.347444+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "d62ed1a7e2e1b9b331a65a45c9575c57bbe37efcd65ebef15844332cbee178ad"
+    },
+    {
+      "source_id": "google-international",
+      "requested_url": "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites",
+      "checked_at": "2026-09-08T12:21:36.366056+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "2a1a839b45230d0f9b35049d2f85b3a7cbe691727bb800cc99ad99512eac34d8"
+    },
+    {
+      "source_id": "gsc-api",
+      "requested_url": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+      "checked_at": "2026-09-08T12:21:36.385739+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/webmaster-tools/v1/searchanalytics/query",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "54ff8904eb4d09ac8f757eb4828525a974280a433e3b895a28a0b9b314ce3b2c"
+    },
+    {
+      "source_id": "google-outbound",
+      "requested_url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "checked_at": "2026-09-08T12:21:36.595564+00:00",
+      "status": 200,
+      "final_url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "8d5c08d3a33a86785922d039cc05b21e96fdf661319bcc0b6cd2bd77e5bc6ddf"
+    },
+    {
+      "source_id": "schema-service",
+      "requested_url": "https://schema.org/Service",
+      "checked_at": "2026-09-08T12:21:37.065009+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/Service",
+      "content_type": "text/html",
+      "result": "retrieved",
+      "sha256": "4240185da95742150f1a96dc7077c8ceedd2e57728652fbb308683ecf3755568"
+    },
+    {
+      "source_id": "schema-term",
+      "requested_url": "https://schema.org/DefinedTerm",
+      "checked_at": "2026-09-08T12:21:37.085859+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/DefinedTerm",
+      "content_type": "text/html",
+      "result": "retrieved",
+      "sha256": "f48d8c0a1c394fd4f60d0d876506f0a981c0ae2fe4bf08a3bff38a96e848853b"
+    },
+    {
+      "source_id": "schema-unit-price",
+      "requested_url": "https://schema.org/UnitPriceSpecification",
+      "checked_at": "2026-09-08T12:21:37.352797+00:00",
+      "status": 200,
+      "final_url": "https://schema.org/UnitPriceSpecification",
+      "content_type": "text/html",
+      "result": "retrieved",
+      "sha256": "c01f5050a89ec936371ac4df5864405f006ef581c8c67e950d4ae750dcc84bca"
+    },
+    {
+      "source_id": "wai-forms-tutorial",
+      "requested_url": "https://www.w3.org/WAI/tutorials/forms/",
+      "checked_at": "2026-09-08T12:21:37.356853+00:00",
+      "status": 200,
+      "final_url": "https://www.w3.org/WAI/tutorials/forms/",
+      "content_type": "text/html; charset=utf-8",
+      "result": "retrieved",
+      "sha256": "ec47a64a4dadd098a2084cd48c18755219a2d73d994c852349720f6ca8b4cf50"
     }
   ]
 }

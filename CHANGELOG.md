@@ -4,6 +4,11 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Historical comparison, service and locale review (corpus 1.7.0)
+
+- Individually reviewed 23 older patterns, corrected nine source/instruction mappings and preserved inferred evidence levels. Fixed nonexistent GSC language segmentation and separated link qualification from disclosure.
+- Added WAI forms support and a source-review worksheet. Counts: 219 patterns, 118 sources, 126 individually reviewed, 93 pending. Prior corpus bytes are preserved.
+
 ### Names, locales and offers (corpus 1.6.0)
 
 - Added ten individually reviewed patterns and three source passports covering titles, URL construction, locale content, currencies, billing, quote-only services, software eligibility and competitor price comparability. Preserved all 209 preceding patterns.

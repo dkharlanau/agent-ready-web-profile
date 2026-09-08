@@ -1,0 +1,492 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-08",
+  "corpus_before": "1.6.0",
+  "corpus_after": "1.7.0",
+  "scope": "Individual support review of 23 previously unreviewed comparison, service and localization practices. Inferred mechanisms remain inferred; no outcome validation.",
+  "changes": [
+    {
+      "id": "arwp-comparisons-decision-criteria",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-reviews"
+      ],
+      "current_sources": [
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Important decision-making factors",
+          "note": "Supports relevant criteria; preregistering them is our method."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-source-cells",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-reviews",
+        "html-data"
+      ],
+      "current_sources": [
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Evidence and useful resource links",
+          "note": "Supports evidence; cell-level provenance is a project convention."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-same-scenario",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-reviews"
+      ],
+      "current_sources": [
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Quantitative measurements and comparable options",
+          "note": "Supports comparison evidence; controlled runs are our protocol."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-fit-cases",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-reviews"
+      ],
+      "current_sources": [
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Best for uses or circumstances",
+          "note": "Supports conditional recommendations with evidence."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-total-cost",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "cloudflare-limits"
+      ],
+      "current_sources": [
+        "schema-unit-price"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-unit-price",
+          "locator": "priceCurrency, billingDuration and referenceQuantity",
+          "note": "Defines price components; scenario arithmetic remains a project procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-switching",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "stripe-upgrades"
+      ],
+      "current_sources": [
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Original research and decision-making factors",
+          "note": "Supports practical decision evidence; migration testing is our proposal."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-limitations",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "cloudflare-limits"
+      ],
+      "current_sources": [
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-reviews",
+          "locator": "Benefits and drawbacks based on original research",
+          "note": "Supports drawbacks; limit inventories are our implementation."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-ownership",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "google-outbound",
+        "google-reviews"
+      ],
+      "current_sources": [
+        "google-outbound",
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-outbound",
+          "locator": "sponsored and nofollow",
+          "note": "Link qualification is separate from visible editorial disclosure."
+        },
+        {
+          "source_id": "google-reviews",
+          "locator": "First-hand supporting evidence",
+          "note": "Supports authentic evidence, not a universal disclosure format."
+        }
+      ]
+    },
+    {
+      "id": "arwp-comparisons-alternatives",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-spam",
+        "google-reviews"
+      ],
+      "current_sources": [
+        "google-spam",
+        "google-reviews"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-spam",
+          "locator": "Doorway abuse and scaled content abuse",
+          "note": "Supports avoiding manipulative low-value variants; no automatic verdict from page count."
+        },
+        {
+          "source_id": "google-reviews",
+          "locator": "Comparable options and standalone ranked lists",
+          "note": "Supports substantive alternatives; one intent owner is our architecture convention."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-deliverable",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-service"
+      ],
+      "current_sources": [
+        "schema-service"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-service",
+          "locator": "Service: provider, serviceType, description",
+          "note": "Vocabulary describes the service; a deliverable checklist is our proposal."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-eligibility",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-service"
+      ],
+      "current_sources": [
+        "schema-service"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-service",
+          "locator": "Service: audience and areaServed",
+          "note": "Vocabulary supports scope; inquiry classification is our proposed manual review."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-availability",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-service"
+      ],
+      "current_sources": [
+        "schema-service"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-service",
+          "locator": "Service: availableChannel and offers",
+          "note": "Describes access and offers; timezone, booking parity and refresh ownership are project practices."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-terms",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-service"
+      ],
+      "current_sources": [
+        "schema-service"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-service",
+          "locator": "Service: offers and termsOfService",
+          "note": "Supports linking terms; placement and comprehension testing are our workflow."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-process",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "github-releases"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "How the content was created",
+          "note": "Supports process transparency; service-stage design is our implementation proposal."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-sample",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-helpful"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Original value and first-hand expertise",
+          "note": "Supports useful evidence; a sample-to-inquiry path is an unmeasured project experiment."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-case-consent",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-helpful"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Trust, sourcing and factual accuracy",
+          "note": "Supports credible evidence; publication permission is a separate project gate, not legal certification."
+        }
+      ]
+    },
+    {
+      "id": "arwp-services-contact",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "wai-structure"
+      ],
+      "current_sources": [
+        "wai-forms-tutorial"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "wai-forms-tutorial",
+          "locator": "Labels, instructions, validation and user notifications",
+          "note": "Supports accessible form interaction; actual destination delivery and conversion are separate runtime evidence."
+        }
+      ]
+    },
+    {
+      "id": "arwp-localization-local-facts",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-international"
+      ],
+      "current_sources": [
+        "google-international"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-international",
+          "locator": "Target audience signals and local language/currency",
+          "note": "Supports locale relevance; the full facts checklist is a project interpretation."
+        }
+      ]
+    },
+    {
+      "id": "arwp-localization-translation-review",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-helpful"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Factual accuracy and satisfying task completion",
+          "note": "Supports reliability; bilingual review and defect measurement are our procedure."
+        }
+      ]
+    },
+    {
+      "id": "arwp-localization-equivalence",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "google-hreflang",
+        "google-canonical"
+      ],
+      "current_sources": [
+        "google-hreflang",
+        "google-canonical"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-hreflang",
+          "locator": "Guidelines for language and regional variants",
+          "note": "Alternate annotations connect equivalent variants, not arbitrary locale homepages."
+        },
+        {
+          "source_id": "google-canonical",
+          "locator": "Canonical and hreflang best practices",
+          "note": "Canonical selection must respect content relationships; default English consolidation is inappropriate."
+        }
+      ]
+    },
+    {
+      "id": "arwp-localization-term-alignment",
+      "before_version": "1.0.0",
+      "after_version": "1.0.1",
+      "change": "individual-review",
+      "previous_sources": [
+        "schema-term"
+      ],
+      "current_sources": [
+        "schema-term"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "schema-term",
+          "locator": "DefinedTerm: name, termCode and inDefinedTermSet",
+          "note": "Vocabulary identifies terms; bilingual consistency and review are our editorial practice, not a ranking mechanism."
+        }
+      ]
+    },
+    {
+      "id": "arwp-localization-regional-evidence",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "gsc-api"
+      ],
+      "current_sources": [
+        "gsc-api"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "gsc-api",
+          "locator": "dimensions, filters and data limitations",
+          "note": "Supports country/page/query observations, not a language dimension or complete enumeration of demand."
+        }
+      ]
+    },
+    {
+      "id": "arwp-localization-locale-drift",
+      "before_version": "1.0.0",
+      "after_version": "1.1.0",
+      "change": "instructions-or-source-correction",
+      "previous_sources": [
+        "stripe-upgrades"
+      ],
+      "current_sources": [
+        "google-helpful"
+      ],
+      "evidence_level": "inferred",
+      "support": [
+        {
+          "source_id": "google-helpful",
+          "locator": "Avoid changing dates without substantive changes",
+          "note": "Supports honest freshness; source-revision tracking is our workflow, not a Stripe requirement."
+        }
+      ]
+    }
+  ],
+  "remaining_individually_unreviewed": 93
+}

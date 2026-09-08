@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "updated_at": "2026-09-08",
   "categories": [
     {
@@ -1584,6 +1584,19 @@
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
       "notes": "Development vocabulary page reviewed as a living document, not a pinned release or a Google feature contract.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "wai-forms-tutorial",
+      "title": "Forms tutorial",
+      "url": "https://www.w3.org/WAI/tutorials/forms/",
+      "publisher": "W3C WAI",
+      "checked_at": "2026-09-08",
+      "authority": "official-documentation",
+      "notes": "Supports accessible form labels, instructions, validation and notifications; actual delivery and conversion require separate checks.",
       "upstream": {
         "kind": "living-document",
         "version": null
@@ -4023,11 +4036,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-reviews",
+            "locator": "Important decision-making factors",
+            "note": "Supports relevant criteria; preregistering them is our method."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4049,8 +4069,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "google-reviews",
-        "html-data"
+        "google-reviews"
       ],
       "applicability": [
         "comparisons"
@@ -4065,11 +4084,18 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-reviews",
+            "locator": "Evidence and useful resource links",
+            "note": "Supports evidence; cell-level provenance is a project convention."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4107,11 +4133,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-reviews",
+            "locator": "Quantitative measurements and comparable options",
+            "note": "Supports comparison evidence; controlled runs are our protocol."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4149,11 +4182,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-reviews",
+            "locator": "Best for uses or circumstances",
+            "note": "Supports conditional recommendations with evidence."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4175,7 +4215,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "cloudflare-limits"
+        "schema-unit-price"
       ],
       "applicability": [
         "comparisons",
@@ -4192,11 +4232,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-unit-price",
+            "locator": "priceCurrency, billingDuration and referenceQuantity",
+            "note": "Defines price components; scenario arithmetic remains a project procedure."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4218,7 +4265,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "stripe-upgrades"
+        "google-reviews"
       ],
       "applicability": [
         "comparisons",
@@ -4234,11 +4281,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-reviews",
+            "locator": "Original research and decision-making factors",
+            "note": "Supports practical decision evidence; migration testing is our proposal."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4260,7 +4314,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "cloudflare-limits"
+        "google-reviews"
       ],
       "applicability": [
         "comparisons",
@@ -4277,11 +4331,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-reviews",
+            "locator": "Benefits and drawbacks based on original research",
+            "note": "Supports drawbacks; limit inventories are our implementation."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4296,7 +4357,8 @@
       "problem": "An owner-written comparison can look like an independent review.",
       "implementation": [
         "State ownership, sponsorship, affiliate relationships, and testing access.",
-        "Keep the same evidence standard for every product."
+        "Keep the same evidence standard for every product.",
+        "Qualify paid or affiliate links appropriately; visible relationship disclosure does not replace the link attribute, and the attribute does not replace disclosure."
       ],
       "verification": [
         "Relationship disclosures are visible near the comparison method."
@@ -4320,11 +4382,23 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-outbound",
+            "locator": "sponsored and nofollow",
+            "note": "Link qualification is separate from visible editorial disclosure."
+          },
+          {
+            "source_id": "google-reviews",
+            "locator": "First-hand supporting evidence",
+            "note": "Supports authentic evidence, not a universal disclosure format."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4363,11 +4437,23 @@
         "google-scaled-query-variant-guardrail",
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-spam",
+            "locator": "Doorway abuse and scaled content abuse",
+            "note": "Supports avoiding manipulative low-value variants; no automatic verdict from page count."
+          },
+          {
+            "source_id": "google-reviews",
+            "locator": "Comparable options and standalone ranked lists",
+            "note": "Supports substantive alternatives; one intent owner is our architecture convention."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4404,11 +4490,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-service",
+            "locator": "Service: provider, serviceType, description",
+            "note": "Vocabulary describes the service; a deliverable checklist is our proposal."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4446,11 +4539,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-service",
+            "locator": "Service: audience and areaServed",
+            "note": "Vocabulary supports scope; inquiry classification is our proposed manual review."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4488,11 +4588,18 @@
         "google-local-commerce-freshness",
         "bing-local-business-freshness"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-service",
+            "locator": "Service: availableChannel and offers",
+            "note": "Describes access and offers; timezone, booking parity and refresh ownership are project practices."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4579,11 +4686,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-service",
+            "locator": "Service: offers and termsOfService",
+            "note": "Supports linking terms; placement and comprehension testing are our workflow."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4605,7 +4719,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "github-releases"
+        "google-helpful"
       ],
       "applicability": [
         "services"
@@ -4620,11 +4734,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-helpful",
+            "locator": "How the content was created",
+            "note": "Supports process transparency; service-stage design is our implementation proposal."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4662,11 +4783,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-helpful",
+            "locator": "Original value and first-hand expertise",
+            "note": "Supports useful evidence; a sample-to-inquiry path is an unmeasured project experiment."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4704,11 +4832,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-helpful",
+            "locator": "Trust, sourcing and factual accuracy",
+            "note": "Supports credible evidence; publication permission is a separate project gate, not legal certification."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -4723,14 +4858,15 @@
       "problem": "Visitors cannot tell whether an inquiry was received or what follows.",
       "implementation": [
         "Provide one clear contact or booking action with expected response handling.",
-        "Test keyboard, mobile, validation, and confirmation states."
+        "Test keyboard, mobile, validation, and confirmation states.",
+        "Use an authorized test destination or agreed test procedure; do not send unsolicited live inquiries as an audit technique."
       ],
       "verification": [
         "A real test submission reaches the intended destination and shows an accurate confirmation."
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "wai-structure"
+        "wai-forms-tutorial"
       ],
       "applicability": [
         "services"
@@ -4746,11 +4882,18 @@
       "recommendation_rule_ids": [
         "openai-atlas-aria-agent-accessibility"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "wai-forms-tutorial",
+            "locator": "Labels, instructions, validation and user notifications",
+            "note": "Supports accessible form interaction; actual destination delivery and conversion are separate runtime evidence."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -5747,11 +5890,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-international",
+            "locator": "Target audience signals and local language/currency",
+            "note": "Supports locale relevance; the full facts checklist is a project interpretation."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -5789,11 +5939,18 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-helpful",
+            "locator": "Factual accuracy and satisfying task completion",
+            "note": "Supports reliability; bilingual review and defect measurement are our procedure."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -5832,11 +5989,23 @@
         "google-localized-hreflang",
         "google-canonical-consistency"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-hreflang",
+            "locator": "Guidelines for language and regional variants",
+            "note": "Alternate annotations connect equivalent variants, not arbitrary locale homepages."
+          },
+          {
+            "source_id": "google-canonical",
+            "locator": "Canonical and hreflang best practices",
+            "note": "Canonical selection must respect content relationships; default English consolidation is inappropriate."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -5874,11 +6043,18 @@
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.0.1",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-term",
+            "locator": "DefinedTerm: name, termCode and inDefinedTermSet",
+            "note": "Vocabulary identifies terms; bilingual consistency and review are our editorial practice, not a ranking mechanism."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -5892,11 +6068,12 @@
       "title": "Collect local query evidence before expanding",
       "problem": "A global keyword list can justify pages no local audience needs.",
       "implementation": [
-        "Segment available search and inquiry evidence by supported language and region.",
+        "Segment available Search Console evidence by country, page and query; map page language through a reviewed locale-URL inventory, not an API language dimension.",
+        "Treat page language as page metadata, not proof of visitor language. Review inquiries separately and preserve missing or anonymized search evidence as unknown.",
         "Select one unmet task and validate its actual local requirements."
       ],
       "verification": [
-        "The proposed page has evidence of a real need and deliverable scope."
+        "The proposal has reviewed need evidence and scope; country is not treated as language, and limited API rows are not treated as a full demand census."
       ],
       "evidence_level": "inferred",
       "source_ids": [
@@ -5916,11 +6093,18 @@
       "recommendation_rule_ids": [
         "google-generative-ai-measurement"
       ],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "gsc-api",
+            "locator": "dimensions, filters and data limitations",
+            "note": "Supports country/page/query observations, not a language dimension or complete enumeration of demand."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -5942,7 +6126,7 @@
       ],
       "evidence_level": "inferred",
       "source_ids": [
-        "stripe-upgrades"
+        "google-helpful"
       ],
       "applicability": [
         "multilingual-sites",
@@ -5956,11 +6140,18 @@
         "freshness-without-fake-recency"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
-        "reviewed_at": null,
-        "scope": "not-individually-reviewed",
-        "method": null
+        "reviewed_at": "2026-09-08",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-helpful",
+            "locator": "Avoid changing dates without substantive changes",
+            "note": "Supports honest freshness; source-revision tracking is our workflow, not a Stripe requirement."
+          }
+        ]
       },
       "lifecycle": {
         "status": "active",
@@ -11497,8 +11688,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.5.0",
-    "path": "knowledge/releases/v1.5.0.json",
-    "sha256": "8fff92c8669fb171a18bb22ad9597baf4e200f2c82656c5598670b5be073f47b"
+    "version": "1.6.0",
+    "path": "knowledge/releases/v1.6.0.json",
+    "sha256": "85d6c848282cf7434a6ae325de592208735b30688a4c1f56412eb11b15dc498c"
   }
 }

@@ -118,3 +118,5 @@ Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/site
 - [Reusable figure and data](https://dkharlanau.github.io/agent-ready-web-profile/examples/asset-kits/): SVG, CSV, visible table and frozen source versions.
 
 - [Names, locales and offers](https://dkharlanau.github.io/agent-ready-web-profile/COMMERCIAL-LOCALIZATION.html): naming, localized content, pricing facts and feature eligibility with review fixtures.
+
+- [Catalog review](https://dkharlanau.github.io/agent-ready-web-profile/CATALOG-REVIEW.html): individual source-support decisions, corrections and remaining review scope.

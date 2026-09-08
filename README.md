@@ -2,7 +2,7 @@
 
 **Make your site worth citing.**
 
-Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **219 patterns, 117 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 103 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
+Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **219 patterns, 118 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 126 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
 
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
 [![Adaptive Site Upgrade validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml)
@@ -413,3 +413,5 @@ Use `arwp-discoverability` as a specialist inside `arwp-growth-loop`. A corpus s
 [Asset workshop](docs/ASSET-WORKSHOP.md): four delivery patterns, three reusable packs and a question-led gap review.
 
 [Names, locales and offers](docs/COMMERCIAL-LOCALIZATION.md): ten reviewed practices and commercial/localization review fixtures.
+
+[Catalog review](docs/CATALOG-REVIEW.md): 23 historical records reviewed, nine source/instruction corrections and explicit remaining review scope.
