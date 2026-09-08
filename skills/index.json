@@ -11,6 +11,12 @@
       "description": "Evidence-backed ongoing website growth loop for Search, recommendations, generative Search, AI citations and agent readability: research, hypothesize, implement, verify and measure."
     },
     {
+      "name": "arwp-site-focus",
+      "path": "skills/arwp-site-focus/SKILL.md",
+      "role": "site-focus-and-information-architecture",
+      "description": "Define the site's primary problem territory, audience, explicit scope and anti-scope, problem-led information architecture, navigation, visual system and performance budget before content or discoverability expansion."
+    },
+    {
       "name": "arwp-search-maturity",
       "path": "skills/arwp-search-maturity/SKILL.md",
       "role": "search-maturity-reference-benchmark",
@@ -85,6 +91,7 @@
   ],
   "composition": {
     "default": "arwp-growth-loop",
+    "siteFocus": "arwp-site-focus",
     "searchMaturity": "arwp-search-maturity",
     "sitePreparation": "arwp-prepare-site",
     "upgradeCompiler": "arwp-adaptive-upgrade",
@@ -92,6 +99,7 @@
     "provenanceGraph": "arwp-braidgraph",
     "futureSearch": "arwp-future-search",
     "specialists": [
+      "arwp-site-focus",
       "arwp-search-maturity",
       "arwp-adaptive-upgrade",
       "arwp-target-transformation",
@@ -104,6 +112,6 @@
       "arwp-discoverability",
       "arwp-portfolio-fleet"
     ],
-    "principle": "Use the growth orchestrator to fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
+    "principle": "Use the growth orchestrator and run Site Focus before broad content/discoverability expansion when the target site's problem territory, audience, scope or navigation is unclear. Fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
   }
 }
