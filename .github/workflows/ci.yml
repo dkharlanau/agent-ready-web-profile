@@ -42,12 +42,21 @@ jobs:
         run: |
           node scripts/site-focus-test.mjs
           node scripts/site-focus-engine-test.mjs
+          node scripts/site-focus-v2-test.mjs
           node scripts/site-focus-dogfood.mjs
           node --check scripts/site-focus-test.mjs
           node --check scripts/site-focus-engine-test.mjs
+          node --check scripts/site-focus-v2-test.mjs
           node --check scripts/site-focus-dogfood.mjs
           node --check lib/site-focus.mjs
+          node --check lib/site-focus-intent.mjs
+          node --check lib/site-focus-v2.mjs
           node --check bin/arwp-focus.mjs
+
+      - name: Dogfood declared Site Focus contract
+        run: |
+          node bin/arwp-focus.mjs https://dkharlanau.github.io/agent-ready-web-profile/ --repo-root=. --max-pages=30 --json > /tmp/cite-goose-focus.json
+          node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('/tmp/cite-goose-focus.json','utf8')); if(r.version!=='0.2') throw new Error('expected Site Focus v0.2'); if(!r.declaredFocus) throw new Error('declared focus missing'); if('score' in r) throw new Error('opaque score forbidden'); if(r.transformationHandoff?.executable!==false) throw new Error('handoff must remain proposal-only');"
 
       - name: Validate entity graph gap engine
         run: |
