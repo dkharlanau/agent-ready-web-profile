@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-report-v0.2.schema.json",
+  "title": "Cite Goose Site Focus Report v0.2",
+  "type": "object",
+  "required": ["version", "canonicalUrl", "scope", "observedSiteThesis", "metrics", "declaredAlignment", "pageContracts", "transformationHandoff", "guardrails"],
+  "properties": {
+    "version": { "const": "0.2" },
+    "intentVersion": { "const": "0.2" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "scope": { "type": "string", "minLength": 20 },
+    "observedSiteThesis": { "type": "object" },
+    "declaredFocus": { "type": ["object", "null"] },
+    "declaredAlignment": { "type": "object" },
+    "metrics": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "navigation": { "type": "object" },
+    "territories": { "type": "array" },
+    "audienceSignals": { "type": "array" },
+    "duplicateIntentClusters": { "type": "array" },
+    "localeEquivalentDuplicatePairsSuppressed": { "type": "array" },
+    "orphanCandidates": { "type": "array" },
+    "outOfScopeCandidates": { "type": "array" },
+    "pagesWithoutClearJob": { "type": "array" },
+    "pagesWithoutProof": { "type": "array" },
+    "pagesWithoutUsefulAction": { "type": "array" },
+    "dispositions": { "type": "object" },
+    "siteFindings": { "type": "array" },
+    "routeRoleSummary": { "type": "object" },
+    "pageContracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["url", "pageJobSignal", "proof", "primaryActionCandidates", "inboundLinksInSample", "routeTerritory", "decision", "confidence", "similarityToThesis", "reasons", "locale", "localeEquivalentKey", "declaredRole", "declaredScope"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "file": { "type": ["string", "null"] },
+          "title": { "type": ["string", "null"] },
+          "h1": { "type": ["string", "null"] },
+          "pageJobSignal": { "type": ["string", "null"] },
+          "parentHub": { "type": ["string", "null"] },
+          "proof": { "type": "object" },
+          "primaryActionCandidates": { "type": "array" },
+          "inboundLinksInSample": { "type": "integer", "minimum": 0 },
+          "routeTerritory": { "type": "string" },
+          "decision": { "enum": ["KEEP", "NARROW", "MERGE", "DEFER"] },
+          "confidence": { "enum": ["heuristic-low", "heuristic-medium", "declared-high"] },
+          "similarityToThesis": { "type": "number", "minimum": 0, "maximum": 1 },
+          "reasons": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "locale": { "type": ["string", "null"] },
+          "localeEquivalentKey": { "type": "string" },
+          "declaredRole": { "type": ["string", "null"], "enum": ["problem-commercial", "proof-portfolio", "trust-utility", "technical-reference", "localization-equivalent", null] },
+          "declaredScope": { "type": ["string", "null"], "enum": ["IN", "ADJACENT", "OUT", null] },
+          "declaredLane": { "type": ["string", "null"] },
+          "declaredRule": { "type": ["object", "null"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "transformationHandoff": {
+      "type": "object",
+      "required": ["mode", "executable", "candidates", "acceptedDecisionRequiredBeforeTransformation", "destructiveOperationsAllowed"],
+      "properties": {
+        "mode": { "const": "proposal-only" },
+        "executable": { "const": false },
+        "candidates": { "type": "array" },
+        "acceptedDecisionRequiredBeforeTransformation": { "const": true },
+        "destructiveOperationsAllowed": { "const": false },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "discovery": { "type": ["object", "null"] },
+    "guardrails": {
+      "type": "object",
+      "required": ["noOpaqueScore", "removeNeverAutomatic", "splitRequiresManualReview", "lowSimilarityIsNotRemovalEvidence", "technicalTermsAreNotAutomaticallyBadNavigation", "sampledPagesAreNotACompleteSiteInventoryUnlessDiscoveryProvesCoverage", "declaredIntentDoesNotProveObservedQuality", "localeEquivalenceDoesNotProveCanonicalCorrectness", "routeFamiliesAreNotProblemTerritories", "supportingRolesMayLegitimatelyDivergeFromHomepageVocabulary", "transformationHandoffIsProposalOnly"],
+      "properties": {
+        "noOpaqueScore": { "const": true },
+        "removeNeverAutomatic": { "const": true },
+        "splitRequiresManualReview": { "const": true },
+        "lowSimilarityIsNotRemovalEvidence": { "const": true },
+        "technicalTermsAreNotAutomaticallyBadNavigation": { "const": true },
+        "sampledPagesAreNotACompleteSiteInventoryUnlessDiscoveryProvesCoverage": { "const": true },
+        "declaredIntentDoesNotProveObservedQuality": { "const": true },
+        "localeEquivalenceDoesNotProveCanonicalCorrectness": { "const": true },
+        "routeFamiliesAreNotProblemTerritories": { "const": true },
+        "supportingRolesMayLegitimatelyDivergeFromHomepageVocabulary": { "const": true },
+        "transformationHandoffIsProposalOnly": { "const": true }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
