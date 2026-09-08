@@ -82,4 +82,29 @@ Referral attribution is not human verification. Debug receipt is not production 
 
 Sources: [traffic-source dimensions](https://support.google.com/analytics/answer/15612152?hl=en), [event debugging](https://support.google.com/analytics/answer/7201382?hl=en), [Search Analytics API](https://developers.google.com/webmaster-tools/v1/searchanalytics/query), [traffic diagnosis](https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops), [data publishing](https://www.w3.org/TR/dwbp/). The experiment-design rules are project procedures, not claimed platform ranking mechanisms.
 
-Individual review coverage is complete; integration, publication and end-to-end task coverage must still be audited separately. A reviewed source can drift later, and no review date proves acquisition impact.
+Individual review coverage is complete. The integration audit below checks the published implementation separately. A reviewed source can drift later, and no review date proves acquisition impact.
+
+## Final integration audit — 8 September 2026
+
+Corpus **1.12.0** contains **219 individually reviewed patterns**, **132 sources** and **16 categories**. The evidence labels remain 69 documented, 133 inferred and 17 experimental. The companion has 28 reviewed negative examples with source references, replacements and false-positive boundaries. Review coverage describes scoped source assessment, not endorsement, permanent freshness or measured acquisition gains.
+
+| Requested area | Inspectable coverage |
+| --- | --- |
+| Names, titles, headings and voice | [Commercial naming](./COMMERCIAL-LOCALIZATION.html), [writing lab](./EDITORIAL-SEARCH-LAB.html), title-promise and voice-role patterns |
+| Locales, regions and currencies | 11 localization patterns covering URLs, reciprocal alternates, equivalence, facts, translation review and offer currency |
+| Services, prices, software and competitors | 13 service and 14 comparison patterns; quote-only, billing commitment, free scope, price basis and actual offer aggregation |
+| Technical discovery and structured data | Access, architecture, entity and retrieval categories; feature eligibility stays distinct from vocabulary validity |
+| Useful assets and evidence | [Asset workshop](./ASSET-WORKSHOP.html), runnable canonical pair, figure with CSV, article/comparison receipts and [Evidence Relay](./EVIDENCE-RELAY.html) |
+| Repeatable work across sites | [Discoverability skill](./skills/arwp-discoverability/SKILL.md), version-pinned adoption plans and [portfolio fleet](./PORTFOLIO-FLEET.html) |
+| Bad signals and review | [28 anti-patterns](./ANTI-PATTERNS.html), explicit exceptions, source locators and per-pattern version history |
+| Measurement and experimentation | Separate search/provider observations, referrals, qualified actions, held-out answer evaluation and unknown states |
+
+### What was exercised
+
+- The live library and corpus returned HTTP 200 and matched repository bytes at `cca3f8e693efab4b1e98c6e06f1446ce26adbfe6`. GitHub Pages reported that exact built commit; ARWP validation passed.
+- The browser search for `quote-only` returned relevant records. Selecting the quote-only service pattern, entering a synthetic site and downloading the selection produced a corpus- and pattern-pinned JSON file. The CLI accepted that actual downloaded file and generated one planned task, with outcomes unmeasured.
+- The public review, commercial/localization guide, anti-pattern guide, asset workshop and worked examples returned HTTP 200. Article and comparison HTML matched local bytes.
+- All 11 anchored historical releases matched their code-reviewed hashes and public mirrors. The current corpus retains every stable ID and native hypothesis routing. Older workshop figures and edition counts deliberately describe their frozen historical releases.
+- Repository tests and package installation smoke checks passed. The canonical pair reproduced its intended before failure and after pass; article and comparison receipts passed consistency checks. These local examples are explicitly synthetic and do not prove arbitrary-site results.
+
+This completes the catalog expansion and review deliverable. Applying a selected change to a specific site, verifying its owner-only controls and measuring search, recommendation or revenue effects remain separate site operations. No top-position guarantee or observed ranking lift is asserted.
