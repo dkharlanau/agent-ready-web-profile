@@ -1,0 +1,61 @@
+{
+  "version": "0.2",
+  "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+  "thesis": {
+    "primaryProblem": "Website owners need to decide which Search, AI-search and agent-web improvements actually help a useful site become easier to find, use, cite and verify.",
+    "primaryAudience": "Website owners and maintainers who can change a public site.",
+    "usefulOutcome": "Choose a bounded evidence-backed improvement, implement it safely, verify the surface and measure the outcome separately.",
+    "distinctEvidence": "Source-backed practices, explicit hypotheses, reproducible audits, Resolver observations, evidence receipts, experiments and dogfood on real sites.",
+    "primaryAction": "Run a focused audit or choose the next evidence-backed change."
+  },
+  "scope": {
+    "in": [
+      "Search and AI-search discoverability decisions",
+      "agent-web interoperability and machine-readable access",
+      "content usefulness, evidence and citation support",
+      "site-focus and information-architecture review",
+      "verification, experiments and owner-side measurement"
+    ],
+    "adjacent": [
+      "protocol reference material",
+      "standards mapping",
+      "benchmarks and research artifacts",
+      "implementation templates and examples"
+    ],
+    "out": [
+      "guaranteed rankings, citations or recommendations",
+      "generic content-volume production",
+      "opaque readiness or SEO scores",
+      "a proprietary manifest intended to replace native web standards"
+    ]
+  },
+  "problemLanes": [
+    { "id": "be-found", "label": "Be found", "job": "Help people, crawlers and agents reach the useful surface." },
+    { "id": "be-used", "label": "Be used", "job": "Make the answer clear, useful, attributable and machine-readable." },
+    { "id": "be-proven", "label": "Be proven", "job": "Separate implementation checks from real outcome evidence." }
+  ],
+  "primaryNavigation": [
+    "/site-focus.html",
+    "/discoverability.html",
+    "/growth/",
+    "/trust/"
+  ],
+  "routeRules": [
+    { "match": { "path": "/" }, "role": "problem-commercial", "scope": "IN", "lane": "be-found", "note": "Primary product narrative and entry point." },
+    { "match": { "path": "/site-focus.html" }, "role": "problem-commercial", "scope": "IN", "lane": "be-used", "note": "Problem-boundary and architecture gate." },
+    { "match": { "path": "/discoverability.html" }, "role": "problem-commercial", "scope": "IN", "lane": "be-found", "note": "Evidence-backed practice selection." },
+    { "match": { "pathPrefix": "/growth" }, "role": "proof-portfolio", "scope": "IN", "lane": "be-proven", "note": "Growth loop, hypotheses, experiments and outcome separation." },
+    { "match": { "pathPrefix": "/trust" }, "role": "trust-utility", "scope": "IN", "lane": "be-proven", "note": "Evidence, claims and trust surfaces." },
+    { "match": { "pathPrefix": "/research" }, "role": "proof-portfolio", "scope": "ADJACENT", "lane": "be-proven", "note": "Research depth supports the product thesis without becoming a separate homepage identity." },
+    { "match": { "pathPrefix": "/benchmark" }, "role": "proof-portfolio", "scope": "ADJACENT", "lane": "be-proven", "note": "Benchmark evidence is supporting proof." },
+    { "match": { "pathPrefix": "/resolver" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "be-found", "note": "Technical interoperability implementation surface." },
+    { "match": { "pathPrefix": "/standards" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "be-found", "note": "Reference depth, not a first-order product lane." },
+    { "match": { "pathPrefix": "/directory" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "be-found", "note": "Reference/directory surface." },
+    { "match": { "pathPrefix": "/skills" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "be-used", "note": "Agent-facing implementation guidance." },
+    { "match": { "pathPrefix": "/examples" }, "role": "proof-portfolio", "scope": "ADJACENT", "lane": "be-used", "note": "Examples are proof/supporting material." }
+  ],
+  "notes": [
+    "The four internal navigation destinations are the declared contract; the external GitHub link may remain a utility action without becoming another problem lane.",
+    "Route families are implementation architecture, not a proxy for the number of problems the site owns."
+  ]
+}
