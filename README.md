@@ -378,3 +378,15 @@ Canonical presentation: **SignalBraid · ARWP**.
 ## License
 
 Apache License 2.0. See [`LICENSE`](LICENSE).
+
+## Choose a concrete implementation practice
+
+The [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html) adds **144 practices across 16 categories** to the existing Growth Loop. Each practice has implementation steps, verification, source scope, an impact hypothesis and native rule/hypothesis routing. It covers decision-oriented articles, fair comparisons, visible evidence footnotes, coherent entities and useful user actions.
+
+```bash
+arwp discoverability --search="comparison" --json
+arwp adoption-plan arwp-adoption.json --output=planned-work.json
+arwp editorial-check article.receipt.json --json
+```
+
+Use `arwp-discoverability` as a specialist inside `arwp-growth-loop`. A corpus selection is a planning aid; actual changes, verification and outcomes stay in the existing Growth/Change Receipt/BraidGraph workflow. [Playbook](docs/DISCOVERABILITY-PLAYBOOK.md) · [Editorial examples](docs/examples/editorial/README.md) · [Measurement contract](docs/DISCOVERABILITY-BENCHMARKS.md).

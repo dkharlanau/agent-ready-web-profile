@@ -99,3 +99,9 @@ The Portfolio Growth series is intentionally a different evidence class: owner-c
 ## Sitemap
 
 Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/sitemap.xml
+
+## Implementation practice library
+
+- [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 144 concrete practices with sources, verification and native hypothesis/rule routing.
+- [Machine-readable corpus](https://dkharlanau.github.io/agent-ready-web-profile/knowledge/discoverability-corpus.json): planning material; no measured ranking effects are implied.
+- [Editorial receipt contract](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-RECEIPTS.md): visible claim-source relationships for useful articles and comparisons.

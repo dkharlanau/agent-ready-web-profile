@@ -1,0 +1,54 @@
+{
+  "page_url": "https://example.com/guides/readable-answer/",
+  "reviewed_at": "2026-09-08",
+  "audience": "Maintainers of public documentation",
+  "question": "What should be verified before adding AI discovery files?",
+  "direct_answer": "Make the canonical page answer a real question with its qualifications and sources, then test whether another representation benefits a supported client.",
+  "original_contribution": "A four-step HTML, rendered-page, and alternate-representation verification sequence; this is an ARWP proposal, not a ranking experiment.",
+  "useful_action": "Inspect one deployed page and compare its extracted answer and qualifications across representations.",
+  "sources": [
+    {
+      "id": "google-ai",
+      "url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "checked_at": "2026-09-08",
+      "support": "Technical requirements require indexing and snippet eligibility for supporting links; SEO best practices include important textual content; additional AI files are unnecessary. No inclusion guarantee."
+    },
+    {
+      "id": "html-data",
+      "url": "https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes",
+      "checked_at": "2026-09-08",
+      "support": "The standard allows application-private data-* attributes. ARWP attribute names and the verification workflow are original conventions, not a search standard."
+    }
+  ],
+  "claims": [
+    {
+      "id": "eligibility",
+      "text": "Google requires a page to be indexed and snippet-eligible to be considered as a supporting link in its AI search features; serving is not guaranteed.",
+      "anchor": "claim-eligibility",
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-ai"
+      ]
+    },
+    {
+      "id": "extra-files",
+      "text": "Google says additional AI text files and special schema are unnecessary for its AI search features.",
+      "anchor": "claim-extra-files",
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-ai"
+      ]
+    },
+    {
+      "id": "private-data",
+      "text": "The HTML standard permits application-private data-* attributes.",
+      "anchor": "claim-private-data",
+      "evidence_level": "documented",
+      "source_ids": [
+        "html-data"
+      ]
+    }
+  ],
+  "fixture": true,
+  "publication_status": "educational example only; example.com identity, noindex HTML; no external ranking experiment"
+}

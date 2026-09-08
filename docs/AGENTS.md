@@ -61,3 +61,7 @@ node bin/arwp.mjs plan https://example.com --intent=search
 - Agent Skills: https://dkharlanau.github.io/agent-ready-web-profile/skills/
 - Resolver/project: https://dkharlanau.github.io/agent-ready-web-profile/
 - Sitemap: https://dkharlanau.github.io/agent-ready-web-profile/sitemap.md
+
+## Implementation practice library
+
+Use `arwp-discoverability` inside the default Growth Loop for concrete editorial, comparison, technical and measurement practices. The library at `discoverability.html` and `knowledge/discoverability-corpus.json` routes to existing hypotheses and rules. Exported selections are plans, not verified changes or outcome receipts. Rebuild with `npm run build:discoverability` after changing the corpus or templates; retain every existing sitemap route.

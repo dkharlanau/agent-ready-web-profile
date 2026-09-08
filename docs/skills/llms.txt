@@ -25,6 +25,7 @@ Use it to compare a target site with timestamped independent Search/AI reference
 Use it to explain why a repository change exists, trace source/rule lineage, preserve superseded history, compute re-review blast radius and separate missing implementation verification from missing Search/AI outcome evidence.
 
 ## Specialists
+- arwp-discoverability — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-discoverability/SKILL.md
 - arwp-ai-search-content — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md
 - arwp-future-search — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-future-search/SKILL.md
 - arwp-dataset-publication — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-dataset-publication/SKILL.md

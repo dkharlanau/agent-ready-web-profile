@@ -1,0 +1,96 @@
+{
+  "page_url": "https://example.com/compare/publishing-surfaces/",
+  "reviewed_at": "2026-09-08",
+  "audience": "Maintainers choosing the next useful publishing surface for public documentation",
+  "question": "When should a documentation publisher prioritize readable HTML, JSON-LD, or alternate Markdown?",
+  "direct_answer": "Our editorial judgment is to establish a useful canonical page, add truthful structured facts for a defined consumer, and test Markdown only for a demonstrated client need.",
+  "original_contribution": "A task-based comparison with evidence boundaries and explicit editorial fit judgments; no original performance measurements.",
+  "useful_action": "Choose one failed reader or client task, then test the publishing surface that addresses it.",
+  "sources": [
+    {
+      "id": "google-ai",
+      "url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "checked_at": "2026-09-08",
+      "support": "Technical requirements require indexing and snippet eligibility for supporting links; SEO best practices include important textual content; additional AI files are unnecessary. No inclusion guarantee."
+    },
+    {
+      "id": "google-sd",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "checked_at": "2026-09-08",
+      "support": "Google supports JSON-LD, requires markup to represent relevant visible content, and does not guarantee rich results even when markup is valid."
+    },
+    {
+      "id": "openai-bots",
+      "url": "https://developers.openai.com/api/docs/bots",
+      "checked_at": "2026-09-08",
+      "support": "Observed page introduction advertises alternate Markdown documentation URLs by appending .md. Supports the existence of this first-party publishing pattern only."
+    }
+  ],
+  "claims": [
+    {
+      "id": "text",
+      "text": "Google recommends important textual content and ordinary search eligibility for its AI features.",
+      "anchor": "claim-text",
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-ai"
+      ]
+    },
+    {
+      "id": "jsonld",
+      "text": "Google supports JSON-LD and requires its facts to represent relevant visible content.",
+      "anchor": "claim-jsonld",
+      "evidence_level": "documented",
+      "source_ids": [
+        "google-sd"
+      ]
+    },
+    {
+      "id": "markdown",
+      "text": "OpenAI documentation advertises alternate Markdown URLs by appending .md to documentation page URLs.",
+      "anchor": "claim-markdown",
+      "evidence_level": "documented",
+      "source_ids": [
+        "openai-bots"
+      ]
+    }
+  ],
+  "comparison": {
+    "criteria": [
+      "Reader task served",
+      "Documented capability",
+      "Qualification and evidence retention",
+      "Maintenance and applicability limits"
+    ],
+    "methodology": "Desk review of cited primary documentation checked on 2026-09-08. The use-it-when recommendations are ARWP editorial judgments. No speed, retrieval, ranking, price, or vendor performance trial was conducted. This comparison concerns complementary publishing approaches, not commercial product quality.",
+    "as_of": "2026-09-08",
+    "products": [
+      {
+        "name": "Canonical page with accessible text",
+        "best_for": "A primary answer people can read, navigate, and cite; editorial judgment.",
+        "limitation": "Useful HTML and technical eligibility do not guarantee indexing or selection.",
+        "source_ids": [
+          "google-ai"
+        ]
+      },
+      {
+        "name": "JSON-LD beside visible content",
+        "best_for": "A defined consumer of truthful entity relationships or applicable structured facts; editorial judgment.",
+        "limitation": "Valid syntax cannot prove truth and valid markup does not guarantee a rich result.",
+        "source_ids": [
+          "google-sd"
+        ]
+      },
+      {
+        "name": "Maintained alternate Markdown",
+        "best_for": "A supported client with a demonstrated parsing benefit and a passing content-parity check; experimental fit judgment.",
+        "limitation": "An observed publisher pattern is not an industry requirement or evidence of ranking impact.",
+        "source_ids": [
+          "openai-bots"
+        ]
+      }
+    ]
+  },
+  "fixture": true,
+  "publication_status": "educational example only; example.com identity, noindex HTML; no external performance trial"
+}

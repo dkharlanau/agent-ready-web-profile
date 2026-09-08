@@ -22,6 +22,8 @@ try {
 
   const paths = new Set(pack.files.map(file => file.path));
   for (const required of [
+    'knowledge/discoverability-corpus.json', 'knowledge/source-link-checks.json', 'lib/discoverability.mjs',
+    'skills/arwp-discoverability/SKILL.md', 'docs/examples/editorial/article.receipt.json',
     'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs',
     'bin/arwp-growth.mjs', 'bin/arwp-growth-remediation.mjs', 'bin/arwp-trends.mjs',
     'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs',
@@ -136,6 +138,12 @@ try {
   assert.equal(recommendations.rules.length, 34);
   assert.equal(recommendations.implementationPacks.length, 11);
   assert.equal(recommendations.methodology.noRankingPromise, true);
+
+  const practices = JSON.parse(execFileSync(process.execPath, [installedCli, 'discoverability', '--search=comparison', '--json'], { cwd: consumerDir, encoding: 'utf8' }));
+  assert.ok(practices.tactics.length > 0, 'installed practice corpus must be queryable outside the repository');
+  assert.ok(practices.tactics.every(t => t.growth_hypothesis_ids.length > 0), 'installed corpus must retain native routing');
+  const receiptCheck = execFileSync(process.execPath, [installedCli, 'editorial-check', path.join(installedRoot, 'docs/examples/editorial/article.receipt.json'), '--json'], { cwd: consumerDir, encoding: 'utf8' });
+  assert.equal(JSON.parse(receiptCheck).valid, true);
 
   const profilePath = path.join(consumerDir, 'site-profile.json');
   fs.writeFileSync(profilePath, JSON.stringify({
