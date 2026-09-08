@@ -15,6 +15,11 @@ Use it to compare a target site with timestamped independent Search/AI reference
 ## Initial preparation
 - arwp-prepare-site — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md
 
+## Multi-site portfolio operations
+- arwp-portfolio-fleet — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-portfolio-fleet/SKILL.md
+
+Use it to inspect local Git/profile state across many checkouts, run reviewed checks without a shell, and perform bounded live-profile verification before selecting one site for implementation.
+
 ## Adaptive implementation
 - arwp-adaptive-upgrade — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-adaptive-upgrade/SKILL.md
 - arwp-target-transformation — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-target-transformation/SKILL.md

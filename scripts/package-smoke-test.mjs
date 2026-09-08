@@ -25,21 +25,21 @@ try {
     'knowledge/discoverability-corpus.json', 'knowledge/source-link-checks.json', 'lib/discoverability.mjs',
     'skills/arwp-discoverability/SKILL.md', 'docs/examples/editorial/article.receipt.json',
     'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs',
-    'bin/arwp-growth.mjs', 'bin/arwp-growth-remediation.mjs', 'bin/arwp-trends.mjs',
+    'bin/arwp-growth.mjs', 'bin/arwp-growth-remediation.mjs', 'bin/arwp-trends.mjs', 'bin/arwp-portfolio.mjs',
     'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs',
     'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs', 'lib/ai-search-profile.mjs',
     'lib/growth-remediation.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'schema/claim.schema.json', 'schema/visibility-snapshot.schema.json', 'schema/agent-eval-receipt.schema.json',
-    'schema/growth-remediation-manifest.schema.json',
+    'schema/growth-remediation-manifest.schema.json', 'schema/portfolio-workspace.schema.json',
     'ai/ai-search-profile.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
     'scanner-service/handler.mjs', 'router/federated.mjs', 'router/resolved-federated.mjs', 'router/server.mjs',
     'monitor/runner.mjs', 'monitor/config.schema.json', 'monitor/example.config.json',
     'registry/sites.json', 'registry/directory.schema.json', 'registry/search-agent-recommendations.json', 'server.json',
     'benchmarks/external-runner.mjs', 'benchmarks/corpus/fixture.schema.json',
     'scripts/trend-source-watch.mjs',
-    'templates/growth/organization.jsonld', 'templates/growth/article.jsonld', 'templates/growth/content-quality-checklist.md',
+    'templates/growth/organization.jsonld', 'templates/growth/article.jsonld', 'templates/growth/content-quality-checklist.md', 'templates/portfolio/workspace.example.json',
     'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md', 'docs/AI-SEARCH-PROFILE.md', 'docs/SEARCH-AGENT-RECOMMENDATIONS.md',
-    'docs/GROWTH-REMEDIATION.md', 'README.md', 'SPEC.md', 'LICENSE'
+    'docs/GROWTH-REMEDIATION.md', 'docs/PORTFOLIO-FLEET.md', 'skills/arwp-portfolio-fleet/SKILL.md', 'README.md', 'SPEC.md', 'LICENSE'
   ]) assert.ok(paths.has(required), `packed artifact is missing ${required}`);
 
   assert.equal(paths.has('scripts/scanner-test.mjs'), false, 'test scripts must not ship in the npm artifact');
@@ -59,10 +59,11 @@ try {
   const installedAgentEvalCli = path.join(installedRoot, 'bin', 'arwp-agent-eval.mjs');
   const installedIndexNowCli = path.join(installedRoot, 'bin', 'arwp-indexnow.mjs');
   const installedGrowthRemediationCli = path.join(installedRoot, 'bin', 'arwp-growth-remediation.mjs');
-  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedAgentEvalCli, installedIndexNowCli, installedGrowthRemediationCli]) {
+  const installedPortfolioCli = path.join(installedRoot, 'bin', 'arwp-portfolio.mjs');
+  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedAgentEvalCli, installedIndexNowCli, installedGrowthRemediationCli, installedPortfolioCli]) {
     assert.ok(fs.existsSync(cli), `installed CLI entrypoint is missing: ${path.basename(cli)}`);
   }
-  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-agent-eval', 'arwp-indexnow', 'arwp-growth-remediation']) {
+  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-agent-eval', 'arwp-indexnow', 'arwp-growth-remediation', 'arwp-portfolio']) {
     assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', bin)), `npm bin shim is missing: ${bin}`);
   }
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'claim.schema.json')), 'claim schema must ship in the npm artifact');
@@ -130,6 +131,8 @@ try {
   const directoryOutput = execFileSync(process.execPath, [installedCli, 'directory', '--json'], { cwd: installedRoot, encoding: 'utf8' });
   const directory = JSON.parse(directoryOutput);
   assert.equal(directory.sites.length, 5, 'installed CLI must ship with the initial ARWP directory');
+  const fleetValidation = execFileSync(process.execPath, [installedPortfolioCli, 'fleet-check', path.join(installedRoot, 'templates', 'portfolio', 'workspace.example.json'), '--json'], { cwd: consumerDir, encoding: 'utf8' });
+  assert.equal(JSON.parse(fleetValidation).valid, true, 'installed portfolio CLI must validate the bundled workspace template');
 
   const recommendations = JSON.parse(fs.readFileSync(path.join(installedRoot, 'registry', 'search-agent-recommendations.json'), 'utf8'));
   assert.equal(recommendations.version, '0.2');

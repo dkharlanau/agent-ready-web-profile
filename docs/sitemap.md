@@ -95,6 +95,8 @@ The Portfolio Growth series is intentionally a different evidence class: owner-c
 - [Protocol support](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/PROTOCOL-SUPPORT.md)
 - [Benchmark methodology](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BENCHMARK.md)
 - [Search + Agent recommendations documentation](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/SEARCH-AGENT-RECOMMENDATIONS.md)
+- [Portfolio fleet workflow](https://dkharlanau.github.io/agent-ready-web-profile/PORTFOLIO-FLEET.md)
+- [Portfolio fleet Agent Skill](https://dkharlanau.github.io/agent-ready-web-profile/skills/arwp-portfolio-fleet/SKILL.md)
 
 ## Sitemap
 
@@ -102,6 +104,6 @@ Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/site
 
 ## Implementation practice library
 
-- [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 144 concrete practices with sources, verification and native hypothesis/rule routing.
+- [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 169 concrete practices with sources, verification and native hypothesis/rule routing.
 - [Machine-readable corpus](https://dkharlanau.github.io/agent-ready-web-profile/knowledge/discoverability-corpus.json): planning material; no measured ranking effects are implied.
 - [Editorial receipt contract](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-RECEIPTS.md): visible claim-source relationships for useful articles and comparisons.

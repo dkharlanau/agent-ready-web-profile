@@ -4,6 +4,12 @@ ARWP is pre-stable. The `main` branch may contain work intended for the next v0.
 
 ## Unreleased — intended for 0.2.0
 
+### Portfolio fleet operations — 2026-09-08
+
+- Added the `arwp-portfolio-fleet` skill and installable `arwp-portfolio` CLI for one-manifest operation across many local website repositories.
+- Added inventory import, read-only Git/profile inspection, reviewed local command execution and bounded live profile verification with site filters and concurrency limits.
+- Dirty worktrees are skipped by default, commands run without a shell, and receipts store output hashes rather than aggregated logs. Fleet evidence remains separate from commit, deployment, indexing and outcome evidence.
+
 ### Cite Goose / discoverability corpus 1.2.0 — 2026-09-08
 
 - Introduced Cite Goose as the public product name, with a new illustrated homepage and responsive pattern library. Repository, package, CLI commands and canonical URLs retain their ARWP identifiers.

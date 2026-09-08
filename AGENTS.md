@@ -36,6 +36,7 @@ node bin/arwp-maturity.mjs check docs/maturity/profile.json
 - `arwp-future-search` — governed future-ready semantics, semantic/evidence graphs, retrieval feedback and browser-agent operability beyond today's documented Search feature set.
 - `arwp-agent-discovery` — truthful llms.txt, Agent Skills, ARD, OpenAPI/MCP/A2A/WebMCP and ARWP surfaces.
 - `arwp-evidence-ci` — assertions, scheduled audits, receipts and drift-safe CI.
+- `arwp-portfolio-fleet` — one-manifest inspection and verification when the task spans multiple local site repositories.
 
 When repository edits are possible, do not stop at a recommendation list. Make high-confidence reversible changes, run verification and leave credential-dependent/outcome measurement work as explicit gates.
 

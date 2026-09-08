@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-workspace.schema.json",
+  "version": "0.1",
+  "name": "Example website portfolio",
+  "sites": [
+    {
+      "id": "example-site",
+      "checkout": "../example-site",
+      "canonicalUrl": "https://example.com/",
+      "profilePath": "docs/ai/site-profile.json",
+      "publicProfilePath": "ai/site-profile.json",
+      "discoveryFiles": ["README.md", "docs/index.html"],
+      "checks": [
+        { "id": "site", "argv": ["npm", "run", "test:site"], "timeoutMs": 120000 }
+      ]
+    }
+  ]
+}

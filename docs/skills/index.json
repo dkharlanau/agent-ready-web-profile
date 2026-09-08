@@ -78,7 +78,13 @@
       "role": "discoverability-practices",
       "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-discoverability/SKILL.md",
       "useWhen": "Select concrete source-backed practices and validate editorial receipts within the Growth Loop; preserve native hypothesis/rule routing and unmeasured outcomes."
+    },
+    {
+      "name": "arwp-portfolio-fleet",
+      "role": "portfolio-workspace-operations",
+      "url": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-portfolio-fleet/SKILL.md",
+      "useWhen": "Inspect or verify many local website repositories and public profiles from one versioned workspace before selecting a focused Growth Loop target."
     }
   ],
-  "guardrail": "Skills implement and verify source-backed or explicitly governed experimental improvements. Search Maturity cohort patterns are observational until stronger evidence exists and do not become ranking factors or competitor-copy instructions. BraidGraph records provenance, history, impact and evidence debt but does not authorize mutation or infer causality from adjacency. Future Search experiments do not become ranking requirements merely because they use Schema.org or machine-readable indexes. Target transformation is digest-gated, path-allowlisted and PR-first; policy/editorial/owner/runtime decisions remain gated. Dataset DOI publication applies only to genuine reusable corpora and is for citation/reproducibility, not a ranking promise."
+  "guardrail": "Skills implement and verify source-backed or explicitly governed experimental improvements. Search Maturity cohort patterns are observational until stronger evidence exists and do not become ranking factors or competitor-copy instructions. BraidGraph records provenance, history, impact and evidence debt but does not authorize mutation or infer causality from adjacency. Future Search experiments do not become ranking requirements merely because they use Schema.org or machine-readable indexes. Target transformation is digest-gated, path-allowlisted and PR-first; policy/editorial/owner/runtime decisions remain gated. Dataset DOI publication applies only to genuine reusable corpora and is for citation/reproducibility, not a ranking promise. Portfolio fleet operations preserve dirty worktrees and keep local, live, release and outcome evidence separate."
 }
