@@ -3,7 +3,7 @@
   "id": "reference-cognitive-biases",
   "url": "https://cognitive-biases.github.io/",
   "ownership": "project-reference",
-  "reviewedAt": "2026-08-26",
+  "reviewedAt": "2026-09-08",
   "accepted": {
     "read": ["https://cognitive-biases.github.io/llms.txt"],
     "search": ["https://cognitive-biases.github.io/data/rag.ndjson"],
