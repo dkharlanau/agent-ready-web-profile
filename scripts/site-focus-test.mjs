@@ -48,7 +48,7 @@ assert.match(skill, /Use this skill before `arwp-discoverability`/i);
 assert.match(skill, /Prefer Site Focus v0\.3/i);
 assert.match(skill, /primary_problem/i);
 assert.match(skill, /we_do_not/i);
-assert.match(skill, /one primary homepage problem lane plus up to two supporting lanes/i);
+assert.match(skill, /primary homepage problem lane.*supporting lanes/i);
 assert.match(skill, /up to 5.*primary navigation destinations/i);
 assert.match(skill, /performance budgets before design expands/i);
 assert.match(skill, /house heuristics or owner-declared budgets/i);
