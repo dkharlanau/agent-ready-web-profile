@@ -1,0 +1,80 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-profile-v0.3.schema.json",
+  "version": "0.3",
+  "canonicalUrl": "https://example.com/",
+  "thesis": {
+    "primaryProblem": "A useful specialist website is difficult to understand because its purpose, audience and next action are spread across unrelated pages.",
+    "primaryAudience": "Owners and maintainers of focused public websites.",
+    "usefulOutcome": "Make the site communicate one primary problem boundary, a small set of problem lanes and a clear next action.",
+    "distinctEvidence": "Real examples, source-backed guidance, implementation receipts and outcome measurements kept separate from claims.",
+    "primaryAction": "Review the site focus contract and choose one bounded improvement."
+  },
+  "scope": {
+    "in": ["site focus", "problem-led information architecture", "evidence-backed website improvements"],
+    "adjacent": ["technical references", "research artifacts"],
+    "out": ["generic content farms", "ranking guarantees", "unrelated product categories"]
+  },
+  "problemLanes": [
+    {
+      "id": "decide",
+      "label": "Decide",
+      "job": "Understand what the site should own and what should stay out.",
+      "audience": "A site owner deciding what to publish.",
+      "problem": "The site is trying to cover too many unrelated intents without a clear product boundary.",
+      "desiredOutcome": "Choose a small explicit set of problems the site will solve.",
+      "primaryAction": "Review the declared scope."
+    },
+    {
+      "id": "improve",
+      "label": "Improve",
+      "job": "Turn the chosen scope into concrete page and navigation changes.",
+      "audience": "A maintainer who can change the site.",
+      "problem": "The current homepage and navigation do not reflect the intended problem structure.",
+      "desiredOutcome": "Create a clearer homepage, page hierarchy and navigation contract.",
+      "primaryAction": "Choose one architecture change."
+    },
+    {
+      "id": "prove",
+      "label": "Prove",
+      "job": "Verify implementation and keep later outcome evidence separate.",
+      "audience": "A maintainer reviewing whether a change actually helped.",
+      "problem": "Implementation success is often confused with ranking, citation or conversion impact.",
+      "desiredOutcome": "Preserve implementation evidence and later field outcomes as separate observations.",
+      "primaryAction": "Attach verification or measurement evidence."
+    }
+  ],
+  "homepage": {
+    "primaryLane": "decide",
+    "supportingLanes": ["improve", "prove"],
+    "requiredSignals": ["problem", "audience", "outcome", "evidence", "action"]
+  },
+  "primaryNavigation": ["/focus/", "/improve/", "/evidence/", "/about/"],
+  "routeRules": [
+    { "match": { "path": "/" }, "role": "problem-commercial", "scope": "IN", "lane": "decide" },
+    { "match": { "pathPrefix": "/focus" }, "role": "problem-commercial", "scope": "IN", "lane": "decide" },
+    { "match": { "pathPrefix": "/improve" }, "role": "problem-commercial", "scope": "IN", "lane": "improve" },
+    { "match": { "pathPrefix": "/evidence" }, "role": "proof-portfolio", "scope": "IN", "lane": "prove" },
+    { "match": { "pathPrefix": "/about" }, "role": "trust-utility", "scope": "IN", "lane": "prove" },
+    { "match": { "pathPrefix": "/reference" }, "role": "technical-reference", "scope": "ADJACENT", "lane": "improve" }
+  ],
+  "experience": {
+    "visualPrinciples": [
+      "Bright high-contrast identity without decorative clutter.",
+      "Strong typographic hierarchy with evidence-led diagrams.",
+      "Dense technical detail progressively disclosed after a simple first screen."
+    ],
+    "navigation": {
+      "maxPrimaryItems": 5,
+      "consistentAcrossPages": true
+    },
+    "performance": {
+      "lcpMsP75Max": 2500,
+      "inpMsP75Max": 200,
+      "clsP75Max": 0.1
+    }
+  },
+  "notes": [
+    "The performance values are budgets that require real field evidence; the static focus audit does not fabricate Core Web Vitals measurements.",
+    "Visual principles are design intent, not an automated beauty score."
+  ]
+}
