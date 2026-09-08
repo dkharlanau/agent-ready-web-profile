@@ -9,12 +9,15 @@ on:
       - 'registry/entity-catalog.jsonld'
       - 'schema/future-search-experiments.schema.json'
       - 'schema/intent-ownership.schema.json'
+      - 'schema/intent-ownership-surface-proof.schema.json'
       - 'lib/semantic-index.mjs'
       - 'lib/intent-ownership.mjs'
+      - 'lib/intent-ownership-surface.mjs'
       - 'bin/arwp-semantic-index.mjs'
       - 'bin/arwp-intent-ownership.mjs'
       - 'scripts/future-search-test.mjs'
       - 'scripts/intent-ownership-test.mjs'
+      - 'scripts/intent-ownership-surface-test.mjs'
       - 'benchmarks/intent-ownership/**'
       - 'skills/arwp-future-search/**'
       - 'skills/arwp-search-maturity/**'
@@ -31,12 +34,15 @@ on:
       - 'registry/entity-catalog.jsonld'
       - 'schema/future-search-experiments.schema.json'
       - 'schema/intent-ownership.schema.json'
+      - 'schema/intent-ownership-surface-proof.schema.json'
       - 'lib/semantic-index.mjs'
       - 'lib/intent-ownership.mjs'
+      - 'lib/intent-ownership-surface.mjs'
       - 'bin/arwp-semantic-index.mjs'
       - 'bin/arwp-intent-ownership.mjs'
       - 'scripts/future-search-test.mjs'
       - 'scripts/intent-ownership-test.mjs'
+      - 'scripts/intent-ownership-surface-test.mjs'
       - 'benchmarks/intent-ownership/**'
       - 'skills/arwp-future-search/**'
       - 'skills/arwp-search-maturity/**'
@@ -65,12 +71,15 @@ jobs:
         run: |
           node scripts/future-search-test.mjs
           node scripts/intent-ownership-test.mjs
+          node scripts/intent-ownership-surface-test.mjs
           node --check lib/semantic-index.mjs
           node --check lib/intent-ownership.mjs
+          node --check lib/intent-ownership-surface.mjs
           node --check bin/arwp-semantic-index.mjs
           node --check bin/arwp-intent-ownership.mjs
           node --check scripts/future-search-test.mjs
           node --check scripts/intent-ownership-test.mjs
+          node --check scripts/intent-ownership-surface-test.mjs
       - name: Exercise semantic index CLI
         run: |
           node bin/arwp-semantic-index.mjs build registry/page-manifest.json registry/entity-catalog.jsonld --output=/tmp/arwp-semantic-index.jsonld
@@ -87,4 +96,5 @@ jobs:
           grep -q 'registry/future-search-experiments.json' skills/arwp-future-search/SKILL.md
           grep -q 'Future Search Lab' docs/FUTURE-SEARCH-LAB.md
           grep -q 'Intent Ownership' docs/INTENT-OWNERSHIP.md
+          grep -q 'technical eligibility proof' docs/INTENT-OWNERSHIP.md
           grep -q 'Future Search rules' AGENTS.md

@@ -87,6 +87,48 @@ If an observation lands on a page other than the declared owner, the report emit
 
 It does **not** prove keyword cannibalization, ranking loss or a need for redirects.
 
+## Production surface proof
+
+Source/repository truth is not enough to mark a canonical owner technically eligible on the public web. ARWP therefore supports a bounded production-surface proof:
+
+```bash
+node bin/arwp-intent-ownership.mjs probe \
+  intent-ownership.json \
+  --proof-output=surface-proof.json \
+  --ledger-output=intent-ownership.observed.json
+```
+
+The probe checks every declared canonical page with bounded public HTTPS requests. For HTML pages, `indexable` means only that the current observation found:
+
+- HTTP `200`;
+- Googlebot allowed for that URL under the observed `robots.txt` rules;
+- no `noindex` in robots meta or `X-Robots-Tag`;
+- textual HTML content;
+- no declared `rel=canonical` pointing away from the owner URL.
+
+A same-origin redirect becomes `redirect`; an observed `noindex` becomes `noindex`. Network/robots uncertainty, non-HTML content, cross-origin redirects, non-200 responses and conflicting declared canonicals stay `unknown`.
+
+This is deliberately a **technical eligibility proof**, not an indexing receipt. Google's own technical requirements say that eligibility does not guarantee indexing. Likewise, `rel=canonical` is a canonical preference signal; Google can select a different canonical. Actual Google indexing and Google-selected canonical require owner-side Search Console/URL Inspection evidence.
+
+Primary references:
+
+- <https://developers.google.com/search/docs/essentials/technical>
+- <https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec>
+- <https://developers.google.com/search/docs/crawling-indexing/canonicalization>
+
+The proof also sets `deploymentCommitProven:false`. Public HTTP evidence proves what was observed at the URL, not which repository commit produced it. Use Change Receipts/deployment evidence separately when source→production parity matters.
+
+For deterministic/offline use, apply an already captured proof:
+
+```bash
+node bin/arwp-intent-ownership.mjs apply-proof \
+  intent-ownership.json \
+  surface-proof.json \
+  --output=intent-ownership.observed.json
+```
+
+The proof must cover exactly the canonical-page inventory in the ledger. This prevents a partial or stale surface sample from silently rewriting only convenient pages.
+
 ## Action semantics
 
 The report can queue:
@@ -123,7 +165,8 @@ Use Intent Ownership before turning a Search Maturity gap into new content:
 6. strengthen the existing owner and evidence path first;
 7. create a new canonical page only when a genuinely distinct, in-scope user job remains unserved;
 8. verify canonical/internal-link/sitemap behavior;
-9. measure Search/AI outcomes separately.
+9. capture public production-surface technical eligibility separately from actual Search indexing;
+10. measure Search/AI outcomes separately.
 
 This avoids a common failure mode: converting query fan-out or long-tail observations into a thin page factory.
 
@@ -132,6 +175,7 @@ This avoids a common failure mode: converting query fan-out or long-tail observa
 - Query variation does not automatically create a URL.
 - A deliberately declined intent does not create a URL.
 - An off-owner observation does not prove cannibalization.
+- A public surface proof does not prove actual Google indexing, Google-selected canonical, ranking or deployed commit identity.
 - A declared owner does not prove Search ranking, AI citation or retrieval.
 - Google/Bing/referral metrics remain provider-scoped.
 - Redirects, canonicals and production content changes require review.

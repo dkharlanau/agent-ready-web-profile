@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/intent-ownership-surface-proof.schema.json",
+  "title": "ARWP Intent Ownership Surface Proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "kind", "observedAt", "site", "source", "pages", "boundaries"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "version": {"const": "0.1"},
+    "kind": {"const": "intent-ownership-surface-proof"},
+    "observedAt": {"type": "string", "format": "date-time"},
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url"],
+      "properties": {"url": {"type": "string", "format": "uri", "pattern": "^https://"}}
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "userAgent"],
+      "properties": {
+        "mode": {"const": "bounded-public-http"},
+        "userAgent": {"type": "string", "minLength": 1}
+      }
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "finalUrl", "httpStatus", "contentType", "redirectObserved", "robots", "directives", "declaredCanonicalUrls", "htmlTextObserved", "derivedIndexState", "reason", "evidenceRefs"],
+        "properties": {
+          "url": {"type": "string", "format": "uri", "pattern": "^https://"},
+          "finalUrl": {"type": "string", "format": "uri", "pattern": "^https://"},
+          "httpStatus": {"type": ["integer", "null"], "minimum": 100, "maximum": 599},
+          "contentType": {"type": ["string", "null"]},
+          "redirectObserved": {"type": "boolean"},
+          "robots": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["url", "availability", "access", "matchedRule", "reason"],
+            "properties": {
+              "url": {"type": "string", "format": "uri", "pattern": "^https://"},
+              "availability": {"enum": ["available", "absent", "unknown"]},
+              "access": {"enum": ["allowed", "blocked", "unknown"]},
+              "matchedRule": {
+                "oneOf": [
+                  {"type": "null"},
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["type", "path"],
+                    "properties": {
+                      "type": {"enum": ["allow", "disallow"]},
+                      "path": {"type": "string", "minLength": 1}
+                    }
+                  }
+                ]
+              },
+              "reason": {"type": "string", "minLength": 1}
+            }
+          },
+          "directives": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["raw", "noindex"],
+            "properties": {
+              "raw": {"type": "array", "items": {"type": "string"}},
+              "noindex": {"type": "boolean"}
+            }
+          },
+          "declaredCanonicalUrls": {"type": "array", "items": {"type": "string", "format": "uri"}},
+          "htmlTextObserved": {"type": "boolean"},
+          "derivedIndexState": {"enum": ["indexable", "noindex", "redirect", "unknown"]},
+          "reason": {"type": "string", "minLength": 1},
+          "evidenceRefs": {"type": "array", "minItems": 1, "items": {"type": "string", "format": "uri", "pattern": "^https://"}}
+        }
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["technicalEligibilityOnly", "actualGoogleIndexingObserved", "searchConsoleIndexCoverageObserved", "deploymentCommitProven", "googleSelectedCanonicalObserved"],
+      "properties": {
+        "technicalEligibilityOnly": {"const": true},
+        "actualGoogleIndexingObserved": {"const": false},
+        "searchConsoleIndexCoverageObserved": {"const": false},
+        "deploymentCommitProven": {"const": false},
+        "googleSelectedCanonicalObserved": {"const": false}
+      }
+    }
+  }
+}
