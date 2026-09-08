@@ -5,6 +5,7 @@ import {
   buildIntentOwnershipReport,
   validateIntentOwnershipLedger
 } from '../lib/intent-ownership.mjs';
+import { evaluateIntentOwnershipGate } from '../lib/intent-ownership-gate.mjs';
 import {
   applyIntentOwnershipSurfaceProof,
   probeIntentOwnershipSurface,
@@ -17,10 +18,11 @@ function help() {
 Usage:
   node bin/arwp-intent-ownership.mjs check <intent-ownership.json>
   node bin/arwp-intent-ownership.mjs report <intent-ownership.json>
+  node bin/arwp-intent-ownership.mjs gate <intent-ownership.json>
   node bin/arwp-intent-ownership.mjs probe <intent-ownership.json> [--proof-output=FILE] [--ledger-output=FILE]
   node bin/arwp-intent-ownership.mjs apply-proof <intent-ownership.json> <surface-proof.json> [--output=FILE]
 
-Maps reviewed intent families to canonical owner pages and evidence without creating one page per query variant. The probe command records bounded public HTTP technical index eligibility; it does not prove Google indexing, Google-selected canonical, ranking or deployment commit parity.`);
+Maps reviewed intent families to canonical owner pages and evidence without creating one page per query variant. The probe command records bounded public HTTP technical index eligibility; it does not prove Google indexing, Google-selected canonical, ranking or deployment commit parity. The gate command is deterministic and fails unless every served intent family has exactly one owner whose current ledger state is indexable; declined intents are ignored.`);
 }
 
 function readJson(file) {
@@ -58,6 +60,12 @@ async function main() {
   }
   if (command === 'report') {
     process.stdout.write(`${JSON.stringify(buildIntentOwnershipReport(ledger), null, 2)}\n`);
+    return;
+  }
+  if (command === 'gate') {
+    const result = evaluateIntentOwnershipGate(ledger);
+    process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
+    if (!result.valid) process.exitCode = 1;
     return;
   }
   if (command === 'probe') {
