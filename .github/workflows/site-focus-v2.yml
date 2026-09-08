@@ -1,0 +1,58 @@
+name: Site Focus v0.2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.arwp/site-focus.json'
+      - 'bin/arwp-focus.mjs'
+      - 'lib/site-focus*.mjs'
+      - 'schema/site-focus*.json'
+      - 'scripts/site-focus*.mjs'
+      - 'docs/SITE-FOCUS-ENGINE.md'
+      - 'docs/site-focus.html'
+      - '.github/workflows/site-focus-v2.yml'
+  pull_request:
+    paths:
+      - '.arwp/site-focus.json'
+      - 'bin/arwp-focus.mjs'
+      - 'lib/site-focus*.mjs'
+      - 'schema/site-focus*.json'
+      - 'scripts/site-focus*.mjs'
+      - 'docs/SITE-FOCUS-ENGINE.md'
+      - 'docs/site-focus.html'
+      - '.github/workflows/site-focus-v2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  focus:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate Site Focus v0.1 compatibility
+        run: node scripts/site-focus-engine-test.mjs
+
+      - name: Validate declared-intent Site Focus v0.2
+        run: |
+          node scripts/site-focus-v2-test.mjs
+          node --check lib/site-focus-intent.mjs
+          node --check lib/site-focus-v2.mjs
+          node --check bin/arwp-focus.mjs
+          node --check scripts/site-focus-v2-test.mjs
+
+      - name: Dogfood Cite Goose declared intent
+        run: |
+          node bin/arwp-focus.mjs https://dkharlanau.github.io/agent-ready-web-profile/ --repo-root=. --max-pages=30 --json > /tmp/cite-goose-focus.json
+          node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('/tmp/cite-goose-focus.json','utf8')); if(r.version!=='0.2') throw new Error('expected v0.2'); if(!r.declaredFocus) throw new Error('declared focus missing'); if('score' in r) throw new Error('opaque score forbidden'); if(r.transformationHandoff?.executable!==false) throw new Error('handoff must remain proposal-only'); console.log('PASS Cite Goose v0.2 dogfood', JSON.stringify({pages:r.metrics.pagesObserved, findings:r.siteFindings.length, handoff:r.transformationHandoff.candidates.length}));"
