@@ -1,0 +1,67 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/intent-ownership.schema.json",
+  "version": "0.1",
+  "kind": "intent-ownership-ledger",
+  "reviewedAt": "2026-09-08T04:30:00Z",
+  "site": {"url": "https://example.com/", "ownership": "owner-controlled"},
+  "disclosure": {"class": "public-fixture", "containsLiveQueries": false},
+  "canonicalPages": [
+    {"url": "https://example.com/guide/clear-explanations/", "indexState": "indexable", "evidenceRefs": ["https://example.com/guide/clear-explanations/"]},
+    {"url": "https://example.com/guide/status-updates/", "indexState": "indexable", "evidenceRefs": ["https://example.com/guide/status-updates/"]},
+    {"url": "https://example.com/practice/concise-speaking/", "indexState": "indexable", "evidenceRefs": ["https://example.com/practice/concise-speaking/"]},
+    {"url": "https://example.com/old/clear-speaking/", "indexState": "redirect", "canonicalUrl": "https://example.com/guide/clear-explanations/", "evidenceRefs": ["https://example.com/old/clear-speaking/"]},
+    {"url": "https://example.com/draft/meeting-answer/", "indexState": "noindex", "evidenceRefs": ["https://example.com/draft/meeting-answer/"]}
+  ],
+  "families": [
+    {
+      "id": "explain-clearly",
+      "label": "Explain a technical topic clearly",
+      "locale": "en",
+      "ownershipConfidence": "high",
+      "ownerUrls": ["https://example.com/guide/clear-explanations/"],
+      "supportingPages": ["https://example.com/practice/concise-speaking/"],
+      "evidenceAssets": [{"id": "worked-example", "type": "first-party-example", "url": "https://example.com/guide/clear-explanations/", "evidenceRefs": []}],
+      "observations": [
+        {"provider": "google-search-console", "surface": "search-performance", "phraseClass": "search-query", "phrase": "synthetic clear explanation query", "observedAt": "2026-09-08T04:00:00Z", "pageUrl": "https://example.com/guide/clear-explanations/", "evidenceRefs": ["urn:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]},
+        {"provider": "bing-ai-performance", "surface": "grounding-queries", "phraseClass": "grounding-query", "phrase": "synthetic concise technical explanation", "observedAt": "2026-09-08T04:05:00Z", "pageUrl": "https://example.com/practice/concise-speaking/", "evidenceRefs": ["urn:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"]}
+      ]
+    },
+    {
+      "id": "project-status-update",
+      "label": "Give a concise project status update",
+      "locale": "en",
+      "ownershipConfidence": "medium",
+      "ownerUrls": ["https://example.com/guide/status-updates/", "https://example.com/practice/concise-speaking/"],
+      "supportingPages": [],
+      "evidenceAssets": [],
+      "observations": []
+    },
+    {
+      "id": "meeting-answer",
+      "label": "Answer a meeting question concisely",
+      "locale": "en",
+      "ownershipConfidence": "low",
+      "ownerUrls": [],
+      "supportingPages": ["https://example.com/practice/concise-speaking/"],
+      "evidenceAssets": [],
+      "observations": []
+    },
+    {
+      "id": "blocked-draft-owner",
+      "label": "A deliberately blocked fixture owner",
+      "locale": "en",
+      "ownershipConfidence": "high",
+      "ownerUrls": ["https://example.com/draft/meeting-answer/"],
+      "supportingPages": [],
+      "evidenceAssets": [],
+      "observations": []
+    }
+  ],
+  "guardrails": {
+    "noPagePerQueryVariant": true,
+    "noCannibalizationInference": true,
+    "noRankingClaim": true,
+    "noCrossProviderMetricJoin": true,
+    "humanReviewBeforeMutation": true
+  }
+}

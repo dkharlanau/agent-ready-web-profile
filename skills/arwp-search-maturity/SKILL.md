@@ -26,6 +26,7 @@ Read:
 
 - `docs/SEARCH-MATURITY-BENCHMARK.md`;
 - `docs/INTERNAL-DISCOVERY-EVIDENCE.md` when reviewing `internalTopicalGraph`;
+- `docs/INTENT-OWNERSHIP.md` when owner query/grounding evidence may imply a new or competing canonical page;
 - `schema/search-maturity-corpus.schema.json`;
 - the relevant reviewed corpus under `benchmarks/search-maturity/`;
 - current primary platform guidance;
@@ -34,16 +35,31 @@ Read:
 ## Workflow
 
 1. **Define the intent family first.** Do not benchmark unrelated high-authority sites merely because they rank for something.
-2. **Capture the visibility observation exactly.** Preserve provider/surface, query, locale/device when known and observation time. Store a numeric rank only when explicit `rankEvidence` independently supports that exact rank.
-3. **Separate ownership.** Independent references can inform the external cohort. ARWP-owned/project-reference sites remain implementation/dogfood evidence.
-4. **Review only observable dimensions.** Use the 16 Search Maturity dimensions. Omit anything not actually checked; omission is `unknown`, never failure.
-5. **Classify evidence.** Keep `documented-platform`, `observed-correlation`, `experiment` and `unknown` distinct.
-6. **Compile the cohort vector.** Prefer repeated patterns and state distributions over a universal score.
-7. **Compare the target.** A target gap is interesting only when the reference pattern is sufficiently repeated and the target evidence is real.
-8. **Perform applicability review.** Ask whether closing the gap improves the actual user/evidence artifact. Reject cosmetic copying and cargo cult.
-9. **Route accepted work through existing ARWP machinery.** Growth hypothesis → Adaptive Upgrade → safe transformation/manual edit → verification receipt.
-10. **Measure external outcomes separately.** Search visibility, AI retrieval/citation, referral traffic and business outcomes are different signals.
-11. **Preserve negative results.** A change with no effect is useful evidence and should influence future priors.
+2. **Resolve intent ownership before creating URLs.** When owner Search/AI evidence exists, map the intent family to zero/one/multiple reviewed canonical owners with `arwp-intent-ownership`. Strengthen an existing owner first; query or fan-out variation is not a page-creation instruction.
+3. **Capture the visibility observation exactly.** Preserve provider/surface, query, locale/device when known and observation time. Store a numeric rank only when explicit `rankEvidence` independently supports that exact rank.
+4. **Separate ownership.** Independent references can inform the external cohort. ARWP-owned/project-reference sites remain implementation/dogfood evidence.
+5. **Review only observable dimensions.** Use the 16 Search Maturity dimensions. Omit anything not actually checked; omission is `unknown`, never failure.
+6. **Classify evidence.** Keep `documented-platform`, `observed-correlation`, `experiment` and `unknown` distinct.
+7. **Compile the cohort vector.** Prefer repeated patterns and state distributions over a universal score.
+8. **Compare the target.** A target gap is interesting only when the reference pattern is sufficiently repeated and the target evidence is real.
+9. **Perform applicability review.** Ask whether closing the gap improves the actual user/evidence artifact. Reject cosmetic copying and cargo cult.
+10. **Route accepted work through existing ARWP machinery.** Growth hypothesis → Adaptive Upgrade → safe transformation/manual edit → verification receipt.
+11. **Measure external outcomes separately.** Search visibility, AI retrieval/citation, referral traffic and business outcomes are different signals.
+12. **Preserve negative results.** A change with no effect is useful evidence and should influence future priors.
+
+### Intent ownership evidence
+
+When query, grounding or referral observations are being used to decide content architecture:
+
+- declare the bounded intent family before reviewing phrases;
+- keep Google, Bing, referral and manual observations provider-scoped;
+- treat exactly one indexable reviewed owner as `owned`;
+- treat zero owners as a review gap, not an automatic new-page request;
+- treat multiple owners as `fragmented`, not automatic proof of cannibalization;
+- treat off-owner observations as a routing/relevance review signal, not proof of ranking harm;
+- preserve live owner query cohorts in private target evidence rather than public ARWP fixtures.
+
+Use `docs/INTENT-OWNERSHIP.md` for the full contract.
 
 ### Internal topical graph evidence
 
@@ -94,6 +110,7 @@ Do not force all dimensions onto every site type.
 - Do not fabricate rank, traffic, citations, backlinks, authorship, dates or evidence.
 - Do not encode a cohort feature as a Google/Bing ranking factor unless the platform documents that claim.
 - Do not create one page per query variant.
+- Do not infer keyword cannibalization merely because an observed query/grounding phrase lands off the reviewed owner.
 - Do not optimize the benchmark by selecting only supporting examples.
 - Do not collapse unknown into zero.
 - Do not hide misses or negative experiments.
@@ -115,6 +132,9 @@ node bin/arwp-search-maturity.mjs diff \
   benchmarks/search-maturity/pilot-2026-09-07.json \
   target-search-maturity.json \
   --intent=ai-search-optimization
+
+node bin/arwp-intent-ownership.mjs report \
+  intent-ownership.json
 ```
 
 ## Done when
@@ -122,6 +142,7 @@ node bin/arwp-search-maturity.mjs diff \
 - the reference cohort is timestamped and reviewable;
 - independent and owner-controlled evidence are separated;
 - unmeasured features remain unknown;
+- query/grounding variation maps to reviewed canonical ownership before any new-page decision;
 - repeated cohort patterns are explainable without a magic score;
 - target gaps retain evidence class and uncertainty;
 - accepted actions enter existing verification/measurement gates;

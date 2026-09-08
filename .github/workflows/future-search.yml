@@ -8,13 +8,20 @@ on:
       - 'registry/page-manifest.json'
       - 'registry/entity-catalog.jsonld'
       - 'schema/future-search-experiments.schema.json'
+      - 'schema/intent-ownership.schema.json'
       - 'lib/semantic-index.mjs'
+      - 'lib/intent-ownership.mjs'
       - 'bin/arwp-semantic-index.mjs'
+      - 'bin/arwp-intent-ownership.mjs'
       - 'scripts/future-search-test.mjs'
+      - 'scripts/intent-ownership-test.mjs'
+      - 'benchmarks/intent-ownership/**'
       - 'skills/arwp-future-search/**'
+      - 'skills/arwp-search-maturity/**'
       - 'skills/index.json'
       - 'skills/README.md'
       - 'docs/FUTURE-SEARCH-LAB.md'
+      - 'docs/INTENT-OWNERSHIP.md'
       - 'AGENTS.md'
       - '.github/workflows/future-search.yml'
   pull_request:
@@ -23,13 +30,20 @@ on:
       - 'registry/page-manifest.json'
       - 'registry/entity-catalog.jsonld'
       - 'schema/future-search-experiments.schema.json'
+      - 'schema/intent-ownership.schema.json'
       - 'lib/semantic-index.mjs'
+      - 'lib/intent-ownership.mjs'
       - 'bin/arwp-semantic-index.mjs'
+      - 'bin/arwp-intent-ownership.mjs'
       - 'scripts/future-search-test.mjs'
+      - 'scripts/intent-ownership-test.mjs'
+      - 'benchmarks/intent-ownership/**'
       - 'skills/arwp-future-search/**'
+      - 'skills/arwp-search-maturity/**'
       - 'skills/index.json'
       - 'skills/README.md'
       - 'docs/FUTURE-SEARCH-LAB.md'
+      - 'docs/INTENT-OWNERSHIP.md'
       - 'AGENTS.md'
       - '.github/workflows/future-search.yml'
 
@@ -47,20 +61,30 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Validate Future Search registry and semantic index compiler
+      - name: Validate Future Search registry, semantic index and intent ownership
         run: |
           node scripts/future-search-test.mjs
+          node scripts/intent-ownership-test.mjs
           node --check lib/semantic-index.mjs
+          node --check lib/intent-ownership.mjs
           node --check bin/arwp-semantic-index.mjs
+          node --check bin/arwp-intent-ownership.mjs
           node --check scripts/future-search-test.mjs
+          node --check scripts/intent-ownership-test.mjs
       - name: Exercise semantic index CLI
         run: |
           node bin/arwp-semantic-index.mjs build registry/page-manifest.json registry/entity-catalog.jsonld --output=/tmp/arwp-semantic-index.jsonld
           node bin/arwp-semantic-index.mjs check /tmp/arwp-semantic-index.jsonld
+      - name: Exercise intent ownership CLI
+        run: |
+          node bin/arwp-intent-ownership.mjs check benchmarks/intent-ownership/public-fixture.json
+          node bin/arwp-intent-ownership.mjs report benchmarks/intent-ownership/public-fixture.json > /tmp/arwp-intent-ownership-report.json
+          node -e "const r=JSON.parse(require('fs').readFileSync('/tmp/arwp-intent-ownership-report.json','utf8')); if(r.kind!=='intent-ownership-report'||r.summary.familyCount!==4||r.boundaries.queryVariantCreatesPage!==false) process.exit(1)"
       - name: Validate Future Search skill routing
         run: |
           node -e "const i=JSON.parse(require('fs').readFileSync('skills/index.json','utf8')); if(i.version!=='0.2'||!i.skills.some(s=>s.name==='arwp-future-search')||i.composition.futureSearch!=='arwp-future-search') process.exit(1)"
           grep -q '^name: arwp-future-search$' skills/arwp-future-search/SKILL.md
           grep -q 'registry/future-search-experiments.json' skills/arwp-future-search/SKILL.md
           grep -q 'Future Search Lab' docs/FUTURE-SEARCH-LAB.md
+          grep -q 'Intent Ownership' docs/INTENT-OWNERSHIP.md
           grep -q 'Future Search rules' AGENTS.md
