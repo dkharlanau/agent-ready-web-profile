@@ -15,7 +15,17 @@ This is a product/design gate, not a claimed search ranking factor. The numeric 
 
 ## Workflow
 
-Run the focus gate before content expansion, Search/AI optimization or visual feature work. Define the site thesis and boundary first, then choose the smallest problem-led information architecture that supports the real audience, and only after that route work to the other ARWP specialists.
+Run the executable Site Focus report first when a public site or generated repository surface exists:
+
+```bash
+node bin/arwp-focus.mjs https://example.com
+node bin/arwp-focus.mjs https://example.com --max-pages=30 --json
+node bin/arwp-focus.mjs https://example.com/project/ --repo-root=. --output=site-focus.json
+```
+
+Read `docs/SITE-FOCUS-ENGINE.md` before treating any heuristic finding as a structural decision. The engine emits transparent counts and Page Contract Map evidence; it never emits one focus/readiness/ranking score. `REMOVE` and `SPLIT` are never automatic.
+
+Use the report to challenge the observed structure, then define the intended site thesis and boundary. Choose the smallest problem-led information architecture that supports the real audience, and only after that route work to the other ARWP specialists.
 
 ## 1. Write the site thesis
 
@@ -77,6 +87,8 @@ primary_action: next useful step
 parent_hub: one canonical owning section
 ```
 
+When an executable report exists, compare this intended contract with `pageContracts[]` instead of overwriting the observed evidence.
+
 ## 4. Make the homepage a decision surface
 
 Recommended sequence:
@@ -128,7 +140,18 @@ Cite Goose default targets for a mostly static informational page:
 
 Do not invent a universal kilobyte or millisecond threshold when the actual hosting, device cohort and page job are unknown. If the project has a measured budget, preserve the stricter local rule.
 
-## 7. Run the focus gate in the Growth Loop
+## 7. Review engine dispositions safely
+
+The current engine may emit:
+
+- `KEEP` — sampled evidence does not currently expose a focus conflict;
+- `NARROW` — the page job/action contract is unclear;
+- `MERGE` — another sampled page has substantially overlapping title/H1/description intent signals;
+- `DEFER` — lexical overlap with the observed homepage thesis is low and scope deserves review.
+
+These are review dispositions, not mutation authority. A `MERGE` recommendation still needs canonical/redirect/history review. A `DEFER` recommendation is not a noindex/delete instruction. Never infer `REMOVE` or `SPLIT` from the numeric similarity alone.
+
+## 8. Run the focus gate in the Growth Loop
 
 Before proposing new content or discovery features, emit this compact decision record:
 
@@ -143,12 +166,12 @@ primary_nav: [...]   # target <= 5
 page_being_changed:
   page_job: ...
   primary_action: ...
-focus_decision: keep | narrow | split | remove | defer
+focus_decision: keep | narrow | merge | defer | manual-split-review | manual-remove-review
 ```
 
 Then continue with the appropriate ARWP specialist. Focus does not replace technical eligibility, evidence review, Search/AI research or measurement; it prevents those systems from optimizing a site whose product story is still incoherent.
 
-## 8. Verification
+## 9. Verification
 
 For a redesign or new page set, verify at minimum:
 
@@ -160,6 +183,7 @@ For a redesign or new page set, verify at minimum:
 - heading order, focus states, link labels and contrast remain usable;
 - generated HTML exposes core content without JavaScript;
 - image dimensions are declared and non-critical media is not eagerly loaded;
+- re-run `arwp-focus` after the structural change and compare the evidence rather than trying to maximize or minimize a score;
 - existing project tests/build checks still pass.
 
-When a site remains broad after this gate, recommend splitting a distinct problem territory into another resource rather than creating more navigation levels inside the same site.
+When a site remains broad after this gate, recommend splitting a distinct problem territory into another resource rather than creating more navigation levels inside the same site. That recommendation must still be reviewed against the real product, traffic/history and URL migration constraints.
