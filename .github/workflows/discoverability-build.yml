@@ -12,6 +12,7 @@ on:
       - 'skills/arwp-discoverability/**'
       - 'lib/discoverability.mjs'
       - 'scripts/build-discoverability.mjs'
+      - 'scripts/sync-discoverability-routes.mjs'
       - 'scripts/discoverability-test.mjs'
       - 'scripts/discoverability-routing-test.mjs'
       - '.github/workflows/discoverability-build.yml'
@@ -38,9 +39,11 @@ jobs:
       - run: npm ci
       - name: Build static discoverability surfaces
         run: npm run build:discoverability
+      - name: Synchronize discovery routes
+        run: node scripts/sync-discoverability-routes.mjs
       - name: Validate corpus and published index contract
         run: node scripts/discoverability-test.mjs --site
-      - name: Validate bounded evidence hubs
+      - name: Validate bounded evidence hubs and sitemap wiring
         run: node scripts/discoverability-routing-test.mjs
       - name: Show generated footprint
         shell: bash
@@ -48,12 +51,15 @@ jobs:
           wc -c docs/discoverability.html
           find docs/discoverability -maxdepth 1 -type f -name '*.html' -printf '%s %p\n' | sort -nr | head -20
           wc -c docs/discoverability/index.json
+          grep -c '/discoverability/.*\.html' docs/sitemap.xml
       - name: Commit generated surfaces when changed
         shell: bash
         run: |
           git add \
             docs/discoverability.html \
             docs/discoverability/ \
+            docs/sitemap.xml \
+            docs/sitemap.md \
             docs/knowledge/discoverability-corpus.json \
             docs/knowledge/source-link-checks.json \
             docs/knowledge/releases/ \
@@ -66,5 +72,5 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Build bounded discoverability evidence hubs'
+          git commit -m 'Sync discoverability evidence routes'
           git push origin HEAD:main
