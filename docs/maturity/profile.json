@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "site": "https://dkharlanau.github.io/agent-ready-web-profile/",
   "stage": "pre-stable",
-  "scope": "Optional evidence inventory; not an upstream standard or ranking requirement",
+  "scope": "Optional evidence inventory; not an upstream standard, legal certification or ranking requirement",
   "identity": {
     "graph": "docs/knowledge/graph.json",
     "subjectId": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
@@ -10,6 +10,12 @@
     "websiteId": "https://dkharlanau.github.io/agent-ready-web-profile/#website"
   },
   "policies": {
+    "project": "docs/project/index.html",
+    "copyright": "docs/project/rights.html",
+    "marks": "docs/project/marks.html",
+    "collaboration": "docs/project/collaboration.html",
+    "governance": "docs/project/governance.html",
+    "privacy": "docs/project/privacy.html",
     "brand": "TRADEMARKS.md",
     "brandPage": "docs/trust/brand.html",
     "license": "LICENSE",
@@ -18,6 +24,9 @@
     "history": "docs/history.json",
     "reuse": "docs/media/rights.json",
     "catalog": "docs/datasets/catalog.jsonld"
+  },
+  "projectSurfaces": {
+    "manifest": "docs/project/profile.json"
   },
   "datasets": [
     {
@@ -50,6 +59,7 @@
   },
   "externalGates": [
     "Trademark clearance requires jurisdiction, goods/services and a documented registry and broader search; no clearance is claimed.",
+    "The Metalhead Cats company route is owner-declared; live availability and legal entity status are not verified by the static maturity checker.",
     "DOIs require an actual published archive record and checked identifier/version metadata.",
     "Analytics needs browser consent/payload tests and owner-side data verification.",
     "Attestations, independent adoption and search outcomes require separate scoped evidence."

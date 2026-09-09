@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-sites.schema.json",
   "version": "0.1",
   "updatedAt": "2026-09-09",
-  "description": "Owner-controlled rollout portfolio for applying reviewed ARWP Growth trends to relevant websites. Membership is operational metadata, not independent adoption evidence or a quality ranking.",
+  "description": "Owner-controlled rollout portfolio for applying reviewed ARWP Growth trends to relevant public surfaces. Membership is operational metadata, not independent adoption evidence or a quality ranking.",
   "guardrails": {
     "ownerControlledEvidence": true,
     "watchIsNotDefaultRollout": true,
@@ -32,7 +32,7 @@
     {
       "id": "metalhatscats-applied-systems",
       "name": "MetalHatsCats",
-      "canonicalUrl": "https://metalhatscats.com/",
+      "canonicalUrl": "https://github.com/metalhatscats/metalhatscats",
       "repository": "metalhatscats/metalhatscats",
       "verticals": ["software-product", "documentation", "editorial", "research-dataset"],
       "goals": ["search", "generative-search", "ai-citations", "acquisition", "measurement", "agent-usability", "agent-discovery"],

@@ -157,6 +157,13 @@
         "mediaType": "application/json",
         "role": "other",
         "description": "Canonical project facts, boilerplate, versions and source links."
+      },
+      {
+        "name": "Goose ARWP Project & Policies manifest",
+        "url": "https://dkharlanau.github.io/agent-ready-web-profile/project/profile.json",
+        "mediaType": "application/json",
+        "role": "other",
+        "description": "Machine-readable project maturity roles for identity, rights, names and marks, collaboration, governance, contact routing and applicable policy surfaces; role presence is not legal certification or ranking evidence."
       }
     ]
   },
@@ -243,6 +250,16 @@
       "mediaPage": "https://dkharlanau.github.io/agent-ready-web-profile/media/",
       "rightsManifest": "https://dkharlanau.github.io/agent-ready-web-profile/media/rights.json",
       "pressFacts": "https://dkharlanau.github.io/agent-ready-web-profile/media/press-facts.json"
+    },
+    "io.github.dkharlanau/project-maturity-surfaces": {
+      "version": "1.0",
+      "status": "active-project-pattern",
+      "profile": "https://dkharlanau.github.io/agent-ready-web-profile/project/profile.json",
+      "schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/project-surfaces.schema.json",
+      "documentation": "https://dkharlanau.github.io/agent-ready-web-profile/MATURITY-PROFILE.md",
+      "semantics": "roles-not-page-count",
+      "legalCertification": false,
+      "rankingBenefitClaimed": false
     }
   }
 }

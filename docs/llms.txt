@@ -10,6 +10,7 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 
 - [ARWP Resolver](https://dkharlanau.github.io/agent-ready-web-profile/): Public project page and resolver workflow.
 - [ARWP Trust Center](https://dkharlanau.github.io/agent-ready-web-profile/trust/): Maintainer identity, evidence policy, security, corrections, software provenance, persistent-identifier state, external trust signals and explicit limitations.
+- [Goose ARWP Project & Policies](https://dkharlanau.github.io/agent-ready-web-profile/project/): Copyright/reuse, names and marks, partnership/collaboration, governance, privacy and project maturity routing.
 - [Agentic Web Protocol Observatory](https://dkharlanau.github.io/agent-ready-web-profile/observatory/): Dated primary-source-reviewed map of MCP, A2A, WebMCP, llms.txt, Agent Skills, RFC discovery and emerging commerce mechanisms.
 - [AI Crawler & Access Matrix](https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/): Current official-source matrix separating AI search indexing, user-triggered retrieval and model-training controls.
 - [ARWP Claims Registry](https://dkharlanau.github.io/agent-ready-web-profile/evidence/claims/): Stable scoped technical claims with IDs, review state, evidence and explicit limitations.
@@ -22,6 +23,7 @@ Localized routing surfaces are available in German (`de`) and Russian (`ru`). Th
 ## Machine-readable project surfaces
 
 - [ARWP self-profile](https://dkharlanau.github.io/agent-ready-web-profile/ai/site-profile.json): Project identity, data surfaces, MCP servers, trust metadata and project extensions.
+- [Project Surfaces manifest](https://dkharlanau.github.io/agent-ready-web-profile/project/profile.json): Machine-readable roles for project identity, rights, names/marks, collaboration, governance, contact routing, security, corrections, history and conditional policies.
 - [AI Search & Citation Profile JSON](https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json): Current implementation state and prioritized citation/trust plan for ARWP itself.
 - [Trust Center JSON](https://dkharlanau.github.io/agent-ready-web-profile/trust/trust.json): Maintainer identity, evidence/review model, security links, software-provenance state, DOI status and trust boundaries.
 - [Corrections ledger JSON](https://dkharlanau.github.io/agent-ready-web-profile/trust/corrections.json): Public corrections policy and material factual-correction history.

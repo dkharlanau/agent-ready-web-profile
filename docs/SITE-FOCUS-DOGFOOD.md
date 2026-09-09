@@ -5,7 +5,7 @@ This note records the first real-site calibration pass for the Goose Site Focus 
 Targets:
 
 - `https://ptichi.com/` — focused multilingual product/editorial site;
-- `https://metalhatscats.com/` — intentionally broader public-systems studio;
+- `https://github.com/metalhatscats/metalhatscats` — currently verified public MetalHatsCats repository surface; no standalone MetalHatsCats website domain is asserted by this note;
 - Goose itself — the self-dogfood control.
 
 The first pass started on Site Focus v0.1 and directly produced v0.2. Version 0.2 now supports owner-declared intent, route roles, locale equivalence and proposal-only transformation handoff. This note keeps the original calibration findings and records what the implementation subsequently proved.
@@ -64,7 +64,9 @@ A useful engine should:
 
 v0.2 implements the last requirement by suppressing locale-equivalent pairs from `MERGE` noise while explicitly refusing to treat that as proof of correct canonical/hreflang implementation.
 
-## MetalHatsCats: broad-site control
+## MetalHatsCats: historical broad-site calibration — re-run required
+
+**Correction, 2026-09-09:** the previous dogfood note treated `metalhatscats.com` as a live target. The project owner clarified that this standalone domain is not in use. The IA observations below are retained as historical calibration context, not current production evidence. Re-run Site Focus against an actual published MetalHatsCats site before using these findings as current evidence.
 
 The repository explicitly defines MetalHatsCats as a public systems studio whose commercial entry points are websites, documentation, public data and search/discovery. Products, projects, research and experiments can also act as proof surfaces.
 

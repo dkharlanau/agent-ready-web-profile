@@ -53,22 +53,67 @@ function inCurrentScope(file) {
   return false;
 }
 
+function countLegacy(text) {
+  return (text.match(/Cite Goose|CITE GOOSE/g) || []).length;
+}
+
+function isBoundedDeprecatedReference(file, text) {
+  const occurrences = countLegacy(text);
+  if (occurrences !== 1) return false;
+
+  if (file === 'TRADEMARKS.md') {
+    return /\*\*Cite Goose\*\*\s+—\s+deprecated legacy public name retained only where history\/path compatibility requires it/i.test(text)
+      && /Goose ARWP/.test(text);
+  }
+
+  if (file === 'docs/project/marks.html') {
+    return /<strong>Cite Goose<\/strong><\/td><td>Legacy public name retained only where history\/path compatibility requires it<\/td><td><span class="project-status legacy">Deprecated<\/span>/i.test(text)
+      && /<title>Names &amp; Marks — Goose ARWP<\/title>/i.test(text);
+  }
+
+  if (file === 'docs/project/profile.json') {
+    try {
+      const value = JSON.parse(text);
+      const legacy = value.projectNames?.filter(item => item?.name === 'Cite Goose') || [];
+      return legacy.length === 1
+        && legacy[0].role === 'legacy-public-name'
+        && /^deprecated-/.test(legacy[0].status)
+        && value.product?.name === 'Goose ARWP';
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+}
+
 const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' })
   .split('\0')
   .filter(Boolean)
   .filter(inCurrentScope);
 
 const legacy = [];
+const boundedLegacy = [];
 for (const file of files) {
   const absolute = path.join(root, file);
   if (!fs.existsSync(absolute) || !fs.statSync(absolute).isFile()) continue;
   let text;
   try { text = fs.readFileSync(absolute, 'utf8'); } catch { continue; }
-  if (text.includes('Cite Goose') || text.includes('CITE GOOSE')) legacy.push(file);
+  if (!text.includes('Cite Goose') && !text.includes('CITE GOOSE')) continue;
+  if (isBoundedDeprecatedReference(file, text)) boundedLegacy.push(file);
+  else legacy.push(file);
 }
 
 if (legacy.length) {
   throw new Error(`Legacy public brand remains in current surfaces: ${legacy.join(', ')}`);
+}
+
+const expectedBoundedLegacy = ['TRADEMARKS.md', 'docs/project/marks.html', 'docs/project/profile.json'];
+for (const file of expectedBoundedLegacy) {
+  if (!boundedLegacy.includes(file)) throw new Error(`Expected bounded deprecated brand reference is missing or no longer explicitly deprecated: ${file}`);
+}
+if (boundedLegacy.some(file => !expectedBoundedLegacy.includes(file))) {
+  throw new Error(`Unexpected current surface contains a deprecated brand reference: ${boundedLegacy.filter(file => !expectedBoundedLegacy.includes(file)).join(', ')}`);
 }
 
 const expectations = [
@@ -122,4 +167,4 @@ for (const required of ['docs/BRAND-GOOSE.md', 'docs/BRAND-CITE-GOOSE.md']) {
   if (!pkg.files?.includes(required)) throw new Error(`npm package surface is missing ${required}`);
 }
 
-console.log(`PASS Goose ARWP brand contract across ${files.length} current public/source surfaces; Get Found. is the primary tagline, Goose remains the short form, Agent-Ready Web Profile / ARWP remains the technical identity, canonical self-profiles are byte-identical, regression fixtures may mention legacy copy only as negative test data, both brand docs ship in the package, and frozen history is excluded.`);
+console.log(`PASS Goose ARWP brand contract across ${files.length} current public/source surfaces; Get Found. is the primary tagline, Goose remains the short form, Agent-Ready Web Profile / ARWP remains the technical identity, canonical self-profiles are byte-identical, exactly three policy/registry surfaces may retain one explicitly deprecated Cite Goose reference each, regression fixtures may mention legacy copy only as negative test data, both brand docs ship in the package, and frozen history is excluded.`);
