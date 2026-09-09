@@ -6,8 +6,8 @@
   "required": ["version", "rulesVersion", "generatedAt", "canonicalUrl", "summary", "cohort", "robots", "pages", "checks", "guardrails", "registry"],
   "not": { "required": ["score"] },
   "properties": {
-    "version": { "const": "0.1" },
-    "rulesVersion": { "type": "string" },
+    "version": { "const": "0.2" },
+    "rulesVersion": { "const": "0.2" },
     "generatedAt": { "type": "string", "format": "date-time" },
     "canonicalUrl": { "type": "string", "format": "uri" },
     "summary": {
@@ -60,11 +60,22 @@
     },
     "guardrails": {
       "type": "object",
-      "required": ["noCompositeScore", "noRankingPromise", "noCitationPromise", "boundedSampleNotSiteWideProof", "watchIsNotFailure", "derivedHeuristicsAreNotPlatformRequirements"],
+      "required": [
+        "noCompositeScore",
+        "noRankingPromise",
+        "noCitationPromise",
+        "boundedSampleNotSiteWideProof",
+        "boundedFetchFailureIsNotIndexabilityFailure",
+        "nonHtmlDoesNotRequireHtmlCanonical",
+        "watchIsNotFailure",
+        "derivedHeuristicsAreNotPlatformRequirements"
+      ],
       "properties": {
         "noCompositeScore": { "const": true },
         "noRankingPromise": { "const": true },
-        "noCitationPromise": { "const": true }
+        "noCitationPromise": { "const": true },
+        "boundedFetchFailureIsNotIndexabilityFailure": { "const": true },
+        "nonHtmlDoesNotRequireHtmlCanonical": { "const": true }
       },
       "additionalProperties": true
     }
