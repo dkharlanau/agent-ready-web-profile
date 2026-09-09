@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-remediation-receipt-v0.1.schema.json",
+  "title": "Cite Goose Site Focus Remediation Receipt v0.1",
+  "description": "Deployment-linked proof for a reviewed Site Focus finding that was patched directly without fabricating SignalBraid transformation lineage.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "id", "generatedAt", "site", "baseline", "findings", "change", "verification", "measurements", "knownUnknowns", "outcome", "formalChangeReceipt"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "id": { "type": "string", "pattern": "^sfr_[a-z0-9][a-z0-9._-]{5,127}$" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalUrl", "repository", "siteFocusVersion"],
+      "properties": {
+        "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "repository": { "type": "string", "pattern": "^[^/\\s]+/[^/\\s]+$" },
+        "siteFocusVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commitSha"],
+      "properties": {
+        "commitSha": { "$ref": "#/$defs/sha" },
+        "report": { "$ref": "#/$defs/reportEvidence" }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "decision", "reason"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "decision": { "enum": ["patch", "keep", "defer", "reject"] },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commits", "paths", "summary"],
+      "properties": {
+        "commits": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/sha" } },
+        "paths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "summary": { "type": "string", "minLength": 1 }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceCheck", "deploy", "productionFocus"],
+      "properties": {
+        "sourceCheck": { "$ref": "#/$defs/workflowEvidence" },
+        "deploy": {
+          "allOf": [
+            { "$ref": "#/$defs/workflowEvidence" },
+            {
+              "type": "object",
+              "required": ["commitSha"],
+              "properties": { "commitSha": { "$ref": "#/$defs/sha" } }
+            }
+          ]
+        },
+        "productionFocus": {
+          "allOf": [
+            { "$ref": "#/$defs/workflowEvidence" },
+            {
+              "type": "object",
+              "required": ["commitSha", "artifactDigest", "verifiedAfterSuccessfulDeploy"],
+              "properties": {
+                "commitSha": { "$ref": "#/$defs/sha" },
+                "artifactDigest": { "$ref": "#/$defs/digest" },
+                "verifiedAfterSuccessfulDeploy": { "const": true }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "measurements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["metric", "before", "after", "interpretation"],
+        "properties": {
+          "metric": { "type": "string", "minLength": 1 },
+          "before": { "$ref": "#/$defs/value" },
+          "after": { "$ref": "#/$defs/value" },
+          "interpretation": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "knownUnknowns": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "outcome": { "enum": ["keep", "revert", "review"] },
+    "formalChangeReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reason"],
+      "properties": {
+        "status": { "enum": ["not-applicable", "eligible", "generated"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "receiptId": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "generated" } }, "required": ["status"] },
+          "then": { "required": ["receiptId"] }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "value": { "type": ["string", "number", "integer", "boolean", "null"] },
+    "workflowEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workflowRunId", "conclusion"],
+      "properties": {
+        "workflowRunId": { "type": "integer", "minimum": 1 },
+        "conclusion": { "enum": ["success", "failure", "cancelled", "skipped", "timed_out", "action_required", "neutral"] }
+      }
+    },
+    "reportEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generatedAt", "artifactDigest"],
+      "properties": {
+        "workflowRunId": { "type": "integer", "minimum": 1 },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "artifactDigest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}
