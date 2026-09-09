@@ -23,6 +23,11 @@ const frozenExact = new Set([
   'docs/history.json'
 ]);
 
+const migrationControlFiles = new Set([
+  'scripts/goose-brand-migration.mjs',
+  'scripts/goose-brand-test.mjs'
+]);
+
 const rootCurrentFiles = new Set([
   'README.md',
   'TRADEMARKS.md'
@@ -37,7 +42,7 @@ function isFrozen(file) {
 }
 
 function isCurrentBrandSurface(file) {
-  if (isFrozen(file)) return false;
+  if (migrationControlFiles.has(file) || isFrozen(file)) return false;
   if (rootCurrentFiles.has(file)) return true;
   if (file === 'docs/BRAND-CITE-GOOSE.md') return true;
   if (file.startsWith('docs/')) return currentExtensions.has(path.extname(file));
@@ -64,7 +69,7 @@ for (const file of files) {
   }
   if (!source.includes('Cite Goose') && !source.includes('CITE GOOSE') && !source.includes('BRAND-CITE-GOOSE.md')) continue;
 
-  let next = source
+  const next = source
     .replaceAll('CITE GOOSE', 'GOOSE')
     .replaceAll('Cite Goose', 'Goose')
     .replaceAll('BRAND-CITE-GOOSE.md', 'BRAND-GOOSE.md');
