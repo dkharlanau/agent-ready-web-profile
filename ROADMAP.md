@@ -1,212 +1,229 @@
-# ARWP Roadmap
+# Goose ARWP Roadmap
 
-ARWP has moved beyond its first profile/specification build-out. The project now has two complementary layers:
+Reviewed: **2026-09-09** after the Goose self-interview loop.
 
-1. **ARWP Profile** — optional publisher-maintained service-map metadata;
-2. **ARWP Resolver** — the primary product direction: discover, normalize, verify and route the machine/agent interfaces a public website actually exposes.
+**Goose ARWP — Get Found.**
 
-> **ARWP should not win by becoming another universal agent manifest. It should become the interoperability resolver that tells software what a website actually exposes, where that evidence came from, and which interface is appropriate for the task.**
+Goose helps a site become easier for Search and AI systems to discover, understand, verify, cite and route to useful actions. **Agent-Ready Web Profile (ARWP)** remains the technical foundation: schemas, Resolver, evidence contracts, site analysis, transformations and interoperability machinery.
 
-## North Star
+The project is no longer roadmaped as “build a better Resolver first.” Resolver quality remains an important technical workstream, but the product North Star is now an **evidence-backed site improvement loop**.
 
-> **How many external sites can ARWP correctly resolve and route without site-specific integration code?**
+## Product North Star
 
-Supporting measures:
+> **How many real sites can complete a reviewed Goose loop from intended outcome → observed site state → applicable change → verified deployment → provider-native Search/AI evidence → explicit keep/revise/stop decision?**
 
-1. resolved independent sites;
-2. correct-interface selection against manually reviewed ground truth;
-3. discovery requests / bytes / duration for the real Resolver run;
-4. real conflicts detected between independent discovery surfaces;
-5. downstream integrations that actually consume Resolver output.
+Track separately:
 
-Owned reference sites, schema field count, GitHub stars and readiness scores are not North Star metrics.
+1. sites with an explicit purpose / intent boundary;
+2. sites with a verified production ref matching the measured implementation;
+3. sites with real provider-native Search/AI evidence;
+4. experiments reaching a reviewed decision;
+5. neutral/negative experiments retained;
+6. independent sites/consumers using Goose outside owner-controlled dogfood.
 
-## Status vocabulary
-
-- **implemented** — code/docs/tests exist and are kept green in CI;
-- **prepared** — deployment/publication artifacts exist but the external action has not completed;
-- **external** — success depends on hosting, a registry or independent users/sites;
-- **evidence-gated** — intentionally blocked until external evidence justifies the work.
+Do **not** collapse these into a Goose score. Feature count, page count, schema count, GitHub stars, Resolver interface count and owner-controlled “wins” are not North Star metrics.
 
 ---
 
-# R0 — Prove utility outside the project
+# M1 — Proof before more product
 
-| Initiative | Status | Current gate |
-| --- | --- | --- |
-| Package-ready 0.2.x Resolver | implemented / prepared | npm trusted-publishing configuration + external publication |
-| Prepared Official MCP Registry Resolver artifact | implemented / prepared | npm publication first, then Registry acceptance |
-| Public bounded discovery service code | implemented / prepared | external HTTPS runtime + edge controls + Pages wiring |
-| Synthetic resolver regression benchmark | implemented | remains engineering-only, never marketed as external evidence |
-| External benchmark fixture schema + runner | implemented | first 10 reviewed independent fixtures created; pilot run in progress |
-| 20–50-site independent benchmark | external / next | expand reviewed corpus after the pilot exposes fixture/resolver problems |
-| 3 independent adopters | external | collect real use/friction rather than owner-controlled demos |
-| Publish negative results | policy | misses, failures and cases where simpler discovery wins stay visible |
+**Status: current P0 milestone.**
 
-### R0 decision rule
+The immediate goal is to demonstrate that Goose can operate a small number of sites end to end without changing definitions after seeing outcomes.
 
-If independent evidence does not show useful resolution/routing gains, reduce scope. Do not add ARWP fields merely to manufacture an advantage.
+## Exit criteria
+
+- at least **three owned sites** have an explicit experiment/evidence state;
+- each measured treatment has an independently checked production/deployment ref;
+- at least two sites have real owner/provider-native Search or AI visibility evidence;
+- at least one experiment reaches a human-reviewed `keep`, `revise`, `continue-measuring`, `revert` or `retire` decision;
+- negative/neutral evidence remains visible;
+- the public Proof Board can render status from committed evidence rather than hand-written success claims;
+- no new large protocol/module track is started merely because the proof window is slow.
+
+**Ptichi stays measurement-hold until production parity is independently verified.** Its existing 12 treatment + 6 control cohort is the authoritative cohort; do not manufacture a larger replacement merely to satisfy an old planning number.
+
+## P0 work
+
+| Initiative | Why now |
+| --- | --- |
+| Portfolio Proof Board (#93) | Make real experiment/deployment/evidence state visible before selling architecture. |
+| Real longitudinal Growth/Controlled Cohort evidence (#55, #83) | The largest remaining credibility gap is outcome population, not another schema. |
+| Production parity gates | Observation clocks start only when the intended implementation is verifiably live. |
+| Provider-native AI/Search evidence | Google AI impressions, Bing citations/grounding evidence and referrals have different semantics and must stay separate. |
+| Recommendation review/decay | Weak or contradicted advice should age out instead of accumulating forever. |
 
 ---
 
-# R1 — Resolver core and evidence ladder
+# M2 — One obvious first-run journey
 
-| Initiative | Status | Notes |
-| --- | --- | --- |
-| `arwp resolve URL` | implemented | evidence-backed normalized service map |
-| `arwp explain URL` | implemented | human-readable interfaces/conflicts/plans |
-| `arwp plan URL --intent=...` | implemented | deterministic `read/search/structured/tools/agent` routing |
-| Canonical HTML read fallback | implemented | ordinary web remains a valid low-priority read interface |
-| Public HTTPS / SSRF / redirect / size / timeout boundaries | implemented | shared bounded network primitives |
-| ARWP profile adapter | implemented | optional resolver input, not a prerequisite |
-| agents.txt / agents.json | implemented | community convention with explicit authority label |
-| RFC 8288 HTTP Link discovery | implemented | `api-catalog`, `service-desc`, `service-doc`, Markdown alternate, ARWP `describedby` |
-| Markdown content negotiation observation | implemented | `Accept: text/markdown` HEAD observation; not a universal requirement |
-| RFC 9727 API Catalog | implemented | conventional and explicit Link discovery |
-| RFC 9728 root protected-resource metadata | implemented | root-origin metadata only |
-| A2A Agent Card | implemented | current v1 + legacy compatibility parsing |
-| Agent Skills discovery index | implemented | artifact/digest metadata preserved |
-| Experimental MCP AI Catalog / Server Cards | implemented | remains explicitly `experimental-upstream` |
-| Source-authority model | implemented | upstream/project/community/observed evidence remains distinct |
-| Static conflict engine | implemented | identity, agents.*, MCP endpoint/card conflicts |
-| Hosted `/scan`, `/resolve`, `/explain`, `/plan` | implemented | fixed bounded routes; no arbitrary proxy |
-| Resolver MCP | implemented | resolve, batch resolve, resolved federation, explain, plan and opt-in verification tools |
-| MCP modern runtime `server/discover` | implemented | opt-in; no tool invocation |
-| MCP legacy initialize lifecycle | implemented | initialize + session + initialized notification |
-| MCP static/runtime reconciliation | implemented | self-reported runtime identity mismatch becomes conflict |
-| A2A v1 shape validator | implemented | current required shape checked before signature work |
-| A2A RS256 / ES256 verifier | implemented internally | bounded JWKS, unsigned/verified/invalid/unavailable states |
-| A2A cross-SDK signed-card interoperability | external / next | must prove canonicalization against independent upstream signatures |
-| RFC 9728 path-scoped protected resources | evidence-gated | implement only for a real resource-level use case |
+**Status: P1 after proof instrumentation is stable.**
 
-### Evidence ladder
-
-ARWP should continue to distinguish:
+The external journey should be understandable without learning Goose internals:
 
 ```text
-declared-static
-observed-web / verified-artifact
-runtime-observed
-signature-verified (when cryptographically proven)
-conflict
-not-assessed / unsupported
+TELL GOOSE THE GOAL
+        ↓
+INSPECT THE REAL SITE
+        ↓
+DECIDE THE TOP 1–3 MOVES
+        ↓
+CHANGE SAFELY
+        ↓
+PROVE IMPLEMENTATION
+        ↓
+MEASURE OUTCOME
+        ↓
+WATCH / REVISE
 ```
 
-A successful runtime probe or signature does not by itself establish business/security trust.
+Relevant work:
+
+- #92 — owner-declared context / adaptive interview;
+- #94 — concise Get Found Brief;
+- #96 — first-run journey hiding internal module complexity;
+- Site Focus and Intent Ownership stay the existing truth models rather than being duplicated.
+
+The interface should simplify the product, **not** simplify away uncertainty, evidence class or owner-vs-observed conflicts.
 
 ---
 
-# R2 — Operational Resolver
+# M3 — Provider-native Search & AI measurement
 
-| Initiative | Status | Notes |
-| --- | --- | --- |
-| `arwp resolve-many` / `resolveMany` | implemented | max batch, bounded concurrency, same-origin serialization, isolated failures |
-| Resolver MCP `resolve_sites` | implemented | bounded multi-site inventory |
-| Compact resolver snapshots | implemented | no canonical datasets copied |
-| `arwp snapshot` | implemented | versioned deterministic operational state |
-| Machine-readable drift diff | implemented | identity/source/interface/conflict/plan changes |
-| `arwp drift` | implemented | explicit drift exit state |
-| Resolver monitor engine | implemented | baseline/stable/drift/failure states |
-| Selective fail classes | implemented | identity/removal/conflict/plan/resolution policies |
-| Monitor config schema/example | implemented | copyable operational contract |
-| Scheduled GitHub Actions monitor template | implemented | cached snapshots + always-uploaded report |
-| Existing ARWP-profile federation | implemented | original reference/use path retained |
-| Resolver-backed federation from canonical URLs | implemented | ARWP profile no longer required |
-| Safe static-index execution | implemented | generic federation only executes resolved JSON/JSONL/NDJSON retrieval indexes |
-| Resolver MCP `search_resolved_sites` | implemented | preserves source/discovery/interface provenance |
-| Advanced redirect/version drift classification | next | needs observed real-world drift evidence |
-| Notification-oriented compact monitor summaries | next | add only after monitor use shows what is actionable |
-| Public universal resolver registry | evidence-gated | a reviewed corpus is sufficient until external clients need registry semantics |
+**Status: active foundation; next hardening required.**
 
-Generic federation must not invent OpenAPI, MCP or A2A operations when the semantic search/action contract is unknown.
+Goose must model each provider according to the evidence the provider actually exposes.
 
----
+### Google
 
-# R3 — Evidence, benchmarking and governance
+Treat Search Console generative-AI visibility as **exposure/impression evidence**. Keep pages/countries/devices/time dimensions where owner exports provide them. Do not relabel these impressions as citations, rankings or ChatGPT-style mentions.
 
-| Initiative | Status | Notes |
-| --- | --- | --- |
-| Resolver methodology | implemented | `docs/RESOLVER.md` |
-| Benchmark evidence rules | implemented | `docs/BENCHMARK.md` |
-| Strict benchmark fixture JSON Schema | implemented | independent/reference/example ownership is explicit |
-| External benchmark runner | implemented | raw site/strategy/intent output; aggregate only independent fixtures |
-| Network-metric attribution policy | implemented | request/byte/time claims only for actual Resolver run; subset strategies remain selection projections |
-| First 10 independent fixtures | implemented as reviewed pilot corpus | deliberately includes ordinary HTML and path-scoped discovery misses |
-| 20–50 independent fixtures | next | expand after reviewing first pilot results |
-| Upstream status labeling | implemented | experimental/community inputs are not promoted to standards |
-| Failure taxonomy through issues | implemented foundation | real interoperability failures should drive changes |
-| Automated upstream compatibility watcher | next | detect material MCP/A2A/Skills/RFC changes |
-| A2A cross-SDK crypto fixtures | next | required before broad interoperability claim |
-| Public resolver change log separate from profile contract | next | useful once upstream-driven adapter changes accelerate |
-| SchemaStore inclusion | evidence-gated | only after independent profile adoption justifies editor discovery |
-| ARWP Profile v0.2 | evidence-gated | requires consumer failure not solvable through upstream metadata or extension |
-| Registered ARWP `.well-known` URI | evidence-gated | do not create a discovery-path format war without demonstrated need |
-| Naming/positioning review | next | continue leading with `ARWP Resolver`, not “readiness certification” |
+### Bing / Microsoft
 
----
+Treat AI Performance as **citation/grounding evidence**. Keep page-level citations and grounding-query relationships separate from Search rankings. Intents, Topics and Citation Share are provider-native dimensions and must not be flattened into a universal AI visibility score.
 
-# Product wedge
+### OpenAI / ChatGPT
 
-Initial evidence remains focused on:
+Treat OAI-SearchBot access, public Search eligibility and referral observations as separate evidence classes. Crawler access is not a citation result; GPTBot training controls are not Search visibility controls.
 
-- technical documentation;
-- research/evidence libraries;
-- public knowledge bases;
-- open datasets;
-- developer/product portals;
-- professional knowledge sites.
+### Cross-provider rule
 
-Do not broaden into commerce, payments, checkout or transaction orchestration merely because adjacent agent-web formats contain those fields.
-
-# What ARWP should not build
-
-Do not create ARWP-native replacements for:
-
-- OAuth Protected Resource Metadata;
-- API Catalog;
-- A2A Agent Cards;
-- MCP runtime discovery / Server Cards;
-- Agent Skills packages/discovery;
-- crawler AI-use preference standards;
-- payment protocols.
-
-Prefer:
+Use a funnel, not a score:
 
 ```text
-UPSTREAM EXISTS
-      ↓
-resolve / verify / normalize it
-
-UPSTREAM DOES NOT EXIST
-      ↓
-collect a concrete interoperability failure
-
-ONLY THEN
-      ↓
-consider an ARWP extension or profile field
+ACCESS
+  ↓
+INDEX / ELIGIBILITY
+  ↓
+EXPOSURE
+  ↓
+CITATION / REFERENCE
+  ↓
+BRAND MENTION
+  ↓
+VISIT
+  ↓
+USEFUL ACTION
 ```
 
-# Immediate execution order
+A provider may expose only some stages. Missing stages remain unknown.
 
-1. keep main CI green after the operational/runtime/crypto expansion;
-2. complete the first 10-site external pilot and publish raw negative/positive results;
-3. fix systematic discovery gaps only after the baseline result is preserved;
-4. rerun the same corpus to show before/after without changing ground truth;
-5. expand the corpus to 20–50 independent sites;
-6. complete #4 npm + MCP Registry publication;
-7. complete #5 public HTTPS resolver deployment;
-8. obtain three independent consumers/adopters in #6;
-9. prove A2A signature interoperability against upstream/second-language signed cards;
-10. decide from evidence whether ARWP Profile itself needs another version.
+---
 
-# Next release gate
+# M4 — Evidence-backed content / GEO operations
 
-Before a public 0.2.x toolchain release:
+**Status: active.**
 
-1. all resolver/monitor/federation/runtime/crypto tests are green;
-2. npm pack/install smoke proves all shipped modules and the Resolver MCP entry point;
-3. hosted service tests prove fixed routes, CORS/rate limits and no arbitrary proxy behavior;
-4. synthetic benchmark remains reproducible and labeled synthetic;
-5. the independent pilot benchmark is preserved with raw failures, not just a headline score;
-6. current upstream protocol statuses are rechecked;
-7. release notes distinguish implemented code from external hosting/registry/adoption claims.
+Google's current guidance does not require special AI markup for AI Overviews or AI Mode. Goose therefore treats “GEO” as an evidence-backed extension of good Search/content operations, not an excuse to generate AI-specific files or thin pages.
+
+Keep strengthening existing layers:
+
+- Site Focus — problem/audience/outcome boundaries;
+- Intent Ownership — one reviewed page/job per intent family before adding URLs;
+- Data Authority — genuine datasets/entities/relationships when they provide standalone value;
+- Answer surfaces — direct useful answers, evidence, authorship/provenance and clear continuation paths;
+- entity graph / structured data — only where it represents visible facts;
+- freshness/review dates — meaningful changes, not timestamp theater;
+- page value gate — demand + unique value + standalone usefulness + canonical identity before indexable expansion;
+- original evidence/tools/examples over commodity text.
+
+The goal is not “more pages.” The goal is more **useful, ownable, verifiable information surfaces** that can earn Search/AI discovery.
+
+---
+
+# M5 — Portfolio maintenance and scale
+
+**Status: later commercial leverage, after proof.**
+
+Once the proof loop is real on several sites, Goose Watch / portfolio capabilities become much more valuable:
+
+- multi-site source/rule blast radius;
+- scheduled re-review;
+- provider policy drift;
+- deployment/evidence queues;
+- approved change waves;
+- portfolio policy-as-code;
+- owner-data connectors;
+- verified stack transformation packs.
+
+The commercial value is maintenance, evidence, governance and scale — not a ranking guarantee.
+
+---
+
+# Technical foundation workstreams
+
+These remain important but are **supporting engines**, not the public journey.
+
+| Engine | Current role |
+| --- | --- |
+| Resolver / protocol adapters | Discover and normalize real machine interfaces with provenance. |
+| Site Focus + Intent Ownership | Define problem, audience, route and intent boundaries. |
+| Growth / Recommendation Registry | Turn current evidence into applicable candidate work. |
+| Repository Mapper / Transformation packs | Resolve source ownership and prepare deterministic changes. |
+| BraidGraph | Preserve evidence → rule → site → recommendation → change → proof relationships and reverse impact. |
+| Evidence / Change Receipts | Preserve what was observed, changed and verified. |
+| Controlled Cohorts / Winner Observatory | Run bounded longitudinal discovery experiments. |
+| Recommendation Review | Age, challenge, revise and retire advice. |
+| Project Maturity Surfaces | Keep identity, rights, governance and collaboration inspectable. |
+
+## Resolver decision-quality gate
+
+The existing reviewed Resolver evidence still matters. Do not weaken it, rewrite frozen truth or add hostname-specific exceptions. However, new Resolver/protocol breadth is lower priority than real site evidence unless a concrete interoperability failure blocks a current Goose workflow.
+
+---
+
+# Stop / deprioritize rules
+
+Until M1 has real evidence:
+
+- do not create a new top-level product module without a demonstrated user job;
+- do not create AI-specific markup/files merely because a third party calls them “GEO”;
+- do not expand URL counts before intent/page value gates;
+- do not treat crawler access as citation evidence;
+- do not treat citation as brand mention, traffic or conversion;
+- do not start new protocol adapters without a concrete blocked workflow or interoperability case;
+- do not rewrite experiments after observing winners;
+- do not use policy/trust page count as maturity;
+- do not hide neutral or negative results;
+- do not replace provider-native metrics with one composite score.
+
+Surface lifecycle work in #95 should actively consolidate or retire low-job/duplicative surfaces over time.
+
+---
+
+# Current execution order
+
+1. keep the production/CI baseline green;
+2. keep Ptichi on HOLD until exact production parity is observed;
+3. build the portfolio Proof Board from committed evidence (#93);
+4. populate at least two additional real owned-site experiment states without inventing outcomes;
+5. harden provider-native AI/Search measurement semantics and imports;
+6. run Recommendation Review on real reviewed outcomes;
+7. implement the simplified first-run/Get Found Brief only against the existing evidence engines (#92, #94, #96);
+8. dogfood Surface Budget / Retirement Gate on Goose (#95);
+9. only then increase portfolio automation / Watch scale;
+10. continue Resolver/protocol work when a real Goose workflow demonstrates the need.
+
+# Decision rule
+
+> **When forced to choose between another capability and another trustworthy real-site evidence loop, choose the evidence loop.**
