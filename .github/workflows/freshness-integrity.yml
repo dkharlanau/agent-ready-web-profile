@@ -1,0 +1,49 @@
+name: Freshness integrity
+
+on:
+  push:
+    paths:
+      - 'lib/freshness-integrity.mjs'
+      - 'bin/arwp-freshness.mjs'
+      - 'schema/freshness-snapshot.schema.json'
+      - 'schema/freshness-comparison.schema.json'
+      - 'scripts/freshness-integrity-test.mjs'
+      - 'docs/FRESHNESS-INTEGRITY.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'REPO_MAP.md'
+      - '.github/workflows/freshness-integrity.yml'
+  pull_request:
+    paths:
+      - 'lib/freshness-integrity.mjs'
+      - 'bin/arwp-freshness.mjs'
+      - 'schema/freshness-snapshot.schema.json'
+      - 'schema/freshness-comparison.schema.json'
+      - 'scripts/freshness-integrity-test.mjs'
+      - 'docs/FRESHNESS-INTEGRITY.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'REPO_MAP.md'
+      - '.github/workflows/freshness-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate schemas and syntax
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('schema/freshness-snapshot.schema.json','utf8')); JSON.parse(require('fs').readFileSync('schema/freshness-comparison.schema.json','utf8'));"
+          node --check lib/freshness-integrity.mjs
+          node --check bin/arwp-freshness.mjs
+          node --check scripts/freshness-integrity-test.mjs
+      - name: Run Freshness Integrity regression
+        run: node scripts/freshness-integrity-test.mjs
+      - name: CLI help smoke
+        run: node bin/arwp-freshness.mjs --help
