@@ -7,7 +7,7 @@
   "not": { "required": ["score"] },
   "properties": {
     "version": { "const": "0.2" },
-    "rulesVersion": { "const": "0.2" },
+    "rulesVersion": { "type": "string", "pattern": "^0\\.[0-9]+(?:\\.[0-9]+)?$" },
     "generatedAt": { "type": "string", "format": "date-time" },
     "canonicalUrl": { "type": "string", "format": "uri" },
     "summary": {
@@ -57,6 +57,18 @@
         },
         "additionalProperties": true
       }
+    },
+    "internalLinkTargetAudit": {
+      "type": "object",
+      "required": ["version", "maxTargets", "sourcePagesRequested", "sourcePagesUnavailable", "candidateTargetsObserved", "selectedTargets", "selectionMethod"],
+      "properties": {
+        "maxTargets": { "type": "integer", "minimum": 0, "maximum": 50 },
+        "sourcePagesRequested": { "type": "integer", "minimum": 1, "maximum": 50 },
+        "sourcePagesUnavailable": { "type": "integer", "minimum": 0, "maximum": 50 },
+        "candidateTargetsObserved": { "type": "integer", "minimum": 0 },
+        "selectedTargets": { "type": "integer", "minimum": 0, "maximum": 50 }
+      },
+      "additionalProperties": true
     },
     "guardrails": {
       "type": "object",
