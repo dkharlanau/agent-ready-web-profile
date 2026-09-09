@@ -5,6 +5,7 @@ on:
     paths:
       - 'lib/freshness-integrity.mjs'
       - 'bin/arwp-freshness.mjs'
+      - 'bin/arwp.mjs'
       - 'schema/freshness-snapshot.schema.json'
       - 'schema/freshness-comparison.schema.json'
       - 'scripts/freshness-integrity-test.mjs'
@@ -16,6 +17,7 @@ on:
     paths:
       - 'lib/freshness-integrity.mjs'
       - 'bin/arwp-freshness.mjs'
+      - 'bin/arwp.mjs'
       - 'schema/freshness-snapshot.schema.json'
       - 'schema/freshness-comparison.schema.json'
       - 'scripts/freshness-integrity-test.mjs'
@@ -42,8 +44,11 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('schema/freshness-snapshot.schema.json','utf8')); JSON.parse(require('fs').readFileSync('schema/freshness-comparison.schema.json','utf8'));"
           node --check lib/freshness-integrity.mjs
           node --check bin/arwp-freshness.mjs
+          node --check bin/arwp.mjs
           node --check scripts/freshness-integrity-test.mjs
       - name: Run Freshness Integrity regression
         run: node scripts/freshness-integrity-test.mjs
       - name: CLI help smoke
-        run: node bin/arwp-freshness.mjs --help
+        run: |
+          node bin/arwp-freshness.mjs --help
+          node bin/arwp.mjs freshness --help
