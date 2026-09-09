@@ -5,6 +5,8 @@ on:
     branches: [brand/goose-cleanup-2026-09-09]
     paths:
       - '.github/workflows/goose-brand-migration-temp.yml'
+      - 'scripts/goose-brand-migration.mjs'
+      - 'scripts/goose-brand-test.mjs'
 
 permissions:
   contents: write
