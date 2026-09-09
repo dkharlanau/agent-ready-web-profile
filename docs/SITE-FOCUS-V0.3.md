@@ -91,6 +91,8 @@ This catches a common architecture smell: a product says it solves a problem, bu
 
 The observed primary navigation count is compared with `experience.navigation.maxPrimaryItems`. Exceeding the owner budget emits `primary-navigation-over-budget` and a proposal-only handoff candidate.
 
+A canonical-root brand identity link is not counted as an extra primary navigation destination unless its visible label is explicitly navigational, such as `Home`, `Start`, or `Overview`. This keeps the navigation budget about user choices rather than double-counting the site identity.
+
 The budget is a deliberate product constraint, not a search-engine requirement. A site can choose another value if its audience and task justify it.
 
 ### Visual principles
@@ -171,6 +173,18 @@ They remain:
 ```
 
 Editorial truth, visual design, redirects, URL history and production mutation still require an explicit reviewed decision.
+
+## Deployment proof
+
+A push-triggered live crawl is not automatically proof of the new release: the crawl can finish while deployment is still publishing the previous public bytes.
+
+For deployment-linked evidence, split the workflow into source validation and a second production crawl triggered only after a successful deployment of the exact commit SHA. The required proof chain and GitHub Actions pattern are defined in [`SITE-FOCUS-DEPLOYMENT-PROOF.md`](SITE-FOCUS-DEPLOYMENT-PROOF.md).
+
+## Remediation receipts
+
+When a reviewed Site Focus finding leads to a direct repository patch, use a **Site Focus Remediation Receipt v0.1** to preserve the finding, exact commits and paths, source check, successful deploy, post-deploy artifact digest, before/after diagnostics and explicit known unknowns.
+
+This receipt does not fabricate SignalBraid Transformation Bundle/BraidGraph lineage. The contract is documented in [`SITE-FOCUS-REMEDIATION-RECEIPTS.md`](SITE-FOCUS-REMEDIATION-RECEIPTS.md) and validated by `schema/site-focus-remediation-receipt-v0.1.schema.json`.
 
 ## Run
 
