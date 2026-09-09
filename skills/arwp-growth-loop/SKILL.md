@@ -89,6 +89,33 @@ Coverage is part of the result. If any canonical owner reaches the per-page anch
 
 When JavaScript rendering materially changes the graph, use rendered/browser evidence or a deterministic inspected build artifact; do not treat raw source or a stale build as conclusive runtime graph evidence.
 
+### Freshness integrity only when two revisions exist
+
+Do not infer truthful sitemap freshness from a one-shot crawl or from the mere presence of `<lastmod>`. When the task involves sitemap-date automation, repeated deployments, freshness drift, large data sites, or a before/after repository change and two comparable revisions are available, read `docs/FRESHNESS-INTEGRITY.md` and build revision-bound snapshots:
+
+```bash
+node bin/arwp.mjs freshness snapshot \
+  .arwp/site-state-before.json sitemap-before.xml \
+  --output=freshness-before.json
+
+node bin/arwp.mjs freshness snapshot \
+  .arwp/site-state-after.json sitemap-after.xml \
+  --output=freshness-after.json
+
+node bin/arwp.mjs freshness compare \
+  freshness-before.json freshness-after.json \
+  --output=freshness-comparison.json
+```
+
+Use Freshness Integrity only as longitudinal implementation evidence:
+
+- `lastmod-churn-candidate` means the sitemap date moved while every currently mapped route input stayed byte-identical; same-commit churn is the strongest review case for build/deploy-time dates;
+- `stale-lastmod-candidate` means a mapped owner/template/build input changed while the date did not, but source change is **not** proof of a significant page change, so review the diff and rendered page before touching the date;
+- `aligned-change` means date and mapped inputs both moved, not that the date is necessarily justified;
+- `unknown` stays unknown when route ownership, mapped inputs or valid W3C `<lastmod>` evidence is incomplete.
+
+Never derive `<lastmod>` from file mtimes, build timestamps, deployment timestamps or the current clock. Never mass-refresh dates to satisfy the tool. A runtime/CMS change outside Repository Mapper can legitimately explain a date change; improve evidence coverage rather than forcing the target site to match an incomplete repository model.
+
 When page semantics are relevant, inventory the important route archetypes and identify reusable canonical entities before editing templates. Classify pages such as site-home, organization, article-editorial, author-profile, event, dataset, software-application, product, video-watch, glossary-term/glossary-index, community-qa and collection-list. Do not install a universal JSON-LD bundle.
 
 For portfolio or repeated site rollouts, follow `docs/SITE-ROLLOUT-PLAYBOOK.md` and start a site-specific record from `templates/growth/site-adoption-record.md`. Reuse the decision order and evidence contract; do not blindly copy provider-specific markup or crawler policy from a reference site.
@@ -124,6 +151,8 @@ For each material route-level change, record `problem → evidence → risk → 
 For semantic/template changes also parse generated JSON-LD, compare it with the rendered visible content, and check canonical/indexability/sitemap/hreflang consistency on changed routes. Use current feature-specific external validators or Search Console/Bing tools where owner access exists.
 
 For internal-link/hub changes, rerun the same bounded Internal Discovery cohort when practical. A cleaner graph verifies the implementation only; Search impressions, positions, citations, referrals and conversions remain separate outcome evidence.
+
+For sitemap freshness automation or meaningful date-policy changes, compare the before/after Freshness Integrity snapshots when both revision-bound Site State Graphs exist. A clean comparison verifies only mechanical date/source coherence. It does not prove significant content change, recrawl, indexing, ranking or traffic effects.
 
 Technical Integrity is intentionally self-correcting. If a live dogfood run exposes a false positive caused by an audit limit, representation mismatch or detector assumption, fix the detector/evidence model rather than editing the target site to satisfy a bad check.
 
