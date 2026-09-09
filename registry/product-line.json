@@ -10,55 +10,73 @@
   "technicalFoundation": "Agent-Ready Web Profile",
   "tagline": "Get Found.",
   "category": "evidence-backed Search and AI discoverability operations",
-  "northStar": "Real sites completing a reviewed loop from intended outcome through observed site state, applicable change, verified deployment and provider-native Search or AI evidence to an explicit keep, revise, continue, revert or retire decision.",
+  "productThesis": "Goose helps a website owner choose a small number of evidence-backed discoverability interventions, verify the exact deployment, measure provider-native Search and AI outcomes, and decide what to keep, revise or stop.",
+  "northStar": "Real sites completing a reviewed loop from goal and demand through observed state, chosen intervention, exact verified deployment and provider-native Search or AI evidence to an explicit keep, revise, continue, revert or retire decision.",
+  "currentBottleneck": "No completed credible real-site chain yet exists from recommendation through exact deployed change and provider-native outcome to a reviewed decision.",
   "proofFirstMilestone": {
     "id": "m1-proof-before-more-product",
     "priority": "P0",
-    "goal": "Demonstrate trustworthy end-to-end evidence loops before expanding major product or protocol scope.",
+    "goal": "Complete the first trustworthy real-site evidence loop before expanding proof presentation, product breadth or protocol scope.",
     "minimumOwnedSitesWithExperimentState": 3,
     "minimumSitesWithProviderNativeEvidence": 2,
     "requiresReviewedDecision": true,
+    "firstReviewedLoopRequiredBeforeRichProofBoard": true,
+    "requiresDemonstratedDecisionAdvantage": true,
     "negativeAndNeutralEvidenceMustRemainVisible": true,
     "deploymentParityRequiredBeforeObservationClock": true
   },
   "publicJourney": [
     {
       "id": "goal",
-      "label": "Tell Goose the goal",
-      "question": "Who is this site for, what useful outcome should it create, and what boundaries matter?",
-      "consumes": ["owner-declared context", "Site Focus", "site/vertical goals"]
+      "label": "Goal / demand",
+      "question": "Who is this site for, what useful outcome should it create, what demand or intent matters, and what boundaries change the decision?",
+      "consumes": ["minimal owner-declared context", "Site Focus", "Intent Ownership", "demand/page-value evidence"]
     },
     {
       "id": "inspect",
       "label": "Inspect",
       "question": "What does the real public site and source repository actually expose?",
-      "consumes": ["site audit", "Intent Ownership", "entity/data evidence", "Resolver", "Repository Mapper"]
+      "consumes": ["site audit", "entity/data evidence", "Resolver where relevant", "Repository Mapper where relevant"]
     },
     {
       "id": "decide",
       "label": "Decide",
-      "question": "What are the top one to three evidence-backed moves that actually apply?",
-      "consumes": ["Growth", "Recommendation Registry", "Adaptive Upgrade", "review state"]
+      "question": "What is the single highest-value evidence-backed move that actually applies?",
+      "consumes": ["Growth", "Recommendation Registry", "review state", "demand/applicability gates"]
     },
     {
       "id": "change",
       "label": "Change",
-      "question": "Which changes can be made safely, deterministically and reviewably?",
-      "consumes": ["Transformation Engine", "stack packs", "repository ownership", "policy gates"]
+      "question": "Which exact change can be made safely, deterministically and reviewably?",
+      "consumes": ["Transformation Engine when needed", "repository ownership", "policy gates"]
     },
     {
       "id": "prove",
       "label": "Prove",
-      "question": "Is the intended implementation really live, and what external evidence followed?",
-      "consumes": ["Change Receipts", "deployment evidence", "visibility imports", "Controlled Cohorts", "Winner Observatory"]
+      "question": "Is that exact intervention really live, and what provider-native evidence followed?",
+      "consumes": ["Controlled Cohorts", "Growth Experiments", "Change Receipts", "deployment evidence", "visibility imports"]
     },
     {
       "id": "watch",
-      "label": "Watch / revise",
-      "question": "What changed in upstream guidance, site state or outcomes, and what now needs re-review?",
-      "consumes": ["Trend Intelligence", "Recommendation Review", "BraidGraph impact", "portfolio queues"]
+      "label": "Keep / revise / stop",
+      "question": "What decision is now justified by outcome evidence, drift or changed upstream guidance?",
+      "consumes": ["Recommendation Review", "Trend Intelligence", "BraidGraph impact", "portfolio queues"]
     }
   ],
+  "canonicalInterventionChain": [
+    "site-goal-or-demand",
+    "observed-state",
+    "applicable-recommendation",
+    "exact-source-change",
+    "deployment-parity",
+    "provider-native-outcome",
+    "review-decision"
+  ],
+  "runtimeStateAuthority": {
+    "canonical": ["Controlled Cohort", "Growth Experiment", "Change Receipt", "outcome evidence"],
+    "programRegistriesOwnRuntimeStatus": false,
+    "proofSurfacesAreViews": ["Evidence Lab", "Winner Observatory", "Proof Board"]
+  },
   "evidenceFunnel": [
     "access",
     "index-or-eligibility",
@@ -74,12 +92,16 @@
       "notEquivalentTo": ["citation", "ranking", "brand mention", "visit"]
     },
     "bing": {
-      "primaryAiEvidence": "AI citations, cited pages, grounding queries and provider-native intent/topic/citation-share dimensions",
-      "notEquivalentTo": ["ranking", "click", "conversion"]
+      "primaryAiEvidence": "AI citations, cited pages, grounding queries and provider-native intent/topic/query-scoped citation-share dimensions",
+      "notEquivalentTo": ["ranking", "click", "conversion", "causal attribution"]
     },
     "openai": {
       "primaryAiEvidence": "OAI-SearchBot access eligibility plus separately observed ChatGPT referrals or citations when evidence exists",
       "notEquivalentTo": ["GPTBot training permission", "guaranteed citation", "traffic"]
+    },
+    "perplexity": {
+      "primaryAiEvidence": "crawler/indexing policy plus bounded observed citations or referrals when evidence exists",
+      "notEquivalentTo": ["provider-native owner visibility score", "guaranteed citation", "traffic"]
     }
   },
   "keyPrimitive": {
@@ -95,7 +117,7 @@
       "visibility": "internal-advanced",
       "verb": "Detect",
       "question": "What changed upstream?",
-      "status": "active"
+      "status": "maintenance"
     },
     {
       "id": "map",
@@ -119,15 +141,15 @@
       "visibility": "internal-advanced",
       "verb": "Change",
       "question": "What can change safely and exactly?",
-      "status": "active"
+      "status": "evidence-gated"
     },
     {
       "id": "proof",
       "name": "Goose Proof",
       "visibility": "internal-advanced",
       "verb": "Prove",
-      "question": "Did implementation pass, is it live, and what evidence followed?",
-      "status": "active-foundation"
+      "question": "Did implementation pass, is the exact intervention live, and what provider-native evidence followed?",
+      "status": "current-p0"
     },
     {
       "id": "watch",
@@ -135,7 +157,7 @@
       "visibility": "internal-advanced",
       "verb": "Watch",
       "question": "What needs attention now across the portfolio?",
-      "status": "active-foundation"
+      "status": "later-after-proof"
     },
     {
       "id": "connect",
@@ -143,61 +165,79 @@
       "visibility": "internal-advanced",
       "verb": "Observe",
       "question": "What owner/provider evidence exists outside the repository?",
-      "status": "active-foundation"
+      "status": "active-cohort-only"
     }
   ],
   "durableDifferentiators": [
-    "site-specific applicability instead of a universal readiness or AI visibility score",
-    "explicit owner-declared versus publicly observed truth boundaries",
-    "intent and page-job ownership before URL expansion",
+    "one auditable intervention chain instead of a universal readiness or AI visibility score",
+    "demand and intent ownership before recommending page or URL expansion",
     "source-backed recommendation supply chain with freshness, supersession and retirement history",
-    "deterministic repository mutations with preconditions, rollback and PR-first delivery",
-    "deployment parity as a hard gate before measuring an intervention",
-    "separation of implementation proof from provider-native external outcome evidence",
-    "versioned evidence lineage and reverse impact through BraidGraph",
-    "negative and neutral experiment outcomes retained rather than filtered out"
+    "exact repository mutation and deployment parity before outcome attribution",
+    "provider-native Search and AI evidence kept semantically distinct",
+    "neutral and negative experiment outcomes retained rather than filtered out",
+    "longitudinal intervention corpus linking site context, recommendation, exact change, deployment, outcome, decision and later rule revision",
+    "explicit owner-declared versus publicly observed truth boundaries"
   ],
   "productBets": [
     {
       "priority": "P0",
-      "id": "portfolio-proof-board",
-      "issue": 93,
-      "title": "Portfolio Proof Board generated from committed evidence"
-    },
-    {
-      "priority": "P0",
-      "id": "real-longitudinal-evidence",
+      "id": "first-reviewed-proof-loop",
       "issues": [55, 83],
-      "title": "Populate real owned-site Growth and controlled-cohort evidence"
+      "title": "Complete the first reviewed real-site intervention using the frozen Ptichi cohort"
     },
     {
       "priority": "P0",
-      "id": "provider-native-measurement",
-      "title": "Harden provider-native Google/Bing/OpenAI/referral evidence semantics without a composite score"
+      "id": "canonical-intervention-state",
+      "issues": [55, 60, 83],
+      "title": "Make one existing cohort/experiment/receipt chain authoritative for runtime intervention state"
+    },
+    {
+      "priority": "P0",
+      "id": "active-cohort-provider-evidence",
+      "issue": 97,
+      "title": "Preserve only the provider-native evidence semantics required by active proof cohorts"
+    },
+    {
+      "priority": "P1-gated",
+      "id": "minimal-proof-rendering",
+      "issue": 93,
+      "gate": "first-reviewed-proof-loop",
+      "title": "Render one evidence-derived proof card before any portfolio dashboard"
     },
     {
       "priority": "P1",
+      "id": "proof-replication",
+      "title": "Replicate the same intervention contract on two contrasting owned sites with real owner evidence"
+    },
+    {
+      "priority": "P1-gated",
       "id": "first-run-journey",
       "issues": [92, 94, 96],
-      "title": "One problem-first first-run journey ending in a concise Get Found Brief"
+      "gate": "first-reviewed-proof-loop",
+      "title": "One decision-first journey ending in a concise Get Found Brief"
     },
     {
-      "priority": "P1",
+      "priority": "P2",
       "id": "surface-budget",
       "issue": 95,
-      "title": "Surface Budget and Retirement Gate"
+      "title": "Surface Budget and Retirement Gate after proof"
     },
     {
-      "priority": "P1",
+      "priority": "later",
       "id": "portfolio-watch-scale",
-      "title": "Scale portfolio Watch only after several trustworthy evidence loops exist"
+      "title": "Scale portfolio Watch only after the proof success gate"
     }
   ],
   "deprioritizedUntilProof": [
+    "rich Portfolio Proof Board before the first reviewed real-site loop",
     "new top-level public modules without a demonstrated user job",
-    "new protocol adapters without a concrete blocked Goose workflow or interoperability failure",
+    "new Resolver, ARD, MCP, WebMCP, transact or cross-lingual protocol breadth without a blocked active proof workflow",
+    "stratified State of the Agentic Web expansion as product P0",
+    "new Trend or Radar feature breadth beyond maintenance",
+    "new transformation-pack breadth without observed blocked target work",
     "new AI-specific markup or files justified only by GEO folklore",
-    "indexable URL expansion that has not passed intent/page value gates",
+    "indexable URL expansion that has not passed demand, intent and page-value gates",
+    "DOI, trust, policy, visual-asset or project-surface count as evidence of discoverability value",
     "new composite readiness or AI visibility scores"
   ],
   "guardrails": {
@@ -210,6 +250,7 @@
     "providerNativeMetricsStayDistinct": true,
     "policyAndEditorialRemainGated": true,
     "negativeResultsPreserved": true,
-    "historicalRuleVersionsPreserved": true
+    "historicalRuleVersionsPreserved": true,
+    "noParallelRuntimeExperimentTruth": true
   }
 }
