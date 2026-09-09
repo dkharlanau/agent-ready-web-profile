@@ -50,3 +50,32 @@ jobs:
         run: |
           node bin/arwp-technical-integrity.mjs --help
           node bin/arwp.mjs technical-integrity --help
+      - name: Dogfood live Goose site
+        id: dogfood
+        shell: bash
+        run: |
+          set +e
+          node bin/arwp.mjs technical-integrity https://dkharlanau.github.io/agent-ready-web-profile/ --max-pages=8 --concurrency=2 --timeout=12000 --json > technical-integrity-goose.json
+          code=$?
+          set -e
+          if [ "$code" -eq 1 ]; then
+            echo "Live Technical Integrity execution failed fatally."
+            cat technical-integrity-goose.json || true
+            exit 1
+          fi
+          echo "audit_exit=$code" >> "$GITHUB_OUTPUT"
+          node - <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('technical-integrity-goose.json', 'utf8'));
+          const findings = report.checks
+            .filter(item => item.status !== 'pass' && item.status !== 'not-applicable')
+            .map(item => ({ id: item.id, priority: item.priority, status: item.status, message: item.message }));
+          console.log(JSON.stringify({ canonicalUrl: report.canonicalUrl, summary: report.summary, findings }, null, 2));
+          NODE
+      - name: Upload live Goose Technical Integrity report
+        uses: actions/upload-artifact@v4
+        with:
+          name: goose-technical-integrity
+          path: technical-integrity-goose.json
+          if-no-files-found: error
+          retention-days: 14
