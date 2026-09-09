@@ -9,6 +9,8 @@ const corpus = loadCorpus();
 const base = 'https://dkharlanau.github.io/agent-ready-web-profile/';
 const xmlPath = path.join(docs, 'sitemap.xml');
 const mdPath = path.join(docs, 'sitemap.md');
+const ROUTING_LAYOUT_REVIEWED_AT = '2026-09-09';
+const routeLastmod = [corpus.updated_at, ROUTING_LAYOUT_REVIEWED_AT].filter(Boolean).sort().at(-1);
 const XML_BEGIN = '  <!-- BEGIN DISCOVERABILITY EVIDENCE HUBS -->';
 const XML_END = '  <!-- END DISCOVERABILITY EVIDENCE HUBS -->';
 const MD_BEGIN = '<!-- BEGIN DISCOVERABILITY EVIDENCE HUBS -->';
@@ -33,14 +35,13 @@ function xmlEscape(value) {
 
 function syncXml() {
   let xml = fs.readFileSync(xmlPath, 'utf8');
-  const today = new Date().toISOString().slice(0, 10);
   const mainUrl = `${base}discoverability.html`;
   const mainPattern = new RegExp(`<url><loc>${mainUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</loc><lastmod>[^<]+</lastmod></url>`);
   if (!mainPattern.test(xml)) throw new Error('Canonical discoverability.html route is missing from sitemap.xml.');
-  xml = xml.replace(mainPattern, `<url><loc>${mainUrl}</loc><lastmod>${today}</lastmod></url>`);
+  xml = xml.replace(mainPattern, `<url><loc>${mainUrl}</loc><lastmod>${routeLastmod}</lastmod></url>`);
 
   const routeLines = corpus.categories.map(category =>
-    `  <url><loc>${xmlEscape(`${base}discoverability/${category.id}.html`)}</loc><lastmod>${today}</lastmod></url>`
+    `  <url><loc>${xmlEscape(`${base}discoverability/${category.id}.html`)}</loc><lastmod>${routeLastmod}</lastmod></url>`
   );
   const block = [XML_BEGIN, ...routeLines, XML_END].join('\n');
   xml = replaceManagedBlock(xml, XML_BEGIN, XML_END, block, '</urlset>');
@@ -72,4 +73,4 @@ function syncMarkdown() {
 
 syncXml();
 syncMarkdown();
-console.log(`Synced ${corpus.categories.length} discoverability evidence hubs into sitemap.xml and sitemap.md.`);
+console.log(`Synced ${corpus.categories.length} discoverability evidence hubs into sitemap.xml and sitemap.md with lastmod=${routeLastmod}.`);
