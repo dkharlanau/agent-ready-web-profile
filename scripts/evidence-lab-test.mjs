@@ -41,7 +41,7 @@ assert.deepEqual(lab.externalEvidence.classCounts, {
 
 assert.match(html, /<title>Goose Evidence Lab — Evidence before advice<\/title>/);
 assert.match(html, /<strong>Goose<\/strong>/);
-assert.doesNotMatch(html, /Cite Goose/);
+assert.doesNotMatch(html, /Cite Goose|CITE GOOSE/);
 assert.match(html, /MEASUREMENT HOLD/);
 assert.match(html, new RegExp(cohort.measurementGate.implementationRef.slice(0, 8)));
 assert.match(html, new RegExp(cohort.measurementGate.productionRef.slice(0, 8)));

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-profile.schema.json",
-  "title": "Cite Goose Site Focus Profile",
+  "title": "Goose Site Focus Profile",
   "description": "Owner-declared problem boundary and information-architecture intent. This is product intent, not a ranking configuration.",
   "type": "object",
   "required": ["version", "canonicalUrl", "thesis", "scope", "problemLanes", "primaryNavigation", "routeRules"],

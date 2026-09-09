@@ -65,7 +65,7 @@ This extension is operational evidence. It is not a search-ranking, citation, co
 Replace `Deploy GitHub Pages` with the exact workflow name used by the target repository.
 
 ```yaml
-name: Cite Goose Site Focus
+name: Goose Site Focus
 
 on:
   pull_request:
@@ -111,7 +111,7 @@ jobs:
           cache: npm
           cache-dependency-path: .tools/arwp/package-lock.json
 
-      - name: Install Cite Goose runtime
+      - name: Install Goose runtime
         working-directory: .tools/arwp
         run: npm ci --ignore-scripts
 

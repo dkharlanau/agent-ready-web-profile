@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-remediation-receipt-v0.1.schema.json",
-  "title": "Cite Goose Site Focus Remediation Receipt v0.1",
+  "title": "Goose Site Focus Remediation Receipt v0.1",
   "description": "Deployment-linked proof for a reviewed Site Focus finding that was patched directly without fabricating SignalBraid transformation lineage.",
   "type": "object",
   "additionalProperties": false,
@@ -118,7 +118,10 @@
       "allOf": [
         {
           "if": { "properties": { "status": { "const": "generated" } }, "required": ["status"] },
-          "then": { "required": ["receiptId"] }
+          "then": {
+            "properties": { "receiptId": { "type": "string", "minLength": 1 } },
+            "required": ["receiptId"]
+          }
         }
       ]
     }
@@ -126,7 +129,14 @@
   "$defs": {
     "sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
     "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
-    "value": { "type": ["string", "number", "integer", "boolean", "null"] },
+    "value": {
+      "anyOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" }
+      ]
+    },
     "workflowConclusion": { "enum": ["success", "failure", "cancelled", "skipped", "timed_out", "action_required", "neutral"] },
     "workflowEvidence": {
       "type": "object",

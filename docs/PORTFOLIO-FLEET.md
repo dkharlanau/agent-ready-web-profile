@@ -1,4 +1,4 @@
-# Cite Goose portfolio fleet
+# Goose portfolio fleet
 
 The fleet workflow turns a collection of local website checkouts into one repeatable operating queue. It complements the public owner-portfolio trend registry: the registry answers which reviewed changes may apply; the workspace answers which local repositories are available, clean and ready to verify.
 

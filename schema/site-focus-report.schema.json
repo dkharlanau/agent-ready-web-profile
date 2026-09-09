@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-focus-report.schema.json",
-  "title": "Cite Goose Site Focus Report",
+  "title": "Goose Site Focus Report",
   "type": "object",
   "required": ["version", "canonicalUrl", "scope", "observedSiteThesis", "metrics", "pageContracts", "guardrails"],
   "properties": {

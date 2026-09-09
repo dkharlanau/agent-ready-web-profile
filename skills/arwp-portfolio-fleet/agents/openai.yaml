@@ -1,4 +1,4 @@
 interface:
-  display_name: "Cite Goose Portfolio Fleet"
+  display_name: "Goose Portfolio Fleet"
   short_description: "Inspect and verify many sites safely"
   default_prompt: "Use $arwp-portfolio-fleet to inspect my site portfolio and produce a prioritized, evidence-bound action report."

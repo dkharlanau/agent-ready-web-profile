@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "project": "Cite Goose",
+  "project": "Goose",
   "aliases": ["Agent-Ready Web Profile", "ARWP"],
   "shortName": "ARWP",
   "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
@@ -15,7 +15,7 @@
   },
   "identity": {
     "brand": {
-      "name": "Cite Goose",
+      "name": "Goose",
       "aliases": ["Agent-Ready Web Profile", "ARWP"],
       "nameReviewedAt": "2026-09-08",
       "policy": "https://dkharlanau.github.io/agent-ready-web-profile/trust/brand.html",

@@ -13,7 +13,7 @@ const now = '2026-09-07T12:00:00Z';
 
 const validation = validatePortfolioRegistry(portfolio);
 assert.equal(validation.valid, true, JSON.stringify(validation));
-assert.equal(portfolio.sites.length, 6);
+assert.equal(portfolio.sites.length, 7);
 assert.equal(portfolio.sites.filter(site => site.rollout.mode === 'managed-issue').length, 3);
 const ptichi = portfolio.sites.find(site => site.id === 'ptichi-fresh-site');
 assert.ok(ptichi);
@@ -78,7 +78,7 @@ const watch = buildPortfolioRollout(portfolio, trends, {
 });
 assert.deepEqual(
   [...new Set(watch.candidates.map(item => item.siteId))].sort(),
-  ['dkharlanau-sap-knowledge', 'metkagram-language-knowledge', 'ptichi-fresh-site'],
+  ['dkharlanau-sap-knowledge', 'metalhatscats-applied-systems', 'metkagram-language-knowledge', 'ptichi-fresh-site'],
   'general is a real vertical, not a wildcard; WebMCP WATCH should map only to portfolio sites whose explicit verticals match its appliesTo set'
 );
 assert.ok(watch.candidates.every(item => item.recommendationStatus === 'watch-only'));
@@ -108,4 +108,4 @@ const invalidResult = validatePortfolioRegistry(invalid);
 assert.equal(invalidResult.valid, false);
 assert.ok(invalidResult.semanticErrors.some(error => /Duplicate portfolio repository/.test(error)));
 
-console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across 6 sites including Ptichi and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
+console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across 7 sites including Ptichi and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);

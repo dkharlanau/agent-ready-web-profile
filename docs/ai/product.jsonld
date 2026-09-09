@@ -4,7 +4,7 @@
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
       "@type": ["SoftwareApplication", "WebApplication"],
-      "name": "Cite Goose",
+      "name": "Goose",
       "alternateName": ["Agent-Ready Web Profile", "ARWP"],
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/product/",
       "mainEntityOfPage": "https://dkharlanau.github.io/agent-ready-web-profile/product/",
@@ -33,7 +33,7 @@
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website",
       "@type": "WebSite",
-      "name": "Cite Goose",
+      "name": "Goose",
       "alternateName": ["Agent-Ready Web Profile", "ARWP"],
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
       "inLanguage": ["en", "de", "ru"],

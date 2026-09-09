@@ -6,7 +6,7 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 
 ## Start here
 
-- [Cite Goose home](https://dkharlanau.github.io/agent-ready-web-profile/)
+- [Goose home](https://dkharlanau.github.io/agent-ready-web-profile/)
 - [Site Focus — problem, scope and page architecture](https://dkharlanau.github.io/agent-ready-web-profile/site-focus.html)
 - [Agent instructions](https://dkharlanau.github.io/agent-ready-web-profile/AGENTS.md)
 - [Canonical llms.txt](https://dkharlanau.github.io/agent-ready-web-profile/llms.txt)
@@ -15,7 +15,7 @@ This Markdown sitemap is an optional agent-readability surface. The canonical se
 
 ## Primary problem routes
 
-Cite Goose keeps its first-order public narrative intentionally small. These are problem routes rather than a list of internal modules:
+Goose keeps its first-order public narrative intentionally small. These are problem routes rather than a list of internal modules:
 
 - **Be found** — [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): technical eligibility, retrieval and applicable discovery patterns.
 - **Be used** — [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): direct answers, evidence, comparisons, data, tools and useful page structure.
@@ -100,7 +100,7 @@ The Portfolio Growth series is intentionally a different evidence class: owner-c
 
 - [Repository README](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/README.md)
 - [Profile specification](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SPEC.md)
-- [Cite Goose visual identity and focus rules](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BRAND-CITE-GOOSE.md)
+- [Goose visual identity and focus rules](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BRAND-GOOSE.md)
 - [Site Focus Agent Skill](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/skills/arwp-site-focus/SKILL.md)
 - [Resolver model](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/RESOLVER.md)
 - [Trend Radar lifecycle](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/TREND-RADAR.md)

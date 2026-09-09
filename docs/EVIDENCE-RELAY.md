@@ -71,7 +71,7 @@ The small [reading corpus](./knowledge/research/doi-reading-corpus.json) has pub
 | [Lost in the Middle, 2024](https://doi.org/10.1162/tacl_a_00638) | Test extraction under different evidence positions | Not a universal heading or page-length rule |
 | [FAIR, 2016](https://doi.org/10.1038/sdata.2016.18) | Make data identifiable and reusable | Not a quality certificate or search boost |
 
-The recorded review covers abstracts and bibliographic identity, not full experimental replication. These are external references, not endorsements of Cite Goose. No new DOI was issued to this bibliography.
+The recorded review covers abstracts and bibliographic identity, not full experimental replication. These are external references, not endorsements of Goose. No new DOI was issued to this bibliography.
 
 ## Evidence Relay: make the artifact the unit of analysis
 

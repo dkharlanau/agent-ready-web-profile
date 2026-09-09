@@ -1,0 +1,48 @@
+name: Goose Brand Contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'README.md'
+      - 'TRADEMARKS.md'
+      - 'package.json'
+      - 'docs/**'
+      - 'lib/**'
+      - 'skills/**'
+      - 'registry/**'
+      - 'examples/**'
+      - 'templates/**'
+      - 'scripts/build-discoverability.mjs'
+      - 'scripts/goose-brand-test.mjs'
+      - '.github/workflows/goose-brand.yml'
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'TRADEMARKS.md'
+      - 'package.json'
+      - 'docs/**'
+      - 'lib/**'
+      - 'skills/**'
+      - 'registry/**'
+      - 'examples/**'
+      - 'templates/**'
+      - 'scripts/build-discoverability.mjs'
+      - 'scripts/goose-brand-test.mjs'
+      - '.github/workflows/goose-brand.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  brand-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Validate Goose product identity
+        run: |
+          node scripts/goose-brand-test.mjs
+          node --check scripts/goose-brand-test.mjs
