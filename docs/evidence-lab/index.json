@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "generatedAt": "2026-09-09T08:30:00Z",
-  "product": "Goose",
+  "product": "Goose ARWP",
   "technicalCore": "Agent-Ready Web Profile (ARWP)",
   "labState": {
     "activeControlledExperiments": 1,
@@ -21,25 +21,104 @@
     "queryCount": 12,
     "querySurface": "google-search",
     "locale": "en",
-    "observationWindowsDays": [14, 28, 56],
+    "observationWindowsDays": [
+      14,
+      28,
+      56
+    ],
     "implementationRef": "fc34374963fbcdb4fb44488ed804d505c25892c7",
     "productionRef": "bff8360b06f1b31724c8273607678b418d369cb5",
     "productionGate": "hold",
     "productionParity": false,
     "gateReason": "Current production evidence predates the frozen treatment implementation. Do not start the 14/28/56-day observation clock or attribute live outcomes to PTI-DA-001 until an independently observed production receipt matches the implementation ref.",
     "queryPanel": [
-      {"id":"q01-explain-clearly","text":"how to explain something clearly at work","targetEntities":["goal.explain_clearly"]},
-      {"id":"q02-explain-technical","text":"how to explain technical ideas to non technical people","targetEntities":["goal.explain_technical"]},
-      {"id":"q03-project-status","text":"how to give a concise project status update","targetEntities":["goal.project_status_update"]},
-      {"id":"q04-recommendation","text":"how to present a recommendation at work","targetEntities":["goal.give_recommendation"]},
-      {"id":"q05-difficult-question","text":"how to answer a difficult question at work","targetEntities":["goal.answer_difficult_question"]},
-      {"id":"q06-project-delay","text":"how to explain a project delay to stakeholders","targetEntities":["goal.explain_delay"]},
-      {"id":"q07-project-risk","text":"how to communicate project risk to stakeholders","targetEntities":["goal.explain_risk"]},
-      {"id":"q08-uncertainty","text":"how to communicate uncertainty at work","targetEntities":["goal.explain_uncertainty"]},
-      {"id":"q09-before-meeting","text":"how to rehearse what to say before a work meeting","targetEntities":["practice.before_meeting","practice.boundary_contrast"]},
-      {"id":"q10-stop-rambling","text":"how to stop rambling at work","targetEntities":["problem.rambling_at_work","practice.boundary_contrast"]},
-      {"id":"q11-speak-concisely","text":"how to speak more concisely in meetings","targetEntities":["problem.rambling_at_work","goal.explain_clearly"]},
-      {"id":"q12-recorded-voice","text":"why does my recorded voice sound different","targetEntities":["problem.recorded_voice"]}
+      {
+        "id": "q01-explain-clearly",
+        "text": "how to explain something clearly at work",
+        "targetEntities": [
+          "goal.explain_clearly"
+        ]
+      },
+      {
+        "id": "q02-explain-technical",
+        "text": "how to explain technical ideas to non technical people",
+        "targetEntities": [
+          "goal.explain_technical"
+        ]
+      },
+      {
+        "id": "q03-project-status",
+        "text": "how to give a concise project status update",
+        "targetEntities": [
+          "goal.project_status_update"
+        ]
+      },
+      {
+        "id": "q04-recommendation",
+        "text": "how to present a recommendation at work",
+        "targetEntities": [
+          "goal.give_recommendation"
+        ]
+      },
+      {
+        "id": "q05-difficult-question",
+        "text": "how to answer a difficult question at work",
+        "targetEntities": [
+          "goal.answer_difficult_question"
+        ]
+      },
+      {
+        "id": "q06-project-delay",
+        "text": "how to explain a project delay to stakeholders",
+        "targetEntities": [
+          "goal.explain_delay"
+        ]
+      },
+      {
+        "id": "q07-project-risk",
+        "text": "how to communicate project risk to stakeholders",
+        "targetEntities": [
+          "goal.explain_risk"
+        ]
+      },
+      {
+        "id": "q08-uncertainty",
+        "text": "how to communicate uncertainty at work",
+        "targetEntities": [
+          "goal.explain_uncertainty"
+        ]
+      },
+      {
+        "id": "q09-before-meeting",
+        "text": "how to rehearse what to say before a work meeting",
+        "targetEntities": [
+          "practice.before_meeting",
+          "practice.boundary_contrast"
+        ]
+      },
+      {
+        "id": "q10-stop-rambling",
+        "text": "how to stop rambling at work",
+        "targetEntities": [
+          "problem.rambling_at_work",
+          "practice.boundary_contrast"
+        ]
+      },
+      {
+        "id": "q11-speak-concisely",
+        "text": "how to speak more concisely in meetings",
+        "targetEntities": [
+          "problem.rambling_at_work",
+          "goal.explain_clearly"
+        ]
+      },
+      {
+        "id": "q12-recorded-voice",
+        "text": "why does my recorded voice sound different",
+        "targetEntities": [
+          "problem.recorded_voice"
+        ]
+      }
     ]
   },
   "externalEvidence": {
@@ -53,18 +132,58 @@
     "sourceArtifact": "knowledge/research/2026-09-09-external-evidence-winner-loop.json"
   },
   "learningSystem": [
-    {"id":"external-evidence","label":"External evidence","purpose":"Separate provider requirements from independent observations and expert experiments."},
-    {"id":"winner-observatory","label":"Winner Observatory","purpose":"Track entrants, drops, top-10 persistence and citation persistence for frozen query cohorts."},
-    {"id":"controlled-cohorts","label":"Controlled cohorts","purpose":"Freeze treatment, controls and queries before outcomes are visible, then block measurement until production parity."},
-    {"id":"recommendation-review","label":"Recommendation review","purpose":"Move advice through fresh, review-due, challenged, contradicted and retire-candidate states without silent registry mutation."}
+    {
+      "id": "external-evidence",
+      "label": "External evidence",
+      "purpose": "Separate provider requirements from independent observations and expert experiments."
+    },
+    {
+      "id": "winner-observatory",
+      "label": "Winner Observatory",
+      "purpose": "Track entrants, drops, top-10 persistence and citation persistence for frozen query cohorts."
+    },
+    {
+      "id": "controlled-cohorts",
+      "label": "Controlled cohorts",
+      "purpose": "Freeze treatment, controls and queries before outcomes are visible, then block measurement until production parity."
+    },
+    {
+      "id": "recommendation-review",
+      "label": "Recommendation review",
+      "purpose": "Move advice through fresh, review-due, challenged, contradicted and retire-candidate states without silent registry mutation."
+    }
   ],
   "evidenceStages": [
-    {"id":"implementation","label":"Implementation","question":"Did the repository change exist and pass checks?"},
-    {"id":"deployment","label":"Deployment","question":"Is that exact implementation live?"},
-    {"id":"exposure","label":"Exposure","question":"Did Search/AI systems expose the page?"},
-    {"id":"citation","label":"Citation","question":"Was the page cited, and did the citation persist?"},
-    {"id":"visit","label":"Visit","question":"Did identifiable traffic arrive?"},
-    {"id":"task","label":"Useful action","question":"Did the visit lead to a relevant product action?"}
+    {
+      "id": "implementation",
+      "label": "Implementation",
+      "question": "Did the repository change exist and pass checks?"
+    },
+    {
+      "id": "deployment",
+      "label": "Deployment",
+      "question": "Is that exact implementation live?"
+    },
+    {
+      "id": "exposure",
+      "label": "Exposure",
+      "question": "Did Search/AI systems expose the page?"
+    },
+    {
+      "id": "citation",
+      "label": "Citation",
+      "question": "Was the page cited, and did the citation persist?"
+    },
+    {
+      "id": "visit",
+      "label": "Visit",
+      "question": "Did identifiable traffic arrive?"
+    },
+    {
+      "id": "task",
+      "label": "Useful action",
+      "question": "Did the visit lead to a relevant product action?"
+    }
   ],
   "sourceArtifacts": {
     "controlledCohort": "knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json",

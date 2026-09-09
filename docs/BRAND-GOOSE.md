@@ -1,10 +1,10 @@
-# Goose visual identity
+# Goose ARWP visual identity
 
-Identity revision 1.1 — 2026-09-08.
+Identity revision 1.2 — 2026-09-09.
 
-**Goose** is the product-facing name. **Agent-Ready Web Profile** and **ARWP** remain technical aliases; package names, CLI commands, canonical URLs and entity IDs retain their existing identity. No registered or cleared trademark status is asserted.
+**Goose ARWP** is the canonical product-facing name. **Goose** is the short form used in conversational copy and module names. **Agent-Ready Web Profile** remains the technical foundation, and **ARWP** remains its established technical abbreviation; package names, CLI commands, canonical URLs and entity IDs retain their existing identity. No registered or cleared trademark status is asserted.
 
-The primary line is **“Make your site worth citing.”** It expresses the product's aim. Use measured results to describe actual discovery outcomes.
+The preferred display lockup is **“Goose ARWP — Get Found.”** The primary tagline is **“Get Found.”** It states the user goal without promising rankings, citations or traffic. Use measured results to describe actual discovery outcomes.
 
 ## Product focus before visual expansion
 

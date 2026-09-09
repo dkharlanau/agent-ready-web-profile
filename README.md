@@ -1,6 +1,6 @@
-# Goose
+# Goose ARWP
 
-**Make your site worth citing.**
+**Get Found.**
 
 Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **219 patterns, 132 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 219 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
 
@@ -10,7 +10,7 @@ Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-pr
 [![BraidGraph validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
-Goose is the product-facing layer of **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
+Goose ARWP is the product-facing layer built on **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
 
 Most tools answer one of two questions:
 
@@ -388,7 +388,7 @@ The [brand policy](docs/trust/brand.html) identifies the current product without
 - **ARWP** — the established technical abbreviation.
 - **Agent-Ready Web Profile** — repository, npm package and interoperability foundation.
 
-Canonical product name: **Goose**. **Agent-Ready Web Profile** and **ARWP** remain technical aliases.
+Canonical product name: **Goose ARWP**. **Goose** is the short form; **Agent-Ready Web Profile** is the technical foundation and **ARWP** remains its established abbreviation.
 
 ## North Star
 

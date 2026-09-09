@@ -1,8 +1,8 @@
 # Project name and third-party marks
 
-Policy date: 2026-09-08. Maintainer: Dzmitryi Kharlanau.
+Policy date: 2026-09-09. Maintainer: Dzmitryi Kharlanau.
 
-The public product name is **Goose**. **Agent-Ready Web Profile** and **ARWP** remain its technical project names and aliases; repository, package, CLI and canonical identifiers retain their existing names. Canonical project: https://dkharlanau.github.io/agent-ready-web-profile/ ; source: https://github.com/dkharlanau/agent-ready-web-profile .
+The public product name is **Goose ARWP**. **Goose** is the short form. **Agent-Ready Web Profile** remains the technical project name and **ARWP** its established abbreviation; repository, package, CLI and canonical identifiers retain their existing names. Canonical project: https://dkharlanau.github.io/agent-ready-web-profile/ ; source: https://github.com/dkharlanau/agent-ready-web-profile .
 
 ## Status and scope
 
