@@ -37,6 +37,16 @@ const currentExtensions = new Set([
   '.html', '.md', '.txt', '.json', '.jsonld', '.xml', '.mjs', '.js', '.yml', '.yaml'
 ]);
 
+const currentPrefixes = [
+  'docs/',
+  'scripts/',
+  'lib/',
+  'skills/',
+  'registry/',
+  'examples/',
+  'templates/'
+];
+
 function isFrozen(file) {
   return frozenExact.has(file) || frozenPrefixes.some(prefix => file.startsWith(prefix));
 }
@@ -45,10 +55,7 @@ function isCurrentBrandSurface(file) {
   if (migrationControlFiles.has(file) || isFrozen(file)) return false;
   if (rootCurrentFiles.has(file)) return true;
   if (file === 'docs/BRAND-CITE-GOOSE.md') return true;
-  if (file.startsWith('docs/')) return currentExtensions.has(path.extname(file));
-  if (file.startsWith('scripts/') || file.startsWith('lib/') || file.startsWith('skills/') || file.startsWith('registry/')) {
-    return currentExtensions.has(path.extname(file));
-  }
+  if (currentPrefixes.some(prefix => file.startsWith(prefix))) return currentExtensions.has(path.extname(file));
   return false;
 }
 
