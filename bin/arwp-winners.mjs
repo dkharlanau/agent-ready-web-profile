@@ -37,7 +37,7 @@ function writeJson(value, output) {
 }
 
 function usage() {
-  console.log(`Goose Winner Observatory\n\nUsage:\n  arwp-winners validate <snapshot.json> [--json]\n  arwp-winners summarize <snapshot.json> [--json]\n  arwp-winners diff <before.json> <after.json> [--output=diff.json] [--json]\n\nA snapshot is a fixed Search/AI query cohort observation. Diff reports entrants, drops, rank movement and persistence. It never infers hidden ranking factors, causality or zero paid acquisition.\n`);
+  console.log(`Goose Winner Observatory\n\nUsage:\n  arwp-winners validate <snapshot.json> [--json]\n  arwp-winners summarize <snapshot.json> [--json]\n  arwp-winners diff <before.json> <after.json> [--output=diff.json] [--json]\n\nA snapshot is a fixed Search/AI query cohort observation. Diff reports entrants, drops, rank movement, result persistence, top-10 persistence and citation persistence. It never infers hidden ranking factors, causality or zero paid acquisition.\n`);
 }
 
 async function main() {
