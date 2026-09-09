@@ -13,7 +13,7 @@ const now = '2026-09-07T12:00:00Z';
 
 const validation = validatePortfolioRegistry(portfolio);
 assert.equal(validation.valid, true, JSON.stringify(validation));
-assert.equal(portfolio.sites.length, 6);
+assert.equal(portfolio.sites.length, 7);
 assert.equal(portfolio.sites.filter(site => site.rollout.mode === 'managed-issue').length, 3);
 const ptichi = portfolio.sites.find(site => site.id === 'ptichi-fresh-site');
 assert.ok(ptichi);
@@ -108,4 +108,4 @@ const invalidResult = validatePortfolioRegistry(invalid);
 assert.equal(invalidResult.valid, false);
 assert.ok(invalidResult.semanticErrors.some(error => /Duplicate portfolio repository/.test(error)));
 
-console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across 6 sites including Ptichi and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
+console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across 7 sites including Ptichi and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
