@@ -34,7 +34,7 @@ for (const needle of ['# Goose ARWP Roadmap', 'M1 — Proof before more product'
 if (/^# ARWP Roadmap/m.test(roadmap)) fail('Resolver-era ARWP roadmap title returned.');
 
 const productLine = read('docs/PRODUCT-LINE.md');
-for (const needle of ['# Goose ARWP — Product Line', 'Public product journey', 'Proof before more product', 'Provider-native measurement hardening']) {
+for (const needle of ['# Goose ARWP — Product Line', 'Public product journey', 'P0 — Proof Board + real longitudinal evidence', 'Provider-native measurement hardening']) {
   if (!productLine.includes(needle)) fail(`docs/PRODUCT-LINE.md missing current Goose strategy marker: ${needle}`);
 }
 
