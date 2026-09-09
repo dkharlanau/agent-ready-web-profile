@@ -17,7 +17,7 @@ const frozenPrefixes = [
   'knowledge/research/'
 ];
 const frozenExact = new Set(['CHANGELOG.md', 'docs/history.html', 'docs/history.json']);
-const selfFiles = new Set(['scripts/goose-brand-test.mjs', 'scripts/goose-brand-migration.mjs']);
+const selfFiles = new Set(['scripts/goose-brand-test.mjs']);
 const extensions = new Set(['.html', '.md', '.txt', '.json', '.jsonld', '.xml', '.mjs', '.js', '.yml', '.yaml']);
 const currentPrefixes = ['docs/', 'lib/', 'skills/', 'registry/', 'examples/', 'templates/'];
 
@@ -78,4 +78,9 @@ if (!home.includes('Agent-Ready Web Profile') || !home.includes('ARWP')) {
 const legacyDoc = fs.readFileSync(path.join(root, 'docs', 'BRAND-CITE-GOOSE.md'), 'utf8');
 if (!legacyDoc.includes('BRAND-GOOSE.md')) throw new Error('Legacy brand path must point to the canonical Goose brand document.');
 
-console.log(`PASS Goose brand contract across ${files.length} current public/source surfaces; ARWP remains the technical identity and frozen history is excluded.`);
+const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+for (const required of ['docs/BRAND-GOOSE.md', 'docs/BRAND-CITE-GOOSE.md']) {
+  if (!pkg.files?.includes(required)) throw new Error(`npm package surface is missing ${required}`);
+}
+
+console.log(`PASS Goose brand contract across ${files.length} current public/source surfaces; ARWP remains the technical identity, both canonical and compatibility brand docs ship in the package, and frozen history is excluded.`);
