@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Information architecture and URL ownership</title><meta name="description" content="11 source-backed discoverability patterns for Information architecture and URL ownership with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html","name":"Goose ARWP — Information architecture and URL ownership","description":"11 reviewed discoverability patterns for information architecture and url ownership, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":11,"itemListElement":[{"@type":"ListItem","position":1,"name":"Give each recurring intent a primary page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-intent-owner"},{"@type":"ListItem","position":2,"name":"Build a task-based topic hub","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-hub"},{"@type":"ListItem","position":3,"name":"Use descriptive crawlable anchors","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-anchors"},{"@type":"ListItem","position":4,"name":"Check discovery paths to important pages","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-orphans"},{"@type":"ListItem","position":5,"name":"Align duplicate URL signals","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-canonical"},{"@type":"ListItem","position":6,"name":"Constrain unbounded filter combinations","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-facets"},{"@type":"ListItem","position":7,"name":"Make long collections reachable without scrolling","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-collections"},{"@type":"ListItem","position":8,"name":"Reflect the visible hierarchy","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-breadcrumbs"},{"@type":"ListItem","position":9,"name":"Preserve answer locations during moves","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-migration"},{"@type":"ListItem","position":10,"name":"Handle duplicate downloadable documents at the actual hosting layer","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-download-canonical"},{"@type":"ListItem","position":11,"name":"Choose readable URL spelling before publication","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html#arwp-architecture-url-spelling"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / ARCHITECTURE</p><h1>Information architecture and URL ownership</h1><p>11 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>11 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>11 patterns</p><a href="../discoverability.html?category=architecture">Back to filtered index</a></div><article class="practice practice-full" id="arwp-architecture-intent-owner">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-intent-owner">Give each recurring intent a primary page</a></h2>
+    <p class="practice-problem">Overlapping articles split maintenance and confuse navigation.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p><strong>People-first content</strong> — Supports useful task coverage; one primary page per task is our maintenance convention.</p></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p><strong>Reasons to specify a canonical URL</strong> — Duplicate consolidation does not require merging distinct tasks.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Group actual reader tasks from search and support evidence.</li><li>Assign an owner URL and distinguish any necessary supporting pages.</li></ul>
+      <h3>Check the result</h3><ul><li>The intent map names one primary answer and the unique job of each support page.</li></ul>
+      <h3>Measure what happens</h3><p>Track query-to-landing-page fragmentation and qualified visits per intent.</p>
+      <h3>Why try it</h3><p>Concentrated maintenance may improve answer completeness.</p>
+      <h3>Where it fits</h3><p>content-sites</p>
+      <h3>Watch out for</h3><p>Creating one page for every keyword permutation.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p>Supports original value and transparent authorship and production methods. ARWP editorial workflows are implementation proposals, not a disclosed ranking formula.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-helpful">Source record</a></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p>Canonical signals consolidate duplicates; the publisher preference is not proof of the search engine-selected canonical.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-canonical">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a> · <a href="../recommendations/registry.json">google-scaled-query-variant-guardrail</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-intent-owner</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-hub">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-hub">Build a task-based topic hub</a></h2>
+    <p class="practice-problem">A chronological archive hides the next useful resource.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Link best practices</a><p><strong>Internal links</strong> — Supports relevant crawlable links; a staged hub is our design proposal.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose a recurring task with multiple meaningful stages.</li><li>Link its prerequisites, main guide, worked example, and troubleshooting from a hub.</li></ul>
+      <h3>Check the result</h3><ul><li>Every link answers a named reader need and all destinations are live.</li></ul>
+      <h3>Measure what happens</h3><p>Measure hub-to-target clicks and orphan-page count.</p>
+      <h3>Why try it</h3><p>A coherent path may improve discovery of deeper useful pages.</p>
+      <h3>Where it fits</h3><p>content-sites, documentation</p>
+      <h3>Watch out for</h3><p>A keyword cloud with no editorial explanation.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Link best practices</a><p>Supports real href links, contextual anchors, and links to important pages. No fixed internal-link count is prescribed.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-links">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-crawlable-internal-links</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-hub</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-anchors">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-anchors">Use descriptive crawlable anchors</a></h2>
+    <p class="practice-problem">Clickable scripts and generic labels obscure destinations.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Link best practices</a><p><strong>Make your links crawlable; Write good anchor text</strong> — Google recommends resolvable href anchors and contextual, concise, descriptive labels; script-only events are unreliable for extracting links. Keyword stuffing is discouraged.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Replace navigation-only event handlers with real href anchors.</li><li>Name the destination task in concise visible link text.</li></ul>
+      <h3>Check the result</h3><ul><li>An HTML link extractor finds priority destinations and meaningful labels.</li></ul>
+      <h3>Measure what happens</h3><p>Count priority links lacking usable href or descriptive accessible text.</p>
+      <h3>Why try it</h3><p>Readable links support crawling and informed navigation.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Stuffing all variants into anchor text.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Link best practices</a><p>Supports real href links, contextual anchors, and links to important pages. No fixed internal-link count is prescribed.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-links">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-crawlable-internal-links</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-anchors</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-orphans">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-orphans">Check discovery paths to important pages</a></h2>
+    <p class="practice-problem">A sitemap alone can conceal pages absent from normal navigation.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Link best practices</a><p><strong>Internal links: cross-reference your own content</strong> — Important pages should receive at least one internal link. Contextual links to useful related resources are encouraged; no universal ideal link count is prescribed.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Crawl links from public entry pages.</li><li>Join the discovered set with the canonical publication inventory.</li></ul>
+      <h3>Check the result</h3><ul><li>Each priority page has a relevant inbound internal link.</li></ul>
+      <h3>Measure what happens</h3><p>Report priority orphans by template and their resolution dates.</p>
+      <h3>Why try it</h3><p>Removing orphan pages may improve both human and crawler discovery.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Adding site-wide unrelated footer links solely to satisfy a counter.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable">Link best practices</a><p>Supports real href links, contextual anchors, and links to important pages. No fixed internal-link count is prescribed.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-links">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-crawlable-internal-links</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-orphans</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-canonical">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-canonical">Align duplicate URL signals</a></h2>
+    <p class="practice-problem">Tracking and slash variants can disagree about the primary address.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p><strong>Best practices</strong> — Google advises using consistent canonical preferences across methods and internal links, including self-referential canonical links. Inconsistent sitemap and canonical targets should be avoided.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose the preferred URL for each duplicate group.</li><li>Align redirects, canonical links, sitemap entries, and internal references.</li></ul>
+      <h3>Check the result</h3><ul><li>All sampled signals identify the same target; external selected-canonical evidence stays separate.</li></ul>
+      <h3>Measure what happens</h3><p>Track conflicting canonical signals and later selected-canonical mismatches.</p>
+      <h3>Why try it</h3><p>Consistent preferences may reduce duplicate processing.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Canonicalizing genuinely different answers to one broad category.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p>Canonical signals consolidate duplicates; the publisher preference is not proof of the search engine-selected canonical.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-canonical">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-canonical-consistency</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-canonical</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-facets">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-facets">Constrain unbounded filter combinations</a></h2>
+    <p class="practice-problem">Facets can generate an effectively endless crawl space.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/crawling/docs/faceted-navigation">Managing crawling of faceted navigation URLs</a><p><strong>Managing crawling; Prevent crawling; Ensure the faceted navigation URLs are optimal for the web</strong> — Facets can create costly URL spaces. Google separates useful indexable combinations from blocked unnecessary ones; stable filter ordering, no duplicates and404 for invalid/no-result combinations are recommended.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Inventory index-worthy filtered views and empty combinations.</li><li>Apply a deliberate crawl and URL policy to nonessential combinations.</li></ul>
+      <h3>Check the result</h3><ul><li>Tests cover useful filters, empty results, reordered parameters, and repeated values.</li></ul>
+      <h3>Measure what happens</h3><p>Compare unique crawler-requested facet URLs and useful indexed filter pages.</p>
+      <h3>Why try it</h3><p>A finite crawl surface may preserve resources for useful views.</p>
+      <h3>Where it fits</h3><p>catalogs, datasets</p>
+      <h3>Watch out for</h3><p>Blocking every filter without checking real demand and content value.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/crawling/docs/faceted-navigation">Managing crawling of faceted navigation URLs</a><p>Current destination of the Search Central guide. Supports controlling unbounded URL combinations; not blanket deletion of useful filtered pages.</p><span>Google Crawling Infrastructure · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-facets">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-canonical-consistency</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-facets</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-collections">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-collections">Make long collections reachable without scrolling</a></h2>
+    <p class="practice-problem">Infinite scroll may hide records from simple clients.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading">Pagination and incremental page loading</a><p><strong>Link pages sequentially; Use URLs correctly</strong> — Supports reachable pagination and page-specific canonicals; complete traversal is our test.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Expose sequential anchor href links and distinct page URLs with appropriate page-specific canonicals.</li><li>Preserve record identity, stable ordering and bounded traversal; document intentional repeated entries.</li></ul>
+      <h3>Check the result</h3><ul><li>A bounded non-JavaScript walk reaches the intended public record set; deduplicate by stable ID and report missing records, loops and repeated entries separately.</li></ul>
+      <h3>Measure what happens</h3><p>Measure reachable public records divided by published public records.</p>
+      <h3>Why try it</h3><p>Deterministic collection traversal may increase retrieval completeness.</p>
+      <h3>Where it fits</h3><p>catalogs, datasets</p>
+      <h3>Watch out for</h3><p>Changing results with each request or linking every page to the first canonical.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading">Pagination and incremental page loading</a><p>Supports sequential crawlable links and distinct page URLs and canonicals.</p><span>Google · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-pagination">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-javascript-renderability</a> · <a href="../recommendations/registry.json">google-crawlable-internal-links</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-collections</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-breadcrumbs">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-breadcrumbs">Reflect the visible hierarchy</a></h2>
+    <p class="practice-problem">Markup can describe a route that readers cannot actually follow.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb">Breadcrumb structured data</a><p><strong>Guidelines; BreadcrumbList; ListItem</strong> — Google recommends meaningful user paths rather than literal URL mirroring, ordered BreadcrumbList entries and valid item URLs.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose a meaningful parent hierarchy for each template.</li><li>Render matching breadcrumbs and BreadcrumbList items.</li></ul>
+      <h3>Check the result</h3><ul><li>Visible labels, positions, and destination URLs agree with the JSON-LD.</li></ul>
+      <h3>Measure what happens</h3><p>Count hierarchy mismatches and broken breadcrumb destinations.</p>
+      <h3>Why try it</h3><p>Consistent hierarchy may clarify page context.</p>
+      <h3>Where it fits</h3><p>content-sites, catalogs</p>
+      <h3>Watch out for</h3><p>Inventing keyword-heavy breadcrumb levels.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb">Breadcrumb structured data</a><p>Describes page hierarchy markup, not keyword paths or a guaranteed search presentation.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-breadcrumb">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-breadcrumbs</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-migration">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-migration">Preserve answer locations during moves</a></h2>
+    <p class="practice-problem">A redesign can discard established entry URLs.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Site moves with URL changes</a><p><strong>Redirect best practices; Start the site move</strong> — Google advises direct equivalent destination redirects, updated canonical references and redirect tests. Irrelevant mass redirects to a homepage may be treated as soft404s.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Map old URLs to equivalent new answers before launch.</li><li>Update canonical references and test one-hop permanent redirects on the deployed host.</li></ul>
+      <h3>Check the result</h3><ul><li>Each priority old URL resolves to an equivalent answer or an intentional removal state.</li></ul>
+      <h3>Measure what happens</h3><p>Track redirect failures and old/new URL traffic through the migration window.</p>
+      <h3>Why try it</h3><p>Preserved routes may reduce avoidable migration losses.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Redirecting every removed article to the homepage.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Site moves with URL changes</a><p>Supports explicit URL mapping, redirects, updated references, and migration monitoring; traffic fluctuations remain possible.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-move">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-canonical-consistency</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-migration</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-download-canonical">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-download-canonical">Handle duplicate downloadable documents at the actual hosting layer</a></h2>
+    <p class="practice-problem">A PDF duplicate is assigned an imagined HTML canonical setting.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p><strong>The rel=canonical HTTP header</strong> — Google documents HTTP canonical headers for non-HTML documents. Canonicalization is not a guarantee; distinct artifacts need not be collapsed.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Decide whether the download substantially duplicates the HTML page or provides a distinct artifact.</li><li>For an equivalent non-HTML document, use a supported HTTP Link canonical header when appropriate; confirm host support before promising implementation.</li></ul>
+      <h3>Check the result</h3><ul><li>Inspect the live download response headers; if unsupported by the host, record that limitation and retain useful landing-page links. Do not pretend an HTML meta tag configures PDF response headers.</li></ul>
+      <h3>Measure what happens</h3><p>Track the relevant technical state, observed search appearance and useful actions separately.</p>
+      <h3>Why try it</h3><p>This practice supports accurate discovery or reuse. Ranking, citation and revenue effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>static-sites, documentation, content-sites</p>
+      <h3>Watch out for</h3><p>Canonicalizing every download to a sales page regardless of content equivalence.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p>Canonical signals consolidate duplicates; the publisher preference is not proof of the search engine-selected canonical.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-canonical">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-download-canonical</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-architecture-url-spelling">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Information architecture and URL ownership</p>
+    <h2><a href="#arwp-architecture-url-spelling">Choose readable URL spelling before publication</a></h2>
+    <p class="practice-problem">Mixed case and unclear separators create avoidable URL variants.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/url-structure">URL structure best practices</a><p><strong>Readable URLs, percent encoding, hyphens and case sensitivity</strong> — Supports URL construction; the avoid-unnecessary-migration rule is project judgment.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use descriptive path segments, hyphens where appropriate and correct escaping; choose a consistent case policy. Preserve established URLs unless a migration is justified.</li></ul>
+      <h3>Check the result</h3><ul><li>Test encoded links and case behavior on the actual static host.</li></ul>
+      <h3>Measure what happens</h3><p>Track factual/technical correctness, relevant search observations and useful actions separately.</p>
+      <h3>Why try it</h3><p>Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>localized-sites, software, service-sites</p>
+      <h3>Watch out for</h3><p>Renaming working URLs just to chase a speculative keyword boost.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/url-structure">URL structure best practices</a><p>Supports readable, encoded and consistent URL construction; not a mandate to migrate working URLs.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-url-structure">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-architecture-url-spelling</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

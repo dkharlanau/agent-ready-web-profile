@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Crawl access and index eligibility</title><meta name="description" content="11 source-backed discoverability patterns for Crawl access and index eligibility with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html","name":"Goose ARWP — Crawl access and index eligibility","description":"11 reviewed discoverability patterns for crawl access and index eligibility, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":11,"itemListElement":[{"@type":"ListItem","position":1,"name":"Return the real page state","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-status"},{"@type":"ListItem","position":2,"name":"Audit robots rules by crawler","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-robots"},{"@type":"ListItem","position":3,"name":"Check snippet eligibility before AI work","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-snippet"},{"@type":"ListItem","position":4,"name":"Separate search crawling from training","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-searchbot"},{"@type":"ListItem","position":5,"name":"Check the CDN response as well as robots","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-edge"},{"@type":"ListItem","position":6,"name":"Keep the answer in initial HTML","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-html"},{"@type":"ListItem","position":7,"name":"Generate canonical sitemaps from the built output","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-sitemap"},{"@type":"ListItem","position":8,"name":"Notify participating engines after real changes","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-notifications"},{"@type":"ListItem","position":9,"name":"Inspect representative URLs after publication","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-inspect"},{"@type":"ListItem","position":10,"name":"Inspect inherited Search generative AI inclusion settings","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-google-ai-property-control"},{"@type":"ListItem","position":11,"name":"Load discovery-critical content without a user gesture","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html#arwp-access-interaction-free-assets"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / ACCESS</p><h1>Crawl access and index eligibility</h1><p>11 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>11 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>11 patterns</p><a href="../discoverability.html?category=access">Back to filtered index</a></div><article class="practice practice-full" id="arwp-access-status">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-status">Return the real page state</a></h2>
+    <p class="practice-problem">An error template can masquerade as an indexable page.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/crawling/docs/troubleshooting/http-status-codes">HTTP status codes and Google crawlers</a><p><strong>HTTP status codes &gt; 2xx (success), 3xx (redirection), 4xx (client errors)</strong> — Success responses enter further processing, including possible soft-404 treatment for error content. Removed URLs returning 404/410 are not indexed. Redirects lead to the final response.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Fetch priority URLs with redirects enabled.</li><li>Return 200 for usable pages and genuine 404 or 410 for removed content.</li></ul>
+      <h3>Check the result</h3><ul><li>No error template returns 200 in the priority sample.</li></ul>
+      <h3>Measure what happens</h3><p>Track valid-content responses divided by sampled priority URLs weekly.</p>
+      <h3>Why try it</h3><p>Clear HTTP states may reduce indexing confusion.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Treating every 200 response as healthy content.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/crawling/docs/troubleshooting/http-status-codes">HTTP status codes and Google crawlers</a><p>Current destination of the Search Central guide. Successful HTTP transport does not prove the content is useful or indexed.</p><span>Google Crawling Infrastructure · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-http">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-search-technical-eligibility</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-status</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-robots">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-robots">Audit robots rules by crawler</a></h2>
+    <p class="practice-problem">A wildcard block can disable intended discovery.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro">Introduction to robots.txt</a><p><strong>Introduction; Understand the limitations of a robots.txt file</strong> — Robots rules manage access, cannot secure content, and do not reliably remove URLs from results. Google explicitly cautions that crawler interpretations differ.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Fetch the deployed root robots.txt.</li><li>Evaluate priority paths for each intended crawler using that provider&#39;s current documentation; record unknown when crawler-specific behavior has not been verified.</li></ul>
+      <h3>Check the result</h3><ul><li>Record allow, disallow, or unknown per crawler and path, including the matching rule and provider documentation used.</li></ul>
+      <h3>Measure what happens</h3><p>Count unintentionally blocked canonical URLs before and after deployment.</p>
+      <h3>Why try it</h3><p>Removing unintended blocks restores crawl eligibility.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Using robots.txt as authentication or proof of deindexing.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro">Introduction to robots.txt</a><p>Crawl management does not equal guaranteed deindexing or access control.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-robots">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a> · <a href="../growth/hypotheses.json">chatgpt-search-access</a></p><p><a href="../recommendations/registry.json">google-search-technical-eligibility</a> · <a href="../recommendations/registry.json">openai-oai-searchbot-access</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-robots</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-snippet">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-snippet">Check snippet eligibility before AI work</a></h2>
+    <p class="practice-problem">Preview restrictions can conflict with the desired AI-search exposure.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p><strong>Technical requirements for appearing in AI features</strong> — Google AI supporting links require an indexed page eligible for a Search snippet, without additional technical requirements or a promise of inclusion.</p></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag">Robots meta tags and HTTP header specifications</a><p><strong>Valid indexing and serving rules &gt; noindex, nosnippet, max-snippet</strong> — Meta directives and HTTP headers constrain indexing and preview use. Restrictive conflicts take precedence; nosnippet also restricts direct input to Google AI features.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Inspect robots meta tags and X-Robots-Tag headers.</li><li>Document whether priority pages should allow indexing and snippets.</li></ul>
+      <h3>Check the result</h3><ul><li>Each target has an explicit preview policy consistent with its live directives.</li></ul>
+      <h3>Measure what happens</h3><p>Track priority pages with conflicting noindex or snippet directives.</p>
+      <h3>Why try it</h3><p>Eligible indexed pages can be considered for supporting links.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Promising AI inclusion after removing nosnippet.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p>Supports ordinary search eligibility and snippet requirements for AI features. No extra AI markup is required; inclusion is not guaranteed. For dedicated owner-side generative-AI reporting, use the separate google-generative-ai-report reference and native measurement rule.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-ai">Source record</a></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag">Robots meta tags and HTTP header specifications</a><p>Supports noindex and snippet controls. Crawlers must access a page to observe page-level directives.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-meta">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-ai-search-eligibility</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-snippet</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-searchbot">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-searchbot">Separate search crawling from training</a></h2>
+    <p class="practice-problem">A single AI-bot policy can conflate independent choices.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI crawlers</a><p><strong>Overview; OAI-SearchBot and GPTBot table rows</strong> — OpenAI distinguishes search and model-training crawlers and makes their robots policies independent. It recommends permitting searchbot plus published IP ranges for intended search access.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Document OAI-SearchBot and GPTBot policies separately.</li><li>Check the deployed rules against current OpenAI documentation.</li></ul>
+      <h3>Check the result</h3><ul><li>A test matrix demonstrates each bot receives the intended policy.</li></ul>
+      <h3>Measure what happens</h3><p>Report OAI-SearchBot policy drift separately from training-policy drift.</p>
+      <h3>Why try it</h3><p>Intentional search access removes a preventable discovery barrier.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Describing GPTBot access as a requirement for ChatGPT search.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI crawlers</a><p>OAI-SearchBot controls automatic search crawling; GPTBot concerns foundation-model training; ChatGPT-User serves user requests. Published IP lists support verification. Allowing access cannot promise citation.</p><span>OpenAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-openai-bots">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">chatgpt-search-access</a></p><p><a href="../recommendations/registry.json">openai-oai-searchbot-access</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-searchbot</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-edge">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-edge">Check the CDN response as well as robots</a></h2>
+    <p class="practice-problem">A permissive file does not bypass an edge challenge.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI crawlers</a><p><strong>OAI-SearchBot and published IP ranges</strong> — Supports provider-specific access; edge log review is our operational method.</p></li><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p><strong>Technical requirements</strong> — Supports crawl access; an HTTP probe does not prove indexing.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Probe canonical HTML through the public hostname.</li><li>Inspect trusted crawler logs and verify published IP ranges before changing narrow firewall rules.</li></ul>
+      <h3>Check the result</h3><ul><li>Priority HTML is accessible without a challenge under the intended verified-crawler policy.</li></ul>
+      <h3>Measure what happens</h3><p>Measure verified search crawler challenge and 4xx rates by provider.</p>
+      <h3>Why try it</h3><p>Reducing false bot blocks may improve successful retrieval.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Allowlisting a user-agent string as if it authenticated a crawler.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.openai.com/api/docs/bots">Overview of OpenAI crawlers</a><p>OAI-SearchBot controls automatic search crawling; GPTBot concerns foundation-model training; ChatGPT-User serves user requests. Published IP lists support verification. Allowing access cannot promise citation.</p><span>OpenAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-openai-bots">Source record</a></li><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p>Supports ordinary search eligibility and snippet requirements for AI features. No extra AI markup is required; inclusion is not guaranteed. For dedicated owner-side generative-AI reporting, use the separate google-generative-ai-report reference and native measurement rule.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-ai">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a> · <a href="../growth/hypotheses.json">chatgpt-search-access</a></p><p><a href="../recommendations/registry.json">google-search-technical-eligibility</a> · <a href="../recommendations/registry.json">openai-oai-searchbot-access</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-edge</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-html">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-html">Keep the answer in initial HTML</a></h2>
+    <p class="practice-problem">Some clients cannot recover essential content from a client-only shell.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">JavaScript SEO basics</a><p><strong>How Google processes JavaScript</strong> — Google renders JavaScript; initial HTML is our broader-client reliability choice.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Fetch a representative article without executing JavaScript.</li><li>Render the main answer, source links, and page identity in initial HTML.</li><li>Treat initial HTML as a reliability choice for the intended clients; Google can render JavaScript, so compare initial and rendered output before diagnosing a blocker.</li></ul>
+      <h3>Check the result</h3><ul><li>A plain HTML extraction contains the answer and its qualifications.</li></ul>
+      <h3>Measure what happens</h3><p>Compare required-answer extraction coverage with and without JavaScript.</p>
+      <h3>Why try it</h3><p>More clients may retrieve complete content on their first fetch.</p>
+      <h3>Where it fits</h3><p>javascript-sites</p>
+      <h3>Watch out for</h3><p>Claiming that Google cannot render JavaScript.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">JavaScript SEO basics</a><p>Supports inspecting rendering, links, status handling, and indexable content; server HTML is an ARWP interoperability choice rather than a universal Google requirement.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-js">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-javascript-renderability</a> · <a href="../recommendations/registry.json">google-important-content-textual</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-html</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-sitemap">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-sitemap">Generate canonical sitemaps from the built output</a></h2>
+    <p class="practice-problem">Repository files do not prove public discovery artifacts exist.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">Build and submit a sitemap</a><p><strong>Referenced URLs properties; Additional notes about XML sitemaps; How to create a sitemap</strong> — Sitemaps should contain preferred canonical absolute URLs. Accurate lastmod refers to significant page changes. Google permits CMS, database-driven, manual and automatic generation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Generate sitemap entries from published canonical pages.</li><li>Fetch the deployed sitemap and sample its destinations.</li></ul>
+      <h3>Check the result</h3><ul><li>Entries resolve to intended canonical indexable pages; lastmod reflects content changes.</li></ul>
+      <h3>Measure what happens</h3><p>Track sitemap URL validity and discovered-to-indexed lag separately.</p>
+      <h3>Why try it</h3><p>Accurate discovery hints may help crawlers find changed resources.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Including drafts or updating all lastmod values on every build.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap">Build and submit a sitemap</a><p>Supports canonical URL lists and meaningful lastmod. Submission is a discovery hint, not indexing evidence.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-sitemap">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a> · <a href="../growth/hypotheses.json">freshness-without-fake-recency</a></p><p><a href="../recommendations/registry.json">google-canonical-consistency</a> · <a href="../recommendations/registry.json">google-sitemap-lastmod</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-sitemap</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-notifications">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-notifications">Notify participating engines after real changes</a></h2>
+    <p class="practice-problem">Repeated unchanged notifications add noise without new content.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.indexnow.org/documentation">IndexNow protocol documentation</a><p><strong>Submitting One URL; Submitting set of URLs; Verifying ownership via the key</strong> — IndexNow accepts added, updated and deleted URLs and checks host ownership through a key file. A successful response acknowledges receipt, not indexing.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Create a changed canonical URL set from the release diff.</li><li>Submit it to IndexNow only after verifying the host key and live content.</li></ul>
+      <h3>Check the result</h3><ul><li>Retain request time, URL count, response, and a separate later indexing observation.</li></ul>
+      <h3>Measure what happens</h3><p>Measure change-to-notification time and independently observed recrawl lag.</p>
+      <h3>Why try it</h3><p>Timely change notification may shorten discovery delays on participating engines.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Calling an accepted notification an indexed page or Google submission.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.indexnow.org/documentation">IndexNow protocol documentation</a><p>Supports notifying participating engines of changed URLs using key verification. Acceptance is not crawling, indexing, or ranking; do not describe it as Google submission.</p><span>IndexNow · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-indexnow">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a></p><p><a href="../recommendations/registry.json">indexnow-change-notification</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-notifications</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-inspect">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-inspect">Inspect representative URLs after publication</a></h2>
+    <p class="practice-problem">Local validation cannot identify the selected indexed version.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://support.google.com/webmasters/answer/9012289">URL Inspection tool</a><p><strong>About the indexed URL status; Inspect a live URL</strong> — Indexed and live observations differ; a live pass does not establish indexed canonical selection.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Select a small cohort covering templates and known failures.</li><li>Use authorized URL Inspection evidence to record indexed and live states separately.</li><li>Record the indexed Google-selected canonical separately; a live test cannot predict canonical selection or guarantee search appearance.</li></ul>
+      <h3>Check the result</h3><ul><li>Each observation has URL, timestamp, inspection type, and evidence status.</li></ul>
+      <h3>Measure what happens</h3><p>Track verified indexed coverage within the fixed cohort; leave uninspected URLs unknown.</p>
+      <h3>Why try it</h3><p>A bounded inspection cohort may reveal real eligibility blockers earlier.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Inferring indexing from site: search or a successful deployment.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://support.google.com/webmasters/answer/9012289">URL Inspection tool</a><p>Indexed observations and live tests have different coverage; neither guarantees appearance.</p><span>Google · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-url-inspection">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-search-technical-eligibility</a> · <a href="../recommendations/registry.json">google-canonical-consistency</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-inspect</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-google-ai-property-control">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-google-ai-property-control">Inspect inherited Search generative AI inclusion settings</a></h2>
+    <p class="practice-problem">An accessible indexed page can still belong to a property excluded from generative AI features.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://support.google.com/webmasters/answer/16908024">Search generative AI control</a><p><strong>Change your control; Inherit control from parent</strong> — The control governs inclusion independently of public crawl checks. Include is the default; property inheritance must be considered.</p></li></ul>
+      <h3>Make the change</h3><ul><li>With owner access, inspect the Search Console property setting and its parent inheritance.</li><li>Record observed setting, property scope and time separately from robots and snippet checks.</li><li>Change distribution policy only within the publisher&#39;s authorization; keep unavailable settings unknown.</li></ul>
+      <h3>Check the result</h3><ul><li>Use the authenticated effective property setting as evidence; a public HTTP check cannot establish it.</li></ul>
+      <h3>Measure what happens</h3><p>Track confirmed inclusion-state coverage across managed properties</p>
+      <h3>Why try it</h3><p>Inspecting property inheritance may reveal a distribution setting invisible to public crawls. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>all-sites</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://support.google.com/webmasters/answer/16908024">Search generative AI control</a><p>Inclusion, exclusion and inherited property controls; rollout note dated August 31, 2026. A public crawl cannot inspect the owner setting.</p><span>Google Search Console Help · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-ai-control">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-google-ai-property-control</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-access-interaction-free-assets">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Crawl access and index eligibility</p>
+    <h2><a href="#arwp-access-interaction-free-assets">Load discovery-critical content without a user gesture</a></h2>
+    <p class="practice-problem">A table or example appears only after a button click.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading">Fix lazy-loaded website content</a><p><strong>Load content when visible in the viewport; Test</strong> — Google Search does not interact with pages to trigger loading. A browser test remains necessary; source HTML alone is not a full rendering audit.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Keep essential answers and direct download links available without clicking or scrolling.</li><li>Use supported viewport-based loading for deferred media; do not defer immediately visible content unnecessarily.</li></ul>
+      <h3>Check the result</h3><ul><li>Inspect initial and rendered HTML without interaction; then verify the normal user journey.</li></ul>
+      <h3>Measure what happens</h3><p>Track the relevant technical state, observed search appearance and useful actions separately.</p>
+      <h3>Why try it</h3><p>This practice supports accurate discovery or reuse. Ranking, citation and revenue effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>static-sites, documentation, content-sites</p>
+      <h3>Watch out for</h3><p>Requiring Run or Load more before the only useful explanation exists.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading">Fix lazy-loaded website content</a><p>Supports loading important content without requiring user interaction and testing rendered output.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-lazy-content">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-access-interaction-free-assets</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

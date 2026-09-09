@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Claims, citations, and provenance</title><meta name="description" content="11 source-backed discoverability patterns for Claims, citations, and provenance with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html","name":"Goose ARWP — Claims, citations, and provenance","description":"11 reviewed discoverability patterns for claims, citations, and provenance, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":11,"itemListElement":[{"@type":"ListItem","position":1,"name":"Maintain a ledger for material claims","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-claim-ledger"},{"@type":"ListItem","position":2,"name":"Place sources next to the supported statement","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-inline-links"},{"@type":"ListItem","position":3,"name":"Use application-specific evidence attributes as an editorial aid","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-evidence-attrs"},{"@type":"ListItem","position":4,"name":"Keep units and denominators beside numbers","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-units"},{"@type":"ListItem","position":5,"name":"Publish null and failed results with context","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-negative-results"},{"@type":"ListItem","position":6,"name":"Distinguish observation, publication, and revision dates","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-dates"},{"@type":"ListItem","position":7,"name":"Publish a correction path and material change log","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-corrections"},{"@type":"ListItem","position":8,"name":"Label first-party and independent evidence","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-independence"},{"@type":"ListItem","position":9,"name":"Revalidate sources that can change","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-expiry"},{"@type":"ListItem","position":10,"name":"Package one claim so another project can rerun it","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-replication-kit"},{"@type":"ListItem","position":11,"name":"Count independent ownership groups instead of citation copies","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html#arwp-evidence-independent-owner-groups"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / EVIDENCE</p><h1>Claims, citations, and provenance</h1><p>11 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>11 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>11 patterns</p><a href="../discoverability.html?category=evidence">Back to filtered index</a></div><article class="practice practice-full" id="arwp-evidence-claim-ledger">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-claim-ledger">Maintain a ledger for material claims</a></h2>
+    <p class="practice-problem">Claims become detached from their supporting observations.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/Claim">Schema.org Claim</a><p><strong>Claim definition</strong> — Represents a claim, not its truth.</p></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Data Provenance</strong> — Supports provenance; a claim ledger and review owner are our application.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Assign each material claim a stable internal ID.</li><li>Record its wording, source, observation date, owner, and review trigger.</li></ul>
+      <h3>Check the result</h3><ul><li>Every material numerical or comparative claim resolves to a ledger entry.</li></ul>
+      <h3>Measure what happens</h3><p>Measure supported material claims divided by all material claims.</p>
+      <h3>Why try it</h3><p>A reviewable ledger may reduce unsupported statements in pages and machine exports.</p>
+      <h3>Where it fits</h3><p>content-sites, services</p>
+      <h3>Watch out for</h3><p>Treating a Claim node as proof that the claim is true.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/Claim">Schema.org Claim</a><p>Represents a claim. Encoding a statement does not establish truth or independent fact-checking.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-claim">Source record</a></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a> · <a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-claim-ledger</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-inline-links">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-inline-links">Place sources next to the supported statement</a></h2>
+    <p class="practice-problem">A bibliography can leave readers guessing what each source supports.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/citation">Schema.org citation</a><p><strong>Property definition</strong> — Defines citation relationships; adjacent placement is our convention.</p></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite">The cite element</a><p><strong>Usage notes</strong> — The cite element represents a work title; it does not verify a claim.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Link the source from the claim or an adjacent footnote.</li><li>Name the work and provide a return link from long footnotes.</li></ul>
+      <h3>Check the result</h3><ul><li>Each citation opens the relevant source and supports the adjacent claim.</li></ul>
+      <h3>Measure what happens</h3><p>Sample citation correctness and time needed to verify a central claim.</p>
+      <h3>Why try it</h3><p>Local attribution may improve human verification and extraction accuracy.</p>
+      <h3>Where it fits</h3><p>content-sites</p>
+      <h3>Watch out for</h3><p>Linking an authoritative homepage that does not support the statement.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/citation">Schema.org citation</a><p>CreativeWork citation relationships can reference works or text. A citation alone is not evidence of agreement.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-citation">Source record</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/cite">The cite element</a><p>Explains cite as the title of a referenced work; the actual clickable source belongs in an anchor.</p><span>MDN · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-mdn-cite">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-inline-links</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-evidence-attrs">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-evidence-attrs">Use application-specific evidence attributes as an editorial aid</a></h2>
+    <p class="practice-problem">Internal QA cannot reliably associate paragraphs with claim records.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes">HTML custom data attributes</a><p><strong>Embedding custom non-visible data with data-* attributes</strong> — Supports application-specific annotations; private means application-specific, not confidential.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Add data-evidence-id and data-source-ids to claim containers.</li><li>Keep the complete claim and clickable source visible in semantic HTML.</li><li>Treat shipped attributes as publicly readable source code. Use non-sensitive IDs; keep confidential ledger data outside the published document.</li></ul>
+      <h3>Check the result</h3><ul><li>A local extractor joins the attributes to the ledger without changing visible meaning.</li></ul>
+      <h3>Measure what happens</h3><p>Compare extractor precision with and without attributes on the same held-out pages.</p>
+      <h3>Why try it</h3><p>Private attributes may make editorial audits more reliable.</p>
+      <h3>Where it fits</h3><p>content-sites, documentation</p>
+      <h3>Watch out for</h3><p>Calling custom data attributes an AI ranking protocol or hiding persuasive instructions in them.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://html.spec.whatwg.org/multipage/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes">HTML custom data attributes</a><p>Allows application-private data-* metadata. ARWP evidence attributes are a local editorial convention, not search-engine instructions or a ranking feature.</p><span>WHATWG · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-html-data">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-evidence-attrs</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-units">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-units">Keep units and denominators beside numbers</a></h2>
+    <p class="practice-problem">A detached percentage can be repeated with the wrong meaning.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide structural metadata</strong> — Supports interpreting data; sentence-level qualifiers are our editorial application.</p></li></ul>
+      <h3>Make the change</h3><ul><li>State the applicable unit, population, time window and method beside each key measurement; add denominator and base count for rates or percentages.</li><li>Retain these fields in table exports and summaries.</li></ul>
+      <h3>Check the result</h3><ul><li>An extracted measurement retains its necessary interpretation; denominators are required for rates, not invented for counts or prices.</li></ul>
+      <h3>Measure what happens</h3><p>Audit numerical claims for complete unit, denominator, window, and method coverage.</p>
+      <h3>Why try it</h3><p>Self-contained measurements may reduce erroneous reuse.</p>
+      <h3>Where it fits</h3><p>datasets, research, comparisons</p>
+      <h3>Watch out for</h3><p>A large percentage with no base count or observation period.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-units</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-negative-results">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-negative-results">Publish null and failed results with context</a></h2>
+    <p class="practice-problem">Selective success stories distort what a method can achieve.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide data quality information</strong> — Supports quality disclosure; retention and denominator reconciliation are our research protocol.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Retain failed runs and zero-result observations in the evidence record.</li><li>Explain exclusions and show when the method did not help.</li></ul>
+      <h3>Check the result</h3><ul><li>Summary totals reconcile with successful, failed, and excluded observations.</li></ul>
+      <h3>Measure what happens</h3><p>Track reconciliation errors and proportion of runs retained with valid status.</p>
+      <h3>Why try it</h3><p>Complete records may make findings more credible and reproducible.</p>
+      <h3>Where it fits</h3><p>research, tools</p>
+      <h3>Watch out for</h3><p>Discarding failed runs from a success-rate denominator.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">platform-ai-measurement</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-negative-results</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-dates">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-dates">Distinguish observation, publication, and revision dates</a></h2>
+    <p class="practice-problem">A fresh page date can disguise old evidence.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/article">Article structured data</a><p><strong>datePublished and dateModified</strong> — Defines publication and modification metadata, not an observation-date field.</p></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Data Provenance; Data Versioning</strong> — Supports lineage and version history; the three internal field names are our convention.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Store observed_at, published_at, and substantively_modified_at separately.</li><li>Show the evidence date beside time-sensitive findings.</li></ul>
+      <h3>Check the result</h3><ul><li>A copy edit cannot reset the observation date or masquerade as a new experiment.</li></ul>
+      <h3>Measure what happens</h3><p>Count time-sensitive claims past their stated review interval.</p>
+      <h3>Why try it</h3><p>Accurate dates may help readers judge whether evidence still applies.</p>
+      <h3>Where it fits</h3><p>content-sites, datasets</p>
+      <h3>Watch out for</h3><p>Automatically displaying today as the research date.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/article">Article structured data</a><p>Supports article author, date, headline, and image properties where accurate; no authorship credential is created by markup.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-article">Source record</a></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a></p><p><a href="../recommendations/registry.json">google-sitemap-lastmod</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-dates</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-corrections">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-corrections">Publish a correction path and material change log</a></h2>
+    <p class="practice-problem">A wrong claim can persist in copied summaries and exports.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide version history; Gather feedback from data consumers</strong> — Supports recorded changes and feedback; coordinated correction propagation is our procedure.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Provide a practical way to report an error.</li><li>Log the corrected claim, correction date, reason, and affected data versions.</li><li>Publish corrected releases and a linked correction notice while preserving historical release bytes; label superseded findings rather than silently rewriting cited artifacts.</li></ul>
+      <h3>Check the result</h3><ul><li>An authorized local test correction reaches current page, graph and release pointers; historical artifacts retain their identity and a discoverable correction path.</li></ul>
+      <h3>Measure what happens</h3><p>Measure correction-to-all-surfaces propagation time.</p>
+      <h3>Why try it</h3><p>Visible correction handling may improve long-term reliability.</p>
+      <h3>Where it fits</h3><p>content-sites, datasets</p>
+      <h3>Watch out for</h3><p>Silent edits that leave conflicting old downloads in circulation.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-corrections</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-independence">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-independence">Label first-party and independent evidence</a></h2>
+    <p class="practice-problem">Owned projects can look like independent corroboration.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p><strong>Expertise questions; Who</strong> — Supports trustworthy sourcing; relationship categories are our disclosure convention.</p></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links">Qualify outbound links</a><p><strong>sponsored and nofollow</strong> — Link qualification and visible disclosure have different roles.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Record the publisher and relationship for each endorsement or case.</li><li>Explain shared ownership when referencing another portfolio project.</li></ul>
+      <h3>Check the result</h3><ul><li>An evidence review distinguishes owner statements, client-approved cases, and independent reports.</li></ul>
+      <h3>Measure what happens</h3><p>Track relationship disclosure coverage among endorsements and comparison sources.</p>
+      <h3>Why try it</h3><p>Transparent relationships may prevent false authority signals.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Presenting cross-links between owned sites as independent adoption.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p>Supports original value and transparent authorship and production methods. ARWP editorial workflows are implementation proposals, not a disclosed ranking formula.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-helpful">Source record</a></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links">Qualify outbound links</a><p>Supports sponsored and ugc link relationship labels; a disclosed relationship is not an independent endorsement.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-outbound">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-independence</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-expiry">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-expiry">Revalidate sources that can change</a></h2>
+    <p class="practice-problem">A working citation can still contradict a claim after a product update.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p><strong>Content and quality questions</strong> — Supports accurate information; volatility-based review scheduling is our method.</p></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Data Versioning</strong> — Supports tracking changes; semantic citation revalidation extends this practice.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Assign source review dates based on volatility.</li><li>On review, check the relevant passage and revise dependent claims rather than only testing HTTP status.</li></ul>
+      <h3>Check the result</h3><ul><li>Changed or removed passages produce a claim review task with affected URLs.</li></ul>
+      <h3>Measure what happens</h3><p>Track overdue claim reviews and material source drift detected per review cycle.</p>
+      <h3>Why try it</h3><p>Semantic source maintenance may reduce stale recommendations.</p>
+      <h3>Where it fits</h3><p>content-sites, comparisons</p>
+      <h3>Watch out for</h3><p>Marking a source verified merely because it returns HTTP 200.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p>Supports original value and transparent authorship and production methods. ARWP editorial workflows are implementation proposals, not a disclosed ranking formula.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-helpful">Source record</a></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-expiry</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-replication-kit">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-replication-kit">Package one claim so another project can rerun it</a></h2>
+    <p class="practice-problem">A benchmark chart is difficult to scrutinize without the actual evaluation materials.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://aclanthology.org/2023.emnlp-main.398/">Enabling Large Language Models to Generate Text with Citations</a><p><strong>Abstract: reproducibility and evaluation dimensions</strong> — The paper motivates reproducible evaluation and separate quality dimensions. A public rerun kit is the proposed implementation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Publish safe inputs, environment versions, scoring rules and a known failing case.</li><li>Provide a result template that accepts disagreement with the original finding.</li><li>Count a rerun only after inspecting evidence from the independently maintained project.</li></ul>
+      <h3>Check the result</h3><ul><li>Execute the kit in a fresh environment and compare outputs with declared tolerances.</li></ul>
+      <h3>Measure what happens</h3><p>Track independent reruns with reviewable results</p>
+      <h3>Why try it</h3><p>This practice may make real resource value easier to inspect and use. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>research-resources, software, portfolio-operations</p>
+      <h3>Watch out for</h3><p>Manufacturing age, activity, citations or backlinks instead of the underlying useful artifact.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://aclanthology.org/2023.emnlp-main.398/">Enabling Large Language Models to Generate Text with Citations</a><p>ALCE separates correctness and citation quality in its evaluation. This supports measurement distinctions, not present-day platform ranking claims.</p><span>ACL Anthology · source checked 8 Sept 2026 · EMNLP 2023, 2023.emnlp-main.398</span><a class="source-record" href="../discoverability.html#source-alce-publication">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-replication-kit</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-evidence-independent-owner-groups">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Claims, citations, and provenance</p>
+    <h2><a href="#arwp-evidence-independent-owner-groups">Count independent ownership groups instead of citation copies</a></h2>
+    <p class="practice-problem">Ten mirrors of one mention can look like ten independent endorsements.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://support.datacite.org/docs/consuming-citations-and-references">Consuming Citations and References</a><p><strong>Citation events from related identifiers; removal limitations</strong> — DataCite events may originate in deposited metadata and persist after relation removal. Ownership and support review are additional project checks.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Resolve observed records to their underlying work and publisher ownership group.</li><li>Keep paid, owned, independent and unknown relationships separate.</li><li>Inspect the cited content and retain correction/retraction state before counting support.</li></ul>
+      <h3>Check the result</h3><ul><li>Mirrors and duplicated metadata collapse to one underlying evidence record; uncertain ownership stays unknown.</li></ul>
+      <h3>Measure what happens</h3><p>Track independently reviewed reuse groups and unresolved ownership</p>
+      <h3>Why try it</h3><p>This practice may make real resource value easier to inspect and use. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>research-resources, software, portfolio-operations</p>
+      <h3>Watch out for</h3><p>Manufacturing age, activity, citations or backlinks instead of the underlying useful artifact.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://support.datacite.org/docs/consuming-citations-and-references">Consuming Citations and References</a><p>Citation events can originate in deposited related identifiers; removing a relation may not remove its prior event. Review underlying evidence.</p><span>DataCite · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-datacite-citation-events">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">platform-ai-measurement</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-evidence-independent-owner-groups</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

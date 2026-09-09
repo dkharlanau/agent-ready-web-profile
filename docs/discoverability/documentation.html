@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Mature product documentation patterns</title><meta name="description" content="16 source-backed discoverability patterns for Mature product documentation patterns with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html","name":"Goose ARWP — Mature product documentation patterns","description":"16 reviewed discoverability patterns for mature product documentation patterns, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":16,"itemListElement":[{"@type":"ListItem","position":1,"name":"Provide one verified path to the first useful result","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-quickstart"},{"@type":"ListItem","position":2,"name":"Use a consistent reference entry structure","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-reference-shape"},{"@type":"ListItem","position":3,"name":"State which version the documentation describes","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-versions"},{"@type":"ListItem","position":4,"name":"Link release claims to actual artifacts","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-release-proof"},{"@type":"ListItem","position":5,"name":"Publish an explicit operational limits reference","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-limits"},{"@type":"ListItem","position":6,"name":"Document retries and partial failures","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-failure-semantics"},{"@type":"ListItem","position":7,"name":"Make breaking changes actionable","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-migration-guide"},{"@type":"ListItem","position":8,"name":"Document every real way to access the product","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-interface-map"},{"@type":"ListItem","position":9,"name":"Turn recurring support gaps into maintained references","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-public-support"},{"@type":"ListItem","position":10,"name":"Signal deprecation and shutdown separately","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-deprecation-signal"},{"@type":"ListItem","position":11,"name":"Verify the bytes of an immutable release","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-release-integrity"},{"@type":"ListItem","position":12,"name":"Reject edits based on stale resource versions","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-conditional-edits"},{"@type":"ListItem","position":13,"name":"Give API failures stable machine-readable types","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-problem-types"},{"@type":"ListItem","position":14,"name":"Connect related API operations through response values","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-operation-links"},{"@type":"ListItem","position":15,"name":"Pin schema dialect and reference identity","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-schema-dialect"},{"@type":"ListItem","position":16,"name":"Make the correct software or dataset citation easy to copy","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html#arwp-documentation-citation-affordance"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / DOCUMENTATION</p><h1>Mature product documentation patterns</h1><p>16 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>16 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>16 patterns</p><a href="../discoverability.html?category=documentation">Back to filtered index</a></div><article class="practice practice-full" id="arwp-documentation-quickstart">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-quickstart">Provide one verified path to the first useful result</a></h2>
+    <p class="practice-problem">A feature catalog does not show whether the product can be used.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.github.com/en/contributing/style-guide-and-content-model/quickstart-content-type">Quickstart content type</a><p><strong>How to write a quickstart</strong> — Supports focused first tasks and prerequisites; clean-environment verification is our method.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose a representative small task and documented prerequisites.</li><li>Run the quickstart from a fresh environment and capture the real outcome.</li></ul>
+      <h3>Check the result</h3><ul><li>A new evaluator completes the stated result using only public instructions.</li></ul>
+      <h3>Measure what happens</h3><p>Measure independent quickstart completion and time to useful output.</p>
+      <h3>Why try it</h3><p>A reliable first result may improve product evaluation and references.</p>
+      <h3>Where it fits</h3><p>software, documentation</p>
+      <h3>Watch out for</h3><p>Claiming a quickstart works because the package compiles.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.github.com/en/contributing/style-guide-and-content-model/quickstart-content-type">Quickstart content type</a><p>Editorial precedent for focused first tasks; house word and time targets are not SEO rules.</p><span>GitHub · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-github-quickstart">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-quickstart</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-reference-shape">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-reference-shape">Use a consistent reference entry structure</a></h2>
+    <p class="practice-problem">Readers cannot find parameter meaning or failure behavior.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.github.com/en/contributing/style-guide-and-content-model/reference-content-type">Reference content type</a><p><strong>How to write reference content</strong> — Supports consistent, scannable references; field coverage is our application.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For each supported feature, document purpose, inputs, output, example, limits, and related tasks.</li><li>Link to the authoritative specification where one exists.</li></ul>
+      <h3>Check the result</h3><ul><li>A reader can answer a fixed set of usage questions from each sampled entry.</li></ul>
+      <h3>Measure what happens</h3><p>Measure reference answer coverage and incorrect usage caused by missing information.</p>
+      <h3>Why try it</h3><p>Predictable references may make accurate retrieval easier.</p>
+      <h3>Where it fits</h3><p>software, documentation</p>
+      <h3>Watch out for</h3><p>Padding every reference with generic SEO introductions.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.github.com/en/contributing/style-guide-and-content-model/reference-content-type">Reference content type</a><p>Supports consistent reference organization; exact fields depend on the interface.</p><span>GitHub · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-github-reference">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-generative-content-structure</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-reference-shape</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-versions">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-versions">State which version the documentation describes</a></h2>
+    <p class="practice-problem">Current documentation can be applied to incompatible older releases.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.stripe.com/upgrades">API upgrades</a><p><strong>Upgrade your API version</strong> — Provides a version-specific API precedent; not every product needs separate pages.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Show the supported version and link migration notes.</li><li>Maintain version-specific pages only where behavior materially differs.</li></ul>
+      <h3>Check the result</h3><ul><li>Examples and requirements match the named release.</li></ul>
+      <h3>Measure what happens</h3><p>Track docs/release mismatches and version-related support failures.</p>
+      <h3>Why try it</h3><p>Version context may reduce unsuitable recommendations and failed integrations.</p>
+      <h3>Where it fits</h3><p>software, documentation</p>
+      <h3>Watch out for</h3><p>Calling unreleased main-branch behavior generally available.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.stripe.com/upgrades">API upgrades</a><p>Observed version-aware upgrade guidance and breaking-change handling. Do not transplant Stripe-specific product behavior.</p><span>Stripe · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-stripe-upgrades">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-versions</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-release-proof">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-release-proof">Link release claims to actual artifacts</a></h2>
+    <p class="practice-problem">A roadmap can be mistaken for a shipped capability.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">Managing repository releases</a><p><strong>Creating a release</strong> — Supports published releases and attached artifacts; capability verification remains separate.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Separate available, preview, planned, and retired features.</li><li>Link availability claims to the actual release and installable artifact.</li></ul>
+      <h3>Check the result</h3><ul><li>A reviewer can obtain the release that contains each claimed public capability.</li></ul>
+      <h3>Measure what happens</h3><p>Measure public capability claims with verified released artifacts.</p>
+      <h3>Why try it</h3><p>Release evidence may improve truthful product assessment.</p>
+      <h3>Where it fits</h3><p>software</p>
+      <h3>Watch out for</h3><p>Fake adoption badges, fabricated download counts, or a roadmap presented as delivery.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository">Managing repository releases</a><p>Observed prerequisites, CLI/browser routes, release assets, and prerelease distinctions. Actual publication must be verified separately.</p><span>GitHub · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-github-releases">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-release-proof</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-limits">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-limits">Publish an explicit operational limits reference</a></h2>
+    <p class="practice-problem">Integration failures reveal limits absent from marketing.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.cloudflare.com/workers/platform/limits/">Workers limits</a><p><strong>Workers limits</strong> — Provides a provider-specific limits reference; never transfer its numbers to another platform.</p></li></ul>
+      <h3>Make the change</h3><ul><li>List applicable size, rate, concurrency, storage, and environment limits.</li><li>State which limits are measured, configured, or provider-documented.</li></ul>
+      <h3>Check the result</h3><ul><li>Each limit has a source or repeatable boundary test and applicable version.</li></ul>
+      <h3>Measure what happens</h3><p>Track limit-related incidents and correctly answered capacity questions.</p>
+      <h3>Why try it</h3><p>Limits disclosure may help agents and users select suitable tools.</p>
+      <h3>Where it fits</h3><p>software, documentation</p>
+      <h3>Watch out for</h3><p>Claiming production scale from a tiny local smoke test.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.cloudflare.com/workers/platform/limits/">Workers limits</a><p>Observed explicit resource limits and plan distinctions. Use the disclosure pattern with your own verified numbers, never copy limits as facts about another product.</p><span>Cloudflare · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-cloudflare-limits">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-limits</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-failure-semantics">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-failure-semantics">Document retries and partial failures</a></h2>
+    <p class="practice-problem">A consumer can repeat a mutation and duplicate work.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.stripe.com/api/idempotent_requests">Idempotent requests</a><p><strong>Idempotent requests</strong> — Shows Stripe replay behavior; retention and recovery semantics must be verified for each actual implementation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For consequential operations, explain idempotency, retry conditions, and partial completion.</li><li>Provide a safe example showing recovery without duplicating the operation.</li><li>State actual key scope, retention and parameter-mismatch behavior; never assume a provider example grants safe retries in a different implementation.</li></ul>
+      <h3>Check the result</h3><ul><li>The documented failure scenario is reproducible in a test environment.</li></ul>
+      <h3>Measure what happens</h3><p>Measure duplicate operations and recovery success in bounded integration tests.</p>
+      <h3>Why try it</h3><p>Explicit failure behavior may improve reliable agent use.</p>
+      <h3>Where it fits</h3><p>software, apis</p>
+      <h3>Watch out for</h3><p>Promising safe retries for operations without implementation support.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.stripe.com/api/idempotent_requests">Idempotent requests</a><p>Observed executable request plus failure and retry boundaries. This is product documentation evidence; borrowing the structure does not prove discoverability lift.</p><span>Stripe · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-stripe-idempotency">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-failure-semantics</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-migration-guide">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-migration-guide">Make breaking changes actionable</a></h2>
+    <p class="practice-problem">A changelog names a change without helping existing users adapt.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.stripe.com/upgrades">API upgrades</a><p><strong>Upgrade your API version</strong> — Provides upgrade testing and rollback precedent; the target product determines feasibility.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Show the old behavior, new behavior, affected versions, and migration steps.</li><li>Provide a small before/after example with verification and rollback where feasible.</li></ul>
+      <h3>Check the result</h3><ul><li>A representative old integration migrates successfully using the guide.</li></ul>
+      <h3>Measure what happens</h3><p>Track migration completion and unresolved version-specific blockers.</p>
+      <h3>Why try it</h3><p>Practical migration guidance may preserve useful adoption.</p>
+      <h3>Where it fits</h3><p>software, documentation</p>
+      <h3>Watch out for</h3><p>A migration page consisting only of a release announcement.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.stripe.com/upgrades">API upgrades</a><p>Observed version-aware upgrade guidance and breaking-change handling. Do not transplant Stripe-specific product behavior.</p><span>Stripe · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-stripe-upgrades">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-migration-guide</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-interface-map">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-interface-map">Document every real way to access the product</a></h2>
+    <p class="practice-problem">The site advertises APIs or agents without usable discovery.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide complete documentation for your API</strong> — Supports access documentation; the cross-interface inventory is our experiment, not a required profile.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Inventory canonical HTML, exports, search, APIs, and agent interfaces actually deployed.</li><li>Publish exact locations, access requirements and capability limits in maintained documentation; a publisher profile may mirror this inventory but is optional.</li></ul>
+      <h3>Check the result</h3><ul><li>Every advertised interface has a scoped check; a read-only response cannot prove a mutation works, and authenticated checks require authorized access.</li></ul>
+      <h3>Measure what happens</h3><p>Measure verified-interface coverage and time to identify a usable interface.</p>
+      <h3>Why try it</h3><p>A tested service map may reduce integration discovery effort.</p>
+      <h3>Where it fits</h3><p>software, apis</p>
+      <h3>Watch out for</h3><p>Inventing MCP or API endpoints solely to appear agent-ready.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">arwp-profile-validity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-interface-map</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-public-support">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-public-support">Turn recurring support gaps into maintained references</a></h2>
+    <p class="practice-problem">Useful answers remain trapped in private or ephemeral conversations.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.github.com/en/contributing/style-guide-and-content-model/contents-of-a-github-docs-article">Contents of a GitHub Docs article</a><p><strong>Troubleshooting content</strong> — Supports maintained error guidance; selecting and anonymizing recurring issues is our procedure.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Select recurring issues that can be documented without private data.</li><li>Publish a tested explanation and link it from the relevant feature and error entries.</li></ul>
+      <h3>Check the result</h3><ul><li>The new reference resolves the underlying task and avoids exposing customer details.</li></ul>
+      <h3>Measure what happens</h3><p>Track repeated support demand and successful visits to the new answer.</p>
+      <h3>Why try it</h3><p>Durable issue answers may create useful long-tail entry points.</p>
+      <h3>Where it fits</h3><p>software, documentation</p>
+      <h3>Watch out for</h3><p>Copying private support logs directly onto a public page.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.github.com/en/contributing/style-guide-and-content-model/contents-of-a-github-docs-article">Contents of a GitHub Docs article</a><p>Editorial precedent for prerequisites and troubleshooting. GitHub house style is not a universal SEO requirement.</p><span>GitHub · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-github-article-contents">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a> · <a href="../recommendations/registry.json">google-generative-content-structure</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-public-support</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-deprecation-signal">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-deprecation-signal">Signal deprecation and shutdown separately</a></h2>
+    <p class="practice-problem">Clients cannot discover a retirement schedule from the resource response.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.rfc-editor.org/rfc/rfc9745.html">RFC 9745: Deprecation HTTP response header</a><p><strong>Sections 2–5: header syntax and scope; deprecation links; Sunset; resource behavior</strong> — Defines the resource-scoped Deprecation date and deprecation documentation link; a signal does not itself change resource behavior.</p></li><li><a href="https://www.rfc-editor.org/rfc/rfc8594.html">RFC 8594: Sunset HTTP header</a><p><strong>Sections 3–4: Sunset response header and distinction from caching</strong> — Sunset signals expected resource unavailability, distinct from deprecation or cache expiry.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Expose a resource-scoped Deprecation date and deprecation documentation link.</li><li>Use Sunset only for an actual shutdown plan; its date must not precede deprecation.</li></ul>
+      <h3>Check the result</h3><ul><li>Fetch the retiring resource and parse both date formats; check the linked migration scope.</li></ul>
+      <h3>Measure what happens</h3><p>Count retiring endpoints with a valid, consistent schedule and working migration link.</p>
+      <h3>Why try it</h3><p>Runtime retirement signals may help clients migrate before a resource disappears. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>apis, versioned-resources</p>
+      <h3>Watch out for</h3><p>Using Sunset as cache expiry or treating a deprecation signal as immediate removal.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.rfc-editor.org/rfc/rfc9745.html">RFC 9745: Deprecation HTTP response header</a><p>Defines the resource-scoped Deprecation date and deprecation documentation link; a signal does not itself change resource behavior.</p><span>IETF / RFC Editor · source checked 8 Sept 2026 · RFC 9745</span><a class="source-record" href="../discoverability.html#source-ietf-deprecation">Source record</a></li><li><a href="https://www.rfc-editor.org/rfc/rfc8594.html">RFC 8594: Sunset HTTP header</a><p>Sunset signals expected resource unavailability, distinct from deprecation or cache expiry.</p><span>IETF / RFC Editor · source checked 8 Sept 2026 · RFC 8594</span><a class="source-record" href="../discoverability.html#source-ietf-sunset">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-deprecation-signal</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-release-integrity">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-release-integrity">Verify the bytes of an immutable release</a></h2>
+    <p class="practice-problem">A release link alone cannot establish that downloaded assets match the published artifact.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases">Immutable releases</a><p><strong>Immutable release guarantees; release attestations; editable release information</strong> — Published immutable releases protect tags and assets and have release attestations; release title and notes remain editable.</p></li><li><a href="https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/verify-release-integrity">Verify release integrity</a><p><strong>Verify a release; Verify a release asset; generated source archives limitation</strong> — Documents gh release verify and verify-asset; generated source archives cannot be checked with verify-asset.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For repositories using immutable releases, publish complete assets from a draft.</li><li>Verify the release attestation and downloaded asset with the documented GitHub CLI commands.</li></ul>
+      <h3>Check the result</h3><ul><li>Record the verified tag, commit and asset digest; reject a modified test asset.</li></ul>
+      <h3>Measure what happens</h3><p>Measure verified downloadable assets divided by sampled release assets.</p>
+      <h3>Why try it</h3><p>Artifact verification may reduce installation of altered or misidentified release files. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>software, github-releases</p>
+      <h3>Watch out for</h3><p>Calling editable release notes immutable or claiming generated source archives pass verify-asset.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases">Immutable releases</a><p>Published immutable releases protect tags and assets and have release attestations; release title and notes remain editable.</p><span>GitHub · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-github-immutable-releases">Source record</a></li><li><a href="https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/verify-release-integrity">Verify release integrity</a><p>Documents gh release verify and verify-asset; generated source archives cannot be checked with verify-asset.</p><span>GitHub · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-github-release-integrity">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a> · <a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-release-integrity</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-conditional-edits">
+  <div class="practice-number" aria-hidden="true">012</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-conditional-edits">Reject edits based on stale resource versions</a></h2>
+    <p class="practice-problem">Concurrent clients can overwrite a newer change using an older copy.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match">If-Match HTTP header</a><p><strong>Header semantics: strong comparison, lost updates and failed preconditions; Examples</strong> — Strong ETag preconditions can prevent conflicting updates; stale conditions fail instead of overwriting a newer representation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Return a strong ETag for editable resources and implement If-Match preconditions.</li><li>Return a conflict-recovery path when the precondition fails.</li></ul>
+      <h3>Check the result</h3><ul><li>Two clients read one revision; after the first update, the second stale write fails without modifying data.</li></ul>
+      <h3>Measure what happens</h3><p>Track lost updates and stale writes correctly rejected in a concurrent-client test.</p>
+      <h3>Why try it</h3><p>Enforced revision preconditions may prevent silent loss of concurrent edits. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>apis, mutable-resources</p>
+      <h3>Watch out for</h3><p>Documenting optimistic concurrency while the server ignores the precondition.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/If-Match">If-Match HTTP header</a><p>Strong ETag preconditions can prevent conflicting updates; stale conditions fail instead of overwriting a newer representation.</p><span>MDN Web Docs · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-mdn-if-match">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-conditional-edits</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-problem-types">
+  <div class="practice-number" aria-hidden="true">013</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-problem-types">Give API failures stable machine-readable types</a></h2>
+    <p class="practice-problem">Consumers parse changing error prose to decide what failed.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457: Problem Details for HTTP APIs</a><p><strong>Section 3.1: type/status/detail members; Section 5: security considerations</strong> — Defines problem type identity and structured details; clients should not parse prose detail, and implementations must avoid leaking internals.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use application/problem+json with a stable type URI and appropriate HTTP status.</li><li>Put machine-readable details in defined extensions and keep sensitive internals out.</li></ul>
+      <h3>Check the result</h3><ul><li>Change localized error prose while the consumer still handles the same type; verify actual status parity.</li></ul>
+      <h3>Measure what happens</h3><p>Measure failures classified by stable type without parsing prose.</p>
+      <h3>Why try it</h3><p>Stable problem types may make API recovery less dependent on error wording. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>apis</p>
+      <h3>Watch out for</h3><p>Returning every error as HTTP 200 or exposing internal traces as problem detail.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.rfc-editor.org/rfc/rfc9457.html">RFC 9457: Problem Details for HTTP APIs</a><p>Defines problem type identity and structured details; clients should not parse prose detail, and implementations must avoid leaking internals.</p><span>IETF / RFC Editor · source checked 8 Sept 2026 · RFC 9457</span><a class="source-record" href="../discoverability.html#source-ietf-problem-details">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-problem-types</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-operation-links">
+  <div class="practice-number" aria-hidden="true">014</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-operation-links">Connect related API operations through response values</a></h2>
+    <p class="practice-problem">A consumer must guess which response field becomes the next operation parameter.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://spec.openapis.org/oas/v3.2.0.html#link-object">OpenAPI 3.2.0 Link Object</a><p><strong>Section 4.20: Link Object; runtime expressions; invocation limitation</strong> — Design-time links map responses to operations through operationId or operationRef and runtime expressions; they do not guarantee successful invocation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>In the supported OpenAPI version, link a response to operationId or operationRef.</li><li>Map parameters using explicit runtime expressions and document required authorization.</li></ul>
+      <h3>Check the result</h3><ul><li>Resolve the operation and expression against a representative response; run the allowed workflow in a test environment.</li></ul>
+      <h3>Measure what happens</h3><p>Track valid response-to-operation bindings and authorized test-workflow completion.</p>
+      <h3>Why try it</h3><p>Explicit parameter bindings may reduce integration errors between related API operations. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>apis, openapi</p>
+      <h3>Watch out for</h3><p>Inventing operations or treating a design-time link as guaranteed invocation.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://spec.openapis.org/oas/v3.2.0.html#link-object">OpenAPI 3.2.0 Link Object</a><p>Design-time links map responses to operations through operationId or operationRef and runtime expressions; they do not guarantee successful invocation.</p><span>OpenAPI Initiative · source checked 8 Sept 2026 · OpenAPI 3.2.0</span><a class="source-record" href="../discoverability.html#source-openapi-link-object">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-operation-links</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-schema-dialect">
+  <div class="practice-number" aria-hidden="true">015</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-schema-dialect">Pin schema dialect and reference identity</a></h2>
+    <p class="practice-problem">A validator silently assumes a dialect or fails to resolve external schema resources.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://json-schema.org/understanding-json-schema/reference/schema">JSON Schema: Dialect and vocabulary declaration</a><p><strong>$schema declaration; external schema resources; custom vocabulary implementation support</strong> — Root $schema declares the dialect; externally referenced schemas need their own declarations and custom assertion keywords need supporting implementations.</p></li><li><a href="https://json-schema.org/understanding-json-schema/structuring">JSON Schema: Modular schema combination</a><p><strong>Schema Identification; Base URI; $id; identifier versus retrieval URI</strong> — $id sets the schema base identifier for reference resolution; an identifier is not automatically a fetchable endpoint.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Declare $schema in each external schema resource and use stable $id values.</li><li>Load referenced schemas into the supported validator and test required custom assertions.</li></ul>
+      <h3>Check the result</h3><ul><li>Validate positive and negative fixtures with the named dialect and the complete reference registry.</li></ul>
+      <h3>Measure what happens</h3><p>Count unresolved references, unsupported assertions and dialect-dependent validation differences.</p>
+      <h3>Why try it</h3><p>Explicit dialects and reference registries may reduce silent validation incompatibility. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>json-schemas, apis, datasets</p>
+      <h3>Watch out for</h3><p>Treating an unknown custom keyword as enforced or assuming every $id is an HTTP endpoint.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://json-schema.org/understanding-json-schema/reference/schema">JSON Schema: Dialect and vocabulary declaration</a><p>Root $schema declares the dialect; externally referenced schemas need their own declarations and custom assertion keywords need supporting implementations.</p><span>JSON Schema project · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-json-schema-dialect">Source record</a></li><li><a href="https://json-schema.org/understanding-json-schema/structuring">JSON Schema: Modular schema combination</a><p>$id sets the schema base identifier for reference resolution; an identifier is not automatically a fetchable endpoint.</p><span>JSON Schema project · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-json-schema-resource-id">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-schema-dialect</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-documentation-citation-affordance">
+  <div class="practice-number" aria-hidden="true">016</div>
+  <div class="practice-body">
+    <p class="practice-category">Mature product documentation patterns</p>
+    <h2><a href="#arwp-documentation-citation-affordance">Make the correct software or dataset citation easy to copy</a></h2>
+    <p class="practice-problem">Readers may cite the mutable homepage rather than the release they used.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files">About CITATION files</a><p><strong>About CITATION files; Citing something other than software</strong> — GitHub renders citation information from CFF and supports preferred citations; copies are intent, not verified external citations.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Maintain a real CITATION.cff with correct object type and version.</li><li>Use preferred-citation only when a different resource is genuinely the intended citation.</li><li>Provide human citation guidance that distinguishes code, data and report.</li></ul>
+      <h3>Check the result</h3><ul><li>Check generated citation output against the actual released object; omit unissued identifiers.</li></ul>
+      <h3>Measure what happens</h3><p>Track citation metadata errors and independently observed correct citations</p>
+      <h3>Why try it</h3><p>This practice may make real resource value easier to inspect and use. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>research-resources, software, portfolio-operations</p>
+      <h3>Watch out for</h3><p>Manufacturing age, activity, citations or backlinks instead of the underlying useful artifact.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files">About CITATION files</a><p>CFF supplies reusable citation metadata and distinguishes software from preferred citations. It does not establish scholarly review.</p><span>GitHub · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-github-cff">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-documentation-citation-affordance</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

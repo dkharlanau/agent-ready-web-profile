@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Reference data and reusable evidence</title><meta name="description" content="17 source-backed discoverability patterns for Reference data and reusable evidence with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html","name":"Goose ARWP — Reference data and reusable evidence","description":"17 reviewed discoverability patterns for reference data and reusable evidence, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":17,"itemListElement":[{"@type":"ListItem","position":1,"name":"Give a dataset a useful landing page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-landing"},{"@type":"ListItem","position":2,"name":"Publish a field dictionary","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-dictionary"},{"@type":"ListItem","position":3,"name":"Expose usable machine downloads","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-downloads"},{"@type":"ListItem","position":4,"name":"Record transformation lineage","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-provenance"},{"@type":"ListItem","position":5,"name":"Keep stable release identifiers","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-versions"},{"@type":"ListItem","position":6,"name":"Publish quality constraints with their results","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-quality"},{"@type":"ListItem","position":7,"name":"State what the data excludes","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-coverage"},{"@type":"ListItem","position":8,"name":"Make reuse terms discoverable","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-license"},{"@type":"ListItem","position":9,"name":"Show questions the data can answer","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-query-examples"},{"@type":"ListItem","position":10,"name":"Resume large downloads against the same bytes","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-resumable-download"},{"@type":"ListItem","position":11,"name":"Distinguish a dataset series from its member datasets","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-series-members"},{"@type":"ListItem","position":12,"name":"Publish executable parsing rules beside CSV data","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-csvw-contract"},{"@type":"ListItem","position":13,"name":"Map physical dataset files to loadable records","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-croissant-records"},{"@type":"ListItem","position":14,"name":"Distinguish citation, metadata and content links","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-fair-links"},{"@type":"ListItem","position":15,"name":"Choose a real research object before choosing a DOI","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-citation-unit"},{"@type":"ListItem","position":16,"name":"Connect research outputs with accurate relation directions","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-typed-doi-relations"},{"@type":"ListItem","position":17,"name":"Distribute a dataset where its intended users can load it","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html#arwp-datasets-consumer-native-release"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / DATASETS</p><h1>Reference data and reusable evidence</h1><p>17 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>17 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>17 patterns</p><a href="../discoverability.html?category=datasets">Back to filtered index</a></div><article class="practice practice-full" id="arwp-datasets-landing">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-landing">Give a dataset a useful landing page</a></h2>
+    <p class="practice-problem">A raw download leaves users unable to judge relevance.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/dataset">Dataset structured data</a><p><strong>Sitemap best practices; Source and provenance; Dataset definitions; DataDownload</strong> — Google recommends Dataset metadata on canonical landing pages, provenance links and descriptive metadata. Download distribution identifies the accessible data location and format.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Publish purpose, population, period, collection method, limitations, and access links.</li><li>Connect the page with accurate Dataset metadata.</li></ul>
+      <h3>Check the result</h3><ul><li>A reviewer can determine scope and retrieve the described data.</li></ul>
+      <h3>Measure what happens</h3><p>Track dataset landing visits, valid downloads, and independent citations.</p>
+      <h3>Why try it</h3><p>A descriptive landing page may enable relevant data discovery.</p>
+      <h3>Where it fits</h3><p>datasets, research</p>
+      <h3>Watch out for</h3><p>Adding Dataset markup to an ordinary sales article.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/dataset">Dataset structured data</a><p>Describes dataset discovery metadata including provenance and distribution. Dataset eligibility is not ordinary search ranking or verified data quality.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-dataset">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a> · <a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-landing</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-dictionary">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-dictionary">Publish a field dictionary</a></h2>
+    <p class="practice-problem">Column names and codes are ambiguous outside their creator.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide structural metadata</strong> — Supports structure descriptions; field coverage testing is our method.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Document each field type, unit, missing-value meaning, allowed values, and examples.</li><li>Version the dictionary with the corresponding data release.</li></ul>
+      <h3>Check the result</h3><ul><li>Every published field has a definition consistent with sampled records.</li></ul>
+      <h3>Measure what happens</h3><p>Measure dictionary coverage and field-interpretation errors in reuse tasks.</p>
+      <h3>Why try it</h3><p>An explicit data contract may improve safe reuse.</p>
+      <h3>Where it fits</h3><p>datasets</p>
+      <h3>Watch out for</h3><p>A dictionary generated only from column labels.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-dictionary</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-downloads">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-downloads">Expose usable machine downloads</a></h2>
+    <p class="practice-problem">A listed export may be stale, inaccessible, or mislabeled.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/DataDownload">Schema.org DataDownload</a><p><strong>contentUrl and encodingFormat</strong> — Describes distributions; live parsing and version parity require separate checks.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Provide an actual stable CSV or JSON download with correct media type.</li><li>Describe it with DataDownload and state encoding and release version.</li></ul>
+      <h3>Check the result</h3><ul><li>The public download parses and matches the landing-page version and record count.</li></ul>
+      <h3>Measure what happens</h3><p>Track successful parse rate and landing/download version mismatches.</p>
+      <h3>Why try it</h3><p>Reliable exports may make references easier to verify and reuse.</p>
+      <h3>Where it fits</h3><p>datasets</p>
+      <h3>Watch out for</h3><p>Advertising API or download access that only returns a sign-up page.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/DataDownload">Schema.org DataDownload</a><p>Vocabulary for dataset download representation and media properties; a described download must actually exist.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-download">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a> · <a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-downloads</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-provenance">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-provenance">Record transformation lineage</a></h2>
+    <p class="practice-problem">Users cannot distinguish source observations from derived fields.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide data provenance information</strong> — Supports lineage; sampled row tracing is our procedure.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Identify source records and acquisition dates.</li><li>Publish transformation rules and label derived values separately from observations.</li></ul>
+      <h3>Check the result</h3><ul><li>A sample output row can be traced through each transformation to its source.</li></ul>
+      <h3>Measure what happens</h3><p>Measure traceable sampled rows and unexplained transformations.</p>
+      <h3>Why try it</h3><p>Traceable lineage may support credible original analyses.</p>
+      <h3>Where it fits</h3><p>datasets, research</p>
+      <h3>Watch out for</h3><p>Calling a model-generated estimate an observed fact.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-provenance</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-versions">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-versions">Keep stable release identifiers</a></h2>
+    <p class="practice-problem">A changing file makes a published result impossible to reproduce.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Data Versioning</strong> — Supports version history; immutable artifacts are our reproducibility implementation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Assign immutable release URLs or explicit versions to cited data.</li><li>Provide a latest pointer and a short change summary linking previous releases.</li></ul>
+      <h3>Check the result</h3><ul><li>A saved citation retrieves the same historical release after a new publication.</li></ul>
+      <h3>Measure what happens</h3><p>Check historical release retrieval and reproducibility after each update.</p>
+      <h3>Why try it</h3><p>Stable releases may improve citation durability.</p>
+      <h3>Where it fits</h3><p>datasets, research</p>
+      <h3>Watch out for</h3><p>Silently overwriting a cited historical dataset.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a> · <a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-versions</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-quality">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-quality">Publish quality constraints with their results</a></h2>
+    <p class="practice-problem">A polished data page can conceal missingness and duplicates.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide data quality information</strong> — Supports published quality evidence; constraint choice is domain-specific.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Define domain-specific checks for key uniqueness, ranges, missingness, and referential integrity.</li><li>Publish observed failures and exclusions for each release.</li></ul>
+      <h3>Check the result</h3><ul><li>Reported counts reconcile with the downloadable release and quality report.</li></ul>
+      <h3>Measure what happens</h3><p>Track failed constraints, affected records, and unresolved quality exceptions.</p>
+      <h3>Why try it</h3><p>Visible quality evidence may help consumers choose suitable uses.</p>
+      <h3>Where it fits</h3><p>datasets</p>
+      <h3>Watch out for</h3><p>Claiming perfect quality because JSON parses.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-quality</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-coverage">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-coverage">State what the data excludes</a></h2>
+    <p class="practice-problem">A narrow sample may be mistaken for a complete market or population.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/Dataset">Schema.org Dataset</a><p><strong>spatialCoverage and temporalCoverage</strong> — Describes scope; representativeness requires separate evidence.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Describe geography, time, selection criteria, and known omissions.</li><li>Represent applicable spatial and temporal coverage in Dataset metadata.</li></ul>
+      <h3>Check the result</h3><ul><li>Coverage statements agree with observed record boundaries.</li></ul>
+      <h3>Measure what happens</h3><p>Audit answers for correct population and time-window qualification.</p>
+      <h3>Why try it</h3><p>Explicit coverage may prevent overgeneralized recommendations.</p>
+      <h3>Where it fits</h3><p>datasets, research</p>
+      <h3>Watch out for</h3><p>Labeling a convenience sample a comprehensive benchmark.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/Dataset">Schema.org Dataset</a><p>Vocabulary including measurements, coverage, and parts. Structured metadata is not verification of scientific validity.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-dataset">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-coverage</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-license">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-license">Make reuse terms discoverable</a></h2>
+    <p class="practice-problem">Readers cannot know whether an attractive dataset can be reused.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/dataset">Dataset structured data</a><p><strong>license</strong> — Supports license metadata, not legal rights verification.</p></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide a license</strong> — Supports explicit reuse terms; authorization remains a separate gate.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose authorized explicit license terms and attribution instructions.</li><li>Place them on the landing page, release record, and download package.</li></ul>
+      <h3>Check the result</h3><ul><li>License links resolve and agree across all distribution surfaces.</li></ul>
+      <h3>Measure what happens</h3><p>Track unresolved license questions and compliant reuse references.</p>
+      <h3>Why try it</h3><p>Clear terms may reduce friction for legitimate reuse and citations.</p>
+      <h3>Where it fits</h3><p>datasets</p>
+      <h3>Watch out for</h3><p>Applying an open license to third-party data without the rights to do so.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/dataset">Dataset structured data</a><p>Describes dataset discovery metadata including provenance and distribution. Dataset eligibility is not ordinary search ranking or verified data quality.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-dataset">Source record</a></li><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-license</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-query-examples">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-query-examples">Show questions the data can answer</a></h2>
+    <p class="practice-problem">A large table gives little help with useful analysis.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide documentation for your API; Data Enrichment</strong> — Supports usable documentation and complementary views; reproducible dataset questions are our proposed application.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Select a small task-appropriate set of real questions within the dataset scope; there is no prescribed question count.</li><li>Publish reproducible queries, small outputs, and limits of interpretation.</li></ul>
+      <h3>Check the result</h3><ul><li>Queries run against the named release and reproduce the shown output.</li></ul>
+      <h3>Measure what happens</h3><p>Measure successful query reproduction and citations to worked analyses.</p>
+      <h3>Why try it</h3><p>Concrete queries may make a dataset more useful as a reference.</p>
+      <h3>Where it fits</h3><p>datasets, research</p>
+      <h3>Watch out for</h3><p>Creating a separate thin page for every possible filter.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-query-examples</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-resumable-download">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-resumable-download">Resume large downloads against the same bytes</a></h2>
+    <p class="practice-problem">An interrupted export must restart, or resumed segments can mix different revisions.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests">HTTP range requests</a><p><strong>Conditional range requests; Partial request responses; If-Range</strong> — Documents partial 206 responses, Content-Range, 416 and If-Range validation; unsupported range requests may return the entire body.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Enable byte ranges only for supported downloads and expose correct range metadata.</li><li>Use If-Range validators when resuming changing resources.</li></ul>
+      <h3>Check the result</h3><ul><li>Reassemble two ranges and compare the full digest; a changed validator returns the full representation.</li></ul>
+      <h3>Measure what happens</h3><p>Measure successful interrupted-download recovery and digest matches.</p>
+      <h3>Why try it</h3><p>Validated resumption may improve completion of interrupted large downloads. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>large-downloads, datasets</p>
+      <h3>Watch out for</h3><p>Advertising byte ranges while always returning unrelated or truncated bytes.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests">HTTP range requests</a><p>Documents partial 206 responses, Content-Range, 416 and If-Range validation; unsupported range requests may return the entire body.</p><span>MDN Web Docs · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-mdn-range-requests">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-resumable-download</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-series-members">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-series-members">Distinguish a dataset series from its member datasets</a></h2>
+    <p class="practice-problem">An annual collection is described as one changing file, losing member coverage.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/">DCAT Version 3: Dataset series</a><p><strong>DatasetSeries; inSeries; Dataset series metadata and coverage inheritance</strong> — DatasetSeries and inSeries describe related datasets, such as annual releases, with series metadata reflecting member coverage.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use DCAT DatasetSeries and inSeries for actual related datasets.</li><li>Keep member coverage explicit and derive series coverage from its members.</li></ul>
+      <h3>Check the result</h3><ul><li>Query the catalog for series membership and check the aggregate temporal and spatial coverage.</li></ul>
+      <h3>Measure what happens</h3><p>Measure correctly linked members and discrepancies between series and member coverage.</p>
+      <h3>Why try it</h3><p>Explicit series membership may improve correct interpretation of recurring dataset coverage. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>dataset-catalogs, recurring-datasets</p>
+      <h3>Watch out for</h3><p>Calling file formats or every correction a separate dataset series.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/">DCAT Version 3: Dataset series</a><p>DatasetSeries and inSeries describe related datasets, such as annual releases, with series metadata reflecting member coverage.</p><span>W3C · source checked 8 Sept 2026 · DCAT 3, Recommendation 2024-08-22</span><a class="source-record" href="../discoverability.html#source-w3c-dcat-series">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a> · <a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-series-members</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-csvw-contract">
+  <div class="practice-number" aria-hidden="true">012</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-csvw-contract">Publish executable parsing rules beside CSV data</a></h2>
+    <p class="practice-problem">The same blank, zero or quoted value is interpreted differently by consumers.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/tabular-metadata/">Metadata Vocabulary for Tabular Data</a><p><strong>Column datatype/null/required properties; Dialect Descriptions</strong> — Defines machine-readable column types, null tokens, required values and CSV dialect metadata.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Supply CSVW column datatypes, null tokens, required fields and dialect.</li><li>Validate the actual download with a consumer using that metadata.</li></ul>
+      <h3>Check the result</h3><ul><li>Parse a fixture containing null, zero, quoted delimiters and non-ASCII text; compare typed values.</li></ul>
+      <h3>Measure what happens</h3><p>Measure typed parsing agreement and rejected contract violations.</p>
+      <h3>Why try it</h3><p>Executable CSV metadata may reduce incompatible typing and missing-value interpretation. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>csv-datasets</p>
+      <h3>Watch out for</h3><p>Publishing a prose dictionary while relying on undocumented parser guesses.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/tabular-metadata/">Metadata Vocabulary for Tabular Data</a><p>Defines machine-readable column types, null tokens, required values and CSV dialect metadata.</p><span>W3C · source checked 8 Sept 2026 · Recommendation 2015-12-17</span><a class="source-record" href="../discoverability.html#source-w3c-csvw-metadata">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-csvw-contract</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-croissant-records">
+  <div class="practice-number" aria-hidden="true">013</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-croissant-records">Map physical dataset files to loadable records</a></h2>
+    <p class="practice-problem">Download links do not explain how files and columns form the records a consumer needs.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://docs.mlcommons.org/croissant/docs/croissant-spec.html">Croissant Format Specification 1.0</a><p><strong>FileObject and FileSet distributions; sha256; RecordSet field source mappings</strong> — Describes physical FileObject/FileSet distributions, checksums and RecordSet field mappings for loading real datasets.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Describe real FileObject or FileSet resources and checksums in Croissant.</li><li>Map RecordSet fields to source files and validate a small consumer load.</li></ul>
+      <h3>Check the result</h3><ul><li>Verify file digests and load sampled records using the declared field mappings.</li></ul>
+      <h3>Measure what happens</h3><p>Measure correctly loaded fields and failed file-to-record mappings.</p>
+      <h3>Why try it</h3><p>File-to-record mappings may reduce manual dataset loading and reconstruction errors. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>ml-datasets, multi-file-datasets</p>
+      <h3>Watch out for</h3><p>Adding Croissant to ordinary content pages or promising universal assistant ingestion.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://docs.mlcommons.org/croissant/docs/croissant-spec.html">Croissant Format Specification 1.0</a><p>Describes physical FileObject/FileSet distributions, checksums and RecordSet field mappings for loading real datasets.</p><span>MLCommons · source checked 8 Sept 2026 · Croissant 1.0</span><a class="source-record" href="../discoverability.html#source-mlcommons-croissant">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-dataset-provenance</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-croissant-records</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-fair-links">
+  <div class="practice-number" aria-hidden="true">014</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-fair-links">Distinguish citation, metadata and content links</a></h2>
+    <p class="practice-problem">A repository client cannot tell which landing-page links identify data versus its description.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://signposting.org/FAIR/">FAIR Signposting Profile</a><p><strong>Section 2: profile levels; landing-page cite-as/describedby/item relations; Section 3 examples</strong> — Typed links distinguish scholarly landing pages, persistent citation identifiers, metadata and downloadable content.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For scholarly outputs, expose FAIR Signposting relations such as cite-as, describedby and item.</li><li>Keep identifiers and relations scoped to the actual scholarly object or content resource.</li></ul>
+      <h3>Check the result</h3><ul><li>Traverse typed links from landing page to metadata and files; confirm the persistent identifier resolves appropriately.</li></ul>
+      <h3>Measure what happens</h3><p>Measure successful typed traversal to actual metadata and content.</p>
+      <h3>Why try it</h3><p>Typed repository links may improve reliable discovery of a scholarly object and its files. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>research-repositories, dataset-repositories</p>
+      <h3>Watch out for</h3><p>Inventing a DOI or labelling every navigation link as downloadable content.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://signposting.org/FAIR/">FAIR Signposting Profile</a><p>Typed links distinguish scholarly landing pages, persistent citation identifiers, metadata and downloadable content.</p><span>Signposting authors · source checked 8 Sept 2026 · 20231002</span><a class="source-record" href="../discoverability.html#source-fair-signposting">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-fair-links</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-citation-unit">
+  <div class="practice-number" aria-hidden="true">015</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-citation-unit">Choose a real research object before choosing a DOI</a></h2>
+    <p class="practice-problem">One DOI per ordinary page creates identifier clutter without reusable research.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/">Digital Object Identifier (DOI)</a><p><strong>Digital Object Identifier; Reserve a DOI</strong> — Zenodo registers identifiers upon publication. Choosing a useful object is an editorial decision rather than a ranking shortcut.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Decide whether the citable object is software, a frozen dataset or a substantive report.</li><li>Prepare rights, methods, limitations and exact distributions before the archive deposit.</li><li>Verify registered metadata and the intended released object before exposing a published DOI.</li></ul>
+      <h3>Check the result</h3><ul><li>The identifier resolves to the same object and release described by the citation; a reservation remains reserved.</li></ul>
+      <h3>Measure what happens</h3><p>Track valid reproducible citation targets</p>
+      <h3>Why try it</h3><p>This practice may make real resource value easier to inspect and use. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>research-resources, software, portfolio-operations</p>
+      <h3>Watch out for</h3><p>Manufacturing age, activity, citations or backlinks instead of the underlying useful artifact.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/">Digital Object Identifier (DOI)</a><p>A reserved identifier is registered upon publication; DOI metadata supports identification and interlinking, not quality certification.</p><span>Zenodo · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-zenodo-doi">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-citation-unit</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-typed-doi-relations">
+  <div class="practice-number" aria-hidden="true">016</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-typed-doi-relations">Connect research outputs with accurate relation directions</a></h2>
+    <p class="practice-problem">A flat DOI list hides which report used which data.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://support.datacite.org/docs/connecting-to-works">Connecting to Works</a><p><strong>RelatedIdentifier and relationType table</strong> — Typed relations describe the relationship between research outputs; they do not certify the claim.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Relate a report, dataset and software only when the relationship exists.</li><li>Select the actual DataCite relation type and verify its direction against the publisher definition.</li><li>Do not label references, supplements or common ownership as independent endorsements.</li></ul>
+      <h3>Check the result</h3><ul><li>A reviewer can explain every relation from the source object to the target and open both records.</li></ul>
+      <h3>Measure what happens</h3><p>Track correct report-data-software resolution</p>
+      <h3>Why try it</h3><p>This practice may make real resource value easier to inspect and use. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>research-resources, software, portfolio-operations</p>
+      <h3>Watch out for</h3><p>Manufacturing age, activity, citations or backlinks instead of the underlying useful artifact.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://support.datacite.org/docs/connecting-to-works">Connecting to Works</a><p>Typed related identifiers describe specific relationships. Relations deposited by an owner do not establish independent reuse.</p><span>DataCite · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-datacite-work-relations">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-typed-doi-relations</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-datasets-consumer-native-release">
+  <div class="practice-number" aria-hidden="true">017</div>
+  <div class="practice-body">
+    <p class="practice-category">Reference data and reusable evidence</p>
+    <h2><a href="#arwp-datasets-consumer-native-release">Distribute a dataset where its intended users can load it</a></h2>
+    <p class="practice-problem">A mirror without a working consumer path creates another page rather than another use.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://huggingface.co/docs/hub/datasets-cards">Dataset Cards</a><p><strong>What are Dataset Cards?; Dataset card metadata</strong> — Cards communicate use and metadata and enable Hub discovery. A consumer-specific release path is an implementation proposal.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For suitable data, publish a Hub card with actual license, task, schema and limitations.</li><li>Include one functioning loader or query example and a link to the canonical release.</li><li>Treat owner-posted mirrors as distribution, not independent adoption.</li></ul>
+      <h3>Check the result</h3><ul><li>A fresh consumer can load the intended release and identify its limitations.</li></ul>
+      <h3>Measure what happens</h3><p>Track successful data use by independently maintained projects</p>
+      <h3>Why try it</h3><p>This practice may make real resource value easier to inspect and use. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>research-resources, software, portfolio-operations</p>
+      <h3>Watch out for</h3><p>Manufacturing age, activity, citations or backlinks instead of the underlying useful artifact.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://huggingface.co/docs/hub/datasets-cards">Dataset Cards</a><p>Cards describe datasets, licenses, limitations and discovery tags for the Hub. No cross-engine ranking claim.</p><span>Hugging Face · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-hf-dataset-cards">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-datasets-consumer-native-release</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Entity identity and linked data</title><meta name="description" content="15 source-backed discoverability patterns for Entity identity and linked data with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html","name":"Goose ARWP — Entity identity and linked data","description":"15 reviewed discoverability patterns for entity identity and linked data, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":15,"itemListElement":[{"@type":"ListItem","position":1,"name":"Use stable IDs for the same entity","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-identity"},{"@type":"ListItem","position":2,"name":"Connect authored work to a real author","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-author"},{"@type":"ListItem","position":3,"name":"Describe the actual publisher","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-organization"},{"@type":"ListItem","position":4,"name":"Reserve sameAs for identity equivalence","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-sameas"},{"@type":"ListItem","position":5,"name":"Separate a service from its provider","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-service-model"},{"@type":"ListItem","position":6,"name":"Describe software capabilities and constraints","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-software-model"},{"@type":"ListItem","position":7,"name":"Connect the page, work, and evidence","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-work-relations"},{"@type":"ListItem","position":8,"name":"Maintain a small domain term set","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-term-graph"},{"@type":"ListItem","position":9,"name":"Test visible content and graph parity","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-graph-parity"},{"@type":"ListItem","position":10,"name":"Represent genuine product variants as one group","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-product-variants"},{"@type":"ListItem","position":11,"name":"Describe only meaningful article sections in a small graph","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-section-graph"},{"@type":"ListItem","position":12,"name":"Keep author roles identical in the byline and Article graph","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-article-role-parity"},{"@type":"ListItem","position":13,"name":"Use forum markup only for an actual discussion","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-discussion-boundary"},{"@type":"ListItem","position":14,"name":"Separate a software description from Google feature eligibility","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-software-eligibility"},{"@type":"ListItem","position":15,"name":"Use AggregateOffer only for actual aggregated offers","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html#arwp-entities-product-offer-aggregation"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / ENTITIES</p><h1>Entity identity and linked data</h1><p>15 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>15 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>15 patterns</p><a href="../discoverability.html?category=entities">Back to filtered index</a></div><article class="practice practice-full" id="arwp-entities-identity">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-identity">Use stable IDs for the same entity</a></h2>
+    <p class="practice-problem">Different pages describe one entity as several disconnected objects.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/json-ld11/">JSON-LD 1.1</a><p><strong>Node identifiers</strong> — Supports IRI identity; a fragment is optional and central reconciliation is our method.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose a stable public IRI for each real entity; a suitable URL or fragment identifier can be used.</li><li>Reuse it in relevant page graphs and resolve naming conflicts centrally.</li></ul>
+      <h3>Check the result</h3><ul><li>One entity ID maps to one identity throughout the sampled graph.</li></ul>
+      <h3>Measure what happens</h3><p>Measure duplicate identities and conflicting facts per entity ID.</p>
+      <h3>Why try it</h3><p>Stable identity may make relationships less ambiguous to consumers.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Generating a new Person ID for each article by the same author.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/json-ld11/">JSON-LD 1.1</a><p>Supports linked-data identifiers and graphs. JSON-LD standard conformance alone does not create search-engine recognition of a property.</p><span>W3C · source checked 8 Sept 2026 · JSON-LD 1.1, W3C Recommendation 2020-07-16</span><a class="source-record" href="../discoverability.html#source-jsonld">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-identity</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-author">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-author">Connect authored work to a real author</a></h2>
+    <p class="practice-problem">An anonymous content template hides accountable authorship.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/article">Article structured data</a><p><strong>Article objects &gt; author, author.name, author.url</strong> — Article author metadata can identify a person or organization and link to a page that disambiguates the author; internal author pages may use ProfilePage markup.</p></li><li><a href="https://schema.org/Person">Schema.org Person</a><p><strong>Person type and JSON-LD Person identity examples</strong> — Schema.org provides the Person vocabulary and identity relationships; these properties do not certify credentials.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Publish a useful author page with verifiable work and relevant background.</li><li>Link visible bylines and Article author IDs to that page.</li></ul>
+      <h3>Check the result</h3><ul><li>Visible author, article metadata, and author-page identity agree.</li></ul>
+      <h3>Measure what happens</h3><p>Track articles with verified author identity and working evidence links.</p>
+      <h3>Why try it</h3><p>Explicit authorship can help readers evaluate a work.</p>
+      <h3>Where it fits</h3><p>content-sites</p>
+      <h3>Watch out for</h3><p>Inventing expert personas, credentials, or reviewer biographies.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/article">Article structured data</a><p>Supports article author, date, headline, and image properties where accurate; no authorship credential is created by markup.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-article">Source record</a></li><li><a href="https://schema.org/Person">Schema.org Person</a><p>Vocabulary for real published identity and relationships. knowsAbout suggests a topic, not proof of expertise.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-person">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-article-author-resolution</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-author</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-organization">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-organization">Describe the actual publisher</a></h2>
+    <p class="practice-problem">Brand names, operator names, and services can become conflated.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/organization">Organization structured data</a><p><strong>Introduction; Technical guidelines; Structured data type definitions</strong> — Organization metadata helps describe and distinguish a publisher. Google recommends the most specific applicable type, relevant properties and placement on a home/about page.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Identify the real publisher and its official public properties.</li><li>Add an appropriate Organization graph with only supported visible facts.</li></ul>
+      <h3>Check the result</h3><ul><li>The graph matches the about/contact pages and documented public identity.</li></ul>
+      <h3>Measure what happens</h3><p>Audit conflicting operator names and unsupported organization properties.</p>
+      <h3>Why try it</h3><p>Consistent publisher information may reduce identification errors.</p>
+      <h3>Where it fits</h3><p>organizations</p>
+      <h3>Watch out for</h3><p>Adding fake offices, registrations, staff size, or founding dates.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/organization">Organization structured data</a><p>Supports identifying real organizations and applicable properties. Do not invent registration, membership, addresses, or corporate scale.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-organization">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-organization</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-sameas">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-sameas">Reserve sameAs for identity equivalence</a></h2>
+    <p class="practice-problem">Related topics or partner links can falsely imply the same entity.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/sameAs">Schema.org sameAs</a><p><strong>Property definition</strong> — sameAs points to a reference that identifies the same item unambiguously, including an appropriate official, Wikipedia or Wikidata page.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Review every sameAs URL against the identity it describes.</li><li>Move ordinary references into visible contextual links or appropriate relationships.</li></ul>
+      <h3>Check the result</h3><ul><li>Every remaining sameAs target identifies the same subject.</li></ul>
+      <h3>Measure what happens</h3><p>Count invalid sameAs relationships during graph review.</p>
+      <h3>Why try it</h3><p>Correct identity links may reduce graph conflation.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Using Wikipedia topic pages or prestigious brands as borrowed identity.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/sameAs">Schema.org sameAs</a><p>Identity-equivalent references only; a related resource or admired brand is not the same entity.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-sameas">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-sameas</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-service-model">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-service-model">Separate a service from its provider</a></h2>
+    <p class="practice-problem">A tutoring offer is not the same thing as the tutor or website.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/Service">Schema.org Service</a><p><strong>provider, audience, areaServed</strong> — Defines service relationships; truthful selection and extraction tests remain implementation work.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Represent the real service and its provider as distinct nodes.</li><li>Include only applicable service type, audience, availability, and area facts visible on the page.</li></ul>
+      <h3>Check the result</h3><ul><li>Consumers can identify who provides what without inventing a physical branch.</li></ul>
+      <h3>Measure what happens</h3><p>Measure correctly extracted provider, service, and applicable-area facts.</p>
+      <h3>Why try it</h3><p>A clearer service model may improve task matching.</p>
+      <h3>Where it fits</h3><p>services</p>
+      <h3>Watch out for</h3><p>Using LocalBusiness markup to manufacture an address for an online service.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/Service">Schema.org Service</a><p>Vocabulary for services, providers, and areas served; no general Service rich-result promise.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-service">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-service-model</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-software-model">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-software-model">Describe software capabilities and constraints</a></h2>
+    <p class="practice-problem">A product name alone cannot answer compatibility questions.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/SoftwareApplication">Schema.org SoftwareApplication</a><p><strong>applicationCategory, operatingSystem, softwareVersion</strong> — Defines software facts; release parity is our check, not proof of rich-result eligibility.</p></li></ul>
+      <h3>Make the change</h3><ul><li>List the real application category, operating environment, and supported version.</li><li>Represent accurate facts with SoftwareApplication and link detailed requirements.</li></ul>
+      <h3>Check the result</h3><ul><li>The graph and executable release documentation agree on support.</li></ul>
+      <h3>Measure what happens</h3><p>Track correct compatibility answers in a fixed retrieval test set.</p>
+      <h3>Why try it</h3><p>Explicit requirements may support more accurate product evaluation.</p>
+      <h3>Where it fits</h3><p>software</p>
+      <h3>Watch out for</h3><p>Inventing downloads, ratings, or supported platforms to complete a template.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/SoftwareApplication">Schema.org SoftwareApplication</a><p>Vocabulary for application facts. Search feature eligibility must be checked independently.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-software">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-software-app-structured-data</a> · <a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-software-model</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-work-relations">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-work-relations">Connect the page, work, and evidence</a></h2>
+    <p class="practice-problem">A page URL and an underlying article or dataset have different roles.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/json-ld11/">JSON-LD 1.1</a><p><strong>Node identifiers</strong> — Identifies nodes; resolving a reference does not validate its meaning.</p></li><li><a href="https://schema.org/citation">Schema.org citation</a><p><strong>Property definition</strong> — Represents citations, not independent verification of their claims.</p></li><li><a href="https://schema.org/mainEntity">mainEntity</a><p><strong>Property definition</strong> — Use for the primary described entity, not every mentioned item.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use mainEntity when the WebPage describes a genuine primary work; do not manufacture separate nodes for every page or mention.</li><li>Link the work to its author, publisher, and cited evidence by stable IDs.</li></ul>
+      <h3>Check the result</h3><ul><li>Internal graph references resolve and represent relationships visible to readers.</li></ul>
+      <h3>Measure what happens</h3><p>Measure resolvable reference coverage and relationship extraction accuracy.</p>
+      <h3>Why try it</h3><p>Typed relationships may support faithful reuse of the evidence chain.</p>
+      <h3>Where it fits</h3><p>content-sites, datasets</p>
+      <h3>Watch out for</h3><p>Building a large disconnected graph with speculative relationships.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/json-ld11/">JSON-LD 1.1</a><p>Supports linked-data identifiers and graphs. JSON-LD standard conformance alone does not create search-engine recognition of a property.</p><span>W3C · source checked 8 Sept 2026 · JSON-LD 1.1, W3C Recommendation 2020-07-16</span><a class="source-record" href="../discoverability.html#source-jsonld">Source record</a></li><li><a href="https://schema.org/citation">Schema.org citation</a><p>CreativeWork citation relationships can reference works or text. A citation alone is not evidence of agreement.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-citation">Source record</a></li><li><a href="https://schema.org/mainEntity">mainEntity</a><p>Defines the primary entity described by a creative work, not a ranking benefit.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-main-entity">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-work-relations</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-term-graph">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-term-graph">Maintain a small domain term set</a></h2>
+    <p class="practice-problem">Similar concepts are merged inconsistently across pages.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/DefinedTerm">Schema.org DefinedTerm</a><p><strong>termCode and inDefinedTermSet</strong> — Supports term identity and membership; alias review is our editorial procedure.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose terms that change a real decision or interpretation.</li><li>Define each term, stable ID, aliases, and membership in a DefinedTermSet.</li></ul>
+      <h3>Check the result</h3><ul><li>Aliases resolve to the intended concept without merging distinct meanings.</li></ul>
+      <h3>Measure what happens</h3><p>Track terminology conflicts detected in content and retrieval answers.</p>
+      <h3>Why try it</h3><p>A precise vocabulary may improve consistency across human and machine content.</p>
+      <h3>Where it fits</h3><p>education, documentation, datasets</p>
+      <h3>Watch out for</h3><p>Equating all semantically nearby terms to enlarge a graph.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/DefinedTerm">Schema.org DefinedTerm</a><p>Vocabulary for a defined concept and its term set; not a special AI search feature.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-term">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a> · <a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-term-graph</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-graph-parity">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-graph-parity">Test visible content and graph parity</a></h2>
+    <p class="practice-problem">Syntactically valid JSON-LD can still misrepresent a page.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">General structured data guidelines</a><p><strong>Content and relevance</strong> — Supports representative visible markup; property comparison is our release check.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Extract key entity properties from rendered HTML and JSON-LD.</li><li>Compare names, dates, prices, authors, and claims at each release.</li></ul>
+      <h3>Check the result</h3><ul><li>All material graph facts have visible support and no contradictory values.</li></ul>
+      <h3>Measure what happens</h3><p>Report unsupported or contradictory graph properties by template.</p>
+      <h3>Why try it</h3><p>Parity checks may prevent misleading machine summaries.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Treating schema validation as proof of factual accuracy.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">General structured data guidelines</a><p>Markup must represent visible, relevant content and use supported properties. Syntax or Rich Results Test success cannot prove truthful claims or rich-result appearance.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-sd">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-graph-parity</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-product-variants">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-product-variants">Represent genuine product variants as one group</a></h2>
+    <p class="practice-problem">Selectable variants have inconsistent parent identity, URLs or offer facts.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/product-variants">Product variant structured data</a><p><strong>ProductGroup / variesBy / hasVariant / productGroupID; single-page and multi-page variant examples</strong> — ProductGroup, variesBy, hasVariant and productGroupID describe genuine product variants and their selectable URLs.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use ProductGroup with actual variation dimensions and stable group identity.</li><li>Ensure variant URLs select the matching product, price and availability.</li></ul>
+      <h3>Check the result</h3><ul><li>Open each sampled variant URL and compare its selection and offer to the structured data.</li></ul>
+      <h3>Measure what happens</h3><p>Measure variant URL, identity and offer mismatches.</p>
+      <h3>Why try it</h3><p>Consistent variant grouping may improve interpretation of the real selectable offer. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>commerce, product-variants</p>
+      <h3>Watch out for</h3><p>Using variant markup to create fictional offers or unrelated keyword pages.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/product-variants">Product variant structured data</a><p>ProductGroup, variesBy, hasVariant and productGroupID describe genuine product variants and their selectable URLs.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-product-variants">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-product-variants</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-section-graph">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-section-graph">Describe only meaningful article sections in a small graph</a></h2>
+    <p class="practice-problem">A page-level citation cannot identify which evidence supports a particular section.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/WebPageElement">WebPageElement</a><p><strong>WebPageElement; inherited CreativeWork properties</strong> — Page-element semantics support describing sections; this selective graph design has no documented Search citation benefit.</p></li><li><a href="https://schema.org/hasPart">hasPart</a><p><strong>Property definition; CreativeWork domain and range</strong> — hasPart relates a work to an included work; no ranking or verification semantics are stated.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Where a consuming tool needs it, model a substantive visible section as WebPageElement with its real fragment URL and name.</li><li>Connect the Article to sections with hasPart; attach citation only where that section actually uses the source.</li><li>Generate HTML anchors and graph IDs from one record; keep ordinary source links visible.</li></ul>
+      <h3>Check the result</h3><ul><li>Every referenced fragment resolves and every graph citation appears in the corresponding section.</li></ul>
+      <h3>Measure what happens</h3><p>Measure section-to-source resolution in the intended consumer</p>
+      <h3>Why try it</h3><p>A selective section graph may help an intended consumer resolve local evidence relationships. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>evidence-rich-editorial, research</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/WebPageElement">WebPageElement</a><p>Open-vocabulary page-element semantics. No documented Google citation advantage.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-page-element">Source record</a></li><li><a href="https://schema.org/hasPart">hasPart</a><p>A CreativeWork may contain another CreativeWork. Relation does not imply independent verification or endorsement.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-has-part">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-section-graph</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-article-role-parity">
+  <div class="practice-number" aria-hidden="true">012</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-article-role-parity">Keep author roles identical in the byline and Article graph</a></h2>
+    <p class="practice-problem">A CMS can expose an organization or uploader as the author of someone else&#39;s work.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/article">Article structured data</a><p><strong>Author markup best practices; Recommended properties</strong> — Article guidance supports complete, disambiguated authorship. A matching byline does not prove expertise.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Render the real author list from the same record used by Article JSON-LD.</li><li>Use separate author nodes and disambiguating profile URLs; keep uploader, editor and publisher roles distinct.</li><li>Only expose dates and author properties actually known for the published article.</li></ul>
+      <h3>Check the result</h3><ul><li>Compare all rendered bylines with parsed author nodes, including articles with multiple authors.</li></ul>
+      <h3>Measure what happens</h3><p>Track author attribution mismatches</p>
+      <h3>Why try it</h3><p>A shared authorship record may reduce identity mismatches between the page and its graph. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>editorial, news</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/article">Article structured data</a><p>Supports article author, date, headline, and image properties where accurate; no authorship credential is created by markup.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-article">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-article-role-parity</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-discussion-boundary">
+  <div class="practice-number" aria-hidden="true">013</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-discussion-boundary">Use forum markup only for an actual discussion</a></h2>
+    <p class="practice-problem">Marketing FAQs with fake comments imitate community evidence without creating it.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/discussion-forum">Discussion forum structured data</a><p><strong>How to use DiscussionForumPosting within a forum</strong> — Google differentiates forum discussions, comments and Q&amp;A; markup does not manufacture first-hand participation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Apply DiscussionForumPosting to real user discussions and nest actual replies under their parent.</li><li>Use QAPage when the real interaction is a question with user-submitted answers; retain Article for authored editorial pages.</li><li>Publish only visible factual counts and moderation-approved content.</li></ul>
+      <h3>Check the result</h3><ul><li>Verify the page interaction model and inspect a thread with replies against its graph.</li></ul>
+      <h3>Measure what happens</h3><p>Track discussion graph errors and useful thread visits</p>
+      <h3>Why try it</h3><p>Accurate discussion modeling may improve eligible feature interpretation for genuine threads. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>forums, communities</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/discussion-forum">Discussion forum structured data</a><p>Models genuine forum discussions and comments, with feature-specific eligibility. Does not turn authored marketing copy into community experience.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-discussion">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-discussion-boundary</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-software-eligibility">
+  <div class="practice-number" aria-hidden="true">014</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-software-eligibility">Separate a software description from Google feature eligibility</a></h2>
+    <p class="practice-problem">A valid SoftwareApplication graph is presented as rich-result approval.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/software-app">Software app structured data</a><p><strong>Required SoftwareApplication properties</strong> — Google requires name, offers.price and rating or review for the documented feature. Missing facts must not be manufactured.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Check the current Google required fields and real review evidence; retain truthful semantics even if feature eligibility is incomplete.</li></ul>
+      <h3>Check the result</h3><ul><li>Record syntax, factual parity and feature eligibility independently.</li></ul>
+      <h3>Measure what happens</h3><p>Track factual/technical correctness, relevant search observations and useful actions separately.</p>
+      <h3>Why try it</h3><p>Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>localized-sites, software, service-sites</p>
+      <h3>Watch out for</h3><p>Inventing a five-star review to satisfy a validator.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/software-app">Software app structured data</a><p>Feature-specific eligibility and actual offer facts; do not invent reviews to satisfy requirements.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-software-app">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-software-eligibility</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-entities-product-offer-aggregation">
+  <div class="practice-number" aria-hidden="true">015</div>
+  <div class="practice-body">
+    <p class="practice-category">Entity identity and linked data</p>
+    <h2><a href="#arwp-entities-product-offer-aggregation">Use AggregateOffer only for actual aggregated offers</a></h2>
+    <p class="practice-problem">A single made-up from-price is presented as an aggregate of several offers.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet">Product snippets: editorial pros and cons</a><p><strong>AggregateOffer definition and variant exclusion</strong> — Google distinguishes an aggregation of offers from a group of product variants.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use AggregateOffer for real aggregated offers and accurate bounds; use the appropriate variant model for variants.</li></ul>
+      <h3>Check the result</h3><ul><li>Trace lowPrice, highPrice and offerCount to the actual underlying offers.</li></ul>
+      <h3>Measure what happens</h3><p>Track factual/technical correctness, relevant search observations and useful actions separately.</p>
+      <h3>Why try it</h3><p>Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>localized-sites, software, service-sites</p>
+      <h3>Watch out for</h3><p>Using AggregateOffer as a generic decoration for service price ranges.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet">Product snippets: editorial pros and cons</a><p>Pros-and-cons appearance is eligible only for editorial product reviews; requires at least two visible statements, not merchant or customer reviews.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-product-pros-cons">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-entities-product-offer-aggregation</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

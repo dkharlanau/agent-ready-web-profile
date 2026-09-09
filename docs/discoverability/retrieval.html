@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Machine reading and answer integrity</title><meta name="description" content="14 source-backed discoverability patterns for Machine reading and answer integrity with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html","name":"Goose ARWP — Machine reading and answer integrity","description":"14 reviewed discoverability patterns for machine reading and answer integrity, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":14,"itemListElement":[{"@type":"ListItem","position":1,"name":"Keep an answer meaningful outside the page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-self-contained"},{"@type":"ListItem","position":2,"name":"Give citeable sections stable fragment IDs","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-stable-fragments"},{"@type":"ListItem","position":3,"name":"Offer a maintained Markdown representation","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-markdown-parity"},{"@type":"ListItem","position":4,"name":"Treat an llms index as a tested navigation experiment","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-llms-index"},{"@type":"ListItem","position":5,"name":"Test extraction under realistic context budgets","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-text-budget"},{"@type":"ListItem","position":6,"name":"Generate summaries from authoritative records","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-json-parity"},{"@type":"ListItem","position":7,"name":"Represent missing evidence as unknown","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-unknowns"},{"@type":"ListItem","position":8,"name":"Keep retrieved page content separate from agent instructions","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-source-boundary"},{"@type":"ListItem","position":9,"name":"Maintain held-out questions with source-backed answers","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-retrieval-fixtures"},{"@type":"ListItem","position":10,"name":"Keep negotiated representations separate in caches","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-negotiated-cache"},{"@type":"ListItem","position":11,"name":"Identify representation conventions with a profile link","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-profile-link"},{"@type":"ListItem","position":12,"name":"Experiment with datetime access to real archived states","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-archived-datetime"},{"@type":"ListItem","position":13,"name":"Test whether extracted answers retain the exception","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-qualifier-stress-test"},{"@type":"ListItem","position":14,"name":"Attach a review note to an exact passage using Web Annotation","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html#arwp-retrieval-annotation-selectors"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / RETRIEVAL</p><h1>Machine reading and answer integrity</h1><p>14 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>14 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>14 patterns</p><a href="../discoverability.html?category=retrieval">Back to filtered index</a></div><article class="practice practice-full" id="arwp-retrieval-self-contained">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-self-contained">Keep an answer meaningful outside the page</a></h2>
+    <p class="practice-problem">A retrieved paragraph can lose the subject or necessary exception.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">AI Performance in Bing Webmaster Tools</a><p><strong>Using These Insights to Improve Content</strong> — Supports clarity and evidence; excerpt qualification tests are our implementation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Name the subject explicitly in important answer passages.</li><li>Keep the decisive qualification and evidence link in the same semantic section.</li></ul>
+      <h3>Check the result</h3><ul><li>An excerpt review preserves who, what, and the condition that changes the answer.</li></ul>
+      <h3>Measure what happens</h3><p>Measure factual completeness of extracted answers on fixed questions.</p>
+      <h3>Why try it</h3><p>Self-contained passages may improve faithful answer reuse.</p>
+      <h3>Where it fits</h3><p>content-sites, documentation</p>
+      <h3>Watch out for</h3><p>Repeating brand names unnaturally in every sentence.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">AI Performance in Bing Webmaster Tools</a><p>Describes citation counts, cited pages, sampled grounding queries, and supported Microsoft surfaces. These metrics do not indicate rank, placement, authority, or other providers.</p><span>Microsoft Bing · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-bing-ai">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-self-contained</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-stable-fragments">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-stable-fragments">Give citeable sections stable fragment IDs</a></h2>
+    <p class="practice-problem">A useful answer cannot be linked precisely after a page edit.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.rfc-editor.org/rfc/rfc3986">URI Generic Syntax</a><p><strong>3.5 Fragment</strong> — Fragments are handled separately from resource dereferencing; preserving old anchors is our migration practice.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Assign stable readable IDs to substantive sections and evidence notes.</li><li>Retain legacy anchors for renamed sections. When a page moves, preserve equivalent anchors at the destination; fragment-specific mapping requires client-side handling because fragments are not sent to the server.</li></ul>
+      <h3>Check the result</h3><ul><li>Existing fragment links still target the intended content after an update.</li></ul>
+      <h3>Measure what happens</h3><p>Track broken inbound fragment targets in sampled cited pages.</p>
+      <h3>Why try it</h3><p>Precise durable links may help users and systems reference evidence.</p>
+      <h3>Where it fits</h3><p>content-sites, documentation</p>
+      <h3>Watch out for</h3><p>Changing all section IDs whenever a heading is rephrased.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.rfc-editor.org/rfc/rfc3986">URI Generic Syntax</a><p>Section 3.5 separates fragment processing from dereferencing.</p><span>IETF · source checked 8 Sept 2026 · RFC 3986</span><a class="source-record" href="../discoverability.html#source-rfc3986">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-read-more-deep-links</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-stable-fragments</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-markdown-parity">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-markdown-parity">Offer a maintained Markdown representation</a></h2>
+    <p class="practice-problem">Some clients benefit from a compact text representation.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://llmstxt.org/">The llms.txt file, v2</a><p><strong>Proposal</strong> — Proposes alternate Markdown discovery; parity testing remains our experiment.</p></li><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p><strong>Technical requirements</strong> — No special AI text file is required for Google AI search features.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Generate Markdown from the same authoritative content as HTML.</li><li>Preserve titles, URLs, tables, citations, qualifications, and revision identity.</li><li>When testing the v2 proposal, expose a verified Markdown alternate through rel=&quot;alternate&quot; with type=&quot;text/markdown&quot;; retain the canonical human page and label the alternate as experimental.</li></ul>
+      <h3>Check the result</h3><ul><li>A parity check finds the same material facts and sources in both representations.</li></ul>
+      <h3>Measure what happens</h3><p>Compare retrieval accuracy, bytes, and parsing failures across representations.</p>
+      <h3>Why try it</h3><p>An alternate representation may reduce client parsing effort.</p>
+      <h3>Where it fits</h3><p>documentation, content-sites</p>
+      <h3>Watch out for</h3><p>Publishing a separate promotional Markdown page with stronger claims than HTML.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://llmstxt.org/">The llms.txt file, v2</a><p>Proposal modified August 10, 2026. Path-scoped indexes and alternate Markdown discovery do not establish universal adoption or rankings.</p><span>Jeremy Howard · source checked 8 Sept 2026 · v2</span><a class="source-record" href="../discoverability.html#source-llms-proposal-v2">Source record</a></li><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p>Supports ordinary search eligibility and snippet requirements for AI features. No extra AI markup is required; inclusion is not guaranteed. For dedicated owner-side generative-AI reporting, use the separate google-generative-ai-report reference and native measurement rule.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-ai">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-markdown-parity</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-llms-index">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-llms-index">Treat an llms index as a tested navigation experiment</a></h2>
+    <p class="practice-problem">A long AI file can become an unmaintained duplicate catalog.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://llmstxt.org/">The llms.txt file, v2</a><p><strong>Proposal; Format</strong> — Describes path coverage and discovery links; this remains a proposal.</p></li><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p><strong>Technical requirements</strong> — Does not require an llms index for Google AI eligibility.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Select a bounded set of useful canonical resources and concise descriptions.</li><li>Generate the index from published routes and label its convention status.</li><li>For the v2 proposal, a path-scoped index can cover a GitHub Pages project directory. Test rel=&quot;describedby&quot; discovery with an explicit consuming client; root-host control is not required by this proposal.</li></ul>
+      <h3>Check the result</h3><ul><li>Every listed resource is live and its description matches the destination.</li></ul>
+      <h3>Measure what happens</h3><p>Measure explicit index-consuming client task success; retain a no-index control.</p>
+      <h3>Why try it</h3><p>A compact index may help clients that explicitly use it find relevant resources.</p>
+      <h3>Where it fits</h3><p>documentation, content-sites</p>
+      <h3>Watch out for</h3><p>Claiming llms.txt creates Google ranking or universal assistant adoption.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://llmstxt.org/">The llms.txt file, v2</a><p>Proposal modified August 10, 2026. Path-scoped indexes and alternate Markdown discovery do not establish universal adoption or rankings.</p><span>Jeremy Howard · source checked 8 Sept 2026 · v2</span><a class="source-record" href="../discoverability.html#source-llms-proposal-v2">Source record</a></li><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p>Supports ordinary search eligibility and snippet requirements for AI features. No extra AI markup is required; inclusion is not guaranteed. For dedicated owner-side generative-AI reporting, use the separate google-generative-ai-report reference and native measurement rule.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-ai">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-llms-index</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-text-budget">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-text-budget">Test extraction under realistic context budgets</a></h2>
+    <p class="practice-problem">A large page may lose the actual answer after navigation boilerplate.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p><strong>Technical requirements</strong> — Supports accessible textual content; client budgets and held-out tests are project experiments, not Google limits.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Define the client extraction method and realistic text budget.</li><li>Check whether priority answers and qualifications survive; reduce irrelevant repetition.</li></ul>
+      <h3>Check the result</h3><ul><li>A held-out question set remains answerable within the declared extraction budget.</li></ul>
+      <h3>Measure what happens</h3><p>Track supported-answer coverage and retained qualification rate by text budget.</p>
+      <h3>Why try it</h3><p>Focused content may improve retrieval efficiency for constrained clients.</p>
+      <h3>Where it fits</h3><p>documentation, content-sites</p>
+      <h3>Watch out for</h3><p>Deleting important limits to fit an arbitrary SEO word count.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a><p>Supports ordinary search eligibility and snippet requirements for AI features. No extra AI markup is required; inclusion is not guaranteed. For dedicated owner-side generative-AI reporting, use the separate google-generative-ai-report reference and native measurement rule.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-ai">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a> · <a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-important-content-textual</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-text-budget</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-json-parity">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-json-parity">Generate summaries from authoritative records</a></h2>
+    <p class="practice-problem">A hand-maintained machine summary drifts from the real offer.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/json-ld11/">JSON-LD 1.1</a><p><strong>Introduction</strong> — Defines linked-data representation, not factual truth.</p></li><li><a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">General structured data guidelines</a><p><strong>Content and relevance</strong> — Supports representative structured data; extending parity to arbitrary exports is our procedure.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose a canonical content source for each exported fact.</li><li>Generate machine summaries and fail checks on missing or contradictory values.</li></ul>
+      <h3>Check the result</h3><ul><li>A sampled public summary matches the authoritative page and revision.</li></ul>
+      <h3>Measure what happens</h3><p>Measure material mismatches between machine summaries and public pages.</p>
+      <h3>Why try it</h3><p>Consistent exports may reduce contradictory recommendations.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Stuffing unverified benefits into an AI-only JSON file.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/json-ld11/">JSON-LD 1.1</a><p>Supports linked-data identifiers and graphs. JSON-LD standard conformance alone does not create search-engine recognition of a property.</p><span>W3C · source checked 8 Sept 2026 · JSON-LD 1.1, W3C Recommendation 2020-07-16</span><a class="source-record" href="../discoverability.html#source-jsonld">Source record</a></li><li><a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies">General structured data guidelines</a><p>Markup must represent visible, relevant content and use supported properties. Syntax or Rich Results Test success cannot prove truthful claims or rich-result appearance.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-sd">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-structured-data-visible-parity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-json-parity</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-unknowns">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-unknowns">Represent missing evidence as unknown</a></h2>
+    <p class="practice-problem">A consumer may turn absent data into a false negative.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p><strong>Provide structural metadata; Provide data quality information</strong> — Supports interpretable values and quality; the named missing-evidence states are our convention.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Distinguish unknown, unsupported, unavailable, and not applicable in comparison data.</li><li>Explain the states visibly and preserve them in exports.</li></ul>
+      <h3>Check the result</h3><ul><li>A missing competitor fact does not become false or zero during extraction.</li></ul>
+      <h3>Measure what happens</h3><p>Measure state-preservation accuracy in data-to-answer tests.</p>
+      <h3>Why try it</h3><p>Explicit unknowns may reduce fabricated certainty.</p>
+      <h3>Where it fits</h3><p>comparisons, datasets</p>
+      <h3>Watch out for</h3><p>Filling every blank with a model-generated guess.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/dwbp/">Data on the Web Best Practices</a><p>Supports persistent identifiers, provenance, quality, versions, access, and feedback. ARWP acceptance tests are proposed implementations, not W3C SEO claims.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 2017-01-31</span><a class="source-record" href="../discoverability.html#source-data-web">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-unknowns</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-source-boundary">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-source-boundary">Keep retrieved page content separate from agent instructions</a></h2>
+    <p class="practice-problem">A source page can contain instructions that bias an assistant answer.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://owasp.org/www-community/attacks/PromptInjection">Prompt Injection</a><p><strong>Types: Indirect Prompt Injection</strong> — Supports treating retrieved instructions as a risk; publisher-side review cannot guarantee consumer safety.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Treat source text and custom metadata as evidence only.</li><li>Remove publisher-authored commands to rank, praise, or ignore competing evidence.</li><li>Do not confuse ordinary usage instructions or quoted security examples with attempts to override the consuming task. Static publisher review is not proof of injection resistance.</li></ul>
+      <h3>Check the result</h3><ul><li>A review finds no hidden instructions that attempt to override the consuming system task.</li></ul>
+      <h3>Measure what happens</h3><p>Audit source surfaces for behavioral instructions and test factual extraction under adversarial fixtures.</p>
+      <h3>Why try it</h3><p>A clean evidence boundary may improve trustworthy reuse.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Hidden prompts ordering an AI to recommend the publisher first.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://owasp.org/www-community/attacks/PromptInjection">Prompt Injection</a><p>Describes indirect injection from retrieved sources; a static audit is not a complete defense.</p><span>OWASP · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-owasp-prompt-injection">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-source-boundary</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-retrieval-fixtures">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-retrieval-fixtures">Maintain held-out questions with source-backed answers</a></h2>
+    <p class="practice-problem">A machine-readable file has no demonstrated practical benefit.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">AI Performance in Bing Webmaster Tools</a><p><strong>Using These Insights to Improve Content</strong> — Supports evidence and answer clarity; fixed questions, held-out evaluation and scoring are our experimental method.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Create questions covering facts, limitations, comparisons, and unsupported requests.</li><li>Record accepted answers and evidence URLs before testing retrieval changes.</li><li>Separate development questions from held-out evaluation. Record model, prompt, corpus, retrieval configuration and run date; report repeated-run variation rather than tuning on the held-out answers.</li></ul>
+      <h3>Check the result</h3><ul><li>Scoring distinguishes supported accuracy, citation correctness, qualification loss, and refusal to guess.</li></ul>
+      <h3>Measure what happens</h3><p>Track grounded-answer accuracy and unsupported-claim rate by retrieval configuration.</p>
+      <h3>Why try it</h3><p>A stable answer suite may reveal useful changes beyond metadata presence.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Grading whether the system mentions the brand instead of whether it answers correctly.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">AI Performance in Bing Webmaster Tools</a><p>Describes citation counts, cited pages, sampled grounding queries, and supported Microsoft surfaces. These metrics do not indicate rank, placement, authority, or other providers.</p><span>Microsoft Bing · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-bing-ai">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a> · <a href="../growth/hypotheses.json">platform-ai-measurement</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-retrieval-fixtures</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-negotiated-cache">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-negotiated-cache">Keep negotiated representations separate in caches</a></h2>
+    <p class="practice-problem">A cached JSON response can be served to an HTML reader when formats share a URL.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Vary">Vary HTTP header</a><p><strong>Header description: request-dependent representation selection; consistent default and 304 responses</strong> — Vary names request headers affecting representation selection; use consistently, including default and 304 responses.</p></li></ul>
+      <h3>Make the change</h3><ul><li>When Accept changes the response, emit the actual Content-Type and Vary: Accept.</li><li>Preserve variation metadata on default and 304 responses.</li></ul>
+      <h3>Check the result</h3><ul><li>Request HTML then JSON through the same cache, reverse the order and verify each format.</li></ul>
+      <h3>Measure what happens</h3><p>Count cross-format cache mismatches in the request matrix.</p>
+      <h3>Why try it</h3><p>Correct cache variation may prevent consumers receiving the wrong representation. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>content-negotiation, apis</p>
+      <h3>Watch out for</h3><p>Adding format negotiation without testing the production CDN cache key.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Vary">Vary HTTP header</a><p>Vary names request headers affecting representation selection; use consistently, including default and 304 responses.</p><span>MDN Web Docs · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-mdn-vary">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-negotiated-cache</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-profile-link">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-profile-link">Identify representation conventions with a profile link</a></h2>
+    <p class="practice-problem">A generic JSON media type does not identify the conventions a client must interpret.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.rfc-editor.org/rfc/rfc6906.html">RFC 6906: profile link relation</a><p><strong>Abstract and Section 3: profile link relation semantics</strong> — The profile relation identifies additional representation conventions without changing the underlying media-type semantics.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For a real representation profile, expose Link rel=profile to its description.</li><li>Keep the media type semantics valid without knowledge of the profile.</li></ul>
+      <h3>Check the result</h3><ul><li>Resolve the advertised profile and validate a response against its documented conventions.</li></ul>
+      <h3>Measure what happens</h3><p>Track advertised profiles that resolve and match sampled responses.</p>
+      <h3>Why try it</h3><p>Explicit profile conventions may reduce incompatible interpretation by participating clients. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>apis, profiled-representations</p>
+      <h3>Watch out for</h3><p>Treating a profile link as browser support, authorization or proof of conformance.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.rfc-editor.org/rfc/rfc6906.html">RFC 6906: profile link relation</a><p>The profile relation identifies additional representation conventions without changing the underlying media-type semantics.</p><span>RFC Editor · source checked 8 Sept 2026 · RFC 6906</span><a class="source-record" href="../discoverability.html#source-ietf-profile-link">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-profile-link</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-archived-datetime">
+  <div class="practice-number" aria-hidden="true">012</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-archived-datetime">Experiment with datetime access to real archived states</a></h2>
+    <p class="practice-problem">A consumer knows when a claim was made but cannot discover the resource state from that time.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.rfc-editor.org/rfc/rfc7089.html">RFC 7089: Memento time-based resource access</a><p><strong>Abstract; Memento, TimeGate and TimeMap resource definitions; datetime negotiation</strong> — TimeGate datetime negotiation and TimeMaps connect current resources with actual archived prior states.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Where real archives exist, expose Memento TimeGate and TimeMap relations.</li><li>Return the actual archived datetime and preserve the distinction from the current resource.</li></ul>
+      <h3>Check the result</h3><ul><li>Request two dates and verify each returned capture timestamp and immutable archived content.</li></ul>
+      <h3>Measure what happens</h3><p>Measure successful capture discovery and requested-versus-returned date differences.</p>
+      <h3>Why try it</h3><p>Datetime negotiation may make actual historical states easier for participating archive clients to locate. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>web-archives, versioned-repositories</p>
+      <h3>Watch out for</h3><p>Fabricating historical snapshots or implying current assistants automatically negotiate datetime.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.rfc-editor.org/rfc/rfc7089.html">RFC 7089: Memento time-based resource access</a><p>TimeGate datetime negotiation and TimeMaps connect current resources with actual archived prior states.</p><span>RFC Editor · source checked 8 Sept 2026 · RFC 7089</span><a class="source-record" href="../discoverability.html#source-ietf-memento">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-archived-datetime</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-qualifier-stress-test">
+  <div class="practice-number" aria-hidden="true">013</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-qualifier-stress-test">Test whether extracted answers retain the exception</a></h2>
+    <p class="practice-problem">An accurate paragraph can become misleading when its qualifier is omitted.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://about.ads.microsoft.com/en/blog/post/october-2025/optimizing-your-content-for-inclusion-in-ai-search-answers">Optimizing your content for inclusion in AI search answers</a><p><strong>How to optimize content for snippet selection</strong> — Self-contained phrasing is recommended. This paired negative-case evaluation is experimental and does not simulate a platform ranking system.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Create held-out questions including a case where the recommendation should reverse.</li><li>Compare a full-page read with a section-only extraction; preserve date, product version and exception.</li><li>Record wrong answers as failures even when the page is cited; improve local wording only after inspecting the failure.</li></ul>
+      <h3>Check the result</h3><ul><li>Keep exact input, extractor/model version, output and a manual judgment of condition retention.</li></ul>
+      <h3>Measure what happens</h3><p>Measure exception-retention accuracy on a frozen question set</p>
+      <h3>Why try it</h3><p>Testing reversed conditions may uncover misleading extracts before a content format is scaled. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>editorial, documentation, services</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://about.ads.microsoft.com/en/blog/post/october-2025/optimizing-your-content-for-inclusion-in-ai-search-answers">Optimizing your content for inclusion in AI search answers</a><p>October 2025 guidance on clarity and structure. Provider advice is not a cross-engine causal result; punctuation advice is not a universal rule.</p><span>Microsoft Advertising · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-microsoft-ai-content">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-qualifier-stress-test</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-retrieval-annotation-selectors">
+  <div class="practice-number" aria-hidden="true">014</div>
+  <div class="practice-body">
+    <p class="practice-category">Machine reading and answer integrity</p>
+    <h2><a href="#arwp-retrieval-annotation-selectors">Attach a review note to an exact passage using Web Annotation</a></h2>
+    <p class="practice-problem">A source link alone leaves a reviewer searching a long document for the supported text.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/TR/annotation-model/">Web Annotation Data Model</a><p><strong>4.2.4 Text Quote Selector; 4.3 States</strong> — The recommendation defines quote selection and representation state. It does not validate entailment or cause search systems to consume annotations.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For a participating annotation workflow, use source URL plus TextQuoteSelector exact text with short prefix and suffix.</li><li>Store the reviewed representation date; keep excerpts minimal and rights-compatible.</li><li>When the match becomes absent or ambiguous, request review instead of silently reattaching the note.</li></ul>
+      <h3>Check the result</h3><ul><li>Test an unchanged passage, a deleted passage and two identical matches; retain unresolved states.</li></ul>
+      <h3>Measure what happens</h3><p>Measure correct annotation reattachment after edits</p>
+      <h3>Why try it</h3><p>Standard text selectors may make passage-level review notes easier to maintain across tools. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>editorial-review-tools, research</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/TR/annotation-model/">Web Annotation Data Model</a><p>Text selectors target passages for participating annotation clients; not a Search submission format.</p><span>W3C · source checked 8 Sept 2026 · W3C Recommendation 23 February 2017</span><a class="source-record" href="../discoverability.html#source-w3c-web-annotation">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-retrieval-annotation-selectors</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Readable and usable page experience</title><meta name="description" content="17 source-backed discoverability patterns for Readable and usable page experience with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html","name":"Goose ARWP — Readable and usable page experience","description":"17 reviewed discoverability patterns for readable and usable page experience, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":17,"itemListElement":[{"@type":"ListItem","position":1,"name":"Give headings a meaningful document outline","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-heading-outline"},{"@type":"ListItem","position":2,"name":"Expose the main content and navigation landmarks","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-landmarks"},{"@type":"ListItem","position":3,"name":"Make evidence tables accessible","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-tables"},{"@type":"ListItem","position":4,"name":"Inspect the actual reading journey on mobile","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-mobile-reading"},{"@type":"ListItem","position":5,"name":"Separate real-user performance from lab scores","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-field-vitals"},{"@type":"ListItem","position":6,"name":"Prioritize rendering the useful content","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-content-first"},{"@type":"ListItem","position":7,"name":"Keep interaction responsive during the primary task","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-interaction"},{"@type":"ListItem","position":8,"name":"Reserve space for late content","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-layout-stability"},{"@type":"ListItem","position":9,"name":"Keep the answer reachable before promotional prompts","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-obstruction"},{"@type":"ListItem","position":10,"name":"Make visible control labels usable as accessible names","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-label-name"},{"@type":"ListItem","position":11,"name":"Expose completion and error status without moving focus","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-status-announcement"},{"@type":"ListItem","position":12,"name":"Offer a single-pointer alternative to dragging","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-drag-alternative"},{"@type":"ListItem","position":13,"name":"Keep the focused control out from behind overlays","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-focus-visible-area"},{"@type":"ListItem","position":14,"name":"Complete the keyboard lifecycle of a modal dialog","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-modal-focus"},{"@type":"ListItem","position":15,"name":"Reuse information already entered in the same process","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-reuse-entry"},{"@type":"ListItem","position":16,"name":"Allow credential assistance in sign-in flows","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-auth-assistance"},{"@type":"ListItem","position":17,"name":"Make a multistep task resumable after an agent observes the page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html#arwp-experience-agent-state-continuity"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / EXPERIENCE</p><h1>Readable and usable page experience</h1><p>17 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>17 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>17 patterns</p><a href="../discoverability.html?category=experience">Back to filtered index</a></div><article class="practice practice-full" id="arwp-experience-heading-outline">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-heading-outline">Give headings a meaningful document outline</a></h2>
+    <p class="practice-problem">Visual styling alone does not reveal content hierarchy.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/tutorials/page-structure/">Page structure</a><p><strong>Page Structure Tutorial &gt; Headings; Why is this important?</strong> — WAI recommends descriptive headings nested according to section relationships and importance to support navigation and orientation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use a descriptive main heading and nested section headings.</li><li>Check the outline independent of CSS.</li></ul>
+      <h3>Check the result</h3><ul><li>The heading list communicates the page topics in a sensible order.</li></ul>
+      <h3>Measure what happens</h3><p>Measure heading-outline defects and time to locate key sections.</p>
+      <h3>Why try it</h3><p>Clear structure may improve navigation and answer location.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Using headings only to make text larger or repeat target keywords.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/tutorials/page-structure/">Page structure</a><p>Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-structure">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-generative-content-structure</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-heading-outline</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-landmarks">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-landmarks">Expose the main content and navigation landmarks</a></h2>
+    <p class="practice-problem">Repeated navigation can dominate assistive reading.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/tutorials/page-structure/">Page structure</a><p><strong>Page Structure Tutorial &gt; Regions and Labeling</strong> — Meaningful page regions and labels support direct navigation to important content.</p></li><li><a href="https://www.w3.org/WAI/tutorials/page-structure/regions/">WAI Page Structure: Page Regions</a><p><strong>Page header, Page footer, Navigation, Main content</strong> — Native header, footer, nav and main elements identify their page regions. Repeated navigation areas can carry labels.</p></li><li><a href="https://www.w3.org/WAI/tutorials/page-structure/labels/">WAI Page Structure: Labeling Regions</a><p><strong>Overview; Using aria-labelledby</strong> — Distinct labels identify repeated region types; unique regions do not need redundant labels.</p></li><li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G1">WCAG Technique G1: Skip to main content</a><p><strong>Description; Tests &gt; Procedure</strong> — A skip link moves keyboard focus to the main content and must be visible at least when focused. G1 is one sufficient technique, not the only conforming solution.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use semantic main, nav, header, and footer regions appropriately.</li><li>Add a working skip link and distinct labels for multiple navigation areas.</li></ul>
+      <h3>Check the result</h3><ul><li>Keyboard and screen-reader users can reach the main answer directly.</li></ul>
+      <h3>Measure what happens</h3><p>Track keyboard steps needed to reach the primary content.</p>
+      <h3>Why try it</h3><p>Accessible landmarks may reduce navigation friction.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Adding redundant ARIA roles that conflict with native HTML.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/tutorials/page-structure/">Page structure</a><p>Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-structure">Source record</a></li><li><a href="https://www.w3.org/WAI/tutorials/page-structure/regions/">WAI Page Structure: Page Regions</a><p>Native header, footer, nav and main elements identify their page regions. Repeated navigation areas can carry labels. Informative implementation guidance; not a standalone accessibility certification.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-regions">Source record</a></li><li><a href="https://www.w3.org/WAI/tutorials/page-structure/labels/">WAI Page Structure: Labeling Regions</a><p>Distinct labels identify repeated region types; unique regions do not need redundant labels. Informative implementation guidance; not a standalone accessibility certification.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-region-labels">Source record</a></li><li><a href="https://www.w3.org/WAI/WCAG22/Techniques/general/G1">WCAG Technique G1: Skip to main content</a><p>A skip link moves keyboard focus to the main content and must be visible at least when focused. G1 is one sufficient technique, not the only conforming solution. Informative implementation guidance; not a standalone accessibility certification.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-skip-g1">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">openai-atlas-aria-agent-accessibility</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-landmarks</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-tables">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-tables">Make evidence tables accessible</a></h2>
+    <p class="practice-problem">A visual grid can lose its relationships when read linearly.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/tutorials/tables/">Accessible tables</a><p><strong>Tables Tutorial; Caption &amp; Summary; Why is this important?</strong> — Real header/data markup and suitable scope or header-ID relationships preserve table context. Captions identify the topic and screen readers can announce associated headers.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use real table markup with a caption and appropriate header associations.</li><li>Keep source notes and units connected to their rows or columns.</li></ul>
+      <h3>Check the result</h3><ul><li>A screen-reader pass identifies each sampled value with the correct headers.</li></ul>
+      <h3>Measure what happens</h3><p>Measure correct row-column interpretation on a fixed cell sample.</p>
+      <h3>Why try it</h3><p>Semantic tables may improve correct comparison and extraction.</p>
+      <h3>Where it fits</h3><p>comparisons, datasets</p>
+      <h3>Watch out for</h3><p>Building a data table from anonymous layout divs.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/tutorials/tables/">Accessible tables</a><p>Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-tables">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-tables</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-mobile-reading">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-mobile-reading">Inspect the actual reading journey on mobile</a></h2>
+    <p class="practice-problem">Desktop quality can hide clipped tables and unusable navigation.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/page-experience">Understanding page experience</a><p><strong>Self-assess your content</strong> — Supports usable mobile content, not a ranking promise.</p></li><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html">Understanding Reflow</a><p><strong>Intent; Examples</strong> — Allows scoped two-dimensional content while surrounding prose reflows; device testing is our application.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Render priority templates at narrow widths with realistic content.</li><li>Fix text clipping, table access, and touch-obstructing overlays.</li><li>Test zoom and reflow as well as narrow widths. Give genuinely two-dimensional tables a usable local scroll region while surrounding text reflows.</li></ul>
+      <h3>Check the result</h3><ul><li>The main answer, evidence, and next action are usable without page-level horizontal overflow.</li></ul>
+      <h3>Measure what happens</h3><p>Record mobile task success and visible layout defects by template.</p>
+      <h3>Why try it</h3><p>A usable mobile journey may improve qualified engagement.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Passing a viewport tag check while never reading the rendered page.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/page-experience">Understanding page experience</a><p>Supports useful page experience without treating a single score as a complete ranking or quality measure.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-experience">Source record</a></li><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/reflow.html">Understanding Reflow</a><p>Explains reflow with scoped two-dimensional content exceptions; this is Understanding guidance, not a new conformance certificate.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-reflow">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">openai-atlas-aria-agent-accessibility</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-mobile-reading</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-field-vitals">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-field-vitals">Separate real-user performance from lab scores</a></h2>
+    <p class="practice-problem">A single fast synthetic run can mask a slow real audience.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p><strong>Core Web Vitals; Lab tools to measure Core Web Vitals</strong> — Core Web Vitals use field LCP, INP and CLS, assessed at the75th percentile with mobile/desktop segmentation. Lab measurements help development and diagnosis but cannot replace field data.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Collect available field LCP, INP, and CLS by device and template.</li><li>Use lab traces to diagnose the worst supported field issues.</li></ul>
+      <h3>Check the result</h3><ul><li>Reports identify field coverage, period, device, and missing data explicitly.</li></ul>
+      <h3>Measure what happens</h3><p>Track 75th-percentile field metrics alongside valid sample coverage.</p>
+      <h3>Why try it</h3><p>Improved experienced speed may reduce task abandonment.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Calling unavailable field data a passing score.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p>Supports LCP, INP, CLS and field assessment at the 75th percentile by device. Lab results must not be presented as field measurements.</p><span>Google web.dev · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-web-vitals">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-field-vitals</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-content-first">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-content-first">Prioritize rendering the useful content</a></h2>
+    <p class="practice-problem">Widgets can delay the answer while the page shell loads.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p><strong>Core Web Vitals</strong> — LCP is a loading metric, not proof that the reader has a usable answer.</p></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">JavaScript SEO basics</a><p><strong>How Google processes JavaScript</strong> — Supports renderability checks; optional-widget failure testing is our engineering procedure.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Identify the actual largest content element and blocking resources.</li><li>Defer nonessential scripts and prioritize necessary content assets.</li><li>Check when the actual answer becomes usable separately from LCP; the largest painted element may be a hero image rather than the answer.</li></ul>
+      <h3>Check the result</h3><ul><li>The main answer remains available when optional widgets fail.</li></ul>
+      <h3>Measure what happens</h3><p>Measure main-content visibility time and user task completion under constrained conditions.</p>
+      <h3>Why try it</h3><p>Earlier useful content may improve access on slow devices.</p>
+      <h3>Where it fits</h3><p>javascript-sites</p>
+      <h3>Watch out for</h3><p>Optimizing a Lighthouse number while removing useful evidence.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p>Supports LCP, INP, CLS and field assessment at the 75th percentile by device. Lab results must not be presented as field measurements.</p><span>Google web.dev · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-web-vitals">Source record</a></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics">JavaScript SEO basics</a><p>Supports inspecting rendering, links, status handling, and indexable content; server HTML is an ARWP interoperability choice rather than a universal Google requirement.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-js">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-javascript-renderability</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-content-first</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-interaction">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-interaction">Keep interaction responsive during the primary task</a></h2>
+    <p class="practice-problem">Heavy handlers can make navigation and forms feel broken.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://web.dev/articles/inp">Interaction to Next Paint</a><p><strong>What is INP?; Details on how INP is calculated</strong> — Measures latency to the next paint for qualifying interactions; task completion needs separate timing.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Profile the slow interaction in the actual user flow.</li><li>Break unnecessary long work and preserve progress feedback.</li></ul>
+      <h3>Check the result</h3><ul><li>The target interaction completes correctly under representative device constraints.</li></ul>
+      <h3>Measure what happens</h3><p>Track field INP separately from full task completion latency and correctness. Missing interaction observations are unknown, not zero; a fast next paint does not prove an asynchronous task finished.</p>
+      <h3>Why try it</h3><p>Responsive interaction may improve successful use after discovery.</p>
+      <h3>Where it fits</h3><p>javascript-sites, tools</p>
+      <h3>Watch out for</h3><p>Reporting low INP from an idle page with no realistic interaction.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://web.dev/articles/inp">Interaction to Next Paint</a><p>Defines interaction-to-presentation latency, not full business-task completion time.</p><span>Google · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-web-inp">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-interaction</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-layout-stability">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-layout-stability">Reserve space for late content</a></h2>
+    <p class="practice-problem">Unexpected movement can cause misclicks and lost reading position.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p><strong>Core Web Vitals</strong> — Defines CLS; reserving space and testing misclicks are our implementation practices.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Specify dimensions for images and embeds.</li><li>Stabilize fonts, banners, and async content around the primary reading path.</li></ul>
+      <h3>Check the result</h3><ul><li>Loading the page does not displace the selected text or primary action unexpectedly.</li></ul>
+      <h3>Measure what happens</h3><p>Measure field CLS and observed layout shifts in the target flow.</p>
+      <h3>Why try it</h3><p>Stable layout may improve reading and action reliability.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Hiding all content until every asset loads.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p>Supports LCP, INP, CLS and field assessment at the 75th percentile by device. Lab results must not be presented as field measurements.</p><span>Google web.dev · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-web-vitals">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-layout-stability</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-obstruction">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-obstruction">Keep the answer reachable before promotional prompts</a></h2>
+    <p class="practice-problem">Popups can obstruct the content visitors came to read.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/page-experience">Understanding page experience</a><p><strong>Self-assess your content</strong> — Supports avoiding intrusive interstitials; entry-state and dismissal testing is our method.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Inspect first entry, returning entry, and mobile states.</li><li>Reduce intrusive overlays and provide accessible dismissal where an overlay is necessary.</li></ul>
+      <h3>Check the result</h3><ul><li>Users can read the main answer and access evidence without avoidable obstruction.</li></ul>
+      <h3>Measure what happens</h3><p>Track overlay-related abandonment and access failures in usability checks.</p>
+      <h3>Why try it</h3><p>Reducing obstruction may improve useful engagement.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>An entry popup that blocks the page until an email is submitted.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/page-experience">Understanding page experience</a><p>Supports useful page experience without treating a single score as a complete ranking or quality measure.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-experience">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a> · <a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-obstruction</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-label-name">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-label-name">Make visible control labels usable as accessible names</a></h2>
+    <p class="practice-problem">A user names a visible button but speech control cannot find it.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html">WCAG 2.2 Understanding: Label in Name</a><p><strong>SC 2.5.3: Success Criterion and Intent; accessible name calculation</strong> — For text-labelled controls the accessible name includes the visible label, supporting speech activation; the Understanding document is informative.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Keep visible label text within the computed accessible name.</li><li>Prefer native labelling; review ARIA overrides that replace visible text.</li></ul>
+      <h3>Check the result</h3><ul><li>Compare the accessibility tree and visible labels for primary controls, then activate them by name.</li></ul>
+      <h3>Measure what happens</h3><p>Measure label/name mismatches and successful name-based activation.</p>
+      <h3>Why try it</h3><p>Matching labels may improve voice and name-based control activation. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>interactive-sites</p>
+      <h3>Watch out for</h3><p>Replacing a clear visible label with a different hidden marketing phrase.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html">WCAG 2.2 Understanding: Label in Name</a><p>For text-labelled controls the accessible name includes the visible label, supporting speech activation; the Understanding document is informative.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-label-in-name">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">openai-atlas-aria-agent-accessibility</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-label-name</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-status-announcement">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-status-announcement">Expose completion and error status without moving focus</a></h2>
+    <p class="practice-problem">A task finishes visually but its result is absent from the accessible state.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html">WCAG 2.2 Understanding: Status Messages</a><p><strong>SC 4.1.3: Success Criterion and Intent; status without receiving focus</strong> — Status changes are programmatically determinable for assistive technology without requiring focus to move.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Mark status messages with the appropriate role or properties.</li><li>Announce useful progress and results without moving focus for ordinary status changes.</li></ul>
+      <h3>Check the result</h3><ul><li>Complete the task with a screen reader; confirm the status is announced and focus remains usable.</li></ul>
+      <h3>Measure what happens</h3><p>Measure meaningful status transitions announced once without focus disruption.</p>
+      <h3>Why try it</h3><p>Accessible status changes may help users recognize task completion and failure. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>interactive-sites, forms</p>
+      <h3>Watch out for</h3><p>Making every keystroke an assertive announcement or relying on a disappearing toast alone.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html">WCAG 2.2 Understanding: Status Messages</a><p>Status changes are programmatically determinable for assistive technology without requiring focus to move.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-status-messages">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">openai-atlas-aria-agent-accessibility</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-status-announcement</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-drag-alternative">
+  <div class="practice-number" aria-hidden="true">012</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-drag-alternative">Offer a single-pointer alternative to dragging</a></h2>
+    <p class="practice-problem">A reorder or selection task requires precise dragging.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html">WCAG 2.2 Understanding: Dragging Movements</a><p><strong>SC 2.5.7: Success Criterion and Intent; separate keyboard and single-pointer requirements</strong> — Author-provided dragging has an equivalent single-pointer alternative unless essential; keyboard support is a separate requirement.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Provide click or tap controls for the same result, such as move buttons.</li><li>Check keyboard operation separately from the pointer alternative.</li></ul>
+      <h3>Check the result</h3><ul><li>Complete each drag task using only clicks or taps, with no held pointer movement.</li></ul>
+      <h3>Measure what happens</h3><p>Measure drag tasks with an equivalent non-drag pointer path.</p>
+      <h3>Why try it</h3><p>A non-drag alternative may allow more users to complete the same manipulation task. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>interactive-sites, drag-controls</p>
+      <h3>Watch out for</h3><p>Calling keyboard support sufficient for the single-pointer requirement.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html">WCAG 2.2 Understanding: Dragging Movements</a><p>Author-provided dragging has an equivalent single-pointer alternative unless essential; keyboard support is a separate requirement.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-drag-alternative">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-drag-alternative</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-focus-visible-area">
+  <div class="practice-number" aria-hidden="true">013</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-focus-visible-area">Keep the focused control out from behind overlays</a></h2>
+    <p class="practice-problem">Sticky UI can hide the component reached by keyboard navigation.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html">WCAG 2.2 Understanding: Focus Not Obscured (Minimum)</a><p><strong>SC 2.4.11: Success Criterion, notes and intent; focused component not entirely hidden</strong> — Author-created content must not entirely hide the component receiving keyboard focus; this is narrower than full visibility.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Test focus positions with sticky headers, banners and consent controls open.</li><li>Adjust layout or scrolling so the focused component is not entirely obscured.</li></ul>
+      <h3>Check the result</h3><ul><li>Tab through the primary flow at narrow widths and zoom with persistent overlays present.</li></ul>
+      <h3>Measure what happens</h3><p>Count keyboard-focused components entirely hidden by author-created content.</p>
+      <h3>Why try it</h3><p>Keeping focused controls visible may reduce keyboard navigation failures. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>interactive-sites, sticky-ui</p>
+      <h3>Watch out for</h3><p>Passing a screenshot check while tabbing still places focus behind a banner.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html">WCAG 2.2 Understanding: Focus Not Obscured (Minimum)</a><p>Author-created content must not entirely hide the component receiving keyboard focus; this is narrower than full visibility.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-focus-obscured">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-focus-visible-area</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-modal-focus">
+  <div class="practice-number" aria-hidden="true">014</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-modal-focus">Complete the keyboard lifecycle of a modal dialog</a></h2>
+    <p class="practice-problem">Opening or closing a modal strands focus or exposes inactive background controls.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">ARIA Authoring Practices: Modal Dialog Pattern</a><p><strong>Keyboard Interaction; initial focus and focus restoration notes; WAI-ARIA properties</strong> — Describes initial focus, contained Tab sequence, Escape dismissal and logical focus restoration for modal dialogs.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Move focus into the modal and contain its tab sequence.</li><li>Provide Escape and visible dismissal, then restore focus to a logical target.</li></ul>
+      <h3>Check the result</h3><ul><li>Open, traverse and dismiss the modal entirely by keyboard; inspect the focus target after each step.</li></ul>
+      <h3>Measure what happens</h3><p>Measure modal flows that preserve logical focus and a working exit.</p>
+      <h3>Why try it</h3><p>A complete modal focus lifecycle may reduce stranded or misplaced keyboard focus. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>interactive-sites, modal-dialogs</p>
+      <h3>Watch out for</h3><p>Adding aria-modal without implementing actual modal behavior.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">ARIA Authoring Practices: Modal Dialog Pattern</a><p>Describes initial focus, contained Tab sequence, Escape dismissal and logical focus restoration for modal dialogs.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-modal-dialog">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">openai-atlas-aria-agent-accessibility</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-modal-focus</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-reuse-entry">
+  <div class="practice-number" aria-hidden="true">015</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-reuse-entry">Reuse information already entered in the same process</a></h2>
+    <p class="practice-problem">A multi-step task asks users to remember and retype data it already holds.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html">WCAG 2.2 Understanding: Redundant Entry</a><p><strong>SC 3.3.7: Success Criterion and its essential/security/validity exceptions</strong> — Repeated information in the same process is populated or selectable, with essential, security and validity exceptions.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Populate repeated values or make earlier information selectable.</li><li>Retain required re-entry only for essential, security or invalidated-data cases.</li></ul>
+      <h3>Check the result</h3><ul><li>Complete a multi-step form and list every repeated entry with its reuse path or documented exception.</li></ul>
+      <h3>Measure what happens</h3><p>Count avoidable repeated entries per completed process.</p>
+      <h3>Why try it</h3><p>Reusing valid entered information may reduce avoidable multi-step form effort. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>forms, multi-step-flows</p>
+      <h3>Watch out for</h3><p>Copying stale values into a new process or claiming the rule requires permanent storage.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/redundant-entry.html">WCAG 2.2 Understanding: Redundant Entry</a><p>Repeated information in the same process is populated or selectable, with essential, security and validity exceptions.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-redundant-entry">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-reuse-entry</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-auth-assistance">
+  <div class="practice-number" aria-hidden="true">016</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-auth-assistance">Allow credential assistance in sign-in flows</a></h2>
+    <p class="practice-problem">Blocking paste or password managers makes sign-in depend on recall and transcription.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html">WCAG 2.2 Understanding: Accessible Authentication (Minimum)</a><p><strong>SC 3.3.8: Copy and paste; password-manager examples</strong> — Credential paste and password-manager assistance can avoid memory or transcription burdens; these alone do not establish full authentication conformance.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Allow credential paste and compatible password-manager completion.</li><li>Evaluate the full authentication flow against the relevant criterion and exceptions.</li></ul>
+      <h3>Check the result</h3><ul><li>Test paste, autofill and the next authentication step with the actual supported browser.</li></ul>
+      <h3>Measure what happens</h3><p>Measure supported authentication paths without unnecessary recall or transcription.</p>
+      <h3>Why try it</h3><p>Credential assistance may reduce sign-in barriers caused by recall and transcription. Any Search or AI recommendation effect remains unmeasured.</p>
+      <h3>Where it fits</h3><p>authentication, forms</p>
+      <h3>Watch out for</h3><p>Calling one working password field proof that every authentication step is accessible.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html">WCAG 2.2 Understanding: Accessible Authentication (Minimum)</a><p>Credential paste and password-manager assistance can avoid memory or transcription burdens; these alone do not establish full authentication conformance.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-accessible-auth">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-auth-assistance</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-experience-agent-state-continuity">
+  <div class="practice-number" aria-hidden="true">017</div>
+  <div class="practice-body">
+    <p class="practice-category">Readable and usable page experience</p>
+    <h2><a href="#arwp-experience-agent-state-continuity">Make a multistep task resumable after an agent observes the page</a></h2>
+    <p class="practice-problem">An agent can select the correct control but lose track of the task after a render.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://web.dev/articles/ai-agent-site-ux">Build agent-friendly websites</a><p><strong>How agents view your site; Screenshots, HTML and accessibility tree</strong> — The source describes different agent representations. Interruption testing is an inferred usability check, not Search optimization.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Give each step a visible name, persistent entered values where appropriate and a clear completion or failure state.</li><li>Test the same bounded task through screenshots, HTML and the accessibility tree as supported by the actual agent.</li><li>Keep consequential submission behind the actual authorized user flow.</li></ul>
+      <h3>Check the result</h3><ul><li>Interrupt a test between steps and verify the state remains understandable; record failures by representation.</li></ul>
+      <h3>Measure what happens</h3><p>Measure authorized task completion and state-recovery failures</p>
+      <h3>Why try it</h3><p>Persistent visible task state may improve an authorized browser agent journey. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>interactive-sites, services</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://web.dev/articles/ai-agent-site-ux">Build agent-friendly websites</a><p>Browser-agent interaction guidance for screenshots, HTML and accessibility trees. Runtime completion is distinct from search ranking.</p><span>web.dev · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-webdev-agent-ux">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-experience-agent-state-continuity</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

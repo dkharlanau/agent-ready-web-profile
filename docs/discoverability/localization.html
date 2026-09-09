@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Language and regional relevance</title><meta name="description" content="11 source-backed discoverability patterns for Language and regional relevance with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html","name":"Goose ARWP — Language and regional relevance","description":"11 reviewed discoverability patterns for language and regional relevance, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":11,"itemListElement":[{"@type":"ListItem","position":1,"name":"Publish distinct URLs for real language versions","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-language-urls"},{"@type":"ListItem","position":2,"name":"Make alternate language annotations reciprocal","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-hreflang"},{"@type":"ListItem","position":3,"name":"Let readers choose a language explicitly","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-locale-choice"},{"@type":"ListItem","position":4,"name":"Adapt facts as well as words","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-local-facts"},{"@type":"ListItem","position":5,"name":"Review meaning-critical translated passages","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-translation-review"},{"@type":"ListItem","position":6,"name":"Separate translations from region-specific answers","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-equivalence"},{"@type":"ListItem","position":7,"name":"Keep translated terminology consistent","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-term-alignment"},{"@type":"ListItem","position":8,"name":"Collect local query evidence before expanding","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-regional-evidence"},{"@type":"ListItem","position":9,"name":"Track translation freshness independently","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-locale-drift"},{"@type":"ListItem","position":10,"name":"Localize the answer rather than only the interface","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-content-language"},{"@type":"ListItem","position":11,"name":"Give purchasable currency offers distinct URLs","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html#arwp-localization-currency-route"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / LOCALIZATION</p><h1>Language and regional relevance</h1><p>11 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>11 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>11 patterns</p><a href="../discoverability.html?category=localization">Back to filtered index</a></div><article class="practice practice-full" id="arwp-localization-language-urls">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-language-urls">Publish distinct URLs for real language versions</a></h2>
+    <p class="practice-problem">One cookie-dependent URL can hide alternate language content.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p><strong>Use different URLs for different language versions; Make sure the page language is obvious</strong> — Google recommends separate language URLs over cookie/browser-dependent substitution. Main content should match the language, rather than only translated boilerplate.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Give each complete supported translation a stable URL.</li><li>Provide visible language navigation while retaining the selected locale.</li></ul>
+      <h3>Check the result</h3><ul><li>Each language URL serves the intended language without requiring a prior cookie.</li></ul>
+      <h3>Measure what happens</h3><p>Track complete translated pages and locale-specific task completion.</p>
+      <h3>Why try it</h3><p>Stable language versions support access and discoverability.</p>
+      <h3>Where it fits</h3><p>multilingual-sites</p>
+      <h3>Watch out for</h3><p>Publishing navigation-only translations around an untranslated main article.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p>Supports distinct language URLs and explicit navigation. Translation alone is not evidence of local service availability.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-international">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-localized-hreflang</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-language-urls</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-hreflang">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-hreflang">Make alternate language annotations reciprocal</a></h2>
+    <p class="practice-problem">Incomplete clusters can send inconsistent language signals.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/specialty/international/localized-versions">Localized versions of pages</a><p><strong>Guidelines for all methods; Supported language and region codes</strong> — Language variants should identify themselves and reciprocal fully qualified alternatives. Nonreciprocal pairs may be ignored; valid language/optional region codes must be used.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Generate hreflang from the actual equivalent-page map.</li><li>Include self references and reciprocal fully qualified alternate URLs where applicable.</li></ul>
+      <h3>Check the result</h3><ul><li>Every cluster passes reciprocal URL and language-code checks.</li></ul>
+      <h3>Measure what happens</h3><p>Count broken or nonreciprocal hreflang clusters.</p>
+      <h3>Why try it</h3><p>Consistent annotations may help surface the intended version.</p>
+      <h3>Where it fits</h3><p>multilingual-sites</p>
+      <h3>Watch out for</h3><p>Linking unrelated pages as language equivalents.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/specialty/international/localized-versions">Localized versions of pages</a><p>Supports reciprocal language alternate annotations and valid regional codes where variants exist.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-hreflang">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-localized-hreflang</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-hreflang</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-locale-choice">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-locale-choice">Let readers choose a language explicitly</a></h2>
+    <p class="practice-problem">Automatic locale redirects can trap readers or crawlers.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p><strong>Let the user switch the page language</strong> — Google discourages inferred-language redirects that block other variants and suggests links letting visitors choose a language version.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Offer a visible language selector using ordinary links.</li><li>Treat detection as a suggestion and preserve direct access to chosen URLs.</li></ul>
+      <h3>Check the result</h3><ul><li>A reader can open any supported locale without forced redirection.</li></ul>
+      <h3>Measure what happens</h3><p>Measure forced-locale failures and language-switch completion.</p>
+      <h3>Why try it</h3><p>Explicit access may reduce wrong-language landings.</p>
+      <h3>Where it fits</h3><p>multilingual-sites</p>
+      <h3>Watch out for</h3><p>Redirecting every visitor based only on IP or browser language.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p>Supports distinct language URLs and explicit navigation. Translation alone is not evidence of local service availability.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-international">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-localized-hreflang</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-locale-choice</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-local-facts">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-local-facts">Adapt facts as well as words</a></h2>
+    <p class="practice-problem">A literal translation may describe unavailable services or wrong conventions.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p><strong>Target audience signals and local language/currency</strong> — Supports locale relevance; the full facts checklist is a project interpretation.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Review currency, units, date formats, examples, availability, and terminology for each market.</li><li>Mark facts that genuinely differ by region.</li></ul>
+      <h3>Check the result</h3><ul><li>A knowledgeable reviewer confirms the page fits the stated locale and offer.</li></ul>
+      <h3>Measure what happens</h3><p>Track locale-specific factual defects and qualified inquiries.</p>
+      <h3>Why try it</h3><p>Accurate localization may improve relevant matches and comprehension.</p>
+      <h3>Where it fits</h3><p>multilingual-sites, services</p>
+      <h3>Watch out for</h3><p>Pretending a translated page proves local operations.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p>Supports distinct language URLs and explicit navigation. Translation alone is not evidence of local service availability.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-international">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-local-facts</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-translation-review">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-translation-review">Review meaning-critical translated passages</a></h2>
+    <p class="practice-problem">Automatic translation can reverse important qualifications.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p><strong>Factual accuracy and satisfying task completion</strong> — Supports reliability; bilingual review and defect measurement are our procedure.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Identify instructions, prices, limitations, and technical terms that change decisions.</li><li>Have competent reviewers compare meaning against the source version.</li></ul>
+      <h3>Check the result</h3><ul><li>Reviewed passages preserve the original claim and its conditions.</li></ul>
+      <h3>Measure what happens</h3><p>Measure critical translation defects per reviewed page.</p>
+      <h3>Why try it</h3><p>Meaning checks may reduce misleading localized answers.</p>
+      <h3>Where it fits</h3><p>multilingual-sites, education</p>
+      <h3>Watch out for</h3><p>Publishing bulk translations without checking central claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p>Supports original value and transparent authorship and production methods. ARWP editorial workflows are implementation proposals, not a disclosed ranking formula.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-helpful">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-non-commodity-content</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-translation-review</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-equivalence">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-equivalence">Separate translations from region-specific answers</a></h2>
+    <p class="practice-problem">A regional guide may contain different facts from the original.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/specialty/international/localized-versions">Localized versions of pages</a><p><strong>Guidelines for language and regional variants</strong> — Alternate annotations connect equivalent variants, not arbitrary locale homepages.</p></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p><strong>Canonical and hreflang best practices</strong> — Canonical selection must respect content relationships; default English consolidation is inappropriate.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Record whether each alternate is a translation or a distinct regional answer.</li><li>Use canonical and alternate relationships according to the actual content relationship.</li></ul>
+      <h3>Check the result</h3><ul><li>Distinct useful regional pages are not incorrectly consolidated as duplicates.</li></ul>
+      <h3>Measure what happens</h3><p>Track language-page canonical conflicts and intended indexed variants.</p>
+      <h3>Why try it</h3><p>Correct relationships may preserve useful regional information.</p>
+      <h3>Where it fits</h3><p>multilingual-sites</p>
+      <h3>Watch out for</h3><p>Canonicalizing every language to English by default.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/specialty/international/localized-versions">Localized versions of pages</a><p>Supports reciprocal language alternate annotations and valid regional codes where variants exist.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-hreflang">Source record</a></li><li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">Specify a canonical URL</a><p>Canonical signals consolidate duplicates; the publisher preference is not proof of the search engine-selected canonical.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-canonical">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-localized-hreflang</a> · <a href="../recommendations/registry.json">google-canonical-consistency</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-equivalence</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-term-alignment">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-term-alignment">Keep translated terminology consistent</a></h2>
+    <p class="practice-problem">A concept can acquire several incompatible translated names.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://schema.org/DefinedTerm">Schema.org DefinedTerm</a><p><strong>DefinedTerm: name, termCode and inDefinedTermSet</strong> — Vocabulary identifies terms; bilingual consistency and review are our editorial practice, not a ranking mechanism.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Maintain a reviewed bilingual term map for the domain.</li><li>Apply it to headings, glossaries, metadata, and learning examples.</li></ul>
+      <h3>Check the result</h3><ul><li>A sample of meaning-critical terms uses the agreed term or an explained alternative.</li></ul>
+      <h3>Measure what happens</h3><p>Count unexplained term inconsistencies and reader terminology questions.</p>
+      <h3>Why try it</h3><p>Consistent terminology may improve retrieval and learning continuity.</p>
+      <h3>Where it fits</h3><p>multilingual-sites, education</p>
+      <h3>Watch out for</h3><p>Replacing idiomatic language with unnatural exact keyword matches.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://schema.org/DefinedTerm">Schema.org DefinedTerm</a><p>Vocabulary for a defined concept and its term set; not a special AI search feature.</p><span>Schema.org · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-schema-term">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-term-alignment</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-regional-evidence">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-regional-evidence">Collect local query evidence before expanding</a></h2>
+    <p class="practice-problem">A global keyword list can justify pages no local audience needs.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/webmaster-tools/v1/searchanalytics/query">Search Analytics query API</a><p><strong>dimensions, filters and data limitations</strong> — Supports country/page/query observations, not a language dimension or complete enumeration of demand.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Segment available Search Console evidence by country, page and query; map page language through a reviewed locale-URL inventory, not an API language dimension.</li><li>Treat page language as page metadata, not proof of visitor language. Review inquiries separately and preserve missing or anonymized search evidence as unknown.</li><li>Select one unmet task and validate its actual local requirements.</li></ul>
+      <h3>Check the result</h3><ul><li>The proposal has reviewed need evidence and scope; country is not treated as language, and limited API rows are not treated as a full demand census.</li></ul>
+      <h3>Measure what happens</h3><p>Measure qualified regional demand against content maintenance cost.</p>
+      <h3>Why try it</h3><p>Evidence-led expansion may improve relevance per page created.</p>
+      <h3>Where it fits</h3><p>multilingual-sites, services</p>
+      <h3>Watch out for</h3><p>Generating all city-language combinations from a spreadsheet.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/webmaster-tools/v1/searchanalytics/query">Search Analytics query API</a><p>Supports dimensions, filters, and API queries. Returned rows are not guaranteed to cover every query; privacy and service limits affect completeness.</p><span>Google Search Console · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-gsc-api">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">platform-ai-measurement</a></p><p><a href="../recommendations/registry.json">google-generative-ai-measurement</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-regional-evidence</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-locale-drift">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-locale-drift">Track translation freshness independently</a></h2>
+    <p class="practice-problem">A current source page can leave translated instructions obsolete.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p><strong>Avoid changing dates without substantive changes</strong> — Supports honest freshness; source-revision tracking is our workflow, not a Stripe requirement.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Link translations to the source revision they reflect.</li><li>Flag material source changes and display truthful review dates until updated.</li></ul>
+      <h3>Check the result</h3><ul><li>A changed instruction produces a locale review task rather than a false fresh date.</li></ul>
+      <h3>Measure what happens</h3><p>Measure time from material source change to verified translation update.</p>
+      <h3>Why try it</h3><p>Explicit drift tracking may prevent stale localized recommendations.</p>
+      <h3>Where it fits</h3><p>multilingual-sites, documentation</p>
+      <h3>Watch out for</h3><p>Updating all locale dates without reviewing their content.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">Creating helpful, reliable, people-first content</a><p>Supports original value and transparent authorship and production methods. ARWP editorial workflows are implementation proposals, not a disclosed ranking formula.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-helpful">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">freshness-without-fake-recency</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-locale-drift</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-content-language">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-content-language">Localize the answer rather than only the interface</a></h2>
+    <p class="practice-problem">A translated navigation shell surrounds unchanged foreign-language content.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p><strong>Make sure the page language is obvious</strong> — Google uses visible content to determine language; lang remains useful for accessibility but is not its language detector.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Review the main explanation, task instructions and navigation as one language experience; keep code and actual names accurate.</li></ul>
+      <h3>Check the result</h3><ul><li>Have a competent reader complete the task in the target language.</li></ul>
+      <h3>Measure what happens</h3><p>Track factual/technical correctness, relevant search observations and useful actions separately.</p>
+      <h3>Why try it</h3><p>Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>localized-sites, software, service-sites</p>
+      <h3>Watch out for</h3><p>Declaring a locale through lang while leaving the useful answer untranslated.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites">Managing multilingual and multi-regional sites</a><p>Supports distinct language URLs and explicit navigation. Translation alone is not evidence of local service availability.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-international">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-content-language</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-localization-currency-route">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Language and regional relevance</p>
+    <h2><a href="#arwp-localization-currency-route">Give purchasable currency offers distinct URLs</a></h2>
+    <p class="practice-problem">The same product URL changes its offer currency only through a cookie.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet">Product snippets: editorial pros and cons</a><p><strong>Product technical guidelines: multiple currencies</strong> — Scoped to Google product guidance, not an obligation to duplicate every informational page by currency.</p></li></ul>
+      <h3>Make the change</h3><ul><li>For products sold in multiple currencies, expose separate offer URLs and keep each visible price and graph aligned. Do not create fake regional offers.</li></ul>
+      <h3>Check the result</h3><ul><li>Fetch each offer URL without cookies and compare displayed and structured currencies.</li></ul>
+      <h3>Measure what happens</h3><p>Track factual/technical correctness, relevant search observations and useful actions separately.</p>
+      <h3>Why try it</h3><p>Accurate naming and offer facts may improve user understanding and machine interpretation. Ranking and acquisition effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>localized-sites, software, service-sites</p>
+      <h3>Watch out for</h3><p>Making locale copies for regions where the product cannot actually be purchased.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet">Product snippets: editorial pros and cons</a><p>Pros-and-cons appearance is eligible only for editorial product reviews; requires at least two visible statements, not merchant or customer reviews.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-product-pros-cons">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-localization-currency-route</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>

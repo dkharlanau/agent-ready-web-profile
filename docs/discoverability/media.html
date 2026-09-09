@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Images, video, and multimodal evidence</title><meta name="description" content="12 source-backed discoverability patterns for Images, video, and multimodal evidence with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html","name":"Goose ARWP — Images, video, and multimodal evidence","description":"12 reviewed discoverability patterns for images, video, and multimodal evidence, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-09-08","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":12,"itemListElement":[{"@type":"ListItem","position":1,"name":"Use visuals that explain original work","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-original-visual"},{"@type":"ListItem","position":2,"name":"Write alternative text for the image purpose","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-alt"},{"@type":"ListItem","position":3,"name":"Make important images crawlable and stable","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-image-delivery"},{"@type":"ListItem","position":4,"name":"Preserve detail without oversized downloads","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-responsive-images"},{"@type":"ListItem","position":5,"name":"Create a watch page when viewing is the main task","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-watch-page"},{"@type":"ListItem","position":6,"name":"Publish an accurate transcript with the recording","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-transcript"},{"@type":"ListItem","position":7,"name":"Keep text and media claims consistent","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-media-consistency"},{"@type":"ListItem","position":8,"name":"Explain chart encodings and evidence in captions","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-captions"},{"@type":"ListItem","position":9,"name":"Keep media attribution and reuse information attached","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-media-rights"},{"@type":"ListItem","position":10,"name":"Check the narrow feature scope before adding speakable","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-speakable-eligibility"},{"@type":"ListItem","position":11,"name":"Choose a representative preview for each substantive page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-preview-selection"},{"@type":"ListItem","position":12,"name":"Attach reuse terms to the exact image object","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html#arwp-media-license-object"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / MEDIA</p><h1>Images, video, and multimodal evidence</h1><p>12 patterns. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Corpus 1.12.0</span><span>12 patterns</span><span>Reviewed 8 Sept 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Original editorial formats</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Observed search and business outcomes</a><a href="./experiments.html">Bounded improvement experiments</a><a href="./governance.html">Publishing quality and sustained operations</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>12 patterns</p><a href="../discoverability.html?category=media">Back to filtered index</a></div><article class="practice practice-full" id="arwp-media-original-visual">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-original-visual">Use visuals that explain original work</a></h2>
+    <p class="practice-problem">Decorative stock imagery adds no evidence to a technical or service claim.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p><strong>Optimize the image landing pages; Add high-quality photos</strong> — Supports contextual useful images; original process evidence is our editorial proposal.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Capture a real process, output, or annotated diagram relevant to the page.</li><li>Explain the figure and its limitations in nearby text.</li></ul>
+      <h3>Check the result</h3><ul><li>A reviewer can identify the specific claim the visual supports.</li></ul>
+      <h3>Measure what happens</h3><p>Track figure usefulness and relevant image-search landing visits.</p>
+      <h3>Why try it</h3><p>Useful original visuals may support understanding and image discovery.</p>
+      <h3>Where it fits</h3><p>content-sites, services, software</p>
+      <h3>Watch out for</h3><p>Using generated scenes as undisclosed photographs of real clients or results.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p>Supports descriptive context, accessible images, stable delivery, and applicable image metadata; no visibility guarantee.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-images">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">google-image-context-alt</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-original-visual</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-alt">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-alt">Write alternative text for the image purpose</a></h2>
+    <p class="practice-problem">An image can be invisible to nonvisual readers.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/tutorials/images/">Accessible images</a><p><strong>Images Tutorial &gt; Informative, Decorative, Functional and Complex images</strong> — WAI ties alternatives to image purpose: information gets an equivalent, actions get functional labels, decoration uses empty alt, and complex content needs a fuller textual equivalent.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Determine whether each image is informative, functional, complex, or decorative.</li><li>Provide purpose-appropriate alternative text or an adjacent long description.</li></ul>
+      <h3>Check the result</h3><ul><li>A screen-reader review preserves the information or action the image supplies.</li></ul>
+      <h3>Measure what happens</h3><p>Count informative images missing meaningful alternatives.</p>
+      <h3>Why try it</h3><p>Accessible image alternatives improve the usable content surface.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Stuffing keywords into every alt attribute.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/tutorials/images/">Accessible images</a><p>Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-images">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-image-context-alt</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-alt</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-image-delivery">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-image-delivery">Make important images crawlable and stable</a></h2>
+    <p class="practice-problem">Expiring URLs or blocked media can undermine image discovery.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p><strong>Use HTML image elements; Responsive images; Use descriptive filenames, titles, and alt text</strong> — Google discovers img src URLs, does not index CSS backgrounds, values nearby relevant context and recommends reusing a consistent URL for the same image.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Use stable public image URLs with correct responses.</li><li>Check robots access, rendered image sources, and relevant surrounding text.</li></ul>
+      <h3>Check the result</h3><ul><li>Priority images resolve successfully and remain associated with the correct page.</li></ul>
+      <h3>Measure what happens</h3><p>Track broken or blocked priority images and image indexing evidence separately.</p>
+      <h3>Why try it</h3><p>Reliable image delivery supports discovery eligibility.</p>
+      <h3>Where it fits</h3><p>content-sites, catalogs</p>
+      <h3>Watch out for</h3><p>Placing the primary explanatory image only in an inaccessible CSS background.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p>Supports descriptive context, accessible images, stable delivery, and applicable image metadata; no visibility guarantee.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-images">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-image-context-alt</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-image-delivery</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-responsive-images">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-responsive-images">Preserve detail without oversized downloads</a></h2>
+    <p class="practice-problem">Heavy images slow first content while tiny versions lose useful evidence.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p><strong>Responsive images</strong> — Supports responsive variants and a fallback src; label-legibility inspection is our procedure.</p></li><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p><strong>Core Web Vitals</strong> — Defines loading and stability metrics; image bytes alone do not establish user experience.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Create appropriately sized variants and specify dimensions.</li><li>Use responsive image markup and inspect legibility at small viewports.</li><li>Keep a real img src fallback alongside srcset or picture; inspect the selected resource and readable detail at the tested viewport and pixel density.</li></ul>
+      <h3>Check the result</h3><ul><li>The selected image fits the viewport and avoids avoidable layout movement.</li></ul>
+      <h3>Measure what happens</h3><p>Measure image bytes, LCP, and legibility failures for target templates.</p>
+      <h3>Why try it</h3><p>Efficient delivery may improve reading experience and task completion.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Compressing evidence screenshots until labels become unreadable.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p>Supports descriptive context, accessible images, stable delivery, and applicable image metadata; no visibility guarantee.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-images">Source record</a></li><li><a href="https://web.dev/articles/vitals">Web Vitals</a><p>Supports LCP, INP, CLS and field assessment at the 75th percentile by device. Lab results must not be presented as field measurements.</p><span>Google web.dev · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-web-vitals">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p><a href="../recommendations/registry.json">google-image-context-alt</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-responsive-images</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-watch-page">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-watch-page">Create a watch page when viewing is the main task</a></h2>
+    <p class="practice-problem">An incidental embed is mistaken for a dedicated video resource.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/video">Video SEO best practices</a><p><strong>Ensure your videos can be indexed; Use stable URLs; Create a dedicated watch page</strong> — A watch page centers viewing one video, with a specific title/description. Stable thumbnail/media URLs aid processing. An indexed watch page alone does not prove video indexing.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Choose videos for which watching is a real entry task.</li><li>Publish a dedicated page with a prominent player, specific title, and supporting context.</li></ul>
+      <h3>Check the result</h3><ul><li>The page primarily serves one video and exposes stable accessible media or player URLs.</li></ul>
+      <h3>Measure what happens</h3><p>Track verified video-indexed watch pages separately from indexed web pages.</p>
+      <h3>Why try it</h3><p>A suitable watch page can meet video-discovery requirements.</p>
+      <h3>Where it fits</h3><p>video-sites, education</p>
+      <h3>Watch out for</h3><p>Claiming every embedded video is eligible for video indexing.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/video">Video SEO best practices</a><p>Supports dedicated watch pages where appropriate and stable accessible media. An indexed page does not establish video indexing.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-video">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">search-foundation-first</a></p><p><a href="../recommendations/registry.json">google-video-discovery</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-watch-page</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-transcript">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-transcript">Publish an accurate transcript with the recording</a></h2>
+    <p class="practice-problem">Audio-only evidence is hard to search, quote, or access.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/media/av/transcripts/">Transcripts</a><p><strong>Introduction; Creating Transcripts</strong> — Supports speech, meaningful non-speech and applicable visual equivalents; transcript sampling is our review method.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Transcribe the published recording and review names, units, and technical terms.</li><li>Link transcript sections to the corresponding recording times where supported.</li><li>Include meaningful non-speech audio and, for a descriptive video transcript, essential visual information. Review applicable caption and audio-description needs separately; a transcript alone does not certify accessibility.</li></ul>
+      <h3>Check the result</h3><ul><li>Sampled transcript passages match the actual recording and retain important qualifications.</li></ul>
+      <h3>Measure what happens</h3><p>Measure sampled transcript error rate and transcript-assisted task completion.</p>
+      <h3>Why try it</h3><p>Text equivalents may improve accessibility and faithful retrieval.</p>
+      <h3>Where it fits</h3><p>video-sites, education</p>
+      <h3>Watch out for</h3><p>Publishing an AI-written summary as if it were a verbatim transcript.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/media/av/transcripts/">Transcripts</a><p>Distinguishes basic and descriptive transcripts and media-specific accessibility needs.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-transcripts">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-important-content-textual</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-transcript</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-media-consistency">
+  <div class="practice-number" aria-hidden="true">007</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-media-consistency">Keep text and media claims consistent</a></h2>
+    <p class="practice-problem">An updated article can contradict an older diagram or recording.</p>
+    <div class="practice-meta"><span>v1.0.1</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.1</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">AI Performance in Bing Webmaster Tools</a><p><strong>Using These Insights to Improve Content</strong> — Supports accurate current content; cross-format claim comparison is our workflow.</p></li></ul>
+      <h3>Make the change</h3><ul><li>List material claims shared across text, screenshots, and video.</li><li>During review, update or label the outdated formats and dates.</li></ul>
+      <h3>Check the result</h3><ul><li>No unqualified contradiction remains in the sampled multimodal claims.</li></ul>
+      <h3>Measure what happens</h3><p>Track contradictions found across formats and time to correction.</p>
+      <h3>Why try it</h3><p>Consistent formats may reduce ambiguous summaries.</p>
+      <h3>Where it fits</h3><p>content-sites, video-sites</p>
+      <h3>Watch out for</h3><p>Leaving old pricing or feature claims inside an unlabeled hero video.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">AI Performance in Bing Webmaster Tools</a><p>Describes citation counts, cited pages, sampled grounding queries, and supported Microsoft surfaces. These metrics do not indicate rank, placement, authority, or other providers.</p><span>Microsoft Bing · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-bing-ai">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a></p><p><a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-media-consistency</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-captions">
+  <div class="practice-number" aria-hidden="true">008</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-captions">Explain chart encodings and evidence in captions</a></h2>
+    <p class="practice-problem">A chart detached from its axes can tell the wrong story.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://www.w3.org/WAI/tutorials/images/">Accessible images</a><p><strong>Complex images</strong> — Supports conveying essential chart information; caption fields depend on the figure.</p></li><li><a href="https://www.w3.org/WAI/tutorials/tables/">Accessible tables</a><p><strong>Captions and Summaries</strong> — Supports identifiable tables; complete evidence alternatives still need manual review.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Explain the chart encodings and applicable unit, population, period and source in the caption or clearly associated description; do not invent fields irrelevant to the figure.</li><li>Provide a text or table alternative for the material values.</li></ul>
+      <h3>Check the result</h3><ul><li>The chart can be interpreted correctly without color alone or hidden hover content.</li></ul>
+      <h3>Measure what happens</h3><p>Audit figure interpretation accuracy and alternative-data availability.</p>
+      <h3>Why try it</h3><p>Complete captions may make figures more reusable and understandable.</p>
+      <h3>Where it fits</h3><p>research, datasets</p>
+      <h3>Watch out for</h3><p>A dramatic chart with truncated axes and no disclosed scale.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://www.w3.org/WAI/tutorials/images/">Accessible images</a><p>Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-images">Source record</a></li><li><a href="https://www.w3.org/WAI/tutorials/tables/">Accessible tables</a><p>Supports accessible HTML semantics and human navigation; not evidence of a search ranking effect.</p><span>W3C WAI · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-wai-tables">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">non-commodity-evidence</a> · <a href="../growth/hypotheses.json">answer-addressability</a></p><p><a href="../recommendations/registry.json">google-image-context-alt</a> · <a href="../recommendations/registry.json">bing-ai-citation-clarity</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-captions</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-media-rights">
+  <div class="practice-number" aria-hidden="true">009</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-media-rights">Keep media attribution and reuse information attached</a></h2>
+    <p class="practice-problem">A reused visual can lose its creator and usage conditions.</p>
+    <div class="practice-meta"><span>v1.1.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.1.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata">Image metadata and licensing</a><p><strong>Structured data and IPTC photo metadata</strong> — Supports creator, credit and licensing metadata; this cannot establish permission or legal clearance.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Record creator, license or permission, source, and material transformations.</li><li>Display required attribution and carry it into downloadable variants.</li></ul>
+      <h3>Check the result</h3><ul><li>Public media have reviewed provenance and any required attribution; a credit may be unnecessary under the actual terms, and metadata never proves permission.</li></ul>
+      <h3>Measure what happens</h3><p>Measure media assets with complete provenance and correctly propagated credit.</p>
+      <h3>Why try it</h3><p>Clear provenance may support legitimate reuse and durable attribution.</p>
+      <h3>Where it fits</h3><p>all</p>
+      <h3>Watch out for</h3><p>Assuming an image found online is free to republish.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata">Image metadata and licensing</a><p>Supports truthful image-specific metadata and scoped feature eligibility; metadata does not grant rights.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-image-license">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p><a href="../recommendations/registry.json">google-image-context-alt</a></p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-media-rights</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-speakable-eligibility">
+  <div class="practice-number" aria-hidden="true">010</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-speakable-eligibility">Check the narrow feature scope before adding speakable</a></h2>
+    <p class="practice-problem">Speakable is often sold as a universal instruction for AI systems to quote a page.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/speakable">Speakable structured data (beta)</a><p><strong>Country and language availability; Technical and content guidelines</strong> — The documented beta addresses a bounded English news voice experience; it is not general generative-search markup.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Verify current provider, language, country and news-content eligibility before implementation.</li><li>For an applicable voice feature, select a short meaningful passage whose spoken form works without visual context.</li><li>Keep source attribution visible and record other assistant support as unknown.</li></ul>
+      <h3>Check the result</h3><ul><li>Test selector resolution and listen to the passage; confirm feature applicability separately.</li></ul>
+      <h3>Measure what happens</h3><p>Measure comprehensible readouts in the supported voice experience</p>
+      <h3>Why try it</h3><p>Eligibility review may avoid unnecessary markup and improve a supported voice experience. Search and AI recommendation effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>eligible-news-publishers</p>
+      <h3>Watch out for</h3><p>Turning this scoped practice into a universal ranking rule or publishing unsupported claims.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/speakable">Speakable structured data (beta)</a><p>Documents a bounded news voice feature with country/language restrictions; not a general AI citation selector.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-speakable">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-speakable-eligibility</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-preview-selection">
+  <div class="practice-number" aria-hidden="true">011</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-preview-selection">Choose a representative preview for each substantive page</a></h2>
+    <p class="practice-problem">A generic logo represents unrelated articles and tools.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p><strong>Specify a preferred image with metadata</strong> — Google documents these preferred-image hints; selection remains automated.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Select a relevant image through primaryImageOfPage, the main entity image or og:image; keep its public URL stable.</li><li>Avoid generic logos, text-heavy preview images and extreme aspect ratios; keep diagrams with necessary labels in the article itself.</li></ul>
+      <h3>Check the result</h3><ul><li>Inspect resolved image bytes, relevance and available crops; observe the actual search preview separately.</li></ul>
+      <h3>Measure what happens</h3><p>Track the relevant technical state, observed search appearance and useful actions separately.</p>
+      <h3>Why try it</h3><p>This practice supports accurate discovery or reuse. Ranking, citation and revenue effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>static-sites, documentation, content-sites</p>
+      <h3>Watch out for</h3><p>Applying the same promotional tile to every page.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/google-images">Image SEO best practices</a><p>Supports descriptive context, accessible images, stable delivery, and applicable image metadata; no visibility guarantee.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-images">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">discover-visual-preview</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-preview-selection</code></details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-media-license-object">
+  <div class="practice-number" aria-hidden="true">012</div>
+  <div class="practice-body">
+    <p class="practice-category">Images, video, and multimodal evidence</p>
+    <h2><a href="#arwp-media-license-object">Attach reuse terms to the exact image object</a></h2>
+    <p class="practice-problem">A repository license does not tell readers which image it covers.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level documented">documented</span><span>Pattern reviewed 8 Sept 2026</span></div>
+    <div class="practice-details">
+      <div class="pattern-passport"><p class="eyebrow">PATTERN PASSPORT</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>8 Sept 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata">Image metadata and licensing</a><p><strong>Structured data definitions: contentUrl, license and acquireLicensePage</strong> — Documents image metadata and Licensable eligibility; a badge is not guaranteed and metadata cannot establish ownership.</p></li></ul>
+      <h3>Make the change</h3><ul><li>Identify the actual image with contentUrl and truthful creator, credit, copyright or license metadata as applicable.</li><li>Provide a real license URL when seeking Licensable eligibility; use acquireLicensePage only for an actual licensing-information page.</li></ul>
+      <h3>Check the result</h3><ul><li>Compare visible credits, rights records, image URL and metadata; validate current feature requirements.</li></ul>
+      <h3>Measure what happens</h3><p>Track the relevant technical state, observed search appearance and useful actions separately.</p>
+      <h3>Why try it</h3><p>This practice supports accurate discovery or reuse. Ranking, citation and revenue effects remain unmeasured.</p>
+      <h3>Where it fits</h3><p>static-sites, documentation, content-sites</p>
+      <h3>Watch out for</h3><p>Inventing rights or requiring manipulative ranking-credit backlinks for reuse.</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata">Image metadata and licensing</a><p>Supports truthful image-specific metadata and scoped feature eligibility; metadata does not grant rights.</p><span>Google Search Central · source checked 8 Sept 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-google-image-license">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">identity-and-provenance</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-media-license-object</code></details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>
