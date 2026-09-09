@@ -13,8 +13,10 @@ on:
       - 'lib/discoverability.mjs'
       - 'scripts/build-discoverability.mjs'
       - 'scripts/sync-discoverability-routes.mjs'
+      - 'scripts/sync-discoverability-references.mjs'
       - 'scripts/discoverability-test.mjs'
       - 'scripts/discoverability-routing-test.mjs'
+      - 'scripts/discoverability-current-surface-test.mjs'
       - '.github/workflows/discoverability-build.yml'
   workflow_dispatch:
 
@@ -41,10 +43,14 @@ jobs:
         run: npm run build:discoverability
       - name: Synchronize discovery routes
         run: node scripts/sync-discoverability-routes.mjs
+      - name: Synchronize current product references
+        run: node scripts/sync-discoverability-references.mjs
       - name: Validate corpus and published index contract
         run: node scripts/discoverability-test.mjs --site
       - name: Validate bounded evidence hubs and sitemap wiring
         run: node scripts/discoverability-routing-test.mjs
+      - name: Validate current public surfaces against canonical corpus
+        run: node scripts/discoverability-current-surface-test.mjs
       - name: Show generated footprint
         shell: bash
         run: |
@@ -52,6 +58,7 @@ jobs:
           find docs/discoverability -maxdepth 1 -type f -name '*.html' -printf '%s %p\n' | sort -nr | head -20
           wc -c docs/discoverability/index.json
           grep -c '/discoverability/.*\.html' docs/sitemap.xml
+          grep -n 'Discoverability Library' docs/llms.txt | tail -1
       - name: Commit generated surfaces when changed
         shell: bash
         run: |
@@ -60,6 +67,9 @@ jobs:
             docs/discoverability/ \
             docs/sitemap.xml \
             docs/sitemap.md \
+            docs/llms.txt \
+            docs/growth/index.html \
+            docs/recommendations/index.html \
             docs/knowledge/discoverability-corpus.json \
             docs/knowledge/source-link-checks.json \
             docs/knowledge/releases/ \
@@ -72,5 +82,7 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Sync discoverability evidence routes'
+          git commit -m 'Sync current discoverability surfaces'
+          git fetch origin main
+          git rebase origin/main
           git push origin HEAD:main
