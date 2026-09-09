@@ -1,0 +1,131 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-09",
+  "title": "Goose Technical Search Integrity Rules",
+  "purpose": "Catch high-confidence technical conditions that can block or weaken Search and AI discovery before longitudinal outcome evidence is mature. This is a non-composite diagnostic rule pack, not a ranking or AI-readiness score.",
+  "methodology": {
+    "primarySourcesPreferred": true,
+    "noRankingPromise": true,
+    "noCompositeScore": true,
+    "boundedPublicObservation": true,
+    "providerSpecificSemantics": true,
+    "watchIsNotFailure": true
+  },
+  "rules": [
+    {
+      "id": "google-robots-fetch-state",
+      "priority": "P0",
+      "authority": "google-platform-guidance",
+      "detector": "google-robots-fetch-state",
+      "claim": "Google treats robots.txt 4xx responses other than 429 as if no robots.txt exists, while 429/5xx/network failures can temporarily suppress or reduce crawling.",
+      "source": "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
+      "action": "Fix robots.txt 429/5xx/network availability problems; do not misclassify an ordinary 404 as a Google crawl block.",
+      "doesNotProve": "A crawlable site will be indexed or ranked."
+    },
+    {
+      "id": "search-indexability",
+      "priority": "P0",
+      "authority": "google-platform-guidance",
+      "detector": "search-indexability",
+      "claim": "Priority Search pages need a successful response and must not expose noindex when they are intended to be discoverable.",
+      "source": "https://developers.google.com/search/docs/essentials/technical",
+      "action": "Fix failed responses and unintended noindex directives on priority pages.",
+      "doesNotProve": "Indexing or ranking."
+    },
+    {
+      "id": "google-ai-snippet-eligibility",
+      "priority": "P0",
+      "authority": "google-platform-guidance",
+      "detector": "google-ai-snippet-eligibility",
+      "claim": "A supporting page for Google AI Overviews or AI Mode must be indexed and eligible to appear with a snippet; nosnippet and max-snippet:0 restrict that eligibility.",
+      "source": "https://developers.google.com/search/docs/appearance/ai-features",
+      "additionalSources": ["https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"],
+      "action": "Remove snippet-blocking directives only when Search/AI snippet visibility is actually desired.",
+      "doesNotProve": "Inclusion in AI Overviews or AI Mode."
+    },
+    {
+      "id": "canonical-final-consistency",
+      "priority": "P0",
+      "authority": "google-platform-guidance",
+      "detector": "canonical-final-consistency",
+      "claim": "Canonical annotations should be technically unambiguous and should not contradict the final URL identity of priority pages without an intentional consolidation reason.",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "action": "Remove duplicate canonical declarations and review priority URLs that canonicalize away from their final URL.",
+      "doesNotProve": "That Google will select the declared canonical."
+    },
+    {
+      "id": "canonical-collision",
+      "priority": "P0",
+      "authority": "derived-technical-integrity",
+      "detector": "canonical-collision",
+      "claim": "Multiple materially distinct sampled priority URLs collapsing to the same canonical can indicate duplicate routing, generated variants, or accidental loss of page identity.",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+      "action": "Review duplicate canonical clusters and keep only intentional consolidation.",
+      "doesNotProve": "Duplicate content or a ranking penalty."
+    },
+    {
+      "id": "crawlable-internal-link-markup",
+      "priority": "P1",
+      "authority": "google-platform-guidance",
+      "detector": "crawlable-internal-link-markup",
+      "claim": "Important discovery paths should use crawlable anchor elements with real href URLs rather than JavaScript-only or href-less pseudo-links.",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+      "action": "Replace JavaScript-only or href-less navigation links on important routes with real crawlable anchors where appropriate.",
+      "doesNotProve": "That every linked URL will be crawled or indexed."
+    },
+    {
+      "id": "critical-content-textual",
+      "priority": "P1",
+      "authority": "google-and-bing-platform-guidance",
+      "detector": "critical-content-textual",
+      "claim": "Important content should be available in textual form and reliably renderable; extremely thin raw HTML with a script-heavy shell is a technical risk that needs rendered-page review.",
+      "source": "https://developers.google.com/search/docs/appearance/ai-features",
+      "additionalSources": [
+        "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics",
+        "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a"
+      ],
+      "action": "Ensure critical answer/content exists in reliable rendered text and verify JavaScript-dependent pages with provider/browser tools.",
+      "doesNotProve": "That raw-HTML text quantity is a ranking factor."
+    },
+    {
+      "id": "hreflang-cluster-integrity",
+      "priority": "P1",
+      "authority": "google-platform-guidance",
+      "detector": "hreflang-cluster-integrity",
+      "claim": "When hreflang is used, language variants should form consistent self-referential and reciprocal clusters.",
+      "source": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "action": "Fix missing self references, malformed alternate URLs, and broken reciprocity inside sampled localization clusters.",
+      "doesNotProve": "That Google will serve a particular locale URL for every query."
+    },
+    {
+      "id": "bing-grounding-preview-controls",
+      "priority": "P1",
+      "authority": "bing-platform-guidance",
+      "detector": "bing-grounding-preview-controls",
+      "claim": "Bing documents that NOSNIPPET/DATA-NOSNIPPET may limit Copilot citation quality, while NOARCHIVE and NOCACHE can restrict use in Copilot or grounding experiences.",
+      "source": "https://www.bing.com/webmasters/help/robots-meta-tags-and-attributes-that-bing-supports-5198d240",
+      "action": "Review Bing preview/grounding controls on pages intended for Microsoft AI citation and grounding.",
+      "doesNotProve": "Citation or answer inclusion in Microsoft AI experiences."
+    },
+    {
+      "id": "near-duplicate-priority-pages",
+      "priority": "P1",
+      "authority": "derived-technical-integrity",
+      "detector": "near-duplicate-priority-pages",
+      "claim": "Near-identical priority pages can signal route duplication or scaled template expansion that should be reviewed before further indexable growth.",
+      "source": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "action": "Consolidate or materially differentiate near-duplicate priority pages when they do not serve distinct user jobs.",
+      "doesNotProve": "Spam, a penalty, or lack of user value."
+    },
+    {
+      "id": "openai-search-crawl-policy",
+      "priority": "P1",
+      "authority": "openai-platform-guidance",
+      "detector": "openai-search-crawl-policy",
+      "claim": "OpenAI says OAI-SearchBot access is relevant to inclusion in ChatGPT summaries/snippets and is separate from GPTBot training controls.",
+      "source": "https://help.openai.com/en/articles/12627856",
+      "action": "Keep OAI-SearchBot and GPTBot policies separate and avoid accidentally blocking OAI-SearchBot when ChatGPT Search discovery is desired.",
+      "doesNotProve": "ChatGPT citation, ranking, or referral traffic."
+    }
+  ]
+}
