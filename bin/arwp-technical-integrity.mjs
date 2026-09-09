@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import { technicalIntegrity, formatTechnicalIntegrityReport } from '../lib/technical-integrity.mjs';
+import { auditInternalLinkTargetHealth, mergeInternalLinkHealth } from '../lib/internal-link-target-health.mjs';
 
 function printHelp() {
-  console.log(`Usage:\n  arwp technical-integrity <https://site.example/> [options]\n  arwp-technical-integrity <https://site.example/> [options]\n\nOptions:\n  --json                 Emit machine-readable JSON\n  --max-pages=N          Bounded priority cohort, 1-50 (default 20)\n  --concurrency=N        Parallel public fetches, 1-10 (default 4)\n  --timeout=N            Per-request timeout in ms (default 8000)\n\nThe command runs a bounded public technical Search/AI integrity audit. It does not produce a readiness score and does not claim indexing, ranking or citation outcomes.`);
+  console.log(`Usage:\n  arwp technical-integrity <https://site.example/> [options]\n  arwp-technical-integrity <https://site.example/> [options]\n\nOptions:\n  --json                 Emit machine-readable JSON\n  --max-pages=N          Bounded priority cohort, 1-50 (default 20)\n  --max-link-targets=N   Same-origin internal-link targets to probe, 0-50 (default 24)\n  --concurrency=N        Parallel public fetches/probes, 1-10 (default 4)\n  --timeout=N            Per-request timeout in ms (default 8000)\n\nThe command runs a bounded public technical Search/AI integrity audit. It does not produce a readiness score and does not claim indexing, ranking or citation outcomes.`);
 }
 
 const raw = process.argv.slice(2);
@@ -40,11 +41,27 @@ if (!source) {
 }
 
 try {
-  const report = await technicalIntegrity(source, {
-    maxPages: intOption('max-pages', 20, 1, 50),
-    concurrency: intOption('concurrency', 4, 1, 10),
-    timeoutMs: intOption('timeout', 8000, 1, 120000)
+  const maxPages = intOption('max-pages', 20, 1, 50);
+  const maxLinkTargets = intOption('max-link-targets', 24, 0, 50);
+  const concurrency = intOption('concurrency', 4, 1, 10);
+  const timeoutMs = intOption('timeout', 8000, 1, 120000);
+
+  let report = await technicalIntegrity(source, {
+    maxPages,
+    concurrency,
+    timeoutMs
   });
+
+  const internalLinkAudit = await auditInternalLinkTargetHealth({
+    canonicalUrl: report.canonicalUrl,
+    cohortUrls: report.cohort.urls,
+    maxTargets: maxLinkTargets,
+    concurrency,
+    timeoutMs,
+    maxBytes: 512 * 1024
+  });
+  report = mergeInternalLinkHealth(report, internalLinkAudit);
+
   process.stdout.write(json ? `${JSON.stringify(report, null, 2)}\n` : `${formatTechnicalIntegrityReport(report)}\n`);
   process.exitCode = report.summary.p0Failures > 0 ? 2 : 0;
 } catch (error) {
