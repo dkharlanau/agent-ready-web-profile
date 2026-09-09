@@ -101,4 +101,6 @@ assert.match(fs.readFileSync('docs/maintainer/index.html','utf8'), /metkagram\.g
 assert.match(fs.readFileSync('docs/sitemap.xml','utf8'), /events\/2026-09-06-search-ai-playbook-release\.html/);
 assert.match(fs.readFileSync('docs/answers/index.html','utf8'), /Structured project graph/);
 
-console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references), 6 negative/conditional contract tests, and structured product/service/profile/event dogfood surfaces`);
+await import('./regional-search-surfaces-test.mjs');
+
+console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references), 6 negative/conditional contract tests, structured product/service/profile/event dogfood surfaces, and regional Search surface routing`);
