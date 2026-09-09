@@ -2,28 +2,33 @@
 
 import { technicalIntegrity, formatTechnicalIntegrityReport } from '../lib/technical-integrity.mjs';
 
+function printHelp() {
+  console.log(`Usage:\n  arwp technical-integrity <https://site.example/> [options]\n  arwp-technical-integrity <https://site.example/> [options]\n\nOptions:\n  --json                 Emit machine-readable JSON\n  --max-pages=N          Bounded priority cohort, 1-50 (default 20)\n  --concurrency=N        Parallel public fetches, 1-10 (default 4)\n  --timeout=N            Per-request timeout in ms (default 8000)\n\nThe command runs a bounded public technical Search/AI integrity audit. It does not produce a readiness score and does not claim indexing, ranking or citation outcomes.`);
+}
+
+const raw = process.argv.slice(2);
+const offset = raw[0] === 'technical-integrity' ? 1 : 0;
+const args = raw.slice(offset);
+const source = args.find(value => !value.startsWith('--'));
+const json = args.includes('--json');
+const help = args.includes('--help') || args.includes('-h');
+
 function optionValue(name) {
   const prefix = `--${name}=`;
-  const arg = process.argv.slice(2).find(value => value.startsWith(prefix));
-  return arg ? arg.slice(prefix.length) : null;
+  const inline = args.find(value => value.startsWith(prefix));
+  if (inline) return inline.slice(prefix.length);
+  const index = args.indexOf(`--${name}`);
+  if (index >= 0 && args[index + 1] && !args[index + 1].startsWith('--')) return args[index + 1];
+  return null;
 }
 
 function intOption(name, fallback, min, max) {
-  const raw = optionValue(name);
-  if (raw === null) return fallback;
-  const value = Number(raw);
+  const valueRaw = optionValue(name);
+  if (valueRaw === null) return fallback;
+  const value = Number(valueRaw);
   if (!Number.isInteger(value) || value < min || value > max) throw new Error(`--${name} must be an integer between ${min} and ${max}.`);
   return value;
 }
-
-function printHelp() {
-  console.log(`Usage: arwp-technical-integrity <https://site.example/> [options]\n\nOptions:\n  --json                 Emit machine-readable JSON\n  --max-pages=N          Bounded priority cohort, 1-50 (default 20)\n  --concurrency=N        Parallel public fetches, 1-10 (default 4)\n  --timeout=N            Per-request timeout in ms (default 8000)\n\nThe command runs a bounded public technical Search/AI integrity audit. It does not produce a readiness score and does not claim indexing, ranking or citation outcomes.`);
-}
-
-const args = process.argv.slice(2).filter(value => !value.startsWith('--'));
-const source = args[0];
-const json = process.argv.includes('--json');
-const help = process.argv.includes('--help') || process.argv.includes('-h');
 
 if (help) {
   printHelp();
