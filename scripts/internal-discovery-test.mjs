@@ -72,6 +72,23 @@ assert.equal(edge(root, 'https://example.com/tool').linkClass, 'utility');
 assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
 
 {
+  const reordered = analyzeInternalDiscoveryFromPages({
+    canonicalUrl: root,
+    pages: [
+      page(root, '<main><a href="/b">Direct owner</a><a href="/legacy">Legacy alias</a></main>'),
+      page('https://example.com/b', '<main><h1>B owner</h1></main>'),
+      page('https://example.com/legacy', '<main>legacy</main>', { requestedUrl: 'https://example.com/legacy', url: 'https://example.com/b' })
+    ],
+    generatedAt: '2026-09-09T18:00:00Z'
+  });
+  const direct = reordered.edges.find(item => item.to === 'https://example.com/b');
+  const legacy = reordered.edges.find(item => item.to === 'https://example.com/legacy');
+  assert.equal(direct.targetState, 'canonical-owner', 'direct canonical-owner classification must not depend on alias observation order');
+  assert.equal(legacy.targetState, 'transition', 'a link to the requested alias URL must remain a transition');
+  assert.equal(reordered.summary.redirectAliases, 1);
+}
+
+{
   const truncated = analyzeInternalDiscoveryFromPages({
     canonicalUrl: root,
     pages: [
@@ -119,4 +136,4 @@ try {
   fs.rmSync(directory, { recursive: true, force: true });
 }
 
-console.log('PASS Internal Discovery keeps rendered owner relations, redirects/non-indexable states, structural link classes, partial coverage and Search outcome claims separate.');
+console.log('PASS Internal Discovery keeps rendered owner relations, redirects/non-indexable states, structural link classes, observation ordering, partial coverage and Search outcome claims separate.');
