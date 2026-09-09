@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/treatment-cohort-integrity.schema.json",
+  "title": "Goose Treatment Cohort Integrity Report v0.1",
+  "description": "Revision-to-revision canonical-route implementation scope compared with an optional declared treatment cohort. This is implementation evidence, not causal attribution or outcome proof.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "site", "repository", "mappingBasis", "treatment", "summary", "routes", "findings", "actions", "sources", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "basePath"],
+      "properties": {
+        "origin": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "basePath": { "type": "string", "pattern": "^/.*" }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "beforeRef", "beforeCommitSha", "afterRef", "afterCommitSha"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "beforeRef": { "type": "string", "minLength": 1 },
+        "beforeCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+        "afterRef": { "type": "string", "minLength": 1 },
+        "afterCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "mappingBasis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "beforeAdapter", "afterAdapter", "beforeSiteRoot", "afterSiteRoot"],
+      "properties": {
+        "state": { "enum": ["same", "changed"] },
+        "beforeAdapter": { "type": "string", "minLength": 1 },
+        "afterAdapter": { "type": "string", "minLength": 1 },
+        "beforeSiteRoot": { "type": "string", "minLength": 1 },
+        "afterSiteRoot": { "type": "string", "minLength": 1 }
+      }
+    },
+    "treatment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "declaredUrls"],
+      "properties": {
+        "state": { "enum": ["not-declared", "declared"] },
+        "declaredUrls": { "$ref": "#/$defs/urlList" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["urls", "comparable", "changed", "unchanged", "added", "removed", "unknown", "declared", "declaredChanged", "declaredUnchanged", "declaredUnknown", "changedOutsideTreatment", "actualChangedCohort"],
+      "properties": {
+        "urls": { "type": "integer", "minimum": 0 },
+        "comparable": { "type": "integer", "minimum": 0 },
+        "changed": { "type": "integer", "minimum": 0 },
+        "unchanged": { "type": "integer", "minimum": 0 },
+        "added": { "type": "integer", "minimum": 0 },
+        "removed": { "type": "integer", "minimum": 0 },
+        "unknown": { "type": "integer", "minimum": 0 },
+        "declared": { "type": "integer", "minimum": 0 },
+        "declaredChanged": { "type": "integer", "minimum": 0 },
+        "declaredUnchanged": { "type": "integer", "minimum": 0 },
+        "declaredUnknown": { "type": "integer", "minimum": 0 },
+        "changedOutsideTreatment": { "type": "integer", "minimum": 0 },
+        "actualChangedCohort": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "routes": {
+      "type": "array",
+      "maxItems": 50000,
+      "items": { "$ref": "#/$defs/routeChange" }
+    },
+    "findings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actualChangedUrls", "declaredChangedUrls", "declaredUnchangedUrls", "declaredUnknownUrls", "changedOutsideTreatmentUrls"],
+      "properties": {
+        "actualChangedUrls": { "$ref": "#/$defs/urlList" },
+        "declaredChangedUrls": { "$ref": "#/$defs/urlList" },
+        "declaredUnchangedUrls": { "$ref": "#/$defs/urlList" },
+        "declaredUnknownUrls": { "$ref": "#/$defs/urlList" },
+        "changedOutsideTreatmentUrls": { "$ref": "#/$defs/urlList" }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/action" }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "format": "uri", "pattern": "^https://" }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["noCausalityInference", "noRankingPromise", "digestChangeNotVisibleChangeProof", "digestEqualityNotRenderedEqualityProof", "sharedInputsCanExpandCohort", "unknownRemainsUnknown", "mappingBasisChangesFailClosed", "noCompositeScore"],
+      "properties": {
+        "noCausalityInference": { "const": true },
+        "noRankingPromise": { "const": true },
+        "digestChangeNotVisibleChangeProof": { "const": true },
+        "digestEqualityNotRenderedEqualityProof": { "const": true },
+        "sharedInputsCanExpandCohort": { "const": true },
+        "unknownRemainsUnknown": { "const": true },
+        "mappingBasisChangesFailClosed": { "const": true },
+        "noCompositeScore": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "urlList": {
+      "type": "array",
+      "maxItems": 50000,
+      "uniqueItems": true,
+      "items": { "type": "string", "format": "uri", "pattern": "^https://" }
+    },
+    "routeChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "state", "declaredTreatment", "beforeRouteState", "afterRouteState", "beforeOwnerPath", "afterOwnerPath", "beforeInputDigestSha256", "afterInputDigestSha256", "ownerChanged", "mappedInputsChanged", "changedInputCount", "changedInputPreview", "changedInputPreviewTruncated", "confidence", "reason"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "state": { "enum": ["changed", "unchanged", "added", "removed", "unknown"] },
+        "declaredTreatment": { "type": "boolean" },
+        "beforeRouteState": { "enum": ["resolved", "ambiguous", "unresolved", "absent"] },
+        "afterRouteState": { "enum": ["resolved", "ambiguous", "unresolved", "absent"] },
+        "beforeOwnerPath": { "type": ["string", "null"], "maxLength": 2000 },
+        "afterOwnerPath": { "type": ["string", "null"], "maxLength": 2000 },
+        "beforeInputDigestSha256": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+        "afterInputDigestSha256": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+        "ownerChanged": { "type": ["boolean", "null"] },
+        "mappedInputsChanged": { "type": ["boolean", "null"] },
+        "changedInputCount": { "type": "integer", "minimum": 0 },
+        "changedInputPreview": { "type": "array", "maxItems": 50, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 2000 } },
+        "changedInputPreviewTruncated": { "type": "boolean" },
+        "confidence": { "enum": ["high", "low", "not-applicable"] },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 3000 }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "priority", "status", "kind", "count", "urlsPreview", "urlsPreviewTruncated", "reason", "verification", "source", "doesNotProve"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "priority": { "enum": ["P1", "P2"] },
+        "status": { "const": "review" },
+        "kind": { "enum": ["declared-treatment-unchanged", "declared-treatment-unknown", "changed-outside-treatment", "mapping-basis-changed"] },
+        "count": { "type": "integer", "minimum": 1 },
+        "urlsPreview": { "type": "array", "maxItems": 20, "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
+        "urlsPreviewTruncated": { "type": "boolean" },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 3000 },
+        "verification": { "type": "string", "minLength": 1, "maxLength": 3000 },
+        "source": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "doesNotProve": { "type": "string", "minLength": 1, "maxLength": 1000 }
+      }
+    }
+  }
+}
