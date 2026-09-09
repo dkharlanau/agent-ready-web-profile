@@ -58,8 +58,7 @@ jobs:
         run: |
           node bin/arwp-technical-integrity.mjs --help
           node bin/arwp.mjs technical-integrity --help
-      - name: Wait for generated Pages parity when discoverability layout changed
-        if: contains(join(github.event.commits.*.modified, ' '), 'docs/discoverability') || contains(join(github.event.commits.*.added, ' '), 'docs/discoverability')
+      - name: Verify bounded discoverability layout is live
         shell: bash
         run: |
           for attempt in {1..12}; do
@@ -69,7 +68,7 @@ jobs:
             fi
             sleep 10
           done
-          echo 'Current generated discoverability layout was not observed on Pages during the parity window.'
+          echo 'Current bounded discoverability layout was not observed on GitHub Pages.'
           exit 1
       - name: Dogfood live Goose site
         id: dogfood
