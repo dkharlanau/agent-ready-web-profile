@@ -10,6 +10,10 @@ on:
       - 'scripts/technical-integrity-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
       - 'docs/TECHNICAL-INTEGRITY.md'
+      - 'docs/discoverability.html'
+      - 'docs/discoverability/**'
+      - 'docs/sitemap.xml'
+      - 'docs/sitemap.md'
       - '.github/workflows/technical-integrity.yml'
   pull_request:
     paths:
@@ -20,6 +24,10 @@ on:
       - 'scripts/technical-integrity-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
       - 'docs/TECHNICAL-INTEGRITY.md'
+      - 'docs/discoverability.html'
+      - 'docs/discoverability/**'
+      - 'docs/sitemap.xml'
+      - 'docs/sitemap.md'
       - '.github/workflows/technical-integrity.yml'
   workflow_dispatch:
 
@@ -50,6 +58,19 @@ jobs:
         run: |
           node bin/arwp-technical-integrity.mjs --help
           node bin/arwp.mjs technical-integrity --help
+      - name: Wait for generated Pages parity when discoverability layout changed
+        if: contains(join(github.event.commits.*.modified, ' '), 'docs/discoverability') || contains(join(github.event.commits.*.added, ' '), 'docs/discoverability')
+        shell: bash
+        run: |
+          for attempt in {1..12}; do
+            if curl -fsSL --max-time 15 https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html | grep -q 'STATIC EVIDENCE HUBS'; then
+              echo 'Observed current bounded discoverability layout on GitHub Pages.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'Current generated discoverability layout was not observed on Pages during the parity window.'
+          exit 1
       - name: Dogfood live Goose site
         id: dogfood
         shell: bash
