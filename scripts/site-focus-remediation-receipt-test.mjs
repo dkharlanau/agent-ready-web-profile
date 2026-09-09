@@ -88,4 +88,14 @@ const fakeFormal = structuredClone(receipt);
 fakeFormal.formalChangeReceipt = { status: 'generated', reason: 'claimed without an id' };
 assert.equal(validate(fakeFormal), false, 'generated formal Change Receipt status requires a receiptId');
 
-console.log('PASS Site Focus Remediation Receipt v0.1 keeps direct-patch proof deployment-linked, measurable, uncertainty-explicit and distinct from formal SignalBraid Change Receipts');
+const examplesDir = path.join(root, 'docs', 'examples');
+const exampleFiles = fs.existsSync(examplesDir)
+  ? fs.readdirSync(examplesDir).filter(name => name.startsWith('site-focus-remediation-receipt') && name.endsWith('.json')).sort()
+  : [];
+
+for (const name of exampleFiles) {
+  const example = JSON.parse(fs.readFileSync(path.join(examplesDir, name), 'utf8'));
+  assert.equal(validate(example), true, `${name}: ${JSON.stringify(validate.errors)}`);
+}
+
+console.log(`PASS Site Focus Remediation Receipt v0.1 keeps direct-patch proof deployment-linked, measurable, uncertainty-explicit and distinct from formal SignalBraid Change Receipts; validated ${exampleFiles.length} repository example(s)`);
