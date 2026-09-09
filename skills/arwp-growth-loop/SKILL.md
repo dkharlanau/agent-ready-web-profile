@@ -14,7 +14,7 @@ Use this skill when the outcome is not merely “make the site agent-ready” bu
 
 ## Product loop
 
-`research → classify → baseline → hypothesis → implement → verify → measure → keep/revert/revise`
+`research → classify → technical preflight → baseline → hypothesis → implement → verify → measure → keep/revert/revise`
 
 Do not collapse this into a generic SEO checklist.
 
@@ -31,13 +31,37 @@ When network access exists, review current primary sources for the target surfac
 
 For page-level structured data, identity, canonicalization, authorship, events, datasets, localization or terminology, load `registry/page-semantics-profiles.json` (or the published `recommendations/page-semantics.json`). Treat it as an implementation-routing profile, not as a ranking hypothesis.
 
-2. **Establish the site baseline.** Inspect framework, deployment, public root, routes, content architecture, metadata, sitemap/robots, structured data, images/video, crawler policy, existing agent surfaces and owner-side metrics where available. Then run:
+2. **Establish the site baseline and run Technical Integrity.** Inspect framework, deployment, public root, routes, content architecture, metadata, sitemap/robots, structured data, images/video, crawler policy, existing agent surfaces and owner-side metrics where available. Then run both:
 
 ```bash
+node bin/arwp.mjs technical-integrity https://example.com/ --max-pages=20 --json
 node bin/arwp-growth.mjs https://example.com --vertical=<vertical> --json
 ```
 
-Do not infer Google/Bing/ChatGPT visibility from repository metadata.
+Technical Integrity is the bounded preflight for problems that can already be checked before Search outcome windows mature. It evaluates provider/source-backed technical blockers and conservative review heuristics including:
+
+- robots.txt fetch semantics and path-specific Googlebot access on sampled priority URLs;
+- known HTTP/noindex failures;
+- Google AI snippet restrictions;
+- canonical integrity on HTML pages only;
+- bounded retrieval-footprint outliers without relabeling audit limits as Search failures;
+- soft-404 suspicion;
+- crawlable internal links, raw textual availability and JS-shell risk;
+- hreflang reciprocity;
+- Bing preview/grounding controls;
+- near-duplicate priority content;
+- OAI-SearchBot policy separately from GPTBot training policy.
+
+Interpret states strictly:
+
+- `FAIL` — a bounded source-backed blocker was actually observed; fix or deliberately resolve it before optional acquisition work;
+- `WATCH` — investigate context/rendering/audit limits; it is not automatically a defect;
+- `PASS` — no issue was observed by that detector in the bounded sample; it is not ranking/indexing proof;
+- `not-applicable` — the check does not apply to the observed representation.
+
+A bounded fetch failure is **unknown**, not an indexability failure. A directly served Markdown/text resource is not required to carry an HTML `<link rel="canonical">`. Do not weaken these truth boundaries to make the report look cleaner.
+
+Do not infer Google/Bing/ChatGPT visibility from repository metadata or from a green technical preflight.
 
 When page semantics are relevant, inventory the important route archetypes and identify reusable canonical entities before editing templates. Classify pages such as site-home, organization, article-editorial, author-profile, event, dataset, software-application, product, video-watch, glossary-term/glossary-index, community-qa and collection-list. Do not install a universal JSON-LD bundle.
 
@@ -48,6 +72,7 @@ For portfolio or repeated site rollouts, follow `docs/SITE-ROLLOUT-PLAYBOOK.md` 
 Structured-data correctness is a baseline contract, not an excuse to maximize schema volume. Remove obsolete feature-only markup when appropriate and never fabricate authors, dates, prices, ratings, reviews, event facts, organization facts or dataset provenance.
 
 4. **Implement highest-confidence changes.** Typical order:
+   - Technical Integrity `FAIL` blockers and reviewed high-impact `WATCH` findings;
    - Search/AI/Discover eligibility blockers;
    - canonical URLs, sitemap and meaningful freshness;
    - canonical/sitemap/indexability consistency and reciprocal/self `hreflang` for real localized variants;
@@ -65,9 +90,11 @@ Structured-data correctness is a baseline contract, not an excuse to maximize sc
 
 For each material route-level change, record `problem → evidence → risk → recommendedChange → files → autofix → verification → source`. Autofix only when the required facts already exist. Otherwise leave an explicit owner-data gate.
 
-5. **Verify.** Run the site's own build/tests/lint and relevant ARWP checks. For each selected hypothesis, distinguish `pass`, `fail`, `manual-pass`, `manual-fail`, `external-owner-data`, `not-applicable` and `watch`. Never call a manual or owner-data check automated.
+5. **Verify.** Run the site's own build/tests/lint, Technical Integrity again on the deployed/public surface when network access exists, and relevant ARWP checks. For each selected hypothesis, distinguish `pass`, `fail`, `manual-pass`, `manual-fail`, `external-owner-data`, `not-applicable` and `watch`. Never call a manual or owner-data check automated.
 
 For semantic/template changes also parse generated JSON-LD, compare it with the rendered visible content, and check canonical/indexability/sitemap/hreflang consistency on changed routes. Use current feature-specific external validators or Search Console/Bing tools where owner access exists.
+
+Technical Integrity is intentionally self-correcting. If a live dogfood run exposes a false positive caused by an audit limit, representation mismatch or detector assumption, fix the detector/evidence model rather than editing the target site to satisfy a bad check.
 
 6. **Measure.** Where owner data exists, compare the relevant Google Search/generative/Discover signals, Bing AI citations and grounding-query samples, ChatGPT referral traffic/citations, image/video discovery, conversions and agent task completion. Choose a sensible before/after window. Do not automatically attribute movement to ARWP.
 
