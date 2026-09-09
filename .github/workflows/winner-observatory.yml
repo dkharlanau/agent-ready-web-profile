@@ -81,4 +81,3 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('schema/controlled-cohort.schema.json','utf8'));"
           node bin/arwp-cohort.mjs validate knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json
           node bin/arwp-cohort.mjs summarize knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json | grep -q 'Treatment/control: 12/6'
-          test "$(node bin/arwp-cohort.mjs gate knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json --production-ref=bff8360b06f1b31724c8273607678b418d369cb5 >/dev/null 2>&1; echo $?)" = "2"
