@@ -116,6 +116,10 @@ Site Pattern Map
                                 v
                        Outcome observations
                   did provider/user/business signals change?
+                                |
+                                v
+                       Pattern Learning Loop
+              what repeats across independent sites?
 ```
 
 Implementation proof and outcome evidence remain separate.
@@ -152,6 +156,32 @@ node bin/arwp-patterns.mjs portfolio \
 
 The portfolio output reports prevalence by pattern and site. It explicitly does **not** infer that a common pattern caused rankings, citations, traffic or conversion.
 
+## Pattern Learning Loop
+
+A portfolio should improve the standard, not merely produce a dashboard. The `learning` command looks for repeated evidence-system signals across at least two sites by default:
+
+```bash
+node bin/arwp-patterns.mjs learning \
+  brali.patterns.json \
+  ptichi.patterns.json \
+  metalheadcats.patterns.json \
+  --min-repeat=2 \
+  --json
+```
+
+It can emit five kinds of review signal:
+
+- `evidence-gap` — a pattern remains unknown repeatedly; improve the detector, review procedure or owner-data boundary;
+- `repeated-practice-gap` — an applicable positive practice is repeatedly absent; inspect site-archetype fit before considering a reusable adoption pack;
+- `repeated-anti-pattern` — the same anti-pattern is manually confirmed on multiple sites; inspect the shared implementation cause and possible remediation pack;
+- `measurement-debt` — multiple remediations are deployment-verified but no later outcome observation is attached;
+- `applicability-filter-candidate` — a pattern is repeatedly not applicable; use that evidence to improve early filtering rather than showing every rule to every site;
+- `version-fragmentation` — active site maps span multiple pattern versions; preserve history but review whether current deployments need migration before comparison.
+
+Every learning signal contains `causalClaim: false`. Repetition across sites is useful product evidence, but it does not reveal a search-engine ranking factor or prove that a remediation caused an outcome.
+
+`minRepeat` cannot be lower than 2. One site is dogfood; it is not a portfolio pattern.
+
 ## Recommended site workflow
 
 1. Define or confirm `.arwp/site-focus.json`.
@@ -164,6 +194,7 @@ The portfolio output reports prevalence by pattern and site. It explicitly does 
 8. Link a deployment receipt when the correction is verified.
 9. Add provider/user/business observations later, preserving non-causal wording unless a stronger design exists.
 10. Aggregate maps across sites to identify repeated opportunities, repeated risks and gaps in the catalog itself.
+11. Feed repeated evidence gaps back into detectors, applicability profiles, pattern boundaries and remediation packs through reviewed changes to the canonical catalog.
 
 ## What portfolio learning can legitimately tell us
 
@@ -190,7 +221,7 @@ The v0.1 contract intentionally leaves room for:
 - **portfolio heatmaps** that show known/unknown/present/absent states without collapsing them into one score;
 - **pattern evolution feedback** when repeated site evidence shows that a passport needs a narrower boundary, replacement or retirement.
 
-The core rule remains: the catalog describes the practice; the site map describes the observation; the receipt proves the deployed change; later measurements describe outcomes.
+The core rule remains: the catalog describes the practice; the site map describes the observation; the receipt proves the deployed change; later measurements describe outcomes; repeated observations may improve the standard only through an explicit reviewed learning step.
 
 ## Files
 
