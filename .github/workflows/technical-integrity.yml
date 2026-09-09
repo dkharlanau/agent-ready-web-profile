@@ -1,0 +1,47 @@
+name: Technical Integrity
+
+on:
+  push:
+    paths:
+      - 'registry/technical-integrity-rules.json'
+      - 'lib/technical-integrity.mjs'
+      - 'bin/arwp-technical-integrity.mjs'
+      - 'scripts/technical-integrity-test.mjs'
+      - 'schema/technical-integrity-report.schema.json'
+      - 'docs/TECHNICAL-INTEGRITY.md'
+      - '.github/workflows/technical-integrity.yml'
+  pull_request:
+    paths:
+      - 'registry/technical-integrity-rules.json'
+      - 'lib/technical-integrity.mjs'
+      - 'bin/arwp-technical-integrity.mjs'
+      - 'scripts/technical-integrity-test.mjs'
+      - 'schema/technical-integrity-report.schema.json'
+      - 'docs/TECHNICAL-INTEGRITY.md'
+      - '.github/workflows/technical-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Validate Technical Integrity rule pack
+        run: node -e "const fs=require('fs'); const rules=JSON.parse(fs.readFileSync('registry/technical-integrity-rules.json','utf8')); if(!rules.rules?.length) throw new Error('empty Technical Integrity rules'); const ids=rules.rules.map(r=>r.id); if(new Set(ids).size!==ids.length) throw new Error('duplicate Technical Integrity rule id'); if(rules.methodology?.noCompositeScore!==true) throw new Error('noCompositeScore guardrail missing'); JSON.parse(fs.readFileSync('schema/technical-integrity-report.schema.json','utf8'));"
+      - name: Run Technical Integrity regression
+        run: node scripts/technical-integrity-test.mjs
+      - name: Syntax check
+        run: |
+          node --check lib/technical-integrity.mjs
+          node --check bin/arwp-technical-integrity.mjs
+          node --check scripts/technical-integrity-test.mjs
+      - name: CLI help smoke
+        run: node bin/arwp-technical-integrity.mjs --help
