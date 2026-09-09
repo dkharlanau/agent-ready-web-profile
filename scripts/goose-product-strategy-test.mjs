@@ -28,7 +28,7 @@ if (product.modules?.some(module => module.visibility !== 'internal-advanced')) 
 if (JSON.stringify(product).includes('SignalBraid')) fail('Current product registry must not restore SignalBraid as an active product identity.');
 
 const roadmap = read('ROADMAP.md');
-for (const needle of ['# Goose ARWP Roadmap', 'M1 — Proof before more product', 'provider-native', 'Ptichi stays measurement-hold', 'real site evidence loop > new capability breadth']) {
+for (const needle of ['# Goose ARWP Roadmap', 'M1 — Proof before more product', 'provider-native', 'Ptichi stays measurement-hold', 'When forced to choose between another capability and another trustworthy real-site evidence loop, choose the evidence loop.']) {
   if (!roadmap.includes(needle)) fail(`ROADMAP.md missing proof-first strategy marker: ${needle}`);
 }
 if (/^# ARWP Roadmap/m.test(roadmap)) fail('Resolver-era ARWP roadmap title returned.');
