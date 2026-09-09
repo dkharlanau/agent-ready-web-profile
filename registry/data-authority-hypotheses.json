@@ -1,0 +1,92 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-09",
+  "title": "ARWP Data Authority Hypotheses",
+  "scope": "Project experiments and source-backed quality constraints for data-rich websites. These hypotheses complement, but do not replace, registry/growth-hypotheses.json.",
+  "guardrails": {
+    "noRankingPromise": true,
+    "noStructuredDataRankingClaim": true,
+    "noPageCountSuccessMetric": true,
+    "preserveNegativeResults": true,
+    "ownerMetricsRequiredForOutcomeClaims": true
+  },
+  "hypotheses": [
+    {
+      "id": "data-entity-page-value",
+      "title": "Distinct entity pages can capture useful long-tail demand",
+      "hypothesis": "When a dataset record has real demand, unique attributes, a useful direct answer, stable identity and meaningful evidence, exposing it as a canonical human-readable page can create more useful Search and AI discovery opportunities than leaving the record only inside a bulk dataset or generic collection page.",
+      "evidenceClass": "project-experiment",
+      "confidence": "experimental",
+      "appliesTo": ["research-dataset", "documentation", "editorial", "software-product"],
+      "checks": [
+        {"id": "real-demand", "mode": "manual", "expect": "The entity maps to a real information, comparison, navigation or decision need."},
+        {"id": "unique-value", "mode": "manual", "expect": "The page contributes non-commodity attributes, evidence, analysis, calculation or curation."},
+        {"id": "standalone-useful", "mode": "manual", "expect": "A direct landing visitor can use the page without navigating back to a parent database."},
+        {"id": "stable-canonical", "mode": "automated", "expect": "One stable canonical URL represents the entity."}
+      ],
+      "successSignals": ["new non-brand query coverage", "priority-page impressions", "useful deep-page visits", "observed AI citations"],
+      "failureSignals": ["zero-demand page growth", "substantially duplicate pages", "crawl/index noise without useful visits"],
+      "sources": [
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+        "https://developers.google.com/search/docs/essentials/spam-policies"
+      ]
+    },
+    {
+      "id": "data-human-machine-parity",
+      "title": "Canonical HTML plus truthful machine-readable data may improve reuse",
+      "hypothesis": "Publishing the same real record in useful canonical HTML and consistent Dataset/JSON/CSV/JSON-LD representations can improve dataset discovery and machine retrieval while reducing ambiguity, provided machine-readable data does not introduce facts absent from the public source of truth.",
+      "evidenceClass": "project-experiment",
+      "confidence": "experimental",
+      "appliesTo": ["research-dataset", "documentation", "software-product"],
+      "checks": [
+        {"id": "html-source-of-truth", "mode": "manual", "expect": "Important facts are visible to users in accessible HTML."},
+        {"id": "representation-parity", "mode": "automated", "expect": "Machine-readable representations use the same identity and do not contradict visible facts."},
+        {"id": "genuine-dataset", "mode": "manual", "expect": "Dataset metadata describes a real reusable corpus, not decorative structured data."}
+      ],
+      "successSignals": ["dataset discovery", "successful agent retrieval", "AI citations to canonical pages", "machine-readable distribution usage where measurable"],
+      "failureSignals": ["schema-visible-content mismatch", "duplicate identities", "no observable retrieval benefit"],
+      "sources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/dataset",
+        "registry/dataset-publication-policy.json"
+      ]
+    },
+    {
+      "id": "data-relationship-navigation",
+      "title": "Meaningful entity relationships may improve deep discovery",
+      "hypothesis": "Visible parent, related-entity, comparison and next-step links can make a large data site easier to browse and may improve discovery of valuable deep pages compared with an orphaned page factory or graph that exists only in JSON.",
+      "evidenceClass": "project-experiment",
+      "confidence": "experimental",
+      "appliesTo": ["research-dataset", "documentation", "editorial"],
+      "checks": [
+        {"id": "visible-relations", "mode": "manual", "expect": "Relationships are useful to a person and visible in normal navigation/content."},
+        {"id": "no-orphan-priority-pages", "mode": "automated", "expect": "Priority entity pages have crawlable internal paths from relevant collections or entities."},
+        {"id": "relation-truth", "mode": "manual", "expect": "Edges represent real semantic relationships rather than keyword adjacency."}
+      ],
+      "successSignals": ["more discovered/indexed priority deep pages", "internal navigation usage", "query diversity", "more cited entity pages"],
+      "failureSignals": ["graph growth without user use", "orphan growth", "irrelevant cross-linking"],
+      "sources": [
+        "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+        "docs/DATA-AUTHORITY-TRACK.md"
+      ]
+    },
+    {
+      "id": "data-index-quality-gate",
+      "title": "Quality gating should beat indiscriminate page expansion",
+      "hypothesis": "For large generated sites, restricting indexable URLs to records with real demand and unique standalone value should produce a healthier experiment than publishing every possible entity/filter/query page and measuring success by page count.",
+      "evidenceClass": "platform-guidance",
+      "confidence": "high",
+      "appliesTo": ["research-dataset", "documentation", "editorial", "software-product"],
+      "checks": [
+        {"id": "page-value-gate", "mode": "manual", "expect": "Indexable candidates pass demand, unique-value, standalone-usefulness and canonical-identity gates."},
+        {"id": "variant-control", "mode": "automated", "expect": "Filter/search/query variants do not create uncontrolled duplicate indexable URLs."},
+        {"id": "thin-content-review", "mode": "manual", "expect": "Generated pages are not generic wrappers around minimal records."}
+      ],
+      "successSignals": ["higher share of useful indexed pages", "query coverage on priority cohorts", "less crawl waste", "fewer duplicate/thin URLs"],
+      "failureSignals": ["scaled thin content", "doorway-like variants", "page growth without unique user value"],
+      "sources": [
+        "https://developers.google.com/search/docs/essentials/spam-policies",
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"
+      ]
+    }
+  ]
+}
