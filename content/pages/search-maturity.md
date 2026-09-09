@@ -2,7 +2,7 @@
 
 Canonical page: https://dkharlanau.github.io/agent-ready-web-profile/search-maturity/
 
-Search Maturity is SignalBraid · ARWP's reference-cohort layer for comparing a target site with observable patterns on currently retrievable independent Search/AI pages.
+Search Maturity is Goose ARWP's reference-cohort layer for comparing a target site with observable patterns on currently retrievable independent Search/AI pages.
 
 The core chain is:
 
