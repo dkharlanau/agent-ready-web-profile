@@ -91,7 +91,7 @@
     },
     "actions": {
       "type": "array",
-      "maxItems": 4,
+      "maxItems": 5,
       "items": { "$ref": "#/$defs/action" }
     },
     "sources": {
@@ -155,7 +155,7 @@
         "id": { "type": "string", "minLength": 1, "maxLength": 160 },
         "priority": { "enum": ["P1", "P2"] },
         "status": { "const": "review" },
-        "kind": { "enum": ["declared-treatment-unchanged", "declared-treatment-unknown", "changed-outside-treatment", "mapping-basis-changed"] },
+        "kind": { "enum": ["declared-treatment-unchanged", "declared-treatment-unknown", "changed-outside-treatment", "mapping-basis-changed", "same-commit-drift"] },
         "count": { "type": "integer", "minimum": 1 },
         "urlsPreview": { "type": "array", "maxItems": 20, "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
         "urlsPreviewTruncated": { "type": "boolean" },
