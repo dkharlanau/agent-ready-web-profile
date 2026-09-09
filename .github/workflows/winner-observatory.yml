@@ -1,0 +1,46 @@
+name: Goose Winner Observatory
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'schema/winner-observation.schema.json'
+      - 'lib/winner-observatory.mjs'
+      - 'bin/arwp-winners.mjs'
+      - 'scripts/winner-observatory-test.mjs'
+      - 'docs/WINNER-OBSERVATORY.md'
+      - 'knowledge/experiments/**'
+      - '.github/workflows/winner-observatory.yml'
+  pull_request:
+    paths:
+      - 'schema/winner-observation.schema.json'
+      - 'lib/winner-observatory.mjs'
+      - 'bin/arwp-winners.mjs'
+      - 'scripts/winner-observatory-test.mjs'
+      - 'docs/WINNER-OBSERVATORY.md'
+      - 'knowledge/experiments/**'
+      - '.github/workflows/winner-observatory.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  winner-observatory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate Winner Observatory engine
+        run: |
+          node scripts/winner-observatory-test.mjs
+          node --check lib/winner-observatory.mjs
+          node --check bin/arwp-winners.mjs
+          node --check scripts/winner-observatory-test.mjs
+          node -e "JSON.parse(require('fs').readFileSync('schema/winner-observation.schema.json','utf8'));"
+          node -e "JSON.parse(require('fs').readFileSync('knowledge/experiments/2026-09-09-ptichi-controlled-cohort-plan.json','utf8'));"
+          node bin/arwp-winners.mjs --help | grep -q 'citation persistence'
