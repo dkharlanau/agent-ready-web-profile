@@ -6,28 +6,38 @@ on:
     paths:
       - 'schema/winner-observation.schema.json'
       - 'schema/recommendation-review-events.schema.json'
+      - 'schema/controlled-cohort.schema.json'
       - 'lib/winner-observatory.mjs'
       - 'lib/recommendation-review.mjs'
+      - 'lib/controlled-cohort.mjs'
       - 'bin/arwp-winners.mjs'
       - 'bin/arwp-recommendation-review.mjs'
+      - 'bin/arwp-cohort.mjs'
       - 'scripts/winner-observatory-test.mjs'
       - 'scripts/recommendation-review-test.mjs'
+      - 'scripts/controlled-cohort-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
+      - 'docs/CONTROLLED-COHORTS.md'
       - 'knowledge/experiments/**'
       - '.github/workflows/winner-observatory.yml'
   pull_request:
     paths:
       - 'schema/winner-observation.schema.json'
       - 'schema/recommendation-review-events.schema.json'
+      - 'schema/controlled-cohort.schema.json'
       - 'lib/winner-observatory.mjs'
       - 'lib/recommendation-review.mjs'
+      - 'lib/controlled-cohort.mjs'
       - 'bin/arwp-winners.mjs'
       - 'bin/arwp-recommendation-review.mjs'
+      - 'bin/arwp-cohort.mjs'
       - 'scripts/winner-observatory-test.mjs'
       - 'scripts/recommendation-review-test.mjs'
+      - 'scripts/controlled-cohort-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
+      - 'docs/CONTROLLED-COHORTS.md'
       - 'knowledge/experiments/**'
       - '.github/workflows/winner-observatory.yml'
 
@@ -62,3 +72,13 @@ jobs:
           node --check scripts/recommendation-review-test.mjs
           node -e "JSON.parse(require('fs').readFileSync('schema/recommendation-review-events.schema.json','utf8'));"
           node bin/arwp-recommendation-review.mjs --help | grep -q 'retire-candidate'
+      - name: Validate Controlled Cohort contract
+        run: |
+          node scripts/controlled-cohort-test.mjs
+          node --check lib/controlled-cohort.mjs
+          node --check bin/arwp-cohort.mjs
+          node --check scripts/controlled-cohort-test.mjs
+          node -e "JSON.parse(require('fs').readFileSync('schema/controlled-cohort.schema.json','utf8'));"
+          node bin/arwp-cohort.mjs validate knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json
+          node bin/arwp-cohort.mjs summarize knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json | grep -q 'Treatment/control: 12/6'
+          test "$(node bin/arwp-cohort.mjs gate knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json --production-ref=bff8360b06f1b31724c8273607678b418d369cb5 >/dev/null 2>&1; echo $?)" = "2"
