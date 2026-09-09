@@ -38,8 +38,16 @@ const currentPrefixes = [
   'templates/'
 ];
 
+function isRegressionFixture(file) {
+  return (
+    /(^|\/)tests?\//.test(file) ||
+    /(^|\/)[^/]*-test\.mjs$/.test(file) ||
+    /(^|\/)[^/]*\.test\.[cm]?[jt]s$/.test(file)
+  );
+}
+
 function inCurrentScope(file) {
-  if (selfFiles.has(file) || frozenExact.has(file) || frozenPrefixes.some(prefix => file.startsWith(prefix))) return false;
+  if (selfFiles.has(file) || isRegressionFixture(file) || frozenExact.has(file) || frozenPrefixes.some(prefix => file.startsWith(prefix))) return false;
   if (file === 'README.md' || file === 'TRADEMARKS.md') return true;
   if (currentPrefixes.some(prefix => file.startsWith(prefix))) return extensions.has(path.extname(file));
   return false;
@@ -105,4 +113,4 @@ for (const required of ['docs/BRAND-GOOSE.md', 'docs/BRAND-CITE-GOOSE.md']) {
   if (!pkg.files?.includes(required)) throw new Error(`npm package surface is missing ${required}`);
 }
 
-console.log(`PASS Goose brand contract across ${files.length} current public/source surfaces; ARWP remains the technical identity, canonical self-profiles are byte-identical, both brand docs ship in the package, and frozen history is excluded.`);
+console.log(`PASS Goose brand contract across ${files.length} current public/source surfaces; ARWP remains the technical identity, canonical self-profiles are byte-identical, regression fixtures may mention legacy copy only as negative test data, both brand docs ship in the package, and frozen history is excluded.`);
