@@ -34,7 +34,7 @@ For page-level structured data, identity, canonicalization, authorship, events, 
 2. **Establish the site baseline and run Technical Integrity.** Inspect framework, deployment, public root, routes, content architecture, metadata, sitemap/robots, structured data, images/video, crawler policy, existing agent surfaces and owner-side metrics where available. Then run both:
 
 ```bash
-node bin/arwp.mjs technical-integrity https://example.com/ --max-pages=20 --json
+node bin/arwp.mjs technical-integrity https://example.com/ --max-pages=20 --max-link-targets=24 --json
 node bin/arwp-growth.mjs https://example.com --vertical=<vertical> --json
 ```
 
@@ -46,16 +46,19 @@ Technical Integrity is the bounded preflight for problems that can already be ch
 - canonical integrity on HTML pages only;
 - bounded retrieval-footprint outliers without relabeling audit limits as Search failures;
 - soft-404 suspicion;
-- crawlable internal links, raw textual availability and JS-shell risk;
+- crawlable internal-link markup plus a capped health probe of important same-origin link targets;
+- raw textual availability and JS-shell risk;
 - hreflang reciprocity;
 - Bing preview/grounding controls;
 - near-duplicate priority content;
 - OAI-SearchBot policy separately from GPTBot training policy.
 
+Internal-link target probing is intentionally bounded. By default Goose selects at most 24 same-origin targets from the priority cohort, favoring links referenced from more sampled pages, then more occurrences and shallower paths. `404`, `410` and `5xx` targets make this P1 check fail; redirects, authorization/rate-limit states and probe uncertainty remain `WATCH`. A redirect is not automatically harmful, and the sample is not a claim about every internal link on the site.
+
 Interpret states strictly:
 
-- `FAIL` — a bounded source-backed blocker was actually observed; fix or deliberately resolve it before optional acquisition work;
-- `WATCH` — investigate context/rendering/audit limits; it is not automatically a defect;
+- `FAIL` — a bounded source-backed blocker or explicit broken technical target was actually observed; fix or deliberately resolve it before optional acquisition work when material;
+- `WATCH` — investigate context/rendering/redirects/audit limits; it is not automatically a defect;
 - `PASS` — no issue was observed by that detector in the bounded sample; it is not ranking/indexing proof;
 - `not-applicable` — the check does not apply to the observed representation.
 
@@ -73,6 +76,7 @@ Structured-data correctness is a baseline contract, not an excuse to maximize sc
 
 4. **Implement highest-confidence changes.** Typical order:
    - Technical Integrity `FAIL` blockers and reviewed high-impact `WATCH` findings;
+   - broken important internal-link destinations observed by the bounded target-health check;
    - Search/AI/Discover eligibility blockers;
    - canonical URLs, sitemap and meaningful freshness;
    - canonical/sitemap/indexability consistency and reciprocal/self `hreflang` for real localized variants;
