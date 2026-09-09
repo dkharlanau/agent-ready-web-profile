@@ -20,7 +20,7 @@
         "applicabilityVersion":{"const":"0.1"}
       }
     },
-    "archetype": {"enum":["software-product","service-business","editorial-news","documentation-research","ecommerce","portfolio","local-business"]},
+    "archetype": {"enum":["software-product","service-business","editorial-news","documentation-research","knowledge-resource","ecommerce","portfolio","local-business"]},
     "facets": {"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}},
     "basis": {"enum":["manual-reviewed","repository-observed","mixed"]},
     "reviewedAt": {"type":"string","format":"date"},

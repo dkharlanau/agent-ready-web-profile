@@ -8,7 +8,10 @@ const runtime = loadApplicabilityRuntime(process.cwd());
 const { registry, facetRegistry, blueprint, catalogs } = runtime;
 const validation = validatePatternApplicabilityRegistry(registry, blueprint, catalogs, facetRegistry);
 assert.equal(validation.valid, true, validation.errors.join('\n'));
-assert.equal(registry.profiles.length, Object.keys(blueprint.siteKinds).length, 'every existing blueprint archetype should have one applicability profile');
+for (const kind of Object.keys(blueprint.siteKinds)) assert.ok(registry.profiles.some(row => row.id === kind), `blueprint archetype ${kind} needs a matching applicability profile`);
+const knowledgeProfile = registry.profiles.find(row => row.id === 'knowledge-resource');
+assert.ok(knowledgeProfile, 'portfolio dogfood identified a project-defined knowledge-resource purpose class');
+assert.equal(knowledgeProfile.blueprintKind, 'documentation-research', 'knowledge-resource reuses the closest existing surface template instead of inventing duplicate surface semantics');
 
 for (const profile of registry.profiles) {
   const basePlan = buildArchetypePatternPlan({ archetype: profile.id, facets: [], registry, facetRegistry, blueprint, catalogs });
@@ -27,6 +30,10 @@ const softwareRich = buildArchetypePatternPlan({ archetype: 'software-product', 
 assert.ok(softwareRich.practices.length >= softwareBase.practices.length, 'declared facets may expand the bounded review set');
 assert.deepEqual(softwareRich.facets, ['interactive-web','machine-interfaces','static-delivery']);
 
+const knowledgePlan = buildArchetypePatternPlan({ archetype: 'knowledge-resource', facets: ['interactive-web','education','research-evaluation'], registry, facetRegistry, blueprint, catalogs });
+assert.equal(knowledgePlan.label, blueprint.siteKinds['documentation-research'].label);
+assert.ok(knowledgePlan.practices.length > 0);
+
 const gaps = buildApplicabilityGapReport(registry, catalogs, facetRegistry);
 assert.ok(Array.isArray(gaps.corpusTags));
 assert.ok(Array.isArray(gaps.unmappedCorpusTags));
@@ -38,12 +45,12 @@ const context = {
   $schema: 'https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-context-v0.1.schema.json',
   version: '0.1',
   siteFocus: { path: '.arwp/site-focus.json', version: '0.3' },
-  runtime: { repository: 'dkharlanau/agent-ready-web-profile', commit: '2cc377740e9d2a6500208e2f9ad3c93526b989d8', applicabilityVersion: '0.1' },
-  archetype: 'documentation-research',
-  facets: ['static-delivery','research-evaluation'],
+  runtime: { repository: 'dkharlanau/agent-ready-web-profile', commit: '1a6ffb948e5d28e80859631f9e08863842de9216', applicabilityVersion: '0.1' },
+  archetype: 'knowledge-resource',
+  facets: ['static-delivery','research-evaluation','education'],
   basis: 'mixed',
   reviewedAt: '2026-09-09',
-  rationale: 'Fixture uses the documentation/research product purpose plus observed static and research surfaces.',
+  rationale: 'Fixture uses a knowledge-resource purpose plus observed static, research and education surfaces.',
   knownUnknowns: ['The context does not establish that selected practices are implemented or beneficial.']
 };
 const schema = JSON.parse(fs.readFileSync('schema/site-pattern-context-v0.1.schema.json','utf8'));
@@ -54,7 +61,7 @@ assert.equal(schemaValidate(context), true, JSON.stringify(schemaValidate.errors
 const contextValidation = validateSitePatternContext(context, runtime);
 assert.equal(contextValidation.valid, true, contextValidation.errors.join('\n'));
 const contextPlan = buildPlanFromSitePatternContext(context, runtime);
-assert.equal(contextPlan.context.archetype, 'documentation-research');
+assert.equal(contextPlan.context.archetype, 'knowledge-resource');
 assert.ok(contextPlan.plan.practices.length > 0);
 
 const badFacet = structuredClone(context);
@@ -69,4 +76,4 @@ let failed = false;
 try { buildArchetypePatternPlan({ archetype: 'not-a-real-archetype', facets: [], registry, facetRegistry, blueprint, catalogs }); } catch { failed = true; }
 assert.equal(failed, true, 'unknown archetypes must fail closed');
 
-console.log('PASS Pattern Applicability v0.1 separates purpose archetypes from capability facets, covers current corpus tags, preserves review-only anti-patterns and validates pinned Site Pattern Context');
+console.log('PASS Pattern Applicability v0.1 separates purpose archetypes from capability facets, includes the portfolio-derived knowledge-resource class, covers current corpus tags and validates pinned Site Pattern Context');

@@ -7,6 +7,7 @@
   },
   "methodology": {
     "reuseExistingArchetypes": true,
+    "projectDefinedExtensionsAllowed": true,
     "unknownTagIsNotApplicableByDefault": false,
     "unknownTagProducesGap": true,
     "antiPatternSelectionIsReviewOnly": true,
@@ -45,6 +46,14 @@
       "coreCategories": ["access", "architecture", "documentation", "evidence", "retrieval", "entities", "experience"],
       "supportingCategories": ["datasets", "media", "editorial", "measurement", "experiments", "governance", "comparisons"],
       "antiPatternCategories": ["content", "schema", "ai", "evidence", "analytics", "maturity", "editorial"]
+    },
+    {
+      "id": "knowledge-resource",
+      "blueprintKind": "documentation-research",
+      "matchTags": ["all", "general"],
+      "coreCategories": ["access", "architecture", "editorial", "evidence", "retrieval", "entities", "experience"],
+      "supportingCategories": ["documentation", "datasets", "media", "localization", "measurement", "experiments", "governance", "comparisons"],
+      "antiPatternCategories": ["content", "editorial", "evidence", "analytics", "schema", "ai", "maturity", "distribution"]
     },
     {
       "id": "ecommerce",
