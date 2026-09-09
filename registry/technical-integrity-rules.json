@@ -1,5 +1,5 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "reviewedAt": "2026-09-09",
   "title": "Goose Technical Search Integrity Rules",
   "purpose": "Catch high-confidence technical conditions that can block or weaken Search and AI discovery before longitudinal outcome evidence is mature. This is a non-composite diagnostic rule pack, not a ranking or AI-readiness score.",
@@ -103,6 +103,17 @@
       "source": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
       "action": "Replace JavaScript-only or href-less navigation links on important routes with real crawlable anchors where appropriate.",
       "doesNotProve": "That every linked URL will be crawled or indexed."
+    },
+    {
+      "id": "bounded-internal-link-target-health",
+      "priority": "P1",
+      "authority": "derived-technical-integrity",
+      "detector": "bounded-internal-link-target-health",
+      "claim": "Crawlable internal links on priority pages should resolve to functioning intended targets. Goose samples a bounded set of frequently referenced same-origin targets so broken destinations can be caught without turning Technical Integrity into a whole-site crawler.",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+      "additionalSources": ["https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors"],
+      "action": "Fix sampled internal links that resolve to 404/410/5xx targets, and review links that redirect, require authorization, are rate-limited, or cannot be probed reliably.",
+      "doesNotProve": "That unsampled links are healthy, that a redirect is harmful, or that fixing a broken internal target changes rankings."
     },
     {
       "id": "critical-content-textual",
