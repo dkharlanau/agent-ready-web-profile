@@ -61,28 +61,26 @@
       "properties": {
         "sourceCheck": { "$ref": "#/$defs/workflowEvidence" },
         "deploy": {
-          "allOf": [
-            { "$ref": "#/$defs/workflowEvidence" },
-            {
-              "type": "object",
-              "required": ["commitSha"],
-              "properties": { "commitSha": { "$ref": "#/$defs/sha" } }
-            }
-          ]
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["workflowRunId", "conclusion", "commitSha"],
+          "properties": {
+            "workflowRunId": { "type": "integer", "minimum": 1 },
+            "conclusion": { "$ref": "#/$defs/workflowConclusion" },
+            "commitSha": { "$ref": "#/$defs/sha" }
+          }
         },
         "productionFocus": {
-          "allOf": [
-            { "$ref": "#/$defs/workflowEvidence" },
-            {
-              "type": "object",
-              "required": ["commitSha", "artifactDigest", "verifiedAfterSuccessfulDeploy"],
-              "properties": {
-                "commitSha": { "$ref": "#/$defs/sha" },
-                "artifactDigest": { "$ref": "#/$defs/digest" },
-                "verifiedAfterSuccessfulDeploy": { "const": true }
-              }
-            }
-          ]
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["workflowRunId", "conclusion", "commitSha", "artifactDigest", "verifiedAfterSuccessfulDeploy"],
+          "properties": {
+            "workflowRunId": { "type": "integer", "minimum": 1 },
+            "conclusion": { "$ref": "#/$defs/workflowConclusion" },
+            "commitSha": { "$ref": "#/$defs/sha" },
+            "artifactDigest": { "$ref": "#/$defs/digest" },
+            "verifiedAfterSuccessfulDeploy": { "const": true }
+          }
         }
       }
     },
@@ -129,13 +127,14 @@
     "sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
     "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
     "value": { "type": ["string", "number", "integer", "boolean", "null"] },
+    "workflowConclusion": { "enum": ["success", "failure", "cancelled", "skipped", "timed_out", "action_required", "neutral"] },
     "workflowEvidence": {
       "type": "object",
       "additionalProperties": false,
       "required": ["workflowRunId", "conclusion"],
       "properties": {
         "workflowRunId": { "type": "integer", "minimum": 1 },
-        "conclusion": { "enum": ["success", "failure", "cancelled", "skipped", "timed_out", "action_required", "neutral"] }
+        "conclusion": { "$ref": "#/$defs/workflowConclusion" }
       }
     },
     "reportEvidence": {
