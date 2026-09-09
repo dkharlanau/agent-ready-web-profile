@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-detector-registry-v0.1.schema.json",
+  "title": "Cite Goose Site Pattern Detector Registry v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "catalogs", "detectors"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "catalogs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["discoverability", "antiPatterns"],
+      "properties": {
+        "discoverability": { "$ref": "#/$defs/catalogRef" },
+        "antiPatterns": { "$ref": "#/$defs/catalogRef" }
+      }
+    },
+    "detectors": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/detector" }
+    }
+  },
+  "$defs": {
+    "catalogRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "path"],
+      "properties": {
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "path": { "type": "string", "minLength": 1 }
+      }
+    },
+    "patternRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+      }
+    },
+    "detector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "pattern", "mode", "authority", "allowedVerdicts", "targetScopes", "evidenceTypes", "reviewGate", "requires", "falsePositiveBoundary", "limitations"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^spd_[a-z0-9][a-z0-9._-]{2,127}$" },
+        "kind": { "enum": ["practice", "anti-pattern"] },
+        "pattern": { "$ref": "#/$defs/patternRef" },
+        "mode": { "enum": ["deterministic", "heuristic", "manual-assisted", "provider-observation"] },
+        "authority": { "enum": ["candidate", "verdict"] },
+        "allowedVerdicts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["present", "absent", "unknown", "not-applicable"] }
+        },
+        "targetScopes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["site", "route", "route-prefix", "route-role", "template", "page-type"] }
+        },
+        "evidenceTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["repo-file", "source-html", "rendered-dom", "structured-data", "http-probe", "workflow-run", "provider-report", "manual-review", "receipt"] }
+        },
+        "reviewGate": { "enum": ["none", "manual", "owner-data", "provider-data"] },
+        "requires": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "falsePositiveBoundary": { "type": "string", "minLength": 1 },
+        "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "mode": { "const": "heuristic" } }, "required": ["mode"] },
+          "then": {
+            "properties": {
+              "authority": { "const": "candidate" },
+              "allowedVerdicts": { "const": ["unknown"] }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "authority": { "const": "candidate" } }, "required": ["authority"] },
+          "then": { "properties": { "allowedVerdicts": { "const": ["unknown"] } } }
+        }
+      ]
+    }
+  }
+}

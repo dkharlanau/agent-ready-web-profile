@@ -1,0 +1,137 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-detector-registry-v0.1.schema.json",
+  "version": "0.1",
+  "catalogs": {
+    "discoverability": {
+      "version": "1.12.0",
+      "path": "knowledge/discoverability-corpus.json"
+    },
+    "antiPatterns": {
+      "version": "1.1.0",
+      "path": "knowledge/research/anti-patterns.json"
+    }
+  },
+  "detectors": [
+    {
+      "id": "spd_http_status",
+      "kind": "practice",
+      "pattern": { "id": "arwp-access-status", "version": "1.0.1" },
+      "mode": "deterministic",
+      "authority": "verdict",
+      "allowedVerdicts": ["present", "absent"],
+      "targetScopes": ["route"],
+      "evidenceTypes": ["http-probe"],
+      "reviewGate": "none",
+      "requires": [
+        "Follow redirects to the final public response.",
+        "Check that a nominal success response does not contain the site's known error or removed-content template."
+      ],
+      "falsePositiveBoundary": "HTTP 200 alone is not a healthy-content verdict; soft-error content must not be counted as a passing page state.",
+      "limitations": [
+        "A healthy HTTP state does not prove indexing, ranking, citation or user usefulness.",
+        "The verdict is scoped to the probed URL and observation time."
+      ]
+    },
+    {
+      "id": "spd_searchbot_policy_review",
+      "kind": "practice",
+      "pattern": { "id": "arwp-access-searchbot", "version": "1.0.1" },
+      "mode": "manual-assisted",
+      "authority": "verdict",
+      "allowedVerdicts": ["present", "absent", "unknown"],
+      "targetScopes": ["site"],
+      "evidenceTypes": ["repo-file", "http-probe", "manual-review"],
+      "reviewGate": "owner-data",
+      "requires": [
+        "Read the deployed crawler policy rather than only the repository source.",
+        "Review current provider documentation for OAI-SearchBot and GPTBot separately.",
+        "Confirm the owner's intended search and training policies before evaluating alignment."
+      ],
+      "falsePositiveBoundary": "Different policies for search crawling and model-training crawling can be intentional; a difference is not itself a defect.",
+      "limitations": [
+        "Correct crawler policy does not guarantee retrieval or search inclusion.",
+        "Provider crawler behavior and documentation can change after the observation."
+      ]
+    },
+    {
+      "id": "spd_magic_agent_file_candidate",
+      "kind": "anti-pattern",
+      "pattern": { "id": "anti-magic-agent-file", "version": "1.0.0" },
+      "mode": "heuristic",
+      "authority": "candidate",
+      "allowedVerdicts": ["unknown"],
+      "targetScopes": ["site", "route", "route-prefix"],
+      "evidenceTypes": ["repo-file", "source-html", "rendered-dom"],
+      "reviewGate": "manual",
+      "requires": [
+        "Nominate only when an AI-readiness or ranking claim appears to be justified mainly by adding llms.txt, ai.txt or another agent-facing file.",
+        "Preserve the exact claim and surrounding context for manual review."
+      ],
+      "falsePositiveBoundary": "Publishing llms.txt or another machine-readable helper is not the anti-pattern. The problem is treating the file itself as proof of search, citation or AI-readiness outcomes.",
+      "limitations": [
+        "Keyword occurrence cannot establish the claim's meaning.",
+        "This detector may never confirm presence or absence; a reviewer must apply the catalog boundary."
+      ]
+    },
+    {
+      "id": "spd_fake_freshness_candidate",
+      "kind": "anti-pattern",
+      "pattern": { "id": "anti-fake-freshness", "version": "1.0.0" },
+      "mode": "heuristic",
+      "authority": "candidate",
+      "allowedVerdicts": ["unknown"],
+      "targetScopes": ["route", "route-prefix", "template", "page-type"],
+      "evidenceTypes": ["repo-file", "source-html", "rendered-dom", "structured-data"],
+      "reviewGate": "manual",
+      "requires": [
+        "Compare visible or structured update dates with evidence of substantive content change.",
+        "Nominate repeated date-only refreshes for review rather than declaring them manipulative."
+      ],
+      "falsePositiveBoundary": "A recent date can be legitimate when content, evidence, data, policy or availability actually changed. Automated timestamp differences are not enough to confirm fake freshness.",
+      "limitations": [
+        "The detector cannot know the editorial significance of a change from timestamps alone.",
+        "Repository history may not match CMS or external data updates."
+      ]
+    },
+    {
+      "id": "spd_schema_costume_candidate",
+      "kind": "anti-pattern",
+      "pattern": { "id": "anti-schema-costume", "version": "1.0.0" },
+      "mode": "heuristic",
+      "authority": "candidate",
+      "allowedVerdicts": ["unknown"],
+      "targetScopes": ["route", "template", "page-type"],
+      "evidenceTypes": ["structured-data", "source-html", "rendered-dom"],
+      "reviewGate": "manual",
+      "requires": [
+        "Compare declared structured-data entity types and claims with visible primary content and actual accessible objects.",
+        "Preserve both markup and rendered evidence for review."
+      ],
+      "falsePositiveBoundary": "A page may validly describe or expose multiple entity types. Type diversity is not a costume when the declared entities actually exist and match visible content.",
+      "limitations": [
+        "Schema validity and semantic truth are different questions.",
+        "An automated parser cannot reliably establish whether the real-world entity or offering exists."
+      ]
+    },
+    {
+      "id": "spd_green_check_growth_candidate",
+      "kind": "anti-pattern",
+      "pattern": { "id": "anti-green-check-growth", "version": "1.0.0" },
+      "mode": "heuristic",
+      "authority": "candidate",
+      "allowedVerdicts": ["unknown"],
+      "targetScopes": ["site", "route", "route-prefix"],
+      "evidenceTypes": ["workflow-run", "provider-report", "repo-file", "source-html"],
+      "reviewGate": "manual",
+      "requires": [
+        "Nominate when implementation or validator success is presented as proof of Search, AI recommendation, citation, traffic or conversion improvement.",
+        "Preserve the claimed outcome and the implementation evidence that supposedly proves it."
+      ],
+      "falsePositiveBoundary": "Showing a green validator result as implementation evidence is correct. The anti-pattern exists only when that result is promoted into an unmeasured growth or visibility outcome.",
+      "limitations": [
+        "The detector cannot infer whether separate owner-side outcome evidence exists elsewhere.",
+        "A reviewer must distinguish implementation language from causal or outcome language."
+      ]
+    }
+  ]
+}
