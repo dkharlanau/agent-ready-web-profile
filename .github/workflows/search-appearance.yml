@@ -5,8 +5,12 @@ on:
     branches: [main]
     paths:
       - 'lib/search-appearance.mjs'
+      - 'lib/search-appearance-patch.mjs'
       - 'bin/arwp-search-appearance.mjs'
+      - 'bin/arwp-search-appearance-patch.mjs'
+      - 'schema/search-appearance-patch-manifest.schema.json'
       - 'scripts/search-appearance-test.mjs'
+      - 'scripts/search-appearance-patch-test.mjs'
       - 'docs/SEARCH-APPEARANCE.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'package.json'
@@ -14,8 +18,12 @@ on:
   pull_request:
     paths:
       - 'lib/search-appearance.mjs'
+      - 'lib/search-appearance-patch.mjs'
       - 'bin/arwp-search-appearance.mjs'
+      - 'bin/arwp-search-appearance-patch.mjs'
+      - 'schema/search-appearance-patch-manifest.schema.json'
       - 'scripts/search-appearance-test.mjs'
+      - 'scripts/search-appearance-patch-test.mjs'
       - 'docs/SEARCH-APPEARANCE.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'package.json'
@@ -41,10 +49,14 @@ jobs:
       - name: Syntax and deterministic offline fixtures
         run: |
           node --check lib/search-appearance.mjs
+          node --check lib/search-appearance-patch.mjs
           node --check bin/arwp-search-appearance.mjs
+          node --check bin/arwp-search-appearance-patch.mjs
           node --check scripts/search-appearance-test.mjs
+          node --check scripts/search-appearance-patch-test.mjs
           node scripts/search-appearance-test.mjs
-      - name: Verify CLI is shipped and runs without installed dependencies
+          node scripts/search-appearance-patch-test.mjs
+      - name: Verify CLIs are shipped and runnable from the package
         shell: bash
         run: |
           set -euo pipefail
@@ -52,4 +64,6 @@ jobs:
           TARBALL=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))[0].filename)' "$RUNNER_TEMP/appearance-pack.json")
           mkdir -p "$RUNNER_TEMP/appearance-package"
           tar -xzf "$TARBALL" -C "$RUNNER_TEMP/appearance-package"
+          npm install --ignore-scripts --no-audit --no-fund --prefix "$RUNNER_TEMP/appearance-package/package" >/dev/null
           node "$RUNNER_TEMP/appearance-package/package/bin/arwp-search-appearance.mjs" --help
+          node "$RUNNER_TEMP/appearance-package/package/bin/arwp-search-appearance-patch.mjs" --help
