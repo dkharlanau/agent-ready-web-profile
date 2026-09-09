@@ -1,0 +1,74 @@
+{
+  "version": "0.1",
+  "blueprint": {"path": "registry/search-surface-blueprint.json", "version": "0.1"},
+  "catalogs": {
+    "discoverability": {"path": "knowledge/discoverability-corpus.json", "version": "1.12.0"},
+    "antiPatterns": {"path": "knowledge/research/anti-patterns.json", "version": "1.1.0"}
+  },
+  "methodology": {
+    "reuseExistingArchetypes": true,
+    "unknownTagIsNotApplicableByDefault": false,
+    "unknownTagProducesGap": true,
+    "antiPatternSelectionIsReviewOnly": true,
+    "noUniversalScore": true,
+    "noRankingInference": true
+  },
+  "profiles": [
+    {
+      "id": "software-product",
+      "blueprintKind": "software-product",
+      "matchTags": ["all", "general", "software-product", "software", "developer", "documentation", "product"],
+      "coreCategories": ["access", "architecture", "documentation", "retrieval", "entities", "experience"],
+      "supportingCategories": ["evidence", "media", "measurement", "experiments", "governance", "comparisons"],
+      "antiPatternCategories": ["ai", "schema", "analytics", "evidence", "maturity", "distribution", "editorial"]
+    },
+    {
+      "id": "service-business",
+      "blueprintKind": "service-business",
+      "matchTags": ["all", "general", "service-business", "service", "services", "business", "commercial"],
+      "coreCategories": ["access", "architecture", "services", "entities", "experience"],
+      "supportingCategories": ["evidence", "comparisons", "media", "localization", "measurement", "governance", "editorial"],
+      "antiPatternCategories": ["distribution", "content", "schema", "editorial", "analytics", "evidence"]
+    },
+    {
+      "id": "editorial-news",
+      "blueprintKind": "editorial-news",
+      "matchTags": ["all", "general", "editorial", "news", "article", "publisher", "content"],
+      "coreCategories": ["access", "architecture", "editorial", "evidence", "entities", "media", "experience"],
+      "supportingCategories": ["retrieval", "localization", "measurement", "governance"],
+      "antiPatternCategories": ["content", "editorial", "evidence", "analytics", "distribution", "schema"]
+    },
+    {
+      "id": "documentation-research",
+      "blueprintKind": "documentation-research",
+      "matchTags": ["all", "general", "documentation", "research", "research-dataset", "dataset", "reference"],
+      "coreCategories": ["access", "architecture", "documentation", "evidence", "retrieval", "entities", "experience"],
+      "supportingCategories": ["datasets", "media", "editorial", "measurement", "experiments", "governance", "comparisons"],
+      "antiPatternCategories": ["content", "schema", "ai", "evidence", "analytics", "maturity", "editorial"]
+    },
+    {
+      "id": "ecommerce",
+      "blueprintKind": "ecommerce",
+      "matchTags": ["all", "general", "commerce", "ecommerce", "product", "catalog", "merchant"],
+      "coreCategories": ["access", "architecture", "entities", "experience", "media", "measurement"],
+      "supportingCategories": ["comparisons", "evidence", "localization", "governance", "retrieval"],
+      "antiPatternCategories": ["distribution", "content", "schema", "analytics", "evidence", "editorial"]
+    },
+    {
+      "id": "portfolio",
+      "blueprintKind": "portfolio",
+      "matchTags": ["all", "general", "portfolio", "profile", "personal", "project"],
+      "coreCategories": ["access", "architecture", "entities", "experience", "evidence"],
+      "supportingCategories": ["documentation", "editorial", "media", "measurement", "governance"],
+      "antiPatternCategories": ["maturity", "evidence", "analytics", "schema", "editorial", "distribution"]
+    },
+    {
+      "id": "local-business",
+      "blueprintKind": "local-business",
+      "matchTags": ["all", "general", "local-business", "local", "service-business", "service", "services"],
+      "coreCategories": ["access", "architecture", "services", "entities", "experience", "localization"],
+      "supportingCategories": ["evidence", "media", "comparisons", "measurement", "governance", "editorial"],
+      "antiPatternCategories": ["distribution", "content", "schema", "analytics", "editorial", "evidence"]
+    }
+  ]
+}

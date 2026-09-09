@@ -1,0 +1,62 @@
+name: Pattern Applicability v0.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/pattern-applicability-profiles.json'
+      - 'registry/search-surface-blueprint.json'
+      - 'knowledge/discoverability-corpus.json'
+      - 'knowledge/research/anti-patterns.json'
+      - 'lib/pattern-applicability.mjs'
+      - 'bin/arwp-applicability.mjs'
+      - 'scripts/pattern-applicability-test.mjs'
+      - 'docs/PATTERN-APPLICABILITY-V0.1.md'
+      - '.github/workflows/pattern-applicability.yml'
+  pull_request:
+    paths:
+      - 'registry/pattern-applicability-profiles.json'
+      - 'registry/search-surface-blueprint.json'
+      - 'knowledge/discoverability-corpus.json'
+      - 'knowledge/research/anti-patterns.json'
+      - 'lib/pattern-applicability.mjs'
+      - 'bin/arwp-applicability.mjs'
+      - 'scripts/pattern-applicability-test.mjs'
+      - 'docs/PATTERN-APPLICABILITY-V0.1.md'
+      - '.github/workflows/pattern-applicability.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  applicability:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate archetype applicability contracts
+        run: |
+          node scripts/pattern-applicability-test.mjs
+          node --check lib/pattern-applicability.mjs
+          node --check bin/arwp-applicability.mjs
+          node bin/arwp-applicability.mjs check
+      - name: Emit archetype plans and gap report
+        run: |
+          mkdir -p /tmp/arwp-applicability
+          for kind in software-product service-business editorial-news documentation-research ecommerce portfolio local-business; do
+            node bin/arwp-applicability.mjs plan --archetype=$kind --json > /tmp/arwp-applicability/$kind.json
+          done
+          node bin/arwp-applicability.mjs gaps --json > /tmp/arwp-applicability/gaps.json
+          node -e "const fs=require('fs'); const g=JSON.parse(fs.readFileSync('/tmp/arwp-applicability/gaps.json','utf8')); console.log('PASS archetype applicability output', JSON.stringify({corpusTags:g.corpusTags.length,unmapped:g.unmappedCorpusTags.length}));"
+      - name: Upload applicability diagnostics
+        uses: actions/upload-artifact@v6
+        with:
+          name: pattern-applicability-${{ github.sha }}
+          path: /tmp/arwp-applicability
+          retention-days: 30
