@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/search-appearance-patch-manifest.schema.json",
+  "title": "ARWP Search Appearance Patch Preparation Manifest v0.1",
+  "description": "Proposal-only mapping from a Search Appearance audit finding to repository ownership evidence. It identifies exact source owners when proven but never authorizes or performs a mutation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "site", "repository", "sourceAudit", "summary", "operations", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "baseRef", "baseCommitSha", "siteRoot", "adapter"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "baseRef": { "type": "string", "minLength": 1 },
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+        "siteRoot": { "type": "string", "minLength": 1 },
+        "adapter": { "enum": ["static-html", "jekyll", "astro", "nextjs"] }
+      }
+    },
+    "sourceAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pageUrl", "searchAppearanceVersion", "evidenceClass", "scope"],
+      "properties": {
+        "pageUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "searchAppearanceVersion": { "type": "string", "minLength": 1 },
+        "evidenceClass": { "type": "string", "minLength": 1 },
+        "scope": { "enum": ["hostname-root", "non-root"] }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "mappedReview", "manualReview", "blocked"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "mappedReview": { "type": "integer", "minimum": 0 },
+        "manualReview": { "type": "integer", "minimum": 0 },
+        "blocked": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "$ref": "#/$defs/operation" }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["writesTargetRepository", "requiresExplicitAuthorizationBeforeMutation", "hostnameRootOnly", "noPathGuessing", "ambiguityPreserved", "exactDigestRequiredForMappedReview", "noIdentityInference", "noFaviconFabrication", "noGeneratedOutputPreference", "noRankingGuarantee"],
+      "properties": {
+        "writesTargetRepository": { "const": false },
+        "requiresExplicitAuthorizationBeforeMutation": { "const": true },
+        "hostnameRootOnly": { "const": true },
+        "noPathGuessing": { "const": true },
+        "ambiguityPreserved": { "const": true },
+        "exactDigestRequiredForMappedReview": { "const": true },
+        "noIdentityInference": { "const": true },
+        "noFaviconFabrication": { "const": true },
+        "noGeneratedOutputPreference": { "const": true },
+        "noRankingGuarantee": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "path", "beforeSha256", "mutationClass", "buildPath", "evidence"],
+      "properties": {
+        "state": { "enum": ["resolved", "ambiguous", "unresolved"] },
+        "path": { "type": ["string", "null"] },
+        "beforeSha256": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+        "mutationClass": { "type": ["string", "null"], "enum": ["mechanical", "grounded-template", "editorial", "policy-gated", "runtime", "owner-platform", "blocked", null] },
+        "buildPath": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 1 } },
+        "evidence": { "type": "array", "maxItems": 100, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "findingId", "status", "kind", "priority", "authority", "title", "reason", "source", "target", "ownerFactsRequired", "preconditions", "changeIntent", "verification", "doesNotProve"],
+      "properties": {
+        "id": { "type": "string", "minLength": 2, "maxLength": 240 },
+        "findingId": { "type": "string", "minLength": 2, "maxLength": 240 },
+        "status": { "enum": ["mapped-review", "manual-review", "blocked"] },
+        "kind": { "enum": ["repair-jsonld-syntax", "reconcile-site-name", "reconcile-name-consistency", "declare-favicon", "verify-favicon-format", "verify-favicon-dimensions", "review-search-appearance"] },
+        "priority": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "authority": { "const": "proposal-only" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 5000 },
+        "source": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "target": { "$ref": "#/$defs/target" },
+        "ownerFactsRequired": { "type": "array", "maxItems": 20, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 200 } },
+        "preconditions": { "type": "array", "minItems": 1, "maxItems": 30, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 1000 } },
+        "changeIntent": { "type": "string", "minLength": 1, "maxLength": 3000 },
+        "verification": { "type": "array", "minItems": 1, "maxItems": 30, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 1000 } },
+        "doesNotProve": { "type": "string", "minLength": 1, "maxLength": 1000 }
+      }
+    }
+  }
+}
