@@ -1,8 +1,18 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "reviewedAt": "2026-09-09",
   "title": "ARWP Data Authority Experiments",
   "purpose": "Test whether useful original data exposed as stable evidence-bearing entity pages can improve Search, generative Search, AI citation and acquisition outcomes without treating page scale, structured data or graph metadata as ranking factors.",
+  "runtimeStatePolicy": {
+    "programRegistryIsAuthoritative": false,
+    "canonicalRuntimeSources": [
+      "Controlled Cohort artifacts",
+      "Growth Experiment artifacts",
+      "Change/deployment receipts",
+      "provider-native outcome evidence"
+    ],
+    "rule": "Site entries in this registry describe the Data Authority program and may mirror a current state only when they link to the canonical experiment artifact. Proof surfaces must read canonical experiment evidence rather than treating this file as a second lifecycle ledger."
+  },
   "evidenceBoundary": {
     "implementationIsNotOutcome": true,
     "ownerControlledSitesAreNotIndependentAdoption": true,
@@ -19,7 +29,7 @@
     "defaultIfUniqueValueFails": "do-not-create-indexable-page"
   },
   "defaultExperiment": {
-    "treatmentCohortTarget": "20-50 priority entity pages",
+    "treatmentCohortTarget": "20-50 priority entity pages when the site's real published universe, demand and value gates justify that size; site-specific frozen cohorts override this planning heuristic",
     "control": "Use comparable unchanged pages where practical; otherwise preserve a dated pre-change baseline.",
     "baseline": "Capture owner-side Search/AI/referral evidence before intervention when available.",
     "interventions": [
@@ -62,9 +72,13 @@
     {
       "siteId": "ptichi-fresh-site",
       "role": "primary-acquisition-proof",
-      "status": "planned",
+      "status": "measurement-hold",
+      "statusIsMirroredNotAuthoritative": true,
+      "canonicalExperimentId": "ptichi-da-001-en-work-speaking",
+      "canonicalExperimentPath": "knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json",
       "candidateEntities": ["voice exercises", "voice goals", "techniques", "progressions", "relationships", "evidence"],
-      "primaryQuestion": "Can high-value voice-training entity pages acquire real non-brand Search traffic and later AI citations?"
+      "primaryQuestion": "Can high-value voice-training entity pages acquire real non-brand Search traffic and later AI citations?",
+      "note": "The canonical cohort is 12 treatment + 6 controls and overrides the generic 20-50 planning heuristic. It adds no new indexable URLs and stays on hold until exact production parity is verified."
     },
     {
       "siteId": "metalhatscats-applied-systems",
@@ -111,12 +125,13 @@
   ],
   "references": [
     "docs/DATA-AUTHORITY-TRACK.md",
+    "knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json",
     "registry/portfolio-sites.json",
     "registry/dataset-publication-policy.json",
     "registry/growth-hypotheses.json",
     "https://developers.google.com/search/docs/appearance/structured-data/dataset",
-    "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+    "https://developers.google.com/search/docs/appearance/ai-features",
     "https://developers.google.com/search/docs/essentials/spam-policies",
-    "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview"
+    "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c"
   ]
 }
