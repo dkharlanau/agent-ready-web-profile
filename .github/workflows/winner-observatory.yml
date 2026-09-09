@@ -1,23 +1,33 @@
-name: Goose Winner Observatory
+name: Goose Evidence Learning
 
 on:
   push:
     branches: [main]
     paths:
       - 'schema/winner-observation.schema.json'
+      - 'schema/recommendation-review-events.schema.json'
       - 'lib/winner-observatory.mjs'
+      - 'lib/recommendation-review.mjs'
       - 'bin/arwp-winners.mjs'
+      - 'bin/arwp-recommendation-review.mjs'
       - 'scripts/winner-observatory-test.mjs'
+      - 'scripts/recommendation-review-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
+      - 'docs/RECOMMENDATION-REVIEW.md'
       - 'knowledge/experiments/**'
       - '.github/workflows/winner-observatory.yml'
   pull_request:
     paths:
       - 'schema/winner-observation.schema.json'
+      - 'schema/recommendation-review-events.schema.json'
       - 'lib/winner-observatory.mjs'
+      - 'lib/recommendation-review.mjs'
       - 'bin/arwp-winners.mjs'
+      - 'bin/arwp-recommendation-review.mjs'
       - 'scripts/winner-observatory-test.mjs'
+      - 'scripts/recommendation-review-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
+      - 'docs/RECOMMENDATION-REVIEW.md'
       - 'knowledge/experiments/**'
       - '.github/workflows/winner-observatory.yml'
 
@@ -25,7 +35,7 @@ permissions:
   contents: read
 
 jobs:
-  winner-observatory:
+  evidence-learning:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -44,3 +54,11 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('schema/winner-observation.schema.json','utf8'));"
           node -e "JSON.parse(require('fs').readFileSync('knowledge/experiments/2026-09-09-ptichi-controlled-cohort-plan.json','utf8'));"
           node bin/arwp-winners.mjs --help | grep -q 'citation persistence'
+      - name: Validate Recommendation Review queue
+        run: |
+          node scripts/recommendation-review-test.mjs
+          node --check lib/recommendation-review.mjs
+          node --check bin/arwp-recommendation-review.mjs
+          node --check scripts/recommendation-review-test.mjs
+          node -e "JSON.parse(require('fs').readFileSync('schema/recommendation-review-events.schema.json','utf8'));"
+          node bin/arwp-recommendation-review.mjs --help | grep -q 'retire-candidate'
