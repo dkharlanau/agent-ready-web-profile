@@ -10,6 +10,9 @@ if (process.argv[2] === 'site-gate') {
 } else if (process.argv[2] === 'treatment-cohort') {
   process.argv.splice(2, 1);
   await import('./arwp-treatment-cohort.mjs');
+} else if (process.argv[2] === 'url-migration') {
+  process.argv.splice(2, 1);
+  await import('./arwp-url-migration.mjs');
 } else {
   await import('./arwp-core.mjs');
 }
