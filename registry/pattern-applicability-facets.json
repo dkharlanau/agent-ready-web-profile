@@ -1,0 +1,23 @@
+{
+  "version": "0.1",
+  "universalTags": ["all", "all-sites"],
+  "principle": "Facets describe real site capabilities or operating surfaces. They are orthogonal to site archetype and must be declared or observed; absence of a facet declaration is unknown, not proof that related patterns are irrelevant.",
+  "facets": [
+    {"id":"interactive-web","label":"Interactive web application","tags":["drag-controls","forms","interactive-sites","javascript-sites","modal-dialogs","multi-step-flows","sticky-ui","tools"]},
+    {"id":"machine-interfaces","label":"Machine-readable APIs and interface contracts","tags":["apis","authentication","content-negotiation","json-schemas","openapi","profiled-representations"]},
+    {"id":"dataset-publication","label":"Dataset publication and distribution","tags":["csv-datasets","dataset-catalogs","dataset-repositories","datasets","large-downloads","ml-datasets","multi-file-datasets","recurring-datasets"]},
+    {"id":"editorial-publishing","label":"Maintained editorial publishing","tags":["content-sites","editorial-product-reviews","editorial-review-tools","editorial-tools","eligible-news-publishers","evidence-rich-editorial","maintained-guides","product-reviews"]},
+    {"id":"community-content","label":"Community and forum content","tags":["communities","forums"]},
+    {"id":"commerce-catalog","label":"Commercial catalog and merchant surfaces","tags":["catalogs","merchant-policies","product-variants"]},
+    {"id":"localization","label":"Localized and multilingual variants","tags":["localized-sites","multilingual-sites"]},
+    {"id":"research-evaluation","label":"Research and comparative evaluation","tags":["performance-comparisons","research-repositories","research-resources","software-benchmarks"]},
+    {"id":"project-lifecycle","label":"Versioned open project lifecycle","tags":["github-releases","measured-sites","mutable-resources","open-source","versioned-repositories","versioned-resources","web-archives"]},
+    {"id":"portfolio-operations","label":"Portfolio operations","tags":["portfolio-operations","portfolios"]},
+    {"id":"service-local","label":"Service and local-service surfaces","tags":["local-services","service-sites"]},
+    {"id":"media-video","label":"Video publishing","tags":["video-sites"]},
+    {"id":"organization-identity","label":"Organization identity surfaces","tags":["organizations"]},
+    {"id":"static-delivery","label":"Static-site delivery","tags":["static-sites"]},
+    {"id":"education","label":"Educational resource","tags":["education"]},
+    {"id":"comparisons","label":"Comparison and alternative decision support","tags":["comparisons"]}
+  ]
+}

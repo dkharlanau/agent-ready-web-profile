@@ -5,24 +5,30 @@ on:
     branches: [main]
     paths:
       - 'registry/pattern-applicability-profiles.json'
+      - 'registry/pattern-applicability-facets.json'
       - 'registry/search-surface-blueprint.json'
       - 'knowledge/discoverability-corpus.json'
       - 'knowledge/research/anti-patterns.json'
+      - 'schema/site-pattern-context-v0.1.schema.json'
       - 'lib/pattern-applicability.mjs'
       - 'bin/arwp-applicability.mjs'
       - 'scripts/pattern-applicability-test.mjs'
       - 'docs/PATTERN-APPLICABILITY-V0.1.md'
+      - 'docs/SITE-PATTERN-CONTEXT-V0.1.md'
       - '.github/workflows/pattern-applicability.yml'
   pull_request:
     paths:
       - 'registry/pattern-applicability-profiles.json'
+      - 'registry/pattern-applicability-facets.json'
       - 'registry/search-surface-blueprint.json'
       - 'knowledge/discoverability-corpus.json'
       - 'knowledge/research/anti-patterns.json'
+      - 'schema/site-pattern-context-v0.1.schema.json'
       - 'lib/pattern-applicability.mjs'
       - 'bin/arwp-applicability.mjs'
       - 'scripts/pattern-applicability-test.mjs'
       - 'docs/PATTERN-APPLICABILITY-V0.1.md'
+      - 'docs/SITE-PATTERN-CONTEXT-V0.1.md'
       - '.github/workflows/pattern-applicability.yml'
 
 permissions:
@@ -40,20 +46,21 @@ jobs:
           node-version: '24'
       - name: Install dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Validate archetype applicability contracts
+      - name: Validate archetype and facet applicability contracts
         run: |
           node scripts/pattern-applicability-test.mjs
           node --check lib/pattern-applicability.mjs
           node --check bin/arwp-applicability.mjs
           node bin/arwp-applicability.mjs check
-      - name: Emit archetype plans and gap report
+      - name: Emit base and facet-rich plans
         run: |
           mkdir -p /tmp/arwp-applicability
           for kind in software-product service-business editorial-news documentation-research ecommerce portfolio local-business; do
             node bin/arwp-applicability.mjs plan --archetype=$kind --json > /tmp/arwp-applicability/$kind.json
           done
+          node bin/arwp-applicability.mjs plan --archetype=software-product --facets=interactive-web,machine-interfaces,static-delivery --json > /tmp/arwp-applicability/software-product-faceted.json
           node bin/arwp-applicability.mjs gaps --json > /tmp/arwp-applicability/gaps.json
-          node -e "const fs=require('fs'); const g=JSON.parse(fs.readFileSync('/tmp/arwp-applicability/gaps.json','utf8')); console.log('PASS archetype applicability output', JSON.stringify({corpusTags:g.corpusTags.length,unmapped:g.unmappedCorpusTags.length}));"
+          node -e "const fs=require('fs'); const g=JSON.parse(fs.readFileSync('/tmp/arwp-applicability/gaps.json','utf8')); if(g.unmappedCorpusTags.length) throw new Error('unmapped applicability tags: '+g.unmappedCorpusTags.join(', ')); console.log('PASS archetype/facet applicability coverage', JSON.stringify({corpusTags:g.corpusTags.length,unmapped:g.unmappedCorpusTags.length}));"
       - name: Upload applicability diagnostics
         uses: actions/upload-artifact@v6
         with:

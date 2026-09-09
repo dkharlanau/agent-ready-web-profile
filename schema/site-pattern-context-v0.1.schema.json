@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-context-v0.1.schema.json",
+  "title": "Cite Goose Site Pattern Context v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "siteFocus", "runtime", "archetype", "facets", "basis", "reviewedAt", "rationale", "knownUnknowns"],
+  "properties": {
+    "$schema": {"type":"string","format":"uri"},
+    "version": {"const":"0.1"},
+    "siteFocus": {
+      "type":"object","additionalProperties":false,"required":["path","version"],
+      "properties":{"path":{"const":".arwp/site-focus.json"},"version":{"const":"0.3"}}
+    },
+    "runtime": {
+      "type":"object","additionalProperties":false,"required":["repository","commit","applicabilityVersion"],
+      "properties":{
+        "repository":{"const":"dkharlanau/agent-ready-web-profile"},
+        "commit":{"type":"string","pattern":"^[a-f0-9]{40}$"},
+        "applicabilityVersion":{"const":"0.1"}
+      }
+    },
+    "archetype": {"enum":["software-product","service-business","editorial-news","documentation-research","ecommerce","portfolio","local-business"]},
+    "facets": {"type":"array","uniqueItems":true,"items":{"type":"string","minLength":1}},
+    "basis": {"enum":["manual-reviewed","repository-observed","mixed"]},
+    "reviewedAt": {"type":"string","format":"date"},
+    "rationale": {"type":"string","minLength":1},
+    "knownUnknowns": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}}
+  }
+}
