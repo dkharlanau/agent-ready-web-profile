@@ -1,36 +1,53 @@
 # Goose Technical Integrity
 
-Status: **v0.1 active** · reviewed **2026-09-09**.
+Status: **v0.2 active** · reviewed **2026-09-09**.
 
 Technical Integrity is a bounded, executable Search/AI preflight for real websites. It exists for the period before Search outcome experiments mature: Goose can already catch source-backed technical blockers and risky implementation patterns without pretending those checks prove rankings, citations or traffic.
 
 Run:
 
 ```bash
-node bin/arwp-technical-integrity.mjs https://example.com/
-node bin/arwp-technical-integrity.mjs https://example.com/ --max-pages=20 --json
+arwp technical-integrity https://example.com/
+arwp technical-integrity https://example.com/ --max-pages=20 --json
 ```
 
-The audit reuses the existing Site Gate cohort selection, then performs a deeper public HTML/robots review over the same bounded priority URLs.
+The audit reuses the existing Site Gate cohort selection, then performs a deeper public document/robots review over the same bounded priority URLs.
+
+## v0.2 dogfood lesson
+
+The first live Goose run caught an important detector-quality problem: a very large public page exceeded Goose's 512 KiB audit fetch cap and was incorrectly classified as an indexability failure, while directly served Markdown resources were incorrectly asked to carry HTML canonical markup.
+
+v0.2 fixes both model errors:
+
+- **bounded audit failure is not Search failure** — an unknown/oversized fetch becomes `WATCH`, not `FAIL`;
+- **non-HTML resources are not forced through HTML-only checks** — Markdown/text resources do not create missing-`<link rel="canonical">` warnings merely because they are not HTML;
+- oversized priority documents move to a separate **retrieval-footprint** review signal.
+
+This is intentional dogfood: Goose detectors themselves must remain falsifiable and correctable.
 
 ## What it checks now
 
 ### P0 — source-backed blockers
 
 - **Google robots fetch state** — distinguishes ordinary robots.txt `4xx` from `429`/`5xx`/network-risk states instead of treating every missing robots file as an unknown crawl block.
-- **Search indexability** — successful priority responses and unintended `noindex`.
+- **Priority-URL robots access** — evaluates path-specific `Allow` / `Disallow` rules on the actual sampled URLs, not only whether `/` is allowed.
+- **Search indexability** — known non-success priority responses and unintended `noindex`; bounded-audit unknowns remain unknown.
 - **Google AI snippet eligibility** — `nosnippet` / `max-snippet:0` on pages intended to remain eligible as supporting links in AI Overviews / AI Mode.
-- **Canonical final-URL consistency** — invalid, duplicated, out-of-head, missing or canonical-away declarations are separated into blocker vs review states.
-- **Canonical collisions** — multiple sampled priority URLs collapsing to the same canonical are surfaced for explicit consolidation review.
+- **Canonical final-URL consistency** — invalid, duplicated, out-of-head, missing or canonical-away declarations on HTML pages are separated into blocker vs review states.
+- **Canonical collisions** — multiple sampled priority HTML URLs collapsing to the same canonical are surfaced for explicit consolidation review.
+
+Google's robots interpretation uses the most specific matching path rule; when equally specific rules conflict, the less restrictive `Allow` wins. Technical Integrity models that behavior for the sampled priority URLs.
 
 ### P1 — high-value technical review
 
+- **bounded retrieval footprint** — a document exceeding the configured audit budget is surfaced as a retrieval/performance review item, never silently converted into a Search failure;
+- **soft-404 suspicion** — a successful response whose title/H1/leading text looks like a missing/error page is flagged for rendered/status review;
 - crawlable internal `<a href>` markup versus href-less / JavaScript pseudo-links;
 - thin raw HTML + script-heavy shell risk for critical textual content;
 - hreflang self-reference and reciprocity inside the sampled localization cluster;
 - Bing `NOSNIPPET`, `DATA-NOSNIPPET`, `NOARCHIVE`, `NOCACHE` controls that can reduce caption / grounding / citation depth;
-- near-duplicate priority pages using bounded five-word-shingle similarity plus repeated-title clusters;
-- OAI-SearchBot policy kept separate from GPTBot training policy.
+- near-duplicate priority pages using bounded five-word-shingle similarity plus repeated HTML-title clusters;
+- OAI-SearchBot root **and sampled path policy** kept separate from GPTBot training policy.
 
 ## Why these are not a score
 
@@ -40,7 +57,7 @@ The report deliberately has no combined percentage, grade or AI-readiness number
 
 ```text
 FAIL  -> fix/understand a concrete technical blocker
-WATCH -> review context, intent or rendered/runtime evidence
+WATCH -> review context, intent, audit limits or rendered/runtime evidence
 PASS  -> no issue was observed by this detector in the bounded sample
 ```
 
@@ -52,12 +69,15 @@ A pass does **not** prove crawling, indexing, ranking, AI citation or referral s
 
 Google states that normal Search SEO foundations remain relevant to AI Overviews / AI Mode, with no separate AI markup requirement. Supporting pages must be indexed and eligible to appear with a snippet. Preview controls such as `nosnippet`, `data-nosnippet`, `max-snippet` and `noindex` therefore remain technically relevant.
 
+Google's current robots documentation also makes path-level rule precedence explicit, which is why a root-level robots check alone is insufficient.
+
 Sources:
 
 - https://developers.google.com/search/docs/appearance/ai-features
 - https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag
 - https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec
 - https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+- https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors
 - https://developers.google.com/search/docs/specialty/international/localized-versions
 - https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
 
@@ -80,12 +100,15 @@ Source:
 
 ## Derived heuristics
 
-Two v0.1 checks are deliberately classified as **derived technical integrity**, not provider requirements:
+These checks are deliberately classified as **derived technical integrity**, not provider requirements:
 
-- canonical collisions across the bounded priority cohort;
+- canonical collisions across the bounded priority HTML cohort;
+- bounded retrieval footprint;
 - near-duplicate priority-page similarity.
 
-They are designed to catch route factories and accidental identity collapse early. They must never be relabeled as ranking factors, spam verdicts or penalties.
+Soft-404 suspicion is source-backed, but the Goose detector remains only a bounded heuristic: Google/owner tooling is still needed to determine whether the provider actually classifies a URL as soft 404.
+
+Derived checks are designed to catch route factories, retrieval-cost outliers and accidental identity collapse early. They must never be relabeled as ranking factors, spam verdicts or penalties.
 
 ## Safety / scope
 
@@ -95,6 +118,7 @@ They are designed to catch route factories and accidental identity collapse earl
 - no form submission or side-effectful browser actions;
 - no claim that the bounded sample represents the entire site;
 - no production mutation;
+- unknown audit states remain unknown;
 - negative and ambiguous evidence remains visible.
 
 Canonical rule metadata lives in `registry/technical-integrity-rules.json`; executable detection lives in `lib/technical-integrity.mjs`.
