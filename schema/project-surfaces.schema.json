@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/project-surfaces.schema.json",
+  "title": "Goose project maturity surfaces manifest",
+  "description": "Project-local maturity surface contract. It is not a legal checklist, ranking factor or certification.",
+  "type": "object",
+  "required": ["schemaVersion", "scope", "product", "owner", "requiredSurfaces", "conditionalSurfaces", "projectNames", "guardrails"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "reviewedAt": { "type": "string", "format": "date" },
+    "scope": { "type": "string", "minLength": 1 },
+    "product": {
+      "type": "object",
+      "required": ["name", "canonicalUrl"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "shortName": { "type": "string" },
+        "technicalName": { "type": "string" },
+        "technicalAbbreviation": { "type": "string" },
+        "tagline": { "type": "string" },
+        "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" }
+      },
+      "additionalProperties": true
+    },
+    "owner": {
+      "type": "object",
+      "required": ["id", "name", "type"],
+      "properties": {
+        "id": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["Person", "Organization"] }
+      },
+      "additionalProperties": true
+    },
+    "companyRouting": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "role": { "type": "string" },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "status": { "type": "string" },
+        "availabilityVerifiedByThisRepository": { "type": "boolean" },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "requiredSurfaces": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "publicUrl", "job"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "path": { "type": "string", "minLength": 1 },
+          "publicUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "job": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "conditionalSurfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "applicable", "reason"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "applicable": { "type": "boolean" },
+          "path": { "type": "string" },
+          "publicUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "reason": { "type": "string", "minLength": 1 }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "applicable": { "const": true } } },
+            "then": { "required": ["path", "publicUrl"] }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "projectNames": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "role", "status"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "minLength": 1 },
+          "registeredTrademarkClaimed": { "type": "boolean" },
+          "exclusiveAcronymRightsClaimed": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "required": ["pageCountIsNotMaturity", "legalComplianceClaimedByPresence", "rankingBenefitClaimed", "trademarkRegistrationClaimed", "partnershipImpliesEndorsement", "conditionalSurfacesMustMatchActualSiteBehavior"],
+      "properties": {
+        "pageCountIsNotMaturity": { "const": true },
+        "legalComplianceClaimedByPresence": { "const": false },
+        "rankingBenefitClaimed": { "const": false },
+        "trademarkRegistrationClaimed": { "const": false },
+        "partnershipImpliesEndorsement": { "const": false },
+        "conditionalSurfacesMustMatchActualSiteBehavior": { "const": true }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}
