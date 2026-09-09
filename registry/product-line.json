@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "reviewedAt": "2026-09-09",
   "brand": "Goose ARWP",
   "brandAliases": [
@@ -7,13 +7,84 @@
     "Agent-Ready Web Profile",
     "ARWP"
   ],
-  "brandNameReviewedAt": "2026-09-09",
   "technicalFoundation": "Agent-Ready Web Profile",
   "tagline": "Get Found.",
-  "category": "evidence-to-change website operations",
-  "northStar": "Turn meaningful upstream web changes into the right site-specific implementation, prove what happened, and identify every site that needs re-review when the evidence changes again.",
+  "category": "evidence-backed Search and AI discoverability operations",
+  "northStar": "Real sites completing a reviewed loop from intended outcome through observed site state, applicable change, verified deployment and provider-native Search or AI evidence to an explicit keep, revise, continue, revert or retire decision.",
+  "proofFirstMilestone": {
+    "id": "m1-proof-before-more-product",
+    "priority": "P0",
+    "goal": "Demonstrate trustworthy end-to-end evidence loops before expanding major product or protocol scope.",
+    "minimumOwnedSitesWithExperimentState": 3,
+    "minimumSitesWithProviderNativeEvidence": 2,
+    "requiresReviewedDecision": true,
+    "negativeAndNeutralEvidenceMustRemainVisible": true,
+    "deploymentParityRequiredBeforeObservationClock": true
+  },
+  "publicJourney": [
+    {
+      "id": "goal",
+      "label": "Tell Goose the goal",
+      "question": "Who is this site for, what useful outcome should it create, and what boundaries matter?",
+      "consumes": ["owner-declared context", "Site Focus", "site/vertical goals"]
+    },
+    {
+      "id": "inspect",
+      "label": "Inspect",
+      "question": "What does the real public site and source repository actually expose?",
+      "consumes": ["site audit", "Intent Ownership", "entity/data evidence", "Resolver", "Repository Mapper"]
+    },
+    {
+      "id": "decide",
+      "label": "Decide",
+      "question": "What are the top one to three evidence-backed moves that actually apply?",
+      "consumes": ["Growth", "Recommendation Registry", "Adaptive Upgrade", "review state"]
+    },
+    {
+      "id": "change",
+      "label": "Change",
+      "question": "Which changes can be made safely, deterministically and reviewably?",
+      "consumes": ["Transformation Engine", "stack packs", "repository ownership", "policy gates"]
+    },
+    {
+      "id": "prove",
+      "label": "Prove",
+      "question": "Is the intended implementation really live, and what external evidence followed?",
+      "consumes": ["Change Receipts", "deployment evidence", "visibility imports", "Controlled Cohorts", "Winner Observatory"]
+    },
+    {
+      "id": "watch",
+      "label": "Watch / revise",
+      "question": "What changed in upstream guidance, site state or outcomes, and what now needs re-review?",
+      "consumes": ["Trend Intelligence", "Recommendation Review", "BraidGraph impact", "portfolio queues"]
+    }
+  ],
+  "evidenceFunnel": [
+    "access",
+    "index-or-eligibility",
+    "exposure",
+    "citation-or-reference",
+    "brand-mention",
+    "visit",
+    "useful-action"
+  ],
+  "providerMeasurementSemantics": {
+    "google": {
+      "primaryAiEvidence": "generative-AI Search/Discover impressions and visible-page dimensions from owner Search Console reports",
+      "notEquivalentTo": ["citation", "ranking", "brand mention", "visit"]
+    },
+    "bing": {
+      "primaryAiEvidence": "AI citations, cited pages, grounding queries and provider-native intent/topic/citation-share dimensions",
+      "notEquivalentTo": ["ranking", "click", "conversion"]
+    },
+    "openai": {
+      "primaryAiEvidence": "OAI-SearchBot access eligibility plus separately observed ChatGPT referrals or citations when evidence exists",
+      "notEquivalentTo": ["GPTBot training permission", "guaranteed citation", "traffic"]
+    }
+  },
   "keyPrimitive": {
     "name": "BraidGraph",
+    "visibility": "internal-advanced",
     "purpose": "Versioned evidence-to-change graph linking upstream sources, rule versions, target-site state, repository ownership, recommendations, transformations, verification and outcome evidence.",
     "reverseImpact": true
   },
@@ -21,203 +92,122 @@
     {
       "id": "radar",
       "name": "Goose Radar",
+      "visibility": "internal-advanced",
       "verb": "Detect",
       "question": "What changed upstream?",
-      "status": "active-foundation",
-      "existingAssets": [
-        "Trend Radar",
-        "Recommendations Registry",
-        "Growth Hypotheses",
-        "source freshness/history",
-        "BraidGraph source/rule revision history"
-      ],
-      "next": [
-        "semantic source diffs",
-        "automatic proposed rule revisions"
-      ]
+      "status": "active"
     },
     {
       "id": "map",
       "name": "Goose Map",
+      "visibility": "internal-advanced",
       "verb": "Map",
       "question": "What does this site actually have and where is it owned?",
-      "status": "next-core",
-      "existingAssets": [
-        "site audit",
-        "vertical evidence",
-        "entity graph",
-        "scanner/resolver",
-        "BraidGraph surface/repo-file target nodes"
-      ],
-      "next": [
-        "Site State Graph",
-        "Repository Mapper",
-        "rendered-surface to source-file ownership",
-        "stack/build/deploy detection",
-        "fact source-of-truth mapping"
-      ]
+      "status": "active-foundation"
     },
     {
       "id": "plan",
       "name": "Goose Plan",
+      "visibility": "internal-advanced",
       "verb": "Decide",
       "question": "What actually applies here now?",
-      "status": "active",
-      "existingAssets": [
-        "Growth Plan",
-        "Adaptive Site Upgrade Engine",
-        "automation classes",
-        "review-due knowledge gates",
-        "BraidGraph rule/recommendation lineage"
-      ],
-      "next": [
-        "consume Repository Mapper site state",
-        "portfolio policy inputs"
-      ]
+      "status": "active"
     },
     {
       "id": "patch",
       "name": "Goose Patch",
+      "visibility": "internal-advanced",
       "verb": "Change",
       "question": "What can change safely and exactly?",
-      "status": "active-v0.1",
-      "existingAssets": [
-        "Target-Site Transformation Engine",
-        "SHA-256 preconditions",
-        "path allowlists",
-        "rollback",
-        "PR-first production delivery",
-        "BraidGraph transform/repo-file lineage"
-      ],
-      "next": [
-        "verified stack adapters",
-        "Repository Mapper integration",
-        "unified change receipt"
-      ]
+      "status": "active"
     },
     {
       "id": "proof",
       "name": "Goose Proof",
+      "visibility": "internal-advanced",
       "verb": "Prove",
-      "question": "Did implementation pass and what evidence followed?",
-      "status": "partial-foundation",
-      "existingAssets": [
-        "Evidence Receipts",
-        "Growth History",
-        "Growth Experiments",
-        "visibility imports",
-        "agent eval receipts",
-        "BraidGraph verification/measurement separation and missing-evidence query"
-      ],
-      "next": [
-        "Unified Change Receipt",
-        "deployment evidence",
-        "direct receipt/visibility/experiment graph adapters"
-      ]
+      "question": "Did implementation pass, is it live, and what evidence followed?",
+      "status": "active-foundation"
     },
     {
       "id": "watch",
       "name": "Goose Watch",
+      "visibility": "internal-advanced",
       "verb": "Watch",
       "question": "What needs attention now across the portfolio?",
-      "status": "next-commercial-core",
-      "existingAssets": [
-        "drift",
-        "history",
-        "trend lifecycle",
-        "portfolio evidence primitives",
-        "BraidGraph single-site source/rule impact traversal",
-        "explicit superseded source/rule history"
-      ],
-      "next": [
-        "multi-site blast radius",
-        "scheduled re-review",
-        "policy drift",
-        "prioritized change waves",
-        "managed alerts"
-      ]
+      "status": "active-foundation"
     },
     {
       "id": "connect",
       "name": "Goose Connect",
+      "visibility": "internal-advanced",
       "verb": "Observe",
-      "question": "What happened outside the repository?",
-      "status": "extension",
-      "existingAssets": [
-        "owner visibility import format",
-        "normalized BraidGraph measurement input"
-      ],
-      "next": [
-        "Google connector",
-        "Bing AI Performance connector",
-        "Cloudflare AI crawler connector",
-        "referral analytics",
-        "deployment/build provider evidence"
-      ]
+      "question": "What owner/provider evidence exists outside the repository?",
+      "status": "active-foundation"
     }
   ],
   "durableDifferentiators": [
-    "source-backed rule supply chain with freshness, supersession and retirement history",
-    "site-specific applicability instead of one universal readiness score",
-    "rendered-surface to canonical source-file ownership as a first-class problem",
+    "site-specific applicability instead of a universal readiness or AI visibility score",
+    "explicit owner-declared versus publicly observed truth boundaries",
+    "intent and page-job ownership before URL expansion",
+    "source-backed recommendation supply chain with freshness, supersession and retirement history",
     "deterministic repository mutations with preconditions, rollback and PR-first delivery",
-    "versioned evidence lineage from source/rule through recommendation and transform",
-    "separation of implementation proof from external outcome evidence",
-    "reverse blast-radius analysis when upstream rules change",
-    "cross-surface scope spanning Search, AI citations, crawler policy, datasets, provenance and real agent interfaces"
+    "deployment parity as a hard gate before measuring an intervention",
+    "separation of implementation proof from provider-native external outcome evidence",
+    "versioned evidence lineage and reverse impact through BraidGraph",
+    "negative and neutral experiment outcomes retained rather than filtered out"
   ],
   "productBets": [
     {
       "priority": "P0",
-      "id": "repository-mapper",
-      "title": "Repository Mapper and Site State Graph"
+      "id": "portfolio-proof-board",
+      "issue": 93,
+      "title": "Portfolio Proof Board generated from committed evidence"
     },
     {
       "priority": "P0",
-      "id": "unified-change-receipt",
-      "title": "Unified Change Receipt and BraidGraph evidence adapters"
+      "id": "real-longitudinal-evidence",
+      "issues": [55, 83],
+      "title": "Populate real owned-site Growth and controlled-cohort evidence"
     },
     {
       "priority": "P0",
-      "id": "signalbraid-watch",
-      "title": "Portfolio Watch over BraidGraph source/rule impact"
+      "id": "provider-native-measurement",
+      "title": "Harden provider-native Google/Bing/OpenAI/referral evidence semantics without a composite score"
     },
     {
       "priority": "P1",
-      "id": "portfolio-policy",
-      "title": "Portfolio policy-as-code"
+      "id": "first-run-journey",
+      "issues": [92, 94, 96],
+      "title": "One problem-first first-run journey ending in a concise Get Found Brief"
     },
     {
       "priority": "P1",
-      "id": "stack-packs",
-      "title": "Verified stack transformation packs"
+      "id": "surface-budget",
+      "issue": 95,
+      "title": "Surface Budget and Retirement Gate"
     },
     {
       "priority": "P1",
-      "id": "semantic-source-diff",
-      "title": "Semantic source-diff watcher"
-    },
-    {
-      "priority": "P1",
-      "id": "owner-connectors",
-      "title": "First-party owner evidence connectors"
-    },
-    {
-      "priority": "P2",
-      "id": "cohort-evidence",
-      "title": "Page-cohort outcome evidence helper"
-    },
-    {
-      "priority": "P2",
-      "id": "transformation-benchmark",
-      "title": "Public transformation regression benchmark"
+      "id": "portfolio-watch-scale",
+      "title": "Scale portfolio Watch only after several trustworthy evidence loops exist"
     }
+  ],
+  "deprioritizedUntilProof": [
+    "new top-level public modules without a demonstrated user job",
+    "new protocol adapters without a concrete blocked Goose workflow or interoperability failure",
+    "new AI-specific markup or files justified only by GEO folklore",
+    "indexable URL expansion that has not passed intent/page value gates",
+    "new composite readiness or AI visibility scores"
   ],
   "guardrails": {
     "noRankingGuarantee": true,
     "noCitationGuarantee": true,
     "noUniversalScore": true,
     "noInventedFacts": true,
+    "ownerDeclaredIsNotIndependentEvidence": true,
+    "deploymentParityBeforeMeasurement": true,
+    "providerNativeMetricsStayDistinct": true,
     "policyAndEditorialRemainGated": true,
     "negativeResultsPreserved": true,
     "historicalRuleVersionsPreserved": true
