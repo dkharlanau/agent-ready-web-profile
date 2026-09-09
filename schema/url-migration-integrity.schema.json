@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/url-migration-integrity.schema.json",
+  "title": "Goose URL Migration Integrity Report v0.1",
+  "description": "Bounded old-to-new URL transition evidence across live redirects, destination page state, optional repository/sitemap evidence and bounded internal-link observations. No ranking or signal-transfer guarantee.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "scope", "summary", "pairs", "actions", "sources", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "scope": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pairs", "checks", "pass", "fail", "watch", "unknown", "notProvided", "notApplicable", "pairsWithBlockingFindings"],
+      "properties": {
+        "pairs": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "checks": { "type": "integer", "minimum": 0 },
+        "pass": { "type": "integer", "minimum": 0 },
+        "fail": { "type": "integer", "minimum": 0 },
+        "watch": { "type": "integer", "minimum": 0 },
+        "unknown": { "type": "integer", "minimum": 0 },
+        "notProvided": { "type": "integer", "minimum": 0 },
+        "notApplicable": { "type": "integer", "minimum": 0 },
+        "pairsWithBlockingFindings": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "pairs": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": { "$ref": "#/$defs/pair" }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": { "$ref": "#/$defs/action" }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "format": "uri", "pattern": "^https://" }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["noRankingPromise", "noSignalTransferPromise", "canonicalIsNotRedirectProof", "boundedInternalLinksNotWholeSite", "crossOriginOldLinksRemainUnknown", "repositoryEvidenceNotLiveRedirectProof", "unknownRemainsUnknown", "noCompositeScore"],
+      "properties": {
+        "noRankingPromise": { "const": true },
+        "noSignalTransferPromise": { "const": true },
+        "canonicalIsNotRedirectProof": { "const": true },
+        "boundedInternalLinksNotWholeSite": { "const": true },
+        "crossOriginOldLinksRemainUnknown": { "const": true },
+        "repositoryEvidenceNotLiveRedirectProof": { "const": true },
+        "unknownRemainsUnknown": { "const": true },
+        "noCompositeScore": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "nullableUrl": { "anyOf": [{ "$ref": "#/$defs/url" }, { "type": "null" }] },
+    "hop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "status", "location"],
+      "properties": {
+        "url": { "$ref": "#/$defs/url" },
+        "status": { "type": "integer", "minimum": 100, "maximum": 599 },
+        "location": { "$ref": "#/$defs/nullableUrl" }
+      }
+    },
+    "redirectTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "requestedUrl", "finalUrl", "finalStatus", "redirectCount", "hops", "error"],
+      "properties": {
+        "state": { "enum": ["observed", "unavailable"] },
+        "requestedUrl": { "$ref": "#/$defs/url" },
+        "finalUrl": { "$ref": "#/$defs/nullableUrl" },
+        "finalStatus": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+        "redirectCount": { "type": ["integer", "null"], "minimum": 0, "maximum": 20 },
+        "hops": { "type": "array", "maxItems": 21, "items": { "$ref": "#/$defs/hop" } },
+        "error": { "type": ["string", "null"], "maxLength": 2000 }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "url", "status", "finalUrl", "contentType", "html", "canonical", "noindex", "error"],
+      "properties": {
+        "state": { "enum": ["observed", "unavailable"] },
+        "url": { "$ref": "#/$defs/url" },
+        "status": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+        "finalUrl": { "$ref": "#/$defs/nullableUrl" },
+        "contentType": { "type": ["string", "null"], "maxLength": 500 },
+        "html": { "type": ["boolean", "null"] },
+        "canonical": { "$ref": "#/$defs/nullableUrl" },
+        "noindex": { "type": ["boolean", "null"] },
+        "error": { "type": ["string", "null"], "maxLength": 2000 }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "beforeOld", "beforeNew", "afterOld", "afterNew"],
+      "properties": {
+        "state": { "enum": ["not-provided", "observed"] },
+        "beforeOld": { "enum": ["resolved", "ambiguous", "unresolved", "absent", "not-provided"] },
+        "beforeNew": { "enum": ["resolved", "ambiguous", "unresolved", "absent", "not-provided"] },
+        "afterOld": { "enum": ["resolved", "ambiguous", "unresolved", "absent", "not-provided"] },
+        "afterNew": { "enum": ["resolved", "ambiguous", "unresolved", "absent", "not-provided"] }
+      }
+    },
+    "sitemap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "oldPresent", "newPresent"],
+      "properties": {
+        "state": { "enum": ["not-provided", "observed"] },
+        "oldPresent": { "type": ["boolean", "null"] },
+        "newPresent": { "type": ["boolean", "null"] }
+      }
+    },
+    "internalLinks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "oldTargetEdges", "sourceUrlsPreview", "sourceUrlsPreviewTruncated", "reason"],
+      "properties": {
+        "state": { "enum": ["not-provided", "observed", "unknown"] },
+        "oldTargetEdges": { "type": ["integer", "null"], "minimum": 0 },
+        "sourceUrlsPreview": { "type": "array", "maxItems": 20, "uniqueItems": true, "items": { "$ref": "#/$defs/url" } },
+        "sourceUrlsPreviewTruncated": { "type": "boolean" },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 2000 }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "priority", "status", "message", "source", "evidence"],
+      "properties": {
+        "id": { "enum": ["redirect-destination", "redirect-directness", "target-availability", "target-indexability", "target-canonical", "repository-continuity", "canonical-sitemap", "internal-link-cleanup"] },
+        "priority": { "enum": ["P1", "P2"] },
+        "status": { "enum": ["pass", "fail", "watch", "unknown", "not-provided", "not-applicable"] },
+        "message": { "type": "string", "minLength": 1, "maxLength": 3000 },
+        "source": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "evidence": { "type": "array", "maxItems": 30, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 1000 } }
+      }
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "oldUrl", "newUrl", "redirectTrace", "target", "repository", "sitemap", "internalLinks", "checks"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "oldUrl": { "$ref": "#/$defs/url" },
+        "newUrl": { "$ref": "#/$defs/url" },
+        "redirectTrace": { "$ref": "#/$defs/redirectTrace" },
+        "target": { "$ref": "#/$defs/target" },
+        "repository": { "$ref": "#/$defs/repository" },
+        "sitemap": { "$ref": "#/$defs/sitemap" },
+        "internalLinks": { "$ref": "#/$defs/internalLinks" },
+        "checks": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/check" }
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "oldUrl", "newUrl", "checkId", "priority", "status", "reason", "verification", "source", "doesNotProve"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 220 },
+        "oldUrl": { "$ref": "#/$defs/url" },
+        "newUrl": { "$ref": "#/$defs/url" },
+        "checkId": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "priority": { "enum": ["P1", "P2"] },
+        "status": { "const": "review" },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 3000 },
+        "verification": { "type": "string", "minLength": 1, "maxLength": 3000 },
+        "source": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "doesNotProve": { "type": "string", "minLength": 1, "maxLength": 1000 }
+      }
+    }
+  }
+}
