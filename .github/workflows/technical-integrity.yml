@@ -7,8 +7,13 @@ on:
       - 'lib/technical-integrity.mjs'
       - 'bin/arwp-technical-integrity.mjs'
       - 'bin/arwp.mjs'
+      - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
+      - 'scripts/sync-technical-preflight-instructions.mjs'
+      - 'scripts/technical-preflight-instructions-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
+      - 'AGENTS.md'
+      - 'docs/AGENTS.md'
       - 'docs/TECHNICAL-INTEGRITY.md'
       - 'docs/discoverability.html'
       - 'docs/discoverability/**'
@@ -21,8 +26,13 @@ on:
       - 'lib/technical-integrity.mjs'
       - 'bin/arwp-technical-integrity.mjs'
       - 'bin/arwp.mjs'
+      - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
+      - 'scripts/sync-technical-preflight-instructions.mjs'
+      - 'scripts/technical-preflight-instructions-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
+      - 'AGENTS.md'
+      - 'docs/AGENTS.md'
       - 'docs/TECHNICAL-INTEGRITY.md'
       - 'docs/discoverability.html'
       - 'docs/discoverability/**'
@@ -35,7 +45,7 @@ on:
     types: [completed]
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   LIVE_GOOSE_URL: https://dkharlanau.github.io/agent-ready-web-profile/
@@ -48,11 +58,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Synchronize agent Technical Integrity preflight contract
+        run: node scripts/sync-technical-preflight-instructions.mjs
+      - name: Validate agent Technical Integrity preflight contract
+        run: node scripts/technical-preflight-instructions-test.mjs
       - name: Validate Technical Integrity rule pack
         run: node -e "const fs=require('fs'); const rules=JSON.parse(fs.readFileSync('registry/technical-integrity-rules.json','utf8')); if(!rules.rules?.length) throw new Error('empty Technical Integrity rules'); const ids=rules.rules.map(r=>r.id); if(new Set(ids).size!==ids.length) throw new Error('duplicate Technical Integrity rule id'); if(rules.methodology?.noCompositeScore!==true) throw new Error('noCompositeScore guardrail missing'); JSON.parse(fs.readFileSync('schema/technical-integrity-report.schema.json','utf8'));"
       - name: Run Technical Integrity regression
@@ -63,10 +78,27 @@ jobs:
           node --check bin/arwp-technical-integrity.mjs
           node --check bin/arwp.mjs
           node --check scripts/technical-integrity-test.mjs
+          node --check scripts/sync-technical-preflight-instructions.mjs
+          node --check scripts/technical-preflight-instructions-test.mjs
       - name: CLI help smoke
         run: |
           node bin/arwp-technical-integrity.mjs --help
           node bin/arwp.mjs technical-integrity --help
+      - name: Commit synchronized agent instructions
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git add AGENTS.md docs/AGENTS.md
+          if git diff --cached --quiet; then
+            echo 'Agent Technical Integrity instructions already match the canonical contract.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Sync Technical Integrity agent preflight'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
       - name: Confirm deployed bounded discoverability layout
         if: github.event_name == 'workflow_run' || github.event_name == 'workflow_dispatch'
         shell: bash
