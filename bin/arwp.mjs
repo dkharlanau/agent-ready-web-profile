@@ -7,6 +7,9 @@ if (process.argv[2] === 'site-gate') {
 } else if (process.argv[2] === 'freshness') {
   process.argv.splice(2, 1);
   await import('./arwp-freshness.mjs');
+} else if (process.argv[2] === 'treatment-cohort') {
+  process.argv.splice(2, 1);
+  await import('./arwp-treatment-cohort.mjs');
 } else {
   await import('./arwp-core.mjs');
 }
