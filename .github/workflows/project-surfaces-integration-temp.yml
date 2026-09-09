@@ -1,6 +1,6 @@
 name: Project Surfaces Integration Temporary
 
-# Retry after bounded deprecated-brand correction.
+# Retry after Names & Marks HTML normalization.
 on:
   push:
     branches: [feature/project-maturity-surfaces-2026-09-09]
