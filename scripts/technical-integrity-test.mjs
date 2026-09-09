@@ -44,7 +44,7 @@ const clean = analyzeTechnicalIntegrityFromPages({
   generatedAt: '2026-09-09T12:00:00.000Z'
 });
 assert.equal(clean.version, '0.2');
-assert.equal(clean.rulesVersion, '0.2');
+assert.equal(clean.rulesVersion, '0.3');
 assert.equal(clean.guardrails.noCompositeScore, true);
 assert.equal(clean.guardrails.boundedFetchFailureIsNotIndexabilityFailure, true);
 assert.equal(clean.guardrails.nonHtmlDoesNotRequireHtmlCanonical, true);
@@ -52,6 +52,8 @@ assert.equal('score' in clean, false);
 assert.equal(clean.summary.p0Failures, 0);
 assert.equal(clean.checks.find(item => item.id === 'google-ai-snippet-eligibility').status, 'pass');
 assert.equal(clean.checks.find(item => item.id === 'google-priority-url-robots-access').status, 'pass');
+assert.equal(clean.checks.find(item => item.id === 'bounded-internal-link-target-health').status, 'watch');
+assert.match(clean.checks.find(item => item.id === 'bounded-internal-link-target-health').message, /No executable detector/);
 assert.equal(clean.checks.find(item => item.id === 'hreflang-cluster-integrity').status, 'not-applicable');
 assert.match(formatTechnicalIntegrityReport(clean), /No composite Search\/AI score/);
 
@@ -144,16 +146,8 @@ const de = 'https://example.com/de/';
 const localized = analyzeTechnicalIntegrityFromPages({
   canonicalUrl: en,
   pages: [
-    page(en, html({
-      title: 'English',
-      canonical: en,
-      hreflang: [{ lang: 'en', url: en }, { lang: 'de', url: de }]
-    })),
-    page(de, html({
-      title: 'Deutsch',
-      canonical: de,
-      hreflang: [{ lang: 'de', url: de }, { lang: 'en', url: en }]
-    }))
+    page(en, html({ title: 'English', canonical: en, hreflang: [{ lang: 'en', url: en }, { lang: 'de', url: de }] })),
+    page(de, html({ title: 'Deutsch', canonical: de, hreflang: [{ lang: 'de', url: de }, { lang: 'en', url: en }] }))
   ],
   robots: { url: 'https://example.com/robots.txt', ok: true, status: 200, text: 'User-agent: *\nAllow: /\n' },
   generatedAt: '2026-09-09T12:00:00.000Z'
@@ -163,16 +157,8 @@ assert.equal(localized.checks.find(item => item.id === 'hreflang-cluster-integri
 const brokenLocalized = analyzeTechnicalIntegrityFromPages({
   canonicalUrl: en,
   pages: [
-    page(en, html({
-      title: 'English',
-      canonical: en,
-      hreflang: [{ lang: 'en', url: en }, { lang: 'de', url: de }]
-    })),
-    page(de, html({
-      title: 'Deutsch',
-      canonical: de,
-      hreflang: [{ lang: 'de', url: de }]
-    }))
+    page(en, html({ title: 'English', canonical: en, hreflang: [{ lang: 'en', url: en }, { lang: 'de', url: de }] })),
+    page(de, html({ title: 'Deutsch', canonical: de, hreflang: [{ lang: 'de', url: de }] }))
   ],
   robots: { url: 'https://example.com/robots.txt', ok: true, status: 200, text: 'User-agent: *\nAllow: /\n' },
   generatedAt: '2026-09-09T12:00:00.000Z'
