@@ -16,13 +16,22 @@ function intOption(name, fallback, min, max) {
   return value;
 }
 
+function printHelp() {
+  console.log(`Usage: arwp-technical-integrity <https://site.example/> [options]\n\nOptions:\n  --json                 Emit machine-readable JSON\n  --max-pages=N          Bounded priority cohort, 1-50 (default 20)\n  --concurrency=N        Parallel public fetches, 1-10 (default 4)\n  --timeout=N            Per-request timeout in ms (default 8000)\n\nThe command runs a bounded public technical Search/AI integrity audit. It does not produce a readiness score and does not claim indexing, ranking or citation outcomes.`);
+}
+
 const args = process.argv.slice(2).filter(value => !value.startsWith('--'));
 const source = args[0];
 const json = process.argv.includes('--json');
+const help = process.argv.includes('--help') || process.argv.includes('-h');
 
-if (!source || process.argv.includes('--help') || process.argv.includes('-h')) {
-  console.log(`Usage: arwp-technical-integrity <https://site.example/> [options]\n\nOptions:\n  --json                 Emit machine-readable JSON\n  --max-pages=N          Bounded priority cohort, 1-50 (default 20)\n  --concurrency=N        Parallel public fetches, 1-10 (default 4)\n  --timeout=N            Per-request timeout in ms (default 8000)\n\nThe command runs a bounded public technical Search/AI integrity audit. It does not produce a readiness score and does not claim indexing, ranking or citation outcomes.`);
-  process.exit(source ? 0 : 1);
+if (help) {
+  printHelp();
+  process.exit(0);
+}
+if (!source) {
+  printHelp();
+  process.exit(1);
 }
 
 try {
