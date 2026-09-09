@@ -1,18 +1,16 @@
-name: Goose Brand Migration Temporary
+name: Goose Brand Finalization Temporary
 
 on:
   push:
     branches: [brand/goose-cleanup-2026-09-09]
     paths:
       - '.github/workflows/goose-brand-migration-temp.yml'
-      - 'scripts/goose-brand-migration.mjs'
-      - 'scripts/goose-brand-test.mjs'
 
 permissions:
   contents: write
 
 jobs:
-  migrate:
+  finalize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -22,22 +20,28 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
-          cache: npm
-      - name: Install dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Migrate current brand surfaces
+      - name: Add canonical Goose brand doc to package surface
         run: |
-          node scripts/goose-brand-migration.mjs
-          node scripts/build-discoverability.mjs
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const file = 'package.json';
+          const pkg = JSON.parse(fs.readFileSync(file, 'utf8'));
+          const legacy = 'docs/BRAND-CITE-GOOSE.md';
+          const canonical = 'docs/BRAND-GOOSE.md';
+          const legacyIndex = pkg.files.indexOf(legacy);
+          if (legacyIndex < 0) throw new Error(`${legacy} missing from package files`);
+          if (!pkg.files.includes(canonical)) pkg.files.splice(legacyIndex, 0, canonical);
+          fs.writeFileSync(file, `${JSON.stringify(pkg, null, 2)}\n`);
+          NODE
           node scripts/goose-brand-test.mjs
-      - name: Commit generated migration
+      - name: Commit package finalization
         run: |
-          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
-            echo "No brand migration changes produced."
+          if git diff --quiet; then
+            echo "Package surface already finalized."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "chore(brand): migrate current surfaces to Goose"
+          git add package.json
+          git commit -m "chore(brand): ship canonical Goose brand document"
           git push origin "HEAD:${GITHUB_REF_NAME}"
