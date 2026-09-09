@@ -1,0 +1,132 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-09",
+  "provider": "google",
+  "title": "ARWP Regional Search Surface Registry",
+  "purpose": "Map provider-documented regional Search experiences to explicit market, query-type and participation checks so growth work does not assume that every Search surface is globally available.",
+  "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+  "sourceLastUpdated": "2026-09-08",
+  "guardrails": {
+    "regionalAvailabilityIsNotRankingFactor": true,
+    "featureEligibilityIsNotPlacementGuarantee": true,
+    "doNotGeneralizeBeyondListedMarkets": true,
+    "structuredDataOnlyWhenFeatureRequiresIt": true,
+    "companyBaseAndBusinessRoleRequireOwnerConfirmation": true,
+    "noUniversalRegionalScore": true
+  },
+  "markets": [
+    { "id": "eea", "label": "European Economic Area" },
+    { "id": "turkiye", "label": "Türkiye" },
+    { "id": "south-africa", "label": "South Africa" }
+  ],
+  "features": [
+    {
+      "id": "google-eea-aggregator-unit",
+      "market": "eea",
+      "feature": "Aggregator unit",
+      "queryTypes": ["hotels", "flights", "ground-transportation", "products"],
+      "eligibleRoles": ["aggregator"],
+      "requiresStructuredData": false,
+      "action": "Review the provider's Aggregator unit participation and eligibility instructions for the real business before implementing any feature-specific integration.",
+      "verification": "Confirm the company is EEA-based, the business actually acts as an aggregator for the selected query type, and all feature-specific eligibility/participation requirements are satisfied.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Eligibility or participation does not guarantee that an Aggregator unit will appear or that the site will rank higher."
+    },
+    {
+      "id": "google-eea-supplier-unit",
+      "market": "eea",
+      "feature": "Supplier unit",
+      "queryTypes": ["hotels", "flights", "ground-transportation", "products"],
+      "eligibleRoles": ["direct-supplier"],
+      "requiresStructuredData": false,
+      "action": "Review the provider's Supplier unit participation and eligibility instructions for the real direct supplier before implementing any feature-specific integration.",
+      "verification": "Confirm the company is EEA-based, directly supplies the selected offering, and satisfies the current feature-specific requirements.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Eligibility or participation does not guarantee a Supplier unit appearance or higher organic ranking."
+    },
+    {
+      "id": "google-eea-ecosystem-carousel",
+      "market": "eea",
+      "feature": "Ecosystem carousel",
+      "queryTypes": ["weather", "sports", "finance", "translate"],
+      "eligibleRoles": ["content-provider", "data-provider"],
+      "requiresStructuredData": false,
+      "action": "Review the Ecosystem carousel participation requirements only when the site supplies genuine interactive/data content for the selected query type.",
+      "verification": "Confirm the company is EEA-based, exposes a real relevant data/content service, and meets the current provider participation requirements.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Participation does not guarantee carousel inclusion, traffic, citation, or ranking improvement."
+    },
+    {
+      "id": "google-eea-job-sites",
+      "market": "eea",
+      "feature": "Job sites features",
+      "queryTypes": ["jobs"],
+      "eligibleRoles": ["aggregator", "job-site"],
+      "requiresStructuredData": false,
+      "action": "Review the Job sites feature eligibility and participation path for a genuine job aggregator/site rather than creating job-shaped pages solely for Search exposure.",
+      "verification": "Confirm the company is EEA-based, the site genuinely provides job listings/aggregation, and the current feature requirements are met.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Feature eligibility does not guarantee carousel or refinement-chip inclusion."
+    },
+    {
+      "id": "google-turkiye-places-sites",
+      "market": "turkiye",
+      "feature": "Places sites features",
+      "queryTypes": ["hotels", "local-businesses"],
+      "eligibleRoles": ["aggregator", "places-site"],
+      "requiresStructuredData": false,
+      "action": "Review the Places sites feature requirements for a genuine Türkiye-based places/hotel/local-business aggregation service.",
+      "verification": "Confirm the company is based in Türkiye, matches the supported query type and business role, and satisfies current provider requirements.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Feature eligibility does not guarantee placement in the Places sites carousel or refinement chip."
+    },
+    {
+      "id": "google-south-africa-badge-refinement",
+      "market": "south-africa",
+      "feature": "South Africa badge and refinement chip",
+      "queryTypes": ["travel", "products", "car-hire", "food-delivery", "ground-transportation"],
+      "eligibleRoles": ["business", "aggregator", "direct-supplier"],
+      "requiresStructuredData": false,
+      "action": "Review the South Africa badge/refinement eligibility instructions for the real business and supported query type.",
+      "verification": "Confirm the business is South Africa-based and satisfies the current feature-specific requirements for the selected query type.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Eligibility does not guarantee a badge/refinement appearance or organic ranking improvement."
+    },
+    {
+      "id": "google-eea-structured-data-carousel",
+      "market": "eea",
+      "feature": "Structured data carousels",
+      "queryTypes": ["hotels", "local-businesses", "things-to-do", "products", "ground-transportation", "flights", "vacation-rentals"],
+      "eligibleRoles": ["publisher", "aggregator", "direct-supplier", "content-provider"],
+      "requiresStructuredData": true,
+      "action": "Use the feature-specific structured-data carousel documentation only for a real list-like page whose visible entities and facts support the required markup.",
+      "verification": "Confirm EEA company base, supported query type, feature-specific structured-data validity, visible-fact parity, canonical/indexable host page, and any additional provider eligibility requirements.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Valid structured data makes a page eligible for the feature; it does not guarantee a rich result or higher ranking."
+    },
+    {
+      "id": "google-south-africa-structured-data-carousel",
+      "market": "south-africa",
+      "feature": "Structured data carousels",
+      "queryTypes": ["hotels", "things-to-do", "flights", "products", "food-delivery", "car-hire", "vacation-rentals", "ground-transportation"],
+      "eligibleRoles": ["publisher", "aggregator", "direct-supplier", "content-provider"],
+      "requiresStructuredData": true,
+      "action": "Use the feature-specific structured-data carousel documentation only when the site has genuine list/entity content for a supported South African query type.",
+      "verification": "Confirm South Africa company base, supported query type, valid feature-specific markup, visible-fact parity, canonical/indexable host page, and current provider eligibility requirements.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Valid structured data is an eligibility condition, not a rich-result or ranking guarantee."
+    },
+    {
+      "id": "google-turkiye-structured-data-carousel",
+      "market": "turkiye",
+      "feature": "Structured data carousels",
+      "queryTypes": ["hotels", "local-businesses", "vacation-rentals"],
+      "eligibleRoles": ["publisher", "aggregator", "direct-supplier", "content-provider"],
+      "requiresStructuredData": true,
+      "action": "Use the feature-specific structured-data carousel documentation only when the site has genuine list/entity content for a supported Türkiye query type.",
+      "verification": "Confirm Türkiye company base, supported query type, valid feature-specific markup, visible-fact parity, canonical/indexable host page, and current provider eligibility requirements.",
+      "source": "https://developers.google.com/search/docs/appearance/aggregator-features",
+      "doesNotProve": "Valid structured data is an eligibility condition, not a rich-result or ranking guarantee."
+    }
+  ]
+}
