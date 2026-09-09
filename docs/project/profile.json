@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "reviewedAt": "2026-09-09",
+  "scope": "Goose house maturity surface manifest. It is not a legal checklist, search ranking factor, certification, or substitute for jurisdiction-specific advice.",
+  "product": {
+    "name": "Goose ARWP",
+    "shortName": "Goose",
+    "technicalName": "Agent-Ready Web Profile",
+    "technicalAbbreviation": "ARWP",
+    "tagline": "Get Found.",
+    "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/"
+  },
+  "owner": {
+    "id": "https://dkharlanau.github.io/agent-ready-web-profile/#maintainer",
+    "name": "Dzmitryi Kharlanau",
+    "type": "Person"
+  },
+  "companyRouting": {
+    "name": "Metalhead Cats",
+    "role": "commercial-partnership-and-company-collaboration",
+    "url": "https://metalheadscats.com/company/",
+    "status": "owner-declared-external-route",
+    "availabilityVerifiedByThisRepository": false,
+    "note": "The link target is configured by the project owner. This manifest does not assert a legal entity type, employment relationship, endorsement, or live availability of the external site."
+  },
+  "requiredSurfaces": [
+    {
+      "id": "project-identity",
+      "path": "docs/project/index.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/",
+      "job": "Explain project identity, ownership, maturity surfaces and where each policy lives."
+    },
+    {
+      "id": "copyright-rights",
+      "path": "docs/project/rights.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/rights.html",
+      "job": "Separate software licensing, project-authored content reuse, AI/media reuse and third-party rights."
+    },
+    {
+      "id": "names-marks",
+      "path": "docs/project/marks.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/marks.html",
+      "job": "Publish canonical names, project-reserved naming roles, legacy names, affiliation boundaries and trademark-status limits."
+    },
+    {
+      "id": "partnership-collaboration",
+      "path": "docs/project/collaboration.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/collaboration.html",
+      "job": "Explain contribution, research, integration and commercial collaboration routes with disclosure boundaries."
+    },
+    {
+      "id": "governance",
+      "path": "docs/project/governance.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/governance.html",
+      "job": "Explain maintainer authority, evidence rules, change decisions, release state and commercial-conflict boundaries."
+    },
+    {
+      "id": "contact-routing",
+      "path": "docs/project/collaboration.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/collaboration.html#routes",
+      "job": "Route general collaboration, commercial, security, correction and media requests to the right channel."
+    },
+    {
+      "id": "security",
+      "path": "SECURITY.md",
+      "publicUrl": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/SECURITY.md",
+      "job": "Provide a responsible security reporting path and scope."
+    },
+    {
+      "id": "corrections",
+      "path": "docs/trust/corrections.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/trust/corrections.html",
+      "job": "Keep material factual corrections inspectable instead of silently rewriting published claims."
+    },
+    {
+      "id": "change-history",
+      "path": "docs/history.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/history.html",
+      "job": "Expose project evolution, stage and meaningful changes over time."
+    }
+  ],
+  "conditionalSurfaces": [
+    {
+      "id": "privacy-data-use",
+      "applicable": true,
+      "path": "docs/project/privacy.html",
+      "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/privacy.html",
+      "reason": "The public site includes consent-gated analytics code, so data-use behavior should be explained."
+    },
+    {
+      "id": "terms-service",
+      "applicable": false,
+      "reason": "The current static project site does not offer accounts, checkout, a paid hosted service, or a user-submission workflow whose contractual terms need a dedicated site page."
+    },
+    {
+      "id": "service-status",
+      "applicable": false,
+      "reason": "The current public project does not promise a hosted-service uptime or support SLA."
+    },
+    {
+      "id": "accessibility-statement",
+      "applicable": false,
+      "reason": "Accessibility is an implementation requirement in the project, but no jurisdiction-specific public accessibility statement is currently asserted. Add one when an applicable commitment or legal duty is identified."
+    }
+  ],
+  "projectNames": [
+    {
+      "name": "Goose ARWP",
+      "role": "canonical-product-name",
+      "status": "active-project-reserved",
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "Goose",
+      "role": "short-product-name",
+      "status": "active-project-reserved",
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "Agent-Ready Web Profile",
+      "role": "technical-project-name",
+      "status": "active-project-reserved",
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "ARWP",
+      "role": "established-technical-abbreviation",
+      "status": "project-identifier",
+      "exclusiveAcronymRightsClaimed": false,
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "Get Found.",
+      "role": "primary-tagline",
+      "status": "active-brand-copy",
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "Goose Radar / Goose Map / Goose Plan / Goose Patch / Goose Proof / Goose Watch",
+      "role": "namespaced-product-modules",
+      "status": "active-project-reserved",
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "BraidGraph",
+      "role": "project-defined-technical-primitive",
+      "status": "active-project-term",
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "Cite Goose",
+      "role": "legacy-public-name",
+      "status": "deprecated-retained-for-history-and-path-compatibility",
+      "registeredTrademarkClaimed": false
+    },
+    {
+      "name": "SignalBraid",
+      "role": "historical-design-direction",
+      "status": "historical-not-current-public-brand",
+      "registeredTrademarkClaimed": false
+    }
+  ],
+  "guardrails": {
+    "pageCountIsNotMaturity": true,
+    "legalComplianceClaimedByPresence": false,
+    "rankingBenefitClaimed": false,
+    "trademarkRegistrationClaimed": false,
+    "partnershipImpliesEndorsement": false,
+    "conditionalSurfacesMustMatchActualSiteBehavior": true
+  }
+}
