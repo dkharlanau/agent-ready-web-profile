@@ -118,7 +118,10 @@
       "allOf": [
         {
           "if": { "properties": { "status": { "const": "generated" } }, "required": ["status"] },
-          "then": { "required": ["receiptId"] }
+          "then": {
+            "properties": { "receiptId": { "type": "string", "minLength": 1 } },
+            "required": ["receiptId"]
+          }
         }
       ]
     }
