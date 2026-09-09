@@ -13,7 +13,7 @@ const html = fs.readFileSync(path.join(root, 'docs', 'evidence-lab', 'index.html
 const css = fs.readFileSync(path.join(root, 'docs', 'evidence-lab', 'evidence-lab.css'), 'utf8');
 const sitemap = fs.readFileSync(path.join(root, 'docs', 'sitemap.xml'), 'utf8');
 
-assert.equal(lab.product, 'Goose');
+assert.equal(lab.product, 'Goose ARWP');
 assert.equal(lab.technicalCore, 'Agent-Ready Web Profile (ARWP)');
 assert.equal(lab.firstExperiment.id, cohort.id);
 assert.equal(lab.firstExperiment.status, cohort.status);

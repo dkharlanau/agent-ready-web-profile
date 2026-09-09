@@ -44,7 +44,7 @@ for (const file of [
 }
 
 const html = fs.readFileSync(htmlPath, 'utf8');
-assert.match(html, /<h1>Make your site<br>worth citing\.<\/h1>/i);
+assert.match(html, /<h1>Get<br>Found\.<\/h1>/i);
 assert.match(html, /Help agents find their way around/i);
 assert.match(html, /Without a resolver/i);
 assert.match(html, /With ARWP Resolver/i);
