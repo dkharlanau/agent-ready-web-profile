@@ -1,0 +1,41 @@
+name: Goose Brand Migration Temporary
+
+on:
+  push:
+    branches: [brand/goose-cleanup-2026-09-09]
+    paths:
+      - '.github/workflows/goose-brand-migration-temp.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Migrate current brand surfaces
+        run: |
+          node scripts/goose-brand-migration.mjs
+          node scripts/build-discoverability.mjs
+          node scripts/goose-brand-test.mjs
+      - name: Commit generated migration
+        run: |
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+            echo "No brand migration changes produced."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(brand): migrate current surfaces to Goose"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
