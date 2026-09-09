@@ -1,14 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/visibility-snapshot.schema.json",
-  "title": "ARWP Search and AI Visibility Snapshot v0.1",
-  "description": "Evidence contract for comparing observable search/AI visibility signals without inferring ranking or causality from ARWP adoption.",
+  "title": "ARWP Search and AI Visibility Snapshot v0.2",
+  "description": "Evidence contract for comparing observable Search, generative-AI, citation, crawler and referral signals without inferring ranking or causality from ARWP adoption. The v0.2 schema remains backward-compatible with v0.1 snapshots.",
   "type": "object",
   "additionalProperties": false,
   "required": ["version", "site", "capturedAt", "period", "sources", "guardrails"],
   "properties": {
     "$schema": { "type": "string", "format": "uri" },
-    "version": { "const": "0.1" },
+    "version": { "type": "string", "enum": ["0.1", "0.2"] },
     "site": { "type": "string", "format": "uri", "pattern": "^https://" },
     "capturedAt": { "type": "string", "format": "date-time" },
     "period": {
@@ -34,6 +34,7 @@
             "enum": [
               "google-search-console-generative-ai",
               "bing-webmaster-ai-performance",
+              "cloudflare-ai-crawl-control",
               "referral-analytics",
               "manual-observation"
             ]
@@ -44,20 +45,31 @@
             "additionalProperties": false,
             "properties": {
               "aiImpressions": { "type": "number", "minimum": 0 },
+              "aiVisiblePages": { "type": "number", "minimum": 0 },
+              "aiVisibleCountries": { "type": "number", "minimum": 0 },
+              "aiVisibleDevices": { "type": "number", "minimum": 0 },
               "totalCitations": { "type": "number", "minimum": 0 },
               "averageCitedPages": { "type": "number", "minimum": 0 },
               "citedPages": { "type": "number", "minimum": 0 },
               "groundingQueriesSampled": { "type": "number", "minimum": 0 },
+              "aiCrawlerRequests": { "type": "number", "minimum": 0 },
+              "aiCrawlerAllowedRequests": { "type": "number", "minimum": 0 },
+              "aiCrawlerSuccessfulRequests": { "type": "number", "minimum": 0 },
+              "aiCrawlerUnsuccessfulRequests": { "type": "number", "minimum": 0 },
+              "aiCrawlerReferrals": { "type": "number", "minimum": 0 },
+              "bytesTransferred": { "type": "number", "minimum": 0 },
               "referrals": { "type": "number", "minimum": 0 },
+              "engagedVisits": { "type": "number", "minimum": 0 },
+              "taskCompletions": { "type": "number", "minimum": 0 },
               "externalMentions": { "type": "number", "minimum": 0 }
             }
           },
           "evidence": { "type": "string", "format": "uri" },
-          "notes": { "type": "string", "maxLength": 1000 }
+          "notes": { "type": "string", "maxLength": 2000 }
         }
       }
     },
-    "notes": { "type": "array", "maxItems": 30, "items": { "type": "string", "maxLength": 1000 } },
+    "notes": { "type": "array", "maxItems": 50, "items": { "type": "string", "maxLength": 1000 } },
     "guardrails": {
       "type": "object",
       "additionalProperties": false,

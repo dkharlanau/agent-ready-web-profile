@@ -1,0 +1,119 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-09",
+  "title": "ARWP Site Readiness Gate",
+  "mode": "non-composite-gates",
+  "purpose": "Decide whether a site has enough technical, content, identity and measurement integrity to begin or interpret a Search/AI acquisition experiment without reducing readiness to a vanity score.",
+  "statusVocabulary": ["pass", "fail", "manual-pass", "manual-fail", "owner-data", "not-applicable", "watch"],
+  "blockingPolicy": {
+    "p0FailBlocksOutcomeInterpretation": true,
+    "missingOwnerDataIsNotZero": true,
+    "noSingleReadinessScore": true,
+    "implementationCanProceedWhileBlocked": true
+  },
+  "gates": [
+    {
+      "id": "site-boundary",
+      "priority": "P0",
+      "checks": [
+        {"id": "primary-problem", "mode": "manual", "requirement": "The site states the primary user/problem/task it serves."},
+        {"id": "scope-exclusion", "mode": "manual", "requirement": "The site or adoption record states what the site intentionally does not cover."},
+        {"id": "priority-cohort", "mode": "manual", "requirement": "A bounded priority page cohort exists for measurement instead of treating every URL equally."},
+        {"id": "real-outcome", "mode": "owner-data", "requirement": "At least one site-specific downstream task or conversion is defined."}
+      ]
+    },
+    {
+      "id": "eligibility-canonical",
+      "priority": "P0",
+      "checks": [
+        {"id": "priority-http-success", "mode": "automated", "requirement": "Priority URLs return the intended successful HTTP status."},
+        {"id": "crawler-access-intentional", "mode": "automated+manual", "requirement": "Search/answer crawler access is intentional and not accidentally blocked."},
+        {"id": "indexability-canonical-sitemap-parity", "mode": "automated", "requirement": "Indexability, canonical target and sitemap membership agree for priority pages."},
+        {"id": "meaningful-lastmod", "mode": "automated+manual", "requirement": "Sitemap freshness represents significant content changes rather than unconditional build time."},
+        {"id": "variant-control", "mode": "automated+manual", "requirement": "Redirects, locale variants, filters and query variants do not create competing canonical identities."}
+      ]
+    },
+    {
+      "id": "page-value-citability",
+      "priority": "P0",
+      "checks": [
+        {"id": "direct-answer-or-value", "mode": "manual", "requirement": "The first useful content states the page's answer or concrete value."},
+        {"id": "non-commodity-contribution", "mode": "manual", "requirement": "Priority pages add original evidence, data, experience, analysis, calculation, curation or an executable utility."},
+        {"id": "claim-evidence-boundary", "mode": "manual", "requirement": "Material factual claims have inspectable evidence or an explicit uncertainty/evidence boundary."},
+        {"id": "addressable-sections", "mode": "automated+manual", "requirement": "Important sections can be linked and retrieved directly."},
+        {"id": "standalone-useful", "mode": "manual", "requirement": "A direct landing visitor can perform a useful task without first understanding the site's internal taxonomy."}
+      ]
+    },
+    {
+      "id": "entity-data-integrity",
+      "priority": "P0",
+      "checks": [
+        {"id": "stable-entity-identity", "mode": "automated+manual", "requirement": "Canonical entities use stable reusable identities across public representations."},
+        {"id": "visible-structured-parity", "mode": "automated+manual", "requirement": "Structured data and machine-readable exports do not contradict visible public facts."},
+        {"id": "genuine-dataset", "mode": "manual", "requirement": "Dataset metadata describes a real reusable corpus when dataset surfaces are used."},
+        {"id": "relation-truth", "mode": "manual", "requirement": "Published entity relationships are semantically meaningful rather than generated keyword adjacency."}
+      ]
+    },
+    {
+      "id": "ai-agent-access",
+      "priority": "P1",
+      "checks": [
+        {"id": "crawler-purpose-split", "mode": "manual", "requirement": "Search/answer retrieval policy is reviewed separately from model-training policy where provider controls differ."},
+        {"id": "real-agent-surface", "mode": "manual", "requirement": "llms.txt/skills/API/MCP/A2A/WebMCP/ARD/ARWP declarations correspond to real useful content or capability."},
+        {"id": "runtime-evidence", "mode": "runtime", "requirement": "Runtime capabilities are backed by runtime evidence rather than static metadata only."},
+        {"id": "semantic-agent-ux", "mode": "automated+manual", "requirement": "Primary tasks expose semantic HTML, usable links/buttons and meaningful accessible names before agent-specific optimization."}
+      ]
+    },
+    {
+      "id": "measurement-baseline",
+      "priority": "P0",
+      "checks": [
+        {"id": "dated-window", "mode": "owner-data", "requirement": "Baseline start/end and change timestamp are recorded."},
+        {"id": "google-generative-native", "mode": "owner-data", "requirement": "Google generative AI evidence comes from the dedicated provider report; ordinary Search impressions are not relabeled."},
+        {"id": "bing-ai-native", "mode": "owner-data", "requirement": "Bing citation/cited-page/grounding-query evidence is retained when available."},
+        {"id": "ai-referral-attribution", "mode": "owner-data", "requirement": "AI referrals retain source/referrer/UTM evidence when available."},
+        {"id": "crawler-observability", "mode": "owner-data", "requirement": "AI crawler requests, response success and policy state are retained when edge/server evidence is available."},
+        {"id": "task-outcome", "mode": "owner-data", "requirement": "A first-party task outcome is measured for referred visits where the product supports it."}
+      ]
+    },
+    {
+      "id": "measurement-integrity",
+      "priority": "P0",
+      "checks": [
+        {"id": "provider-local-denominator", "mode": "manual", "requirement": "Derived ratios use the same provider/population/window unless an explicit join key exists."},
+        {"id": "no-cross-provider-conversion", "mode": "automated+manual", "requirement": "No cross-provider pseudo-conversion rate such as Bing citations divided by Google AI impressions is used."},
+        {"id": "no-single-ai-score", "mode": "manual", "requirement": "No synthetic AI visibility score is treated as the system of record."},
+        {"id": "missing-is-unknown", "mode": "automated", "requirement": "Missing metrics remain missing/partial/unavailable rather than becoming zero."},
+        {"id": "replayable-provenance", "mode": "manual", "requirement": "Provider exports/evidence locations are preserved for replay and review."}
+      ]
+    },
+    {
+      "id": "experiment-design",
+      "priority": "P1",
+      "checks": [
+        {"id": "predeclared-hypothesis", "mode": "manual", "requirement": "Hypothesis IDs and tested implementation actions are recorded before outcome review."},
+        {"id": "bounded-treatment", "mode": "manual", "requirement": "Treatment pages form a bounded cohort; large generated sites start with priority cohorts before scale."},
+        {"id": "control-or-baseline", "mode": "manual", "requirement": "Comparable unchanged pages are retained when practical; otherwise a dated pre-change baseline is preserved."},
+        {"id": "success-guardrail-stop", "mode": "manual", "requirement": "Success signals, guardrails and stop conditions are defined before measurement."}
+      ]
+    },
+    {
+      "id": "data-site-specialization",
+      "priority": "P1",
+      "appliesTo": ["research-dataset", "large-knowledge-site", "data-site"],
+      "checks": [
+        {"id": "page-value-gate", "mode": "manual", "requirement": "Indexable entity pages pass demand, unique-value, standalone-usefulness and canonical-identity gates."},
+        {"id": "deep-discovery-path", "mode": "automated+manual", "requirement": "Priority deep pages have useful crawlable paths from collections/hubs or related entities."},
+        {"id": "deep-page-contribution", "mode": "owner-data", "requirement": "Deep-page contribution is measured separately for exposure, citations, referrals and task outcomes."},
+        {"id": "crawl-growth-vs-value", "mode": "owner-data", "requirement": "Crawl/index growth is reviewed against useful discovery growth; raw page count is not a success metric."}
+      ]
+    }
+  ],
+  "references": [
+    "templates/growth/growth-loop-checklist.md",
+    "docs/MEASUREMENT-OS.md",
+    "registry/measurement-patterns.json",
+    "registry/data-authority-experiments.json",
+    "docs/GROWTH-EXPERIMENTS.md"
+  ]
+}

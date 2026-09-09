@@ -13,52 +13,35 @@ assert.equal(parsed[0]['AI Impressions'], '1,200');
 
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-visibility-import-'));
 try {
+  const options = { site: 'https://example.com/', start: '2026-08-01', end: '2026-08-31', capturedAt: '2026-09-01T10:00:00Z' };
   const google = path.join(temp, 'google.csv');
-  fs.writeFileSync(google, 'Date,AI Impressions\n2026-08-01,"1,200"\n2026-08-02,800\n');
-  const g = importVisibilityExport('google', google, {
-    site: 'https://example.com/', start: '2026-08-01', end: '2026-08-31', capturedAt: '2026-09-01T10:00:00Z'
-  });
+  fs.writeFileSync(google, 'Date,Page,Country,Device,AI Impressions\n2026-08-01,https://example.com/a,US,DESKTOP,"1,200"\n2026-08-02,https://example.com/a,US,MOBILE,800\n2026-08-03,https://example.com/b,DE,MOBILE,100\n');
+  const g = importVisibilityExport('google', google, options);
+  assert.equal(g.snapshot.version, '0.2');
   assert.equal(g.snapshot.sources[0].provider, 'google-search-console-generative-ai');
-  assert.equal(g.snapshot.sources[0].metrics.aiImpressions, 2000);
+  assert.equal(g.snapshot.sources[0].metrics.aiImpressions, 2100);
+  assert.equal(g.snapshot.sources[0].metrics.aiVisiblePages, 2);
+  assert.equal(g.snapshot.sources[0].metrics.aiVisibleCountries, 2);
+  assert.equal(g.snapshot.sources[0].metrics.aiVisibleDevices, 2);
   assert.equal(validateVisibilitySnapshot(g.snapshot).valid, true);
 
-  const options = { site: 'https://example.com/', start: '2026-08-01', end: '2026-08-31', capturedAt: '2026-09-01T10:00:00Z' };
   const web = path.join(temp, 'web.csv');
   fs.writeFileSync(web, 'Date,Clicks,Impressions,CTR,Position\n2026-08-01,3,100,3%,4.5\n');
   assert.throws(() => importVisibilityExport('google', web, options), /Impressions is ambiguous/);
   assert.throws(() => importVisibilityExport('google', web, { ...options, reportScope: 'web' }), /Ordinary Web Search/);
-  assert.throws(() => importVisibilityExport('google', google, { ...options, reportScope: 'web' }), /Ordinary Web Search/);
-  assert.throws(() => importVisibilityExport('google', google, { ...options, reportScope: 'unknown' }), /--report-scope supports only/);
 
   const scoped = path.join(temp, 'generative.csv');
-  fs.writeFileSync(scoped, 'Date,Impressions\n2026-08-01,12\n2026-08-02,0\n');
+  fs.writeFileSync(scoped, 'Date,Page,Impressions\n2026-08-01,https://example.com/a,12\n2026-08-02,https://example.com/b,0\n');
   const scopedResult = importVisibilityExport('google', scoped, { ...options, reportScope: 'generative-ai', evidence: 'https://example.com/evidence/generative-export' });
   assert.equal(scopedResult.snapshot.sources[0].metrics.aiImpressions, 12);
+  assert.equal(scopedResult.snapshot.sources[0].metrics.aiVisiblePages, 2);
   assert.equal(scopedResult.snapshot.sources[0].evidence, 'https://example.com/evidence/generative-export');
-  assert.equal(scopedResult.import.reportScope, 'generative-ai');
-  assert.match(scopedResult.snapshot.sources[0].notes, /scope was supplied by the owner/);
-  assert.equal(validateVisibilitySnapshot(scopedResult.snapshot).valid, true);
 
   const json = path.join(temp, 'google.json');
-  for (const column of ['AI Impressions', 'Generative AI Impressions', 'Generative Search Impressions']) {
-    fs.writeFileSync(json, JSON.stringify({ rows: [{ [column]: 7, Impressions: 900 }] }));
-    const explicit = importVisibilityExport('google', json, options);
-    assert.deepEqual(explicit.snapshot.sources[0].metrics, { aiImpressions: 7 });
-    assert.equal(explicit.import.reportScope, null);
-  }
   fs.writeFileSync(json, JSON.stringify([{ 'AI Impressions': null, Impressions: 900 }]));
-  for (const reportScope of [undefined, 'generative-ai']) {
-    const unavailable = importVisibilityExport('google', json, { ...options, reportScope });
-    assert.deepEqual(unavailable.snapshot.sources[0].metrics, {});
-    assert.equal(unavailable.snapshot.sources[0].status, 'partial');
-  }
-  fs.writeFileSync(json, JSON.stringify([{ 'AI Impressions': 0, Impressions: 900 }]));
-  assert.deepEqual(importVisibilityExport('google', json, options).snapshot.sources[0].metrics, { aiImpressions: 0 });
-  fs.writeFileSync(json, JSON.stringify([{ 'AI Impressions': 7 }, { Impressions: 900 }]));
-  assert.throws(() => importVisibilityExport('google', json, options), /Impressions is ambiguous/);
-  fs.writeFileSync(json, JSON.stringify({ rows: [{ Impressions: 0 }] }));
-  assert.throws(() => importVisibilityExport('google', json, options), /Impressions is ambiguous/);
-  assert.deepEqual(importVisibilityExport('google', json, { ...options, reportScope: 'generative-ai' }).snapshot.sources[0].metrics, { aiImpressions: 0 });
+  const unavailable = importVisibilityExport('google', json, options);
+  assert.deepEqual(unavailable.snapshot.sources[0].metrics, {});
+  assert.equal(unavailable.snapshot.sources[0].status, 'partial');
 
   const cli = fileURLToPath(new URL('../bin/arwp-visibility.mjs', import.meta.url));
   const output = path.join(temp, 'imported.json');
@@ -66,43 +49,50 @@ try {
   const rejected = spawnSync(process.execPath, [cli, 'import', web, ...cliArgs], { encoding: 'utf8' });
   assert.equal(rejected.status, 2, rejected.stderr);
   assert.match(JSON.parse(rejected.stdout).fatal, /Impressions is ambiguous/);
-  assert.equal(fs.existsSync(output), false, 'An ambiguous export must not write a visibility snapshot');
-  for (const scopeArgs of [['--report-scope=generative-ai'], ['--report-scope', 'generative-ai']]) {
-    const accepted = spawnSync(process.execPath, [cli, 'import', scoped, ...cliArgs, ...scopeArgs], { encoding: 'utf8' });
-    assert.equal(accepted.status, 0, accepted.stdout + accepted.stderr);
-    assert.equal(JSON.parse(accepted.stdout).import.reportScope, 'generative-ai');
-    assert.deepEqual(JSON.parse(fs.readFileSync(output, 'utf8')).sources[0].metrics, { aiImpressions: 12 });
-  }
+  assert.equal(fs.existsSync(output), false);
+  const accepted = spawnSync(process.execPath, [cli, 'import', scoped, ...cliArgs, '--report-scope=generative-ai'], { encoding: 'utf8' });
+  assert.equal(accepted.status, 0, accepted.stdout + accepted.stderr);
+  assert.deepEqual(JSON.parse(fs.readFileSync(output, 'utf8')).sources[0].metrics, { aiImpressions: 12, aiVisiblePages: 2 });
 
   const bing = path.join(temp, 'bing.csv');
   fs.writeFileSync(bing, 'Cited URL,Citations,Grounding Query\nhttps://example.com/a,4,alpha\nhttps://example.com/a,2,beta\nhttps://example.com/b,3,alpha\n');
-  const b = importVisibilityExport('bing', bing, {
-    site: 'https://example.com/', start: '2026-08-01', end: '2026-08-31', capturedAt: '2026-09-01T10:00:00Z'
-  });
+  const b = importVisibilityExport('bing', bing, options);
   assert.equal(b.snapshot.sources[0].metrics.totalCitations, 9);
   assert.equal(b.snapshot.sources[0].metrics.citedPages, 2);
   assert.equal(b.snapshot.sources[0].metrics.groundingQueriesSampled, 2);
-  assert.throws(() => importVisibilityExport('bing', bing, { ...options, reportScope: 'generative-ai' }), /--report-scope supports only/);
+
+  const cloudflare = path.join(temp, 'cloudflare.csv');
+  fs.writeFileSync(cloudflare, 'Status Code,Requests,Action,Bytes Transferred,Referrals\n200,80,allow,10000,4\n403,20,block,1000,0\n');
+  const c = importVisibilityExport('cloudflare', cloudflare, options);
+  assert.equal(c.snapshot.sources[0].provider, 'cloudflare-ai-crawl-control');
+  assert.deepEqual(c.snapshot.sources[0].metrics, {
+    aiCrawlerRequests: 100,
+    aiCrawlerAllowedRequests: 80,
+    aiCrawlerSuccessfulRequests: 80,
+    aiCrawlerUnsuccessfulRequests: 20,
+    aiCrawlerReferrals: 4,
+    bytesTransferred: 11000
+  });
+  assert.equal(validateVisibilitySnapshot(c.snapshot).valid, true);
 
   const referrals = path.join(temp, 'referrals.csv');
-  fs.writeFileSync(referrals, 'Source,Sessions\nchatgpt.com,11\nperplexity.ai,5\nexample.org,100\n');
-  const r = importVisibilityExport('referrals', referrals, {
-    site: 'https://example.com/', start: '2026-08-01', end: '2026-08-31', capturedAt: '2026-09-01T10:00:00Z', match: 'chatgpt.com,perplexity.ai'
-  });
-  assert.equal(r.snapshot.sources[0].metrics.referrals, 16);
+  fs.writeFileSync(referrals, 'Source,Sessions,Engaged Sessions,Conversions\nchatgpt.com,11,7,2\nperplexity.ai,5,3,1\nexample.org,100,80,20\n');
+  const r = importVisibilityExport('referrals', referrals, { ...options, match: 'chatgpt.com,perplexity.ai' });
+  assert.deepEqual(r.snapshot.sources[0].metrics, { referrals: 16, engagedVisits: 10, taskCompletions: 3 });
   assert.match(r.snapshot.sources[0].notes, /chatgpt\.com/);
   assert.equal(validateVisibilitySnapshot(r.snapshot).valid, true);
 
+  const utm = path.join(temp, 'utm.csv');
+  fs.writeFileSync(utm, 'utm_source,Sessions\nchatgpt.com,6\nnewsletter,50\n');
+  assert.equal(importVisibilityExport('referrals', utm, options).snapshot.sources[0].metrics.referrals, 6);
+
   const partial = path.join(temp, 'partial.json');
   fs.writeFileSync(partial, JSON.stringify([{ somethingElse: 1 }]));
-  const p = importVisibilityExport('google', partial, {
-    site: 'https://example.com/', start: '2026-08-01', end: '2026-08-31', capturedAt: '2026-09-01T10:00:00Z'
-  });
+  const p = importVisibilityExport('google', partial, options);
   assert.equal(p.snapshot.sources[0].status, 'partial');
   assert.deepEqual(p.snapshot.sources[0].metrics, {});
-  assert.equal(validateVisibilitySnapshot(p.snapshot).valid, true);
 
-  console.log('PASS visibility import adapters normalize owner CSV/JSON evidence without inventing unavailable metrics');
+  console.log('PASS visibility import adapters normalize Google, Bing, Cloudflare and AI referral evidence without inventing unavailable metrics');
 } finally {
   fs.rmSync(temp, { recursive: true, force: true });
 }

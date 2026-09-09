@@ -3,9 +3,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
+  buildVisibilityFunnel,
   compareVisibilitySnapshots,
   formatVisibilityComparison,
+  formatVisibilityFunnel,
   loadVisibilitySnapshot,
+  mergeVisibilitySnapshots,
   summarizeVisibilitySnapshot,
   validateVisibilitySnapshot
 } from '../lib/visibility-evidence.mjs';
@@ -18,15 +21,15 @@ Usage:
   arwp-visibility validate <snapshot.json> [--json]
   arwp-visibility show <snapshot.json> [--json]
   arwp-visibility compare <before.json> <after.json> [--json]
-  arwp-visibility import <export.csv|export.json> --provider=<google|bing|referrals> --site=https://... --start=YYYY-MM-DD --end=YYYY-MM-DD [--report-scope=generative-ai] [--captured-at=ISO] [--evidence=URI] [--match=chatgpt.com,openai.com] [--output=snapshot.json] [--json]
+  arwp-visibility merge <snapshot.json> <snapshot.json> [...] [--output=snapshot.json] [--json]
+  arwp-visibility funnel <snapshot.json> [--json]
+  arwp-visibility import <export.csv|export.json> --provider=<google|bing|cloudflare|referrals> --site=https://... --start=YYYY-MM-DD --end=YYYY-MM-DD [--report-scope=generative-ai] [--captured-at=ISO] [--evidence=URI] [--match=chatgpt.com,openai.com] [--output=snapshot.json] [--json]
 
-Visibility snapshots store aggregate owner-observed evidence. Import adapters normalize only metrics actually present in owner exports. Google exports with generic Impressions require --report-scope=generative-ai and must come from the dedicated generative AI report; ordinary Web Search exports are unsupported. Explicit AI impression columns do not require this option. Comparisons report deltas only and never infer ranking or causality from ARWP adoption.`);
+Visibility snapshots store aggregate owner-observed evidence. Import adapters normalize only metrics actually present in owner exports. Google exports with generic Impressions require --report-scope=generative-ai and must come from the dedicated generative AI report; ordinary Web Search exports are unsupported. Explicit AI impression columns do not require this option. Merge requires the same site and exact observation period and rejects duplicate providers. Funnel keeps access, exposure, citation, visit and task signals separate: provider populations differ, so it never creates cross-provider conversion rates or a single AI visibility score.`);
 }
 
 const args = process.argv.slice(2);
 const command = args[0];
-const source = args[1];
-const second = args[2] && !args[2].startsWith('--') ? args[2] : null;
 const jsonOutput = args.includes('--json');
 
 function optionValue(name) {
@@ -38,8 +41,24 @@ function optionValue(name) {
   return null;
 }
 
+function positionalArgs() {
+  const optionsWithValues = new Set(['provider', 'site', 'start', 'end', 'report-scope', 'captured-at', 'evidence', 'match', 'output']);
+  const out = [];
+  for (let index = 1; index < args.length; index += 1) {
+    const arg = args[index];
+    if (!arg.startsWith('--')) {
+      out.push(arg);
+      continue;
+    }
+    if (arg.includes('=')) continue;
+    const option = arg.slice(2);
+    if (optionsWithValues.has(option) && args[index + 1] && !args[index + 1].startsWith('--')) index += 1;
+  }
+  return out;
+}
+
 function formatError(error) {
-  return `${error.instancePath || '/'} ${error.message}`;
+  return typeof error === 'string' ? error : `${error.instancePath || '/'} ${error.message || JSON.stringify(error)}`;
 }
 
 function writeSnapshot(snapshot, output) {
@@ -54,12 +73,15 @@ function main() {
     usage();
     return 0;
   }
-  if (!['validate', 'show', 'compare', 'import'].includes(command) || !source) {
+  const positionals = positionalArgs();
+  const source = positionals[0];
+  if (!['validate', 'show', 'compare', 'merge', 'funnel', 'import'].includes(command)) {
     usage();
     return 2;
   }
 
   if (command === 'import') {
+    if (!source) throw new Error('import requires an export file.');
     const provider = optionValue('provider');
     const site = optionValue('site');
     const start = optionValue('start');
@@ -82,7 +104,36 @@ function main() {
     return 0;
   }
 
+  if (command === 'merge') {
+    if (positionals.length < 2) throw new Error('merge requires at least two visibility snapshots.');
+    const result = mergeVisibilitySnapshots(positionals.map(loadVisibilitySnapshot));
+    if (!result.valid) {
+      if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+      else for (const error of result.errors || []) console.error(`FAIL ${formatError(error)}`);
+      return 1;
+    }
+    const output = optionValue('output');
+    const written = output ? writeSnapshot(result.snapshot, output) : null;
+    if (jsonOutput) console.log(JSON.stringify({ ...result, written }, null, 2));
+    else if (written) console.log(`WROTE ${written}\nProviders: ${result.snapshot.sources.map(item => item.provider).join(', ')}`);
+    else console.log(JSON.stringify(result.snapshot, null, 2));
+    return 0;
+  }
+
+  if (!source) {
+    usage();
+    return 2;
+  }
+
+  if (command === 'funnel') {
+    const result = buildVisibilityFunnel(loadVisibilitySnapshot(source));
+    if (jsonOutput) console.log(JSON.stringify(result, null, 2));
+    else console.log(formatVisibilityFunnel(result));
+    return result.valid ? 0 : 1;
+  }
+
   if (command === 'compare') {
+    const second = positionals[1];
     if (!second) throw new Error('compare requires before.json and after.json.');
     const result = compareVisibilitySnapshots(loadVisibilitySnapshot(source), loadVisibilitySnapshot(second));
     if (jsonOutput) console.log(JSON.stringify(result, null, 2));

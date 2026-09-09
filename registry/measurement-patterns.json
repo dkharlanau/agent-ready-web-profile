@@ -1,0 +1,150 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-09",
+  "title": "ARWP Search and AI Measurement Patterns",
+  "scope": "Operational patterns for observing Search/AI discovery with provider-native evidence. These are measurement patterns, not additions to the versioned discoverability corpus unless separately reviewed there.",
+  "guardrails": {
+    "noRankingPromise": true,
+    "noCausalityInference": true,
+    "noCrossProviderConversionRate": true,
+    "noSingleAiVisibilityScore": true,
+    "missingDataIsNotZero": true,
+    "preserveNegativeResults": true
+  },
+  "patterns": [
+    {
+      "id": "measurement-provider-native-generative-exposure",
+      "title": "Measure Google generative exposure from the dedicated report",
+      "evidenceClass": "platform-measurement",
+      "confidence": "high",
+      "measure": ["aiImpressions", "aiVisiblePages", "aiVisibleCountries", "aiVisibleDevices"],
+      "implementation": "Import the dedicated Search Console Generative AI performance export. Generic Web Search impressions are a different population and must not be relabeled as AI impressions.",
+      "usefulDerived": ["aiImpressions / aiVisiblePages within the same report period"],
+      "guardrail": "Do not infer citations, visits or conversions from generative impressions alone.",
+      "sources": ["https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports"]
+    },
+    {
+      "id": "measurement-grounding-query-page-map",
+      "title": "Keep Bing grounding queries attached to cited pages",
+      "evidenceClass": "platform-measurement",
+      "confidence": "high",
+      "measure": ["totalCitations", "citedPages", "groundingQueriesSampled", "averageCitedPages"],
+      "implementation": "Preserve page- and query-level evidence privately when available, then aggregate only for the public/portable visibility snapshot.",
+      "usefulDerived": ["totalCitations / citedPages within the same Bing observation window"],
+      "guardrail": "Grounding-query samples are provider observations, not a complete demand universe.",
+      "sources": ["https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview"]
+    },
+    {
+      "id": "measurement-ai-referral-attribution",
+      "title": "Preserve AI referral source and UTM evidence",
+      "evidenceClass": "platform-measurement",
+      "confidence": "high",
+      "measure": ["referrals", "engagedVisits", "taskCompletions"],
+      "implementation": "Match identifiable AI referrers and provider UTM source values in first-party analytics. Preserve the source dimension before aggregating sessions or visits.",
+      "usefulDerived": ["engagedVisits / referrals", "taskCompletions / referrals"],
+      "guardrail": "Some AI-origin visits may be unattributed; measured referrals are an observable lower-bound-like signal, not total AI influence.",
+      "sources": ["https://help.openai.com/en/articles/12627856"]
+    },
+    {
+      "id": "measurement-crawler-path-observability",
+      "title": "Measure AI crawler access before guessing about retrieval",
+      "evidenceClass": "platform-measurement",
+      "confidence": "high",
+      "measure": ["aiCrawlerRequests", "aiCrawlerAllowedRequests", "aiCrawlerSuccessfulRequests", "aiCrawlerUnsuccessfulRequests", "bytesTransferred"],
+      "implementation": "Use Cloudflare AI Crawl Control or equivalent edge/server evidence to inspect crawler traffic, allowed/blocked state, response codes and requested paths.",
+      "usefulDerived": ["aiCrawlerAllowedRequests / aiCrawlerRequests", "aiCrawlerSuccessfulRequests / aiCrawlerRequests"],
+      "guardrail": "Crawler access proves neither indexing nor citation.",
+      "sources": ["https://developers.cloudflare.com/ai-crawl-control/"]
+    },
+    {
+      "id": "measurement-content-format-observation",
+      "title": "Break crawler/retrieval evidence down by content format",
+      "evidenceClass": "platform-feature",
+      "confidence": "high",
+      "measure": ["crawler requests by HTML/Markdown/other format", "response success by format", "bytes by format"],
+      "implementation": "Where edge tooling exposes negotiated or served content format, compare formats as an operational retrieval signal rather than assuming Markdown or another representation is intrinsically preferred.",
+      "guardrail": "Format traffic is not evidence of a ranking advantage. Keep canonical facts equivalent across representations.",
+      "sources": ["https://developers.cloudflare.com/changelog/post/2026-04-17-tools-for-agentic-internet/", "https://developers.cloudflare.com/ai-crawl-control/"]
+    },
+    {
+      "id": "measurement-crawler-purpose-split",
+      "title": "Separate search/answer retrieval policy from model-training policy",
+      "evidenceClass": "platform-guidance",
+      "confidence": "high",
+      "measure": ["crawler class", "access decision", "response outcome"],
+      "implementation": "Track provider crawler identities and publisher policy by purpose. For OpenAI, Search retrieval and model-training crawler controls are separate; other providers may expose different semantics.",
+      "guardrail": "Do not treat all AI user agents as one interchangeable permission class.",
+      "sources": ["https://help.openai.com/en/articles/12627856", "https://developers.cloudflare.com/ai-crawl-control/"]
+    },
+    {
+      "id": "measurement-stage-separated-funnel",
+      "title": "Use access → exposure → citation → visit → task as an observability model",
+      "evidenceClass": "project-method",
+      "confidence": "experimental",
+      "measure": ["access", "exposure", "citation", "visit", "task"],
+      "implementation": "Place provider-native metrics in the stage they actually observe. Report missing stages explicitly and preserve provider provenance.",
+      "guardrail": "The stages are not a mathematical funnel unless the same population can be joined end to end. Do not compute cross-provider conversion rates.",
+      "sources": ["docs/MEASUREMENT-OS.md"]
+    },
+    {
+      "id": "measurement-provider-local-ratios",
+      "title": "Derive ratios only inside a compatible provider population",
+      "evidenceClass": "project-method",
+      "confidence": "high",
+      "measure": ["crawlerSuccessRate", "impressionsPerVisiblePage", "citationsPerCitedPage", "engagedReferralRate", "taskCompletionPerReferral"],
+      "implementation": "Only derive a ratio when numerator and denominator come from the same provider, compatible scope and observation period, or have an explicit join key.",
+      "guardrail": "Never divide Bing citations by Google impressions or AI referrals by crawler requests and call it conversion.",
+      "sources": ["docs/MEASUREMENT-OS.md"]
+    },
+    {
+      "id": "measurement-page-cohort-before-scale",
+      "title": "Measure a bounded page cohort before scaling generated pages",
+      "evidenceClass": "project-experiment",
+      "confidence": "experimental",
+      "measure": ["priority cohort exposure", "priority cohort citations", "priority cohort referrals", "priority cohort task outcomes", "crawl/index noise"],
+      "implementation": "For data/knowledge sites, start with a reviewed priority cohort and comparable unchanged pages where practical. Scale only after the page-value gate and outcome review survive the first observation window.",
+      "guardrail": "Raw page count, indexed URL count or schema volume is not the success metric.",
+      "sources": ["registry/data-authority-experiments.json", "registry/site-readiness-checklist.json"]
+    },
+    {
+      "id": "measurement-deep-page-contribution",
+      "title": "Measure whether deep entity pages contribute useful discovery",
+      "evidenceClass": "project-experiment",
+      "confidence": "experimental",
+      "measure": ["deep-page share of generative impressions", "deep-page share of citations", "deep-page AI referrals", "deep-page task outcomes"],
+      "implementation": "Tag the priority entity/deep-page cohort and report its contribution separately for each provider/outcome surface.",
+      "guardrail": "Do not collapse surface-specific shares into one blended authority score.",
+      "sources": ["registry/data-authority-hypotheses.json", "registry/data-authority-experiments.json"]
+    },
+    {
+      "id": "measurement-freshness-lag",
+      "title": "Observe freshness lag instead of simulating freshness",
+      "evidenceClass": "project-method",
+      "confidence": "experimental",
+      "measure": ["meaningful change timestamp", "first crawler observation", "first provider visibility observation"],
+      "implementation": "For materially changed pages, preserve the source change/deploy timestamp and, where evidence permits, the first later crawler or visibility observation. Compare lag distributions by page cohort.",
+      "guardrail": "Do not update dates or sitemap lastmod without a meaningful content change merely to improve this metric.",
+      "sources": ["docs/MEASUREMENT-OS.md"]
+    },
+    {
+      "id": "measurement-agent-semantic-task",
+      "title": "Test agent tasks through semantic/accessibility surfaces",
+      "evidenceClass": "platform-guidance",
+      "confidence": "medium",
+      "measure": ["agent task success", "semantic control discovery", "fallback to ordinary links/forms"],
+      "implementation": "Evaluate representative tasks using semantic HTML and accessible names/roles. Treat agent-specific metadata as an enhancement, not a substitute for a usable accessibility tree and ordinary web controls.",
+      "guardrail": "A successful controlled task is runtime evidence for that task/configuration, not universal agent compatibility.",
+      "sources": ["https://help.openai.com/en/articles/12627856"]
+    },
+    {
+      "id": "measurement-regional-eligibility-slice",
+      "title": "Record regional availability before comparing Search/AI outcomes",
+      "evidenceClass": "platform-guidance",
+      "confidence": "high",
+      "measure": ["country", "feature availability", "provider-specific observation"],
+      "implementation": "When a Search/AI feature has regional or language availability differences, retain the country/locale slice and avoid comparing populations that were not equally eligible.",
+      "guardrail": "A regional absence may be eligibility/availability, not a page-quality failure.",
+      "sources": ["https://developers.google.com/search/updates"]
+    }
+  ]
+}
