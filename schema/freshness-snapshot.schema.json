@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/freshness-snapshot.schema.json",
+  "title": "Goose Freshness Integrity Snapshot v0.1",
+  "description": "Revision-bound sitemap lastmod and Repository Mapper input evidence. This is implementation evidence, not ranking or recrawl proof.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "site", "repository", "sitemap", "entries", "summary", "sources", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin", "basePath"],
+      "properties": {
+        "origin": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "basePath": { "type": "string", "pattern": "^/.*" }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "baseRef", "baseCommitSha"],
+      "properties": {
+        "fullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "baseRef": { "type": "string", "minLength": 1 },
+        "baseCommitSha": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "sitemap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "sha256", "entries"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "sha256": { "$ref": "#/$defs/digest" },
+        "entries": { "type": "integer", "minimum": 0, "maximum": 50000 }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "maxItems": 50000,
+      "items": { "$ref": "#/$defs/entry" }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sitemapEntries", "mappedRoutes", "unmappedRoutes", "withLastmod", "withoutLastmod", "invalidLastmod", "completeBuildInputs", "partialBuildInputs"],
+      "properties": {
+        "sitemapEntries": { "type": "integer", "minimum": 0 },
+        "mappedRoutes": { "type": "integer", "minimum": 0 },
+        "unmappedRoutes": { "type": "integer", "minimum": 0 },
+        "withLastmod": { "type": "integer", "minimum": 0 },
+        "withoutLastmod": { "type": "integer", "minimum": 0 },
+        "invalidLastmod": { "type": "integer", "minimum": 0 },
+        "completeBuildInputs": { "type": "integer", "minimum": 0 },
+        "partialBuildInputs": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["noRankingPromise", "noRecrawlPromise", "sourceDigestNotRenderedProof", "mappingAmbiguityPreserved", "significantChangeNeedsReview", "noBuildTimestampInference"],
+      "properties": {
+        "noRankingPromise": { "const": true },
+        "noRecrawlPromise": { "const": true },
+        "sourceDigestNotRenderedProof": { "const": true },
+        "mappingAmbiguityPreserved": { "const": true },
+        "significantChangeNeedsReview": { "const": true },
+        "noBuildTimestampInference": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "lastmod", "lastmodState", "routeState", "ownerPath", "ownerSha256", "buildInputPaths", "buildInputDigestSha256", "buildInputCoverage", "evidence"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "lastmod": { "type": ["string", "null"], "maxLength": 100 },
+        "lastmodState": { "enum": ["valid", "missing", "invalid"] },
+        "routeState": { "enum": ["resolved", "ambiguous", "unresolved", "not-mapped"] },
+        "ownerPath": { "type": ["string", "null"], "maxLength": 2000 },
+        "ownerSha256": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+        "buildInputPaths": { "type": "array", "maxItems": 1000, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 2000 } },
+        "buildInputDigestSha256": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+        "buildInputCoverage": { "enum": ["complete", "partial", "unavailable"] },
+        "evidence": { "type": "array", "maxItems": 30, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 2000 } }
+      }
+    }
+  }
+}
