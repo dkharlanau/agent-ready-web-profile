@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/controlled-cohort.schema.json",
+  "title": "Goose Controlled Cohort Freeze v0.1",
+  "description": "Frozen treatment/control and query-panel contract for bounded Search/AI discovery experiments. Freezes assignment before outcome review and keeps implementation, deployment and measurement evidence separate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "id",
+    "site",
+    "repository",
+    "frozenAt",
+    "status",
+    "sourceEvidence",
+    "treatment",
+    "control",
+    "queryPanel",
+    "measurementGate",
+    "observationWindowsDays",
+    "guardrails"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,159}$" },
+    "site": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+    "frozenAt": { "type": "string", "format": "date-time" },
+    "status": {
+      "type": "string",
+      "enum": ["planned", "measurement-hold", "ready-to-observe", "observing", "reviewed", "stopped"]
+    },
+    "purpose": { "type": "string", "minLength": 1, "maxLength": 3000 },
+    "siteSpecificRationale": { "type": "string", "maxLength": 4000 },
+    "sourceEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repositoryRef", "experimentPath", "experimentBlobSha"],
+      "properties": {
+        "repositoryRef": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "planningRef": { "type": "string", "pattern": "^[a-f0-9]{7,40}$" },
+        "experimentPath": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "experimentBlobSha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "searchExpansionGatePath": { "type": "string", "maxLength": 500 },
+        "ownerEvidencePath": { "type": "string", "maxLength": 500 },
+        "deploymentEvidencePath": { "type": "string", "maxLength": 500 },
+        "notes": { "type": "string", "maxLength": 3000 }
+      }
+    },
+    "treatment": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": { "$ref": "#/$defs/cohortMember" }
+    },
+    "control": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": { "$ref": "#/$defs/cohortMember" }
+    },
+    "assignmentPolicy": { "type": "string", "maxLength": 4000 },
+    "queryPanel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cohortId", "surface", "locale", "queries", "frozenBeforeOutcomeReview"],
+      "properties": {
+        "cohortId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,159}$" },
+        "surface": {
+          "type": "string",
+          "enum": ["google-search", "google-ai-overview", "google-ai-mode", "bing-search", "bing-copilot", "chatgpt-search", "perplexity", "cross-surface-panel"]
+        },
+        "locale": { "type": "string", "pattern": "^[A-Za-z]{2,3}([_-][A-Za-z0-9]{2,8})?$" },
+        "market": { "type": "string", "maxLength": 120 },
+        "frozenBeforeOutcomeReview": { "const": true },
+        "selectionBasis": { "type": "string", "maxLength": 3000 },
+        "queries": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 500,
+          "items": { "$ref": "#/$defs/query" }
+        }
+      }
+    },
+    "baselineEvidence": {
+      "type": "array",
+      "maxItems": 100,
+      "items": { "$ref": "#/$defs/evidenceRef" }
+    },
+    "measurementGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "implementationRef", "requiresMatchingProductionRef", "reason"],
+      "properties": {
+        "state": { "type": "string", "enum": ["hold", "ready"] },
+        "implementationRef": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "productionRef": { "type": ["string", "null"], "pattern": "^[a-f0-9]{40}$" },
+        "requiresMatchingProductionRef": { "const": true },
+        "reason": { "type": "string", "minLength": 1, "maxLength": 3000 }
+      }
+    },
+    "outcomes": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 100,
+      "items": { "type": "string", "minLength": 1, "maxLength": 240 }
+    },
+    "observationWindowsDays": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "integer", "minimum": 1, "maximum": 3650 }
+    },
+    "decisionRules": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "maxLength": 4000 }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assignmentFrozenBeforeOutcomeReview",
+        "noRankingGuarantee",
+        "noCausalityInference",
+        "preserveNeutralAndNegativeResults",
+        "missingOwnerEvidenceIsUnknown",
+        "noScaleUpBeforeReview"
+      ],
+      "properties": {
+        "assignmentFrozenBeforeOutcomeReview": { "const": true },
+        "noRankingGuarantee": { "const": true },
+        "noCausalityInference": { "const": true },
+        "preserveNeutralAndNegativeResults": { "const": true },
+        "missingOwnerEvidenceIsUnknown": { "const": true },
+        "noScaleUpBeforeReview": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "cohortMember": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "entity", "source"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,159}$" },
+        "entity": { "type": "string", "minLength": 2, "maxLength": 200 },
+        "source": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "primaryJob": { "type": "string", "maxLength": 500 },
+        "role": { "type": "string", "enum": ["acquisition", "support", "continuation", "comparison-control"] },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "text", "targetEntities"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,159}$" },
+        "text": { "type": "string", "minLength": 1, "maxLength": 1000 },
+        "intent": { "type": "string", "maxLength": 300 },
+        "targetEntities": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 2, "maxLength": 200 }
+        }
+      }
+    },
+    "evidenceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "capturedAt", "state", "path"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["owner-search", "public-search", "deployment", "expansion-gate", "intent-ownership", "implementation", "winner-snapshot", "other-reviewed"]
+        },
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "state": { "type": "string", "enum": ["observed", "available", "unknown", "unavailable", "stale", "hold"] },
+        "path": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "note": { "type": "string", "maxLength": 3000 }
+      }
+    }
+  }
+}

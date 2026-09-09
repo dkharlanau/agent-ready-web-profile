@@ -1,15 +1,18 @@
 {
   "version": "0.1",
   "id": "ptichi-discovery-controlled-cohort-2026-09",
-  "status": "planned",
+  "status": "superseded-by-site-specific-freeze",
   "createdAt": "2026-09-09T00:00:00Z",
+  "resolvedAt": "2026-09-09T08:30:00Z",
+  "resolvedBy": "knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json",
+  "resolution": "The generic 20-50 treatment / 20-50 control target was replaced by the existing owner-reviewed PTI-DA-001 design: 12 treatment entities and 6 controls from the current published universe, with no new indexable URLs. The site-specific freeze is authoritative because Ptichi's binding expansion gate and stale production deployment make artificial cohort expansion inappropriate.",
   "product": "Ptichi",
   "canonicalSite": "https://ptichi.com/",
-  "purpose": "Test whether a bounded set of genuinely useful voice-training/data-rich pages gains measurable Search/AI discovery relative to comparable unchanged pages before any large-scale expansion.",
+  "purpose": "Historical generic planning input for a bounded Search/AI discovery cohort. The authoritative executable cohort is now the site-specific freeze referenced above.",
   "design": {
     "treatmentTarget": { "min": 20, "max": 50 },
     "controlTarget": { "min": 20, "max": 50 },
-    "assignment": "Match treatment candidates to comparable pages by intent family, current baseline visibility, page type and content depth before intervention. Preserve the selected controls unchanged during the primary observation window unless a correctness/safety issue requires intervention.",
+    "assignment": "Generic pre-site-review target only. The resolved Ptichi cohort must not be enlarged to meet these counts.",
     "freezeBeforeOutcomeReview": true,
     "noThousandsOfPagesBeforeReview": true
   },
@@ -73,10 +76,9 @@
     "humanReviewBeforeExpansion": true
   },
   "nextExecution": [
-    "Freeze the first candidate and control page list from current Ptichi inventory before inspecting post-change outcomes.",
-    "Capture baseline owner visibility exports and one fixed query-cohort Winner Observatory snapshot.",
-    "Apply one coherent intervention family to the treatment cohort; avoid bundling unrelated site-wide changes.",
-    "Capture repeated snapshots at the declared windows and compare treatment/control outcomes separately.",
-    "Feed reviewed outcomes back into Goose hypotheses and recommendation lifecycle without automatic promotion."
+    "Use the authoritative site-specific controlled cohort freeze.",
+    "Keep its measurement gate on HOLD until production evidence matches the frozen implementation ref.",
+    "After deployment parity, capture repeated fixed-panel and owner-side observations at the declared windows.",
+    "Feed reviewed treatment/control outcomes back into Goose Recommendation Review without automatic promotion."
   ]
 }
