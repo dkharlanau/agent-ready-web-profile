@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-gate-report.schema.json",
+  "title": "ARWP Site Readiness Gate Report",
+  "type": "object",
+  "required": [
+    "version",
+    "generatedAt",
+    "inputUrl",
+    "canonicalUrl",
+    "siteType",
+    "summary",
+    "cohort",
+    "publicBaseline",
+    "priorityPages",
+    "gates",
+    "experimentSeed",
+    "guardrails"
+  ],
+  "not": {
+    "required": ["score"]
+  },
+  "properties": {
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "inputUrl": { "type": "string", "format": "uri" },
+    "canonicalUrl": { "type": "string", "format": "uri" },
+    "siteType": {
+      "enum": ["general", "data-site", "research-dataset", "large-knowledge-site"]
+    },
+    "summary": {
+      "type": "object",
+      "required": ["counts", "p0Failures", "p0Watch", "p0OwnerData", "publicImplementationState", "outcomeInterpretationState"],
+      "properties": {
+        "p0Failures": { "type": "integer", "minimum": 0 },
+        "p0Watch": { "type": "integer", "minimum": 0 },
+        "p0OwnerData": { "type": "integer", "minimum": 0 },
+        "publicImplementationState": { "enum": ["blocked", "provisional", "ready"] },
+        "outcomeInterpretationState": { "enum": ["blocked", "ready"] }
+      },
+      "additionalProperties": true
+    },
+    "cohort": {
+      "type": "object",
+      "required": ["id", "digestSha256", "selectedPages", "selectionMethod", "urls"],
+      "properties": {
+        "id": { "type": "string" },
+        "digestSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "selectedPages": { "type": "integer", "minimum": 1, "maximum": 50 },
+        "urls": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": { "type": "string", "format": "uri" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "priorityPages": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "required": ["requestedUrl", "url", "ok", "status", "selection"],
+        "additionalProperties": true
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "priority", "applicable", "blocking", "checks"],
+        "properties": {
+          "priority": { "enum": ["P0", "P1", "P2"] },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "mode", "requirement", "status", "message", "evidence"],
+              "properties": {
+                "status": {
+                  "enum": ["pass", "fail", "watch", "owner-data", "not-applicable"]
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "required": ["noCompositeReadinessScore", "noRankingPromise", "missingOwnerDataIsUnknown", "publicCohortIsNotDemandRanking"],
+      "properties": {
+        "noCompositeReadinessScore": { "const": true },
+        "noRankingPromise": { "const": true },
+        "missingOwnerDataIsUnknown": { "const": true },
+        "publicCohortIsNotDemandRanking": { "const": true }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
