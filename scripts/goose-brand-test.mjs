@@ -19,13 +19,12 @@ const frozenPrefixes = [
 const frozenExact = new Set(['CHANGELOG.md', 'docs/history.html', 'docs/history.json']);
 const selfFiles = new Set(['scripts/goose-brand-test.mjs', 'scripts/goose-brand-migration.mjs']);
 const extensions = new Set(['.html', '.md', '.txt', '.json', '.jsonld', '.xml', '.mjs', '.js', '.yml', '.yaml']);
+const currentPrefixes = ['docs/', 'lib/', 'skills/', 'registry/', 'examples/', 'templates/'];
 
 function inCurrentScope(file) {
   if (selfFiles.has(file) || frozenExact.has(file) || frozenPrefixes.some(prefix => file.startsWith(prefix))) return false;
   if (file === 'README.md' || file === 'TRADEMARKS.md') return true;
-  if (file.startsWith('docs/') || file.startsWith('lib/') || file.startsWith('skills/') || file.startsWith('registry/')) {
-    return extensions.has(path.extname(file));
-  }
+  if (currentPrefixes.some(prefix => file.startsWith(prefix))) return extensions.has(path.extname(file));
   if (file === 'scripts/build-discoverability.mjs') return true;
   return false;
 }
@@ -57,6 +56,8 @@ const expectations = [
   ['docs/growth/index.html', 'Goose'],
   ['docs/trust/brand.html', 'Goose'],
   ['docs/evidence-lab/index.html', '<strong>Goose</strong>'],
+  ['examples/editorial/section-graph.html', 'Goose example'],
+  ['docs/examples/editorial/section-graph.html', 'Goose example'],
   ['README.md', 'Goose'],
   ['TRADEMARKS.md', 'Goose'],
   ['docs/BRAND-GOOSE.md', 'Goose'],
