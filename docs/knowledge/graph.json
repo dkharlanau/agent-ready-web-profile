@@ -13,7 +13,7 @@
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software",
       "@type": "SoftwareSourceCode",
-      "name": "Cite Goose",
+      "name": "Goose",
       "alternateName": ["Agent-Ready Web Profile", "ARWP"],
       "description": "Evidence-backed agentic web interoperability resolver and profile/tooling project for discovering and routing the machine- and agent-facing interfaces exposed by public websites.",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
@@ -41,7 +41,7 @@
     {
       "@id": "https://dkharlanau.github.io/agent-ready-web-profile/#website",
       "@type": "WebSite",
-      "name": "Cite Goose",
+      "name": "Goose",
       "alternateName": ["Agent-Ready Web Profile", "ARWP"],
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/",
       "about": {"@id": "https://dkharlanau.github.io/agent-ready-web-profile/#software"},

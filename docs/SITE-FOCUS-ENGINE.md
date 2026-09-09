@@ -1,8 +1,8 @@
-# Cite Goose Site Focus Engine
+# Goose Site Focus Engine
 
 The Site Focus Engine turns the `arwp-site-focus` product/design gate into an executable, reviewable system. It is deliberately **not** a ranking score, readiness score or automated content-pruning system.
 
-Version 0.2 adds an owner-declared Site Focus profile so Cite Goose can compare **what the site is meant to be** with **what the sampled site currently exposes**.
+Version 0.2 adds an owner-declared Site Focus profile so Goose can compare **what the site is meant to be** with **what the sampled site currently exposes**.
 
 ## The operating model
 
@@ -79,7 +79,7 @@ Core fields:
 }
 ```
 
-The profile is product intent, not Search configuration. Its numeric architecture limits remain Cite Goose house heuristics rather than platform requirements.
+The profile is product intent, not Search configuration. Its numeric architecture limits remain Goose house heuristics rather than platform requirements.
 
 ## Page roles
 
@@ -230,7 +230,7 @@ A later Target Transformation step may compile an **accepted** decision into exa
 
 ## Dogfood state
 
-Cite Goose now carries `.arwp/site-focus.json` and validates it against generated `docs/` output in the dedicated `Site Focus v0.2` workflow.
+Goose now carries `.arwp/site-focus.json` and validates it against generated `docs/` output in the dedicated `Site Focus v0.2` workflow.
 
 The same declaration contract has been added to two intentionally different dogfood sites:
 
@@ -239,7 +239,7 @@ The same declaration contract has been added to two intentionally different dogf
 
 The contrast is intentional. Thresholds should improve because the engine survives different legitimate site shapes, not because it maximizes warnings.
 
-## Relationship to the rest of Cite Goose
+## Relationship to the rest of Goose
 
 ```text
 FOCUS

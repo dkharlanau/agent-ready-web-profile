@@ -23,7 +23,7 @@ const pages = samples.filter(([file]) => fs.existsSync(path.join(docs, file))).m
   status: 200
 }));
 
-if (pages.length < 6) throw new Error(`Expected at least 6 Cite Goose dogfood pages, found ${pages.length}.`);
+if (pages.length < 6) throw new Error(`Expected at least 6 Goose dogfood pages, found ${pages.length}.`);
 const report = buildSiteFocusReportFromPages(pages, { canonicalUrl: base, discovery: { mode: 'dogfood-curated', files: samples.map(([file]) => `docs/${file}`) } });
 
 if (!report.guardrails.noOpaqueScore) throw new Error('Dogfood report lost the no-score guardrail.');

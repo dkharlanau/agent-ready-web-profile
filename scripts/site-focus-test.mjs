@@ -8,7 +8,7 @@ const docs = path.join(root, 'docs');
 const home = fs.readFileSync(path.join(docs, 'index.html'), 'utf8');
 const guide = fs.readFileSync(path.join(docs, 'site-focus.html'), 'utf8');
 const css = fs.readFileSync(path.join(docs, 'cite-goose.css'), 'utf8');
-const brand = fs.readFileSync(path.join(docs, 'BRAND-CITE-GOOSE.md'), 'utf8');
+const brand = fs.readFileSync(path.join(docs, 'BRAND-GOOSE.md'), 'utf8');
 const sitemap = fs.readFileSync(path.join(docs, 'sitemap.xml'), 'utf8');
 const skill = fs.readFileSync(path.join(root, 'skills', 'arwp-site-focus', 'SKILL.md'), 'utf8');
 const v3Guide = fs.readFileSync(path.join(docs, 'SITE-FOCUS-V0.3.md'), 'utf8');
@@ -16,8 +16,8 @@ const skillIndex = JSON.parse(fs.readFileSync(path.join(root, 'skills', 'index.j
 const publicSkillIndex = JSON.parse(fs.readFileSync(path.join(docs, 'skills', 'index.json'), 'utf8'));
 
 assert.match(home, /Own a problem\.\s*<br>Draw the boundary\./i);
-assert.match(home, /CITE GOOSE \/ WE DO/i);
-assert.match(home, /CITE GOOSE \/ WE DO NOT/i);
+assert.match(home, /GOOSE \/ WE DO/i);
+assert.match(home, /GOOSE \/ WE DO NOT/i);
 assert.match(home, /01 \/ BE FOUND/i);
 assert.match(home, /02 \/ BE USED/i);
 assert.match(home, /03 \/ BE PROVEN/i);
@@ -71,4 +71,4 @@ assert.match(brand, /own a problem, not a pile of adjacent topics/i);
 assert.match(brand, /up to 3 homepage problem lanes/i);
 assert.match(sitemap, /site-focus\.html/);
 
-console.log('PASS Cite Goose keeps one visible problem territory, explicit anti-scope, small problem-led navigation, v0.3 homepage/experience contracts, bright lightweight design rules and a reusable Site Focus agent gate');
+console.log('PASS Goose keeps one visible problem territory, explicit anti-scope, small problem-led navigation, v0.3 homepage/experience contracts, bright lightweight design rules and a reusable Site Focus agent gate');

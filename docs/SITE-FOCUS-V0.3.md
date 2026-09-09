@@ -1,4 +1,4 @@
-# Cite Goose Site Focus v0.3
+# Goose Site Focus v0.3
 
 Site Focus v0.3 turns a broad instruction such as “make this site clearer, brighter and faster” into an explicit owner-declared contract that can be compared with the observed site without inventing a ranking or design score.
 
@@ -113,7 +113,7 @@ The static analyzer does not invent LCP, INP or CLS. Real field or explicitly sc
 
 ## Default experience direction
 
-For a focused specialist site, Cite Goose currently recommends this as a starting design constraint, not a platform mandate:
+For a focused specialist site, Goose currently recommends this as a starting design constraint, not a platform mandate:
 
 - one primary problem territory;
 - one primary homepage lane plus up to two supporting lanes;
@@ -126,13 +126,13 @@ For a focused specialist site, Cite Goose currently recommends this as a startin
 
 ## Evidence basis
 
-The contract intentionally separates upstream guidance from Cite Goose heuristics.
+The contract intentionally separates upstream guidance from Goose heuristics.
 
 ### Google: intended audience and primary site focus
 
 Primary source: <https://developers.google.com/search/docs/fundamentals/creating-helpful-content>
 
-Google's people-first guidance asks publishers to consider whether content has an existing or intended audience and whether the site has a primary purpose or focus. Cite Goose uses that as support for making audience and site focus explicit. It does **not** claim that the v0.3 schema or lane count is a Google ranking factor.
+Google's people-first guidance asks publishers to consider whether content has an existing or intended audience and whether the site has a primary purpose or focus. Goose uses that as support for making audience and site focus explicit. It does **not** claim that the v0.3 schema or lane count is a Google ranking factor.
 
 ### W3C: consistent navigation
 

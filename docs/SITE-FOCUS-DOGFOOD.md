@@ -1,12 +1,12 @@
 # Site Focus real-site dogfood — 2026-09-08
 
-This note records the first real-site calibration pass for the Cite Goose Site Focus Engine. It is not a benchmark, ranking study or recommendation outcome report.
+This note records the first real-site calibration pass for the Goose Site Focus Engine. It is not a benchmark, ranking study or recommendation outcome report.
 
 Targets:
 
 - `https://ptichi.com/` — focused multilingual product/editorial site;
 - `https://metalhatscats.com/` — intentionally broader public-systems studio;
-- Cite Goose itself — the self-dogfood control.
+- Goose itself — the self-dogfood control.
 
 The first pass started on Site Focus v0.1 and directly produced v0.2. Version 0.2 now supports owner-declared intent, route roles, locale equivalence and proposal-only transformation handoff. This note keeps the original calibration findings and records what the implementation subsequently proved.
 
@@ -59,7 +59,7 @@ A useful engine should:
 - recognize the narrow top-level product story despite a much deeper underlying content/entity model;
 - avoid equating content-family count with first-order problem count;
 - surface genuine overlapping article/practice intents for review without rewarding URL reduction for its own sake;
-- preserve the existing search-expansion gate as stronger local policy when it is stricter than Cite Goose defaults;
+- preserve the existing search-expansion gate as stronger local policy when it is stricter than Goose defaults;
 - treat multilingual equivalents as localized representations, not duplicate-intent pages merely because their contracts are similar.
 
 v0.2 implements the last requirement by suppressing locale-equivalent pairs from `MERGE` noise while explicitly refusing to treat that as proof of correct canonical/hreflang implementation.
@@ -115,9 +115,9 @@ A useful engine should:
 - surface true drift inside a large repository without declaring the studio concept itself invalid;
 - flag technical navigation only when implementation vocabulary replaces the visitor's task, not merely because technical material exists deeper in the site.
 
-## Cite Goose: self-dogfood control
+## Goose: self-dogfood control
 
-Cite Goose itself now declares `.arwp/site-focus.json` with:
+Goose itself now declares `.arwp/site-focus.json` with:
 
 - the primary problem: deciding which Search, AI-search and agent-web changes actually help a useful site become easier to find, use, cite and verify;
 - three lanes: Be found / Be used / Be proven;
@@ -126,7 +126,7 @@ Cite Goose itself now declares `.arwp/site-focus.json` with:
 - resolver, standards, directory and skills as technical-reference depth;
 - no guaranteed ranking/citation/recommendation outcomes and no opaque readiness score.
 
-The dedicated `Site Focus v0.2` workflow validates v0.1 compatibility, the v0.2 schema/engine, the copyable public example and Cite Goose's own declared-vs-observed dogfood report.
+The dedicated `Site Focus v0.2` workflow validates v0.1 compatibility, the v0.2 schema/engine, the copyable public example and Goose's own declared-vs-observed dogfood report.
 
 ## Calibration finding #1: route territories are not problem lanes
 
@@ -145,7 +145,7 @@ v0.2 removes the generic `many-route-territories` finding when owner-declared in
 
 ## Calibration finding #2: local policy outranks generic house heuristics
 
-Cite Goose defaults (`1` primary problem, `<=3` homepage problem lanes, `<=5` primary navigation destinations) are starting heuristics.
+Goose defaults (`1` primary problem, `<=3` homepage problem lanes, `<=5` primary navigation destinations) are starting heuristics.
 
 A target repository may already have a stronger, reviewed contract. Ptichi's search-expansion and navigation policies are examples. Site Focus should ingest/preserve such local policy rather than replacing it with the generic threshold set.
 

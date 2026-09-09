@@ -11,7 +11,7 @@ metadata:
 
 Use this skill before `arwp-discoverability`, `arwp-ai-search-content`, broad content expansion or a visual redesign. A site should first be coherent enough that a person can explain what problem territory it owns, for whom, which first-order problem lanes it exposes and what it intentionally leaves out.
 
-This is a product/design gate, not a claimed search ranking factor. Numeric limits are Cite Goose house heuristics or owner-declared budgets unless an upstream source explicitly defines them. Never turn them into a composite readiness/focus/beauty score.
+This is a product/design gate, not a claimed search ranking factor. Numeric limits are Goose house heuristics or owner-declared budgets unless an upstream source explicitly defines them. Never turn them into a composite readiness/focus/beauty score.
 
 ## Workflow
 

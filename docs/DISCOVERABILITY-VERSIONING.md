@@ -1,6 +1,6 @@
 # Pattern versions and evidence passports
 
-A saved selection should identify the instructions that its owner reviewed. Cite Goose keeps each published pattern ID, versions its instructions, and retains the preceding corpus as an immutable artifact. These are publishing and compatibility checks. They do not prove that a pattern was implemented, indexed, cited or responsible for an outcome.
+A saved selection should identify the instructions that its owner reviewed. Goose keeps each published pattern ID, versions its instructions, and retains the preceding corpus as an immutable artifact. These are publishing and compatibility checks. They do not prove that a pattern was implemented, indexed, cited or responsible for an outcome.
 
 ## Read a passport
 

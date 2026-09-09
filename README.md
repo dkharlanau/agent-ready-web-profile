@@ -1,4 +1,4 @@
-# Cite Goose
+# Goose
 
 **Make your site worth citing.**
 
@@ -10,7 +10,7 @@ Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-pr
 [![BraidGraph validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
-Cite Goose is the product-facing layer of **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
+Goose is the product-facing layer of **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
 
 Most tools answer one of two questions:
 
@@ -20,7 +20,7 @@ or:
 
 > What is technically wrong with my site right now?
 
-Cite Goose is aimed at the harder operational question:
+Goose is aimed at the harder operational question:
 
 > **What changed upstream, does it actually matter to this site, what exact site/repository change follows from it, can that change be made safely, how do we verify it, and which sites need attention when the rule changes again?**
 
@@ -67,7 +67,7 @@ arwp-portfolio fleet-live portfolio-workspace.json --output=live.json --json
 
 By 2026, strong AI-search products already monitor prompts, mentions, citations, sentiment, competitors and share of voice. Several now add recommendations, content workflows and agentic execution. Agent-experience products can serve AI-optimized content; crawler platforms can enforce access policy; agent-readiness scanners can score technical readiness; open-source AEO/GEO tools can gate regressions in CI.
 
-Cite Goose should not win by cloning those surfaces.
+Goose should not win by cloning those surfaces.
 
 Its stronger differentiation is the complete evidence lineage:
 
@@ -278,7 +278,7 @@ This is now the biggest blocker to promoting more grounded recommendations into 
 
 Every executed transformation should preserve source/rule version, before/after digests, verification results, deployment evidence and outstanding measurement requirements, then map those canonical artifacts into BraidGraph without duplicating their payloads.
 
-### P0 — Cite Goose Watch
+### P0 — Goose Watch
 
 Turn BraidGraph source/rule revisions and reverse impact traversal into portfolio re-review queues, alerts and bounded remediation waves.
 
@@ -319,7 +319,7 @@ Reproducible fixtures showing whether specific transformations close intended im
 ### Hosted / Pro
 
 - managed continuously refreshed intelligence;
-- Cite Goose Watch portfolio mode;
+- Goose Watch portfolio mode;
 - scheduled re-audits and source-impact alerts;
 - owner-data connectors;
 - verified stack transformation packs;
@@ -339,7 +339,7 @@ Paid value should be **maintenance, automation, governance, evidence and scale**
 
 ## The technical foundation remains ARWP
 
-Cite Goose is the product brand. **Agent-Ready Web Profile (ARWP)** remains the repository/package and interoperability foundation.
+Goose is the product brand. **Agent-Ready Web Profile (ARWP)** remains the repository/package and interoperability foundation.
 
 The Resolver still discovers heterogeneous website interfaces, preserves provenance/conflicts and selects a suitable interface for a concrete intent without requiring every site to adopt ARWP.
 
@@ -371,7 +371,7 @@ Supported planning intents remain `read`, `search`, `structured`, `tools` and `a
 
 - [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md) — product line, market boundary and packaging.
 - [`docs/BRAIDGRAPH.md`](docs/BRAIDGRAPH.md) — implemented evidence-to-change graph, revision history and query model.
-- [`docs/BRAND-CITE-GOOSE.md`](docs/BRAND-CITE-GOOSE.md) — current Cite Goose identity, asset provenance and evidence labels.
+- [`docs/BRAND-GOOSE.md`](docs/BRAND-GOOSE.md) — current Goose identity, asset provenance and evidence labels.
 - [`docs/BRAND-SIGNALBRAID.md`](docs/BRAND-SIGNALBRAID.md) — previous SignalBraid visual direction, retained as a historical reference.
 - [`docs/ADAPTIVE-SITE-UPGRADE.md`](docs/ADAPTIVE-SITE-UPGRADE.md) — target-specific upgrade compiler.
 - [`docs/TARGET-SITE-TRANSFORMATION.md`](docs/TARGET-SITE-TRANSFORMATION.md) — deterministic repository transformation boundary.
@@ -384,15 +384,15 @@ Supported planning intents remain `read`, `search`, `structured`, `tools` and `a
 
 The [brand policy](docs/trust/brand.html) identifies the current product without claiming trademark registration or clearance.
 
-- **Cite Goose** — product brand.
+- **Goose** — product brand.
 - **ARWP** — the established technical abbreviation.
 - **Agent-Ready Web Profile** — repository, npm package and interoperability foundation.
 
-Canonical product name: **Cite Goose**. **Agent-Ready Web Profile** and **ARWP** remain technical aliases.
+Canonical product name: **Goose**. **Agent-Ready Web Profile** and **ARWP** remain technical aliases.
 
 ## North Star
 
-> **Can Cite Goose turn a meaningful upstream web change into the right site-specific implementation, prove what happened, and identify every site that needs re-review when the evidence changes again?**
+> **Can Goose turn a meaningful upstream web change into the right site-specific implementation, prove what happened, and identify every site that needs re-review when the evidence changes again?**
 
 ## License
 

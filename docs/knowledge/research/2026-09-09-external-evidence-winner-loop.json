@@ -1,0 +1,245 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-09-09",
+  "method": "agent-assisted review of current platform documentation, large-sample industry research and transparent individual experiments",
+  "scope": "Evidence-policy and hypothesis input only. No record in this file proves a ranking factor, causal traffic effect, universal AI-citation rule or absence of paid acquisition.",
+  "source_classes": {
+    "official-platform": "Best suited to provider requirements, eligibility, controls, reporting semantics and explicitly documented recommendations.",
+    "large-sample-observational": "Useful for prevalence, association, drift and cohort behaviour; does not establish causality.",
+    "individual-experiment": "Useful for a narrowly specified feature behaviour when setup and limitations are inspectable; not automatically generalizable.",
+    "commentary": "May generate hypotheses but cannot promote a recommendation without stronger evidence."
+  },
+  "records": [
+    {
+      "id": "google-generative-search-optimization-2026",
+      "class": "official-platform",
+      "publisher": "Google Search Central",
+      "title": "Optimizing your website for generative AI features on Google Search",
+      "published_or_updated": "2026-07-10",
+      "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "claim_scope": "Google Search generative features",
+      "finding": "Foundational SEO remains relevant. Google states that llms.txt, special AI markup, artificial content chunking and AI-specific rewriting are not required for visibility in Google Search generative features.",
+      "use_in_goose": "Eligibility and anti-cargo-cult guardrail.",
+      "causal_strength": "provider-guidance",
+      "caveat": "Does not disclose ranking weights or guarantee inclusion."
+    },
+    {
+      "id": "openai-publisher-searchbot-2026",
+      "class": "official-platform",
+      "publisher": "OpenAI",
+      "title": "Publishers and Developers - FAQ",
+      "published_or_updated": "2026-09-05",
+      "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
+      "claim_scope": "ChatGPT search discovery and crawler controls",
+      "finding": "OAI-SearchBot access is relevant to inclusion of page content in ChatGPT search summaries and snippets; training controls are separate.",
+      "use_in_goose": "Keep search/retrieval eligibility separate from training preference.",
+      "causal_strength": "provider-guidance",
+      "caveat": "Eligibility does not guarantee placement."
+    },
+    {
+      "id": "bing-ai-performance-2026",
+      "class": "official-platform",
+      "publisher": "Microsoft Bing Webmaster",
+      "title": "Introducing AI Performance in Bing Webmaster Tools Public Preview",
+      "published_or_updated": "2026-02-10",
+      "url": "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+      "claim_scope": "Microsoft AI citation measurement",
+      "finding": "Bing Webmaster Tools exposes citation activity and cited URLs across supported Microsoft AI experiences.",
+      "use_in_goose": "Treat AI citations as a measurable owner-side outcome distinct from rankings, clicks and conversions.",
+      "causal_strength": "provider-reporting-semantics",
+      "caveat": "A citation count does not establish correctness, user intent or causal value."
+    },
+    {
+      "id": "perplexity-crawlers-2026",
+      "class": "official-platform",
+      "publisher": "Perplexity",
+      "title": "Perplexity Crawlers",
+      "published_or_updated": "2026-07-16",
+      "url": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+      "claim_scope": "Perplexity indexing and crawler controls",
+      "finding": "PerplexityBot is documented as a search/indexing crawler and not a foundation-model training crawler.",
+      "use_in_goose": "Model Perplexity search eligibility independently from model-training policy.",
+      "causal_strength": "provider-guidance",
+      "caveat": "Crawler access alone does not guarantee indexing or citation."
+    },
+    {
+      "id": "semrush-ai-mode-comparison-2025",
+      "class": "large-sample-observational",
+      "publisher": "Semrush",
+      "title": "How Google's AI Mode Compares to Traditional Search and Other LLMs",
+      "published_or_updated": "2025-07-21",
+      "url": "https://www.semrush.com/blog/ai-mode-comparison-study/",
+      "claim_scope": "Google AI Mode, AI Overviews, ChatGPT and Perplexity citation overlap",
+      "finding": "The study reports strong domain-level association between classic Google top-10 visibility and AI citations, while URL-level overlap is lower and differs by surface.",
+      "use_in_goose": "Measure classic Search and AI visibility together without assuming URL-level equivalence.",
+      "causal_strength": "correlational",
+      "caveat": "Correlation does not establish that organic ranking causes citation."
+    },
+    {
+      "id": "semrush-technical-ai-search-2026",
+      "class": "large-sample-observational",
+      "publisher": "Semrush",
+      "title": "How Do Technical SEO Factors Impact AI Search?",
+      "published_or_updated": "2026-01-05",
+      "url": "https://www.semrush.com/blog/technical-seo-impact-on-ai-search-study/",
+      "claim_scope": "Technical characteristics of AI-cited URLs",
+      "method_summary": "Five million cited URLs across ChatGPT Search and Google AI Mode, with subsets for structure, engagement and schema analysis.",
+      "finding": "Technical and engagement characteristics show measurable associations with AI citations, with the authors explicitly limiting interpretation to correlation.",
+      "use_in_goose": "Generate technical hypotheses only after eligibility blockers are handled.",
+      "causal_strength": "correlational",
+      "caveat": "Observed characteristics may be proxies for authority, content type or other confounders."
+    },
+    {
+      "id": "semrush-content-ai-search-2026",
+      "class": "large-sample-observational",
+      "publisher": "Semrush",
+      "title": "How We Built a Content Optimization Tool for AI Search",
+      "published_or_updated": "2026-01-14",
+      "url": "https://www.semrush.com/blog/content-optimization-ai-search-study/",
+      "claim_scope": "Text characteristics associated with AI citations",
+      "method_summary": "11,882 prompts, 59,410 Google keywords, 304,805 cited URLs and 921,614 Google-ranking URLs collected in July-August 2025.",
+      "finding": "Clarity/summarization, E-E-A-T signals, Q&A format, section structure and structured elements were more prevalent in the cited sample under the study's scoring method.",
+      "use_in_goose": "Candidate page-type experiments, never a universal formatting template.",
+      "causal_strength": "correlational",
+      "caveat": "Text scoring and sample construction can encode confounders; the study does not prove that adding a feature creates citations."
+    },
+    {
+      "id": "sistrix-ai-citation-drift-2026",
+      "class": "large-sample-observational",
+      "publisher": "SISTRIX",
+      "title": "AI Citation drift: How stable are sources in AI search results?",
+      "published_or_updated": "2026-05-12",
+      "url": "https://www.sistrix.com/blog/ai-citation-drift-how-stable-are-sources-in-ai-search-results/",
+      "claim_scope": "AI source persistence across engines and countries",
+      "method_summary": "82,619 prompts tracked over 17 weeks across multiple platforms and six countries.",
+      "finding": "The study reports high weekly source replacement, including 56% for Google and 74% for ChatGPT in its measured setup.",
+      "use_in_goose": "Require repeated snapshots and citation-persistence metrics; shorten review windows for volatile claims.",
+      "causal_strength": "longitudinal-observational",
+      "caveat": "Rates are specific to the tracked prompt set, product versions, countries and observation period."
+    },
+    {
+      "id": "semrush-most-cited-domains-drift-2025",
+      "class": "large-sample-observational",
+      "publisher": "Semrush",
+      "title": "The Most-Cited Domains in AI: A 3-Month Study",
+      "published_or_updated": "2025-11-10",
+      "url": "https://www.semrush.com/blog/most-cited-domains-ai/",
+      "claim_scope": "Cross-engine citation-share changes",
+      "method_summary": "More than 230,000 prompts observed weekly over 13 weeks and more than 100 million total citations.",
+      "finding": "Large changes in citation share occurred for major sources over the observation window, reinforcing that AI source selection is time-sensitive.",
+      "use_in_goose": "Treat a source/citation state as dated evidence rather than a permanent rank.",
+      "causal_strength": "longitudinal-observational",
+      "caveat": "Domain-level citation share can hide substantial query- and URL-level differences."
+    },
+    {
+      "id": "seer-aio-ctr-2026",
+      "class": "large-sample-observational",
+      "publisher": "Seer Interactive",
+      "title": "AIO Impact on Google CTR: 2026 Update",
+      "published_or_updated": "2026-04-24",
+      "url": "https://www.seerinteractive.com/insights/aio-impact-on-google-ctr-2026-update",
+      "claim_scope": "Organic and paid CTR around Google AI Overviews",
+      "method_summary": "Full-year 2025 analysis across 53 brands, 5.47 million tracked queries and 2.43 billion organic impressions, with Q1 2026 observations.",
+      "finding": "AIO-present cohorts generally showed lower organic CTR, citation status mattered, and early-2026 CTR behaviour changed direction versus the prior decline trend.",
+      "use_in_goose": "Track query-specific AIO/citation cohorts; reject fixed historical CTR penalties.",
+      "causal_strength": "longitudinal-observational",
+      "caveat": "AIO-prone query cohorts differ systematically from non-AIO cohorts; the study itself discusses selection effects and tracking limitations."
+    },
+    {
+      "id": "ahrefs-aio-clicks-2026",
+      "class": "large-sample-observational",
+      "publisher": "Ahrefs",
+      "title": "Update: AI Overviews Reduce Clicks by 58%",
+      "published_or_updated": "2026-02-04",
+      "url": "https://ahrefs.com/blog/ai-overviews-reduce-clicks-update/",
+      "claim_scope": "CTR association for top-ranking informational pages when AI Overviews are present",
+      "finding": "The updated analysis reports a larger CTR reduction association than Ahrefs' 2025 study, showing that the measured effect changed materially over time.",
+      "use_in_goose": "Store CTR studies as dated observations and compare methodologies instead of encoding one permanent coefficient.",
+      "causal_strength": "observational-comparative",
+      "caveat": "The estimate is method- and cohort-dependent and should not be treated as a universal causal penalty."
+    },
+    {
+      "id": "semrush-ghost-citations-2026",
+      "class": "large-sample-observational",
+      "publisher": "Semrush / Growth Memo",
+      "title": "Why 62% of AI citations don't lead to brand mentions",
+      "published_or_updated": "2026-06-09",
+      "url": "https://www.semrush.com/blog/the-ghost-citations-study/",
+      "claim_scope": "Difference between source citation and explicit brand mention",
+      "method_summary": "3,981 domain appearances for 115 prompts across 14 countries and four AI search surfaces.",
+      "finding": "Citation and explicit brand mention frequently diverged and varied by engine, country, query type and content type.",
+      "use_in_goose": "Track citation presence, brand mention, context and referral separately.",
+      "causal_strength": "cross-sectional-observational",
+      "caveat": "The prompt panel is relatively small compared with broad web-scale studies and should be replicated for a target market."
+    },
+    {
+      "id": "brodie-clark-ai-mode-gsc-2026",
+      "class": "individual-experiment",
+      "publisher": "Brodie Clark Consulting",
+      "title": "AI Mode Tracking in Google Search Console Confirmed",
+      "published_or_updated": "2026-06-08",
+      "url": "https://brodieclark.com/ai-mode-google-search-console/",
+      "claim_scope": "Observed Search Console handling of AI Mode impressions",
+      "finding": "A coordinated experiment used repeated searches to test how AI Mode visibility appeared in Search Console reporting.",
+      "use_in_goose": "Useful feature-behaviour evidence when official reporting details are incomplete or changing.",
+      "causal_strength": "individual-feature-experiment",
+      "caveat": "Provider UI/reporting can change and the result must be rechecked before reuse."
+    },
+    {
+      "id": "kevin-indig-listicle-analysis-2026",
+      "class": "individual-experiment",
+      "publisher": "Growth Memo / Kevin Indig",
+      "title": "What makes a good listicle?",
+      "published_or_updated": "2026-08-31",
+      "url": "https://www.growth-memo.com/p/what-makes-a-good-listicle",
+      "claim_scope": "Listicle prevalence and features associated with top-three Google rankings",
+      "method_summary": "Follow-up analysis referencing 5.3 million search results and 60,000 queries.",
+      "finding": "In the published analysis, freshness was the feature that predicted top-three ranking while several commonly cited format signals did not; query intent and vertical mattered strongly.",
+      "use_in_goose": "Example of why page-format advice must be tested by query intent/vertical instead of promoted universally.",
+      "causal_strength": "large-observational-analysis-by-individual-publisher",
+      "caveat": "The exact modelling choices and paywalled details should be reviewed before deriving a specific implementation rule."
+    }
+  ],
+  "winner_observatory_policy": {
+    "default_paid_acquisition_status": "unknown",
+    "allowed_paid_acquisition_status": [
+      "unknown",
+      "none_observed",
+      "confirmed_present"
+    ],
+    "candidate_winner_requires": "A dated, defined query/prompt cohort plus repeated evidence of new or materially improved organic/citation visibility. One screenshot is insufficient.",
+    "controls": [
+      "stable incumbent in the same cohort",
+      "ranking but uncited page",
+      "cited but weakly ranking page where observable",
+      "relevant target-site page",
+      "same URL before/after a meaningful revision where available"
+    ]
+  },
+  "promotion_policy": [
+    "Official provider guidance may directly update provider-specific eligibility/control rules after source review.",
+    "A single correlational study or individual experiment may create or reprioritize a hypothesis but does not become a universal recommendation.",
+    "Repeated compatible findings from independent methods increase prior confidence but still require site applicability review.",
+    "Target-site negative or neutral experiments remain visible and may lower local priority even when external evidence is positive.",
+    "Material provider contradiction, product change or high citation drift reopens dependent claims for review.",
+    "Stale unsupported advice becomes review-due or retired rather than silently persisting."
+  ],
+  "conflicts_and_resolutions": [
+    {
+      "topic": "AI-specific formatting",
+      "external_signal": "Some observational studies associate certain textual structures with citations.",
+      "provider_signal": "Google explicitly says special AI formatting, artificial chunking and AI-specific rewriting are not required.",
+      "resolution": "Treat structural findings as page-type hypotheses for readability/citability, never as a Google requirement."
+    },
+    {
+      "topic": "AI Overview CTR",
+      "external_signal": "Multiple studies report large CTR differences, with estimates and trends changing over time.",
+      "resolution": "Store dated cohort observations and measure the target site's own exposed queries instead of applying a universal CTR loss coefficient."
+    },
+    {
+      "topic": "AI citation visibility",
+      "external_signal": "Large studies show both overlap with classic Search strength and substantial citation drift.",
+      "resolution": "Use classic Search as a related foundation but track AI citations, persistence and brand mentions as independent longitudinal outcomes."
+    }
+  ]
+}

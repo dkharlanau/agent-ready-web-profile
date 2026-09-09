@@ -1,6 +1,6 @@
 # Site Pattern Graph v0.1
 
-The Site Pattern Graph turns Cite Goose's versioned practice and anti-pattern catalogs into **site-specific observed knowledge**.
+The Site Pattern Graph turns Goose's versioned practice and anti-pattern catalogs into **site-specific observed knowledge**.
 
 The existing catalogs answer: **what is the pattern, what problem does it address, what evidence supports it, and what can be misclassified?**
 
@@ -10,7 +10,7 @@ It is deliberately not an SEO score, AI-readiness score, ranking model, penalty 
 
 ## Why this layer exists
 
-Cite Goose already has:
+Goose already has:
 
 - a versioned discoverability corpus with positive practices;
 - a separate anti-pattern catalog with false-positive boundaries;
@@ -198,7 +198,7 @@ Every learning signal contains `causalClaim: false`. Repetition across sites is 
 
 ## What portfolio learning can legitimately tell us
 
-With several maps, Cite Goose can answer useful questions such as:
+With several maps, Goose can answer useful questions such as:
 
 - Which positive practices are repeatedly applicable but absent on documentation sites?
 - Which anti-patterns repeatedly appear on generated landing-page fleets?

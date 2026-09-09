@@ -2,7 +2,7 @@
 
 Edition 1.0.0 · reviewed 9 September 2026.
 
-Cite Goose should not treat platform documentation, industry studies, expert experiments and pages that currently win in Search as the same kind of evidence.
+Goose should not treat platform documentation, industry studies, expert experiments and pages that currently win in Search as the same kind of evidence.
 
 This lab adds a second research path beside primary-source monitoring:
 
@@ -145,7 +145,7 @@ Source: <https://www.semrush.com/blog/the-ghost-citations-study/>
 
 ## Expert-source policy
 
-Cite Goose may follow individual analysts when they publish inspectable experiments or datasets. It should not maintain a celebrity whitelist.
+Goose may follow individual analysts when they publish inspectable experiments or datasets. It should not maintain a celebrity whitelist.
 
 Initial useful examples include:
 

@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "reviewedAt": "2026-09-07",
-  "brand": "Cite Goose",
+  "brand": "Goose",
   "brandAliases": ["Agent-Ready Web Profile", "ARWP"],
   "brandNameReviewedAt": "2026-09-08",
   "technicalFoundation": "Agent-Ready Web Profile",
@@ -16,7 +16,7 @@
   "modules": [
     {
       "id": "radar",
-      "name": "Cite Goose Radar",
+      "name": "Goose Radar",
       "verb": "Detect",
       "question": "What changed upstream?",
       "status": "active-foundation",
@@ -25,7 +25,7 @@
     },
     {
       "id": "map",
-      "name": "Cite Goose Map",
+      "name": "Goose Map",
       "verb": "Map",
       "question": "What does this site actually have and where is it owned?",
       "status": "next-core",
@@ -34,7 +34,7 @@
     },
     {
       "id": "plan",
-      "name": "Cite Goose Plan",
+      "name": "Goose Plan",
       "verb": "Decide",
       "question": "What actually applies here now?",
       "status": "active",
@@ -43,7 +43,7 @@
     },
     {
       "id": "patch",
-      "name": "Cite Goose Patch",
+      "name": "Goose Patch",
       "verb": "Change",
       "question": "What can change safely and exactly?",
       "status": "active-v0.1",
@@ -52,7 +52,7 @@
     },
     {
       "id": "proof",
-      "name": "Cite Goose Proof",
+      "name": "Goose Proof",
       "verb": "Prove",
       "question": "Did implementation pass and what evidence followed?",
       "status": "partial-foundation",
@@ -61,7 +61,7 @@
     },
     {
       "id": "watch",
-      "name": "Cite Goose Watch",
+      "name": "Goose Watch",
       "verb": "Watch",
       "question": "What needs attention now across the portfolio?",
       "status": "next-commercial-core",
@@ -70,7 +70,7 @@
     },
     {
       "id": "connect",
-      "name": "Cite Goose Connect",
+      "name": "Goose Connect",
       "verb": "Observe",
       "question": "What happened outside the repository?",
       "status": "extension",

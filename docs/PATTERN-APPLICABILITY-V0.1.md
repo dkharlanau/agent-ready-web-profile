@@ -1,6 +1,6 @@
 # Pattern Applicability v0.1
 
-Pattern Applicability connects Cite Goose's existing **7 Search Surface archetypes** to the versioned discoverability and anti-pattern catalogs.
+Pattern Applicability connects Goose's existing **7 Search Surface archetypes** to the versioned discoverability and anti-pattern catalogs.
 
 It solves a specific failure mode: a large pattern library becomes less useful when every site is asked to review every pattern. A documentation resource, software product, local business and editorial publisher have different surface expectations and different likely pattern sets.
 
@@ -108,7 +108,7 @@ node bin/arwp-applicability.mjs gaps --json
 
 ## What this enables next
 
-Once several portfolio sites publish Site Pattern Maps, Cite Goose can compare archetype-level observations without pretending correlation is causation. Useful questions include:
+Once several portfolio sites publish Site Pattern Maps, Goose can compare archetype-level observations without pretending correlation is causation. Useful questions include:
 
 - Which patterns are repeatedly applicable but absent on documentation resources?
 - Which anti-pattern review candidates recur on service sites but not software products?

@@ -1,6 +1,6 @@
 # Site Pattern Context v0.1
 
-A Site Pattern Context records the **purpose archetype** and the **capability facets that are actually present** before Cite Goose selects patterns for review.
+A Site Pattern Context records the **purpose archetype** and the **capability facets that are actually present** before Goose selects patterns for review.
 
 It exists because these are different dimensions:
 
@@ -14,7 +14,7 @@ Treating every capability as an archetype creates huge pseudo-personas. Treating
 Each `.arwp/pattern-context.json` pins:
 
 - Site Focus v0.3;
-- exact Cite Goose runtime commit;
+- exact Goose runtime commit;
 - Pattern Applicability version;
 - one existing Search Surface archetype;
 - zero or more reviewed capability facets;

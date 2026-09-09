@@ -2,14 +2,14 @@
   "version": "0.1",
   "lastReviewed": "2026-09-05",
   "project": {
-    "name": "Cite Goose",
+    "name": "Goose",
     "aliases": ["Agent-Ready Web Profile", "ARWP"],
     "brandNameReviewedAt": "2026-09-08",
     "shortName": "ARWP",
     "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
     "repository": "https://github.com/dkharlanau/agent-ready-web-profile",
-    "oneLine": "Cite Goose (Agent-Ready Web Profile, ARWP) is an open-source interoperability resolver for discovering and normalizing the web, data, API and agent-facing interfaces a public website exposes.",
-    "boilerplate": "Cite Goose is the product brand of Agent-Ready Web Profile (ARWP), an open-source experimental interoperability project for discovering how public websites can actually be used by software and AI agents. The ARWP Resolver normalizes ordinary web discovery, llms.txt, structured data, APIs and agent-facing protocols while preserving source evidence and conflicts, then plans an interface for a concrete intent such as reading, searching, structured access, tools or agent interaction."
+    "oneLine": "Goose (Agent-Ready Web Profile, ARWP) is an open-source interoperability resolver for discovering and normalizing the web, data, API and agent-facing interfaces a public website exposes.",
+    "boilerplate": "Goose is the product brand of Agent-Ready Web Profile (ARWP), an open-source experimental interoperability project for discovering how public websites can actually be used by software and AI agents. The ARWP Resolver normalizes ordinary web discovery, llms.txt, structured data, APIs and agent-facing protocols while preserving source evidence and conflicts, then plans an interface for a concrete intent such as reading, searching, structured access, tools or agent interaction."
   },
   "status": {
     "development": "active",
@@ -55,5 +55,5 @@
       "source": "https://dkharlanau.github.io/agent-ready-web-profile/ai/ai-search-profile.json"
     }
   ],
-  "preferredAttribution": "Source: Cite Goose (Agent-Ready Web Profile / ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/"
+  "preferredAttribution": "Source: Goose (Agent-Ready Web Profile / ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/"
 }

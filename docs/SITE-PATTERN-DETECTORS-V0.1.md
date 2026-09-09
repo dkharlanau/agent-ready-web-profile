@@ -2,7 +2,7 @@
 
 The Detector Authority Registry defines **what an automated or assisted detector is allowed to conclude** before its output enters a Site Pattern Map.
 
-This exists because scaling Cite Goose across many sites creates a new failure mode: a useful heuristic can quietly become an automated accusation. A string match, timestamp comparison or schema parser can nominate a suspicious surface, but that does not mean it has enough evidence to confirm an anti-pattern.
+This exists because scaling Goose across many sites creates a new failure mode: a useful heuristic can quietly become an automated accusation. A string match, timestamp comparison or schema parser can nominate a suspicious surface, but that does not mean it has enough evidence to confirm an anti-pattern.
 
 The registry therefore separates detector mechanics from detector authority.
 
