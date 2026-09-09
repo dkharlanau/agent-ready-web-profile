@@ -5,30 +5,38 @@ on:
     branches: [main]
     paths:
       - 'README.md'
+      - 'ROADMAP.md'
       - 'TRADEMARKS.md'
       - 'package.json'
+      - 'content/**'
       - 'docs/**'
       - 'lib/**'
       - 'skills/**'
       - 'registry/**'
+      - 'research/product/**'
       - 'examples/**'
       - 'templates/**'
       - 'scripts/build-discoverability.mjs'
       - 'scripts/goose-brand-test.mjs'
+      - 'scripts/goose-product-strategy-test.mjs'
       - '.github/workflows/goose-brand.yml'
   pull_request:
     paths:
       - 'README.md'
+      - 'ROADMAP.md'
       - 'TRADEMARKS.md'
       - 'package.json'
+      - 'content/**'
       - 'docs/**'
       - 'lib/**'
       - 'skills/**'
       - 'registry/**'
+      - 'research/product/**'
       - 'examples/**'
       - 'templates/**'
       - 'scripts/build-discoverability.mjs'
       - 'scripts/goose-brand-test.mjs'
+      - 'scripts/goose-product-strategy-test.mjs'
       - '.github/workflows/goose-brand.yml'
 
 permissions:
@@ -42,7 +50,9 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: '24'
-      - name: Validate Goose product identity
+      - name: Validate Goose product identity and strategy
         run: |
           node scripts/goose-brand-test.mjs
+          node scripts/goose-product-strategy-test.mjs
           node --check scripts/goose-brand-test.mjs
+          node --check scripts/goose-product-strategy-test.mjs
