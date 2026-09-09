@@ -16,12 +16,13 @@
     "type": "Person"
   },
   "companyRouting": {
-    "name": "Metalhead Cats",
+    "name": "MetalHatsCats",
     "role": "commercial-partnership-and-company-collaboration",
-    "url": "https://metalheadscats.com/company/",
-    "status": "owner-declared-external-route",
+    "url": "https://www.linkedin.com/company/metalhatscats",
+    "surface": "LinkedIn Company",
+    "status": "owner-project-company-route",
     "availabilityVerifiedByThisRepository": false,
-    "note": "The link target is configured by the project owner. This manifest does not assert a legal entity type, employment relationship, endorsement, or live availability of the external site."
+    "note": "The company route points to the MetalHatsCats LinkedIn Company surface. Goose does not claim a standalone MetalHatsCats website domain here, and this manifest does not assert a legal entity type, employment relationship or endorsement."
   },
   "requiredSurfaces": [
     {
