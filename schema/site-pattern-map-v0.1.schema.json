@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-map-v0.1.schema.json",
-  "title": "Cite Goose Site Pattern Map v0.1",
+  "title": "Goose Site Pattern Map v0.1",
   "description": "Site-specific evidence graph binding versioned discoverability practices and anti-patterns to concrete routes, templates or page roles without turning them into a ranking score.",
   "type": "object",
   "additionalProperties": false,
