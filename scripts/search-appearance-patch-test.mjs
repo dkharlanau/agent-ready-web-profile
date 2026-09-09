@@ -117,7 +117,8 @@ assert.ok(missing.actions.some(action => action.id === 'growth:appearance:favico
   const manifest = buildSearchAppearancePatchManifest(missing, graph({ origin: 'https://owner.github.io', basePath: '/project/' }), { generatedAt: '2026-09-09T18:00:00Z' });
   assert.equal(manifest.summary.blocked, manifest.summary.total);
   assert.ok(manifest.operations.every(item => item.status === 'blocked'));
-  assert.ok(manifest.operations.every(item => /hostname-level/.test(item.reason)));
+  assert.ok(manifest.operations.every(item => item.target.path === null && item.target.beforeSha256 === null));
+  assert.equal(manifest.guardrails.hostnameRootOnly, true);
 }
 
 {
