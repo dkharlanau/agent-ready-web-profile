@@ -74,6 +74,7 @@
     { "match": { "path": "/" }, "role": "problem-commercial", "scope": "IN", "lane": "be-found", "note": "Primary product narrative and entry point." },
     { "match": { "path": "/site-focus.html" }, "role": "problem-commercial", "scope": "IN", "lane": "be-used", "note": "Problem-boundary and architecture gate." },
     { "match": { "path": "/discoverability.html" }, "role": "problem-commercial", "scope": "IN", "lane": "be-found", "note": "Evidence-backed practice selection." },
+    { "match": { "path": "/site-pattern-graph.html" }, "role": "technical-reference", "scope": "IN", "lane": "be-used", "note": "Applied pattern and anti-pattern evidence graph linking catalog guidance to reviewed site-specific observations and remediation." },
     { "match": { "pathPrefix": "/growth" }, "role": "proof-portfolio", "scope": "IN", "lane": "be-proven", "note": "Growth loop, hypotheses, experiments and outcome separation." },
     { "match": { "pathPrefix": "/trust" }, "role": "trust-utility", "scope": "IN", "lane": "be-proven", "note": "Evidence, claims and trust surfaces." },
     { "match": { "pathPrefix": "/research" }, "role": "proof-portfolio", "scope": "ADJACENT", "lane": "be-proven", "note": "Research depth supports the product thesis without becoming a separate homepage identity." },
@@ -104,6 +105,7 @@
   "notes": [
     "The four internal navigation destinations are the declared contract; the external GitHub link may remain a utility action without becoming another problem lane.",
     "Route families are implementation architecture, not a proxy for the number of problems the site owns.",
+    "The Site Pattern Graph is an in-scope applied evidence surface but remains subordinate to the primary problem lanes rather than expanding primary navigation.",
     "Visual principles are owner intent, not a beauty score. Performance budgets require real field evidence and are not inferred from static HTML."
   ]
 }

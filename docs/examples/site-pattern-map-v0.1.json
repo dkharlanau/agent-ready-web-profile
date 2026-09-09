@@ -1,0 +1,114 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-map-v0.1.schema.json",
+  "version": "0.1",
+  "generatedAt": "2026-09-09T06:00:00Z",
+  "site": {
+    "canonicalUrl": "https://example.com/",
+    "repository": "example/site",
+    "siteFocusPath": ".arwp/site-focus.json",
+    "siteFocusVersion": "0.3"
+  },
+  "catalogs": {
+    "discoverability": {
+      "version": "1.12.0",
+      "path": "knowledge/discoverability-corpus.json"
+    },
+    "antiPatterns": {
+      "version": "1.1.0",
+      "path": "knowledge/research/anti-patterns.json"
+    }
+  },
+  "coverage": {
+    "mode": "sample",
+    "routesKnown": null,
+    "routesObserved": 2,
+    "note": "Example review covers the homepage plus one AI-guidance route; all other routes remain outside this observation."
+  },
+  "instances": [
+    {
+      "id": "spi_example_home_status",
+      "kind": "practice",
+      "pattern": {
+        "id": "arwp-access-status",
+        "version": "1.0.1"
+      },
+      "target": {
+        "scope": "route",
+        "value": "/"
+      },
+      "applicability": "applicable",
+      "verdict": "present",
+      "basis": "deterministic",
+      "evidence": [
+        {
+          "type": "http-probe",
+          "locator": "GET https://example.com/",
+          "observedAt": "2026-09-09T06:00:00Z",
+          "summary": "The sampled homepage returned a usable success response. This does not establish index state or every route's status."
+        }
+      ],
+      "falsePositiveBoundaryReviewed": false,
+      "remediation": {
+        "state": "none"
+      },
+      "outcomes": []
+    },
+    {
+      "id": "spi_example_searchbot_review",
+      "kind": "practice",
+      "pattern": {
+        "id": "arwp-access-searchbot",
+        "version": "1.0.1"
+      },
+      "target": {
+        "scope": "site",
+        "value": "https://example.com/"
+      },
+      "applicability": "unknown",
+      "verdict": "unknown",
+      "basis": "heuristic-candidate",
+      "evidence": [],
+      "falsePositiveBoundaryReviewed": false,
+      "remediation": {
+        "state": "none"
+      },
+      "outcomes": [],
+      "note": "A crawler-policy review was nominated but has not yet been completed."
+    },
+    {
+      "id": "spi_example_magic_file_review",
+      "kind": "anti-pattern",
+      "pattern": {
+        "id": "anti-magic-agent-file",
+        "version": "1.0.0"
+      },
+      "target": {
+        "scope": "route-prefix",
+        "value": "/ai/"
+      },
+      "applicability": "unknown",
+      "verdict": "unknown",
+      "basis": "heuristic-candidate",
+      "evidence": [],
+      "falsePositiveBoundaryReviewed": false,
+      "remediation": {
+        "state": "none"
+      },
+      "outcomes": [],
+      "note": "Mentioning llms.txt or AI metadata is not enough to confirm this anti-pattern; a reviewer must inspect the actual claim and false-positive boundary."
+    }
+  ],
+  "relations": [
+    {
+      "from": "spi_example_home_status",
+      "to": "spi_example_searchbot_review",
+      "type": "reinforces",
+      "rationale": "A healthy public response and intentional provider-specific crawler policy are distinct but complementary retrieval conditions."
+    }
+  ],
+  "knownUnknowns": [
+    "The example does not establish search ranking, indexing or AI citation outcomes.",
+    "The sample does not establish site-wide absence of anti-patterns.",
+    "Heuristic candidates remain unknown until reviewed under their catalog boundaries."
+  ]
+}

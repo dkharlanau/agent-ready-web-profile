@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-map-v0.1.schema.json",
+  "title": "Cite Goose Site Pattern Map v0.1",
+  "description": "Site-specific evidence graph binding versioned discoverability practices and anti-patterns to concrete routes, templates or page roles without turning them into a ranking score.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generatedAt", "site", "catalogs", "coverage", "instances", "relations", "knownUnknowns"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalUrl", "repository"],
+      "properties": {
+        "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "repository": { "type": "string", "pattern": "^[^/\\s]+/[^/\\s]+$" },
+        "siteFocusPath": { "type": "string", "minLength": 1 },
+        "siteFocusVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "catalogs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["discoverability", "antiPatterns"],
+      "properties": {
+        "discoverability": { "$ref": "#/$defs/catalogRef" },
+        "antiPatterns": { "$ref": "#/$defs/catalogRef" }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "routesObserved", "note"],
+      "properties": {
+        "mode": { "enum": ["sample", "complete-known-set", "unknown"] },
+        "routesKnown": { "type": ["integer", "null"], "minimum": 0 },
+        "routesObserved": { "type": "integer", "minimum": 0 },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    },
+    "instances": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/instance" }
+    },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relation" }
+    },
+    "knownUnknowns": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "catalogRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "path"],
+      "properties": {
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "path": { "type": "string", "minLength": 1 }
+      }
+    },
+    "patternRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]+$" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "value"],
+      "properties": {
+        "scope": { "enum": ["site", "route", "route-prefix", "route-role", "template", "page-type"] },
+        "value": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "locator", "observedAt", "summary"],
+      "properties": {
+        "type": { "enum": ["repo-file", "source-html", "rendered-dom", "structured-data", "http-probe", "workflow-run", "provider-report", "manual-review", "receipt"] },
+        "locator": { "type": "string", "minLength": 1 },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "summary": { "type": "string", "minLength": 1 },
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "workflowRunId": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": { "enum": ["none", "proposed", "in-progress", "verified", "rejected", "deferred"] },
+        "action": { "type": "string", "minLength": 1 },
+        "receiptId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric", "before", "after", "observationWindow", "source", "interpretation", "causalClaim"],
+      "properties": {
+        "metric": { "type": "string", "minLength": 1 },
+        "before": { "$ref": "#/$defs/value" },
+        "after": { "$ref": "#/$defs/value" },
+        "observationWindow": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "interpretation": { "type": "string", "minLength": 1 },
+        "causalClaim": { "const": false }
+      }
+    },
+    "instance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "pattern", "target", "applicability", "verdict", "basis", "evidence", "falsePositiveBoundaryReviewed", "remediation", "outcomes"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^spi_[a-z0-9][a-z0-9._-]{2,127}$" },
+        "kind": { "enum": ["practice", "anti-pattern"] },
+        "pattern": { "$ref": "#/$defs/patternRef" },
+        "target": { "$ref": "#/$defs/target" },
+        "applicability": { "enum": ["applicable", "not-applicable", "unknown"] },
+        "verdict": { "enum": ["present", "absent", "unknown", "not-applicable"] },
+        "basis": { "enum": ["manual-reviewed", "deterministic", "provider-observation", "heuristic-candidate"] },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+        "falsePositiveBoundaryReviewed": { "type": "boolean" },
+        "remediation": { "$ref": "#/$defs/remediation" },
+        "outcomes": { "type": "array", "items": { "$ref": "#/$defs/outcome" } },
+        "note": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "basis": { "const": "heuristic-candidate" } }, "required": ["basis"] },
+          "then": { "properties": { "verdict": { "const": "unknown" } } }
+        },
+        {
+          "if": { "properties": { "applicability": { "const": "not-applicable" } }, "required": ["applicability"] },
+          "then": { "properties": { "verdict": { "const": "not-applicable" } } }
+        },
+        {
+          "if": { "properties": { "verdict": { "const": "not-applicable" } }, "required": ["verdict"] },
+          "then": { "properties": { "applicability": { "const": "not-applicable" } } }
+        },
+        {
+          "if": { "properties": { "verdict": { "enum": ["present", "absent"] } }, "required": ["verdict"] },
+          "then": { "properties": { "evidence": { "minItems": 1 } } }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": { "const": "anti-pattern" },
+              "verdict": { "const": "present" }
+            },
+            "required": ["kind", "verdict"]
+          },
+          "then": { "properties": { "falsePositiveBoundaryReviewed": { "const": true } } }
+        }
+      ]
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "type", "rationale"],
+      "properties": {
+        "from": { "type": "string", "pattern": "^spi_" },
+        "to": { "type": "string", "pattern": "^spi_" },
+        "type": { "enum": ["reinforces", "prerequisite-for", "conflicts-with", "replaces", "co-occurs-with"] },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "value": { "type": ["string", "number", "integer", "boolean", "null"] }
+  }
+}

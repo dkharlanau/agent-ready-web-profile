@@ -1,0 +1,124 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-pattern-map-v0.1.schema.json",
+  "version": "0.1",
+  "generatedAt": "2026-09-09T05:30:00Z",
+  "site": {
+    "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "repository": "dkharlanau/agent-ready-web-profile",
+    "siteFocusPath": ".arwp/site-focus.json",
+    "siteFocusVersion": "0.3"
+  },
+  "catalogs": {
+    "discoverability": {
+      "version": "1.12.0",
+      "path": "knowledge/discoverability-corpus.json"
+    },
+    "antiPatterns": {
+      "version": "1.1.0",
+      "path": "knowledge/research/anti-patterns.json"
+    }
+  },
+  "coverage": {
+    "mode": "sample",
+    "routesKnown": null,
+    "routesObserved": 2,
+    "note": "Initial dogfood binds only the homepage access state and the published llms guidance route. It is not a whole-site certification."
+  },
+  "instances": [
+    {
+      "id": "spi_citegoose_home_status",
+      "kind": "practice",
+      "pattern": {
+        "id": "arwp-access-status",
+        "version": "1.0.1"
+      },
+      "target": {
+        "scope": "route",
+        "value": "/"
+      },
+      "applicability": "applicable",
+      "verdict": "present",
+      "basis": "deterministic",
+      "evidence": [
+        {
+          "type": "workflow-run",
+          "locator": "Site Focus v0.3 current-public observation run 34314743823",
+          "observedAt": "2026-09-09T05:24:43Z",
+          "summary": "The public homepage returned usable Cite Goose content under a successful Site Focus fetch. This proves the observed homepage response only, not every route or index state.",
+          "workflowRunId": 34314743823
+        }
+      ],
+      "falsePositiveBoundaryReviewed": false,
+      "remediation": {
+        "state": "none"
+      },
+      "outcomes": [],
+      "note": "Implementation evidence only; ranking, indexing and citation outcomes remain external."
+    },
+    {
+      "id": "spi_citegoose_no_magic_llms_claim",
+      "kind": "anti-pattern",
+      "pattern": {
+        "id": "anti-magic-agent-file",
+        "version": "1.0.0"
+      },
+      "target": {
+        "scope": "route",
+        "value": "/recommendations/llms.txt"
+      },
+      "applicability": "applicable",
+      "verdict": "absent",
+      "basis": "manual-reviewed",
+      "evidence": [
+        {
+          "type": "repo-file",
+          "locator": "docs/recommendations/llms.txt",
+          "observedAt": "2026-09-09T05:30:00Z",
+          "summary": "The published guidance explicitly says normal Search foundations remain relevant and no special AI-only schema or machine-readable file is required; llms.txt is not presented as a ranking shortcut."
+        }
+      ],
+      "falsePositiveBoundaryReviewed": true,
+      "remediation": {
+        "state": "none"
+      },
+      "outcomes": [],
+      "note": "Absence is scoped to this reviewed guidance route, not every historical project statement."
+    },
+    {
+      "id": "spi_citegoose_searchbot_policy_review",
+      "kind": "practice",
+      "pattern": {
+        "id": "arwp-access-searchbot",
+        "version": "1.0.1"
+      },
+      "target": {
+        "scope": "site",
+        "value": "https://dkharlanau.github.io/agent-ready-web-profile/"
+      },
+      "applicability": "unknown",
+      "verdict": "unknown",
+      "basis": "heuristic-candidate",
+      "evidence": [],
+      "falsePositiveBoundaryReviewed": false,
+      "remediation": {
+        "state": "none"
+      },
+      "outcomes": [],
+      "note": "The practice is intentionally left unknown until deployed crawler-specific policy and current provider documentation are reviewed together."
+    }
+  ],
+  "relations": [
+    {
+      "from": "spi_citegoose_home_status",
+      "to": "spi_citegoose_searchbot_policy_review",
+      "type": "reinforces",
+      "rationale": "A successful public response and an intentional crawler-specific policy are separate access conditions that together reduce preventable retrieval ambiguity."
+    }
+  ],
+  "knownUnknowns": [
+    "The map does not establish Google ranking, indexing, AI Overview inclusion, AI Mode inclusion or preferred-source treatment.",
+    "The map does not establish Bing or Copilot citation frequency or correctness.",
+    "The initial two-route sample does not establish absence of any anti-pattern across the rest of the site.",
+    "No causal outcome is attributed to a pattern until a separate measurement design supports that claim; v0.1 stores observational outcomes with causalClaim=false only."
+  ]
+}

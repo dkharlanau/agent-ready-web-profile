@@ -1,0 +1,73 @@
+name: Site Pattern Graph v0.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.arwp/site-pattern-map.json'
+      - 'bin/arwp-patterns.mjs'
+      - 'lib/site-pattern-graph.mjs'
+      - 'schema/site-pattern-map-v0.1.schema.json'
+      - 'scripts/site-pattern-graph-test.mjs'
+      - 'docs/SITE-PATTERN-GRAPH-V0.1.md'
+      - 'docs/site-pattern-graph.html'
+      - 'docs/examples/site-pattern-map-v0.1.json'
+      - 'knowledge/discoverability-corpus.json'
+      - 'knowledge/research/anti-patterns.json'
+      - '.github/workflows/site-pattern-graph.yml'
+  pull_request:
+    paths:
+      - '.arwp/site-pattern-map.json'
+      - 'bin/arwp-patterns.mjs'
+      - 'lib/site-pattern-graph.mjs'
+      - 'schema/site-pattern-map-v0.1.schema.json'
+      - 'scripts/site-pattern-graph-test.mjs'
+      - 'docs/SITE-PATTERN-GRAPH-V0.1.md'
+      - 'docs/site-pattern-graph.html'
+      - 'docs/examples/site-pattern-map-v0.1.json'
+      - 'knowledge/discoverability-corpus.json'
+      - 'knowledge/research/anti-patterns.json'
+      - '.github/workflows/site-pattern-graph.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pattern-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate Site Pattern Graph contracts
+        run: |
+          node scripts/site-pattern-graph-test.mjs
+          node --check lib/site-pattern-graph.mjs
+          node --check bin/arwp-patterns.mjs
+          node --check scripts/site-pattern-graph-test.mjs
+
+      - name: Validate Cite Goose dogfood map
+        run: node bin/arwp-patterns.mjs check .arwp/site-pattern-map.json
+
+      - name: Emit bounded summary and actions
+        run: |
+          node bin/arwp-patterns.mjs summary .arwp/site-pattern-map.json --json > /tmp/site-pattern-summary.json
+          node bin/arwp-patterns.mjs actions .arwp/site-pattern-map.json --json > /tmp/site-pattern-actions.json
+          node -e "const fs=require('fs'); const s=JSON.parse(fs.readFileSync('/tmp/site-pattern-summary.json','utf8')); const a=JSON.parse(fs.readFileSync('/tmp/site-pattern-actions.json','utf8')); if(!s.knownUnknowns?.length) throw new Error('known unknowns required'); if(a.scope?.toLowerCase().includes('ranking recommendations')) console.log(a.scope); console.log('PASS bounded Site Pattern Graph output', JSON.stringify({summary:s.summary, actions:a.actions.length, fingerprint:s.fingerprint}));"
+
+      - name: Upload Site Pattern Graph diagnostics
+        uses: actions/upload-artifact@v6
+        with:
+          name: site-pattern-graph-${{ github.sha }}
+          path: |
+            /tmp/site-pattern-summary.json
+            /tmp/site-pattern-actions.json
+          retention-days: 30

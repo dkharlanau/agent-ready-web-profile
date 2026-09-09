@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site Pattern Graph — Cite Goose</title>
+  <meta name="description" content="Bind Cite Goose patterns and anti-patterns to concrete website routes with review evidence, remediation receipts and later outcome observations.">
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/site-pattern-graph.html">
+  <link rel="stylesheet" href="./arwp.css">
+  <style>
+    .pattern-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin:2rem 0}.pattern-flow article,.state-card{border:1px solid var(--line,#d8dde5);border-radius:18px;padding:1.1rem;background:var(--surface,#fff)}.pattern-flow strong{display:block;margin-bottom:.35rem}.states{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.callout{border-left:4px solid currentColor;padding:.8rem 1rem;margin:1.4rem 0}.code-line{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}@media(max-width:800px){.pattern-flow,.states{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="./">Cite Goose</a>
+      <nav aria-label="Primary">
+        <a href="./site-focus.html">Site Focus</a>
+        <a href="./discoverability.html">Patterns</a>
+        <a href="./growth/">Growth</a>
+        <a href="./trust/">Trust</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">SITE PATTERN GRAPH · v0.1</p>
+      <h1>Turn pattern libraries into evidence about real sites.</h1>
+      <p class="lede">A pattern passport says what a practice is. A Site Pattern Map records where it applies, what was actually observed, what remains unknown, what was remediated, and what changed later.</p>
+      <p><a class="button" href="./examples/site-pattern-map-v0.1.json">Inspect the example map</a> <a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/SITE-PATTERN-GRAPH-V0.1.md">Read the contract</a></p>
+    </section>
+
+    <section>
+      <h2>One chain, four evidence objects</h2>
+      <div class="pattern-flow">
+        <article><strong>1 · Passport</strong><span>Versioned positive practice or anti-pattern with sources and boundaries.</span></article>
+        <article><strong>2 · Instance</strong><span>Binding to a site, route, route role, template or page type.</span></article>
+        <article><strong>3 · Receipt</strong><span>Deployment-linked proof when a reviewed problem is corrected.</span></article>
+        <article><strong>4 · Outcome</strong><span>Later provider, user or business observations kept separate from implementation proof.</span></article>
+      </div>
+      <div class="callout"><strong>No score.</strong> Present, absent, unknown and not-applicable stay separate. A sampled absence never becomes a site-wide certification.</div>
+    </section>
+
+    <section>
+      <h2>Safe states instead of automated accusations</h2>
+      <div class="states">
+        <article class="state-card"><h3>Heuristic candidate</h3><p>A detector can nominate a route for review, but its verdict must remain <code>unknown</code>.</p></article>
+        <article class="state-card"><h3>Manual anti-pattern review</h3><p>Catalog entries marked manual-required cannot become present or absent through a string match or automated heuristic.</p></article>
+        <article class="state-card"><h3>Deterministic practice evidence</h3><p>HTTP, markup or workflow facts can support bounded implementation verdicts where the check is actually deterministic.</p></article>
+        <article class="state-card"><h3>Outcome observation</h3><p>Before/after observations are allowed, but v0.1 fixes <code>causalClaim=false</code> unless a stronger future experimental contract is used.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Use it on one site</h2>
+      <p class="code-line">node bin/arwp-patterns.mjs check .arwp/site-pattern-map.json</p>
+      <p class="code-line">node bin/arwp-patterns.mjs actions .arwp/site-pattern-map.json --json</p>
+      <p>Start with a small set of applicable patterns. Bind them to exact surfaces. Confirm anti-patterns only after reviewing their false-positive boundary. Remediate one bounded problem and attach the deployment receipt.</p>
+    </section>
+
+    <section>
+      <h2>Then learn across sites</h2>
+      <p>The portfolio view can show which practices are repeatedly applicable but absent, which anti-patterns recur on a site archetype, where owner data keeps conclusions unknown, and which verified changes still lack outcome observations.</p>
+      <p class="code-line">node bin/arwp-patterns.mjs portfolio site-a.json site-b.json site-c.json --json</p>
+      <p>This is prevalence and operational learning, not proof that a common pattern causes rankings, citations, traffic or conversion.</p>
+    </section>
+
+    <section>
+      <h2>Why this matters</h2>
+      <p>Cite Goose already maintains versioned positive practices and synthetic anti-patterns. The Site Pattern Graph adds the missing site-specific layer, so the project can improve from repeated dogfood instead of merely accumulating recommendations.</p>
+      <p><a href="./discoverability.html">Browse positive patterns</a> · <a href="./site-focus.html">Define site boundaries first</a> · <a href="./growth/">Keep outcomes separate</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell">Cite Goose · evidence-backed website improvement without ranking guarantees.</div></footer>
+</body>
+</html>
