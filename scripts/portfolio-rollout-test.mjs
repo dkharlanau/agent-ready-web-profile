@@ -78,7 +78,7 @@ const watch = buildPortfolioRollout(portfolio, trends, {
 });
 assert.deepEqual(
   [...new Set(watch.candidates.map(item => item.siteId))].sort(),
-  ['dkharlanau-sap-knowledge', 'metkagram-language-knowledge', 'ptichi-fresh-site'],
+  ['dkharlanau-sap-knowledge', 'metalhatscats-applied-systems', 'metkagram-language-knowledge', 'ptichi-fresh-site'],
   'general is a real vertical, not a wildcard; WebMCP WATCH should map only to portfolio sites whose explicit verticals match its appliesTo set'
 );
 assert.ok(watch.candidates.every(item => item.recommendationStatus === 'watch-only'));
