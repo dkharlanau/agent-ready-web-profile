@@ -103,5 +103,6 @@ assert.match(fs.readFileSync('docs/answers/index.html','utf8'), /Structured proj
 
 await import('./regional-search-surfaces-test.mjs');
 await import('./search-appearance-patch-test.mjs');
+await import('./internal-discovery-test.mjs');
 
-console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references), 6 negative/conditional contract tests, structured product/service/profile/event dogfood surfaces, regional Search routing, and Search Appearance patch preparation`);
+console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references), 6 negative/conditional contract tests, structured product/service/profile/event dogfood surfaces, regional Search routing, Search Appearance patch preparation, and bounded Internal Discovery evidence`);
