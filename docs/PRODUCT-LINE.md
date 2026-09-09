@@ -1,248 +1,257 @@
 # Goose ARWP — Product Line
 
-Reviewed: **2026-09-09** after the Goose self-interview loop.
+Reviewed: **2026-09-09** after the 10-role proof-first stress test.
 
 > **Get Found.**
 
-**Goose ARWP** is the public product. **Agent-Ready Web Profile (ARWP)** is the technical foundation. Goose is not another AI-visibility score, generic SEO checklist or protocol catalog. Its intended category is **evidence-backed Search & AI discoverability operations**: understand what a site is trying to achieve, inspect what is actually present, decide what applies, implement bounded changes, prove deployment, measure provider-native outcomes and re-review when evidence changes.
+**Goose ARWP** is the public product. **Agent-Ready Web Profile (ARWP)** is the technical foundation.
+
+Goose is an **evidence-backed Search and AI discoverability operations** product: it helps a website owner choose a small number of interventions worth trying, verify the exact deployment, preserve provider-native outcomes and decide what to keep, revise or stop.
+
+It is not another AI-visibility score, generic SEO checklist, prompt-tracking suite, protocol catalog or content-volume system.
 
 ## Public product journey
 
-A first-time user should not need to choose between Resolver, BraidGraph, Growth, Site Focus, Evidence Lab, Radar or Watch.
+A first-time user should not need to choose between Resolver, BraidGraph, Growth, Site Focus, Evidence Lab, Radar, Repository Mapper, Project Maturity Surfaces or Watch.
 
 The public journey is:
 
 ```text
-TELL GOOSE THE GOAL
-        ↓
+GOAL / DEMAND
+      ↓
 INSPECT
-        ↓
-DECIDE
-        ↓
+      ↓
+DECIDE ONE PRIMARY MOVE
+      ↓
 CHANGE
-        ↓
-PROVE
-        ↓
-WATCH / REVISE
+      ↓
+VERIFY EXACT DEPLOYMENT
+      ↓
+MEASURE PROVIDER-NATIVE OUTCOME
+      ↓
+KEEP / REVISE / STOP
 ```
 
-This is the product experience. Internal modules remain composable engines behind it.
+The underlying technical sequence remains compatible with `goal -> inspect -> decide -> change -> prove -> watch`; the user-facing result is a decision cycle, not a module selector.
 
-### 1. Tell Goose the goal
+### Goal / demand
 
-Capture only the owner context that materially changes recommendations: audience, problem, useful action, site boundary, relevant vertical, rights/identity constraints, owner-side measurement availability and success definition.
+Capture only owner context that materially changes the recommendation: audience/problem, useful action, market/language where relevant and owner-side measurement availability. Combine this with observed demand/intent/page-job evidence.
 
-Owner-declared context is not independent evidence. Public observation and owner declaration remain separate when they disagree.
+Owner-declared context is not independent evidence.
 
-### 2. Inspect
+### Inspect
 
-Observe the real site and repository where available:
+Observe the real site/repository and only the evidence needed to decide whether a candidate intervention applies:
 
-- crawl/index eligibility and Search foundations;
-- Site Focus and route roles;
-- Intent Ownership and page/job conflicts;
-- entities, structured data and visible fact parity;
-- datasets and Data Authority where genuine;
-- crawler/access controls;
-- Search/AI/agent discovery surfaces;
-- repository/source ownership and deployment state;
-- project maturity surfaces where applicable.
+- crawl/index eligibility;
+- Site Focus and Intent Ownership;
+- page/job conflicts and demand hypotheses;
+- visible facts, entities and structured-data parity;
+- genuine datasets/Data Authority where relevant;
+- crawler/access policy;
+- Search/AI discovery state;
+- source ownership and deployment identity.
 
-### 3. Decide
+### Decide
 
-Return the smallest useful set of actions — normally the top 1–3 — with:
+Return **one primary intervention** when possible, with up to three only when the actions are genuinely independent.
 
-- why the action applies;
-- evidence/source class;
-- expected implementation check;
-- what outcome would actually matter;
-- explicit unknown/blocked state;
+Every action must state:
+
+- why it applies to this site;
+- demand/evidence basis;
+- source/confidence class;
+- exact implementation verification;
+- the outcome stage that would matter;
+- what would falsify the recommendation;
+- what remains unknown;
 - what the action does **not** prove.
 
-The system should prefer `not-applicable` or `insufficient-evidence` to cargo-cult work.
+### Change
 
-### 4. Change
+Use bounded, reviewable transformations only where source ownership is known. Editorial truth, legal/policy claims, authenticated provider settings and ambiguous ownership remain gated.
 
-Use deterministic, reviewable transformations where source ownership is known. Editorial truth, policy, legal/identity claims, authenticated provider settings and ambiguous repository ownership remain gated.
+### Prove / measure
 
-### 5. Prove
-
-Separate:
+Keep separate:
 
 - implementation verification;
-- deployment parity;
+- production/deployment parity;
+- index/eligibility;
 - Search/AI exposure;
 - citations/references;
 - brand mentions;
-- referrals/visits;
+- visits/referrals;
 - useful actions/conversions.
 
-A successful build or deployment is not Search/AI outcome evidence.
+A correct implementation is not outcome evidence.
 
-### 6. Watch / revise
+### Watch / decide
 
-Keep source guidance, recommendations, deployments and outcomes under review. Recommendations can become review-due, challenged, contradicted, consolidate-candidate or retired. Negative/neutral outcomes remain visible.
+The reason to return is a changed decision state: new provider evidence, a mature observation window, deployment drift, stale guidance or a review-due recommendation. Negative/neutral outcomes remain visible.
+
+---
+
+# Canonical product primitive: the intervention chain
+
+Goose should converge on one outcome-bearing chain:
+
+```text
+SITE GOAL / DEMAND
+      ↓
+OBSERVED STATE
+      ↓
+APPLICABLE RECOMMENDATION
+      ↓
+EXACT SOURCE / REPOSITORY CHANGE
+      ↓
+DEPLOYMENT PARITY
+      ↓
+PROVIDER-NATIVE OUTCOME
+      ↓
+REVIEW DECISION
+```
+
+Controlled Cohorts / Growth Experiments plus Change Receipts and outcome evidence should own runtime intervention state. Program registries may define hypotheses and candidate sites, but should reference canonical experiment IDs instead of duplicating `planned/hold/observing/reviewed` truth.
+
+Evidence Lab, Winner Observatory and the future Proof Board are views over this evidence, not parallel proof systems.
 
 ---
 
 # Internal architecture
 
-## Evidence core
-
-The evidence core preserves truth boundaries:
-
-- upstream source guidance vs Goose interpretation;
-- owner declaration vs public observation;
-- implementation proof vs external outcome;
-- owner-controlled dogfood vs independent evidence;
-- unknown vs zero;
-- current vs superseded/retired evidence.
-
 ## BraidGraph
 
-**BraidGraph** is an internal product primitive connecting:
+BraidGraph remains an internal lineage/index primitive connecting source/rule evidence to recommendations, source ownership, changes, verification and outcomes. Its value is traceability and reverse impact. It is not the user-facing product and does not infer causality.
 
-```text
-SOURCE / RULE
-      ↓
-SITE EVIDENCE
-      ↓
-APPLICABILITY
-      ↓
-RECOMMENDATION
-      ↓
-SOURCE / REPO OWNERSHIP
-      ↓
-CHANGE
-      ↓
-VERIFICATION / DEPLOYMENT
-      ↓
-OUTCOME EVIDENCE
-```
+## Supporting engines
 
-Its main value is explainability and reverse impact. It is not the user-facing brand and does not infer causality.
-
-## Existing internal engines
-
-| Engine | Job |
+| Engine | Product job |
 | --- | --- |
-| Radar / Trend Intelligence | Detect material upstream Search/AI changes. |
-| Site Focus | Define problem, audience, outcome and site boundaries. |
-| Intent Ownership | Prevent uncontrolled URL/content expansion and map intent families to canonical page jobs. |
-| Resolver | Discover and normalize real machine/agent interfaces with provenance. |
-| Growth / Adaptive Upgrade | Decide which reviewed recommendations actually apply. |
-| Repository Mapper / Transformation Packs | Resolve source ownership and prepare deterministic bounded changes. |
-| Evidence / Change Receipts | Preserve observations, mutations, verification and deployment state. |
-| Controlled Cohorts / Winner Observatory | Run frozen longitudinal Search/AI experiments. |
-| Recommendation Review | Re-review, challenge, revise and retire advice. |
-| Project Maturity Surfaces | Keep identity, rights, collaboration and governance inspectable. |
-| Portfolio Watch | Compose review/evidence state across multiple sites. |
+| Site Focus + Intent Ownership | Define the problem, demand and canonical page/job boundary. |
+| Growth / Recommendation Registry | Supply source-backed candidate interventions. |
+| Controlled Cohorts / Growth Experiments | Freeze intervention design and review outcomes. |
+| Evidence / Change Receipts | Preserve exact observations, changes and deployment identity. |
+| provider-native evidence imports | Preserve Search/AI/referral evidence without flattening semantics. |
+| Repository Mapper / Transformation Packs | Map rendered surfaces to exact sources and prepare bounded changes when needed. |
+| BraidGraph | Preserve lineage and reverse-impact relationships. |
+| Resolver / protocol adapters | Supporting machine-interface discovery and decision-quality work. |
+| Trend Intelligence | Keep upstream recommendations current. |
+| Project Maturity Surfaces | Project identity/rights/governance support, not discoverability proof. |
+| Portfolio Watch | Later multi-site review/maintenance composition. |
 
-Do not expose these as required first-run choices.
+Internal engines should not silently become first-run product choices.
 
 ---
 
-# 2026 market reality
+# Market boundary
 
-The market already has strong visibility dashboards, GEO/AEO audits, content workflows and agent-readiness scanners. Goose should not try to win by recreating their dashboards or by inventing a more impressive composite score.
+By 2026, established SEO/GEO products already provide prompt tracking, citations, mentions, competitors, AI visibility scores and large response/prompt datasets. Goose should not try to win on prompt corpus size or another visibility dashboard.
 
-The durable differentiation is the chain:
+The plausible differentiation is the intervention history:
 
-> **what the site is trying to achieve → what is actually present → why a change applies → what exact change happened → whether it is live → what provider-native evidence followed → whether to keep/revise/stop it.**
+> **why this site should try this change → what exact change went live → what provider-native evidence followed → what decision was made → what must be re-reviewed when guidance changes.**
 
-Current official platform evidence reinforces the need for provider-specific semantics:
+The architecture is copyable. The potential moat is an accumulating, provenance-rich corpus of interventions and outcomes across sites, including null and negative results.
 
-- Google says the same foundational SEO practices apply to AI Overviews/AI Mode and no special AI markup is required; Google Search Console now exposes dedicated generative-AI visibility reports.
-- Bing Webmaster Tools exposes AI citation/grounding evidence, including page-level citations and grounding-query relationships, with newer intent/topic/citation-share views.
-- OpenAI separates OAI-SearchBot Search surfacing from GPTBot training controls; crawler access is eligibility/access evidence, not citation or traffic evidence.
+---
 
-Provider metrics must remain provider-native rather than being flattened into a universal “AI visibility” score.
+# Provider-native evidence
+
+Use a funnel, not a score:
+
+`access -> index/eligibility -> exposure -> citation/reference -> brand mention -> visit -> useful action`.
+
+### Google
+
+Search Console generative-AI reports are exposure/impression evidence with provider-supported page/country/device/time dimensions. Google does not require special AI markup for AI Overviews or AI Mode.
+
+### Bing / Microsoft
+
+Bing AI Performance is citation/grounding evidence: citations, cited pages, grounding-query/page relationships and provider-native intent/topic/query-scoped Citation Share. It is not ranking/authority evidence and is aggregated/sampled.
+
+### OpenAI / ChatGPT
+
+OAI-SearchBot access, public Search eligibility, bounded observed citations and referrals are separate evidence stages. GPTBot training control is separate.
+
+### Perplexity / other answer engines
+
+Keep crawler/indexing policy and bounded observed citations/referrals where real. Do not invent owner telemetry that is not actually exposed.
+
+## Provider-native evidence — active-cohort only
+
+Do not build a generalized provider abstraction ahead of evidence. Preserve raw owner exports and add/harden adapters when an active proof cohort has real data that cannot be represented safely today.
 
 ---
 
 # Product wedge
 
-## Now: proof on real sites
+## P0 — First reviewed real-site proof loop
 
-The immediate wedge is not “support every website stack.” It is:
+The current product P0 is **not** the Proof Board. It is the first completed chain from recommendation to exact deployed change to provider-native outcome to reviewed decision.
 
-- focused public knowledge/data/product sites;
-- owner-controlled sites where Goose can safely dogfood end-to-end;
-- Search/AI discoverability problems where deployment and outcome evidence can actually be observed.
+Ptichi’s frozen 12-treatment / 6-control cohort remains the canonical first attempt and stays `measurement-hold` until exact production parity is verified.
 
-Current portfolio examples include Ptichi, Brali, CBT Cards, Cognitive Biases, Metkagram, `dkharlanau.github.io` and the MetalHatsCats public repository surface where applicable.
+No larger replacement cohort should be manufactured for appearance.
 
-## Later: portfolio operators
+## P1 gated — Minimal proof rendering
 
-After several real evidence loops exist, the strongest commercial user is likely an agency, maintainer or small team responsible for many sites. Portfolio Watch, policy-as-code, reviewed change waves, source-change blast radius and owner-data connectors become valuable only after the single-site proof chain is trustworthy.
+After one reviewed loop exists, #93 should render one evidence-derived proof card before any portfolio dashboard is built.
 
----
+The card should show site goal, intervention, evidence/demand basis, exact deployment state, provider-native outcome, unknowns/confounders and the review decision.
 
-# Packaging direction
+## P1 — Replicate the contract
 
-### Goose Open Core
+Apply the same proof contract to two contrasting owned sites with real owner evidence. The goal is to test generality, not fill a dashboard.
 
-- inspect and explain;
-- Site Focus / Intent Ownership;
-- evidence-backed recommendation planning;
-- Resolver and technical interoperability;
-- deterministic transformations where safe;
-- receipts, experiments and open schemas.
+## P1 — Minimal first-run / Get Found Brief
 
-### Goose Portfolio / managed layer
+Then use #92/#94/#96 to expose URL + minimal owner context -> inspect -> one primary recommendation -> proof plan. Site Focus, Intent Ownership, Growth and evidence engines remain underneath.
 
-Potential hosted value after proof:
+## Later — Portfolio operator value
 
-- recurring audits/re-review;
-- multi-site Proof Board;
-- provider-native evidence imports/connectors;
-- source/rule change alerts;
-- portfolio policy-as-code;
-- verified stack transformation packs;
-- reviewed remediation waves and audit history.
+After proof generalizes, the strongest paying-user hypothesis is an agency, maintainer or small team responsible for multiple sites. Potential paid value:
 
-Do not introduce extra public sub-brands until real usage demonstrates the need.
+- recurring evidence/review;
+- multi-site source/rule impact;
+- owner-data connectors;
+- deployment/evidence queues;
+- policy/governance;
+- reviewed remediation waves;
+- intervention history and learned applicability.
 
----
-
-# Current product bets
-
-## P0 — Proof Board + real longitudinal evidence
-
-Make committed experiment/deployment/outcome state visible across the portfolio. A visitor should immediately see what is planned, on hold, observing, reviewed, neutral/negative or stopped.
-
-## P0 — Provider-native measurement hardening
-
-Model Google generative-AI impressions, Bing citation/grounding data, AI referrals and other owner evidence according to provider semantics. No common score.
-
-## P0 — Deployment parity as a hard measurement gate
-
-Never start an observation clock when the intended implementation cannot be independently shown to be live.
-
-## P1 — Simplified first-run journey
-
-Use existing Site Focus, Intent Ownership, Growth and evidence engines behind a URL + owner-context flow. The output should be a concise Get Found Brief rather than a module selector.
-
-## P1 — Surface Budget / Retirement Gate
-
-New pages/modules need a real consumer, page job, verification path, review date and retirement/consolidation condition. Maturity is not file count.
-
-## P1 — Portfolio Watch after proof
-
-Scale only after the evidence chain is demonstrated on multiple sites.
+This buyer hypothesis remains unvalidated until independent repeat use exists.
 
 ---
 
 # Stop rules
 
-Do not add a new public module, protocol adapter, schema family or indexable content surface merely because it is technically interesting.
+Until the proof success gate is met:
 
-New work should normally satisfy at least one of these:
+- do not build a rich Proof Board before the first reviewed loop;
+- do not add new public modules merely to make the project look mature;
+- do not expand Resolver/ARD/MCP/WebMCP/transact/cross-lingual breadth without a blocked real workflow;
+- do not treat the stratified agentic-web corpus as product P0;
+- do not add Trend/Radar breadth beyond maintenance;
+- do not add transformation-pack breadth without observed blocked target work;
+- do not add AI-specific files/markup as ranking tactics;
+- do not expand URLs before demand/intent/page-value gates;
+- do not use DOI/trust/policy/asset/page counts as evidence of discoverability value;
+- do not collapse provider evidence into a universal AI score;
+- do not create parallel experiment lifecycle truth;
+- do not hide neutral or negative outcomes.
 
-1. it closes a concrete real-site discoverability/evidence gap;
-2. it reduces repeated owner work across several sites;
-3. it improves measurement truth or prevents a false inference;
-4. it fixes a demonstrated interoperability failure;
-5. it makes an existing product journey materially simpler.
+# Proof success gate
 
-When the choice is **more product** versus **more trustworthy site evidence**, Goose currently chooses the evidence.
+Before the next major product expansion Goose needs:
+
+1. one fully reviewed real-site intervention with exact deployment parity and provider-native outcome evidence;
+2. three owned sites with canonical experiment/evidence state;
+3. at least two sites with real provider-native Search/AI evidence;
+4. at least one retained neutral/negative result;
+5. one minimal proof artifact generated from committed evidence;
+6. one demonstrated decision advantage over a generic checklist;
+7. no major new capability justified by feature count or speculative maturity.
+
+If repeated well-run interventions cannot reach this gate, Goose should contract its scope rather than add product surface.
