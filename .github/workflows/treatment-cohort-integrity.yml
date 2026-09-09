@@ -1,0 +1,52 @@
+name: Treatment cohort integrity
+
+on:
+  push:
+    paths:
+      - 'lib/treatment-cohort-integrity.mjs'
+      - 'bin/arwp-treatment-cohort.mjs'
+      - 'bin/arwp.mjs'
+      - 'schema/treatment-cohort-integrity.schema.json'
+      - 'scripts/treatment-cohort-integrity-test.mjs'
+      - 'docs/TREATMENT-COHORT-INTEGRITY.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'REPO_MAP.md'
+      - '.github/workflows/treatment-cohort-integrity.yml'
+  pull_request:
+    paths:
+      - 'lib/treatment-cohort-integrity.mjs'
+      - 'bin/arwp-treatment-cohort.mjs'
+      - 'bin/arwp.mjs'
+      - 'schema/treatment-cohort-integrity.schema.json'
+      - 'scripts/treatment-cohort-integrity-test.mjs'
+      - 'docs/TREATMENT-COHORT-INTEGRITY.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'REPO_MAP.md'
+      - '.github/workflows/treatment-cohort-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate schema and syntax
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('schema/treatment-cohort-integrity.schema.json','utf8'));"
+          node --check lib/treatment-cohort-integrity.mjs
+          node --check bin/arwp-treatment-cohort.mjs
+          node --check bin/arwp.mjs
+          node --check scripts/treatment-cohort-integrity-test.mjs
+      - name: Run Treatment Cohort Integrity regression
+        run: node scripts/treatment-cohort-integrity-test.mjs
+      - name: CLI help smoke
+        run: |
+          node bin/arwp-treatment-cohort.mjs --help
+          node bin/arwp.mjs treatment-cohort --help
