@@ -16,10 +16,14 @@ on:
       - 'scripts/winner-observatory-test.mjs'
       - 'scripts/recommendation-review-test.mjs'
       - 'scripts/controlled-cohort-test.mjs'
+      - 'scripts/evidence-lab-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
       - 'docs/CONTROLLED-COHORTS.md'
+      - 'docs/evidence-lab/**'
+      - 'docs/sitemap.xml'
       - 'knowledge/experiments/**'
+      - 'knowledge/research/2026-09-09-external-evidence-winner-loop.json'
       - '.github/workflows/winner-observatory.yml'
   pull_request:
     paths:
@@ -35,10 +39,14 @@ on:
       - 'scripts/winner-observatory-test.mjs'
       - 'scripts/recommendation-review-test.mjs'
       - 'scripts/controlled-cohort-test.mjs'
+      - 'scripts/evidence-lab-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
       - 'docs/CONTROLLED-COHORTS.md'
+      - 'docs/evidence-lab/**'
+      - 'docs/sitemap.xml'
       - 'knowledge/experiments/**'
+      - 'knowledge/research/2026-09-09-external-evidence-winner-loop.json'
       - '.github/workflows/winner-observatory.yml'
 
 permissions:
@@ -81,3 +89,8 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('schema/controlled-cohort.schema.json','utf8'));"
           node bin/arwp-cohort.mjs validate knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json
           node bin/arwp-cohort.mjs summarize knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json | grep -q 'Treatment/control: 12/6'
+      - name: Validate public Evidence Lab
+        run: |
+          node scripts/evidence-lab-test.mjs
+          node --check scripts/evidence-lab-test.mjs
+          node -e "JSON.parse(require('fs').readFileSync('docs/evidence-lab/index.json','utf8'));"
