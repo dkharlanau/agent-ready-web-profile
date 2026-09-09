@@ -72,20 +72,23 @@ if (legacy.length) {
 }
 
 const expectations = [
-  ['ai/site-profile.json', '"name":"Goose"'],
-  ['docs/ai/site-profile.json', '"name":"Goose"'],
-  ['docs/index.html', '<strong>Goose</strong>'],
-  ['docs/index.html', '<title>Goose — Make your site worth citing.</title>'],
-  ['docs/site-focus.html', 'Goose'],
+  ['ai/site-profile.json', '"name": "Goose ARWP"'],
+  ['docs/ai/site-profile.json', '"name": "Goose ARWP"'],
+  ['docs/index.html', '<strong>Goose</strong><span>ARWP<br>GET FOUND.</span>'],
+  ['docs/index.html', '<title>Goose ARWP — Get Found.</title>'],
+  ['docs/index.html', '<h1>Get<br>Found.</h1>'],
+  ['docs/site-focus.html', '<strong>Goose</strong><span>ARWP<br>GET FOUND.</span>'],
   ['docs/site-pattern-graph.html', 'Goose'],
-  ['docs/discoverability.html', 'Goose — Discoverability Pattern Library'],
-  ['docs/trust/brand.html', 'Goose'],
-  ['docs/evidence-lab/index.html', '<strong>Goose</strong>'],
+  ['docs/discoverability.html', 'Goose ARWP — Discoverability Pattern Library'],
+  ['docs/discoverability.html', '<h1>Get<br>Found.</h1>'],
+  ['docs/trust/brand.html', 'Goose ARWP'],
+  ['docs/evidence-lab/index.html', '<strong>Goose</strong><span>ARWP<br>GET FOUND.</span>'],
   ['examples/editorial/section-graph.html', 'Goose example'],
   ['docs/examples/editorial/section-graph.html', 'Goose example'],
-  ['README.md', 'Goose'],
-  ['TRADEMARKS.md', 'Goose'],
-  ['docs/BRAND-GOOSE.md', 'Goose'],
+  ['README.md', '# Goose ARWP'],
+  ['README.md', '**Get Found.**'],
+  ['TRADEMARKS.md', 'Goose ARWP'],
+  ['docs/BRAND-GOOSE.md', 'Goose ARWP — Get Found.'],
   ['docs/BRAND-CITE-GOOSE.md', 'Legacy brand-path compatibility']
 ];
 
@@ -93,7 +96,7 @@ for (const [file, needle] of expectations) {
   const absolute = path.join(root, file);
   if (!fs.existsSync(absolute)) throw new Error(`Missing brand surface: ${file}`);
   const text = fs.readFileSync(absolute, 'utf8');
-  if (!text.includes(needle)) throw new Error(`${file} is missing expected Goose identity: ${needle}`);
+  if (!text.includes(needle)) throw new Error(`${file} is missing expected Goose ARWP identity: ${needle}`);
 }
 
 const rootProfile = fs.readFileSync(path.join(root, 'ai', 'site-profile.json'), 'utf8');
@@ -102,15 +105,21 @@ if (rootProfile !== docsProfile) throw new Error('Canonical and GitHub Pages sel
 
 const home = fs.readFileSync(path.join(root, 'docs', 'index.html'), 'utf8');
 if (!home.includes('Agent-Ready Web Profile') || !home.includes('ARWP')) {
-  throw new Error('Technical Agent-Ready Web Profile / ARWP identity must remain on the Goose home page.');
+  throw new Error('Technical Agent-Ready Web Profile / ARWP identity must remain on the Goose ARWP home page.');
 }
 
+const productLine = JSON.parse(fs.readFileSync(path.join(root, 'registry', 'product-line.json'), 'utf8'));
+if (productLine.brand !== 'Goose ARWP' || productLine.tagline !== 'Get Found.') {
+  throw new Error('Product-line registry must keep Goose ARWP as the canonical brand and Get Found. as the tagline.');
+}
+if (!productLine.brandAliases?.includes('Goose')) throw new Error('Goose short form must remain an explicit brand alias.');
+
 const legacyDoc = fs.readFileSync(path.join(root, 'docs', 'BRAND-CITE-GOOSE.md'), 'utf8');
-if (!legacyDoc.includes('BRAND-GOOSE.md')) throw new Error('Legacy brand path must point to the canonical Goose brand document.');
+if (!legacyDoc.includes('BRAND-GOOSE.md')) throw new Error('Legacy brand path must point to the canonical Goose ARWP brand document.');
 
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 for (const required of ['docs/BRAND-GOOSE.md', 'docs/BRAND-CITE-GOOSE.md']) {
   if (!pkg.files?.includes(required)) throw new Error(`npm package surface is missing ${required}`);
 }
 
-console.log(`PASS Goose brand contract across ${files.length} current public/source surfaces; ARWP remains the technical identity, canonical self-profiles are byte-identical, regression fixtures may mention legacy copy only as negative test data, both brand docs ship in the package, and frozen history is excluded.`);
+console.log(`PASS Goose ARWP brand contract across ${files.length} current public/source surfaces; Get Found. is the primary tagline, Goose remains the short form, Agent-Ready Web Profile / ARWP remains the technical identity, canonical self-profiles are byte-identical, regression fixtures may mention legacy copy only as negative test data, both brand docs ship in the package, and frozen history is excluded.`);
