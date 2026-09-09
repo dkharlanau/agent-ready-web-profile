@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import {
+  buildPatternLearningSignals,
   buildSitePatternActions,
   loadSitePatternCatalogs,
   loadSitePatternMap,
@@ -120,6 +121,27 @@ assert.equal(portfolio.sites.length, 1);
 assert.equal(portfolio.patterns.find(row => row.patternId === anti.id).absent, 2);
 assert.match(portfolio.scope, /not causal evidence/i);
 
+const observedA = structuredClone(map);
+const observedB = structuredClone(map);
+observedA.site.canonicalUrl = 'https://alpha.example/';
+observedB.site.canonicalUrl = 'https://beta.example/';
+for (const candidate of [observedA, observedB]) {
+  candidate.instances[0].verdict = 'absent';
+  candidate.instances[0].evidence = evidence('Applicable practice reviewed as absent on the sampled route.');
+  candidate.instances[1].verdict = 'present';
+  candidate.instances[1].evidence = evidence('Anti-pattern confirmed after false-positive boundary review.');
+  candidate.instances[1].remediation = { state: 'verified', action: 'Applied bounded correction.', receiptId: `sfr_${candidate.site.canonicalUrl.includes('alpha') ? 'alpha' : 'beta'}_fixture` };
+}
+const learning = buildPatternLearningSignals([observedA, observedB]);
+assert.equal(learning.sitesObserved, 2);
+assert.match(learning.scope, /do not infer ranking factors/i);
+assert.ok(learning.signals.some(row => row.type === 'repeated-practice-gap' && row.patternId === practice.id));
+assert.ok(learning.signals.some(row => row.type === 'evidence-gap' && row.patternId === practice.id));
+assert.ok(learning.signals.some(row => row.type === 'repeated-anti-pattern' && row.patternId === anti.id));
+assert.ok(learning.signals.some(row => row.type === 'measurement-debt' && row.patternId === anti.id));
+assert.ok(learning.signals.every(row => row.causalClaim === false));
+assert.throws(() => buildPatternLearningSignals([observedA], { minRepeat: 1 }), /minRepeat/);
+
 for (const file of ['docs/examples/site-pattern-map-v0.1.json', '.arwp/site-pattern-map.json']) {
   if (!fs.existsSync(file)) continue;
   const candidate = loadSitePatternMap(file);
@@ -129,4 +151,4 @@ for (const file of ['docs/examples/site-pattern-map-v0.1.json', '.arwp/site-patt
   assert.equal(candidateResult.valid, true, `${file} runtime invalid:\n${candidateResult.errors.join('\n')}`);
 }
 
-console.log('PASS Site Pattern Graph v0.1 schema/runtime invariants, catalog binding, manual anti-pattern boundary, non-causal outcomes and portfolio aggregation');
+console.log('PASS Site Pattern Graph v0.1 schema/runtime invariants, catalog binding, manual anti-pattern boundary, non-causal outcomes, portfolio aggregation and learning signals');
