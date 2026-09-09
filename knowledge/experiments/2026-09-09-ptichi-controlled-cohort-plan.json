@@ -1,0 +1,82 @@
+{
+  "version": "0.1",
+  "id": "ptichi-discovery-controlled-cohort-2026-09",
+  "status": "planned",
+  "createdAt": "2026-09-09T00:00:00Z",
+  "product": "Ptichi",
+  "canonicalSite": "https://ptichi.com/",
+  "purpose": "Test whether a bounded set of genuinely useful voice-training/data-rich pages gains measurable Search/AI discovery relative to comparable unchanged pages before any large-scale expansion.",
+  "design": {
+    "treatmentTarget": { "min": 20, "max": 50 },
+    "controlTarget": { "min": 20, "max": 50 },
+    "assignment": "Match treatment candidates to comparable pages by intent family, current baseline visibility, page type and content depth before intervention. Preserve the selected controls unchanged during the primary observation window unless a correctness/safety issue requires intervention.",
+    "freezeBeforeOutcomeReview": true,
+    "noThousandsOfPagesBeforeReview": true
+  },
+  "candidateIntentFamilies": [
+    "voice exercises",
+    "vocal warm ups",
+    "breathing exercises for speaking",
+    "articulation exercises",
+    "resonance exercises",
+    "speech volume exercises",
+    "intonation exercises",
+    "voice confidence practice",
+    "voice training routines"
+  ],
+  "treatmentRequirements": [
+    "The page solves a real user task and is useful without machine-readable metadata.",
+    "The page has stable canonical identity and is not a thin keyword/filter variant.",
+    "Visible facts and machine-readable facts remain in parity.",
+    "The intervention is recorded precisely enough to distinguish it from unrelated site changes.",
+    "Related entities/pages are linked only when the relationship helps the user.",
+    "Evidence/provenance is shown when a claim depends on external research or a real dataset."
+  ],
+  "baseline": {
+    "requiredBeforeTreatment": [
+      "indexability/canonical state",
+      "Google page/query visibility export when available",
+      "Bing page/citation evidence when available",
+      "fixed query-cohort Winner Observatory snapshot",
+      "release/commit identity"
+    ],
+    "missingEvidencePolicy": "Unknown remains unknown; do not convert missing owner data into zero."
+  },
+  "outcomes": [
+    "time-to-first-impression",
+    "time-to-index where owner evidence supports it",
+    "non-brand query breadth",
+    "impressions",
+    "clicks",
+    "top-10 persistence for fixed observed cohorts",
+    "organic entrant rate",
+    "AI citation presence",
+    "AI citation persistence",
+    "explicit brand mention",
+    "identifiable referral traffic",
+    "relevant product action where measurable"
+  ],
+  "observationWindows": ["7d", "14d", "28d", "56d"],
+  "reviewDecisions": ["keep", "revise", "revert", "retire", "continue-measuring", "expand-cohort", "stop-expansion"],
+  "stopConditions": [
+    "Treatment pages become less useful or misleading to users.",
+    "Indexability/canonical regression appears.",
+    "A material confounder prevents an interpretable comparison and cannot be isolated.",
+    "The intervention requires synthetic claims, fake reviews/experience or unsupported structured data.",
+    "Repeated neutral/negative observations make scale-up unjustified."
+  ],
+  "guardrails": {
+    "noRankingGuarantee": true,
+    "noCausalityInferenceFromSimpleBeforeAfter": true,
+    "preserveNeutralAndNegativeResults": true,
+    "controlsAreNotSacrificedForSeo": true,
+    "humanReviewBeforeExpansion": true
+  },
+  "nextExecution": [
+    "Freeze the first candidate and control page list from current Ptichi inventory before inspecting post-change outcomes.",
+    "Capture baseline owner visibility exports and one fixed query-cohort Winner Observatory snapshot.",
+    "Apply one coherent intervention family to the treatment cohort; avoid bundling unrelated site-wide changes.",
+    "Capture repeated snapshots at the declared windows and compare treatment/control outcomes separately.",
+    "Feed reviewed outcomes back into Goose hypotheses and recommendation lifecycle without automatic promotion."
+  ]
+}
