@@ -10,6 +10,8 @@ Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-pr
 [![BraidGraph validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
+Repository work from ChatGPT/GitHub: start with [AGENTS.md](AGENTS.md), then use [REPO_MAP.md](REPO_MAP.md) to route the task to canonical sources and checks.
+
 Goose ARWP is the product-facing layer built on **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
 
 Most tools answer one of two questions:
