@@ -3,7 +3,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createHash } from 'node:crypto';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
@@ -14,12 +13,10 @@ const htmlPath = path.join(outputDir, 'index.html');
 const jsonPath = path.join(outputDir, 'index.json');
 const check = process.argv.includes('--check');
 
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
-
-function sha256(value) {
-  return createHash('sha256').update(value).digest('hex');
+function evidenceClassCounts(records) {
+  const counts = {};
+  for (const record of records) counts[record.class] = (counts[record.class] || 0) + 1;
+  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
 }
 
 function escapeHtml(value) {
@@ -31,12 +28,6 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function evidenceClassCounts(records) {
-  const counts = {};
-  for (const record of records) counts[record.class] = (counts[record.class] || 0) + 1;
-  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
-}
-
 function shortSha(value) {
   return value ? value.slice(0, 8) : 'unknown';
 }
@@ -46,13 +37,8 @@ function statusLabel(status) {
 }
 
 function buildModel() {
-  const cohortRaw = fs.readFileSync(cohortPath, 'utf8');
-  const researchRaw = fs.readFileSync(externalEvidencePath, 'utf8');
-  const cohort = JSON.parse(cohortRaw);
-  const external = JSON.parse(researchRaw);
-  const classCounts = evidenceClassCounts(external.records || []);
-  const treatmentEntities = cohort.treatment.map(item => item.entity);
-  const controlEntities = cohort.control.map(item => item.entity);
+  const cohort = JSON.parse(fs.readFileSync(cohortPath, 'utf8'));
+  const external = JSON.parse(fs.readFileSync(externalEvidencePath, 'utf8'));
 
   return {
     version: '0.1',
@@ -83,8 +69,8 @@ function buildModel() {
       productionGate: cohort.measurementGate.state,
       productionParity: cohort.measurementGate.productionRef === cohort.measurementGate.implementationRef,
       gateReason: cohort.measurementGate.reason,
-      treatmentEntities,
-      controlEntities,
+      treatmentEntities: cohort.treatment.map(item => item.entity),
+      controlEntities: cohort.control.map(item => item.entity),
       queryPanel: cohort.queryPanel.queries.map(query => ({ id: query.id, text: query.text, targetEntities: query.targetEntities })),
       outcomes: cohort.outcomes,
       decisionRules: cohort.decisionRules
@@ -92,43 +78,16 @@ function buildModel() {
     externalEvidence: {
       reviewedAt: external.reviewed_at,
       recordCount: (external.records || []).length,
-      classCounts,
+      classCounts: evidenceClassCounts(external.records || []),
       sourceClasses: external.source_classes,
       promotionPolicy: external.promotion_policy,
-      records: (external.records || []).map(record => ({
-        id: record.id,
-        class: record.class,
-        publisher: record.publisher,
-        title: record.title,
-        publishedOrUpdated: record.published_or_updated,
-        url: record.url,
-        finding: record.finding,
-        useInGoose: record.use_in_goose,
-        causalStrength: record.causal_strength,
-        caveat: record.caveat
-      }))
+      sourceArtifact: 'knowledge/research/2026-09-09-external-evidence-winner-loop.json'
     },
     learningSystem: [
-      {
-        id: 'external-evidence',
-        label: 'External evidence',
-        purpose: 'Separate provider requirements from independent observations and expert experiments.'
-      },
-      {
-        id: 'winner-observatory',
-        label: 'Winner Observatory',
-        purpose: 'Track entrants, drops, top-10 persistence and citation persistence for frozen query cohorts.'
-      },
-      {
-        id: 'controlled-cohorts',
-        label: 'Controlled cohorts',
-        purpose: 'Freeze treatment, controls and queries before outcomes are visible, then block measurement until production parity.'
-      },
-      {
-        id: 'recommendation-review',
-        label: 'Recommendation review',
-        purpose: 'Move advice through fresh, review-due, challenged, contradicted and retire-candidate states without silent registry mutation.'
-      }
+      { id: 'external-evidence', label: 'External evidence', purpose: 'Separate provider requirements from independent observations and expert experiments.' },
+      { id: 'winner-observatory', label: 'Winner Observatory', purpose: 'Track entrants, drops, top-10 persistence and citation persistence for frozen query cohorts.' },
+      { id: 'controlled-cohorts', label: 'Controlled cohorts', purpose: 'Freeze treatment, controls and queries before outcomes are visible, then block measurement until production parity.' },
+      { id: 'recommendation-review', label: 'Recommendation review', purpose: 'Move advice through fresh, review-due, challenged, contradicted and retire-candidate states without silent registry mutation.' }
     ],
     evidenceStages: [
       { id: 'implementation', label: 'Implementation', question: 'Did the repository change exist and pass checks?' },
@@ -138,9 +97,9 @@ function buildModel() {
       { id: 'visit', label: 'Visit', question: 'Did identifiable traffic arrive?' },
       { id: 'task', label: 'Useful action', question: 'Did the visit lead to a relevant product action?' }
     ],
-    sourceDigests: {
-      controlledCohortSha256: sha256(cohortRaw),
-      externalEvidenceSha256: sha256(researchRaw)
+    sourceArtifacts: {
+      controlledCohort: 'knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json',
+      externalEvidence: 'knowledge/research/2026-09-09-external-evidence-winner-loop.json'
     },
     links: {
       controlledCohorts: '../CONTROLLED-COHORTS.md',
@@ -246,7 +205,7 @@ function buildHtml(model) {
     <section class="goose-shell lab-section">
       <div class="lab-section-head"><div><p class="eyebrow">EXTERNAL EVIDENCE / REVIEWED ${escapeHtml(model.externalEvidence.reviewedAt)}</p><h2>${model.externalEvidence.recordCount} records. Different jobs.</h2></div><p>Official platform documentation is strongest for provider requirements and controls. Observational studies and expert experiments can generate hypotheses, but they do not expose hidden ranking weights.</p></div>
       <div class="lab-class-grid">${classCards}</div>
-      <p class="lab-source-note">Machine-readable source digests: cohort <code>${model.sourceDigests.controlledCohortSha256}</code> · research <code>${model.sourceDigests.externalEvidenceSha256}</code>.</p>
+      <p class="lab-source-note">The full dated research record remains the source of truth: <code>${escapeHtml(model.externalEvidence.sourceArtifact)}</code>.</p>
     </section>
 
     <section class="lab-review">
@@ -277,9 +236,7 @@ function buildHtml(model) {
 
 function render() {
   const model = buildModel();
-  const json = `${JSON.stringify(model, null, 2)}\n`;
-  const html = buildHtml(model);
-  return { json, html };
+  return { json: `${JSON.stringify(model, null, 2)}\n`, html: buildHtml(model) };
 }
 
 function ensure(file, expected) {
