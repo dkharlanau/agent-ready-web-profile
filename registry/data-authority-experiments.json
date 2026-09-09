@@ -1,0 +1,122 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-09",
+  "title": "ARWP Data Authority Experiments",
+  "purpose": "Test whether useful original data exposed as stable evidence-bearing entity pages can improve Search, generative Search, AI citation and acquisition outcomes without treating page scale, structured data or graph metadata as ranking factors.",
+  "evidenceBoundary": {
+    "implementationIsNotOutcome": true,
+    "ownerControlledSitesAreNotIndependentAdoption": true,
+    "negativeResultsAreEvidence": true,
+    "noRankingPromise": true,
+    "noAiCitationPromise": true,
+    "noIndexationPromise": true
+  },
+  "pageValueGate": {
+    "mode": "non-composite-gates",
+    "requiredForIndexableCandidate": ["demand", "uniqueValue", "standaloneUsefulness", "canonicalIdentity"],
+    "review": ["evidence", "extractability", "connectivity", "freshnessIntegrity"],
+    "defaultIfDemandFails": "do-not-create-indexable-page",
+    "defaultIfUniqueValueFails": "do-not-create-indexable-page"
+  },
+  "defaultExperiment": {
+    "treatmentCohortTarget": "20-50 priority entity pages",
+    "control": "Use comparable unchanged pages where practical; otherwise preserve a dated pre-change baseline.",
+    "baseline": "Capture owner-side Search/AI/referral evidence before intervention when available.",
+    "interventions": [
+      "add genuinely useful entity attributes or derived facts",
+      "make the direct answer visible in canonical HTML",
+      "add evidence, methodology, provenance or limitations where applicable",
+      "align page-visible facts with Dataset/JSON/CSV/JSON-LD representations",
+      "add meaningful parent, related-entity and comparison links",
+      "remove or exclude thin duplicate/query-variant pages from Search"
+    ],
+    "outcomes": [
+      "indexedPriorityUrls",
+      "googleSearchImpressions",
+      "googleSearchClicks",
+      "nonBrandQueryCoverage",
+      "queryPageFit",
+      "bingAiCitations",
+      "bingUniqueCitedPages",
+      "observedGenerativeSearchCitations",
+      "searchAiReferralSessions",
+      "acquisitionConversions"
+    ],
+    "guardrails": [
+      "duplicateUrlGrowth",
+      "thinPageGrowth",
+      "crawlWaste",
+      "fakeFreshness",
+      "schemaVisibleContentMismatch",
+      "privacyOrRightsViolation"
+    ],
+    "stopConditions": [
+      "new cohorts repeatedly add no unique user value",
+      "generated pages are substantially duplicative",
+      "index/crawl noise grows faster than useful discovery",
+      "the experiment requires fabricated evidence or metadata",
+      "privacy, licensing or safety boundaries cannot be satisfied"
+    ]
+  },
+  "sites": [
+    {
+      "siteId": "ptichi-fresh-site",
+      "role": "primary-acquisition-proof",
+      "status": "planned",
+      "candidateEntities": ["voice exercises", "voice goals", "techniques", "progressions", "relationships", "evidence"],
+      "primaryQuestion": "Can high-value voice-training entity pages acquire real non-brand Search traffic and later AI citations?"
+    },
+    {
+      "siteId": "metalhatscats-applied-systems",
+      "role": "commercial-professional-proof",
+      "status": "planned",
+      "candidateEntities": ["workflow patterns", "system architectures", "automation patterns", "operational concepts", "published datasets"],
+      "primaryQuestion": "Can structured professional knowledge and datasets create qualified discovery rather than only informational impressions?"
+    },
+    {
+      "siteId": "metkagram-language-knowledge",
+      "role": "language-pattern-proof",
+      "status": "planned",
+      "candidateEntities": ["language patterns", "annotated examples", "relations", "corpus records", "provenance"],
+      "primaryQuestion": "Do stable language-pattern entities gain useful long-tail query coverage and machine retrieval?"
+    },
+    {
+      "siteId": "cbt-cards-public-reflection",
+      "role": "structured-practice-proof",
+      "status": "planned",
+      "candidateEntities": ["reviewed practices", "situations", "fit", "exclusions", "relationships", "evidence notes"],
+      "primaryQuestion": "Can bounded reviewed practice records be discovered without turning safety-sensitive material into a page factory?"
+    },
+    {
+      "siteId": "cognitive-biases-knowledge",
+      "role": "entity-library-proof",
+      "status": "planned",
+      "candidateEntities": ["biases", "examples", "mechanisms", "related concepts", "evidence"],
+      "primaryQuestion": "Can a large conceptual entity library win useful long-tail discovery through distinct data and relationships?"
+    },
+    {
+      "siteId": "brali-practical-knowledge",
+      "role": "large-knowledge-library-proof",
+      "status": "planned",
+      "candidateEntities": ["practical knowledge records", "relationships", "collections", "comparisons", "derived facts"],
+      "primaryQuestion": "Which parts of a large GitHub Pages knowledge library produce real demand and which parts create only index noise?"
+    },
+    {
+      "siteId": "dkharlanau-sap-knowledge",
+      "role": "mixed-domain-baseline",
+      "status": "planned",
+      "candidateEntities": ["SAP concepts", "professional knowledge", "datasets", "project artifacts"],
+      "primaryQuestion": "Can data-rich professional pages outperform generic mixed-domain content on discovery and qualified visits?"
+    }
+  ],
+  "references": [
+    "docs/DATA-AUTHORITY-TRACK.md",
+    "registry/portfolio-sites.json",
+    "registry/dataset-publication-policy.json",
+    "registry/growth-hypotheses.json",
+    "https://developers.google.com/search/docs/appearance/structured-data/dataset",
+    "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+    "https://developers.google.com/search/docs/essentials/spam-policies",
+    "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview"
+  ]
+}
