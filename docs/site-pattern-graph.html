@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Site Pattern Graph — Cite Goose</title>
-  <meta name="description" content="Bind Cite Goose patterns and anti-patterns to concrete website routes with review evidence, remediation receipts and later outcome observations.">
+  <meta name="description" content="Bind Cite Goose patterns and anti-patterns to concrete website routes, control detector authority, prove remediation and learn across sites without collapsing evidence into a score.">
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/site-pattern-graph.html">
   <link rel="stylesheet" href="./arwp.css">
   <style>
@@ -12,17 +12,7 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="shell">
-      <a class="brand" href="./">Cite Goose</a>
-      <nav aria-label="Primary">
-        <a href="./site-focus.html">Site Focus</a>
-        <a href="./discoverability.html">Patterns</a>
-        <a href="./growth/">Growth</a>
-        <a href="./trust/">Trust</a>
-      </nav>
-    </div>
-  </header>
+  <header class="site-header"><div class="shell"><a class="brand" href="./">Cite Goose</a><nav aria-label="Primary"><a href="./site-focus.html">Site Focus</a><a href="./discoverability.html">Patterns</a><a href="./growth/">Growth</a><a href="./trust/">Trust</a></nav></div></header>
 
   <main class="shell">
     <section class="hero">
@@ -44,13 +34,15 @@
     </section>
 
     <section>
-      <h2>Safe states instead of automated accusations</h2>
+      <h2>Detector authority is explicit</h2>
       <div class="states">
-        <article class="state-card"><h3>Heuristic candidate</h3><p>A detector can nominate a route for review, but its verdict must remain <code>unknown</code>.</p></article>
-        <article class="state-card"><h3>Manual anti-pattern review</h3><p>Catalog entries marked manual-required cannot become present or absent through a string match or automated heuristic.</p></article>
-        <article class="state-card"><h3>Deterministic practice evidence</h3><p>HTTP, markup or workflow facts can support bounded implementation verdicts where the check is actually deterministic.</p></article>
-        <article class="state-card"><h3>Outcome observation</h3><p>Before/after observations are allowed, but v0.1 fixes <code>causalClaim=false</code> unless a stronger future experimental contract is used.</p></article>
+        <article class="state-card"><h3>Heuristic candidate</h3><p>A heuristic may nominate a route, but its verdict must remain <code>unknown</code>.</p></article>
+        <article class="state-card"><h3>Manual anti-pattern review</h3><p>Manual-required anti-patterns cannot become present or absent through a keyword, timestamp or schema heuristic.</p></article>
+        <article class="state-card"><h3>Deterministic evidence</h3><p>A detector may emit a bounded verdict only when its registered evidence boundary actually supports one.</p></article>
+        <article class="state-card"><h3>Authority change is reviewed</h3><p>A smarter implementation does not silently gain stronger conclusions. Its registry contract must change too.</p></article>
       </div>
+      <p class="code-line">node bin/arwp-pattern-detectors.mjs list --kind=anti-pattern --authority=candidate</p>
+      <p><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/SITE-PATTERN-DETECTORS-V0.1.md">Detector Authority contract</a></p>
     </section>
 
     <section>
@@ -61,15 +53,15 @@
     </section>
 
     <section>
-      <h2>Then learn across sites</h2>
-      <p>The portfolio view can show which practices are repeatedly applicable but absent, which anti-patterns recur on a site archetype, where owner data keeps conclusions unknown, and which verified changes still lack outcome observations.</p>
-      <p class="code-line">node bin/arwp-patterns.mjs portfolio site-a.json site-b.json site-c.json --json</p>
-      <p>This is prevalence and operational learning, not proof that a common pattern causes rankings, citations, traffic or conversion.</p>
+      <h2>Then let the portfolio improve the standard</h2>
+      <p>The portfolio view reports prevalence. The Learning Loop goes further: it surfaces repeated evidence gaps, recurring anti-patterns, applicable practices repeatedly absent, measurement debt, applicability-filter candidates and version fragmentation.</p>
+      <p class="code-line">node bin/arwp-patterns.mjs learning site-a.json site-b.json site-c.json --min-repeat=2 --json</p>
+      <p>One site cannot generate a portfolio pattern. Every learning signal remains non-causal: repetition can improve the review system, but it does not reveal a search-engine ranking factor.</p>
     </section>
 
     <section>
       <h2>Why this matters</h2>
-      <p>Cite Goose already maintains versioned positive practices and synthetic anti-patterns. The Site Pattern Graph adds the missing site-specific layer, so the project can improve from repeated dogfood instead of merely accumulating recommendations.</p>
+      <p>Cite Goose already maintains versioned positive practices and synthetic anti-patterns. The Site Pattern Graph turns them into site observations; Detector Authority controls automation; the Learning Loop turns repeated dogfood into reviewed improvements to the standard itself.</p>
       <p><a href="./discoverability.html">Browse positive patterns</a> · <a href="./site-focus.html">Define site boundaries first</a> · <a href="./growth/">Keep outcomes separate</a></p>
     </section>
   </main>
