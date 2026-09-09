@@ -99,6 +99,9 @@ assert.ok(missing.actions.some(action => action.id === 'growth:appearance:favico
 {
   const html = page('<script type="application/ld+json">{"broken":</script>');
   const report = inspectSearchAppearance({ html, url: 'https://example.com/' });
+  assert.equal(report.checks.find(item => item.id === 'appearance:site-name')?.status, 'not-assessed');
+  assert.equal(report.actions.some(item => item.id === 'growth:appearance:site-name'), false,
+    'unknown site-name state must not become a patch request merely because JSON-LD syntax is broken');
   const manifest = buildSearchAppearancePatchManifest(report, graph({ adapter: 'nextjs', jsonldOwner: true }), { generatedAt: '2026-09-09T18:00:00Z' });
   const syntax = manifest.operations.find(item => item.kind === 'repair-jsonld-syntax');
   const siteName = manifest.operations.find(item => item.kind === 'reconcile-site-name');
@@ -106,8 +109,7 @@ assert.ok(missing.actions.some(action => action.id === 'growth:appearance:favico
   assert.equal(syntax.status, 'mapped-review');
   assert.equal(syntax.target.path, 'src/app/layout.tsx');
   assert.equal(syntax.target.beforeSha256, digest('b'));
-  assert.equal(siteName.status, 'mapped-review');
-  assert.equal(siteName.target.path, 'src/app/layout.tsx');
+  assert.equal(siteName, undefined, 'not-assessed site-name evidence must remain absent from the patch manifest');
   assert.equal(favicon.status, 'manual-review', 'favicon ownership must not be inferred from a Next.js build path');
 }
 
@@ -155,4 +157,4 @@ try {
   fs.rmSync(directory, { recursive: true, force: true });
 }
 
-console.log('PASS Search Appearance findings map to exact source digests only when repository ownership is proven; ambiguous framework ownership and hostname-scope mismatches fail closed.');
+console.log('PASS Search Appearance findings map to exact source digests only when repository ownership is proven; unknown evidence stays unknown, and ambiguous framework ownership and hostname-scope mismatches fail closed.');
