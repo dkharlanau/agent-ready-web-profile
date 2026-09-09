@@ -1,5 +1,5 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "reviewedAt": "2026-09-09",
   "title": "Goose Technical Search Integrity Rules",
   "purpose": "Catch high-confidence technical conditions that can block or weaken Search and AI discovery before longitudinal outcome evidence is mature. This is a non-composite diagnostic rule pack, not a ranking or AI-readiness score.",
@@ -21,6 +21,16 @@
       "source": "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
       "action": "Fix robots.txt 429/5xx/network availability problems; do not misclassify an ordinary 404 as a Google crawl block.",
       "doesNotProve": "A crawlable site will be indexed or ranked."
+    },
+    {
+      "id": "google-priority-url-robots-access",
+      "priority": "P0",
+      "authority": "google-platform-guidance",
+      "detector": "google-priority-url-robots-access",
+      "claim": "A robots.txt file can allow the site root while blocking specific priority paths. Google applies the most specific matching allow/disallow rule, with allow winning equal-length conflicts.",
+      "source": "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
+      "action": "Remove unintended path-specific Googlebot blocks from priority Search pages while preserving intentional private/utility exclusions.",
+      "doesNotProve": "That an allowed priority URL will be crawled, indexed or ranked."
     },
     {
       "id": "search-indexability",
@@ -48,9 +58,9 @@
       "priority": "P0",
       "authority": "google-platform-guidance",
       "detector": "canonical-final-consistency",
-      "claim": "Canonical annotations should be technically unambiguous and should not contradict the final URL identity of priority pages without an intentional consolidation reason.",
+      "claim": "Canonical annotations on HTML pages should be technically unambiguous and should not contradict the final URL identity of priority pages without an intentional consolidation reason.",
       "source": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
-      "action": "Remove duplicate canonical declarations and review priority URLs that canonicalize away from their final URL.",
+      "action": "Remove duplicate canonical declarations and review priority HTML URLs that canonicalize away from their final URL.",
       "doesNotProve": "That Google will select the declared canonical."
     },
     {
@@ -58,10 +68,31 @@
       "priority": "P0",
       "authority": "derived-technical-integrity",
       "detector": "canonical-collision",
-      "claim": "Multiple materially distinct sampled priority URLs collapsing to the same canonical can indicate duplicate routing, generated variants, or accidental loss of page identity.",
+      "claim": "Multiple materially distinct sampled priority HTML URLs collapsing to the same canonical can indicate duplicate routing, generated variants, or accidental loss of page identity.",
       "source": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
       "action": "Review duplicate canonical clusters and keep only intentional consolidation.",
       "doesNotProve": "Duplicate content or a ranking penalty."
+    },
+    {
+      "id": "bounded-retrieval-footprint",
+      "priority": "P1",
+      "authority": "derived-technical-integrity",
+      "detector": "bounded-retrieval-footprint",
+      "claim": "A priority document that exceeds Goose's bounded public fetch budget is not automatically a Search failure, but it deserves retrieval/performance review instead of being misclassified as non-indexable.",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors",
+      "action": "Review unusually large priority documents and, when practical, keep the landing answer lightweight while moving large datasets/catalog payloads to dedicated retrievable resources.",
+      "doesNotProve": "That the document exceeds Google's fetch limits, causes a soft 404, or ranks worse because of byte size."
+    },
+    {
+      "id": "soft-404-suspect",
+      "priority": "P1",
+      "authority": "google-platform-guidance",
+      "detector": "soft-404-suspect",
+      "claim": "Google describes soft 404s as successful responses that actually present an error, missing-content, empty or nearly empty page.",
+      "source": "https://developers.google.com/search/docs/crawling-indexing/troubleshoot-crawling-errors",
+      "additionalSources": ["https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"],
+      "action": "Return meaningful 404/410/redirect status for genuinely missing pages and verify rendered content when a successful page looks empty or error-like.",
+      "doesNotProve": "That Google has classified the URL as a soft 404."
     },
     {
       "id": "crawlable-internal-link-markup",
