@@ -1,6 +1,6 @@
 name: Project Surfaces Integration Temporary
 
-# Retry after shared-page canonical correction.
+# Retry after bounded deprecated-brand correction.
 on:
   push:
     branches: [feature/project-maturity-surfaces-2026-09-09]
