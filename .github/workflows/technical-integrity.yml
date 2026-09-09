@@ -5,10 +5,12 @@ on:
     paths:
       - 'registry/technical-integrity-rules.json'
       - 'lib/technical-integrity.mjs'
+      - 'lib/internal-link-target-health.mjs'
       - 'bin/arwp-technical-integrity.mjs'
       - 'bin/arwp.mjs'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
+      - 'scripts/internal-link-target-health-test.mjs'
       - 'scripts/sync-technical-preflight-instructions.mjs'
       - 'scripts/technical-preflight-instructions-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
@@ -24,10 +26,12 @@ on:
     paths:
       - 'registry/technical-integrity-rules.json'
       - 'lib/technical-integrity.mjs'
+      - 'lib/internal-link-target-health.mjs'
       - 'bin/arwp-technical-integrity.mjs'
       - 'bin/arwp.mjs'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
+      - 'scripts/internal-link-target-health-test.mjs'
       - 'scripts/sync-technical-preflight-instructions.mjs'
       - 'scripts/technical-preflight-instructions-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
@@ -68,13 +72,17 @@ jobs:
       - name: Validate Technical Integrity rule pack
         run: node -e "const fs=require('fs'); const rules=JSON.parse(fs.readFileSync('registry/technical-integrity-rules.json','utf8')); if(!rules.rules?.length) throw new Error('empty Technical Integrity rules'); const ids=rules.rules.map(r=>r.id); if(new Set(ids).size!==ids.length) throw new Error('duplicate Technical Integrity rule id'); if(rules.methodology?.noCompositeScore!==true) throw new Error('noCompositeScore guardrail missing'); JSON.parse(fs.readFileSync('schema/technical-integrity-report.schema.json','utf8'));"
       - name: Run Technical Integrity regression
-        run: node scripts/technical-integrity-test.mjs
+        run: |
+          node scripts/technical-integrity-test.mjs
+          node scripts/internal-link-target-health-test.mjs
       - name: Syntax check
         run: |
           node --check lib/technical-integrity.mjs
+          node --check lib/internal-link-target-health.mjs
           node --check bin/arwp-technical-integrity.mjs
           node --check bin/arwp.mjs
           node --check scripts/technical-integrity-test.mjs
+          node --check scripts/internal-link-target-health-test.mjs
           node --check scripts/sync-technical-preflight-instructions.mjs
           node --check scripts/technical-preflight-instructions-test.mjs
       - name: CLI help smoke
@@ -110,7 +118,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          node bin/arwp.mjs technical-integrity "$LIVE_GOOSE_URL" --max-pages=8 --concurrency=2 --timeout=12000 --json > technical-integrity-goose.json
+          node bin/arwp.mjs technical-integrity "$LIVE_GOOSE_URL" --max-pages=8 --max-link-targets=24 --concurrency=2 --timeout=12000 --json > technical-integrity-goose.json
           code=$?
           set -e
           if [ "$code" -eq 1 ]; then
@@ -125,7 +133,7 @@ jobs:
           const findings = report.checks
             .filter(item => item.status !== 'pass' && item.status !== 'not-applicable')
             .map(item => ({ id: item.id, priority: item.priority, status: item.status, message: item.message }));
-          console.log(JSON.stringify({ canonicalUrl: report.canonicalUrl, summary: report.summary, findings }, null, 2));
+          console.log(JSON.stringify({ canonicalUrl: report.canonicalUrl, summary: report.summary, internalLinkTargetAudit: report.internalLinkTargetAudit || null, findings }, null, 2));
           NODE
       - name: Upload live Goose Technical Integrity report
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
