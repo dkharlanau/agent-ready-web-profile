@@ -1,0 +1,306 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/controlled-cohort.schema.json",
+  "version": "0.1",
+  "id": "ptichi-da-001-en-work-speaking",
+  "site": "https://ptichi.com/",
+  "repository": "dkharlanau/ptichi-site",
+  "frozenAt": "2026-09-09T08:30:00Z",
+  "status": "measurement-hold",
+  "purpose": "Freeze the real Ptichi Data Authority treatment/control assignment and a stable English Search query panel before any post-deployment outcome review.",
+  "siteSpecificRationale": "The generic Goose plan proposed 20-50 treatment pages, but Ptichi has a binding search-expansion gate, only 18 comparable published entities in the current pilot universe and a stale production deployment. The owner-controlled PTI-DA-001 design therefore uses 12 existing treatment entities and 6 unchanged controls, adds no indexable URLs and is the authoritative site-specific cohort. The former acquisition branch is no longer a live branch; its planning commit is an ancestor of current main, so this freeze binds to the current main implementation ref instead.",
+  "sourceEvidence": {
+    "repositoryRef": "fc34374963fbcdb4fb44488ed804d505c25892c7",
+    "planningRef": "55924d5ad74e6d5f6e3789c17b9d648f8e49b4a9",
+    "experimentPath": "reports/search/arwp/data-authority-experiment-001-2026-09-09.json",
+    "experimentBlobSha": "7a8623bda1c1f7d20d142a82aaf4616fdbf7119c",
+    "searchExpansionGatePath": "data/search-expansion-gate.json",
+    "ownerEvidencePath": "reports/search/google-console.json",
+    "deploymentEvidencePath": "reports/search/deployment.json",
+    "notes": "PTI-DA-001 is the source of truth for treatment/control assignment. Current main contains the acquisition work, but owner-side measurement must not start until a production receipt proves the implementation ref is live."
+  },
+  "treatment": [
+    {
+      "id": "t01",
+      "entity": "goal.explain_clearly",
+      "source": "content/goals/goal.explain_clearly/en.md",
+      "primaryJob": "explain something clearly at work",
+      "role": "acquisition"
+    },
+    {
+      "id": "t02",
+      "entity": "goal.explain_technical",
+      "source": "content/goals/goal.explain_technical/en.md",
+      "primaryJob": "explain technical ideas to non-technical colleagues",
+      "role": "acquisition"
+    },
+    {
+      "id": "t03",
+      "entity": "goal.project_status_update",
+      "source": "content/goals/goal.project_status_update/en.md",
+      "primaryJob": "give a concise project status update",
+      "role": "acquisition"
+    },
+    {
+      "id": "t04",
+      "entity": "goal.give_recommendation",
+      "source": "content/goals/goal.give_recommendation/en.md",
+      "primaryJob": "present a recommendation with rationale",
+      "role": "acquisition"
+    },
+    {
+      "id": "t05",
+      "entity": "goal.answer_difficult_question",
+      "source": "content/goals/goal.answer_difficult_question/en.md",
+      "primaryJob": "answer a difficult question without rambling or overclaiming",
+      "role": "acquisition"
+    },
+    {
+      "id": "t06",
+      "entity": "goal.explain_delay",
+      "source": "content/goals/goal.explain_delay/en.md",
+      "primaryJob": "explain a delay without turning a condition into a promise",
+      "role": "acquisition"
+    },
+    {
+      "id": "t07",
+      "entity": "goal.explain_risk",
+      "source": "content/goals/goal.explain_risk/en.md",
+      "primaryJob": "explain a risk clearly",
+      "role": "acquisition"
+    },
+    {
+      "id": "t08",
+      "entity": "goal.explain_uncertainty",
+      "source": "content/goals/goal.explain_uncertainty/en.md",
+      "primaryJob": "communicate uncertainty without sounding evasive",
+      "role": "acquisition"
+    },
+    {
+      "id": "t09",
+      "entity": "practice.before_meeting",
+      "source": "content/practice/practice.before_meeting/en.md",
+      "primaryJob": "rehearse before a meeting",
+      "role": "continuation"
+    },
+    {
+      "id": "t10",
+      "entity": "practice.boundary_contrast",
+      "source": "content/practice/practice.boundary_contrast/en.md",
+      "primaryJob": "practice thought boundaries and contrast",
+      "role": "support"
+    },
+    {
+      "id": "t11",
+      "entity": "problem.rambling_at_work",
+      "source": "content/problems/problem.rambling_at_work/en.md",
+      "primaryJob": "stop rambling at work",
+      "role": "acquisition"
+    },
+    {
+      "id": "t12",
+      "entity": "problem.recorded_voice",
+      "source": "content/problems/problem.recorded_voice/en.md",
+      "primaryJob": "understand why recorded voice sounds different and what to practice",
+      "role": "acquisition"
+    }
+  ],
+  "control": [
+    {
+      "id": "c01",
+      "entity": "goal.explain_a_change",
+      "source": "content/goals/goal.explain_a_change/en.md",
+      "role": "comparison-control"
+    },
+    {
+      "id": "c02",
+      "entity": "goal.explain_tradeoff",
+      "source": "content/goals/goal.explain_tradeoff/en.md",
+      "role": "comparison-control"
+    },
+    {
+      "id": "c03",
+      "entity": "goal.give_bad_news_update",
+      "source": "content/goals/goal.give_bad_news_update/en.md",
+      "role": "comparison-control"
+    },
+    {
+      "id": "c04",
+      "entity": "goal.handoff_work",
+      "source": "content/goals/goal.handoff_work/en.md",
+      "role": "comparison-control"
+    },
+    {
+      "id": "c05",
+      "entity": "goal.prepare_difficult_conversation",
+      "source": "content/goals/goal.prepare_difficult_conversation/en.md",
+      "role": "comparison-control"
+    },
+    {
+      "id": "c06",
+      "entity": "practice.listener_time_comic",
+      "source": "content/practice/practice.listener_time_comic/en.md",
+      "role": "comparison-control"
+    }
+  ],
+  "assignmentPolicy": "Treatment/control membership is imported from the reviewed PTI-DA-001 artifact and is frozen before post-deployment outcomes. Controls must not receive intentional Data Authority treatment during the first observation window; correctness, safety and broken-link fixes are allowed only when recorded as contamination.",
+  "queryPanel": {
+    "cohortId": "ptichi-work-speaking-en-2026-09",
+    "surface": "google-search",
+    "locale": "en",
+    "market": "English-language web",
+    "frozenBeforeOutcomeReview": true,
+    "selectionBasis": "Queries are a fixed observational panel derived from the existing Ptichi acquisition wedge, PTI-DA-001 primary jobs and the 2026-09-09 public-result review. They are not search-volume claims and are not rewritten later to fit observed winners.",
+    "queries": [
+      {
+        "id": "q01-explain-clearly",
+        "text": "how to explain something clearly at work",
+        "intent": "construct a clear spoken work explanation",
+        "targetEntities": ["goal.explain_clearly"]
+      },
+      {
+        "id": "q02-explain-technical",
+        "text": "how to explain technical ideas to non technical people",
+        "intent": "translate technical work for a non-technical listener without losing truth",
+        "targetEntities": ["goal.explain_technical"]
+      },
+      {
+        "id": "q03-project-status",
+        "text": "how to give a concise project status update",
+        "intent": "deliver a decision-ready spoken project update",
+        "targetEntities": ["goal.project_status_update"]
+      },
+      {
+        "id": "q04-recommendation",
+        "text": "how to present a recommendation at work",
+        "intent": "state a recommendation, rationale and trade-off clearly",
+        "targetEntities": ["goal.give_recommendation"]
+      },
+      {
+        "id": "q05-difficult-question",
+        "text": "how to answer a difficult question at work",
+        "intent": "answer directly while preserving uncertainty and scope",
+        "targetEntities": ["goal.answer_difficult_question"]
+      },
+      {
+        "id": "q06-project-delay",
+        "text": "how to explain a project delay to stakeholders",
+        "intent": "communicate a delay without fake precision or overpromising",
+        "targetEntities": ["goal.explain_delay"]
+      },
+      {
+        "id": "q07-project-risk",
+        "text": "how to communicate project risk to stakeholders",
+        "intent": "explain risk, impact, uncertainty and the next decision",
+        "targetEntities": ["goal.explain_risk"]
+      },
+      {
+        "id": "q08-uncertainty",
+        "text": "how to communicate uncertainty at work",
+        "intent": "state what is known, unknown and what will be checked next",
+        "targetEntities": ["goal.explain_uncertainty"]
+      },
+      {
+        "id": "q09-before-meeting",
+        "text": "how to rehearse what to say before a work meeting",
+        "intent": "practice a real work message before speaking",
+        "targetEntities": ["practice.before_meeting", "practice.boundary_contrast"]
+      },
+      {
+        "id": "q10-stop-rambling",
+        "text": "how to stop rambling at work",
+        "intent": "get to the point and stop unnecessary detours",
+        "targetEntities": ["problem.rambling_at_work", "practice.boundary_contrast"]
+      },
+      {
+        "id": "q11-speak-concisely",
+        "text": "how to speak more concisely in meetings",
+        "intent": "shorten a work message without losing the decision-relevant condition",
+        "targetEntities": ["problem.rambling_at_work", "goal.explain_clearly"]
+      },
+      {
+        "id": "q12-recorded-voice",
+        "text": "why does my recorded voice sound different",
+        "intent": "understand recorded-voice perception and choose a bounded practice response",
+        "targetEntities": ["problem.recorded_voice"]
+      }
+    ]
+  },
+  "baselineEvidence": [
+    {
+      "kind": "owner-search",
+      "capturedAt": "2026-09-05T10:02:29Z",
+      "state": "available",
+      "path": "reports/search/google-console.json",
+      "note": "Google property ownership is verified and sitemap submission succeeded with 60 discovered pages. Query/page performance values are not stored in this receipt, so missing performance remains unknown."
+    },
+    {
+      "kind": "expansion-gate",
+      "capturedAt": "2026-09-07T00:00:00Z",
+      "state": "available",
+      "path": "data/search-expansion-gate.json",
+      "note": "Binding published-entity baseline; promotions are empty. The experiment adds no indexable entities."
+    },
+    {
+      "kind": "intent-ownership",
+      "capturedAt": "2026-09-08T04:20:00Z",
+      "state": "available",
+      "path": "reports/search/intent-ownership-2026-09-08.json",
+      "note": "Existing high-confidence English ownership records cover explain clearly, explain technical and stop rambling; index state remains unknown."
+    },
+    {
+      "kind": "public-search",
+      "capturedAt": "2026-09-09T00:00:00Z",
+      "state": "observed",
+      "path": "reports/search/arwp/data-authority-experiment-001-2026-09-09.json",
+      "note": "A bounded unauthenticated public observation saw no Ptichi result for sampled site-restricted voice/speaking queries. This does not prove zero indexed URLs."
+    },
+    {
+      "kind": "implementation",
+      "capturedAt": "2026-09-09T06:53:49Z",
+      "state": "available",
+      "path": "main@fc34374963fbcdb4fb44488ed804d505c25892c7",
+      "note": "The original search-acquisition planning commit is an ancestor of current main; the temporary acquisition branch is no longer present."
+    },
+    {
+      "kind": "deployment",
+      "capturedAt": "2026-09-05T10:00:28Z",
+      "state": "stale",
+      "path": "reports/search/deployment.json",
+      "note": "Production receipt points to bff8360b06f1b31724c8273607678b418d369cb5, not the frozen implementation ref."
+    }
+  ],
+  "measurementGate": {
+    "state": "hold",
+    "implementationRef": "fc34374963fbcdb4fb44488ed804d505c25892c7",
+    "productionRef": "bff8360b06f1b31724c8273607678b418d369cb5",
+    "requiresMatchingProductionRef": true,
+    "reason": "Current production evidence predates the frozen treatment implementation. Do not start the 14/28/56-day observation clock or attribute live outcomes to PTI-DA-001 until an independently observed production receipt matches the implementation ref."
+  },
+  "outcomes": [
+    "Google Search impressions by treatment/control URL",
+    "relevant non-brand query coverage by treatment/control URL",
+    "query-to-page fit",
+    "unique treatment entities receiving relevant impressions",
+    "Google Search clicks and CTR with denominators",
+    "indexed/canonical state where owner reports expose it",
+    "Bing AI citations and unique cited pages where available",
+    "generative-search citation presence and persistence where observable",
+    "Search/AI referral sessions",
+    "privacy-safe useful-practice continuation where available"
+  ],
+  "observationWindowsDays": [14, 28, 56],
+  "decisionRules": {
+    "GO": "At least three treatment entities receive relevant non-brand impressions from distinct query families and the movement is not explained equally by controls, while no page-quality, crawl or release-truth guardrail regresses.",
+    "CHANGE": "Treatment pages gain impressions but query-to-page fit is poor, or useful continuation is weak; revise page value, answer shape or relationships instead of adding more URLs.",
+    "HOLD": "Treatment is not verifiably deployed, owner-side measurement is unavailable, the window is immature, or safety/release truth blocks interpretation.",
+    "DROP": "Treatment requires thin or duplicate pages, fabricated evidence, misleading structured data/freshness, or repeatedly creates crawl/index noise without useful discovery."
+  },
+  "guardrails": {
+    "assignmentFrozenBeforeOutcomeReview": true,
+    "noRankingGuarantee": true,
+    "noCausalityInference": true,
+    "preserveNeutralAndNegativeResults": true,
+    "missingOwnerEvidenceIsUnknown": true,
+    "noScaleUpBeforeReview": true
+  }
+}
