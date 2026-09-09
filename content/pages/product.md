@@ -1,177 +1,147 @@
-# SignalBraid · ARWP
-
-**Weave the signals. Ship the change.**
+# Goose ARWP — Get Found.
 
 Canonical HTML: https://dkharlanau.github.io/agent-ready-web-profile/product/
 
-SignalBraid · ARWP is the product-facing identity for the adaptive website-improvement system built by Agent-Ready Web Profile (ARWP).
+**Goose ARWP** is the public product. **Agent-Ready Web Profile (ARWP)** is the technical foundation.
 
-The product is designed for a web that keeps changing underneath a site. Search guidance changes. AI citation and retrieval behavior changes. Crawler policy changes. Agent interfaces change. New measurement surfaces appear. A one-time audit goes stale.
+Goose helps a site become easier for Search and AI systems to discover, understand, verify, cite and route to useful actions. It does this as an evidence-backed operating loop rather than a one-time readiness score.
 
-SignalBraid keeps the evidence chain connected from **what changed upstream** to **what should change in this exact website**, then to **what actually changed in the repository**, **whether the implementation passed**, and **what evidence appeared afterwards**.
-
-> **Detect. Map. Decide. Change. Prove. Watch.**
+> **Tell Goose the goal. Inspect. Decide. Change. Prove. Watch.**
 
 ```text
-SEARCH / AI / AGENT / CRAWLER / DATA SIGNALS
-                    ↓
-                 RADAR
-                    ↓
-                  MAP
-                    ↓
-                  PLAN
-                    ↓
-                  PATCH
-                    ↓
-                  PROOF
-                    ↓
-                  WATCH
-                    └──────────────────────↺
+WHAT SHOULD THIS SITE ACHIEVE?
+            ↓
+         INSPECT
+            ↓
+          DECIDE
+        top 1–3 moves
+            ↓
+          CHANGE
+       safely / reviewably
+            ↓
+           PROVE
+    implementation + deployment
+            ↓
+          MEASURE
+ provider-native Search / AI evidence
+            ↓
+       WATCH / REVISE
 ```
 
-## The unique primitive: BraidGraph
+## What Goose answers
 
-The main product asset is not a GEO score or another prompt dashboard. It is a versioned evidence-to-change graph:
+For a site owner, the useful questions are simple:
+
+1. Why am I not being found for the things that matter?
+2. What should I do first?
+3. Which change can Goose prepare safely?
+4. Is that exact change really live?
+5. What Search/AI evidence changed afterwards?
+6. Should I keep, revise, continue measuring, revert or retire the intervention?
+
+Advanced technical modules remain available, but the first-run journey should not require choosing one.
+
+## What makes Goose different
+
+Goose keeps the evidence chain connected:
 
 ```text
-UPSTREAM SOURCE
-      ↓
-RULE VERSION
-      ↓
-TARGET-SITE EVIDENCE
-      ↓
+OWNER GOAL / SITE BOUNDARY
+          ↓
+PUBLIC + REPOSITORY EVIDENCE
+          ↓
 APPLICABILITY
-      ↓
+          ↓
 RECOMMENDATION
-      ↓
-REPOSITORY SURFACE
-      ↓
-TRANSFORMATION
-      ↓
-VERIFICATION RECEIPT
-      ↓
-OUTCOME EVIDENCE
+          ↓
+EXACT SOURCE / REPOSITORY SURFACE
+          ↓
+CHANGE
+          ↓
+VERIFICATION + DEPLOYMENT PARITY
+          ↓
+PROVIDER-NATIVE OUTCOME EVIDENCE
+          ↓
+REVIEW DECISION
 ```
 
-The important part is that the graph works backwards too.
+The chain works backwards too. When upstream guidance changes or a recommendation becomes stale, Goose can identify which sites and prior changes need re-review.
 
-If a source rule changes or becomes `review-due`, SignalBraid should be able to tell an owner **which sites, recommendations, previous transformations and source files now require re-review**.
+## No Goose score
 
-That turns platform drift into a concrete website-maintenance problem instead of another news feed.
+Search and AI systems expose different evidence. Goose does not flatten it into one 0–100 score.
 
-## Product line
+A useful evidence funnel is:
 
-### Radar — what changed?
-
-Versioned source-backed intelligence for Search, AI search, crawler policy, agent-web interfaces, datasets/PIDs and related platform guidance.
-
-### Map — what does this site actually have?
-
-A Site State Graph that understands the public surface and the source repository: routes, framework, source-of-truth files, structured data, entities, datasets, policies, agent interfaces and safe/gated mutation boundaries.
-
-The next major technical goal is **rendered surface → owning source file** resolution.
-
-### Plan — what actually applies?
-
-The Adaptive Site Upgrade Engine filters current guidance through site type, real evidence, goals, dependencies and knowledge freshness. It can say `recommended`, `conditional`, `not-applicable` or `review-due` rather than handing every site the same checklist.
-
-### Patch — what can change safely?
-
-The Target-Site Transformation Engine turns deterministic mechanical or grounded work into digest-gated, path-allowlisted changes and reviewable production pull requests. Policy, editorial truth, authenticated owner settings and runtime/security decisions stay gated.
-
-### Proof — did the implementation pass?
-
-Build/test results, ARWP re-audits, transformation digests, evidence receipts, runtime checks and owner-side visibility/referral evidence remain connected to the exact change that produced them.
-
-A successful build proves implementation, not ranking or citation impact.
-
-### Watch — what needs attention now?
-
-Portfolio mode should continuously connect new upstream changes and site drift to affected websites and files.
-
-Example:
-
-> Google changes a rule. Which 12 sites, 27 recommendations and 8 repository paths now need review?
-
-That reverse impact analysis is the intended high-leverage commercial layer.
-
-## What is genuinely different
-
-By 2026, strong AI-search products already offer prompt monitoring, mentions, citations, share of voice, sentiment, competitor analysis, recommendations and increasingly content/action automation. Other products specialize in agent-ready content delivery, crawler enforcement or technical readiness scoring.
-
-SignalBraid should therefore compete on a different chain:
-
-> **source-backed rule supply chain → site-specific applicability → canonical source-file resolution → safe reversible change → verification → outcome evidence → reverse impact when the rule changes again**
-
-That distinction matters because it keeps the product useful even if visibility dashboards and content-generation features become commodity.
-
-## Core capabilities today
-
-- **Search + AI visibility audit** — crawlability, indexability, citation surfaces, freshness, identity, structured data, crawler policy and owner-measurement gates.
-- **Versioned best-practice intelligence** — sources, applicability, review dates and stale-knowledge gates.
-- **Adaptive Site Upgrade Engine** — exact change surfaces, recipes, dependencies, verification contracts and measurement signals.
-- **Target-Site Transformation Engine** — digest-gated, path-allowlisted deterministic mutations and PR-first production delivery.
-- **Dataset publication + DOI readiness** — only for genuine reusable corpora, with provenance, versioning, checksums and external PID workflow.
-- **Agentic web interoperability** — API, MCP, A2A, WebMCP, Agent Skills, ARD and ordinary web discovery remain part of the technical foundation.
-- **Evidence + drift** — implementation snapshots, negative results, source history and owner-side outcome evidence stay separate and inspectable.
-
-## Installed workflow
-
-```bash
-# What does this site need now?
-arwp-growth https://example.com --vertical=documentation --upgrade
-
-# Compile the target-specific plan.
-arwp-upgrade site https://example.com --vertical=documentation --output=upgrade.json
-
-# After exact repository files and grounded facts are resolved:
-arwp-transform compile upgrade.json target-transform-spec.json --output=transform.json
-arwp-transform simulate transform.json
+```text
+ACCESS
+  ↓
+INDEX / ELIGIBILITY
+  ↓
+EXPOSURE
+  ↓
+CITATION / REFERENCE
+  ↓
+BRAND MENTION
+  ↓
+VISIT
+  ↓
+USEFUL ACTION
 ```
 
-A production transform can be delivered through a new GitHub branch and pull request after explicit authorization and base/file digest verification. ARWP does not expose a direct-main transformation mode.
+Google generative-AI impressions are not Bing citations. Bing citations are not visits. OAI-SearchBot access is not a ChatGPT citation. Missing evidence stays unknown rather than becoming zero.
 
-## Product packaging direction
+## Product priorities now
 
-### Open core
+### P0 — Proof before more product
 
-Single-site Radar / Map / Plan / Patch / Proof primitives, open schemas, CLI, transformation engine and Agent Skills.
+Goose currently prioritizes real site evidence loops over new architecture. The target is several owned sites with explicit experiment state, verified deployment parity, provider-native evidence and reviewed keep/revise/stop decisions. Neutral and negative outcomes remain visible.
 
-### Hosted / Pro
+### P0 — Portfolio Proof Board
 
-Managed intelligence freshness, SignalBraid Watch, portfolio impact analysis, scheduled re-audits, owner-data connectors, verified stack transformation packs and managed PR delivery.
+Show what is actually planned, on hold, observing, reviewed or stopped across the portfolio from committed evidence rather than hand-written success claims.
 
-### Team / Enterprise
+### P0 — Provider-native Search & AI measurement
 
-Private rule packs, organization policy-as-code, automation governance, approval gates, audit history and portfolio-level crawler/content-use policy.
+Keep Google, Bing, OpenAI/referral and other owner evidence semantically correct instead of manufacturing a universal AI-visibility metric.
 
-The paid value should be **maintenance, automation, governance, evidence and scale** — not a promise to rank or be cited.
+### P1 — One first-run journey
 
-## Product boundary
+A future first-run flow should accept a URL plus only the owner context that materially changes recommendations, then return a concise Get Found Brief with the top one to three next moves.
 
-SignalBraid · ARWP keeps four things distinct:
+### P1 — Surface retirement
 
-1. **upstream knowledge** — what current platforms/specifications actually say;
-2. **applicability** — whether a mechanism is relevant to this site;
-3. **implementation evidence** — whether the technical change is really present and correct;
-4. **outcome evidence** — what Search, AI citation, referral or agent metrics did afterward.
+New pages/modules need a real user job, consumer, verification path and retirement/consolidation condition. Project maturity is not page count.
 
-A technically correct change can produce neutral or negative external outcomes. The system keeps that evidence instead of converting it into a vanity readiness score.
+## Technical foundation
 
-## Brand relationship
+Behind the simple public journey, ARWP provides the deeper engines:
 
-- **SignalBraid** — product brand and human-facing metaphor.
-- **ARWP** — technical project identity and suffix in the canonical lockup.
-- **Agent-Ready Web Profile** — repository, package and interoperability foundation.
+- Site Focus and Intent Ownership;
+- Search/AI Growth and recommendation registries;
+- Resolver and agent-web interoperability;
+- Repository Mapper and stack-aware transformations;
+- BraidGraph evidence-to-change lineage;
+- Evidence and Change Receipts;
+- Controlled Cohorts and Winner Observatory;
+- Recommendation Review and Trend Intelligence;
+- Project Maturity Surfaces and portfolio review tooling.
 
-Canonical presentation: **SignalBraid · ARWP**.
+BraidGraph is an advanced internal primitive, not a user-facing requirement.
 
-## Key product docs
+## Search / GEO boundary
 
-- `docs/PRODUCT-LINE.md` — market boundary, packaging and product bets.
-- `docs/BRAIDGRAPH.md` — evidence-to-change graph design.
-- `docs/ADAPTIVE-SITE-UPGRADE.md` — target-specific planning engine.
-- `docs/TARGET-SITE-TRANSFORMATION.md` — safe repository transformation engine.
+Goose does not claim that special AI markup, `llms.txt`, schema volume or policy-page count creates ranking or citation gains. Google currently states that foundational SEO remains relevant to AI Overviews and AI Mode and that no special AI optimization is required for eligibility.
+
+Goose therefore prioritizes:
+
+- useful, unique, non-commodity content;
+- intent ownership before URL expansion;
+- genuine original data/tools/examples where they add standalone value;
+- crawl/index eligibility;
+- clear visible identity and fact parity;
+- evidence/provenance and meaningful freshness;
+- real provider-native measurement after deployment.
 
 ## Availability
 
@@ -180,6 +150,14 @@ Canonical presentation: **SignalBraid · ARWP**.
 - License: Apache-2.0
 - Current open-source price: 0
 
+## Key product docs
+
+- `ROADMAP.md` — proof-first milestones and execution order.
+- `docs/PRODUCT-LINE.md` — public journey, internal engines, packaging and stop rules.
+- `research/product/2026-09-09-goose-self-interview.md` — multi-role product stress test behind the current priorities.
+- `docs/BRAIDGRAPH.md` — advanced evidence-to-change graph design.
+- `docs/MATURITY-PROFILE.md` — project identity/governance/evidence maturity pattern.
+
 ## Structured-data boundary
 
-ARWP uses SoftwareApplication semantics. Google SoftwareApplication rich-result eligibility also requires a genuine rating or review; the project does not fabricate either.
+The public software entity should use truthful SoftwareApplication/WebApplication semantics. Do not fabricate ratings, reviews, awards, customer counts or other eligibility fields merely to make the project look mature.
