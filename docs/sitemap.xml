@@ -70,7 +70,7 @@
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/measurement/</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/trust/brand.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/growth/opportunities/</loc><lastmod>2026-09-06</lastmod></url>
-  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html</loc><lastmod>2026-09-08</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html</loc><lastmod>2026-09-09</lastmod></url>
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-SEARCH-LAB.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/EVIDENCE-RELAY.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/ANTI-PATTERNS.html</loc><lastmod>2026-09-08</lastmod></url>
@@ -78,4 +78,22 @@
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/examples/asset-kits/</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/COMMERCIAL-LOCALIZATION.html</loc><lastmod>2026-09-08</lastmod></url>
   <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/CATALOG-REVIEW.html</loc><lastmod>2026-09-08</lastmod></url>
+  <!-- BEGIN DISCOVERABILITY EVIDENCE HUBS -->
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/editorial.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/comparisons.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/services.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/measurement.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experiments.html</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://dkharlanau.github.io/agent-ready-web-profile/discoverability/governance.html</loc><lastmod>2026-09-09</lastmod></url>
+  <!-- END DISCOVERABILITY EVIDENCE HUBS -->
 </urlset>

@@ -118,6 +118,30 @@ Canonical XML sitemap: https://dkharlanau.github.io/agent-ready-web-profile/site
 ## Implementation practice library
 
 - [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): 219 concrete practices with sources, verification and native hypothesis/rule routing.
+<!-- BEGIN DISCOVERABILITY EVIDENCE HUBS -->
+
+### Discoverability evidence hubs
+
+The lightweight [routing index](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/index.json) maps 219 stable pattern IDs into 16 bounded topical evidence hubs. The canonical full machine corpus remains separate.
+
+- [Crawl access and index eligibility](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/access.html) — 11 full static evidence patterns.
+- [Information architecture and URL ownership](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/architecture.html) — 11 full static evidence patterns.
+- [Original editorial formats](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/editorial.html) — 20 full static evidence patterns.
+- [Claims, citations, and provenance](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/evidence.html) — 11 full static evidence patterns.
+- [Entity identity and linked data](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/entities.html) — 15 full static evidence patterns.
+- [Reference data and reusable evidence](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/datasets.html) — 17 full static evidence patterns.
+- [Fair comparisons and alternatives](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/comparisons.html) — 14 full static evidence patterns.
+- [Service and local offer clarity](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/services.html) — 13 full static evidence patterns.
+- [Images, video, and multimodal evidence](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/media.html) — 12 full static evidence patterns.
+- [Readable and usable page experience](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experience.html) — 17 full static evidence patterns.
+- [Language and regional relevance](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/localization.html) — 11 full static evidence patterns.
+- [Mature product documentation patterns](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/documentation.html) — 16 full static evidence patterns.
+- [Machine reading and answer integrity](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/retrieval.html) — 14 full static evidence patterns.
+- [Observed search and business outcomes](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/measurement.html) — 13 full static evidence patterns.
+- [Bounded improvement experiments](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experiments.html) — 10 full static evidence patterns.
+- [Publishing quality and sustained operations](https://dkharlanau.github.io/agent-ready-web-profile/discoverability/governance.html) — 14 full static evidence patterns.
+
+<!-- END DISCOVERABILITY EVIDENCE HUBS -->
 - [Machine-readable corpus](https://dkharlanau.github.io/agent-ready-web-profile/knowledge/discoverability-corpus.json): planning material; no measured ranking effects are implied.
 - [Editorial receipt contract](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-RECEIPTS.md): visible claim-source relationships for useful articles and comparisons.
 - [Editorial research lab](https://dkharlanau.github.io/agent-ready-web-profile/EDITORIAL-SEARCH-LAB.html)
