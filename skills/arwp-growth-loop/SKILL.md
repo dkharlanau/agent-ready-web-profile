@@ -14,7 +14,7 @@ Use this skill when the outcome is not merely “make the site agent-ready” bu
 
 ## Product loop
 
-`research → classify → technical preflight → internal discovery/demand baseline → hypothesis → implement → verify → measure → keep/revert/revise`
+`research → classify → technical preflight → internal discovery/demand baseline → hypothesis → implement → verify implementation scope → measure → keep/revert/revise`
 
 Do not collapse this into a generic SEO checklist.
 
@@ -116,6 +116,32 @@ Use Freshness Integrity only as longitudinal implementation evidence:
 
 Never derive `<lastmod>` from file mtimes, build timestamps, deployment timestamps or the current clock. Never mass-refresh dates to satisfy the tool. A runtime/CMS change outside Repository Mapper can legitimately explain a date change; improve evidence coverage rather than forcing the target site to match an incomplete repository model.
 
+### Verify treatment scope before interpreting outcomes
+
+When a growth experiment or before/after analysis is route-scoped and both before/after Repository Mapper Site State Graphs exist, read `docs/TREATMENT-COHORT-INTEGRITY.md` and compare the implemented route scope before interpreting Search/AI/referral/business movement:
+
+```bash
+node bin/arwp.mjs treatment-cohort compare \
+  .arwp/site-state-before.json \
+  .arwp/site-state-after.json \
+  --treatment=treatment-urls.json \
+  --output=treatment-cohort.json
+```
+
+Use this as companion implementation evidence, not as a replacement for the Growth Experiment record.
+
+Review these states before outcome interpretation:
+
+- `declared-treatment-unchanged` — a planned treatment URL has byte-identical complete mapped inputs; verify that the implementation actually reached it or that a missing runtime source explains the treatment;
+- `declared-treatment-unknown` — the intended treatment cannot be proven from complete comparable source ownership; resolve evidence before presenting it as implemented;
+- `changed-outside-treatment` — shared layout/template/data/metadata changes affected canonical routes outside the declared cohort; expand the treatment, isolate the implementation, or explicitly mark the experiment contaminated;
+- `mapping-basis-changed` — adapter/site-root changed, so the route-level comparison fails closed and should be treated as a separate migration event;
+- `same-commit-drift` — the same immutable Git commit is associated with different mapped inputs, so dirty/stale/inconsistent snapshots are `unknown`, not treatment evidence.
+
+The actual changed cohort includes mapped `changed`, `added` and `removed` canonical routes. Route evidence includes the document owner, `buildPath` and resolved route-scoped surface owners, so a shared template can correctly expand the actual cohort beyond the page whose leaf source was edited.
+
+Do not shrink the actual cohort to preserve a cleaner experiment story. Digest movement proves implementation-input movement only; it does not prove a visible/significant page change or causal effect.
+
 When page semantics are relevant, inventory the important route archetypes and identify reusable canonical entities before editing templates. Classify pages such as site-home, organization, article-editorial, author-profile, event, dataset, software-application, product, video-watch, glossary-term/glossary-index, community-qa and collection-list. Do not install a universal JSON-LD bundle.
 
 For portfolio or repeated site rollouts, follow `docs/SITE-ROLLOUT-PLAYBOOK.md` and start a site-specific record from `templates/growth/site-adoption-record.md`. Reuse the decision order and evidence contract; do not blindly copy provider-specific markup or crawler policy from a reference site.
@@ -154,9 +180,13 @@ For internal-link/hub changes, rerun the same bounded Internal Discovery cohort 
 
 For sitemap freshness automation or meaningful date-policy changes, compare the before/after Freshness Integrity snapshots when both revision-bound Site State Graphs exist. A clean comparison verifies only mechanical date/source coherence. It does not prove significant content change, recrawl, indexing, ranking or traffic effects.
 
+For route-scoped experiments, run Treatment Cohort Integrity after the implementation and before outcome interpretation when comparable before/after Site State Graphs are available. If mapped changes exist outside the declared treatment, do not silently attribute the full outcome window to the declared URLs; expand/isolate the cohort or mark contamination explicitly.
+
 Technical Integrity is intentionally self-correcting. If a live dogfood run exposes a false positive caused by an audit limit, representation mismatch or detector assumption, fix the detector/evidence model rather than editing the target site to satisfy a bad check.
 
 6. **Measure.** Where owner data exists, compare the relevant Google Search/generative/Discover signals, Bing AI citations and grounding-query samples, ChatGPT referral traffic/citations, image/video discovery, conversions and agent task completion. Choose a sensible before/after window. Do not automatically attribute movement to ARWP.
+
+Before interpreting route-scoped outcome movement as evidence for the selected treatment, confirm that the companion Treatment Cohort Integrity report is either clean enough for that scope or explicitly records contamination/unknown coverage. A treatment-scope pass is still not causal attribution; seasonality, demand shifts, competitors, indexing timing and other concurrent changes remain possible explanations.
 
 7. **Keep, revise, revert or retire.** Preserve negative results. Keep a correct change when evidence is neutral/positive, revise a weak implementation or measurement design, revert harmful changes, and retire a hypothesis when upstream guidance or evidence invalidates it.
 
