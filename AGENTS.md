@@ -37,6 +37,21 @@ Current source and applicable scoped instructions override a stale route in this
 - Keep public methodology, commercial/private evidence and confidential R&D at their intended disclosure boundaries. [`CONTRIBUTING.md`](CONTRIBUTING.md) is canonical for that classification gate.
 - Preserve canonical IDs, public URLs, schema contracts and source-to-output relationships when restructuring data or generated surfaces.
 
+## Future Search rules
+
+Use [`skills/arwp-future-search/SKILL.md`](skills/arwp-future-search/SKILL.md), [`docs/FUTURE-SEARCH-LAB.md`](docs/FUTURE-SEARCH-LAB.md) and `registry/future-search-experiments.json` as the scoped contract. Preserve these existing boundaries:
+
+1. Use Future Search only after current eligibility/foundation work is healthy.
+2. Open-vocabulary semantics may be useful for truthful interoperability without implying a current Search feature or ranking benefit.
+3. Prefer a small coherent entity/evidence graph with stable IDs and real relations over metadata volume.
+4. Treat the semantic index as a complement to canonical HTML, page-local JSON-LD, sitemap and navigation — never as a documented ranking/discovery requirement.
+5. Owner-observed query/citation evidence may strengthen canonical answers; it must not create a page factory for query variants.
+6. Prefer native HTML semantics and accurate ARIA behavior; static metadata does not prove runtime agent operability or accessibility compliance.
+7. Describe actions only when the real user-visible capability exists, and never infer authorization for side effects from discovery metadata.
+8. Track evolving open vocabularies without duplicating fields unless there is a concrete interoperability reason.
+9. Every experiment needs explicit maturity, source review, verification and a rollback/retirement path.
+10. Future-search experiments remain experiments until evidence justifies a different classification.
+
 ## Install and verify
 
 Run from the repository root. CI currently uses Node.js 24 and the committed npm lockfile.
