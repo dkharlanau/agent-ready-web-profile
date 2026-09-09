@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Privacy and data-use notes for the Goose ARWP public site, including consent-gated analytics, local consent storage, public aggregate measurement boundaries and external links.">
+  <title>Privacy & Data Use — Goose ARWP</title>
+  <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/project/privacy.html">
+  <link rel="describedby" type="application/json" href="./profile.json">
+  <link rel="stylesheet" href="../arwp.css">
+  <link rel="stylesheet" href="./project.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/project/privacy.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/project/privacy.html","name":"Privacy & Data Use — Goose ARWP","about":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#software"},"isPartOf":{"@id":"https://dkharlanau.github.io/agent-ready-web-profile/#website"}}</script>
+</head>
+<body class="project-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="project-header project-shell"><a class="project-brand" href="../"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav class="project-nav" aria-label="Project navigation"><a href="./">Project</a><a href="./rights.html">Rights</a><a href="./marks.html">Names &amp; marks</a><a href="./collaboration.html">Collaboration</a><a href="./governance.html">Governance</a></nav></header>
+  <main id="main" class="project-main project-shell">
+    <section class="project-hero"><div><p class="project-eyebrow">PRIVACY / ANALYTICS / PUBLIC DATA</p><h1>Measure less. Explain more.</h1><p class="project-lead">The current Goose ARWP public site contains optional analytics code behind an explicit consent choice. This page documents the intended behavior and the limits of what the repository can verify.</p></div><aside class="project-stamp"><strong>Current intent</strong><p>Analytics: opt-in</p><p>Public reporting: aggregate only</p><p>Unknown ≠ zero</p></aside></section>
+
+    <section class="project-section"><h2>Optional analytics</h2><p>Where the Goose analytics consent component is present, the implementation is designed not to load Google Analytics until a visitor chooses “Allow.” The choice is remembered locally in the browser so the prompt does not need to reappear on every visit.</p><div class="project-callout"><strong>Repository evidence is not provider-account evidence.</strong> The source can show the consent gate and intended payload behavior. It cannot by itself prove provider-side retention settings, account configuration, geographic processing, deletion state or every browser/runtime outcome.</div></section>
+
+    <section class="project-section"><h2>What the project tries not to collect or publish</h2><ul><li>No visitor-level analytics export should be published by the project.</li><li>Measurement plans require aggregate public reporting.</li><li>Unknown baselines remain unknown rather than being converted to zero.</li><li>Raw search queries, free-text submissions and submitted audit URLs should not be exposed in public evidence artifacts.</li><li>Owner-side provider exports should be minimized to the fields required for a defined experiment or decision.</li></ul><div class="project-actions"><a class="project-button" href="../measurement/">Measurement method</a><a class="project-button alt" href="../growth/">Growth Loop</a></div></section>
+
+    <section class="project-section"><h2>Local browser state</h2><p>The analytics preference is stored in browser local storage by the public-site consent component. Clearing browser storage can remove that local preference. The project should not treat a local consent flag as proof of provider-side deletion or as consent for unrelated processing.</p></section>
+
+    <section class="project-section"><h2>External services and links</h2><p>GitHub, Google Analytics and external sites linked from Goose operate under their own terms and privacy practices. Following an external link leaves the Goose project site. A partnership link does not make the external service part of the Goose privacy boundary.</p></section>
+
+    <section class="project-section"><h2>When this page must change</h2><p>Update the privacy surface when the project adds a form, account, hosted scan service, payment flow, new analytics provider, different consent mechanism, material new cookies/storage, personal-data collection or a new legally relevant processing purpose. Do not keep a generic policy while the actual product changes underneath it.</p></section>
+
+    <section class="project-section"><h2>What this page does not claim</h2><p>This is a factual project-data-use summary, not a jurisdiction-specific legal compliance statement. It does not claim GDPR, ePrivacy, CCPA or another regime is satisfied merely because a consent banner or privacy page exists.</p></section>
+  </main>
+  <footer class="project-footer project-shell"><strong>Goose ARWP — Privacy &amp; Data Use</strong><nav><a href="./">Project</a><a href="./governance.html">Governance</a><a href="../measurement/">Measurement</a><a href="../trust/">Trust</a><a href="../">Home</a></nav></footer>
+</body>
+</html>
