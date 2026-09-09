@@ -19,13 +19,29 @@ const frozenPrefixes = [
 const frozenExact = new Set(['CHANGELOG.md', 'docs/history.html', 'docs/history.json']);
 const selfFiles = new Set(['scripts/goose-brand-test.mjs']);
 const extensions = new Set(['.html', '.md', '.txt', '.json', '.jsonld', '.xml', '.mjs', '.js', '.yml', '.yaml']);
-const currentPrefixes = ['docs/', 'lib/', 'skills/', 'registry/', 'examples/', 'templates/'];
+const currentPrefixes = [
+  'ai/',
+  'benchmarks/',
+  'bin/',
+  'docs/',
+  'examples/',
+  'gateway/',
+  'lib/',
+  'monitor/',
+  'registry/',
+  'resolver/',
+  'router/',
+  'scanner-service/',
+  'schema/',
+  'scripts/',
+  'skills/',
+  'templates/'
+];
 
 function inCurrentScope(file) {
   if (selfFiles.has(file) || frozenExact.has(file) || frozenPrefixes.some(prefix => file.startsWith(prefix))) return false;
   if (file === 'README.md' || file === 'TRADEMARKS.md') return true;
   if (currentPrefixes.some(prefix => file.startsWith(prefix))) return extensions.has(path.extname(file));
-  if (file === 'scripts/build-discoverability.mjs') return true;
   return false;
 }
 
@@ -48,6 +64,8 @@ if (legacy.length) {
 }
 
 const expectations = [
+  ['ai/site-profile.json', '"name":"Goose"'],
+  ['docs/ai/site-profile.json', '"name":"Goose"'],
   ['docs/index.html', '<strong>Goose</strong>'],
   ['docs/index.html', '<title>Goose — Make your site worth citing.</title>'],
   ['docs/site-focus.html', 'Goose'],
@@ -70,6 +88,10 @@ for (const [file, needle] of expectations) {
   if (!text.includes(needle)) throw new Error(`${file} is missing expected Goose identity: ${needle}`);
 }
 
+const rootProfile = fs.readFileSync(path.join(root, 'ai', 'site-profile.json'), 'utf8');
+const docsProfile = fs.readFileSync(path.join(root, 'docs', 'ai', 'site-profile.json'), 'utf8');
+if (rootProfile !== docsProfile) throw new Error('Canonical and GitHub Pages self-profiles must remain byte-identical.');
+
 const home = fs.readFileSync(path.join(root, 'docs', 'index.html'), 'utf8');
 if (!home.includes('Agent-Ready Web Profile') || !home.includes('ARWP')) {
   throw new Error('Technical Agent-Ready Web Profile / ARWP identity must remain on the Goose home page.');
@@ -83,4 +105,4 @@ for (const required of ['docs/BRAND-GOOSE.md', 'docs/BRAND-CITE-GOOSE.md']) {
   if (!pkg.files?.includes(required)) throw new Error(`npm package surface is missing ${required}`);
 }
 
-console.log(`PASS Goose brand contract across ${files.length} current public/source surfaces; ARWP remains the technical identity, both canonical and compatibility brand docs ship in the package, and frozen history is excluded.`);
+console.log(`PASS Goose brand contract across ${files.length} current public/source surfaces; ARWP remains the technical identity, canonical self-profiles are byte-identical, both brand docs ship in the package, and frozen history is excluded.`);
