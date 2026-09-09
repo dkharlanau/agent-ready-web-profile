@@ -112,7 +112,8 @@
     <pre><code>baseline → choose one implementation pack → patch → build/render → verify
         → collect owner metrics → compare → keep / revise / revert</code></pre>
     <p>For repository automation, convert findings into <code>problem → evidence → risk → recommendedChange → files → verification → source</code>. Missing authorship, legal identity, ratings, price, license, dataset provenance or publication history are owner-data gates: an agent must not invent them.</p>
-    <pre><code>arwp audit https://example.com --json
+    <pre><code>arwp technical-integrity https://example.com/ --max-pages=20 --json
+arwp audit https://example.com --json
 arwp-growth https://example.com --json
 arwp-visibility compare before.json after.json</code></pre>
   </section>
@@ -125,7 +126,7 @@ arwp-visibility compare before.json after.json</code></pre>
   <footer>
     <a href="../">ARWP home</a> · <a href="./registry.json">JSON registry</a> · <a href="./history/index.json">ruleset history</a> · <a href="../growth/">Growth loop</a> · <a href="../observatory/">Protocol Observatory</a> · <a href="../crawler-matrix/">AI crawler matrix</a>
   </footer>
-<section class="cite-card" id="practice-library"><h2>Turn a site gap into a concrete change</h2><p>Browse 144 practices across 16 categories: useful articles, sourced comparisons, inline evidence, entity relationships, crawl access and measurement. Each practice includes implementation steps, checks and links to current Growth hypotheses and rules.</p><p><a href="../discoverability.html">Open the practice library and prepare a site selection</a> · <a href="../examples/editorial/comparison.html">Inspect a worked comparison</a></p></section>
+<section class="cite-card" id="practice-library"><h2>Turn a site gap into a concrete change</h2><p>Browse 219 practices across 16 categories: useful articles, sourced comparisons, inline evidence, entity relationships, crawl access and measurement. Full pattern evidence is routed through bounded topical hubs rather than one ever-growing HTML payload.</p><p><a href="../discoverability.html">Open the practice library and prepare a site selection</a> · <a href="../discoverability/index.json">Use the lightweight routing index</a> · <a href="../examples/editorial/comparison.html">Inspect a worked comparison</a></p></section>
 </main>
 <script>
 (() => {
