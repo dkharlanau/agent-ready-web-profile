@@ -14,6 +14,7 @@ on:
       - 'docs/SEARCH-APPEARANCE.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
   pull_request:
     paths:
@@ -27,6 +28,7 @@ on:
       - 'docs/SEARCH-APPEARANCE.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
   workflow_dispatch:
 
@@ -46,6 +48,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Syntax and deterministic offline fixtures
         run: |
           node --check lib/search-appearance.mjs
