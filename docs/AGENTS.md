@@ -4,7 +4,7 @@ ARWP is an evidence-backed website growth and agent-readiness toolkit with an ag
 
 Primary workflow:
 
-`research current Search/recommendation changes -> classify evidence -> select hypotheses -> improve a real site -> verify -> measure -> iterate`
+`research current Search/recommendation changes -> classify evidence -> technical preflight -> select hypotheses -> improve a real site -> verify -> measure -> iterate`
 
 The Resolver remains the technical foundation for discovering machine- and agent-facing interfaces, preserving evidence/conflicts and selecting a suitable interface for a concrete intent. The publisher ARWP profile remains optional.
 
@@ -16,6 +16,7 @@ cd agent-ready-web-profile
 npm ci
 node bin/arwp-trends.mjs list --since=90 --exclude-retired
 node bin/arwp-hypotheses.mjs list --vertical=editorial
+node bin/arwp.mjs technical-integrity https://example.com/ --max-pages=20 --json
 node bin/arwp-growth.mjs https://example.com --vertical=editorial --json
 ```
 
@@ -35,6 +36,27 @@ Use `arwp-prepare-site` for initial technical preparation. Specialists remain av
 Use `arwp-portfolio-fleet` when several local site repositories need one bounded inventory, verification run or live-profile report before selecting a single Growth target.
 
 The growth skill should research primary sources when possible, establish a baseline, select applicable hypotheses, edit the target repository, verify checks and identify owner-side success metrics. Preserve neutral/negative results and never claim causation from implementation alone.
+
+<!-- BEGIN GOOSE TECHNICAL PREFLIGHT -->
+## Technical preflight
+
+Before optional Search/GEO/content/agent tactics on a public target, run the bounded Technical Integrity audit:
+
+```bash
+node bin/arwp.mjs technical-integrity https://example.com/ --max-pages=20 --json
+```
+
+Interpret the result conservatively:
+
+- `FAIL` — a bounded source-backed blocker was observed; fix it or explicitly resolve why it is intentional before optional acquisition work;
+- `WATCH` — investigate context, rendered/runtime behavior or audit limits; do not automatically call it a defect;
+- `PASS` — no issue was observed by that detector in the bounded sample; this is not indexing, ranking or citation proof;
+- `not-applicable` — the check does not apply to the observed representation.
+
+A bounded fetch failure remains unknown rather than becoming an indexability failure. Non-HTML resources are not required to carry HTML-only canonical markup. If dogfood exposes a detector false positive, repair the detector/evidence boundary instead of editing the target site to satisfy a bad check.
+
+Use Technical Integrity before optional tactics and again after the changed public/deployed surface is observable.
+<!-- END GOOSE TECHNICAL PREFLIGHT -->
 
 ## Resolver remains
 

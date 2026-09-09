@@ -40,6 +40,27 @@ node bin/arwp-maturity.mjs check docs/maturity/profile.json
 
 When repository edits are possible, do not stop at a recommendation list. Make high-confidence reversible changes, run verification and leave credential-dependent/outcome measurement work as explicit gates.
 
+<!-- BEGIN GOOSE TECHNICAL PREFLIGHT -->
+## Technical preflight
+
+Before optional Search/GEO/content/agent tactics on a public target, run the bounded Technical Integrity audit:
+
+```bash
+node bin/arwp.mjs technical-integrity https://example.com/ --max-pages=20 --json
+```
+
+Interpret the result conservatively:
+
+- `FAIL` — a bounded source-backed blocker was observed; fix it or explicitly resolve why it is intentional before optional acquisition work;
+- `WATCH` — investigate context, rendered/runtime behavior or audit limits; do not automatically call it a defect;
+- `PASS` — no issue was observed by that detector in the bounded sample; this is not indexing, ranking or citation proof;
+- `not-applicable` — the check does not apply to the observed representation.
+
+A bounded fetch failure remains unknown rather than becoming an indexability failure. Non-HTML resources are not required to carry HTML-only canonical markup. If dogfood exposes a detector false positive, repair the detector/evidence boundary instead of editing the target site to satisfy a bad check.
+
+Use Technical Integrity before optional tactics and again after the changed public/deployed surface is observable.
+<!-- END GOOSE TECHNICAL PREFLIGHT -->
+
 ## Growth Loop rules
 
 1. Prefer current primary-source platform documentation/specifications over secondary GEO/AEO advice.
