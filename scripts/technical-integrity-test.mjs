@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { analyzeTechnicalIntegrityFromPages, formatTechnicalIntegrityReport } from '../lib/technical-integrity.mjs';
+import { analyzeTechnicalIntegrityFromPages, formatTechnicalIntegrityReport, robotsPathAccess } from '../lib/technical-integrity.mjs';
 
 function html({
   title = 'Useful guide',
@@ -23,6 +23,8 @@ function page(url, markup, extra = {}) {
     status: 200,
     contentType: 'text/html; charset=utf-8',
     headers: {},
+    bytes: 4096,
+    fetchBudgetBytes: 524288,
     html: markup,
     ...extra
   };
@@ -41,11 +43,15 @@ const clean = analyzeTechnicalIntegrityFromPages({
   robots: { url: 'https://example.com/robots.txt', ok: true, status: 200, text: 'User-agent: *\nAllow: /\n' },
   generatedAt: '2026-09-09T12:00:00.000Z'
 });
-assert.equal(clean.version, '0.1');
+assert.equal(clean.version, '0.2');
+assert.equal(clean.rulesVersion, '0.2');
 assert.equal(clean.guardrails.noCompositeScore, true);
+assert.equal(clean.guardrails.boundedFetchFailureIsNotIndexabilityFailure, true);
+assert.equal(clean.guardrails.nonHtmlDoesNotRequireHtmlCanonical, true);
 assert.equal('score' in clean, false);
 assert.equal(clean.summary.p0Failures, 0);
 assert.equal(clean.checks.find(item => item.id === 'google-ai-snippet-eligibility').status, 'pass');
+assert.equal(clean.checks.find(item => item.id === 'google-priority-url-robots-access').status, 'pass');
 assert.equal(clean.checks.find(item => item.id === 'hreflang-cluster-integrity').status, 'not-applicable');
 assert.match(formatTechnicalIntegrityReport(clean), /No composite Search\/AI score/);
 
@@ -57,6 +63,7 @@ const robots404 = analyzeTechnicalIntegrityFromPages({
 });
 assert.equal(robots404.checks.find(item => item.id === 'google-robots-fetch-state').status, 'pass');
 assert.match(robots404.checks.find(item => item.id === 'google-robots-fetch-state').message, /no crawl restrictions/i);
+assert.equal(robots404.checks.find(item => item.id === 'google-priority-url-robots-access').status, 'watch');
 
 const robots503 = analyzeTechnicalIntegrityFromPages({
   canonicalUrl: home,
@@ -66,6 +73,18 @@ const robots503 = analyzeTechnicalIntegrityFromPages({
 });
 assert.equal(robots503.checks.find(item => item.id === 'google-robots-fetch-state').status, 'fail');
 assert.ok(robots503.summary.p0Failures >= 1);
+
+const pathRobots = 'User-agent: Googlebot\nDisallow: /private/\nAllow: /private/public/\nUser-agent: *\nAllow: /\n';
+assert.equal(robotsPathAccess(pathRobots, 'Googlebot', 'https://example.com/private/a').status, 'blocked');
+assert.equal(robotsPathAccess(pathRobots, 'Googlebot', 'https://example.com/private/public/a').status, 'allowed');
+const pathBlocked = analyzeTechnicalIntegrityFromPages({
+  canonicalUrl: home,
+  pages: [page(home, html({ title: 'Home', canonical: home })), page('https://example.com/private/a', html({ title: 'Private accidental', canonical: 'https://example.com/private/a' }))],
+  robots: { url: 'https://example.com/robots.txt', ok: true, status: 200, text: pathRobots },
+  generatedAt: '2026-09-09T12:00:00.000Z'
+});
+assert.equal(pathBlocked.checks.find(item => item.id === 'google-robots-fetch-state').status, 'pass');
+assert.equal(pathBlocked.checks.find(item => item.id === 'google-priority-url-robots-access').status, 'fail');
 
 const blockedMarkup = `<!doctype html><html><head><title>Broken</title><link rel="canonical" href="${home}"><link rel="canonical" href="${guide}"><meta name="robots" content="noindex,nosnippet"></head><body><div id="app"></div><script src="a.js"></script><script src="b.js"></script><script src="c.js"></script></body></html>`;
 const blocked = analyzeTechnicalIntegrityFromPages({
@@ -79,6 +98,46 @@ assert.equal(blocked.checks.find(item => item.id === 'google-ai-snippet-eligibil
 assert.equal(blocked.checks.find(item => item.id === 'canonical-final-consistency').status, 'fail');
 assert.equal(blocked.checks.find(item => item.id === 'critical-content-textual').status, 'watch');
 assert.ok(blocked.summary.p0Failures >= 3);
+
+const fetchLimited = analyzeTechnicalIntegrityFromPages({
+  canonicalUrl: home,
+  pages: [
+    page(home, html({ title: 'Home', canonical: home })),
+    {
+      requestedUrl: 'https://example.com/library/',
+      url: 'https://example.com/library/',
+      ok: false,
+      status: null,
+      contentType: null,
+      headers: {},
+      html: null,
+      fetchBudgetBytes: 524288,
+      error: 'Response exceeds maxBytes (524288).'
+    }
+  ],
+  robots: { url: 'https://example.com/robots.txt', ok: true, status: 200, text: 'User-agent: *\nAllow: /\n' },
+  generatedAt: '2026-09-09T12:00:00.000Z'
+});
+assert.equal(fetchLimited.checks.find(item => item.id === 'search-indexability').status, 'watch');
+assert.equal(fetchLimited.checks.find(item => item.id === 'bounded-retrieval-footprint').status, 'watch');
+assert.equal(fetchLimited.summary.p0Failures, 0);
+assert.match(fetchLimited.checks.find(item => item.id === 'bounded-retrieval-footprint').message, /not an indexability failure/i);
+
+const markdown = analyzeTechnicalIntegrityFromPages({
+  canonicalUrl: home,
+  pages: [
+    page(home, html({ title: 'Home', canonical: home })),
+    page('https://example.com/README.md', '# README\n\nUseful Markdown documentation with enough direct content for a user.', {
+      contentType: 'text/markdown; charset=utf-8',
+      headers: {},
+      bytes: 1200
+    })
+  ],
+  robots: { url: 'https://example.com/robots.txt', ok: true, status: 200, text: 'User-agent: *\nAllow: /\n' },
+  generatedAt: '2026-09-09T12:00:00.000Z'
+});
+assert.equal(markdown.checks.find(item => item.id === 'canonical-final-consistency').status, 'pass');
+assert.doesNotMatch(markdown.checks.find(item => item.id === 'canonical-final-consistency').message, /README\.md/);
 
 const en = 'https://example.com/en/';
 const de = 'https://example.com/de/';
@@ -133,6 +192,18 @@ const duplicate = analyzeTechnicalIntegrityFromPages({
 });
 assert.equal(duplicate.checks.find(item => item.id === 'near-duplicate-priority-pages').status, 'watch');
 assert.ok(duplicate.checks.find(item => item.id === 'near-duplicate-priority-pages').nearDuplicatePairs.length >= 1);
+
+const soft404 = analyzeTechnicalIntegrityFromPages({
+  canonicalUrl: home,
+  pages: [page('https://example.com/missing/', html({
+    title: 'Page not found',
+    canonical: 'https://example.com/missing/',
+    body: '<main><h1>404 — Page not found</h1><p>The page does not exist.</p><a href="/">Home</a></main>'
+  }))],
+  robots: { url: 'https://example.com/robots.txt', ok: true, status: 200, text: 'User-agent: *\nAllow: /\n' },
+  generatedAt: '2026-09-09T12:00:00.000Z'
+});
+assert.equal(soft404.checks.find(item => item.id === 'soft-404-suspect').status, 'watch');
 
 const bingRestricted = analyzeTechnicalIntegrityFromPages({
   canonicalUrl: home,
