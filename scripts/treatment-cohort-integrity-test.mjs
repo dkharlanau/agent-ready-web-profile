@@ -224,6 +224,19 @@ assert.equal(cRoute.declaredTreatment, true);
 }
 
 {
+  const sameCommitAfter = graph({ phase: 'after', commit: '1'.repeat(40), sharedSha: '1', titlesSha: '2' });
+  const dirty = compareTreatmentCohortIntegrity(before, sameCommitAfter, {
+    treatmentUrls: ['https://example.com/a'],
+    generatedAt: '2026-09-09T19:05:00Z'
+  });
+  assert.equal(dirty.summary.actualChangedCohort, 0, 'different inputs under the same immutable commit must not become revision-bound treatment evidence');
+  assert.equal(dirty.summary.declaredUnknown, 1);
+  assert.ok(dirty.routes.filter(item => item.url !== 'https://example.com/c').every(item => item.state === 'unknown'));
+  assert.equal(dirty.actions.some(item => item.kind === 'same-commit-drift'), true);
+  assert.equal(dirty.actions.some(item => item.kind === 'changed-outside-treatment'), false);
+}
+
+{
   assert.throws(() => compareTreatmentCohortIntegrity(before, after, { treatmentUrls: ['https://other.example.com/a'] }), /outside the Site State Graph scope/);
   const other = structuredClone(after);
   other.site.origin = 'https://other.example.com';
@@ -254,4 +267,4 @@ try {
   fs.rmSync(directory, { recursive: true, force: true });
 }
 
-console.log('PASS Treatment Cohort Integrity maps shared and route-scoped source changes into actual canonical-route scope, preserves unknown ownership, and exposes declared-treatment contamination without causal claims.');
+console.log('PASS Treatment Cohort Integrity maps shared and route-scoped source changes into actual canonical-route scope, rejects dirty same-commit drift, preserves unknown ownership, and exposes declared-treatment contamination without causal claims.');
