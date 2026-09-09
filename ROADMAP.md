@@ -1,27 +1,29 @@
 # Goose ARWP Roadmap
 
-Reviewed: **2026-09-09** after the Goose self-interview loop.
+Reviewed: **2026-09-09** after the 10-role Goose proof-first stress test.
 
 **Goose ARWP — Get Found.**
 
-Goose helps a site become easier for Search and AI systems to discover, understand, verify, cite and route to useful actions. **Agent-Ready Web Profile (ARWP)** remains the technical foundation: schemas, Resolver, evidence contracts, site analysis, transformations and interoperability machinery.
+Goose helps a website owner choose a small number of evidence-backed discoverability interventions, verify the exact deployment, measure provider-native Search/AI outcomes, and decide what to keep, revise or stop. **Agent-Ready Web Profile (ARWP)** remains the technical foundation.
 
-The project is no longer roadmaped as “build a better Resolver first.” Resolver quality remains an important technical workstream, but the product North Star is now an **evidence-backed site improvement loop**.
+The product is not the number of patterns, schemas, protocols, pages, graphs or checks. The product is the **quality of the intervention decision and the evidence that follows it**.
 
 ## Product North Star
 
-> **How many real sites can complete a reviewed Goose loop from intended outcome → observed site state → applicable change → verified deployment → provider-native Search/AI evidence → explicit keep/revise/stop decision?**
+> **How many real sites complete a reviewed chain from goal/demand → observed site state → chosen intervention → exact verified deployment → provider-native outcome → explicit keep/revise/stop decision?**
 
 Track separately:
 
-1. sites with an explicit purpose / intent boundary;
-2. sites with a verified production ref matching the measured implementation;
-3. sites with real provider-native Search/AI evidence;
-4. experiments reaching a reviewed decision;
-5. neutral/negative experiments retained;
-6. independent sites/consumers using Goose outside owner-controlled dogfood.
+1. sites with explicit problem/audience/intent boundaries;
+2. interventions with a frozen recommendation and measurement plan;
+3. interventions with verified production parity;
+4. sites with provider-native Search/AI/referral evidence;
+5. experiments reaching a reviewed decision;
+6. neutral/negative experiments retained;
+7. cases where Goose changed a real owner decision or prevented unnecessary work;
+8. independent consumers returning to the workflow.
 
-Do **not** collapse these into a Goose score. Feature count, page count, schema count, GitHub stars, Resolver interface count and owner-controlled “wins” are not North Star metrics.
+Do **not** collapse these into a Goose score. Feature count, URL count, schema count, GitHub stars, pattern count, Resolver interface count and owner-controlled “wins” are not North Star metrics.
 
 ---
 
@@ -29,84 +31,131 @@ Do **not** collapse these into a Goose score. Feature count, page count, schema 
 
 **Status: current P0 milestone.**
 
-The immediate goal is to demonstrate that Goose can operate a small number of sites end to end without changing definitions after seeing outcomes.
+## The bottleneck
 
-## Exit criteria
+Goose does not yet have one completed, credible real-site chain from:
 
-- at least **three owned sites** have an explicit experiment/evidence state;
-- each measured treatment has an independently checked production/deployment ref;
-- at least two sites have real owner/provider-native Search or AI visibility evidence;
-- at least one experiment reaches a human-reviewed `keep`, `revise`, `continue-measuring`, `revert` or `retire` decision;
-- negative/neutral evidence remains visible;
-- the public Proof Board can render status from committed evidence rather than hand-written success claims;
-- no new large protocol/module track is started merely because the proof window is slow.
+`recommendation → exact deployed change → provider-native outcome → reviewed decision`.
 
-**Ptichi stays measurement-hold until production parity is independently verified.** Its existing 12 treatment + 6 control cohort is the authoritative cohort; do not manufacture a larger replacement merely to satisfy an old planning number.
+Until that exists, building richer proof presentation is secondary.
 
-## P0 work
+## P0 execution order
 
-| Initiative | Why now |
-| --- | --- |
-| Portfolio Proof Board (#93) | Make real experiment/deployment/evidence state visible before selling architecture. |
-| Real longitudinal Growth/Controlled Cohort evidence (#55, #83) | The largest remaining credibility gap is outcome population, not another schema. |
-| Production parity gates | Observation clocks start only when the intended implementation is verifiably live. |
-| Provider-native AI/Search evidence | Google AI impressions, Bing citations/grounding evidence and referrals have different semantics and must stay separate. |
-| Recommendation review/decay | Weak or contradicted advice should age out instead of accumulating forever. |
+### 1. Complete the first real proof loop — #55
+
+Use the existing frozen Ptichi cohort `ptichi-da-001-en-work-speaking` as the canonical first proof.
+
+**Ptichi stays measurement-hold until production parity is independently verified.** Its existing **12 treatment + 6 control** cohort and frozen 12-query observational panel are authoritative. Do not replace them with a larger cohort merely to satisfy an earlier generic 20–50-page planning target.
+
+Immediate sequence:
+
+1. verify that the exact frozen implementation ref is live;
+2. only then start the existing observation windows;
+3. import/preserve real provider-native evidence where available;
+4. keep treatment/control, confounders and missing evidence explicit;
+5. reach a reviewed `keep`, `revise`, `continue-measuring`, `revert` or `retire` decision.
+
+No new feature is required to begin this work.
+
+### 2. Make intervention state canonical
+
+One experiment must have one lifecycle truth.
+
+Canonical outcome-bearing state should come from the existing Controlled Cohort / Growth Experiment / Change Receipt / outcome-evidence chain. Program registries such as Data Authority may describe hypotheses, candidate sites and experiment families, but must reference the canonical experiment rather than independently declaring runtime state.
+
+Evidence Lab, Winner Observatory and future Proof Board surfaces are **views/adapters over canonical evidence**, not parallel proof systems.
+
+### 3. Harden measurement only when active evidence requires it — #97
+
+Preserve raw exports and provider semantics. Add or revise adapters when a real active cohort has evidence that cannot be represented safely today.
+
+Do not turn provider hardening into a generalized P0 platform project before real data arrives.
+
+## M1 exit criteria / SUCCESS GATE
+
+Before the next major product expansion:
+
+- **one fully reviewed real-site intervention** has exact deployment parity and real provider-native outcome evidence;
+- at least **three owned sites** have canonical experiment/evidence state;
+- at least **two sites** have real owner/provider-native Search or AI evidence;
+- at least one neutral/negative result is retained in the canonical evidence record;
+- at least one case shows a **decision advantage** — Goose caused an owner to choose, reject, revise or stop work differently than a generic checklist would have;
+- a minimal public proof artifact can be generated from committed evidence rather than hand-written success claims;
+- no new major module is justified by project maturity, feature count or speculative protocol breadth.
+
+If several well-run interventions cannot satisfy these gates, contract the product scope instead of adding features.
 
 ---
 
-# M2 — One obvious first-run journey
+# M2 — Minimal proof surface, then replication
 
-**Status: P1 after proof instrumentation is stable.**
+**Status: gated P1. Starts only after the first reviewed real-site loop.**
 
-The external journey should be understandable without learning Goose internals:
+## Proof Board — #93
+
+The Proof Board is a **renderer**, not the proof itself.
+
+First version should be one minimal evidence-derived card with:
+
+- site goal / target intent;
+- chosen intervention;
+- evidence/demand basis;
+- implementation ref;
+- independently observed production ref / parity state;
+- provider-native outcome evidence;
+- unknowns/confounders;
+- review decision;
+- links to canonical committed evidence.
+
+No dashboard, portfolio score or rich analytics layer is justified before this minimal rendering is useful.
+
+## Replicate on two contrasting sites
+
+After the first reviewed Ptichi loop, apply the same proof contract to two materially different owned sites. The purpose is not to maximize cohort count; it is to test whether the same intervention contract generalizes across site types.
+
+Choose sites with actual owner evidence and a narrow, reviewable discoverability problem. Do not manufacture experiments merely to fill the portfolio.
+
+---
+
+# M3 — One obvious first-run journey
+
+**Status: P1 after proof exists.**
+
+The external journey should be:
 
 ```text
-TELL GOOSE THE GOAL
+URL + MINIMAL OWNER CONTEXT
         ↓
 INSPECT THE REAL SITE
         ↓
-DECIDE THE TOP 1–3 MOVES
+ONE PRIMARY MOVE
+        ↓
+WHY IT APPLIES / WHAT WOULD FALSIFY IT
         ↓
 CHANGE SAFELY
         ↓
-PROVE IMPLEMENTATION
+VERIFY EXACT DEPLOYMENT
         ↓
 MEASURE OUTCOME
         ↓
-WATCH / REVISE
+KEEP / REVISE / STOP
 ```
 
-Relevant work:
+Relevant issues:
 
-- #92 — owner-declared context / adaptive interview;
+- #92 — owner context, but keep the interview adaptive and minimal;
 - #94 — concise Get Found Brief;
-- #96 — first-run journey hiding internal module complexity;
-- Site Focus and Intent Ownership stay the existing truth models rather than being duplicated.
+- #96 — first-run journey hiding internal module complexity.
 
-The interface should simplify the product, **not** simplify away uncertainty, evidence class or owner-vs-observed conflicts.
+Site Focus and Intent Ownership remain existing truth models; do not create another intake ontology.
+
+First useful output should be understandable without learning Resolver, BraidGraph, Radar, Repository Mapper, Project Maturity Surfaces, Change Receipts or registry names.
 
 ---
 
-# M3 — Provider-native Search & AI measurement
+# M4 — Provider-native Search & AI evidence
 
-**Status: active foundation; next hardening required.**
-
-Goose must model each provider according to the evidence the provider actually exposes.
-
-### Google
-
-Treat Search Console generative-AI visibility as **exposure/impression evidence**. Keep pages/countries/devices/time dimensions where owner exports provide them. Do not relabel these impressions as citations, rankings or ChatGPT-style mentions.
-
-### Bing / Microsoft
-
-Treat AI Performance as **citation/grounding evidence**. Keep page-level citations and grounding-query relationships separate from Search rankings. Intents, Topics and Citation Share are provider-native dimensions and must not be flattened into a universal AI visibility score.
-
-### OpenAI / ChatGPT
-
-Treat OAI-SearchBot access, public Search eligibility and referral observations as separate evidence classes. Crawler access is not a citation result; GPTBot training controls are not Search visibility controls.
-
-### Cross-provider rule
+**Status: active capability, evidence-gated hardening.**
 
 Use a funnel, not a score:
 
@@ -128,101 +177,121 @@ USEFUL ACTION
 
 A provider may expose only some stages. Missing stages remain unknown.
 
+### Google
+
+Treat Search Console generative-AI reporting as **exposure/impression evidence** with provider-supported page/country/device/time dimensions. Do not relabel it citation, ranking or causal attribution.
+
+### Bing / Microsoft
+
+Treat AI Performance as **citation/grounding evidence**. Keep citations, cited pages, grounding-query/page mappings, Intents, Topics and query-scoped Citation Share in provider-native semantics. Bing’s aggregated/sampled evidence is not a complete answer log or ranking measure.
+
+### OpenAI / ChatGPT
+
+Treat OAI-SearchBot access, public Search eligibility, bounded observed citations and `chatgpt.com` referrals as distinct evidence stages. GPTBot training controls are separate.
+
+### Perplexity / other answer engines
+
+Preserve crawler/indexing policy and bounded observed citations/referrals where real. Do not invent provider-native owner telemetry that the provider does not expose.
+
+## Rule for #97
+
+Add adapter breadth only when an active proof cohort supplies real evidence that the current contract cannot preserve without semantic loss.
+
 ---
 
-# M4 — Evidence-backed content / GEO operations
+# M5 — Evidence-backed Search / GEO operations
 
-**Status: active.**
+**Status: active discipline, not a separate product.**
 
-Google's current guidance does not require special AI markup for AI Overviews or AI Mode. Goose therefore treats “GEO” as an evidence-backed extension of good Search/content operations, not an excuse to generate AI-specific files or thin pages.
+Current Google guidance does not require special AI markup for AI Overviews or AI Mode. Goose treats GEO as evidence-backed Search/content operations, not a special-file contest.
 
-Keep strengthening existing layers:
+Keep:
 
 - Site Focus — problem/audience/outcome boundaries;
-- Intent Ownership — one reviewed page/job per intent family before adding URLs;
-- Data Authority — genuine datasets/entities/relationships when they provide standalone value;
-- Answer surfaces — direct useful answers, evidence, authorship/provenance and clear continuation paths;
-- entity graph / structured data — only where it represents visible facts;
-- freshness/review dates — meaningful changes, not timestamp theater;
-- page value gate — demand + unique value + standalone usefulness + canonical identity before indexable expansion;
-- original evidence/tools/examples over commodity text.
+- Intent Ownership — canonical page jobs before URL expansion;
+- demand / Page Value Gate — demand + unique value + standalone usefulness + canonical identity;
+- Data Authority — genuine original/curated data when it has standalone user value;
+- direct useful answers and source/provenance support;
+- visible-fact ↔ structured-data parity;
+- meaningful freshness/review state;
+- original evidence, tools, examples and datasets over commodity text.
 
-The goal is not “more pages.” The goal is more **useful, ownable, verifiable information surfaces** that can earn Search/AI discovery.
+Do not recommend a page or content intervention merely because a pattern exists. Source support answers **“is this legitimate?”**; demand/context must still answer **“is this worth doing here?”**
 
 ---
 
-# M5 — Portfolio maintenance and scale
+# M6 — Portfolio maintenance and commercial scale
 
-**Status: later commercial leverage, after proof.**
+**Status: later, after the SUCCESS GATE.**
 
-Once the proof loop is real on several sites, Goose Watch / portfolio capabilities become much more valuable:
+The strongest eventual paying-user hypothesis remains an agency, maintainer or small team responsible for several sites. That is not yet validated.
+
+Only after single-site proof generalizes should Goose expand:
 
 - multi-site source/rule blast radius;
 - scheduled re-review;
-- provider policy drift;
 - deployment/evidence queues;
-- approved change waves;
-- portfolio policy-as-code;
 - owner-data connectors;
-- verified stack transformation packs.
+- portfolio policy-as-code;
+- verified change waves;
+- transformation-pack breadth driven by observed blocked work.
 
-The commercial value is maintenance, evidence, governance and scale — not a ranking guarantee.
+Paid value should be maintenance, evidence, governance and scale — never a ranking/citation guarantee.
 
 ---
 
-# Technical foundation workstreams
+# Technical foundation — supporting engines
 
-These remain important but are **supporting engines**, not the public journey.
-
-| Engine | Current role |
-| --- | --- |
-| Resolver / protocol adapters | Discover and normalize real machine interfaces with provenance. |
-| Site Focus + Intent Ownership | Define problem, audience, route and intent boundaries. |
-| Growth / Recommendation Registry | Turn current evidence into applicable candidate work. |
-| Repository Mapper / Transformation packs | Resolve source ownership and prepare deterministic changes. |
-| BraidGraph | Preserve evidence → rule → site → recommendation → change → proof relationships and reverse impact. |
-| Evidence / Change Receipts | Preserve what was observed, changed and verified. |
-| Controlled Cohorts / Winner Observatory | Run bounded longitudinal discovery experiments. |
-| Recommendation Review | Age, challenge, revise and retire advice. |
-| Project Maturity Surfaces | Keep identity, rights, governance and collaboration inspectable. |
-
-## Resolver decision-quality gate
-
-The existing reviewed Resolver evidence still matters. Do not weaken it, rewrite frozen truth or add hostname-specific exceptions. However, new Resolver/protocol breadth is lower priority than real site evidence unless a concrete interoperability failure blocks a current Goose workflow.
+| Engine | Current role | Priority rule |
+| --- | --- | --- |
+| Site Focus + Intent Ownership | Define problem, audience, demand and route/page boundaries. | Active when it changes intervention choice. |
+| Growth / Recommendation Registry | Source-backed candidate recommendations. | Active; candidate supply is not proof. |
+| Controlled Cohorts / Growth Experiments | Freeze and review interventions/outcomes. | P0 proof primitive. |
+| Evidence / Change Receipts | Preserve observations, exact change and deployment state. | P0 when needed by active proof. |
+| provider-native evidence imports | Preserve Search/AI/referral outcome semantics. | P0/P1 only for real active evidence. |
+| Repository Mapper / Transformation packs | Resolve source ownership and prepare bounded changes. | Evidence-gated by real target need. |
+| BraidGraph | Evidence lineage and reverse impact. | Internal/advanced; no new public product identity. |
+| Resolver / protocol adapters | Machine-interface discovery and decision quality. | Supporting P2 unless a real Goose workflow is blocked. |
+| Trend Intelligence | Source freshness and candidate-rule lifecycle. | Maintenance P2 until proof gate. |
+| Project Maturity Surfaces | Identity/rights/governance support. | Governance, not discoverability P0. |
 
 ---
 
 # Stop / deprioritize rules
 
-Until M1 has real evidence:
+Until the SUCCESS GATE is met:
 
-- do not create a new top-level product module without a demonstrated user job;
-- do not create AI-specific markup/files merely because a third party calls them “GEO”;
-- do not expand URL counts before intent/page value gates;
-- do not treat crawler access as citation evidence;
-- do not treat citation as brand mention, traffic or conversion;
-- do not start new protocol adapters without a concrete blocked workflow or interoperability case;
-- do not rewrite experiments after observing winners;
-- do not use policy/trust page count as maturity;
-- do not hide neutral or negative results;
-- do not replace provider-native metrics with one composite score.
+1. do not build #93 as a rich portfolio dashboard before the first reviewed proof loop;
+2. do not expand Resolver/ARD/MCP/WebMCP/transact/cross-lingual protocol breadth unless an active proof workflow is blocked;
+3. do not treat the stratified State of the Agentic Web expansion as product P0;
+4. do not add Trend/Radar feature breadth beyond maintenance of current evidence;
+5. do not expand stack transformation packs without observed real-site blocked work;
+6. do not create AI-specific markup/files merely because a third party calls them GEO;
+7. do not expand indexable URL counts before demand/intent/page-value gates;
+8. do not use DOI, policy/trust pages, visual assets or project-surface count as evidence that Goose helps discovery;
+9. do not treat crawler access as citation evidence;
+10. do not treat citation as traffic, conversion or causality;
+11. do not hide neutral or negative outcomes;
+12. do not introduce a universal Goose/GEO/AI visibility score;
+13. do not create another experiment lifecycle registry when an existing canonical artifact can own the state.
 
-Surface lifecycle work in #95 should actively consolidate or retire low-job/duplicative surfaces over time.
+Surface lifecycle work in #95 should consolidate or retire low-job/duplicative public surfaces after the first proof loop, not become another P0 subsystem.
 
 ---
 
 # Current execution order
 
-1. keep the production/CI baseline green;
+1. keep production/CI truth green;
 2. keep Ptichi on HOLD until exact production parity is observed;
-3. build the portfolio Proof Board from committed evidence (#93);
-4. populate at least two additional real owned-site experiment states without inventing outcomes;
-5. harden provider-native AI/Search measurement semantics and imports;
-6. run Recommendation Review on real reviewed outcomes;
-7. implement the simplified first-run/Get Found Brief only against the existing evidence engines (#92, #94, #96);
-8. dogfood Surface Budget / Retirement Gate on Goose (#95);
-9. only then increase portfolio automation / Watch scale;
-10. continue Resolver/protocol work when a real Goose workflow demonstrates the need.
+3. complete the first real proof loop through #55 using the existing Ptichi cohort;
+4. make experiment/intervention lifecycle truth canonical and remove conflicting program-level runtime status;
+5. harden only the provider evidence adapters required by that real loop (#97);
+6. reach and record the first reviewed decision, including neutral/negative outcomes;
+7. render one minimal evidence-derived Proof card (#93), not a dashboard;
+8. replicate the proof contract on two contrasting owned sites with real owner evidence;
+9. then implement the minimal Get Found Brief / first-run flow (#92, #94, #96);
+10. only after the SUCCESS GATE increase portfolio Watch/automation scale;
+11. continue Resolver/protocol/research breadth only when real evidence demonstrates the need.
 
 # Decision rule
 
