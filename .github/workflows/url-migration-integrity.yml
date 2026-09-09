@@ -1,0 +1,55 @@
+name: URL migration integrity
+
+on:
+  push:
+    paths:
+      - 'lib/public-redirect-trace.mjs'
+      - 'lib/url-migration-integrity.mjs'
+      - 'schema/url-migration-integrity.schema.json'
+      - 'scripts/public-redirect-trace-test.mjs'
+      - 'scripts/url-migration-integrity-test.mjs'
+      - 'bin/arwp-url-migration.mjs'
+      - 'bin/arwp.mjs'
+      - 'docs/URL-MIGRATION-INTEGRITY.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'REPO_MAP.md'
+      - '.github/workflows/url-migration-integrity.yml'
+  pull_request:
+    paths:
+      - 'lib/public-redirect-trace.mjs'
+      - 'lib/url-migration-integrity.mjs'
+      - 'schema/url-migration-integrity.schema.json'
+      - 'scripts/public-redirect-trace-test.mjs'
+      - 'scripts/url-migration-integrity-test.mjs'
+      - 'bin/arwp-url-migration.mjs'
+      - 'bin/arwp.mjs'
+      - 'docs/URL-MIGRATION-INTEGRITY.md'
+      - 'skills/arwp-growth-loop/SKILL.md'
+      - 'REPO_MAP.md'
+      - '.github/workflows/url-migration-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate schema and syntax
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('schema/url-migration-integrity.schema.json','utf8'));"
+          node --check lib/public-redirect-trace.mjs
+          node --check lib/url-migration-integrity.mjs
+          node --check scripts/public-redirect-trace-test.mjs
+          node --check scripts/url-migration-integrity-test.mjs
+          if [ -f bin/arwp-url-migration.mjs ]; then node --check bin/arwp-url-migration.mjs; fi
+      - name: Run redirect trace regression
+        run: node scripts/public-redirect-trace-test.mjs
+      - name: Run URL Migration Integrity regression
+        run: node scripts/url-migration-integrity-test.mjs
