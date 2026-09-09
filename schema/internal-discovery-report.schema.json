@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/internal-discovery-report.schema.json",
+  "title": "Goose Internal Discovery Evidence Report v0.1",
+  "description": "Bounded rendered-HTML internal discovery graph. Keeps canonical owners, aliases, link classes and evidence gaps separate without producing a PageRank, authority, SEO or readiness score.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "version", "generatedAt", "canonicalUrl", "scope", "cohort", "summary", "nodes", "edges", "gaps", "actions", "sources", "guardrails"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "version": { "const": "0.1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "scope": { "type": "string", "minLength": 1 },
+    "cohort": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selectedPages", "urls", "selectionMethod"],
+      "properties": {
+        "id": { "type": ["string", "null"] },
+        "digestSha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "selectedPages": { "type": "integer", "minimum": 0, "maximum": 50 },
+        "urls": { "type": "array", "maxItems": 50, "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
+        "selectionMethod": { "type": "string", "minLength": 1, "maxLength": 2000 }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewedPages", "canonicalOwners", "redirectAliases", "canonicalAliases", "nonIndexableStates", "unknownNodes", "ownerEdges", "contextualOwnerEdges", "hubOwnerEdges", "utilityOwnerEdges", "globalOwnerEdges", "unclassifiedOwnerEdges", "transitionEdges", "outOfCohortInternalEdges", "ownersWithoutInbound", "ownersWithGlobalOnlyInbound", "ownersWithoutContinuation"],
+      "properties": {
+        "reviewedPages": { "type": "integer", "minimum": 0 },
+        "canonicalOwners": { "type": "integer", "minimum": 0 },
+        "redirectAliases": { "type": "integer", "minimum": 0 },
+        "canonicalAliases": { "type": "integer", "minimum": 0 },
+        "nonIndexableStates": { "type": "integer", "minimum": 0 },
+        "unknownNodes": { "type": "integer", "minimum": 0 },
+        "ownerEdges": { "type": "integer", "minimum": 0 },
+        "contextualOwnerEdges": { "type": "integer", "minimum": 0 },
+        "hubOwnerEdges": { "type": "integer", "minimum": 0 },
+        "utilityOwnerEdges": { "type": "integer", "minimum": 0 },
+        "globalOwnerEdges": { "type": "integer", "minimum": 0 },
+        "unclassifiedOwnerEdges": { "type": "integer", "minimum": 0 },
+        "transitionEdges": { "type": "integer", "minimum": 0 },
+        "outOfCohortInternalEdges": { "type": "integer", "minimum": 0 },
+        "ownersWithoutInbound": { "type": "integer", "minimum": 0 },
+        "ownersWithGlobalOnlyInbound": { "type": "integer", "minimum": 0 },
+        "ownersWithoutContinuation": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "nodes": { "type": "array", "maxItems": 50, "items": { "$ref": "#/$defs/node" } },
+    "edges": { "type": "array", "maxItems": 5000, "items": { "$ref": "#/$defs/edge" } },
+    "gaps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["withoutInbound", "globalOnlyInbound", "withoutContinuation", "transitionTargets", "unknownPages"],
+      "properties": {
+        "withoutInbound": { "$ref": "#/$defs/urlList" },
+        "globalOnlyInbound": { "$ref": "#/$defs/urlList" },
+        "withoutContinuation": { "$ref": "#/$defs/urlList" },
+        "transitionTargets": { "$ref": "#/$defs/urlList" },
+        "unknownPages": { "$ref": "#/$defs/urlList" }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "priority", "status", "url", "title", "reason", "verification", "source", "doesNotProve"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "maxLength": 240 },
+          "priority": { "enum": ["P1", "P2"] },
+          "status": { "const": "review" },
+          "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "title": { "type": "string", "minLength": 1, "maxLength": 500 },
+          "reason": { "type": "string", "minLength": 1, "maxLength": 3000 },
+          "verification": { "type": "string", "minLength": 1, "maxLength": 3000 },
+          "source": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "doesNotProve": { "type": "string", "minLength": 1, "maxLength": 1000 }
+        }
+      }
+    },
+    "sources": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["noCompositeScore", "noPageRankApproximation", "noRankingPromise", "boundedCohortNotWholeSite", "rawHtmlRegionClassificationIsHeuristic", "redirectsNotContentNodes", "unknownRemainsUnknown", "linkCountNotCausality"],
+      "properties": {
+        "noCompositeScore": { "const": true },
+        "noPageRankApproximation": { "const": true },
+        "noRankingPromise": { "const": true },
+        "boundedCohortNotWholeSite": { "const": true },
+        "rawHtmlRegionClassificationIsHeuristic": { "const": true },
+        "redirectsNotContentNodes": { "const": true },
+        "unknownRemainsUnknown": { "const": true },
+        "linkCountNotCausality": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "urlList": { "type": "array", "maxItems": 50, "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https://" } },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestedUrl", "url", "status", "contentType", "nodeClass", "canonical", "noindex", "redirected", "evidence"],
+      "properties": {
+        "requestedUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "status": { "type": ["integer", "null"], "minimum": 100, "maximum": 599 },
+        "contentType": { "type": ["string", "null"] },
+        "nodeClass": { "enum": ["canonical-owner", "redirect-alias", "canonical-alias", "non-indexable-state", "unknown"] },
+        "canonical": { "type": ["string", "null"], "format": "uri" },
+        "noindex": { "type": "boolean" },
+        "redirected": { "type": "boolean" },
+        "evidence": { "type": "array", "maxItems": 20, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 1000 } }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "targetState", "linkClass", "classEvidence", "anchorText", "crawlable", "sameOrigin"],
+      "properties": {
+        "from": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "to": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "targetState": { "enum": ["canonical-owner", "transition", "out-of-cohort", "unknown"] },
+        "linkClass": { "enum": ["contextual", "hub", "utility", "global", "unclassified"] },
+        "classEvidence": { "enum": ["semantic-container", "structural-container", "derived-action-text", "unclassified"] },
+        "anchorText": { "type": ["string", "null"], "maxLength": 500 },
+        "crawlable": { "const": true },
+        "sameOrigin": { "const": true }
+      }
+    }
+  }
+}
