@@ -52,7 +52,7 @@ const expectations = [
   ['docs/index.html', '<title>Goose — Make your site worth citing.</title>'],
   ['docs/site-focus.html', 'Goose'],
   ['docs/site-pattern-graph.html', 'Goose'],
-  ['docs/discoverability.html', 'Goose Discoverability Library'],
+  ['docs/discoverability.html', 'Goose — Discoverability Pattern Library'],
   ['docs/growth/index.html', 'Goose'],
   ['docs/trust/brand.html', 'Goose'],
   ['docs/evidence-lab/index.html', '<strong>Goose</strong>'],
