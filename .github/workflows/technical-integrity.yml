@@ -6,6 +6,7 @@ on:
       - 'registry/technical-integrity-rules.json'
       - 'lib/technical-integrity.mjs'
       - 'bin/arwp-technical-integrity.mjs'
+      - 'bin/arwp.mjs'
       - 'scripts/technical-integrity-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
       - 'docs/TECHNICAL-INTEGRITY.md'
@@ -15,6 +16,7 @@ on:
       - 'registry/technical-integrity-rules.json'
       - 'lib/technical-integrity.mjs'
       - 'bin/arwp-technical-integrity.mjs'
+      - 'bin/arwp.mjs'
       - 'scripts/technical-integrity-test.mjs'
       - 'schema/technical-integrity-report.schema.json'
       - 'docs/TECHNICAL-INTEGRITY.md'
@@ -42,6 +44,9 @@ jobs:
         run: |
           node --check lib/technical-integrity.mjs
           node --check bin/arwp-technical-integrity.mjs
+          node --check bin/arwp.mjs
           node --check scripts/technical-integrity-test.mjs
       - name: CLI help smoke
-        run: node bin/arwp-technical-integrity.mjs --help
+        run: |
+          node bin/arwp-technical-integrity.mjs --help
+          node bin/arwp.mjs technical-integrity --help
