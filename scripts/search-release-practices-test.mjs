@@ -5,7 +5,7 @@ const registry = JSON.parse(fs.readFileSync('registry/search-release-practices.j
 const docs = fs.readFileSync('docs/SEARCH-RELEASE-GATE.md', 'utf8');
 const skill = fs.readFileSync('skills/arwp-search-release/SKILL.md', 'utf8');
 
-assert.equal(registry.version, '1.1');
+assert.equal(registry.version, '1.2');
 assert.match(registry.reviewedAt, /^\d{4}-\d{2}-\d{2}$/);
 assert.equal(registry.methodology.primarySourcesPreferred, true);
 assert.equal(registry.methodology.noRankingPromise, true);
@@ -16,16 +16,17 @@ assert.equal(registry.methodology.ownerSearchObservationSeparate, true);
 assert.equal(registry.methodology.githubPagesIsHostingNotIdentity, true);
 assert.equal(registry.methodology.deploymentSuccessRequired, true);
 assert.equal(registry.methodology.negativeTestsRequired, true);
+assert.equal(registry.methodology.productionDeploysSerialized, true);
 
 const sourceEntries = Object.entries(registry.sources || {});
-assert.ok(sourceEntries.length >= 18, 'Search Release should retain a broad primary-source set');
+assert.ok(sourceEntries.length >= 19, 'Search Release should retain a broad primary-source set');
 for (const [key, url] of sourceEntries) {
   assert.match(key, /^[a-z][A-Za-z0-9]+$/);
   assert.match(url, /^https:\/\//, `source ${key} must be HTTPS`);
 }
 
 assert.ok(Array.isArray(registry.practices));
-assert.ok(registry.practices.length >= 29, 'Search Release should retain the hardened interview/practice coverage');
+assert.ok(registry.practices.length >= 30, 'Search Release should retain the hardened interview/practice coverage');
 const ids = registry.practices.map((practice) => practice.id);
 assert.equal(new Set(ids).size, ids.length, 'Search Release practice ids must be unique');
 
@@ -58,7 +59,8 @@ const required = [
   'SR-26-machine-readable-consistency',
   'SR-27-share-preview-contract',
   'SR-28-deployment-success-proof',
-  'SR-29-negative-release-tests'
+  'SR-29-negative-release-tests',
+  'SR-30-production-deployment-serialization'
 ];
 for (const id of required) assert.ok(ids.includes(id), `missing required Search Release practice ${id}`);
 
@@ -98,4 +100,4 @@ for (const phrase of [
   'negative assertions'
 ]) assert.match(skill, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
 
-console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, GitHub Pages publishing, final-artifact, freshness, structured-data, machine-readable and deployment-proof boundaries without a ranking score.`);
+console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, GitHub Pages publishing, final-artifact, freshness, structured-data, machine-readable, deployment-proof and production-serialization boundaries without a ranking score.`);
