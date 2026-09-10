@@ -5,7 +5,7 @@ const registry = JSON.parse(fs.readFileSync('registry/search-release-practices.j
 const docs = fs.readFileSync('docs/SEARCH-RELEASE-GATE.md', 'utf8');
 const skill = fs.readFileSync('skills/arwp-search-release/SKILL.md', 'utf8');
 
-assert.equal(registry.version, '1.0');
+assert.equal(registry.version, '1.1');
 assert.match(registry.reviewedAt, /^\d{4}-\d{2}-\d{2}$/);
 assert.equal(registry.methodology.primarySourcesPreferred, true);
 assert.equal(registry.methodology.noRankingPromise, true);
@@ -14,16 +14,18 @@ assert.equal(registry.methodology.finalArtifactFirst, true);
 assert.equal(registry.methodology.productionVerificationSeparate, true);
 assert.equal(registry.methodology.ownerSearchObservationSeparate, true);
 assert.equal(registry.methodology.githubPagesIsHostingNotIdentity, true);
+assert.equal(registry.methodology.deploymentSuccessRequired, true);
+assert.equal(registry.methodology.negativeTestsRequired, true);
 
 const sourceEntries = Object.entries(registry.sources || {});
-assert.ok(sourceEntries.length >= 10, 'Search Release should retain a broad primary-source set');
+assert.ok(sourceEntries.length >= 18, 'Search Release should retain a broad primary-source set');
 for (const [key, url] of sourceEntries) {
   assert.match(key, /^[a-z][A-Za-z0-9]+$/);
   assert.match(url, /^https:\/\//, `source ${key} must be HTTPS`);
 }
 
 assert.ok(Array.isArray(registry.practices));
-assert.ok(registry.practices.length >= 18, 'Search Release should retain the initial interview/practice coverage');
+assert.ok(registry.practices.length >= 29, 'Search Release should retain the hardened interview/practice coverage');
 const ids = registry.practices.map((practice) => practice.id);
 assert.equal(new Set(ids).size, ids.length, 'Search Release practice ids must be unique');
 
@@ -45,7 +47,18 @@ const required = [
   'SR-15-change-notification',
   'SR-16-migration-continuity',
   'SR-17-portfolio-identity-isolation',
-  'SR-18-owner-serp-observation'
+  'SR-18-owner-serp-observation',
+  'SR-19-indexability-status-contract',
+  'SR-20-github-pages-publishing-source',
+  'SR-21-site-identity-contract',
+  'SR-22-post-mutation-release-gate',
+  'SR-23-freshness-provenance',
+  'SR-24-error-route-integrity',
+  'SR-25-structured-data-coherence',
+  'SR-26-machine-readable-consistency',
+  'SR-27-share-preview-contract',
+  'SR-28-deployment-success-proof',
+  'SR-29-negative-release-tests'
 ];
 for (const id of required) assert.ok(ids.includes(id), `missing required Search Release practice ${id}`);
 
@@ -66,7 +79,11 @@ for (const phrase of [
   'Snippet hygiene rule',
   'Favicon rule',
   'Canonical-host invariant',
-  'Production loop'
+  'Production loop',
+  'Post-mutation release gate',
+  'Freshness provenance',
+  'Deployment success is evidence',
+  'negative tests'
 ]) assert.match(docs, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
 
 for (const phrase of [
@@ -74,7 +91,11 @@ for (const phrase of [
   'final built hostname-root HTML',
   'data-nosnippet',
   'GitHub Pages custom domain',
-  'actual Search/Bing selection'
+  'actual Search/Bing selection',
+  'post-mutation gate',
+  'deployment workflow',
+  'fabricated lastmod',
+  'negative assertions'
 ]) assert.match(skill, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
 
-console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, GitHub Pages, final-artifact and owner-observation boundaries without a ranking score.`);
+console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, GitHub Pages publishing, final-artifact, freshness, structured-data, machine-readable and deployment-proof boundaries without a ranking score.`);
