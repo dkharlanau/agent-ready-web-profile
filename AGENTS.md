@@ -33,6 +33,7 @@ Current source and applicable scoped instructions override a stale route in this
 - Preserve neutral, negative and counterexample evidence; do not curate evidence only to support a preferred theory.
 - Do not create fake freshness, fake authorship, decorative structured data, thin query-variant pages or unsupported ranking claims.
 - Static metadata is evidence of a declaration, not runtime conformance, authorization, security or trust.
+- Search-result presentation is a public product surface: for hostname-root releases, explicitly review site identity, title-source convergence, snippet-source hygiene, favicon delivery, canonical-host coherence and the final deployed artifact. Technical crawl eligibility alone is not a Search release pass. Use [`skills/arwp-search-release/SKILL.md`](skills/arwp-search-release/SKILL.md).
 - Prefer upstream standards to ARWP-specific fields when an established mechanism already expresses the capability. The optional ARWP publisher profile must not become a prerequisite for the Resolver.
 - Keep public methodology, commercial/private evidence and confidential R&D at their intended disclosure boundaries. [`CONTRIBUTING.md`](CONTRIBUTING.md) is canonical for that classification gate.
 - Preserve canonical IDs, public URLs, schema contracts and source-to-output relationships when restructuring data or generated surfaces.
@@ -94,6 +95,7 @@ Use Technical Integrity before optional tactics and again after the changed publ
 - Core ARWP contract: [`SPEC.md`](SPEC.md)
 - Product priorities and stop rules: [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md)
 - Growth workflow: [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) and [`skills/arwp-growth-loop/SKILL.md`](skills/arwp-growth-loop/SKILL.md)
+- Search release gate (site name, title, snippet, favicon, canonical host, sitemap/robots, GitHub Pages domain contract, final deployed artifact): [`docs/SEARCH-RELEASE-GATE.md`](docs/SEARCH-RELEASE-GATE.md), [`registry/search-release-practices.json`](registry/search-release-practices.json) and [`skills/arwp-search-release/SKILL.md`](skills/arwp-search-release/SKILL.md)
 - Search Maturity: [`docs/SEARCH-MATURITY-BENCHMARK.md`](docs/SEARCH-MATURITY-BENCHMARK.md) and [`skills/arwp-search-maturity/SKILL.md`](skills/arwp-search-maturity/SKILL.md)
 - Future Search: [`docs/FUTURE-SEARCH-LAB.md`](docs/FUTURE-SEARCH-LAB.md) and [`skills/arwp-future-search/SKILL.md`](skills/arwp-future-search/SKILL.md)
 - Resolver/interoperability: [`docs/RESOLVER.md`](docs/RESOLVER.md)
