@@ -11,8 +11,12 @@ on:
       - 'schema/search-appearance-patch-manifest.schema.json'
       - 'scripts/search-appearance-test.mjs'
       - 'scripts/search-appearance-patch-test.mjs'
+      - 'scripts/search-release-practices-test.mjs'
+      - 'registry/search-release-practices.json'
       - 'docs/SEARCH-APPEARANCE.md'
+      - 'docs/SEARCH-RELEASE-GATE.md'
       - 'skills/arwp-growth-loop/SKILL.md'
+      - 'skills/arwp-search-release/SKILL.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
@@ -25,8 +29,12 @@ on:
       - 'schema/search-appearance-patch-manifest.schema.json'
       - 'scripts/search-appearance-test.mjs'
       - 'scripts/search-appearance-patch-test.mjs'
+      - 'scripts/search-release-practices-test.mjs'
+      - 'registry/search-release-practices.json'
       - 'docs/SEARCH-APPEARANCE.md'
+      - 'docs/SEARCH-RELEASE-GATE.md'
       - 'skills/arwp-growth-loop/SKILL.md'
+      - 'skills/arwp-search-release/SKILL.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
@@ -58,8 +66,10 @@ jobs:
           node --check bin/arwp-search-appearance-patch.mjs
           node --check scripts/search-appearance-test.mjs
           node --check scripts/search-appearance-patch-test.mjs
+          node --check scripts/search-release-practices-test.mjs
           node scripts/search-appearance-test.mjs
           node scripts/search-appearance-patch-test.mjs
+          node scripts/search-release-practices-test.mjs
       - name: Verify CLIs are shipped and runnable from the package
         shell: bash
         run: |
