@@ -14,13 +14,17 @@ const script = value => `<script type="application/ld+json">${JSON.stringify(val
 const page = (head = '', body = '') => `<!doctype html><html><head>${head}</head><body>${body}</body></html>`;
 const inspect = (html, url = rootUrl) => inspectSearchAppearance({ html, url });
 const check = (report, id) => report.checks.find(item => item.id === `appearance:${id}`);
-const valid = page(script(website) + '<meta content="EX" property="og:site_name"><link sizes="64x64" href="/icon.png" rel="icon">');
+const identityHead = '<title>Example: useful reference</title><meta name="description" content="A clear reference for people looking for Example resources."><meta content="EX" property="og:site_name">';
+const valid = page(identityHead + script(website) + '<link sizes="64x64" href="/icon.png" rel="icon">');
 
 test('root site identity is observed, not a ranking or live-asset pass', () => {
   const report = inspect(valid);
   assert.equal(report.scope, 'hostname-root');
+  assert.equal(check(report, 'page-title').status, 'observed');
+  assert.equal(check(report, 'meta-description').status, 'observed');
   assert.equal(check(report, 'site-name').status, 'observed');
   assert.equal(check(report, 'name-consistency').status, 'observed');
+  assert.equal(check(report, 'title-name-consistency').status, 'observed');
   assert.equal(check(report, 'favicon-dimensions').status, 'not-assessed');
   assert.equal(report.guardrails.noRankingClaim, true);
   assert.equal(report.coverage.actualSearchAppearance, 'not-assessed');
@@ -33,8 +37,32 @@ test('project and localized paths never get hostname-brand remediation', () => {
     assert.equal(check(report, 'site-scope').status, 'not-applicable');
     assert.equal(check(report, 'site-name'), undefined);
     assert.equal(check(report, 'favicon-link'), undefined);
-    assert.equal(report.actions.length, 0);
+    assert.equal(check(report, 'page-title').status, 'not-observed');
+    assert.equal(check(report, 'meta-description').status, 'not-observed');
+    assert.ok(report.actions.every(action => !action.id.includes('site-name') && !action.id.includes('favicon')));
   }
+});
+test('title and description are observed without character-count folklore', () => {
+  const report = inspect(page('<title>Example — a deliberately descriptive title without a numeric SEO gate</title><meta name="description" content="This description is assessed for presence only; snippet selection remains outside static coverage.">'));
+  assert.equal(check(report, 'page-title').status, 'observed');
+  assert.equal(check(report, 'meta-description').status, 'observed');
+  assert.deepEqual(report.observations.pageTitles, ['Example — a deliberately descriptive title without a numeric SEO gate']);
+});
+test('missing or duplicate title and description produce review actions', () => {
+  const missing = inspect(page());
+  assert.equal(check(missing, 'page-title').status, 'not-observed');
+  assert.equal(check(missing, 'meta-description').status, 'not-observed');
+  const duplicate = inspect(page('<title>Example</title><title>Other</title><meta name="description" content="One"><meta name="description" content="Two">'));
+  assert.equal(check(duplicate, 'page-title').status, 'review');
+  assert.equal(check(duplicate, 'meta-description').status, 'review');
+});
+test('root title should visibly carry the declared site name', () => {
+  const report = inspect(page('<title>Generic decision tools</title><meta name="description" content="Useful tools."><meta property="og:site_name" content="Example">' + script(website)));
+  assert.equal(check(report, 'title-name-consistency').status, 'review');
+});
+test('missing og site name is a hostname identity review, not a ranking claim', () => {
+  const report = inspect(page('<title>Example</title><meta name="description" content="Useful tools.">' + script(website)));
+  assert.equal(check(report, 'name-consistency').status, 'review');
 });
 test('subdomain roots have their own inspectable scope', () => {
   const url = 'https://news.example.com/';
@@ -154,6 +182,7 @@ test('unclosed raw-text sequences stay bounded and cannot expose fake tags', () 
   assert.equal(report.observations.faviconDeclarations.length, 0);
   assert.equal(check(report, 'site-name').status, 'not-assessed');
   assert.equal(check(report, 'favicon-link').status, 'not-assessed');
+  assert.equal(check(report, 'page-title').status, 'not-assessed');
 });
 
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-appearance-'));
@@ -176,7 +205,7 @@ try {
   test('CLI writes a new report without overwriting input or existing output', () => {
     const output = path.join(directory, 'report.json');
     assert.equal(run(input, `--url=${rootUrl}`, `--output=${output}`).status, 0);
-    assert.equal(JSON.parse(fs.readFileSync(output, 'utf8')).searchAppearanceVersion, '0.1');
+    assert.equal(JSON.parse(fs.readFileSync(output, 'utf8')).searchAppearanceVersion, '0.2');
     assert.equal(run(input, `--url=${rootUrl}`, `--output=${output}`).status, 2);
     const before = fs.readFileSync(input);
     assert.equal(run(input, `--url=${rootUrl}`, `--output=${input}`).status, 2);
