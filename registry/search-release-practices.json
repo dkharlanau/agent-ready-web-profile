@@ -1,0 +1,196 @@
+{
+  "version": "1.0",
+  "reviewedAt": "2026-09-10",
+  "title": "ARWP Search Release Practices",
+  "purpose": "Prevent technically healthy sites from shipping with weak or contradictory search-result identity, crawl discovery, canonical-host, snippet, favicon, localization, or deployment signals. This is a release discipline, not a ranking score.",
+  "methodology": {
+    "primarySourcesPreferred": true,
+    "noRankingPromise": true,
+    "noCompositeScore": true,
+    "finalArtifactFirst": true,
+    "productionVerificationSeparate": true,
+    "ownerSearchObservationSeparate": true,
+    "githubPagesIsHostingNotIdentity": true
+  },
+  "sources": {
+    "googleSiteNames": "https://developers.google.com/search/docs/appearance/site-names",
+    "googleTitleLinks": "https://developers.google.com/search/docs/appearance/title-link",
+    "googleSnippets": "https://developers.google.com/search/docs/appearance/snippet",
+    "googleFavicons": "https://developers.google.com/search/docs/appearance/favicon-in-search",
+    "googleCanonical": "https://developers.google.com/search/docs/crawling-indexing/canonicalization",
+    "googleSiteMoves": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+    "googleSitemaps": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+    "googleLinks": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+    "googleHreflang": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+    "googleRobots": "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
+    "githubPagesDomains": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages",
+    "githubPagesHttps": "https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https",
+    "githubPagesTroubleshooting": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages",
+    "bingGuidelines": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a",
+    "indexNow": "https://www.indexnow.org/documentation"
+  },
+  "practices": [
+    {
+      "id": "SR-01-hostname-scope",
+      "priority": "P0",
+      "appliesTo": ["all"],
+      "question": "Which hostname is the actual public site, and is this page the hostname root?",
+      "practice": "Resolve the canonical production hostname before editing search identity. Google site names and Search favicons are hostname-scoped, not project-subdirectory-scoped.",
+      "verify": ["canonical production hostname recorded", "root versus subdirectory classified", "no project path attempts to override parent-host site identity"],
+      "sources": ["googleSiteNames", "googleFavicons"]
+    },
+    {
+      "id": "SR-02-home-identity-chain",
+      "priority": "P0",
+      "appliesTo": ["hostname-root"],
+      "question": "If a crawler only saw the homepage, would every strong identity source name the same site?",
+      "practice": "Keep visible brand/home link, WebSite.name, WebSite.url, genuine alternateName, og:site_name, canonical hostname, application name and homepage title coherent. Prefer one existing WebSite node over competing identity blocks.",
+      "verify": ["one coherent WebSite identity", "WebSite.url is canonical root", "og:site_name matches a genuine site name", "visible brand is consistent"],
+      "sources": ["googleSiteNames"]
+    },
+    {
+      "id": "SR-03-title-source-convergence",
+      "priority": "P0",
+      "appliesTo": ["indexable-html"],
+      "question": "Could Google reasonably infer a different title from our other title sources?",
+      "practice": "Use one descriptive concise title and a distinctive primary visual heading. Reconcile title, H1/prominent heading, og:title, site name, page text and important anchor text so they do not tell conflicting stories. Do not force exact equality when page intent legitimately differs.",
+      "verify": ["one non-empty title", "title describes the actual page", "primary heading is distinctive", "no contradictory og:title", "no generic Home/Profile titles or boilerplate-heavy templates"],
+      "sources": ["googleTitleLinks"]
+    },
+    {
+      "id": "SR-04-snippet-source-hygiene",
+      "priority": "P0",
+      "appliesTo": ["indexable-html"],
+      "question": "What text near the top would become the snippet if Google ignored our meta description?",
+      "practice": "Write a page-specific meta description and make the visible opening copy independently useful. Keep consent banners, utility notices and repeated chrome from becoming the strongest snippet candidate; use data-nosnippet selectively for non-essential UI when appropriate. Never hide the substantive answer behind data-nosnippet.",
+      "verify": ["one useful meta description", "visible opening states page purpose", "no nosnippet or max-snippet:0 when snippets are desired", "utility text does not dominate the leading extract", "data-nosnippet excludes only non-essential text"],
+      "sources": ["googleSnippets", "bingGuidelines"]
+    },
+    {
+      "id": "SR-05-favicon-delivery",
+      "priority": "P0",
+      "appliesTo": ["hostname-root"],
+      "question": "Does the icon still look like our brand at search-result size, and can the crawler fetch it?",
+      "practice": "Use a stable, representative square favicon with a supported raster or ICO option. Keep Googlebot access to the homepage and Googlebot-Image access to the favicon. Prefer a simple mark that remains recognizable at 16–32 px; verify actual bytes and dimensions rather than trusting HTML declarations.",
+      "verify": ["stable favicon URL", "square actual asset", "at least 8x8 and preferably larger than 48x48", "supported raster/ICO option", "200 response", "crawler access", "manual small-size visual check"],
+      "sources": ["googleFavicons"]
+    },
+    {
+      "id": "SR-06-canonical-host-contract",
+      "priority": "P0",
+      "appliesTo": ["all"],
+      "question": "Do canonical, redirects, sitemap, structured data, social URLs and internal links all vote for the same public hostname?",
+      "practice": "Choose one canonical host and keep canonical links, WebSite/WebPage URLs, og:url, sitemap URLs and internal absolute links aligned. Treat HTTP/HTTPS, www/non-www, default github.io and custom-domain variants as duplicate-host candidates that need a coherent redirect/canonical policy.",
+      "verify": ["one valid head canonical per HTML page", "canonical matches intended final URL", "no old-host URLs in current sitemap", "structured/social URLs use canonical host", "internal links prefer final canonical URLs"],
+      "sources": ["googleCanonical", "googleSiteMoves"]
+    },
+    {
+      "id": "SR-07-duplicate-home-variants",
+      "priority": "P0",
+      "appliesTo": ["hostname-root"],
+      "question": "Can the same homepage be reached under multiple protocol or host variants?",
+      "practice": "Inspect HTTP/HTTPS, www/non-www and legacy/default-host homepage variants. Redirect duplicates to the chosen host where the platform supports it and keep site-name identity consistent on accessible duplicates until consolidation is complete.",
+      "verify": ["duplicate variants inventoried", "redirect targets are final canonical root", "no redirect loops", "site identity does not conflict across reachable duplicates"],
+      "sources": ["googleSiteNames", "googleCanonical", "googleSiteMoves"]
+    },
+    {
+      "id": "SR-08-github-pages-domain-security",
+      "priority": "P0",
+      "appliesTo": ["github-pages-custom-domain"],
+      "question": "Is GitHub Pages serving the exact domain contract we think it is?",
+      "practice": "For GitHub Pages custom domains, verify the domain before use, configure supported DNS, enable HTTPS enforcement, avoid wildcard DNS, and configure the apex/www pair so GitHub can redirect the non-canonical variant to the chosen domain.",
+      "verify": ["custom domain verified", "DNS points to documented GitHub Pages targets", "HTTPS works and is enforced", "apex/www redirect is intentional", "no wildcard DNS takeover exposure"],
+      "sources": ["githubPagesDomains", "githubPagesHttps", "githubPagesTroubleshooting"]
+    },
+    {
+      "id": "SR-09-sitemap-canonical-inventory",
+      "priority": "P0",
+      "appliesTo": ["multi-page"],
+      "question": "Does the sitemap describe the site we want indexed, or the site our build happened to emit?",
+      "practice": "Publish a root sitemap containing current canonical indexable URLs only. Remove deleted, redirected, noindex and old-host URLs. Use lastmod only when it reflects meaningful page changes rather than build time.",
+      "verify": ["sitemap fetches successfully", "canonical root is represented when indexable", "URLs use canonical host", "no redirected/noindex/deleted URLs", "lastmod provenance is meaningful"],
+      "sources": ["googleSitemaps", "bingGuidelines"]
+    },
+    {
+      "id": "SR-10-robots-discovery-contract",
+      "priority": "P0",
+      "appliesTo": ["all"],
+      "question": "Can crawlers reach the pages and assets we are asking them to understand?",
+      "practice": "Keep intended public roots and priority paths crawlable, distinguish crawl policy from noindex, and expose the canonical sitemap through an absolute Sitemap directive in robots.txt. Evaluate Googlebot, Googlebot-Image, Bingbot and OAI-SearchBot according to publisher policy.",
+      "verify": ["robots fetch state known", "priority paths not accidentally blocked", "favicon asset not blocked for Googlebot-Image", "absolute canonical sitemap reference", "OAI-SearchBot policy reviewed separately from GPTBot"],
+      "sources": ["googleRobots", "googleFavicons", "googleSitemaps", "bingGuidelines"]
+    },
+    {
+      "id": "SR-11-internal-discovery",
+      "priority": "P1",
+      "appliesTo": ["multi-page"],
+      "question": "Can a crawler and a person reach every important page through meaningful links without knowing the URL?",
+      "practice": "Use crawlable a[href] links and descriptive anchor text. Ensure important canonical pages have at least one useful internal discovery path, preferably contextual or hub-based rather than footer-only link inflation.",
+      "verify": ["important pages have inbound internal paths", "anchors are crawlable", "anchor text is descriptive", "no high-value orphan pages", "redirecting aliases are not the dominant link targets"],
+      "sources": ["googleLinks", "bingGuidelines"]
+    },
+    {
+      "id": "SR-12-localization-clusters",
+      "priority": "P1",
+      "appliesTo": ["localized"],
+      "question": "Does every localized page point to itself and the same alternate set, on the canonical host?",
+      "practice": "Use fully qualified reciprocal hreflang links, including self references. Add x-default where it represents the appropriate fallback. Keep canonical and hreflang roles distinct and do not combine unrelated alternate semantics in one link tag.",
+      "verify": ["self reference", "reciprocity", "fully qualified URLs", "canonical host consistency", "x-default reviewed", "one hreflang relation per link tag"],
+      "sources": ["googleHreflang"]
+    },
+    {
+      "id": "SR-13-root-gateway-substance",
+      "priority": "P1",
+      "appliesTo": ["language-gateway", "redirect-like-root"],
+      "question": "Is the hostname root a real search identity surface or just a thin launcher?",
+      "practice": "When the root is a language selector or gateway, keep enough stable brand/purpose text and the canonical WebSite identity at the hostname root. If a locale page is the true destination, use an explicit, crawlable routing strategy without creating a contradictory root identity or a thin indexable doorway.",
+      "verify": ["root has clear brand and purpose", "routing is crawlable", "root indexability is intentional", "localized pages remain independently useful", "no doorway-style near-duplicates"],
+      "sources": ["googleSiteNames", "googleTitleLinks", "googleHreflang"]
+    },
+    {
+      "id": "SR-14-final-artifact-gate",
+      "priority": "P0",
+      "appliesTo": ["all"],
+      "question": "Are we checking the bytes that will actually ship, after every generator and post-processor?",
+      "practice": "Run search identity, canonical, sitemap, robots and localization checks against the final generated artifact after all render/post-processing steps. Then verify the deployed production revision separately. Source templates or a green earlier stage are not release evidence.",
+      "verify": ["final built root inspected", "generated metadata inspected after last post-processor", "production HTML matches intended revision", "deployment did not restore stale metadata"],
+      "sources": ["googleSiteNames", "googleTitleLinks", "googleSnippets"]
+    },
+    {
+      "id": "SR-15-change-notification",
+      "priority": "P2",
+      "appliesTo": ["frequently-updated", "large-site"],
+      "question": "After a real change, how do engines learn about the changed canonical URLs?",
+      "practice": "Keep Search Console/Bing sitemap submissions healthy and use IndexNow for participating engines when appropriate. Submit only real added, updated or deleted canonical URLs; notification is not indexing proof.",
+      "verify": ["sitemap processing status reviewed", "IndexNow key/host scope valid when used", "only changed canonical URLs submitted", "receipts retained where available"],
+      "sources": ["googleSitemaps", "bingGuidelines", "indexNow"]
+    },
+    {
+      "id": "SR-16-migration-continuity",
+      "priority": "P0",
+      "appliesTo": ["site-move", "host-change", "url-change"],
+      "question": "What old URLs or hostnames still carry links, crawl history or user bookmarks?",
+      "practice": "For moves, map old URLs to corresponding new canonical URLs, use permanent server redirects where available, update canonicals/hreflang/internal links/sitemaps, and keep redirects for a long transition. A canonical tag is not a substitute for a proper move redirect.",
+      "verify": ["old-to-new map exists", "permanent redirects work where platform permits", "new pages self-canonicalize", "internal/profile links updated", "new sitemap submitted"],
+      "sources": ["googleSiteMoves", "bingGuidelines"]
+    },
+    {
+      "id": "SR-17-portfolio-identity-isolation",
+      "priority": "P1",
+      "appliesTo": ["portfolio"],
+      "question": "Are several sites accidentally presenting the same publisher boilerplate instead of distinct product identities?",
+      "practice": "Reuse the release checklist, not the brand copy. Each hostname needs its own real site name, homepage promise, title, description, favicon and semantic identity. Avoid copy-pasted descriptions and generic hosting identity across a portfolio.",
+      "verify": ["site names are distinct where products are distinct", "homepage descriptions are product-specific", "favicons are intentionally selected", "no cross-host canonical or structured-data leakage"],
+      "sources": ["googleSiteNames", "googleTitleLinks", "googleSnippets"]
+    },
+    {
+      "id": "SR-18-owner-serp-observation",
+      "priority": "P1",
+      "appliesTo": ["all"],
+      "question": "What did the search engine actually select after recrawl?",
+      "practice": "After deployment, inspect Search Console URL Inspection and real Search appearance for site name, title, snippet, favicon and selected canonical. Record the observation date and query/context. Repository state cannot prove the displayed result.",
+      "verify": ["Google-selected canonical reviewed", "homepage recrawl requested when justified", "site name/title/snippet/favicon observed after processing window", "Bing URL inspection or index state reviewed when relevant", "differences become new evidence, not assumptions"],
+      "sources": ["googleSiteNames", "googleTitleLinks", "googleSnippets", "bingGuidelines"]
+    }
+  ]
+}
