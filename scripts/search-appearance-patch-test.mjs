@@ -65,14 +65,16 @@ function graph({ adapter = 'static-html', origin = 'https://example.com', basePa
 
 const page = head => `<!doctype html><html><head>${head || ''}</head><body><h1>Example</h1></body></html>`;
 const missing = inspectSearchAppearance({ html: page(''), url: 'https://example.com/' });
+assert.ok(missing.actions.some(action => action.id === 'growth:appearance:page-title'));
+assert.ok(missing.actions.some(action => action.id === 'growth:appearance:meta-description'));
 assert.ok(missing.actions.some(action => action.id === 'growth:appearance:site-name'));
 assert.ok(missing.actions.some(action => action.id === 'growth:appearance:favicon-link'));
 
 {
   const manifest = buildSearchAppearancePatchManifest(missing, graph(), { generatedAt: '2026-09-09T18:00:00Z' });
   assert.equal(validateSearchAppearancePatchManifest(manifest).valid, true);
-  assert.equal(manifest.summary.total, 2);
-  assert.equal(manifest.summary.mappedReview, 2);
+  assert.equal(manifest.summary.total, 4);
+  assert.equal(manifest.summary.mappedReview, 4);
   assert.equal(manifest.summary.manualReview, 0);
   for (const operation of manifest.operations) {
     assert.equal(operation.status, 'mapped-review');
@@ -88,7 +90,7 @@ assert.ok(missing.actions.some(action => action.id === 'growth:appearance:favico
 {
   const manifest = buildSearchAppearancePatchManifest(missing, graph({ adapter: 'nextjs' }), { generatedAt: '2026-09-09T18:00:00Z' });
   assert.equal(manifest.summary.mappedReview, 0);
-  assert.equal(manifest.summary.manualReview, 2);
+  assert.equal(manifest.summary.manualReview, 4);
   for (const operation of manifest.operations) {
     assert.equal(operation.target.path, null);
     assert.deepEqual(operation.target.buildPath, ['src/app/page.tsx', 'src/app/layout.tsx']);
@@ -122,7 +124,7 @@ assert.ok(missing.actions.some(action => action.id === 'growth:appearance:favico
 }
 
 {
-  const cleanHtml = page('<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Example","url":"https://example.com/"}</script><link rel="icon" href="/icon.png" sizes="64x64">');
+  const cleanHtml = page('<title>Example: useful reference</title><meta name="description" content="A useful Example reference."><meta property="og:site_name" content="Example"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Example","url":"https://example.com/"}</script><link rel="icon" href="/icon.png" sizes="64x64">');
   const clean = inspectSearchAppearance({ html: cleanHtml, url: 'https://example.com/' });
   assert.equal(clean.actions.length, 0);
   const manifest = buildSearchAppearancePatchManifest(clean, graph(), { generatedAt: '2026-09-09T18:00:00Z' });
@@ -147,7 +149,7 @@ try {
   const built = run('build', audit, state, `--output=${out}`);
   assert.equal(built.status, 0, built.stderr);
   const manifest = JSON.parse(fs.readFileSync(out, 'utf8'));
-  assert.equal(manifest.summary.mappedReview, 2);
+  assert.equal(manifest.summary.mappedReview, 4);
   assert.equal(run('validate', out).status, 0);
   assert.equal(run('build', audit, state, `--output=${out}`).status, 2, 'existing output must never be overwritten implicitly');
   const text = run('build', audit, state, '--text');
