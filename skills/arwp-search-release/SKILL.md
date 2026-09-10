@@ -18,7 +18,7 @@ A green crawl/indexability report is not enough. A site may still ship with a ge
 
 Treat the Search result as a public product surface.
 
-## Required interview
+## Workflow — required interview
 
 Resolve these in order:
 
