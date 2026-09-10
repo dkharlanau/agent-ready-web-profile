@@ -1,8 +1,8 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "reviewedAt": "2026-09-10",
   "title": "ARWP Search Release Practices",
-  "purpose": "Prevent technically healthy sites from shipping with weak or contradictory search-result identity, crawl discovery, canonical-host, snippet, favicon, localization, or deployment signals. This is a release discipline, not a ranking score.",
+  "purpose": "Prevent technically healthy sites from shipping with weak or contradictory search-result identity, crawl discovery, canonical-host, snippet, favicon, localization, freshness, structured-data, error-route, machine-readable, or deployment signals. This is a release discipline, not a ranking score.",
   "methodology": {
     "primarySourcesPreferred": true,
     "noRankingPromise": true,
@@ -10,7 +10,9 @@
     "finalArtifactFirst": true,
     "productionVerificationSeparate": true,
     "ownerSearchObservationSeparate": true,
-    "githubPagesIsHostingNotIdentity": true
+    "githubPagesIsHostingNotIdentity": true,
+    "deploymentSuccessRequired": true,
+    "negativeTestsRequired": true
   },
   "sources": {
     "googleSiteNames": "https://developers.google.com/search/docs/appearance/site-names",
@@ -23,9 +25,13 @@
     "googleLinks": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
     "googleHreflang": "https://developers.google.com/search/docs/specialty/international/localized-versions",
     "googleRobots": "https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec",
+    "googleRobotsMeta": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+    "googleStructuredData": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
     "githubPagesDomains": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages",
     "githubPagesHttps": "https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https",
     "githubPagesTroubleshooting": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages",
+    "githubPagesPublishing": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+    "githubPages404": "https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site",
     "bingGuidelines": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a",
     "indexNow": "https://www.indexnow.org/documentation"
   },
@@ -152,8 +158,8 @@
       "priority": "P0",
       "appliesTo": ["all"],
       "question": "Are we checking the bytes that will actually ship, after every generator and post-processor?",
-      "practice": "Run search identity, canonical, sitemap, robots and localization checks against the final generated artifact after all render/post-processing steps. Then verify the deployed production revision separately. Source templates or a green earlier stage are not release evidence.",
-      "verify": ["final built root inspected", "generated metadata inspected after last post-processor", "production HTML matches intended revision", "deployment did not restore stale metadata"],
+      "practice": "Run search identity, canonical, sitemap, robots and localization checks against the final generated artifact after all render and post-processing steps. A source template or a green earlier stage is not release evidence.",
+      "verify": ["final built root inspected", "generated metadata inspected after last post-processor", "representative leaf pages inspected", "no later local mutation can restore stale metadata"],
       "sources": ["googleSiteNames", "googleTitleLinks", "googleSnippets"]
     },
     {
@@ -191,6 +197,105 @@
       "practice": "After deployment, inspect Search Console URL Inspection and real Search appearance for site name, title, snippet, favicon and selected canonical. Record the observation date and query/context. Repository state cannot prove the displayed result.",
       "verify": ["Google-selected canonical reviewed", "homepage recrawl requested when justified", "site name/title/snippet/favicon observed after processing window", "Bing URL inspection or index state reviewed when relevant", "differences become new evidence, not assumptions"],
       "sources": ["googleSiteNames", "googleTitleLinks", "googleSnippets", "bingGuidelines"]
+    },
+    {
+      "id": "SR-19-indexability-status-contract",
+      "priority": "P0",
+      "appliesTo": ["indexable-html"],
+      "question": "Is every URL we want indexed actually an indexable successful document rather than a blocked, error-like, or contradictory page?",
+      "practice": "Treat HTTP success, crawl allowance, page-level robots directives and canonical target validity as one contract. Intended index pages must not carry noindex, canonicalize to errors, or depend on a soft-error experience that looks successful to the build but not to crawlers.",
+      "verify": ["intended index pages return successful responses", "no accidental noindex or none directive", "canonical target is fetchable and indexable", "robots policy does not block required fetches", "error-like pages are excluded from sitemap"],
+      "sources": ["googleRobotsMeta", "googleCanonical", "googleSitemaps"]
+    },
+    {
+      "id": "SR-20-github-pages-publishing-source",
+      "priority": "P0",
+      "appliesTo": ["github-pages"],
+      "question": "Are we reasoning from the GitHub Pages publishing mode that is actually active, rather than from a stale branch/Jekyll/CNAME assumption?",
+      "practice": "Classify GitHub Pages publication as branch-based or custom GitHub Actions before changing domain files or build logic. For custom Actions, the uploaded artifact is the release source and must contain its entry file at the artifact root; an existing CNAME file is ignored and is not evidence of domain configuration.",
+      "verify": ["publishing source classified", "Actions artifact path and root index verified when applicable", "CNAME meaning matches publishing mode", "repository Settings and workflow do not imply different hosts"],
+      "sources": ["githubPagesPublishing", "githubPagesTroubleshooting"]
+    },
+    {
+      "id": "SR-21-site-identity-contract",
+      "priority": "P0",
+      "appliesTo": ["generated-site"],
+      "question": "How many independent hard-coded copies of the site name, homepage title, description, canonical root and favicon can drift apart?",
+      "practice": "Keep intentional site-level identity values in one explicit contract or configuration surface and make generators, finalizers and tests consume or validate that contract. Avoid independent stale literals in separate scripts that can make a correct metadata change fail deployment or silently regress later.",
+      "verify": ["one authoritative identity contract exists", "homepage finalizer uses the contract", "release test validates final output against the contract", "no contradictory legacy literals remain in release-critical checks"],
+      "sources": ["googleSiteNames", "googleTitleLinks", "googleFavicons"]
+    },
+    {
+      "id": "SR-22-post-mutation-release-gate",
+      "priority": "P0",
+      "appliesTo": ["custom-build", "github-actions"],
+      "question": "Does anything mutate HTML, metadata, sitemap, robots, feeds, redirects or assets after the main test suite says green?",
+      "practice": "Place a small deterministic public-surface gate after the last deployment-time mutator and before artifact upload. Recheck homepage identity plus representative leaf metadata, canonical host, robots, sitemap and machine-readable surfaces there; do not trust an earlier build check if later workflow steps can rewrite output.",
+      "verify": ["all post-build mutators inventoried", "final gate runs after the last mutator", "gate runs before artifact upload", "final gate fails closed on identity or canonical regressions"],
+      "sources": ["githubPagesPublishing", "googleSiteNames", "googleCanonical", "googleSitemaps"]
+    },
+    {
+      "id": "SR-23-freshness-provenance",
+      "priority": "P0",
+      "appliesTo": ["sitemap-with-lastmod", "feeds", "dated-structured-data"],
+      "question": "Can we prove each freshness timestamp came from a meaningful content change rather than from today's build?",
+      "practice": "Use lastmod and other freshness fields only when their provenance maps to a significant page or data update. Do not stamp every generated URL with the build date. Omit uncertain timestamps instead of manufacturing freshness, and retain content-derived dates for genuinely maintained resources.",
+      "verify": ["no blanket build-date lastmod", "dated resources map to maintained content dates", "undated aggregations may omit lastmod", "feed and structured-data dates do not contradict page provenance"],
+      "sources": ["googleSitemaps"]
+    },
+    {
+      "id": "SR-24-error-route-integrity",
+      "priority": "P1",
+      "appliesTo": ["multi-page", "github-pages"],
+      "question": "What does a user and crawler receive for a URL that does not exist?",
+      "practice": "Provide a useful custom 404 experience where the host supports it, keep it outside the sitemap, and prevent error pages from presenting themselves as canonical indexable content. On GitHub Pages, ship 404.html in the deployed publishing artifact when a custom error experience is desired.",
+      "verify": ["custom 404 exists when intended", "error route is not in sitemap", "404 content is clearly an error state", "404 page is not an indexable substitute for missing content"],
+      "sources": ["githubPages404", "googleSitemaps", "googleRobotsMeta"]
+    },
+    {
+      "id": "SR-25-structured-data-coherence",
+      "priority": "P1",
+      "appliesTo": ["structured-data"],
+      "question": "Does structured data describe the visible canonical page without creating a second conflicting identity graph?",
+      "practice": "Keep JSON-LD syntactically valid and semantically aligned with visible content, canonical URLs and the intended site identity. Prefer one homepage WebSite identity node, stable identifiers and page-appropriate types; do not add markup merely to chase rankings or rich results that the page does not support.",
+      "verify": ["all JSON-LD parses", "homepage avoids competing WebSite identities", "schema URLs use canonical host", "page type matches visible content", "stable ids and publisher relationships are coherent"],
+      "sources": ["googleStructuredData", "googleSiteNames", "googleCanonical"]
+    },
+    {
+      "id": "SR-26-machine-readable-consistency",
+      "priority": "P1",
+      "appliesTo": ["machine-readable-surfaces"],
+      "question": "Do feeds, llms files, datasets, schemas and agent discovery surfaces agree with the canonical human site, or have they become a second stale website?",
+      "practice": "Treat machine-readable discovery files as complements to canonical HTML, not as substitutes or ranking promises. Keep product identity, canonical host, public URL inventory and provenance consistent across feeds, llms files, datasets, schemas and agent manifests, and test the final deployed copies after generators run.",
+      "verify": ["machine-readable URLs use canonical host", "site/product name does not conflict with homepage", "feeds expose current canonical resources", "stale or private routes are not advertised", "claims about AI discovery remain evidence-bounded"],
+      "sources": ["googleSitemaps", "googleCanonical", "bingGuidelines"]
+    },
+    {
+      "id": "SR-27-share-preview-contract",
+      "priority": "P2",
+      "appliesTo": ["shareable-html"],
+      "question": "When a canonical page is shared, do its Open Graph and Twitter metadata identify the same page with an intentional image?",
+      "practice": "Keep og:title, og:description and og:url aligned with page intent and canonical URL, and provide an intentional share image with matching Twitter metadata when social previews matter. Treat this as distribution and product-quality work, not as a direct ranking guarantee.",
+      "verify": ["og:url matches canonical", "share title/description are coherent", "og:image resolves", "twitter card image is explicitly available or intentionally omitted", "preview copy does not leak another site's identity"],
+      "sources": ["googleTitleLinks", "googleCanonical"]
+    },
+    {
+      "id": "SR-28-deployment-success-proof",
+      "priority": "P0",
+      "appliesTo": ["deployed-site"],
+      "question": "Did the workflow that actually publishes the site succeed for the exact revision we are claiming is live?",
+      "practice": "Treat deployment success for the intended commit as a release requirement. A green auxiliary quality workflow, successful source commit, or locally correct dist does not prove publication. Verify the actual Pages deployment job, deployed revision and production bytes before declaring a fix live.",
+      "verify": ["publishing workflow succeeded", "deployed revision matches intended commit or contains it", "artifact upload and deploy job both completed", "production bytes reflect the intended identity", "failed/cancelled deploys are surfaced as blocking evidence"],
+      "sources": ["githubPagesPublishing"]
+    },
+    {
+      "id": "SR-29-negative-release-tests",
+      "priority": "P0",
+      "appliesTo": ["all"],
+      "question": "Which bad states would still pass our positive checks?",
+      "practice": "Add explicit negative release assertions for the failure modes that matter: stale site-name literals, duplicate canonicals, wrong host, accidental noindex, sitemap aliases, fabricated freshness, missing final artifact entry, and conflicting final metadata. Positive presence checks alone are insufficient for generated sites.",
+      "verify": ["known stale identity literals rejected", "wrong-host canonicals rejected", "noindex on intended pages rejected", "duplicate sitemap/canonical states rejected", "fabricated lastmod rejected where provenance is unavailable", "final entry file presence checked"],
+      "sources": ["googleSiteNames", "googleCanonical", "googleRobotsMeta", "googleSitemaps", "githubPagesPublishing"]
     }
   ]
 }
