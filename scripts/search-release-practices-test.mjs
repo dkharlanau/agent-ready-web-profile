@@ -61,7 +61,7 @@ for (const practice of registry.practices) {
 }
 
 for (const phrase of [
-  'Search result as a public product surface',
+  'user-facing result is itself a product surface',
   'GitHub Pages-specific checks',
   'Snippet hygiene rule',
   'Favicon rule',
