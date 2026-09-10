@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "reviewedAt": "2026-09-10",
   "title": "ARWP Search Release Practices",
   "purpose": "Prevent technically healthy sites from shipping with weak or contradictory search-result identity, crawl discovery, canonical-host, snippet, favicon, localization, freshness, structured-data, error-route, machine-readable, or deployment signals. This is a release discipline, not a ranking score.",
@@ -12,7 +12,8 @@
     "ownerSearchObservationSeparate": true,
     "githubPagesIsHostingNotIdentity": true,
     "deploymentSuccessRequired": true,
-    "negativeTestsRequired": true
+    "negativeTestsRequired": true,
+    "productionDeploysSerialized": true
   },
   "sources": {
     "googleSiteNames": "https://developers.google.com/search/docs/appearance/site-names",
@@ -32,6 +33,7 @@
     "githubPagesTroubleshooting": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages",
     "githubPagesPublishing": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
     "githubPages404": "https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site",
+    "githubActionsConcurrency": "https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency",
     "bingGuidelines": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a",
     "indexNow": "https://www.indexnow.org/documentation"
   },
@@ -296,6 +298,15 @@
       "practice": "Add explicit negative release assertions for the failure modes that matter: stale site-name literals, duplicate canonicals, wrong host, accidental noindex, sitemap aliases, fabricated freshness, missing final artifact entry, and conflicting final metadata. Positive presence checks alone are insufficient for generated sites.",
       "verify": ["known stale identity literals rejected", "wrong-host canonicals rejected", "noindex on intended pages rejected", "duplicate sitemap/canonical states rejected", "fabricated lastmod rejected where provenance is unavailable", "final entry file presence checked"],
       "sources": ["googleSiteNames", "googleCanonical", "googleRobotsMeta", "googleSitemaps", "githubPagesPublishing"]
+    },
+    {
+      "id": "SR-30-production-deployment-serialization",
+      "priority": "P0",
+      "appliesTo": ["github-actions", "deployed-site"],
+      "question": "Can two different production-capable workflow triggers or workflows publish overlapping revisions to the same Pages environment?",
+      "practice": "Serialize all production-capable publication paths for the same public environment with a shared concurrency contract, or otherwise guarantee deterministic deployment ordering. Do not let push, workflow_run, manual, scheduled, or sibling deployment workflows use different concurrency groups when they can all publish to the same target; an older run finishing last can restore stale Search metadata even when every individual run is green.",
+      "verify": ["all production-capable triggers and sibling workflows inventoried", "same production environment shares one serialization policy", "pull-request validation cannot deploy", "older in-progress production publication is canceled or queued intentionally", "latest successful deployment revision is verified after races/cancellation"],
+      "sources": ["githubActionsConcurrency", "githubPagesPublishing"]
     }
   ]
 }
