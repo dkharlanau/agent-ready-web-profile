@@ -1,0 +1,100 @@
+# Technical SEO Critic Review — 2026-09-11
+
+This review deliberately looked for technical Search gaps that could remain after ARWP's existing Search Release, Technical Integrity, Search Surface, structured-data, sitemap, robots, canonical, deployment and measurement checks already pass.
+
+It is a gap review, not a generic SEO checklist and not a ranking score.
+
+## Scope
+
+Reviewed the current ARWP technical/Search registries and runtime checks, the owner-controlled portfolio registry, representative public fleet surfaces, and current Google Search/Crawling documentation.
+
+Primary fleet scope from `registry/portfolio-sites.json`:
+
+- dkharlanau.github.io
+- ptichi.com
+- metalhatscats.com
+- metkagram.github.io
+- brali-lifeos.github.io
+- cognitive-biases.github.io
+- cbt-cards.github.io
+
+Portfolio rollout guardrails remain active: audit before mutation and no production mutation merely because a site is listed in the fleet.
+
+## Findings implemented in ARWP
+
+### P0 — effective head parsing was not explicitly guarded
+
+A page can contain canonical, robots, favicon, hreflang and other metadata yet still be effectively broken for Google if an invalid element such as `img` or `iframe` occurs earlier inside `head`. Google's documentation states that it treats such an invalid element as the end of the head and ignores later elements.
+
+Action: added `TSC-01-head-metadata-parser-integrity` to `registry/technical-seo-critic-practices.json` and made final source-order inspection part of the critic skill.
+
+### P1 — field Core Web Vitals were not carried into Search Release consistently
+
+ARWP already knows Core Web Vitals through Site Focus, but an ordinary technical/Search release could still finish without explicitly carrying real-user performance evidence into the Search review.
+
+Action: added `TSC-02-search-field-performance`. Field evidence remains owner/provider data; missing data is `unknown`, not an automatic failure or pass. Lighthouse/lab results are diagnostic and are not silently relabelled as field evidence.
+
+### P1 — pagination needed an explicit canonical-independence challenge
+
+Generic canonical validation does not catch the common state where page 2+ has a syntactically valid canonical pointing to page 1. Google recommends persistent crawlable pagination URLs and each useful page should have its own canonical URL.
+
+Action: added `TSC-03-pagination-canonical-independence`.
+
+### P1 — bounded samples could miss crawl-state explosions
+
+Healthy sampled pages do not prove that filter, sort, tracking, search or faceted URL combinations cannot create a very large low-value crawl space.
+
+Action: added `TSC-04-crawl-state-space-control`, including parameter-family inventory, equivalent-state control, real error handling for impossible states, and curated sitemap publication.
+
+### P2 — HTTP conditional revalidation was absent from the technical critic layer
+
+For large or frequently updated sites, truthful `ETag` / `Last-Modified` behavior can help crawlers revalidate unchanged resources efficiently. This is crawl-efficiency work, not a direct ranking promise.
+
+Action: added `TSC-05-http-revalidation-efficiency`.
+
+### P2 — link relation semantics were only partially covered
+
+Existing ARWP checks inspect crawlable `a[href]` discovery paths, but did not make accidental internal `nofollow` or outbound sponsored/UGC relationship semantics an explicit critic question.
+
+Action: added `TSC-06-link-follow-and-relationship-integrity`.
+
+### P2 — obsolete and falsely-labelled SEO work needed an explicit rejection layer
+
+ARWP Search Surface generated a missing `html[lang]` action in the Search presentation lane. Current Google documentation says Google Search does not use the `lang` attribute to determine page language. The attribute remains useful for accessibility and document semantics, but it should not be sold as a Google Search language signal.
+
+Action: removed the `surface:lang` SEO action from `lib/search-surface-core.mjs` and added `TSC-07-obsolete-and-false-seo-signals`. The critic also rejects `meta keywords`, `rel=next/prev` and obsolete sitelinks-search-box controls as current Google SEO tasks.
+
+### P0 — MetalHatsCats fleet target pointed at the wrong public surface
+
+The portfolio registry used `https://github.com/metalhatscats/metalhatscats` as the canonical URL while the real public site is `https://metalhatscats.com/`. That could make a fleet audit inspect the repository page instead of the website.
+
+Action: corrected `registry/portfolio-sites.json` to `https://metalhatscats.com/`.
+
+## Things deliberately not added as new gaps
+
+The critic review also checked several areas that are already adequately represented in ARWP and should not be duplicated:
+
+- `X-Robots-Tag` is already observed by the public-fetch / technical-integrity path.
+- Googlebot's current supported-file fetch boundary is already represented as a 2 MB retrieval-footprint check; the old 15 MB figure is obsolete.
+- redirect migration directness already has a dedicated URL migration integrity path, while internal discovery detects links aimed at redirects/canonical aliases.
+- Google Preferred Sources support is already present in the site audit/recommendation logic.
+- sitemap lastmod provenance, soft 404 suspicion, canonical collisions, hreflang clusters, near-duplicate priority pages and final deployment proof are already explicit.
+
+## Fleet observations from this round
+
+The current public surfaces that were observable in this review show substantive crawlable content rather than obvious empty JS shells. Search results expose current pages for the SAP knowledge site, MetalHatsCats, Metkagram and CBT Cards, including deeper content surfaces. This does not replace Search Console or a browser/header crawl.
+
+No repository evidence was found in the sampled fleet for current use of `meta keywords`, `rel=next/prev` or `nositelinkssearchbox`; the new obsolete-signal rule is therefore mainly a regression guard at this point.
+
+`ETag` / `Last-Modified` was not promoted as a blanket site task because static hosting/CDN behavior must be verified from response headers and hosting capabilities first.
+
+## Verification contract
+
+Added `scripts/technical-seo-critic-test.mjs` to verify:
+
+- all seven critic practices and their source references exist;
+- the Search Surface runtime no longer generates the `html[lang]` SEO action;
+- the critic skill preserves the accessibility/Search distinction;
+- the MetalHatsCats canonical fleet target is the real public hostname.
+
+Production Search impact still requires live verification and provider evidence. Passing these checks does not prove ranking, indexing, traffic, Discover visibility or AI citation uplift.
