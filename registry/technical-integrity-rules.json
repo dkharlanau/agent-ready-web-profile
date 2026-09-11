@@ -1,6 +1,6 @@
 {
-  "version": "0.3",
-  "reviewedAt": "2026-09-09",
+  "version": "0.4",
+  "reviewedAt": "2026-09-11",
   "title": "Goose Technical Search Integrity Rules",
   "purpose": "Catch high-confidence technical conditions that can block or weaken Search and AI discovery before longitudinal outcome evidence is mature. This is a non-composite diagnostic rule pack, not a ranking or AI-readiness score.",
   "methodology": {
@@ -164,10 +164,10 @@
       "priority": "P1",
       "authority": "openai-platform-guidance",
       "detector": "openai-search-crawl-policy",
-      "claim": "OpenAI says OAI-SearchBot access is relevant to inclusion in ChatGPT summaries/snippets and is separate from GPTBot training controls.",
-      "source": "https://help.openai.com/en/articles/12627856",
-      "action": "Keep OAI-SearchBot and GPTBot policies separate and avoid accidentally blocking OAI-SearchBot when ChatGPT Search discovery is desired.",
-      "doesNotProve": "ChatGPT citation, ranking, or referral traffic."
+      "claim": "OpenAI says OAI-SearchBot access is relevant to inclusion in ChatGPT summaries/snippets; a robots-disallowed URL learned from another source may still surface as a link plus title in ChatGPT Atlas, while readable noindex is the documented suppression control. GPTBot training policy remains separate.",
+      "source": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
+      "action": "Keep OAI-SearchBot and GPTBot policies separate. When ChatGPT discovery is desired, avoid accidental OAI-SearchBot blocks. When URL/title suppression is actually intended, use generic noindex and keep the relevant page crawlable so the directive can be read; do not use robots controls as a privacy boundary.",
+      "doesNotProve": "Universal ChatGPT suppression, citation, ranking, referral traffic, or model-training behavior beyond the documented publisher controls."
     }
   ]
 }
