@@ -1,6 +1,6 @@
 # Goose Technical Integrity
 
-Status: **report v0.2 · rule pack v0.3 active** · document reviewed **2026-09-11**.
+Status: **report v0.2 · rule pack v0.4 active** · reviewed **2026-09-11**.
 
 Technical Integrity is a bounded, executable Search/AI preflight for real websites. It exists for the period before Search outcome experiments mature: Goose can already catch source-backed technical blockers and risky implementation patterns without pretending those checks prove rankings, citations or traffic.
 
@@ -23,7 +23,9 @@ v0.2 fixed both model errors:
 - **non-HTML resources are not forced through HTML-only checks** — Markdown/text resources do not create missing-`<link rel="canonical">` warnings merely because they are not HTML;
 - oversized priority documents move to a separate **retrieval-footprint** review signal.
 
-Dogfood then exposed a second practical gap: detecting a crawlable `<a href>` is not enough if the destination itself is broken. Rule pack v0.3 therefore adds bounded internal-link target probing without turning Technical Integrity into a whole-site crawler.
+Dogfood then exposed a second practical gap: detecting a crawlable `<a href>` is not enough if the destination itself is broken. Rule pack v0.3 therefore added bounded internal-link target probing without turning Technical Integrity into a whole-site crawler.
+
+Rule pack v0.4 adds a third correction from OpenAI's current publisher guidance: **crawler blocking and result suppression are different controls**. Goose now detects the risky combination where a sampled page exposes a generic `noindex` but `OAI-SearchBot` is blocked from that same URL, and it keeps `GPTBot` training policy independent.
 
 This is intentional dogfood: Goose detectors themselves must remain falsifiable and correctable.
 
@@ -50,9 +52,16 @@ Google's robots interpretation uses the most specific matching path rule; when e
 - hreflang self-reference and reciprocity inside the sampled localization cluster;
 - Bing `NOSNIPPET`, `DATA-NOSNIPPET`, `NOARCHIVE`, `NOCACHE` controls that can reduce caption / grounding / citation depth;
 - near-duplicate priority pages using bounded five-word-shingle similarity plus repeated HTML-title clusters;
-- OAI-SearchBot root **and sampled path policy** kept separate from GPTBot training policy.
+- OAI-SearchBot root **and sampled path policy** kept separate from GPTBot training policy;
+- **ChatGPT suppression readability** — if a sampled page carries a generic `noindex`, Goose checks whether `OAI-SearchBot` is allowed to fetch that same URL so the directive can be read.
 
-OpenAI's current FAQ adds an important **manual companion review** to that last detector: a robots block alone is not proof that a URL/title cannot surface in ChatGPT Atlas. If suppression is the actual publisher goal, verify a readable `noindex` on the relevant page. Because OpenAI says the crawler must be allowed to fetch the page to read that directive, a configuration that simultaneously relies on `noindex` and blocks OAI-SearchBot from the same page deserves explicit review. The current executable Technical Integrity detector reports OAI-SearchBot policy but does not yet claim full route-level ChatGPT suppression verification.
+The OpenAI detector intentionally distinguishes three observable states:
+
+- generic `noindex` + OAI-SearchBot allowed → the suppression directive is **readable in the bounded sample**;
+- generic `noindex` + OAI-SearchBot blocked → `WATCH`, because OpenAI says the crawler must be allowed to crawl the page to read `noindex`;
+- OAI-SearchBot blocked without generic `noindex` → `WATCH`, because robots blocking alone is not evidence that a URL/title learned elsewhere cannot surface.
+
+A Googlebot-scoped `noindex` is not reinterpreted as an OpenAI suppression directive. Absence of `noindex` is also not a failure by itself: suppression is a publisher-intent control, not a default growth requirement.
 
 ### Internal-link target semantics
 
@@ -132,9 +141,12 @@ Implications for Goose:
 - do not infer GPTBot intent from OAI-SearchBot intent;
 - do not treat robots blocking alone as URL/title suppression evidence;
 - do not treat `noindex` as an authentication or confidentiality boundary;
+- distinguish generic `robots` / unscoped `X-Robots-Tag` directives from provider-specific Googlebot directives;
 - prefer native HTML and correct accessibility semantics over decorative ARIA;
 - require runtime task testing for interactive agent claims;
 - for Apps SDK products, include constrained-width sidebar usability in the acceptance criteria.
+
+The v0.4 executable detector verifies only the **observable control relationship** in the bounded sample: OAI-SearchBot path access, generic `noindex` readability and separate GPTBot state. Even a `PASS` on a readable `noindex` does not prove universal suppression across every discovery path or future product behavior.
 
 The dedicated control matrix is documented in `OPENAI-CHATGPT-SEARCH-CONTROLS.md`.
 
