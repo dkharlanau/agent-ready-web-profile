@@ -23,7 +23,8 @@
     "googleSpecialTags": "https://developers.google.com/search/docs/crawling-indexing/special-tags",
     "googleLinks": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
     "googleQualifyLinks": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
-    "googleCanonical": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+    "googleCanonical": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+    "googleRobotsMeta": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
   },
   "practices": [
     {
@@ -150,6 +151,22 @@
         "sitemap and priority internal links reinforce the chosen canonical target"
       ],
       "sources": ["googleCanonical"]
+    },
+    {
+      "id": "TSC-09-negative-serving-directives",
+      "priority": "P1",
+      "appliesTo": ["indexable-html", "image-discovery", "video-discovery", "ai-search"],
+      "question": "Do combined robots meta, googlebot meta and X-Robots-Tag rules unintentionally suppress snippets, images, video previews or future Search eligibility even though the page remains indexable?",
+      "whyMissedByOrdinaryAudit": "A page can pass a binary indexability check while negative serving directives still materially restrict how it can appear in Search, Discover, Images or AI surfaces. These rules may also be injected at the HTTP layer and combine across declarations.",
+      "practice": "Resolve the effective negative serving directives across HTML and HTTP for representative priority pages. Flag unexpected nosnippet/max-snippet:0, noimageindex, max-image-preview:none, max-video-preview:0, notranslate or unavailable_after states when they conflict with the site's Search goals. Preserve intentional publisher controls; do not remove a restriction merely to maximize exposure.",
+      "verify": [
+        "robots, googlebot and X-Robots-Tag directives are evaluated together",
+        "snippet restrictions match publisher intent",
+        "image/video preview restrictions match discovery goals",
+        "unavailable_after is absent unless an expiry is intentional and current",
+        "publisher controls remain authoritative even when they reduce Search exposure"
+      ],
+      "sources": ["googleRobotsMeta"]
     }
   ]
 }
