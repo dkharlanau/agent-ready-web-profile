@@ -79,13 +79,14 @@ assert.match(audit.check.sampledTargets.find(item => item.url.endsWith('/redirec
 
 const merged = mergeInternalLinkHealth({
   version: '0.2',
-  rulesVersion: '0.3',
+  rulesVersion: '0.4',
   summary: { counts: { pass: 1, fail: 0, watch: 1, 'not-applicable': 0 }, p0Failures: 0, state: 'review' },
   checks: [
     { id: 'google-robots-fetch-state', priority: 'P0', status: 'pass' },
     { id: 'bounded-internal-link-target-health', priority: 'P1', status: 'watch', message: 'placeholder' }
   ]
 }, audit);
+assert.equal(merged.rulesVersion, '0.4');
 assert.equal(merged.checks.find(item => item.id === 'bounded-internal-link-target-health').status, 'fail');
 assert.equal(merged.summary.counts.fail, 1);
 assert.equal(merged.summary.counts.watch, 0);
