@@ -53,6 +53,8 @@ For Apps SDK experiences, OpenAI recommends testing the app inside the Chat side
 
 Primary source reviewed 11 September 2026: `https://help.openai.com/en/articles/12627856-publishers-and-developers-faq`.
 
+The three newly clarified companion controls — readable `noindex` suppression semantics, explicit GPTBot/Atlas training-policy wording, and Apps SDK sidebar-width testing — are documented for immediate use but are **not yet counted as separate rules in registry v0.2**. First-class registry/executable coverage is tracked separately so the public rule count remains truthful.
+
 ### Bing and Copilot
 
 Bing Webmaster Tools AI Performance is in public preview and exposes citation activity for supported Microsoft AI experiences. Bing recommends clear headings/tables/FAQ where useful, evidence-supported claims, freshness and consistency across text, images and video.
@@ -70,7 +72,7 @@ WebMCP remains a Chrome origin-trial mechanism and requires browser-runtime eval
 - `media-discover`: Discover images, image context/alt and video discovery.
 - `international`: real localized variants with reciprocal hreflang.
 - `local-commerce`: Google owner data plus Bing Places where applicable.
-- `chatgpt`: OAI-SearchBot discovery, GPTBot training choice, `noindex` suppression semantics, referral measurement and Atlas/Apps compatibility.
+- `chatgpt`: OAI-SearchBot, referral measurement and ARIA/Atlas compatibility as represented in registry v0.2; use the OpenAI control guide for the 2026-09-11 companion review.
 - `measurement`: Google, Bing and ChatGPT owner-side evidence.
 - `agent-experiments`: WebMCP, AIPREF, W3C Introduction Layer and ARWP runtime truth.
 - `anti-cargo-cult`: no query-variant page factories, fake facts or speculative ranking claims.
