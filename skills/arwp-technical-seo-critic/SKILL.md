@@ -1,6 +1,6 @@
 ---
 name: arwp-technical-seo-critic
-description: Run an adversarial second-pass technical SEO review after ordinary ARWP Search Release, Technical Integrity and Search Surface checks. Use it to find false-green head metadata, missing field Core Web Vitals evidence, pagination canonical mistakes, unbounded faceted URL states, crawl revalidation gaps, HTTP-vs-HTML canonical conflicts, link relationship problems and obsolete SEO advice without inventing a ranking score.
+description: Run an adversarial second-pass technical SEO review after ordinary ARWP Search Release, Technical Integrity and Search Surface checks. Use it to find false-green head metadata, missing field Core Web Vitals evidence, pagination canonical mistakes, unbounded faceted URL states, crawl revalidation gaps, HTTP-vs-HTML canonical conflicts, restrictive robots directives, link relationship problems and obsolete SEO advice without inventing a ranking score.
 license: Apache-2.0
 compatibility: Requires access to website source or final generated HTML. Live response headers, Search Console field data and production crawling improve verification but may remain explicit owner-data gates.
 metadata:
@@ -48,8 +48,9 @@ Do not create duplicate work for `covered` findings.
 7. For large or frequently updated sites, inspect truthful HTTP validators and conditional revalidation as crawl-efficiency evidence when the hosting stack exposes them.
 8. Inspect link relationship semantics: important internal discovery paths should not be accidentally `nofollow`; paid and user-generated outbound relationships should be qualified where applicable.
 9. Inspect live response `Link` headers for `rel=canonical`. An HTML self-canonical is not a green state if an HTTP Link canonical points somewhere else. Prefer one canonical declaration channel; when both are intentionally present, require exact resolved-URL agreement and alignment with sitemap/internal-link signals.
-10. Reject obsolete or falsely labelled SEO work. In particular, do not generate Search tasks for `meta keywords`, `rel=next/prev`, or `nositelinkssearchbox`. Keep `html[lang]` for accessibility and document semantics, but do not claim Google Search uses it to determine page language.
-11. Reconcile the result with the site's rollout mode and repository guardrails before mutating another repository.
+10. Resolve effective serving directives across robots meta, googlebot meta and `X-Robots-Tag`. Flag unexpected `nosnippet`, `max-snippet:0`, `noimageindex`, `max-image-preview:none`, `max-video-preview:0`, `notranslate` or `unavailable_after` when they conflict with the site's intended Search/Discover/Images/AI exposure. Preserve intentional publisher restrictions.
+11. Reject obsolete or falsely labelled SEO work. In particular, do not generate Search tasks for `meta keywords`, `rel=next/prev`, or `nositelinkssearchbox`. Keep `html[lang]` for accessibility and document semantics, but do not claim Google Search uses it to determine page language.
+12. Reconcile the result with the site's rollout mode and repository guardrails before mutating another repository.
 
 ## Mutation policy
 
