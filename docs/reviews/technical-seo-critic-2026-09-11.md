@@ -50,7 +50,7 @@ Action: added `TSC-04-crawl-state-space-control`, including parameter-family inv
 
 For large or frequently updated sites, truthful `ETag` / `Last-Modified` behavior can help crawlers revalidate unchanged resources efficiently. This is crawl-efficiency work, not a direct ranking promise.
 
-Action: added `TSC-05-http-revalidation-efficiency`.
+Action: added `TSC-05-http-revalidation-efficiency`. ARWP `public-fetch` now retains `ETag` and `Last-Modified` so a live critic pass can inspect this evidence instead of discarding it.
 
 ### P2 — link relation semantics were only partially covered
 
@@ -68,7 +68,13 @@ Action: removed the `surface:lang` SEO action from `lib/search-surface-core.mjs`
 
 ARWP's ordinary canonical checks were centered on document/sitemap/internal-link consistency, but a proxy, framework or hosting layer can also emit an HTTP `Link: <...>; rel=canonical` header. Google supports both HTML and HTTP canonical declarations and warns that using both is more error-prone. An HTML self-canonical can therefore look green while the response header asks Google to consolidate elsewhere.
 
-Action: added `TSC-08-canonical-channel-conflict`. The critic now requires live response-header inspection when HTTP Link canonicals are present and exact resolved-URL agreement if both channels are intentionally used.
+Action: added `TSC-08-canonical-channel-conflict`. ARWP `public-fetch` now retains the live `Link` header, and the critic requires exact resolved-URL agreement if HTML and HTTP canonical channels are intentionally used together.
+
+### P1 — non-indexing serving restrictions could remain hidden
+
+A binary `indexable / noindex` check is not enough. A page can remain indexable while `nosnippet`, `max-snippet:0`, `noimageindex`, `max-image-preview:none`, `max-video-preview:0`, `notranslate` or `unavailable_after` materially changes whether and how it can appear in Search, Discover, Images, video or AI Search surfaces. Google combines negative rules across applicable declarations, including `X-Robots-Tag`.
+
+Action: added `TSC-09-negative-serving-directives`. The critic now resolves restrictive serving rules across HTML robots/googlebot metadata and HTTP response directives and only flags them when they conflict with the publisher's intended exposure.
 
 ### P0 — MetalHatsCats fleet target pointed at the wrong public surface
 
@@ -96,16 +102,17 @@ No repository evidence was found in the sampled fleet for current use of `meta k
 
 No sampled repository exposed an obvious pagination/query-state family or internal `nofollow` implementation in this pass, so the new pagination, URL-state and link-relation checks remain applicability-gated rather than becoming synthetic fleet defects.
 
-`ETag` / `Last-Modified` and HTTP `Link` canonical behavior were not promoted as blanket site failures because they must be verified from live response headers and hosting/proxy behavior first.
+`ETag` / `Last-Modified`, HTTP `Link` canonical behavior and negative response-level serving directives were not promoted as blanket site failures because they must be verified from live response headers and hosting/proxy behavior first.
 
 ## Verification contract
 
 Added `scripts/technical-seo-critic-test.mjs` to verify:
 
-- all eight critic practices and their source references exist;
+- all nine critic practices and their source references exist;
 - the Search Surface runtime no longer generates the `html[lang]` SEO action;
+- public fetch retains `Link`, `ETag` and `Last-Modified` evidence;
 - the critic skill preserves the accessibility/Search distinction;
-- the critic skill includes the HTTP-versus-HTML canonical challenge;
+- the critic skill includes the HTTP-versus-HTML canonical challenge and negative serving-directive review;
 - the MetalHatsCats canonical fleet target is the real public hostname.
 
 Production Search impact still requires live verification and provider evidence. Passing these checks does not prove ranking, indexing, traffic, Discover visibility or AI citation uplift.
