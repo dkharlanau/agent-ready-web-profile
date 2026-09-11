@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "reviewedAt": "2026-09-11",
+  "title": "ARWP Index Worthiness Practices",
+  "purpose": "Decide whether a page is worth publishing into the indexable/sitemap cohort without reducing Search value to a numeric score or confusing crawl eligibility with ranking.",
+  "methodology": {
+    "noCompositeScore": true,
+    "noRankingPromise": true,
+    "manualDemandEvidenceRequired": true,
+    "sitemapIsCuratedIndexCohort": true,
+    "scaledContentRiskIsGoverned": true,
+    "githubPagesPathIdentityLimitExplicit": true,
+    "automaticNoindexMutationForbidden": true
+  },
+  "states": [
+    "index-candidate",
+    "review",
+    "hold",
+    "exclude-from-search-candidate"
+  ],
+  "gateStatusVocabulary": [
+    "pass",
+    "fail",
+    "unknown",
+    "not-applicable"
+  ],
+  "gates": [
+    {
+      "id": "demand",
+      "priority": "P0",
+      "requirement": "A real user, navigation, comparison, research or decision need exists for this page. URL generation capacity is not demand.",
+      "failureEffect": "exclude-from-search-candidate"
+    },
+    {
+      "id": "uniqueValue",
+      "priority": "P0",
+      "requirement": "The page contributes original, curated, calculated, normalized, first-hand or otherwise non-commodity value beyond a template and entity-name substitution.",
+      "failureEffect": "exclude-from-search-candidate"
+    },
+    {
+      "id": "standaloneUtility",
+      "priority": "P0",
+      "requirement": "A direct landing visitor can complete a useful task or get a complete answer without first understanding the site's internal taxonomy.",
+      "failureEffect": "hold"
+    },
+    {
+      "id": "provenance",
+      "priority": "P0",
+      "requirement": "Material factual/data claims expose appropriate sources, methodology, ownership, evidence boundaries or limitations.",
+      "failureEffect": "hold"
+    },
+    {
+      "id": "connectivity",
+      "priority": "P1",
+      "requirement": "The page has meaningful crawlable relationships to hubs, parents, related entities, comparisons or next steps and is not merely present in a sitemap.",
+      "failureEffect": "hold"
+    },
+    {
+      "id": "canonicalIdentity",
+      "priority": "P0",
+      "requirement": "The page has one stable canonical URL/entity identity and does not compete with filter, query, locale, alias or generated variants.",
+      "failureEffect": "hold"
+    },
+    {
+      "id": "freshnessIntegrity",
+      "priority": "P1",
+      "requirement": "dateModified, sitemap lastmod and release/version signals change only when the underlying page/data materially changes.",
+      "failureEffect": "hold"
+    },
+    {
+      "id": "entityDepth",
+      "priority": "P1",
+      "appliesTo": [
+        "data-site",
+        "research-dataset",
+        "large-knowledge-site"
+      ],
+      "requirement": "Entity/detail pages expose enough real attributes, relationships, evidence or derived insight to justify a separate page instead of a thin row wrapper.",
+      "failureEffect": "hold"
+    }
+  ],
+  "scaledContentSignals": [
+    "generated page whose uniqueValue gate is not pass",
+    "index-candidate page declared as a variantOf another URL",
+    "large generated cohort expanded before a bounded priority cohort has outcome evidence",
+    "sitemap mirrors build output instead of curated canonical index candidates",
+    "generic AI-written text is used to justify otherwise low-value records"
+  ],
+  "githubPages": {
+    "rule": "owner.github.io/project/ is a path under one hostname, not an independent hostname-level Search site-name/favicon identity.",
+    "action": "Do not diagnose this as a missing meta-tag bug. Use page-level title/description/canonical correctly; use a custom domain or independent hostname when distinct site identity materially matters."
+  },
+  "references": [
+    "https://developers.google.com/search/docs/essentials/spam-policies",
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+    "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+    "https://developers.google.com/search/docs/appearance/site-names",
+    "https://developers.google.com/search/docs/appearance/favicon-in-search"
+  ]
+}

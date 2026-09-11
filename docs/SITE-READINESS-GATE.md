@@ -81,11 +81,40 @@ Then attach the provider-native snapshots, hypothesis IDs and change timestamp t
 For data/knowledge sites, the gate additionally checks or requests evidence for:
 
 - page-value gating;
+- explicit Index Worthiness review;
+- curated sitemap publication instead of build-output dumping;
+- scaled-content/template-family risk;
 - deep discovery paths;
 - deep-page contribution;
 - crawl/index growth versus useful discovery.
 
 Raw URL count, crawl count or index count is never treated as the success metric.
+
+Run the operational publication gate after technical readiness:
+
+```bash
+node bin/arwp-index-worthiness.mjs review.json
+node bin/arwp-index-worthiness.mjs review.json --json
+```
+
+Use `schema/index-worthiness-review.schema.json` for the review artifact.
+
+Only pages in state `index-candidate` are sitemap-eligible under the ARWP Index Worthiness contract. `review`, `hold` and `exclude-from-search-candidate` remain outside the curated Search-facing cohort until the evidence or page changes.
+
+This is not an automatic `noindex` system. The command never edits robots, sitemap, canonicals or page metadata.
+
+## GitHub Pages identity scope
+
+When a site lives under `owner.github.io/project/`, the project path does not have a separate hostname-level Google site-name or Search-favicon scope.
+
+The gate therefore treats this as an identity/product decision, not a meta-tag defect:
+
+- keep page-level title, description, canonical and visible purpose strong;
+- do not keep adding metadata to force a separate project site name at path scope;
+- use a custom domain or another independent hostname when a distinct brand/search identity materially matters;
+- migrate canonicals, sitemap URLs, structured data and internal links coherently if the host changes.
+
+A custom domain does not make weak content index-worthy; it only gives the project an independent hostname identity surface.
 
 ## Guardrails
 
@@ -96,8 +125,12 @@ The Site Readiness Gate does not:
 - compute a synthetic readiness/AI score;
 - divide unrelated provider populations;
 - treat `llms.txt`, JSON-LD, MCP, A2A, WebMCP or ARWP metadata as ranking factors;
-- infer that a generated cohort represents real demand without owner query/page evidence.
+- infer that a generated cohort represents real demand without owner query/page evidence;
+- treat sitemap inclusion as proof that a page deserves indexing;
+- automatically exclude pages based on a text-length or similarity heuristic.
 
 Canonical checklist: `registry/site-readiness-checklist.json`.
+
+Index Worthiness: `docs/INDEX-WORTHINESS.md`.
 
 Measurement model: `docs/MEASUREMENT-OS.md`.

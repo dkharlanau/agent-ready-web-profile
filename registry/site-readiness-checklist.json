@@ -1,10 +1,18 @@
 {
-  "version": "0.1",
-  "reviewedAt": "2026-09-09",
+  "version": "0.2",
+  "reviewedAt": "2026-09-11",
   "title": "ARWP Site Readiness Gate",
   "mode": "non-composite-gates",
-  "purpose": "Decide whether a site has enough technical, content, identity and measurement integrity to begin or interpret a Search/AI acquisition experiment without reducing readiness to a vanity score.",
-  "statusVocabulary": ["pass", "fail", "manual-pass", "manual-fail", "owner-data", "not-applicable", "watch"],
+  "purpose": "Decide whether a site has enough technical, content, identity, publication and measurement integrity to begin or interpret a Search/AI acquisition experiment without reducing readiness to a vanity score.",
+  "statusVocabulary": [
+    "pass",
+    "fail",
+    "manual-pass",
+    "manual-fail",
+    "owner-data",
+    "not-applicable",
+    "watch"
+  ],
   "blockingPolicy": {
     "p0FailBlocksOutcomeInterpretation": true,
     "missingOwnerDataIsNotZero": true,
@@ -30,7 +38,8 @@
         {"id": "crawler-access-intentional", "mode": "automated+manual", "requirement": "Search/answer crawler access is intentional and not accidentally blocked."},
         {"id": "indexability-canonical-sitemap-parity", "mode": "automated", "requirement": "Indexability, canonical target and sitemap membership agree for priority pages."},
         {"id": "meaningful-lastmod", "mode": "automated+manual", "requirement": "Sitemap freshness represents significant content changes rather than unconditional build time."},
-        {"id": "variant-control", "mode": "automated+manual", "requirement": "Redirects, locale variants, filters and query variants do not create competing canonical identities."}
+        {"id": "variant-control", "mode": "automated+manual", "requirement": "Redirects, locale variants, filters and query variants do not create competing canonical identities."},
+        {"id": "hostname-search-identity-scope", "mode": "manual", "requirement": "Search identity scope is classified at hostname level. A project under owner.github.io/project/ does not pretend to own a separate Google site-name/Search-favicon scope; distinct brands use an independent hostname when that identity matters."}
       ]
     },
     {
@@ -102,7 +111,9 @@
       "priority": "P1",
       "appliesTo": ["research-dataset", "large-knowledge-site", "data-site"],
       "checks": [
-        {"id": "page-value-gate", "mode": "manual", "requirement": "Indexable entity pages pass demand, unique-value, standalone-usefulness and canonical-identity gates."},
+        {"id": "page-value-gate", "mode": "manual", "requirement": "Indexable entity pages pass the ARWP Index Worthiness demand, unique-value, standalone-utility, provenance, connectivity, canonical-identity, freshness and entity-depth review."},
+        {"id": "sitemap-publication-cohort", "mode": "manual", "requirement": "The Search-facing sitemap is a curated canonical cohort of index-candidate pages, not a dump of every route emitted by the build."},
+        {"id": "scaled-content-risk", "mode": "manual", "requirement": "Generated pages, query/filter variants and template families are reviewed for independent value; generic filler text is not used to justify Search publication."},
         {"id": "deep-discovery-path", "mode": "automated+manual", "requirement": "Priority deep pages have useful crawlable paths from collections/hubs or related entities."},
         {"id": "deep-page-contribution", "mode": "owner-data", "requirement": "Deep-page contribution is measured separately for exposure, citations, referrals and task outcomes."},
         {"id": "crawl-growth-vs-value", "mode": "owner-data", "requirement": "Crawl/index growth is reviewed against useful discovery growth; raw page count is not a success metric."}
@@ -114,6 +125,10 @@
     "docs/MEASUREMENT-OS.md",
     "registry/measurement-patterns.json",
     "registry/data-authority-experiments.json",
-    "docs/GROWTH-EXPERIMENTS.md"
+    "docs/GROWTH-EXPERIMENTS.md",
+    "docs/INDEX-WORTHINESS.md",
+    "registry/index-worthiness-practices.json",
+    "schema/index-worthiness-review.schema.json",
+    "skills/arwp-index-worthiness/SKILL.md"
   ]
 }

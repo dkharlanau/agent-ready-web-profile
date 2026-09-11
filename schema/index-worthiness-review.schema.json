@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/index-worthiness-review.schema.json",
+  "title": "ARWP Index Worthiness Review",
+  "type": "object",
+  "required": [
+    "version",
+    "site",
+    "siteType",
+    "reviewedAt",
+    "pages"
+  ],
+  "not": {
+    "required": [
+      "score"
+    ]
+  },
+  "properties": {
+    "version": {
+      "const": "1.0"
+    },
+    "site": {
+      "type": "string",
+      "format": "uri"
+    },
+    "siteType": {
+      "enum": [
+        "general",
+        "data-site",
+        "research-dataset",
+        "large-knowledge-site"
+      ]
+    },
+    "reviewedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "url",
+          "gates"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "generated": {
+            "type": "boolean"
+          },
+          "variantOf": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "gates": {
+            "type": "object",
+            "required": [
+              "demand",
+              "uniqueValue",
+              "standaloneUtility",
+              "provenance",
+              "connectivity",
+              "canonicalIdentity",
+              "freshnessIntegrity"
+            ],
+            "properties": {
+              "demand": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              },
+              "uniqueValue": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              },
+              "standaloneUtility": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              },
+              "provenance": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              },
+              "connectivity": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              },
+              "canonicalIdentity": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              },
+              "freshnessIntegrity": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              },
+              "entityDepth": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {"status": {"enum": ["pass", "fail", "unknown", "not-applicable"]}, "evidence": {"type": "array", "items": {"type": "string"}}},
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

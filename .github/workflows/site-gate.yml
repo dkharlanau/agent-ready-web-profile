@@ -7,20 +7,36 @@ on:
       - 'bin/arwp.mjs'
       - 'bin/arwp-core.mjs'
       - 'bin/arwp-site-gate.mjs'
+      - 'bin/arwp-index-worthiness.mjs'
       - 'lib/site-gate.mjs'
+      - 'lib/index-worthiness.mjs'
       - 'registry/site-readiness-checklist.json'
+      - 'registry/index-worthiness-practices.json'
       - 'schema/site-gate-report.schema.json'
+      - 'schema/index-worthiness-review.schema.json'
       - 'scripts/site-gate-test.mjs'
+      - 'scripts/index-worthiness-test.mjs'
+      - 'docs/SITE-READINESS-GATE.md'
+      - 'docs/INDEX-WORTHINESS.md'
+      - 'skills/arwp-index-worthiness/SKILL.md'
       - '.github/workflows/site-gate.yml'
   pull_request:
     paths:
       - 'bin/arwp.mjs'
       - 'bin/arwp-core.mjs'
       - 'bin/arwp-site-gate.mjs'
+      - 'bin/arwp-index-worthiness.mjs'
       - 'lib/site-gate.mjs'
+      - 'lib/index-worthiness.mjs'
       - 'registry/site-readiness-checklist.json'
+      - 'registry/index-worthiness-practices.json'
       - 'schema/site-gate-report.schema.json'
+      - 'schema/index-worthiness-review.schema.json'
       - 'scripts/site-gate-test.mjs'
+      - 'scripts/index-worthiness-test.mjs'
+      - 'docs/SITE-READINESS-GATE.md'
+      - 'docs/INDEX-WORTHINESS.md'
+      - 'skills/arwp-index-worthiness/SKILL.md'
       - '.github/workflows/site-gate.yml'
 
 permissions:
@@ -44,9 +60,13 @@ jobs:
       - name: Validate Site Readiness Gate
         run: |
           node scripts/site-gate-test.mjs
+          node scripts/index-worthiness-test.mjs
           node --check lib/site-gate.mjs
+          node --check lib/index-worthiness.mjs
           node --check bin/arwp-site-gate.mjs
+          node --check bin/arwp-index-worthiness.mjs
           node --check bin/arwp.mjs
           node --check bin/arwp-core.mjs
           node bin/arwp.mjs site-gate --help
+          node bin/arwp-index-worthiness.mjs --help
           node bin/arwp.mjs validate examples/minimal.site-profile.json
