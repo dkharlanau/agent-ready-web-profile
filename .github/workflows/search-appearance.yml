@@ -7,6 +7,7 @@ on:
       - 'lib/search-appearance.mjs'
       - 'lib/search-appearance-patch.mjs'
       - 'lib/search-surface-core.mjs'
+      - 'lib/public-fetch.mjs'
       - 'bin/arwp-search-appearance.mjs'
       - 'bin/arwp-search-appearance-patch.mjs'
       - 'schema/search-appearance-patch-manifest.schema.json'
@@ -32,6 +33,7 @@ on:
       - 'lib/search-appearance.mjs'
       - 'lib/search-appearance-patch.mjs'
       - 'lib/search-surface-core.mjs'
+      - 'lib/public-fetch.mjs'
       - 'bin/arwp-search-appearance.mjs'
       - 'bin/arwp-search-appearance-patch.mjs'
       - 'schema/search-appearance-patch-manifest.schema.json'
@@ -77,6 +79,7 @@ jobs:
           node --check lib/search-appearance.mjs
           node --check lib/search-appearance-patch.mjs
           node --check lib/search-surface-core.mjs
+          node --check lib/public-fetch.mjs
           node --check bin/arwp-search-appearance.mjs
           node --check bin/arwp-search-appearance-patch.mjs
           node --check scripts/search-appearance-test.mjs
