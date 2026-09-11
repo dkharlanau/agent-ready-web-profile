@@ -1,0 +1,138 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-11",
+  "title": "ARWP Image Discovery Practices",
+  "purpose": "A source-backed layer for making meaningful site imagery discoverable, understandable and consistently represented across Google Search, Google Images and Discover without treating image metadata as a ranking guarantee.",
+  "methodology": {
+    "runAfterCanonicalSearchBaseline": true,
+    "finalArtifactRequired": true,
+    "liveAssetFetchPreferred": true,
+    "publisherIntentAuthoritative": true,
+    "noRankingGuarantee": true,
+    "discoverRequirementsSeparatedFromGeneralImageSearch": true,
+    "decorativeAndInformativeImagesSeparated": true,
+    "deprecatedImageSitemapFieldsRejected": true
+  },
+  "sources": {
+    "googleImages": "https://developers.google.com/search/docs/appearance/google-images",
+    "googleImageSitemaps": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps",
+    "googleDiscover": "https://developers.google.com/search/docs/appearance/google-discover",
+    "googleRobotsMeta": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+    "googleImageMetadata": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata",
+    "googleArticle": "https://developers.google.com/search/docs/appearance/structured-data/article"
+  },
+  "practices": [
+    {
+      "id": "IDL-01-crawlable-image-and-landing-page",
+      "priority": "P0",
+      "appliesTo": ["image-discovery", "indexable-html"],
+      "question": "Can Google fetch both the landing page and the meaningful image asset we expect it to understand?",
+      "practice": "Keep the landing page crawlable and index-eligible according to publisher intent, expose meaningful images through crawlable image URLs, and verify that robots policy does not block the page or the image crawler from assets intended for discovery. Prefer ordinary HTML image references with a usable src fallback rather than making discovery depend on opaque client-side state.",
+      "verify": [
+        "priority landing page is fetchable",
+        "preferred image URL is fetchable",
+        "robots policy does not block intended image discovery",
+        "meaningful image has a crawlable HTML reference or equivalent supported discovery path"
+      ],
+      "sources": ["googleImages", "googleRobotsMeta"]
+    },
+    {
+      "id": "IDL-02-preferred-image-signal-convergence",
+      "priority": "P0",
+      "appliesTo": ["image-discovery", "indexable-html"],
+      "question": "Do page metadata sources converge on one representative preferred image instead of sending Google several contradictory candidates?",
+      "practice": "For priority pages, align the representative image used by og:image with schema.org primaryImageOfPage or the main entity image when structured data is applicable. Use a page-relevant high-quality image rather than a generic logo or unrelated asset, and verify the final generated page after all post-processing.",
+      "verify": [
+        "og:image points to a representative page image",
+        "primaryImageOfPage or applicable main-entity image agrees with the preferred image when present",
+        "generic logos are not used as the preferred image for content pages unless genuinely representative",
+        "final generated metadata does not restore a stale or conflicting image URL"
+      ],
+      "sources": ["googleImages", "googleArticle"]
+    },
+    {
+      "id": "IDL-03-image-sitemap-canonical-cohort",
+      "priority": "P1",
+      "appliesTo": ["image-discovery", "multi-page", "data-site"],
+      "question": "Does the canonical sitemap explicitly expose important images without publishing deprecated or low-value image sitemap fields?",
+      "practice": "When image discovery is important, add image:image entries to the existing canonical sitemap or publish a dedicated image sitemap. Keep image:loc URLs crawlable and associated with canonical index candidates. Do not emit deprecated image:caption, image:geo_location, image:title or image:license fields merely for SEO.",
+      "verify": [
+        "image namespace is valid when image sitemap entries are present",
+        "priority canonical pages expose intended image:loc entries",
+        "image URLs are crawlable and use the intended host",
+        "deprecated image sitemap caption, geo_location, title and license fields are absent"
+      ],
+      "sources": ["googleImageSitemaps"]
+    },
+    {
+      "id": "IDL-04-context-and-alt-semantics",
+      "priority": "P1",
+      "appliesTo": ["image-discovery", "content-site"],
+      "question": "Can the image be understood from its alt text and surrounding page context without keyword stuffing or duplicating decorative noise?",
+      "practice": "Give informative images concise alternative text that describes the image's meaningful content or function in context. Keep purely decorative images empty-alt when appropriate. Put images near relevant visible text and avoid mechanical keyword repetition, filename stuffing or redundant alt text that adds no information.",
+      "verify": [
+        "informative priority images have useful contextual alt text",
+        "decorative imagery is not forced to carry SEO copy",
+        "nearby visible content explains the same subject coherently",
+        "alt text is not a keyword list or boilerplate repeated across unrelated images"
+      ],
+      "sources": ["googleImages"]
+    },
+    {
+      "id": "IDL-05-image-preview-and-serving-controls",
+      "priority": "P0",
+      "appliesTo": ["image-discovery", "discover"],
+      "question": "Do robots or preview directives unintentionally suppress image indexing or large previews that the publisher actually wants?",
+      "practice": "Resolve robots, googlebot and X-Robots-Tag image-related controls together. Treat noimageindex and max-image-preview:none as publisher controls, not defects by default. When large Search or Discover previews are desired, keep the effective policy compatible with max-image-preview:large and verify that later response-level directives do not override the HTML intent.",
+      "verify": [
+        "noimageindex matches publisher intent",
+        "max-image-preview policy matches intended exposure",
+        "HTML and HTTP serving directives are evaluated together",
+        "publisher restrictions are preserved even when they reduce exposure"
+      ],
+      "sources": ["googleImages", "googleDiscover", "googleRobotsMeta"]
+    },
+    {
+      "id": "IDL-06-representative-quality-and-discover-readiness",
+      "priority": "P1",
+      "appliesTo": ["image-discovery", "discover"],
+      "question": "Is the preferred image visually representative and large enough for the surface being targeted?",
+      "practice": "Prefer high-resolution representative imagery and avoid extreme aspect ratios, generic logos and text-heavy preferred images. Keep general image indexing requirements separate from the stricter Discover guidance: for Discover-oriented imagery, review Google's current recommendation for at least 1200 px width, more than 300,000 total pixels and landscape-friendly presentation such as 16:9. Do not call a sub-1200 image a general indexing failure solely because it misses the Discover recommendation.",
+      "verify": [
+        "preferred image is relevant to page content",
+        "preferred image is not an extreme aspect-ratio or generic-logo fallback",
+        "image dimensions are measured from the real asset when possible",
+        "Discover-specific size guidance is classified separately from general image Search eligibility"
+      ],
+      "sources": ["googleImages", "googleDiscover", "googleArticle"]
+    },
+    {
+      "id": "IDL-07-responsive-delivery-with-crawlable-fallback",
+      "priority": "P2",
+      "appliesTo": ["image-discovery", "responsive-site", "performance"],
+      "question": "Can the site serve appropriately sized images without making the canonical image undiscoverable?",
+      "practice": "Use responsive image delivery when it materially reduces transferred bytes, but retain a crawlable src fallback and stable preferred-image URL. Treat srcset, sizes and derived variants as performance and user-experience tools; do not create a swarm of unstable asset URLs or claim responsive markup itself is a ranking factor.",
+      "verify": [
+        "img retains a usable src fallback",
+        "srcset/sizes variants resolve when used",
+        "preferred-image metadata points to a stable representative asset",
+        "responsive optimization is not presented as direct ranking proof"
+      ],
+      "sources": ["googleImages"]
+    },
+    {
+      "id": "IDL-08-license-and-creator-metadata-boundary",
+      "priority": "P2",
+      "appliesTo": ["licensed-images", "publisher-owned-images"],
+      "question": "If licensing or creator information is published, is it truthful and expressed through currently supported image metadata rather than obsolete sitemap fields?",
+      "practice": "Use supported structured data or IPTC-style image metadata for truthful license, creator and credit information when the publisher actually wants to expose it. Do not infer ownership or licensing from file location, and do not use deprecated image sitemap license/title/caption fields as a substitute for supported metadata.",
+      "verify": [
+        "license or creator claims have a real provenance source",
+        "supported structured data or image metadata is used when licensing details are published",
+        "deprecated image sitemap license/title/caption fields are not generated",
+        "missing licensing metadata is not called an indexing failure when licensing display is not a goal"
+      ],
+      "sources": ["googleImageMetadata", "googleImageSitemaps"]
+    }
+  ]
+}
