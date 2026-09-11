@@ -84,6 +84,8 @@ The critic review also checked several areas that are already adequately represe
 
 The current public surfaces that were observable in this review show substantive crawlable content rather than obvious empty JS shells. Search results expose current pages for the SAP knowledge site, MetalHatsCats, Metkagram and CBT Cards, including deeper content surfaces. This does not replace Search Console or a browser/header crawl.
 
+Ptichi needs a Search-outcome verification round rather than speculative canonical/robots changes. The repository's latest captured owner evidence (2026-09-05) records verified Google ownership, a successfully processed sitemap with 60 discovered pages, and indexing requests for three priority URLs. The paired live audit records all 60 sampled URLs as HTTP 200 with self-canonicals and no reported live issues. In this 2026-09-11 critic round, generic web search did not surface `site:ptichi.com` or exact-domain results, so current indexing/search visibility remains `owner-data / needs verification`, not a proven repository defect. Refresh Search Console indexing, impressions and selected-canonical evidence before expanding or rewriting Search infrastructure.
+
 No repository evidence was found in the sampled fleet for current use of `meta keywords`, `rel=next/prev` or `nositelinkssearchbox`; the new obsolete-signal rule is therefore mainly a regression guard at this point.
 
 `ETag` / `Last-Modified` was not promoted as a blanket site task because static hosting/CDN behavior must be verified from response headers and hosting capabilities first.
