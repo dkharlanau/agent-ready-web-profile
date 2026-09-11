@@ -36,7 +36,7 @@ Use `arwp-prepare-site` when the main task is to prepare or migrate an existing 
 - `arwp-ai-search-content` — original useful content and answer/comparison pages.
 - `arwp-index-worthiness` — decide which generated/data/knowledge pages deserve Search-facing publication before sitemap expansion, without a composite SEO score.
 - `arwp-measurement-os` — provider-native Search/AI measurement, readiness gates, cohort analysis and outcome interpretation.
-- `arwp-technical-seo-critic` — adversarial second-pass review for false-green metadata/head states, field Core Web Vitals release gaps, pagination canonicals, crawl-state explosions, HTTP revalidation, link relationship semantics and obsolete SEO advice that survives ordinary checks.
+- `arwp-technical-seo-critic` — adversarial second-pass review for false-green metadata/head states, field Core Web Vitals release gaps, pagination canonicals, crawl-state explosions, HTTP cache validators, HTTP-vs-HTML canonical conflicts, restrictive robots serving directives, link relationship semantics and obsolete SEO advice that survives ordinary checks.
 - `arwp-future-search` — governed future-ready Schema.org semantics, semantic/evidence graphs, retrieval feedback and browser-agent operability beyond today's documented Search feature set.
 - `arwp-dataset-publication` — genuine dataset publication, reproducibility, persistent identifiers and DOI lifecycle.
 - `arwp-agent-discovery` — llms.txt, Agent Skills, ARD, OpenAPI/MCP/A2A/WebMCP and ARWP surfaces.
