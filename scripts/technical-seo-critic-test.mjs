@@ -19,7 +19,8 @@ const required = [
   'TSC-04-crawl-state-space-control',
   'TSC-05-http-revalidation-efficiency',
   'TSC-06-link-follow-and-relationship-integrity',
-  'TSC-07-obsolete-and-false-seo-signals'
+  'TSC-07-obsolete-and-false-seo-signals',
+  'TSC-08-canonical-channel-conflict'
 ];
 const ids = critic.practices.map((practice) => practice.id);
 for (const id of required) assert.ok(ids.includes(id), `missing critic practice ${id}`);
@@ -44,9 +45,11 @@ assert.doesNotMatch(searchSurface, /Declare the page language/, 'Search Surface 
 assert.match(skill, /html\[lang\].*accessibility/i);
 assert.match(skill, /meta keywords/i);
 assert.match(skill, /Core Web Vitals/i);
+assert.match(skill, /HTTP Link/i);
+assert.match(skill, /canonical/i);
 
 const metalHatsCats = portfolio.sites.find((site) => site.id === 'metalhatscats-applied-systems');
 assert.equal(metalHatsCats?.canonicalUrl, 'https://metalhatscats.com/');
 assert.notEqual(metalHatsCats?.canonicalUrl, 'https://github.com/metalhatscats/metalhatscats');
 
-console.log(`PASS ${critic.practices.length} Technical SEO Critic practices, obsolete-signal guardrails, and MetalHatsCats canonical fleet target.`);
+console.log(`PASS ${critic.practices.length} Technical SEO Critic practices, obsolete-signal guardrails, canonical-channel challenge, and MetalHatsCats canonical fleet target.`);
