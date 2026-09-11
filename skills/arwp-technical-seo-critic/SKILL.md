@@ -1,3 +1,13 @@
+---
+name: arwp-technical-seo-critic
+description: Run an adversarial second-pass technical SEO review after ordinary ARWP Search Release, Technical Integrity and Search Surface checks. Use it to find false-green head metadata, missing field Core Web Vitals evidence, pagination canonical mistakes, unbounded faceted URL states, crawl revalidation gaps, link relationship problems and obsolete SEO advice without inventing a ranking score.
+license: Apache-2.0
+compatibility: Requires access to website source or final generated HTML. Live response headers, Search Console field data and production crawling improve verification but may remain explicit owner-data gates.
+metadata:
+  standard: agent-skills
+  arwp-role: technical-seo-critic
+---
+
 # ARWP Technical SEO Critic
 
 Use this skill for a second-pass adversarial technical SEO review after the normal ARWP Search Release, Technical Integrity and Search Surface checks. The goal is not to repeat a generic SEO checklist. The goal is to find states that can remain wrong after the ordinary checks look green.
@@ -27,7 +37,7 @@ Classify every candidate as one of:
 
 Do not create duplicate work for `covered` findings.
 
-## Critic sequence
+## Workflow — critic sequence
 
 1. Establish the canonical public hostname and representative priority URLs.
 2. Run or inspect the ordinary Search Release / Technical Integrity / Search Surface findings first.
