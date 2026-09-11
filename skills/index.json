@@ -47,6 +47,12 @@
       "description": "Audit and improve meaningful image discovery across Search, Google Images and Discover using preferred-image signal convergence, image sitemaps, contextual alt semantics, preview controls, surface-specific quality guidance, responsive delivery and truthful licensing metadata."
     },
     {
+      "name": "arwp-internal-discovery",
+      "path": "skills/arwp-internal-discovery/SKILL.md",
+      "role": "internal-discovery-distribution",
+      "description": "Audit and improve rendered internal discovery and page distribution using canonical crawl paths, descriptive anchors, semantic/reverse relations, breadcrumbs, intentional continuation blocks, lightweight share/save/cite utilities and regression-safe graph checks."
+    },
+    {
       "name": "arwp-index-worthiness",
       "path": "skills/arwp-index-worthiness/SKILL.md",
       "role": "index-worthiness-publication-gate",
@@ -127,6 +133,7 @@
     "searchRelease": "arwp-search-release",
     "technicalSeoCritic": "arwp-technical-seo-critic",
     "imageDiscovery": "arwp-image-discovery",
+    "internalDiscovery": "arwp-internal-discovery",
     "indexWorthiness": "arwp-index-worthiness",
     "sitePreparation": "arwp-prepare-site",
     "upgradeCompiler": "arwp-adaptive-upgrade",
@@ -140,6 +147,7 @@
       "arwp-search-release",
       "arwp-technical-seo-critic",
       "arwp-image-discovery",
+      "arwp-internal-discovery",
       "arwp-index-worthiness",
       "arwp-adaptive-upgrade",
       "arwp-target-transformation",
@@ -152,6 +160,6 @@
       "arwp-discoverability",
       "arwp-portfolio-fleet"
     ],
-    "principle": "Use the growth orchestrator and run Site Focus before broad content/discoverability expansion when the target site's problem territory, audience, scope or navigation is unclear. Use Measurement OS whenever Search/AI outcomes need provider-native baselines, page cohorts or stage-separated interpretation. Fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; run Search Release before calling a public hostname ready so crawlability, site identity, title/snippet/favicon, canonical host, final build and owner-observed Search presentation remain separate evidence; run Technical SEO Critic after the ordinary technical/Search pass to challenge false-green head parsing, performance evidence, pagination, URL-state, cache-validator, link-relation and obsolete-signal states; use Image Discovery when meaningful visual assets should become a deliberate Search/Images/Discover surface, keeping preferred-image metadata, image sitemaps, alt/context, preview controls and Discover-specific quality guidance separate from outcome claims; run Index Worthiness before broad generated-page sitemap expansion so technically indexable URLs still need demand, unique value, standalone utility, provenance, connectivity and canonical identity; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
+    "principle": "Use the growth orchestrator and run Site Focus before broad content/discoverability expansion when the target site's problem territory, audience, scope or navigation is unclear. Use Measurement OS whenever Search/AI outcomes need provider-native baselines, page cohorts or stage-separated interpretation. Fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; run Search Release before calling a public hostname ready so crawlability, site identity, title/snippet/favicon, canonical host, final build and owner-observed Search presentation remain separate evidence; run Technical SEO Critic after the ordinary technical/Search pass to challenge false-green head parsing, performance evidence, pagination, URL-state, cache-validator, link-relation and obsolete-signal states; use Image Discovery when meaningful visual assets should become a deliberate Search/Images/Discover surface, keeping preferred-image metadata, image sitemaps, alt/context, preview controls and Discover-specific quality guidance separate from outcome claims; use Internal Discovery when important pages need stronger canonical crawl paths, descriptive anchors, semantic/reverse relationships, breadcrumbs, intentional continuation or lightweight share/save/cite utilities, while keeping utility controls and link counts separate from ranking claims; run Index Worthiness before broad generated-page sitemap expansion so technically indexable URLs still need demand, unique value, standalone utility, provenance, connectivity and canonical identity; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
   }
 }
