@@ -22,7 +22,8 @@
     "googleCrawlerOverview": "https://developers.google.com/crawling/docs/crawlers-fetchers/overview-google-crawlers",
     "googleSpecialTags": "https://developers.google.com/search/docs/crawling-indexing/special-tags",
     "googleLinks": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
-    "googleQualifyLinks": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+    "googleQualifyLinks": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+    "googleCanonical": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
   },
   "practices": [
     {
@@ -134,6 +135,21 @@
         "deprecated recommendations are removed or demoted when official documentation changes"
       ],
       "sources": ["googleSpecialTags", "googlePagination"]
+    },
+    {
+      "id": "TSC-08-canonical-channel-conflict",
+      "priority": "P0",
+      "appliesTo": ["indexable-html", "http-link-canonical"],
+      "question": "Does the HTTP Link header declare a different canonical URL from the HTML canonical or other strong canonical signals?",
+      "whyMissedByOrdinaryAudit": "An HTML-only audit can report a healthy self-canonical while the response header independently asks Google to consolidate the page elsewhere.",
+      "practice": "Inspect HTTP Link headers for rel=canonical on representative indexable responses. Prefer one canonical declaration method. If both HTML and HTTP canonical are intentionally present, require exact resolved-URL agreement and keep sitemap/internal-link signals aligned with the same target.",
+      "verify": [
+        "HTTP Link rel=canonical presence is recorded",
+        "HTML and HTTP canonicals resolve to the same URL when both exist",
+        "no redirect or proxy layer injects a conflicting canonical header",
+        "sitemap and priority internal links reinforce the chosen canonical target"
+      ],
+      "sources": ["googleCanonical"]
     }
   ]
 }
