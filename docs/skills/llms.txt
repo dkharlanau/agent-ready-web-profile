@@ -12,6 +12,11 @@ Use it for Search growth, Google Discover/recommendations, generative Search, AI
 
 Use it before calling a public hostname search-ready. It checks the Search result as a product surface: hostname scope, site identity, title sources, visible snippet candidates, favicon delivery, canonical host, sitemap/robots, internal discovery, localization, GitHub Pages domain behavior, final generated output and the later owner-observed Search result. A green repository check is not engine-selection or ranking evidence.
 
+## Index Worthiness publication gate
+- arwp-index-worthiness — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-index-worthiness/SKILL.md
+
+Use it before broad generated-page or data-site sitemap expansion. Crawl/index eligibility is not enough: candidate pages must have explicit evidence for demand, unique value, standalone utility, provenance, connectivity and canonical identity; data/knowledge sites also review entity depth. The gate emits index-candidate/review/hold/exclude-from-search-candidate states and never automatically mutates noindex, robots or canonical state.
+
 ## Reference benchmarking
 - arwp-search-maturity — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-search-maturity/SKILL.md
 
@@ -54,4 +59,4 @@ Use arwp-future-search after current crawl/index/canonical/content/identity foun
 npx skills add dkharlanau/agent-ready-web-profile
 
 ## Rule
-Research -> classify current vs observational vs experimental -> establish site focus -> fix technical eligibility -> run Search Release -> benchmark when useful -> implement -> trace provenance/impact when needed -> verify final production -> measure owner-observed outcomes. Do not claim that ARWP, BraidGraph adjacency, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
+Research -> classify current vs observational vs experimental -> establish site focus -> fix technical eligibility -> run Search Release -> run Index Worthiness before broad generated-page sitemap expansion -> benchmark when useful -> implement -> trace provenance/impact when needed -> verify final production -> measure owner-observed outcomes. Do not claim that ARWP, Index Worthiness, BraidGraph adjacency, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
