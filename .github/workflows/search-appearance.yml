@@ -6,17 +6,24 @@ on:
     paths:
       - 'lib/search-appearance.mjs'
       - 'lib/search-appearance-patch.mjs'
+      - 'lib/search-surface-core.mjs'
       - 'bin/arwp-search-appearance.mjs'
       - 'bin/arwp-search-appearance-patch.mjs'
       - 'schema/search-appearance-patch-manifest.schema.json'
       - 'scripts/search-appearance-test.mjs'
       - 'scripts/search-appearance-patch-test.mjs'
       - 'scripts/search-release-practices-test.mjs'
+      - 'scripts/technical-seo-critic-test.mjs'
       - 'registry/search-release-practices.json'
+      - 'registry/technical-seo-critic-practices.json'
+      - 'registry/portfolio-sites.json'
       - 'docs/SEARCH-APPEARANCE.md'
       - 'docs/SEARCH-RELEASE-GATE.md'
+      - 'docs/reviews/technical-seo-critic-2026-09-11.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'skills/arwp-search-release/SKILL.md'
+      - 'skills/arwp-technical-seo-critic/SKILL.md'
+      - 'skills/README.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
@@ -24,17 +31,24 @@ on:
     paths:
       - 'lib/search-appearance.mjs'
       - 'lib/search-appearance-patch.mjs'
+      - 'lib/search-surface-core.mjs'
       - 'bin/arwp-search-appearance.mjs'
       - 'bin/arwp-search-appearance-patch.mjs'
       - 'schema/search-appearance-patch-manifest.schema.json'
       - 'scripts/search-appearance-test.mjs'
       - 'scripts/search-appearance-patch-test.mjs'
       - 'scripts/search-release-practices-test.mjs'
+      - 'scripts/technical-seo-critic-test.mjs'
       - 'registry/search-release-practices.json'
+      - 'registry/technical-seo-critic-practices.json'
+      - 'registry/portfolio-sites.json'
       - 'docs/SEARCH-APPEARANCE.md'
       - 'docs/SEARCH-RELEASE-GATE.md'
+      - 'docs/reviews/technical-seo-critic-2026-09-11.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'skills/arwp-search-release/SKILL.md'
+      - 'skills/arwp-technical-seo-critic/SKILL.md'
+      - 'skills/README.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
@@ -62,14 +76,17 @@ jobs:
         run: |
           node --check lib/search-appearance.mjs
           node --check lib/search-appearance-patch.mjs
+          node --check lib/search-surface-core.mjs
           node --check bin/arwp-search-appearance.mjs
           node --check bin/arwp-search-appearance-patch.mjs
           node --check scripts/search-appearance-test.mjs
           node --check scripts/search-appearance-patch-test.mjs
           node --check scripts/search-release-practices-test.mjs
+          node --check scripts/technical-seo-critic-test.mjs
           node scripts/search-appearance-test.mjs
           node scripts/search-appearance-patch-test.mjs
           node scripts/search-release-practices-test.mjs
+          node scripts/technical-seo-critic-test.mjs
       - name: Verify CLIs are shipped and runnable from the package
         shell: bash
         run: |
