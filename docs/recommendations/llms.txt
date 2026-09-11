@@ -2,7 +2,7 @@
 
 > A dated, source-backed implementation playbook for making public websites easier to discover, retrieve, cite and operate across classic search, Google generative Search, ChatGPT Search, Bing/Copilot and browser agents.
 
-Reviewed: `2026-09-06`
+Reviewed: `2026-09-11`
 Registry version: `0.2`
 Rules: `34`
 
@@ -12,6 +12,7 @@ ARWP does not promise crawling, indexing, ranking, rich results, AI citation or 
 
 - [Search & AI Visibility Playbook](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/): Human guide, implementation packs and searchable rule catalog.
 - [Machine-readable registry](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/registry.json): Current rules, actions, verification steps, priorities, maturity and primary sources.
+- [OpenAI / ChatGPT Search controls](https://dkharlanau.github.io/agent-ready-web-profile/OPENAI-CHATGPT-SEARCH-CONTROLS.html): Publisher-control matrix for OAI-SearchBot, GPTBot, `noindex`, referrals, Atlas ARIA and Apps SDK width testing.
 - [Page Semantics Profile](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/page-semantics.json): Route-aware structured-data and entity guidance.
 - [Ruleset history](https://dkharlanau.github.io/agent-ready-web-profile/recommendations/history/index.json): Immutable dated snapshots.
 - [Growth loop](https://dkharlanau.github.io/agent-ready-web-profile/growth/): Baseline, hypotheses, remediation, owner evidence and experiment review.
@@ -26,9 +27,9 @@ ARWP does not promise crawling, indexing, ranking, rich results, AI citation or 
 6. Citation structure: clear sections, stable anchors, factual parity and supporting evidence.
 7. Media: relevant large images, useful alt/context and discoverable video surfaces when appropriate.
 8. Identity/provenance: real authors, stable profiles, dataset identifiers/licenses and grounded software/product facts.
-9. Platform-specific mechanisms: OAI-SearchBot, Preferred Sources, IndexNow, local/commerce owner data.
+9. Platform-specific mechanisms: OAI-SearchBot, GPTBot, `noindex` suppression semantics, Preferred Sources, IndexNow and local/commerce owner data.
 10. Measurement: Google generative-AI Search Console views, Bing AI Performance and ChatGPT referral analytics.
-11. Agent experiments: ARIA/Atlas compatibility, WebMCP runtime evals and emerging protocol watch items.
+11. Agent compatibility: native semantics + ARIA/Atlas behavior, Apps SDK narrow-width testing, then experimental WebMCP/runtime work where justified.
 
 ## High-signal 2026 updates
 
@@ -40,9 +41,19 @@ Google Search Console now provides dedicated generative-AI performance views for
 
 ### ChatGPT Search and Atlas
 
-OpenAI documents separate controls for OAI-SearchBot discovery and GPTBot training. ChatGPT referral URLs include `utm_source=chatgpt.com`, which can be measured in first-party analytics.
+OpenAI documents separate controls for OAI-SearchBot discovery and GPTBot training. A site that wants content eligible for ChatGPT summaries/snippets should not accidentally block OAI-SearchBot. GPTBot is a separate publisher choice: OpenAI says publishers can disallow GPTBot for sites or pages they want excluded from potential training, including content acquired through users' interactions in Atlas.
 
-OpenAI also documents that ChatGPT Agent in Atlas uses ARIA labels and roles to understand interactive page structure. ARWP therefore treats accessibility semantics as both an accessibility requirement and an agent-compatibility surface, without replacing native HTML or runtime testing.
+A robots block is not a reliable substitute for `noindex` when the publisher specifically wants to suppress a URL/title from ChatGPT. OpenAI says a disallowed URL learned from a third-party search provider or another crawled page may still be surfaced as a link plus page title in ChatGPT Atlas. For that suppression goal, use `noindex` and allow the relevant crawler to fetch the page so it can read the directive. Do not turn `noindex` into a privacy or access-control mechanism.
+
+ChatGPT referral URLs include `utm_source=chatgpt.com`, which can be measured in first-party analytics.
+
+OpenAI also documents that ChatGPT Agent in Atlas uses ARIA labels, roles and states to understand interactive page structure. ARWP therefore treats accurate accessibility semantics as both an accessibility requirement and an agent-compatibility surface, while still preferring native HTML and runtime testing over decorative ARIA.
+
+For Apps SDK experiences, OpenAI recommends testing the app inside the Chat sidebar at smaller widths. Treat this as a real responsive/runtime acceptance test: critical content and actions should remain usable without clipping, hidden controls or interaction paths that only work in a wide desktop layout.
+
+Primary source reviewed 11 September 2026: `https://help.openai.com/en/articles/12627856-publishers-and-developers-faq`.
+
+The three newly clarified companion controls — readable `noindex` suppression semantics, explicit GPTBot/Atlas training-policy wording, and Apps SDK sidebar-width testing — are documented for immediate use but are **not yet counted as separate rules in registry v0.2**. First-class registry/executable coverage is tracked separately so the public rule count remains truthful.
 
 ### Bing and Copilot
 
@@ -61,7 +72,7 @@ WebMCP remains a Chrome origin-trial mechanism and requires browser-runtime eval
 - `media-discover`: Discover images, image context/alt and video discovery.
 - `international`: real localized variants with reciprocal hreflang.
 - `local-commerce`: Google owner data plus Bing Places where applicable.
-- `chatgpt`: OAI-SearchBot, referral measurement and ARIA/Atlas compatibility.
+- `chatgpt`: OAI-SearchBot, referral measurement and ARIA/Atlas compatibility as represented in registry v0.2; use the OpenAI control guide for the 2026-09-11 companion review.
 - `measurement`: Google, Bing and ChatGPT owner-side evidence.
 - `agent-experiments`: WebMCP, AIPREF, W3C Introduction Layer and ARWP runtime truth.
 - `anti-cargo-cult`: no query-variant page factories, fake facts or speculative ranking claims.

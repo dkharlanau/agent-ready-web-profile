@@ -1,6 +1,6 @@
 # Goose Technical Integrity
 
-Status: **report v0.2 · rule pack v0.3 active** · reviewed **2026-09-09**.
+Status: **report v0.2 · rule pack v0.3 active** · document reviewed **2026-09-11**.
 
 Technical Integrity is a bounded, executable Search/AI preflight for real websites. It exists for the period before Search outcome experiments mature: Goose can already catch source-backed technical blockers and risky implementation patterns without pretending those checks prove rankings, citations or traffic.
 
@@ -51,6 +51,8 @@ Google's robots interpretation uses the most specific matching path rule; when e
 - Bing `NOSNIPPET`, `DATA-NOSNIPPET`, `NOARCHIVE`, `NOCACHE` controls that can reduce caption / grounding / citation depth;
 - near-duplicate priority pages using bounded five-word-shingle similarity plus repeated HTML-title clusters;
 - OAI-SearchBot root **and sampled path policy** kept separate from GPTBot training policy.
+
+OpenAI's current FAQ adds an important **manual companion review** to that last detector: a robots block alone is not proof that a URL/title cannot surface in ChatGPT Atlas. If suppression is the actual publisher goal, verify a readable `noindex` on the relevant page. Because OpenAI says the crawler must be allowed to fetch the page to read that directive, a configuration that simultaneously relies on `noindex` and blocks OAI-SearchBot from the same page deserves explicit review. The current executable Technical Integrity detector reports OAI-SearchBot policy but does not yet claim full route-level ChatGPT suppression verification.
 
 ### Internal-link target semantics
 
@@ -115,13 +117,30 @@ Sources:
 - https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a
 - https://www.bing.com/webmasters/help/robots-meta-tags-and-attributes-that-bing-supports-5198d240
 
-### OpenAI / ChatGPT Search
+### OpenAI / ChatGPT Search and Atlas
 
-OpenAI documents OAI-SearchBot as relevant to Search summaries/snippets and GPTBot as a separate training control. Goose keeps those policies separate instead of treating “AI crawler access” as one switch.
+OpenAI currently documents four separate implementation concerns that should not be collapsed into one “AI crawler” policy:
 
-Source:
+1. **Search discovery / summaries / snippets** — intended public content should not accidentally block `OAI-SearchBot` when ChatGPT Search visibility is desired.
+2. **URL/title suppression** — OpenAI says a disallowed page URL learned from a third-party search provider or another crawled page may still surface as a link plus title in ChatGPT Atlas. When the publisher specifically wants to prevent that, OpenAI documents `noindex`; the relevant crawler must be allowed to fetch the page so it can read the directive.
+3. **Potential model training** — `GPTBot` is a separate control. OpenAI says publishers can disallow GPTBot on sites/pages they want excluded from potential training and that this signal is respected for content acquired through Atlas user interactions.
+4. **Agent/app operation** — ChatGPT Agent in Atlas uses ARIA labels, roles and states to interpret page structure and interactive elements. OpenAI also recommends testing Apps SDK experiences inside the Chat sidebar at smaller widths.
 
-- https://help.openai.com/en/articles/12627856
+Implications for Goose:
+
+- do not recommend blocking OAI-SearchBot as a generic privacy mechanism;
+- do not infer GPTBot intent from OAI-SearchBot intent;
+- do not treat robots blocking alone as URL/title suppression evidence;
+- do not treat `noindex` as an authentication or confidentiality boundary;
+- prefer native HTML and correct accessibility semantics over decorative ARIA;
+- require runtime task testing for interactive agent claims;
+- for Apps SDK products, include constrained-width sidebar usability in the acceptance criteria.
+
+The dedicated control matrix is documented in `OPENAI-CHATGPT-SEARCH-CONTROLS.md`.
+
+Source reviewed 2026-09-11:
+
+- https://help.openai.com/en/articles/12627856-publishers-and-developers-faq
 
 ## Derived heuristics
 
