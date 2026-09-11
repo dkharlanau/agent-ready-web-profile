@@ -22,7 +22,7 @@ Also ask:
 
 > Is there enough independent user value to justify publishing this URL into the Search-facing cohort?
 
-## Required sequence
+## Workflow
 
 1. establish technical eligibility and canonical identity;
 2. define a bounded priority cohort;
