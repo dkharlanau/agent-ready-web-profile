@@ -37,7 +37,7 @@
     {
       "id": "metalhatscats-applied-systems",
       "name": "MetalHatsCats",
-      "canonicalUrl": "https://github.com/metalhatscats/metalhatscats",
+      "canonicalUrl": "https://metalhatscats.com/",
       "repository": "metalhatscats/metalhatscats",
       "verticals": ["software-product", "documentation", "editorial", "research-dataset"],
       "goals": ["search", "generative-search", "ai-citations", "acquisition", "measurement", "agent-usability", "agent-discovery"],
