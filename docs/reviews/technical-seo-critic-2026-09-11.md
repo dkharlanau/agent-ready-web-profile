@@ -64,6 +64,12 @@ ARWP Search Surface generated a missing `html[lang]` action in the Search presen
 
 Action: removed the `surface:lang` SEO action from `lib/search-surface-core.mjs` and added `TSC-07-obsolete-and-false-seo-signals`. The critic also rejects `meta keywords`, `rel=next/prev` and obsolete sitelinks-search-box controls as current Google SEO tasks.
 
+### P0 — canonical could disagree across HTML and HTTP channels
+
+ARWP's ordinary canonical checks were centered on document/sitemap/internal-link consistency, but a proxy, framework or hosting layer can also emit an HTTP `Link: <...>; rel=canonical` header. Google supports both HTML and HTTP canonical declarations and warns that using both is more error-prone. An HTML self-canonical can therefore look green while the response header asks Google to consolidate elsewhere.
+
+Action: added `TSC-08-canonical-channel-conflict`. The critic now requires live response-header inspection when HTTP Link canonicals are present and exact resolved-URL agreement if both channels are intentionally used.
+
 ### P0 — MetalHatsCats fleet target pointed at the wrong public surface
 
 The portfolio registry used `https://github.com/metalhatscats/metalhatscats` as the canonical URL while the real public site is `https://metalhatscats.com/`. That could make a fleet audit inspect the repository page instead of the website.
@@ -88,15 +94,18 @@ Ptichi needs a Search-outcome verification round rather than speculative canonic
 
 No repository evidence was found in the sampled fleet for current use of `meta keywords`, `rel=next/prev` or `nositelinkssearchbox`; the new obsolete-signal rule is therefore mainly a regression guard at this point.
 
-`ETag` / `Last-Modified` was not promoted as a blanket site task because static hosting/CDN behavior must be verified from response headers and hosting capabilities first.
+No sampled repository exposed an obvious pagination/query-state family or internal `nofollow` implementation in this pass, so the new pagination, URL-state and link-relation checks remain applicability-gated rather than becoming synthetic fleet defects.
+
+`ETag` / `Last-Modified` and HTTP `Link` canonical behavior were not promoted as blanket site failures because they must be verified from live response headers and hosting/proxy behavior first.
 
 ## Verification contract
 
 Added `scripts/technical-seo-critic-test.mjs` to verify:
 
-- all seven critic practices and their source references exist;
+- all eight critic practices and their source references exist;
 - the Search Surface runtime no longer generates the `html[lang]` SEO action;
 - the critic skill preserves the accessibility/Search distinction;
+- the critic skill includes the HTTP-versus-HTML canonical challenge;
 - the MetalHatsCats canonical fleet target is the real public hostname.
 
 Production Search impact still requires live verification and provider evidence. Passing these checks does not prove ranking, indexing, traffic, Discover visibility or AI citation uplift.
