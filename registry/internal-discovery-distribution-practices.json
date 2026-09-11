@@ -1,0 +1,167 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-11",
+  "title": "ARWP Internal Discovery & Distribution Practices",
+  "purpose": "A source-backed layer for making important pages easy to discover, understand, continue from and share without turning link volume or utility controls into ranking guarantees.",
+  "methodology": {
+    "renderedGraphPreferred": true,
+    "canonicalTargetsPreferred": true,
+    "contextualLinksSeparatedFromGlobalNavigation": true,
+    "breadcrumbsRepresentTypicalUserPath": true,
+    "utilityControlsSeparatedFromRankingSignals": true,
+    "partialCohortNeverTreatedAsCompleteGraph": true,
+    "noMagicLinkCount": true,
+    "noRankingGuarantee": true
+  },
+  "sources": {
+    "googleLinks": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+    "googleBreadcrumbs": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb",
+    "googleSiteMove": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+    "googleEssentials": "https://developers.google.com/search/docs/essentials",
+    "googlePreferredSources": "https://developers.google.com/search/docs/appearance/preferred-sources",
+    "mdnWebShare": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API",
+    "mdnWebStorage": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API"
+  },
+  "practices": [
+    {
+      "id": "IDD-01-crawlable-canonical-internal-links",
+      "priority": "P0",
+      "appliesTo": ["multi-page", "content-site", "data-site"],
+      "question": "Can every important canonical page be reached through ordinary crawlable internal links that point directly to the intended canonical target?",
+      "practice": "Use ordinary HTML anchors with href for important internal navigation and contextual references. Keep meaningful canonical pages connected from at least one useful page or hub, and prefer direct canonical destinations over redirect aliases, stale URLs or noindex states.",
+      "verify": [
+        "priority canonical pages have at least one observed inbound crawlable path in a complete reviewed cohort",
+        "important internal links use ordinary anchors with href",
+        "internal links do not unnecessarily target redirects, canonical aliases or noindex states",
+        "partial bounded coverage is reported as partial rather than converted into orphan findings"
+      ],
+      "sources": ["googleLinks", "googleSiteMove"]
+    },
+    {
+      "id": "IDD-02-descriptive-anchor-text",
+      "priority": "P0",
+      "appliesTo": ["multi-page", "editorial", "documentation"],
+      "question": "Do internal link labels explain the destination well enough to be useful without keyword stuffing or generic boilerplate?",
+      "practice": "Prefer concise descriptive anchor text that makes sense in surrounding context and gives a useful preview of the destination. Avoid repeated generic labels such as 'click here', 'read more' or 'article' when a clearer label is practical, but do not force unnatural exact-match keywords into every link.",
+      "verify": [
+        "priority contextual links expose non-empty anchor text",
+        "generic anchor labels are bounded and reviewed rather than treated as automatic defects",
+        "anchor text is relevant to both source context and destination",
+        "anchor wording is not mechanically stuffed with keyword variants"
+      ],
+      "sources": ["googleLinks", "googleEssentials"]
+    },
+    {
+      "id": "IDD-03-reachability-depth-and-global-only-gaps",
+      "priority": "P1",
+      "appliesTo": ["multi-page", "large-site", "data-site"],
+      "question": "Are priority pages reachable through useful topical paths instead of depending only on a global footer, search box or deep click chain?",
+      "practice": "Measure bounded rendered reachability from representative entry points and distinguish contextual, hub, utility and global links. Treat global-only reachability and excessive depth as review signals, not ranking failures. Never invent a universal maximum click depth or reward raw link count.",
+      "verify": [
+        "priority pages are not orphaned in the complete reviewed graph",
+        "global-only inbound paths are identified separately from true orphans",
+        "depth is measured from explicit entry points or hubs with the cohort definition retained",
+        "no arbitrary universal link-count or click-depth threshold is presented as a Google requirement"
+      ],
+      "sources": ["googleLinks"]
+    },
+    {
+      "id": "IDD-04-semantic-related-and-reverse-links",
+      "priority": "P1",
+      "appliesTo": ["knowledge-site", "data-site", "editorial"],
+      "question": "Do related-content links express a real relationship, and can users move both from an entity to its contexts and from a context back to the entity?",
+      "practice": "Build related and reverse-link blocks from real editorial, taxonomy, comparison, evidence, usage or workflow relationships. Prefer a small set of explainable links such as 'Often confused with', 'Appears in', 'Use with' or 'Compared with' over random popularity rails or sitewide keyword clouds.",
+      "verify": [
+        "related links have a documented relation type or visible reason",
+        "high-value hub-to-entity and entity-to-context paths are reciprocal when the relationship genuinely supports both directions",
+        "related blocks do not contain duplicate or random links merely to increase link volume",
+        "targets resolve to canonical indexable pages unless the user journey intentionally requires another state"
+      ],
+      "sources": ["googleLinks"]
+    },
+    {
+      "id": "IDD-05-visible-breadcrumbs-and-breadcrumblist",
+      "priority": "P1",
+      "appliesTo": ["hierarchical-site", "multi-page"],
+      "question": "Does the page expose a useful visible breadcrumb path, with BreadcrumbList structured data when appropriate, based on the user's typical path rather than mechanically mirroring the URL?",
+      "practice": "For hierarchical content, provide concise visible breadcrumbs that reflect a normal user journey. When BreadcrumbList structured data is used, keep it consistent with the visible hierarchy and current canonical URLs. Do not fabricate categories solely to create deeper breadcrumb markup.",
+      "verify": [
+        "hierarchical priority pages expose a useful visible breadcrumb trail",
+        "BreadcrumbList exists when the site intentionally supports breadcrumb structured data",
+        "breadcrumb items resolve to canonical usable destinations",
+        "breadcrumb hierarchy represents a typical user path instead of blindly mirroring folder depth"
+      ],
+      "sources": ["googleBreadcrumbs"]
+    },
+    {
+      "id": "IDD-06-intentional-continuation-blocks",
+      "priority": "P1",
+      "appliesTo": ["editorial", "reference-site", "tool-site"],
+      "question": "When a page is not intentionally terminal, does it give the reader a small number of useful next steps with distinct jobs?",
+      "practice": "Use an intentional continuation block such as 'Continue from here' or 'What next?' when it helps the reader. Prefer distinct jobs such as Understand, Apply, Compare, Evidence or Use a tool rather than an undifferentiated list of more articles. Keep the block compact and relation-driven.",
+      "verify": [
+        "non-terminal priority pages expose at least one useful contextual, hub or utility continuation",
+        "continuation items have distinct user jobs or relation labels when appropriate",
+        "the block stays compact enough to remain comprehensible",
+        "terminal pages are allowed to remain terminal when no useful next step exists"
+      ],
+      "sources": ["googleLinks"]
+    },
+    {
+      "id": "IDD-07-page-utility-share-copy-save-cite",
+      "priority": "P2",
+      "appliesTo": ["editorial", "reference-site", "knowledge-site"],
+      "question": "Would lightweight page utilities make a useful resource easier to return to, cite or share without obscuring the content or being misrepresented as SEO signals?",
+      "practice": "When useful, add a compact page utility surface for actions such as Share, Copy link, Save and Cite. Use the Web Share API only as progressive enhancement with a copy-link fallback; local save can use local browser storage when privacy-appropriate. These are user/distribution affordances, not ranking factors.",
+      "verify": [
+        "share action has a robust fallback when Web Share is unavailable",
+        "copy-link uses the canonical URL rather than a tracking or alias URL",
+        "save behavior is local and privacy-bounded unless an authenticated product explicitly owns server-side state",
+        "utility controls do not block reading or claim direct ranking benefit"
+      ],
+      "sources": ["mdnWebShare", "mdnWebStorage", "googleLinks"]
+    },
+    {
+      "id": "IDD-08-citation-and-canonical-share-contract",
+      "priority": "P2",
+      "appliesTo": ["reference-site", "research", "knowledge-site"],
+      "question": "Can a reader or agent copy a stable citation or link that identifies the canonical page and truthful review/publication metadata?",
+      "practice": "For citable reference content, expose a stable citation or copyable Markdown/text link using the canonical URL and truthful title, publisher and review/publication metadata when available. Do not invent review dates, authorship, DOI-like identifiers or publication metadata merely to make the citation look formal.",
+      "verify": [
+        "citation and copy-link utilities use the canonical URL",
+        "review or publication dates come from a real source of truth",
+        "publisher/author fields are truthful and consistent with page metadata",
+        "no pseudo-DOI or fabricated academic metadata is generated"
+      ],
+      "sources": ["googleEssentials"]
+    },
+    {
+      "id": "IDD-09-preferred-source-affordance",
+      "priority": "P2",
+      "appliesTo": ["publisher", "editorial", "reference-site"],
+      "question": "If the publication is eligible and the audience relationship justifies it, can users deliberately add the domain as a Google Preferred Source without implying that the button itself improves ranking?",
+      "practice": "For eligible domain/subdomain publishers, consider Google's supported Preferred Sources button or deeplink as an audience/distribution affordance. Verify site availability in the source-preferences tool before promoting it prominently, keep the control secondary to the page content, and state no ranking guarantee.",
+      "verify": [
+        "the site is domain- or subdomain-level and is checked for applicability before prominent promotion",
+        "the implementation follows a currently supported Google button or deeplink pattern",
+        "the control is not presented as a ranking requirement or guaranteed eligibility",
+        "the preferred-source affordance does not replace ordinary internal discovery or external audience work"
+      ],
+      "sources": ["googlePreferredSources"]
+    },
+    {
+      "id": "IDD-10-regression-safe-link-graph-gate",
+      "priority": "P1",
+      "appliesTo": ["ci", "multi-page", "generated-site"],
+      "question": "Can the repository detect regressions in important internal paths without turning a partial crawl or heuristic into a synthetic SEO score?",
+      "practice": "Add deterministic graph checks for canonical target health, bounded orphan/global-only states, missing continuation where the page family requires it, duplicate or broken relation targets, and selected anchor-quality regressions. Preserve cohort, denominators, observation caps and unknown states; avoid PageRank-like scoring or a universal link quota.",
+      "verify": [
+        "CI fails only on deterministic contract violations and keeps heuristic findings as review/watch states",
+        "canonical/redirect/noindex target health is checked for selected internal relations",
+        "cohort size, observation caps and partial coverage are retained in reports",
+        "no composite SEO authority score or magic link quota is emitted"
+      ],
+      "sources": ["googleLinks", "googleSiteMove"]
+    }
+  ]
+}
