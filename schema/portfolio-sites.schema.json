@@ -31,6 +31,16 @@
   },
   "$defs": {
     "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "githubPages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "hostnameRoot", "independentSearchIdentity"],
+      "properties": {
+        "kind": { "enum": ["user-site-root", "organization-site-root", "project-site-path"] },
+        "hostnameRoot": { "$ref": "#/$defs/httpsUrl" },
+        "independentSearchIdentity": { "type": "boolean" }
+      }
+    },
     "site": {
       "type": "object",
       "additionalProperties": false,
@@ -40,6 +50,7 @@
         "name": { "type": "string", "minLength": 1, "maxLength": 200 },
         "canonicalUrl": { "$ref": "#/$defs/httpsUrl" },
         "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "githubPages": { "$ref": "#/$defs/githubPages" },
         "verticals": {
           "type": "array",
           "minItems": 1,

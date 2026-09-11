@@ -91,15 +91,18 @@ These signals require review. They do not automatically prove spam or trigger au
 
 ## GitHub Pages identity boundary
 
-For `owner.github.io/project/`, the project path is **not** an independent hostname-level Search identity. Site names and Search favicons are hostname-scoped.
+Classify the Pages deployment before applying hostname-level Search identity rules. The account type and the URL shape are separate facts:
 
-Therefore:
+- `https://<user>.github.io/` — a **user-site root**. It is the hostname root and therefore has its own hostname-level Search identity surface.
+- `https://<organization>.github.io/` — an **organization-site root**. It is also the hostname root and gets the same full Search identity treatment as any other independent hostname: site name, favicon, `WebSite`, sitemap, robots and canonical-host coherence.
+- `https://<account>.github.io/<repository>/` — a **project-site path** under the account hostname. The project path does not get a separate hostname-level Google site-name or Search-favicon scope from the parent host.
+- a GitHub Pages custom domain is an independent hostname and should be evaluated as that hostname after canonical/domain migration is coherent.
 
-- fix page-level title, description, canonical and visible purpose normally;
-- do not keep adding metadata in an attempt to force a separate project site name/favicon at path scope;
-- when a project is intended to become an independent brand/search property, use a custom domain or another independent hostname as a product decision, then migrate canonicals/sitemaps/structured data coherently.
+Do not confuse an organization site with a project site merely because both are hosted by GitHub Pages. A repository named `<organization>.github.io` that publishes at `https://<organization>.github.io/` is a hostname-root site, not a subpath project.
 
-This is separate from Index Worthiness: a valuable page can exist under a weak brand scope, and a custom domain does not make a weak page valuable.
+Therefore, portfolio metadata may record `githubPages.kind` as `user-site-root`, `organization-site-root`, or `project-site-path`. `independentSearchIdentity` describes the hostname-scope consequence, not an expected ranking advantage.
+
+This is separate from Index Worthiness: a valuable page can exist under a shared-host project path, and an independent hostname does not make a weak page valuable.
 
 ## Review format
 

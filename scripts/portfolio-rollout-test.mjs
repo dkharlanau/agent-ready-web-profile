@@ -20,6 +20,15 @@ assert.ok(ptichi);
 assert.equal(ptichi.canonicalUrl, 'https://ptichi.com/');
 assert.equal(ptichi.repository, 'dkharlanau/ptichi-site');
 assert.equal(ptichi.rollout.mode, 'proposal-only');
+const dkharlanau = portfolio.sites.find(site => site.id === 'dkharlanau-sap-knowledge');
+const metkagram = portfolio.sites.find(site => site.id === 'metkagram-language-knowledge');
+const cognitiveBiases = portfolio.sites.find(site => site.id === 'cognitive-biases-knowledge');
+assert.equal(dkharlanau.githubPages.kind, 'user-site-root');
+assert.equal(dkharlanau.githubPages.independentSearchIdentity, true);
+assert.equal(metkagram.githubPages.kind, 'organization-site-root');
+assert.equal(metkagram.githubPages.independentSearchIdentity, true);
+assert.equal(cognitiveBiases.githubPages.kind, 'organization-site-root');
+assert.equal(cognitiveBiases.githubPages.independentSearchIdentity, true);
 
 const rollout = buildPortfolioRollout(portfolio, trends, { now });
 assert.ok(rollout.candidates.length > 0);
@@ -108,4 +117,4 @@ const invalidResult = validatePortfolioRegistry(invalid);
 assert.equal(invalidResult.valid, false);
 assert.ok(invalidResult.semanticErrors.some(error => /Duplicate portfolio repository/.test(error)));
 
-console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across 7 sites including Ptichi and builds ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
+console.log(`PASS owner portfolio maps ${rollout.candidates.length} ADOPT/MEASURED trend candidates across 7 sites including Ptichi and preserves GitHub Pages user-root versus organization-root hostname identity while building ${proposals.proposals.length} deterministic review-only target proposals without generic production mutation`);
