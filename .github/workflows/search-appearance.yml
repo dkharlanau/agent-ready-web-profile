@@ -15,16 +15,23 @@ on:
       - 'scripts/search-appearance-patch-test.mjs'
       - 'scripts/search-release-practices-test.mjs'
       - 'scripts/technical-seo-critic-test.mjs'
+      - 'scripts/image-discovery-layer-test.mjs'
       - 'registry/search-release-practices.json'
       - 'registry/technical-seo-critic-practices.json'
+      - 'registry/image-discovery-practices.json'
       - 'registry/portfolio-sites.json'
       - 'docs/SEARCH-APPEARANCE.md'
       - 'docs/SEARCH-RELEASE-GATE.md'
+      - 'docs/IMAGE-DISCOVERY-LAYER.md'
       - 'docs/reviews/technical-seo-critic-2026-09-11.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'skills/arwp-search-release/SKILL.md'
       - 'skills/arwp-technical-seo-critic/SKILL.md'
+      - 'skills/arwp-image-discovery/SKILL.md'
+      - 'skills/index.json'
       - 'skills/README.md'
+      - 'docs/skills/index.json'
+      - 'AGENTS.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
@@ -41,16 +48,23 @@ on:
       - 'scripts/search-appearance-patch-test.mjs'
       - 'scripts/search-release-practices-test.mjs'
       - 'scripts/technical-seo-critic-test.mjs'
+      - 'scripts/image-discovery-layer-test.mjs'
       - 'registry/search-release-practices.json'
       - 'registry/technical-seo-critic-practices.json'
+      - 'registry/image-discovery-practices.json'
       - 'registry/portfolio-sites.json'
       - 'docs/SEARCH-APPEARANCE.md'
       - 'docs/SEARCH-RELEASE-GATE.md'
+      - 'docs/IMAGE-DISCOVERY-LAYER.md'
       - 'docs/reviews/technical-seo-critic-2026-09-11.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'skills/arwp-search-release/SKILL.md'
       - 'skills/arwp-technical-seo-critic/SKILL.md'
+      - 'skills/arwp-image-discovery/SKILL.md'
+      - 'skills/index.json'
       - 'skills/README.md'
+      - 'docs/skills/index.json'
+      - 'AGENTS.md'
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/search-appearance.yml'
@@ -86,10 +100,12 @@ jobs:
           node --check scripts/search-appearance-patch-test.mjs
           node --check scripts/search-release-practices-test.mjs
           node --check scripts/technical-seo-critic-test.mjs
+          node --check scripts/image-discovery-layer-test.mjs
           node scripts/search-appearance-test.mjs
           node scripts/search-appearance-patch-test.mjs
           node scripts/search-release-practices-test.mjs
           node scripts/technical-seo-critic-test.mjs
+          node scripts/image-discovery-layer-test.mjs
       - name: Verify CLIs are shipped and runnable from the package
         shell: bash
         run: |
