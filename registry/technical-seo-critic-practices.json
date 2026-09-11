@@ -1,0 +1,172 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-11",
+  "title": "ARWP Technical SEO Critic Practices",
+  "purpose": "A second-pass adversarial review for technical Search gaps that can survive ordinary metadata, canonical, robots, sitemap and structured-data checks. It is designed to find what is still missing, contradictory, obsolete or only superficially green after the normal ARWP Search Release and Technical Integrity passes.",
+  "methodology": {
+    "runAfterBaselineChecks": true,
+    "doNotDuplicateExistingFindings": true,
+    "finalArtifactAndLiveSurfaceRequired": true,
+    "fieldEvidencePreferredForPerformance": true,
+    "noRankingGuarantee": true,
+    "accessibilityAndSeoClaimsSeparated": true,
+    "obsoleteSignalsRejected": true,
+    "ownerDataCanRemainUnknown": true
+  },
+  "sources": {
+    "googleValidMetadata": "https://developers.google.com/search/docs/crawling-indexing/valid-page-metadata",
+    "googlePageExperience": "https://developers.google.com/search/docs/appearance/page-experience",
+    "googleCoreWebVitals": "https://developers.google.com/search/docs/appearance/core-web-vitals",
+    "googlePagination": "https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading",
+    "googleFacetedNavigation": "https://developers.google.com/crawling/docs/faceted-navigation",
+    "googleCrawlerOverview": "https://developers.google.com/crawling/docs/crawlers-fetchers/overview-google-crawlers",
+    "googleSpecialTags": "https://developers.google.com/search/docs/crawling-indexing/special-tags",
+    "googleLinks": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+    "googleQualifyLinks": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+    "googleCanonical": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+    "googleRobotsMeta": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"
+  },
+  "practices": [
+    {
+      "id": "TSC-01-head-metadata-parser-integrity",
+      "priority": "P0",
+      "appliesTo": ["indexable-html"],
+      "question": "Can an invalid element terminate Google's head parsing before it reaches canonical, robots, favicon, hreflang, structured data or other critical metadata?",
+      "whyMissedByOrdinaryAudit": "A page can contain every expected tag and still fail semantically if an invalid head element appears before those tags. Presence-only checks therefore produce a false green state.",
+      "practice": "Inspect the final shipped head in source order. Keep head content limited to valid metadata elements, and reject iframe, img or other invalid head children before Search-critical metadata. Verify the generated and deployed HTML rather than only the source template.",
+      "verify": [
+        "final head contains only valid head elements",
+        "no invalid head breaker precedes title/meta/link/script/style/base/noscript/template metadata",
+        "canonical and robots metadata occur inside the effective parsed head",
+        "representative generated leaf pages pass the same check"
+      ],
+      "sources": ["googleValidMetadata"]
+    },
+    {
+      "id": "TSC-02-search-field-performance",
+      "priority": "P1",
+      "appliesTo": ["indexable-html"],
+      "question": "Do real users experience poor Core Web Vitals even though static SEO checks are green?",
+      "whyMissedByOrdinaryAudit": "ARWP already models Core Web Vitals in Site Focus, but a Search Release can otherwise finish without carrying field performance into the release decision.",
+      "practice": "Bring field Core Web Vitals evidence into the Search release review when available. Treat LCP, INP and CLS as page-experience signals used by Google's ranking systems, not as a standalone SEO score. Keep lab diagnostics separate from field evidence and do not fabricate values when owner data is unavailable.",
+      "verify": [
+        "field or Search Console Core Web Vitals evidence is recorded when available",
+        "good targets use LCP <= 2.5 s, INP < 200 ms and CLS < 0.1",
+        "mobile and desktop evidence are not silently collapsed when they differ",
+        "missing field data remains unknown rather than pass",
+        "no claim says perfect Core Web Vitals guarantees ranking"
+      ],
+      "sources": ["googlePageExperience", "googleCoreWebVitals"]
+    },
+    {
+      "id": "TSC-03-pagination-canonical-independence",
+      "priority": "P1",
+      "appliesTo": ["paginated", "large-collection", "data-site"],
+      "question": "Does pagination expose independently crawlable pages, or do page 2+ URLs collapse back to page 1 and hide deeper items?",
+      "whyMissedByOrdinaryAudit": "Generic canonical validation can accept a technically valid canonical even when every paginated page incorrectly canonicalizes to the first page.",
+      "practice": "Give each useful paginated page a persistent crawlable URL and its own canonical identity. Link pages in a crawlable sequence. Do not use rel=next/prev as a Google indexing mechanism and do not canonicalize all pages to page 1 merely because they belong to one collection.",
+      "verify": [
+        "page 2+ has a persistent URL",
+        "useful pagination pages self-canonicalize",
+        "page 2+ is reachable through crawlable anchors",
+        "pagination does not depend on rel=next/prev for Google indexing",
+        "filter/sort variants are handled separately from true pagination"
+      ],
+      "sources": ["googlePagination"]
+    },
+    {
+      "id": "TSC-04-crawl-state-space-control",
+      "priority": "P1",
+      "appliesTo": ["faceted-navigation", "filters", "search-pages", "large-site", "data-site"],
+      "question": "Can filters, sort orders, tracking parameters or combinatorial URL states create a practically unbounded crawl space?",
+      "whyMissedByOrdinaryAudit": "A sample of healthy canonical pages does not reveal millions of discoverable low-value combinations outside the sample.",
+      "practice": "Bound the crawlable URL state space. Keep parameter ordering and semantics consistent, prevent session/tracking and non-useful filter states from multiplying crawlable URLs, and return a real 404 for impossible or empty combinations when appropriate. Only intentional index candidates should be promoted through internal links and sitemaps.",
+      "verify": [
+        "parameter/state families are inventoried",
+        "equivalent states do not create uncontrolled URL permutations",
+        "session and tracking parameters are not used as index identities",
+        "empty or nonsensical combinations do not masquerade as useful 200 pages",
+        "sitemap publication remains a curated canonical cohort"
+      ],
+      "sources": ["googleFacetedNavigation"]
+    },
+    {
+      "id": "TSC-05-http-revalidation-efficiency",
+      "priority": "P2",
+      "appliesTo": ["frequently-updated", "large-site", "large-static-site"],
+      "question": "Can a crawler cheaply determine that a previously fetched resource has not changed?",
+      "whyMissedByOrdinaryAudit": "Indexability and freshness checks inspect content state, but do not necessarily inspect HTTP cache validators and conditional revalidation behavior.",
+      "practice": "Where the hosting stack supports it, publish truthful ETag and/or Last-Modified validators and verify conditional requests can return 304 for unchanged resources. Prefer content-derived validators and avoid fake freshness caused by build timestamps. Treat this as crawl-efficiency work, not a direct ranking factor.",
+      "verify": [
+        "ETag and/or Last-Modified semantics are intentional",
+        "unchanged conditional requests can return 304 when supported",
+        "validators change when the represented resource materially changes",
+        "Last-Modified is not blanket build-time freshness",
+        "cache behavior does not conflict with deployment correctness"
+      ],
+      "sources": ["googleCrawlerOverview"]
+    },
+    {
+      "id": "TSC-06-link-follow-and-relationship-integrity",
+      "priority": "P2",
+      "appliesTo": ["multi-page", "affiliate", "ugc", "sponsored-links"],
+      "question": "Are important internal discovery paths accidentally nofollow, or are paid/user-generated outbound relationships left unqualified?",
+      "whyMissedByOrdinaryAudit": "A crawlable href can look healthy to a basic link detector while rel attributes change how the relationship is interpreted.",
+      "practice": "Keep important internal canonical discovery paths normally followable. Do not use nofollow as a substitute for internal crawl-state design. Qualify paid links with sponsored and user-generated links with ugc where appropriate; use nofollow when the other values do not fit and the site does not want Google to associate itself with the target.",
+      "verify": [
+        "priority internal paths are not unintentionally nofollow",
+        "sponsored relationships are qualified",
+        "user-generated links are qualified where applicable",
+        "nofollow is not being used as the primary internal crawl-control mechanism"
+      ],
+      "sources": ["googleLinks", "googleQualifyLinks"]
+    },
+    {
+      "id": "TSC-07-obsolete-and-false-seo-signals",
+      "priority": "P2",
+      "appliesTo": ["all"],
+      "question": "Are we spending engineering effort on metadata Google ignores, or incorrectly labelling accessibility/semantic attributes as Search ranking controls?",
+      "whyMissedByOrdinaryAudit": "SEO checklists tend to accumulate historical advice and can turn harmless semantic recommendations into false Search requirements.",
+      "practice": "Reject meta keywords, rel=next/prev and obsolete sitelinks-search-box controls as Google Search optimization tasks. Keep html lang for accessibility and document semantics when useful, but do not claim that Google Search uses it to determine page language. When a platform changes support, update the ARWP finding rather than preserving cargo-cult advice.",
+      "verify": [
+        "no meta-keywords SEO task is generated",
+        "rel=next/prev is not presented as a Google indexing signal",
+        "nositelinkssearchbox is not presented as an active control",
+        "html lang is classified as accessibility/semantic metadata rather than Google language-detection SEO",
+        "deprecated recommendations are removed or demoted when official documentation changes"
+      ],
+      "sources": ["googleSpecialTags", "googlePagination"]
+    },
+    {
+      "id": "TSC-08-canonical-channel-conflict",
+      "priority": "P0",
+      "appliesTo": ["indexable-html", "http-link-canonical"],
+      "question": "Does the HTTP Link header declare a different canonical URL from the HTML canonical or other strong canonical signals?",
+      "whyMissedByOrdinaryAudit": "An HTML-only audit can report a healthy self-canonical while the response header independently asks Google to consolidate the page elsewhere.",
+      "practice": "Inspect HTTP Link headers for rel=canonical on representative indexable responses. Prefer one canonical declaration method. If both HTML and HTTP canonical are intentionally present, require exact resolved-URL agreement and keep sitemap/internal-link signals aligned with the same target.",
+      "verify": [
+        "HTTP Link rel=canonical presence is recorded",
+        "HTML and HTTP canonicals resolve to the same URL when both exist",
+        "no redirect or proxy layer injects a conflicting canonical header",
+        "sitemap and priority internal links reinforce the chosen canonical target"
+      ],
+      "sources": ["googleCanonical"]
+    },
+    {
+      "id": "TSC-09-negative-serving-directives",
+      "priority": "P1",
+      "appliesTo": ["indexable-html", "image-discovery", "video-discovery", "ai-search"],
+      "question": "Do combined robots meta, googlebot meta and X-Robots-Tag rules unintentionally suppress snippets, images, video previews or future Search eligibility even though the page remains indexable?",
+      "whyMissedByOrdinaryAudit": "A page can pass a binary indexability check while negative serving directives still materially restrict how it can appear in Search, Discover, Images or AI surfaces. These rules may also be injected at the HTTP layer and combine across declarations.",
+      "practice": "Resolve the effective negative serving directives across HTML and HTTP for representative priority pages. Flag unexpected nosnippet/max-snippet:0, noimageindex, max-image-preview:none, max-video-preview:0, notranslate or unavailable_after states when they conflict with the site's Search goals. Preserve intentional publisher controls; do not remove a restriction merely to maximize exposure.",
+      "verify": [
+        "robots, googlebot and X-Robots-Tag directives are evaluated together",
+        "snippet restrictions match publisher intent",
+        "image/video preview restrictions match discovery goals",
+        "unavailable_after is absent unless an expiry is intentional and current",
+        "publisher controls remain authoritative even when they reduce Search exposure"
+      ],
+      "sources": ["googleRobotsMeta"]
+    }
+  ]
+}

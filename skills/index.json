@@ -35,6 +35,12 @@
       "description": "Run a final hostname-root Search release interview across site identity, title sources, snippet hygiene, favicon delivery, canonical host, sitemap/robots, internal discovery, localization, GitHub Pages domain behavior, final build output and owner-observed Search appearance."
     },
     {
+      "name": "arwp-technical-seo-critic",
+      "path": "skills/arwp-technical-seo-critic/SKILL.md",
+      "role": "technical-seo-critic",
+      "description": "Run an adversarial second-pass technical SEO review for false-green metadata and head parsing, field Core Web Vitals evidence, pagination canonical independence, bounded URL state spaces, crawl revalidation, link relationship semantics and obsolete Search advice."
+    },
+    {
       "name": "arwp-index-worthiness",
       "path": "skills/arwp-index-worthiness/SKILL.md",
       "role": "index-worthiness-publication-gate",
@@ -113,6 +119,7 @@
     "siteFocus": "arwp-site-focus",
     "searchMaturity": "arwp-search-maturity",
     "searchRelease": "arwp-search-release",
+    "technicalSeoCritic": "arwp-technical-seo-critic",
     "indexWorthiness": "arwp-index-worthiness",
     "sitePreparation": "arwp-prepare-site",
     "upgradeCompiler": "arwp-adaptive-upgrade",
@@ -124,6 +131,7 @@
       "arwp-site-focus",
       "arwp-search-maturity",
       "arwp-search-release",
+      "arwp-technical-seo-critic",
       "arwp-index-worthiness",
       "arwp-adaptive-upgrade",
       "arwp-target-transformation",
@@ -136,6 +144,6 @@
       "arwp-discoverability",
       "arwp-portfolio-fleet"
     ],
-    "principle": "Use the growth orchestrator and run Site Focus before broad content/discoverability expansion when the target site's problem territory, audience, scope or navigation is unclear. Use Measurement OS whenever Search/AI outcomes need provider-native baselines, page cohorts or stage-separated interpretation. Fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; run Search Release before calling a public hostname ready so crawlability, site identity, title/snippet/favicon, canonical host, final build and owner-observed Search presentation remain separate evidence; run Index Worthiness before broad generated-page sitemap expansion so technically indexable URLs still need demand, unique value, standalone utility, provenance, connectivity and canonical identity; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
+    "principle": "Use the growth orchestrator and run Site Focus before broad content/discoverability expansion when the target site's problem territory, audience, scope or navigation is unclear. Use Measurement OS whenever Search/AI outcomes need provider-native baselines, page cohorts or stage-separated interpretation. Fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; run Search Release before calling a public hostname ready so crawlability, site identity, title/snippet/favicon, canonical host, final build and owner-observed Search presentation remain separate evidence; run Technical SEO Critic after the ordinary technical/Search pass to challenge false-green head parsing, performance evidence, pagination, URL-state, cache-validator, link-relation and obsolete-signal states; run Index Worthiness before broad generated-page sitemap expansion so technically indexable URLs still need demand, unique value, standalone utility, provenance, connectivity and canonical identity; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
   }
 }
