@@ -1,0 +1,131 @@
+{
+  "updated_at": "2026-09-05",
+  "tracked_sites": [
+    "https://dkharlanau.github.io/agent-ready-web-profile/",
+    "https://dkharlanau.github.io/ai-cv-builder/",
+    "https://dkharlanau.github.io/cutover-graph/",
+    "https://dkharlanau.github.io/data-relationship-map/",
+    "https://dkharlanau.github.io/decision-tables-as-code/",
+    "https://dkharlanau.github.io/enterprise-architecture-composer/",
+    "https://dkharlanau.github.io/enterprise-change-graph/",
+    "https://dkharlanau.github.io/interface-as-code/",
+    "https://dkharlanau.github.io/mapping-as-code/",
+    "https://dkharlanau.github.io/process-as-code/",
+    "https://dkharlanau.github.io/project-evidence-graph/",
+    "https://dkharlanau.github.io/reconciliation-as-code/",
+    "https://dkharlanau.github.io/sap-agentic-operations/",
+    "https://dkharlanau.github.io/signal-to-insight/",
+    "https://dkharlanau.github.io/transformation-graph/",
+    "https://dkharlanau.github.io/visual-workbench/"
+  ],
+  "projects": [
+    {
+      "property": "sc-domain:bonihua.ru",
+      "project": "Bonihua legacy RU",
+      "role": "migration",
+      "priority": 90,
+      "monetization": "Preserve qualified language-learning demand during migration",
+      "next_action": "Complete .com measurement and map legacy landing pages",
+      "measurement": "GSC only"
+    },
+    {
+      "property": "sc-domain:bonihua.by",
+      "project": "Bonihua legacy BY",
+      "role": "migration",
+      "priority": 85,
+      "monetization": "Preserve qualified language-learning demand during migration",
+      "next_action": "Complete .com measurement and map legacy landing pages",
+      "measurement": "GSC only"
+    },
+    {
+      "property": "https://bonihua.com/",
+      "project": "Bonihua",
+      "role": "income",
+      "priority": 100,
+      "monetization": "Paid lessons, teacher materials, specialist matching",
+      "next_action": "Define useful-action and qualified-enquiry conversion events after the first hostname-filtered baseline",
+      "measurement": "GSC; consent-aware GTM-KLGPW9DB live; GA4 G-T2TS9NCN2N"
+    },
+    {
+      "property": "https://dkharlanau.github.io/",
+      "project": "Personal site",
+      "role": "proof",
+      "priority": 95,
+      "monetization": "Qualified SAP and enterprise-AI consulting conversations",
+      "next_action": "Connect case study entry to a bounded diagnostic request",
+      "measurement": "GSC and GA4 tag"
+    },
+    {
+      "property": "https://martenweave.github.io/",
+      "project": "Martenweave",
+      "role": "income",
+      "priority": 92,
+      "monetization": "Paid model-governance diagnostic or pilot",
+      "next_action": "Publish one evidence-backed pilot path and measure qualified requests",
+      "measurement": "GSC; consent-aware GA4 G-T2TS9NCN2N live"
+    },
+    {
+      "property": "https://cognitive-biases.github.io/",
+      "project": "Cognitive Biases",
+      "role": "audience",
+      "priority": 82,
+      "monetization": "Decision toolkit, workshop, or team pack",
+      "next_action": "Improve one high-impression page and attach one useful tool action",
+      "measurement": "GSC; consent-aware GA4 G-T2TS9NCN2N live"
+    },
+    {
+      "property": "https://ptichi.com/",
+      "project": "Ptichi",
+      "role": "research",
+      "priority": 72,
+      "monetization": "Paid rehearsal plan after repeat-use evidence",
+      "next_action": "Define consented rehearsal-completion events after a baseline of hostname-filtered traffic",
+      "measurement": "GSC empty; consent-aware GTM-56QZHWVW version 2 live; GA4 G-T2TS9NCN2N"
+    },
+    {
+      "property": "https://cbt-cards.github.io/",
+      "project": "CBT Cards",
+      "role": "audience",
+      "priority": 58,
+      "monetization": "Curated educator or professional practice pack",
+      "next_action": "Measure tool completion before expanding content",
+      "measurement": "GSC; consent-aware GA4 G-T2TS9NCN2N live"
+    },
+    {
+      "property": "https://metkagram.github.io/",
+      "project": "Metkagram",
+      "role": "research",
+      "priority": 50,
+      "monetization": "Undecided until repeat practice is demonstrated",
+      "next_action": "Use aggregate page traffic separately from local-only learning telemetry",
+      "measurement": "GSC; consent-aware aggregate GA4 G-T2TS9NCN2N live; learning telemetry remains local-only"
+    },
+    {
+      "property": "https://brali-lifeos.github.io/",
+      "project": "Brali",
+      "role": "research",
+      "priority": 45,
+      "monetization": "Narrow practice product after audience validation",
+      "next_action": "Use hostname-filtered GA4 data to test repeat use around the strongest existing practice cluster",
+      "measurement": "GSC; consent-aware GTM-5TJVLJG9 version 2 live; GA4 G-T2TS9NCN2N"
+    },
+    {
+      "property": "https://wooolfmesh.github.io/",
+      "project": "Wooolfmesh",
+      "role": "hold",
+      "priority": 10,
+      "monetization": "No active investment",
+      "next_action": "Maintain only",
+      "measurement": "GSC; consent-aware aggregate GA4 G-T2TS9NCN2N live; product telemetry remains local-only"
+    },
+    {
+      "property": "sc-domain:metalhatscats.com",
+      "project": "Metalhatscats",
+      "role": "audience",
+      "priority": 60,
+      "monetization": "Undefined until lead/intent signal is defined",
+      "next_action": "Add explicit consent-aware analytics and define a primary demand action before scaling experiments",
+      "measurement": "GSC; GA4 if live"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+project,property,clicks_current,clicks_previous,clicks_delta,impressions_current,impressions_previous,impressions_delta,ctr_current,ctr_previous,ctr_delta,position_current,position_previous,position_delta
+Cognitive Biases,https://cognitive-biases.github.io/,41,1,40,10100,260,9840,0.004059,0.003846,0.000213,14.395644,15.734615,-1.338972
+Metalhatscats,sc-domain:metalhatscats.com,39,59,-20,7477,15296,-7819,0.005216,0.003857,0.001359,11.401364,11.466985,-0.065621
+Brali,https://brali-lifeos.github.io/,33,5,28,7242,2414,4828,0.004557,0.002071,0.002486,10.887462,16.438277,-5.550815
+CBT Cards,https://cbt-cards.github.io/,13,0,13,324,12,312,0.040123,0.000000,0.040123,5.996914,16.666667,-10.669753
+Ptichi,https://ptichi.com/,2,0,2,22,0,22,0.090909,0.000000,0.090909,8.409091,,
+Personal site,https://dkharlanau.github.io/,1,1,0,41,150,-109,0.024390,0.006667,0.017724,8.902439,8.706667,0.195772
+Martenweave,https://martenweave.github.io/,0,0,0,27,11,16,0.000000,0.000000,0.000000,4.185185,1.000000,3.185185
+Metkagram,https://metkagram.github.io/,0,2,-2,45,15,30,0.000000,0.133333,-0.133333,5.844444,13.000000,-7.155556
+Wooolfmesh,https://wooolfmesh.github.io/,0,0,0,1,5,-4,0.000000,0.000000,0.000000,2.000000,6.000000,-4.000000
