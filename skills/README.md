@@ -22,9 +22,9 @@ Use `arwp-search-maturity` when the task is to reverse-engineer what currently v
 
 The benchmark keeps unmeasured dimensions `unknown`, requires explicit evidence before recording numeric rank and does not turn repeated correlations into Google/Bing ranking factors.
 
-## Initial technical preparation
+## Initial technical preparation and whole-site audit
 
-Use `arwp-prepare-site` when the main task is to prepare or migrate an existing repository to the ARWP/Search/agent technical baseline.
+Use `arwp-prepare-site` when the main task is to prepare, migrate or deeply audit an existing repository against the ARWP/Search/agent baseline. For a deep, complete, end-to-end or whole-site request it must inventory and reconcile every enumerable in-scope route first, run applicable deterministic checks page-complete, keep repository/build/deployed/rendered/owner evidence separate, and report explicit coverage. Bounded Site Gate, Technical Integrity, Growth and Internal Discovery cohorts remain preflight/specialist evidence; they are not a whole-site pass.
 
 ## Adaptive implementation
 
@@ -46,6 +46,6 @@ Use `arwp-prepare-site` when the main task is to prepare or migrate an existing 
 
 Use Search Maturity for reference evidence, Growth for prioritization/current rules, Index Worthiness before broad generated-page Search publication, Measurement OS for interpreting provider evidence, Technical SEO Critic after the ordinary technical/Search release pass, Image Discovery when meaningful image assets deserve dedicated Search/Images/Discover handling, Internal Discovery when useful pages need stronger crawl paths, relation architecture, breadcrumbs, continuation or distribution utilities, and Future Search only after current eligibility/foundation work is healthy. A mechanism can be valuable for open machine interoperability even when it is not a documented Google ranking requirement, but every experiment must stay grounded, reversible and separately measured.
 
-When repository edits are possible, inspect the stack, establish a baseline, select only applicable high-confidence work, implement it and run the site's build/tests plus relevant ARWP checks. Leave credential-dependent or owner-side measurement work as explicit gates.
+When repository edits are possible, inspect the stack, establish a baseline, select only applicable high-confidence work, implement it and run the site's build/tests plus relevant ARWP checks. For whole-site audits, preserve the page ledger and coverage state through the completion report. Leave credential-dependent or owner-side measurement work as explicit gates.
 
 Do not claim that ARWP adoption, internal-link volume, share/save/cite controls, image metadata, an image sitemap, a reference-cohort pattern, semantic index, Schema.org volume, `llms.txt`, Agent Skills or other metadata guarantees ranking, image indexing, Discover placement, AI citations, recommendations or traffic.
