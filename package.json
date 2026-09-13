@@ -2,7 +2,7 @@
   "name": "agent-ready-web-profile",
   "version": "0.2.0",
   "description": "Evidence-backed website growth loop for Search, AI discovery and agent interoperability, with source-backed hypotheses, audits, adaptive upgrades, deterministic target-site transformations, measurement evidence and a multi-standard Resolver.",
-  "license": "Apache-2.0",
+  "license": "SEE LICENSE IN LICENSE",
   "type": "module",
   "mcpName": "io.github.dkharlanau/agent-ready-web-profile",
   "bin": {
