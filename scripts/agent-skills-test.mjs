@@ -86,6 +86,41 @@ for (const expected of ['arwp audit', 'arwp-growth', 'arwp assert', 'Evidence Re
 assert.match(prepare, /Do not stop at a plan/i);
 assert.match(prepare, /references\/stack-detection\.md/);
 assert.match(prepare, /references\/file-matrix\.md/);
+assert.match(prepare, /references\/comprehensive-audit\.md/);
+assert.match(prepare, /registry\/comprehensive-site-audit\.json/);
+for (const expected of ['runtime-complete', 'template-runtime-complete', 'partial', 'unknown', 'page ledger', 'bounded']) assert.match(prepare, new RegExp(expected, 'i'));
+
+const comprehensiveReferencePath = path.join(skillsRoot, 'arwp-prepare-site', 'references', 'comprehensive-audit.md');
+assert.ok(fs.existsSync(comprehensiveReferencePath), 'arwp-prepare-site must ship the comprehensive audit reference');
+const comprehensiveReference = fs.readFileSync(comprehensiveReferencePath, 'utf8');
+for (const expected of ['full audit is a coverage claim', 'repository', 'build', 'deployed http', 'rendered browser', 'owner/platform evidence', 'WCAG 2.2', 'coverage state']) {
+  assert.match(comprehensiveReference, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+}
+
+const comprehensiveRegistryPath = path.join(root, 'registry', 'comprehensive-site-audit.json');
+assert.ok(fs.existsSync(comprehensiveRegistryPath), 'comprehensive site audit registry must exist');
+const comprehensiveRegistry = JSON.parse(fs.readFileSync(comprehensiveRegistryPath, 'utf8'));
+assert.ok(comprehensiveRegistry.coverageContract, 'comprehensive audit registry must define coverageContract');
+for (const state of ['complete', 'runtime-complete', 'template-runtime-complete', 'partial', 'unknown']) {
+  assert.ok(comprehensiveRegistry.coverageContract.coverageStates?.[state], `comprehensive audit must define coverage state ${state}`);
+}
+const auditDomainIds = new Set((comprehensiveRegistry.auditDomains || []).map(domain => domain.id));
+for (const id of [
+  'inventory-and-deployment',
+  'http-crawl-index-canonical',
+  'content-quality-and-evidence',
+  'accessibility-wcag22',
+  'performance-and-delivery',
+  'mobile-responsive-visual',
+  'runtime-js-functionality',
+  'security-privacy',
+  'analytics-measurement-observability',
+  'ai-agent-readiness',
+  'freshness-lifecycle-regression'
+]) assert.ok(auditDomainIds.has(id), `comprehensive audit registry must retain ${id}`);
+assert.ok((comprehensiveRegistry.auditDomains || []).length >= 15, 'comprehensive audit must remain multi-domain rather than collapsing into SEO-only checks');
+assert.ok((comprehensiveRegistry.conditionalPacks || []).length >= 5, 'comprehensive audit must retain conditional vertical packs');
+assert.ok((comprehensiveRegistry.completionReportRequired || []).some(value => /coverage state/i.test(value)), 'completion report must require explicit coverage state');
 
 const content = fs.readFileSync(path.join(skillsRoot, 'arwp-ai-search-content', 'SKILL.md'), 'utf8');
 assert.match(content, /non-commodity/i);
@@ -99,4 +134,4 @@ for (const mechanism of ['Agent Skills', 'ARD', 'MCP', 'A2A', 'WebMCP', 'OpenAPI
 const evidence = fs.readFileSync(path.join(skillsRoot, 'arwp-evidence-ci', 'SKILL.md'), 'utf8');
 assert.match(evidence, /read-only/i);
 
-console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration, reference-cohort learning, adaptive upgrade intelligence, BraidGraph provenance, future-search experimentation, safe transformation delivery and evidence-safe workflows`);
+console.log(`PASS ${index.skills.length} ARWP Agent Skills use growth-first orchestration, comprehensive coverage-aware site preparation, reference-cohort learning, adaptive upgrade intelligence, BraidGraph provenance, future-search experimentation, safe transformation delivery and evidence-safe workflows`);
