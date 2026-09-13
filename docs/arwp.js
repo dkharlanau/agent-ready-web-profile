@@ -57,7 +57,6 @@ function renderReferenceCards() {
       <div class="cap-list">${capabilityLabels(site.capabilities).map(label => `<span class="cap">${escapeHtml(label)}</span>`).join('')}</div>
       <div class="reference-actions"><a href="${escapeHtml(site.canonicalUrl)}">Site ↗</a><a href="${escapeHtml(site.profileUrl)}">Profile ↗</a></div>
     </article>`).join('');
-
   for (const card of target.querySelectorAll('.reference-card')) {
     card.addEventListener('click', event => {
       if (event.target.closest('a')) return;
@@ -213,6 +212,18 @@ for (const button of document.querySelectorAll('.copy')) {
       window.setTimeout(() => { button.textContent = oldText; }, 1200);
     }
   });
+}
+
+// Dogfood the Proof Mark on Goose itself. This is a bounded audit status, not a certification or score.
+if (!document.querySelector('[data-goose-arwp-proof-mark="0.1"]')) {
+  const footer = document.querySelector('footer');
+  if (footer) {
+    const slot = document.createElement('div');
+    slot.dataset.gooseArwpProofMarkSlot = 'footer';
+    slot.style.marginTop = '12px';
+    slot.innerHTML = `<span data-goose-arwp-proof-mark="0.1" data-arwp-coverage="partial" role="group" aria-label="Goose ARWP Proof Mark: partial audit scope" title="ARWP evidence is present; whole-site audit scope remains incomplete." style="display:inline-flex;max-width:100%;min-height:38px;border:1px solid #080c0b;border-radius:4px;overflow:hidden;background:#fafaf7;color:#080c0b;font:10px/1.15 Arial,sans-serif;vertical-align:middle"><a href="./product/" aria-label="Open Goose ARWP product" style="padding:8px 9px;background:#080c0b;color:#fafaf7;text-decoration:none;border-right:4px solid #173bea;font-weight:700;letter-spacing:.06em">GOOSE ARWP</a><a href="https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/PROOF-MARK.md" aria-label="Read Proof Mark contract: partial scope" style="padding:8px 9px;color:#080c0b;text-decoration:none"><strong>PARTIAL</strong> · <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">scope incomplete</span></a></span>`;
+    footer.append(slot);
+  }
 }
 
 loadDirectory();
