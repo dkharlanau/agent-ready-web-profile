@@ -1,0 +1,146 @@
+{
+  "version": "0.1",
+  "sourceLocale": "en",
+  "defaultLocale": "en",
+  "fallbackPolicy": "explicit-by-surface",
+  "locales": [
+    {
+      "code": "en",
+      "label": "English",
+      "role": "canonical",
+      "status": "published"
+    },
+    {
+      "code": "fr",
+      "label": "Français",
+      "role": "human-interface",
+      "status": "published",
+      "sourceRevisionPolicy": "record-hash",
+      "surfaceStatus": {
+        "ui": "complete",
+        "runtime-states": "complete",
+        "content": "complete",
+        "content-libraries": "complete",
+        "accessibility": "complete",
+        "seo-search": "complete",
+        "ai-agent": "complete",
+        "media-text": "partial",
+        "documentation": "out-of-scope"
+      }
+    },
+    {
+      "code": "de",
+      "label": "Deutsch",
+      "role": "agent-routing",
+      "status": "published-limited",
+      "surfaceStatus": {
+        "ui": "out-of-scope",
+        "runtime-states": "out-of-scope",
+        "content": "out-of-scope",
+        "content-libraries": "out-of-scope",
+        "accessibility": "out-of-scope",
+        "seo-search": "out-of-scope",
+        "ai-agent": "complete",
+        "media-text": "out-of-scope",
+        "documentation": "out-of-scope"
+      }
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "ui",
+      "kind": "key-set",
+      "canonicalSource": "src/i18n/en.json",
+      "localePattern": "src/i18n/{locale}.json",
+      "requiredForRoles": ["human-interface"],
+      "blockingChecks": ["exact-key-parity", "placeholder-parity", "no-silent-fallback"]
+    },
+    {
+      "id": "runtime-states",
+      "kind": "key-set",
+      "canonicalSource": "src/i18n/runtime/en.json",
+      "localePattern": "src/i18n/runtime/{locale}.json",
+      "requiredForRoles": ["human-interface"],
+      "blockingChecks": ["exact-key-parity", "placeholder-parity"]
+    },
+    {
+      "id": "content",
+      "kind": "record-set",
+      "canonicalSource": "content/en",
+      "localePattern": "content/{locale}",
+      "stableIdField": "canonicalId",
+      "sourceRevisionField": "sourceHash",
+      "requiredForRoles": ["human-interface"],
+      "blockingChecks": ["exact-id-parity", "required-fields", "source-current"]
+    },
+    {
+      "id": "content-libraries",
+      "kind": "record-set-group",
+      "members": ["skills", "techniques", "taxonomy"],
+      "requiredForRoles": ["human-interface"],
+      "blockingChecks": ["exact-id-parity", "unique-localized-slug", "source-current"]
+    },
+    {
+      "id": "accessibility",
+      "kind": "rendered-ui",
+      "requiredForRoles": ["human-interface"],
+      "blockingChecks": ["localized-accessible-names", "localized-skip-link", "localized-validation"]
+    },
+    {
+      "id": "seo-search",
+      "kind": "generated-page-contract",
+      "requiredForRoles": ["human-interface"],
+      "blockingChecks": ["html-lang", "self-canonical", "reciprocal-hreflang", "sitemap-membership", "structured-data-language"]
+    },
+    {
+      "id": "ai-agent",
+      "kind": "machine-readable",
+      "requiredForRoles": ["human-interface", "agent-routing"],
+      "blockingChecks": ["locale-manifest", "declared-routing-surface", "declared-library-coverage"]
+    },
+    {
+      "id": "media-text",
+      "kind": "asset-inventory",
+      "requiredForRoles": ["human-interface"],
+      "blockingChecks": []
+    },
+    {
+      "id": "documentation",
+      "kind": "route-set",
+      "requiredForRoles": [],
+      "blockingChecks": []
+    }
+  ],
+  "quality": {
+    "glossaryRequiredBeforeBulkContent": true,
+    "independentReconciliationRequired": true,
+    "builtUiReviewRequired": true,
+    "pseudoLocaleRecommended": true,
+    "allowPermanentSilentExceptions": false,
+    "separateTranslationAndEvidenceReview": true
+  },
+  "impactRules": [
+    {
+      "paths": ["src/components/**", "src/i18n/en.json"],
+      "surfaces": ["ui", "accessibility"]
+    },
+    {
+      "paths": ["content/en/**"],
+      "surfaces": ["content"]
+    },
+    {
+      "paths": ["data/skills.json", "data/techniques.json", "data/taxonomy.json"],
+      "surfaces": ["content-libraries"]
+    },
+    {
+      "paths": ["templates/**", "scripts/generate-*.mjs"],
+      "surfaces": ["seo-search", "ui", "accessibility"]
+    },
+    {
+      "paths": ["ai/**", "skills/**"],
+      "surfaces": ["ai-agent"]
+    }
+  ],
+  "exceptionsFile": "data/localization-exceptions.json",
+  "evidenceBoundary": "A passing localization profile proves only the checked source/build/rendered contract. It does not prove indexing, ranking, citation, recommendation or traffic outcomes."
+}
