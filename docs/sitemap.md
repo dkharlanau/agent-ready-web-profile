@@ -109,7 +109,7 @@ The Portfolio Growth series is intentionally a different evidence class: owner-c
 - [Benchmark methodology](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/BENCHMARK.md)
 - [Search + Agent recommendations documentation](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/SEARCH-AGENT-RECOMMENDATIONS.md)
 - [Portfolio fleet workflow](https://dkharlanau.github.io/agent-ready-web-profile/PORTFOLIO-FLEET.md)
-- [Portfolio fleet Agent Skill](https://dkharlanau.github.io/agent-ready-web-profile/skills/arwp-portfolio-fleet/SKILL.md)
+- [Portfolio fleet Agent Skill](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/skills/arwp-portfolio-fleet/SKILL.md)
 
 ## Sitemap
 
