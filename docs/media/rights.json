@@ -18,7 +18,7 @@
     "ARWP-authored explanatory text explicitly marked CC BY 4.0"
   ],
   "doesNotApplyTo": [
-    "software source code, which remains licensed under Apache-2.0",
+    "current software source code, licensed under PolyForm Strict 1.0.0 (earlier Apache-2.0 revision grants remain valid)",
     "third-party logos, trademarks, screenshots, quotations or other third-party material unless separately marked",
     "material whose page or file declares a different license"
   ],

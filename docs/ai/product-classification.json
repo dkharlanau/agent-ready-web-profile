@@ -11,7 +11,7 @@
     "shortName": "ARWP",
     "canonicalUrl": "https://dkharlanau.github.io/agent-ready-web-profile/",
     "repository": "https://github.com/dkharlanau/agent-ready-web-profile",
-    "license": "Apache-2.0"
+    "license": "PolyForm-Strict-1.0.0"
   },
   "preferredClass": {
     "id": "agentic-web-interoperability-resolver",

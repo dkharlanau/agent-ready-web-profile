@@ -26,9 +26,9 @@
   },
   "licenses": {
     "software": {
-      "name": "Apache License 2.0",
-      "spdx": "Apache-2.0",
-      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+      "name": "PolyForm Strict License 1.0.0",
+      "spdx": "PolyForm-Strict-1.0.0",
+      "url": "https://polyformproject.org/licenses/strict/1.0.0"
     },
     "openMedia": {
       "name": "Creative Commons Attribution 4.0 International",
