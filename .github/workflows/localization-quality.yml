@@ -5,7 +5,10 @@ on:
     paths:
       - 'LOCALIZATION.md'
       - 'docs/LOCALIZATION.md'
+      - 'docs/LOCALIZATION-QUALITY.md'
+      - 'docs/localization-quality-profile.example.json'
       - 'skills/arwp-localization-quality/**'
+      - 'docs/skills/arwp-localization-quality/**'
       - 'skills/index.json'
       - 'docs/skills/index.json'
       - 'scripts/localization-quality-test.mjs'
@@ -15,7 +18,10 @@ on:
     paths:
       - 'LOCALIZATION.md'
       - 'docs/LOCALIZATION.md'
+      - 'docs/LOCALIZATION-QUALITY.md'
+      - 'docs/localization-quality-profile.example.json'
       - 'skills/arwp-localization-quality/**'
+      - 'docs/skills/arwp-localization-quality/**'
       - 'skills/index.json'
       - 'docs/skills/index.json'
       - 'scripts/localization-quality-test.mjs'
