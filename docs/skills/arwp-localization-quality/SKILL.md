@@ -12,7 +12,9 @@ metadata:
 
 Localization Quality is an executable specialist contract. It composes with Repository Mapper for ownership, BraidGraph for evidence/change relationships, Change/Evidence Receipts for verification evidence, and Agent Eval for runtime tasks. Do not build a second graph or receipt format here.
 
-## Applicability
+## Workflow
+
+### Applicability
 
 Run when repository/site inspection finds a locale registry, translated routes, dictionaries, localized structured records, `hreflang`, language sitemaps, localized machine surfaces, or a change matching `impactRules`. Do not run on a genuinely monolingual site.
 
