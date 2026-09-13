@@ -10,6 +10,15 @@ The engine does not introduce another graph or proof lifecycle. Repository Mappe
 
 `arwp localization` exposes `init`, `check`, `impact`, `explain`, `receipt`, `gate` and `pseudo`.
 
+Typical CI/review flow:
+
+```bash
+arwp localization check .arwp/localization.json --root=. --json
+arwp localization impact .arwp/localization.json --root=. --base=origin/main --head=HEAD --json
+arwp localization gate .arwp/localization.json --root=. --base=origin/main --head=HEAD
+arwp localization receipt report.json --evidence-ref=urn:example:evidence --widget=verification.html
+```
+
 `check` emits inspectable states. `impact` maps changed paths to required locale representations. `gate` blocks unresolved required missing/stale/incomplete representations. `receipt` projects the result into canonical Change Receipt verification semantics and can render an accessible evidence widget without a synthetic score.
 
 ## Result semantics
