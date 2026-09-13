@@ -52,20 +52,20 @@ Before adding Search Maturity observations, experiments, datasets, automation or
 
 Allowed disclosure classes are:
 
-- **open-core / public methodology** — schemas, validators, transparent cohort math, basic CLI, interoperability contracts and deliberately limited reviewed/synthetic fixtures needed for adoption;
+- **source-available / public methodology** — schemas, validators, transparent cohort math, basic CLI, interoperability contracts and deliberately limited reviewed/synthetic fixtures needed for adoption;
 - **commercial/private** — continuously refreshed query/SERP/AI observations, private competitor cohorts, longitudinal outcome history, large negative-results sets, owner-data connectors, portfolio monitoring and learned recommendation priors;
 - **confidential R&D** — a genuinely novel similarity, attribution, decision or transformation mechanism that should remain undisclosed until an explicit IP decision is made;
 - **defensive publication** — a mechanism intentionally published to establish public prior art rather than kept confidential or pursued for patent protection.
 
 Ask these questions before publishing:
 
-1. Is the material already public/common knowledge, or is it needed for open interoperability/adoption?
+1. Is the material already public/common knowledge, or is it needed for interoperability/adoption?
 2. Does it contain a refreshed/live corpus, private query set, competitor cohort, owner-only measurement, large negative-results set or operational know-how?
 3. Does it reveal learned priors, recommendation ranking logic or cross-site outcome history that can remain behind a public interface?
 4. Could it contain a novel technical mechanism that merits confidential/IP review before disclosure?
-5. Is publication intentional, and is Apache-2.0 the intended grant for this contribution?
+5. Is publication intentional, and are the repository's current PolyForm Strict 1.0.0 terms the intended grant for this contribution?
 
-For Search Intervention records, `public-methodology` and `public-fixture` must keep `containsLiveCorpus:false` and `containsLearnedPriors:false`. Use synthetic or deliberately limited reviewed fixtures for OSS tests. Real dogfood evidence belongs in the target's private evidence store unless there is an explicit publication decision.
+For Search Intervention records, `public-methodology` and `public-fixture` must keep `containsLiveCorpus:false` and `containsLearnedPriors:false`. Use synthetic or deliberately limited reviewed fixtures for tests. Real dogfood evidence belongs in the target's private evidence store unless there is an explicit publication decision.
 
 If classification is uncertain, do not include the sensitive implementation/data in the public PR. The public issue may describe the interface, problem and review gate without candidate patent claims or confidential algorithms.
 
@@ -148,6 +148,10 @@ Experimental upstream technologies must be labelled as experimental when that st
 
 ## Licensing
 
-Unless explicitly stated otherwise, contributions intentionally submitted to this repository are accepted under the Apache License 2.0, consistent with the repository `LICENSE`.
+Unless explicitly stated otherwise for third-party material, contributions intentionally submitted to this repository must be offered under the repository's current PolyForm Strict License 1.0.0 terms so they can be distributed as part of ARWP under the same source-available license.
 
-That license applies to material intentionally published here. Do not submit confidential R&D, private owner evidence or proprietary live corpora merely because an interface/schema referring to them is public.
+PolyForm Strict permits noncommercial use, but it does not grant permission to redistribute the software or create modified/derivative versions. See `LICENSE` for the authoritative terms.
+
+This licensing change applies prospectively. It does not revoke rights already granted for earlier repository revisions that were released under Apache License 2.0.
+
+Do not submit confidential R&D, private owner evidence or proprietary live corpora merely because an interface/schema referring to them is public.
