@@ -21,7 +21,9 @@ const requiredFiles = [
   'docs/skills/arwp-localization-quality/references/localization-profile.example.json',
   'docs/skills/arwp-localization-quality/references/glossary.example.json',
   'skills/index.json',
-  'docs/skills/index.json'
+  'docs/skills/index.json',
+  'docs/skills/index.html',
+  'docs/skills/llms.txt'
 ];
 
 for (const path of requiredFiles) {
@@ -110,5 +112,20 @@ for (const [name, index] of [['skills/index.json', sourceIndex], ['docs/skills/i
 }
 assert.ok(sourceIndex.composition?.specialists?.includes('arwp-localization-quality'), 'Localization skill must be part of the source specialist composition');
 assert.equal(sourceIndex.composition?.localizationQuality, 'arwp-localization-quality', 'Localization composition pointer is missing');
+
+const publicSkillsHtml = read('docs/skills/index.html');
+const itemCountMatch = publicSkillsHtml.match(/"numberOfItems":(\d+)/);
+assert.ok(itemCountMatch, 'Public skills HTML must expose ItemList numberOfItems');
+assert.equal(Number(itemCountMatch[1]), publicIndex.skills.length, 'Public skills HTML ItemList count must match docs/skills/index.json');
+for (const entry of publicIndex.skills) {
+  const inCard = publicSkillsHtml.includes(`<strong>${entry.name}</strong>`);
+  const inJsonLd = publicSkillsHtml.includes(`"name":"${entry.name}"`);
+  assert.ok(inCard && inJsonLd, `Public skills HTML must expose ${entry.name} in both the visible catalog and JSON-LD ItemList`);
+}
+
+const publicSkillsLlms = read('docs/skills/llms.txt');
+assert.ok(publicSkillsLlms.includes('arwp-localization-quality'), 'Agent-facing skills catalog must include arwp-localization-quality');
+assert.match(publicSkillsLlms, /glossary/i, 'Agent-facing skills catalog must communicate glossary-first localization');
+assert.match(publicSkillsLlms, /localization-impact/i, 'Agent-facing skills catalog must communicate localization-impact drift protection');
 
 console.log('localization quality package OK');
