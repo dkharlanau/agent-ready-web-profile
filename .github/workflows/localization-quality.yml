@@ -5,6 +5,7 @@ on:
     paths:
       - 'LOCALIZATION.md'
       - 'docs/LOCALIZATION*'
+      - 'docs/localization-quality-profile.example.json'
       - 'bin/arwp.mjs'
       - 'bin/arwp-localization.mjs'
       - 'lib/localization-quality.mjs'
@@ -15,6 +16,10 @@ on:
       - 'schema/agent-eval-receipt.schema.json'
       - 'skills/arwp-localization-quality/**'
       - 'docs/skills/arwp-localization-quality/**'
+      - 'skills/index.json'
+      - 'docs/skills/index.json'
+      - 'docs/skills/index.html'
+      - 'docs/skills/llms.txt'
       - 'benchmarks/localization-quality/**'
       - 'scripts/localization-*.mjs'
       - '.github/workflows/localization-quality.yml'
@@ -23,6 +28,7 @@ on:
     paths:
       - 'LOCALIZATION.md'
       - 'docs/LOCALIZATION*'
+      - 'docs/localization-quality-profile.example.json'
       - 'bin/arwp.mjs'
       - 'bin/arwp-localization.mjs'
       - 'lib/localization-quality.mjs'
@@ -33,6 +39,10 @@ on:
       - 'schema/agent-eval-receipt.schema.json'
       - 'skills/arwp-localization-quality/**'
       - 'docs/skills/arwp-localization-quality/**'
+      - 'skills/index.json'
+      - 'docs/skills/index.json'
+      - 'docs/skills/index.html'
+      - 'docs/skills/llms.txt'
       - 'benchmarks/localization-quality/**'
       - 'scripts/localization-*.mjs'
       - '.github/workflows/localization-quality.yml'
@@ -55,6 +65,7 @@ jobs:
       - run: node scripts/localization-engine-test.mjs
       - run: node scripts/localization-fault-injection-test.mjs
       - run: node scripts/localization-schema-test.mjs
+      - run: node scripts/agent-eval-test.mjs
       - run: node --check lib/localization-quality.mjs
       - run: node --check lib/surface-integrity.mjs
       - run: node --check bin/arwp-localization.mjs
