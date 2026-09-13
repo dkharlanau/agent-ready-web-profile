@@ -1,7 +1,7 @@
 ---
 name: arwp-localization-quality
 description: Design, implement, audit and maintain high-quality website localization across terminology, UI, content libraries, accessibility, Search metadata and AI/agent surfaces. Use when adding a locale, reviewing a multilingual release, finding untranslated components, or adding CI that prevents new strings, pages, skills or datasets from escaping localization.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Stack-neutral; strongest with versioned locale data, deterministic inventories and CI.
 metadata:
   standard: agent-skills
@@ -61,6 +61,7 @@ Read the target repository's current instructions and localization architecture 
    - Track source revision, release version or content hash so an existing translation can become `stale` after canonical content changes.
    - Add a localization-impact gate: a pull request that changes a localizable source must update affected active locales or carry an explicit time-bounded exception.
    - Prefer one generic locale-aware checker over a growing family of `check-<language>` scripts.
+   - Run build-dependent localization checks in the same runtime and system-dependency environment as the production build; environment drift should not masquerade as a localization failure.
    - See [`references/ci-gates.md`](references/ci-gates.md).
 
 9. **Report evidence, not a synthetic localization score.**
@@ -119,5 +120,6 @@ This rule is the main protection against localization quality decaying after a s
 - [`references/ci-gates.md`](references/ci-gates.md) — reusable CI design.
 - [`references/localization-profile.example.json`](references/localization-profile.example.json) — example surface contract.
 - [`references/glossary.example.json`](references/glossary.example.json) — versioned glossary example.
+- [`references/cognitive-biases-dogfood.md`](references/cognitive-biases-dogfood.md) — concrete implementation lessons from a multilingual knowledge site, including locale roles, glossary parity, freshness enforcement, impact gates and production-environment parity.
 
 Localization can improve usefulness, retrieval and discovery readiness. It does not guarantee ranking, recommendation or citation outcomes.
