@@ -9,7 +9,7 @@ repository-code: "https://github.com/dkharlanau/agent-ready-web-profile"
 url: "https://dkharlanau.github.io/agent-ready-web-profile/"
 version: "0.1.0"
 date-released: "2026-08-25"
-license: "Apache-2.0"
+license: "PolyForm-Strict-1.0.0"
 keywords:
   - "agentic web interoperability resolver"
   - "agentic web resolver"
