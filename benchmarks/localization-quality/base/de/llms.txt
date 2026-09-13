@@ -1,0 +1,3 @@
+# Beispiel Agent Routing
+Canonical technical semantics: English.
+Locale: de
