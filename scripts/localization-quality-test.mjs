@@ -9,17 +9,35 @@ const readJson = path => JSON.parse(read(path));
 const requiredFiles = [
   'LOCALIZATION.md',
   'docs/LOCALIZATION.md',
+  'docs/LOCALIZATION-QUALITY.md',
   'skills/arwp-localization-quality/SKILL.md',
   'skills/arwp-localization-quality/references/prompts.md',
   'skills/arwp-localization-quality/references/ci-gates.md',
   'skills/arwp-localization-quality/references/localization-profile.example.json',
   'skills/arwp-localization-quality/references/glossary.example.json',
+  'docs/skills/arwp-localization-quality/SKILL.md',
+  'docs/skills/arwp-localization-quality/references/prompts.md',
+  'docs/skills/arwp-localization-quality/references/ci-gates.md',
+  'docs/skills/arwp-localization-quality/references/localization-profile.example.json',
+  'docs/skills/arwp-localization-quality/references/glossary.example.json',
   'skills/index.json',
   'docs/skills/index.json'
 ];
 
 for (const path of requiredFiles) {
   assert.ok(existsSync(resolve(root, path)), `Missing localization package file: ${path}`);
+}
+assert.ok(!existsSync(resolve(root, 'docs/LOCALIZATION-ENTRYPOINT.tmp.md')), 'Temporary localization entry point must not be committed');
+
+const mirrorPairs = [
+  ['skills/arwp-localization-quality/SKILL.md', 'docs/skills/arwp-localization-quality/SKILL.md'],
+  ['skills/arwp-localization-quality/references/prompts.md', 'docs/skills/arwp-localization-quality/references/prompts.md'],
+  ['skills/arwp-localization-quality/references/ci-gates.md', 'docs/skills/arwp-localization-quality/references/ci-gates.md'],
+  ['skills/arwp-localization-quality/references/localization-profile.example.json', 'docs/skills/arwp-localization-quality/references/localization-profile.example.json'],
+  ['skills/arwp-localization-quality/references/glossary.example.json', 'docs/skills/arwp-localization-quality/references/glossary.example.json']
+];
+for (const [canonical, published] of mirrorPairs) {
+  assert.equal(read(published), read(canonical), `${published} must remain an exact mirror of ${canonical}`);
 }
 
 const standard = read('LOCALIZATION.md');
