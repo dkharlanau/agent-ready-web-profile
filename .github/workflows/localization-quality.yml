@@ -11,6 +11,8 @@ on:
       - 'docs/skills/arwp-localization-quality/**'
       - 'skills/index.json'
       - 'docs/skills/index.json'
+      - 'docs/skills/index.html'
+      - 'docs/skills/llms.txt'
       - 'scripts/localization-quality-test.mjs'
       - '.github/workflows/localization-quality.yml'
   push:
@@ -24,6 +26,8 @@ on:
       - 'docs/skills/arwp-localization-quality/**'
       - 'skills/index.json'
       - 'docs/skills/index.json'
+      - 'docs/skills/index.html'
+      - 'docs/skills/llms.txt'
       - 'scripts/localization-quality-test.mjs'
       - '.github/workflows/localization-quality.yml'
 
