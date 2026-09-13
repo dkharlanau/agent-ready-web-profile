@@ -1,0 +1,40 @@
+name: Localization quality
+
+on:
+  pull_request:
+    paths:
+      - 'LOCALIZATION.md'
+      - 'docs/LOCALIZATION.md'
+      - 'skills/arwp-localization-quality/**'
+      - 'skills/index.json'
+      - 'docs/skills/index.json'
+      - 'scripts/localization-quality-test.mjs'
+      - '.github/workflows/localization-quality.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'LOCALIZATION.md'
+      - 'docs/LOCALIZATION.md'
+      - 'skills/arwp-localization-quality/**'
+      - 'skills/index.json'
+      - 'docs/skills/index.json'
+      - 'scripts/localization-quality-test.mjs'
+      - '.github/workflows/localization-quality.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check test syntax
+        run: node --check scripts/localization-quality-test.mjs
+      - name: Verify localization quality package
+        run: node scripts/localization-quality-test.mjs
