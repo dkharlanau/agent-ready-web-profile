@@ -124,7 +124,9 @@ for (const entry of publicIndex.skills) {
 }
 
 const publicSkillsLlms = read('docs/skills/llms.txt');
-assert.ok(publicSkillsLlms.includes('arwp-localization-quality'), 'Agent-facing skills catalog must include arwp-localization-quality');
+for (const entry of publicIndex.skills) {
+  assert.ok(publicSkillsLlms.includes(entry.name), `Agent-facing skills catalog must include ${entry.name}`);
+}
 assert.match(publicSkillsLlms, /glossary/i, 'Agent-facing skills catalog must communicate glossary-first localization');
 assert.match(publicSkillsLlms, /localization-impact/i, 'Agent-facing skills catalog must communicate localization-impact drift protection');
 
