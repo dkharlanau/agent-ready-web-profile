@@ -16,6 +16,14 @@ The engine does not introduce another graph or proof lifecycle. Repository Mappe
 
 States are `pass`, `fail`, `warning`, `stale`, `missing`, `incomplete`, `intentionally-excepted`, `not-applicable`, `not-assessed`. A bounded exception changes disposition, not the underlying diagnostic. Expired exceptions are failures.
 
+## Quality Debt
+
+Temporary localization exceptions are recorded in the machine-readable Quality Debt ledger instead of being hidden in comments or disabled checks. Entries may be `active`, `review-due`, `resolved` or explicitly `non-applicable`.
+
+An active bounded exception can change a blocking diagnostic to the visible disposition `intentionally-excepted`; it never rewrites the underlying finding to `pass`. Time-bounded exceptions may carry review and expiry dates, scoped checks/surfaces/locales/markets/paths and evidence references. An expired active exception is blocking. Permanent non-applicability requires explicit justification rather than an unbounded waiver.
+
+Quality Debt is not a second issue tracker or evidence graph. The ledger only records the exception boundary needed by deterministic gates; repository work items and provenance remain in their existing systems.
+
 ## Adapters, parity and markets
 
 Deterministic adapters are `json-key-set`, `json-record-set`, `rendered-page-manifest`, `machine-files` and `manual`. Parity is independent from storage: `exact`, `semantic`, `adapted`, `market-specific`, `routing-only`. Locale and market are separate profile objects. Routing-only locales cannot be silently promoted into Search publication, sitemap membership or human-interface completeness.
