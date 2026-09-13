@@ -1,0 +1,5 @@
+{
+  "documentation": "This public example points implementers to the canonical Agent Skill example.",
+  "canonical": "https://github.com/dkharlanau/agent-ready-web-profile/blob/main/skills/arwp-localization-quality/references/localization-profile.example.json",
+  "principle": "Declare locale roles and required surfaces explicitly; exact coverage, source freshness, rendered UI and machine-readable parity are separate checks."
+}
