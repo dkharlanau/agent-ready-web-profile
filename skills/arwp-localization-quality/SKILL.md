@@ -20,6 +20,8 @@ Run when repository/site inspection finds a locale registry, translated routes, 
 
 Normal ARWP orchestration is `inspect → detect localization applicability → localization check → localization impact → plan/transform → localization gate → receipt`. Missing/stale/incomplete required surfaces block release unless a valid bounded exception applies. The exception remains visible debt and never turns the underlying diagnostic into `pass`.
 
+When localization validation depends on building the real site, run it in the same Node/runtime, system-dependency and dependency-install environment as the canonical production validation suite. Environment drift must not masquerade as a localization defect.
+
 ## Executable interface
 
 ```bash
@@ -59,3 +61,4 @@ Locale-aware browser tasks stay in the canonical Agent Eval receipt using option
 - [`references/glossary.example.json`](references/glossary.example.json) — glossary model.
 - [`references/prompts.md`](references/prompts.md) — generation/reconciliation prompt separation.
 - [`references/ci-gates.md`](references/ci-gates.md) — CI guidance.
+- [`references/cognitive-biases-dogfood.md`](references/cognitive-biases-dogfood.md) — implementation lessons from a multilingual structured-knowledge site, including locale roles, glossary parity, freshness enforcement, impact gates and production-environment parity.
