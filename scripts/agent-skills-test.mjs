@@ -60,7 +60,7 @@ for (const skill of index.skills) {
   const frontmatter = parseFrontmatter(text, expectedPath);
   assert.equal(frontmatter.name, skill.name);
   assert.ok(frontmatter.description?.length > 80 && frontmatter.description.length <= 1024);
-  assert.match(frontmatter.license || '', /Apache-2\.0/);
+  assert.match(frontmatter.license || '', /PolyForm-Strict-1\.0\.0/);
   assert.match(text, /## Workflow|## Decision order|## Core rule|## Product loop/i);
   assert.match(text, /ranking|citation|readiness|recommend/i);
   assert.ok(!/meta name=["']keywords["']/i.test(text));

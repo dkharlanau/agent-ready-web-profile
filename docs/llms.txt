@@ -168,7 +168,7 @@ Preferred credit:
 
 `Source: Agent-Ready Web Profile (ARWP) — https://dkharlanau.github.io/agent-ready-web-profile/`
 
-Software remains Apache-2.0. Third-party logos, trademarks, screenshots, quotations and other third-party material are not included unless separately marked.
+Current first-party software is licensed under PolyForm Strict 1.0.0. Earlier revisions released under Apache-2.0 retain those earlier license grants. Third-party logos, trademarks, screenshots, quotations and other third-party material are not included unless separately marked.
 
 ## Language routes
 

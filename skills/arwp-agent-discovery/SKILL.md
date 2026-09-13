@@ -1,7 +1,7 @@
 ---
 name: arwp-agent-discovery
 description: Add or repair machine-readable agent discovery and interoperability surfaces for a website. Use when asked to expose llms.txt, AGENTS.md, Agent Skills, ARD, MCP, A2A, WebMCP, OpenAPI, API catalogs, agent-readable sitemaps, or an ARWP site profile. Discover what the site truly supports, prefer upstream standards, and never advertise capabilities that do not exist.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires repository access; live verification is optional but preferred when a deployed site exists.
 metadata:
   standard: agent-skills

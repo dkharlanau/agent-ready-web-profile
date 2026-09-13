@@ -1,7 +1,7 @@
 ---
 name: arwp-search-maturity
 description: Reverse-engineer observable, evidence-bearing patterns from currently visible Search/AI reference pages, compare them with a target site, and route repeated gaps into evidence-backed experiments without pretending correlations are ranking factors. Use when the goal is competitive/reference analysis, site maturity benchmarking, fast-riser analysis or finding repeatable characteristics of discoverable pages.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 metadata:
   compatibility: Requires a reviewed Search Maturity corpus or enough current evidence to build one. Network access is recommended for fresh visibility observations; owner Search/AI data improves outcome validation.
   standard: agent-skills

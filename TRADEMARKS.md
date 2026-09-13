@@ -24,7 +24,7 @@ Current project roles are published in `docs/project/profile.json` and summarize
 
 No registered-trademark status, registry clearance, exclusive right to the acronym, or absence of conflicting rights is asserted by this repository. A project-name policy is not a trademark registration or legal opinion. Do not display the registered symbol for this project without verified registration and applicable scope.
 
-The software license remains Apache-2.0. Its trademark provision is separate from its software permissions. The designated media/research reuse terms remain in `docs/media/rights.json`; this policy does not expand those terms to third-party logos or material and does not narrow permissions already granted by a license or applicable law.
+The software license remains PolyForm Strict 1.0.0. Its trademark provision is separate from its software permissions. The designated media/research reuse terms remain in `docs/media/rights.json`; this policy does not expand those terms to third-party logos or material and does not narrow permissions already granted by a license or applicable law.
 
 ## Accurate references
 

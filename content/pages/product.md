@@ -147,8 +147,8 @@ Goose therefore prioritizes:
 
 - GitHub: https://github.com/dkharlanau/agent-ready-web-profile
 - npm: https://www.npmjs.com/package/agent-ready-web-profile
-- License: Apache-2.0
-- Current open-source price: 0
+- License: PolyForm Strict 1.0.0
+- Source availability: public; commercial use, redistribution and derivative works require separate permission
 
 ## Key product docs
 

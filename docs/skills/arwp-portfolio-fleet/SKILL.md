@@ -1,7 +1,7 @@
 ---
 name: arwp-portfolio-fleet
 description: Inspect and verify multiple local website repositories and their public ARWP profiles from one versioned workspace manifest. Use for portfolio-wide status, drift triage, repeated local checks, bounded live checks, or choosing the next site to improve. Do not use for a single-site implementation or as authorization to commit, push, deploy, or change external services.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 ---
 
 # ARWP Portfolio Fleet

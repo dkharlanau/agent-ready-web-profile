@@ -1,7 +1,7 @@
 ---
 name: arwp-evidence-ci
 description: Add ARWP verification, regression contracts, evidence receipts, scheduled audits, and CI to a website repository. Use when asked to continuously check ARWP quality, prevent agent/search regressions, monitor public interfaces, generate evidence, or prove that an ARWP implementation remains consistent over time. Keep checks read-only and distinguish observation integrity from ranking, trust, or adoption claims.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Best with GitHub Actions and Node.js; concepts also apply to other CI systems.
 metadata:
   standard: agent-skills

@@ -1,7 +1,7 @@
 ---
 name: arwp-measurement-os
 description: Build or review Search/AI measurement for a website without collapsing incompatible provider data into a synthetic visibility score. Use when asked how to track Google generative Search, Bing AI citations, ChatGPT/AI referrals, AI crawler access, page cohorts or the outcome of an ARWP/GEO/SEO experiment. Establish site readiness, freeze treatment/control and query cohorts before outcome review, verify the production ref, normalize owner evidence, produce the access-to-task observation funnel, and preserve missing/negative evidence.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires owner exports or equivalent measurement evidence for provider-specific observations. Node.js is recommended for the ARWP measurement CLIs.
 metadata:
   standard: agent-skills

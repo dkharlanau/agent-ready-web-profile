@@ -1,7 +1,7 @@
 ---
 name: arwp-future-search
 description: Explore and implement future-ready website semantics, machine-readable entity/evidence graphs, retrieval feedback and browser-agent operability after current Search foundations are healthy. Use when the goal is to prepare a real site for emerging Search/AI/agent systems beyond today's documented rich-result requirements, while keeping experiments explicit, grounded and reversible.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires a website repository or captured site/page/entity manifests. Network access is recommended for rechecking current platform and open-standard sources before promoting experiments.
 metadata:
   standard: agent-skills

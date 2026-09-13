@@ -1,7 +1,7 @@
 ---
 name: arwp-image-discovery
 description: Audit and improve how meaningful website images are discovered, contextualized and selected across Google Search, Google Images and Discover. Use it for preferred-image convergence, image sitemaps, alt/context semantics, preview controls, Discover-ready asset quality, responsive delivery and truthful image licensing metadata without inventing ranking guarantees.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires access to website source or final generated HTML. Live image responses and final deployed metadata improve verification. Search Console or Discover outcomes remain owner-data evidence.
 metadata:
   standard: agent-skills

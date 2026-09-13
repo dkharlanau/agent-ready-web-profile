@@ -1,7 +1,7 @@
 ---
 name: arwp-technical-seo-critic
 description: Run an adversarial second-pass technical SEO review after ordinary ARWP Search Release, Technical Integrity and Search Surface checks. Use it to find false-green head metadata, missing field Core Web Vitals evidence, pagination canonical mistakes, unbounded faceted URL states, crawl revalidation gaps, HTTP-vs-HTML canonical conflicts, restrictive robots directives, link relationship problems and obsolete SEO advice without inventing a ranking score.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires access to website source or final generated HTML. Live response headers, Search Console field data and production crawling improve verification but may remain explicit owner-data gates.
 metadata:
   standard: agent-skills

@@ -1,7 +1,7 @@
 ---
 name: arwp-discoverability
 description: Select concrete implementation practices from the ARWP discoverability corpus and validate editorial evidence receipts for articles and comparisons. Use as a specialist within arwp-growth-loop after the site problem and measurement scope are known.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 metadata:
   standard: agent-skills
   runtime: Node.js >=20 for local corpus and receipt validation.

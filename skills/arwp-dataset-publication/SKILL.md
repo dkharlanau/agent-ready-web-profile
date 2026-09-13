@@ -1,7 +1,7 @@
 ---
 name: arwp-dataset-publication
 description: Audit and prepare a genuine website corpus for versioned dataset publication, archival DOI citation, provenance and machine-readable discovery without treating DOI or metadata as ranking factors.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 metadata:
   compatibility: Requires access to the target website corpus or repository. External archive owner access is required only for the final DOI issuance step.
   standard: agent-skills

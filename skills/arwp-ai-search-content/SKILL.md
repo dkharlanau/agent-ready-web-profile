@@ -1,7 +1,7 @@
 ---
 name: arwp-ai-search-content
 description: Improve website content for search, AI search, citation, and recommendation surfaces without AI-generated filler. Use when asked to optimize articles, docs, landing pages, comparisons, answer pages, or knowledge content for Google Search, AI Overviews/AI Mode, ChatGPT Search, Bing/Copilot citations, or ARWP content quality. Preserve human usefulness, evidence, originality, and clear entity/topic structure.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 metadata:
   compatibility: Works on Markdown, HTML, MDX, CMS-exported content, documentation sites, and static/generated pages.
   standard: agent-skills

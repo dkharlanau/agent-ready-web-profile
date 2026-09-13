@@ -1,7 +1,7 @@
 ---
 name: arwp-prepare-site
 description: Prepare, upgrade, migrate, or comprehensively audit a website repository with the Agent-Ready Web Profile (ARWP). Use when asked to make a site agent-ready, AI-search-ready, easier for AI agents to understand, improve search/discovery quality, add ARWP metadata, apply the ARWP profile, or check a website deeply/end-to-end. Build a reconciled page inventory first, run page-complete applicable checks instead of treating bounded samples as whole-site proof, inspect repository/build/deployed/rendered evidence, implement safe changes autonomously, verify them, and leave explicit coverage evidence.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires a repository/filesystem and a Node.js environment for ARWP CLI verification. Network and browser access are useful for live/runtime audits but are not required for static preparation.
 metadata:
   standard: agent-skills

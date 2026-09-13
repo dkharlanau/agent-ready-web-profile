@@ -1,7 +1,7 @@
 ---
 name: arwp-target-transformation
 description: Convert an ARWP Adaptive Site Upgrade graph into deterministic, digest-gated changes in a target website repository. Use after the agent has inspected the target repository and can resolve exact production files, grounded facts and verification conditions. Compile explicit path-allowlisted transformations, simulate them, apply locally with rollback or open a new production-path GitHub PR. Never auto-promote policy, editorial, owner-platform, runtime or stale-knowledge recommendations.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires a target website repository/filesystem for local application or GitHub credentials for production PR delivery. Node.js 20+.
 metadata:
   standard: agent-skills

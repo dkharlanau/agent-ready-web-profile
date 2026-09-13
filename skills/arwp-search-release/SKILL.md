@@ -1,7 +1,7 @@
 ---
 name: arwp-search-release
 description: Run the final Search release interview for a public website, especially GitHub Pages portfolios. Use before or after deployment when title, site name, snippet, favicon, canonical host, sitemap, robots, internal discovery, localization, publishing source, structured data, freshness, machine-readable surfaces, custom-domain aliases, or final-build durability could affect how the site is discovered and presented. This skill treats the search result as a product surface and requires production/owner evidence separately from repository checks.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires access to the website source or final generated HTML. Network access and Search Console/Bing owner data improve production verification but are not required for offline implementation review.
 metadata:
   standard: agent-skills

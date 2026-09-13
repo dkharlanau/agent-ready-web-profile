@@ -1,7 +1,7 @@
 ---
 name: arwp-growth-loop
 description: Run an evidence-backed website growth loop for Search, Google Discover and recommendations, generative Search, Bing AI citations, ChatGPT Search and agent readability. Use when asked to make a site rank or discover better, get into recommendations, improve AI-search visibility, apply current ARWP guidance, or continuously improve a website repository. Research current primary-source guidance, select explicit hypotheses, inspect and edit the repository, verify checks, measure owner-side outcomes where available, and preserve negative results.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires a website repository/filesystem. Node.js is recommended for ARWP CLI checks. Network access is useful for current primary-source research and live audits.
 metadata:
   standard: agent-skills

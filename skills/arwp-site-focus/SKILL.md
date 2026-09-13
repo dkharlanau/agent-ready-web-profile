@@ -1,7 +1,7 @@
 ---
 name: arwp-site-focus
 description: Define a website's problem territory, audience, explicit scope and anti-scope, page architecture, navigation, visual system and performance budget before expanding content or discoverability work. Use at the start of a site build/redesign or when a site feels broad, fragmented or feature-led.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 metadata:
   standard: agent-skills
   arwp-role: site-focus-and-information-architecture

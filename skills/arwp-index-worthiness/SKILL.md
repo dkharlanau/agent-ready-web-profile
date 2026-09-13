@@ -1,7 +1,7 @@
 ---
 name: arwp-index-worthiness
 description: Review whether Search-facing pages, especially generated entity/data/knowledge pages, deserve inclusion in the indexable sitemap cohort. Use after technical eligibility and before broad URL expansion. Produces non-numeric index-candidate/review/hold/exclude-from-search-candidate decisions and scaled-content signals without claiming ranking impact.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Works with repository/page review evidence. Owner-side query and outcome evidence improves demand review but is not required to represent unknowns honestly.
 metadata:
   standard: agent-skills

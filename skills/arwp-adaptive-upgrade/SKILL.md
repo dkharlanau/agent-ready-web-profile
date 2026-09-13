@@ -1,7 +1,7 @@
 ---
 name: arwp-adaptive-upgrade
 description: Convert an ARWP Growth audit into a target-specific website upgrade graph with current source-backed practices, applicability, exact change surfaces, implementation recipes, verification contracts, measurement signals and knowledge-freshness checks. Use when the goal is to inspect a real site and decide what should be added, changed or retired rather than only report an SEO/GEO score.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires ARWP and a public website or captured Growth Plan. Repository access is recommended when implementation work follows the recommendation stage.
 metadata:
   standard: agent-skills

@@ -1,7 +1,7 @@
 ---
 name: arwp-braidgraph
 description: Trace why a website change exists, connect repository transformations back to evidence and rules, identify missing verification or outcome evidence, and compute source/rule change blast radius through the canonical ARWP BraidGraph instead of inventing a parallel provenance model. Use for change explanation, stale-guidance review, audit, impact analysis and evidence follow-up.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires a valid ARWP BraidGraph. Transformation-level provenance is strongest when the graph includes a Transformation Bundle; revision analysis can add explicit Braid history evidence.
 metadata:
   standard: agent-skills

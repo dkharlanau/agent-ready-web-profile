@@ -1,7 +1,7 @@
 ---
 name: arwp-internal-discovery
 description: Audit and improve a site's rendered internal discovery and page-distribution architecture: crawlable canonical links, descriptive anchors, topical/reverse relations, breadcrumbs, continuation blocks, share/copy/save/cite utilities and regression-safe link-graph checks without inventing link-count ranking formulas.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Requires access to website source, final generated HTML or a bounded public crawl. Rendered HTML and canonical sitemap evidence are preferred. Search Console, referral and engagement outcomes remain owner-data evidence.
 metadata:
   standard: agent-skills
