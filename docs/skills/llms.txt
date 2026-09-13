@@ -45,6 +45,11 @@ Use it to inspect local Git/profile state across many checkouts, run reviewed ch
 
 Use it to explain why a repository change exists, trace source/rule lineage, preserve superseded history, compute re-review blast radius and separate missing implementation verification from missing Search/AI outcome evidence.
 
+## Localization quality
+- arwp-localization-quality — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-localization-quality/SKILL.md
+
+Use it when adding, reviewing or maintaining a locale. It treats localization as a release contract across glossary, UI, runtime states, reusable components, content libraries, accessibility, Search metadata, structured data and declared AI/agent surfaces. It also defines source-staleness and localization-impact CI gates so new features cannot silently fall out of localization.
+
 ## Specialists
 - arwp-discoverability — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-discoverability/SKILL.md
 - arwp-ai-search-content — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-ai-search-content/SKILL.md
@@ -59,4 +64,4 @@ Use arwp-future-search after current crawl/index/canonical/content/identity foun
 npx skills add dkharlanau/agent-ready-web-profile
 
 ## Rule
-Research -> classify current vs observational vs experimental -> establish site focus -> fix technical eligibility -> run Search Release -> run Index Worthiness before broad generated-page sitemap expansion -> benchmark when useful -> implement -> trace provenance/impact when needed -> verify final production -> measure owner-observed outcomes. Do not claim that ARWP, Index Worthiness, BraidGraph adjacency, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
+Research -> classify current vs observational vs experimental -> establish site focus -> fix technical eligibility -> run Search Release -> run Index Worthiness before broad generated-page sitemap expansion -> benchmark when useful -> run Localization Quality whenever a locale is added or a localizable surface changes -> implement -> trace provenance/impact when needed -> verify final production -> measure owner-observed outcomes. Do not claim that ARWP, localization completeness, Index Worthiness, BraidGraph adjacency, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
