@@ -1,1 +1,201 @@
-{"$schema":"https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/localization-profile.schema.json","version":"0.2","sourceLocale":"en","defaultLocale":"en","locales":[{"code":"en","role":"canonical","markets":[],"searchPublication":"full"},{"code":"fr","role":"human-interface","markets":["FR"],"searchPublication":"full"},{"code":"de","role":"routing-only","markets":["DE"],"searchPublication":"none"}],"markets":[{"code":"FR","locales":["fr"]},{"code":"DE","locales":["de"]}],"surfaces":[{"id":"ui","kind":"json-key-set","parity":"exact","canonicalSource":"i18n/en.json","localePattern":"i18n/{locale}.json","requiredForRoles":["human-interface"]},{"id":"content","kind":"json-record-set","parity":"semantic","canonicalSource":"data/en.json","localePattern":"data/{locale}.json","requiredForRoles":["human-interface"]},{"id":"page","kind":"rendered-page-manifest","parity":"adapted","canonicalSource":"pages/en.json","localePattern":"pages/{locale}.json","requiredForRoles":["human-interface"]},{"id":"offers","kind":"json-record-set","parity":"market-specific","canonicalSource":"offers/en.json","localePattern":"offers/{locale}.json","marketFields":["price"],"requiredForRoles":["human-interface"]},{"id":"routing","kind":"machine-files","parity":"routing-only","localePattern":"ai/{locale}.txt","requiredForRoles":["routing-only"]}],"impactRules":[{"paths":["i18n/en.json","data/en.json"],"surfaces":["ui","content","page"]}]}
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/localization-profile.schema.json",
+  "version": "0.2",
+  "site": "https://example.test/",
+  "sourceLocale": "en",
+  "defaultLocale": "en",
+  "fallbackPolicy": "explicit-by-surface",
+  "glossaryFile": "data/localization-glossary.json",
+  "debtLedger": "data/localization-quality-debt.json",
+  "sitemapManifest": "build/sitemap-locales.json",
+  "localeManifest": "build/locale-manifest.json",
+  "xDefaultPolicy": "source-locale",
+  "locales": [
+    {
+      "code": "en",
+      "label": "English",
+      "role": "canonical",
+      "status": "published",
+      "markets": ["US", "GB"],
+      "searchPublication": "full"
+    },
+    {
+      "code": "fr",
+      "label": "Français",
+      "role": "human-interface",
+      "status": "published",
+      "markets": ["FR"],
+      "searchPublication": "full"
+    },
+    {
+      "code": "pt-BR",
+      "label": "Português do Brasil",
+      "role": "human-interface",
+      "status": "reviewed-partial",
+      "markets": ["BR"],
+      "searchPublication": "limited"
+    },
+    {
+      "code": "de",
+      "label": "Deutsch",
+      "role": "routing-only",
+      "status": "published-limited",
+      "markets": ["DE"],
+      "searchPublication": "none"
+    }
+  ],
+  "markets": [
+    { "code": "US", "locales": ["en"] },
+    { "code": "GB", "locales": ["en"] },
+    { "code": "FR", "locales": ["fr"] },
+    { "code": "BR", "locales": ["pt-BR"] },
+    { "code": "DE", "locales": ["de"] }
+  ],
+  "surfaces": [
+    {
+      "id": "ui",
+      "kind": "json-key-set",
+      "parity": "exact",
+      "canonicalSource": "src/i18n/en.json",
+      "localePattern": "src/i18n/{locale}.json",
+      "requiredForRoles": ["human-interface"],
+      "disallowSourceEqual": true,
+      "requireNfc": true,
+      "checks": ["exact-key-parity", "placeholder-parity", "no-silent-fallback"]
+    },
+    {
+      "id": "runtime-states",
+      "kind": "json-key-set",
+      "parity": "exact",
+      "canonicalSource": "src/i18n/runtime/en.json",
+      "localePattern": "src/i18n/runtime/{locale}.json",
+      "requiredForRoles": ["human-interface"],
+      "checks": ["exact-key-parity", "placeholder-parity"]
+    },
+    {
+      "id": "content",
+      "kind": "json-record-set",
+      "parity": "semantic",
+      "canonicalSource": "data/content-en.json",
+      "localePattern": "data/content-{locale}.json",
+      "stableIdField": "canonicalId",
+      "localizedSlugField": "slug",
+      "sourceHashField": "sourceHash",
+      "membership": "exact",
+      "requiredFields": ["canonicalId", "title", "summary", "sourceHash"],
+      "valueFields": ["title", "summary"],
+      "requiredForRoles": ["human-interface"],
+      "checks": ["exact-id-parity", "required-fields", "source-current"]
+    },
+    {
+      "id": "content-libraries",
+      "kind": "json-record-set",
+      "parity": "semantic",
+      "canonicalSource": "data/skills-en.json",
+      "localePattern": "data/skills-{locale}.json",
+      "stableIdField": "canonicalId",
+      "localizedSlugField": "slug",
+      "sourceHashField": "sourceHash",
+      "membership": "exact",
+      "requiredFields": ["canonicalId", "name", "sourceHash"],
+      "valueFields": ["name", "description"],
+      "requiredForRoles": ["human-interface"],
+      "checks": ["exact-id-parity", "unique-localized-slug", "source-current"]
+    },
+    {
+      "id": "accessibility",
+      "kind": "manual",
+      "parity": "adapted",
+      "requiredForRoles": ["human-interface"],
+      "checks": ["localized-accessible-names", "localized-skip-link", "localized-validation", "narrow-layout-review"]
+    },
+    {
+      "id": "seo-search",
+      "kind": "rendered-page-manifest",
+      "parity": "adapted",
+      "canonicalSource": "build/pages-en.json",
+      "localePattern": "build/pages-{locale}.json",
+      "stableIdField": "canonicalId",
+      "localizedSlugField": "slug",
+      "requiredForRoles": ["human-interface"],
+      "requireHreflang": true,
+      "requireSitemap": true,
+      "requireSearchMetadata": true,
+      "requireStructuredDataLanguage": true,
+      "checks": ["html-lang", "self-canonical", "reciprocal-hreflang", "sitemap-membership", "structured-data-language"]
+    },
+    {
+      "id": "ai-agent",
+      "kind": "machine-files",
+      "parity": "semantic",
+      "localePattern": "ai/{locale}/llms.txt",
+      "requiredForRoles": ["human-interface"],
+      "requiredTokens": ["locale", "canonical"],
+      "checks": ["declared-machine-surface", "locale-routing-semantics"]
+    },
+    {
+      "id": "agent-routing",
+      "kind": "machine-files",
+      "parity": "routing-only",
+      "localePattern": "ai/{locale}/llms.txt",
+      "requiredForRoles": ["routing-only"],
+      "requiredTokens": ["locale"],
+      "checks": ["declared-routing-surface", "no-human-search-publication"]
+    },
+    {
+      "id": "market-offers",
+      "kind": "json-record-set",
+      "parity": "market-specific",
+      "canonicalSource": "data/offers-us.json",
+      "localePattern": "data/offers-{locale}.json",
+      "stableIdField": "canonicalId",
+      "membership": "independent",
+      "requiredFields": ["canonicalId", "name"],
+      "valueFields": ["name", "description"],
+      "marketFields": ["price", "currency", "availability", "legalText"],
+      "requiredForRoles": ["human-interface"],
+      "checks": ["stable-identity", "market-facts-not-inferred-from-language"]
+    },
+    {
+      "id": "media-text",
+      "kind": "manual",
+      "parity": "adapted",
+      "requiredForRoles": ["human-interface"],
+      "checks": ["embedded-text-inventory", "alt-text-review"]
+    },
+    {
+      "id": "documentation",
+      "kind": "manual",
+      "parity": "adapted",
+      "requiredForRoles": [],
+      "checks": ["declared-scope"]
+    }
+  ],
+  "impactRules": [
+    {
+      "paths": ["src/components/**", "src/i18n/en.json", "src/i18n/runtime/en.json"],
+      "surfaces": ["ui", "runtime-states", "accessibility"]
+    },
+    {
+      "paths": ["data/content-en.json"],
+      "surfaces": ["content", "seo-search"]
+    },
+    {
+      "paths": ["data/skills-en.json", "data/taxonomy*.json"],
+      "surfaces": ["content-libraries", "ai-agent"]
+    },
+    {
+      "paths": ["templates/**", "scripts/generate-*.mjs"],
+      "surfaces": ["seo-search", "ui", "accessibility"]
+    },
+    {
+      "paths": ["ai/**", "skills/**"],
+      "surfaces": ["ai-agent", "agent-routing"]
+    },
+    {
+      "paths": ["data/offers-*.json", "config/markets/**"],
+      "surfaces": ["market-offers"]
+    }
+  ],
+  "evidenceBoundary": "A passing localization profile proves only declared source/build/rendered implementation observations. It does not prove deployed parity, literary quality, cultural fit, indexing, ranking, AI citation/recommendation, traffic or conversion."
+}
