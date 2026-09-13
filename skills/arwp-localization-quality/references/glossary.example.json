@@ -1,0 +1,60 @@
+{
+  "version": "0.1",
+  "locale": "fr",
+  "sourceLocale": "en",
+  "sourceRevision": "example-release-2026-09-13",
+  "status": "reviewed-example",
+  "entries": [
+    {
+      "conceptId": "decision-skill",
+      "source": "Decision Skill",
+      "preferred": "Compétence de décision",
+      "aliases": ["Decision Skill"],
+      "avoid": ["Hack"],
+      "context": "A reusable practical capability for improving a decision process, not a shortcut or trick.",
+      "grammarNotes": "Use sentence case in body copy. Keep the English alias only where recognition or cross-language mapping helps.",
+      "example": "Cette compétence de décision aide à comparer plusieurs options avant de choisir.",
+      "status": "reviewed"
+    },
+    {
+      "conceptId": "evidence-status",
+      "source": "Evidence status",
+      "preferred": "Niveau de preuve",
+      "aliases": [],
+      "avoid": ["Preuve certaine"],
+      "context": "A label that describes how strong or complete the supporting evidence is. It must not imply certainty when the canonical evidence is limited.",
+      "grammarNotes": "Prefer the same wording across cards, detail pages and machine-readable labels when natural grammar allows it.",
+      "example": "Le niveau de preuve est limité : cette technique doit être utilisée avec prudence.",
+      "status": "reviewed"
+    },
+    {
+      "conceptId": "reviewed-localization",
+      "source": "Reviewed localization",
+      "preferred": "Localisation relue",
+      "aliases": ["Traduction relue"],
+      "avoid": ["Traduction certifiée"],
+      "context": "Language and semantic review has been completed according to the project contract. It is not a legal certification and does not upgrade evidence quality.",
+      "grammarNotes": "Use the shorter form in status labels; explain the scope in documentation when needed.",
+      "example": "Cette version française est une localisation relue du contenu canonique anglais.",
+      "status": "reviewed"
+    },
+    {
+      "conceptId": "source-stale",
+      "source": "Stale",
+      "preferred": "À mettre à jour",
+      "aliases": ["Obsolète"],
+      "avoid": ["Incorrect"],
+      "context": "The localized record no longer matches the required canonical source revision. This state does not automatically mean the old translation is factually wrong.",
+      "grammarNotes": "Prefer a user-facing action phrase over a technical database adjective when displayed in UI.",
+      "example": "Cette localisation est à mettre à jour après une modification du contenu source.",
+      "status": "reviewed"
+    }
+  ],
+  "rules": {
+    "naturalGrammarMayInflectPreferredTerms": true,
+    "canonicalIdsAreNeverTranslated": true,
+    "evidenceStrengthMustNotChange": true,
+    "unresolvedTerminologyMustBeFlagged": true
+  },
+  "note": "This file illustrates the data shape. Real projects should build their glossary from their own domain corpus, audience and target-language usage rather than copying these terms."
+}
