@@ -4,6 +4,29 @@ import fs from 'node:fs';
 const registry = JSON.parse(fs.readFileSync('registry/search-release-practices.json', 'utf8'));
 const docs = fs.readFileSync('docs/SEARCH-RELEASE-GATE.md', 'utf8');
 const skill = fs.readFileSync('skills/arwp-search-release/SKILL.md', 'utf8');
+const sitemapXml = fs.readFileSync('docs/sitemap.xml', 'utf8');
+const sitemapMarkdown = fs.readFileSync('docs/sitemap.md', 'utf8');
+const publicBase = 'https://dkharlanau.github.io/agent-ready-web-profile/';
+
+function publicSourceCandidates(publicUrl) {
+  const parsed = new URL(publicUrl);
+  const basePath = new URL(publicBase).pathname;
+  assert.equal(parsed.origin, new URL(publicBase).origin, `unexpected sitemap origin: ${publicUrl}`);
+  assert.ok(parsed.pathname.startsWith(basePath), `public URL escapes the project path: ${publicUrl}`);
+  const rel = decodeURIComponent(parsed.pathname.slice(basePath.length));
+  if (!rel) return ['docs/index.html'];
+  if (rel.endsWith('/')) return [`docs/${rel}index.html`, `docs/${rel}index.md`];
+  if (rel.endsWith('.html')) return [`docs/${rel}`, `docs/${rel.replace(/\.html$/, '.md')}`];
+  return [`docs/${rel}`];
+}
+
+function assertPublishedSource(publicUrl, sourceLabel) {
+  const candidates = publicSourceCandidates(publicUrl);
+  assert.ok(
+    candidates.some(candidate => fs.existsSync(candidate)),
+    `${sourceLabel} points to a public URL with no publishing source: ${publicUrl}; checked ${candidates.join(', ')}`
+  );
+}
 
 assert.equal(registry.version, '1.2');
 assert.match(registry.reviewedAt, /^\d{4}-\d{2}-\d{2}$/);
@@ -75,6 +98,22 @@ for (const practice of registry.practices) {
   for (const source of practice.sources) assert.ok(registry.sources[source], `${practice.id} references unknown source ${source}`);
 }
 
+const sitemapUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1].trim());
+assert.ok(sitemapUrls.length > 0, 'Search Release dogfood requires a non-empty sitemap');
+assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, 'sitemap URLs must be unique');
+for (const publicUrl of sitemapUrls) assertPublishedSource(publicUrl, 'sitemap.xml');
+assert.ok(!sitemapUrls.includes(`${publicBase}404.html`), '404.html must stay outside the sitemap');
+
+const publicMarkdownLinks = [...sitemapMarkdown.matchAll(/\]\((https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/[^)\s]+)\)/g)]
+  .map(match => match[1]);
+for (const publicUrl of publicMarkdownLinks) assertPublishedSource(publicUrl, 'sitemap.md');
+
+assert.ok(fs.existsSync('docs/404.html'), 'GitHub Pages publishing source must ship a custom 404.html');
+const errorHtml = fs.readFileSync('docs/404.html', 'utf8');
+assert.match(errorHtml, /<meta\s+name="robots"\s+content="[^"]*noindex/i, '404.html must be explicitly non-indexable');
+assert.match(errorHtml, /<h1>[^<]*(?:not here|not found|404)/i, '404.html must visibly communicate the error state');
+assert.doesNotMatch(errorHtml, /rel="canonical"/i, '404.html must not masquerade as a canonical content page');
+
 for (const phrase of [
   'user-facing result is itself a product surface',
   'GitHub Pages-specific checks',
@@ -100,4 +139,4 @@ for (const phrase of [
   'negative assertions'
 ]) assert.match(skill, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
 
-console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, GitHub Pages publishing, final-artifact, freshness, structured-data, machine-readable, deployment-proof and production-serialization boundaries without a ranking score.`);
+console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, sitemap-to-source integrity, 404 handling, GitHub Pages publishing, final-artifact, freshness, structured-data, machine-readable, deployment-proof and production-serialization boundaries without a ranking score.`);
