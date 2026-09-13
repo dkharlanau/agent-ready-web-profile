@@ -1,7 +1,7 @@
 ---
 name: arwp-localization-quality
 description: Design, implement, audit and maintain high-quality website localization across terminology, UI, content libraries, accessibility, Search metadata and AI/agent surfaces. Use when adding a locale, reviewing a multilingual release, finding untranslated components, or adding CI that prevents new strings, pages, skills or datasets from escaping localization.
-license: Apache-2.0
+license: PolyForm-Strict-1.0.0
 compatibility: Stack-neutral; strongest with versioned locale data, deterministic inventories and CI.
 metadata:
   standard: agent-skills
