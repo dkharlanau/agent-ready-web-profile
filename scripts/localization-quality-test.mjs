@@ -110,6 +110,9 @@ for (const [name, index] of [['skills/index.json', sourceIndex], ['docs/skills/i
   const entries = index.skills.filter(entry => entry.name === 'arwp-localization-quality');
   assert.equal(entries.length, 1, `${name} must list arwp-localization-quality exactly once`);
 }
+const sourceSkillNames = sourceIndex.skills.map(entry => entry.name).sort();
+const publicSkillNames = publicIndex.skills.map(entry => entry.name).sort();
+assert.deepEqual(publicSkillNames, sourceSkillNames, 'Public skill registry must expose the exact canonical skill-name set');
 assert.ok(sourceIndex.composition?.specialists?.includes('arwp-localization-quality'), 'Localization skill must be part of the source specialist composition');
 assert.equal(sourceIndex.composition?.localizationQuality, 'arwp-localization-quality', 'Localization composition pointer is missing');
 
