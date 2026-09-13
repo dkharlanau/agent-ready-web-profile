@@ -1,0 +1,187 @@
+{
+  "version": "0.1",
+  "name": "ARWP Comprehensive Site Audit",
+  "reviewedAt": "2026-09-13",
+  "purpose": "Make a whole-site ARWP application coverage-explicit. Bounded cohorts remain useful preflight evidence but cannot prove whole-site coverage.",
+  "truthBoundaries": [
+    "Repository declarations are not deployed runtime evidence.",
+    "A successful build is not proof that the deployed artifact matches the build.",
+    "Raw HTTP HTML is not proof of rendered browser behavior when JavaScript materially changes the page.",
+    "A green bounded cohort is not a whole-site pass.",
+    "Automated accessibility checks are not a WCAG conformance claim.",
+    "Lab performance is not field Core Web Vitals evidence.",
+    "Valid structured data does not guarantee a Search feature.",
+    "Search, AI and business outcomes require owner/provider evidence."
+  ],
+  "coverageContract": {
+    "inventorySources": [
+      "repository routes and content collections",
+      "deterministic build output",
+      "robots.txt sitemap declarations",
+      "sitemap indexes and leaf sitemaps",
+      "same-origin crawlable links",
+      "hreflang and canonical targets",
+      "feeds when present",
+      "first-party URLs declared in structured data",
+      "redirects, pagination, locale variants and generated route states"
+    ],
+    "pageLedgerRequiredFields": [
+      "url",
+      "canonicalOwner",
+      "routeArchetype",
+      "templateOrLayout",
+      "locale",
+      "inventorySources",
+      "expectedIndexability",
+      "auditState",
+      "findings",
+      "evidence"
+    ],
+    "coverageStates": {
+      "complete": "Every enumerable in-scope canonical page received all applicable deterministic page checks and required site/system surfaces were checked.",
+      "runtime-complete": "Complete plus rendered browser/runtime verification on every in-scope page.",
+      "template-runtime-complete": "Complete deterministic page coverage plus rendered/runtime verification for every route archetype/template and every high-risk or changed page.",
+      "partial": "Some discovered pages or applicable checks were sampled, capped, rate-limited or skipped.",
+      "unknown": "The inventory cannot be reconciled or an important source/build/deployment surface cannot be inspected."
+    },
+    "fullAuditClaimRequires": [
+      "coverageState is complete, runtime-complete or template-runtime-complete",
+      "no unexplained inventory or canonical-owner gaps",
+      "every applicable domain has explicit evidence or an explicit watch/owner-data/not-applicable state",
+      "bounded tools are labelled preflight/supplemental rather than whole-site proof",
+      "every exclusion has a reason",
+      "tested revision and deployment identity are recorded when repository changes are part of the task"
+    ],
+    "largeSitePolicy": "Prefer complete repository/build analysis for every page, then chunk public checks conservatively. If every live/rendered page cannot be checked safely, report template-runtime-complete or partial rather than runtime-complete."
+  },
+  "evidenceLayers": [
+    "repository",
+    "build",
+    "deployed-http",
+    "rendered-browser",
+    "owner-platform"
+  ],
+  "auditDomains": [
+    {
+      "id": "inventory-and-deployment",
+      "priority": "P0",
+      "checks": ["route/content/build/sitemap/link reconciliation", "canonical owners and aliases", "route archetypes/templates/locales", "source-build-deploy revision parity", "host and HTTPS normalization", "404/410 and soft-404 behavior"]
+    },
+    {
+      "id": "http-crawl-index-canonical",
+      "priority": "P0",
+      "checks": ["expected HTTP state", "redirects", "robots and crawler-specific access", "meta/X-Robots-Tag", "canonical consistency", "sitemap/indexability parity", "pagination/filter/parameter policy", "hreflang reciprocity"]
+    },
+    {
+      "id": "head-search-appearance-social",
+      "priority": "P1",
+      "checks": ["title uniqueness and source convergence", "description quality", "charset/viewport/lang", "favicon and site identity", "Open Graph/social cards", "preferred image", "snippet pollution"]
+    },
+    {
+      "id": "structured-data-entities-provenance",
+      "priority": "P1",
+      "checks": ["JSON-LD parsing", "page-type fit", "visible-fact parity", "stable @id reuse", "cross-page entity consistency", "truthful authors/dates/prices/ratings/licenses/provenance"]
+    },
+    {
+      "id": "content-quality-and-evidence",
+      "priority": "P1",
+      "checks": ["clear page job", "standalone usefulness", "original contribution", "claim/source support", "thin/duplicate/stale content", "heading hierarchy", "placeholder/debug filler", "truthful freshness", "important citation health"]
+    },
+    {
+      "id": "internal-discovery-information-architecture",
+      "priority": "P1",
+      "checks": ["intentional discovery path", "crawlable descriptive links", "breadcrumbs", "hub/detail/reverse relations", "orphans/global-only pages", "dead ends", "canonical link targets", "all internal links and critical assets"]
+    },
+    {
+      "id": "accessibility-wcag22",
+      "priority": "P1",
+      "checks": ["landmarks/headings", "image alternatives", "name-role-value/state", "form labels/errors", "keyboard operation", "visible unobscured focus", "target size/input alternatives", "contrast/non-color cues", "zoom/reflow", "reduced motion", "captions/transcripts", "document language", "manual review before conformance claims"]
+    },
+    {
+      "id": "performance-and-delivery",
+      "priority": "P1",
+      "checks": ["field LCP/INP/CLS when owner data exists", "lab diagnostics", "transfer/request outliers", "render-blocking/client-JS risk", "responsive images/dimensions/lazy loading", "font policy", "compression/cache validators", "third-party weight", "layout shifts"]
+    },
+    {
+      "id": "mobile-responsive-visual",
+      "priority": "P1",
+      "checks": ["viewport/overflow", "mobile navigation/dialogs/sticky UI", "readability", "touch targets", "interstitial obstruction", "breakpoint hierarchy", "visual regressions"]
+    },
+    {
+      "id": "runtime-js-functionality",
+      "priority": "P0",
+      "checks": ["raw-vs-rendered content parity", "console/network errors", "hydration", "SPA deep links/history", "links/buttons/menus/dialogs", "forms and validation", "search/filter/sort/pagination", "empty/error states", "downloads", "third-party failure resilience"]
+    },
+    {
+      "id": "security-privacy",
+      "priority": "P1",
+      "checks": ["HTTPS/mixed content", "security response headers", "framing/referrer/permissions policy applicability", "external script review", "cookies/analytics inventory", "privacy/consent applicability", "deeper app-security gate for accounts/uploads/forms", "no private owner data in public artifacts"]
+    },
+    {
+      "id": "media-images-video-downloads",
+      "priority": "P1",
+      "checks": ["media URL/content type", "responsive images/dimensions", "alt/context/captions/transcripts", "preferred/social images", "media sitemap applicability", "license/credit truth", "download metadata"]
+    },
+    {
+      "id": "localization-internationalization",
+      "priority": "P1",
+      "checks": ["lang declaration", "localized route inventory", "hreflang equivalence", "untranslated gaps", "locale formatting", "locale switcher behavior", "localized metadata/structured-data parity"]
+    },
+    {
+      "id": "trust-identity-legal",
+      "priority": "P1",
+      "checks": ["operator/publisher consistency", "about/contact/author identity when useful", "copyright/license/trademark", "privacy/data-use when applicable", "terms/refund/submission rules when applicable", "security contact when applicable", "corrections/version history when useful"]
+    },
+    {
+      "id": "analytics-measurement-observability",
+      "priority": "P1",
+      "checks": ["analytics configuration and duplicate firing", "important task/conversion events", "Search Console/Bing owner gates", "AI referrals/crawler logs when relevant", "provider-native denominators", "private measurement data kept out of public artifacts"]
+    },
+    {
+      "id": "ai-agent-readiness",
+      "priority": "P1",
+      "checks": ["OAI-SearchBot policy separate from GPTBot", "useful HTML/text availability", "accurate control semantics", "truthful llms.txt/Agent Skills/API/MCP/A2A/WebMCP surfaces", "no implied side-effect authorization", "snippet/citation controls match publisher intent"]
+    },
+    {
+      "id": "feeds-manifests-api-machine-surfaces",
+      "priority": "P2",
+      "checks": ["RSS/Atom when present", "web manifest/icons when present", "public JSON/CSV/API/download content types", "public data caching/CORS where applicable", "no stale/private resources in catalogs"]
+    },
+    {
+      "id": "freshness-lifecycle-regression",
+      "priority": "P1",
+      "checks": ["truthful sitemap lastmod", "date/version consistency", "deprecated-content handling", "shared-template blast radius", "re-audit changed pages and affected archetypes", "scheduled regression evidence"]
+    }
+  ],
+  "conditionalPacks": [
+    {"id": "ecommerce-product", "trigger": "products, prices or checkout", "checks": ["Product/Offer parity", "price/currency/availability", "shipping/returns", "cart/checkout", "merchant-feed consistency"]},
+    {"id": "editorial-news", "trigger": "articles/news/recurring authors", "checks": ["author identity", "publication/modified dates", "article markup", "provenance/corrections", "archive/topic discovery"]},
+    {"id": "dataset-research", "trigger": "datasets/research/benchmarks", "checks": ["Dataset metadata", "license/version/checksums", "persistent identifiers", "methodology/provenance", "reproducible downloads", "citation instructions"]},
+    {"id": "tool-app-account", "trigger": "interactive app/accounts/uploads/saved state", "checks": ["authentication/accessibility", "error/recovery", "state persistence", "privacy lifecycle", "application-security review", "critical task completion"]},
+    {"id": "local-business", "trigger": "physical location/service area", "checks": ["name/address/phone", "hours", "map/contact route", "LocalBusiness applicability", "service-area truth", "local-page uniqueness"]},
+    {"id": "media-heavy", "trigger": "video/audio/image-led content", "checks": ["captions/transcripts", "poster/thumbnail", "media metadata", "stream/download behavior", "media sitemap", "licensing/credits", "bandwidth"]}
+  ],
+  "completionReportRequired": [
+    "coverage state and exact discovered/in-scope/audited/browser-tested/excluded/unknown counts",
+    "inventory reconciliation and unexplained gaps",
+    "per-page ledger or machine-readable equivalent",
+    "site/system findings",
+    "P0/P1/P2 plus watch/owner-data/not-applicable findings",
+    "evidence layer for every material finding",
+    "autofixed versus manual/owner/runtime gates",
+    "verification and tested revision/deployment identity",
+    "explicit surfaces not checked",
+    "no composite SEO/AI/accessibility/security score substituting for evidence"
+  ],
+  "sources": [
+    {"id": "google-search-essentials", "url": "https://developers.google.com/search/docs/essentials"},
+    {"id": "google-page-experience", "url": "https://developers.google.com/search/docs/appearance/page-experience"},
+    {"id": "google-structured-data", "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"},
+    {"id": "google-js-seo", "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"},
+    {"id": "wcag22", "url": "https://www.w3.org/TR/WCAG22/"},
+    {"id": "web-vitals", "url": "https://web.dev/articles/vitals"},
+    {"id": "owasp-http-headers", "url": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html"},
+    {"id": "openai-publishers", "url": "https://help.openai.com/en/articles/12627856"},
+    {"id": "bing-webmaster-guidelines", "url": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a"}
+  ]
+}
