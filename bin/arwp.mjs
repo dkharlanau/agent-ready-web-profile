@@ -13,6 +13,9 @@ if (process.argv[2] === 'site-gate') {
 } else if (process.argv[2] === 'url-migration') {
   process.argv.splice(2, 1);
   await import('./arwp-url-migration.mjs');
+} else if (process.argv[2] === 'localization') {
+  process.argv.splice(2, 1);
+  await import('./arwp-localization.mjs');
 } else {
   await import('./arwp-core.mjs');
 }

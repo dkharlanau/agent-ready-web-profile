@@ -4,47 +4,71 @@ on:
   pull_request:
     paths:
       - 'LOCALIZATION.md'
-      - 'docs/LOCALIZATION.md'
-      - 'docs/LOCALIZATION-QUALITY.md'
+      - 'docs/LOCALIZATION*'
       - 'docs/localization-quality-profile.example.json'
+      - 'bin/arwp.mjs'
+      - 'bin/arwp-localization.mjs'
+      - 'lib/localization-quality.mjs'
+      - 'lib/surface-integrity.mjs'
+      - 'schema/localization-*.json'
+      - 'schema/surface-integrity-*.json'
+      - 'schema/quality-debt-ledger.schema.json'
+      - 'schema/agent-eval-receipt.schema.json'
       - 'skills/arwp-localization-quality/**'
       - 'docs/skills/arwp-localization-quality/**'
       - 'skills/index.json'
       - 'docs/skills/index.json'
       - 'docs/skills/index.html'
       - 'docs/skills/llms.txt'
-      - 'scripts/localization-quality-test.mjs'
+      - 'benchmarks/localization-quality/**'
+      - 'scripts/localization-*.mjs'
       - '.github/workflows/localization-quality.yml'
   push:
     branches: [main]
     paths:
       - 'LOCALIZATION.md'
-      - 'docs/LOCALIZATION.md'
-      - 'docs/LOCALIZATION-QUALITY.md'
+      - 'docs/LOCALIZATION*'
       - 'docs/localization-quality-profile.example.json'
+      - 'bin/arwp.mjs'
+      - 'bin/arwp-localization.mjs'
+      - 'lib/localization-quality.mjs'
+      - 'lib/surface-integrity.mjs'
+      - 'schema/localization-*.json'
+      - 'schema/surface-integrity-*.json'
+      - 'schema/quality-debt-ledger.schema.json'
+      - 'schema/agent-eval-receipt.schema.json'
       - 'skills/arwp-localization-quality/**'
       - 'docs/skills/arwp-localization-quality/**'
       - 'skills/index.json'
       - 'docs/skills/index.json'
       - 'docs/skills/index.html'
       - 'docs/skills/llms.txt'
-      - 'scripts/localization-quality-test.mjs'
+      - 'benchmarks/localization-quality/**'
+      - 'scripts/localization-*.mjs'
       - '.github/workflows/localization-quality.yml'
 
 permissions:
   contents: read
 
 jobs:
-  contract:
+  deterministic-localization-quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Check test syntax
-        run: node --check scripts/localization-quality-test.mjs
-      - name: Verify localization quality package
-        run: node scripts/localization-quality-test.mjs
+          cache: npm
+      - run: npm ci
+      - run: node scripts/localization-quality-test.mjs
+      - run: node scripts/localization-engine-test.mjs
+      - run: node scripts/localization-fault-injection-test.mjs
+      - run: node scripts/localization-schema-test.mjs
+      - run: node scripts/agent-eval-test.mjs
+      - run: node --check lib/localization-quality.mjs
+      - run: node --check lib/surface-integrity.mjs
+      - run: node --check bin/arwp-localization.mjs
+      - run: node bin/arwp.mjs localization --help
+      - run: node bin/arwp.mjs localization check benchmarks/localization-quality/base/profile.json --root=benchmarks/localization-quality/base --json > /tmp/localization-report.json
+      - run: node bin/arwp.mjs localization gate benchmarks/localization-quality/base/profile.json --root=benchmarks/localization-quality/base --changed=en/content.json
