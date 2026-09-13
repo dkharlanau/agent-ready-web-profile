@@ -12,7 +12,7 @@ metadata:
 
 Use this skill when localization is a product surface, not a one-time translation job.
 
-Read the repository's current instructions and localization architecture first. Then read [`../../LOCALIZATION.md`](../../LOCALIZATION.md). Do not impose one file layout on every stack.
+Read the target repository's current instructions and localization architecture first. If the ARWP repository-level [`../../LOCALIZATION.md`](../../LOCALIZATION.md) standard is available in the current checkout, read it for the extended guidance; otherwise this skill and its bundled `references/` are self-contained. Do not impose one file layout on every stack.
 
 ## Workflow
 
@@ -114,7 +114,7 @@ This rule is the main protection against localization quality decaying after a s
 
 ## References
 
-- [`../../LOCALIZATION.md`](../../LOCALIZATION.md) — full standard.
+- [`../../LOCALIZATION.md`](../../LOCALIZATION.md) — extended repository-level standard when present.
 - [`references/prompts.md`](references/prompts.md) — glossary, localization, reconciliation and UI-audit prompt contracts.
 - [`references/ci-gates.md`](references/ci-gates.md) — reusable CI design.
 - [`references/localization-profile.example.json`](references/localization-profile.example.json) — example surface contract.
