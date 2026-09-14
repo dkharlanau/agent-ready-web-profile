@@ -12,7 +12,7 @@ Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-pr
 
 Repository work from ChatGPT/GitHub: start with [AGENTS.md](AGENTS.md), then use [REPO_MAP.md](REPO_MAP.md) to route the task to canonical sources and checks.
 
-Goose ARWP is the product-facing layer built on **Agent-Ready Web Profile (ARWP)**: an open-source system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
+Goose ARWP is the product-facing layer built on **Agent-Ready Web Profile (ARWP)**: a source-available system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
 
 Most tools answer one of two questions:
 
@@ -155,7 +155,7 @@ Existing ARWP foundations: Trend Radar, recommendation registries, source snapsh
 
 ### 2. Map — **What does this site actually have?**
 
-The next major core build: a **Site State Graph + Repository Mapper**.
+Repository Mapper is a supporting engine for resolving rendered surfaces to owning source files when a real intervention needs grounded repository changes.
 
 Map should understand:
 
@@ -222,7 +222,7 @@ BraidGraph already keeps implementation verification and external measurements a
 
 ### 6. Watch — **What needs attention now?**
 
-The next high-leverage portfolio layer.
+Watch is a later portfolio-maintenance layer, gated on trustworthy single-site proof rather than feature breadth.
 
 Example:
 
@@ -268,53 +268,19 @@ Owner-data adapters should bring external observations into BraidGraph without p
 - Resolver / MCP / A2A / WebMCP / Agent Skills / ARD interoperability foundation;
 - change/history/experiment evidence.
 
-## Highest-value next builds
+## Current priorities
 
-### P0 — Repository Mapper
+README does not maintain a second roadmap. Use [`ROADMAP.md`](ROADMAP.md) plus live GitHub issues for actionable priorities, and [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md) for the current product boundary and stop rules.
 
-Resolve rendered public surfaces to their source repository files, framework ownership, facts and mutation classes.
-
-This is now the biggest blocker to promoting more grounded recommendations into safe deterministic PRs and to populating trustworthy `repo-file → renders → surface` BraidGraph edges.
-
-### P0 — Unified Change Receipt + evidence adapters
-
-Every executed transformation should preserve source/rule version, before/after digests, verification results, deployment evidence and outstanding measurement requirements, then map those canonical artifacts into BraidGraph without duplicating their payloads.
-
-### P0 — Goose Watch
-
-Turn BraidGraph source/rule revisions and reverse impact traversal into portfolio re-review queues, alerts and bounded remediation waves.
-
-### P1 — Portfolio policy-as-code
-
-Organization-level rules for what can be automated, what always needs review, crawler/content-use policy and required verification gates.
-
-### P1 — Verified stack transformation packs
-
-High-confidence adapters and fixtures for GitHub Pages/static HTML, Jekyll, Next.js, Astro, Docusaurus and later CMS/e-commerce stacks.
-
-### P1 — Semantic source-diff watcher
-
-Detect material guidance changes and generate proposed rule revisions + blast-radius previews instead of reacting to simple timestamp/page churn.
-
-### P1 — First-party evidence connectors
-
-Google, Bing, Cloudflare and analytics adapters with explicit provenance and missing-data states.
-
-### P2 — Page-cohort evidence helper
-
-Support before/after cohorts and comparable unchanged pages for more disciplined outcome review without claiming unsupported causality.
-
-### P2 — Public transformation benchmark
-
-Reproducible fixtures showing whether specific transformations close intended implementation debt — including failures and negative results — without turning this into a ranking benchmark.
+Supporting engines such as Repository Mapper, Resolver/protocol breadth, Watch, provider adapters and transformation packs should expand when current evidence or an active product workflow justifies the work, not because the repository can support another module.
 
 ## Product packaging
 
-### Open core
+### Source-available core
 
 - single-site Radar / Map / Plan / Patch / Proof primitives;
-- open BraidGraph schema/compiler/history/query layer;
-- open CLI, schemas and Agent Skills;
+- source-available BraidGraph schema/compiler/history/query layer;
+- source-available CLI, schemas and Agent Skills;
 - deterministic transformation engine;
 - local verification/evidence.
 
@@ -398,7 +364,7 @@ Canonical product name: **Goose ARWP**. **Goose** is the short form; **Agent-Rea
 
 ## License
 
-Apache License 2.0. See [`LICENSE`](LICENSE).
+PolyForm Strict License 1.0.0 from the current revision onward. Earlier revisions may retain rights already granted under Apache License 2.0. See [`LICENSE`](LICENSE) for the authoritative terms.
 
 ## Choose a concrete implementation practice
 

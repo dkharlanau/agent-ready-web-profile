@@ -23,6 +23,7 @@ Run commands from the repository root unless a row says otherwise. CI currently 
 | Agent Skills | Canonical `skills/*/SKILL.md` and `skills/README.md` | Published `docs/skills/` mirrors and `.github/workflows/agent-skills.yml` | Use the existing skill validation/workflow plus `npm test`; do not hand-edit a published mirror when a canonical skill source owns it |
 | Maturity, identity, datasets, trust | `docs/MATURITY-PROFILE.md`, `CONTRIBUTING.md`, relevant `docs/trust/` sources | `docs/maturity/profile.json`, entity/catalog surfaces, dataset/DOI records | `node scripts/maturity-profile-test.mjs --site`; `node bin/arwp-maturity.mjs check docs/maturity/profile.json` |
 | Core package/schema changes | `SPEC.md`, relevant `schema/`, `lib/`, `bin/`, examples | `README.md`, standards docs, package exports, public examples | Focused package/schema tests plus `npm test`; `npm run test:package` for package-surface changes |
+| Repository memory / navigation | `AGENTS.md`, `REPO_MAP.md`, `ROADMAP.md`, live GitHub issues | `README.md`, `docs/LOOP-STATUS.md`, historical milestone docs, `.gitignore` | `node scripts/repository-memory-test.mjs`; keep task routing pointed at existing paths, keep workstation-local paths out of repository memory, and do not let historical milestone docs become a second current backlog |
 | Repository CI / validation | `.github/workflows/ci.yml` and the workflow touching the changed surface | Test scripts, action pins, package scripts | Validate the existing command locally when available; after publication, match the workflow result to the exact commit SHA. Do not weaken checks to make the run pass. |
 | npm / MCP publication | `.github/workflows/publish-ecosystem.yml` | npm tarball / Official MCP Registry metadata | Manual only. The workflow validates first, and publication inputs default false. Do not dispatch or automate publication without explicit authorization. |
 | Technical Integrity instruction synchronization | `scripts/sync-technical-preflight-instructions.mjs` | `AGENTS.md`, `docs/AGENTS.md`, `.github/workflows/technical-integrity.yml` | `node scripts/technical-preflight-instructions-test.mjs`. The workflow has `contents: write` and may push a synchronization commit on `main` if the managed block drifts. |
@@ -63,6 +64,12 @@ These paths may be useful for diagnosis, but normally inspect their owner/source
 Do not ignore them universally. Generated output may be the correct evidence when diagnosing a build/publication defect.
 
 ## Verification contract
+
+Repository-memory validation is intentionally lightweight and dependency-free:
+
+```bash
+node scripts/repository-memory-test.mjs
+```
 
 Broad deterministic repository validation:
 

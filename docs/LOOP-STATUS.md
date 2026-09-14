@@ -67,10 +67,10 @@ The existing Resolver, publisher profile, protocol work, scanner, evidence recei
 
 Repository tests prove internal consistency, not improved ranking, crawling, Discover placement, citation frequency, traffic or conversion. Those outcomes remain owner-side/external measurements. Trend maturity changes remain explicit reviewed repository changes even after evidence becomes eligible.
 
-## Next loop
+## Current priority authority
 
-- managed longitudinal operation in target repositories: retain snapshots/experiments, show changes since the previous run and surface experiments awaiting measurement/review;
-- portfolio rollout: map applicable ADOPT trends to target sites and generate target-specific implementation proposals;
-- deeper vertical adapters only where upstream evidence is strong;
-- stronger search-appearance identity checks and safe patch-manifest generation;
-- continue Resolver decision-quality and independent interoperability work as the technical foundation.
+This file is an implementation-status record, not an independent roadmap.
+
+Use live GitHub issues for actionable work and [`../ROADMAP.md`](../ROADMAP.md) for current durable priorities. Reconcile older milestone documents, historical backlogs and this status record against those sources before resuming work.
+
+The retained Resolver/interoperability foundation may continue to receive maintenance and evidence-driven fixes, but old R4 ordering or this file's historical implementation sequence must not override the current proof-first product priorities.
