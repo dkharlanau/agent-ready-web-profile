@@ -24,7 +24,7 @@ Run commands from the repository root unless a row says otherwise. CI currently 
 | Maturity, identity, datasets, trust | `docs/MATURITY-PROFILE.md`, `CONTRIBUTING.md`, relevant `docs/trust/` sources | `docs/maturity/profile.json`, entity/catalog surfaces, dataset/DOI records | `node scripts/maturity-profile-test.mjs --site`; `node bin/arwp-maturity.mjs check docs/maturity/profile.json` |
 | Core package/schema changes | `SPEC.md`, relevant `schema/`, `lib/`, `bin/`, examples | `README.md`, standards docs, package exports, public examples | Focused package/schema tests plus `npm test`; `npm run test:package` for package-surface changes |
 | Repository memory / navigation | `AGENTS.md`, `REPO_MAP.md`, `ROADMAP.md`, live GitHub issues | `README.md`, `docs/LOOP-STATUS.md`, historical milestone docs, `.gitignore` | `node scripts/repository-memory-test.mjs`; keep task routing pointed at existing paths, keep workstation-local paths out of repository memory, and do not let historical milestone docs become a second current backlog |
-| Repository CI / validation | `.github/workflows/ci.yml` and the workflow touching the changed surface | Test scripts, action pins, package scripts | Validate the existing command locally when available; after publication, match the workflow result to the exact commit SHA. Do not weaken checks to make the run pass. |
+| Repository CI / validation | `scripts/validation-contract.mjs`, `scripts/validation-contract-test.mjs`, `.github/workflows/ci.yml` | `package.json`, focused workflows, test scripts, action pins | `npm run test:validation-contract`; `npm test`; use `node scripts/validation-contract.mjs --list core` to inspect the broad contract without running it. Keep live/network and external SDK setup explicit in workflows; after publication, match results to the exact commit SHA. Do not weaken checks to make the run pass. |
 | npm / MCP publication | `.github/workflows/publish-ecosystem.yml` | npm tarball / Official MCP Registry metadata | Manual only. The workflow validates first, and publication inputs default false. Do not dispatch or automate publication without explicit authorization. |
 | Technical Integrity instruction synchronization | `scripts/sync-technical-preflight-instructions.mjs` | `AGENTS.md`, `docs/AGENTS.md`, `.github/workflows/technical-integrity.yml` | `node scripts/technical-preflight-instructions-test.mjs`. The workflow has `contents: write` and may push a synchronization commit on `main` if the managed block drifts. |
 | Backlog / resume | live GitHub issues, `ROADMAP.md`, `docs/LOOP-STATUS.md` | Relevant issue acceptance criteria and last verified repository state | Reconcile with current HEAD and affected checks; no code check proves backlog freshness |
@@ -71,6 +71,13 @@ Repository-memory validation is intentionally lightweight and dependency-free:
 node scripts/repository-memory-test.mjs
 ```
 
+Validation routing is also dependency-free and can be inspected without executing the suite:
+
+```bash
+node scripts/validation-contract-test.mjs
+node scripts/validation-contract.mjs --list core
+```
+
 Broad deterministic repository validation:
 
 ```bash
@@ -79,8 +86,8 @@ npm test
 npm run quickstart
 ```
 
-`npm test` is the broad repository contract, not proof of production Search/AI outcomes. Live/reference/network checks and owner-side Google/Bing/referral measurements remain separate evidence.
+`npm test` delegates to the `core` validation group. Its command/order fingerprint is guarded so consolidation cannot silently drop or reorder coverage. Live/reference/network checks and owner-side Google/Bing/referral measurements remain separate evidence.
 
-Remote validation is primarily `.github/workflows/ci.yml` on `main` pushes and pull requests, plus focused workflows for specific surfaces. Check the actual tested revision; a green result for another SHA is not evidence for the current change.
+Remote validation is primarily `.github/workflows/ci.yml` on `main` pushes and pull requests, plus focused workflows for specific surfaces. Main CI routes deterministic Node-only phases through the same validation contract while keeping live dogfood, external SDK installation and reusable-action execution explicit in YAML. Check the actual tested revision; a green result for another SHA is not evidence for the current change.
 
 Publication is separate from validation. In particular, `.github/workflows/publish-ecosystem.yml` is manual and must remain so unless an explicitly authorized release task changes that policy.
