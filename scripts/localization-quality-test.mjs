@@ -25,12 +25,14 @@ const requiredFiles = [
   'skills/arwp-localization-quality/references/localization-profile.example.json',
   'skills/arwp-localization-quality/references/glossary.example.json',
   'skills/arwp-localization-quality/references/cognitive-biases-dogfood.md',
+  'skills/arwp-localization-quality/references/browser-verification.md',
   'docs/skills/arwp-localization-quality/SKILL.md',
   'docs/skills/arwp-localization-quality/references/prompts.md',
   'docs/skills/arwp-localization-quality/references/ci-gates.md',
   'docs/skills/arwp-localization-quality/references/localization-profile.example.json',
   'docs/skills/arwp-localization-quality/references/glossary.example.json',
   'docs/skills/arwp-localization-quality/references/cognitive-biases-dogfood.md',
+  'docs/skills/arwp-localization-quality/references/browser-verification.md',
   'skills/index.json',
   'docs/skills/index.json',
   'docs/skills/index.html',
@@ -48,7 +50,8 @@ const mirrorPairs = [
   ['skills/arwp-localization-quality/references/ci-gates.md', 'docs/skills/arwp-localization-quality/references/ci-gates.md'],
   ['skills/arwp-localization-quality/references/localization-profile.example.json', 'docs/skills/arwp-localization-quality/references/localization-profile.example.json'],
   ['skills/arwp-localization-quality/references/glossary.example.json', 'docs/skills/arwp-localization-quality/references/glossary.example.json'],
-  ['skills/arwp-localization-quality/references/cognitive-biases-dogfood.md', 'docs/skills/arwp-localization-quality/references/cognitive-biases-dogfood.md']
+  ['skills/arwp-localization-quality/references/cognitive-biases-dogfood.md', 'docs/skills/arwp-localization-quality/references/cognitive-biases-dogfood.md'],
+  ['skills/arwp-localization-quality/references/browser-verification.md', 'docs/skills/arwp-localization-quality/references/browser-verification.md']
 ];
 for (const [canonical, published] of mirrorPairs) {
   assert.equal(read(published), read(canonical), `${published} must remain an exact mirror of ${canonical}`);
@@ -138,8 +141,31 @@ for (const entry of glossary.entries) {
 }
 
 const dogfood = read('skills/arwp-localization-quality/references/cognitive-biases-dogfood.md');
-for (const marker of ['Locale roles', 'localization-impact gate', 'glossary-first', 'freshness', 'CI environment parity']) {
+for (const marker of [
+  'Current locale roles',
+  'localization-impact gate',
+  'glossary-first',
+  'freshness',
+  'final artifact',
+  'error and recovery routes',
+  'browser detector',
+  'deployment identity',
+  'CI environment parity'
+]) {
   assert.ok(dogfood.toLowerCase().includes(marker.toLowerCase()), `Dogfood reference is missing reusable lesson: ${marker}`);
+}
+
+const browserVerification = read('skills/arwp-localization-quality/references/browser-verification.md');
+for (const marker of [
+  'Four evidence levels',
+  'accessibility tree',
+  '320 px',
+  'Keyboard and focus',
+  'Production verification',
+  'False-green fault injection',
+  'Quality Debt'
+]) {
+  assert.ok(browserVerification.includes(marker), `Browser localization reference is missing reusable contract: ${marker}`);
 }
 
 const sourceIndex = readJson('skills/index.json');
