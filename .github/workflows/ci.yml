@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Validate repository memory
+        run: node scripts/repository-memory-test.mjs
+
       - name: Validate maturity evidence inventory
         run: |
           node scripts/project-surfaces-test.mjs --site
