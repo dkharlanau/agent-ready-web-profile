@@ -1,0 +1,32 @@
+name: Feed syndication contract
+
+on:
+  pull_request:
+    paths:
+      - 'registry/feed-syndication.json'
+      - 'docs/FEED-SYNDICATION.md'
+      - 'examples/rss/**'
+      - 'scripts/feed-syndication-test.mjs'
+      - '.github/workflows/feed-syndication.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'registry/feed-syndication.json'
+      - 'docs/FEED-SYNDICATION.md'
+      - 'examples/rss/**'
+      - 'scripts/feed-syndication-test.mjs'
+      - '.github/workflows/feed-syndication.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Verify feed syndication contract
+        run: node scripts/feed-syndication-test.mjs
