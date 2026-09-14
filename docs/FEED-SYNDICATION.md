@@ -15,7 +15,7 @@ For a site with articles, research notes, releases, changelogs, guides, cards, d
 <link rel="alternate" type="application/rss+xml" title="Site updates" href="https://example.com/feed.xml">
 ```
 
-3. use canonical absolute HTTPS URLs in `<link>` and `<guid>`;
+3. use canonical absolute HTTPS URLs in channel/item `<link>` elements and stable item GUIDs; prefer the canonical URL as the GUID when it is a durable identifier, otherwise use a stable opaque identifier such as a URN;
 4. source item dates from reviewed content/release metadata, not the build clock;
 5. keep ordering deterministic, newest first;
 6. validate the generated artifact in CI;
@@ -45,10 +45,11 @@ Prefer a stable feed per locale when the site has genuinely localized content, f
 
 At minimum, CI should fail when:
 
-- `feed.xml` is missing for an applicable site;
+- the canonical RSS endpoint is missing for an applicable site;
 - the document is not RSS 2.0 or is malformed XML;
 - required channel metadata is absent;
-- item links or GUIDs are relative/non-canonical;
+- channel/item links are relative or non-canonical;
+- GUIDs are missing or unstable across rebuilds;
 - dates are invalid or fabricated from the build wall clock;
 - relevant HTML lacks RSS autodiscovery;
 - `robots.txt` declares a feed URL as `Sitemap:`;
