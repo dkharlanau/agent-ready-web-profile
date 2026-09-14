@@ -12,6 +12,7 @@ const required = [
   'google-faq-rich-results',
   'google-generative-ai-search-console'
 ];
+const today = Date.parse(`${new Date().toISOString().slice(0, 10)}T00:00:00Z`);
 
 for (const rule of registry.rules || []) {
   assert.ok(rule.id && !ids.has(rule.id), `duplicate/missing rule id: ${rule.id}`);
@@ -22,6 +23,7 @@ for (const rule of registry.rules || []) {
   assert.match(rule.verifiedAt || '', /^\d{4}-\d{2}-\d{2}$/, `${rule.id}: verifiedAt`);
   assert.match(rule.reviewBy || '', /^\d{4}-\d{2}-\d{2}$/, `${rule.id}: reviewBy`);
   assert.ok(Date.parse(rule.reviewBy) >= Date.parse(rule.verifiedAt), `${rule.id}: reviewBy precedes verifiedAt`);
+  assert.ok(Date.parse(`${rule.reviewBy}T23:59:59Z`) >= today, `${rule.id}: primary-source review is overdue; verify current guidance and update the registry instead of accepting stale Search assumptions`);
 }
 
 for (const id of required) assert.ok(ids.has(id), `missing Search freshness rule ${id}`);
