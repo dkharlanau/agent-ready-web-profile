@@ -23,16 +23,11 @@ jobs:
       - name: Validate repository memory
         run: node scripts/repository-memory-test.mjs
 
+      - name: Validate validation contract
+        run: node scripts/validation-contract-test.mjs
+
       - name: Validate maturity evidence inventory
-        run: |
-          node scripts/project-surfaces-test.mjs --site
-          node scripts/maturity-profile-test.mjs --site
-          node bin/arwp-maturity.mjs check docs/maturity/profile.json
-          node --check lib/project-surfaces.mjs
-          node --check scripts/project-surfaces-test.mjs
-          node --check lib/maturity-profile.mjs
-          node --check bin/arwp-maturity.mjs
-          node -e "JSON.parse(require('fs').readFileSync('schema/project-surfaces.schema.json','utf8'))"
+        run: node scripts/validation-contract.mjs ci-maturity
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -46,22 +41,7 @@ jobs:
         run: npm test
 
       - name: Validate problem-first Site Focus
-        run: |
-          node scripts/site-focus-test.mjs
-          node scripts/site-focus-engine-test.mjs
-          node scripts/site-focus-v2-test.mjs
-          node scripts/site-focus-v3-test.mjs
-          node scripts/site-focus-dogfood.mjs
-          node --check scripts/site-focus-test.mjs
-          node --check scripts/site-focus-engine-test.mjs
-          node --check scripts/site-focus-v2-test.mjs
-          node --check scripts/site-focus-v3-test.mjs
-          node --check scripts/site-focus-dogfood.mjs
-          node --check lib/site-focus.mjs
-          node --check lib/site-focus-intent.mjs
-          node --check lib/site-focus-v2.mjs
-          node --check lib/site-focus-v3.mjs
-          node --check bin/arwp-focus.mjs
+        run: node scripts/validation-contract.mjs ci-site-focus
 
       - name: Dogfood declared Site Focus contract
         run: |
@@ -69,51 +49,25 @@ jobs:
           node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync('/tmp/cite-goose-focus.json','utf8')); if(r.version!=='0.3') throw new Error('expected latest Site Focus v0.3'); if(!r.declaredFocus) throw new Error('declared focus missing'); if(!r.experienceContract) throw new Error('experience contract missing'); if(r.experienceContract.performance?.assessmentState!=='field-data-required') throw new Error('performance evidence boundary missing'); if('score' in r) throw new Error('opaque score forbidden'); if(r.transformationHandoff?.executable!==false) throw new Error('handoff must remain proposal-only'); if(r.guardrails?.noCompositeFocusExperienceScore!==true) throw new Error('no-composite-score guardrail missing');"
 
       - name: Validate entity graph gap engine
-        run: |
-          node scripts/entity-gap-test.mjs
-          node --check lib/entity-gap.mjs
-          node --check bin/arwp-entities.mjs
+        run: node scripts/validation-contract.mjs ci-entity-gap
 
       - name: Validate entity graph remediation engine
-        run: |
-          node scripts/entity-remediation-test.mjs
-          node --check lib/entity-remediation.mjs
-          node --check bin/arwp-entity-remediation.mjs
+        run: node scripts/validation-contract.mjs ci-entity-remediation
 
       - name: Validate Search Surface Blueprint
-        run: |
-          node scripts/search-surface-test.mjs
-          node --check lib/search-surface-core.mjs
-          node --check lib/search-surface.mjs
-          node --check lib/site-improvement-deep.mjs
-          node --check bin/arwp-surfaces.mjs
+        run: node scripts/validation-contract.mjs ci-search-surface
 
       - name: Validate unified Site Improvement Plan
-        run: |
-          node scripts/site-improvement-test.mjs
-          node scripts/site-improvement-vertical-test.mjs
-          node --check lib/site-improvement.mjs
-          node --check lib/site-improvement-deep.mjs
-          node --check lib/site-improvement-vertical.mjs
-          node --check lib/growth-vertical-evidence.mjs
-          node --check bin/arwp-improve.mjs
-          node --check scripts/site-improvement-vertical-test.mjs
+        run: node scripts/validation-contract.mjs ci-site-improvement
 
       - name: Validate dataset publication and DOI audit
-        run: |
-          node scripts/dataset-publication-test.mjs
-          node --check lib/dataset-publication.mjs
-          node --check bin/arwp-dataset.mjs
-          node --check scripts/dataset-publication-test.mjs
+        run: node scripts/validation-contract.mjs ci-dataset
 
       - name: Validate adaptive content profile
-        run: |
-          node scripts/content-profile-test.mjs
-          node --check lib/content-profile.mjs
-          node --check bin/arwp-content.mjs
+        run: node scripts/validation-contract.mjs ci-content-profile
 
       - name: Validate product classification and competitor surface
-        run: node scripts/classification-test.mjs
+        run: node scripts/validation-contract.mjs ci-classification
 
       - name: Test official A2A JS signature interoperability
         run: |
@@ -126,32 +80,22 @@ jobs:
           node scripts/a2a-python-interoperability-test.mjs
 
       - name: Test benchmark publication sanitizer
-        run: |
-          node benchmarks/publication-report-test.mjs
-          node --check benchmarks/publication-report.mjs
+        run: node scripts/validation-contract.mjs ci-benchmark-publication
 
       - name: Test benchmark decision diagnostics, regret, and truth re-review workflow
-        run: |
-          node benchmarks/selection-diagnostics-test.mjs
-          node benchmarks/resolver-regret-test.mjs
-          node benchmarks/live-capability-drift-test.mjs
-          node benchmarks/ground-truth-review-test.mjs
-          node --check benchmarks/selection-diagnostics.mjs
-          node --check benchmarks/ground-truth-review.mjs
+        run: node scripts/validation-contract.mjs ci-benchmark-diagnostics
 
       - name: Test bounded large-homepage scanning
-        run: node scripts/scanner-large-homepage-test.mjs
+        run: node scripts/validation-contract.mjs ci-large-homepage
 
       - name: Smoke-test npm package
         run: npm run test:package
 
       - name: Smoke-test improvement package surface
-        run: node scripts/package-improvement-smoke-test.mjs
+        run: node scripts/validation-contract.mjs ci-package-improvement
 
       - name: Validate examples through CLI
-        run: |
-          node bin/arwp.mjs validate examples/minimal.site-profile.json
-          node bin/arwp.mjs validate examples/knowledge-site.site-profile.json
+        run: node scripts/validation-contract.mjs ci-examples
 
       - name: Exercise reusable GitHub Action
         uses: ./
