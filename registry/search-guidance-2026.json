@@ -1,0 +1,84 @@
+{
+  "version": "2026-09-14",
+  "purpose": "Primary-source snapshot for Search/localization rules that are easy to fossilize or confuse with agent-interoperability conventions.",
+  "authorityClasses": [
+    "standards-requirement",
+    "google-specific-requirement",
+    "arwp-stronger-recommendation",
+    "product-specific-contract",
+    "experimental-emerging"
+  ],
+  "surfaceClasses": [
+    "search-required",
+    "accessibility-semantic-web",
+    "optional-agent-interoperability",
+    "product-specific-machine-contract",
+    "experimental-emerging"
+  ],
+  "rules": [
+    {
+      "id": "google-llms-txt",
+      "authority": "google-specific-requirement",
+      "surfaceClass": "optional-agent-interoperability",
+      "status": "not-required-for-google-search",
+      "claim": "Google Search does not require llms.txt and it does not positively or negatively affect Search visibility or rankings. A project may keep it for other systems that use it.",
+      "source": "https://developers.google.com/search/updates",
+      "sourceEvent": "2026-06-15",
+      "verifiedAt": "2026-09-14",
+      "reviewBy": "2026-12-14"
+    },
+    {
+      "id": "google-hreflang-representations",
+      "authority": "google-specific-requirement",
+      "surfaceClass": "search-required",
+      "status": "equivalent-representations",
+      "claim": "HTML, HTTP header and sitemap hreflang methods are equivalent for Google. Using all of them provides no Search benefit and increases implementation complexity.",
+      "source": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "verifiedAt": "2026-09-14",
+      "reviewBy": "2026-12-14"
+    },
+    {
+      "id": "google-hreflang-code-eligibility",
+      "authority": "google-specific-requirement",
+      "surfaceClass": "search-required",
+      "status": "google-specific-subset",
+      "claim": "Google hreflang uses ISO 639-1 language codes, optional ISO 15924 script and optional ISO 3166-1 Alpha-2 region. Generic BCP 47 validity alone is not proof of Google hreflang eligibility.",
+      "source": "https://developers.google.com/search/docs/specialty/international/localized-versions",
+      "verifiedAt": "2026-09-14",
+      "reviewBy": "2026-12-14"
+    },
+    {
+      "id": "google-language-detection",
+      "authority": "google-specific-requirement",
+      "surfaceClass": "search-required",
+      "status": "visible-content-driven",
+      "claim": "Google determines page language primarily from visible content, not URL language tokens, html lang or hreflang. html lang remains important for accessibility, browsers and downstream tooling.",
+      "source": "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites",
+      "verifiedAt": "2026-09-14",
+      "reviewBy": "2026-12-14"
+    },
+    {
+      "id": "google-faq-rich-results",
+      "authority": "google-specific-requirement",
+      "surfaceClass": "search-required",
+      "status": "removed",
+      "claim": "FAQ rich results no longer appear in Google Search as of 2026-05-07; FAQPage may still have non-Google semantic uses but must not be sold as a current Google rich-result optimization.",
+      "source": "https://developers.google.com/search/updates",
+      "sourceEvent": "2026-05-07",
+      "verifiedAt": "2026-09-14",
+      "reviewBy": "2026-12-14"
+    },
+    {
+      "id": "google-generative-ai-search-console",
+      "authority": "google-specific-requirement",
+      "surfaceClass": "search-required",
+      "status": "owner-data-available",
+      "claim": "Search Console exposes Generative AI performance data for AI Overviews and AI Mode and a Search generative AI inclusion control. Owner access is required; absence of owner data is not a site implementation failure.",
+      "source": "https://support.google.com/webmasters/answer/16984139",
+      "secondarySource": "https://support.google.com/webmasters/answer/16908024",
+      "sourceEvent": "2026-08-31",
+      "verifiedAt": "2026-09-14",
+      "reviewBy": "2026-10-14"
+    }
+  ]
+}
