@@ -17,9 +17,9 @@
     },
     {
       "id": "FEED-03",
-      "title": "Use canonical absolute URLs",
+      "title": "Use canonical links and stable identifiers",
       "severity": "required",
-      "rule": "Channel links, item links and GUIDs MUST resolve to canonical public HTTPS URLs; item identifiers MUST remain stable across rebuilds."
+      "rule": "Channel and item links MUST use canonical public HTTPS URLs. Item GUIDs MUST remain stable across rebuilds and SHOULD use the canonical item URL when that URL is a durable identifier; otherwise a stable opaque identifier such as a URN is permitted."
     },
     {
       "id": "FEED-04",
@@ -43,7 +43,7 @@
       "id": "FEED-07",
       "title": "Validate generated output",
       "severity": "required",
-      "rule": "CI MUST verify well-formed XML, required RSS channel/item fields, HTML autodiscovery, canonical HTTPS URLs, deterministic ordering and the absence of feed URLs in robots.txt Sitemap directives."
+      "rule": "CI MUST verify well-formed XML, required RSS channel/item fields, HTML autodiscovery, canonical HTTPS links, stable GUIDs, deterministic ordering and the absence of feed URLs in robots.txt Sitemap directives."
     },
     {
       "id": "FEED-08",
