@@ -1,0 +1,56 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-15",
+  "sources": {
+    "googleSitemaps": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+    "googleGenerativeAiPerformance": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+    "bingSitemaps": "https://blogs.bing.com/webmaster/July-2025/Keeping-Content-Discoverable-with-Sitemaps-in-AI-Powered-Search",
+    "bingAiPerformance": "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+    "indexNow": "https://www.indexnow.org/documentation"
+  },
+  "rules": [
+    {
+      "id": "DDL-01-verified-deploy-first",
+      "priority": "P0",
+      "claim": "Discovery notifications must be derived from the exact verified production revision rather than an unverified repository or build state.",
+      "decision": "Require a passing final artifact plus complete live parity with matching source/deployed commit SHA before emitting a ready-to-submit URL set.",
+      "sources": ["googleSitemaps", "bingSitemaps"]
+    },
+    {
+      "id": "DDL-02-changed-canonical-only",
+      "priority": "P0",
+      "claim": "IndexNow is intended for URLs that were added, updated or deleted, not for mechanically resubmitting an unchanged canonical inventory.",
+      "decision": "Ready URLs are limited to added canonical URLs, Search-surface-updated canonical URLs, and removed URLs with explicit live 404/410 evidence.",
+      "sources": ["indexNow", "bingSitemaps"]
+    },
+    {
+      "id": "DDL-03-byte-diff-is-review",
+      "priority": "P1",
+      "claim": "A deployment-time byte difference can reflect non-substantive rebuild churn and is not by itself proof of a meaningful page update.",
+      "decision": "Keep artifact-only byte changes in watch until stronger content/Search evidence exists; do not send them automatically to IndexNow.",
+      "sources": ["googleSitemaps", "bingSitemaps"]
+    },
+    {
+      "id": "DDL-04-sitemap-remains-coverage-layer",
+      "priority": "P0",
+      "claim": "Sitemaps remain the broad canonical coverage mechanism while IndexNow is a URL-level freshness notification mechanism for participating engines.",
+      "decision": "Require the after-artifact sitemap to cover the canonical cohort and keep sitemap processing/status as a separate owner-platform follow-up.",
+      "sources": ["googleSitemaps", "bingSitemaps"]
+    },
+    {
+      "id": "DDL-05-owner-evidence-after-release",
+      "priority": "P1",
+      "claim": "Submission receipts and deployment parity do not prove indexing, ranking, citations or traffic.",
+      "decision": "Create provider-specific owner-evidence follow-ups for Google Search Console, Bing Webmaster/AI Performance and referrals without causal attribution.",
+      "sources": ["googleGenerativeAiPerformance", "bingAiPerformance"]
+    }
+  ],
+  "guardrails": [
+    "Do not notify IndexNow before exact production deployment parity is proven.",
+    "Do not mass-submit an unchanged sitemap cohort.",
+    "Do not treat a build timestamp, deployment timestamp or byte-only rebuild as proof of a meaningful page update.",
+    "Do not treat IndexNow acceptance, sitemap submission or Search Console/Bing visibility as indexing/ranking proof.",
+    "Do not send Google ordinary pages through the Google Indexing API; that applicability is governed separately by Search Platform Eligibility.",
+    "Keep owner exports private; emit only an owner-evidence queue/contract from this planner."
+  ]
+}
