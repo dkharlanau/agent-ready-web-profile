@@ -36,9 +36,19 @@ if (bets.get('minimal-proof-rendering')?.priority !== 'P1-gated') fail('Proof re
 if (bets.get('minimal-proof-rendering')?.gate !== 'first-reviewed-proof-loop') fail('Proof rendering gate drifted.');
 
 const roadmap = read('ROADMAP.md');
-for (const needle of ['# Goose ARWP Roadmap', 'M1 — Proof before more product', 'provider-native', 'Ptichi stays measurement-hold', 'When forced to choose between another capability and another trustworthy real-site evidence loop, choose the evidence loop.']) {
+for (const needle of [
+  '# Goose ARWP Roadmap',
+  'M1 — Proof before more product',
+  'provider-native',
+  'knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json',
+  'R2 is `ready-to-observe`',
+  'The original `2026-09-09-ptichi-cohort-freeze.json` remains immutable historical `measurement-hold` evidence',
+  'When forced to choose between another capability and another trustworthy real-site evidence loop, choose the evidence loop.'
+]) {
   if (!roadmap.includes(needle)) fail(`ROADMAP.md missing proof-first strategy marker: ${needle}`);
 }
+if (/Ptichi stays measurement-hold/i.test(roadmap)) fail('ROADMAP.md still claims the current Ptichi cohort is on measurement hold after exact production parity was canonically refrozen.');
+if (!/remaining bottleneck is real post-deployment provider evidence and a reviewed decision/i.test(roadmap)) fail('ROADMAP.md must keep the post-parity proof bottleneck explicit.');
 if (/^# ARWP Roadmap/m.test(roadmap)) fail('Resolver-era ARWP roadmap title returned.');
 
 const productLine = read('docs/PRODUCT-LINE.md');
@@ -82,4 +92,4 @@ for (const marker of ['THE PRODUCT THESIS', 'THE BIGGEST CURRENT BOTTLENECK', 'T
   if (!selfInterview.includes(marker)) fail(`Self-interview synthesis missing: ${marker}`);
 }
 
-console.log('PASS Goose product strategy contract: the first reviewed real-site intervention is P0, proof rendering is gated, provider-native evidence stays non-composite, runtime experiment truth is singular, the public journey remains simple, and all ten product stress-test roles are preserved.');
+console.log('PASS Goose product strategy contract: the first reviewed real-site intervention is P0, current Ptichi proof state requires exact production parity and then provider-native outcomes, proof rendering is gated, provider-native evidence stays non-composite, runtime experiment truth is singular, the public journey remains simple, and all ten product stress-test roles are preserved.');

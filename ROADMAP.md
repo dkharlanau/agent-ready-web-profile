@@ -1,6 +1,6 @@
 # Goose ARWP Roadmap
 
-Reviewed: **2026-09-09** after the 10-role Goose proof-first stress test.
+Reviewed: **2026-09-15** after the first Ptichi production-parity refreeze and the Search platform delivery passes.
 
 **Goose ARWP — Get Found.**
 
@@ -33,29 +33,31 @@ Do **not** collapse these into a Goose score. Feature count, URL count, schema c
 
 ## The bottleneck
 
-Goose does not yet have one completed, credible real-site chain from:
+Goose still does not have one completed, credible real-site chain from:
 
 `recommendation → exact deployed change → provider-native outcome → reviewed decision`.
 
-Until that exists, building richer proof presentation is secondary.
+The deployment-parity part of the first Ptichi proof is now represented canonically. The remaining bottleneck is real post-deployment provider evidence and a reviewed decision. Until that exists, building richer proof presentation is secondary.
 
 ## P0 execution order
 
 ### 1. Complete the first real proof loop — #55
 
-Use the existing frozen Ptichi cohort `ptichi-da-001-en-work-speaking` as the canonical first proof.
+Use `knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json` as the canonical current Ptichi proof state.
 
-**Ptichi stays measurement-hold until production parity is independently verified.** Its existing **12 treatment + 6 control** cohort and frozen 12-query observational panel are authoritative. Do not replace them with a larger cohort merely to satisfy an earlier generic 20–50-page planning target.
+The original `2026-09-09-ptichi-cohort-freeze.json` remains immutable historical `measurement-hold` evidence: its exact implementation ref was never verified as the production revision and treatment content changed before the first later verified publication. Do not rewrite that freeze.
+
+The r2 revision preserves the authoritative **12 treatment + 6 control** assignment and frozen 12-query observational panel, but binds them to the exact Ptichi production snapshot `13b49e9a5faa9256b5bbded049caf33327abc240` recorded as verified live. R2 is `ready-to-observe`; that is production evidence, not a Search outcome.
 
 Immediate sequence:
 
-1. verify that the exact frozen implementation ref is live;
-2. only then start the existing observation windows;
-3. import/preserve real provider-native evidence where available;
-4. keep treatment/control, confounders and missing evidence explicit;
+1. keep r2 treatment/control/query assignment frozen and keep later undeployed source drift outside the experiment state;
+2. preserve/import real provider-native evidence as the 14/28/56-day windows mature;
+3. keep treatment/control, confounders, contamination and missing evidence explicit;
+4. do not treat deployment parity, indexing requests or small early samples as ranking/acquisition proof;
 5. reach a reviewed `keep`, `revise`, `continue-measuring`, `revert` or `retire` decision.
 
-No new feature is required to begin this work.
+No new feature is required to continue this work.
 
 ### 2. Make intervention state canonical
 
@@ -282,12 +284,12 @@ Surface lifecycle work in #95 should consolidate or retire low-job/duplicative p
 # Current execution order
 
 1. keep production/CI truth green;
-2. keep Ptichi on HOLD until exact production parity is observed;
-3. complete the first real proof loop through #55 using the existing Ptichi cohort;
-4. make experiment/intervention lifecycle truth canonical and remove conflicting program-level runtime status;
-5. harden only the provider evidence adapters required by that real loop (#97);
-6. reach and record the first reviewed decision, including neutral/negative outcomes;
-7. render one minimal evidence-derived Proof card (#93), not a dashboard;
+2. keep Ptichi r2 pinned to exact verified production `13b49e9...`; later undeployed source changes must not silently move the experiment;
+3. collect/preserve provider-native evidence as the existing 14/28/56-day windows mature;
+4. complete the first real proof loop through #55 using the r2 cohort and reach a reviewed decision;
+5. keep experiment/intervention lifecycle truth canonical and remove conflicting program-level runtime status;
+6. harden only the provider evidence adapters required by that real loop (#97);
+7. render one minimal evidence-derived Proof card (#93), not a dashboard, only after the reviewed decision exists;
 8. replicate the proof contract on two contrasting owned sites with real owner evidence;
 9. then implement the minimal Get Found Brief / first-run flow (#92, #94, #96);
 10. only after the SUCCESS GATE increase portfolio Watch/automation scale;

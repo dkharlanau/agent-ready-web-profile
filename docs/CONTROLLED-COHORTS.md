@@ -70,9 +70,16 @@ Validation rejects:
 
 Changing query text or treatment/control membership after outcomes are visible should create a new cohort/version rather than rewriting the old freeze.
 
+A later verified deployment must also not be retrofitted into an older frozen implementation when treatment content changed before publication. Preserve the old freeze and create a new revision that:
+
+- keeps the already-frozen assignment/query panel unchanged;
+- binds to the exact implementation that was actually verified live;
+- records why the earlier freeze never entered observation;
+- is created before post-deployment outcomes are used to alter the design.
+
 ## First dogfood: Ptichi PTI-DA-001
 
-`knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json` imports the existing owner-reviewed Ptichi Data Authority experiment rather than inventing a parallel design.
+The original artifact, `knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json`, imported the existing owner-reviewed Ptichi Data Authority experiment rather than inventing a parallel design.
 
 The authoritative site-specific design contains:
 
@@ -84,7 +91,25 @@ The authoritative site-specific design contains:
 
 The generic earlier Goose plan suggested 20–50 treatment pages. Ptichi overrides that because its binding expansion gate and current published universe make 20–50 artificial. The smaller real cohort is preferable to manufacturing extra pages for statistical appearance.
 
-At freeze time, Ptichi source `main` contains the treatment implementation, but the preserved production receipt points to an older commit. Therefore the cohort is `measurement-hold`. No outcome should be attributed to PTI-DA-001 until production evidence matches the frozen implementation ref.
+### Historical freeze — 2026-09-09
+
+At the first freeze, Ptichi source `main` contained the treatment implementation, but the preserved production receipt pointed to an older commit. The artifact therefore remains immutable `measurement-hold` evidence. Its exact frozen implementation was not later rewritten merely to match a newer deployment.
+
+### Current revision — r2
+
+`knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json` is the current observation-bearing revision.
+
+Before the first later exact-SHA production publication, several treatment pages changed. The English control membership and the fixed 12-query panel did not change. Ptichi's reviewed operating evidence records `13b49e9a5faa9256b5bbded049caf33327abc240` as the exact source revision verified live on 2026-09-13, while later source commits are explicitly not treated as deployed.
+
+R2 therefore:
+
+- preserves the same 12 treatment / 6 control assignment;
+- preserves the same 12 query texts and target entities;
+- binds both `implementationRef` and `productionRef` to `13b49e9a...`;
+- carries the authenticated pre-publication Google Search Console baseline captured on 2026-09-12 with final data through 2026-09-09;
+- is `ready-to-observe`, not a measured win.
+
+`ready-to-observe` proves only that the production gate is satisfied for the refrozen implementation. It does not prove indexing, ranking, citation, traffic, conversion or treatment causality. Post-deployment owner evidence must still mature and be reviewed against treatment, controls, confounders and missing evidence.
 
 ## Relationship to Winner Observatory
 
