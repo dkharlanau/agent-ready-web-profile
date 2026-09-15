@@ -1,0 +1,63 @@
+{
+  "version": "0.2",
+  "reviewedAt": "2026-09-15",
+  "title": "ARWP Next.js Search Pack v0.2",
+  "purpose": "Keep Next.js source-level Search/deployment risk separate from final build evidence, then reconcile deterministic App Router ownership with the actual static export artifact when one exists.",
+  "sources": {
+    "nextStaticExport": "https://nextjs.org/docs/app/guides/static-exports",
+    "nextMetadata": "https://nextjs.org/docs/app/api-reference/functions/generate-metadata",
+    "nextJsonLd": "https://nextjs.org/docs/app/guides/json-ld"
+  },
+  "rules": [
+    {
+      "id": "NJS-01-deployment-mode",
+      "priority": "P0",
+      "claim": "Static export is an explicit deployment mode and must not be inferred from the presence of App Router source alone.",
+      "decision": "Classify literal output: 'export' as static-export; keep other literal modes as dynamic-or-unspecified, and keep computed output configuration explicitly unresolved. Never treat deployment mode as a ranking signal.",
+      "sources": ["nextStaticExport"]
+    },
+    {
+      "id": "NJS-02-static-export-compatibility",
+      "priority": "P0",
+      "claim": "Features that require request-time or Node.js server behavior are unsupported by Next.js static export.",
+      "decision": "When static export is explicit, fail on inspectable unsupported config/runtime features such as rewrites, redirects, headers, Proxy/middleware, numeric ISR/revalidation, Draft Mode, Server Actions, non-GET/request-dependent Route Handlers, intercepting routes, dynamicParams=true and dynamic routes without inspectable generateStaticParams evidence. Keep computed revalidate state as review rather than guessing it.",
+      "sources": ["nextStaticExport"]
+    },
+    {
+      "id": "NJS-03-metadata-boundary",
+      "priority": "P0",
+      "claim": "Static metadata and generateMetadata are server-resolved declarations; source presence alone does not prove the final emitted metadata values.",
+      "decision": "Inventory static metadata/generateMetadata ownership and metadataBase/htmlLimitedBots signals, but use the final Search Build Gate artifact to prove emitted title/canonical/robots/Open Graph/JSON-LD values.",
+      "sources": ["nextMetadata"]
+    },
+    {
+      "id": "NJS-04-client-metadata-conflict",
+      "priority": "P0",
+      "claim": "Next.js metadata exports are supported in Server Components, not Client Components.",
+      "decision": "Fail when a file is inspectably marked 'use client' and also exports metadata or generateMetadata.",
+      "sources": ["nextMetadata"]
+    },
+    {
+      "id": "NJS-05-jsonld-safety",
+      "priority": "P1",
+      "claim": "Raw JSON.stringify output can require sanitization before embedding untrusted strings into JSON-LD script content.",
+      "decision": "Watch when a Next.js source visibly embeds application/ld+json with JSON.stringify but no inspectable less-than escaping/sanitizer evidence. Keep custom sanitizer cases as review rather than automatic failure.",
+      "sources": ["nextJsonLd"]
+    },
+    {
+      "id": "NJS-06-final-artifact-reconciliation",
+      "priority": "P0",
+      "claim": "Generated out/dist HTML is not source authority, but it is the correct evidence for what a static export actually emits.",
+      "decision": "When a final static artifact is supplied, compile it with Production Search Build Gate and keep source diagnostics and artifact failures as separate evidence lanes.",
+      "sources": ["nextStaticExport", "nextMetadata"]
+    }
+  ],
+  "guardrails": {
+    "noTargetCodeExecution": true,
+    "generatedOutputNotSourceAuthority": true,
+    "finalArtifactIsDeploymentEvidence": true,
+    "dynamicValuesNotGuessed": true,
+    "warningsDoNotBecomeRankingClaims": true,
+    "noRankingGuarantee": true
+  }
+}
