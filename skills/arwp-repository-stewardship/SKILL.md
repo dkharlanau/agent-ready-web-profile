@@ -75,14 +75,14 @@ Classify material into one of these states:
 - `required-runtime` — needed by product/runtime/package behavior;
 - `verification` — tests, fixtures, schemas or checks that protect behavior;
 - `generated-output` — reproducible output with a known owner/generator;
-- `published-artifact` — committed output intentionally required for hosting/distribution;
+- `published-artifact` — committed output intentionally required for hosting/distribution or a stable public URL;
 - `durable-evidence` — benchmark, migration, provenance or historical evidence still required for reproducibility or decisions;
 - `duplicate-candidate` — substantially duplicated by a stronger current source;
 - `obsolete-candidate` — appears superseded and has no known current consumer;
 - `local-artifact` — workstation/cache/build output that should normally be ignored rather than versioned;
 - `unknown` — purpose or dependency cannot yet be established.
 
-`unknown` is not a synonym for unused.
+`unknown` is not a synonym for unused. A `published-artifact` may have external consumers that repository search cannot see.
 
 ### 4. Build the source-to-output map
 
@@ -111,9 +111,10 @@ Delete or merge a candidate only when all applicable evidence is satisfied:
 5. if generated, the regeneration path is known and the repository does not intentionally require the generated copy to be committed;
 6. removing it does not silently reduce meaningful test or validation coverage;
 7. the rollback path is ordinary version control, not reconstruction from memory;
-8. the repository's focused verification is known and can be run or explicitly left as an evidence gap.
+8. the repository's focused verification is known and can be run or explicitly left as an evidence gap;
+9. if it is served from a public/static root or has had a stable public URL, external-consumer and compatibility risk has been checked and removal has an explicit migration, redirect, deprecation or other justified compatibility decision.
 
-A grep miss, old timestamp, unfamiliar filename or low reference count is not enough evidence by itself.
+A grep miss, old timestamp, unfamiliar filename or low reference count is not enough evidence by itself. Internal repository search cannot prove that a published URL has no external consumers.
 
 When one gate is unresolved, keep the file and record the exact missing evidence.
 
@@ -201,11 +202,12 @@ Do not:
 
 - delete tests, fixtures or schemas because they are not runtime code;
 - treat old files as dead solely because of age;
-- treat an unreferenced file as safe to delete without checking generation, release and evidence roles;
+- treat an unreferenced file as safe to delete without checking generation, release, evidence and public-compatibility roles;
+- delete a stable public/static-root artifact merely because internal repository search finds no references;
 - create a giant auto-generated tree and call it repository understanding;
 - create `ROADMAP-2.md`, `TODO-new.md` or agent-session checkpoint files when a current issue/roadmap system already exists;
 - manually edit generated/public mirrors when a canonical source owns them;
 - reduce validation coverage to make cleanup pass;
 - use file count, repository size or deletion volume as the success metric.
 
-The success condition is lower comprehension and maintenance cost with preserved behavior, evidence and rollback safety.
+The success condition is lower comprehension and maintenance cost with preserved behavior, evidence, public compatibility and rollback safety.
