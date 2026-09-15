@@ -1,0 +1,68 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-15",
+  "title": "ARWP Production Search Build Gate",
+  "purpose": "Prove that the final publish artifact and the deployed Search-facing representation agree on the bounded release contract without treating repository state, a successful build, or a deployment badge as equivalent evidence.",
+  "guardrails": {
+    "noRankingClaim": true,
+    "noIndexingClaim": true,
+    "noBuildExecution": true,
+    "finalArtifactOnly": true,
+    "liveVerificationSeparate": true,
+    "revisionParityExplicit": true,
+    "boundedLiveChecksStayBounded": true
+  },
+  "sources": {
+    "googleCanonical": "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls",
+    "googleRobotsMeta": "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+    "googleSitemaps": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+    "googleTitleLinks": "https://developers.google.com/search/docs/appearance/title-link",
+    "googleStructuredData": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+    "githubPagesPublishing": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+    "nextStaticExport": "https://nextjs.org/docs/app/guides/static-exports"
+  },
+  "rules": [
+    {
+      "id": "SBG-01-artifact-entry",
+      "priority": "P0",
+      "claim": "The publish artifact, not an earlier source/template state, is the release boundary for static publication.",
+      "decision": "Require an artifact-root index.html and reject unsafe/symlinked or unbounded artifact inventories.",
+      "sources": ["githubPagesPublishing", "nextStaticExport"]
+    },
+    {
+      "id": "SBG-02-sitemap-artifact-parity",
+      "priority": "P0",
+      "claim": "Sitemaps should contain canonical URLs that the site actually intends to expose, not missing, redirected, error or foreign-host URLs.",
+      "decision": "When a root sitemap exists, use it as the canonical index cohort and require every listed URL to resolve to an artifact HTML page.",
+      "sources": ["googleSitemaps", "googleCanonical"]
+    },
+    {
+      "id": "SBG-03-indexable-search-contract",
+      "priority": "P0",
+      "claim": "Final index-candidate HTML must not contradict its own title, canonical, robots, JSON-LD or Open Graph URL signals.",
+      "decision": "Fail the artifact gate on missing/duplicate canonical or title, unexpected noindex, invalid JSON-LD anywhere in the document, off-site canonical, canonical-route mismatch or conflicting og:url.",
+      "sources": ["googleCanonical", "googleRobotsMeta", "googleTitleLinks", "googleStructuredData"]
+    },
+    {
+      "id": "SBG-04-error-route-integrity",
+      "priority": "P1",
+      "claim": "A static error document must not present itself as canonical content.",
+      "decision": "Reject canonical declarations on 404 artifacts; keep missing noindex as review evidence because the serving HTTP status remains separate runtime evidence.",
+      "sources": ["googleCanonical", "googleRobotsMeta"]
+    },
+    {
+      "id": "SBG-05-live-search-surface-parity",
+      "priority": "P0",
+      "claim": "A correct local artifact does not prove the deployed Search-facing representation is the same artifact.",
+      "decision": "Compare live title, description, canonical, noindex, og:url and JSON-LD parse state, block count and normalized semantic fingerprints with the final artifact; optionally require byte parity for hosts where exact delivery is expected.",
+      "sources": ["googleCanonical", "googleRobotsMeta", "googleTitleLinks", "googleStructuredData"]
+    },
+    {
+      "id": "SBG-06-revision-parity",
+      "priority": "P0",
+      "claim": "Deployment success is revision-specific evidence; a green deployment for another commit is not proof for the intended source revision.",
+      "decision": "Compare explicit source and deployed 40-character commit SHAs when both are available; missing revision evidence remains watch rather than pass.",
+      "sources": ["githubPagesPublishing"]
+    }
+  ]
+}

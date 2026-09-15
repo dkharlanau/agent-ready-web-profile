@@ -1,0 +1,136 @@
+name: Production Search Build Gate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'content/**'
+      - 'registry/page-manifest.json'
+      - 'registry/search-build-gate-practices.json'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-search-build.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - '.github/workflows/search-build-gate.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'content/**'
+      - 'registry/page-manifest.json'
+      - 'registry/search-build-gate-practices.json'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-search-build.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - '.github/workflows/search-build-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: read
+
+concurrency:
+  group: production-search-build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  ARWP_PUBLIC_SITE: https://dkharlanau.github.io/agent-ready-web-profile/
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+      - name: Run Search Build Gate regression
+        run: node scripts/search-build-gate-test.mjs
+      - name: Syntax and CLI smoke
+        run: |
+          node --check lib/search-build-gate.mjs
+          node --check bin/arwp-search-build.mjs
+          node --check scripts/search-build-gate-test.mjs
+          node bin/arwp-search-build.mjs --help
+      - name: Reproduce GitHub Pages Jekyll build
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
+        with:
+          source: ./docs
+          destination: ./docs/_site
+          build_revision: ${{ github.sha }}
+      - name: Compile final public artifact contract
+        id: artifact_gate
+        shell: bash
+        run: |
+          set +e
+          node bin/arwp-search-build.mjs check \
+            --root=docs/_site \
+            --site="$ARWP_PUBLIC_SITE" \
+            --source-sha="$GITHUB_SHA" \
+            --json \
+            --output=search-build-artifact.json
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload artifact contract
+        if: always() && steps.artifact_gate.outputs.status != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: search-build-artifact
+          path: search-build-artifact.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Enforce final public artifact contract
+        if: steps.artifact_gate.outputs.status != '0'
+        run: exit "${{ steps.artifact_gate.outputs.status }}"
+      - name: Wait for exact GitHub Pages deployment revision
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs"
+          for attempt in $(seq 1 36); do
+            payload="$(curl -fsSL \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H 'Accept: application/vnd.github+json' \
+              -H 'X-GitHub-Api-Version: 2022-11-28' \
+              "$api")"
+            if jq -e --arg sha "$GITHUB_SHA" '.check_runs[] | select(.name == "deploy" and .head_sha == $sha and .conclusion == "success")' <<<"$payload" >/dev/null; then
+              echo "Confirmed successful GitHub Pages deploy check for ${GITHUB_SHA}."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "No successful GitHub Pages deploy check was observed for ${GITHUB_SHA}."
+          exit 1
+      - name: Verify live Search surface against exact deployed revision
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        id: live_gate
+        shell: bash
+        run: |
+          set +e
+          node bin/arwp-search-build.mjs live \
+            --root=docs/_site \
+            --site="$ARWP_PUBLIC_SITE" \
+            --source-sha="$GITHUB_SHA" \
+            --deployed-sha="$GITHUB_SHA" \
+            --max-live-pages=250 \
+            --json \
+            --output=search-build-live.json
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload live parity evidence
+        if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.live_gate.outputs.status != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: search-build-live
+          path: search-build-live.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Enforce live Search parity
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.live_gate.outputs.status != '0'
+        run: exit "${{ steps.live_gate.outputs.status }}"
