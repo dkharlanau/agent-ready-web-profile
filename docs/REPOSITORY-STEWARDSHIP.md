@@ -54,9 +54,11 @@ Repository cleanup must be evidence-gated.
 
 A file is not safe to delete merely because it is old, unfamiliar or unreferenced by one text search. Before consequential deletion, establish that it is not a canonical source, live runtime/package dependency, build/release input, test/fixture/schema, committed publication requirement, migration, benchmark/provenance record or other unique reproducibility evidence.
 
+Public/static roots need an additional compatibility check. A file under a published root can have external consumers even when repository search finds zero internal references. Treat a stable public URL as a `published-artifact` until its compatibility role is understood; removal requires an explicit migration, redirect, deprecation or other justified compatibility decision.
+
 If the role is still unclear, keep it and record the missing evidence.
 
-This rule intentionally favors a slightly larger understandable repository over a smaller repository that lost verification or provenance.
+This rule intentionally favors a slightly larger understandable repository over a smaller repository that lost verification, provenance or public compatibility.
 
 ## Recommended navigation baseline
 
@@ -115,4 +117,4 @@ A stewardship pass should leave:
 - verification results;
 - unresolved unknown/debt items with the exact next evidence needed.
 
-The result is successful when future work requires less rediscovery while behavior, verification coverage, evidence and rollback safety remain intact.
+The result is successful when future work requires less rediscovery while behavior, verification coverage, evidence, public compatibility and rollback safety remain intact.
