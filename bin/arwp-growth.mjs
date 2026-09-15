@@ -8,15 +8,15 @@ function usage() {
   return `arwp-growth — prioritized Search / AI-search / citation improvement planner
 
 Usage:
-  arwp-growth <https://site.example> [--vertical=general|documentation|editorial|software-product|commerce|local-business|research-dataset] [--upgrade] [--goals=search,generative-search,ai-citations,measurement] [--json] [--output=FILE] [--upgrade-output=FILE] [--timeout=MS] [--max-bytes=N]
+  arwp-growth <https://site.example> [--vertical=general|documentation|editorial|software-product|commerce|local-business|research-dataset] [--site-scope=hostname-root|subdirectory|unknown] [--upgrade] [--goals=search,generative-search,ai-citations,measurement] [--json] [--output=FILE] [--upgrade-output=FILE] [--timeout=MS] [--max-bytes=N]
 
 Examples:
-  arwp-growth https://example.com
-  arwp-growth https://example.com --vertical=editorial --json
+  arwp-growth https://example.com --site-scope=hostname-root
+  arwp-growth https://owner.github.io/project/ --site-scope=subdirectory --json
   arwp-growth https://example.com --vertical=research-dataset --upgrade --goals=search,generative-search,ai-citations,measurement
   arwp-growth https://example.com --upgrade --output=arwp-growth.json
 
-The Growth Profile includes applicable ADOPT/MEASURED Trend Radar changes plus bounded vertical evidence. With --upgrade it also compiles the current evidence into an Adaptive Site Upgrade Graph: exact target surfaces, change recipes, verification contracts, measurement signals and knowledge-freshness state. Neither mode outputs a universal readiness score or guarantees ranking, AI citation or recommendation outcomes.
+The Growth Profile includes applicable ADOPT/MEASURED Trend Radar changes plus bounded vertical evidence. Platform-specific acquisition tactics remain gated when site scope is unknown or ineligible. With --upgrade it also compiles the current evidence into an Adaptive Site Upgrade Graph: exact target surfaces, change recipes, verification contracts, measurement signals and knowledge-freshness state. Neither mode outputs a universal readiness score or guarantees ranking, AI citation or recommendation outcomes.
 `;
 }
 
@@ -60,10 +60,13 @@ async function main() {
   const target = args.find(arg => !arg.startsWith('--'));
   if (!target) throw new Error('A public website URL is required.');
   const vertical = optionValue(args, 'vertical') || 'general';
+  const siteScope = optionValue(args, 'site-scope') || 'unknown';
+  if (!['hostname-root', 'subdirectory', 'unknown'].includes(siteScope)) throw new Error(`Invalid --site-scope: ${siteScope}`);
   const plan = await buildGrowthPlan(target, {
     timeoutMs: numeric(args, 'timeout', 8000),
     maxBytes: numeric(args, 'max-bytes', 512 * 1024),
-    vertical
+    vertical,
+    siteScope
   });
 
   const wantsUpgrade = args.includes('--upgrade');
