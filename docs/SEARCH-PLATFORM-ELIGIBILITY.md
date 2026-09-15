@@ -63,6 +63,21 @@ node bin/arwp-search-platform.mjs check site-platform.json --json
 
 The command is read-only and performs no network requests. Exit code `1` means at least one bounded platform contract failed; `watch` and `not-applicable` do not fail the command.
 
+## Growth Profile integration
+
+`arwp-growth` accepts the same hostname-scope decision explicitly:
+
+```bash
+node bin/arwp-growth.mjs https://example.com/ --site-scope=hostname-root
+node bin/arwp-growth.mjs https://owner.github.io/project/ --site-scope=subdirectory
+```
+
+The default is `unknown`. In that state ARWP keeps Preferred Sources as `watch` and removes the ready-to-apply CTA URL until hostname ownership is classified.
+
+For an explicit `subdirectory`, the Preferred Sources acquisition action is removed as not applicable. For `hostname-root`, the opportunity remains only when the supplied public site root is actually `/` on that hostname. A contradictory declaration such as `hostname-root` for `https://owner.github.io/project/` fails closed.
+
+This integration is intentionally narrow. Growth still evaluates ordinary Search/content opportunities for a subdirectory; only the hostname-scoped acquisition tactic is gated.
+
 ## Scope must be explicit
 
 `site` is the **public site root being evaluated**, not an arbitrary page URL.
