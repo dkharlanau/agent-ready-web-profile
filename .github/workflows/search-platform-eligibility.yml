@@ -5,16 +5,24 @@ on:
     paths:
       - 'registry/search-platform-eligibility.json'
       - 'lib/search-platform-eligibility.mjs'
+      - 'lib/growth-platform-eligibility.mjs'
+      - 'lib/growth-plan-vertical.mjs'
       - 'bin/arwp-search-platform.mjs'
+      - 'bin/arwp-growth.mjs'
       - 'scripts/search-platform-eligibility-test.mjs'
+      - 'scripts/growth-platform-eligibility-test.mjs'
       - 'docs/SEARCH-PLATFORM-ELIGIBILITY.md'
       - '.github/workflows/search-platform-eligibility.yml'
   pull_request:
     paths:
       - 'registry/search-platform-eligibility.json'
       - 'lib/search-platform-eligibility.mjs'
+      - 'lib/growth-platform-eligibility.mjs'
+      - 'lib/growth-plan-vertical.mjs'
       - 'bin/arwp-search-platform.mjs'
+      - 'bin/arwp-growth.mjs'
       - 'scripts/search-platform-eligibility-test.mjs'
+      - 'scripts/growth-platform-eligibility-test.mjs'
       - 'docs/SEARCH-PLATFORM-ELIGIBILITY.md'
       - '.github/workflows/search-platform-eligibility.yml'
   workflow_dispatch:
@@ -37,11 +45,19 @@ jobs:
         with:
           node-version: 24
       - name: Validate Search Platform Eligibility
-        run: node scripts/search-platform-eligibility-test.mjs
+        run: |
+          node scripts/search-platform-eligibility-test.mjs
+          node scripts/growth-platform-eligibility-test.mjs
       - name: Syntax check
         run: |
           node --check lib/search-platform-eligibility.mjs
+          node --check lib/growth-platform-eligibility.mjs
+          node --check lib/growth-plan-vertical.mjs
           node --check bin/arwp-search-platform.mjs
+          node --check bin/arwp-growth.mjs
           node --check scripts/search-platform-eligibility-test.mjs
+          node --check scripts/growth-platform-eligibility-test.mjs
       - name: CLI help smoke
-        run: node bin/arwp-search-platform.mjs --help
+        run: |
+          node bin/arwp-search-platform.mjs --help
+          node bin/arwp-growth.mjs --help | grep -q -- '--site-scope=hostname-root|subdirectory|unknown'
