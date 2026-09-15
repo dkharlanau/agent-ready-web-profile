@@ -13,7 +13,9 @@ on:
       - 'scripts/deploy-discovery-loop-test.mjs'
       - 'scripts/search-build-gate-test.mjs'
       - 'scripts/indexnow-test.mjs'
+      - 'scripts/package-smoke-test.mjs'
       - 'docs/DEPLOY-DISCOVERY-LOOP.md'
+      - 'package.json'
       - '.github/workflows/deploy-discovery-loop.yml'
   pull_request:
     paths:
@@ -26,7 +28,9 @@ on:
       - 'scripts/deploy-discovery-loop-test.mjs'
       - 'scripts/search-build-gate-test.mjs'
       - 'scripts/indexnow-test.mjs'
+      - 'scripts/package-smoke-test.mjs'
       - 'docs/DEPLOY-DISCOVERY-LOOP.md'
+      - 'package.json'
       - '.github/workflows/deploy-discovery-loop.yml'
   workflow_dispatch:
 
@@ -53,6 +57,7 @@ jobs:
           node scripts/deploy-discovery-loop-test.mjs
           node scripts/search-build-gate-test.mjs
           node scripts/indexnow-test.mjs
+          node scripts/package-smoke-test.mjs
           node --check lib/deploy-discovery-loop.mjs
           node --check bin/arwp-deploy-discovery.mjs
           node bin/arwp-deploy-discovery.mjs --help
