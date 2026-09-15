@@ -28,6 +28,7 @@
       },
       "uniqueItems": true
     },
+    "adoption": { "$ref": "#/$defs/adoption" },
     "web": { "$ref": "#/$defs/web" },
     "data": { "$ref": "#/$defs/data" },
     "retrieval": { "$ref": "#/$defs/retrieval" },
@@ -43,11 +44,72 @@
       "additionalProperties": true
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "required": ["adoption"],
+        "properties": {
+          "adoption": {
+            "type": "object",
+            "required": ["level"],
+            "properties": {
+              "level": { "const": "full-publisher" }
+            }
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "required": ["languages", "web", "identity", "trust"],
+        "properties": {
+          "web": {
+            "type": "object",
+            "required": ["sitemap", "robots", "llms"]
+          },
+          "identity": {
+            "type": "object",
+            "required": ["namespace", "idPattern"]
+          },
+          "trust": {
+            "type": "object",
+            "required": [
+              "publisher",
+              "license",
+              "citation",
+              "provenance",
+              "reviewPolicy",
+              "privacy",
+              "accessibility",
+              "contact",
+              "corrections",
+              "security"
+            ]
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
     "httpsUri": {
       "type": "string",
       "format": "uri",
       "pattern": "^https://"
+    },
+    "adoption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["core", "full-publisher"]
+        },
+        "reviewedAt": {
+          "type": "string",
+          "format": "date"
+        }
+      }
     },
     "feed": {
       "type": "object",
@@ -81,6 +143,7 @@
         "sitemap": { "$ref": "#/$defs/httpsUri" },
         "robots": { "$ref": "#/$defs/httpsUri" },
         "llms": { "$ref": "#/$defs/httpsUri" },
+        "manifest": { "$ref": "#/$defs/httpsUri" },
         "feeds": {
           "type": "array",
           "items": { "$ref": "#/$defs/feed" },
@@ -257,11 +320,17 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "publisher": { "$ref": "#/$defs/httpsUri" },
         "license": { "$ref": "#/$defs/httpsUri" },
         "citation": { "$ref": "#/$defs/httpsUri" },
         "provenance": { "$ref": "#/$defs/httpsUri" },
         "reviewPolicy": { "$ref": "#/$defs/httpsUri" },
-        "security": { "$ref": "#/$defs/httpsUri" }
+        "privacy": { "$ref": "#/$defs/httpsUri" },
+        "accessibility": { "$ref": "#/$defs/httpsUri" },
+        "contact": { "$ref": "#/$defs/httpsUri" },
+        "corrections": { "$ref": "#/$defs/httpsUri" },
+        "security": { "$ref": "#/$defs/httpsUri" },
+        "terms": { "$ref": "#/$defs/httpsUri" }
       }
     }
   }

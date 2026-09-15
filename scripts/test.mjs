@@ -11,6 +11,7 @@ const referenceProfiles = fs.readdirSync(referenceDir)
 
 const examples = [
   'examples/minimal.site-profile.json',
+  'examples/full-publisher.site-profile.json',
   'examples/knowledge-site.site-profile.json',
   ...referenceProfiles
 ];
@@ -25,6 +26,14 @@ assert.equal(referenceProfiles.length, 5, 'The v0.1 reference suite should conta
 const missingRequired = loadProfile('examples/minimal.site-profile.json');
 delete missingRequired.canonicalUrl;
 assert.equal(validateProfile(missingRequired).valid, false, 'Missing canonicalUrl must fail validation.');
+
+const incompleteFullPublisher = loadProfile('examples/full-publisher.site-profile.json');
+delete incompleteFullPublisher.trust.security;
+assert.equal(
+  validateProfile(incompleteFullPublisher).valid,
+  false,
+  'Full Publisher Adoption must fail closed when a required trust surface is missing.'
+);
 
 const falseRemoteMcp = loadProfile('examples/minimal.site-profile.json');
 falseRemoteMcp.mcp = { servers: [{ name: 'example/server', transport: 'streamable-http' }] };
@@ -105,4 +114,4 @@ await import('./regional-search-surfaces-test.mjs');
 await import('./search-appearance-patch-test.mjs');
 await import('./internal-discovery-test.mjs');
 
-console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references), 6 negative/conditional contract tests, structured product/service/profile/event dogfood surfaces, regional Search routing, Search Appearance patch preparation, and bounded Internal Discovery evidence`);
+console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references), Full Publisher Adoption enforcement, 6 negative/conditional protocol contract tests, structured product/service/profile/event dogfood surfaces, regional Search routing, Search Appearance patch preparation, and bounded Internal Discovery evidence`);
