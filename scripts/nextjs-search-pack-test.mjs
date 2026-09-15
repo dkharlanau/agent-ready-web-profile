@@ -87,11 +87,33 @@ const dynamic = compile(dynamicRoot);
 assert.equal(dynamic.pass, false);
 assert.ok(dynamic.failures.some(item => item.code === 'next-static-export-dynamic-route-without-static-params'));
 
+const dynamicParamsRoot = copyFixture();
+write(dynamicParamsRoot, 'src/app/catalog/[id]/page.tsx', `export const dynamicParams = true;\nexport function generateStaticParams(){ return [{ id: 'one' }]; }\nexport default function Page(){ return <main>Item</main>; }\n`);
+const dynamicParams = compile(dynamicParamsRoot);
+assert.equal(dynamicParams.pass, false);
+assert.ok(dynamicParams.failures.some(item => item.code === 'next-static-export-dynamic-params-true'));
+assert.equal(dynamicParams.failures.some(item => item.code === 'next-static-export-dynamic-route-without-static-params'), false);
+
+const interceptingRoot = copyFixture();
+write(interceptingRoot, 'src/app/feed/(.)photo/page.tsx', `export default function Page(){ return <main>Photo</main>; }\n`);
+const intercepting = compile(interceptingRoot);
+assert.equal(intercepting.pass, false);
+assert.ok(intercepting.failures.some(item => item.code === 'next-static-export-intercepting-route'));
+
 const configRoot = copyFixture();
 write(configRoot, 'next.config.ts', `export default { output: 'export', async rewrites(){ return [{ source: '/a', destination: '/b' }]; } };\n`);
 const config = compile(configRoot);
 assert.equal(config.pass, false);
 assert.ok(config.failures.some(item => item.code === 'next-static-export-rewrites-unsupported'));
+
+const computedOutputRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-next-computed-output-'));
+write(computedOutputRoot, 'package.json', JSON.stringify({ dependencies: { next: '16.3.4' } }));
+write(computedOutputRoot, 'next.config.ts', `const output = process.env.NEXT_OUTPUT; export default { output };\n`);
+write(computedOutputRoot, 'app/page.tsx', `export default function Page(){ return <main>Home</main>; }\n`);
+const computedOutput = compile(computedOutputRoot);
+assert.equal(computedOutput.pass, true);
+assert.equal(computedOutput.deployment.outputResolved, false);
+assert.ok(computedOutput.watches.some(item => item.code === 'next-output-mode-unresolved'));
 
 const handlerRoot = copyFixture();
 write(handlerRoot, 'src/app/api/route.ts', `export async function POST(){ return Response.json({ ok: true }); }\n`);
@@ -99,8 +121,14 @@ const handler = compile(handlerRoot);
 assert.equal(handler.pass, false);
 assert.ok(handler.failures.some(item => item.code === 'next-static-export-route-handler-non-get'));
 
+const constHandlerRoot = copyFixture();
+write(constHandlerRoot, 'src/app/api-two/route.ts', `export const POST = async () => Response.json({ ok: true });\n`);
+const constHandler = compile(constHandlerRoot);
+assert.equal(constHandler.pass, false);
+assert.ok(constHandler.failures.some(item => item.code === 'next-static-export-route-handler-non-get'));
+
 const requestRoot = copyFixture();
-write(requestRoot, 'src/app/data.json/route.ts', `export async function GET(request){ return Response.json({ url: request.url }); }\n`);
+write(requestRoot, 'src/app/data.json/route.ts', `export async function GET(request){ const body = await request.json(); return Response.json({ body }); }\n`);
 const requestDependent = compile(requestRoot);
 assert.equal(requestDependent.pass, false);
 assert.ok(requestDependent.failures.some(item => item.code === 'next-static-export-route-handler-request-dependent'));
@@ -116,6 +144,18 @@ write(isrRoot, 'src/app/news/page.tsx', `export const revalidate = 60;\nexport d
 const isr = compile(isrRoot);
 assert.equal(isr.pass, false);
 assert.ok(isr.failures.some(item => item.code === 'next-static-export-isr'));
+
+const noIsrRoot = copyFixture();
+write(noIsrRoot, 'src/app/stable/page.tsx', `export const revalidate = false;\nexport default function Page(){ return <main>Stable</main>; }\n`);
+const noIsr = compile(noIsrRoot);
+assert.equal(noIsr.pass, true, 'literal revalidate=false is static-compatible and must not be labeled ISR');
+assert.equal(noIsr.findings.some(item => item.code.startsWith('next-static-export-revalidate')), false);
+
+const computedRevalidateRoot = copyFixture();
+write(computedRevalidateRoot, 'src/app/review/page.tsx', `const interval = Number(process.env.REVALIDATE);\nexport const revalidate = interval;\nexport default function Page(){ return <main>Review</main>; }\n`);
+const computedRevalidate = compile(computedRevalidateRoot);
+assert.equal(computedRevalidate.pass, true, 'computed revalidate cannot be safely classified by source regex alone');
+assert.ok(computedRevalidate.watches.some(item => item.code === 'next-static-export-revalidate-unresolved'));
 
 const proxyRoot = copyFixture();
 write(proxyRoot, 'proxy.ts', `export function proxy(){ return new Response('ok'); }\n`);
@@ -153,4 +193,4 @@ assert.equal(dynamicMode.deployment.mode, 'dynamic-or-unspecified');
 assert.equal(dynamicMode.pass, true);
 assert.equal(dynamicMode.releaseEvidenceComplete, true, 'static artifact proof is required only when static export is explicitly declared');
 
-console.log('PASS Next.js Search Pack v0.2 separates non-executing App Router source diagnostics from final static-export Search artifact evidence and fails closed on inspectable static-export incompatibilities.');
+console.log('PASS Next.js Search Pack v0.2 separates non-executing App Router source diagnostics from final static-export Search artifact evidence and fails closed on inspectable static-export incompatibilities without turning unresolved source semantics into false defects.');
