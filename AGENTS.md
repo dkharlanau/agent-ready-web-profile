@@ -33,6 +33,7 @@ Current source and applicable scoped instructions override a stale route in this
 - Preserve neutral, negative and counterexample evidence; do not curate evidence only to support a preferred theory.
 - Do not create fake freshness, fake authorship, decorative structured data, thin query-variant pages or unsupported ranking claims.
 - Static metadata is evidence of a declaration, not runtime conformance, authorization, security or trust.
+- Repository cleanup is evidence-gated: old, unfamiliar or unreferenced files are not automatically dead. Preserve canonical source, tests, schemas, fixtures, migrations, provenance and reproducibility evidence unless the deletion/consolidation gates in [`arwp-repository-stewardship`](skills/arwp-repository-stewardship/SKILL.md) are satisfied.
 - Search-result presentation is a public product surface: for hostname-root releases, explicitly review site identity, title-source convergence, snippet-source hygiene, favicon delivery, canonical-host coherence and the final deployed artifact. Technical crawl eligibility alone is not a Search release pass. Use [`skills/arwp-search-release/SKILL.md`](skills/arwp-search-release/SKILL.md).
 - Meaningful imagery is a distinct Search surface when a target relies on original visual assets. Keep general image Search eligibility, preferred-image metadata, Google Images indexing and Discover suitability separate. Use [`skills/arwp-image-discovery/SKILL.md`](skills/arwp-image-discovery/SKILL.md); never treat an image sitemap, `og:image`, `primaryImageOfPage`, alt text or a 1200 px Discover recommendation as proof of indexing or ranking.
 - Internal discovery is a rendered product/Search surface for multi-page sites. Use [`skills/arwp-internal-discovery/SKILL.md`](skills/arwp-internal-discovery/SKILL.md) to keep canonical crawl paths, descriptive anchor text, semantic/reverse relations, breadcrumbs and continuation blocks healthy. Keep Share/Save/Copy/Cite/Preferred Source controls separate as distribution UX; do not treat link volume, click depth or utility buttons as ranking formulas.
@@ -92,6 +93,7 @@ Use Technical Integrity before optional tactics and again after the changed publ
 
 ## Read next by task
 
+- Repository stewardship / safe cleanup / agent navigation / source-output maps: [`docs/REPOSITORY-STEWARDSHIP.md`](docs/REPOSITORY-STEWARDSHIP.md) and [`skills/arwp-repository-stewardship/SKILL.md`](skills/arwp-repository-stewardship/SKILL.md)
 - Repository routing and verification: [`REPO_MAP.md`](REPO_MAP.md)
 - Contribution, truthfulness and disclosure rules: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - Core ARWP contract: [`SPEC.md`](SPEC.md)
