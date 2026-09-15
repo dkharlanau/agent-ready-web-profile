@@ -68,6 +68,16 @@ const drift = await verifySearchArtifactLive(manifest, {
 assert.equal(drift.pass, false);
 assert.ok(drift.pages.find(item => item.url.endsWith('/guide/')).issues.includes('search-surface-drift'));
 
+const structuredDriftBodies = new Map(bodies);
+structuredDriftBodies.set('https://example.com/guide/', page('https://example.com/guide/', 'Guide').replace('"@type":"WebPage"', '"@type":"Article"'));
+const structuredDrift = await verifySearchArtifactLive(manifest, {
+  deployedSha: sourceSha,
+  resolveImpl,
+  fetchImpl: async input => new Response(structuredDriftBodies.get(String(input)), { status: 200, headers: { 'content-type': 'text/html' } })
+});
+assert.equal(structuredDrift.pass, false, 'live structured-data drift must fail Search-surface parity');
+assert.ok(structuredDrift.pages.find(item => item.url.endsWith('/guide/')).issues.includes('search-surface-drift'));
+
 const revisionDrift = await verifySearchArtifactLive(manifest, { deployedSha: 'b'.repeat(40), fetchImpl, resolveImpl });
 assert.equal(revisionDrift.pass, false);
 assert.equal(revisionDrift.revision.state, 'fail');
@@ -96,6 +106,13 @@ fs.writeFileSync(path.join(noIndexRoot, 'guide', 'index.html'), page('https://ex
 const noIndex = compileSearchArtifact({ artifactRoot: noIndexRoot, site: 'https://example.com/' });
 assert.equal(noIndex.pass, false);
 assert.ok(noIndex.failures.some(item => item.includes('unexpected-noindex')));
+
+const bodyJsonRoot = fixture();
+const bodyJsonPage = page('https://example.com/guide/', 'Guide').replace('</body>', '<script type="application/ld+json">{"broken":</script></body>');
+fs.writeFileSync(path.join(bodyJsonRoot, 'guide', 'index.html'), bodyJsonPage);
+const bodyJson = compileSearchArtifact({ artifactRoot: bodyJsonRoot, site: 'https://example.com/' });
+assert.equal(bodyJson.pass, false, 'invalid body JSON-LD must not escape validation');
+assert.ok(bodyJson.failures.some(item => item.includes('invalid-jsonld')));
 
 const errorCanonicalRoot = fixture();
 fs.writeFileSync(path.join(errorCanonicalRoot, '404.html'), page('https://example.com/404.html', 'Not found', '<meta name="robots" content="noindex">'));
