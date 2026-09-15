@@ -96,7 +96,7 @@ const stewardship = fs.readFileSync(path.join(skillsRoot, 'arwp-repository-stewa
 for (const expected of ['AUDIT', 'EXECUTE', 'unknown', 'deletion gate', 'AGENTS.md', 'REPO_MAP.md', 'file count', 'generated-output', 'durable-evidence']) {
   assert.match(stewardship, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `repository stewardship must retain ${expected}`);
 }
-assert.match(stewardship, /old, unfamiliar or unreferenced files are not automatically dead/i);
+assert.match(stewardship, /A grep miss, old timestamp, unfamiliar filename or low reference count is not enough evidence by itself/i);
 assert.match(stewardship, /Do not assume a local checkout or CLI exists/i);
 
 const comprehensiveReferencePath = path.join(skillsRoot, 'arwp-prepare-site', 'references', 'comprehensive-audit.md');
