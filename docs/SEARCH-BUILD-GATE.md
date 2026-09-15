@@ -31,18 +31,23 @@ The gate is intentionally artifact-first. It does not execute the target build a
 
 Use it after the project has already produced its real publish directory, for example:
 
-- GitHub Pages branch publishing: `docs/`, `_site/` or another configured publish directory;
+- GitHub Pages with Jekyll: the final `_site/` produced by the same Jekyll build path used for Pages publication;
+- GitHub Pages without a transform: the exact configured publish directory such as `docs/`;
 - GitHub Pages custom Actions: the exact directory uploaded by the Pages artifact step;
 - Next.js static export: `out/` after `output: 'export'`;
 - other static generators: the final `dist/`, `build/` or equivalent directory.
+
+Do not point the gate at a source directory merely because that directory is the configured Pages source. If GitHub Pages or another publisher transforms Markdown, Liquid, templates, assets or metadata before deployment, reproduce that transform first and inspect its output.
 
 Dynamic SSR/runtime deployments need a different source-to-runtime evidence adapter; do not pretend `.next/` server internals are final static HTML.
 
 ## Artifact check
 
+For an already-built static artifact:
+
 ```bash
 node bin/arwp-search-build.mjs check \
-  --root=docs \
+  --root=_site \
   --site=https://example.github.io/project/ \
   --source-sha="$GITHUB_SHA"
 ```
@@ -73,7 +78,7 @@ For each URL in the canonical cohort, the final artifact must have:
 - canonical URL inside the declared public site scope;
 - canonical identity matching the route represented by the artifact;
 - no accidental `noindex`;
-- parseable JSON-LD blocks when JSON-LD is present;
+- parseable JSON-LD blocks wherever they appear in the HTML document;
 - no conflicting `og:url`.
 
 A missing meta description is `watch`, not a crawl/index failure. Search engines may generate snippets from visible content, and this gate must not turn every optional presentation improvement into P0 release failure.
@@ -104,7 +109,7 @@ After deployment:
 
 ```bash
 node bin/arwp-search-build.mjs live \
-  --root=docs \
+  --root=_site \
   --site=https://example.github.io/project/ \
   --source-sha="$SOURCE_SHA" \
   --deployed-sha="$DEPLOYED_SHA"
@@ -117,7 +122,9 @@ The default `search-surface` parity compares the deployed representation with th
 - canonical URL;
 - effective `noindex` observation from robots/googlebot meta;
 - `og:url`;
-- JSON-LD parse state.
+- JSON-LD parse state, block count and normalized semantic fingerprints.
+
+JSON-LD fingerprints canonicalize object-key order before hashing so harmless key reordering does not become drift, while changed or missing structured-data content does.
 
 For hosts where exact static delivery is part of the deployment contract, use:
 
@@ -154,18 +161,21 @@ For GitHub Pages, a practical evidence source is the Pages `deploy` check-run at
 
 ## GitHub Pages dogfood pattern
 
-For branch-based GitHub Pages:
+For Jekyll-backed GitHub Pages:
 
 ```text
 main commit
-→ repository/public artifact check
+→ reproduce the Pages Jekyll build
+→ inspect final _site artifact
 → GitHub Pages deploy check for the same head_sha
 → live Search-surface parity against that exact revision
 ```
 
-The ARWP repository dogfoods this pattern in `.github/workflows/search-build-gate.yml`.
+The ARWP repository dogfoods this pattern in `.github/workflows/search-build-gate.yml` with the same pinned `actions/jekyll-build-pages` action used by the Pages build path.
 
 The production job does not set `deployedSha` until GitHub exposes a successful `deploy` check-run whose `head_sha` equals the current `GITHUB_SHA`. Only then does it run live parity.
+
+Both artifact and live reports are uploaded before their result is enforced, so failed gates still leave inspectable machine-readable evidence.
 
 ## Next.js static export
 
