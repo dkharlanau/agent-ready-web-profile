@@ -53,10 +53,16 @@ jobs:
           node --check bin/arwp-search-build.mjs
           node --check scripts/search-build-gate-test.mjs
           node bin/arwp-search-build.mjs --help
+      - name: Reproduce GitHub Pages Jekyll build
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
+        with:
+          source: ./docs
+          destination: ./docs/_site
+          build_revision: ${{ github.sha }}
       - name: Compile final public artifact contract
         run: |
           node bin/arwp-search-build.mjs check \
-            --root=docs \
+            --root=docs/_site \
             --site="$ARWP_PUBLIC_SITE" \
             --source-sha="$GITHUB_SHA" \
             --json \
@@ -94,7 +100,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           node bin/arwp-search-build.mjs live \
-            --root=docs \
+            --root=docs/_site \
             --site="$ARWP_PUBLIC_SITE" \
             --source-sha="$GITHUB_SHA" \
             --deployed-sha="$GITHUB_SHA" \
