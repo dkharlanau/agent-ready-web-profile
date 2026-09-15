@@ -1,0 +1,73 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-15",
+  "title": "ARWP GitHub Pages Search Pack",
+  "purpose": "Prove GitHub Pages host identity, publication boundaries and project-subpath Search integrity without confusing repository hints, a CNAME file, a successful workflow or optional Google acquisition features with deployed Search outcomes.",
+  "sources": {
+    "githubPublishing": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+    "githubCustomWorkflows": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages",
+    "githubCreatingSite": "https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site",
+    "githubCustomDomains": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages",
+    "githubHttps": "https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https",
+    "googlePreferredSources": "https://developers.google.com/search/docs/appearance/preferred-sources"
+  },
+  "rules": [
+    {
+      "id": "GPS-01-host-identity",
+      "priority": "P0",
+      "claim": "A GitHub Pages user/organization site, a repository project subpath and a custom-domain site have different public-root contracts.",
+      "decision": "Classify the supplied public site against owner/repository identity; fail contradictory github.io paths or custom-domain site roots with an unexpected subdirectory.",
+      "sources": ["githubPublishing", "githubCustomDomains"]
+    },
+    {
+      "id": "GPS-02-publication-boundary",
+      "priority": "P0",
+      "claim": "GitHub Pages can publish from a branch or a custom Actions artifact; repository files alone do not prove what was deployed.",
+      "decision": "Require an explicit publication mode, retain missing/custom-workflow evidence as watch, and require final artifact evidence before release completeness.",
+      "sources": ["githubPublishing", "githubCustomWorkflows"]
+    },
+    {
+      "id": "GPS-03-jekyll-boundary",
+      "priority": "P1",
+      "claim": "Branch publishing uses Jekyll by default unless the publishing source contains .nojekyll; non-Jekyll generators are better represented by custom Actions or an explicit .nojekyll publication source.",
+      "decision": "Classify branch source as Jekyll-default or nojekyll without guessing the generator; warn when a source looks prebuilt/non-Jekyll but neither boundary is explicit.",
+      "sources": ["githubCreatingSite", "githubPublishing"]
+    },
+    {
+      "id": "GPS-04-project-subpath-integrity",
+      "priority": "P0",
+      "claim": "A project site under owner.github.io/repository/ must keep its Search-owned URLs inside that project base path.",
+      "decision": "Use the final artifact Search Build Gate for canonical/sitemap identity, fail feed/robots Search references that escape the project root, and watch ordinary root-relative navigation/assets that may intentionally depend on a host-root resource.",
+      "sources": ["githubPublishing"]
+    },
+    {
+      "id": "GPS-05-custom-domain-evidence",
+      "priority": "P0",
+      "claim": "A repository CNAME file is a source declaration, not proof that GitHub Pages currently serves that custom domain.",
+      "decision": "Fail a source CNAME that contradicts the supplied custom-domain host; keep a missing CNAME/settings proof as watch and require HTTPS for release-facing custom-domain evidence.",
+      "sources": ["githubPublishing", "githubCustomDomains", "githubHttps"]
+    },
+    {
+      "id": "GPS-06-preferred-source-scope",
+      "priority": "P1",
+      "claim": "Google Preferred Sources accepts domain/subdomain sites but not a project subdirectory as an independently selectable source.",
+      "decision": "Delegate hostname-scope applicability to Search Platform Eligibility: github.io project sites are subdirectory/not-applicable; hostname-root and custom-domain roots are scope-eligible but not guaranteed to appear in the feature.",
+      "sources": ["googlePreferredSources"]
+    },
+    {
+      "id": "GPS-07-exact-deployment-proof",
+      "priority": "P0",
+      "claim": "A green Pages deployment is revision-specific evidence and must be followed by final live parity for the same source revision.",
+      "decision": "Leave exact deployment SHA and live HTML parity to Production Search Build Gate; this pack reports release evidence incomplete until final artifact proof exists and never treats source-only checks as deployment proof.",
+      "sources": ["githubPublishing"]
+    }
+  ],
+  "guardrails": {
+    "cnameIsNotRuntimeProof": true,
+    "projectSubpathIsNotIndependentHostname": true,
+    "customDomainIsNotRankingSignal": true,
+    "preferredSourcesIsOptionalAcquisition": true,
+    "generatedArtifactIsDeploymentEvidenceNotSourceAuthority": true,
+    "noRankingGuarantee": true
+  }
+}

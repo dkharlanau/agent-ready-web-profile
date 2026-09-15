@@ -1,0 +1,86 @@
+name: GitHub Pages Search Pack validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/github-pages-search-pack-practices.json'
+      - 'lib/github-pages-search-pack.mjs'
+      - 'lib/search-platform-eligibility.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-github-pages-search.mjs'
+      - 'scripts/github-pages-search-pack-test.mjs'
+      - 'scripts/search-platform-eligibility-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'docs/**'
+      - '.github/workflows/github-pages-search-pack.yml'
+  pull_request:
+    paths:
+      - 'registry/github-pages-search-pack-practices.json'
+      - 'lib/github-pages-search-pack.mjs'
+      - 'lib/search-platform-eligibility.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-github-pages-search.mjs'
+      - 'scripts/github-pages-search-pack-test.mjs'
+      - 'scripts/search-platform-eligibility-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'docs/**'
+      - '.github/workflows/github-pages-search-pack.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate GitHub Pages Search Pack
+        run: |
+          node scripts/github-pages-search-pack-test.mjs
+          node scripts/search-platform-eligibility-test.mjs
+          node scripts/search-build-gate-test.mjs
+          node --check lib/github-pages-search-pack.mjs
+          node --check bin/arwp-github-pages-search.mjs
+          node bin/arwp-github-pages-search.mjs --help
+          node -e "JSON.parse(require('fs').readFileSync('registry/github-pages-search-pack-practices.json','utf8'));"
+      - name: Reproduce ARWP GitHub Pages Jekyll artifact
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
+        with:
+          source: ./docs
+          destination: ./docs/_site
+          build_revision: ${{ github.sha }}
+      - name: Dogfood Pages Search Pack on ARWP
+        id: dogfood
+        shell: bash
+        run: |
+          set +e
+          node bin/arwp-github-pages-search.mjs check \
+            --root=. \
+            --repository=dkharlanau/agent-ready-web-profile \
+            --site=https://dkharlanau.github.io/agent-ready-web-profile/ \
+            --publishing-mode=branch \
+            --pages-source=docs \
+            --artifact=docs/_site \
+            --source-sha="$GITHUB_SHA" \
+            --json \
+            --output=github-pages-search-pack.json
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Upload Pages Search Pack evidence
+        if: always() && steps.dogfood.outputs.status != ''
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: github-pages-search-pack
+          path: github-pages-search-pack.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Enforce ARWP Pages Search Pack
+        if: steps.dogfood.outputs.status != '0'
+        run: exit "${{ steps.dogfood.outputs.status }}"
