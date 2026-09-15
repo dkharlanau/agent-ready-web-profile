@@ -13,14 +13,14 @@ ARWP is a discovery profile for a website's existing human, search, data, retrie
 An ARWP document answers questions such as:
 
 - What is the canonical site identity?
-- Where are its sitemap, crawler policy and `llms.txt` resources?
+- Where are its sitemap, crawler policy, manifest and `llms.txt` resources?
 - Which structured datasets, schemas, releases or APIs are public?
 - Are retrieval-ready distributions available?
 - Which portable Agent Skills does the publisher expose?
 - Does the site expose WebMCP tools in the browser?
 - Is there a real local or remote MCP server?
 - Is there a real A2A agent and Agent Card?
-- Where can a consumer find license, citation, provenance and review information?
+- Where can a consumer find publisher, license, citation, provenance, review, privacy, accessibility, contact, correction and security information?
 
 ARWP does not define the semantics of the site's domain records and does not replace the protocols or formats it points to.
 
@@ -74,7 +74,7 @@ Secrets, bearer tokens, private keys, session identifiers and credentials MUST N
 
 The root object MUST conform to `schema/site-profile.schema.json`.
 
-The following properties are required:
+The following properties are required for core conformance:
 
 - `profileVersion` — ARWP version. v0.1 requires the exact value `0.1`.
 - `id` — stable publisher-chosen identifier for this site/profile.
@@ -83,6 +83,10 @@ The following properties are required:
 - `description` — concise explanation of the site's purpose.
 
 The optional `$schema` property SHOULD identify the JSON Schema used to validate the document.
+
+The optional `adoption` object declares an adoption level. `adoption.level` MAY be `core` or `full-publisher`. Omitting `adoption` is equivalent to making no completeness claim beyond ordinary core conformance.
+
+A site that declares `adoption.level: "full-publisher"` makes an additional completeness claim and MUST satisfy the requirements in Section 7. Core conformance remains backward-compatible and does not require the Full Publisher Adoption surface set.
 
 ## 6. Capability groups
 
@@ -95,12 +99,15 @@ It MAY contain:
 - `sitemap` — canonical sitemap or sitemap index URL;
 - `robots` — crawler-control resource URL;
 - `llms` — `llms.txt` URL;
+- `manifest` — a published web app manifest when the site exposes one;
 - `feeds` — RSS, Atom, JSON Feed or comparable public feeds;
 - `markdownIndex` — an optional index of Markdown representations when the publisher maintains one.
 
 Publishing `llms` does not imply any search-ranking advantage. `llms.txt` is an inference-time discovery convention and MUST NOT be represented as a Google Search requirement.
 
 The `robots` resource controls crawler access according to the relevant crawler semantics. ARWP itself grants no crawler permission.
+
+A `manifest` declaration does not make the site installable by itself. The manifest and its icons MUST reflect the real public web-app surface and SHOULD be verified through ordinary browser/platform tooling.
 
 ### 6.2 `data`
 
@@ -214,19 +221,88 @@ It MAY provide:
 
 Canonical identity SHOULD be independent from presentation labels and SHOULD survive URL or title changes when possible.
 
+A Full Publisher Adoption declaration MUST include `identity.namespace` and `identity.idPattern`. `identity.aliases` remains conditional and SHOULD be published when the publisher maintains renamed identifiers, aliases or an identity-reconciliation surface.
+
 ### 6.9 `trust`
 
 The `trust` object MAY identify:
 
+- `publisher` — publisher/operator identity or project-maintainer page;
 - `license` — license or reuse terms;
 - `citation` — citation guidance;
 - `provenance` — provenance/source model or manifest;
 - `reviewPolicy` — editorial/review policy;
-- `security` — security/contact policy.
+- `privacy` — privacy/data-use policy;
+- `accessibility` — accessibility statement or policy;
+- `contact` — public contact route or a truthful contact-availability page;
+- `corrections` — correction/reporting policy;
+- `security` — security/contact policy;
+- `terms` — terms governing use, submissions, payments or another user relationship when applicable.
 
 When a public record's trust state affects whether an agent should use it, that trust state SHOULD travel with the record or retrieval chunk, not exist only in a top-level website policy page.
 
-## 7. Extensions
+A trust URL is a discovery pointer, not proof that the referenced policy is adequate. Publishers MUST NOT use a trust field to imply a support channel, security program, license, legal entity or contractual promise that does not actually exist.
+
+## 7. Full Publisher Adoption
+
+A publisher that declares:
+
+```json
+{
+  "adoption": {
+    "level": "full-publisher"
+  }
+}
+```
+
+MUST provide a complete publisher baseline for the public information surface being described.
+
+The profile MUST include:
+
+- `languages`;
+- `web.sitemap`;
+- `web.robots`;
+- `web.llms`;
+- `identity.namespace`;
+- `identity.idPattern`;
+- `trust.publisher`;
+- `trust.license`;
+- `trust.citation`;
+- `trust.provenance`;
+- `trust.reviewPolicy`;
+- `trust.privacy`;
+- `trust.accessibility`;
+- `trust.contact`;
+- `trust.corrections`;
+- `trust.security`.
+
+The JSON Schema enforces this required set when `adoption.level` is `full-publisher`.
+
+The following remain conditional:
+
+- `web.manifest` SHOULD be declared when a web app manifest is actually published;
+- `trust.terms` SHOULD be declared when accounts, payments, submissions, uploads, community participation, contractual services or another user relationship needs explicit terms;
+- `identity.aliases` SHOULD be declared when aliases are actually maintained.
+
+Full Publisher Adoption also includes ordinary web presentation surfaces that SHOULD remain in established HTML/HTTP/browser mechanisms rather than being duplicated into proprietary ARWP fields. A full adoption review MUST check, where applicable:
+
+- canonical and language metadata;
+- favicon delivery and recognizability at small sizes;
+- correctly sized touch/Apple icons when declared;
+- complete manifest icons when a manifest is published, including an appropriate maskable asset where the target platform contract needs one;
+- a stable default social preview image for pages without a page-specific image;
+- coherent Open Graph/social-card title, description, canonical URL and preferred image;
+- visible first-party publisher/trust information in canonical HTML;
+- reachability of declared trust/discovery resources;
+- separation of repository, build, deployed-HTTP, rendered-browser and owner-platform evidence.
+
+Full Publisher Adoption MUST NOT be interpreted as a requirement to create MCP, A2A, WebMCP, Agent Skills, OpenAPI, Croissant, accounts, forms, payments or any capability that the site does not expose.
+
+Full Publisher Adoption is not proof of indexing, ranking, citation, recommendation traffic, accessibility conformance, security assurance or business outcomes.
+
+See `docs/FULL-PUBLISHER-ADOPTION.md` for the concise implementation contract.
+
+## 8. Extensions
 
 The optional `extensions` object allows experiments without adding speculative core fields.
 
@@ -246,7 +322,7 @@ Consumers MUST ignore unknown extension keys unless they explicitly support them
 
 An extension MUST NOT redefine the meaning of a core ARWP property.
 
-## 8. Truthfulness and verification
+## 9. Truthfulness and verification
 
 An ARWP profile is a declaration, not proof.
 
@@ -263,7 +339,7 @@ node bin/arwp.mjs verify https://example.com/ai/site-profile.json
 
 Verification of URL reachability is still not proof that a WebMCP tool, MCP protocol handshake, Agent Skill behavior or A2A agent is semantically correct. Protocol-specific conformance remains the responsibility of the corresponding upstream implementation/tooling.
 
-## 9. Search engines and AI search
+## 10. Search engines and AI search
 
 ARWP is intentionally separate from search ranking.
 
@@ -276,7 +352,7 @@ Google Search documentation states that AI Overviews and AI Mode do not require 
 
 ARWP can make a site easier for configured agents and tooling to integrate with without affecting this distinction.
 
-## 10. `llms.txt`
+## 11. `llms.txt`
 
 ARWP may point to `llms.txt` but does not duplicate its content.
 
@@ -284,7 +360,7 @@ As of ARWP v0.1, `llms.txt` v2 is a community proposal/convention rather than a 
 
 Where Markdown alternates are published, sites SHOULD follow current `llms.txt` v2 discovery guidance rather than invent incompatible page-mirror conventions.
 
-## 11. Security
+## 12. Security
 
 ARWP metadata MUST NOT bypass authorization.
 
@@ -302,7 +378,7 @@ Publishers SHOULD:
 
 The reference MCP gateway accepts only profile-declared resources, uses HTTPS and origin allow-listing, re-checks redirects and applies response-size limits. These controls reduce accidental SSRF-like behavior but do not make remote content trusted.
 
-## 12. Versioning
+## 13. Versioning
 
 `profileVersion` versions the ARWP contract, not the site's content.
 
@@ -312,7 +388,7 @@ A future stable ARWP version should define compatibility rules before claiming l
 
 Publishers SHOULD version their domain datasets, APIs, Agent Skills and MCP servers independently when their consumers require reproducibility.
 
-## 13. Conformance
+## 14. Conformance
 
 A profile conforms to ARWP v0.1 when:
 
@@ -321,9 +397,11 @@ A profile conforms to ARWP v0.1 when:
 3. all declared capabilities are truthful at publication time;
 4. the publisher does not reinterpret ARWP as granting permissions or implementing the protocols/formats it only references.
 
-A conforming profile is not required to implement every optional capability group.
+A core-conforming profile is not required to implement every optional capability group.
 
-## 14. Upstream references
+A profile that additionally declares `adoption.level: "full-publisher"` MUST satisfy Section 7. This is a stronger completeness claim, not a higher protocol-capability score.
+
+## 15. Upstream references
 
 ARWP intentionally delegates protocol/format details to their upstream specifications and documentation:
 
