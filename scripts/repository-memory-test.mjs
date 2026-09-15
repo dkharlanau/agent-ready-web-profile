@@ -48,7 +48,7 @@ for (const relativePath of memoryDocs) {
   }
 }
 
-const navigationDocs = ['AGENTS.md', 'REPO_MAP.md'];
+const navigationDocs = ['AGENTS.md', 'REPO_MAP.md', 'docs/REPOSITORY-STEWARDSHIP.md'];
 const markdownLink = /!?\[[^\]]*\]\(([^)\s]+)(?:\s+["'][^"']*["'])?\)/g;
 
 for (const relativePath of navigationDocs) {
