@@ -1,0 +1,51 @@
+name: GitHub Pages Search Pack validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/github-pages-search-pack-practices.json'
+      - 'lib/github-pages-search-pack.mjs'
+      - 'lib/search-platform-eligibility.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-github-pages-search.mjs'
+      - 'scripts/github-pages-search-pack-test.mjs'
+      - 'scripts/search-platform-eligibility-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'docs/GITHUB-PAGES-SEARCH-PACK.md'
+      - '.github/workflows/github-pages-search-pack.yml'
+  pull_request:
+    paths:
+      - 'registry/github-pages-search-pack-practices.json'
+      - 'lib/github-pages-search-pack.mjs'
+      - 'lib/search-platform-eligibility.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-github-pages-search.mjs'
+      - 'scripts/github-pages-search-pack-test.mjs'
+      - 'scripts/search-platform-eligibility-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'docs/GITHUB-PAGES-SEARCH-PACK.md'
+      - '.github/workflows/github-pages-search-pack.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate GitHub Pages Search Pack
+        run: |
+          node scripts/github-pages-search-pack-test.mjs
+          node scripts/search-platform-eligibility-test.mjs
+          node scripts/search-build-gate-test.mjs
+          node --check lib/github-pages-search-pack.mjs
+          node --check bin/arwp-github-pages-search.mjs
+          node bin/arwp-github-pages-search.mjs --help
+          node -e "JSON.parse(require('fs').readFileSync('registry/github-pages-search-pack-practices.json','utf8'));"
