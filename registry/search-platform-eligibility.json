@@ -1,0 +1,72 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-15",
+  "title": "ARWP Search Platform Eligibility",
+  "purpose": "Prevent agents from applying platform-specific Search tactics to sites, scopes or deployment modes that are not eligible for them. This layer is an applicability/configuration gate, not a ranking score.",
+  "states": ["pass", "fail", "watch", "not-applicable"],
+  "guardrails": {
+    "noRankingPromise": true,
+    "noIndexingPromise": true,
+    "providerScopeMustBeExplicitWhenAmbiguous": true,
+    "finalArtifactOutranksSourceDeclaration": true,
+    "unsupportedPlatformFeaturesFailClosed": true
+  },
+  "sources": {
+    "googlePreferredSources": "https://developers.google.com/search/docs/appearance/preferred-sources",
+    "googleIndexingApi": "https://developers.google.com/search/apis/indexing-api/v3/using-api",
+    "githubPagesPublishing": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site",
+    "nextMetadata": "https://nextjs.org/docs/app/api-reference/functions/generate-metadata",
+    "nextBasePath": "https://nextjs.org/docs/pages/api-reference/config/next-config-js/basePath",
+    "nextStaticExport": "https://nextjs.org/docs/app/guides/static-exports"
+  },
+  "rules": [
+    {
+      "id": "SPE-01-preferred-sources-scope",
+      "priority": "P1",
+      "appliesTo": ["publisher", "editorial", "repeat-reader"],
+      "claim": "Google Preferred Sources accepts domain-level and subdomain-level sites, not a subdirectory as an independently selectable source.",
+      "decision": "Require hostname-root scope before recommending a Preferred Sources CTA. Keep subdirectory sites search-eligible, but do not pretend that the path itself can be selected as a Preferred Source.",
+      "source": "googlePreferredSources"
+    },
+    {
+      "id": "SPE-02-google-indexing-api-scope",
+      "priority": "P0",
+      "appliesTo": ["google-indexing-api"],
+      "claim": "Google Indexing API can only be used for pages containing JobPosting or BroadcastEvent embedded in a VideoObject.",
+      "decision": "Do not recommend or call Google Indexing API for ordinary articles, documentation, product pages or generic site updates.",
+      "source": "googleIndexingApi"
+    },
+    {
+      "id": "SPE-03-nextjs-metadata-base",
+      "priority": "P0",
+      "appliesTo": ["nextjs"],
+      "claim": "Next.js metadataBase composes relative canonical, alternate and other URL-based metadata into absolute URLs.",
+      "decision": "For a known production site root, require metadataBase to resolve to that same public root or record an explicit review when metadata is fully absolute.",
+      "source": "nextMetadata"
+    },
+    {
+      "id": "SPE-04-nextjs-subpath-basepath",
+      "priority": "P0",
+      "appliesTo": ["nextjs", "subdirectory-deployment"],
+      "claim": "Next.js basePath is the framework control for deploying an application under a domain sub-path and is inlined at build time.",
+      "decision": "When the public site root is a subdirectory, require an exact basePath match and rebuild after basePath changes. Do not substitute assetPrefix for application routing scope.",
+      "source": "nextBasePath"
+    },
+    {
+      "id": "SPE-05-nextjs-static-export-compatibility",
+      "priority": "P0",
+      "appliesTo": ["nextjs", "static-export"],
+      "claim": "Next.js static export does not support features that require a Node.js server or dynamic request-time behavior, including several dynamic-route, request, rewrite, redirect, header, proxy, ISR, default image optimization and Server Action patterns.",
+      "decision": "Before deploying output: export to static hosting, inventory server-dependent features and fail the gate when any required feature cannot be computed at build time.",
+      "source": "nextStaticExport"
+    },
+    {
+      "id": "SPE-06-github-pages-publication-boundary",
+      "priority": "P0",
+      "appliesTo": ["github-pages"],
+      "claim": "GitHub Pages can publish from a branch or a custom GitHub Actions workflow; with custom Actions the uploaded Pages artifact is the publication boundary, while a repository CNAME file is not proof of the active custom-domain configuration.",
+      "decision": "Verify the actual Pages publishing mode and final artifact before treating repository files as production Search evidence.",
+      "source": "githubPagesPublishing"
+    }
+  ]
+}
