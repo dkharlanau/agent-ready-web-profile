@@ -13,14 +13,14 @@
       "id": "NJS-01-deployment-mode",
       "priority": "P0",
       "claim": "Static export is an explicit deployment mode and must not be inferred from the presence of App Router source alone.",
-      "decision": "Classify literal output: 'export' as static-export; otherwise keep deployment mode dynamic-or-unspecified. Never treat that classification as a ranking signal.",
+      "decision": "Classify literal output: 'export' as static-export; keep other literal modes as dynamic-or-unspecified, and keep computed output configuration explicitly unresolved. Never treat deployment mode as a ranking signal.",
       "sources": ["nextStaticExport"]
     },
     {
       "id": "NJS-02-static-export-compatibility",
       "priority": "P0",
       "claim": "Features that require request-time or Node.js server behavior are unsupported by Next.js static export.",
-      "decision": "When static export is explicit, fail on inspectable unsupported config/runtime features such as rewrites, redirects, headers, Proxy/middleware, ISR, Draft Mode, Server Actions, non-GET/request-dependent Route Handlers and dynamic routes without inspectable generateStaticParams evidence.",
+      "decision": "When static export is explicit, fail on inspectable unsupported config/runtime features such as rewrites, redirects, headers, Proxy/middleware, numeric ISR/revalidation, Draft Mode, Server Actions, non-GET/request-dependent Route Handlers, intercepting routes, dynamicParams=true and dynamic routes without inspectable generateStaticParams evidence. Keep computed revalidate state as review rather than guessing it.",
       "sources": ["nextStaticExport"]
     },
     {
