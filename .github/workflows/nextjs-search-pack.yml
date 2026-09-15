@@ -1,0 +1,57 @@
+name: Next.js Search Pack validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/nextjs-search-pack-practices.json'
+      - 'lib/nextjs-search-pack.mjs'
+      - 'lib/repository-mapper-nextjs.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-nextjs-search.mjs'
+      - 'scripts/nextjs-search-pack-test.mjs'
+      - 'scripts/repository-mapper-nextjs-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'docs/NEXTJS-SEARCH-PACK.md'
+      - '.github/workflows/nextjs-search-pack.yml'
+  pull_request:
+    paths:
+      - 'registry/nextjs-search-pack-practices.json'
+      - 'lib/nextjs-search-pack.mjs'
+      - 'lib/repository-mapper-nextjs.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'bin/arwp-nextjs-search.mjs'
+      - 'scripts/nextjs-search-pack-test.mjs'
+      - 'scripts/repository-mapper-nextjs-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'docs/NEXTJS-SEARCH-PACK.md'
+      - '.github/workflows/nextjs-search-pack.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate Next.js Search Pack
+        run: |
+          node scripts/nextjs-search-pack-test.mjs
+          node scripts/repository-mapper-nextjs-test.mjs
+          node scripts/search-build-gate-test.mjs
+          node --check lib/nextjs-search-pack.mjs
+          node --check bin/arwp-nextjs-search.mjs
+          node bin/arwp-nextjs-search.mjs --help
+          node -e "JSON.parse(require('fs').readFileSync('registry/nextjs-search-pack-practices.json','utf8'));"
