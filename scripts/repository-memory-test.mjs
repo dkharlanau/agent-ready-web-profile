@@ -10,7 +10,9 @@ const requiredPaths = [
   'REPO_MAP.md',
   'ROADMAP.md',
   'docs/LOOP-STATUS.md',
-  'docs/PRODUCT-LINE.md'
+  'docs/PRODUCT-LINE.md',
+  'docs/REPOSITORY-STEWARDSHIP.md',
+  'skills/arwp-repository-stewardship/SKILL.md'
 ];
 
 for (const relativePath of requiredPaths) {
@@ -25,7 +27,8 @@ const memoryDocs = [
   'REPO_MAP.md',
   'ROADMAP.md',
   'docs/LOOP-STATUS.md',
-  'docs/README-R4.md'
+  'docs/README-R4.md',
+  'docs/REPOSITORY-STEWARDSHIP.md'
 ];
 
 const workstationPatterns = [
@@ -71,6 +74,33 @@ for (const relativePath of navigationDocs) {
     if (!fs.existsSync(resolved)) {
       failures.push(`${relativePath} points to a missing repository path: ${target}`);
     }
+  }
+}
+
+const agentsPath = path.join(root, 'AGENTS.md');
+if (fs.existsSync(agentsPath)) {
+  const agents = fs.readFileSync(agentsPath, 'utf8');
+  if (!agents.includes('skills/arwp-repository-stewardship/SKILL.md')) {
+    failures.push('AGENTS.md must route repository cleanup to the canonical Repository Stewardship skill');
+  }
+}
+
+const repoMapPath = path.join(root, 'REPO_MAP.md');
+if (fs.existsSync(repoMapPath)) {
+  const repoMap = fs.readFileSync(repoMapPath, 'utf8');
+  for (const requiredRoute of ['docs/REPOSITORY-STEWARDSHIP.md', 'skills/arwp-repository-stewardship/SKILL.md']) {
+    if (!repoMap.includes(requiredRoute)) failures.push(`REPO_MAP.md must route repository stewardship through ${requiredRoute}`);
+  }
+}
+
+const historicalR4Path = path.join(root, 'docs/README-R4.md');
+if (fs.existsSync(historicalR4Path)) {
+  const historicalR4 = fs.readFileSync(historicalR4Path, 'utf8');
+  if (!/not the current product backlog or priority authority/i.test(historicalR4)) {
+    failures.push('docs/README-R4.md must remain explicitly historical rather than becoming a second current backlog');
+  }
+  if (!historicalR4.includes('../ROADMAP.md')) {
+    failures.push('docs/README-R4.md must route current priorities back to ROADMAP.md');
   }
 }
 
