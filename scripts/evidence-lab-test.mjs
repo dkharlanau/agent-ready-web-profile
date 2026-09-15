@@ -6,7 +6,8 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 
-const cohort = JSON.parse(fs.readFileSync(path.join(root, 'knowledge', 'experiments', '2026-09-09-ptichi-cohort-freeze.json'), 'utf8'));
+const historical = JSON.parse(fs.readFileSync(path.join(root, 'knowledge', 'experiments', '2026-09-09-ptichi-cohort-freeze.json'), 'utf8'));
+const cohort = JSON.parse(fs.readFileSync(path.join(root, 'knowledge', 'experiments', '2026-09-15-ptichi-cohort-refreeze-r2.json'), 'utf8'));
 const external = JSON.parse(fs.readFileSync(path.join(root, 'knowledge', 'research', '2026-09-09-external-evidence-winner-loop.json'), 'utf8'));
 const lab = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'evidence-lab', 'index.json'), 'utf8'));
 const html = fs.readFileSync(path.join(root, 'docs', 'evidence-lab', 'index.html'), 'utf8');
@@ -23,7 +24,12 @@ assert.equal(lab.firstExperiment.queryCount, cohort.queryPanel.queries.length);
 assert.equal(lab.firstExperiment.implementationRef, cohort.measurementGate.implementationRef);
 assert.equal(lab.firstExperiment.productionRef, cohort.measurementGate.productionRef);
 assert.equal(lab.firstExperiment.productionGate, cohort.measurementGate.state);
-assert.equal(lab.firstExperiment.productionParity, false);
+assert.equal(lab.firstExperiment.productionParity, true);
+assert.equal(lab.firstExperiment.productionRef, lab.firstExperiment.implementationRef);
+assert.equal(lab.sourceArtifacts.controlledCohort, 'knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json');
+assert.equal(lab.sourceArtifacts.historicalControlledCohort, 'knowledge/experiments/2026-09-09-ptichi-cohort-freeze.json');
+assert.equal(historical.status, 'measurement-hold');
+assert.equal(historical.measurementGate.state, 'hold');
 assert.deepEqual(
   lab.firstExperiment.queryPanel.map(item => ({ id: item.id, text: item.text, targetEntities: item.targetEntities })),
   cohort.queryPanel.queries.map(item => ({ id: item.id, text: item.text, targetEntities: item.targetEntities }))
@@ -42,9 +48,9 @@ assert.deepEqual(lab.externalEvidence.classCounts, {
 assert.match(html, /<title>Goose Evidence Lab — Evidence before advice<\/title>/);
 assert.match(html, /<strong>Goose<\/strong>/);
 assert.doesNotMatch(html, /Cite Goose|CITE GOOSE/);
-assert.match(html, /MEASUREMENT HOLD/);
+assert.match(html, /READY TO OBSERVE/);
+assert.doesNotMatch(html, /MEASUREMENT HOLD/);
 assert.match(html, new RegExp(cohort.measurementGate.implementationRef.slice(0, 8)));
-assert.match(html, new RegExp(cohort.measurementGate.productionRef.slice(0, 8)));
 assert.match(html, /Measured wins<\/dt><dd>0<\/dd>/);
 assert.match(html, /evidence-lab\.css/);
 assert.match(css, /\.lab-status-hold/);
