@@ -67,6 +67,7 @@ const report = planDeployDiscovery({
 });
 assert.equal(report.pass, true, JSON.stringify(report.failures));
 assert.equal(report.deployment.state, 'pass');
+assert.equal(report.changedLiveEvidence.state, 'pass');
 assert.deepEqual(report.diff.added.map(item => item.url), ['https://example.com/new/']);
 assert.deepEqual(report.diff.updated.map(item => item.url), ['https://example.com/guide/']);
 assert.equal(report.diff.updated[0].reason, 'visible-content-updated');
@@ -74,6 +75,7 @@ assert.deepEqual(report.diff.artifactOnlyChanged.map(item => item.url), ['https:
 assert.deepEqual(report.diff.removed.map(item => [item.url, item.status, item.verifiedGone]), [['https://example.com/old/', 410, true]]);
 assert.deepEqual(report.indexNow.readyUrls, ['https://example.com/guide/', 'https://example.com/new/', 'https://example.com/old/']);
 assert.deepEqual(report.indexNow.watchUrls, ['https://example.com/']);
+assert.equal(report.indexNow.blockedCandidates.length, 0);
 assert.equal(report.feed.state, 'pass');
 assert.equal(report.feed.feeds[0].url, 'https://example.com/feed.xml');
 assert.equal(report.feed.feeds[0].artifactPresent, true);
@@ -117,6 +119,26 @@ const wrong = planDeployDiscovery({
 assert.equal(wrong.pass, false);
 assert.equal(wrong.deployment.state, 'fail');
 assert.equal(wrong.indexNow.readyUrls.length, 0);
+
+const staleBodyLive = structuredClone(live);
+const staleGuide = staleBodyLive.pages.find(item => item.url === 'https://example.com/guide/');
+staleGuide.liveSha256 = 'c'.repeat(64);
+const stale = planDeployDiscovery({
+  site: 'https://example.com/',
+  beforeArtifactRoot: before,
+  afterArtifactRoot: after,
+  liveReport: staleBodyLive,
+  sourceSha: sha,
+  removedStatus: { 'https://example.com/old/': 410 }
+});
+assert.equal(stale.pass, false, 'changed URL byte drift must block a complete discovery pass');
+assert.equal(stale.changedLiveEvidence.state, 'fail');
+assert.ok(stale.failures.some(item => item.includes('changed-url-live-byte-drift')));
+assert.equal(stale.indexNow.readyUrls.includes('https://example.com/guide/'), false, 'stale changed URL must not enter IndexNow-ready handoff');
+assert.ok(stale.indexNow.blockedCandidates.includes('https://example.com/guide/'));
+assert.ok(stale.indexNow.readyUrls.includes('https://example.com/new/'), 'independently exact-live new URL may remain ready');
+assert.ok(stale.indexNow.readyUrls.includes('https://example.com/old/'), 'verified 410 removal may remain ready');
+assert.equal(stale.indexNow.state, 'partial');
 
 assert.equal(visibleTextDigest('<html><body><h1>Hello</h1><script>noise()</script><p> world </p></body></html>'), visibleTextDigest('<body><h1>Hello</h1><p>world</p></body>'));
 
