@@ -93,10 +93,12 @@ assert.match(prepare, /registry\/comprehensive-site-audit\.json/);
 for (const expected of ['runtime-complete', 'template-runtime-complete', 'partial', 'unknown', 'page ledger', 'bounded']) assert.match(prepare, new RegExp(expected, 'i'));
 
 const stewardship = fs.readFileSync(path.join(skillsRoot, 'arwp-repository-stewardship', 'SKILL.md'), 'utf8');
-for (const expected of ['AUDIT', 'EXECUTE', 'unknown', 'deletion gate', 'AGENTS.md', 'REPO_MAP.md', 'file count', 'generated-output', 'durable-evidence']) {
+for (const expected of ['AUDIT', 'EXECUTE', 'unknown', 'deletion gate', 'AGENTS.md', 'REPO_MAP.md', 'file count', 'generated-output', 'durable-evidence', 'published-artifact']) {
   assert.match(stewardship, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `repository stewardship must retain ${expected}`);
 }
 assert.match(stewardship, /A grep miss, old timestamp, unfamiliar filename or low reference count is not enough evidence by itself/i);
+assert.match(stewardship, /Internal repository search cannot prove that a published URL has no external consumers/i);
+assert.match(stewardship, /migration, redirect, deprecation or other justified compatibility decision/i);
 assert.match(stewardship, /Do not assume a local checkout or CLI exists/i);
 
 const comprehensiveReferencePath = path.join(skillsRoot, 'arwp-prepare-site', 'references', 'comprehensive-audit.md');
