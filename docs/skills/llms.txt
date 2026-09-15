@@ -30,9 +30,12 @@ Use it before broad generated-page or data-site sitemap expansion. Crawl/index e
 
 Use it to compare a target site with timestamped independent Search/AI reference cohorts. Repeated features remain observational evidence unless stronger evidence exists; numeric rank requires explicit rank evidence.
 
-## Initial preparation and focus
+## Initial preparation, repository stewardship and focus
 - arwp-prepare-site — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-prepare-site/SKILL.md
+- arwp-repository-stewardship — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-repository-stewardship/SKILL.md
 - arwp-site-focus — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-site-focus/SKILL.md
+
+Use Repository Stewardship when a repository is costly to understand or maintain: inventory and classify files, distinguish canonical/generated/evidence surfaces, remove only proven dead weight, refresh AGENTS/REPO_MAP routing and add lightweight structural drift checks. Unknown or merely unreferenced files are not deletion evidence.
 
 ## Measurement
 - arwp-measurement-os — https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/skills/arwp-measurement-os/SKILL.md
@@ -72,4 +75,4 @@ Use arwp-future-search after current crawl/index/canonical/content/identity foun
 npx skills add dkharlanau/agent-ready-web-profile
 
 ## Rule
-Research -> classify current vs observational vs experimental -> establish site focus -> fix technical eligibility -> run Search Release -> run Technical SEO Critic when an adversarial second pass is needed -> run Feed Syndication when the site publishes updateable content -> run Index Worthiness before broad generated-page sitemap expansion -> benchmark when useful -> run Localization Quality whenever a locale is added or a localizable surface changes -> implement -> trace provenance/impact when needed -> verify final production -> measure owner-observed outcomes. Do not claim that ARWP, feed correctness, localization completeness, Index Worthiness, BraidGraph adjacency, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.
+Research -> classify current vs observational vs experimental -> establish site/repository focus -> run Repository Stewardship when structural entropy blocks safe work -> fix technical eligibility -> run Search Release -> run Technical SEO Critic when an adversarial second pass is needed -> run Feed Syndication when the site publishes updateable content -> run Index Worthiness before broad generated-page sitemap expansion -> benchmark when useful -> run Localization Quality whenever a locale is added or a localizable surface changes -> implement -> trace provenance/impact when needed -> verify final production -> measure owner-observed outcomes. Do not claim that repository tidiness, ARWP, feed correctness, localization completeness, Index Worthiness, BraidGraph adjacency, a reference-cohort pattern, semantic-index JSON-LD, llms.txt, Schema.org volume, Agent Skills or another metadata mechanism guarantees ranking, Discover placement, AI citation, recommendations or traffic.

@@ -89,7 +89,7 @@ const preservedCiBoundaries = [
   'node scripts/validation-contract-test.mjs',
   'npm test',
   'npm install --no-save --ignore-scripts --no-audit --no-fund @a2a-js/sdk@1.0.1',
-  "python -m pip install --disable-pip-version-check 'a2a-sdk[signing,encryption]==1.1.2'",
+  "python -m pip install --disable-pip-version-check --index-url https://pypi.org/simple 'a2a-sdk[signing,encryption]==1.1.2'",
   'node bin/arwp-focus.mjs https://dkharlanau.github.io/agent-ready-web-profile/',
   'uses: ./'
 ];
