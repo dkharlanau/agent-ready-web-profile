@@ -39,11 +39,14 @@ before final artifact (optional for first release)
 → exact source/deployed SHA parity
 → complete live Search parity
 → canonical URL diff
+→ exact live byte parity for added/updated candidate URLs
 → safe discovery plan
 → provider-native owner evidence
 ```
 
 If exact deployment evidence is missing, the planner can still show candidate differences, but IndexNow output is blocked.
+
+Production Search Build Gate may intentionally use its bounded `search-surface` parity mode. Deploy Discovery Loop adds a stricter candidate-level rule: an added or updated URL cannot enter the IndexNow-ready handoff unless the final artifact bytes observed for that URL equal the live bytes in the supplied parity report. This prevents a stale body from being notified merely because title/canonical/JSON-LD evidence already matches.
 
 ## Run it
 
@@ -84,7 +87,7 @@ The planner never sends network submissions. `changed-urls.txt` is only an evide
 
 A canonical URL exists in the after sitemap/index cohort but not in the before cohort.
 
-After deployment is verified, it is eligible for the ready IndexNow set.
+It becomes ready only after exact deployment/revision evidence passes **and** the live parity report proves byte equality for that added URL.
 
 ### `updated`
 
@@ -93,7 +96,7 @@ The URL exists in both cohorts and either:
 - visible text changed; or
 - title/description/canonical/noindex/Open Graph URL/JSON-LD Search-surface evidence changed.
 
-This is stronger than a raw file hash and is eligible for the ready set after deployment verification.
+This is stronger than a raw file hash. The URL becomes ready only when the changed final artifact is also byte-identical to the live representation observed by the supplied parity report.
 
 ### `artifactOnlyChanged`
 
@@ -108,6 +111,12 @@ Do not mass-submit these URLs merely because a deployment rebuilt them.
 A canonical URL existed in the before cohort and is absent from the after cohort.
 
 It becomes IndexNow-ready as a deletion only when explicit live `404` or `410` evidence is supplied. An unverified removal remains `watch` because repository/sitemap disappearance is not proof that the production URL is actually gone.
+
+## Partial handoff
+
+Discovery evidence is URL-scoped. If one changed URL has live byte drift while another changed URL is exact-live and a deletion is independently verified, the report may expose the independently proven URLs as ready while marking the overall loop incomplete and the stale URL blocked.
+
+This does not relax the release gate: `report.pass` stays false until every changed candidate has the required live evidence. The partial ready list exists so one stale URL does not erase valid evidence for unrelated URLs.
 
 ## Sitemap role
 
@@ -132,7 +141,7 @@ RSS/Atom is complementary to the canonical XML sitemap and URL-level notificatio
 
 ## IndexNow handoff
 
-When `indexNow.state` is `ready`, use the existing helper separately:
+When `indexNow.state` is `ready` or `partial`, the `readyUrls` list contains only independently proven candidates. Use the existing helper separately:
 
 ```bash
 export INDEXNOW_KEY='...'
@@ -164,7 +173,7 @@ Owner exports remain private. Existing ARWP visibility importers can normalize p
 
 ## First deployment
 
-`--before-artifact` is optional. Without it, the after canonical cohort is classified as newly added. Ready output is still blocked unless live deployment parity is supplied.
+`--before-artifact` is optional. Without it, the after canonical cohort is classified as newly added. Ready output is still blocked unless live deployment and exact changed-URL byte parity are supplied.
 
 ## Relationship to other ARWP layers
 
