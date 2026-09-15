@@ -1,0 +1,66 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-15",
+  "title": "ARWP Earned Discovery Practices",
+  "purpose": "Turn a genuinely useful public asset into an audience-discovery plan without treating backlink acquisition, outreach volume or paid placement as ranking proof.",
+  "states": ["pass", "fail", "watch", "not-applicable"],
+  "guardrails": {
+    "noRankingPromise": true,
+    "noBacklinkScore": true,
+    "noAutomatedLinkBuilding": true,
+    "noPaidLinkAuthorityClaim": true,
+    "audienceValueBeforePromotion": true,
+    "measurementDoesNotProveCausality": true
+  },
+  "sources": {
+    "googleSeoStarter": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+    "googleHelpfulContent": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "googleGenerativeAi": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+    "googleSpamPolicies": "https://developers.google.com/search/docs/essentials/spam-policies",
+    "googleQualifyLinks": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+  },
+  "rules": [
+    {
+      "id": "ED-01-promotable-asset",
+      "priority": "P0",
+      "claim": "Promotion should start from content or a resource that is useful, original or materially differentiated for the intended audience rather than from a need to manufacture links.",
+      "decision": "Require an explicit original contribution and visible supporting evidence before recommending earned distribution as ready work. Unknown quality stays watch; a declared non-original/no-value asset fails closed.",
+      "sources": ["googleSeoStarter", "googleHelpfulContent", "googleGenerativeAi"]
+    },
+    {
+      "id": "ED-02-audience-channel-fit",
+      "priority": "P1",
+      "claim": "Google's SEO Starter Guide explicitly lists social promotion, community engagement, advertising and word of mouth as ways to help interested people discover new content while warning that promotion can be overdone.",
+      "decision": "Recommend only declared channels with a real audience fit. Unknown fit stays watch; a channel declared irrelevant to the audience is excluded rather than used for volume.",
+      "sources": ["googleSeoStarter"]
+    },
+    {
+      "id": "ED-03-link-manipulation-boundary",
+      "priority": "P0",
+      "claim": "Buying or selling links for ranking purposes, excessive reciprocal links, automated link creation, low-quality directory links and optimized forum-comment links are examples of link spam.",
+      "decision": "Block tactics whose stated goal is ranking manipulation, automated link creation, bulk forum/link posting or required reciprocal linking. Do not optimize for backlink count.",
+      "sources": ["googleSpamPolicies"]
+    },
+    {
+      "id": "ED-04-paid-link-qualification",
+      "priority": "P0",
+      "claim": "Advertising and sponsorship links are not inherently prohibited, but Google says paid links should be qualified so they do not pass ranking credit, including rel=sponsored or rel=nofollow.",
+      "decision": "Any paid/sponsored channel that can create a link must declare sponsored or nofollow qualification. Treat the placement as paid distribution, never earned authority.",
+      "sources": ["googleSpamPolicies", "googleQualifyLinks"]
+    },
+    {
+      "id": "ED-05-scaled-promotion-boundary",
+      "priority": "P0",
+      "claim": "Google warns that over-promotion can fatigue people and that automated/manipulative link creation violates spam policy; scaled low-value content used to manipulate linking or ranking signals is also prohibited.",
+      "decision": "Fail closed on mass automated posting/link creation and keep distribution tied to one canonical useful asset instead of manufacturing thin variants for channels or keywords.",
+      "sources": ["googleSeoStarter", "googleSpamPolicies"]
+    },
+    {
+      "id": "ED-06-outcome-measurement",
+      "priority": "P1",
+      "claim": "Promotion is useful when it helps interested people discover the asset; raw outreach attempts or backlink counts are not evidence that Search rankings improved.",
+      "decision": "Require at least one audience/outcome measurement such as qualified referrals, subscribers, legitimate citations/references, direct/brand demand or owner-observed Search/AI visibility. Preserve before/after uncertainty and do not infer causality from one observation.",
+      "sources": ["googleSeoStarter"]
+    }
+  ]
+}
