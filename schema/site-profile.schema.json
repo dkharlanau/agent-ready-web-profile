@@ -47,9 +47,11 @@
   "allOf": [
     {
       "if": {
+        "type": "object",
         "required": ["adoption"],
         "properties": {
           "adoption": {
+            "type": "object",
             "required": ["level"],
             "properties": {
               "level": { "const": "full-publisher" }
@@ -58,15 +60,19 @@
         }
       },
       "then": {
+        "type": "object",
         "required": ["languages", "web", "identity", "trust"],
         "properties": {
           "web": {
+            "type": "object",
             "required": ["sitemap", "robots", "llms"]
           },
           "identity": {
+            "type": "object",
             "required": ["namespace", "idPattern"]
           },
           "trust": {
+            "type": "object",
             "required": [
               "publisher",
               "license",
