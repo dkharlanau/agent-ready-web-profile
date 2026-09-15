@@ -40,7 +40,7 @@
       "id": "SBG-03-indexable-search-contract",
       "priority": "P0",
       "claim": "Final index-candidate HTML must not contradict its own title, canonical, robots, JSON-LD or Open Graph URL signals.",
-      "decision": "Fail the artifact gate on missing/duplicate canonical or title, unexpected noindex, invalid JSON-LD, off-site canonical, canonical-route mismatch or conflicting og:url.",
+      "decision": "Fail the artifact gate on missing/duplicate canonical or title, unexpected noindex, invalid JSON-LD anywhere in the document, off-site canonical, canonical-route mismatch or conflicting og:url.",
       "sources": ["googleCanonical", "googleRobotsMeta", "googleTitleLinks", "googleStructuredData"]
     },
     {
@@ -54,7 +54,7 @@
       "id": "SBG-05-live-search-surface-parity",
       "priority": "P0",
       "claim": "A correct local artifact does not prove the deployed Search-facing representation is the same artifact.",
-      "decision": "Compare live title, description, canonical, noindex, og:url and JSON-LD parse state with the final artifact; optionally require byte parity for hosts where exact delivery is expected.",
+      "decision": "Compare live title, description, canonical, noindex, og:url and JSON-LD parse state, block count and normalized semantic fingerprints with the final artifact; optionally require byte parity for hosts where exact delivery is expected.",
       "sources": ["googleCanonical", "googleRobotsMeta", "googleTitleLinks", "googleStructuredData"]
     },
     {
