@@ -1,0 +1,36 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-profile.schema.json",
+  "profileVersion": "0.1",
+  "id": "example-full-publisher",
+  "name": "Example Full Publisher",
+  "canonicalUrl": "https://publisher.example.com/",
+  "description": "An example public information site declaring ARWP Full Publisher Adoption.",
+  "languages": ["en"],
+  "adoption": {
+    "level": "full-publisher",
+    "reviewedAt": "2026-09-15"
+  },
+  "web": {
+    "sitemap": "https://publisher.example.com/sitemap.xml",
+    "robots": "https://publisher.example.com/robots.txt",
+    "llms": "https://publisher.example.com/llms.txt",
+    "manifest": "https://publisher.example.com/manifest.webmanifest"
+  },
+  "identity": {
+    "namespace": "publisher.example.com",
+    "idPattern": "^[a-z]+(?:[._-][a-z0-9]+)*$"
+  },
+  "trust": {
+    "publisher": "https://publisher.example.com/about",
+    "license": "https://publisher.example.com/reuse",
+    "citation": "https://publisher.example.com/citation",
+    "provenance": "https://publisher.example.com/provenance",
+    "reviewPolicy": "https://publisher.example.com/editorial-policy",
+    "privacy": "https://publisher.example.com/privacy",
+    "accessibility": "https://publisher.example.com/accessibility",
+    "contact": "https://publisher.example.com/contact",
+    "corrections": "https://publisher.example.com/corrections",
+    "security": "https://publisher.example.com/security",
+    "terms": "https://publisher.example.com/terms"
+  }
+}
