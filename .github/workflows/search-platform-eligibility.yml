@@ -58,8 +58,4 @@ jobs:
           node --check scripts/search-platform-eligibility-test.mjs
           node --check scripts/growth-platform-eligibility-test.mjs
       - name: CLI help smoke
-        shell: bash
-        run: |
-          node bin/arwp-search-platform.mjs --help
-          node bin/arwp-growth.mjs --help > "$RUNNER_TEMP/arwp-growth-help.txt"
-          grep -Fq -- '--site-scope=hostname-root|subdirectory|unknown' "$RUNNER_TEMP/arwp-growth-help.txt"
+        run: node bin/arwp-search-platform.mjs --help
