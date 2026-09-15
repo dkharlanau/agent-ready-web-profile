@@ -10,8 +10,13 @@ import {
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
-const ptichiPath = path.join(root, 'knowledge', 'experiments', '2026-09-09-ptichi-cohort-freeze.json');
-const ptichi = JSON.parse(fs.readFileSync(ptichiPath, 'utf8'));
+
+function load(name) {
+  return JSON.parse(fs.readFileSync(path.join(root, 'knowledge', 'experiments', name), 'utf8'));
+}
+
+const ptichi = load('2026-09-09-ptichi-cohort-freeze.json');
+const ptichiR2 = load('2026-09-15-ptichi-cohort-refreeze-r2.json');
 
 const validation = validateControlledCohort(ptichi);
 assert.equal(validation.valid, true, JSON.stringify(validation, null, 2));
@@ -34,6 +39,37 @@ const readyGate = evaluateMeasurementGate(ptichi, ptichi.measurementGate.impleme
 assert.equal(readyGate.ready, true);
 assert.equal(readyGate.nextState, 'ready-to-observe');
 assert.equal(readyGate.observationClockMayStart, true);
+
+const r2Validation = validateControlledCohort(ptichiR2);
+assert.equal(r2Validation.valid, true, JSON.stringify(r2Validation, null, 2));
+assert.equal(r2Validation.warnings.length, 0);
+
+const r2Summary = summarizeControlledCohort(ptichiR2);
+assert.equal(r2Summary.status, 'ready-to-observe');
+assert.equal(r2Summary.treatmentCount, ptichi.treatment.length);
+assert.equal(r2Summary.controlCount, ptichi.control.length);
+assert.equal(r2Summary.queryCount, ptichi.queryPanel.queries.length);
+assert.equal(r2Summary.measurementGate, 'ready');
+assert.equal(r2Summary.implementationRef, '13b49e9a5faa9256b5bbded049caf33327abc240');
+assert.equal(r2Summary.productionRef, r2Summary.implementationRef);
+
+assert.deepEqual(
+  ptichiR2.treatment.map(({ entity, source }) => ({ entity, source })),
+  ptichi.treatment.map(({ entity, source }) => ({ entity, source }))
+);
+assert.deepEqual(
+  ptichiR2.control.map(({ entity, source }) => ({ entity, source })),
+  ptichi.control.map(({ entity, source }) => ({ entity, source }))
+);
+assert.deepEqual(
+  ptichiR2.queryPanel.queries.map(({ id, text, targetEntities }) => ({ id, text, targetEntities })),
+  ptichi.queryPanel.queries.map(({ id, text, targetEntities }) => ({ id, text, targetEntities }))
+);
+
+const r2Gate = evaluateMeasurementGate(ptichiR2, ptichiR2.measurementGate.productionRef);
+assert.equal(r2Gate.ready, true);
+assert.equal(r2Gate.nextState, 'ready-to-observe');
+assert.equal(r2Gate.observationClockMayStart, true);
 
 const overlap = structuredClone(ptichi);
 overlap.control[0].entity = overlap.treatment[0].entity;
