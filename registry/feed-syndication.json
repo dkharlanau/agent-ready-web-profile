@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "status": "required-baseline",
+  "purpose": "Make update streams explicitly subscribable and machine-discoverable without confusing feeds with sitemaps.",
+  "requirements": [
+    {
+      "id": "FEED-01",
+      "title": "Publish RSS 2.0",
+      "severity": "required",
+      "rule": "Sites with public updates, articles, research notes, releases, changelogs, guides, cards, or other subscribable content MUST publish an RSS 2.0 feed. Prefer /feed.xml as the canonical site feed."
+    },
+    {
+      "id": "FEED-02",
+      "title": "Expose HTML autodiscovery",
+      "severity": "required",
+      "rule": "Relevant HTML entry points MUST advertise the canonical feed with rel=alternate and type=application/rss+xml."
+    },
+    {
+      "id": "FEED-03",
+      "title": "Use canonical links and stable identifiers",
+      "severity": "required",
+      "rule": "Channel and item links MUST use canonical public HTTPS URLs. Item GUIDs MUST remain stable across rebuilds and SHOULD use the canonical item URL when that URL is a durable identifier; otherwise a stable opaque identifier such as a URN is permitted."
+    },
+    {
+      "id": "FEED-04",
+      "title": "Keep feed dates truthful",
+      "severity": "required",
+      "rule": "Item publication/update dates MUST come from source content or reviewed release metadata rather than the build wall clock."
+    },
+    {
+      "id": "FEED-05",
+      "title": "Do not declare feeds as sitemaps",
+      "severity": "required",
+      "rule": "robots.txt Sitemap directives MUST reference sitemap resources, never RSS, Atom or JSON Feed documents."
+    },
+    {
+      "id": "FEED-06",
+      "title": "Preserve locale semantics",
+      "severity": "required-when-localized",
+      "rule": "Localized feeds MUST identify the correct language and link only to content appropriate to that feed's locale; a global feed may aggregate locales only when language is explicit per item or otherwise unambiguous."
+    },
+    {
+      "id": "FEED-07",
+      "title": "Validate generated output",
+      "severity": "required",
+      "rule": "CI MUST verify well-formed XML, required RSS channel/item fields, HTML autodiscovery, canonical HTTPS links, stable GUIDs, deterministic ordering and the absence of feed URLs in robots.txt Sitemap directives."
+    },
+    {
+      "id": "FEED-08",
+      "title": "Keep compatibility formats additive",
+      "severity": "recommended",
+      "rule": "Existing Atom or JSON Feed endpoints SHOULD remain available when consumers may depend on them; RSS 2.0 is the baseline subscription surface, not a reason to break compatible feeds."
+    }
+  ],
+  "implementationProfiles": {
+    "githubPages": {
+      "strategy": "Generate feed.xml into the published static root during the deterministic build, inject RSS autodiscovery into the shared HTML head/template, and validate the built artifact before deployment.",
+      "example": "examples/rss/github-pages/generate-feed.mjs"
+    },
+    "nextjsAppRouter": {
+      "strategy": "Expose app/feed.xml/route.ts (or an equivalent static-generation path), return application/rss+xml, add RSS autodiscovery in the root layout/head, and derive items from the same canonical content source used by the UI.",
+      "example": "examples/rss/nextjs/app/feed.xml/route.ts"
+    }
+  }
+}
