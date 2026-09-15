@@ -1,0 +1,64 @@
+name: Deploy Discovery Loop validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/deploy-discovery-loop-practices.json'
+      - 'lib/deploy-discovery-loop.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'lib/indexnow.mjs'
+      - 'bin/arwp-deploy-discovery.mjs'
+      - 'bin/arwp-indexnow.mjs'
+      - 'scripts/deploy-discovery-loop-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'scripts/indexnow-test.mjs'
+      - 'scripts/package-smoke-test.mjs'
+      - 'docs/DEPLOY-DISCOVERY-LOOP.md'
+      - 'package.json'
+      - '.github/workflows/deploy-discovery-loop.yml'
+  pull_request:
+    paths:
+      - 'registry/deploy-discovery-loop-practices.json'
+      - 'lib/deploy-discovery-loop.mjs'
+      - 'lib/search-build-gate.mjs'
+      - 'lib/indexnow.mjs'
+      - 'bin/arwp-deploy-discovery.mjs'
+      - 'bin/arwp-indexnow.mjs'
+      - 'scripts/deploy-discovery-loop-test.mjs'
+      - 'scripts/search-build-gate-test.mjs'
+      - 'scripts/indexnow-test.mjs'
+      - 'scripts/package-smoke-test.mjs'
+      - 'docs/DEPLOY-DISCOVERY-LOOP.md'
+      - 'package.json'
+      - '.github/workflows/deploy-discovery-loop.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Validate Deploy Discovery Loop
+        run: |
+          node scripts/deploy-discovery-loop-test.mjs
+          node scripts/search-build-gate-test.mjs
+          node scripts/indexnow-test.mjs
+          node scripts/package-smoke-test.mjs
+          node --check lib/deploy-discovery-loop.mjs
+          node --check bin/arwp-deploy-discovery.mjs
+          node bin/arwp-deploy-discovery.mjs --help
+          node -e "JSON.parse(require('fs').readFileSync('registry/deploy-discovery-loop-practices.json','utf8'));"

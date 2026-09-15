@@ -30,9 +30,9 @@ try {
     'knowledge/research/2026-09-08-editorial-expansion.json',
     'knowledge/discoverability-corpus.json', 'knowledge/source-link-checks.json', 'lib/discoverability.mjs',
     'skills/arwp-discoverability/SKILL.md', 'docs/examples/editorial/article.receipt.json',
-    'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs',
+    'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs', 'bin/arwp-deploy-discovery.mjs',
     'bin/arwp-growth.mjs', 'bin/arwp-growth-remediation.mjs', 'bin/arwp-trends.mjs', 'bin/arwp-portfolio.mjs',
-    'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs',
+    'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs', 'lib/deploy-discovery-loop.mjs',
     'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs', 'lib/ai-search-profile.mjs',
     'lib/growth-remediation.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'schema/claim.schema.json', 'schema/visibility-snapshot.schema.json', 'schema/agent-eval-receipt.schema.json',
@@ -40,12 +40,12 @@ try {
     'ai/ai-search-profile.json', 'gateway/server.mjs', 'gateway/http-node.mjs',
     'scanner-service/handler.mjs', 'router/federated.mjs', 'router/resolved-federated.mjs', 'router/server.mjs',
     'monitor/runner.mjs', 'monitor/config.schema.json', 'monitor/example.config.json',
-    'registry/sites.json', 'registry/directory.schema.json', 'registry/search-agent-recommendations.json', 'server.json',
+    'registry/sites.json', 'registry/directory.schema.json', 'registry/search-agent-recommendations.json', 'registry/deploy-discovery-loop-practices.json', 'server.json',
     'benchmarks/external-runner.mjs', 'benchmarks/corpus/fixture.schema.json',
     'scripts/trend-source-watch.mjs',
     'templates/growth/organization.jsonld', 'templates/growth/article.jsonld', 'templates/growth/content-quality-checklist.md', 'templates/portfolio/workspace.example.json',
     'docs/USE-CASES.md', 'docs/ADOPTION.md', 'docs/RESOLVER.md', 'docs/BENCHMARK.md', 'docs/AI-SEARCH-PROFILE.md', 'docs/SEARCH-AGENT-RECOMMENDATIONS.md',
-    'docs/GROWTH-REMEDIATION.md', 'docs/PORTFOLIO-FLEET.md', 'skills/arwp-portfolio-fleet/SKILL.md', 'README.md', 'SPEC.md', 'LICENSE'
+    'docs/GROWTH-REMEDIATION.md', 'docs/DEPLOY-DISCOVERY-LOOP.md', 'docs/PORTFOLIO-FLEET.md', 'skills/arwp-portfolio-fleet/SKILL.md', 'README.md', 'SPEC.md', 'LICENSE'
   ]) assert.ok(paths.has(required), `packed artifact is missing ${required}`);
 
   assert.equal(paths.has('scripts/scanner-test.mjs'), false, 'test scripts must not ship in the npm artifact');
@@ -67,12 +67,13 @@ try {
   const installedVisibilityCli = path.join(installedRoot, 'bin', 'arwp-visibility.mjs');
   const installedAgentEvalCli = path.join(installedRoot, 'bin', 'arwp-agent-eval.mjs');
   const installedIndexNowCli = path.join(installedRoot, 'bin', 'arwp-indexnow.mjs');
+  const installedDeployDiscoveryCli = path.join(installedRoot, 'bin', 'arwp-deploy-discovery.mjs');
   const installedGrowthRemediationCli = path.join(installedRoot, 'bin', 'arwp-growth-remediation.mjs');
   const installedPortfolioCli = path.join(installedRoot, 'bin', 'arwp-portfolio.mjs');
-  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedAgentEvalCli, installedIndexNowCli, installedGrowthRemediationCli, installedPortfolioCli]) {
+  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedAgentEvalCli, installedIndexNowCli, installedDeployDiscoveryCli, installedGrowthRemediationCli, installedPortfolioCli]) {
     assert.ok(fs.existsSync(cli), `installed CLI entrypoint is missing: ${path.basename(cli)}`);
   }
-  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-agent-eval', 'arwp-indexnow', 'arwp-growth-remediation', 'arwp-portfolio']) {
+  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-agent-eval', 'arwp-indexnow', 'arwp-deploy-discovery', 'arwp-growth-remediation', 'arwp-portfolio']) {
     assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', bin)), `npm bin shim is missing: ${bin}`);
   }
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'claim.schema.json')), 'claim schema must ship in the npm artifact');
@@ -80,6 +81,8 @@ try {
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'agent-eval-receipt.schema.json')), 'agent eval schema must ship in the npm artifact');
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'growth-remediation-manifest.schema.json')), 'growth remediation schema must ship in the npm artifact');
   assert.ok(fs.existsSync(path.join(installedRoot, 'registry', 'search-agent-recommendations.json')), 'recommendation registry must ship in the npm artifact');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'registry', 'deploy-discovery-loop-practices.json')), 'deploy discovery registry must ship in the npm artifact');
+  assert.ok(fs.existsSync(path.join(installedRoot, 'docs', 'DEPLOY-DISCOVERY-LOOP.md')), 'Deploy Discovery Loop documentation must ship in the npm artifact');
   assert.ok(fs.existsSync(path.join(installedRoot, 'scripts', 'trend-source-watch.mjs')), 'managed Growth Trend watcher must ship in the npm artifact');
   assert.ok(fs.existsSync(path.join(installedRoot, 'templates', 'growth', 'organization.jsonld')), 'Growth remediation templates must ship in the npm artifact');
   const installedPackage = JSON.parse(fs.readFileSync(path.join(installedRoot, 'package.json'), 'utf8'));
@@ -91,6 +94,7 @@ try {
   assert.equal(installedPackage.scripts.visibility, 'node bin/arwp-visibility.mjs');
   assert.equal(installedPackage.scripts['agent-eval'], 'node bin/arwp-agent-eval.mjs');
   assert.equal(installedPackage.scripts.indexnow, 'node bin/arwp-indexnow.mjs');
+  assert.equal(installedPackage.scripts['deploy-discovery'], 'node bin/arwp-deploy-discovery.mjs');
   assert.equal(installedPackage.scripts['growth-remediation'], 'node bin/arwp-growth-remediation.mjs');
 
   const installedServer = JSON.parse(fs.readFileSync(path.join(installedRoot, 'server.json'), 'utf8'));
@@ -110,6 +114,7 @@ try {
     [installedVisibilityCli, /visibility evidence/i],
     [installedAgentEvalCli, /browser agent evaluation receipts/i],
     [installedIndexNowCli, /IndexNow helper/i],
+    [installedDeployDiscoveryCli, /Deploy Discovery Loop/i],
     [installedGrowthRemediationCli, /proposal-only/i]
   ]) {
     const cliHelp = execFileSync(process.execPath, [cli, '--help'], { cwd: consumerDir, encoding: 'utf8' });
