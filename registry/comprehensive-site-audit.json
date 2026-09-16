@@ -80,7 +80,23 @@
     {
       "id": "structured-data-entities-provenance",
       "priority": "P1",
-      "checks": ["JSON-LD parsing", "page-type fit", "visible-fact parity", "stable @id reuse", "cross-page entity consistency", "truthful authors/dates/prices/ratings/licenses/provenance"]
+      "checks": [
+        "JSON-LD parsing",
+        "page-type fit",
+        "visible-fact parity",
+        "stable @id reuse",
+        "cross-page entity consistency",
+        "relationship resolution",
+        "WebSite/publisher/Organization or Person graph",
+        "Organization identity and applicable merchant policy relations",
+        "Product/ProductGroup/Offer/brand/seller graph when commerce applies",
+        "Service/provider/OfferCatalog/areaServed graph when services apply",
+        "Dataset/DataCatalog/DataDownload creator/publisher/license/distribution graph when data applies",
+        "LocalBusiness/Place/PostalAddress/GeoCoordinates or GeoShape applicability when physical location applies",
+        "Article/author/publisher and Event/location/organizer relationships when applicable",
+        "truthful authors/dates/prices/ratings/licenses/provenance/location/policy facts",
+        "provider feature eligibility kept separate from Schema.org semantic completeness"
+      ]
     },
     {
       "id": "content-quality-and-evidence",
@@ -154,11 +170,12 @@
     }
   ],
   "conditionalPacks": [
-    {"id": "ecommerce-product", "trigger": "products, prices or checkout", "checks": ["Product/Offer parity", "price/currency/availability", "shipping/returns", "cart/checkout", "merchant-feed consistency"]},
+    {"id": "ecommerce-product", "trigger": "products, prices or checkout", "checks": ["Product/Offer parity", "ProductGroup variant relationships when genuine variants exist", "price/currency/availability", "seller identity", "MerchantReturnPolicy applicability and parity", "ShippingService/shippingDetails applicability and parity", "cart/checkout", "merchant-feed consistency"]},
+    {"id": "service-catalog", "trigger": "multiple public services/capabilities or geographic service scope", "checks": ["Service/provider identity", "OfferCatalog/Offer applicability", "service URLs", "areaServed truth", "service-to-provider relationships", "no LocalBusiness fabrication for online-only services"]},
     {"id": "editorial-news", "trigger": "articles/news/recurring authors", "checks": ["author identity", "publication/modified dates", "article markup", "provenance/corrections", "archive/topic discovery"]},
-    {"id": "dataset-research", "trigger": "datasets/research/benchmarks", "checks": ["Dataset metadata", "license/version/checksums", "persistent identifiers", "methodology/provenance", "reproducible downloads", "citation instructions"]},
+    {"id": "dataset-research", "trigger": "datasets/research/benchmarks", "checks": ["Dataset metadata", "creator/publisher and license", "DataDownload distributions", "DataCatalog membership when applicable", "license/version/checksums", "persistent identifiers", "methodology/provenance", "reproducible downloads", "citation instructions"]},
     {"id": "tool-app-account", "trigger": "interactive app/accounts/uploads/saved state", "checks": ["authentication/accessibility", "error/recovery", "state persistence", "privacy lifecycle", "application-security review", "critical task completion"]},
-    {"id": "local-business", "trigger": "physical location/service area", "checks": ["name/address/phone", "hours", "map/contact route", "LocalBusiness applicability", "service-area truth", "local-page uniqueness"]},
+    {"id": "local-business", "trigger": "physical location/service area", "checks": ["name/address/phone", "hours", "map/contact route as user-facing utility", "LocalBusiness or truthful subtype applicability", "Place/PostalAddress graph", "GeoCoordinates/GeoShape truth when coordinates are published", "areaServed/service scope truth", "local-page uniqueness", "map embed not treated as structured-data completeness"]},
     {"id": "media-heavy", "trigger": "video/audio/image-led content", "checks": ["captions/transcripts", "poster/thumbnail", "media metadata", "image byte/dimension/format inventory", "responsive delivery and loading priority", "stream/download behavior", "media sitemap", "creator/provenance/licensing/visible credits", "bandwidth"]}
   ],
   "completionReportRequired": [
@@ -177,6 +194,15 @@
     {"id": "google-search-essentials", "url": "https://developers.google.com/search/docs/essentials"},
     {"id": "google-page-experience", "url": "https://developers.google.com/search/docs/appearance/page-experience"},
     {"id": "google-structured-data", "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"},
+    {"id": "google-organization", "url": "https://developers.google.com/search/docs/appearance/structured-data/organization"},
+    {"id": "google-local-business", "url": "https://developers.google.com/search/docs/appearance/structured-data/local-business"},
+    {"id": "google-product", "url": "https://developers.google.com/search/docs/appearance/structured-data/product"},
+    {"id": "google-product-variants", "url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants"},
+    {"id": "google-return-policy", "url": "https://developers.google.com/search/docs/appearance/structured-data/return-policy"},
+    {"id": "google-dataset", "url": "https://developers.google.com/search/docs/appearance/structured-data/dataset"},
+    {"id": "schema-service", "url": "https://schema.org/Service"},
+    {"id": "schema-place", "url": "https://schema.org/Place"},
+    {"id": "schema-area-served", "url": "https://schema.org/areaServed"},
     {"id": "google-js-seo", "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"},
     {"id": "google-image-metadata", "url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"},
     {"id": "mdn-img", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"},
