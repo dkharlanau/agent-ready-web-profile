@@ -7,6 +7,13 @@ on:
       - 'skills/**'
       - 'docs/skills/**'
       - 'templates/adoption/**'
+      - 'registry/content-page-quality-contract.json'
+      - 'registry/comprehensive-site-audit.json'
+      - 'docs/CONTENT-PAGE-QUALITY-CONTRACT.md'
+      - 'lib/content-page-quality.mjs'
+      - 'bin/arwp-content-page-quality.mjs'
+      - 'bin/arwp.mjs'
+      - 'scripts/content-page-quality-test.mjs'
       - 'scripts/agent-skills-test.mjs'
       - 'scripts/agent-skill-inspector-test.mjs'
       - 'AGENTS.md'
@@ -17,6 +24,13 @@ on:
       - 'skills/**'
       - 'docs/skills/**'
       - 'templates/adoption/**'
+      - 'registry/content-page-quality-contract.json'
+      - 'registry/comprehensive-site-audit.json'
+      - 'docs/CONTENT-PAGE-QUALITY-CONTRACT.md'
+      - 'lib/content-page-quality.mjs'
+      - 'bin/arwp-content-page-quality.mjs'
+      - 'bin/arwp.mjs'
+      - 'scripts/content-page-quality-test.mjs'
       - 'scripts/agent-skills-test.mjs'
       - 'scripts/agent-skill-inspector-test.mjs'
       - 'AGENTS.md'
@@ -38,9 +52,13 @@ jobs:
         run: |
           node scripts/agent-skills-test.mjs
           node scripts/agent-skill-inspector-test.mjs
+          node scripts/content-page-quality-test.mjs
           node --check scripts/agent-skills-test.mjs
           node --check scripts/agent-skill-inspector-test.mjs
-          node --check skills/arwp-prepare-site/scripts/inspect-repo.mjs
+          node --check scripts/content-page-quality-test.mjs
+          node --check lib/content-page-quality.mjs
+          node --check bin/arwp-content-page-quality.mjs
+          node --check bin/arwp.mjs
       - name: Validate public skills catalog
         run: |
           node - <<'NODE'
