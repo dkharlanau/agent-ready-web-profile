@@ -53,12 +53,6 @@
       "description": "Audit and improve rendered internal discovery and page distribution using canonical crawl paths, descriptive anchors, semantic/reverse relations, breadcrumbs, intentional continuation blocks, lightweight share/save/cite utilities and regression-safe graph checks."
     },
     {
-      "name": "arwp-content-page-quality",
-      "path": "skills/arwp-content-page-quality/SKILL.md",
-      "role": "content-page-quality",
-      "description": "Enforce strict content/detail page quality for search/snippet identity, Open Graph/social previews, representative images, mandatory end-of-content Share/Copy/direct-social controls, accessible runtime fallback behavior, truthful structured data, feedback integrity and final-artifact family-wide CI."
-    },
-    {
       "name": "arwp-feed-syndication",
       "path": "skills/arwp-feed-syndication/SKILL.md",
       "role": "feed-syndication",
@@ -158,7 +152,6 @@
     "technicalSeoCritic": "arwp-technical-seo-critic",
     "imageDiscovery": "arwp-image-discovery",
     "internalDiscovery": "arwp-internal-discovery",
-    "contentPageQuality": "arwp-content-page-quality",
     "feedSyndication": "arwp-feed-syndication",
     "indexWorthiness": "arwp-index-worthiness",
     "sitePreparation": "arwp-prepare-site",
@@ -176,7 +169,6 @@
       "arwp-technical-seo-critic",
       "arwp-image-discovery",
       "arwp-internal-discovery",
-      "arwp-content-page-quality",
       "arwp-feed-syndication",
       "arwp-index-worthiness",
       "arwp-adaptive-upgrade",
@@ -192,6 +184,6 @@
       "arwp-discoverability",
       "arwp-portfolio-fleet"
     ],
-    "principle": "Use the growth orchestrator and run Site Focus before broad content/discoverability expansion when the target site's problem territory, audience, scope or navigation is unclear. Use Repository Stewardship before deep preparation when repository entropy, duplicate artifacts, unclear source/output ownership or stale agent navigation makes safe change expensive, and after large transformations when maps or boundaries may have drifted. Use Measurement OS whenever Search/AI outcomes need provider-native baselines, page cohorts or stage-separated interpretation. Fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; run Search Release before calling a public hostname ready so crawlability, site identity, title/snippet/favicon, canonical host, final build and owner-observed Search presentation remain separate evidence; run Technical SEO Critic after the ordinary technical/Search pass to challenge false-green head parsing, performance evidence, pagination, URL-state, cache-validator, link-relation and obsolete-signal states; use Image Discovery when meaningful visual assets should become a deliberate Search/Images/Discover surface, keeping preferred-image metadata, image sitemaps, alt/context, preview controls and Discover-specific quality guidance separate from outcome claims; use Internal Discovery when important pages need stronger canonical crawl paths, descriptive anchors, semantic/reverse relationships, breadcrumbs, intentional continuation or distribution utilities, while keeping utility controls and link counts separate from ranking claims; use Content Page Quality whenever canonical content/detail pages exist so preview metadata, representative share images, end-of-content Share/Copy/direct-social controls, accessible fallback behavior and feedback integrity become explicit family-wide requirements rather than optional polish; use Feed Syndication when a site publishes subscribable updates so RSS, compatibility feeds, autodiscovery, stable identifiers, truthful dates and sitemap separation stay aligned; run Index Worthiness before broad generated-page sitemap expansion so technically indexable URLs still need demand, unique value, standalone utility, provenance, connectivity and canonical identity; use Localization Quality when a locale is added, reviewed or affected by new UI/content/library/agent surfaces so glossary, exact coverage, source freshness, rendered UI and Search/AI parity stay aligned; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
+    "principle": "Use the growth orchestrator and run Site Focus before broad content/discoverability expansion when the target site's problem territory, audience, scope or navigation is unclear. Use Repository Stewardship before deep preparation when repository entropy, duplicate artifacts, unclear source/output ownership or stale agent navigation makes safe change expensive, and after large transformations when maps or boundaries may have drifted. Use Measurement OS whenever Search/AI outcomes need provider-native baselines, page cohorts or stage-separated interpretation. Fix current eligibility and evidence-backed priorities first; invoke Search Maturity when a current intent needs a reviewed independent reference cohort; run Search Release before calling a public hostname ready so crawlability, site identity, title/snippet/favicon, canonical host, final build and owner-observed Search presentation remain separate evidence; run Technical SEO Critic after the ordinary technical/Search pass to challenge false-green head parsing, performance evidence, pagination, URL-state, cache-validator, link-relation and obsolete-signal states; use Image Discovery when meaningful visual assets should become a deliberate Search/Images/Discover surface, keeping preferred-image metadata, image sitemaps, alt/context, preview controls and Discover-specific quality guidance separate from outcome claims; use Internal Discovery when important pages need stronger canonical crawl paths, descriptive anchors, semantic/reverse relationships, breadcrumbs, intentional continuation or lightweight share/save/cite utilities, while keeping utility controls and link counts separate from ranking claims; use Feed Syndication when a site publishes subscribable updates so RSS, compatibility feeds, autodiscovery, stable identifiers, truthful dates and sitemap separation stay aligned; run Index Worthiness before broad generated-page sitemap expansion so technically indexable URLs still need demand, unique value, standalone utility, provenance, connectivity and canonical identity; use Localization Quality when a locale is added, reviewed or affected by new UI/content/library/agent surfaces so glossary, exact coverage, source freshness, rendered UI and Search/AI parity stay aligned; compile accepted site-specific upgrades; use BraidGraph when provenance, impact or evidence debt must be traced; invoke Future Search only for grounded reversible semantic/retrieval experiments after foundations are healthy; then use Target Transformation only after exact files and grounded facts are resolved. Policy/editorial/owner/runtime decisions remain gated."
   }
 }
