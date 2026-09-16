@@ -142,7 +142,7 @@ Example for an owner-produced portfolio image:
 </script>
 ```
 
-Only publish rights/licensing properties that are actually true. If a real photographer, illustrator, licensor or other creator is known, preserve that attribution instead of replacing it with a portfolio brand.
+Only publish rights/licensing properties that are actually true. Known **third-party** creator, photographer, illustrator, licensor and rights-holder provenance must be preserved instead of being replaced with a portfolio brand.
 
 ## Portfolio GitHub Pages default
 
