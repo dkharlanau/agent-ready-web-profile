@@ -2,15 +2,15 @@
 
 Status: strict ARWP content/detail page contract · reviewed 2026-09-16
 
-The canonical machine-readable rules live in `registry/content-page-quality-contract.json`. The execution workflow lives in `skills/arwp-content-page-quality/SKILL.md`.
+The canonical machine-readable rules live in `registry/content-page-quality-contract.json`. Complete/strict audits consume them through `registry/comprehensive-site-audit.json`; Internal Discovery owns the implementation workflow for distribution controls; `bin/arwp.mjs content-page-quality` provides the deterministic final-artifact gate.
+
+This is deliberately **not** another optional specialist skill. If a route is classified as an applicable content/detail page, the contract must be evaluated.
 
 ## Why this exists
 
-ARWP already had strong Search release, image, internal-discovery and comprehensive-audit rules, but some distribution features were intentionally optional. That made it possible for a technically healthy content site to pass broad work while still shipping article/detail pages with weak social previews, generic images, no reliable Share/Copy surface, or decorative feedback controls that record nothing.
+ARWP already had strong Search release, image, internal-discovery and comprehensive-audit rules, but some distribution features were intentionally optional. That allowed a technically healthy content site to pass broad work while still shipping article/detail pages with weak social previews, generic images, no reliable Share/Copy surface, or decorative feedback controls that record nothing.
 
-This contract fixes the applicability problem rather than adding another vanity score.
-
-For content/detail pages, quality is a page-family invariant. Every applicable rule must be evaluated. Priority decides remediation order; it does not allow an agent to silently omit the rule.
+This contract fixes the applicability problem rather than adding another score. For content/detail pages, quality is a page-family invariant. Every applicable rule must be evaluated. Priority decides remediation order; it does not allow an agent to silently omit the rule.
 
 ## In-scope pages
 
@@ -37,7 +37,7 @@ Not applicable by default:
 - noindex utilities;
 - non-HTML resources.
 
-A `not-applicable` decision needs a reason.
+A `not-applicable` state requires a reason.
 
 ## Mandatory end-of-content distribution footer
 
@@ -61,9 +61,9 @@ The canonical URL is the source of truth for every share/copy/citation action.
 
 ### Native Share + fallback
 
-Use the Web Share API only as progressive enhancement. The `navigator.share()` call must be triggered by user activation and must be feature-detected. When a payload needs validation, `navigator.canShare()` can be used where supported.
+Use `navigator.share()` only as progressive enhancement. It must be feature-detected and triggered by a real user activation. Use `navigator.canShare()` when the payload needs validation. `Copy link` remains the universal fallback when Web Share is unsupported, blocked or rejected.
 
-`Copy link` remains the universal fallback. Cancellation or rejection of the native share sheet is not a successful share.
+Cancellation or rejection is not a successful share. Runtime-test each distinct implementation because static HTML cannot prove share-sheet behavior.
 
 Primary reference: https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API
 
@@ -84,9 +84,9 @@ Required ARWP baseline:
 - meaningful `og:image:alt`;
 - explicit card compatibility metadata for the social targets the site supports.
 
-When the image width, height and media type are known, publish them. Verify the image URL actually serves an image.
+When image width, height and media type are known, publish them. Verify the image URL actually serves an image.
 
-Open Graph requires the core object identity fields and supports image/description/locale/site-name metadata. ARWP adds a stricter product-quality layer for content pages.
+Open Graph defines `og:title`, `og:type`, `og:image` and `og:url` as its core object properties; ARWP adds a stricter product-quality layer for content pages.
 
 Primary reference: https://ogp.me/
 
@@ -97,15 +97,13 @@ A page share image and a hostname favicon solve different problems.
 - favicon = stable site/hostname identity;
 - share/preferred image = representative page/content asset.
 
-For substantial content, prefer a page-relevant visual rather than falling back to a tiny logo. ARWP's interoperable default is approximately `1200 × 630` / `1.91:1` where target platforms support it. That dimension is an ARWP design default, not an Open Graph requirement and not a Search ranking claim.
+For substantial content, prefer a page-relevant visual rather than a tiny generic logo. ARWP's interoperable default is approximately `1200 × 630` / `1.91:1` where target platforms support it. That dimension is an ARWP design default, not an Open Graph requirement and not a Search ranking claim.
 
 Keep Open Graph image selection, structured-data image and any preferred page image semantically coherent. Platform-specific crops/renditions may differ.
 
 ## Search title and snippet surface
 
-Head metadata is not the whole result. Google can derive title links and snippets from visible page content.
-
-A content page therefore needs:
+Head metadata is not the whole result. Search systems can derive title/snippet text from visible page content, so every content page also needs:
 
 - a concise descriptive title;
 - a distinctive primary heading;
@@ -120,6 +118,17 @@ Primary references:
 
 - https://developers.google.com/search/docs/appearance/title-link
 - https://developers.google.com/search/docs/appearance/snippet
+
+## Canonical, favicon and indexability integrity
+
+The page identity must converge across canonical URL, sitemap, structured data, `og:url` and share payload. Intended index pages must not accidentally emit `noindex` or contradictory canonical state.
+
+The hostname favicon remains a separate stable site-identity asset. Google documents favicon eligibility at the hostname level and may choose whether to show it; a content share image must not silently replace the favicon contract.
+
+Primary references:
+
+- https://developers.google.com/search/docs/crawling-indexing/canonicalization
+- https://developers.google.com/search/docs/appearance/favicon-in-search
 
 ## Structured data
 
@@ -156,7 +165,7 @@ If aggregate counts are shown, they must come from real aggregate data. The UI m
 
 ## Accessibility and resilience
 
-Share controls are interactive product UI and therefore need runtime evidence:
+Share controls are interactive product UI and need runtime evidence:
 
 - semantic buttons/links;
 - meaningful accessible names;
@@ -193,7 +202,24 @@ This is deliberately different from a score. A site cannot compensate for a brok
 
 For enumerable content families, CI should inspect every final canonical page after all generators/post-processors and before publication.
 
-Fail or explicitly surface unknown/watch for:
+The repository command is:
+
+```bash
+node bin/arwp.mjs content-page-quality <build-dir> --base-url=https://example.com/ --include='^guides/' --strict
+```
+
+A target can also mark final HTML explicitly with `data-arwp-content-detail`; `--all-html` is available only when every generated HTML file is genuinely a content/detail page. The gate never assumes all HTML is content.
+
+Deterministic integration hooks are intentionally non-semantic test hooks, not ranking metadata:
+
+- `data-arwp-distribution-footer`;
+- `data-arwp-share`;
+- `data-arwp-copy-link`;
+- `data-arwp-share-provider="provider"`;
+- optional `data-arwp-feedback` plus a real sink/local-only declaration;
+- optional `data-arwp-continuation`.
+
+Fail or explicitly surface watch/unknown for:
 
 - missing or contradictory canonical;
 - missing/generic title or description;
