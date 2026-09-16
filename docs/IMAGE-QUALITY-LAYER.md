@@ -90,7 +90,7 @@ For offscreen imagery, lazy loading can avoid unnecessary network work. Explicit
 
 ## File naming
 
-Human-managed source assets should be concise, descriptive and stable.
+Human-managed source assets should use concise, descriptive and stable **lowercase kebab-case** names when safe to rename.
 
 Prefer:
 
