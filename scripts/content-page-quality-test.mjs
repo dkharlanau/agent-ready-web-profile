@@ -102,10 +102,39 @@ for (const id of [
 assert.equal(byId(valid, 'CPQ-09-feedback-integrity').status, 'not-applicable');
 assert.equal(byId(valid, 'CPQ-12-final-artifact-family-gate').status, 'watch');
 assert.deepEqual(valid.observations.providers, ['linkedin', 'telegram']);
+assert.deepEqual(valid.observations.invalidProviderTargets, []);
 
 const missingShare = inspectContentPageQuality({ html: pageHtml({ includeNativeShare: false }), url: 'https://example.com/guides/share-well/' });
 assert.equal(byId(missingShare, 'CPQ-05-end-of-content-sharing').status, 'fail');
 assert.ok(missingShare.summary.p0Failures > 0, 'Direct provider links must not masquerade as the required Share control');
+
+const missingCanonicalPayload = inspectContentPageQuality({
+  html: pageHtml().replace(
+    'https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.com%2Fguides%2Fshare-well%2F',
+    'https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.com%2Fother%2F'
+  ),
+  url: 'https://example.com/guides/share-well/'
+});
+assert.equal(byId(missingCanonicalPayload, 'CPQ-05-end-of-content-sharing').status, 'fail');
+assert.deepEqual(missingCanonicalPayload.observations.invalidProviderTargets, ['linkedin']);
+
+const providerHomepageOnly = inspectContentPageQuality({
+  html: pageHtml().replace(
+    'https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.com%2Fguides%2Fshare-well%2F',
+    'https://www.linkedin.com/'
+  ),
+  url: 'https://example.com/guides/share-well/'
+});
+assert.equal(byId(providerHomepageOnly, 'CPQ-05-end-of-content-sharing').status, 'fail');
+
+const unsafeProviderTarget = inspectContentPageQuality({
+  html: pageHtml().replace(
+    'https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fexample.com%2Fguides%2Fshare-well%2F',
+    'javascript:void(0)'
+  ),
+  url: 'https://example.com/guides/share-well/'
+});
+assert.equal(byId(unsafeProviderTarget, 'CPQ-05-end-of-content-sharing').status, 'fail');
 
 const fakeFeedback = inspectContentPageQuality({
   html: pageHtml({ feedback: '<button data-arwp-feedback aria-label="Useful">Yes</button><span data-arwp-feedback-count>99</span>' }),
