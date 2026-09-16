@@ -1,0 +1,270 @@
+{
+  "version": "0.1",
+  "name": "ARWP Site Execution Manifest",
+  "reviewedAt": "2026-09-16",
+  "purpose": "Define how a site-wide ARWP application composes existing audit domains, specialist skills, applicability decisions, verification and repair without creating one Agent Skill per individual check.",
+  "sources": {
+    "auditDomains": "registry/comprehensive-site-audit.json",
+    "skillIndex": "skills/index.json",
+    "surfaceIntegrityEngine": "lib/surface-integrity.mjs",
+    "surfaceIntegritySchema": "schema/surface-integrity-contract.schema.json"
+  },
+  "defaultOrchestrator": "arwp-prepare-site",
+  "principles": [
+    "A check is not a skill boundary.",
+    "The orchestrator owns whole-site coverage, applicability, sequencing, evidence reconciliation and completion.",
+    "Specialist skills own reusable expert workflows with distinct evidence, inputs or verification logic.",
+    "Audit-domain checks remain in their canonical registries and are referenced by module ID instead of copied into this manifest.",
+    "Every applicable module must end in explicit evidence and state; omission is not equivalent to not-applicable.",
+    "Repository, build, deployed HTTP, rendered runtime and owner-platform evidence remain separate.",
+    "Surface Integrity is the mandatory cross-module reconciliation pass before a full completion claim."
+  ],
+  "statusVocabulary": [
+    "pass",
+    "fail",
+    "warning",
+    "stale",
+    "missing",
+    "incomplete",
+    "intentionally-excepted",
+    "not-applicable",
+    "not-assessed"
+  ],
+  "applicabilityVocabulary": [
+    "required",
+    "optional",
+    "not-applicable",
+    "unknown"
+  ],
+  "evidenceClasses": [
+    "deterministic",
+    "heuristic",
+    "runtime",
+    "owner-platform"
+  ],
+  "stages": [
+    {
+      "id": "inspect",
+      "required": true,
+      "outputs": ["repository and stack facts", "source/build/deploy boundaries", "available evidence layers"]
+    },
+    {
+      "id": "inventory",
+      "required": true,
+      "outputs": ["reconciled route inventory", "canonical owner map", "route archetypes/templates/locales"]
+    },
+    {
+      "id": "applicability",
+      "required": true,
+      "outputs": ["module applicability matrix", "conditional-pack activation decisions", "unknown owner-data/runtime gates"]
+    },
+    {
+      "id": "execute",
+      "required": true,
+      "outputs": ["module findings", "specialist evidence", "bounded remediation tasks"]
+    },
+    {
+      "id": "repair",
+      "required": true,
+      "outputs": ["authorized reversible changes", "explicit unresolved gates"]
+    },
+    {
+      "id": "verify",
+      "required": true,
+      "outputs": ["build/test results", "changed-surface evidence", "deployment/runtime evidence when available"]
+    },
+    {
+      "id": "re-audit",
+      "required": true,
+      "outputs": ["affected-cohort recheck", "remaining failures/warnings", "blast-radius reconciliation"]
+    },
+    {
+      "id": "surface-integrity",
+      "required": true,
+      "outputs": ["cross-surface parity report", "blocking missing/stale/incomplete representations"]
+    },
+    {
+      "id": "receipt",
+      "required": true,
+      "outputs": ["coverage state", "applicability matrix", "verification evidence", "remaining owner/manual gates"]
+    }
+  ],
+  "modules": [
+    {
+      "id": "repository-readiness",
+      "auditDomains": ["inventory-and-deployment"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-repository-stewardship"],
+      "invokeSpecialistWhen": ["canonical/generated ownership is unclear", "repository entropy materially raises inspection or change risk", "large transformation changed navigation or source/output boundaries"],
+      "evidenceClasses": ["deterministic", "heuristic"]
+    },
+    {
+      "id": "search-foundation",
+      "auditDomains": ["http-crawl-index-canonical", "head-search-appearance-social"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-search-release", "arwp-technical-seo-critic"],
+      "invokeSpecialistWhen": ["public hostname release/readiness is in scope", "ordinary technical checks are green but Search presentation may still be false-green", "canonical/redirect/pagination/head behavior needs adversarial review"],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime", "owner-platform"]
+    },
+    {
+      "id": "structured-data-entities",
+      "auditDomains": ["structured-data-entities-provenance"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": [],
+      "invokeSpecialistWhen": [],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+    },
+    {
+      "id": "content-quality",
+      "auditDomains": ["content-quality-and-evidence"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-ai-search-content", "arwp-index-worthiness"],
+      "invokeSpecialistWhen": ["article/docs/comparison/answer quality is material", "generated/data/knowledge pages are candidates for broad Search-facing publication"],
+      "evidenceClasses": ["deterministic", "heuristic", "owner-platform"]
+    },
+    {
+      "id": "internal-discovery",
+      "auditDomains": ["internal-discovery-information-architecture"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-internal-discovery"],
+      "invokeSpecialistWhen": ["multi-page site needs canonical crawl-path evidence", "orphan/dead-end/breadcrumb/semantic-relation risk is material"],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+    },
+    {
+      "id": "accessibility",
+      "auditDomains": ["accessibility-wcag22"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": [],
+      "invokeSpecialistWhen": [],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+    },
+    {
+      "id": "performance-runtime",
+      "auditDomains": ["performance-and-delivery", "runtime-js-functionality"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": [],
+      "invokeSpecialistWhen": [],
+      "evidenceClasses": ["deterministic", "runtime", "owner-platform"]
+    },
+    {
+      "id": "responsive-visual",
+      "auditDomains": ["mobile-responsive-visual"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": [],
+      "invokeSpecialistWhen": [],
+      "evidenceClasses": ["heuristic", "runtime"]
+    },
+    {
+      "id": "security-privacy-trust",
+      "auditDomains": ["security-privacy", "trust-identity-legal"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": [],
+      "invokeSpecialistWhen": [],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime", "owner-platform"]
+    },
+    {
+      "id": "media-image-quality",
+      "auditDomains": ["media-images-video-downloads"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-image-discovery"],
+      "invokeSpecialistWhen": ["meaningful images are part of Search/Images/Discover intent", "image-heavy pages have delivery, responsive, attribution or sitemap questions"],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+    },
+    {
+      "id": "localization",
+      "auditDomains": ["localization-internationalization"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-localization-quality"],
+      "invokeSpecialistWhen": ["more than one locale exists", "a change affects localizable UI/content/Search/agent surfaces", "locale parity or source staleness needs verification"],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+    },
+    {
+      "id": "measurement-observability",
+      "auditDomains": ["analytics-measurement-observability"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-measurement-os"],
+      "invokeSpecialistWhen": ["Search/AI outcomes or provider-native baselines are part of the task", "owner analytics/Search Console/Bing/referral evidence is available"],
+      "evidenceClasses": ["deterministic", "owner-platform"]
+    },
+    {
+      "id": "agent-machine-surfaces",
+      "auditDomains": ["ai-agent-readiness", "feeds-manifests-api-machine-surfaces"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-agent-discovery", "arwp-feed-syndication"],
+      "invokeSpecialistWhen": ["the site exposes or should expose truthful agent/API/protocol discovery", "the site publishes real subscribable updates that justify RSS/Atom/JSON Feed handling"],
+      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+    },
+    {
+      "id": "freshness-regression",
+      "auditDomains": ["freshness-lifecycle-regression"],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": ["arwp-evidence-ci", "arwp-braidgraph"],
+      "invokeSpecialistWhen": ["important surfaces need assertion/CI/receipt protection", "change provenance or blast radius must be traced across source, recommendation and transformation"],
+      "evidenceClasses": ["deterministic", "owner-platform"]
+    }
+  ],
+  "conditionalPacks": {
+    "source": "registry/comprehensive-site-audit.json#/conditionalPacks",
+    "rule": "Evaluate every pack trigger during applicability. Activated packs contribute checks/evidence to their owning modules; they do not create new skills automatically."
+  },
+  "skillPolicy": {
+    "createNewSkillOnlyWhen": [
+      "the capability is a reusable multi-step workflow rather than one check",
+      "it has distinct inputs, evidence semantics or verification/rollback logic",
+      "it benefits from scoped references/scripts/tests that would overload the orchestrator",
+      "it can be invoked independently across more than one site or module context"
+    ],
+    "doNotCreateSkillFor": [
+      "one metadata field",
+      "one HTML attribute",
+      "one validator assertion",
+      "one checklist item",
+      "one provider recommendation that belongs in an existing domain or practice registry"
+    ],
+    "compositionRule": "Prefer adding or refining a check in its canonical registry, then map it through an existing module. Add a module only when execution/evidence boundaries differ materially. Add a skill only when the reusable workflow itself is a product boundary."
+  },
+  "applicabilityMatrix": {
+    "requiredFields": [
+      "moduleId",
+      "applicability",
+      "reason",
+      "state",
+      "evidenceClasses",
+      "evidence",
+      "findings",
+      "verification",
+      "remediation"
+    ],
+    "fullClaimRules": [
+      "every module has a row",
+      "no required module remains not-assessed",
+      "unknown applicability is resolved or the overall coverage state remains partial/unknown",
+      "every activated conditional pack is represented in evidence",
+      "not-applicable always has an explicit reason",
+      "specialist output contributes evidence to the module rather than replacing whole-site coverage"
+    ]
+  },
+  "repairLoop": {
+    "sequence": ["execute", "repair", "verify", "re-audit", "surface-integrity"],
+    "repeatWhen": ["required state is fail/missing/stale/incomplete", "verification exposes new affected routes or representations", "cross-module parity is blocked and the cause is safely repairable"],
+    "stopWhen": ["remaining work requires owner facts/credentials/external platform evidence", "mutation is not authorized", "the proposed fix is materially uncertain or irreversible", "all required resolvable states pass and Surface Integrity is not blocked"]
+  },
+  "completion": {
+    "requires": [
+      "coverage state from the comprehensive audit contract",
+      "complete module applicability matrix",
+      "page ledger or equivalent durable coverage evidence",
+      "verification evidence for changed and affected surfaces",
+      "final Surface Integrity reconciliation",
+      "explicit unresolved owner/manual/runtime gates",
+      "tested repository revision and deployment identity when available"
+    ],
+    "forbids": [
+      "silently skipped modules",
+      "claiming not-applicable without a reason",
+      "treating bounded specialist output as whole-site proof",
+      "creating a specialist skill merely to avoid maintaining the module/check registries",
+      "one composite quality/SEO/AI/accessibility/security score as a substitute for evidence"
+    ]
+  }
+}
