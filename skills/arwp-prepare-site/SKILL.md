@@ -18,6 +18,20 @@ Deliver a working repository change when mutation is authorized, not merely a ch
 
 ARWP must never be presented as a guaranteed Google ranking or AI recommendation mechanism. The goal is to remove technical blockers, implement current platform guidance, expose useful machine-readable surfaces, improve the actual site, and make both implementation coverage and later outcomes measurable.
 
+## Execution is manifest-driven
+
+Before choosing specialist workflows, load `registry/site-execution-manifest.json`. It is the canonical machine-readable composition contract for applying ARWP to a site.
+
+Do not create or invoke one Agent Skill per checklist item. The execution model is:
+
+`rules → audit domains/contracts → execution modules → optional specialist skills → arwp-prepare-site → site applicability matrix → repair/verify/re-audit → Surface Integrity → receipt`
+
+Every site-wide application must create an applicability row for every execution module. An omitted module is not `not-applicable`. Use an explicit applicability/state/reason/evidence record, and keep unresolved applicability visible instead of converting uncertainty into a pass.
+
+Specialist skills contribute evidence to their owning execution module. They do not replace whole-site coverage. Add a new specialist skill only when the reusable workflow itself has distinct inputs, evidence semantics, references/tests, verification or rollback boundaries; add individual checks to their canonical registry/module instead.
+
+See `docs/SITE-EXECUTION-MODEL.md` for the maintenance contract and `schema/site-execution-manifest.schema.json` for the machine-readable shape.
+
 ## Coverage is a first-class result
 
 When the user asks to apply ARWP to a site, do **not** treat a bounded `site-gate`, Technical Integrity, Internal Discovery, Growth or other sampled report as evidence that the entire site was checked.
@@ -64,6 +78,8 @@ If the skill is installed but the ARWP CLI/templates are not present, read `refe
 
 ## Load references only when needed
 
+- Read `registry/site-execution-manifest.json` for every site-wide ARWP application; use it to build the module applicability matrix and decide which specialists to compose.
+- Read `docs/SITE-EXECUTION-MODEL.md` when changing ARWP composition, adding checks/modules/skills, or diagnosing why a rule was not executed.
 - Read `references/comprehensive-audit.md` for any deep/complete/whole-site ARWP application or audit. This is mandatory before a full-audit claim.
 - Read `references/stack-detection.md` when the framework/deployment/public-root model is unclear.
 - Read `references/file-matrix.md` before creating new machine-readable/public files so you do not cargo-cult every ARWP surface into every site.
@@ -81,6 +97,14 @@ If the skill is installed but the ARWP CLI/templates are not present, read `refe
 - Load `arwp-evidence-ci` when the main work is CI, contracts, receipts or ongoing monitoring.
 
 ## Workflow
+
+### 0. Compile the execution plan
+
+- Load `registry/site-execution-manifest.json` before selecting specialist skills.
+- Create one applicability-matrix row for every manifest module with `moduleId`, `applicability`, `reason`, `state`, `evidenceClasses`, `evidence`, `findings`, `verification` and `remediation`.
+- Evaluate every conditional-pack trigger from `registry/comprehensive-site-audit.json`; activated packs contribute checks to their owning modules rather than automatically becoming new skills.
+- Keep the manifest's evidence classes distinct: deterministic, heuristic, runtime and owner-platform.
+- Do not silently omit modules. If applicability cannot yet be resolved, record `unknown` and keep the overall coverage claim partial/unknown until the evidence boundary is resolved.
 
 ### 1. Inspect the repository before editing
 
@@ -128,7 +152,7 @@ For larger sites, run deterministic repository/build checks page-complete, batch
 
 ### 4. Run the comprehensive applicable audit matrix
 
-Load `registry/comprehensive-site-audit.json` and address every applicable domain. Do not silently omit domains because the original task sounded like “SEO”.
+Load `registry/comprehensive-site-audit.json` and address every applicable domain through the owning module in `registry/site-execution-manifest.json`. Do not silently omit domains because the original task sounded like “SEO”.
 
 The default whole-site matrix includes:
 
@@ -217,7 +241,7 @@ For each material problem record:
 - Keep Google/Bing/ChatGPT visibility metrics as external evidence; never infer causation from ARWP adoption alone.
 - Re-audit changed pages and affected templates/archetypes after implementation.
 
-### 11. Verify before completion
+### 11. Verify, re-audit and reconcile Surface Integrity before completion
 
 - Run the site's existing tests/build/lint.
 - Inspect deterministic build output, not just source templates.
@@ -229,6 +253,9 @@ For each material problem record:
 - Verify generated/public metadata paths actually deploy where intended.
 - Compare the deployed artifact/revision with the tested repository revision when that evidence is available.
 - Check browser rendering, console/network health, mobile/responsive behavior, keyboard/focus paths and interactive controls for the required runtime cohort.
+- Re-run every affected execution module after remediation; do not assume the first fix closed the finding.
+- Run the final cross-module Surface Integrity pass so canonical, hreflang, sitemap, JSON-LD, social/preferred-image, feed, internal-link and agent-facing representations cannot each be locally green while disagreeing globally.
+- Repeat repair → verify → re-audit → Surface Integrity for safely resolvable required `fail`, `missing`, `stale` or `incomplete` states.
 - Do not mark runtime/browser checks as passed without runtime evidence.
 - Do not mark accessibility/security/Search/AI outcomes as proven by a generic automated score.
 
@@ -238,11 +265,13 @@ A whole-site ARWP application must report:
 
 - coverage state: `runtime-complete`, `complete`, `template-runtime-complete`, `partial` or `unknown`;
 - exact counts for discovered routes, in-scope canonical pages, deterministic audited pages, rendered/browser-tested pages, redirects/aliases, excluded/non-HTML/utility routes and unknowns;
+- the complete execution-module applicability matrix, including explicit reasons for `not-applicable`, `not-assessed` or unresolved/unknown decisions;
 - inventory reconciliation gaps, including URLs seen only in repository/build/sitemap/navigation/live evidence;
 - the per-page ledger or a durable machine-readable equivalent;
 - which ARWP/Search/AI/agent/accessibility/performance/runtime/security/privacy/content problems were fixed;
 - which page-semantics profiles were applied and which schemas/features were intentionally not added;
 - which changes were autofixed versus blocked on owner/runtime data;
+- final Surface Integrity status and any cross-module inconsistency that remains blocked;
 - which checks remain manual/external and exactly which surfaces were not checked;
 - verification commands/results plus the tested revision/deployment identity where available;
 - any intentionally skipped feature and why.
