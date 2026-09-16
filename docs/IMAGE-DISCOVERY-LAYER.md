@@ -32,7 +32,7 @@ Current primary-source anchors:
 - Google Images licensing metadata: `https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata`
 - Article structured-data image guidance: `https://developers.google.com/search/docs/appearance/structured-data/article`
 
-As of the 2026-09-11 review, Google documents both schema.org image metadata and `og:image` as sources used when selecting preferred image previews. Image sitemaps remain supported. The older image-sitemap fields `image:caption`, `image:geo_location`, `image:title` and `image:license` are deprecated and should not be added to new implementations.
+As of the 2026-09-16 review, Google documents both schema.org image metadata and `og:image` as sources used when selecting preferred image previews. Image sitemaps remain supported, but they are a discovery mechanism rather than a universal requirement for every site. The older image-sitemap fields `image:caption`, `image:geo_location`, `image:title` and `image:license` are deprecated and should not be added to new implementations.
 
 ## Release sequence
 
@@ -55,9 +55,19 @@ For a priority content page:
 
 Metadata convergence influences candidate selection; it does not guarantee what Google will display.
 
+## Image sitemap applicability gate
+
+Do not create an image sitemap automatically just because a site contains images. Every Image Discovery pass must classify the site as one of:
+
+- `REQUIRED` — image or visual discovery is a material acquisition surface and the site has a large/programmatic page-to-image cohort, weak ordinary discovery paths, or another clear need for explicit image discovery coverage. Typical examples: visual catalogs, product/reference collections, diagram libraries and data sites with many meaningful generated visual assets.
+- `RECOMMENDED` — the site has many meaningful curated images across canonical content pages and image sitemap generation is cheap, deterministic and can stay aligned with canonical URLs. The sitemap adds useful coverage but is not essential to basic crawlability.
+- `NOT_NEEDED` — the site is small, images are sparse or mostly decorative, important images already appear directly in crawlable canonical HTML, or Google Images is not a meaningful acquisition surface. In this case an image sitemap adds maintenance cost without meaningful discovery coverage.
+
+Record the decision and reason. `NOT_NEEDED` is a valid healthy result; absence of an image sitemap is not a defect by itself.
+
 ## Image sitemap contract
 
-Use image sitemap entries when they add useful discovery coverage, especially on visual catalogs or large static/data sites.
+When the applicability result is `REQUIRED` or `RECOMMENDED`, use image sitemap entries only for meaningful canonical content and keep them aligned with the actual page cohort.
 
 A valid pattern is:
 
@@ -73,7 +83,9 @@ A valid pattern is:
 </urlset>
 ```
 
-Keep sitemap image entries aligned with the curated canonical page cohort. Do not publish image entries for deleted, redirected or intentionally non-indexed pages merely because an asset exists.
+A dedicated image sitemap is optional; extending the canonical sitemap is also valid when that is easier to generate and maintain. Choose the simpler deterministic implementation.
+
+Keep sitemap image entries aligned with the curated canonical page cohort. Do not publish image entries for deleted, redirected or intentionally non-indexed pages merely because an asset exists. Do not add decorative icons, logos, build artifacts or every responsive derivative merely to increase entry count.
 
 Do not generate deprecated `image:caption`, `image:geo_location`, `image:title` or `image:license` fields.
 
@@ -133,5 +145,7 @@ Use the same conservative states as other ARWP layers:
 - `PASS` — no issue observed in the bounded check;
 - `not-applicable` — mechanism is not used or not relevant;
 - `owner-data` — Search/Discover outcome evidence requires provider/owner data.
+
+For image sitemaps specifically, keep the applicability decision (`REQUIRED`, `RECOMMENDED`, `NOT_NEEDED`) separate from implementation verification (`PASS`, `WATCH`, `FAIL`). A site can legitimately be `NOT_NEEDED` and still pass Image Discovery.
 
 A green Image Discovery implementation does not prove image indexing, ranking, Search thumbnail selection, Discover visibility or traffic impact.
