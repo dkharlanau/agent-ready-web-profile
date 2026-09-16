@@ -30,6 +30,7 @@ Current source and applicable scoped instructions override a stale route in this
 
 - Platform requirements and primary-source evidence outrank optional tactics, correlations and project experiments.
 - A passing implementation check does not prove indexing, ranking, citation, recommendation traffic or business impact.
+- For little traffic, declining impressions or contradictory crawl alerts, first use [`docs/SEARCH-FAILURE-TRIAGE.md`](docs/SEARCH-FAILURE-TRIAGE.md). Separate deployment, GET access, effective HTTP/meta eligibility, indexing, query coverage, clicks and adoption; reconcile measurement windows and migration cohorts before prescribing more pages or metadata.
 - Preserve neutral, negative and counterexample evidence; do not curate evidence only to support a preferred theory.
 - Do not create fake freshness, fake authorship, decorative structured data, thin query-variant pages or unsupported ranking claims.
 - Static metadata is evidence of a declaration, not runtime conformance, authorization, security or trust.
@@ -99,6 +100,7 @@ Use Technical Integrity before optional tactics and again after the changed publ
 - Core ARWP contract: [`SPEC.md`](SPEC.md)
 - Product priorities and stop rules: [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md)
 - Growth workflow: [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) and [`skills/arwp-growth-loop/SKILL.md`](skills/arwp-growth-loop/SKILL.md)
+- Low/declining Search traffic, migration accounting and contradictory HTTP checks: [`docs/SEARCH-FAILURE-TRIAGE.md`](docs/SEARCH-FAILURE-TRIAGE.md)
 - Search release gate (site name, title, snippet, favicon, canonical host, sitemap/robots, GitHub Pages domain contract, final deployed artifact): [`docs/SEARCH-RELEASE-GATE.md`](docs/SEARCH-RELEASE-GATE.md), [`registry/search-release-practices.json`](registry/search-release-practices.json) and [`skills/arwp-search-release/SKILL.md`](skills/arwp-search-release/SKILL.md)
 - Image discovery (preferred image, image sitemap, alt/context, preview controls, Discover-specific image guidance, responsive delivery, licensing metadata): [`docs/IMAGE-DISCOVERY-LAYER.md`](docs/IMAGE-DISCOVERY-LAYER.md), [`registry/image-discovery-practices.json`](registry/image-discovery-practices.json) and [`skills/arwp-image-discovery/SKILL.md`](skills/arwp-image-discovery/SKILL.md)
 - Internal discovery & distribution (canonical crawl paths, anchors, semantic/reverse links, breadcrumbs, continuation, Share/Save/Cite utilities, graph CI): [`docs/INTERNAL-DISCOVERY-DISTRIBUTION-LAYER.md`](docs/INTERNAL-DISCOVERY-DISTRIBUTION-LAYER.md), [`docs/INTERNAL-DISCOVERY-EVIDENCE.md`](docs/INTERNAL-DISCOVERY-EVIDENCE.md), [`registry/internal-discovery-distribution-practices.json`](registry/internal-discovery-distribution-practices.json) and [`skills/arwp-internal-discovery/SKILL.md`](skills/arwp-internal-discovery/SKILL.md)
