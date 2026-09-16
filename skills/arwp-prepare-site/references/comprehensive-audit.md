@@ -100,14 +100,16 @@ At minimum cover:
 4. Clear page job, first useful content, thin/duplicate/stale/template-heavy content and claim/source boundaries.
 5. Internal discovery: inbound path, descriptive anchors, breadcrumbs, continuation and canonical link targets.
 6. Accessibility structure that can be inspected statically: headings, landmarks, labels/names, alt text and language.
-7. Performance delivery basics: asset sizes, image dimensions, loading policy, caching/compression where public responses are available.
-8. Media/download validity and content types.
+7. Performance delivery basics: asset sizes, caching/compression where public responses are available, plus image byte/dimension inventory, intrinsic-to-rendered overdelivery, responsive variants, stable dimensions and lazy/eager/priority policy.
+8. Media/download validity and content types. For images, apply `registry/image-quality-practices.json`: check format choice, quality-preserving optimization, semantic source names, broken references after renames, duplicate/unused variants, creator/provenance/license and visible attribution. Do not replace known third-party attribution with a portfolio default.
 9. Localization consistency for every locale variant.
 10. Trust/provenance/legal surfaces when applicable.
 11. AI/agent policy and truthful agent-discovery surfaces.
 12. Freshness/version/lastmod consistency.
 
 All internal links and critical first-party assets should be validated when the build/public inventory makes that feasible. Do not probe only the first few links and call the link graph clean.
+
+When a GitHub Pages target participates in the owner-controlled ARWP portfolio, apply the portfolio attribution rule from `registry/image-quality-practices.json` only to eligible first-party portfolio-produced images: default to visible **Metal Heads Cats** credit when no different known creator or rights holder applies, while preserving the explicit exception for `dkharlanau/dkharlanau.github.io`.
 
 ## Phase 5 — rendered browser and interaction coverage
 
@@ -126,6 +128,7 @@ For each route archetype/template, and for every high-risk or changed page, veri
 - copy/share/download controls;
 - sticky UI, cookie banners and interstitials do not obscure primary content;
 - images/fonts/media render without breakage;
+- for image-heavy pages, selected responsive resources and loading priority match the intended layout rather than causing systematic overdelivery or delaying the likely LCP image;
 - reduced-motion and responsive/reflow behavior where relevant.
 
 Do not report an automated accessibility pass as WCAG conformance. Manual keyboard and interaction review remains necessary. W3C WCAG 2.2 is the baseline accessibility reference.
@@ -152,7 +155,7 @@ After coverage exists, compose the relevant ARWP specialists rather than duplica
 - `arwp-search-release` for hostname/search-result release presentation;
 - `arwp-technical-seo-critic` for adversarial false-green review;
 - `arwp-internal-discovery` for canonical relation/crawl-path evidence;
-- `arwp-image-discovery` for meaningful image surfaces;
+- `arwp-image-discovery` for meaningful image discovery plus the paired Image Quality & Attribution contract in `docs/IMAGE-QUALITY-LAYER.md` and `registry/image-quality-practices.json`;
 - `arwp-index-worthiness` before broad generated-page publication;
 - `arwp-ai-search-content` for human-useful retrieval/citation quality;
 - `arwp-measurement-os` for provider-native outcomes;
@@ -165,6 +168,8 @@ A bounded specialist report contributes evidence to the page/site ledger. It doe
 Do not reduce ARWP application to Search metadata.
 
 Performance review should distinguish field Core Web Vitals from lab diagnostics. Current good field thresholds remain LCP ≤ 2.5 s, INP ≤ 200 ms and CLS ≤ 0.1 at the 75th percentile, segmented appropriately; owner/platform field data is stronger than a one-off lab run.
+
+For images, do not replace evidence with a universal file-size rule. Measure exact transferred bytes, intrinsic and selected resource dimensions, and the rendered need. Prefer lossless/reversible optimization first; a lossy or visually-lossless transcode requires visual acceptance and must not be described as mathematically lossless.
 
 Accessibility should use WCAG 2.2 as the baseline and combine deterministic checks with manual keyboard/focus/interaction review.
 
@@ -181,7 +186,9 @@ Check for:
 - generated metadata differs from source expectations;
 - one shared template changed many routes outside the initially intended cohort;
 - deployed routes exist that are missing from repository/build inventory;
-- old aliases remain in sitemap/navigation after migration.
+- old aliases remain in sitemap/navigation after migration;
+- renamed/optimized image assets leave stale source, HTML, sitemap, social-card or structured-data references;
+- production serves different image bytes/variants than the tested build.
 
 Use Treatment Cohort Integrity and Repository Mapper evidence when available. Do not shrink the blast radius merely to preserve a cleaner story.
 
@@ -201,5 +208,7 @@ A comprehensive ARWP application is not complete until the report states:
 - what was autofixed, what requires owner/runtime evidence, and what was intentionally left unchanged;
 - exact verification commands/results and tested revision/deployment identity;
 - an explicit list of anything not checked.
+
+For sites with in-scope imagery, also report image inventory coverage, largest byte/dimension outliers, optimization/format changes, lazy/eager/priority decisions, filename/reference changes and attribution/provenance coverage.
 
 Never replace this with one SEO, AI, accessibility, security or quality score.

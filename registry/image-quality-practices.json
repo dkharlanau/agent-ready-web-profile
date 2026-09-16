@@ -1,0 +1,190 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-16",
+  "title": "ARWP Image Quality & Attribution Practices",
+  "purpose": "A deterministic engineering layer for inventorying image weight and dimensions, choosing efficient formats, preserving visual quality, controlling loading priority, keeping stable descriptive asset names and publishing truthful image provenance/attribution.",
+  "methodology": {
+    "measureRealBytes": true,
+    "measureIntrinsicDimensions": true,
+    "compareRenderedDimensions": true,
+    "qualityPreservationRequired": true,
+    "lossyTranscodesRequireVisualAcceptance": true,
+    "sourceMastersPreservedWhenPractical": true,
+    "offscreenLazyLoadingPreferred": true,
+    "criticalImagesMustNotBeBlindlyLazyLoaded": true,
+    "explicitDimensionsPreferred": true,
+    "semanticStableNamingPreferred": true,
+    "actualCreatorPrecedesPortfolioDefaults": true,
+    "noUniversalByteLimitClaim": true
+  },
+  "sources": {
+    "mdnImg": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img",
+    "mdnLoading": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading",
+    "mdnFetchPriority": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority",
+    "googleImages": "https://developers.google.com/search/docs/appearance/google-images",
+    "googleImageMetadata": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata",
+    "schemaImageObject": "https://schema.org/ImageObject"
+  },
+  "portfolioAttributionPolicy": {
+    "scope": "Owner-controlled first-party images on portfolio GitHub Pages sites when no different known creator or rights holder applies.",
+    "githubPagesDefault": {
+      "creatorType": "Organization",
+      "creatorName": "Metal Heads Cats",
+      "creditText": "Metal Heads Cats",
+      "visibleAttributionRequired": true
+    },
+    "exceptions": [
+      {
+        "repository": "dkharlanau/dkharlanau.github.io",
+        "canonicalUrl": "https://dkharlanau.github.io/",
+        "reason": "Personal publisher site; preserve its explicit personal author/owner identity."
+      }
+    ],
+    "guardrails": [
+      "Never replace a known third-party creator, photographer, illustrator, licensor or rights holder with the portfolio default.",
+      "Do not infer copyright ownership from repository location alone.",
+      "If creator provenance is unknown, record it as unknown rather than fabricating a person or organization.",
+      "For portfolio-produced assets where Metal Heads Cats is the real creator/publisher, expose the credit visibly and, when structured image metadata is used, keep creator/creditText/copyrightNotice/license facts consistent with the visible attribution."
+    ]
+  },
+  "inventoryFields": [
+    "sourcePath",
+    "publicUrl",
+    "usedBy",
+    "format",
+    "mimeType",
+    "bytes",
+    "intrinsicWidth",
+    "intrinsicHeight",
+    "largestRenderedWidth",
+    "largestRenderedHeight",
+    "responsiveVariants",
+    "loadingPolicy",
+    "fetchPriority",
+    "altState",
+    "creator",
+    "creditText",
+    "license",
+    "sourceOrProvenance",
+    "optimizationState"
+  ],
+  "practices": [
+    {
+      "id": "IQL-01-byte-dimension-inventory",
+      "priority": "P0",
+      "question": "Do we know the exact transfer weight and intrinsic dimensions of every meaningful first-party image, and where each asset is used?",
+      "practice": "Build a source-controlled or reproducible image inventory from source/build output. Record bytes, format/MIME type, intrinsic width/height, public URL, page usage and responsive variants. Sort by transferred bytes and by intrinsic-to-rendered size mismatch so the largest avoidable costs are visible instead of relying on file-count guesses.",
+      "verify": [
+        "every in-scope meaningful image has an observed byte size",
+        "intrinsic dimensions are recorded when the format exposes them",
+        "page/template usage is known or explicitly unknown",
+        "largest-byte and most-oversized assets can be identified deterministically"
+      ],
+      "sources": ["mdnImg"]
+    },
+    {
+      "id": "IQL-02-quality-preserving-optimization",
+      "priority": "P0",
+      "question": "Can image bytes be reduced without silently degrading diagrams, screenshots, text, transparency or photographic detail?",
+      "practice": "Prefer metadata stripping, lossless recompression and removal of redundant variants first. When a lossy or visually-lossless transcode is proposed, compare the candidate with the source at relevant display sizes and reject visible artifacts. Keep the source master or an equivalent reproducible source when practical. Do not describe a lossy encode as mathematically lossless.",
+      "verify": [
+        "optimization candidates are compared against the current source",
+        "text/line-art/screenshots are checked for ringing, blur and color damage",
+        "the optimized file is actually smaller before replacing the served variant",
+        "quality acceptance and source/master preservation are explicit"
+      ],
+      "sources": ["googleImages"]
+    },
+    {
+      "id": "IQL-03-format-selection",
+      "priority": "P1",
+      "question": "Is each asset encoded in a format that fits its visual content and delivery constraints instead of using one format everywhere?",
+      "practice": "Use SVG for suitable vector artwork; keep lossless raster delivery where transparency, pixel-accurate UI/text or archival fidelity requires it; evaluate AVIF/WebP or another browser-supported efficient raster encoding for photographic/illustrative content when it materially reduces bytes at accepted quality. Preserve a crawlable stable src and only generate fallbacks that have a real compatibility or product purpose.",
+      "verify": [
+        "format choice matches the asset type",
+        "candidate modern formats are compared on real bytes and visual quality",
+        "conversion does not make small assets larger or harder to maintain",
+        "stable public image identity is preserved where Search/social metadata depends on it"
+      ],
+      "sources": ["googleImages", "mdnImg"]
+    },
+    {
+      "id": "IQL-04-responsive-sizing-and-overdelivery",
+      "priority": "P1",
+      "question": "Does the browser receive an appropriately sized variant instead of downloading a much larger raster than the layout can display?",
+      "practice": "For images that render at materially different sizes, provide truthful srcset/sizes or the framework-native equivalent and keep a usable src fallback. Compare intrinsic/selected resource dimensions with the largest realistic rendered dimensions, including high-density displays. Treat substantial repeated overdelivery as a delivery defect rather than solving it only with CSS scaling.",
+      "verify": [
+        "responsive variants resolve and preserve aspect ratio",
+        "sizes reflects actual layout breakpoints when width-descriptor srcset is used",
+        "the selected resource is not systematically far larger than the rendered need",
+        "src remains crawlable and stable"
+      ],
+      "sources": ["mdnImg", "googleImages"]
+    },
+    {
+      "id": "IQL-05-loading-priority-and-layout-stability",
+      "priority": "P0",
+      "question": "Are offscreen images deferred while likely LCP/above-the-fold images remain discoverable early and reserve layout space?",
+      "practice": "Use native loading=lazy for genuinely offscreen images where deferral helps. Do not blindly lazy-load the likely LCP/hero image. Give img elements explicit width/height or an equivalent stable aspect-ratio reservation. Use fetchpriority=high only for a small number of genuinely critical images when evidence justifies it; leave ordinary images at browser defaults.",
+      "verify": [
+        "offscreen content images use an intentional lazy/eager policy",
+        "likely LCP/hero images are not accidentally delayed by lazy loading",
+        "width/height or equivalent aspect-ratio reservation prevents avoidable layout shift",
+        "fetchpriority is not sprayed across many images"
+      ],
+      "sources": ["mdnImg", "mdnLoading", "mdnFetchPriority"]
+    },
+    {
+      "id": "IQL-06-semantic-stable-filenames",
+      "priority": "P2",
+      "question": "Are human-managed image source names descriptive, stable and maintainable rather than camera dumps or keyword-stuffed SEO names?",
+      "practice": "Prefer concise lowercase kebab-case source names that describe the real subject or role, for example microphone-baseline-waveform.webp instead of IMG_4821-final-final.png. Generated immutable fingerprints are acceptable for build output when a stable semantic source/manifest owns them. Renaming must update every reference and should not churn public preferred-image URLs without a migration reason.",
+      "verify": [
+        "human-managed source names are descriptive and filesystem-safe",
+        "generic camera/export names and final-final style names are removed when safe",
+        "generated hashes are traceable to a semantic source or manifest",
+        "renames do not leave broken references or unnecessary public URL churn"
+      ],
+      "sources": ["googleImages"]
+    },
+    {
+      "id": "IQL-07-provenance-and-visible-attribution",
+      "priority": "P1",
+      "question": "Can a reviewer tell who created an important image, where it came from and what credit/license applies without inventing ownership?",
+      "practice": "Maintain provenance for important first-party, commissioned, third-party and generated images. When attribution is required by license or publisher policy, expose it visibly in a figure caption, nearby credit, media/credits page or another user-visible surface and keep machine-readable ImageObject/IPTC metadata consistent. Use creator, creditText, copyrightNotice, license and acquireLicensePage only when the facts are known.",
+      "verify": [
+        "important non-decorative assets have known provenance or an explicit unknown state",
+        "license-required/publisher-required credit is visible to users",
+        "structured image metadata does not contradict visible credit",
+        "third-party creator and license facts are preserved"
+      ],
+      "sources": ["googleImageMetadata", "schemaImageObject"]
+    },
+    {
+      "id": "IQL-08-portfolio-github-pages-attribution",
+      "priority": "P1",
+      "question": "Do owner-controlled GitHub Pages sites apply the portfolio image credit default without overwriting real creator provenance or the personal-site exception?",
+      "practice": "For first-party portfolio-produced images on GitHub Pages, default visible credit and applicable ImageObject creator/creditText to Metal Heads Cats when no different real creator/rights holder applies. Do not apply that default to dkharlanau/dkharlanau.github.io. Never rewrite known third-party attribution merely to make portfolio branding uniform.",
+      "verify": [
+        "eligible GitHub Pages first-party images expose Metal Heads Cats attribution",
+        "dkharlanau/dkharlanau.github.io is excluded from the portfolio default",
+        "known third-party creator/license metadata remains unchanged",
+        "visible and machine-readable attribution agree where both are present"
+      ],
+      "sources": ["googleImageMetadata", "schemaImageObject"]
+    },
+    {
+      "id": "IQL-09-duplicate-unused-and-variant-control",
+      "priority": "P2",
+      "question": "Does the repository avoid shipping duplicate, orphaned or redundant image variants that increase repository and delivery cost?",
+      "practice": "Detect byte-identical duplicates, obsolete exports, unused generated variants and near-duplicate responsive assets that no current source/build path references. Remove only when repository/build usage is proven absent and provenance/source masters are preserved where needed. Prefer deterministic variant generation over hand-maintained copy proliferation.",
+      "verify": [
+        "byte-identical duplicates are reported",
+        "unused status is proven across source/build references before deletion",
+        "source masters and attribution records are not deleted as dead weight",
+        "variant generation remains reproducible"
+      ],
+      "sources": ["mdnImg"]
+    }
+  ]
+}
