@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/site-execution-manifest.schema.json",
+  "title": "ARWP Site Execution Manifest v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "name",
+    "reviewedAt",
+    "purpose",
+    "sources",
+    "defaultOrchestrator",
+    "principles",
+    "statusVocabulary",
+    "applicabilityVocabulary",
+    "evidenceClasses",
+    "stages",
+    "modules",
+    "conditionalPacks",
+    "skillPolicy",
+    "applicabilityMatrix",
+    "repairLoop",
+    "completion"
+  ],
+  "properties": {
+    "version": { "const": "0.1" },
+    "name": { "type": "string", "minLength": 1 },
+    "reviewedAt": { "type": "string", "format": "date" },
+    "purpose": { "type": "string", "minLength": 1 },
+    "sources": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 },
+      "required": ["auditDomains", "skillIndex", "surfaceIntegrityEngine", "surfaceIntegritySchema"]
+    },
+    "defaultOrchestrator": { "const": "arwp-prepare-site" },
+    "principles": {
+      "type": "array",
+      "minItems": 5,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "statusVocabulary": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "pass",
+          "fail",
+          "warning",
+          "stale",
+          "missing",
+          "incomplete",
+          "intentionally-excepted",
+          "not-applicable",
+          "not-assessed"
+        ]
+      }
+    },
+    "applicabilityVocabulary": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["required", "optional", "not-applicable", "unknown"] }
+    },
+    "evidenceClasses": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["deterministic", "heuristic", "runtime", "owner-platform"] }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "required", "outputs"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "required": { "type": "boolean" },
+          "outputs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "auditDomains", "defaultExecutor", "specialistSkills", "invokeSpecialistWhen", "evidenceClasses"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "auditDomains": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+          "defaultExecutor": { "const": "arwp-prepare-site" },
+          "specialistSkills": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^arwp-[a-z0-9-]+$" } },
+          "invokeSpecialistWhen": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "evidenceClasses": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["deterministic", "heuristic", "runtime", "owner-platform"] } }
+        }
+      }
+    },
+    "conditionalPacks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "rule"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "rule": { "type": "string", "minLength": 1 }
+      }
+    },
+    "skillPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createNewSkillOnlyWhen", "doNotCreateSkillFor", "compositionRule"],
+      "properties": {
+        "createNewSkillOnlyWhen": { "type": "array", "minItems": 3, "items": { "type": "string", "minLength": 1 } },
+        "doNotCreateSkillFor": { "type": "array", "minItems": 3, "items": { "type": "string", "minLength": 1 } },
+        "compositionRule": { "type": "string", "minLength": 1 }
+      }
+    },
+    "applicabilityMatrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredFields", "fullClaimRules"],
+      "properties": {
+        "requiredFields": { "type": "array", "minItems": 5, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "fullClaimRules": { "type": "array", "minItems": 3, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "repairLoop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequence", "repeatWhen", "stopWhen"],
+      "properties": {
+        "sequence": { "type": "array", "minItems": 4, "items": { "type": "string", "minLength": 1 } },
+        "repeatWhen": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "stopWhen": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requires", "forbids"],
+      "properties": {
+        "requires": { "type": "array", "minItems": 3, "items": { "type": "string", "minLength": 1 } },
+        "forbids": { "type": "array", "minItems": 3, "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}
