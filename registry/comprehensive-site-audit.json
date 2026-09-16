@@ -18,7 +18,8 @@
     "registry/content-page-quality-contract.json",
     "registry/search-release-practices.json",
     "registry/internal-discovery-distribution-practices.json",
-    "registry/image-discovery-practices.json"
+    "registry/image-discovery-practices.json",
+    "registry/image-quality-practices.json"
   ],
   "applicabilityLedger": {
     "required": true,
@@ -124,7 +125,7 @@
     {
       "id": "performance-and-delivery",
       "priority": "P1",
-      "checks": ["field LCP/INP/CLS when owner data exists", "lab diagnostics", "transfer/request outliers", "render-blocking/client-JS risk", "responsive images/dimensions/lazy loading", "social/share image delivery", "font policy", "compression/cache validators", "third-party weight", "layout shifts"]
+      "checks": ["field LCP/INP/CLS when owner data exists", "lab diagnostics", "transfer/request outliers", "render-blocking/client-JS risk", "image byte and intrinsic-vs-rendered inventory", "responsive image variants/dimensions", "offscreen lazy loading and critical/LCP image priority", "social/share image delivery", "font policy", "compression/cache validators", "third-party weight", "layout shifts"]
     },
     {
       "id": "mobile-responsive-visual",
@@ -144,7 +145,7 @@
     {
       "id": "media-images-video-downloads",
       "priority": "P1",
-      "checks": ["media URL/content type", "responsive images/dimensions", "alt/context/captions/transcripts", "preferred/social images", "social crop/legibility where applicable", "media sitemap applicability", "license/credit truth", "download metadata"]
+      "checks": ["media URL/content type", "exact image bytes and intrinsic dimensions", "largest rendered dimensions and responsive overdelivery", "format choice and quality-preserving optimization", "width/height and lazy/eager/fetch-priority policy", "semantic stable image filenames and reference integrity", "alt/context/captions/transcripts", "preferred/social images", "social crop/legibility where applicable", "media sitemap applicability", "creator/provenance/license/visible credit truth", "publisher-specific image attribution policy", "duplicate/unused image variants", "download metadata"]
     },
     {
       "id": "localization-internationalization",
@@ -183,7 +184,7 @@
     {"id": "dataset-research", "trigger": "datasets/research/benchmarks", "checks": ["Dataset metadata", "license/version/checksums", "persistent identifiers", "methodology/provenance", "reproducible downloads", "citation instructions"]},
     {"id": "tool-app-account", "trigger": "interactive app/accounts/uploads/saved state", "checks": ["authentication/accessibility", "error/recovery", "state persistence", "privacy lifecycle", "application-security review", "critical task completion"]},
     {"id": "local-business", "trigger": "physical location/service area", "checks": ["name/address/phone", "hours", "map/contact route", "LocalBusiness applicability", "service-area truth", "local-page uniqueness"]},
-    {"id": "media-heavy", "trigger": "video/audio/image-led content", "checks": ["captions/transcripts", "poster/thumbnail", "media metadata", "stream/download behavior", "media sitemap", "licensing/credits", "bandwidth"]}
+    {"id": "media-heavy", "trigger": "video/audio/image-led content", "checks": ["captions/transcripts", "poster/thumbnail", "media metadata", "image byte/dimension/format inventory", "responsive delivery and loading priority", "stream/download behavior", "media sitemap", "creator/provenance/licensing/visible credits", "bandwidth"]}
   ],
   "completionReportRequired": [
     "coverage state and exact discovered/in-scope/audited/browser-tested/excluded/unknown counts",
@@ -204,6 +205,8 @@
     {"id": "google-page-experience", "url": "https://developers.google.com/search/docs/appearance/page-experience"},
     {"id": "google-structured-data", "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"},
     {"id": "google-js-seo", "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"},
+    {"id": "google-image-metadata", "url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"},
+    {"id": "mdn-img", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"},
     {"id": "open-graph-protocol", "url": "https://ogp.me/"},
     {"id": "mdn-web-share", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API"},
     {"id": "wcag22", "url": "https://www.w3.org/TR/WCAG22/"},
