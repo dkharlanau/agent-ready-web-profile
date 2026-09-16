@@ -13,6 +13,8 @@ assert.equal(discovery.methodology.noRankingGuarantee, true);
 assert.equal(discovery.methodology.discoverRequirementsSeparatedFromGeneralImageSearch, true);
 assert.equal(discovery.methodology.decorativeAndInformativeImagesSeparated, true);
 assert.equal(discovery.methodology.deprecatedImageSitemapFieldsRejected, true);
+assert.equal(discovery.methodology.imageSitemapApplicabilityMustBeDecided, true);
+assert.equal(discovery.methodology.imageSitemapDefaultIsNotMandatory, true);
 
 const requiredDiscovery = [
   'IDL-01-crawlable-image-and-landing-page',
@@ -28,6 +30,13 @@ const requiredDiscovery = [
 const discoveryIds = discovery.practices.map((practice) => practice.id);
 assert.deepEqual(discoveryIds, requiredDiscovery);
 assert.equal(new Set(discoveryIds).size, discoveryIds.length, 'Image Discovery practice ids must be unique');
+
+const sitemapPractice = discovery.practices.find((practice) => practice.id === 'IDL-03-image-sitemap-canonical-cohort');
+assert.deepEqual(sitemapPractice.decisionStates, ['REQUIRED', 'RECOMMENDED', 'NOT_NEEDED']);
+assert.ok(sitemapPractice.decisionSignals.required.length >= 3);
+assert.ok(sitemapPractice.decisionSignals.recommended.length >= 2);
+assert.ok(sitemapPractice.decisionSignals.notNeeded.length >= 3);
+assert.ok(sitemapPractice.verify.some((rule) => /NOT_NEEDED/.test(rule)));
 
 for (const [key, url] of Object.entries(discovery.sources)) {
   assert.match(key, /^[a-z][A-Za-z0-9]+$/);
@@ -121,6 +130,9 @@ for (const text of [skill, discoveryDocs]) {
   assert.match(text, /1200 px/i);
   assert.match(text, /300,000/i);
   assert.match(text, /ranking/i);
+  assert.match(text, /REQUIRED/);
+  assert.match(text, /RECOMMENDED/);
+  assert.match(text, /NOT_NEEDED/);
 }
 
 for (const text of [skill, qualityDocs]) {
@@ -145,6 +157,7 @@ assert.match(skill, /decorative images may legitimately use empty alt/i);
 assert.match(skill, /Do not mass-generate pseudo-descriptive alt text/i);
 assert.match(discoveryDocs, /1024 px representative image can still be a legitimate Search\/Images asset/i);
 assert.match(discoveryDocs, /Image sitemap `image:license` is deprecated/i);
+assert.match(discoveryDocs, /absence of an image sitemap is not a defect by itself/i);
 assert.match(qualityDocs, /GitHub Pages has no runtime image optimization service/i);
 assert.match(qualityDocs, /A lossy codec can be visually equivalent/i);
 
@@ -152,4 +165,4 @@ const deprecatedAsNewMarkup = /<image:(caption|geo_location|title|license)>/;
 assert.doesNotMatch(skill, deprecatedAsNewMarkup);
 assert.doesNotMatch(discoveryDocs, deprecatedAsNewMarkup);
 
-console.log(`PASS ${discovery.practices.length} Image Discovery practices plus ${quality.practices.length} Image Quality & Attribution practices with byte/dimension inventory, quality-preserving optimization, loading priority, semantic naming and truthful portfolio attribution guardrails.`);
+console.log(`PASS ${discovery.practices.length} Image Discovery practices plus ${quality.practices.length} Image Quality & Attribution practices with image-sitemap applicability, byte/dimension inventory, quality-preserving optimization, loading priority, semantic naming and truthful portfolio attribution guardrails.`);
