@@ -1,3 +1,4 @@
+import './structured-data-knowledge-graph-test.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { analyzeEntityGraphPages, formatEntityGapReport } from '../lib/entity-gap.mjs';
