@@ -10,20 +10,23 @@ const readJson = (relativePath) => JSON.parse(fs.readFileSync(path.join(root, re
 const manifestPath = 'registry/site-execution-manifest.json';
 const schemaPath = 'schema/site-execution-manifest.schema.json';
 const auditPath = 'registry/comprehensive-site-audit.json';
+const purposePath = 'registry/site-purpose-mission-practices.json';
 const skillIndexPath = 'skills/index.json';
 
-for (const relativePath of [manifestPath, schemaPath, auditPath, skillIndexPath, 'lib/surface-integrity.mjs']) {
+for (const relativePath of [manifestPath, schemaPath, auditPath, purposePath, skillIndexPath, 'lib/surface-integrity.mjs']) {
   assert.ok(fs.existsSync(path.join(root, relativePath)), `site execution dependency must exist: ${relativePath}`);
 }
 
 const manifest = readJson(manifestPath);
 const schema = readJson(schemaPath);
 const audit = readJson(auditPath);
+const purpose = readJson(purposePath);
 const skillIndex = readJson(skillIndexPath);
 
 assert.equal(manifest.version, '0.1');
 assert.equal(manifest.defaultOrchestrator, 'arwp-prepare-site');
 assert.equal(manifest.sources.auditDomains, auditPath);
+assert.equal(manifest.sources.sitePurposePractices, purposePath);
 assert.equal(manifest.sources.skillIndex, skillIndexPath);
 assert.equal(manifest.sources.surfaceIntegrityEngine, 'lib/surface-integrity.mjs');
 assert.equal(manifest.sources.surfaceIntegritySchema, 'schema/surface-integrity-contract.schema.json');
@@ -31,14 +34,18 @@ assert.deepEqual(manifest.statusVocabulary, [...SURFACE_STATES], 'site execution
 assert.deepEqual(manifest.applicabilityVocabulary, ['required', 'optional', 'not-applicable', 'unknown']);
 assert.deepEqual(manifest.evidenceClasses, ['deterministic', 'heuristic', 'runtime', 'owner-platform']);
 assert.ok(manifest.principles.some(value => /check is not a skill boundary/i.test(value)), 'manifest must preserve check != skill boundary');
+assert.ok(manifest.principles.some(value => /purpose is resolved before optimization/i.test(value)), 'manifest must require purpose before optimization');
 assert.ok(manifest.principles.some(value => /Surface Integrity/i.test(value)), 'manifest must require final Surface Integrity reconciliation');
 
-const expectedStages = ['inspect', 'inventory', 'applicability', 'execute', 'repair', 'verify', 're-audit', 'surface-integrity', 'receipt'];
+const expectedStages = ['inspect', 'inventory', 'purpose', 'applicability', 'execute', 'repair', 'verify', 're-audit', 'surface-integrity', 'receipt'];
 assert.deepEqual(manifest.stages.map(stage => stage.id), expectedStages, 'site execution stage order changed; review orchestration intentionally');
 for (const stage of manifest.stages) {
   assert.equal(stage.required, true, `execution stage ${stage.id} must remain required`);
   assert.ok(stage.outputs?.length, `execution stage ${stage.id} must declare outputs`);
 }
+const purposeStage = manifest.stages.find(stage => stage.id === 'purpose');
+assert.ok(purposeStage.outputs.some(value => /purpose brief/i.test(value)), 'purpose stage must output a canonical site purpose brief');
+assert.ok(purposeStage.outputs.some(value => /manifesto\/footer/i.test(value)), 'purpose stage must set the visible manifesto/footer alignment target');
 
 const moduleIds = manifest.modules.map(module => module.id);
 assert.equal(new Set(moduleIds).size, moduleIds.length, 'execution module IDs must be unique');
@@ -70,6 +77,25 @@ for (const [domainId, owners] of ownership) {
   assert.equal(owners.length, 1, `audit domain ${domainId} must have exactly one execution-module owner, found: ${owners.join(', ') || 'none'}`);
 }
 
+const purposeDomain = (audit.auditDomains || []).find(domain => domain.id === 'site-purpose-mission-alignment');
+assert.equal(purposeDomain?.priority, 'P0', 'site purpose/mission alignment must remain a P0 whole-site domain');
+assert.ok(purposeDomain.checks.some(value => /footer mission/i.test(value)), 'purpose domain must retain footer mission coverage');
+assert.ok(purposeDomain.checks.some(value => /Search-independence test/i.test(value)), 'purpose domain must retain the Search-independence test');
+const purposeModule = manifest.modules.find(module => module.id === 'site-purpose-mission');
+assert.deepEqual(purposeModule?.auditDomains, ['site-purpose-mission-alignment'], 'site-purpose-mission module must own the purpose domain');
+assert.deepEqual(purposeModule?.specialistSkills, [], 'site purpose stays orchestrator-owned unless a reusable independent workflow emerges');
+
+assert.equal(purpose.version, '0.1');
+assert.ok((purpose.model?.requiredPurposeFields || []).length >= 8, 'purpose contract must retain audience/problem/outcome/mechanism/boundary/evidence/action fields');
+assert.match(purpose.model?.searchIndependenceTest || '', /organic Search traffic were zero/i);
+assert.equal(purpose.model?.missionIsNotWebAppManifest, true);
+assert.ok((purpose.practices || []).length >= 10, 'site purpose layer must remain a substantial cross-surface contract');
+for (const id of ['SPM-01-primary-purpose', 'SPM-03-visible-manifesto', 'SPM-04-footer-mission', 'SPM-06-search-surface-alignment', 'SPM-07-entity-and-structured-data-parity', 'SPM-11-outcome-and-seo-boundary']) {
+  assert.ok(purpose.practices.some(practice => practice.id === id), `site purpose practices must retain ${id}`);
+}
+assert.ok(purpose.guardrails.some(value => /directly improves rankings/i.test(value)), 'purpose layer must forbid direct ranking claims');
+assert.ok(purpose.guardrails.some(value => /keyword/i.test(value)), 'purpose layer must retain anti-keyword-stuffing safeguards');
+
 for (const requiredField of ['moduleId', 'applicability', 'reason', 'state', 'evidenceClasses', 'evidence', 'findings', 'verification', 'remediation']) {
   assert.ok(manifest.applicabilityMatrix.requiredFields.includes(requiredField), `applicability matrix must retain ${requiredField}`);
 }
@@ -96,4 +122,4 @@ assert.ok(manifest.skillPolicy.createNewSkillOnlyWhen?.length >= 3, 'skill creat
 assert.ok(manifest.skillPolicy.doNotCreateSkillFor?.some(value => /checklist item/i.test(value)), 'skill policy must reject checklist-item skills');
 assert.match(manifest.skillPolicy.compositionRule, /Add a skill only when the reusable workflow itself is a product boundary/i);
 
-console.log(`PASS site execution manifest: ${manifest.modules.length} modules own ${auditDomainIds.length} audit domains with ${indexedSkillNames.size} indexed skills and explicit applicability/repair/Surface Integrity gates`);
+console.log(`PASS site execution manifest: ${manifest.modules.length} modules own ${auditDomainIds.length} audit domains with ${indexedSkillNames.size} indexed skills, a P0 Site Purpose & Mission layer, and explicit applicability/repair/Surface Integrity gates`);

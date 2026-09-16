@@ -1,0 +1,234 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-16",
+  "title": "ARWP Site Purpose & Mission Practices",
+  "purpose": "Define a site-level purpose contract that explains why the site exists, who it helps, what outcome it creates and how that purpose stays coherent across visible content, Search surfaces, structured data, feeds and agent-facing representations without becoming SEO boilerplate.",
+  "model": {
+    "requiredPurposeFields": [
+      "primaryAudience",
+      "userProblemOrNeed",
+      "desiredOutcome",
+      "mechanismOrApproach",
+      "distinctContribution",
+      "scopeBoundaries",
+      "supportingEvidence",
+      "primaryUserAction"
+    ],
+    "recommendedPublicSurfaces": [
+      "homepage or primary entry",
+      "compact shared-footer mission line",
+      "About, Mission or Method page when it adds independent user value",
+      "homepage title and description when appropriate",
+      "existing WebSite and publisher Organization or Person descriptions when truthful and applicable",
+      "feed or channel description when a real feed exists",
+      "agent or AI site profile, llms.txt or equivalent summary when those surfaces exist"
+    ],
+    "defaultFooterPattern": "[Site] helps [primary audience] [desired outcome] through [mechanism or distinctive contribution].",
+    "searchIndependenceTest": "The purpose must still justify the site if organic Search traffic were zero. A statement that exists only to capture queries is not a valid site purpose.",
+    "missionIsNotWebAppManifest": true,
+    "dedicatedMissionPagePolicy": {
+      "recommendedWhen": "A multi-page editorial, product, service, research or portfolio site benefits from explaining method, evidence, scope, limitations or publisher intent in more depth.",
+      "optionalWhen": "A small single-purpose site already explains the purpose clearly on the primary entry and a separate page would be thin or repetitive."
+    }
+  },
+  "guardrails": [
+    "Purpose exists to help users and govern product/content decisions; it is not a keyword or ranking hack.",
+    "Do not repeat the full mission mechanically in every title, H1, meta description or page body.",
+    "Do not fabricate an audience, expertise, outcome, geography or service scope from target keywords.",
+    "Do not invent custom Schema.org mission properties when supported types and properties already express the truthful facts.",
+    "Keep the footer mission concise and human-readable; do not turn it into a synonym, location, service or query list.",
+    "Do not claim that a mission statement, footer text or structured-data description directly improves rankings.",
+    "If the site's purpose is genuinely unclear, record it as unknown and resolve focus before mass SEO, content, schema or generated-page expansion.",
+    "For multi-topic sites, define one defensible umbrella purpose or explicit section purposes instead of claiming to serve everyone with everything.",
+    "If shared mission text pollutes Search snippets, improve wording and placement first; use snippet controls only when they reflect publisher intent and an observed need."
+  ],
+  "practices": [
+    {
+      "id": "SPM-01-primary-purpose",
+      "priority": "P0",
+      "question": "Can a first-time visitor explain in one sentence why this site exists and who it is for?",
+      "practice": "Establish one canonical purpose brief with the primary audience, user problem or need, desired outcome, mechanism or approach, distinct contribution, scope boundaries, supporting evidence and primary user action. Prefer evidence already present in the product, repository and visible content; unresolved owner intent remains unknown rather than being invented.",
+      "verify": [
+        "all required purpose fields are present or explicitly unknown",
+        "the purpose is specific enough to exclude irrelevant content",
+        "the statement remains useful under the Search-independence test",
+        "the primary action follows naturally from the promised outcome"
+      ]
+    },
+    {
+      "id": "SPM-02-distinct-contribution-and-boundaries",
+      "priority": "P0",
+      "question": "Does the purpose explain what the site contributes rather than restating a broad topic or a list of search phrases?",
+      "practice": "Describe the site's real mechanism, evidence, tool, dataset, experience, point of view or other non-commodity contribution. Add an explicit anti-purpose or scope boundary for claims the site must not make, audiences it does not serve, or adjacent topics that would dilute the product.",
+      "verify": [
+        "the distinct contribution is visible in actual site content or functionality",
+        "scope boundaries are compatible with the site's claims and legal/trust surfaces",
+        "the purpose is not a generic mission template that could fit unrelated sites",
+        "new content can be accepted or rejected against the boundary"
+      ]
+    },
+    {
+      "id": "SPM-03-visible-manifesto",
+      "priority": "P0",
+      "question": "Is the purpose visible to humans on the primary entry instead of existing only in metadata or an internal brief?",
+      "practice": "Express the core purpose in normal visible copy on the homepage or primary entry. Add an About, Mission or Method page only when it contributes useful detail such as method, evidence, limitations, provenance or operating principles; do not create a thin page merely to host a mission statement.",
+      "verify": [
+        "the primary entry communicates audience, outcome and mechanism without requiring metadata inspection",
+        "a deeper mission/about surface exists when it has independent user value",
+        "visible wording does not overclaim unsupported outcomes",
+        "the manifesto remains readable without Search or AI terminology unless that is genuinely the product"
+      ]
+    },
+    {
+      "id": "SPM-04-footer-mission",
+      "priority": "P1",
+      "question": "Does the shared footer reinforce what the site is for without becoming repetitive SEO boilerplate?",
+      "practice": "Add a compact one-sentence mission to the shared footer and, when useful, link it to the canonical About, Mission or Method surface. Keep it stable, concise and written for people. Review its effect on snippets because shared footer text can become part of a page's extractable content.",
+      "verify": [
+        "the footer mission is present on applicable public pages",
+        "it fits the canonical purpose brief",
+        "it is short enough to avoid overwhelming page-specific content",
+        "it contains no keyword, location, service or synonym stuffing",
+        "the link target, if present, resolves to a useful canonical page"
+      ]
+    },
+    {
+      "id": "SPM-05-page-job-alignment",
+      "priority": "P1",
+      "question": "Does every important page have a job that advances the site's purpose or a justified supporting function?",
+      "practice": "For canonical page archetypes record the page job, target user need, contribution to the site purpose and primary next action. Flag pages that exist mainly as thin query variants, duplicate the same promise, drift outside scope, or cannot explain why a user should encounter them.",
+      "verify": [
+        "every important route archetype has a clear page job",
+        "page-level intent stays specific instead of repeating the site mission verbatim",
+        "thin query-variant and scope-drift pages are identified",
+        "navigation and continuation paths support the declared user journey"
+      ]
+    },
+    {
+      "id": "SPM-06-search-surface-alignment",
+      "priority": "P1",
+      "question": "Do Search-facing representations describe the same site purpose without turning every page into homepage boilerplate?",
+      "practice": "Align homepage title, meta description, site-name signals and prominent homepage copy with the real purpose. Keep leaf-page titles and descriptions specific to their own job. Prefer concise descriptive wording, avoid keyword stuffing and repeated boilerplate, and inspect snippet-source hygiene rather than assuming the meta description will always be used.",
+      "verify": [
+        "homepage Search-facing wording is compatible with the visible purpose",
+        "leaf-page metadata stays page-specific",
+        "titles and descriptions avoid keyword stuffing and mechanical repetition",
+        "shared mission copy does not create obvious snippet pollution",
+        "no ranking benefit is claimed from the mission text itself"
+      ]
+    },
+    {
+      "id": "SPM-07-entity-and-structured-data-parity",
+      "priority": "P1",
+      "question": "Do machine-readable site and publisher descriptions agree with the human-visible purpose and identity?",
+      "practice": "When WebSite, Organization or Person entities already apply, keep their supported descriptive properties and relationships consistent with the visible site purpose and real publisher identity. Reuse stable @id values and supported vocabularies. Do not invent custom mission fields or mark up aspirations as capabilities.",
+      "verify": [
+        "WebSite and publisher descriptions do not contradict the visible mission",
+        "publisher identity remains distinct from the site's user outcome",
+        "stable entities are reused rather than duplicated for wording variants",
+        "only supported truthful structured-data properties are emitted"
+      ]
+    },
+    {
+      "id": "SPM-08-machine-feed-agent-parity",
+      "priority": "P1",
+      "question": "Do feeds, catalogs and agent-facing summaries describe the same site users actually see?",
+      "practice": "Reconcile RSS, Atom or JSON Feed channel descriptions, llms.txt, ARWP site profiles, APIs, catalogs and agent-discovery surfaces when they exist. These representations may be more concise, but they must not broaden the mission, invent capabilities, or promise actions that the human-visible product cannot perform.",
+      "verify": [
+        "machine-facing summaries are traceable to the canonical purpose",
+        "feeds describe the real publication rather than SEO keywords",
+        "agent surfaces do not invent tools, permissions or transactional capabilities",
+        "human and machine descriptions remain semantically compatible"
+      ]
+    },
+    {
+      "id": "SPM-09-localization-parity",
+      "priority": "P1",
+      "question": "Do localized versions preserve the same mission while sounding natural for each audience?",
+      "practice": "Localize the meaning of the purpose, footer mission and deeper mission/about copy rather than translating keywords mechanically. Keep audience, scope, claims and publisher identity equivalent unless a locale or market intentionally has a different documented offer.",
+      "verify": [
+        "localized mission copy is complete and natural",
+        "claims and scope remain equivalent across locales",
+        "locale-specific differences are intentional and documented",
+        "localized metadata and structured-data descriptions do not drift from visible copy"
+      ]
+    },
+    {
+      "id": "SPM-10-purpose-lifecycle-and-drift",
+      "priority": "P1",
+      "question": "When the site's positioning changes, are all dependent surfaces migrated together?",
+      "practice": "Treat a material purpose change as a cross-surface migration. Reconcile homepage, footer, About/Mission/Method, navigation, homepage metadata, social previews, structured data, feeds, agent summaries, localized variants, content portfolio, CTAs and measurement goals. Preserve evidence of intentional exceptions instead of leaving stale promises.",
+      "verify": [
+        "purpose changes have an explicit affected-surface inventory",
+        "stale old positioning is not left in shared templates or machine surfaces",
+        "content outside the new boundary is migrated, deprecated or intentionally retained",
+        "measurement goals track the new user outcome separately from Search visibility"
+      ]
+    },
+    {
+      "id": "SPM-11-outcome-and-seo-boundary",
+      "priority": "P1",
+      "question": "Is the purpose used to improve real user outcomes while Search performance remains a measured distribution outcome rather than the mission itself?",
+      "practice": "Use the purpose contract to prioritize content, navigation, calls to action, evidence and product improvements. Measure user/task outcomes separately from impressions, clicks, rankings, citations and referrals. SEO may help the right audience discover useful content, but Search traffic does not define the site's reason for existing.",
+      "verify": [
+        "at least one user or product outcome follows from the purpose",
+        "Search/AI visibility metrics remain separate from user-value metrics",
+        "the roadmap does not substitute ranking targets for the site's promised outcome",
+        "the site would still have a coherent purpose if organic Search traffic disappeared"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "google-helpful-content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "supports": [
+        "primary purpose or focus",
+        "intended audience",
+        "people-first why",
+        "SEO as support rather than the reason content exists"
+      ]
+    },
+    {
+      "id": "google-ai-optimization",
+      "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "supports": [
+        "foundational SEO for AI Search experiences",
+        "unique non-commodity value",
+        "avoid manipulative query-variant content"
+      ]
+    },
+    {
+      "id": "google-title-links",
+      "url": "https://developers.google.com/search/docs/appearance/title-link",
+      "supports": [
+        "descriptive concise titles",
+        "avoid keyword stuffing",
+        "avoid repeated boilerplate"
+      ]
+    },
+    {
+      "id": "google-snippets",
+      "url": "https://developers.google.com/search/docs/appearance/snippet",
+      "supports": [
+        "snippets can use page content",
+        "meta descriptions are not guaranteed snippet text",
+        "snippet controls when publisher intent requires them"
+      ]
+    },
+    {
+      "id": "google-organization",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+      "supports": [
+        "truthful organization description and identity context"
+      ]
+    },
+    {
+      "id": "schema-website",
+      "url": "https://schema.org/WebSite",
+      "supports": [
+        "standard WebSite entity vocabulary"
+      ]
+    }
+  ]
+}

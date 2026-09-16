@@ -7,7 +7,8 @@
     "auditDomains": "registry/comprehensive-site-audit.json",
     "skillIndex": "skills/index.json",
     "surfaceIntegrityEngine": "lib/surface-integrity.mjs",
-    "surfaceIntegritySchema": "schema/surface-integrity-contract.schema.json"
+    "surfaceIntegritySchema": "schema/surface-integrity-contract.schema.json",
+    "sitePurposePractices": "registry/site-purpose-mission-practices.json"
   },
   "defaultOrchestrator": "arwp-prepare-site",
   "principles": [
@@ -17,6 +18,7 @@
     "Audit-domain checks remain in their canonical registries and are referenced by module ID instead of copied into this manifest.",
     "Every applicable module must end in explicit evidence and state; omission is not equivalent to not-applicable.",
     "Repository, build, deployed HTTP, rendered runtime and owner-platform evidence remain separate.",
+    "Site purpose is resolved before optimization; Search, content, structured data, footer and agent-facing tactics must serve a clear user mission rather than manufacture one for ranking.",
     "Surface Integrity is the mandatory cross-module reconciliation pass before a full completion claim."
   ],
   "statusVocabulary": [
@@ -46,161 +48,358 @@
     {
       "id": "inspect",
       "required": true,
-      "outputs": ["repository and stack facts", "source/build/deploy boundaries", "available evidence layers"]
+      "outputs": [
+        "repository and stack facts",
+        "source/build/deploy boundaries",
+        "available evidence layers"
+      ]
     },
     {
       "id": "inventory",
       "required": true,
-      "outputs": ["reconciled route inventory", "canonical owner map", "route archetypes/templates/locales"]
+      "outputs": [
+        "reconciled route inventory",
+        "canonical owner map",
+        "route archetypes/templates/locales"
+      ]
+    },
+    {
+      "id": "purpose",
+      "required": true,
+      "outputs": [
+        "canonical site purpose brief",
+        "primary audience/problem/outcome/mechanism/boundary contract",
+        "visible manifesto/footer alignment target",
+        "page-job and cross-surface purpose constraints"
+      ]
     },
     {
       "id": "applicability",
       "required": true,
-      "outputs": ["module applicability matrix", "conditional-pack activation decisions", "unknown owner-data/runtime gates"]
+      "outputs": [
+        "module applicability matrix",
+        "conditional-pack activation decisions",
+        "unknown owner-data/runtime gates"
+      ]
     },
     {
       "id": "execute",
       "required": true,
-      "outputs": ["module findings", "specialist evidence", "bounded remediation tasks"]
+      "outputs": [
+        "module findings",
+        "specialist evidence",
+        "bounded remediation tasks"
+      ]
     },
     {
       "id": "repair",
       "required": true,
-      "outputs": ["authorized reversible changes", "explicit unresolved gates"]
+      "outputs": [
+        "authorized reversible changes",
+        "explicit unresolved gates"
+      ]
     },
     {
       "id": "verify",
       "required": true,
-      "outputs": ["build/test results", "changed-surface evidence", "deployment/runtime evidence when available"]
+      "outputs": [
+        "build/test results",
+        "changed-surface evidence",
+        "deployment/runtime evidence when available"
+      ]
     },
     {
       "id": "re-audit",
       "required": true,
-      "outputs": ["affected-cohort recheck", "remaining failures/warnings", "blast-radius reconciliation"]
+      "outputs": [
+        "affected-cohort recheck",
+        "remaining failures/warnings",
+        "blast-radius reconciliation"
+      ]
     },
     {
       "id": "surface-integrity",
       "required": true,
-      "outputs": ["cross-surface parity report", "blocking missing/stale/incomplete representations"]
+      "outputs": [
+        "cross-surface parity report",
+        "blocking missing/stale/incomplete representations"
+      ]
     },
     {
       "id": "receipt",
       "required": true,
-      "outputs": ["coverage state", "applicability matrix", "verification evidence", "remaining owner/manual gates"]
+      "outputs": [
+        "coverage state",
+        "applicability matrix",
+        "verification evidence",
+        "remaining owner/manual gates"
+      ]
     }
   ],
   "modules": [
     {
       "id": "repository-readiness",
-      "auditDomains": ["inventory-and-deployment"],
+      "auditDomains": [
+        "inventory-and-deployment"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-repository-stewardship"],
-      "invokeSpecialistWhen": ["canonical/generated ownership is unclear", "repository entropy materially raises inspection or change risk", "large transformation changed navigation or source/output boundaries"],
-      "evidenceClasses": ["deterministic", "heuristic"]
+      "specialistSkills": [
+        "arwp-repository-stewardship"
+      ],
+      "invokeSpecialistWhen": [
+        "canonical/generated ownership is unclear",
+        "repository entropy materially raises inspection or change risk",
+        "large transformation changed navigation or source/output boundaries"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic"
+      ]
+    },
+    {
+      "id": "site-purpose-mission",
+      "auditDomains": [
+        "site-purpose-mission-alignment"
+      ],
+      "defaultExecutor": "arwp-prepare-site",
+      "specialistSkills": [],
+      "invokeSpecialistWhen": [],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "search-foundation",
-      "auditDomains": ["http-crawl-index-canonical", "head-search-appearance-social"],
+      "auditDomains": [
+        "http-crawl-index-canonical",
+        "head-search-appearance-social"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-search-release", "arwp-technical-seo-critic"],
-      "invokeSpecialistWhen": ["public hostname release/readiness is in scope", "ordinary technical checks are green but Search presentation may still be false-green", "canonical/redirect/pagination/head behavior needs adversarial review"],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime", "owner-platform"]
+      "specialistSkills": [
+        "arwp-search-release",
+        "arwp-technical-seo-critic"
+      ],
+      "invokeSpecialistWhen": [
+        "public hostname release/readiness is in scope",
+        "ordinary technical checks are green but Search presentation may still be false-green",
+        "canonical/redirect/pagination/head behavior needs adversarial review"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime",
+        "owner-platform"
+      ]
     },
     {
       "id": "structured-data-entities",
-      "auditDomains": ["structured-data-entities-provenance"],
+      "auditDomains": [
+        "structured-data-entities-provenance"
+      ],
       "defaultExecutor": "arwp-prepare-site",
       "specialistSkills": [],
       "invokeSpecialistWhen": [],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "content-quality",
-      "auditDomains": ["content-quality-and-evidence"],
+      "auditDomains": [
+        "content-quality-and-evidence"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-ai-search-content", "arwp-index-worthiness"],
-      "invokeSpecialistWhen": ["article/docs/comparison/answer quality is material", "generated/data/knowledge pages are candidates for broad Search-facing publication"],
-      "evidenceClasses": ["deterministic", "heuristic", "owner-platform"]
+      "specialistSkills": [
+        "arwp-ai-search-content",
+        "arwp-index-worthiness"
+      ],
+      "invokeSpecialistWhen": [
+        "article/docs/comparison/answer quality is material",
+        "generated/data/knowledge pages are candidates for broad Search-facing publication"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "owner-platform"
+      ]
     },
     {
       "id": "internal-discovery",
-      "auditDomains": ["internal-discovery-information-architecture"],
+      "auditDomains": [
+        "internal-discovery-information-architecture"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-internal-discovery"],
-      "invokeSpecialistWhen": ["multi-page site needs canonical crawl-path evidence", "orphan/dead-end/breadcrumb/semantic-relation risk is material"],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+      "specialistSkills": [
+        "arwp-internal-discovery"
+      ],
+      "invokeSpecialistWhen": [
+        "multi-page site needs canonical crawl-path evidence",
+        "orphan/dead-end/breadcrumb/semantic-relation risk is material"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "accessibility",
-      "auditDomains": ["accessibility-wcag22"],
+      "auditDomains": [
+        "accessibility-wcag22"
+      ],
       "defaultExecutor": "arwp-prepare-site",
       "specialistSkills": [],
       "invokeSpecialistWhen": [],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "performance-runtime",
-      "auditDomains": ["performance-and-delivery", "runtime-js-functionality"],
+      "auditDomains": [
+        "performance-and-delivery",
+        "runtime-js-functionality"
+      ],
       "defaultExecutor": "arwp-prepare-site",
       "specialistSkills": [],
       "invokeSpecialistWhen": [],
-      "evidenceClasses": ["deterministic", "runtime", "owner-platform"]
+      "evidenceClasses": [
+        "deterministic",
+        "runtime",
+        "owner-platform"
+      ]
     },
     {
       "id": "responsive-visual",
-      "auditDomains": ["mobile-responsive-visual"],
+      "auditDomains": [
+        "mobile-responsive-visual"
+      ],
       "defaultExecutor": "arwp-prepare-site",
       "specialistSkills": [],
       "invokeSpecialistWhen": [],
-      "evidenceClasses": ["heuristic", "runtime"]
+      "evidenceClasses": [
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "security-privacy-trust",
-      "auditDomains": ["security-privacy", "trust-identity-legal"],
+      "auditDomains": [
+        "security-privacy",
+        "trust-identity-legal"
+      ],
       "defaultExecutor": "arwp-prepare-site",
       "specialistSkills": [],
       "invokeSpecialistWhen": [],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime", "owner-platform"]
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime",
+        "owner-platform"
+      ]
     },
     {
       "id": "media-image-quality",
-      "auditDomains": ["media-images-video-downloads"],
+      "auditDomains": [
+        "media-images-video-downloads"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-image-discovery"],
-      "invokeSpecialistWhen": ["meaningful images are part of Search/Images/Discover intent", "image-heavy pages have delivery, responsive, attribution or sitemap questions"],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+      "specialistSkills": [
+        "arwp-image-discovery"
+      ],
+      "invokeSpecialistWhen": [
+        "meaningful images are part of Search/Images/Discover intent",
+        "image-heavy pages have delivery, responsive, attribution or sitemap questions"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "localization",
-      "auditDomains": ["localization-internationalization"],
+      "auditDomains": [
+        "localization-internationalization"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-localization-quality"],
-      "invokeSpecialistWhen": ["more than one locale exists", "a change affects localizable UI/content/Search/agent surfaces", "locale parity or source staleness needs verification"],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+      "specialistSkills": [
+        "arwp-localization-quality"
+      ],
+      "invokeSpecialistWhen": [
+        "more than one locale exists",
+        "a change affects localizable UI/content/Search/agent surfaces",
+        "locale parity or source staleness needs verification"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "measurement-observability",
-      "auditDomains": ["analytics-measurement-observability"],
+      "auditDomains": [
+        "analytics-measurement-observability"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-measurement-os"],
-      "invokeSpecialistWhen": ["Search/AI outcomes or provider-native baselines are part of the task", "owner analytics/Search Console/Bing/referral evidence is available"],
-      "evidenceClasses": ["deterministic", "owner-platform"]
+      "specialistSkills": [
+        "arwp-measurement-os"
+      ],
+      "invokeSpecialistWhen": [
+        "Search/AI outcomes or provider-native baselines are part of the task",
+        "owner analytics/Search Console/Bing/referral evidence is available"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "owner-platform"
+      ]
     },
     {
       "id": "agent-machine-surfaces",
-      "auditDomains": ["ai-agent-readiness", "feeds-manifests-api-machine-surfaces"],
+      "auditDomains": [
+        "ai-agent-readiness",
+        "feeds-manifests-api-machine-surfaces"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-agent-discovery", "arwp-feed-syndication"],
-      "invokeSpecialistWhen": ["the site exposes or should expose truthful agent/API/protocol discovery", "the site publishes real subscribable updates that justify RSS/Atom/JSON Feed handling"],
-      "evidenceClasses": ["deterministic", "heuristic", "runtime"]
+      "specialistSkills": [
+        "arwp-agent-discovery",
+        "arwp-feed-syndication"
+      ],
+      "invokeSpecialistWhen": [
+        "the site exposes or should expose truthful agent/API/protocol discovery",
+        "the site publishes real subscribable updates that justify RSS/Atom/JSON Feed handling"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "heuristic",
+        "runtime"
+      ]
     },
     {
       "id": "freshness-regression",
-      "auditDomains": ["freshness-lifecycle-regression"],
+      "auditDomains": [
+        "freshness-lifecycle-regression"
+      ],
       "defaultExecutor": "arwp-prepare-site",
-      "specialistSkills": ["arwp-evidence-ci", "arwp-braidgraph"],
-      "invokeSpecialistWhen": ["important surfaces need assertion/CI/receipt protection", "change provenance or blast radius must be traced across source, recommendation and transformation"],
-      "evidenceClasses": ["deterministic", "owner-platform"]
+      "specialistSkills": [
+        "arwp-evidence-ci",
+        "arwp-braidgraph"
+      ],
+      "invokeSpecialistWhen": [
+        "important surfaces need assertion/CI/receipt protection",
+        "change provenance or blast radius must be traced across source, recommendation and transformation"
+      ],
+      "evidenceClasses": [
+        "deterministic",
+        "owner-platform"
+      ]
     }
   ],
   "conditionalPacks": {
@@ -245,9 +444,24 @@
     ]
   },
   "repairLoop": {
-    "sequence": ["execute", "repair", "verify", "re-audit", "surface-integrity"],
-    "repeatWhen": ["required state is fail/missing/stale/incomplete", "verification exposes new affected routes or representations", "cross-module parity is blocked and the cause is safely repairable"],
-    "stopWhen": ["remaining work requires owner facts/credentials/external platform evidence", "mutation is not authorized", "the proposed fix is materially uncertain or irreversible", "all required resolvable states pass and Surface Integrity is not blocked"]
+    "sequence": [
+      "execute",
+      "repair",
+      "verify",
+      "re-audit",
+      "surface-integrity"
+    ],
+    "repeatWhen": [
+      "required state is fail/missing/stale/incomplete",
+      "verification exposes new affected routes or representations",
+      "cross-module parity is blocked and the cause is safely repairable"
+    ],
+    "stopWhen": [
+      "remaining work requires owner facts/credentials/external platform evidence",
+      "mutation is not authorized",
+      "the proposed fix is materially uncertain or irreversible",
+      "all required resolvable states pass and Surface Integrity is not blocked"
+    ]
   },
   "completion": {
     "requires": [

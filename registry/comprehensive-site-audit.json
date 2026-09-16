@@ -65,17 +65,61 @@
     {
       "id": "inventory-and-deployment",
       "priority": "P0",
-      "checks": ["route/content/build/sitemap/link reconciliation", "canonical owners and aliases", "route archetypes/templates/locales", "source-build-deploy revision parity", "host and HTTPS normalization", "404/410 and soft-404 behavior"]
+      "checks": [
+        "route/content/build/sitemap/link reconciliation",
+        "canonical owners and aliases",
+        "route archetypes/templates/locales",
+        "source-build-deploy revision parity",
+        "host and HTTPS normalization",
+        "404/410 and soft-404 behavior"
+      ]
+    },
+    {
+      "id": "site-purpose-mission-alignment",
+      "priority": "P0",
+      "checks": [
+        "canonical purpose brief or attributable source of truth",
+        "primary audience and user problem/need",
+        "desired visitor outcome and primary action",
+        "mechanism/distinct contribution and supporting evidence",
+        "scope boundaries/anti-purpose",
+        "homepage or primary-entry purpose clarity",
+        "compact footer mission and useful About/Mission/Method route when applicable",
+        "page-job-to-site-purpose alignment",
+        "homepage title/description/search-surface alignment without keyword stuffing or repeated mission boilerplate",
+        "WebSite/Organization/Person description parity when applicable",
+        "feed/AI/agent description parity when present",
+        "localized purpose parity",
+        "purpose-change lifecycle and stale-surface drift",
+        "Search-independence test: the site purpose remains coherent without organic Search traffic"
+      ]
     },
     {
       "id": "http-crawl-index-canonical",
       "priority": "P0",
-      "checks": ["expected HTTP state", "redirects", "robots and crawler-specific access", "meta/X-Robots-Tag", "canonical consistency", "sitemap/indexability parity", "pagination/filter/parameter policy", "hreflang reciprocity"]
+      "checks": [
+        "expected HTTP state",
+        "redirects",
+        "robots and crawler-specific access",
+        "meta/X-Robots-Tag",
+        "canonical consistency",
+        "sitemap/indexability parity",
+        "pagination/filter/parameter policy",
+        "hreflang reciprocity"
+      ]
     },
     {
       "id": "head-search-appearance-social",
       "priority": "P1",
-      "checks": ["title uniqueness and source convergence", "description quality", "charset/viewport/lang", "favicon and site identity", "Open Graph/social cards", "preferred image", "snippet pollution"]
+      "checks": [
+        "title uniqueness and source convergence",
+        "description quality",
+        "charset/viewport/lang",
+        "favicon and site identity",
+        "Open Graph/social cards",
+        "preferred image",
+        "snippet pollution"
+      ]
     },
     {
       "id": "structured-data-entities-provenance",
@@ -101,82 +145,299 @@
     {
       "id": "content-quality-and-evidence",
       "priority": "P1",
-      "checks": ["clear page job", "standalone usefulness", "original contribution", "claim/source support", "thin/duplicate/stale content", "heading hierarchy", "placeholder/debug filler", "truthful freshness", "important citation health"]
+      "checks": [
+        "clear page job",
+        "standalone usefulness",
+        "original contribution",
+        "claim/source support",
+        "thin/duplicate/stale content",
+        "heading hierarchy",
+        "placeholder/debug filler",
+        "truthful freshness",
+        "important citation health"
+      ]
     },
     {
       "id": "internal-discovery-information-architecture",
       "priority": "P1",
-      "checks": ["intentional discovery path", "crawlable descriptive links", "breadcrumbs", "hub/detail/reverse relations", "orphans/global-only pages", "dead ends", "canonical link targets", "all internal links and critical assets"]
+      "checks": [
+        "intentional discovery path",
+        "crawlable descriptive links",
+        "breadcrumbs",
+        "hub/detail/reverse relations",
+        "orphans/global-only pages",
+        "dead ends",
+        "canonical link targets",
+        "all internal links and critical assets"
+      ]
     },
     {
       "id": "accessibility-wcag22",
       "priority": "P1",
-      "checks": ["landmarks/headings", "image alternatives", "name-role-value/state", "form labels/errors", "keyboard operation", "visible unobscured focus", "target size/input alternatives", "contrast/non-color cues", "zoom/reflow", "reduced motion", "captions/transcripts", "document language", "manual review before conformance claims"]
+      "checks": [
+        "landmarks/headings",
+        "image alternatives",
+        "name-role-value/state",
+        "form labels/errors",
+        "keyboard operation",
+        "visible unobscured focus",
+        "target size/input alternatives",
+        "contrast/non-color cues",
+        "zoom/reflow",
+        "reduced motion",
+        "captions/transcripts",
+        "document language",
+        "manual review before conformance claims"
+      ]
     },
     {
       "id": "performance-and-delivery",
       "priority": "P1",
-      "checks": ["field LCP/INP/CLS when owner data exists", "lab diagnostics", "transfer/request outliers", "render-blocking/client-JS risk", "image byte and intrinsic-vs-rendered inventory", "responsive image variants/dimensions", "offscreen lazy loading and critical/LCP image priority", "font policy", "compression/cache validators", "third-party weight", "layout shifts"]
+      "checks": [
+        "field LCP/INP/CLS when owner data exists",
+        "lab diagnostics",
+        "transfer/request outliers",
+        "render-blocking/client-JS risk",
+        "image byte and intrinsic-vs-rendered inventory",
+        "responsive image variants/dimensions",
+        "offscreen lazy loading and critical/LCP image priority",
+        "font policy",
+        "compression/cache validators",
+        "third-party weight",
+        "layout shifts"
+      ]
     },
     {
       "id": "mobile-responsive-visual",
       "priority": "P1",
-      "checks": ["viewport/overflow", "mobile navigation/dialogs/sticky UI", "readability", "touch targets", "interstitial obstruction", "breakpoint hierarchy", "visual regressions"]
+      "checks": [
+        "viewport/overflow",
+        "mobile navigation/dialogs/sticky UI",
+        "readability",
+        "touch targets",
+        "interstitial obstruction",
+        "breakpoint hierarchy",
+        "visual regressions"
+      ]
     },
     {
       "id": "runtime-js-functionality",
       "priority": "P0",
-      "checks": ["raw-vs-rendered content parity", "console/network errors", "hydration", "SPA deep links/history", "links/buttons/menus/dialogs", "forms and validation", "search/filter/sort/pagination", "empty/error states", "downloads", "third-party failure resilience"]
+      "checks": [
+        "raw-vs-rendered content parity",
+        "console/network errors",
+        "hydration",
+        "SPA deep links/history",
+        "links/buttons/menus/dialogs",
+        "forms and validation",
+        "search/filter/sort/pagination",
+        "empty/error states",
+        "downloads",
+        "third-party failure resilience"
+      ]
     },
     {
       "id": "security-privacy",
       "priority": "P1",
-      "checks": ["HTTPS/mixed content", "security response headers", "framing/referrer/permissions policy applicability", "external script review", "cookies/analytics inventory", "privacy/consent applicability", "deeper app-security gate for accounts/uploads/forms", "no private owner data in public artifacts"]
+      "checks": [
+        "HTTPS/mixed content",
+        "security response headers",
+        "framing/referrer/permissions policy applicability",
+        "external script review",
+        "cookies/analytics inventory",
+        "privacy/consent applicability",
+        "deeper app-security gate for accounts/uploads/forms",
+        "no private owner data in public artifacts"
+      ]
     },
     {
       "id": "media-images-video-downloads",
       "priority": "P1",
-      "checks": ["media URL/content type", "exact image bytes and intrinsic dimensions", "largest rendered dimensions and responsive overdelivery", "format choice and quality-preserving optimization", "width/height and lazy/eager/fetch-priority policy", "semantic stable image filenames and reference integrity", "alt/context/captions/transcripts", "preferred/social images", "media sitemap applicability", "creator/provenance/license/visible credit truth", "publisher-specific image attribution policy", "duplicate/unused image variants", "download metadata"]
+      "checks": [
+        "media URL/content type",
+        "exact image bytes and intrinsic dimensions",
+        "largest rendered dimensions and responsive overdelivery",
+        "format choice and quality-preserving optimization",
+        "width/height and lazy/eager/fetch-priority policy",
+        "semantic stable image filenames and reference integrity",
+        "alt/context/captions/transcripts",
+        "preferred/social images",
+        "media sitemap applicability",
+        "creator/provenance/license/visible credit truth",
+        "publisher-specific image attribution policy",
+        "duplicate/unused image variants",
+        "download metadata"
+      ]
     },
     {
       "id": "localization-internationalization",
       "priority": "P1",
-      "checks": ["lang declaration", "localized route inventory", "hreflang equivalence", "untranslated gaps", "locale formatting", "locale switcher behavior", "localized metadata/structured-data parity"]
+      "checks": [
+        "lang declaration",
+        "localized route inventory",
+        "hreflang equivalence",
+        "untranslated gaps",
+        "locale formatting",
+        "locale switcher behavior",
+        "localized metadata/structured-data parity"
+      ]
     },
     {
       "id": "trust-identity-legal",
       "priority": "P1",
-      "checks": ["operator/publisher consistency", "about/contact/author identity when useful", "copyright/license/trademark", "privacy/data-use when applicable", "terms/refund/submission rules when applicable", "security contact when applicable", "corrections/version history when useful"]
+      "checks": [
+        "operator/publisher consistency",
+        "about/contact/author identity when useful",
+        "copyright/license/trademark",
+        "privacy/data-use when applicable",
+        "terms/refund/submission rules when applicable",
+        "security contact when applicable",
+        "corrections/version history when useful"
+      ]
     },
     {
       "id": "analytics-measurement-observability",
       "priority": "P1",
-      "checks": ["analytics configuration and duplicate firing", "important task/conversion events", "Search Console/Bing owner gates", "AI referrals/crawler logs when relevant", "provider-native denominators", "private measurement data kept out of public artifacts"]
+      "checks": [
+        "analytics configuration and duplicate firing",
+        "important task/conversion events",
+        "Search Console/Bing owner gates",
+        "AI referrals/crawler logs when relevant",
+        "provider-native denominators",
+        "private measurement data kept out of public artifacts"
+      ]
     },
     {
       "id": "ai-agent-readiness",
       "priority": "P1",
-      "checks": ["OAI-SearchBot policy separate from GPTBot", "useful HTML/text availability", "accurate control semantics", "truthful llms.txt/Agent Skills/API/MCP/A2A/WebMCP surfaces", "no implied side-effect authorization", "snippet/citation controls match publisher intent"]
+      "checks": [
+        "OAI-SearchBot policy separate from GPTBot",
+        "useful HTML/text availability",
+        "accurate control semantics",
+        "truthful llms.txt/Agent Skills/API/MCP/A2A/WebMCP surfaces",
+        "no implied side-effect authorization",
+        "snippet/citation controls match publisher intent"
+      ]
     },
     {
       "id": "feeds-manifests-api-machine-surfaces",
       "priority": "P2",
-      "checks": ["RSS/Atom when present", "web manifest/icons when present", "public JSON/CSV/API/download content types", "public data caching/CORS where applicable", "no stale/private resources in catalogs"]
+      "checks": [
+        "RSS/Atom when present",
+        "web manifest/icons when present",
+        "public JSON/CSV/API/download content types",
+        "public data caching/CORS where applicable",
+        "no stale/private resources in catalogs"
+      ]
     },
     {
       "id": "freshness-lifecycle-regression",
       "priority": "P1",
-      "checks": ["truthful sitemap lastmod", "date/version consistency", "deprecated-content handling", "shared-template blast radius", "re-audit changed pages and affected archetypes", "scheduled regression evidence"]
+      "checks": [
+        "truthful sitemap lastmod",
+        "date/version consistency",
+        "deprecated-content handling",
+        "shared-template blast radius",
+        "re-audit changed pages and affected archetypes",
+        "scheduled regression evidence"
+      ]
     }
   ],
   "conditionalPacks": [
-    {"id": "ecommerce-product", "trigger": "products, prices or checkout", "checks": ["Product/Offer parity", "ProductGroup variant relationships when genuine variants exist", "price/currency/availability", "seller identity", "MerchantReturnPolicy applicability and parity", "ShippingService/shippingDetails applicability and parity", "cart/checkout", "merchant-feed consistency"]},
-    {"id": "service-catalog", "trigger": "multiple public services/capabilities or geographic service scope", "checks": ["Service/provider identity", "OfferCatalog/Offer applicability", "service URLs", "areaServed truth", "service-to-provider relationships", "no LocalBusiness fabrication for online-only services"]},
-    {"id": "editorial-news", "trigger": "articles/news/recurring authors", "checks": ["author identity", "publication/modified dates", "article markup", "provenance/corrections", "archive/topic discovery"]},
-    {"id": "dataset-research", "trigger": "datasets/research/benchmarks", "checks": ["Dataset metadata", "creator/publisher and license", "DataDownload distributions", "DataCatalog membership when applicable", "license/version/checksums", "persistent identifiers", "methodology/provenance", "reproducible downloads", "citation instructions"]},
-    {"id": "tool-app-account", "trigger": "interactive app/accounts/uploads/saved state", "checks": ["authentication/accessibility", "error/recovery", "state persistence", "privacy lifecycle", "application-security review", "critical task completion"]},
-    {"id": "local-business", "trigger": "physical location/service area", "checks": ["name/address/phone", "hours", "map/contact route as user-facing utility", "LocalBusiness or truthful subtype applicability", "Place/PostalAddress graph", "GeoCoordinates/GeoShape truth when coordinates are published", "areaServed/service scope truth", "local-page uniqueness", "map embed not treated as structured-data completeness"]},
-    {"id": "media-heavy", "trigger": "video/audio/image-led content", "checks": ["captions/transcripts", "poster/thumbnail", "media metadata", "image byte/dimension/format inventory", "responsive delivery and loading priority", "stream/download behavior", "media sitemap", "creator/provenance/licensing/visible credits", "bandwidth"]}
+    {
+      "id": "ecommerce-product",
+      "trigger": "products, prices or checkout",
+      "checks": [
+        "Product/Offer parity",
+        "ProductGroup variant relationships when genuine variants exist",
+        "price/currency/availability",
+        "seller identity",
+        "MerchantReturnPolicy applicability and parity",
+        "ShippingService/shippingDetails applicability and parity",
+        "cart/checkout",
+        "merchant-feed consistency"
+      ]
+    },
+    {
+      "id": "service-catalog",
+      "trigger": "multiple public services/capabilities or geographic service scope",
+      "checks": [
+        "Service/provider identity",
+        "OfferCatalog/Offer applicability",
+        "service URLs",
+        "areaServed truth",
+        "service-to-provider relationships",
+        "no LocalBusiness fabrication for online-only services"
+      ]
+    },
+    {
+      "id": "editorial-news",
+      "trigger": "articles/news/recurring authors",
+      "checks": [
+        "author identity",
+        "publication/modified dates",
+        "article markup",
+        "provenance/corrections",
+        "archive/topic discovery"
+      ]
+    },
+    {
+      "id": "dataset-research",
+      "trigger": "datasets/research/benchmarks",
+      "checks": [
+        "Dataset metadata",
+        "creator/publisher and license",
+        "DataDownload distributions",
+        "DataCatalog membership when applicable",
+        "license/version/checksums",
+        "persistent identifiers",
+        "methodology/provenance",
+        "reproducible downloads",
+        "citation instructions"
+      ]
+    },
+    {
+      "id": "tool-app-account",
+      "trigger": "interactive app/accounts/uploads/saved state",
+      "checks": [
+        "authentication/accessibility",
+        "error/recovery",
+        "state persistence",
+        "privacy lifecycle",
+        "application-security review",
+        "critical task completion"
+      ]
+    },
+    {
+      "id": "local-business",
+      "trigger": "physical location/service area",
+      "checks": [
+        "name/address/phone",
+        "hours",
+        "map/contact route as user-facing utility",
+        "LocalBusiness or truthful subtype applicability",
+        "Place/PostalAddress graph",
+        "GeoCoordinates/GeoShape truth when coordinates are published",
+        "areaServed/service scope truth",
+        "local-page uniqueness",
+        "map embed not treated as structured-data completeness"
+      ]
+    },
+    {
+      "id": "media-heavy",
+      "trigger": "video/audio/image-led content",
+      "checks": [
+        "captions/transcripts",
+        "poster/thumbnail",
+        "media metadata",
+        "image byte/dimension/format inventory",
+        "responsive delivery and loading priority",
+        "stream/download behavior",
+        "media sitemap",
+        "creator/provenance/licensing/visible credits",
+        "bandwidth"
+      ]
+    }
   ],
   "completionReportRequired": [
     "coverage state and exact discovered/in-scope/audited/browser-tested/excluded/unknown counts",
@@ -191,25 +452,101 @@
     "no composite SEO/AI/accessibility/security score substituting for evidence"
   ],
   "sources": [
-    {"id": "google-search-essentials", "url": "https://developers.google.com/search/docs/essentials"},
-    {"id": "google-page-experience", "url": "https://developers.google.com/search/docs/appearance/page-experience"},
-    {"id": "google-structured-data", "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"},
-    {"id": "google-organization", "url": "https://developers.google.com/search/docs/appearance/structured-data/organization"},
-    {"id": "google-local-business", "url": "https://developers.google.com/search/docs/appearance/structured-data/local-business"},
-    {"id": "google-product", "url": "https://developers.google.com/search/docs/appearance/structured-data/product"},
-    {"id": "google-product-variants", "url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants"},
-    {"id": "google-return-policy", "url": "https://developers.google.com/search/docs/appearance/structured-data/return-policy"},
-    {"id": "google-dataset", "url": "https://developers.google.com/search/docs/appearance/structured-data/dataset"},
-    {"id": "schema-service", "url": "https://schema.org/Service"},
-    {"id": "schema-place", "url": "https://schema.org/Place"},
-    {"id": "schema-area-served", "url": "https://schema.org/areaServed"},
-    {"id": "google-js-seo", "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"},
-    {"id": "google-image-metadata", "url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"},
-    {"id": "mdn-img", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"},
-    {"id": "wcag22", "url": "https://www.w3.org/TR/WCAG22/"},
-    {"id": "web-vitals", "url": "https://web.dev/articles/vitals"},
-    {"id": "owasp-http-headers", "url": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html"},
-    {"id": "openai-publishers", "url": "https://help.openai.com/en/articles/12627856"},
-    {"id": "bing-webmaster-guidelines", "url": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a"}
+    {
+      "id": "google-search-essentials",
+      "url": "https://developers.google.com/search/docs/essentials"
+    },
+    {
+      "id": "google-people-first-content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+    },
+    {
+      "id": "google-ai-optimization",
+      "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"
+    },
+    {
+      "id": "google-page-experience",
+      "url": "https://developers.google.com/search/docs/appearance/page-experience"
+    },
+    {
+      "id": "google-title-links",
+      "url": "https://developers.google.com/search/docs/appearance/title-link"
+    },
+    {
+      "id": "google-snippets",
+      "url": "https://developers.google.com/search/docs/appearance/snippet"
+    },
+    {
+      "id": "google-structured-data",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"
+    },
+    {
+      "id": "google-organization",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/organization"
+    },
+    {
+      "id": "google-local-business",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/local-business"
+    },
+    {
+      "id": "google-product",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/product"
+    },
+    {
+      "id": "google-product-variants",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants"
+    },
+    {
+      "id": "google-return-policy",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/return-policy"
+    },
+    {
+      "id": "google-dataset",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/dataset"
+    },
+    {
+      "id": "schema-service",
+      "url": "https://schema.org/Service"
+    },
+    {
+      "id": "schema-place",
+      "url": "https://schema.org/Place"
+    },
+    {
+      "id": "schema-area-served",
+      "url": "https://schema.org/areaServed"
+    },
+    {
+      "id": "google-js-seo",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+    },
+    {
+      "id": "google-image-metadata",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata"
+    },
+    {
+      "id": "mdn-img",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img"
+    },
+    {
+      "id": "wcag22",
+      "url": "https://www.w3.org/TR/WCAG22/"
+    },
+    {
+      "id": "web-vitals",
+      "url": "https://web.dev/articles/vitals"
+    },
+    {
+      "id": "owasp-http-headers",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html"
+    },
+    {
+      "id": "openai-publishers",
+      "url": "https://help.openai.com/en/articles/12627856"
+    },
+    {
+      "id": "bing-webmaster-guidelines",
+      "url": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a"
+    }
   ]
 }
