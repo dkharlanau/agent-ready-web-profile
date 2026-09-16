@@ -26,6 +26,18 @@ The benchmark keeps unmeasured dimensions `unknown`, requires explicit evidence 
 
 Use `arwp-prepare-site` when the main task is to prepare, migrate or deeply audit an existing repository against the ARWP/Search/agent baseline. For a deep, complete, end-to-end or whole-site request it must inventory and reconcile every enumerable in-scope route first, run applicable deterministic checks page-complete, keep repository/build/deployed/rendered/owner evidence separate, and report explicit coverage. Bounded Site Gate, Technical Integrity, Growth and Internal Discovery cohorts remain preflight/specialist evidence; they are not a whole-site pass.
 
+## Site execution orchestration
+
+Whole-site ARWP application is composed through `registry/site-execution-manifest.json`. The manifest maps the canonical audit domains from `registry/comprehensive-site-audit.json` into maintainable execution modules and then conditionally invokes existing specialist skills.
+
+`rules → audit domains/contracts → modules → optional specialist skills → arwp-prepare-site → applicability matrix → repair/verify/re-audit → Surface Integrity → receipt`
+
+Do not create one Agent Skill per metadata field, HTML attribute, validator assertion or checklist item. Add/refine the check in its canonical registry, keep it inside an existing execution module when possible, add/split a module only when evidence or execution boundaries materially differ, and create a specialist skill only for a reusable independent multi-step workflow with its own inputs, references, verification or rollback semantics.
+
+Every site-wide application must produce one applicability row for every execution module. Omission is not `not-applicable`; unresolved applicability remains explicit and prevents a false full-coverage claim. Specialist output contributes evidence to the owning module and never replaces whole-site coverage.
+
+See `docs/SITE-EXECUTION-MODEL.md` for the maintenance contract and `scripts/site-execution-manifest-test.mjs` for drift protection.
+
 ## Repository stewardship
 
 Use `arwp-repository-stewardship` when repository entropy itself is the problem: suspected dead or duplicated files, unclear canonical/generated ownership, stale agent navigation, parallel roadmap/checkpoint files, committed local output or high comprehension cost.
@@ -55,6 +67,6 @@ The skill is deliberately conservative: an old, unfamiliar or unreferenced file 
 
 Use Search Maturity for reference evidence, Growth for prioritization/current rules, Repository Stewardship for repository structure/navigation/cleanup, Index Worthiness before broad generated-page Search publication, Measurement OS for interpreting provider evidence, Technical SEO Critic after the ordinary technical/Search release pass, Image Discovery when meaningful image assets deserve dedicated Search/Images/Discover handling, Internal Discovery when useful pages need stronger crawl paths, relation architecture, breadcrumbs, continuation or distribution utilities, Localization Quality whenever a locale is added or a feature changes a localizable surface, and Future Search only after current eligibility/foundation work is healthy. A mechanism can be valuable for open machine interoperability even when it is not a documented Google ranking requirement, but every experiment must stay grounded, reversible and separately measured.
 
-When repository edits are possible, inspect the stack, establish a baseline, select only applicable high-confidence work, implement it and run the site's build/tests plus relevant ARWP checks. For whole-site audits, preserve the page ledger and coverage state through the completion report. Leave credential-dependent or owner-side measurement work as explicit gates.
+When repository edits are possible, inspect the stack, establish a baseline, select only applicable high-confidence work, implement it and run the site's build/tests plus relevant ARWP checks. For whole-site audits, preserve the page ledger, module applicability matrix and coverage state through the completion report. Leave credential-dependent or owner-side measurement work as explicit gates.
 
 Do not claim that repository cleanup, ARWP adoption, localization completeness, internal-link volume, share/save/cite controls, image metadata, an image sitemap, a reference-cohort pattern, semantic index, Schema.org volume, `llms.txt`, Agent Skills or other metadata guarantees ranking, image indexing, Discover placement, AI citations, recommendations or traffic.
