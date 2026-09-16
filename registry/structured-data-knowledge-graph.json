@@ -1,0 +1,314 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-16",
+  "name": "ARWP Structured Data & Knowledge Graph Contract",
+  "purpose": "Provide a truthful, page-classified, relationship-aware contract for structured data across organizations, products, services, datasets, places, editorial content and other real entities.",
+  "truthBoundaries": [
+    "Structured data must describe visible first-party facts or explicitly linked public facts; it must not manufacture entities or business claims.",
+    "Schema.org vocabulary coverage is broader than Google Search feature eligibility. A valid Schema.org graph does not imply a rich result.",
+    "Google-required or recommended properties are feature-specific and can change; provider eligibility must be reviewed separately from semantic completeness.",
+    "A map embed is a user interface surface, not a substitute for truthful Place, PostalAddress, GeoCoordinates or areaServed semantics.",
+    "Stable @id values improve graph consistency but are not ranking signals.",
+    "A complete graph implementation does not prove indexing, ranking, Knowledge Panel inclusion, AI citation or business outcomes."
+  ],
+  "validationDimensions": [
+    "json-ld-parseability",
+    "page-type-fit",
+    "visible-fact-parity",
+    "stable-entity-identity",
+    "relationship-resolution",
+    "cross-page-identity-consistency",
+    "canonical-url-consistency",
+    "localization-parity",
+    "provider-feature-eligibility",
+    "deployed-output-verification"
+  ],
+  "identityPolicy": {
+    "preferredContext": "https://schema.org",
+    "idRule": "Use one stable absolute canonical @id for reusable first-class entities and reuse it across pages.",
+    "recommendedFragments": ["#website", "#organization", "#person", "#product", "#service", "#dataset", "#place"],
+    "sameAsRule": "Use sameAs only for URLs that identify the same entity, never for topical links, category pages or loosely related profiles.",
+    "duplicateRule": "The same @id must not resolve to conflicting names, types or materially different identities across pages."
+  },
+  "entityFamilies": [
+    {
+      "id": "site",
+      "types": ["WebSite"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name", "url"],
+      "relations": [{"property": "publisher", "targets": ["Organization", "Person"], "priority": "P1"}],
+      "notes": "One coherent site identity should reference the real publisher when that fact is known."
+    },
+    {
+      "id": "organization",
+      "types": ["Organization", "Corporation", "OnlineStore"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name", "url"],
+      "recommendedWhenKnown": ["logo", "sameAs", "contactPoint", "address", "email", "telephone", "legalName", "taxID", "vatID", "iso6523Code", "naics"],
+      "relations": [
+        {"property": "hasMerchantReturnPolicy", "targets": ["MerchantReturnPolicy"], "priority": "conditional"},
+        {"property": "hasShippingService", "targets": ["ShippingService"], "priority": "conditional"}
+      ],
+      "notes": "Google currently has no universally required Organization properties; ARWP's name/url/@id checks are identity-consistency requirements, not a Google eligibility claim."
+    },
+    {
+      "id": "local-business",
+      "types": ["LocalBusiness"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name", "address"],
+      "recommendedWhenKnown": ["telephone", "openingHours", "openingHoursSpecification", "geo", "url", "image"],
+      "relations": [
+        {"property": "address", "targets": ["PostalAddress"], "priority": "P1"},
+        {"property": "geo", "targets": ["GeoCoordinates", "GeoShape"], "priority": "P2"}
+      ],
+      "notes": "Use the most specific truthful LocalBusiness subtype when applicable. Never invent a physical location for an online-only business."
+    },
+    {
+      "id": "place",
+      "types": ["Place"],
+      "stableIdentity": "recommended-when-reused",
+      "coreProperties": ["name"],
+      "recommendedWhenKnown": ["address", "geo", "containedInPlace", "sameAs", "url"],
+      "relations": [
+        {"property": "address", "targets": ["PostalAddress"], "priority": "P2"},
+        {"property": "geo", "targets": ["GeoCoordinates", "GeoShape"], "priority": "P2"},
+        {"property": "containedInPlace", "targets": ["Place"], "priority": "P3"}
+      ],
+      "notes": "Place semantics represent a real location. They do not require an embedded map, and an embedded map does not replace them."
+    },
+    {
+      "id": "postal-address",
+      "types": ["PostalAddress"],
+      "stableIdentity": "optional-nested-value",
+      "coreProperties": [],
+      "recommendedWhenKnown": ["streetAddress", "addressLocality", "addressRegion", "postalCode", "addressCountry"]
+    },
+    {
+      "id": "geo",
+      "types": ["GeoCoordinates"],
+      "stableIdentity": "optional-nested-value",
+      "coreProperties": ["latitude", "longitude"],
+      "notes": "Coordinates must represent the real location and must not be inferred or fabricated merely to make markup complete."
+    },
+    {
+      "id": "service",
+      "types": ["Service"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name", "provider"],
+      "recommendedWhenKnown": ["description", "url", "serviceType", "areaServed", "offers", "audience"],
+      "relations": [
+        {"property": "provider", "targets": ["Organization", "Person"], "priority": "P1"},
+        {"property": "areaServed", "targets": ["AdministrativeArea", "GeoShape", "Place", "Text"], "priority": "conditional"},
+        {"property": "offers", "targets": ["Offer", "OfferCatalog"], "priority": "conditional"}
+      ],
+      "notes": "Prefer areaServed over the superseded serviceArea property. Geographic service scope must match the actual business/service scope."
+    },
+    {
+      "id": "offer-catalog",
+      "types": ["OfferCatalog"],
+      "stableIdentity": "recommended-when-reused",
+      "coreProperties": ["name"],
+      "relations": [{"property": "itemListElement", "targets": ["Offer", "OfferCatalog"], "priority": "P2"}]
+    },
+    {
+      "id": "product",
+      "types": ["Product"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name"],
+      "recommendedWhenKnown": ["description", "image", "brand", "sku", "gtin", "mpn", "offers", "isVariantOf", "review", "aggregateRating"],
+      "relations": [
+        {"property": "brand", "targets": ["Brand", "Organization"], "priority": "P2"},
+        {"property": "offers", "targets": ["Offer"], "priority": "conditional"},
+        {"property": "isVariantOf", "targets": ["ProductGroup"], "priority": "conditional"}
+      ],
+      "notes": "Do not invent offers, reviews or ratings to satisfy Search feature requirements."
+    },
+    {
+      "id": "product-group",
+      "types": ["ProductGroup"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name", "productGroupID", "variesBy", "hasVariant"],
+      "relations": [{"property": "hasVariant", "targets": ["Product"], "priority": "P1"}],
+      "notes": "Use ProductGroup only for genuine variants. Variant URLs and visible product facts must select the matching variant."
+    },
+    {
+      "id": "offer",
+      "types": ["Offer"],
+      "stableIdentity": "recommended-when-reused",
+      "coreProperties": [],
+      "recommendedWhenKnown": ["price", "priceCurrency", "availability", "url", "seller", "shippingDetails", "hasMerchantReturnPolicy"],
+      "relations": [
+        {"property": "seller", "targets": ["Organization", "Person"], "priority": "P2"},
+        {"property": "hasMerchantReturnPolicy", "targets": ["MerchantReturnPolicy"], "priority": "conditional"}
+      ]
+    },
+    {
+      "id": "merchant-return-policy",
+      "types": ["MerchantReturnPolicy"],
+      "stableIdentity": "optional-nested-value",
+      "coreProperties": [],
+      "recommendedWhenKnown": ["applicableCountry", "returnPolicyCountry", "returnPolicyCategory", "merchantReturnDays", "returnMethod", "returnFees", "refundType"],
+      "notes": "Organization-level policy describes the standard merchant policy; Offer-level policy can override a specific product when supported by the page/business facts."
+    },
+    {
+      "id": "shipping-service",
+      "types": ["ShippingService"],
+      "stableIdentity": "recommended-when-reused",
+      "coreProperties": ["name"],
+      "recommendedWhenKnown": ["description", "fulfillmentType", "shippingConditions"]
+    },
+    {
+      "id": "dataset",
+      "types": ["Dataset"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name", "creator|publisher", "license"],
+      "recommendedWhenKnown": ["description", "identifier", "version", "distribution", "includedInDataCatalog", "datePublished", "dateModified", "isBasedOn", "sameAs"],
+      "relations": [
+        {"property": "creator", "targets": ["Person", "Organization"], "priority": "P1"},
+        {"property": "publisher", "targets": ["Person", "Organization"], "priority": "P1"},
+        {"property": "distribution", "targets": ["DataDownload"], "priority": "conditional"},
+        {"property": "includedInDataCatalog", "targets": ["DataCatalog"], "priority": "conditional"}
+      ],
+      "notes": "citation is for related publications; do not use it as the dataset's own identifier."
+    },
+    {
+      "id": "data-catalog",
+      "types": ["DataCatalog"],
+      "stableIdentity": "recommended-when-reused",
+      "coreProperties": ["name"]
+    },
+    {
+      "id": "data-download",
+      "types": ["DataDownload"],
+      "stableIdentity": "optional-nested-value",
+      "coreProperties": ["contentUrl|url"],
+      "recommendedWhenKnown": ["encodingFormat", "contentSize", "sha256"]
+    },
+    {
+      "id": "article",
+      "types": ["Article", "BlogPosting", "NewsArticle", "TechArticle", "ScholarlyArticle"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["headline|name", "author"],
+      "recommendedWhenKnown": ["datePublished", "dateModified", "publisher", "image", "mainEntityOfPage", "about"],
+      "relations": [
+        {"property": "author", "targets": ["Person", "Organization"], "priority": "P1"},
+        {"property": "publisher", "targets": ["Organization", "Person"], "priority": "P2"}
+      ]
+    },
+    {
+      "id": "event",
+      "types": ["Event", "PublicationEvent"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name", "startDate", "location"],
+      "recommendedWhenKnown": ["endDate", "organizer", "performer", "offers", "eventStatus"],
+      "relations": [
+        {"property": "location", "targets": ["Place", "VirtualLocation"], "priority": "P1"},
+        {"property": "organizer", "targets": ["Organization", "Person"], "priority": "P2"}
+      ],
+      "notes": "Google event rich-result eligibility is narrower than Schema.org Event semantics; online publication milestones must not be presented as eligible physical public events without satisfying provider requirements."
+    },
+    {
+      "id": "image",
+      "types": ["ImageObject"],
+      "stableIdentity": "recommended-when-reused",
+      "coreProperties": ["contentUrl|url"],
+      "recommendedWhenKnown": ["creator", "creditText", "copyrightNotice", "license", "acquireLicensePage", "width", "height", "encodingFormat"]
+    },
+    {
+      "id": "breadcrumb",
+      "types": ["BreadcrumbList"],
+      "stableIdentity": "optional-page-structure",
+      "coreProperties": ["itemListElement"],
+      "notes": "BreadcrumbList must reflect a real useful hierarchy and must not create fake parent pages."
+    },
+    {
+      "id": "term",
+      "types": ["DefinedTerm"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name"],
+      "recommendedWhenKnown": ["description", "termCode", "inDefinedTermSet"],
+      "relations": [{"property": "inDefinedTermSet", "targets": ["DefinedTermSet"], "priority": "P2"}]
+    },
+    {
+      "id": "term-set",
+      "types": ["DefinedTermSet"],
+      "stableIdentity": "required-for-arwp-maturity",
+      "coreProperties": ["name"],
+      "recommendedWhenKnown": ["hasDefinedTerm", "about"]
+    }
+  ],
+  "relationshipChecks": [
+    {"source": ["WebSite"], "property": "publisher", "target": ["Organization", "Person"], "priority": "P1"},
+    {"source": ["Service"], "property": "provider", "target": ["Organization", "Person"], "priority": "P1"},
+    {"source": ["Service", "Organization", "Offer"], "property": "areaServed", "target": ["AdministrativeArea", "GeoShape", "Place", "Text"], "priority": "conditional"},
+    {"source": ["LocalBusiness", "Place"], "property": "address", "target": ["PostalAddress"], "priority": "P1"},
+    {"source": ["LocalBusiness", "Place"], "property": "geo", "target": ["GeoCoordinates", "GeoShape"], "priority": "P2"},
+    {"source": ["ProductGroup"], "property": "hasVariant", "target": ["Product"], "priority": "P1"},
+    {"source": ["Product"], "property": "isVariantOf", "target": ["ProductGroup"], "priority": "conditional"},
+    {"source": ["Product"], "property": "offers", "target": ["Offer"], "priority": "conditional"},
+    {"source": ["Organization"], "property": "hasMerchantReturnPolicy", "target": ["MerchantReturnPolicy"], "priority": "conditional"},
+    {"source": ["Organization"], "property": "hasShippingService", "target": ["ShippingService"], "priority": "conditional"},
+    {"source": ["Dataset"], "property": "distribution", "target": ["DataDownload"], "priority": "conditional"},
+    {"source": ["Dataset"], "property": "includedInDataCatalog", "target": ["DataCatalog"], "priority": "conditional"},
+    {"source": ["Article", "BlogPosting", "NewsArticle", "TechArticle", "ScholarlyArticle"], "property": "author", "target": ["Person", "Organization"], "priority": "P1"},
+    {"source": ["Event", "PublicationEvent"], "property": "location", "target": ["Place", "VirtualLocation"], "priority": "P1"}
+  ],
+  "conditionalPacks": [
+    {
+      "id": "physical-location",
+      "trigger": "A real physical location or locally served area materially affects the page or business.",
+      "types": ["LocalBusiness", "Place", "PostalAddress", "GeoCoordinates", "GeoShape"],
+      "checks": ["visible address/location parity", "truthful coordinates when present", "areaServed/service scope", "map/contact route usefulness", "no fake local landing pages"]
+    },
+    {
+      "id": "commerce",
+      "trigger": "Products, prices, availability, checkout, shipping or returns are part of the public offer.",
+      "types": ["Product", "ProductGroup", "Offer", "MerchantReturnPolicy", "ShippingService"],
+      "checks": ["variant identity", "price/currency/availability parity", "seller identity", "shipping policy parity", "return policy parity", "merchant/feed owner-data reconciliation"]
+    },
+    {
+      "id": "service-catalog",
+      "trigger": "The site publishes multiple real services or capabilities.",
+      "types": ["Service", "OfferCatalog", "Offer"],
+      "checks": ["provider resolution", "service URL", "areaServed when geographic", "catalog relationships", "visible offer facts"]
+    },
+    {
+      "id": "dataset-publication",
+      "trigger": "The site contains a genuine reusable dataset/corpus/research release.",
+      "types": ["Dataset", "DataCatalog", "DataDownload"],
+      "checks": ["creator/publisher", "license", "identifier/version", "distribution", "methodology/provenance", "persistent archive/DOI when externally issued"]
+    }
+  ],
+  "severity": {
+    "P0": ["invalid JSON-LD that breaks the intended graph", "materially deceptive structured data", "same @id used for conflicting real entities"],
+    "P1": ["missing stable identity for a reusable first-class entity", "missing core relation such as Service.provider or Article.author", "structured facts contradict visible first-party facts"],
+    "P2": ["important graph relation missing where the fact is already known", "reusable entity isolated from the rest of the graph", "recommended enrichment absent where it improves resolvability"],
+    "P3": ["optional semantic enrichment supported by real facts"]
+  },
+  "antiPatterns": [
+    "universal schema bundle on every page",
+    "machine-only facts absent from visible content",
+    "invented address, coordinates or service area",
+    "LocalBusiness used for an online-only business without a real local presence",
+    "ProductGroup used without genuine variants",
+    "fabricated offers, prices, availability, ratings or reviews",
+    "return/shipping policies that disagree with the actual merchant policy",
+    "sameAs used as a topical link",
+    "multiple conflicting Organization or Product nodes for the same @id",
+    "public map embed treated as structured-data completeness",
+    "valid Schema.org treated as proof of a Google rich result"
+  ],
+  "sources": [
+    {"id": "google-structured-data-policy", "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"},
+    {"id": "google-organization", "url": "https://developers.google.com/search/docs/appearance/structured-data/organization"},
+    {"id": "google-local-business", "url": "https://developers.google.com/search/docs/appearance/structured-data/local-business"},
+    {"id": "google-product", "url": "https://developers.google.com/search/docs/appearance/structured-data/product"},
+    {"id": "google-product-variants", "url": "https://developers.google.com/search/docs/appearance/structured-data/product-variants"},
+    {"id": "google-return-policy", "url": "https://developers.google.com/search/docs/appearance/structured-data/return-policy"},
+    {"id": "google-dataset", "url": "https://developers.google.com/search/docs/appearance/structured-data/dataset"},
+    {"id": "schema-service", "url": "https://schema.org/Service"},
+    {"id": "schema-place", "url": "https://schema.org/Place"},
+    {"id": "schema-area-served", "url": "https://schema.org/areaServed"},
+    {"id": "schema-offer-catalog", "url": "https://schema.org/OfferCatalog"}
+  ]
+}
