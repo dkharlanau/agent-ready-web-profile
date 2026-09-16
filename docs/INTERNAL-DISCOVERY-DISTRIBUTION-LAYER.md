@@ -1,10 +1,10 @@
 # Internal Discovery & Distribution Layer
 
-Status: source-backed Search/product-distribution layer · reviewed 2026-09-11
+Status: source-backed Search/product-distribution layer · reviewed 2026-09-16
 
 This layer extends the existing Internal Discovery Evidence contract from graph observation into an implementation contract for how useful pages connect, continue, get cited and get shared.
 
-The canonical practices live in `registry/internal-discovery-distribution-practices.json`. The executable bounded graph remains `lib/internal-discovery.mjs` / `bin/arwp-internal-discovery.mjs` and keeps its existing evidence limits.
+The canonical general practices live in `registry/internal-discovery-distribution-practices.json`. Canonical content/detail pages additionally follow the stricter `registry/content-page-quality-contract.json`. The executable bounded graph remains `lib/internal-discovery.mjs` / `bin/arwp-internal-discovery.mjs` and keeps its existing evidence limits. Partial or capped graph coverage stays explicitly partial and must never be promoted to complete-site evidence.
 
 ## Why this exists
 
@@ -71,25 +71,29 @@ Evidence    → Reviewed research notes
 
 The labels are product semantics, not Google link categories. A page may legitimately be terminal when there is no useful next action.
 
-## Page utility bar
+## Page distribution and utility controls
 
-Useful reference pages can benefit from a compact utility surface such as:
+There are now two applicability levels.
 
-```text
-Reviewed Sep 2026 · 6 min · Save · Share · Copy link · Cite
-```
+For ordinary pages such as the homepage, hubs, search results, legal/auth/error routes and non-content utilities, distribution controls remain product-dependent. Do not inject the same sitewide block merely to satisfy a count.
 
-or, for a practical resource:
+For canonical content/detail pages — articles, guides, documentation/reference/research detail, case studies, glossary/resource detail and comparable substantive pages — the stricter Content Page Quality contract applies. These pages must expose an end-of-content distribution footer with:
 
 ```text
-Evidence: reviewed · Print · Save · Share · Copy protocol
+Share · Copy link · [direct provider 1] · [direct provider 2]
 ```
 
-Keep the content primary. Utilities should not become a floating wall of social icons or block reading.
+The site chooses audience-appropriate providers; common examples include LinkedIn, X, Facebook, Bluesky, Telegram and WhatsApp. The contract requires at least two direct provider destinations in addition to Share and Copy link. All actions use the canonical URL.
+
+Optional utilities such as `Save`, `Cite`, `Copy Markdown link` and `Print` remain applicability-driven. Keep content primary: the footer must not become a sticky/floating wall of icons or obstruct reading.
+
+Full strict contract: `docs/CONTENT-PAGE-QUALITY-CONTRACT.md`.
 
 ### Share
 
-Use the Web Share API only as progressive enhancement. Provide a canonical copy-link fallback when the API is unavailable. Share controls are distribution UX; they are not treated as ranking factors.
+Use the Web Share API only as progressive enhancement from user activation. Feature-detect support and keep `Copy link` as the universal fallback. Cancellation/rejection is not a successful share. Direct provider targets must be runtime-tested because external share endpoints can change independently of the repository.
+
+Share controls are distribution UX; they are not treated as ranking factors.
 
 Reference: https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API
 
@@ -103,9 +107,13 @@ Reference: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
 
 Reference sites can expose a short citation or Markdown-link utility when the source metadata is trustworthy. Use the canonical URL and real publisher/review/publication information. Never invent an author, review date, DOI or formal publication status merely to make the citation look stronger.
 
+### Feedback / reactions
+
+A like/dislike or `Was this useful?` control is not required. If it exists, it must have a real analytics/backend/issue/feedback sink or be explicitly labelled local-only. Do not show fake aggregate counts and do not report success before the configured sink accepts the event.
+
 ## Preferred Sources
 
-Google now documents a publisher-facing Preferred Sources button/deeplink. For sites that are available in the source-preferences tool, it can be a legitimate audience/distribution affordance. It remains optional and should be secondary to the content.
+Google documents a publisher-facing Preferred Sources button/deeplink. For sites that are available in the source-preferences tool, it can be a legitimate audience/distribution affordance. It remains optional and should be secondary to the content.
 
 Primary source: https://developers.google.com/search/docs/appearance/preferred-sources
 
@@ -116,7 +124,7 @@ Important boundaries:
 - adding a button does not become a general ranking requirement;
 - it does not replace ordinary internal links, content quality, external discovery or owner-side measurement.
 
-## Regression-safe graph gate
+## Regression-safe graph and distribution gate
 
 A strong static/data site should be able to detect deterministic regressions such as:
 
@@ -126,7 +134,8 @@ A strong static/data site should be able to detect deterministic regressions suc
 - a relation target becoming a redirect, canonical alias, missing page or noindex state;
 - required breadcrumbs disappearing or diverging from structured data;
 - a `Continue from here` contract disappearing from a page family that intentionally requires it;
-- canonical share/citation URLs drifting to tracking parameters or aliases.
+- canonical share/citation URLs drifting to tracking parameters or aliases;
+- a content/detail layout losing its required distribution footer, Share/Copy controls or direct provider destinations across the family.
 
 Keep heuristic findings as review/watch states. Do not fail CI because a page has fewer than an arbitrary number of links, and do not emit PageRank-like authority scores.
 
@@ -139,7 +148,15 @@ node bin/arwp-internal-discovery.mjs https://example.com/ --max-pages=20 --json 
 node bin/arwp-internal-discovery.mjs validate internal-discovery.json
 ```
 
-Read `docs/INTERNAL-DISCOVERY-EVIDENCE.md` for coverage limits, node classes, partial observations, redirect/canonical transitions and evidence precedence.
+Use Content Page Quality for deterministic final-artifact evidence:
+
+```bash
+node bin/arwp.mjs content-page-quality <build-dir> --base-url=https://example.com/ --include='^guides/' --strict
+```
+
+The content-page command never guesses that all HTML is content/detail. Classify pages explicitly with the page marker, `--include`, or `--all-html` only when that is actually true. Runtime-test each distinct Share/Copy/provider implementation separately.
+
+Read `docs/INTERNAL-DISCOVERY-EVIDENCE.md` for graph coverage limits and `docs/CONTENT-PAGE-QUALITY-CONTRACT.md` for the strict content/detail page contract.
 
 ## Outcome boundary
 

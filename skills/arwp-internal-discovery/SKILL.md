@@ -15,6 +15,7 @@ Use this skill when a multi-page site has good pages but weak traversal, unclear
 Read first:
 
 - `registry/internal-discovery-distribution-practices.json`
+- `registry/content-page-quality-contract.json` when content/detail pages exist
 - `docs/INTERNAL-DISCOVERY-EVIDENCE.md`
 - `docs/INTERNAL-DISCOVERY-DISTRIBUTION-LAYER.md`
 - `registry/search-release-practices.json`
@@ -47,11 +48,12 @@ node bin/arwp-internal-discovery.mjs https://example.com/ --max-pages=20 --json
 6. Build semantic relations only from real relationships. Useful relation labels include `Often confused with`, `Compared with`, `Appears in`, `Use with`, `Evidence`, `Practice` and `Used by`. Add reverse links where the same relationship genuinely helps the reverse journey.
 7. For hierarchical content, align visible breadcrumbs with a typical user path. Add or verify `BreadcrumbList` only when it truthfully represents that hierarchy; do not fabricate folder-like categories merely to create markup.
 8. On non-terminal page families, add a compact continuation block. Prefer different jobs such as `Understand`, `Apply`, `Compare`, `Evidence` or `Use a tool` over a generic wall of related articles.
-9. Consider a compact page utility bar when it fits the product: `Reviewed`, reading time/status, `Save`, `Share`, `Copy link`, `Cite`, `Print`. Share should progressively enhance through the Web Share API with a copy-link fallback. Copy/citation must use the canonical URL. Local save should remain local/private unless the product explicitly owns authenticated server state.
-10. For citable reference pages, generate citations only from truthful metadata. Never invent authors, review dates, DOIs or publication history.
-11. For eligible publishers, review Google's current Preferred Sources feature as an optional audience/distribution affordance. Check applicability before prominent promotion; never call the button a ranking requirement.
-12. Add deterministic CI for the target site's actual contract: canonical target health, orphan/global-only regressions in a complete cohort, required reverse links/continuation blocks, breadcrumb parity and selected anchor-quality rules. Preserve unknown/partial states and avoid an authority score.
-13. Re-run final generated/public evidence after all post-processing. Measure Search, referrals, shares, return use and task outcomes separately over time.
+9. Classify whether each canonical page is a content/detail page under `registry/content-page-quality-contract.json`. For every applicable content/detail page, render a compact end-of-content distribution footer containing `Share`, `Copy link` and at least two audience-appropriate direct provider share destinations. Native Share progressively enhances through the Web Share API; Copy link remains the universal fallback. All share/copy/citation actions use the canonical URL. For pages outside that contract, utility controls remain applicability-driven rather than globally injected.
+10. Add `Save`, `Cite`, `Copy Markdown link` or `Print` only when they serve the page. Local save remains local/private unless the product explicitly owns authenticated server state. For citable reference pages, generate citations only from truthful metadata. Never invent authors, review dates, DOIs or publication history.
+11. Do not add like/dislike or `Was this useful?` merely as decoration. If feedback is present, require a real analytics/backend/issue/feedback sink or explicit local-only semantics; never show fake aggregate counts or a success state before the configured sink accepts the event.
+12. For eligible publishers, review Google's current Preferred Sources feature as an optional audience/distribution affordance. Check applicability before prominent promotion; never call the button a ranking requirement.
+13. Add deterministic CI for the target site's actual contract: canonical target health, orphan/global-only regressions in a complete cohort, required reverse links/continuation blocks, breadcrumb parity, content-page distribution-footer coverage and selected anchor-quality rules. Preserve unknown/partial states and avoid an authority score.
+14. Re-run final generated/public evidence after all post-processing. Runtime-test each distinct Share/Copy/footer implementation and every changed/high-risk page. Measure Search, referrals, share intents/clicks, return use and task outcomes separately over time.
 
 ## Target-site implementation pattern
 
@@ -61,25 +63,29 @@ For a structured knowledge site, a strong implementation usually has:
 - explicit relation types and deterministic reverse-link generation;
 - visible breadcrumbs plus matching `BreadcrumbList` for hierarchical page families;
 - a small `Continue from here` block with distinct user jobs;
-- a compact utility bar whose JS is progressive enhancement and whose links/actions do not hide the article;
+- a mandatory end-of-content distribution footer on content/detail pages, with native Share + Copy link fallback + at least two configured direct provider shares;
+- optional Save/Cite/Print controls only where they add product value;
 - canonical-URL copy/share/citation behavior;
 - optional localStorage bookmarks with no account requirement;
-- a graph checker that rejects broken/alias targets and verifies required relation reciprocity.
+- no reaction counter or success state without a real persistence/measurement contract;
+- a graph/page-family checker that rejects broken/alias targets and verifies required relation reciprocity and distribution-footer coverage.
 
-Do not inject the same sitewide block into every page merely to improve graph counts. Do not turn every taxonomy relationship into a visible link. Use the smallest relation set that genuinely helps the page's user journey.
+Do not inject the same distribution block into homepage, hubs, auth/legal/error/utility pages merely to satisfy a count. Do not turn every taxonomy relationship into a visible link. Use the smallest relation set that genuinely helps the page's user journey.
 
 ## Output contract
 
 Report:
 
 - reviewed page/link cohort and coverage limits;
+- content/detail page classification and distribution-footer coverage;
 - orphan/global-only/continuation findings;
 - canonical target and redirect/alias health;
 - anchor-text findings;
 - related/reverse relation architecture;
 - breadcrumb implementation and structured-data parity;
 - continuation and page-utility implementation;
-- share/copy/save/cite/Preferred Source applicability separately from SEO claims;
+- Share/Copy/direct-provider runtime evidence, plus Save/Cite/Preferred Source applicability separately from SEO claims;
+- feedback/reaction sink integrity when feedback UI exists;
 - deterministic CI/regression coverage;
 - remaining owner-data or live outcome gates.
 

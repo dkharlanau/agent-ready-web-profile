@@ -99,10 +99,11 @@ export const validationPhases = Object.freeze({
     ])
   }),
   'core-supplemental': Object.freeze({
-    description: 'Supplemental repository contract checks that historically closed npm test.',
+    description: 'Supplemental repository contract checks that close npm test.',
     commands: Object.freeze([
       node('scripts/discoverability-test.mjs', '--site'),
       node('scripts/agent-skills-test.mjs'),
+      node('scripts/content-page-quality-test.mjs'),
       node('scripts/portfolio-workspace-test.mjs'),
       node('scripts/evidence-relay-test.mjs')
     ])

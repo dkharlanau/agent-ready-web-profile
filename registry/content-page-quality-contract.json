@@ -1,0 +1,244 @@
+{
+  "version": "0.1",
+  "reviewedAt": "2026-09-16",
+  "title": "ARWP Content Page Quality Contract",
+  "purpose": "Define a strict, executable quality floor for canonical content/detail pages so search appearance, social previews, sharing, page semantics and distribution controls are not applied selectively.",
+  "mode": "strict-applicability-ledger",
+  "truthBoundaries": [
+    "A metadata declaration is not proof that a search engine or social platform selected it.",
+    "A share button is distribution UX, not a ranking signal.",
+    "A passing repository/build check is not proof that the deployed or rendered control works.",
+    "A feedback control without a real storage or analytics sink must not imply that feedback was recorded.",
+    "A social image is a page-distribution asset and must not be confused with the hostname favicon or a Search ranking requirement."
+  ],
+  "applicability": {
+    "requiredPageFamilies": [
+      "article",
+      "blog-post",
+      "guide",
+      "documentation-detail",
+      "reference-detail",
+      "research-detail",
+      "case-study",
+      "glossary-term",
+      "resource-detail",
+      "product-or-tool-detail-with-substantive-content"
+    ],
+    "notApplicableByDefault": [
+      "homepage",
+      "hub-or-listing",
+      "search-results",
+      "authentication",
+      "privacy-or-terms",
+      "error-route",
+      "redirect-alias",
+      "noindex-utility",
+      "non-html-resource"
+    ],
+    "rule": "Classify every canonical HTML route before evaluation. A content/detail page may not opt out of this contract merely because a shared template, framework default or earlier audit omitted the capability.",
+    "notApplicableRequiresReason": true
+  },
+  "enforcement": {
+    "priorityDoesNotPermitSkipping": true,
+    "everyApplicableRequirementMustEmitState": true,
+    "allowedStates": ["pass", "fail", "watch", "owner-data", "not-applicable", "unknown"],
+    "strictPass": "Every applicable P0 and P1 deterministic requirement passes in the final build artifact; runtime-dependent requirements have rendered evidence or an explicit unknown/watch state; every P2 requirement is evaluated rather than silently skipped.",
+    "p0FailureBlocksStrictRelease": true,
+    "p1FailureBlocksStrictQualityPass": true,
+    "unknownIsNotPass": true
+  },
+  "distributionFooter": {
+    "placement": "After the primary content and before broad sitewide/footer navigation unless the page layout has an equivalent end-of-content utility region.",
+    "requiredActions": ["Share", "Copy link"],
+    "directShareTargets": {
+      "minimum": 2,
+      "policy": "Provide at least two explicit provider destinations appropriate to the site's audience in addition to native Share and Copy link. Typical candidates include LinkedIn, X, Facebook, Bluesky, Telegram and WhatsApp. The publisher may choose the set, but the chosen links must be runtime-tested and must share the canonical URL."
+    },
+    "optionalActions": ["Save", "Cite", "Print", "Copy Markdown link"],
+    "contentPrimary": true
+  },
+  "requirements": [
+    {
+      "id": "CPQ-01-page-identity-and-indexability",
+      "priority": "P0",
+      "question": "Does the final content page have one coherent canonical identity and the intended crawl/index state?",
+      "requirement": "Every applicable content/detail page must expose a non-empty page-specific title, page-specific meta description, document language, viewport, one intended canonical URL and an intentional robots/indexability state. Canonical, sitemap, structured-data URLs, Open Graph URL and share payload must converge on the same public page identity.",
+      "verify": [
+        "title and meta description are page-specific rather than inherited boilerplate",
+        "html lang and viewport are present and appropriate",
+        "exactly one intended canonical URL is emitted",
+        "intended index pages are not accidentally noindex or blocked",
+        "canonical, sitemap, JSON-LD, og:url and share URL do not disagree"
+      ],
+      "sources": ["googleCanonical", "googleSnippets", "googleTitleLinks"]
+    },
+    {
+      "id": "CPQ-02-search-snippet-surface",
+      "priority": "P0",
+      "question": "Would the page still produce a useful search-result title and snippet if the engine chose visible page text instead of the declared metadata?",
+      "requirement": "Keep title sources, H1/prominent heading, opening copy and meta description coherent. The opening content must state the page's purpose or value. Keep repetitive share, consent and utility chrome from becoming the strongest snippet candidate; use data-nosnippet only for non-essential UI when justified.",
+      "verify": [
+        "title, primary heading and og:title do not contradict the page job",
+        "visible opening copy is independently useful",
+        "meta description is useful but is not treated as guaranteed snippet text",
+        "utility/share boilerplate does not dominate the leading extract",
+        "substantive content is not hidden behind nosnippet controls"
+      ],
+      "sources": ["googleTitleLinks", "googleSnippets"]
+    },
+    {
+      "id": "CPQ-03-social-preview-metadata",
+      "priority": "P0",
+      "question": "When the canonical page URL is pasted into a social or messaging product, does the final HTML expose a coherent intentional preview?",
+      "requirement": "Every applicable page must expose Open Graph title, description, canonical URL, type and an intentional representative image. The image URL must be absolute HTTPS, fetchable and relevant to the page. Include og:image:alt and, when known, width, height and media type. Publish explicit card compatibility metadata for the site's supported social targets rather than relying on accidental template inheritance.",
+      "verify": [
+        "og:title and og:description describe this page",
+        "og:url equals the intended canonical URL",
+        "og:type is intentional for the page family",
+        "og:image resolves successfully with an image content type and is not an unrelated site/logo fallback unless that fallback is intentional",
+        "og:image:alt is meaningful and card metadata does not leak another page or site's identity"
+      ],
+      "sources": ["openGraph", "googleCanonical", "googleTitleLinks"]
+    },
+    {
+      "id": "CPQ-04-representative-share-image",
+      "priority": "P1",
+      "question": "Is the share image a useful page-specific visual asset rather than a missing, tiny, generic or contradictory image?",
+      "requirement": "Prefer a dedicated page-relevant share image for substantive content. ARWP's interoperable default is a 1.91:1 social card around 1200x630 when the site's target platforms support it; this is a product default, not an Open Graph or ranking requirement. Keep the social image, page preferred image and structured-data image semantically coherent while allowing platform-specific renditions.",
+      "verify": [
+        "image dimensions are sufficient for the intended card layout",
+        "the important subject/text remains legible in common crops",
+        "the asset is not a screenshot containing private/debug UI",
+        "preferred-image metadata does not point to a contradictory generic asset",
+        "image generation/versioning does not fabricate page freshness"
+      ],
+      "sources": ["openGraph", "googleArticle", "googleImageSEO"]
+    },
+    {
+      "id": "CPQ-05-end-of-content-sharing",
+      "priority": "P0",
+      "question": "Can a reader who reaches the end of the content share the canonical page without manually reconstructing its URL?",
+      "requirement": "Render a compact distribution footer at the end of every applicable content/detail page. It must contain Share and Copy link plus at least two explicit provider share destinations chosen for the audience. Native Share should progressively enhance through navigator.share when available; Copy link remains the universal fallback. All actions use the canonical URL and page-specific title/text.",
+      "verify": [
+        "distribution footer is present after the primary content on every applicable page",
+        "Share invokes native Web Share only from a user action and falls back safely when unavailable or rejected",
+        "Copy link copies the canonical URL and exposes a clear success/failure state",
+        "at least two configured direct provider share links work with correctly encoded canonical URL/title text",
+        "share controls remain secondary to the article and do not obscure reading"
+      ],
+      "sources": ["mdnWebShare", "openGraph"]
+    },
+    {
+      "id": "CPQ-06-sharing-accessibility-and-resilience",
+      "priority": "P0",
+      "question": "Do share controls remain usable with keyboard, assistive technology, unsupported APIs and failed external launches?",
+      "requirement": "Sharing controls must be semantic buttons/links with meaningful accessible names, visible keyboard focus and non-color-only state. Icon-only controls require accessible labels. Feature-detect navigator.share/navigator.canShare where appropriate, preserve a copy-link fallback, and never make content access depend on JavaScript sharing support.",
+      "verify": [
+        "controls expose usable accessible names",
+        "keyboard focus is visible and controls are operable without pointer-only gestures",
+        "unsupported Web Share does not remove the fallback path",
+        "cancel/rejection/failure is not presented as a successful share",
+        "the primary content remains readable if sharing JavaScript fails"
+      ],
+      "sources": ["mdnWebShare", "wcag22"]
+    },
+    {
+      "id": "CPQ-07-structured-content-semantics",
+      "priority": "P1",
+      "question": "Does machine-readable page semantics truthfully describe the visible content and reuse stable entities?",
+      "requirement": "Use a page-appropriate WebPage/Article/BlogPosting/TechArticle or other applicable schema type only when it truthfully matches the visible page. Reuse canonical URLs and stable publisher/author identifiers. Publication/modified dates, authors, image and provenance fields must come from real source data rather than build time or invented metadata.",
+      "verify": [
+        "JSON-LD parses",
+        "schema type fits the visible page",
+        "mainEntity/publisher/author identities are stable where used",
+        "dates and authorship are grounded in real content data",
+        "schema image/canonical URLs do not contradict the visible/social page identity"
+      ],
+      "sources": ["googleStructuredData", "googleArticle", "googleCanonical"]
+    },
+    {
+      "id": "CPQ-08-favicon-and-page-image-separation",
+      "priority": "P1",
+      "question": "Are site identity icons and page-distribution images both present for their own jobs without being conflated?",
+      "requirement": "Keep the hostname favicon/site icon as a stable site-identity asset and the page share/preferred image as a content asset. A generic favicon must not silently become the page share image, and a page hero/share image must not replace the hostname identity contract.",
+      "verify": [
+        "favicon is stable, square, crawlable and recognizable at small size",
+        "content pages have an intentional representative image or an explicitly justified fallback",
+        "favicon and og:image references serve different documented roles",
+        "no cross-site favicon or social-image identity leakage occurs",
+        "final deployed assets return successful image responses"
+      ],
+      "sources": ["googleFavicons", "openGraph", "googleImageSEO"]
+    },
+    {
+      "id": "CPQ-09-feedback-integrity",
+      "priority": "P1",
+      "question": "If the page asks whether it was useful or shows reaction state, is there a real persistence/measurement contract behind the UI?",
+      "requirement": "Do not render fake like/dislike counters or imply that a vote was recorded when no durable sink exists. A 'Was this useful? Yes/No' control is allowed only when it sends to a real analytics/backend/issue/feedback sink with documented success and failure behavior, or when it is explicitly labelled as local-only state. If no sink exists, omit the reaction control rather than simulate engagement.",
+      "verify": [
+        "feedback sink or explicit local-only behavior is documented",
+        "success UI is shown only after the configured sink accepts/records the event",
+        "public counters are backed by real aggregate data or are absent",
+        "failure/retry behavior is visible and accessible",
+        "no personal or sensitive page/user data is leaked through share or feedback URLs"
+      ],
+      "sources": ["wcag22"]
+    },
+    {
+      "id": "CPQ-10-continuation-and-citation",
+      "priority": "P1",
+      "question": "After reading and sharing, can the user continue, cite or return to the resource without hitting an arbitrary dead end?",
+      "requirement": "Where the page is not intentionally terminal, provide a compact continuation block with real semantic relationships. For citable/reference content, provide Cite or Copy Markdown link when truthful metadata exists. Citation and continuation targets must use canonical URLs and must not invent authors, review dates or identifiers.",
+      "verify": [
+        "non-terminal pages expose at least one useful next step",
+        "continuation links are relation-driven rather than random popularity links",
+        "citation uses canonical URL and truthful title/publisher/date data",
+        "generated citation does not fabricate DOI-like identifiers or authorship",
+        "local Save behavior, if present, is clearly local unless authenticated persistence exists"
+      ],
+      "sources": ["googleLinks", "mdnWebStorage"]
+    },
+    {
+      "id": "CPQ-11-share-and-feedback-measurement",
+      "priority": "P2",
+      "question": "If the publisher measures sharing or usefulness, are events interpretable without turning missing analytics into zero?",
+      "requirement": "Measurement is optional, but when implemented use stable event names and page canonical identifiers, distinguish share intent from confirmed external completion, and keep missing/blocked analytics as unknown. Do not claim a successful social share merely because a share menu opened.",
+      "verify": [
+        "event schema and canonical page identifier are documented",
+        "native share invocation is not mislabeled as confirmed external publication",
+        "copy-link and explicit provider clicks are distinguishable when measured",
+        "feedback events retain success/failure semantics",
+        "missing analytics is not converted to zero engagement"
+      ],
+      "sources": ["mdnWebShare"]
+    },
+    {
+      "id": "CPQ-12-final-artifact-family-gate",
+      "priority": "P0",
+      "question": "Can CI prove the content-page contract against the final generated artifacts for the entire applicable route family?",
+      "requirement": "Run deterministic contract checks after all metadata/content post-processing and before publication. Evaluate every enumerable applicable content/detail page, not one representative sample, for required metadata and distribution-footer presence. Runtime-test each distinct sharing implementation/template plus every changed/high-risk page. A missing applicable rule must fail or remain explicit unknown; it must never disappear from the report.",
+      "verify": [
+        "all applicable canonical content/detail pages are enumerated",
+        "final generated HTML is checked rather than source template alone",
+        "required metadata/footer controls are checked page-complete",
+        "each distinct runtime implementation receives rendered interaction coverage",
+        "CI reports explicit pass/fail/watch/unknown/not-applicable states and tested revision"
+      ],
+      "sources": ["googleCanonical", "openGraph", "mdnWebShare"]
+    }
+  ],
+  "sources": {
+    "openGraph": "https://ogp.me/",
+    "mdnWebShare": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API",
+    "mdnWebStorage": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API",
+    "googleTitleLinks": "https://developers.google.com/search/docs/appearance/title-link",
+    "googleSnippets": "https://developers.google.com/search/docs/appearance/snippet",
+    "googleCanonical": "https://developers.google.com/search/docs/crawling-indexing/canonicalization",
+    "googleFavicons": "https://developers.google.com/search/docs/appearance/favicon-in-search",
+    "googleStructuredData": "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+    "googleArticle": "https://developers.google.com/search/docs/appearance/structured-data/article",
+    "googleImageSEO": "https://developers.google.com/search/docs/appearance/google-images",
+    "googleLinks": "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+    "wcag22": "https://www.w3.org/TR/WCAG22/"
+  }
+}

@@ -17,15 +17,20 @@ function fail(message) {
 }
 
 const core = flattenValidationContract('core');
-assert.equal(core.length, 84, 'core validation contract command count changed; review coverage intentionally before updating this assertion');
+assert.equal(core.length, 85, 'core validation contract command count changed; review coverage intentionally before updating this assertion');
 const coreFingerprint = crypto
   .createHash('sha256')
   .update(JSON.stringify(core.map((command) => command.args)))
   .digest('hex');
 assert.equal(
   coreFingerprint,
-  '8679385075a650e731977aebf634bacfd633151acf950d89d145fc964ee4024c',
+  'fa2f942dc6c73b33b45f52987c90cfa772b76b72569f83de10cd20563e19622c',
   'core validation command/order fingerprint changed; review equivalence intentionally before updating the fingerprint'
+);
+
+assert.ok(
+  core.some((command) => command.args.length === 1 && command.args[0] === 'scripts/content-page-quality-test.mjs'),
+  'core validation must include the central Content Page Quality contract test'
 );
 
 for (const [phaseName, phase] of Object.entries(validationPhases)) {

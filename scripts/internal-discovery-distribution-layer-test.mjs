@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const registry = JSON.parse(fs.readFileSync('registry/internal-discovery-distribution-practices.json', 'utf8'));
+const contentContract = JSON.parse(fs.readFileSync('registry/content-page-quality-contract.json', 'utf8'));
 const skill = fs.readFileSync('skills/arwp-internal-discovery/SKILL.md', 'utf8');
 const docs = fs.readFileSync('docs/INTERNAL-DISCOVERY-DISTRIBUTION-LAYER.md', 'utf8');
 const evidence = fs.readFileSync('docs/INTERNAL-DISCOVERY-EVIDENCE.md', 'utf8');
@@ -61,10 +62,14 @@ for (const text of [skill, docs]) {
   assert.match(text, /partial/i);
 }
 
+assert.equal(contentContract.distributionFooter.directShareTargets.minimum, 2);
+assert.equal(contentContract.enforcement.priorityDoesNotPermitSkipping, true);
 assert.match(skill, /Do not infer ranking improvement from link count/i);
-assert.match(skill, /Do not inject the same sitewide block into every page/i);
+assert.match(skill, /every applicable content\/detail page/i);
+assert.match(skill, /Do not inject the same distribution block into homepage/i);
+assert.match(skill, /real analytics\/backend\/issue\/feedback sink/i);
 assert.match(docs, /typical user path/i);
 assert.match(docs, /not treated as ranking factors/i);
 assert.match(evidence, /no magical ideal number of links/i);
 
-console.log(`PASS ${registry.practices.length} Internal Discovery & Distribution practices covering canonical crawl paths, descriptive anchors, semantic relations, breadcrumbs, continuation, utility actions and regression-safe graph gates.`);
+console.log(`PASS ${registry.practices.length} Internal Discovery & Distribution practices plus the strict content-page distribution contract.`);
