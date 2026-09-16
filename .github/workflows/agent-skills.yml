@@ -55,6 +55,7 @@ jobs:
           node scripts/content-page-quality-test.mjs
           node --check scripts/agent-skills-test.mjs
           node --check scripts/agent-skill-inspector-test.mjs
+          node --check skills/arwp-prepare-site/scripts/inspect-repo.mjs
           node --check scripts/content-page-quality-test.mjs
           node --check lib/content-page-quality.mjs
           node --check bin/arwp-content-page-quality.mjs
