@@ -26,6 +26,8 @@ The benchmark keeps unmeasured dimensions `unknown`, requires explicit evidence 
 
 Use `arwp-prepare-site` when the main task is to prepare, migrate or deeply audit an existing repository against the ARWP/Search/agent baseline. For a deep, complete, end-to-end or whole-site request it must inventory and reconcile every enumerable in-scope route first, run applicable deterministic checks page-complete, keep repository/build/deployed/rendered/owner evidence separate, and report explicit coverage. Bounded Site Gate, Technical Integrity, Growth and Internal Discovery cohorts remain preflight/specialist evidence; they are not a whole-site pass.
 
+When the site has canonical content/detail pages, `arwp-content-page-quality` is part of that preparation contract. It makes page-specific preview metadata, representative share images, an end-of-content Share/Copy/direct-social footer, accessible runtime fallback behavior and feedback integrity explicit instead of optional. Priority determines remediation order; it never permits an applicable rule to be silently skipped.
+
 ## Repository stewardship
 
 Use `arwp-repository-stewardship` when repository entropy itself is the problem: suspected dead or duplicated files, unclear canonical/generated ownership, stale agent navigation, parallel roadmap/checkpoint files, committed local output or high comprehension cost.
@@ -42,6 +44,7 @@ The skill is deliberately conservative: an old, unfamiliar or unreferenced file 
 ## Specialists
 
 - `arwp-ai-search-content` — original useful content and answer/comparison pages.
+- `arwp-content-page-quality` — strict content/detail page quality: title/snippet identity, Open Graph/social preview, representative share image, mandatory end-of-content Share/Copy plus direct social destinations, truthful structured data, accessible fallback behavior, feedback integrity and family-wide final-artifact CI.
 - `arwp-index-worthiness` — decide which generated/data/knowledge pages deserve Search-facing publication before sitemap expansion, without a composite SEO score.
 - `arwp-measurement-os` — provider-native Search/AI measurement, readiness gates, cohort analysis and outcome interpretation.
 - `arwp-technical-seo-critic` — adversarial second-pass review for false-green metadata/head states, field Core Web Vitals release gaps, pagination canonicals, crawl-state explosions, HTTP cache validators, HTTP-vs-HTML canonical conflicts, restrictive robots serving directives, link relationship semantics and obsolete SEO advice that survives ordinary checks.
@@ -53,7 +56,7 @@ The skill is deliberately conservative: an old, unfamiliar or unreferenced file 
 - `arwp-agent-discovery` — llms.txt, Agent Skills, ARD, OpenAPI/MCP/A2A/WebMCP and ARWP surfaces.
 - `arwp-evidence-ci` — assertion contracts, scheduled audits, receipts and drift-safe CI.
 
-Use Search Maturity for reference evidence, Growth for prioritization/current rules, Repository Stewardship for repository structure/navigation/cleanup, Index Worthiness before broad generated-page Search publication, Measurement OS for interpreting provider evidence, Technical SEO Critic after the ordinary technical/Search release pass, Image Discovery when meaningful image assets deserve dedicated Search/Images/Discover handling, Internal Discovery when useful pages need stronger crawl paths, relation architecture, breadcrumbs, continuation or distribution utilities, Localization Quality whenever a locale is added or a feature changes a localizable surface, and Future Search only after current eligibility/foundation work is healthy. A mechanism can be valuable for open machine interoperability even when it is not a documented Google ranking requirement, but every experiment must stay grounded, reversible and separately measured.
+Use Search Maturity for reference evidence, Growth for prioritization/current rules, Repository Stewardship for repository structure/navigation/cleanup, Content Page Quality whenever canonical content/detail pages exist, Index Worthiness before broad generated-page Search publication, Measurement OS for interpreting provider evidence, Technical SEO Critic after the ordinary technical/Search release pass, Image Discovery when meaningful image assets deserve dedicated Search/Images/Discover handling, Internal Discovery when useful pages need stronger crawl paths, relation architecture, breadcrumbs, continuation or distribution utilities, Localization Quality whenever a locale is added or a feature changes a localizable surface, and Future Search only after current eligibility/foundation work is healthy. A mechanism can be valuable for open machine interoperability even when it is not a documented Google ranking requirement, but every experiment must stay grounded, reversible and separately measured.
 
 When repository edits are possible, inspect the stack, establish a baseline, select only applicable high-confidence work, implement it and run the site's build/tests plus relevant ARWP checks. For whole-site audits, preserve the page ledger and coverage state through the completion report. Leave credential-dependent or owner-side measurement work as explicit gates.
 
