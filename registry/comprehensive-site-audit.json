@@ -1,8 +1,8 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "name": "ARWP Comprehensive Site Audit",
-  "reviewedAt": "2026-09-13",
-  "purpose": "Make a whole-site ARWP application coverage-explicit. Bounded cohorts remain useful preflight evidence but cannot prove whole-site coverage.",
+  "reviewedAt": "2026-09-16",
+  "purpose": "Make a whole-site ARWP application coverage-explicit. Bounded cohorts remain useful preflight evidence but cannot prove whole-site coverage. Applicable rules must be evaluated explicitly instead of being silently omitted because they have lower priority or live in a specialist layer.",
   "truthBoundaries": [
     "Repository declarations are not deployed runtime evidence.",
     "A successful build is not proof that the deployed artifact matches the build.",
@@ -11,8 +11,24 @@
     "Automated accessibility checks are not a WCAG conformance claim.",
     "Lab performance is not field Core Web Vitals evidence.",
     "Valid structured data does not guarantee a Search feature.",
-    "Search, AI and business outcomes require owner/provider evidence."
+    "Search, AI and business outcomes require owner/provider evidence.",
+    "Priority determines remediation order; it never permits an applicable rule to be skipped."
   ],
+  "linkedContracts": [
+    "registry/content-page-quality-contract.json",
+    "registry/search-release-practices.json",
+    "registry/internal-discovery-distribution-practices.json",
+    "registry/image-discovery-practices.json"
+  ],
+  "applicabilityLedger": {
+    "required": true,
+    "priorityDoesNotPermitSkipping": true,
+    "allowedStates": ["pass", "fail", "watch", "owner-data", "not-applicable", "unknown"],
+    "notApplicableRequiresReason": true,
+    "unknownIsNotPass": true,
+    "rule": "For every canonical page and every site/system surface, classify all applicable audit-domain and linked-contract requirements. A complete/strict report must not omit a rule because it is P2, because a bounded tool did not inspect it, or because a template was assumed to cover every route.",
+    "contentDetailRule": "Every route classified as a content/detail page must evaluate every requirement in registry/content-page-quality-contract.json against the final artifact, with runtime evidence for every distinct interactive implementation plus every changed/high-risk page."
+  },
   "coverageContract": {
     "inventorySources": [
       "repository routes and content collections",
@@ -33,6 +49,7 @@
       "locale",
       "inventorySources",
       "expectedIndexability",
+      "applicableContracts",
       "auditState",
       "findings",
       "evidence"
@@ -47,9 +64,10 @@
     "fullAuditClaimRequires": [
       "coverageState is complete, runtime-complete or template-runtime-complete",
       "no unexplained inventory or canonical-owner gaps",
-      "every applicable domain has explicit evidence or an explicit watch/owner-data/not-applicable state",
+      "every applicable domain and linked-contract rule has explicit evidence or an explicit watch/owner-data/not-applicable/unknown state",
+      "every content/detail page has a content-page-quality applicability row and final-artifact evidence",
       "bounded tools are labelled preflight/supplemental rather than whole-site proof",
-      "every exclusion has a reason",
+      "every exclusion and not-applicable state has a reason",
       "tested revision and deployment identity are recorded when repository changes are part of the task"
     ],
     "largeSitePolicy": "Prefer complete repository/build analysis for every page, then chunk public checks conservatively. If every live/rendered page cannot be checked safely, report template-runtime-complete or partial rather than runtime-complete."
@@ -65,7 +83,7 @@
     {
       "id": "inventory-and-deployment",
       "priority": "P0",
-      "checks": ["route/content/build/sitemap/link reconciliation", "canonical owners and aliases", "route archetypes/templates/locales", "source-build-deploy revision parity", "host and HTTPS normalization", "404/410 and soft-404 behavior"]
+      "checks": ["route/content/build/sitemap/link reconciliation", "canonical owners and aliases", "route archetypes/templates/locales", "content/detail page-family classification", "source-build-deploy revision parity", "host and HTTPS normalization", "404/410 and soft-404 behavior"]
     },
     {
       "id": "http-crawl-index-canonical",
@@ -74,8 +92,14 @@
     },
     {
       "id": "head-search-appearance-social",
-      "priority": "P1",
-      "checks": ["title uniqueness and source convergence", "description quality", "charset/viewport/lang", "favicon and site identity", "Open Graph/social cards", "preferred image", "snippet pollution"]
+      "priority": "P0",
+      "checks": ["title uniqueness and source convergence", "description quality", "charset/viewport/lang", "favicon and site identity", "Open Graph title/description/url/type", "intentional social card metadata", "representative og:image and image alt", "preferred image", "canonical/social URL convergence", "snippet pollution"]
+    },
+    {
+      "id": "content-page-quality-distribution",
+      "priority": "P0",
+      "contract": "registry/content-page-quality-contract.json",
+      "checks": ["content/detail applicability classification", "all CPQ requirements evaluated page-complete", "end-of-content distribution footer", "Share and Copy link", "at least two configured direct provider share destinations", "canonical share payload", "native Share progressive enhancement and Copy fallback", "sharing accessibility and failure behavior", "feedback sink integrity when feedback UI exists", "no fake reaction counts or false recorded state", "runtime coverage for each distinct distribution implementation", "final-artifact family-wide CI gate"]
     },
     {
       "id": "structured-data-entities-provenance",
@@ -90,52 +114,52 @@
     {
       "id": "internal-discovery-information-architecture",
       "priority": "P1",
-      "checks": ["intentional discovery path", "crawlable descriptive links", "breadcrumbs", "hub/detail/reverse relations", "orphans/global-only pages", "dead ends", "canonical link targets", "all internal links and critical assets"]
+      "checks": ["intentional discovery path", "crawlable descriptive links", "breadcrumbs", "hub/detail/reverse relations", "orphans/global-only pages", "dead ends", "continuation after content", "canonical link targets", "all internal links and critical assets"]
     },
     {
       "id": "accessibility-wcag22",
       "priority": "P1",
-      "checks": ["landmarks/headings", "image alternatives", "name-role-value/state", "form labels/errors", "keyboard operation", "visible unobscured focus", "target size/input alternatives", "contrast/non-color cues", "zoom/reflow", "reduced motion", "captions/transcripts", "document language", "manual review before conformance claims"]
+      "checks": ["landmarks/headings", "image alternatives", "name-role-value/state", "form labels/errors", "keyboard operation", "visible unobscured focus", "target size/input alternatives", "contrast/non-color cues", "zoom/reflow", "reduced motion", "captions/transcripts", "document language", "share/copy/feedback accessible names and states", "manual review before conformance claims"]
     },
     {
       "id": "performance-and-delivery",
       "priority": "P1",
-      "checks": ["field LCP/INP/CLS when owner data exists", "lab diagnostics", "transfer/request outliers", "render-blocking/client-JS risk", "responsive images/dimensions/lazy loading", "font policy", "compression/cache validators", "third-party weight", "layout shifts"]
+      "checks": ["field LCP/INP/CLS when owner data exists", "lab diagnostics", "transfer/request outliers", "render-blocking/client-JS risk", "responsive images/dimensions/lazy loading", "social/share image delivery", "font policy", "compression/cache validators", "third-party weight", "layout shifts"]
     },
     {
       "id": "mobile-responsive-visual",
       "priority": "P1",
-      "checks": ["viewport/overflow", "mobile navigation/dialogs/sticky UI", "readability", "touch targets", "interstitial obstruction", "breakpoint hierarchy", "visual regressions"]
+      "checks": ["viewport/overflow", "mobile navigation/dialogs/sticky UI", "readability", "touch targets", "interstitial obstruction", "distribution footer fit", "breakpoint hierarchy", "visual regressions"]
     },
     {
       "id": "runtime-js-functionality",
       "priority": "P0",
-      "checks": ["raw-vs-rendered content parity", "console/network errors", "hydration", "SPA deep links/history", "links/buttons/menus/dialogs", "forms and validation", "search/filter/sort/pagination", "empty/error states", "downloads", "third-party failure resilience"]
+      "checks": ["raw-vs-rendered content parity", "console/network errors", "hydration", "SPA deep links/history", "links/buttons/menus/dialogs", "forms and validation", "search/filter/sort/pagination", "empty/error states", "native Share support/cancel/failure paths", "Copy link fallback", "direct provider share targets", "feedback success/failure when implemented", "downloads", "third-party failure resilience"]
     },
     {
       "id": "security-privacy",
       "priority": "P1",
-      "checks": ["HTTPS/mixed content", "security response headers", "framing/referrer/permissions policy applicability", "external script review", "cookies/analytics inventory", "privacy/consent applicability", "deeper app-security gate for accounts/uploads/forms", "no private owner data in public artifacts"]
+      "checks": ["HTTPS/mixed content", "security response headers", "framing/referrer/permissions policy applicability", "Web Share permissions policy compatibility when used", "external script review", "cookies/analytics inventory", "privacy/consent applicability", "share/feedback URL data leakage", "deeper app-security gate for accounts/uploads/forms", "no private owner data in public artifacts"]
     },
     {
       "id": "media-images-video-downloads",
       "priority": "P1",
-      "checks": ["media URL/content type", "responsive images/dimensions", "alt/context/captions/transcripts", "preferred/social images", "media sitemap applicability", "license/credit truth", "download metadata"]
+      "checks": ["media URL/content type", "responsive images/dimensions", "alt/context/captions/transcripts", "preferred/social images", "social crop/legibility where applicable", "media sitemap applicability", "license/credit truth", "download metadata"]
     },
     {
       "id": "localization-internationalization",
       "priority": "P1",
-      "checks": ["lang declaration", "localized route inventory", "hreflang equivalence", "untranslated gaps", "locale formatting", "locale switcher behavior", "localized metadata/structured-data parity"]
+      "checks": ["lang declaration", "localized route inventory", "hreflang equivalence", "untranslated gaps", "locale formatting", "locale switcher behavior", "localized metadata/structured-data parity", "localized share labels and page-specific share text"]
     },
     {
       "id": "trust-identity-legal",
       "priority": "P1",
-      "checks": ["operator/publisher consistency", "about/contact/author identity when useful", "copyright/license/trademark", "privacy/data-use when applicable", "terms/refund/submission rules when applicable", "security contact when applicable", "corrections/version history when useful"]
+      "checks": ["operator/publisher consistency", "about/contact/author identity when useful", "copyright/license/trademark", "privacy/data-use when applicable", "terms/refund/submission rules when applicable", "security contact when applicable", "corrections/version history when useful", "no fabricated feedback/social proof"]
     },
     {
       "id": "analytics-measurement-observability",
       "priority": "P1",
-      "checks": ["analytics configuration and duplicate firing", "important task/conversion events", "Search Console/Bing owner gates", "AI referrals/crawler logs when relevant", "provider-native denominators", "private measurement data kept out of public artifacts"]
+      "checks": ["analytics configuration and duplicate firing", "important task/conversion events", "share/copy/provider-click events when intentionally measured", "feedback event sink when feedback UI exists", "share intent not mislabeled as confirmed external publication", "Search Console/Bing owner gates", "AI referrals/crawler logs when relevant", "provider-native denominators", "private measurement data kept out of public artifacts"]
     },
     {
       "id": "ai-agent-readiness",
@@ -150,12 +174,12 @@
     {
       "id": "freshness-lifecycle-regression",
       "priority": "P1",
-      "checks": ["truthful sitemap lastmod", "date/version consistency", "deprecated-content handling", "shared-template blast radius", "re-audit changed pages and affected archetypes", "scheduled regression evidence"]
+      "checks": ["truthful sitemap lastmod", "date/version consistency", "deprecated-content handling", "shared-template blast radius", "content-page footer/metadata family regressions", "re-audit changed pages and affected archetypes", "scheduled regression evidence"]
     }
   ],
   "conditionalPacks": [
     {"id": "ecommerce-product", "trigger": "products, prices or checkout", "checks": ["Product/Offer parity", "price/currency/availability", "shipping/returns", "cart/checkout", "merchant-feed consistency"]},
-    {"id": "editorial-news", "trigger": "articles/news/recurring authors", "checks": ["author identity", "publication/modified dates", "article markup", "provenance/corrections", "archive/topic discovery"]},
+    {"id": "editorial-news", "trigger": "articles/news/recurring authors", "checks": ["author identity", "publication/modified dates", "article markup", "provenance/corrections", "archive/topic discovery", "content-page quality contract"]},
     {"id": "dataset-research", "trigger": "datasets/research/benchmarks", "checks": ["Dataset metadata", "license/version/checksums", "persistent identifiers", "methodology/provenance", "reproducible downloads", "citation instructions"]},
     {"id": "tool-app-account", "trigger": "interactive app/accounts/uploads/saved state", "checks": ["authentication/accessibility", "error/recovery", "state persistence", "privacy lifecycle", "application-security review", "critical task completion"]},
     {"id": "local-business", "trigger": "physical location/service area", "checks": ["name/address/phone", "hours", "map/contact route", "LocalBusiness applicability", "service-area truth", "local-page uniqueness"]},
@@ -164,9 +188,11 @@
   "completionReportRequired": [
     "coverage state and exact discovered/in-scope/audited/browser-tested/excluded/unknown counts",
     "inventory reconciliation and unexplained gaps",
-    "per-page ledger or machine-readable equivalent",
+    "per-page ledger or machine-readable equivalent including applicableContracts",
+    "applicability ledger proving every applicable audit/linked-contract rule was evaluated",
+    "content/detail page count and CPQ pass/fail/watch/owner-data/not-applicable/unknown coverage",
     "site/system findings",
-    "P0/P1/P2 plus watch/owner-data/not-applicable findings",
+    "P0/P1/P2 plus watch/owner-data/not-applicable/unknown findings",
     "evidence layer for every material finding",
     "autofixed versus manual/owner/runtime gates",
     "verification and tested revision/deployment identity",
@@ -178,6 +204,8 @@
     {"id": "google-page-experience", "url": "https://developers.google.com/search/docs/appearance/page-experience"},
     {"id": "google-structured-data", "url": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies"},
     {"id": "google-js-seo", "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"},
+    {"id": "open-graph-protocol", "url": "https://ogp.me/"},
+    {"id": "mdn-web-share", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API"},
     {"id": "wcag22", "url": "https://www.w3.org/TR/WCAG22/"},
     {"id": "web-vitals", "url": "https://web.dev/articles/vitals"},
     {"id": "owasp-http-headers", "url": "https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html"},
