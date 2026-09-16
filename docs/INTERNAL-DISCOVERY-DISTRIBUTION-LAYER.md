@@ -4,7 +4,7 @@ Status: source-backed Search/product-distribution layer · reviewed 2026-09-16
 
 This layer extends the existing Internal Discovery Evidence contract from graph observation into an implementation contract for how useful pages connect, continue, get cited and get shared.
 
-The canonical general practices live in `registry/internal-discovery-distribution-practices.json`. Canonical content/detail pages additionally follow the stricter `registry/content-page-quality-contract.json`. The executable bounded graph remains `lib/internal-discovery.mjs` / `bin/arwp-internal-discovery.mjs` and keeps its existing evidence limits.
+The canonical general practices live in `registry/internal-discovery-distribution-practices.json`. Canonical content/detail pages additionally follow the stricter `registry/content-page-quality-contract.json`. The executable bounded graph remains `lib/internal-discovery.mjs` / `bin/arwp-internal-discovery.mjs` and keeps its existing evidence limits. Partial or capped graph coverage stays explicitly partial and must never be promoted to complete-site evidence.
 
 ## Why this exists
 
