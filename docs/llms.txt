@@ -70,11 +70,11 @@ Do not interpret “AI access” as one boolean. ARWP separates at least three p
 2. **User-triggered retrieval** — may an assistant fetch the page because a user explicitly requested information from it?
 3. **Training/model use** — may documented crawler/product controls permit the content to be collected/used for model-training or related non-Search uses?
 
-The 2026-09-05 matrix covers OpenAI, Anthropic, Google, Perplexity and Microsoft/Bing. Important reviewed distinctions:
+The 2026-09-18 matrix covers OpenAI, Anthropic, Google, Perplexity and Microsoft/Bing. Important reviewed distinctions:
 
 - OpenAI documents `OAI-SearchBot` separately from `GPTBot`, so ChatGPT search visibility and potential model-training crawl access can be configured independently.
 - Anthropic documents `Claude-SearchBot`, `Claude-User` and `ClaudeBot` as separate search, user-triggered and training roles.
-- Google Search AI features use ordinary Googlebot/Search controls. `Google-Extended` is a robots product token, not a distinct request User-Agent; it does not control Google Search inclusion but does control specified Gemini training/grounding uses.
+- Google Search AI features use ordinary Googlebot/Search controls. `Google-Extended` is a robots product token, not a distinct request User-Agent; it does not control Google Search inclusion but does control specified Gemini training/grounding uses.\n- Google documents `Google-Agent` and `Google-GeminiNotebook` as user-triggered surfaces. User-triggered fetchers generally ignore robots.txt; `Google-NotebookLM` was only supported through August 2026. Google-Agent request provenance can also use published user-triggered agent IP ranges, while Web Bot Auth with `https://agent.bot.goog` remains experimental.
 - Perplexity's current official sources are not fully consistent about `Perplexity-User` robots behavior. ARWP preserves this as `official-source-conflict` and intentionally emits no confident robots rule for it.
 - Bingbot is a search/index crawler upstream of Bing/Microsoft AI experiences. Microsoft documents additional page-level robots meta / X-Robots-Tag controls for Chat/Copilot display and generative-AI training; ARWP does not invent a separate Bing training crawler.
 

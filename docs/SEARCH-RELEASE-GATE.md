@@ -1,6 +1,6 @@
 # Search Release Gate
 
-Reviewed: **2026-09-10**.
+Reviewed: **2026-09-18**.
 
 This gate exists because a site can be crawlable, richly structured and content-heavy while still presenting a weak Search result: a generic host/site label, stale or unsuitable favicon, rewritten title, poor snippet, wrong canonical host, fabricated freshness, conflicting structured data, or an old deployment artifact. Passing repository tests does not prove what Search displays, and passing an auxiliary workflow does not prove that GitHub Pages deployed the intended revision.
 
@@ -31,7 +31,7 @@ Before calling a public site "search-ready", answer these questions from evidenc
 19. **Is there a post-mutation release gate immediately before artifact upload?** It must re-check the small set of public invariants that later workflow steps can break.
 20. **Did the publishing workflow actually succeed for this revision?** A green helper workflow or successful commit is not deployment evidence.
 21. **Which known bad states would still pass the current tests?** Add negative tests for stale identity, wrong host, accidental noindex, sitemap aliases, fabricated freshness, missing entry files and conflicting final metadata.
-22. **What did Search actually select?** After recrawl, record the selected canonical, site name, title, snippet and favicon. Treat differences as new evidence for the next loop.
+22. **What did Search actually select?** After recrawl, record the selected canonical, site name, title, snippet and favicon. Treat differences as new evidence for the next loop.\n23. **Does the owner already have a claimed Google Search profile?** If yes, decide whether an official Search profile badge or text link is useful as an optional distribution surface; if not, record `not-applicable` rather than creating a fake requirement.
 
 ## Required order
 
@@ -211,7 +211,7 @@ Never collapse those into one green/failed badge. A green auxiliary CI run does 
 
 Positive checks prove presence; negative tests reject known regressions. Once a real failure is found, preserve it as an executable assertion. Typical negative tests reject obsolete site identity strings, wrong-host canonical URLs, accidental noindex, aliases/error routes in sitemap, blanket build-date lastmod, missing artifact-root entry files and final post-processors that restore stale metadata.
 
-## Production loop
+## Google Search profile distribution (conditional)\n\nGoogle added official guidance for linking a website to a claimed Search profile in September 2026. This is an optional owner/distribution surface, not a baseline SEO requirement.\n\nWhen the owner has actually claimed a Search profile:\n\n- use the verified `https://profile.google.com/@handle` URL;\n- use Google's official badge assets without altering the logo/colors, or use a plain text link;\n- keep the target accessible and distinguish the Search profile control from Preferred Sources UI when both are present;\n- treat follows as a way to make linked content more likely to appear in Discover for that following audience, not as a general ranking/indexing boost.\n\nIf the site has no claimed Search profile, mark this practice `not-applicable`. Do not create an unverified handle or block release on its absence.\n\n## Production loop
 
 For every material site release:
 
@@ -241,7 +241,7 @@ Do not block a whole development session waiting for longitudinal ranking eviden
 - Google Search Central — Structured data introduction: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data
 - Google Search Central — Site moves: https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes
 - Google Search Central — Build and submit a sitemap: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-- Google Search Central — Link best practices: https://developers.google.com/search/docs/crawling-indexing/links-crawlable
+- Google Search Central — Link best practices: https://developers.google.com/search/docs/crawling-indexing/links-crawlable\n- Google Search Central — Search profiles: https://developers.google.com/search/docs/appearance/search-profiles
 - Google Search Central — Localized versions: https://developers.google.com/search/docs/specialty/international/localized-versions
 - GitHub Docs — Configuring a publishing source: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 - GitHub Docs — Custom domains and GitHub Pages: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages

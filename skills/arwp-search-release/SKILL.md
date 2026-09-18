@@ -39,7 +39,7 @@ Resolve these in order:
 15. actual deployment workflow success for the intended revision;
 16. production bytes/assets/redirects for that deployed revision;
 17. negative assertions for known bad states;
-18. actual Search/Bing selection after recrawl.
+18. actual Search/Bing selection after recrawl;\n19. optional claimed Google Search profile distribution surface, when owner-verified.
 
 Do not skip an item because another SEO tool is green. Record `not-applicable` or `unknown` explicitly.
 
@@ -144,7 +144,7 @@ Positive checks such as “a canonical exists” are not enough. Include negativ
 
 A regression that is known today should become executable evidence tomorrow.
 
-## Portfolio mode
+## Google Search profile distribution (conditional)\n\nWhen the owner has a real claimed Google Search profile, ARWP may recommend Google's official Search profile badge or a plain text link to the verified `https://profile.google.com/@handle` URL. Follow Google's badge/accessibility guidance and keep it distinct from Preferred Sources UI when both are used.\n\nTreat this as optional audience distribution. A follow can make linked content more likely to appear in Discover for that following audience; it is not a general ranking, indexing or AI-visibility guarantee. If no claimed profile exists, record `not-applicable` and do not invent one.\n\n## Portfolio mode
 
 When the task concerns several sites, reuse the practice IDs, not the text values. For every hostname record:
 

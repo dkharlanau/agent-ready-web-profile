@@ -28,7 +28,7 @@ function assertPublishedSource(publicUrl, sourceLabel) {
   );
 }
 
-assert.equal(registry.version, '1.2');
+assert.equal(registry.version, '1.3');
 assert.match(registry.reviewedAt, /^\d{4}-\d{2}-\d{2}$/);
 assert.equal(registry.methodology.primarySourcesPreferred, true);
 assert.equal(registry.methodology.noRankingPromise, true);
@@ -49,7 +49,7 @@ for (const [key, url] of sourceEntries) {
 }
 
 assert.ok(Array.isArray(registry.practices));
-assert.ok(registry.practices.length >= 30, 'Search Release should retain the hardened interview/practice coverage');
+assert.ok(registry.practices.length >= 31, 'Search Release should retain the hardened interview/practice coverage');
 const ids = registry.practices.map((practice) => practice.id);
 assert.equal(new Set(ids).size, ids.length, 'Search Release practice ids must be unique');
 
@@ -139,4 +139,4 @@ for (const phrase of [
   'negative assertions'
 ]) assert.match(skill, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
 
-console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, sitemap-to-source integrity, 404 handling, GitHub Pages publishing, final-artifact, freshness, structured-data, machine-readable, deployment-proof and production-serialization boundaries without a ranking score.`);
+console.log(`PASS ${registry.practices.length} Search Release practices preserve hostname identity, title/snippet/favicon, canonical host, crawl discovery, sitemap-to-source integrity, 404 handling, GitHub Pages publishing, final-artifact, freshness, structured-data, machine-readable, deployment-proof, production-serialization and optional claimed Search-profile distribution boundaries without a ranking score.`);

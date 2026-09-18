@@ -1,7 +1,14 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "project": "Agent-Ready Web Profile",
   "snapshots": [
+    {
+      "date": "2026-09-18",
+      "url": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/history/2026-09-18.json",
+      "entries": 12,
+      "providers": 5,
+      "notes": "Adds Google-GeminiNotebook and Google-Agent as user-triggered surfaces, records the Google-NotebookLM retirement boundary, and keeps Web Bot Auth experimental."
+    },
     {
       "date": "2026-09-05",
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/crawler-matrix/history/2026-09-05.json",
