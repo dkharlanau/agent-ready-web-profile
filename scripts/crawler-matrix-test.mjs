@@ -31,7 +31,9 @@ assert.equal(current.methodology.unknownStaysUnknown, true);
 assert.equal(current.methodology.conflictsStayVisible, true);
 assert.equal(current.methodology.noRankingPromise, true);
 assert.match(current.methodology.rightsVsAccess, /separate from technical crawler access/i);
-assert.equal(frozen.snapshotDate, '2026-09-05');\nassert.equal(frozen.entries.length, 10);\nassert.notDeepEqual(frozen, current, 'historical crawler snapshots must remain frozen when the current matrix advances');
+assert.equal(frozen.snapshotDate, '2026-09-05');
+assert.equal(frozen.entries.length, 10);
+assert.notDeepEqual(frozen, current, 'historical crawler snapshots must remain frozen when the current matrix advances');
 assert.equal(history.snapshots[0].date, '2026-09-05');
 assert.equal(history.snapshots[0].entries, 10);
 assert.equal(history.snapshots[0].providers, 5);
@@ -40,7 +42,8 @@ const ids = current.entries.map(entry => entry.id);
 assert.equal(new Set(ids).size, ids.length, 'crawler entry IDs must be unique');
 for (const entry of current.entries) {
   assert.ok(entry.officialSources?.length >= 1, `${entry.id} must have at least one official source`);
-  assert.match(entry.reviewedAt, /^\\d{4}-\\d{2}-\\d{2}$/);\n  assert.ok(entry.reviewedAt <= current.snapshotDate, `${entry.id} review date cannot be newer than snapshot`);
+  assert.match(entry.reviewedAt, /^\d{4}-\d{2}-\d{2}$/);
+  assert.ok(entry.reviewedAt <= current.snapshotDate, `${entry.id} review date cannot be newer than snapshot`);
   assert.notEqual(entry.robotsControl, 'allowed', `${entry.id} must describe control semantics, not a vague allowed flag`);
 }
 const byId = id => current.entries.find(entry => entry.id === id);
@@ -66,7 +69,19 @@ assert.equal(googlebot.searchVisibilityUse, true);
 assert.equal(googleExtended.searchVisibilityUse, false);
 assert.equal(googleExtended.separateHttpUserAgent, false);
 assert.equal(googleExtended.robotsControl, 'robots-product-token');
-assert.equal(googlebot.trainingUse, 'not-controlled-by-this-token');\n\nconst geminiNotebook = byId('google-gemini-notebook');\nconst googleAgent = byId('google-google-agent');\nassert.equal(geminiNotebook.role, 'user-triggered');\nassert.equal(geminiNotebook.token, 'Google-GeminiNotebook');\nassert.equal(geminiNotebook.robotsControl, 'generally-ignores-robots-user-triggered');\nassert.match(geminiNotebook.notes.join(' '), /Google-NotebookLM.*August 2026/i);\nassert.equal(googleAgent.role, 'user-triggered-agent');\nassert.equal(googleAgent.robotsControl, 'generally-ignores-robots-user-triggered');\nassert.match(googleAgent.notes.join(' '), /Web Bot Auth/i);\nassert.doesNotMatch(noTraining, /User-agent: Google-(?:Agent|GeminiNotebook)/, 'user-triggered Google agents must not be emitted as ordinary robots policy rules');\nassert.doesNotMatch(open, /User-agent: Google-(?:Agent|GeminiNotebook)/, 'user-triggered Google agents must not be emitted as ordinary robots policy rules');
+assert.equal(googlebot.trainingUse, 'not-controlled-by-this-token');
+
+const geminiNotebook = byId('google-gemini-notebook');
+const googleAgent = byId('google-google-agent');
+assert.equal(geminiNotebook.role, 'user-triggered');
+assert.equal(geminiNotebook.token, 'Google-GeminiNotebook');
+assert.equal(geminiNotebook.robotsControl, 'generally-ignores-robots-user-triggered');
+assert.match(geminiNotebook.notes.join(' '), /Google-NotebookLM.*August 2026/i);
+assert.equal(googleAgent.role, 'user-triggered-agent');
+assert.equal(googleAgent.robotsControl, 'generally-ignores-robots-user-triggered');
+assert.match(googleAgent.notes.join(' '), /Web Bot Auth/i);
+assert.doesNotMatch(noTraining, /User-agent: Google-(?:Agent|GeminiNotebook)/, 'user-triggered Google agents must not be emitted as ordinary robots policy rules');
+assert.doesNotMatch(open, /User-agent: Google-(?:Agent|GeminiNotebook)/, 'user-triggered Google agents must not be emitted as ordinary robots policy rules');
 
 assert.equal(byId('perplexity-perplexitybot').trainingUse, false);
 const perplexityUser = byId('perplexity-perplexity-user');
