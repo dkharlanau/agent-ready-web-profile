@@ -34,9 +34,10 @@ assert.match(current.methodology.rightsVsAccess, /separate from technical crawle
 assert.equal(frozen.snapshotDate, '2026-09-05');
 assert.equal(frozen.entries.length, 10);
 assert.notDeepEqual(frozen, current, 'historical crawler snapshots must remain frozen when the current matrix advances');
-assert.equal(history.snapshots[0].date, '2026-09-05');
-assert.equal(history.snapshots[0].entries, 10);
+assert.equal(history.snapshots[0].date, '2026-09-18');
+assert.equal(history.snapshots[0].entries, 12);
 assert.equal(history.snapshots[0].providers, 5);
+assert.ok(history.snapshots.some(snapshot => snapshot.date === '2026-09-05' && snapshot.entries === 10), 'frozen 2026-09-05 snapshot must stay in history');
 
 const ids = current.entries.map(entry => entry.id);
 assert.equal(new Set(ids).size, ids.length, 'crawler entry IDs must be unique');
