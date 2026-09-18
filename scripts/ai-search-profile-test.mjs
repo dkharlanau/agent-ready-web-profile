@@ -113,7 +113,9 @@ assert.equal(claimsIndex.claims.every(item => item.status === 'verified'), true)
 assert.match(claimsIndex.historyPolicy, /not silently rewritten/i);
 
 const crawlerMatrix = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'crawler-matrix', 'crawlers.json'), 'utf8'));
-assert.equal(crawlerMatrix.entries.length, 12);\nassert.ok(crawlerMatrix.entries.some(entry => entry.id === 'google-google-agent' && entry.userTriggered === true));\nassert.ok(crawlerMatrix.entries.some(entry => entry.id === 'google-gemini-notebook' && entry.userTriggered === true));
+assert.equal(crawlerMatrix.entries.length, 12);
+assert.ok(crawlerMatrix.entries.some(entry => entry.id === 'google-google-agent' && entry.userTriggered === true));
+assert.ok(crawlerMatrix.entries.some(entry => entry.id === 'google-gemini-notebook' && entry.userTriggered === true));
 assert.equal(crawlerMatrix.methodology.conflictsStayVisible, true);
 
 const trust = JSON.parse(fs.readFileSync(path.join(root, 'docs', 'trust', 'trust.json'), 'utf8'));
