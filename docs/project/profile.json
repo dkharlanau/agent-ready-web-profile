@@ -86,7 +86,7 @@
       "applicable": true,
       "path": "docs/project/privacy.html",
       "publicUrl": "https://dkharlanau.github.io/agent-ready-web-profile/project/privacy.html",
-      "reason": "The public site includes consent-gated analytics code, so data-use behavior should be explained."
+      "reason": "The public site offers optional measurement that starts only after a visitor allows it, so the choice and data-use boundaries should be explained clearly."
     },
     {
       "id": "terms-service",
