@@ -18,6 +18,19 @@ Deliver a working repository change when mutation is authorized, not merely a ch
 
 ARWP must never be presented as a guaranteed Google ranking or AI recommendation mechanism. The goal is to remove technical blockers, implement current platform guidance, expose useful machine-readable surfaces, improve the actual site, and make both implementation coverage and later outcomes measurable.
 
+## Public language is human-first
+
+ARWP should improve a site without making the site sound like an audit report. For reader-facing copy:
+
+- use clear, semi-formal, approachable language with concrete verbs and short explanations;
+- lead with what the visitor can understand, do or decide, not with the implementation behind it;
+- avoid provider names, tag managers, frameworks, schema/protocol names, internal checks and similar implementation detail in primary copy unless that fact materially changes the visitor's decision or is required for truthful disclosure;
+- keep implementation-specific detail in technical documentation, source/configuration or a clearly secondary technical note;
+- write consent and measurement prompts in human terms first: explain the choice and why it may be useful before implementation vocabulary;
+- simplify wording without hiding material data-use behavior, uncertainty or evidence limits.
+
+Technical documentation can stay precise. Public pages, prompts and notices should read like useful product writing rather than configuration output.
+
 ## Execution is manifest-driven
 
 Before choosing specialist workflows, load `registry/site-execution-manifest.json`. It is the canonical machine-readable composition contract for applying ARWP to a site.
