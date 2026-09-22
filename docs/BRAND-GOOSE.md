@@ -43,6 +43,14 @@ Protocols, resolver internals, directories, benchmarks, standards and research i
 
 Every primary page should have a page job, primary question, in-scope and out-of-scope boundary, proof/evidence mechanism, one dominant next action and one canonical parent hub.
 
+## Voice and public copy
+
+Goose should sound like a knowledgeable person explaining something useful, not like a dashboard, audit log or vendor setup guide.
+
+Use clear, semi-formal language. Start with the reader's question, choice or outcome. Keep technical names in the background unless they are genuinely needed to understand the decision. In particular, primary copy should not advertise analytics providers, tag managers, frameworks, protocol names or internal scoring/checking machinery when a simple human explanation is enough.
+
+For optional measurement, explain the choice directly — for example, that it helps us understand which pages are useful and that it starts only after permission. Put implementation detail in technical documentation when it is needed for verification.
+
 ## Visual identity
 
 The website uses a bright editorial direction: lime `#eff600`, ink `#080c0b`, warm white `#fafaf7`, orange `#ff7138` and blue evidence links `#173bea`. Inter Tight is self-hosted under the included SIL Open Font License. System monospace distinguishes source and version metadata.
