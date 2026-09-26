@@ -16,6 +16,7 @@ export const validationPhases = Object.freeze({
       node('scripts/gateway-test.mjs'),
       node('scripts/http-gateway-test.mjs'),
       node('scripts/verifier-test.mjs'),
+      node('scripts/verifier-mcp-test.mjs'),
       node('scripts/scanner-test.mjs'),
       node('scripts/health-test.mjs'),
       node('scripts/protocol-checks-test.mjs'),

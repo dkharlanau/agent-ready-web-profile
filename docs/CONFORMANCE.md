@@ -144,21 +144,43 @@ The current verifier checks:
 - expected media type with warnings for mismatches;
 - Agent Skill files/source links;
 - declared WebMCP pages/documentation;
-- MCP URLs/source/registry/documentation;
+- MCP source/registry/documentation links;
 - data, retrieval, identity and trust resources.
 
 It uses `HEAD` where possible and a bounded `GET` fallback for servers that reject `HEAD`.
+
+Declared MCP servers with `transport = "streamable-http"` are the exception: their `url` is **not** probed as a generic webpage. A Streamable HTTP MCP endpoint is allowed to reject ordinary `GET`/`HEAD` requests, so webpage reachability proves nothing about it. Instead the verifier performs a bounded MCP-aware check:
+
+- `POST` with a valid JSON-RPC `initialize` request (and the `server/discover` fast path for modern servers), followed by `notifications/initialized`;
+- HTTPS-only final URL, same-origin redirects only, no credentials;
+- bounded response size and bounded timeouts;
+- read-only: it never lists or invokes MCP tools and never executes server-returned instructions.
+
+Possible outcomes for such a declaration:
+
+- `pass` (`verification: "protocol-verified"`) — the endpoint completed a basic MCP handshake;
+- `warn` (`verification: "not-assessed"`) — the endpoint is reachable but requires authorization, so ARWP cannot assess the protocol without credentials;
+- `fail` (`verification: "failed"`) — the endpoint is unreachable, times out, redirects across origins, or answers the handshake with a non-MCP or malformed response, with protocol-specific evidence attached.
 
 The verifier does **not yet** execute protocol-semantic tests such as:
 
 - parsing and linting every `SKILL.md` against the upstream Agent Skills validator;
 - WebMCP runtime tool discovery;
-- MCP initialize/handshake/tool-listing;
+- MCP tool listing or tool invocation;
 - A2A Agent Card semantic validation;
 - OpenAPI/Croissant domain validation;
 - citation/provenance preservation through a real retrieval run.
 
 Those checks should use upstream validators/adapters rather than reimplementing their protocols inside ARWP.
+
+### What verification proves
+
+- Schema validation proves declaration shape only.
+- URL reachability proves basic transport availability of webpages, feeds and documents.
+- MCP `initialize` proves a basic MCP protocol endpoint is responding at the declared URL.
+- It does **not** prove that all advertised tools work.
+- It does **not** prove authorization or permission correctness.
+- It does **not** prove semantic quality, truthfulness or safety of the server.
 
 ## Exit semantics
 
@@ -166,9 +188,9 @@ Those checks should use upstream validators/adapters rather than reimplementing 
 
 Live verification distinguishes:
 
-- `pass` — the resource is reachable and matches the expected basic transport contract;
-- `warn` — reachable but metadata such as `Content-Type` is unexpected or incomplete;
-- `fail` — unreachable, error status or invalid HTTPS final URL.
+- `pass` — the resource is reachable and matches the expected basic transport contract (for Streamable HTTP MCP servers: a basic MCP handshake completed);
+- `warn` — reachable but metadata such as `Content-Type` is unexpected or incomplete, or (MCP only) the endpoint requires authorization so the protocol could not be assessed;
+- `fail` — unreachable, error status, invalid HTTPS final URL, or (MCP only) the endpoint does not answer a valid MCP handshake.
 
 Warnings do not make a profile invalid by themselves.
 
