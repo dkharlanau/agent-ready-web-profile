@@ -81,7 +81,7 @@ assert.equal(software.offers.price, 0);
 assert.equal('aggregateRating' in software, false, 'do not fabricate software ratings');
 assert.equal('review' in software, false, 'do not fabricate software reviews');
 assert.ok(maintainer.sameAs.includes('https://github.com/dkharlanau'));
-assert.ok(maintainer.sameAs.includes('https://www.linkedin.com/in/dkharlanau/'));
+assert.ok(!maintainer.sameAs.includes('https://www.linkedin.com/in/dkharlanau/'));
 assert.equal(entities.filter(item => item['@type'] === 'Service').length, 4);
 assert.ok(entities.some(item => item['@type'] === 'OfferCatalog'));
 assert.ok(entities.some(item => item['@type'] === 'PublicationEvent'));
