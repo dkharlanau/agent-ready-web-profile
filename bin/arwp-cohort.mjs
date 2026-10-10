@@ -13,6 +13,7 @@ import {
   planCohortSearchObservation,
   reviewCohortGscWebExport
 } from '../lib/cohort-search-observation.mjs';
+import { reviewCohortIndexInspection } from '../lib/cohort-index-observation.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0] && !args[0].startsWith('--') ? args[0] : 'help';
@@ -58,6 +59,7 @@ function usage() {
     '  arwp-cohort plan <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD [--final-through=YYYY-MM-DD] [--json]',
     '  arwp-cohort page-map <cohort.json> [--output=private-map.json] [--json]',
     '  arwp-cohort check-gsc <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD --final-through=YYYY-MM-DD --window-days=14 --report-scope=web --export-start=YYYY-MM-DD --export-end=YYYY-MM-DD --page-map=private-map.json --export=private-web.csv [--output=private-review.json] [--json]',
+    '  arwp-cohort check-index <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --page-map=private-map.json --inspection=private-inspection.json [--output=private-index-review.json] [--json]',
     '',
     'The frozen cohort remains the only experiment design authority. Planning starts',
     'only with an independently reviewed exact production SHA and explicit deployment',
@@ -68,6 +70,11 @@ function usage() {
     'Search Console WEB Search. It is NOT a generative-AI export and cannot verify',
     'that the CSV was exported from Search Console. The explicit private page map',
     'links exact canonical URLs to frozen treatment/control IDs. It never guesses URLs.',
+    '',
+    'URL Inspection describes Googles indexed version, not live HTTP. check-index',
+    'accepts a dated read-only Search Console snapshot with current_url_inspection.rows',
+    'and an exact site property; it matches only frozen canonical URLs, keeps missing',
+    'inspection rows unknown and never makes ranking or causal claims.',
     '',
     'Search Console can omit anonymized/low-volume rows. No row means unobserved,',
     'not zero. No outcome or causal decision is made from this helper alone. Keep',
@@ -155,6 +162,38 @@ async function main() {
     const written = writeLocalJson(map, optionValue('output'));
     if (jsonOutput || !written) console.log(JSON.stringify(map, null, 2));
     else console.log('WROTE private page-map template: ' + written + '\nFill in all exact canonical URLs before check-gsc.');
+    return 0;
+  }
+
+  if (command === 'check-index') {
+    const options = {
+      productionRef: optionRequired('production-ref'),
+      deploymentDate: optionRequired('deployment-date')
+    };
+    const pageMap = readJson(optionRequired('page-map'));
+    const snapshot = readJson(optionRequired('inspection'));
+    const review = reviewCohortIndexInspection(cohort, pageMap, snapshot, options);
+    const written = writeLocalJson(review, optionValue('output'));
+    if (jsonOutput) console.log(JSON.stringify({ ...review, written }, null, 2));
+    else {
+      console.log('Goose cohort index inspection: ' + review.cohortId);
+      console.log('Snapshot observed: ' + review.observedAt + ' (indexed version, not live test)');
+      console.log('Matching frozen members: ' + review.snapshot.matchedFrozenMembers
+        + '/' + (review.frozen.treatment + review.frozen.control));
+      for (const group of ['treatment', 'control']) {
+        const value = review[group];
+        const states = Object.entries(value.stateCounts)
+          .filter(([, count]) => count > 0)
+          .map(([state, count]) => state + '=' + count)
+          .join(', ');
+        console.log(group + ': ' + value.inspectedMembers + '/' + value.frozenMembers
+          + ' inspected; ' + states);
+      }
+      console.log('Next checks:');
+      for (const check of review.nextChecks) console.log(' - ' + check);
+      if (written) console.log('WROTE privacy-bounded review: ' + written);
+      console.log('No indexing, traffic or causal outcome is claimed.');
+    }
     return 0;
   }
 
