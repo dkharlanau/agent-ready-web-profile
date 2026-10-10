@@ -6,7 +6,7 @@ This file is a repository rights map. It does not replace the actual license tex
 
 ## Software
 
-Repository software is licensed under the Apache License 2.0. See [`LICENSE`](LICENSE). The license controls the permissions it grants for covered software and includes its own trademark provision.
+Current repository software is available under PolyForm Strict License 1.0.0. See [`LICENSE`](LICENSE) for the current permissions and restrictions. Earlier revisions released under Apache License 2.0 may retain rights already granted under those releases.
 
 ## Project-authored media, research and reuse packs
 
@@ -14,7 +14,7 @@ Material explicitly included by the Open Media & AI Reuse Pack follows the scope
 
 ## Other web content
 
-Do not infer a blanket content license merely because the source repository is open source. Use the explicit license or rights statement attached to the relevant page, file, dataset or collection.
+Do not infer a blanket content license merely because the source repository is public. Use the explicit license or rights statement attached to the relevant page, file, dataset or collection.
 
 ## Third-party material
 
