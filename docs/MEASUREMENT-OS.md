@@ -22,6 +22,12 @@ This is an **observability sequence**, not automatically a mathematical conversi
 
 The goal is to preserve the evidence chain while keeping each provider's population honest.
 
+## Bing AI context and owner evidence
+
+A small, separate local adapter now handles actual owner-reported Bing AI Performance **Intents, Topics, grounding-query-to-page projections, per-query Citation Share and period comparison**. It is deliberately not a generic AI-visibility score or a raw CSV parser that guesses column meaning. The owner retains unmodified provider exports privately and prepares opaque query/page IDs with the exact filters used.
+
+See [Bing AI owner context](BING-AI-OWNER-CONTEXT.md) and `arwp-bing inspect/compare`. The existing `arwp-visibility` Bing aggregate import remains unchanged; do not mix sampled page/query citation counts with site-level daily totals or Google Web impressions.
+
 ## CLI workflow
 
 Normalize each available owner export using the same observation window:
