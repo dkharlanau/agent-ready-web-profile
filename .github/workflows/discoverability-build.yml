@@ -17,6 +17,7 @@ on:
       - 'scripts/discoverability-test.mjs'
       - 'scripts/discoverability-routing-test.mjs'
       - 'scripts/discoverability-current-surface-test.mjs'
+      - 'scripts/editorial-voice-test.mjs'
       - '.github/workflows/discoverability-build.yml'
   workflow_dispatch:
 
@@ -51,6 +52,8 @@ jobs:
         run: node scripts/discoverability-routing-test.mjs
       - name: Validate current public surfaces against canonical corpus
         run: node scripts/discoverability-current-surface-test.mjs
+      - name: Review human-first copy and publication consistency
+        run: node scripts/editorial-voice-test.mjs
       - name: Show generated footprint
         shell: bash
         run: |
