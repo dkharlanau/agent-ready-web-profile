@@ -171,6 +171,10 @@
         "tool",
         "security",
         "eval"
+      ],
+      "expectedTopicTerms": [
+        "WebMCP",
+        "Chrome"
       ]
     },
     {
@@ -195,7 +199,11 @@
         "noindex",
         "accessibility"
       ],
-      "note": "Legacy primary source retained only for redirect/relevance review. As of 2026-10-10 the requested FAQ resolves to a different Atlas-retirement article; claims about OAI bots, Atlas agent, referral UTM and Apps SDK must be rechecked separately against topic-matching primary sources. Do not infer all claims are false or auto-retire advice."
+      "note": "Legacy primary source retained only for redirect/relevance review. As of 2026-10-10 the requested FAQ resolves to a different Atlas-retirement article; claims about OAI bots, Atlas agent, referral UTM and Apps SDK must be rechecked separately against topic-matching primary sources. Do not infer all claims are false or auto-retire advice.",
+      "expectedTopicTerms": [
+        "OAI-SearchBot",
+        "GPTBot"
+      ]
     },
     {
       "id": "openai-current-crawler-docs",
@@ -214,7 +222,11 @@
         "robots.txt",
         "IP"
       ],
-      "note": "Current topic-matching primary source for crawler role definitions and IP ranges only; does not support previous Atlas ARIA, Apps SDK/sidebar, referral UTM claims."
+      "note": "Current topic-matching primary source for crawler role definitions and IP ranges only; does not support previous Atlas ARIA, Apps SDK/sidebar, referral UTM claims.",
+      "expectedTopicTerms": [
+        "OAI-SearchBot",
+        "GPTBot"
+      ]
     },
     {
       "id": "cloudflare-ai-bots-changelog",

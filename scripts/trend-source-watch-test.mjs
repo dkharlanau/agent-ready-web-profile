@@ -78,4 +78,27 @@ assert.match(redirectCandidate.title, /verify the actual supporting claim/);
 assert.equal(report.results.find(item => item.sourceId === 'page').sourceRedirectRequiresReview, false);
 assert.equal(report.summary.failed, 0, 'a redirected HTTP 200 is a human review issue, not an HTTP failure');
 
+const topicReport = await runTrendSourceWatch({
+  version: 'test', reviewedThrough: '2026-09-06', guardrails: {}, sources: [
+    { id: 'same-url-topic-lost', provider: 'openai', kind: 'page-update',
+      url: 'https://example.test/page', reviewedThrough: '2026-09-06',
+      expectedTopicTerms: ['OAI-SearchBot', 'GPTBot'] },
+    { id: 'same-url-topic-present', provider: 'openai', kind: 'page-update',
+      url: 'https://example.test/retired-faq', reviewedThrough: '2026-09-06',
+      expectedTopicTerms: ['Retired product'] }
+  ]
+}, { fetchImpl, timeoutMs: 1000 });
+const staleTopic = topicReport.results.find(x => x.sourceId === 'same-url-topic-lost');
+assert.equal(staleTopic.topicRequiresReview, true);
+assert.equal(staleTopic.topicEvidence.checkable, true);
+assert.equal(staleTopic.topicEvidence.matchedTermCount, 0);
+const missingTopic = topicReport.candidates.find(x => x.type === 'source-topic-review');
+assert.equal(missingTopic.sourceId, 'same-url-topic-lost');
+assert.equal(missingTopic.publishedAt, null);
+assert.match(missingTopic.summary, /extraction problem|material source change/);
+const presentTopic = topicReport.results.find(x => x.sourceId === 'same-url-topic-present');
+assert.equal(presentTopic.topicRequiresReview, false);
+assert.equal(presentTopic.topicEvidence.matchedTermCount, 1);
+assert.equal(topicReport.summary.failed, 0, 'missing topic is not a network failure');
+
 console.log('PASS trend-source-watch-test');

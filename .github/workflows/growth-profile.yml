@@ -13,6 +13,9 @@ on:
       - 'schema/growth-pr-delivery.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
+      - 'lib/growth-readable.mjs'
+      - 'lib/editorial-parity.mjs'
+      - 'bin/arwp-editorial.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-plan-vertical.mjs'
       - 'lib/growth-vertical-evidence.mjs'
@@ -34,6 +37,8 @@ on:
       - 'bin/arwp-trends.mjs'
       - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
+      - 'scripts/growth-readable-test.mjs'
+      - 'scripts/editorial-parity-test.mjs'
       - 'scripts/growth-vertical-evidence-test.mjs'
       - 'scripts/growth-vertical-site-test.mjs'
       - 'scripts/growth-policy-test.mjs'
@@ -71,6 +76,9 @@ on:
       - 'schema/growth-pr-delivery.schema.json'
       - 'examples/growth-policy.example.json'
       - 'lib/growth-profile.mjs'
+      - 'lib/growth-readable.mjs'
+      - 'lib/editorial-parity.mjs'
+      - 'bin/arwp-editorial.mjs'
       - 'lib/growth-plan.mjs'
       - 'lib/growth-plan-vertical.mjs'
       - 'lib/growth-vertical-evidence.mjs'
@@ -92,6 +100,8 @@ on:
       - 'bin/arwp-trends.mjs'
       - 'bin/arwp-trend-history.mjs'
       - 'scripts/growth-profile-test.mjs'
+      - 'scripts/growth-readable-test.mjs'
+      - 'scripts/editorial-parity-test.mjs'
       - 'scripts/growth-vertical-evidence-test.mjs'
       - 'scripts/growth-vertical-site-test.mjs'
       - 'scripts/growth-policy-test.mjs'
@@ -136,6 +146,13 @@ jobs:
       - name: Validate Growth Profile registry, planner, vertical evidence and templates
         run: |
           node scripts/growth-profile-test.mjs
+          node scripts/growth-readable-test.mjs
+          node scripts/editorial-parity-test.mjs
+          node --check lib/growth-readable.mjs
+          node --check lib/editorial-parity.mjs
+          node --check bin/arwp-editorial.mjs
+          node --check scripts/growth-readable-test.mjs
+          node --check scripts/editorial-parity-test.mjs
           node scripts/growth-vertical-evidence-test.mjs
           node scripts/growth-vertical-site-test.mjs
           node --check lib/growth-profile.mjs

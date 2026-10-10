@@ -72,6 +72,19 @@ Keep the underlying source, version, checks, contracts and licensing truthful. D
 
 A successful editorial change must survive review in the **canonical source**, the **published page**, and any **generated recommendation surface**. After editing a catalog, rebuild dependent pages and check stable IDs, anchors, search summaries, machine descriptions and the current software license against `LICENSE`.
 
+## Built-page editorial parity, not an AI score
+
+When a real page is revised with AI assistance, the editor approves facts, not a probability that the writing "sounds AI". The optional offline preflight `arwp-editorial` checks the built HTML against the owner's explicit visible facts, disallowed claims, expected metadata and release status. It flags numeric claims that appear in metadata but not the page. The editor then checks meaning, rights and source support; a passing machine check is never human sign-off, actual user benefit or SEO proof.
+
+```bash
+node bin/arwp-editorial.mjs --html=/private/preview/article.html \
+  --contract=/private/owner-approved-facts.json --json
+```
+
+The local contract format is documented in `docs/EDITORIAL-FACT-PARITY.md`. Its raw content belongs with the owner when facts or drafts are private. The CLI does not inspect network accounts or send text to an AI classifier.
+
+For generated Growth advice, the user-facing CLI now starts with **Start here**, **Check it** and **When not to do it**. Stable machine IDs, source fields and implementation status remain in the JSON plan; technical detail is not deleted to make the prose shorter.
+
 ## Visual identity
 
 The website uses a bright editorial direction: lime `#eff600`, ink `#080c0b`, warm white `#fafaf7`, orange `#ff7138` and blue evidence links `#173bea`. Inter Tight is self-hosted under the included SIL Open Font License. System monospace distinguishes source and version metadata.

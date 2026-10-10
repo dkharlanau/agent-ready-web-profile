@@ -20,6 +20,7 @@
     "arwp-watch": "bin/arwp-watch.mjs",
     "arwp-assert": "bin/arwp-assert.mjs",
     "arwp-growth": "bin/arwp-growth.mjs",
+    "arwp-editorial": "bin/arwp-editorial.mjs",
     "arwp-growth-policy": "bin/arwp-growth-policy.mjs",
     "arwp-growth-history": "bin/arwp-growth-history.mjs",
     "arwp-hypotheses": "bin/arwp-hypotheses.mjs",
@@ -190,6 +191,8 @@
     "test:portfolio-workspace": "node scripts/portfolio-workspace-test.mjs",
     "test:evidence-relay": "node scripts/evidence-relay-test.mjs",
     "test:cohort-observation": "node scripts/controlled-cohort-test.mjs && node scripts/cohort-search-observation-test.mjs && node scripts/cohort-index-observation-test.mjs && node scripts/cohort-index-comparison-test.mjs && node scripts/cohort-web-observer-test.mjs && node --check lib/cohort-web-observer.mjs && node --check lib/cohort-index-comparison.mjs && node --check lib/cohort-search-observation.mjs && node --check lib/cohort-index-observation.mjs && node --check bin/arwp-cohort.mjs",
+    "test:human-growth": "node scripts/growth-readable-test.mjs && node --check lib/growth-readable.mjs",
+    "test:editorial-parity": "node scripts/editorial-parity-test.mjs && node --check lib/editorial-parity.mjs && node --check bin/arwp-editorial.mjs",
     "test:voice": "node scripts/editorial-voice-test.mjs"
   },
   "dependencies": {
