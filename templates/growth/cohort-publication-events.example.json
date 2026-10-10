@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "sourceClass": "synthetic",
+  "cohortId": "REPLACE_WITH_FROZEN_COHORT_ID",
+  "completeThrough": null,
+  "events": [
+    {
+      "memberId": "REPLACE_WITH_FROZEN_CONTROL_ID",
+      "publishedOn": "2026-10-04",
+      "productionRef": "0000000000000000000000000000000000000000",
+      "kind": "editorial",
+      "evidenceUrl": "https://example.com/reviewed-publication-receipt"
+    }
+  ],
+  "warning": "EXAMPLE ONLY. Synthetic sourceClass deliberately fails the owner-declared evidence gate. Use an owner-reviewed private file with actual member IDs, observed live revision and dated evidence URL. Do not commit owner query or account evidence."
+}
