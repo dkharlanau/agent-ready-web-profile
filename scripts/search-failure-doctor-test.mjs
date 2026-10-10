@@ -53,6 +53,11 @@ const blocker = diagnoseSearchFailure({
 });
 assert.equal(blocker.primary.code, 'review-technical-blocker');
 assert.equal(blocker.primary.checkId, 'search-indexability');
+assert.equal(blocker.primary.evidenceClass, 'supplied-technical-report');
+assert.equal(blocker.sourceState.technical, 'supplied-unverified-technical');
+const liveAudit = diagnoseSearchFailure({ site, technical: technical([fail('P0')]), technicalOrigin: 'live' });
+assert.equal(liveAudit.primary.evidenceClass, 'live-bounded-public-audit');
+assert.equal(liveAudit.sourceState.technical, 'live-bounded-public-audit');
 assert.match(blocker.primary.hold, /not proof of Google deindexing/);
 
 const mismatch = diagnoseSearchFailure({
@@ -105,6 +110,15 @@ const oldWindow = diagnoseSearchFailure({ site, owner: owner({
 assert.equal(oldWindow.primary.code, 'establish-evidence');
 assert.equal(oldWindow.stages.exposure, 'predeployment-evidence');
 assert.equal(oldWindow.sourceState.googleSearchPeriod, null);
+
+const crossingWindow = diagnoseSearchFailure({ site, owner: owner({
+  deployment: { expectedRef: 'a123', liveRef: 'a123', deployedOn: '2026-09-15' },
+  search: search({ startDate: '2026-09-01', endDate: '2026-09-28', impressions: 200, clicks: 0 })
+}) });
+assert.equal(crossingWindow.stages.exposure, 'mixed-deployment-window');
+assert.equal(crossingWindow.stages.visitsFromSearch, 'unknown');
+assert.equal(crossingWindow.primary.code, 'establish-evidence');
+assert.equal(crossingWindow.sourceState.googleSearchPeriod, null);
 
 const synthetic = diagnoseSearchFailure({ site, owner: owner({
   dataStatus: 'synthetic',
