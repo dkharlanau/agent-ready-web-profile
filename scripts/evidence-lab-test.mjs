@@ -55,6 +55,8 @@ assert.match(html, /Measured wins<\/dt><dd>0<\/dd>/);
 assert.match(html, /What we need next: real search evidence/);
 assert.match(html, /arwp-cohort check-gsc/);
 assert.match(html, /arwp-cohort check-index/);
+assert.match(html, /arwp-cohort compare-index/);
+assert.match(html, /Pages checked on only one date/);
 assert.match(html, /never inspected in the snapshot/i);
 assert.match(html, /Missing rows remain unknown/);
 assert.match(html, /Not yet measured:/);
