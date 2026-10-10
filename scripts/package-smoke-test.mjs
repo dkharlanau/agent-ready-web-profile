@@ -30,9 +30,9 @@ try {
     'knowledge/research/2026-09-08-editorial-expansion.json',
     'knowledge/discoverability-corpus.json', 'knowledge/source-link-checks.json', 'lib/discoverability.mjs',
     'skills/arwp-discoverability/SKILL.md', 'docs/examples/editorial/article.receipt.json',
-    'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-bing.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs', 'bin/arwp-deploy-discovery.mjs',
+    'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-bing.mjs', 'bin/arwp-geo-plan.mjs', 'bin/arwp-qualified-review.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs', 'bin/arwp-deploy-discovery.mjs',
     'bin/arwp-growth.mjs', 'bin/arwp-editorial.mjs', 'bin/arwp-growth-remediation.mjs', 'bin/arwp-trends.mjs', 'bin/arwp-portfolio.mjs', 'bin/arwp-cohort.mjs',
-    'lib/growth-readable.mjs', 'lib/editorial-parity.mjs', 'lib/bing-context-evidence.mjs', 'lib/cohort-search-observation.mjs', 'lib/cohort-index-observation.mjs', 'lib/cohort-index-comparison.mjs', 'lib/cohort-web-observer.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs', 'lib/deploy-discovery-loop.mjs',
+    'lib/growth-readable.mjs', 'lib/editorial-parity.mjs', 'lib/bing-context-evidence.mjs', 'lib/search-geo-execution.mjs', 'lib/qualified-feature-preflight.mjs', 'lib/cohort-search-observation.mjs', 'lib/cohort-index-observation.mjs', 'lib/cohort-index-comparison.mjs', 'lib/cohort-web-observer.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs', 'lib/deploy-discovery-loop.mjs',
     'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs', 'lib/ai-search-profile.mjs',
     'lib/growth-remediation.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'schema/claim.schema.json', 'schema/visibility-snapshot.schema.json', 'schema/agent-eval-receipt.schema.json',
@@ -66,6 +66,8 @@ try {
   const installedAiSearchCli = path.join(installedRoot, 'bin', 'arwp-ai-search.mjs');
   const installedVisibilityCli = path.join(installedRoot, 'bin', 'arwp-visibility.mjs');
   const installedBingCli = path.join(installedRoot, 'bin', 'arwp-bing.mjs');
+  const installedGeoPlanCli = path.join(installedRoot, 'bin', 'arwp-geo-plan.mjs');
+  const installedQualifiedReviewCli = path.join(installedRoot, 'bin', 'arwp-qualified-review.mjs');
   const installedCohortCli = path.join(installedRoot, 'bin', 'arwp-cohort.mjs');
   const installedAgentEvalCli = path.join(installedRoot, 'bin', 'arwp-agent-eval.mjs');
   const installedIndexNowCli = path.join(installedRoot, 'bin', 'arwp-indexnow.mjs');
@@ -73,10 +75,10 @@ try {
   const installedEditorialCli = path.join(installedRoot, 'bin', 'arwp-editorial.mjs');
   const installedGrowthRemediationCli = path.join(installedRoot, 'bin', 'arwp-growth-remediation.mjs');
   const installedPortfolioCli = path.join(installedRoot, 'bin', 'arwp-portfolio.mjs');
-  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedBingCli, installedCohortCli, installedEditorialCli, installedAgentEvalCli, installedIndexNowCli, installedDeployDiscoveryCli, installedGrowthRemediationCli, installedPortfolioCli]) {
+  for (const cli of [installedCli, installedAiSearchCli, installedVisibilityCli, installedBingCli, installedGeoPlanCli, installedQualifiedReviewCli, installedCohortCli, installedEditorialCli, installedAgentEvalCli, installedIndexNowCli, installedDeployDiscoveryCli, installedGrowthRemediationCli, installedPortfolioCli]) {
     assert.ok(fs.existsSync(cli), `installed CLI entrypoint is missing: ${path.basename(cli)}`);
   }
-  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-bing', 'arwp-cohort', 'arwp-editorial', 'arwp-agent-eval', 'arwp-indexnow', 'arwp-deploy-discovery', 'arwp-growth-remediation', 'arwp-portfolio']) {
+  for (const bin of ['arwp', 'arwp-ai-search', 'arwp-visibility', 'arwp-bing', 'arwp-geo-plan', 'arwp-qualified-review', 'arwp-cohort', 'arwp-editorial', 'arwp-agent-eval', 'arwp-indexnow', 'arwp-deploy-discovery', 'arwp-growth-remediation', 'arwp-portfolio']) {
     assert.ok(fs.existsSync(path.join(consumerDir, 'node_modules', '.bin', bin)), `npm bin shim is missing: ${bin}`);
   }
   assert.ok(fs.existsSync(path.join(installedRoot, 'schema', 'claim.schema.json')), 'claim schema must ship in the npm artifact');
