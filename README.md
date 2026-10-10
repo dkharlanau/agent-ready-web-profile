@@ -21,6 +21,10 @@ For the existing Ptichi experiment, use the [controlled-cohort observation workf
 
 The [Deep Run research](research/product/2026-10-10-search-geo-deep-run.md) evaluates **34 source-backed Search, GEO and agent-web opportunities** for editors, site owners, commerce providers and browser-agent workflows. These are **review candidates**, not 34 active rankings tactics or new product modules: the structured [research ledger](research/product/2026-10-10-search-geo-deep-run.json) records applicability, first useful change, how to check it and when not to apply it. P0 remains the first honest owner-evidence proof loop. The Trend Radar now flags topic-changing redirects in primary-source documentation for review; it does not silently promote or retire advice.
 
+### Practical writing and evidence tools
+
+The normal `arwp-growth` text output now leads with a practical action, its verification and a reason not to apply it. For AI-assisted editorial revisions, use the offline [built-page fact check](docs/EDITORIAL-FACT-PARITY.md) rather than an unreliable "AI text detection" score. For an actual original research item, start with the [original evidence review worksheet](templates/growth/original-evidence-review.md), and link the *existing* canonical experiment, release and outcome evidence rather than inventing a success story.
+
 Repository work from ChatGPT/GitHub: start with [AGENTS.md](AGENTS.md), then use [REPO_MAP.md](REPO_MAP.md) to route the task to canonical sources and checks.
 
 Goose ARWP is the product-facing layer built on **Agent-Ready Web Profile (ARWP)**: a source-available system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
