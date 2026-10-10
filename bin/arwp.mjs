@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-if (process.argv[2] === 'site-gate') {
+if (process.argv[2] === 'search-doctor') {
+  process.argv.splice(2, 1);
+  await import('./arwp-search-doctor.mjs');
+} else if (process.argv[2] === 'site-gate') {
   await import('./arwp-site-gate.mjs');
 } else if (process.argv[2] === 'technical-integrity') {
   await import('./arwp-technical-integrity.mjs');

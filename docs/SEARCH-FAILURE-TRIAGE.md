@@ -62,6 +62,32 @@ Do not require already-established demand as a universal prerequisite for a genu
 
 Keep treatment and comparison cohorts separate; record concurrent content, template, migration and deployment changes. Run Treatment Cohort Integrity where applicable. Choose a prospective observation window after verified deployment and allow for crawl/data latency. A 28-day review window can be a project convention, not a Google promise or a causal experiment by itself.
 
+## Search Failure Doctor: one next action
+
+The offline-first **Search Failure Doctor** makes this diagnostic order executable without creating another ranking or AI-readiness score. It returns one practical next action, how to check it, when not to act and what remains unknown. A public audit is optional and bounded; owner search/indexing facts come from a local file and are never collected by the service.
+
+```bash
+# No scan: start with a safe evidence-collection decision.
+node bin/arwp.mjs search-doctor https://example.com/
+
+# Actual public HTTP/robots/canonical check; never a Google index or traffic claim.
+node bin/arwp.mjs search-doctor https://example.com/ --scan --max-pages=8
+
+# Reuse an existing bounded technical report and an owner-held local snapshot.
+node bin/arwp.mjs technical-integrity https://example.com/ --json > private-technical.json
+node bin/arwp.mjs search-doctor --technical=private-technical.json --owner=private-owner.json
+node bin/arwp.mjs search-doctor --technical=private-technical.json --owner=private-owner.json --json
+```
+
+For an example of the **owner file shape**, see [`templates/growth/search-failure-owner.example.json`](../templates/growth/search-failure-owner.example.json). Its `dataStatus` is deliberately `synthetic`. Copy it to a private location, replace the example site and numbers using actual dated evidence and set `dataStatus` to `owner-supplied` only when you have those facts. The Doctor cannot verify that a manual file genuinely came from the provider.
+
+Owner evidence is deliberately narrow: `site` must be the **same exact canonical site or project-path** as the technical report; the optional `deployment` distinguishes expected and observed revisions; `indexing` counts **inspected approved URLs only**; `search` accepts Google Search Console **final Web Search property totals** for the specified property and dates. A domain property must cover the site's host, and a URL-prefix property must cover its canonical path; otherwise the command rejects the report. A query+page sample is not a property total. Preliminary data, fabricated sample data, reports ending before a deployment and windows **crossing the deployment date** never become post-change outcome evidence. Local technical report files are not independently authenticated; an opt-in live scan is labeled separately.
+
+Safe decision order: owner-reported deployment mismatch → observed bounded P0 technical blocker → owner URL Inspection sample → final zero-impression property → impressions without clicks → lower-priority bounded technical finding → visits without a useful-action measure → first evidence to collect. The output does not claim that a bounded failure represents Googlebot, that a sampled index count is sitewide, or that a Search change caused traffic. A `WATCH` result is for review, not automatic repair.
+
+Use `--help` for options. Input files are capped at 1 MiB for owner data and 4 MiB for the technical report. **Do not commit private owner reports, property/query evidence or client logs to public GitHub**. JSON output can itself contain owner-derived stage descriptions and should be treated as private until reviewed for publication. No automated site writes, provider logins, rating scores or performance promises are part of this command.
+
+Regression: `npm run test:search-doctor`. The tool supplements the canonical Ptichi controlled-cohort proof milestone; it does not complete or replace that outcome review.
 ## Existing implementation routes
 
 - `skills/arwp-growth-loop/SKILL.md`: overall research/implementation/measurement loop.

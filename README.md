@@ -21,6 +21,9 @@ For the existing Ptichi experiment, use the [controlled-cohort observation workf
 
 The [Deep Run research](research/product/2026-10-10-search-geo-deep-run.md) evaluates **34 source-backed Search, GEO and agent-web opportunities** for editors, site owners, commerce providers and browser-agent workflows. These are **review candidates**, not 34 active rankings tactics or new product modules: the structured [research ledger](research/product/2026-10-10-search-geo-deep-run.json) records applicability, first useful change, how to check it and when not to apply it. P0 remains the first honest owner-evidence proof loop. The Trend Radar now flags topic-changing redirects in primary-source documentation for review; it does not silently promote or retire advice.
 
+### One-action Search Failure Doctor (early CLI)
+
+When a site has few impressions or unclear indexing, use the [Search Failure Doctor](docs/SEARCH-FAILURE-TRIAGE.md#search-failure-doctor-one-next-action) to choose the **first check worth doing**, not another score. Run `node bin/arwp.mjs search-doctor https://example.com/ --scan` for a bounded public technical check, or provide a local owner snapshot to distinguish indexing, impressions and clicks. Missing owner evidence stays unknown; this does **not** complete the real Ptichi outcome-proof milestone.
 ### Practical writing and evidence tools
 
 The normal `arwp-growth` text output now leads with a practical action, its verification and a reason not to apply it. For AI-assisted editorial revisions, use the offline [built-page fact check](docs/EDITORIAL-FACT-PARITY.md) rather than an unreliable "AI text detection" score. For an actual original research item, start with the [original evidence review worksheet](templates/growth/original-evidence-review.md), and link the *existing* canonical experiment, release and outcome evidence rather than inventing a success story.

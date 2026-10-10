@@ -36,7 +36,8 @@
     "arwp-entity-remediation": "bin/arwp-entity-remediation.mjs",
     "arwp-improve": "bin/arwp-improve.mjs",
     "arwp-surfaces": "bin/arwp-surfaces.mjs",
-    "arwp-portfolio": "bin/arwp-portfolio.mjs"
+    "arwp-portfolio": "bin/arwp-portfolio.mjs",
+    "arwp-search-doctor": "bin/arwp-search-doctor.mjs"
   },
   "files": [
     "bin/",
@@ -111,7 +112,8 @@
     "docs/ASSET-WORKSHOP.md",
     "docs/examples/asset-kits/",
     "docs/COMMERCIAL-LOCALIZATION.md",
-    "docs/CATALOG-REVIEW.md"
+    "docs/CATALOG-REVIEW.md",
+    "docs/SEARCH-FAILURE-TRIAGE.md"
   ],
   "scripts": {
     "validate:examples": "node scripts/test.mjs",
@@ -195,7 +197,8 @@
     "test:human-growth": "node scripts/growth-readable-test.mjs && node --check lib/growth-readable.mjs",
     "test:editorial-parity": "node scripts/editorial-parity-test.mjs && node --check lib/editorial-parity.mjs && node --check bin/arwp-editorial.mjs",
     "test:bing-context": "node scripts/bing-context-evidence-test.mjs && node --check lib/bing-context-evidence.mjs && node --check bin/arwp-bing.mjs",
-    "test:voice": "node scripts/editorial-voice-test.mjs"
+    "test:voice": "node scripts/editorial-voice-test.mjs",
+    "test:search-doctor": "node scripts/search-failure-doctor-test.mjs && node --check lib/search-failure-doctor.mjs && node --check bin/arwp-search-doctor.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/node": "^2.0.0",
