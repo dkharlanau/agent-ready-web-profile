@@ -129,6 +129,8 @@ for (const input of [
   { site, owner: owner({search: search({clicks:1})}) },
   { site, owner: owner({search: search({dataState:'unknown'})}) },
   { site, owner: owner({search: search({scope:'page-query'})}) },
+  { site, owner: owner({search: search({property:'sc-domain:other.com'})}) },
+  { site, owner: owner({search: search({property:'https://example.com/unrelated/'})}) },
   { site, owner: owner({search: search({endDate:'2026-02-30'})}) },
   { site, owner: owner({indexing:{inspectedApprovedUrls:1,indexedApprovedUrls:2}}) }
 ]) assert.throws(() => diagnoseSearchFailure(input), Error, 'invalid or cross-scope evidence must fail closed');
