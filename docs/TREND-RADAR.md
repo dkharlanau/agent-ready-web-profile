@@ -99,6 +99,12 @@ The site plan does not automatically turn every trend into an implementation tas
 
 `WATCH` trends stay out of default Growth plans.
 
+## Dated October 2026 opportunity review
+
+The [10 October Search/GEO Deep Run](../research/product/2026-10-10-search-geo-deep-run.md) contains 34 qualified opportunities with source links, applicability, verification, measurement and reasons to decline. Its [JSON review ledger](../research/product/2026-10-10-search-geo-deep-run.json) is **not** an active recommendation or Trend Radar registry. Current P0 first-proof evidence remains the release gate before introducing new product modules.
+
+**Source-link drift:** a source can return HTTP 200 yet silently redirect to an unrelated topic. Page-update/discover-feed checks now surface path/host-changing redirects as a human-review candidate, even without a later page date. Trailing slash or query-only normalization does not automatically raise the alarm. The reviewer must check the **actual claim against a topic-matching primary source** before revising, retiring or replacing the reference. An HTTP failure is reported separately. This guard never promotes WATCH into ADOPT or measures ranking effects.
+
 ## Source policy
 
 A secondary article, social post or community discussion can be useful for discovery, but it cannot promote a trend to ADOPT by itself.
