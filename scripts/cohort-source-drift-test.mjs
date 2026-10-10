@@ -65,7 +65,7 @@ try {
   assert.equal(diff.measurementGateAtFreeze, 'ready');
 
   const events = {
-    version: '0.1', cohortId: cohort.id, completeThrough: '2026-10-09',
+    version: '0.1', sourceClass: 'owner-declared', cohortId: cohort.id, completeThrough: '2026-10-09',
     events: ['c02', 'c03', 'c04', 'c05'].map((id, index) => ({
       memberId: id,
       publishedOn: '2026-10-04',
@@ -100,6 +100,7 @@ try {
     [cohort, {repoFolder: repository, afterRef: after, publicationEvents: events}],
     [cohort, {repoFolder: repository, afterRef: after, deploymentDate:'2026-02-30'}],
     [cohort, {repoFolder: repository, afterRef: after, deploymentDate:'2026-09-13', publicationEvents: {...events, cohortId:'wrong'}}],
+    [cohort, {repoFolder: repository, afterRef: after, deploymentDate:'2026-09-13', publicationEvents: {...events, sourceClass:'synthetic'}}],
     [cohort, {repoFolder: repository, afterRef: after, deploymentDate:'2026-09-13', publicationEvents: {...events, completeThrough:'2026-10-03'}}],
     [cohort, {repoFolder: repository, afterRef: after, deploymentDate:'2026-09-13', publicationEvents: {...events, events: [...events.events, events.events[0]]}}],
     [cohort, {repoFolder: repository, afterRef: after, deploymentDate:'2026-09-13', publicationEvents: {...events, events:[{...events.events[0],memberId:'missing'}]}}],
