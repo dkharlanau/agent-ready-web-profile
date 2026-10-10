@@ -55,6 +55,8 @@ node bin/arwp-cohort.mjs page-map cohort.json --output=/private/cohort-page-map.
 
 The owner fills exact canonical URLs for **every** frozen treatment/control member. `check-gsc` then accepts an actual **joint date/page/query** Google Web Search CSV (not separate page/query totals or an AI impressions export) for one entire frozen window. It rejects mismatched dates, duplicates, unreviewed page maps and HOLD cohorts, and keeps missing members unknown. Only call it with `--report-scope=web`, the full `--export-start`/`--export-end` window and an owner-verified `--final-through` date. See `docs/CONTROLLED-COHORTS.md` for the complete syntax and privacy limits.
 
+If a dated owner URL Inspection snapshot is available, run `arwp-cohort check-index` after filling the canonical page map and **before** explaining absent search performance. The read-only inspection review distinguishes `indexed`, `discovered-not-indexed`, `unknown-to-google`, and `not-inspected` from the exact indexed-version snapshot. Keep the snapshot date, crawled-before-deployment flags and canonical differences; never label the URL Inspection API a live URL test or use it to establish traffic. For the supported private snapshot wrapper, see `docs/CONTROLLED-COHORTS.md`. Unknown or uninspected pages do not receive synthetic zeroes.
+
 Do not put private query/page owner exports or private page-map files in a public repository. A calendar window that has elapsed is not automatically final provider data, and a descriptive GSC row comparison is not causal evidence.
 
 4. **Collect provider-native evidence.** Prefer owner exports and first-party logs. Keep dimensions privately when useful for page/query/cohort analysis.

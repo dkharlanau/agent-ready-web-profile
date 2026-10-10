@@ -56,6 +56,7 @@
           <ol>
             <li><strong>Check the dates.</strong> Confirm the deployment record, then use the existing <code>arwp-cohort plan</code> command to see which windows are complete and whether report data is final.</li>
             <li><strong>Match the right pages.</strong> Use <code>arwp-cohort page-map</code> with exact public canonical URLs. A source filename is not a published page address.</li>
+            <li><strong>Separate discovery from indexing.</strong> If the owner has a dated URL Inspection snapshot, use <code>arwp-cohort check-index</code> to distinguish pages Google indexed, discovered but did not index, reported unknown, or never inspected in the snapshot. This is not a live test or a cause of ranking changes.</li>
             <li><strong>Review real observations.</strong> Use <code>arwp-cohort check-gsc</code> on a local, joint Google Web Search date/page/query export. Missing rows remain unknown; never upload private exports to this public repository.</li>
             <li><strong>Decide separately.</strong> Compare treatment, controls, baseline, query relevance and known disruptions before deciding whether to keep or revise the change.</li>
           </ol>

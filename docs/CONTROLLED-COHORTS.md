@@ -144,6 +144,35 @@ node bin/arwp-cohort.mjs page-map \
 
 Fill the 18 `url: null` entries with the exact published **canonical** HTTPS URLs. Each ID, entity, and treatment/control assignment must remain unchanged. Goose does not guess a public route from `content/goals/*.md`, strip tracking parameters, merge aliases, silently relocate a member, or fill missing entries for you. Duplicate URLs, unknown members and cross-site mappings fail validation.
 
+### 2a. Check Google indexing before interpreting missing search rows
+
+For sites with a dated owner URL Inspection snapshot, Goose can now tell apart four very different observations: a page Google reported indexed, a page Google discovered but has not indexed, a page Google said was unknown, and a page **not inspected in the supplied snapshot**. A missing Search Analytics row cannot answer these questions.
+
+The read-only `check-index` command uses the **same private canonical page map** as the Web Search export workflow. It accepts an owner-provided report with `properties[<exact site>]` and `current_url_inspection.rows`, `total`, `observed_at`, and (optionally) `counts`. This structure matches an actual dated site recovery capture; it is not a request to the Search Console API and does not use credentials.
+
+```bash
+node bin/arwp-cohort.mjs check-index \
+  knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json \
+  --production-ref=13b49e9a5faa9256b5bbded049caf33327abc240 \
+  --deployment-date=2026-09-13 \
+  --page-map=/private/ptichi-page-map.json \
+  --inspection=/private/dated-index-inspection.json \
+  --output=/private/dated-index-review.json
+```
+
+The complete inspection snapshot must be internally consistent: its declared total and coverage counts must match its rows, every inspected URL must be unique and the report must identify the frozen site property. **No public URLs, canonical targets or raw queries are copied into the derived output**; only frozen member IDs and status/coverage summaries are retained. Production HOLD or a mismatched observed SHA blocks cohort attribution. A crawl on or before the claimed deployment date is not evidence that Google processed the new version.
+
+How to interpret the result:
+
+- **Indexed:** the dated report showed a consistent PASS verdict and indexed coverage. This does not establish impressions, clicks, citations, useful visits or continued indexing.
+- **Discovered, currently not indexed:** inspect the actual dated crawling, migration and page-value context rather than assuming one universal cause or adding more URLs.
+- **Unknown to Google:** look at actual sitemap processing and internal discovery routes. Do not confuse it with a URL that was never checked.
+- **Crawled, not indexed / blocked / fetch problem:** inspect the specific observed response or policy and whether it is intentional. Do not automatically remove `noindex` or alter canonicals.
+- **Not inspected in this snapshot:** information is missing. It is **not** proof of exclusion, of zero impressions, or of an unknown URL.
+- **Canonical differs or last crawl precedes deployment:** investigate the individual URL and release chronology; a difference is not automatically a defect.
+
+The <https://developers.google.com/webmaster-tools/v1/urlInspection.index/UrlInspectionResult> contract includes the verdict, coverage state, robots/indexing controls, selected and declared canonicals and last crawl when available. The <https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect> method reports the **indexed version, not a live URL test**. A single index snapshot cannot prove why Google made an indexing decision. Keep the raw owner snapshot and the filled URL map private, and preserve the observation date when comparing later captures.
+
 ### 3. Inspect an actual joint Web Search export locally
 
 In the property owner's Google Search Console account, select **Search results → Web** for the exact intended dates. Export **date + canonical page + query + clicks + impressions together** using the supported Search Analytics API dimensions or an equivalent genuinely joint export. A separate Pages CSV joined to a separate Queries CSV is *not* the same dataset and must not be used. Retain the unmodified export, filters, aggregation basis (`byPage` for page grouping) and report-finality proof privately.
