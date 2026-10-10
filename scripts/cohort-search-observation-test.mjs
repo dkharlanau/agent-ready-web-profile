@@ -79,6 +79,16 @@ bad = structuredClone(pageMap);
 bad.members.pop();
 assert.throws(() => validateCohortPageMap(synthetic, bad), /every frozen member/);
 
+// A frozen subdirectory is a path segment, not a raw string prefix.
+const nested = structuredClone(synthetic);
+nested.site = 'https://example.com/study';
+const nestedMap = createCohortPageMapTemplate(nested);
+for (const member of nestedMap.members) member.url = 'https://example.com/study/fixture/' + member.id + '/';
+assert.equal(validateCohortPageMap(nested, nestedMap).members.length, 18);
+const siblingPrefix = structuredClone(nestedMap);
+siblingPrefix.members[0].url = 'https://example.com/study-other/fixture/t01/';
+assert.throws(() => validateCohortPageMap(nested, siblingPrefix), /within its base path/);
+
 const csv = [
   'Date,Page,Query,Clicks,Impressions',
   '2026-09-16,https://example.com/fixture/t01/,how to explain something clearly at work,2,9',
