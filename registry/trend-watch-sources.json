@@ -8,8 +8,43 @@
       "kind": "feed",
       "url": "https://developers.google.com/search/updates/search_docs_updates.rss",
       "reviewedThrough": "2026-09-06",
-      "trendIds": ["google-generative-ai-performance-global", "google-generative-ai-control-global", "google-site-reputation-policy-eea-2026-08", "google-preferred-sources-custom-button", "google-social-video-platform-properties", "google-generative-ai-optimization-guide", "google-faq-rich-result-retired"],
-      "keywords": ["ai", "generative", "search console", "preferred source", "structured data", "crawler", "robots", "index", "citation", "social", "video", "image", "discover", "ranking", "spam", "reputation", "canonical", "hreflang", "author", "event", "dataset", "javascript", "internal link", "merchant", "business profile", "localization"]
+      "trendIds": [
+        "google-generative-ai-performance-global",
+        "google-generative-ai-control-global",
+        "google-site-reputation-policy-eea-2026-08",
+        "google-preferred-sources-custom-button",
+        "google-social-video-platform-properties",
+        "google-generative-ai-optimization-guide",
+        "google-faq-rich-result-retired"
+      ],
+      "keywords": [
+        "ai",
+        "generative",
+        "search console",
+        "preferred source",
+        "structured data",
+        "crawler",
+        "robots",
+        "index",
+        "citation",
+        "social",
+        "video",
+        "image",
+        "discover",
+        "ranking",
+        "spam",
+        "reputation",
+        "canonical",
+        "hreflang",
+        "author",
+        "event",
+        "dataset",
+        "javascript",
+        "internal link",
+        "merchant",
+        "business profile",
+        "localization"
+      ]
     },
     {
       "id": "google-search-blog",
@@ -17,8 +52,39 @@
       "kind": "discover-feed",
       "url": "https://developers.google.com/search/blog",
       "reviewedThrough": "2026-09-06",
-      "trendIds": ["google-generative-ai-performance-global", "google-generative-ai-control-global", "google-site-reputation-policy-eea-2026-08", "google-preferred-sources-custom-button", "google-social-video-platform-properties", "google-generative-ai-optimization-guide", "google-faq-rich-result-retired"],
-      "keywords": ["ai", "generative", "search console", "crawler", "index", "ranking", "structured data", "agent", "citation", "content", "spam", "canonical", "author", "event", "dataset", "javascript", "internal link", "discover", "image", "video", "local", "shopping"]
+      "trendIds": [
+        "google-generative-ai-performance-global",
+        "google-generative-ai-control-global",
+        "google-site-reputation-policy-eea-2026-08",
+        "google-preferred-sources-custom-button",
+        "google-social-video-platform-properties",
+        "google-generative-ai-optimization-guide",
+        "google-faq-rich-result-retired"
+      ],
+      "keywords": [
+        "ai",
+        "generative",
+        "search console",
+        "crawler",
+        "index",
+        "ranking",
+        "structured data",
+        "agent",
+        "citation",
+        "content",
+        "spam",
+        "canonical",
+        "author",
+        "event",
+        "dataset",
+        "javascript",
+        "internal link",
+        "discover",
+        "image",
+        "video",
+        "local",
+        "shopping"
+      ]
     },
     {
       "id": "bing-webmaster-blog",
@@ -26,8 +92,27 @@
       "kind": "discover-feed",
       "url": "https://blogs.bing.com/webmaster",
       "reviewedThrough": "2026-09-06",
-      "trendIds": ["bing-ai-performance-citations"],
-      "keywords": ["ai", "copilot", "citation", "grounding", "indexnow", "search", "crawler", "ranking", "webmaster", "structured data", "snippet", "clarity", "evidence", "freshness", "bing places", "local"]
+      "trendIds": [
+        "bing-ai-performance-citations"
+      ],
+      "keywords": [
+        "ai",
+        "copilot",
+        "citation",
+        "grounding",
+        "indexnow",
+        "search",
+        "crawler",
+        "ranking",
+        "webmaster",
+        "structured data",
+        "snippet",
+        "clarity",
+        "evidence",
+        "freshness",
+        "bing places",
+        "local"
+      ]
     },
     {
       "id": "schemaorg-latest-release",
@@ -36,7 +121,22 @@
       "url": "https://schema.org/version/latest",
       "reviewedThrough": "2026-09-06",
       "trendIds": [],
-      "keywords": ["DefinedTerm", "DefinedTermSet", "Person", "Organization", "Event", "Dataset", "SoftwareApplication", "Product", "CreativeWork", "sameAs", "schema", "ProfilePage", "Article", "VideoObject"]
+      "keywords": [
+        "DefinedTerm",
+        "DefinedTermSet",
+        "Person",
+        "Organization",
+        "Event",
+        "Dataset",
+        "SoftwareApplication",
+        "Product",
+        "CreativeWork",
+        "sameAs",
+        "schema",
+        "ProfilePage",
+        "Article",
+        "VideoObject"
+      ]
     },
     {
       "id": "indexnow-documentation",
@@ -45,7 +145,15 @@
       "url": "https://www.indexnow.org/documentation",
       "reviewedThrough": "2026-09-06",
       "trendIds": [],
-      "keywords": ["indexnow", "url changed", "updated", "deleted", "key", "endpoint", "search engine"]
+      "keywords": [
+        "indexnow",
+        "url changed",
+        "updated",
+        "deleted",
+        "key",
+        "endpoint",
+        "search engine"
+      ]
     },
     {
       "id": "chrome-webmcp",
@@ -53,8 +161,17 @@
       "kind": "page-update",
       "url": "https://developer.chrome.com/docs/ai/webmcp",
       "reviewedThrough": "2026-09-06",
-      "trendIds": ["webmcp-origin-trial-evals"],
-      "keywords": ["webmcp", "agent", "origin trial", "tool", "security", "eval"]
+      "trendIds": [
+        "webmcp-origin-trial-evals"
+      ],
+      "keywords": [
+        "webmcp",
+        "agent",
+        "origin trial",
+        "tool",
+        "security",
+        "eval"
+      ]
     },
     {
       "id": "openai-publishers-developers",
@@ -62,8 +179,42 @@
       "kind": "page-update",
       "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq",
       "reviewedThrough": "2026-09-06",
-      "trendIds": ["openai-publisher-agent-guidance-refresh"],
-      "keywords": ["oai-searchbot", "gptbot", "chatgpt search", "agent", "atlas", "aria", "crawler", "utm_source", "referral", "noindex", "accessibility"]
+      "trendIds": [
+        "openai-publisher-agent-guidance-refresh"
+      ],
+      "keywords": [
+        "oai-searchbot",
+        "gptbot",
+        "chatgpt search",
+        "agent",
+        "atlas",
+        "aria",
+        "crawler",
+        "utm_source",
+        "referral",
+        "noindex",
+        "accessibility"
+      ],
+      "note": "Legacy primary source retained only for redirect/relevance review. As of 2026-10-10 the requested FAQ resolves to a different Atlas-retirement article; claims about OAI bots, Atlas agent, referral UTM and Apps SDK must be rechecked separately against topic-matching primary sources. Do not infer all claims are false or auto-retire advice."
+    },
+    {
+      "id": "openai-current-crawler-docs",
+      "provider": "openai",
+      "kind": "page-update",
+      "url": "https://developers.openai.com/api/docs/bots",
+      "reviewedThrough": "2026-10-10",
+      "trendIds": [
+        "openai-publisher-agent-guidance-refresh"
+      ],
+      "keywords": [
+        "OAI-SearchBot",
+        "GPTBot",
+        "ChatGPT-User",
+        "OAI-AdsBot",
+        "robots.txt",
+        "IP"
+      ],
+      "note": "Current topic-matching primary source for crawler role definitions and IP ranges only; does not support previous Atlas ARIA, Apps SDK/sidebar, referral UTM claims."
     },
     {
       "id": "cloudflare-ai-bots-changelog",
@@ -71,8 +222,18 @@
       "kind": "page-update",
       "url": "https://developers.cloudflare.com/changelog/",
       "reviewedThrough": "2026-09-06",
-      "trendIds": ["cloudflare-content-use-reference-enforcement"],
-      "keywords": ["ai", "crawler", "robots", "content signal", "content-signal", "browser run", "bot"]
+      "trendIds": [
+        "cloudflare-content-use-reference-enforcement"
+      ],
+      "keywords": [
+        "ai",
+        "crawler",
+        "robots",
+        "content signal",
+        "content-signal",
+        "browser run",
+        "bot"
+      ]
     }
   ],
   "guardrails": {
