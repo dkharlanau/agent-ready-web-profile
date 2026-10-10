@@ -76,10 +76,10 @@ function usage() {
     'URL Inspection describes Googles indexed version, not live HTTP. check-index',
     'accepts either a dated Search recovery snapshot with current_url_inspection.rows',
     'or the actual read-only Ptichi scripts/search-observe.py output (inspections).',
-    'and an exact site property; it matches only frozen canonical URLs, keeps missing',
-    'inspection rows unknown and never makes ranking or causal claims.',
+    'The site property and private frozen canonical page map must match; missing',
+    'inspection rows remain unobserved and never become fabricated ranking results.',
     'compare-index compares only identically mapped frozen URLs observed on both dates;',
-    'unknown/uninspected states cannot become false traffic or indexing gains.'
+    'unknown/uninspected states cannot become false traffic or indexing gains.',
     '',
     'Search Console can omit anonymized/low-volume rows. No row means unobserved,',
     'not zero. No outcome or causal decision is made from this helper alone. Keep',
