@@ -3,53 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="How to measure AI search visibility in 2026 using Google Search Console generative AI reports, Bing AI Performance and ChatGPT referral analytics, with a before/after experiment model.">
+  <meta name="description" content="Find out whether people discovered or visited your website after a change. Separate search appearances, citations and visits using the reports you actually have.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-  <title>How to Measure AI Search Visibility in 2026 | ARWP</title>
+  <title>Did more people find your website? Measure search visibility — Goose</title>
   <link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-measure-ai-search-visibility.html">
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
   <link rel="stylesheet" href="../citation.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"How to Measure AI Search Visibility in 2026","dateModified":"2026-09-06","author":{"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"},"mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-measure-ai-search-visibility.html","isPartOf":{"@type":"WebSite","name":"Agent-Ready Web Profile","url":"https://dkharlanau.github.io/agent-ready-web-profile/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Did more people find your website? Measure search and AI visibility","dateModified":"2026-10-10","author":{"@type":"Person","name":"Dzmitryi Kharlanau","url":"https://github.com/dkharlanau"},"mainEntityOfPage":"https://dkharlanau.github.io/agent-ready-web-profile/answers/how-to-measure-ai-search-visibility.html","isPartOf":{"@type":"WebSite","name":"Agent-Ready Web Profile","url":"https://dkharlanau.github.io/agent-ready-web-profile/"}}</script>
 </head>
 <body>
 <header class="topbar"><a class="brand" href="../"><span class="brand-mark">A/</span><span>ARWP</span></a><nav><a href="./">Answers</a><a href="../recommendations/">Playbook</a><a class="nav-cta" href="../measurement/">Measurement</a></nav></header>
 <main class="cite-main shell">
   <section class="cite-hero">
     <p class="eyebrow">Measurement · reviewed 2026-09-06</p>
-    <h1>How do you measure AI search visibility?</h1>
-    <p class="cite-lead"><strong>Use platform-owner evidence and first-party analytics, not an “AI readiness score.”</strong> In 2026 the useful signals are becoming measurable: Google exposes generative-AI performance in Search Console, Bing exposes citation activity in AI Performance, and OpenAI adds a ChatGPT UTM source to referral URLs.</p>
-    <div class="cite-meta"><span>Before / after</span><span>Owner data</span><span>Page-level evidence</span></div>
+    <h1>Did more people find your page after the change?</h1>
+    <p class="cite-lead">First ask what you want to know: did someone see your page in search, was it cited in an answer, or did someone actually visit? These are different events. Check what your Google, Bing or site reports really show, and leave unavailable information unknown.</p>
+    <div class="cite-meta"><span>What changed?</span><span>What can you observe?</span><span>What is unknown?</span></div>
   </section>
 
-  <section class="cite-card" id="google"><h2>Google: generative AI performance in Search Console</h2>
-    <p>Google introduced dedicated generative-AI performance views for Search and Discover and stated that the rollout reached all websites worldwide on <strong>31 August 2026</strong>. Use these views to observe the pages and impressions associated with Google's generative experiences rather than trying to infer AI visibility from HTML changes alone.</p>
+  <section class="cite-card" id="google"><h2>Google: is your page appearing in search?</h2>
+    <p>Google introduced dedicated generative-AI performance views for Search and Discover and stated that the rollout reached all websites worldwide on <strong>31 August 2026</strong>. If the relevant report is available for your property, choose a page and a period and write down what it shows. Keep general Search and AI-related appearances separate where the reports overlap. Changing the page's HTML by itself does not prove visibility.</p>
     <p><a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">Google Search Central: generative AI performance reports</a></p>
   </section>
 
-  <section class="cite-card" id="bing"><h2>Bing: citations and cited pages</h2>
-    <p>Bing Webmaster Tools AI Performance is documented as a public-preview reporting surface for citation activity across supported Microsoft AI experiences. Track citation trends and the pages being cited, then inspect which page structures and evidence types correlate with durable changes.</p>
+  <section class="cite-card" id="bing"><h2>Bing: is your page being cited?</h2>
+    <p>Bing Webmaster Tools AI Performance is documented as a public-preview reporting surface for citation activity across supported Microsoft AI experiences. If your property has the AI Performance report, note which pages were cited and the dates covered. Do not count citations as visits or pretend the report includes every answer.</p>
     <p><a href="https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview">Bing Webmaster: AI Performance</a></p>
   </section>
 
-  <section class="cite-card" id="chatgpt"><h2>ChatGPT: referral traffic</h2>
-    <p>OpenAI states that ChatGPT automatically includes <code>utm_source=chatgpt.com</code> in referral URLs. Create a dedicated first-party analytics segment for that source and retain the landing page and downstream conversion event where your privacy policy allows it. Referral traffic measures visits; crawler logs do not.</p>
+  <section class="cite-card" id="chatgpt"><h2>ChatGPT: did someone actually visit?</h2>
+    <p>OpenAI states that ChatGPT automatically includes <code>utm_source=chatgpt.com</code> in referral URLs. If your site statistics are set up with appropriate permissions, check visits associated with that source. Note the landing page and any useful next step you can legitimately observe. This measures visits, not every answer that may have mentioned your site.</p>
     <p><a href="https://help.openai.com/en/articles/12627856-publishers-and-developers-faq">OpenAI: Publishers and Developers FAQ</a></p>
   </section>
 
-  <section class="cite-card" id="experiment"><h2>A useful experiment design</h2>
+  <section class="cite-card" id="experiment"><h2>Try this with one page before changing the whole site</h2>
     <ol>
-      <li><strong>Define a bounded page group.</strong> Do not change the entire site when you want to learn which intervention mattered.</li>
-      <li><strong>Save a baseline.</strong> Record classic Search impressions/clicks plus available Google generative, Bing citation and ChatGPT referral evidence before the change.</li>
-      <li><strong>Apply one coherent implementation pack.</strong> Examples: internal-link repair, citation structure, author provenance or media/Discover improvements.</li>
-      <li><strong>Verify implementation separately.</strong> A canonical, robots, structured-data or rendering fix is a technical result, not an outcome metric.</li>
-      <li><strong>Compare over time.</strong> Look at absolute values as well as percentage change; compare with similar unchanged pages when possible.</li>
-      <li><strong>Record alternative explanations.</strong> Seasonality, site-wide releases, demand changes and platform changes can move the numbers.</li>
+      <li><strong>Pick a page.</strong> Choose one guide that should help a particular reader, and write down the problem you want to fix.</li>
+      <li><strong>Record the starting point.</strong> Save the searches and visits you can observe, including the exact dates. Mark missing data as unavailable, not zero.</li>
+      <li><strong>Make one clear change.</strong> Repair an internal link, clarify an answer or add a genuine example. Record what you changed and when.</li>
+      <li><strong>Check the live page.</strong> Confirm your change actually appears and everything still works. That is not yet evidence of more visitors.</li>
+      <li><strong>Compare sensible periods.</strong> Allow for reporting delays and compare complete periods. Look at real counts as well as percentages; use a similar unchanged page as context where possible.</li>
+      <li><strong>Ask what else could explain it.</strong> Seasonality, other site changes and demand can move the numbers. Do not assume your edit caused the difference.</li>
     </ol>
   </section>
 
-  <section class="cite-card" id="scorecard"><h2>Minimum outcome scorecard</h2>
+  <section class="cite-card" id="scorecard"><h2>Keep a small record of what happened</h2>
     <p><strong>Search:</strong> non-brand impressions, clicks, indexed priority pages. <strong>Google generative:</strong> generative-AI impressions/pages. <strong>Bing:</strong> citation activity and cited pages. <strong>ChatGPT:</strong> sessions from <code>utm_source=chatgpt.com</code>. <strong>Business:</strong> one meaningful action such as signup, download, contact or tool use.</p>
-    <p>ARWP's own rule is simple: do not promote a recommendation from “implemented” to “measured” without outcome evidence.</p>
+    <p>A finished edit is not a successful outcome by itself. If reports are unavailable, say so. If visitors increased but useful actions did not, record both observations.</p>
     <p><a href="../recommendations/">Open the full playbook</a> · <a href="../measurement/">Open ARWP measurement resources</a></p>
   </section>
 
