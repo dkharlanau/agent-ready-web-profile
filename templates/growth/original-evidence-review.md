@@ -52,6 +52,6 @@ When available, link an authorized reproducible public method and an original as
 
 Do not publish a success story when the publication revision is not independently confirmed, the outcome period predates the intervention, owner data is missing or preliminary, control pages have changed unrecorded, or the example needs fabricated users/metrics. Keep a truthful methodology page or a neutral outcome instead.
 
-**Sources:** Google Search Central on [helpful/original information](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) and [AI-assisted content quality](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content); existing [Goose Controlled Cohorts](../../docs/CONTROLLED-COHORTS.md), [Growth Experiments](../../docs/GROWTH-EXPERIMENTS.md), [Change Receipt](../../docs/CHANGE-RECEIPT.md) and [Evidence Lab](../../docs/EVIDENCE-WINNER-LAB.md).
+**Sources:** Google Search Central on [helpful/original information](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) and [AI-assisted content quality](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content); existing [Goose Controlled Cohorts](../../docs/CONTROLLED-COHORTS.md), [Growth Experiments](../../docs/GROWTH-EXPERIMENTS.md), [Change Receipt](../../docs/CHANGE-RECEIPTS.md) and [Evidence Lab](../../docs/EVIDENCE-WINNER-LAB.md).
 
 This is a review worksheet. It does not imply the site gained rankings, visitors, citations or completed tasks.
