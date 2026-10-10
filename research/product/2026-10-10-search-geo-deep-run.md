@@ -1,6 +1,6 @@
 # Goose Search, GEO & AI Discovery — Deep Run, 10 October 2026
 
-**State:** 34 researched, primary-source-backed **review candidates**. They are NOT 34 new shipped features, SEO ranking factors, or an instruction to publish 34 pages. Human/product review must precede activation. The latest verified owner data and current source documents outrank any older snapshot.
+**State:** 34 researched, primary-source-backed **review candidates**. They are NOT 34 new shipped features, SEO ranking factors, or an instruction to publish 34 pages. Human/product review must precede activation. These entries are not automatically active recommendations. The latest verified owner data and current source documents outrank any older snapshot.
 
 **Scope:** The existing Goose/ARWP core, with opt-in vertical applicability to real client sites. This is a product strategy and specialist implementation worksheet, not a public content farm or a live Search-performance report. Raw owner evidence, credentials, private query/page exports and protected implementation receipts remain outside this public repository.
 
@@ -27,7 +27,7 @@
 1. **1 October — Google AI content quality update:** low-effort, weakly original and low-value auto-created content and metadata deserve factual/reader review. [Primary source](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
 2. **8 October — UGC Fresh Data Program:** special approved high-volume third-party UGC platform pipeline, explicitly not general indexing. [Eligibility](https://developers.google.com/search/docs/appearance/ugc-fresh-data-program)
 3. **24 September — video creator and interaction counters:** source-valid VideoObject options for actual videos. [Video guidance](https://developers.google.com/search/docs/appearance/structured-data/video)
-4. **June/October — Bing AI Performance context:** grounding-query↔page, new Intents, Topics, Citation Share and Compare; provider sampling and mixed-population caveats are essential. [Bing reference](https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview)
+4. **June/October — Bing AI Performance context:** grounding-query↔page, new Intents, Topics, Citation Share and Compare; provider sampling and mixed-population caveats are essential. [Bing reference](https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/)
 5. **Cloudflare's 2026 role and rights updates:** Search vs Agent vs Training defaults and content-use-aware crawling require *actual* provider/crawler verification. [Roles](https://developers.cloudflare.com/changelog/post/2026-07-01-ai-traffic-options/) · [Content-use](https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/)
 6. **OpenAI product commerce:** authorized discovery feeds and the supported Stable schema are separate from ads and checkout. [Partner-only onboarding](https://developers.openai.com/commerce/guides/get-started)
 7. **OpenAI source integrity incident:** the previously used help article URL currently redirects to an Atlas retirement help page. The current crawler definitions live in [OpenAI Crawlers](https://developers.openai.com/api/docs/bots). **Do not replace citations for ARIA/Apps/UTM claims with crawler documentation that doesn't support them.** Every affected claim requires its own scoped source review.
@@ -164,7 +164,7 @@
 
 **Existing Goose owners:** `registry/search-agent-recommendations.json`. This is a review/improvement, not authorization to add a duplicate engine.
 
-**Primary sources:** [1](https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview) · [2](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/).
+**Primary sources:** [1](https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/) · [2](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/).
 
 <a id="openai-crawler-roles-and-real-edge-access"></a>
 
@@ -220,7 +220,7 @@
 
 **Existing Goose owners:** `registry/search-agent-recommendations.json`. This is a review/improvement, not authorization to add a duplicate engine.
 
-**Primary sources:** [1](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/) · [2](https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview).
+**Primary sources:** [1](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/) · [2](https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/).
 
 <a id="bing-topics-preview"></a>
 
@@ -256,7 +256,7 @@
 
 **Existing Goose owners:** `docs/MEASUREMENT-OS.md`. This is a review/improvement, not authorization to add a duplicate engine.
 
-**Primary sources:** [1](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/) · [2](https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview).
+**Primary sources:** [1](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/) · [2](https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/).
 
 <a id="bing-preview-period-compare"></a>
 
@@ -274,7 +274,7 @@
 
 **Existing Goose owners:** `docs/MEASUREMENT-OS.md`. This is a review/improvement, not authorization to add a duplicate engine.
 
-**Primary sources:** [1](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/) · [2](https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview).
+**Primary sources:** [1](https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/) · [2](https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/).
 
 <a id="generative-search-owner-report-scope"></a>
 
