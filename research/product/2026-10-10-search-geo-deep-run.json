@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "reviewDate": "2026-10-10",
-  "title": "Goose: 32 source-backed Search, GEO and agent-web opportunities",
+  "title": "Goose: 34 source-backed Search, GEO and agent-web opportunities",
   "scope": "Research candidate decisions, NOT automatically active advice or publisher instructions.",
   "method": {
     "roles": [
@@ -50,7 +50,7 @@
     "cfCrawl": "https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/",
     "cfAnalytics": "https://developers.cloudflare.com/changelog/post/2026-02-09-analytics-enhancements/",
     "cfFormat": "https://developers.cloudflare.com/changelog/post/2026-04-17-tools-for-agentic-internet/",
-    "cfBatch": "https://developers.cloudflare.com/changelog/post/2026-03-10-crawl-websites/",
+    "cfBatch": "https://developers.cloudflare.com/changelog/post/2026-03-10-br-crawl-endpoint/",
     "ietf": "https://datatracker.ietf.org/doc/draft-ietf-aipref-attach/",
     "webmcp": "https://developer.chrome.com/docs/ai/webmcp",
     "indexnow": "https://www.indexnow.org/documentation"
@@ -695,7 +695,7 @@
       "primarySources": [
         "https://developers.cloudflare.com/changelog/post/2026-04-17-tools-for-agentic-internet/",
         "https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/",
-        "https://developers.cloudflare.com/changelog/post/2026-03-10-crawl-websites/"
+        "https://developers.cloudflare.com/changelog/post/2026-03-10-br-crawl-endpoint/"
       ],
       "existingCoverage": []
     },
