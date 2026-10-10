@@ -19,22 +19,32 @@ on:
       - 'scripts/discoverability-current-surface-test.mjs'
       - 'scripts/editorial-voice-test.mjs'
       - '.github/workflows/discoverability-build.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'knowledge/discoverability-corpus.json'
+      - 'knowledge/releases/**'
+      - 'lib/discoverability.mjs'
+      - 'scripts/build-discoverability.mjs'
+      - '.github/workflows/discoverability-build.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: discoverability-build-main
+  group: discoverability-build-${{ github.event_name == 'pull_request' && github.head_ref || 'main' }}
   cancel-in-progress: true
 
 jobs:
   build-sync:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || 'main' }}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -64,6 +74,8 @@ jobs:
           grep -n 'Discoverability Library' docs/llms.txt | tail -1
       - name: Commit generated surfaces when changed
         shell: bash
+        env:
+          TARGET_BRANCH: ${{ github.event_name == 'pull_request' && github.head_ref || 'main' }}
         run: |
           git add \
             docs/discoverability.html \
@@ -86,6 +98,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Sync current discoverability surfaces'
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          git fetch origin "$TARGET_BRANCH"
+          git rebase "origin/$TARGET_BRANCH"
+          git push origin "HEAD:$TARGET_BRANCH"
