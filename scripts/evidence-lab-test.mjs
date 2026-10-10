@@ -54,6 +54,8 @@ assert.match(html, new RegExp(cohort.measurementGate.implementationRef.slice(0, 
 assert.match(html, /Measured wins<\/dt><dd>0<\/dd>/);
 assert.match(html, /What we need next: real search evidence/);
 assert.match(html, /arwp-cohort check-gsc/);
+assert.match(html, /arwp-cohort check-index/);
+assert.match(html, /never inspected in the snapshot/i);
 assert.match(html, /Missing rows remain unknown/);
 assert.match(html, /Not yet measured:/);
 assert.match(html, /CONTROLLED-COHORTS\.md/);
