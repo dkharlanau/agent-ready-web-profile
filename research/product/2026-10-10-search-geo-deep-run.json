@@ -1,0 +1,726 @@
+{
+  "version": "0.1",
+  "reviewDate": "2026-10-10",
+  "title": "Goose: 32 source-backed Search, GEO and agent-web opportunities",
+  "scope": "Research candidate decisions, NOT automatically active advice or publisher instructions.",
+  "method": {
+    "roles": [
+      "website owner",
+      "Search engineer",
+      "GEO analyst",
+      "editor",
+      "technical architect",
+      "privacy/rights reviewer",
+      "product manager",
+      "skeptical investor"
+    ],
+    "evidenceBoundary": "Documented provider features and explicit experiments; no causal Search-ranking claim, invented owner evidence or recommendation-count KPI.",
+    "priorityOrder": "P0 source credibility and first proof; P1 only where real owner evidence or eligibility exists; P2 conditional trials or research watches.",
+    "candidateNotRecommendation": true,
+    "noAutomaticActivation": true,
+    "noChangesToTargetSites": true,
+    "privacyRule": "Raw owner Search Console/analytics logs, queries, personal data and private project artifacts stay outside public Goose research.",
+    "existingCoverage": "Cards explicitly say what Goose already implements. This research does not silently add duplicate first-class engines or promote unproven tactics."
+  },
+  "sourceCatalog": {
+    "gAi": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+    "gAiSearch": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+    "gUpdates": "https://developers.google.com/search/updates",
+    "gVideo": "https://developers.google.com/search/docs/appearance/structured-data/video",
+    "gPreferred": "https://developers.google.com/search/docs/appearance/preferred-sources",
+    "gProfile": "https://developers.google.com/search/docs/appearance/search-profiles",
+    "gSocial": "https://developers.google.com/search/blog/2026/07/search-console-social-video-platforms",
+    "gDiscover": "https://developers.google.com/search/docs/appearance/google-discover",
+    "gImages": "https://developers.google.com/search/docs/appearance/google-images",
+    "gUgc": "https://developers.google.com/search/docs/appearance/ugc-fresh-data-program",
+    "gAggregator": "https://developers.google.com/search/docs/appearance/aggregator-unit",
+    "gSupplier": "https://developers.google.com/search/docs/appearance/supplier-unit",
+    "gRegional": "https://developers.google.com/search/docs/appearance/aggregator-features",
+    "gMerchant": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+    "gSpam": "https://developers.google.com/search/docs/essentials/spam-policies",
+    "gIndexing": "https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect",
+    "bAi": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+    "bPreview": "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
+    "oBots": "https://developers.openai.com/api/docs/bots",
+    "oCommerce": "https://developers.openai.com/commerce/guides/get-started",
+    "oStable": "https://developers.openai.com/commerce/specs/file-upload/products",
+    "oAds": "https://help.openai.com/en/articles/20001243-advertiser-guidance-for-allowing-openai-web-crawlers",
+    "oAdfeed": "https://help.openai.com/en/articles/20001268-create-campaigns-from-product-feeds",
+    "cfBots": "https://developers.cloudflare.com/changelog/post/2026-07-01-ai-traffic-options/",
+    "cfCrawl": "https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/",
+    "cfAnalytics": "https://developers.cloudflare.com/changelog/post/2026-02-09-analytics-enhancements/",
+    "cfFormat": "https://developers.cloudflare.com/changelog/post/2026-04-17-tools-for-agentic-internet/",
+    "cfBatch": "https://developers.cloudflare.com/changelog/post/2026-03-10-crawl-websites/",
+    "ietf": "https://datatracker.ietf.org/doc/draft-ietf-aipref-attach/",
+    "webmcp": "https://developer.chrome.com/docs/ai/webmcp",
+    "indexnow": "https://www.indexnow.org/documentation"
+  },
+  "opportunities": [
+    {
+      "rank": 1,
+      "id": "openai-bots-source-repair",
+      "priority": "P0",
+      "status": "act-now",
+      "area": "source-integrity",
+      "title": "Fix the OpenAI publisher-documentation source of truth",
+      "insight": "The old OpenAI publisher FAQ URL presently redirects to an unrelated retired-browser article. The current crawler documentation separately describes search, training, user-triggered and ads access.",
+      "action": "Make the active watch source point to OpenAI's crawler documentation; keep the old link as historical evidence and review the Atlas-dependent advice before representing it as current.",
+      "check": "Verify the new URL resolves to OAI-SearchBot/GPTBot/ChatGPT-User/OAI-AdsBot definitions; flag old Atlas/Apps claims as due for re-review rather than quietly transferring them.",
+      "measure": "Count recommendations whose live cited sources match the claims; prevent source-redirect incidents, not promise indexing.",
+      "skip": "Do not bulk-replace the old URL under referral or Atlas statements with crawler docs that cannot substantiate them.",
+      "primarySources": [
+        "https://developers.openai.com/api/docs/bots"
+      ],
+      "existingCoverage": [
+        "registry/trend-watch-sources.json",
+        "docs/OPENAI-CHATGPT-SEARCH-CONTROLS.md"
+      ]
+    },
+    {
+      "rank": 2,
+      "id": "october-ai-copy-editorial-gate",
+      "priority": "P0",
+      "status": "act-now",
+      "area": "editorial",
+      "title": "Replace generated-looking advice with inspected decisions",
+      "insight": "Google's 1 October 2026 update adds quality-rater context around low-effort, low-originality and low-value material. Rewording every headline is less important than giving readers something specific to decide or try.",
+      "action": "Select a small sample of the highest-seen Goose advice and target-site pages. Require one distinct useful action, owner-valid example, evidence boundary, reason not to use it and concise human explanation. Record real defects and corrections.",
+      "check": "Review original vs updated pages with user, specialist, editor and skeptic roles. Check no invented first-hand experience or claims, and preserve non-changes.",
+      "measure": "Page-specific query fit and useful continuation where owner evidence exists; otherwise editorial pass/fail only.",
+      "skip": "Do not equate lower AI-text scores or higher keyword density with search improvement.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"
+      ],
+      "existingCoverage": [
+        "docs/BRAND-GOOSE.md",
+        "scripts/editorial-voice-test.mjs"
+      ]
+    },
+    {
+      "rank": 3,
+      "id": "generated-metadata-parity",
+      "priority": "P0",
+      "status": "act-now",
+      "area": "editorial",
+      "title": "Review titles, descriptions, alt text and structured data together",
+      "insight": "Google explicitly says factual AI-output review includes metadata, not just article body text. An answer can be accurate in a paragraph but misleading in a snippet or image description.",
+      "action": "Add a bounded metadata-to-visible-facts editorial comparison to the current publication review for pages revised with AI assistance; include title, meta description, alt, JSON-LD claims and canonical job.",
+      "check": "On sampled built pages, reject invented product availability, author, review, results or attributes. Compare against the visible source of truth.",
+      "measure": "Material false claims removed and Search appearance parity checks passed; no ranking promise.",
+      "skip": "Do not auto-generate alternate metadata from unverified page summaries.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content"
+      ],
+      "existingCoverage": [
+        "docs/BRAND-GOOSE.md",
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 4,
+      "id": "first-party-proof-kit",
+      "priority": "P0",
+      "status": "pilot-existing-page",
+      "area": "evidence",
+      "title": "Publish one original, reproducible evidence asset instead of more generic tips",
+      "insight": "Google emphasizes non-commodity information. For Goose, a clear test of a real claim is more useful than publishing another list of GEO tactics.",
+      "action": "On one existing canonical resource, add a small real repeatable experiment: question, baseline, original sample, exact method, observation, negative cases and a practical decision. Review permissions before exposing data.",
+      "check": "Verify source and final deployment refs, copyright/consent, reproducer and an independently understandable result; keep failures.",
+      "measure": "Owner query/page discovery, genuine reuse or citations where measurable, and a real keep/revise/stop decision.",
+      "skip": "Never manufacture survey respondents, third-party endorsements or a fabricated AI-citation gain.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+        "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content"
+      ],
+      "existingCoverage": [
+        "ROADMAP.md",
+        "docs/EVIDENCE-WINNER-LAB.md"
+      ]
+    },
+    {
+      "rank": 5,
+      "id": "source-backed-bing-grounding-map",
+      "priority": "P0",
+      "status": "owner-evidence-gate",
+      "area": "geo-measurement",
+      "title": "Compare Bing grounding queries with the actual cited canonical pages",
+      "insight": "Bing AI Performance exposes a grounding-query/page map, which can show whether a page is being cited for the task it really serves. The report is aggregated and can be partial.",
+      "action": "If the owner has Bing access, import a bounded query-page pair set, map stable page IDs, note provider scope and keep a review queue for mismatched intent or repeated citations.",
+      "check": "Compare raw pair mapping to cited page state and visible factual support; preserve nonreturned queries and sampling limits.",
+      "measure": "New relevant citations/grounding-query families in a later comparable period, separated from traffic and brand mentions.",
+      "skip": "Do not claim any specific prompt, model answer, ranking or causality from aggregated grounding labels.",
+      "primarySources": [
+        "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+        "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 6,
+      "id": "openai-crawler-roles-and-real-edge-access",
+      "priority": "P0",
+      "status": "conditional-owner",
+      "area": "ai-access",
+      "title": "Audit four OpenAI crawler roles against actual edge responses",
+      "insight": "OpenAI's bot documentation separates OAI-SearchBot, GPTBot, ChatGPT-User and OAI-AdsBot, with IP lists; a robots.txt-only test is not proof that CDN/WAF challenges allow real retrieval.",
+      "action": "For sites wanting ChatGPT discovery, reconcile publisher choice per bot with robots.txt, real WAF/CDN settings and independently observed requests from documented IP ranges; keep search/training/ads/user actions distinct.",
+      "check": "Check verified bot IPs, allowed public routes, HTTP/noindex, challenge/403 and intentionally protected paths. Use limited non-spoofed evidence.",
+      "measure": "Actual eligible fetches and separately observed ChatGPT referrals or mentions; no universal AI access score.",
+      "skip": "Do not disable firewalls wholesale, turn on training to gain search visibility or assume user-triggered ChatGPT-User is Search indexing.",
+      "primarySources": [
+        "https://developers.openai.com/api/docs/bots",
+        "https://help.openai.com/en/articles/20001243-advertiser-guidance-for-allowing-openai-web-crawlers"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json",
+        "docs/OPENAI-CHATGPT-SEARCH-CONTROLS.md"
+      ]
+    },
+    {
+      "rank": 7,
+      "id": "bing-intent-preview",
+      "priority": "P1",
+      "status": "conditional-owner",
+      "area": "geo-measurement",
+      "title": "Use Bing AI intent buckets to choose a better answer format",
+      "insight": "Bing's 2026 preview classifies grounding contexts such as research, planning, local and commercial. That may reveal a mismatch between a cited page's goal and its actual answer.",
+      "action": "On one active owned site with enough cited pages, group the actual provider intent labels; select one page whose published content can genuinely answer a different stage or task without creating an extra URL.",
+      "check": "Review mislabeled/ambiguous intent manually; inspect page usefulness and any later cited page/query pairs.",
+      "measure": "Query/page fit on a frozen Bing intent slice, not assumed market size.",
+      "skip": "Skip when no Bing owner observations exist; preview labels are not reliable for every niche.",
+      "primarySources": [
+        "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
+        "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 8,
+      "id": "bing-topics-preview",
+      "priority": "P1",
+      "status": "conditional-owner",
+      "area": "geo-measurement",
+      "title": "Build a small topical opportunity map from Bing's own citation topics",
+      "insight": "Bing Topics groups AI grounding queries into subject clusters. For small niche sites, this can reveal whether original evidence spans the actual user task.",
+      "action": "Map provider topic labels to existing canonical resource pages and authentic subject boundaries. Improve an existing information gap before considering a new page.",
+      "check": "Check manually that provider topics are coherent; retain ambiguous/mixed labels and do not change frozen query experiments retroactively.",
+      "measure": "Coverage and reuse of distinct existing topic/job pages by later provider citations.",
+      "skip": "Do not mass-generate one page per topic or mistake provider topic classifications for ranking authority.",
+      "primarySources": [
+        "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/"
+      ],
+      "existingCoverage": [
+        "registry/trends.json"
+      ]
+    },
+    {
+      "rank": 9,
+      "id": "bing-citation-share-by-grounding-query",
+      "priority": "P1",
+      "status": "conditional-owner",
+      "area": "geo-measurement",
+      "title": "Track Citation Share only within the same grounding query",
+      "insight": "Bing's new Citation Share is the share of observed citations for a specific grounding query, not share of AI traffic or a universal visibility score.",
+      "action": "Freeze up to 10 owner-observed relevant grounding queries and compare their Bing-native Citation Share at comparable intervals alongside raw citation counts and page IDs.",
+      "check": "Verify query-scoped denominator, preview availability, dates and changes in the observed query mix.",
+      "measure": "Within-query Citation Share trend plus citation count and cited-page coverage; avoid cross-surface sums.",
+      "skip": "Don't rank unrelated queries, providers or businesses by a blended citation percentage.",
+      "primarySources": [
+        "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
+        "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c"
+      ],
+      "existingCoverage": [
+        "docs/MEASUREMENT-OS.md"
+      ]
+    },
+    {
+      "rank": 10,
+      "id": "bing-preview-period-compare",
+      "priority": "P1",
+      "status": "conditional-owner",
+      "area": "geo-measurement",
+      "title": "Use Bing Compare to prevent selective screenshot-based success stories",
+      "insight": "Bing Compare overlays earlier and later periods for supported AI citation data. A chart moving upward cannot identify the cause.",
+      "action": "Record a frozen current/previous window, actual cited pages and exposure context. Include zero, flat and negative examples and known releases/outages.",
+      "check": "Check consistent page/query scope and finality/lag; preserve provider sampling warnings.",
+      "measure": "Comparable Bing-native citation trend with absolute denominators, no automatic treatment win.",
+      "skip": "Don't use a prior period with different eligibility or a changed query set as a causal control.",
+      "primarySources": [
+        "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
+        "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c"
+      ],
+      "existingCoverage": [
+        "docs/MEASUREMENT-OS.md"
+      ]
+    },
+    {
+      "rank": 11,
+      "id": "generative-search-owner-report-scope",
+      "priority": "P1",
+      "status": "existing-recheck",
+      "area": "geo-measurement",
+      "title": "Keep Google's ordinary Web and generative Search reports as separate populations",
+      "insight": "Google AI Overviews and AI Mode reporting has provider-specific exposure semantics. Goose's current first proof uses classic Web Search, which cannot be relabeled as AI citations.",
+      "action": "Check owner-side generative report availability and reporting dimensions separately. Keep missing as unavailable; preserve scope, date/time zone and provider semantics.",
+      "check": "Re-run the existing Google import on an actual supplied report only; verify API/CSV columns before labeling impressions.",
+      "measure": "Provider-native AI exposure separately from classic Web, Bing citations and useful sessions.",
+      "skip": "Do not infer a ChatGPT/Bing referral or a specific AI answer from Google's impressions.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+        "https://developers.google.com/search/updates"
+      ],
+      "existingCoverage": [
+        "lib/visibility-import.mjs",
+        "docs/MEASUREMENT-OS.md"
+      ]
+    },
+    {
+      "rank": 12,
+      "id": "cloudflare-ai-role-defaults",
+      "priority": "P1",
+      "status": "conditional-cloudflare",
+      "area": "ai-access",
+      "title": "Check Cloudflare's September Search / Agent / Training defaults",
+      "insight": "Cloudflare separates Search, Agent and Training behaviors. New domain defaults changed in September 2026 and can affect multi-purpose crawlers.",
+      "action": "For sites actually behind Cloudflare, compare intended role policy with the account's effective crawler settings and WAF rules; record host/path and customer choice.",
+      "check": "Inspect live settings and verified response logs before changing a rule, especially ad-serving pages and multi-purpose bots.",
+      "measure": "Verified allowed/blocked crawler requests by role, not guessed ChatGPT Search traffic.",
+      "skip": "Do not recommend unblocking all AI bots or altering a site that is not on Cloudflare.",
+      "primarySources": [
+        "https://developers.cloudflare.com/changelog/post/2026-07-01-ai-traffic-options/"
+      ],
+      "existingCoverage": [
+        "registry/trends.json"
+      ]
+    },
+    {
+      "rank": 13,
+      "id": "cloudflare-crawler-path-referral-reconciliation",
+      "priority": "P1",
+      "status": "conditional-cloudflare",
+      "area": "geo-measurement",
+      "title": "Use Cloudflare path patterns and referral paths to find broken discovery loops",
+      "insight": "Cloudflare AI Crawl Control now surfaces request patterns, bytes and AI referral paths; high crawler activity in one section without useful visits calls for diagnosis, not applause.",
+      "action": "Compare the real top crawler-request URL families, response status/bytes, and AI-origin referral landing sections with the site's actual task priority.",
+      "check": "Verify provider read permissions, bot-role labels, stable periods and sample disclosure; do not infer unique users from requests.",
+      "measure": "Meaningful referral landings and supported task continuations where measured, separately from crawler bandwidth.",
+      "skip": "Do not use aggregate request volume as an authority score or scrape privacy-protected logs.",
+      "primarySources": [
+        "https://developers.cloudflare.com/changelog/post/2026-02-09-analytics-enhancements/",
+        "https://developers.cloudflare.com/changelog/post/2026-04-17-tools-for-agentic-internet/"
+      ],
+      "existingCoverage": [
+        "docs/MEASUREMENT-OS.md"
+      ]
+    },
+    {
+      "rank": 14,
+      "id": "content-signals-consumer-compatibility",
+      "priority": "P1",
+      "status": "provider-specific-watch",
+      "area": "ai-rights",
+      "title": "Test Content Signals with an actual compatible consumer",
+      "insight": "Cloudflare Browser Run's crawl endpoint has an enforceable reference/full content-use mode, but this is a provider-specific consumer capability, not a universal search requirement.",
+      "action": "If publisher/consumer policies require it, run a tiny authorized crawl with contentUse=reference and, where policy allows, contentUse=full; verify allowed/rejected requests and the effective directive.",
+      "check": "Check the robots content-use directive, resulting status and source permission before/after, without bypassing policy.",
+      "measure": "Correct rights-policy enforcement for that one consumer; no Search rank or ChatGPT citation metric.",
+      "skip": "Never present Cloudflare's use directive as an IETF final standard or universal Google policy.",
+      "primarySources": [
+        "https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/"
+      ],
+      "existingCoverage": [
+        "registry/trends.json"
+      ]
+    },
+    {
+      "rank": 15,
+      "id": "ietf-ai-preference-header-watch",
+      "priority": "P2",
+      "status": "watch",
+      "area": "ai-rights",
+      "title": "Track IETF AIPREF Content-Usage header and robots attachment as a draft",
+      "insight": "The IETF AIPREF attachment and vocabulary are active Internet-Drafts, not RFCs; they define how publishers may express usage preferences distinct from crawler access.",
+      "action": "Keep a version-pinned compatibility matrix for Content-Usage HTTP/robots signals and the precise draft revision; only prototype on a test site when the real publisher rights decision exists.",
+      "check": "Check the current IETF working-group revision and consumer support; ensure no contradiction with existing robots, contracts or actual licensing.",
+      "measure": "Protocol interoperability in a compatible consumer, not discoverability uplift.",
+      "skip": "Do not automatically emit draft fields across all target sites or confuse rights preferences with guaranteed enforcement.",
+      "primarySources": [
+        "https://datatracker.ietf.org/doc/draft-ietf-aipref-attach/"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 16,
+      "id": "google-video-creator-and-author-parity",
+      "priority": "P1",
+      "status": "conditional-video",
+      "area": "media",
+      "title": "Add a truthful video creator identity to genuine watch pages",
+      "insight": "September 2026 Google VideoObject guidance documents creator support and author as an alternative. A real video needs the correct actual creator, not an invented personal byline.",
+      "action": "On a genuinely published video, align VideoObject creator/author with the public brand/person credited on the watch page and actual media rights; no source changes for pages without a video.",
+      "check": "Rich Results Test, visible credit, canonical video/watch URL and playable media inspection.",
+      "measure": "Valid video page coverage and organic video discovery, never guaranteed video placement.",
+      "skip": "Skip for text-only guides, fictional brands, unverified authorship or unreleased videos.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/video",
+        "https://developers.google.com/search/updates"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 17,
+      "id": "google-video-real-interaction-counters",
+      "priority": "P1",
+      "status": "conditional-video",
+      "area": "media",
+      "title": "Verify VideoObject interactionStatistic uses supported measured actions",
+      "insight": "Google clarified supported VideoObject interaction counters. Fake view counts are an avoidable trust failure in sites that auto-fill schema.",
+      "action": "Only publish InteractionCounter data backed by the video host's actual metric and supported interaction type; otherwise omit it.",
+      "check": "Validate the interaction type, actual counts and disclosure of their scope, then compare visible facts.",
+      "measure": "Data parity and video appearance eligibility, not rank.",
+      "skip": "Never synthesize engagement from page views or a text reader count.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/video",
+        "https://developers.google.com/search/updates"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 18,
+      "id": "video-key-moment-deep-links",
+      "priority": "P1",
+      "status": "conditional-video",
+      "area": "media",
+      "title": "Turn a genuinely useful video into answer-level key moments",
+      "insight": "Google supports Clip and SeekToAction on real watch pages. A practical section marker can help someone jump to the moment needed for a task.",
+      "action": "For one real published lesson/demo with clear segments, publish accurate key-moment labels/timestamps and working deep links; retain readable text/context.",
+      "check": "Play each segment URL on mobile, keyboard and browser; validate Clip/SeekToAction and indexable watch page.",
+      "measure": "Actual video deep-link engagement and separately observed Search appearances if available.",
+      "skip": "Do not add chapters to static images, nonexistent training videos or inaccessible recordings.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/video"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 19,
+      "id": "discover-original-image-context",
+      "priority": "P1",
+      "status": "conditional-visual",
+      "area": "media",
+      "title": "Choose one original useful visual and reconcile preferred thumbnails",
+      "insight": "Google documents og:image and page schema as sources for preferred thumbnails. Image eligibility is different from the page's eligibility and different from Discover distribution.",
+      "action": "On a page whose visual genuinely explains the task, use a meaningful high-quality image with accessible alt, image URL, correct rights and consistent og:image/structured data. Make sure the preview works at different crops.",
+      "check": "Inspect image fetch, actual dimensions, rights, rendered HTML, max-image-preview policy and mobile crop.",
+      "measure": "Image Search/Discover appearances where exposed, separately from Web Search sessions.",
+      "skip": "No decorative logos as giant Discover hero art and no promise of Discover placement.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/google-images",
+        "https://developers.google.com/search/docs/appearance/google-discover"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 20,
+      "id": "search-console-platform-properties",
+      "priority": "P1",
+      "status": "conditional-channel",
+      "area": "distribution",
+      "title": "Measure social and video content in Search Console separately from site pages",
+      "insight": "Google documented Search Console platform properties for supported social/video accounts. Distribution can happen on a platform page even when the owned-domain page is still new.",
+      "action": "For actual owned publishing channels, verify property access and inspect platform content discoverability; connect reports by canonical public topic only when evidence supports it.",
+      "check": "Record provider/property scopes, canonical URLs and distinct date windows before cross-channel interpretation.",
+      "measure": "Platform content impressions and referral/return activity where measured, not owned-site organic clicks.",
+      "skip": "Do not add social accounts just to fill a dashboard or double count site and platform impressions.",
+      "primarySources": [
+        "https://developers.google.com/search/blog/2026/07/search-console-social-video-platforms"
+      ],
+      "existingCoverage": [
+        "registry/trends.json"
+      ]
+    },
+    {
+      "rank": 21,
+      "id": "claimed-search-profile-badge",
+      "priority": "P1",
+      "status": "conditional-creator",
+      "area": "distribution",
+      "title": "Use a real Google Search profile badge when a brand profile is claimed",
+      "insight": "Google's new Search profile badge can guide people to a claimed creator or publisher Search profile. It is a distribution control, not a link scheme.",
+      "action": "For a project with an actually claimed Search profile and useful cross-platform content, add an accessible, correctly attributed optional link or official badge near the real publisher identity.",
+      "check": "Verify the claimed profile resolves, correct brand attribution, accessible touch target and no unintended disclosure of a personal maintainer.",
+      "measure": "User-follow/return engagement where provider data is available; no ranking promise.",
+      "skip": "Skip unclaimed profiles, private creator identities and sites without a real follow use case.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/search-profiles"
+      ],
+      "existingCoverage": [
+        "docs/BRAND-GOOSE.md"
+      ]
+    },
+    {
+      "rank": 22,
+      "id": "preferred-sources-domain-only",
+      "priority": "P1",
+      "status": "conditional-publisher",
+      "area": "distribution",
+      "title": "Apply Preferred Sources only to eligible domains with a repeat readership",
+      "insight": "Google's 2026 preferred-source button supports Top Stories and potential AI Overview/Mode badges, but the selection tool only supports domain/subdomain identities, not a subdirectory URL.",
+      "action": "Check an actual owned domain in the source preferences tool first; where available and editorially useful, trial one localized interactive button or text deep link on an article hub.",
+      "check": "Verify eligibility of the exact domain, user-initiated flow, return navigation, mobile accessibility, and no false implication that the site is already preferred.",
+      "measure": "Observed reader follow/return behavior and publisher repeat discovery, not a generalized AI ranking score.",
+      "skip": "Do not show an inert button on the Goose GitHub Pages subdirectory or guarantee AI inclusion.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/preferred-sources"
+      ],
+      "existingCoverage": [
+        "registry/trends.json",
+        "registry/search-agent-recommendations.json"
+      ]
+    },
+    {
+      "rank": 23,
+      "id": "eea-vss-aggregator-eligibility",
+      "priority": "P2",
+      "status": "conditional-sector",
+      "area": "regional",
+      "title": "Gate EEA aggregator opportunities on actual vertical-search business status",
+      "insight": "Google added local-business queries to EEA aggregator units in September 2026; participation is for eligible approved Vertical Search Services with meaningful data and quality requirements.",
+      "action": "Only for a real travel/product/local-business aggregator serving EEA customers, review eligibility and the direct provider application path. Keep this as a conditional business opportunity in Goose.",
+      "check": "Verify entity type, EEA consumer context, provider approval, available feed data and evidence of actual search unit appearance.",
+      "measure": "Accepted integration and genuine referrals on the applicable vertical unit.",
+      "skip": "Not applicable to a general knowledge blog, Ptichi, or Vedokrok merely because it has many pages.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/aggregator-unit",
+        "https://developers.google.com/search/docs/appearance/aggregator-features",
+        "https://developers.google.com/search/updates"
+      ],
+      "existingCoverage": [
+        "registry/regional-search-surfaces.json"
+      ]
+    },
+    {
+      "rank": 24,
+      "id": "eea-direct-supplier-eligibility",
+      "priority": "P2",
+      "status": "conditional-sector",
+      "area": "regional",
+      "title": "Check direct-supplier eligibility separately from aggregator participation",
+      "insight": "Google's supplier unit can feature direct businesses alongside EEA aggregators. It may draw from crawlable web data and, where applicable, supplier feeds.",
+      "action": "For real EEA direct hotel, flight, transport, local-service or merchant clients, separate supplier facts from aggregator feeds; review availability, actual service areas and source ownership.",
+      "check": "Verify geography, business type, directly accessible data and supplier-unit presence if reported.",
+      "measure": "Provider-native contacts or bookings attributable to the qualifying service, not a universal badge.",
+      "skip": "Don't confuse a local-direct supplier with a Vertical Search Service or create an empty feed for irrelevant sites.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/supplier-unit",
+        "https://developers.google.com/search/docs/appearance/aggregator-features"
+      ],
+      "existingCoverage": [
+        "registry/regional-search-surfaces.json"
+      ]
+    },
+    {
+      "rank": 25,
+      "id": "ugc-fresh-data-qualification",
+      "priority": "P2",
+      "status": "restricted-program",
+      "area": "fresh-content",
+      "title": "Qualify for Google's new UGC Fresh Data Program before proposing its API",
+      "insight": "Google announced a dedicated fresh UGC ingestion pipeline on 8 October 2026, but limits it to substantial authentic public UGC platforms with moderation, creator profiles, quality/volume and technical readiness.",
+      "action": "Add a yes/no eligibility decision when Goose reviews an actual large forum/social platform; only eligible applicants should pursue OAuth/JSON-LD and minute-level updates.",
+      "check": "Review independent user authorship, public stable URLs, moderation, user volume, engagement counter freshness and acceptance status.",
+      "measure": "Eligible approved integration processing/quality, not generalized organic indexing speed.",
+      "skip": "Do not advise standard blogs or authored content sites to use it; it is not the general Indexing API.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/ugc-fresh-data-program"
+      ],
+      "existingCoverage": []
+    },
+    {
+      "rank": 26,
+      "id": "openai-acp-commerce-feed",
+      "priority": "P1",
+      "status": "approved-partner-only",
+      "area": "commerce",
+      "title": "Offer a discovery feed through OpenAI ACP only for approved merchants",
+      "insight": "OpenAI's 2026 agentic commerce program uses structured merchant feeds for more accurate ChatGPT shopping discovery, but onboarding is currently approval-gated.",
+      "action": "For an actual eligible e-commerce owner, review merchant approval, access, canonical product identity and update cadence before building an export.",
+      "check": "Check live scheme eligibility, authorization, publicly accessible real product/image URLs and accuracy of price/availability.",
+      "measure": "Feed acceptance and separately observed product discovery/merchant visits; not an organic site ranking promise.",
+      "skip": "Do not build ACP feeds for non-commerce websites or present partner onboarding as generally open.",
+      "primarySources": [
+        "https://developers.openai.com/commerce/guides/get-started",
+        "https://developers.openai.com/commerce/specs/file-upload/products"
+      ],
+      "existingCoverage": []
+    },
+    {
+      "rank": 27,
+      "id": "acp-stable-schema-variants",
+      "priority": "P1",
+      "status": "approved-partner-only",
+      "area": "commerce",
+      "title": "Use stable ACP product IDs and validated variant-specific facts",
+      "insight": "OpenAI specifies a Stable file upload schema; its Draft version is not production supported. IDs, variants and required fields need real product data, not LLM-generated placeholders.",
+      "action": "For an approved partner, validate stable item_id, brand, seller, title, description, canonical URL, image, stock and money, with distinct variants and stable parent/offer identity.",
+      "check": "Compare each feed row to real public product and stock truth, schema required-field checks and production Stable version; never reuse IDs.",
+      "measure": "Reduced feed errors and accurate discovered variant representation where accepted.",
+      "skip": "Do not ship the draft schema into production or invent GTIN, reviews, seller and availability.",
+      "primarySources": [
+        "https://developers.openai.com/commerce/specs/file-upload/products"
+      ],
+      "existingCoverage": []
+    },
+    {
+      "rank": 28,
+      "id": "acp-inventory-freshness-delta",
+      "priority": "P1",
+      "status": "approved-partner-only",
+      "area": "commerce",
+      "title": "Separate full catalog snapshots from fast stock/promotion deltas",
+      "insight": "OpenAI recommends daily complete feed snapshots with later API updates; inventory and promotions can change during the day. A stale cheap price destroys user trust even when an AI recommendation appears.",
+      "action": "For supported partner integrations, use a stable complete catalog plus permitted incremental upserts, keeping promotion feeds and timestamps in their documented channel.",
+      "check": "Detect stale prices/availability by comparison with canonical commerce backend; run rollback and idempotency tests.",
+      "measure": "Feed freshness and actual order eligibility, not AI citation or search rank.",
+      "skip": "Skip if no authorized commerce backend or the partner has not been granted the required API/feed access.",
+      "primarySources": [
+        "https://developers.openai.com/commerce/guides/get-started",
+        "https://developers.openai.com/commerce/specs/file-upload/products"
+      ],
+      "existingCoverage": []
+    },
+    {
+      "rank": 29,
+      "id": "openai-paid-ads-feed-separation",
+      "priority": "P1",
+      "status": "conditional-ads",
+      "area": "commerce",
+      "title": "Keep ChatGPT ad feeds separate from organic product discovery",
+      "insight": "OpenAI publishes dedicated ads feed and OAI-AdsBot landing-page checks; ad beta eligibility is different from ACP organic discovery.",
+      "action": "On a retailer deliberately running ChatGPT ads, verify the ads-specific schema and crawlable landing pages with OAI-AdsBot and separate paid-vs-organic reporting.",
+      "check": "Inspect live landing path, verified bot accessibility, forbidden categories and accurate advertising disclosures.",
+      "measure": "Ad approval and paid attributed visits/conversions, never a claim that buying ads boosts organic recommendation.",
+      "skip": "Do not treat ads feed upload as organic ChatGPT inclusion or confuse OAI-AdsBot with GPTBot.",
+      "primarySources": [
+        "https://help.openai.com/en/articles/20001243-advertiser-guidance-for-allowing-openai-web-crawlers",
+        "https://help.openai.com/en/articles/20001268-create-campaigns-from-product-feeds",
+        "https://developers.openai.com/api/docs/bots"
+      ],
+      "existingCoverage": []
+    },
+    {
+      "rank": 30,
+      "id": "google-merchant-category-sales-validity",
+      "priority": "P2",
+      "status": "conditional-commerce",
+      "area": "commerce",
+      "title": "Validate 2026 Product.category and sale-price effective dates",
+      "insight": "Google documented Product.category mapping and Offer sale validity windows in 2026. These are real data integrity issues when catalog offers change, not shortcuts for editorial pages.",
+      "action": "For an actual merchant, align feed, public listing and structured Product/Offer category, currency and sale start/end timestamps from one authoritative commerce backend.",
+      "check": "Rich Results Test, feed checks, time boundary tests and price parity after the promotion expires.",
+      "measure": "Merchant listing validity and order-quality support; no generic GEO uplift.",
+      "skip": "Skip if the site has no authentic offers, prices or eligible Product pages.",
+      "primarySources": [
+        "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
+        "https://developers.google.com/search/updates"
+      ],
+      "existingCoverage": []
+    },
+    {
+      "rank": 31,
+      "id": "webmcp-real-form-progressive",
+      "priority": "P2",
+      "status": "origin-trial",
+      "area": "agent-operability",
+      "title": "Pilot declarative WebMCP only on a real useful form",
+      "insight": "Chrome 149+ documents a WebMCP origin trial and a declarative API. Tools make browser-side tasks more understandable but cannot be discovered before a browser visits the page.",
+      "action": "Choose one actual low-risk form flow whose native labels, validation and keyboard behavior are already good; trial WebMCP as an enhancement behind a browser support gate.",
+      "check": "Compare real task completion with and without the trial; do not expose hidden server actions or confuse tool discovery with consent.",
+      "measure": "Verified completion rate/accuracy for that one agent task with human oversight, not indexing or ranking.",
+      "skip": "No fake web tools for actions that do not exist; retain ordinary HTML fallback and permission boundaries.",
+      "primarySources": [
+        "https://developer.chrome.com/docs/ai/webmcp"
+      ],
+      "existingCoverage": [
+        "registry/search-agent-recommendations.json",
+        "registry/trends.json"
+      ]
+    },
+    {
+      "rank": 32,
+      "id": "webmcp-agent-task-evals-security",
+      "priority": "P2",
+      "status": "origin-trial",
+      "area": "agent-operability",
+      "title": "Build adversarial task evaluations for browser-agent WebMCP tools",
+      "insight": "Chrome includes debugging and agent evaluation guidance. Success depends on correct tool choice, argument constraints and resistance to unintended side effects, not a positive static metadata count.",
+      "action": "For a genuine opt-in agent workflow, freeze 5 representative tasks and 5 adversarial cases: injection, scope, duplicate call, rollback/confirmation, and denied access. Include no-WebMCP fallback.",
+      "check": "Inspect DevTools schemas, per-task receipts, user confirmation and the absence of surprise mutations or data leaks.",
+      "measure": "Task-completion correctness and safety failure count, not a search readiness score.",
+      "skip": "Do not claim an origin-trial tool improves AI Search visibility or permit writes merely because a model requested them.",
+      "primarySources": [
+        "https://developer.chrome.com/docs/ai/webmcp"
+      ],
+      "existingCoverage": [
+        "registry/trends.json"
+      ]
+    },
+    {
+      "rank": 33,
+      "id": "cloudflare-policy-aware-incremental-crawl",
+      "priority": "P2",
+      "status": "conditional-tooling",
+      "area": "verification",
+      "title": "Use policy-aware, incremental fetch checks instead of repeated bulk crawling",
+      "insight": "Cloudflare Browser Run /crawl can use sitemap scope, static mode, and modifiedSince/maxAge to limit repeat work; the content-use directive is now enforced in compatible consumers.",
+      "action": "Where the owner already authorizes Cloudflare Browser Run, test a small unchanged-page snapshot vs a changed-page snapshot, with explicit max pages and content-use mode.",
+      "check": "Confirm robots/Content Signals consent, bounded URL inclusion, matched bytes, retry handling and no forced full crawl.",
+      "measure": "Coverage of materially changed URLs per request/cost while preserving evidence quality.",
+      "skip": "Don't substitute crawler output for Google indexing or introduce paid crawling into no-budget projects.",
+      "primarySources": [
+        "https://developers.cloudflare.com/changelog/post/2026-04-17-tools-for-agentic-internet/",
+        "https://developers.cloudflare.com/changelog/post/2026-08-31-crawl-content-use/",
+        "https://developers.cloudflare.com/changelog/post/2026-03-10-crawl-websites/"
+      ],
+      "existingCoverage": []
+    },
+    {
+      "rank": 34,
+      "id": "versioned-search-source-redirect-gate",
+      "priority": "P0",
+      "status": "act-now",
+      "area": "source-integrity",
+      "title": "Fail review when cited platform guidance redirects to a different topic",
+      "insight": "A source redirect can turn yesterday's well-supported advice into an unrelated citation. Goose has a current example involving a publisher FAQ and retired-browser help page.",
+      "action": "Enhance the existing Trend Radar source review process with a redirect-topic/manual confirmation step, keeping exact URL, observed destination, source class and revision date.",
+      "check": "Assert no automatic WATCH-to-ADOPT promotion; produce a review-required alert with before/after source role rather than replacing every source string automatically.",
+      "measure": "Number of stale source-backed claims caught before publication; preserve false alarms and source reachability errors.",
+      "skip": "Don't infer a recommendation is false merely because a URL moved; reverify the specific mechanism at an appropriate primary replacement source.",
+      "primarySources": [
+        "https://developers.openai.com/api/docs/bots",
+        "https://developers.google.com/search/updates"
+      ],
+      "existingCoverage": [
+        "registry/trend-watch-sources.json",
+        "docs/TREND-RADAR.md"
+      ]
+    }
+  ],
+  "outcomeRule": "Use a frozen provider-specific cohort, actual deployment parity, and a later reviewed keep/revise/stop decision. Retain no-change and negative observations.",
+  "stopRule": "Do not ship commerce/UGC/local/video/WebMCP provider features on sites lacking the actual qualifying product, media, user action, region or authorized account."
+}
