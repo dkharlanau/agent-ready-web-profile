@@ -1,8 +1,8 @@
 {
   "version": "0.1",
-  "generated_at": "2026-09-08",
-  "corpus_version": "1.12.0",
-  "corpus_sha256": "b6c49826adc8e55b5ae3ba94e1f488e5cf81f61aba5b375bbf39889d6b5c78d1",
+  "generated_at": "2026-10-10",
+  "corpus_version": "1.13.0",
+  "corpus_sha256": "85e1089b244e4cd353f035210f5d3dcc0b2f29557edacc9bd21f88a49c9945d8",
   "canonical_corpus": "https://dkharlanau.github.io/agent-ready-web-profile/knowledge/discoverability-corpus.json",
   "purpose": "Lightweight routing index for the Discoverability Library. It maps categories to stable static evidence hubs without duplicating the canonical pattern payload.",
   "categories": [
@@ -46,7 +46,7 @@
     },
     {
       "id": "editorial",
-      "title": "Original editorial formats",
+      "title": "Write pages people can use",
       "count": 20,
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/discoverability/editorial.html",
       "pattern_ids": [
@@ -294,7 +294,7 @@
     },
     {
       "id": "measurement",
-      "title": "Observed search and business outcomes",
+      "title": "Know whether a change helped",
       "count": 13,
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/discoverability/measurement.html",
       "pattern_ids": [
@@ -315,7 +315,7 @@
     },
     {
       "id": "experiments",
-      "title": "Bounded improvement experiments",
+      "title": "Try a change and learn from it",
       "count": 10,
       "url": "https://dkharlanau.github.io/agent-ready-web-profile/discoverability/experiments.html",
       "pattern_ids": [

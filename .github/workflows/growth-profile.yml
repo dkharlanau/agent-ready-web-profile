@@ -227,6 +227,6 @@ jobs:
       - name: Validate public Growth Profile surfaces
         run: |
           node -e "const p=JSON.parse(require('fs').readFileSync('docs/growth/profile.json','utf8')); if (p.profile !== '2026-09-06' || p.guardrails.rankingGuarantee !== false || p.guardrails.aiRecommendationGuarantee !== false) process.exit(1);"
-          grep -q 'Connect a site. Get a defensible improvement backlog.' docs/growth/index.html
+          grep -q 'Check your site and choose what matters.' docs/growth/index.html
           grep -q 'no universal quality/readiness score' docs/growth/llms.txt
           grep -q 'Tell ARWP what the site is actually trying to achieve.' docs/growth/policy.html

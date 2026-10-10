@@ -1,6 +1,6 @@
 {
-  "version": "1.12.0",
-  "updated_at": "2026-09-08",
+  "version": "1.13.0",
+  "updated_at": "2026-10-10",
   "categories": [
     {
       "id": "access",
@@ -12,7 +12,7 @@
     },
     {
       "id": "editorial",
-      "title": "Original editorial formats"
+      "title": "Write pages people can use"
     },
     {
       "id": "evidence",
@@ -56,11 +56,11 @@
     },
     {
       "id": "measurement",
-      "title": "Observed search and business outcomes"
+      "title": "Know whether a change helped"
     },
     {
       "id": "experiments",
-      "title": "Bounded improvement experiments"
+      "title": "Try a change and learn from it"
     },
     {
       "id": "governance",
@@ -2688,11 +2688,11 @@
     {
       "id": "arwp-editorial-decision-lead",
       "category": "editorial",
-      "title": "Open with the decision and its boundary",
-      "problem": "An introduction can delay the reason the reader arrived.",
+      "title": "Answer the reader's question before explaining your process",
+      "problem": "People shouldn't have to read a long introduction to learn whether a page is for them.",
       "implementation": [
-        "For decision-oriented pages, state the practical answer near the start; use a different opening when the reader task requires context or narrative.",
-        "Name the audience, assumption, and condition that would change it."
+        "On a decision page, give the practical answer near the top and say who it applies to.",
+        "State the one or two conditions that would change your advice. Keep a story-first opening when the story itself is the point."
       ],
       "verification": [
         "A reviewer can locate the answer, audience and main exception early in the reading path; no universal viewport or paragraph quota is required."
@@ -2708,7 +2708,7 @@
       "effort": "small",
       "impact_hypothesis": "A precise opening may improve understanding and qualified engagement.",
       "anti_pattern": "Universal advice disguised as a confident one-line answer.",
-      "measurement": "Measure correct comprehension in a short reader task and downstream useful actions.",
+      "measurement": "Ask a reader to find the recommendation and explain when they would choose differently.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence",
         "answer-addressability"
@@ -2717,7 +2717,7 @@
         "google-non-commodity-content",
         "google-generative-content-structure"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -2739,11 +2739,12 @@
     {
       "id": "arwp-editorial-worked-example",
       "category": "editorial",
-      "title": "Publish a reproducible worked example",
-      "problem": "Abstract claims are hard to apply or verify.",
+      "title": "Show one example someone can follow",
+      "problem": "'Follow best practices' doesn't tell a visitor what to do on Monday morning.",
       "implementation": [
-        "Choose a realistic task and provide safe inputs.",
-        "Show the actual intermediate steps, output, and a known failure."
+        "Choose a concrete task and provide realistic, safe starting information.",
+        "Show the steps, the result and a mistake someone could actually make. Clearly label invented teaching data.",
+        "Check that a reader unfamiliar with the author can repeat the example."
       ],
       "verification": [
         "A fresh run reproduces the documented result within stated tolerances."
@@ -2759,14 +2760,14 @@
       "effort": "medium",
       "impact_hypothesis": "Concrete examples may earn references and reduce evaluation friction.",
       "anti_pattern": "Presenting an invented execution transcript as a real run.",
-      "measurement": "Track successful example completion and citations to its stable URL.",
+      "measurement": "See whether a reader can complete the example and explain what to do if it fails.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -2788,11 +2789,11 @@
     {
       "id": "arwp-editorial-prerequisites",
       "category": "editorial",
-      "title": "State prerequisites before instructions",
-      "problem": "Readers discover missing permissions or tools halfway through a guide.",
+      "title": "Tell readers what they need before they start",
+      "problem": "A guide is frustrating when it reveals a required account or permission at step six.",
       "implementation": [
-        "List the versions, permissions, materials, or prior knowledge required.",
-        "Place a readiness check before the first consequential step."
+        "Before the first step, say which access, tools, versions or background knowledge are needed.",
+        "Offer a quick way to check readiness and an alternative path when a requirement isn't met."
       ],
       "verification": [
         "A new reader can determine eligibility before starting."
@@ -2808,14 +2809,14 @@
       "effort": "small",
       "impact_hypothesis": "Early constraints may reduce abandoned attempts.",
       "anti_pattern": "Hiding paid dependencies or required expertise near the end.",
-      "measurement": "Measure starts abandoned because of undisclosed prerequisites.",
+      "measurement": "Track where readers stop because they discover an unstated prerequisite.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -2837,11 +2838,12 @@
     {
       "id": "arwp-editorial-failure-atlas",
       "category": "editorial",
-      "title": "Create a symptom-to-diagnosis reference",
-      "problem": "A generic troubleshooting section cannot separate similar failures.",
+      "title": "Help readers tell similar problems apart",
+      "problem": "A list of possible causes is less useful than one check that narrows the problem.",
       "implementation": [
-        "Collect real recurring errors or symptoms.",
-        "For each, give a discriminating check, likely cause, and bounded remedy."
+        "Start with genuine recurring symptoms or errors, not invented success stories.",
+        "For each symptom, give a safe first check, what its result means, and when to stop or escalate.",
+        "Keep the suggested fix tied to the observation that supports it."
       ],
       "verification": [
         "Every remedy has an observable trigger and a way to verify recovery."
@@ -2857,7 +2859,7 @@
       "effort": "medium",
       "impact_hypothesis": "Specific failure answers may address underserved diagnostic queries.",
       "anti_pattern": "Generating dozens of guessed errors without reproductions.",
-      "measurement": "Track successful resolutions and search impressions for diagnostic queries.",
+      "measurement": "Check whether readers can identify the correct next check and resolve the issue where applicable.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence",
         "answer-addressability"
@@ -2866,7 +2868,7 @@
         "google-non-commodity-content",
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -2888,11 +2890,11 @@
     {
       "id": "arwp-editorial-counterexample",
       "category": "editorial",
-      "title": "Include a case where the advice fails",
-      "problem": "Readers cannot see the limits of a polished success story.",
+      "title": "Show when your advice would be wrong",
+      "problem": "A recommendation sounds universal when it only works under certain conditions.",
       "implementation": [
-        "Choose the most consequential assumption in the article.",
-        "Show a counterexample and explain the alternative choice it requires."
+        "Identify the assumption your advice depends on most.",
+        "Give a believable counterexample and explain what changes in the decision. Use a hypothetical label if the example is invented."
       ],
       "verification": [
         "The counterexample changes a recommendation for a clearly defined circumstance."
@@ -2908,14 +2910,14 @@
       "effort": "medium",
       "impact_hypothesis": "Honest limits may improve decision quality and citation accuracy.",
       "anti_pattern": "A cosmetic cons section that never affects the conclusion.",
-      "measurement": "Audit whether readers can state when to choose another approach.",
+      "measurement": "Ask whether readers can identify a case where they should choose another approach.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -2937,11 +2939,12 @@
     {
       "id": "arwp-editorial-method-note",
       "category": "editorial",
-      "title": "Explain how the answer was produced",
-      "problem": "A fluent article can hide its evidence and production process.",
+      "title": "Explain what you checked — without turning it into a lab report",
+      "problem": "Confident wording can hide whether a claim was tested, researched or simply guessed.",
       "implementation": [
-        "Explain material research, testing or AI assistance where it helps readers assess how the answer was produced; use a method note when appropriate.",
-        "Link the relevant inputs and separate observed facts from interpretation."
+        "For important claims, briefly say what you actually checked or where the information came from.",
+        "Link supporting material when available. Distinguish observations, your interpretation and ideas for a later test.",
+        "Mention material AI assistance where it helps readers assess the work; never claim firsthand experience that did not happen."
       ],
       "verification": [
         "A reviewer can trace at least the central conclusion to its method and sources."
@@ -2956,7 +2959,7 @@
       "effort": "small",
       "impact_hypothesis": "Method transparency may make original work easier to assess.",
       "anti_pattern": "An AI-generated badge with no account of verification.",
-      "measurement": "Track central claims with a reviewable method note and unresolved evidence gaps.",
+      "measurement": "Check whether a reader can tell which central claims were observed, sourced or still uncertain.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence",
         "identity-and-provenance"
@@ -2964,7 +2967,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -2986,11 +2989,11 @@
     {
       "id": "arwp-editorial-progressive-depth",
       "category": "editorial",
-      "title": "Offer concise guidance with optional technical depth",
-      "problem": "Exhaustive detail can bury the main action.",
+      "title": "Keep the answer easy to find, with detail one level deeper",
+      "problem": "A useful next step gets lost when every paragraph starts with technical caveats.",
       "implementation": [
-        "Keep the decision and required steps visible.",
-        "Place derivations, logs, and edge cases in labeled sections with stable anchors."
+        "Put the answer and required steps where readers can see them without opening technical sections.",
+        "Keep logs, formulas, edge cases and references in clearly titled sections nearby. Do not hide a condition that changes the answer."
       ],
       "verification": [
         "Keyboard and plain-text readers can reach all supporting content in logical order."
@@ -3006,14 +3009,14 @@
       "effort": "medium",
       "impact_hypothesis": "Layered explanation may serve both quick decisions and careful verification.",
       "anti_pattern": "Hiding qualifications in inaccessible accordions or hover-only text.",
-      "measurement": "Compare task success and access to supporting evidence on mobile and desktop.",
+      "measurement": "Ask readers to complete the task on mobile and desktop and find an important limitation.",
       "growth_hypothesis_ids": [
         "answer-addressability"
       ],
       "recommendation_rule_ids": [
         "google-generative-content-structure"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -3035,11 +3038,11 @@
     {
       "id": "arwp-editorial-glossary",
       "category": "editorial",
-      "title": "Define terms at the point of use",
-      "problem": "Shared words can have different domain meanings.",
+      "title": "Explain unfamiliar words when readers meet them",
+      "problem": "Specialist terms can make a simple decision look harder than it is.",
       "implementation": [
-        "Identify terms necessary for the current task.",
-        "Add a short contextual definition and link to a maintained term page when deeper explanation exists."
+        "Keep only terms the reader needs for this decision.",
+        "Give a short plain-language meaning at first use; link deeper technical definitions only if useful."
       ],
       "verification": [
         "Definitions distinguish nearby concepts and use consistent terminology across pages."
@@ -3055,14 +3058,14 @@
       "effort": "medium",
       "impact_hypothesis": "Clear terms may reduce entity and concept ambiguity.",
       "anti_pattern": "Generating thin dictionary pages for every word.",
-      "measurement": "Measure glossary use and recurring terminology questions in feedback.",
+      "measurement": "See whether a reader can explain the decision without consulting an outside glossary.",
       "growth_hypothesis_ids": [
         "answer-addressability"
       ],
       "recommendation_rule_ids": [
         "bing-ai-citation-clarity"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -3084,11 +3087,12 @@
     {
       "id": "arwp-editorial-faq",
       "category": "editorial",
-      "title": "Answer real remaining questions without rich-result promises",
-      "problem": "Template FAQs can repeat the article and chase a retired feature.",
+      "title": "Answer questions people really ask",
+      "problem": "A page full of generic FAQs often repeats itself without solving another problem.",
       "implementation": [
-        "Use support or research evidence to select unresolved questions.",
-        "Write visible concise answers with links to deeper evidence."
+        "Use real support questions or observed research needs to pick what has not been answered.",
+        "Answer directly and link to a worked example or source where the short answer is not enough.",
+        "Do not add FAQ markup just because you hope it will change search appearance."
       ],
       "verification": [
         "Questions add information; no copy promises Google FAQ rich results."
@@ -3105,7 +3109,7 @@
       "effort": "small",
       "impact_hypothesis": "Relevant questions may improve completeness and answer reuse.",
       "anti_pattern": "Mass-producing FAQPage markup as a Google rich-result tactic.",
-      "measurement": "Track question-level usefulness feedback and observed citations; do not count markup as visibility.",
+      "measurement": "Check whether each question helps a reader with something the main page does not already answer.",
       "growth_hypothesis_ids": [
         "answer-addressability"
       ],
@@ -3113,7 +3117,7 @@
         "bing-ai-citation-clarity",
         "google-scaled-query-variant-guardrail"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -7667,12 +7671,12 @@
     {
       "id": "arwp-measurement-baseline",
       "category": "measurement",
-      "title": "Capture a dated baseline before applying tactics",
-      "problem": "After-only reports cannot show what changed.",
+      "title": "Take a snapshot before changing your site",
+      "problem": "If you only look at results afterwards, it's hard to tell what actually changed.",
       "implementation": [
-        "Export available page/query performance and record live technical observations.",
-        "Freeze the target cohort, period, timezone, and data-availability status.",
-        "Capture the available authenticated Google generative-AI report separately; aggregate Web traffic and public crawling cannot substitute for that report."
+        "Choose the pages you're trying to improve. Record what is live today and the date of the check.",
+        "If you can access your search reports, save the available clicks and impressions for those pages. Record the period, timezone and any missing data.",
+        "Keep dedicated AI-search reports separate from ordinary Search results. One report cannot stand in for another."
       ],
       "verification": [
         "Each baseline metric has a source, date range, and explicit missing-data state."
@@ -7689,7 +7693,7 @@
       "effort": "medium",
       "impact_hypothesis": "A consistent baseline may make later decisions more reliable.",
       "anti_pattern": "Backfilling invented zeros for unavailable accounts or dates.",
-      "measurement": "Track baseline coverage across target URLs and provider datasets.",
+      "measurement": "For each chosen page, mark which starting measurements you have, which are missing and the dates they cover.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
@@ -7697,7 +7701,7 @@
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -7729,11 +7733,12 @@
     {
       "id": "arwp-measurement-metric-contract",
       "category": "measurement",
-      "title": "Define each metric before reporting it",
-      "problem": "Different denominators create incompatible success claims.",
+      "title": "Decide what a good result would look like",
+      "problem": "A chart can look impressive when nobody has agreed what its numbers mean.",
       "implementation": [
-        "Write formulas and scope for impressions, clicks, CTR, citations, referrals, and qualified actions.",
-        "Store provider and aggregation rules with the report."
+        "Pick one or two outcomes that fit the page: a relevant visit, a useful resource click or a qualified enquiry.",
+        "For every number, write down what is counted, where it comes from, the date range and any denominator used.",
+        "Keep searches, citations, visits and completed actions separate. Don't combine figures from reports that count different things."
       ],
       "verification": [
         "A second analyst can recompute each derived value from retained counts."
@@ -7749,7 +7754,7 @@
       "effort": "small",
       "impact_hypothesis": "Stable definitions may prevent misleading benchmark comparisons.",
       "anti_pattern": "Combining citation counts and clicks into an unexplained visibility score.",
-      "measurement": "Count irreproducible metrics and inconsistent denominators per report.",
+      "measurement": "Check whether another person can reproduce each reported number from the same source and date range.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
@@ -7757,7 +7762,7 @@
         "google-generative-ai-measurement",
         "bing-ai-performance-measurement"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -7784,12 +7789,12 @@
     {
       "id": "arwp-measurement-gsc-segments",
       "category": "measurement",
-      "title": "Separate brand, intent, device, and country",
-      "problem": "An aggregate traffic change can hide opposite audience trends.",
+      "title": "See which searches bring the right visitors",
+      "problem": "A rise in total clicks may only mean more people searched for your name.",
       "implementation": [
-        "Define a versioned brand-query rule and bounded intent groups.",
-        "Compare consistent page, device, and country segments using available GSC data.",
-        "Use only dimensions actually exposed by each report. Do not infer a report-specific breakdown from aggregate Web data or join incompatible scopes as if they were the same observations."
+        "Use your available search report to separate brand-name searches from other relevant questions.",
+        "Compare like-for-like pages, countries and devices only where the report provides those fields.",
+        "Record missing queries and incomplete report coverage. Don't invent segments by joining incompatible reports."
       ],
       "verification": [
         "Segment totals explain documented differences without pretending query rows are exhaustive."
@@ -7805,14 +7810,14 @@
       "effort": "medium",
       "impact_hypothesis": "Segmentation may locate useful gains or regressions.",
       "anti_pattern": "Calling every query without the exact brand spelling non-brand.",
-      "measurement": "Track clicks and impressions by stable segments with coverage notes.",
+      "measurement": "Compare relevant clicks and impressions for the same page groups and time periods, noting what the report does not show.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [
         "google-generative-ai-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -7839,11 +7844,12 @@
     {
       "id": "arwp-measurement-bing-citations",
       "category": "measurement",
-      "title": "Track supported Bing AI citation observations",
-      "problem": "AI visibility is often reported without provider evidence.",
+      "title": "See whether Bing is citing your pages",
+      "problem": "Being mentioned in an AI answer and receiving a website visit are different things.",
       "implementation": [
-        "Record available AI Performance citation and cited-page data for the owned property using a native export when offered, otherwise retain a dated dashboard observation.",
-        "Record supported surfaces, period, and sampled-query limitations."
+        "If your property has access to Bing's AI Performance view, record the cited pages and citations it actually reports.",
+        "Save the date, reporting period and any limits on the available samples or dimensions.",
+        "Keep this separate from visits and from observations about other search providers."
       ],
       "verification": [
         "Reports describe citation counts without interpreting them as rank or placement."
@@ -7858,14 +7864,14 @@
       "effort": "medium",
       "impact_hypothesis": "Provider observations can reveal which pages participate in supported AI answers.",
       "anti_pattern": "Calling Bing citations a measurement of ChatGPT or universal AI authority.",
-      "measurement": "Trend total citations and cited pages within the same supported report scope.",
+      "measurement": "Follow reported citations and cited pages in comparable Bing report windows; do not treat them as visits.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [
         "bing-ai-performance-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -7887,12 +7893,12 @@
     {
       "id": "arwp-measurement-referrals",
       "category": "measurement",
-      "title": "Measure identifiable AI referral visits",
-      "problem": "Bot requests and human referrals can be mixed together.",
+      "title": "Tell reader visits from crawler traffic",
+      "problem": "An automated request isn't a person who chose to open your website.",
       "implementation": [
-        "Group known referral hosts and explicit campaign parameters in authorized analytics.",
-        "Retain unknown and unattributed traffic separately from identifiable AI referrals.",
-        "Keep session, first-user and event attribution scopes distinct. Version the host rules and treat campaign labels as declared provenance rather than independent proof."
+        "In your authorized visit reports, identify referrals from known AI services using a maintained list of hosts.",
+        "Leave traffic you cannot attribute in an unknown group rather than guessing its origin.",
+        "Keep visits, first-time users and button clicks distinct. A campaign label is a clue about origin, not independent proof."
       ],
       "verification": [
         "Session attribution, verified crawler logs and unclassified observations are separate. A referral host or campaign label does not prove a human visit or establish complete AI traffic coverage."
@@ -7907,14 +7913,14 @@
       "effort": "medium",
       "impact_hypothesis": "Referral tracking may identify useful downstream demand.",
       "anti_pattern": "Assuming all direct traffic is AI-driven or every crawler visit is a user.",
-      "measurement": "Track identifiable AI referral sessions and their qualified-action rate.",
+      "measurement": "Count identifiable referred visits, then check meaningful actions within the same properly measured group.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [
         "openai-chatgpt-referral-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -7936,11 +7942,12 @@
     {
       "id": "arwp-measurement-conversions",
       "category": "measurement",
-      "title": "Connect discovery to a meaningful next action",
-      "problem": "More impressions may bring no relevant audience value.",
+      "title": "Look for an action that actually matters",
+      "problem": "More impressions aren't much help if visitors still cannot complete their task.",
       "implementation": [
-        "Choose a real success action such as a qualified inquiry, completed example, or useful download.",
-        "Validate the event and document counting and consent constraints."
+        "Choose a useful next step for the page: opening a worked example, downloading a resource or sending a qualified enquiry.",
+        "Check that the action really works before counting clicks or events.",
+        "Record what permission and tracking coverage allow you to observe. A click isn't automatically a completed task."
       ],
       "verification": [
         "An authorized test action follows the defined counting rule; debug receipt, production reporting and business qualification are verified separately. Duplicate sends and missing observations are reported."
@@ -7957,14 +7964,14 @@
       "effort": "medium",
       "impact_hypothesis": "Outcome measurement may prevent optimizing visibility without usefulness.",
       "anti_pattern": "Treating every pageview as a conversion.",
-      "measurement": "Report qualified actions per attributable visit alongside absolute counts.",
+      "measurement": "Report the observed number of useful actions alongside comparable measured visits, without inventing a rate for missing data.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [
         "openai-chatgpt-referral-measurement"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -7986,11 +7993,12 @@
     {
       "id": "arwp-measurement-index-status",
       "category": "measurement",
-      "title": "Separate eligibility from verified indexing",
-      "problem": "A readiness score can be mistaken for search presence.",
+      "title": "Check whether your pages are actually listed in search",
+      "problem": "A page can be technically ready for indexing without appearing in search results.",
       "implementation": [
-        "Store technical checks and provider indexing observations as separate dimensions.",
-        "Record last observation time and leave unavailable provider states unknown."
+        "First check that important pages are reachable and not deliberately blocked.",
+        "Use the site owner's search tools, when available, to inspect their reported indexing status.",
+        "Keep 'technically eligible', 'reported indexed' and 'not checked' as different states. Date each observation."
       ],
       "verification": [
         "No local check is labeled as proof of Google or Bing indexing."
@@ -8006,7 +8014,7 @@
       "effort": "small",
       "impact_hypothesis": "Separated states may make operational reports more truthful.",
       "anti_pattern": "Reporting a 100 percent SEO score as 100 percent indexed.",
-      "measurement": "Track eligible, observed-indexed, and unknown URL counts independently.",
+      "measurement": "Count eligible pages, pages reported indexed and pages with unknown status separately.",
       "growth_hypothesis_ids": [
         "search-foundation-first",
         "platform-ai-measurement"
@@ -8014,7 +8022,7 @@
       "recommendation_rule_ids": [
         "google-search-technical-eligibility"
       ],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -8041,12 +8049,12 @@
     {
       "id": "arwp-measurement-query-panel",
       "category": "measurement",
-      "title": "Use a reproducible manual AI answer panel",
-      "problem": "One favorable prompt response can look like broad market leadership.",
+      "title": "Repeat AI answer checks before drawing conclusions",
+      "problem": "One answer that mentions your site does not prove people are regularly being recommended to visit it.",
       "implementation": [
-        "Freeze representative unbranded prompts, language, location, provider, and task settings.",
-        "Capture dated answers, actual source URLs, and recommendations over repeated runs.",
-        "Record controllable settings and leave unobservable personalization unknown. Treat this bounded panel as a sample, not a platform-wide recommendation probability."
+        "Choose a small, fixed set of real questions your audience might ask, including questions without your brand name.",
+        "Record the service, date, language, location if controllable, answer and actual linked sources for each check.",
+        "Repeat checks under stated conditions and keep unfavorable or missing mentions. This is a sample, not a market-wide probability."
       ],
       "verification": [
         "Results retain failures and distinguish cited, mentioned, recommended, and absent states."
@@ -8061,12 +8069,12 @@
       "effort": "large",
       "impact_hypothesis": "A bounded panel may reveal directional answer changes for the sampled conditions.",
       "anti_pattern": "Cherry-picking screenshots or claiming personalized samples represent market share.",
-      "measurement": "Report sample counts and rates by provider/prompt with run-to-run variation.",
+      "measurement": "Show the number of runs, mentions and correct references per service and question, including variation between runs.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.1.0",
+      "pattern_version": "1.2.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -8088,11 +8096,12 @@
     {
       "id": "arwp-measurement-external-references",
       "category": "measurement",
-      "title": "Count independent references with evidence",
-      "problem": "Owned-site links can inflate apparent authority.",
+      "title": "Notice when someone else recommends your work",
+      "problem": "Links from your own projects do not show independent interest.",
       "implementation": [
-        "Maintain a deduplicated record of actual third-party references to the project or work.",
-        "Record publisher independence, context, date, and the referenced URL."
+        "Keep a small record of relevant references from independently maintained sites or projects.",
+        "Check what was actually mentioned, who published it, when it appeared and which page was linked.",
+        "Separate your own projects, repeated links and unverified claims from independent references."
       ],
       "verification": [
         "Each counted reference is publicly retrievable and its ownership relationship is checked."
@@ -8108,7 +8117,7 @@
       "effort": "medium",
       "impact_hypothesis": "Verified references may show whether useful work is being recognized externally.",
       "anti_pattern": "Buying links, fabricating mentions, or counting portfolio cross-links as independent.",
-      "measurement": "Track new relevant independent references and their attributable qualified visits.",
+      "measurement": "Count verified independent references and any attributable useful visits separately.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence",
         "platform-ai-measurement"
@@ -8116,7 +8125,7 @@
       "recommendation_rule_ids": [
         "google-non-commodity-content"
       ],
-      "pattern_version": "1.0.1",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -10270,12 +10279,12 @@
     {
       "id": "arwp-editorial-title-promise",
       "category": "editorial",
-      "title": "Make the title a promise the page can fulfil",
-      "problem": "A catchy headline can conceal what the visitor will actually receive.",
+      "title": "Write a title the page can deliver on",
+      "problem": "A clever headline is not helpful when the content answers a smaller or different question.",
       "implementation": [
-        "Draft a title with the concrete subject and useful result; include a version or constraint only when it changes the answer.",
-        "Compare title, prominent heading and introduction for matching scope; allow natural wording differences.",
-        "Preview truncation on small screens without treating 60 characters as a Google limit."
+        "Name the actual task, decision or result; include versions only when they change the answer.",
+        "Read the title, main heading and opening together to check that they promise the same thing.",
+        "Preview smaller screens; there is no universal 60-character ranking rule."
       ],
       "verification": [
         "Ask a reader what they expect from the title, then check whether the page delivers it."
@@ -10292,12 +10301,12 @@
       "effort": "medium",
       "impact_hypothesis": "A clearer promise may attract visitors whose needs the page actually serves. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Record expectation mismatches and qualified search visits",
+      "measurement": "Record whether readers find the promised answer and whether search visitors were misled.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -10319,11 +10328,11 @@
     {
       "id": "arwp-editorial-heading-job",
       "category": "editorial",
-      "title": "Choose heading grammar by the section job",
-      "problem": "Every section phrased as a keyword question makes an article repetitive.",
+      "title": "Make headings help people find the next step",
+      "problem": "A series of keyword-shaped questions can read like search bait instead of a helpful guide.",
       "implementation": [
-        "Use an action verb for a task, a noun phrase for a concept, and a question when answering that question is the actual job.",
-        "Read only the outline: remove sections that repeat the title without adding a decision or explanation."
+        "Use a clear action for a task, a simple subject for background and a question only when it is genuinely being answered.",
+        "Read just the headings; remove sections that repeat the same promise without adding value."
       ],
       "verification": [
         "A reader can find prerequisites, instructions and interpretation from the outline alone."
@@ -10340,12 +10349,12 @@
       "effort": "medium",
       "impact_hypothesis": "A task-sensitive outline may reduce the time needed to locate an applicable section. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Measure section-finding success",
+      "measurement": "Ask a reader to find one specific instruction using only the headings.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -10367,12 +10376,12 @@
     {
       "id": "arwp-editorial-voice-role",
       "category": "editorial",
-      "title": "Use a practitioner voice with explicit roles",
-      "problem": "A confident narrator can make borrowed facts sound like firsthand experience.",
+      "title": "Sound experienced without pretending you did the work",
+      "problem": "A polished 'we tested this' voice can invent experience nobody actually had.",
       "implementation": [
-        "Use direct second-person instructions for tasks; reserve first person for work the named author actually performed.",
-        "Use neutral attribution for external evidence and conditional language for a prediction.",
-        "Keep the distinctive brand voice in framing and examples; keep definitions, numbers and conditions literal."
+        "Write instructions directly to the reader. Use 'we found' or 'I tested' only when that work really happened.",
+        "Attribute facts from other people and label predictions as predictions.",
+        "Keep the tone approachable without changing exact conditions, numbers or exceptions."
       ],
       "verification": [
         "A reviewer can distinguish author observation, cited fact and advice in every material paragraph."
@@ -10389,12 +10398,12 @@
       "effort": "medium",
       "impact_hypothesis": "Explicit narration roles may reduce confusion between experience, attribution and prediction. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Measure comprehension and attribution errors",
+      "measurement": "Review examples for mistaken authorship, invented experiences and misunderstood conditions.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -10416,12 +10425,12 @@
     {
       "id": "arwp-editorial-opening-shape",
       "category": "editorial",
-      "title": "Choose the opening from the reader task",
-      "problem": "A compulsory summary-first template can spoil a useful narrative or delay a diagnostic check.",
+      "title": "Start with what the reader came to do",
+      "problem": "One opening formula does not work for a guide, a diagnosis, a comparison and a field report.",
       "implementation": [
-        "For a procedure, lead with the result and prerequisites; for a diagnosis, lead with the discriminating symptom.",
-        "For a comparison, lead with the choice condition; for a field report, lead with the surprising observation and where it happened.",
-        "Write the opening after the evidence is assembled; no mandatory sentence or word count."
+        "For a guide, begin with the goal and prerequisites; for a diagnosis, the important symptom and first check.",
+        "For a comparison, give the choice condition; for a field report, describe the real observation and its context.",
+        "Write the opening after checking the evidence. Don't impose a fixed AI-friendly word count."
       ],
       "verification": [
         "A reader can identify the job and next useful step from the opening."
@@ -10438,12 +10447,12 @@
       "effort": "medium",
       "impact_hypothesis": "An opening matched to the reader task may help visitors choose their next step. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Measure first-step selection accuracy",
+      "measurement": "See if a reader can choose the first sensible step after reading the opening.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -10465,12 +10474,12 @@
     {
       "id": "arwp-editorial-evidence-first-outline",
       "category": "editorial",
-      "title": "Build the outline around the evidence you actually have",
-      "problem": "An outline generated from competing articles often produces another interchangeable summary.",
+      "title": "Build an article around something worth showing",
+      "problem": "Copying the headings of other articles usually produces another interchangeable summary.",
       "implementation": [
-        "Inventory original measurements, screenshots, artifacts and observations before drafting headings.",
-        "Assign each proposed section an actual asset or useful synthesis; remove unsupported promises.",
-        "State the missing experiment where evidence is unavailable instead of inventing a result."
+        "Before writing, list the examples, data, screenshots or observations you can actually share.",
+        "Give each section a distinct job and useful material. Remove sections that simply restate general advice.",
+        "When evidence is missing, explain what would need to be checked rather than inventing a result."
       ],
       "verification": [
         "The editor can open the asset supporting each original contribution."
@@ -10487,12 +10496,12 @@
       "effort": "medium",
       "impact_hypothesis": "An evidence-first outline may increase the distinctive, inspectable value of a page. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Track usable original contributions per published article",
+      "measurement": "Count useful original examples or investigations, not just headings and word count.",
       "growth_hypothesis_ids": [
         "non-commodity-evidence"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -11196,12 +11205,12 @@
     {
       "id": "arwp-measurement-ai-report-overlap",
       "category": "measurement",
-      "title": "Avoid double-counting generative AI impressions",
-      "problem": "Adding AI impressions to total Search impressions inflates visibility.",
+      "title": "Don't count the same search appearance twice",
+      "problem": "Adding AI-search impressions to overall Search impressions can count overlapping visibility twice.",
       "implementation": [
-        "Store the exact report surface, property, dimensions and observation window with an export.",
-        "Treat the dedicated AI view as overlapping overall Search reporting; do not add the two totals.",
-        "Keep Search and Discover exports separate and unavailable fields null."
+        "Label each export with its provider, report type, property, dates and available dimensions.",
+        "Where the dedicated AI view overlaps general Search reporting, show the two figures separately instead of adding them.",
+        "Keep Search and Discover separate, and leave fields you cannot observe blank."
       ],
       "verification": [
         "Check compatible dimensions and complete periods; do not derive AI CTR without corresponding supported click data."
@@ -11216,12 +11225,12 @@
       "effort": "medium",
       "impact_hypothesis": "Keeping overlapping reports distinct may prevent inflated visibility claims. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Track independently reconciled AI and overall Search impressions",
+      "measurement": "Present the separate figures and confirm that no combined total double-counts overlapping observations.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -11243,12 +11252,12 @@
     {
       "id": "arwp-measurement-ai-report-absence",
       "category": "measurement",
-      "title": "Distinguish an unavailable AI report from zero exposure",
-      "problem": "A missing dashboard is easy to misreport as zero citations.",
+      "title": "A missing report does not mean zero interest",
+      "problem": "No access to a report is not evidence that nobody found or mentioned your site.",
       "implementation": [
-        "Record whether the report is visible, accessible and populated for the exact property.",
-        "Inspect insufficient impressions and exclusion as possible explanations; retain uncertainty when owner access is missing.",
-        "Preserve the acquisition date and the report's actual dimensions without inventing user prompts."
+        "Check whether the relevant report exists and is available for the exact property you own.",
+        "Record whether it is unavailable, empty, not yet populated or simply not accessible to you.",
+        "Consider reporting thresholds and incomplete data, but don't turn a possible explanation into a fact."
       ],
       "verification": [
         "An unavailable or empty report cannot silently become a numeric zero in portfolio totals."
@@ -11263,12 +11272,12 @@
       "effort": "medium",
       "impact_hypothesis": "Explicit report-availability states may prevent missing data from becoming false zeroes. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Track known versus unavailable measurement coverage",
+      "measurement": "Track which reports are available and which remain unknown instead of converting missing figures to zero.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -11290,12 +11299,12 @@
     {
       "id": "arwp-measurement-citation-correctness",
       "category": "measurement",
-      "title": "Score citation correctness separately from citation frequency",
-      "problem": "An AI answer can cite a page while reversing its advice or misidentifying the product.",
+      "title": "Check whether a citation gets your advice right",
+      "problem": "An answer can link to your page while giving the reader the wrong conclusion.",
       "implementation": [
-        "For a small fixed prompt panel, preserve the exact answer and cited URL.",
-        "Review identity, claim support, date, exception and recommended action separately.",
-        "Count a citation as an exposure observation even when inaccurate; record the accuracy failure alongside it."
+        "For a small set of repeated questions, keep the answer and the exact linked page.",
+        "Read the answer against your page: is the product, claim, date, exception and next step correct?",
+        "Record inaccurate citations as citations with accuracy problems, not as successful recommendations."
       ],
       "verification": [
         "A second review can reproduce the cited passage and explain each failed dimension."
@@ -11310,12 +11319,12 @@
       "effort": "medium",
       "impact_hypothesis": "Manual citation review may reveal inaccurate recommendations concealed by frequency totals. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Turning this scoped practice into a universal ranking rule or publishing unsupported claims.",
-      "measurement": "Measure supported citations and incorrect recommendations separately",
+      "measurement": "Show how many sampled citations were supported by the page and how many contained material errors.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -11972,12 +11981,12 @@
     {
       "id": "arwp-measurement-evidence-relay",
       "category": "measurement",
-      "title": "Measure an artifact journey with coverage-aware observation yields",
-      "problem": "Portfolio totals hide which published materials become useful external references.",
+      "title": "Follow a useful resource beyond publication",
+      "problem": "Publishing more material tells you little about whether anyone uses it.",
       "implementation": [
-        "Anchor assets to existing BraidGraph nodes and keep reviewed observations in a private ledger.",
-        "Use the same post-release window and declared monitoring coverage for each asset.",
-        "Report independent reuse yield, useful-action yield and citation support separately; preserve immature and unmonitored assets."
+        "Pick a small set of existing guides, datasets or examples and record when they became available.",
+        "Where you have permission and coverage, follow whether people discover, open, reuse or independently reference them.",
+        "Keep missing observations and newer materials visible. Do not compare an unmonitored resource with a fully tracked one as if coverage matched."
       ],
       "verification": [
         "Run the local evidence-relay calculator; review its denominators, duplicate handling and source receipts."
@@ -11994,12 +12003,12 @@
       "effort": "medium",
       "impact_hypothesis": "This practice may make real resource value easier to inspect and use. Search and AI recommendation effects remain unmeasured.",
       "anti_pattern": "Manufacturing age, activity, citations or backlinks instead of the underlying useful artifact.",
-      "measurement": "Compare monitored artifact cohorts and investigate the stage with missing evidence",
+      "measurement": "For a comparable observed group, report discovery, useful actions and independent references separately.",
       "growth_hypothesis_ids": [
         "platform-ai-measurement"
       ],
       "recommendation_rule_ids": [],
-      "pattern_version": "1.0.0",
+      "pattern_version": "1.1.0",
       "review": {
         "reviewed_at": "2026-09-08",
         "scope": "source-support-and-implementation",
@@ -12693,8 +12702,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.11.0",
-    "path": "knowledge/releases/v1.11.0.json",
-    "sha256": "42bbf773b6be520257e0daf5608ce7e2b263d5bf7fbc242c8cfb237bf6461272"
+    "version": "1.12.0",
+    "path": "knowledge/releases/v1.12.0.json",
+    "sha256": "052df898da23b1953a629225a8c1c783e5b87e078b31d6d2e5c8ee3f081676f7"
   }
 }

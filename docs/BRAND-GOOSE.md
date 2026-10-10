@@ -51,6 +51,27 @@ Use clear, semi-formal language. Start with the reader's question, choice or out
 
 For optional measurement, explain the choice directly — for example, that it helps us understand which pages are useful and that it starts only after permission. Put implementation detail in technical documentation when it is needed for verification.
 
+## Editorial review before publication
+
+Goose should explain itself as if a thoughtful website owner had asked a practical question. Do not write for an imagined AI evaluator. Technical accuracy belongs in the explanation and supporting detail, not in every headline.
+
+For every public page, recommendation, notice or generated plan, run these four passes:
+
+1. **Reader:** Can someone name the problem and first useful action after reading the opening? If not, rewrite the opening.
+2. **Practitioner:** Does the advice say where to start, what would change, what to check and when not to use it? Keep a worked example if possible; mark hypothetical examples clearly.
+3. **Skeptic:** Is a reported result actually measured? Are missing reports, uncertain causes and alternative choices visible? Never fabricate experience, testimonials or conversion evidence.
+4. **Editor:** Read the headings and notices aloud. Cut abstract nouns, repeated claims, unnecessary provider names and strings of internal terms. Keep any essential caveat close to the recommendation.
+
+**Before → after examples (fictional writing examples, not outcomes):**
+
+- "Enable cross-channel analytics instrumentation for downstream outcome attribution" → "Want to know whether a page helped? Start by checking relevant visits and whether visitors took the next useful step."
+- "Improve entity resolution and machine-readable content surfaces" → "Make the page clear about what you offer, who it is for and where to go next."
+- "Apply evidence-based discovery optimization tactics" → "Check why a useful page is hard to find. Fix the obstacle you can verify before writing another article."
+
+Keep the underlying source, version, checks, contracts and licensing truthful. Do not delete important constraints to make a sentence feel easier. Use technical headings only when the section exists to teach a technical task. For optional statistics, say what the visitor agrees to and what is sent; don't call third-party measurements anonymous without verification.
+
+A successful editorial change must survive review in the **canonical source**, the **published page**, and any **generated recommendation surface**. After editing a catalog, rebuild dependent pages and check stable IDs, anchors, search summaries, machine descriptions and the current software license against `LICENSE`.
+
 ## Visual identity
 
 The website uses a bright editorial direction: lime `#eff600`, ink `#080c0b`, warm white `#fafaf7`, orange `#ff7138` and blue evidence links `#173bea`. Inter Tight is self-hosted under the included SIL Open Font License. System monospace distinguishes source and version metadata.

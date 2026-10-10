@@ -187,7 +187,8 @@
     "build:discoverability": "node scripts/build-discoverability.mjs",
     "test:discoverability": "node scripts/discoverability-test.mjs --site",
     "test:portfolio-workspace": "node scripts/portfolio-workspace-test.mjs",
-    "test:evidence-relay": "node scripts/evidence-relay-test.mjs"
+    "test:evidence-relay": "node scripts/evidence-relay-test.mjs",
+    "test:voice": "node scripts/editorial-voice-test.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/node": "^2.0.0",

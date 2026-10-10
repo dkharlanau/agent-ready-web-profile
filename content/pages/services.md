@@ -1,19 +1,23 @@
-# ARWP Services & Public Capabilities
+# What Goose can help you do
 
 Canonical HTML: https://dkharlanau.github.io/agent-ready-web-profile/services/
 
-These are public project capabilities, not a paid consulting catalog and not an SLA.
+These are capabilities of the public project, not an offer of paid consulting or a promise of support.
 
-## Search & AI Visibility Audit
-Source-backed checks for Search eligibility, AI-search controls, structured data, freshness and measurement.
+## Find out why a page is hard to discover
 
-## Growth Planning & Repository Remediation
-Evidence -> hypothesis -> implementation -> verification -> measurement.
+Check whether important pages can be reached and indexed, whether the site makes sense to visitors, and whether useful answers are easy to find. The underlying audit covers Search and AI-search requirements, but the result should lead with the actual problem.
 
-## Agentic Web Resolver
-Discovers heterogeneous site interfaces and preserves provenance/conflicts.
+## Choose a fix you can verify
 
-## AI Visibility Evidence Normalization
-Normalizes owner-side evidence without treating implementation as causality.
+Start with a small number of relevant suggestions. See what each would change, which file or page is affected, what could go wrong and how to confirm it is live. Repository edits should be reviewable and safe to reverse.
 
-Schema.org Service / OfferCatalog semantics are used for machine understanding, not as a Google rich-result promise.
+## Help technical tools understand the site
+
+For developers, ARWP Resolver can inspect the interfaces a website actually publishes, compare overlapping declarations and explain uncertainty rather than silently guessing.
+
+## Learn whether an improvement mattered
+
+Check what you can really observe: page reachability, search appearances, citations, visits or useful actions. These are different kinds of evidence; a passing technical audit does not prove traffic growth.
+
+Technical reference: the site also publishes structured Service and OfferCatalog descriptions for machines. This is not a promise of a special Google result.

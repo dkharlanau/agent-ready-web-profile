@@ -10,7 +10,7 @@
   },
   "catalogs": {
     "discoverability": {
-      "version": "1.12.0",
+      "version": "1.13.0",
       "path": "knowledge/discoverability-corpus.json"
     },
     "antiPatterns": {
@@ -119,6 +119,7 @@
     "The map does not establish Google ranking, indexing, AI Overview inclusion, AI Mode inclusion or preferred-source treatment.",
     "The map does not establish Bing or Copilot citation frequency or correctness.",
     "The initial two-route sample does not establish absence of any anti-pattern across the rest of the site.",
-    "No causal outcome is attributed to a pattern until a separate measurement design supports that claim; v0.1 stores observational outcomes with causalClaim=false only."
+    "No causal outcome is attributed to a pattern until a separate measurement design supports that claim; v0.1 stores observational outcomes with causalClaim=false only.",
+    "The catalog reference was updated to release 1.13.0 on 10 October 2026; earlier observations were not repeated or promoted to live evidence."
   ]
 }
