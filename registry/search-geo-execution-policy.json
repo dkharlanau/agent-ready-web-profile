@@ -11,9 +11,6 @@
       "mode": "local-review",
       "requires": [],
       "existingTool": "lib/trend-source-watch.mjs",
-      "ownerInstruction": "Make the active watch source point to OpenAI's crawler documentation; keep the old link as historical evidence and review the Atlas-dependent advice before representing it as current.",
-      "reviewGate": "Verify the new URL resolves to OAI-SearchBot/GPTBot/ChatGPT-User/OAI-AdsBot definitions; flag old Atlas/Apps claims as due for re-review rather than quietly transferring them.",
-      "stopCondition": "Do not bulk-replace the old URL under referral or Atlas statements with crawler docs that cannot substantiate them.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -22,9 +19,6 @@
       "mode": "local-review",
       "requires": [],
       "existingTool": "lib/growth-readable.mjs",
-      "ownerInstruction": "Select a small sample of the highest-seen Goose advice and target-site pages. Require one distinct useful action, owner-valid example, evidence boundary, reason not to use it and concise human explanation. Record real defects and corrections.",
-      "reviewGate": "Review original vs updated pages with user, specialist, editor and skeptic roles. Check no invented first-hand experience or claims, and preserve non-changes.",
-      "stopCondition": "Do not equate lower AI-text scores or higher keyword density with search improvement.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -35,9 +29,6 @@
         "hasOwnerApprovedFacts"
       ],
       "existingTool": "bin/arwp-editorial.mjs",
-      "ownerInstruction": "Add a bounded metadata-to-visible-facts editorial comparison to the current publication review for pages revised with AI assistance; include title, meta description, alt, JSON-LD claims and canonical job.",
-      "reviewGate": "On sampled built pages, reject invented product availability, author, review, results or attributes. Compare against the visible source of truth.",
-      "stopCondition": "Do not auto-generate alternate metadata from unverified page summaries.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -48,9 +39,6 @@
         "hasOwnedSiteEvidence"
       ],
       "existingTool": "templates/growth/original-evidence-review.md",
-      "ownerInstruction": "On one existing canonical resource, add a small real repeatable experiment: question, baseline, original sample, exact method, observation, negative cases and a practical decision. Review permissions before exposing data.",
-      "reviewGate": "Verify source and final deployment refs, copyright/consent, reproducer and an independently understandable result; keep failures.",
-      "stopCondition": "Never manufacture survey respondents, third-party endorsements or a fabricated AI-citation gain.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -61,9 +49,6 @@
         "hasBingOwnerEvidence"
       ],
       "existingTool": "bin/arwp-bing.mjs",
-      "ownerInstruction": "If the owner has Bing access, import a bounded query-page pair set, map stable page IDs, note provider scope and keep a review queue for mismatched intent or repeated citations.",
-      "reviewGate": "Compare raw pair mapping to cited page state and visible factual support; preserve nonreturned queries and sampling limits.",
-      "stopCondition": "Do not claim any specific prompt, model answer, ranking or causality from aggregated grounding labels.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -75,9 +60,6 @@
         "hasVerifiedEdgeLogs"
       ],
       "existingTool": "docs/OPENAI-CHATGPT-SEARCH-CONTROLS.md",
-      "ownerInstruction": "For sites wanting ChatGPT discovery, reconcile publisher choice per bot with robots.txt, real WAF/CDN settings and independently observed requests from documented IP ranges; keep search/training/ads/user actions distinct.",
-      "reviewGate": "Check verified bot IPs, allowed public routes, HTTP/noindex, challenge/403 and intentionally protected paths. Use limited non-spoofed evidence.",
-      "stopCondition": "Do not disable firewalls wholesale, turn on training to gain search visibility or assume user-triggered ChatGPT-User is Search indexing.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -88,9 +70,6 @@
         "hasBingOwnerEvidence"
       ],
       "existingTool": "bin/arwp-bing.mjs",
-      "ownerInstruction": "On one active owned site with enough cited pages, group the actual provider intent labels; select one page whose published content can genuinely answer a different stage or task without creating an extra URL.",
-      "reviewGate": "Review mislabeled/ambiguous intent manually; inspect page usefulness and any later cited page/query pairs.",
-      "stopCondition": "Skip when no Bing owner observations exist; preview labels are not reliable for every niche.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -101,9 +80,6 @@
         "hasBingOwnerEvidence"
       ],
       "existingTool": "bin/arwp-bing.mjs",
-      "ownerInstruction": "Map provider topic labels to existing canonical resource pages and authentic subject boundaries. Improve an existing information gap before considering a new page.",
-      "reviewGate": "Check manually that provider topics are coherent; retain ambiguous/mixed labels and do not change frozen query experiments retroactively.",
-      "stopCondition": "Do not mass-generate one page per topic or mistake provider topic classifications for ranking authority.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -114,9 +90,6 @@
         "hasBingOwnerEvidence"
       ],
       "existingTool": "bin/arwp-bing.mjs",
-      "ownerInstruction": "Freeze up to 10 owner-observed relevant grounding queries and compare their Bing-native Citation Share at comparable intervals alongside raw citation counts and page IDs.",
-      "reviewGate": "Verify query-scoped denominator, preview availability, dates and changes in the observed query mix.",
-      "stopCondition": "Don't rank unrelated queries, providers or businesses by a blended citation percentage.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -128,9 +101,6 @@
         "hasComparableBingWindows"
       ],
       "existingTool": "bin/arwp-bing.mjs",
-      "ownerInstruction": "Record a frozen current/previous window, actual cited pages and exposure context. Include zero, flat and negative examples and known releases/outages.",
-      "reviewGate": "Check consistent page/query scope and finality/lag; preserve provider sampling warnings.",
-      "stopCondition": "Don't use a prior period with different eligibility or a changed query set as a causal control.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -141,9 +111,6 @@
         "hasGoogleGenerativeReport"
       ],
       "existingTool": "bin/arwp-visibility.mjs",
-      "ownerInstruction": "Check owner-side generative report availability and reporting dimensions separately. Keep missing as unavailable; preserve scope, date/time zone and provider semantics.",
-      "reviewGate": "Re-run the existing Google import on an actual supplied report only; verify API/CSV columns before labeling impressions.",
-      "stopCondition": "Do not infer a ChatGPT/Bing referral or a specific AI answer from Google's impressions.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -155,9 +122,6 @@
         "hasCloudflareOwnerAccess"
       ],
       "existingTool": "docs/MEASUREMENT-OS.md",
-      "ownerInstruction": "For sites actually behind Cloudflare, compare intended role policy with the account's effective crawler settings and WAF rules; record host/path and customer choice.",
-      "reviewGate": "Inspect live settings and verified response logs before changing a rule, especially ad-serving pages and multi-purpose bots.",
-      "stopCondition": "Do not recommend unblocking all AI bots or altering a site that is not on Cloudflare.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -170,9 +134,6 @@
         "hasAuthorizedReferralObservations"
       ],
       "existingTool": "bin/arwp-visibility.mjs",
-      "ownerInstruction": "Compare the real top crawler-request URL families, response status/bytes, and AI-origin referral landing sections with the site's actual task priority.",
-      "reviewGate": "Verify provider read permissions, bot-role labels, stable periods and sample disclosure; do not infer unique users from requests.",
-      "stopCondition": "Do not use aggregate request volume as an authority score or scrape privacy-protected logs.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -184,9 +145,6 @@
         "hasCompatibleContentSignalConsumer"
       ],
       "existingTool": "docs/MEASUREMENT-OS.md",
-      "ownerInstruction": "If publisher/consumer policies require it, run a tiny authorized crawl with contentUse=reference and, where policy allows, contentUse=full; verify allowed/rejected requests and the effective directive.",
-      "reviewGate": "Check the robots content-use directive, resulting status and source permission before/after, without bypassing policy.",
-      "stopCondition": "Never present Cloudflare's use directive as an IETF final standard or universal Google policy.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -195,9 +153,6 @@
       "mode": "watch-only",
       "requires": [],
       "existingTool": "docs/FUTURE-SEARCH-LAB.md",
-      "ownerInstruction": "Keep a version-pinned compatibility matrix for Content-Usage HTTP/robots signals and the precise draft revision; only prototype on a test site when the real publisher rights decision exists.",
-      "reviewGate": "Check the current IETF working-group revision and consumer support; ensure no contradiction with existing robots, contracts or actual licensing.",
-      "stopCondition": "Do not automatically emit draft fields across all target sites or confuse rights preferences with guaranteed enforcement.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -208,9 +163,6 @@
         "hasPublishedVideo"
       ],
       "existingTool": "docs/PAGE-SEMANTICS-PROFILE.md",
-      "ownerInstruction": "On a genuinely published video, align VideoObject creator/author with the public brand/person credited on the watch page and actual media rights; no source changes for pages without a video.",
-      "reviewGate": "Rich Results Test, visible credit, canonical video/watch URL and playable media inspection.",
-      "stopCondition": "Skip for text-only guides, fictional brands, unverified authorship or unreleased videos.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -222,9 +174,6 @@
         "hasVerifiedVideoInteractionCounts"
       ],
       "existingTool": "docs/PAGE-SEMANTICS-PROFILE.md",
-      "ownerInstruction": "Only publish InteractionCounter data backed by the video host's actual metric and supported interaction type; otherwise omit it.",
-      "reviewGate": "Validate the interaction type, actual counts and disclosure of their scope, then compare visible facts.",
-      "stopCondition": "Never synthesize engagement from page views or a text reader count.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -236,9 +185,6 @@
         "hasUsefulVideoChapters"
       ],
       "existingTool": "docs/PAGE-SEMANTICS-PROFILE.md",
-      "ownerInstruction": "For one real published lesson/demo with clear segments, publish accurate key-moment labels/timestamps and working deep links; retain readable text/context.",
-      "reviewGate": "Play each segment URL on mobile, keyboard and browser; validate Clip/SeekToAction and indexable watch page.",
-      "stopCondition": "Do not add chapters to static images, nonexistent training videos or inaccessible recordings.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -249,9 +195,6 @@
         "hasUsefulOriginalImage"
       ],
       "existingTool": "docs/IMAGE-DISCOVERY-LAYER.md",
-      "ownerInstruction": "On a page whose visual genuinely explains the task, use a meaningful high-quality image with accessible alt, image URL, correct rights and consistent og:image/structured data. Make sure the preview works at different crops.",
-      "reviewGate": "Inspect image fetch, actual dimensions, rights, rendered HTML, max-image-preview policy and mobile crop.",
-      "stopCondition": "No decorative logos as giant Discover hero art and no promise of Discover placement.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -263,9 +206,6 @@
         "hasGooglePlatformPropertyAccess"
       ],
       "existingTool": "docs/MEASUREMENT-OS.md",
-      "ownerInstruction": "For actual owned publishing channels, verify property access and inspect platform content discoverability; connect reports by canonical public topic only when evidence supports it.",
-      "reviewGate": "Record provider/property scopes, canonical URLs and distinct date windows before cross-channel interpretation.",
-      "stopCondition": "Do not add social accounts just to fill a dashboard or double count site and platform impressions.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -276,9 +216,6 @@
         "hasClaimedSearchProfile"
       ],
       "existingTool": "docs/SEARCH-AGENT-RECOMMENDATIONS.md",
-      "ownerInstruction": "For a project with an actually claimed Search profile and useful cross-platform content, add an accessible, correctly attributed optional link or official badge near the real publisher identity.",
-      "reviewGate": "Verify the claimed profile resolves, correct brand attribution, accessible touch target and no unintended disclosure of a personal maintainer.",
-      "stopCondition": "Skip unclaimed profiles, private creator identities and sites without a real follow use case.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -290,9 +227,6 @@
         "hasEligiblePublisherDomain"
       ],
       "existingTool": "templates/growth/preferred-source.html",
-      "ownerInstruction": "Check an actual owned domain in the source preferences tool first; where available and editorially useful, trial one localized interactive button or text deep link on an article hub.",
-      "reviewGate": "Verify eligibility of the exact domain, user-initiated flow, return navigation, mobile accessibility, and no false implication that the site is already preferred.",
-      "stopCondition": "Do not show an inert button on the Goose GitHub Pages subdirectory or guarantee AI inclusion.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -305,9 +239,6 @@
         "hasGoogleAggregatorApproval"
       ],
       "existingTool": "docs/REGIONAL-SEARCH-SURFACES.md",
-      "ownerInstruction": "Only for a real travel/product/local-business aggregator serving EEA customers, review eligibility and the direct provider application path. Keep this as a conditional business opportunity in Goose.",
-      "reviewGate": "Verify entity type, EEA consumer context, provider approval, available feed data and evidence of actual search unit appearance.",
-      "stopCondition": "Not applicable to a general knowledge blog, Ptichi, or Vedokrok merely because it has many pages.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -320,9 +251,6 @@
         "hasGoogleSupplierApproval"
       ],
       "existingTool": "docs/REGIONAL-SEARCH-SURFACES.md",
-      "ownerInstruction": "For real EEA direct hotel, flight, transport, local-service or merchant clients, separate supplier facts from aggregator feeds; review availability, actual service areas and source ownership.",
-      "reviewGate": "Verify geography, business type, directly accessible data and supplier-unit presence if reported.",
-      "stopCondition": "Don't confuse a local-direct supplier with a Vertical Search Service or create an empty feed for irrelevant sites.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -334,9 +262,6 @@
         "hasGoogleUgcFreshApproval"
       ],
       "existingTool": "docs/FUTURE-SEARCH-LAB.md",
-      "ownerInstruction": "Add a yes/no eligibility decision when Goose reviews an actual large forum/social platform; only eligible applicants should pursue OAuth/JSON-LD and minute-level updates.",
-      "reviewGate": "Review independent user authorship, public stable URLs, moderation, user volume, engagement counter freshness and acceptance status.",
-      "stopCondition": "Do not advise standard blogs or authored content sites to use it; it is not the general Indexing API.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -348,9 +273,6 @@
         "hasApprovedAcpFeedAccess"
       ],
       "existingTool": "docs/SEARCH-AGENT-RECOMMENDATIONS.md",
-      "ownerInstruction": "For an actual eligible e-commerce owner, review merchant approval, access, canonical product identity and update cadence before building an export.",
-      "reviewGate": "Check live scheme eligibility, authorization, publicly accessible real product/image URLs and accuracy of price/availability.",
-      "stopCondition": "Do not build ACP feeds for non-commerce websites or present partner onboarding as generally open.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -362,9 +284,6 @@
         "hasApprovedAcpFeedAccess"
       ],
       "existingTool": "docs/SEARCH-AGENT-RECOMMENDATIONS.md",
-      "ownerInstruction": "For an approved partner, validate stable item_id, brand, seller, title, description, canonical URL, image, stock and money, with distinct variants and stable parent/offer identity.",
-      "reviewGate": "Compare each feed row to real public product and stock truth, schema required-field checks and production Stable version; never reuse IDs.",
-      "stopCondition": "Do not ship the draft schema into production or invent GTIN, reviews, seller and availability.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -377,9 +296,6 @@
         "hasAuthorizedInventorySource"
       ],
       "existingTool": "docs/SEARCH-AGENT-RECOMMENDATIONS.md",
-      "ownerInstruction": "For supported partner integrations, use a stable complete catalog plus permitted incremental upserts, keeping promotion feeds and timestamps in their documented channel.",
-      "reviewGate": "Detect stale prices/availability by comparison with canonical commerce backend; run rollback and idempotency tests.",
-      "stopCondition": "Skip if no authorized commerce backend or the partner has not been granted the required API/feed access.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -391,9 +307,6 @@
         "hasOpenAiAdsFeedAccess"
       ],
       "existingTool": "docs/SEARCH-AGENT-RECOMMENDATIONS.md",
-      "ownerInstruction": "On a retailer deliberately running ChatGPT ads, verify the ads-specific schema and crawlable landing pages with OAI-AdsBot and separate paid-vs-organic reporting.",
-      "reviewGate": "Inspect live landing path, verified bot accessibility, forbidden categories and accurate advertising disclosures.",
-      "stopCondition": "Do not treat ads feed upload as organic ChatGPT inclusion or confuse OAI-AdsBot with GPTBot.",
       "ownerEvidenceNeeded": true
     },
     {
@@ -405,9 +318,6 @@
         "hasRealMerchantOffers"
       ],
       "existingTool": "docs/SEARCH-AGENT-RECOMMENDATIONS.md",
-      "ownerInstruction": "For an actual merchant, align feed, public listing and structured Product/Offer category, currency and sale start/end timestamps from one authoritative commerce backend.",
-      "reviewGate": "Rich Results Test, feed checks, time boundary tests and price parity after the promotion expires.",
-      "stopCondition": "Skip if the site has no authentic offers, prices or eligible Product pages.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -419,9 +329,6 @@
         "hasWebMcpOriginTrialAccess"
       ],
       "existingTool": "docs/FUTURE-SEARCH-LAB.md",
-      "ownerInstruction": "Choose one actual low-risk form flow whose native labels, validation and keyboard behavior are already good; trial WebMCP as an enhancement behind a browser support gate.",
-      "reviewGate": "Compare real task completion with and without the trial; do not expose hidden server actions or confuse tool discovery with consent.",
-      "stopCondition": "No fake web tools for actions that do not exist; retain ordinary HTML fallback and permission boundaries.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -433,9 +340,6 @@
         "hasWebMcpOriginTrialAccess"
       ],
       "existingTool": "docs/FUTURE-SEARCH-LAB.md",
-      "ownerInstruction": "For a genuine opt-in agent workflow, freeze 5 representative tasks and 5 adversarial cases: injection, scope, duplicate call, rollback/confirmation, and denied access. Include no-WebMCP fallback.",
-      "reviewGate": "Inspect DevTools schemas, per-task receipts, user confirmation and the absence of surprise mutations or data leaks.",
-      "stopCondition": "Do not claim an origin-trial tool improves AI Search visibility or permit writes merely because a model requested them.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -447,9 +351,6 @@
         "hasAuthorizedCloudflareBrowserCrawl"
       ],
       "existingTool": "docs/MEASUREMENT-OS.md",
-      "ownerInstruction": "Where the owner already authorizes Cloudflare Browser Run, test a small unchanged-page snapshot vs a changed-page snapshot, with explicit max pages and content-use mode.",
-      "reviewGate": "Confirm robots/Content Signals consent, bounded URL inclusion, matched bytes, retry handling and no forced full crawl.",
-      "stopCondition": "Don't substitute crawler output for Google indexing or introduce paid crawling into no-budget projects.",
       "ownerEvidenceNeeded": false
     },
     {
@@ -458,9 +359,6 @@
       "mode": "local-review",
       "requires": [],
       "existingTool": "lib/trend-source-watch.mjs",
-      "ownerInstruction": "Enhance the existing Trend Radar source review process with a redirect-topic/manual confirmation step, keeping exact URL, observed destination, source class and revision date.",
-      "reviewGate": "Assert no automatic WATCH-to-ADOPT promotion; produce a review-required alert with before/after source role rather than replacing every source string automatically.",
-      "stopCondition": "Don't infer a recommendation is false merely because a URL moved; reverify the specific mechanism at an appropriate primary replacement source.",
       "ownerEvidenceNeeded": false
     }
   ]
