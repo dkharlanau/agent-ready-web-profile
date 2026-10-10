@@ -48,7 +48,7 @@ assert.match(html, /<h1>Get<br>Found\.<\/h1>/i);
 assert.match(html, /Help agents find their way around/i);
 assert.match(html, /Without a resolver/i);
 assert.match(html, /With ARWP Resolver/i);
-assert.match(html, /href="\.\/discoverability\.html">Find a pattern/i);
+assert.match(html, /href="\.\/discoverability\.html">Find a useful fix/i);
 assert.match(html, /Explore the working reference sites/i);
 assert.match(html, /ARWP Directory/i);
 assert.match(html, /Federated router/i);
