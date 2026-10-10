@@ -4,7 +4,7 @@ Canonical HTML: https://dkharlanau.github.io/agent-ready-web-profile/product/
 
 **Goose ARWP** is the public product. **Agent-Ready Web Profile (ARWP)** is the technical foundation.
 
-Goose helps a site become easier for Search and AI systems to discover, understand, verify, cite and route to useful actions. It does this as an evidence-backed operating loop rather than a one-time readiness score.
+Goose helps a website owner answer a practical question: what should I fix so people can find and use the pages that matter? It checks what's in the way, suggests a small number of relevant changes and helps separate a successful edit from a genuine improvement.
 
 > **Tell Goose the goal. Inspect. Decide. Change. Prove. Watch.**
 
@@ -28,9 +28,9 @@ WHAT SHOULD THIS SITE ACHIEVE?
        WATCH / REVISE
 ```
 
-## What Goose answers
+## Questions Goose helps answer
 
-For a site owner, the useful questions are simple:
+Start with the questions you actually have:
 
 1. Why am I not being found for the things that matter?
 2. What should I do first?
@@ -41,7 +41,7 @@ For a site owner, the useful questions are simple:
 
 Advanced technical modules remain available, but the first-run journey should not require choosing one.
 
-## What makes Goose different
+## What goes into a recommendation
 
 Goose keeps the evidence chain connected:
 
@@ -67,7 +67,7 @@ REVIEW DECISION
 
 The chain works backwards too. When upstream guidance changes or a recommendation becomes stale, Goose can identify which sites and prior changes need re-review.
 
-## No Goose score
+## Why we don't turn everything into a score
 
 Search and AI systems expose different evidence. Goose does not flatten it into one 0–100 score.
 
@@ -91,9 +91,9 @@ USEFUL ACTION
 
 Google generative-AI impressions are not Bing citations. Bing citations are not visits. OAI-SearchBot access is not a ChatGPT citation. Missing evidence stays unknown rather than becoming zero.
 
-## Product priorities now
+## Where we're putting the work
 
-### P0 — Proof before more product
+### P0 — See what genuinely helped
 
 Goose currently prioritizes real site evidence loops over new architecture. The target is several owned sites with explicit experiment state, verified deployment parity, provider-native evidence and reviewed keep/revise/stop decisions. Neutral and negative outcomes remain visible.
 
@@ -101,19 +101,19 @@ Goose currently prioritizes real site evidence loops over new architecture. The 
 
 Show what is actually planned, on hold, observing, reviewed or stopped across the portfolio from committed evidence rather than hand-written success claims.
 
-### P0 — Provider-native Search & AI measurement
+### P0 — Use the right measurement for each question
 
 Keep Google, Bing, OpenAI/referral and other owner evidence semantically correct instead of manufacturing a universal AI-visibility metric.
 
-### P1 — One first-run journey
+### P1 — Make the first experience simple
 
 A future first-run flow should accept a URL plus only the owner context that materially changes recommendations, then return a concise Get Found Brief with the top one to three next moves.
 
-### P1 — Surface retirement
+### P1 — Keep only pages and tools that earn their place
 
 New pages/modules need a real user job, consumer, verification path and retirement/consolidation condition. Project maturity is not page count.
 
-## Technical foundation
+## Technical foundation (for developers)
 
 Behind the simple public journey, ARWP provides the deeper engines:
 
@@ -129,7 +129,7 @@ Behind the simple public journey, ARWP provides the deeper engines:
 
 BraidGraph is an advanced internal primitive, not a user-facing requirement.
 
-## Search / GEO boundary
+## Search and AI visibility: what we can and cannot promise
 
 Goose does not claim that special AI markup, `llms.txt`, schema volume or policy-page count creates ranking or citation gains. Google currently states that foundational SEO remains relevant to AI Overviews and AI Mode and that no special AI optimization is required for eligibility.
 
@@ -147,7 +147,7 @@ Goose therefore prioritizes:
 
 - GitHub: https://github.com/dkharlanau/agent-ready-web-profile
 - npm: https://www.npmjs.com/package/agent-ready-web-profile
-- License: PolyForm Strict 1.0.0
+- Current software license: PolyForm Strict 1.0.0 (earlier releases may have different grants)
 - Source availability: public; commercial use, redistribution and derivative works require separate permission
 
 ## Key product docs
