@@ -3,7 +3,7 @@
   "version": "0.1",
   "catalogs": {
     "discoverability": {
-      "version": "1.12.0",
+      "version": "1.13.0",
       "path": "knowledge/discoverability-corpus.json"
     },
     "antiPatterns": {
@@ -15,12 +15,22 @@
     {
       "id": "spd_http_status",
       "kind": "practice",
-      "pattern": { "id": "arwp-access-status", "version": "1.0.1" },
+      "pattern": {
+        "id": "arwp-access-status",
+        "version": "1.0.1"
+      },
       "mode": "deterministic",
       "authority": "verdict",
-      "allowedVerdicts": ["present", "absent"],
-      "targetScopes": ["route"],
-      "evidenceTypes": ["http-probe"],
+      "allowedVerdicts": [
+        "present",
+        "absent"
+      ],
+      "targetScopes": [
+        "route"
+      ],
+      "evidenceTypes": [
+        "http-probe"
+      ],
       "reviewGate": "none",
       "requires": [
         "Follow redirects to the final public response.",
@@ -35,12 +45,25 @@
     {
       "id": "spd_searchbot_policy_review",
       "kind": "practice",
-      "pattern": { "id": "arwp-access-searchbot", "version": "1.0.1" },
+      "pattern": {
+        "id": "arwp-access-searchbot",
+        "version": "1.0.1"
+      },
       "mode": "manual-assisted",
       "authority": "verdict",
-      "allowedVerdicts": ["present", "absent", "unknown"],
-      "targetScopes": ["site"],
-      "evidenceTypes": ["repo-file", "http-probe", "manual-review"],
+      "allowedVerdicts": [
+        "present",
+        "absent",
+        "unknown"
+      ],
+      "targetScopes": [
+        "site"
+      ],
+      "evidenceTypes": [
+        "repo-file",
+        "http-probe",
+        "manual-review"
+      ],
       "reviewGate": "owner-data",
       "requires": [
         "Read the deployed crawler policy rather than only the repository source.",
@@ -56,12 +79,25 @@
     {
       "id": "spd_magic_agent_file_candidate",
       "kind": "anti-pattern",
-      "pattern": { "id": "anti-magic-agent-file", "version": "1.0.0" },
+      "pattern": {
+        "id": "anti-magic-agent-file",
+        "version": "1.0.0"
+      },
       "mode": "heuristic",
       "authority": "candidate",
-      "allowedVerdicts": ["unknown"],
-      "targetScopes": ["site", "route", "route-prefix"],
-      "evidenceTypes": ["repo-file", "source-html", "rendered-dom"],
+      "allowedVerdicts": [
+        "unknown"
+      ],
+      "targetScopes": [
+        "site",
+        "route",
+        "route-prefix"
+      ],
+      "evidenceTypes": [
+        "repo-file",
+        "source-html",
+        "rendered-dom"
+      ],
       "reviewGate": "manual",
       "requires": [
         "Nominate only when an AI-readiness or ranking claim appears to be justified mainly by adding llms.txt, ai.txt or another agent-facing file.",
@@ -76,12 +112,27 @@
     {
       "id": "spd_fake_freshness_candidate",
       "kind": "anti-pattern",
-      "pattern": { "id": "anti-fake-freshness", "version": "1.0.0" },
+      "pattern": {
+        "id": "anti-fake-freshness",
+        "version": "1.0.0"
+      },
       "mode": "heuristic",
       "authority": "candidate",
-      "allowedVerdicts": ["unknown"],
-      "targetScopes": ["route", "route-prefix", "template", "page-type"],
-      "evidenceTypes": ["repo-file", "source-html", "rendered-dom", "structured-data"],
+      "allowedVerdicts": [
+        "unknown"
+      ],
+      "targetScopes": [
+        "route",
+        "route-prefix",
+        "template",
+        "page-type"
+      ],
+      "evidenceTypes": [
+        "repo-file",
+        "source-html",
+        "rendered-dom",
+        "structured-data"
+      ],
       "reviewGate": "manual",
       "requires": [
         "Compare visible or structured update dates with evidence of substantive content change.",
@@ -96,12 +147,25 @@
     {
       "id": "spd_schema_costume_candidate",
       "kind": "anti-pattern",
-      "pattern": { "id": "anti-schema-costume", "version": "1.0.0" },
+      "pattern": {
+        "id": "anti-schema-costume",
+        "version": "1.0.0"
+      },
       "mode": "heuristic",
       "authority": "candidate",
-      "allowedVerdicts": ["unknown"],
-      "targetScopes": ["route", "template", "page-type"],
-      "evidenceTypes": ["structured-data", "source-html", "rendered-dom"],
+      "allowedVerdicts": [
+        "unknown"
+      ],
+      "targetScopes": [
+        "route",
+        "template",
+        "page-type"
+      ],
+      "evidenceTypes": [
+        "structured-data",
+        "source-html",
+        "rendered-dom"
+      ],
       "reviewGate": "manual",
       "requires": [
         "Compare declared structured-data entity types and claims with visible primary content and actual accessible objects.",
@@ -116,12 +180,26 @@
     {
       "id": "spd_green_check_growth_candidate",
       "kind": "anti-pattern",
-      "pattern": { "id": "anti-green-check-growth", "version": "1.0.0" },
+      "pattern": {
+        "id": "anti-green-check-growth",
+        "version": "1.0.0"
+      },
       "mode": "heuristic",
       "authority": "candidate",
-      "allowedVerdicts": ["unknown"],
-      "targetScopes": ["site", "route", "route-prefix"],
-      "evidenceTypes": ["workflow-run", "provider-report", "repo-file", "source-html"],
+      "allowedVerdicts": [
+        "unknown"
+      ],
+      "targetScopes": [
+        "site",
+        "route",
+        "route-prefix"
+      ],
+      "evidenceTypes": [
+        "workflow-run",
+        "provider-report",
+        "repo-file",
+        "source-html"
+      ],
       "reviewGate": "manual",
       "requires": [
         "Nominate when implementation or validator success is presented as proof of Search, AI recommendation, citation, traffic or conversion improvement.",
