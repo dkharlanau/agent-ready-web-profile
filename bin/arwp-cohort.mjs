@@ -14,6 +14,7 @@ import {
   reviewCohortGscWebExport
 } from '../lib/cohort-search-observation.mjs';
 import { reviewCohortIndexInspection } from '../lib/cohort-index-observation.mjs';
+import { compareCohortIndexObservations } from '../lib/cohort-index-comparison.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0] && !args[0].startsWith('--') ? args[0] : 'help';
@@ -60,6 +61,7 @@ function usage() {
     '  arwp-cohort page-map <cohort.json> [--output=private-map.json] [--json]',
     '  arwp-cohort check-gsc <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD --final-through=YYYY-MM-DD --window-days=14 --report-scope=web --export-start=YYYY-MM-DD --export-end=YYYY-MM-DD --page-map=private-map.json --export=private-web.csv [--output=private-review.json] [--json]',
     '  arwp-cohort check-index <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --page-map=private-map.json --inspection=private-inspection.json [--output=private-index-review.json] [--json]',
+    '  arwp-cohort compare-index <cohort.json> --before=private-index-review-a.json --after=private-index-review-b.json [--output=private-change-review.json] [--json]',
     '',
     'The frozen cohort remains the only experiment design authority. Planning starts',
     'only with an independently reviewed exact production SHA and explicit deployment',
@@ -72,9 +74,12 @@ function usage() {
     'links exact canonical URLs to frozen treatment/control IDs. It never guesses URLs.',
     '',
     'URL Inspection describes Googles indexed version, not live HTTP. check-index',
-    'accepts a dated read-only Search Console snapshot with current_url_inspection.rows',
+    'accepts either a dated Search recovery snapshot with current_url_inspection.rows',
+    'or the actual read-only Ptichi scripts/search-observe.py output (inspections).',
     'and an exact site property; it matches only frozen canonical URLs, keeps missing',
     'inspection rows unknown and never makes ranking or causal claims.',
+    'compare-index compares only identically mapped frozen URLs observed on both dates;',
+    'unknown/uninspected states cannot become false traffic or indexing gains.'
     '',
     'Search Console can omit anonymized/low-volume rows. No row means unobserved,',
     'not zero. No outcome or causal decision is made from this helper alone. Keep',
@@ -162,6 +167,31 @@ async function main() {
     const written = writeLocalJson(map, optionValue('output'));
     if (jsonOutput || !written) console.log(JSON.stringify(map, null, 2));
     else console.log('WROTE private page-map template: ' + written + '\nFill in all exact canonical URLs before check-gsc.');
+    return 0;
+  }
+
+  if (command === 'compare-index') {
+    const before = readJson(optionRequired('before'));
+    const after = readJson(optionRequired('after'));
+    const result = compareCohortIndexObservations(cohort, before, after);
+    const written = writeLocalJson(result, optionValue('output'));
+    if (jsonOutput) console.log(JSON.stringify({ ...result, written }, null, 2));
+    else {
+      console.log('Goose fixed-cohort indexed-version comparison: ' + result.cohortId);
+      console.log('Before: ' + result.before.observedAt + '; after: ' + result.after.observedAt);
+      console.log('Comparable members: ' + result.comparableMembers + '/' +
+        (result.comparableMembers + result.unpairedOrUnresolvedMembers));
+      for (const group of ['treatment', 'control']) {
+        const g = result[group];
+        console.log(group + ': ' + g.comparableMembers + '/' + g.frozenMembers +
+          ' paired, indexed ' + g.beforeIndexedComparable + ' -> ' +
+          g.afterIndexedComparable + ' on those paired members' +
+          ' (observed change ' + g.netIndexedChangeOnComparableMembers + ')');
+      }
+      for (const next of result.nextActions) console.log(' - ' + next);
+      if (written) console.log('WROTE derived private review: ' + written);
+      console.log('This is not proof of search traffic, benefit or causal impact.');
+    }
     return 0;
   }
 
