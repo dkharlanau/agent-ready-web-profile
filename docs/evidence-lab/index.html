@@ -59,6 +59,7 @@
             <li><strong>Separate discovery from indexing.</strong> If the owner has a dated URL Inspection snapshot, use <code>arwp-cohort check-index</code> to distinguish pages Google indexed, discovered but did not index, reported unknown, or never inspected in the snapshot. This is not a live test or a cause of ranking changes.</li>
             <li><strong>Compare the same pages.</strong> Use <code>arwp-cohort compare-index</code> for two dated local inspection reviews. Pages checked on only one date are not counted as gains, and control pages remain a separate comparison.</li>
             <li><strong>Review real observations.</strong> Use <code>arwp-cohort check-gsc</code> on a local, joint Google Web Search date/page/query export. Missing rows remain unknown; never upload private exports to this public repository.</li>
+            <li><strong>Use existing search reports.</strong> If the owner already has the site’s read-only Search observer JSON, <code>arwp-cohort review-observer-web</code> reviews its actual page-and-query rows. A rolling 28-day report is not automatically the experiment’s T28 result.</li>
             <li><strong>Decide separately.</strong> Compare treatment, controls, baseline, query relevance and known disruptions before deciding whether to keep or revise the change.</li>
           </ol>
           <p><a href="../CONTROLLED-COHORTS.md">See the exact commands and data requirements →</a></p>
