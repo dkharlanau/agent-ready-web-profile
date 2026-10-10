@@ -41,6 +41,7 @@ function optionRequired(name) {
 function writeLocalJson(value, output) {
   if (!output) return null;
   const target = path.resolve(output);
+  if (fs.existsSync(target)) throw new Error('Refusing to overwrite existing private observation artifact: ' + target);
   fs.mkdirSync(path.dirname(target), { recursive: true });
   fs.writeFileSync(target, JSON.stringify(value, null, 2) + '\n', 'utf8');
   return target;
