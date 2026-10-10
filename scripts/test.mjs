@@ -103,8 +103,8 @@ for (const [file, expected] of [
   assert.match(html, /application\/ld\+json/);
   assert.match(html, expected);
 }
-assert.match(fs.readFileSync('docs/product/index.html','utf8'), /no rating in the schema/i);
-assert.match(fs.readFileSync('docs/services/index.html','utf8'), /not a paid consulting catalog/i);
+assert.match(fs.readFileSync('docs/product/index.html','utf8'), /Why you won.t see made-up ratings/i);
+assert.match(fs.readFileSync('docs/services/index.html','utf8'), /not a paid consulting (service|catalog)/i);
 assert.match(fs.readFileSync('docs/maintainer/index.html','utf8'), /LinkedIn profile/);
 assert.match(fs.readFileSync('docs/maintainer/index.html','utf8'), /metkagram\.github\.io/);
 assert.match(fs.readFileSync('docs/sitemap.xml','utf8'), /events\/2026-09-06-search-ai-playbook-release\.html/);
