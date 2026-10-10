@@ -1,4 +1,6 @@
 # Treatment Cohort Integrity
+> For experiments with frozen **control** source files, also run [`arwp-cohort source-drift`](CONTROLLED-COHORTS.md#before-an-outcome-review-compare-the-frozen-sources). This compares pinned Git blobs by frozen member ID and can review separately declared dated publication events; it does **not** duplicate the route/build graph comparison or prove a live deployment.
+
 
 Status: experimental implementation-scope evidence contract · reviewed 2026-09-09
 
