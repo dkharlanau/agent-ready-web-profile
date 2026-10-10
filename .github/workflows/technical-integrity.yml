@@ -7,6 +7,10 @@ on:
       - 'lib/technical-integrity.mjs'
       - 'lib/internal-link-target-health.mjs'
       - 'bin/arwp-technical-integrity.mjs'
+      - 'bin/arwp-search-doctor.mjs'
+      - 'lib/search-failure-doctor.mjs'
+      - 'scripts/search-failure-doctor-test.mjs'
+      - 'templates/growth/search-failure-owner.example.json'
       - 'bin/arwp.mjs'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
@@ -28,6 +32,10 @@ on:
       - 'lib/technical-integrity.mjs'
       - 'lib/internal-link-target-health.mjs'
       - 'bin/arwp-technical-integrity.mjs'
+      - 'bin/arwp-search-doctor.mjs'
+      - 'lib/search-failure-doctor.mjs'
+      - 'scripts/search-failure-doctor-test.mjs'
+      - 'templates/growth/search-failure-owner.example.json'
       - 'bin/arwp.mjs'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
@@ -75,11 +83,15 @@ jobs:
         run: |
           node scripts/technical-integrity-test.mjs
           node scripts/internal-link-target-health-test.mjs
+          node scripts/search-failure-doctor-test.mjs
       - name: Syntax check
         run: |
           node --check lib/technical-integrity.mjs
           node --check lib/internal-link-target-health.mjs
           node --check bin/arwp-technical-integrity.mjs
+          node --check lib/search-failure-doctor.mjs
+          node --check bin/arwp-search-doctor.mjs
+          node --check scripts/search-failure-doctor-test.mjs
           node --check bin/arwp.mjs
           node --check scripts/technical-integrity-test.mjs
           node --check scripts/internal-link-target-health-test.mjs
@@ -89,6 +101,7 @@ jobs:
         run: |
           node bin/arwp-technical-integrity.mjs --help
           node bin/arwp.mjs technical-integrity --help
+          node bin/arwp.mjs search-doctor --help
       - name: Commit synchronized agent instructions
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
