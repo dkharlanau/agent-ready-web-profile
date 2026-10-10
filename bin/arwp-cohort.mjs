@@ -15,6 +15,7 @@ import {
 } from '../lib/cohort-search-observation.mjs';
 import { reviewCohortIndexInspection } from '../lib/cohort-index-observation.mjs';
 import { compareCohortIndexObservations } from '../lib/cohort-index-comparison.mjs';
+import { reviewCohortObserverWeb } from '../lib/cohort-web-observer.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0] && !args[0].startsWith('--') ? args[0] : 'help';
@@ -62,6 +63,7 @@ function usage() {
     '  arwp-cohort check-gsc <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD --final-through=YYYY-MM-DD --window-days=14 --report-scope=web --export-start=YYYY-MM-DD --export-end=YYYY-MM-DD --page-map=private-map.json --export=private-web.csv [--output=private-review.json] [--json]',
     '  arwp-cohort check-index <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --page-map=private-map.json --inspection=private-inspection.json [--output=private-index-review.json] [--json]',
     '  arwp-cohort compare-index <cohort.json> --before=private-index-review-a.json --after=private-index-review-b.json [--output=private-change-review.json] [--json]',
+    '  arwp-cohort review-observer-web <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --page-map=private-map.json --observer=private-observer.json [--output=private-web-review.json] [--json]',
     '',
     'The frozen cohort remains the only experiment design authority. Planning starts',
     'only with an independently reviewed exact production SHA and explicit deployment',
@@ -80,6 +82,8 @@ function usage() {
     'inspection rows remain unobserved and never become fabricated ranking results.',
     'compare-index compares only identically mapped frozen URLs observed on both dates;',
     'unknown/uninspected states cannot become false traffic or indexing gains.',
+    'review-observer-web reads only the native final Web current28 page+query',
+    'dimension; a rolling report is NOT a frozen T28 or proof of traffic growth.',
     '',
     'Search Console can omit anonymized/low-volume rows. No row means unobserved,',
     'not zero. No outcome or causal decision is made from this helper alone. Keep',
@@ -167,6 +171,35 @@ async function main() {
     const written = writeLocalJson(map, optionValue('output'));
     if (jsonOutput || !written) console.log(JSON.stringify(map, null, 2));
     else console.log('WROTE private page-map template: ' + written + '\nFill in all exact canonical URLs before check-gsc.');
+    return 0;
+  }
+
+  if (command === 'review-observer-web') {
+    const source = readJson(optionRequired('observer'));
+    const pageMap = readJson(optionRequired('page-map'));
+    const review = reviewCohortObserverWeb(cohort, pageMap, source, {
+      productionRef: optionRequired('production-ref'),
+      deploymentDate: optionRequired('deployment-date')
+    });
+    const written = writeLocalJson(review, optionValue('output'));
+    if (jsonOutput) console.log(JSON.stringify({ ...review, written }, null, 2));
+    else {
+      console.log('Goose observed Web Search page/query report: ' + review.cohortId);
+      console.log('Owner-declared final PT window: ' + review.window.startDate + ' .. ' + review.window.endDate);
+      console.log('Frozen observation window match: ' + (review.window.frozenObservationWindowDays || 'none; rolling report only'));
+      console.log('Source: ' + review.sourceFormat + '; status: ' + review.status);
+      console.log('Owner property total (separate population): ' +
+        (review.propertyTopline.observed ? review.propertyTopline.impressions + ' impressions / ' +
+        review.propertyTopline.clicks + ' clicks' : 'not returned'));
+      for (const group of ['treatment', 'control']) {
+        const observed = review.observed[group];
+        console.log(group + ': returned rows for ' + observed.returnedMembers +
+          '/' + observed.frozenMembers + ' frozen members; visible page/query impressions=' +
+          (observed.visiblePageQueryImpressions == null ? 'not returned' : observed.visiblePageQueryImpressions));
+      }
+      if (written) console.log('WROTE private derived review: ' + written);
+      console.log('Never add property totals to page rows, invent zeroes, or claim user outcomes.');
+    }
     return 0;
   }
 

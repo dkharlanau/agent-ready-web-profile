@@ -245,6 +245,28 @@ The parser checks required dimensions, date range, duplicate rows, exact page ma
 
 Even a final full-window CSV is subject to Search Console row limits and anonymized-query omissions. Report scope and finality are owner declarations because CSV bytes alone cannot authenticate the provider. This helper intentionally does **not** support relabeling ordinary Web Search as a Google generative-AI report, derive a cross-provider conversion score, or declare that an edit caused more traffic. <https://developers.google.com/webmaster-tools/v1/searchanalytics/query> documents the row limits and page/query dimensions; <https://support.google.com/webmasters/answer/17011364> explains page vs property aggregation and preliminary data.
 
+### 3b. Read the same owner's Web Search evidence without making a fake CSV
+
+The existing Ptichi observer also fetches an authenticated **final Web Search** report with a single joint \`page + query\` dimension. It is a 28-day rolling report, not a date/page/query series. Goose can read that private JSON directly, so an owner no longer has to try joining separate Pages and Queries tables or re-exporting metrics just to inspect what the current collection already contains.
+
+\`\`\`bash
+node bin/arwp-cohort.mjs review-observer-web \
+  knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json \
+  --production-ref=13b49e9a5faa9256b5bbded049caf33327abc240 \
+  --deployment-date=2026-09-13 \
+  --page-map=/private/ptichi-page-map.json \
+  --observer=/private/observations/ptichi-owner-readonly.json \
+  --output=/private/observations/ptichi-rolling-web-review.json
+\`\`\`
+
+This command checks exact property, Pacific reporting timezone, Web Search, \`final\` data state, full 28-day interval, cutoff, the existing production gate and provider response shape. It then shows which **frozen pages actually have rows returned**, and how many page/query impressions and clicks appear for treatment and controls. Frozen query-panel IDs are reported separately. Pages not returned stay **unknown**, not zero.
+
+The owner report's property-level total appears as a **separate number**. It is not added to page/query rows or treated as the same population. Google's page/query export may omit anonymized queries and only return top rows; Goose preserves the collector's \`row_limit_reached\` flag and marks those reports as truncated rather than complete. Never divide this opt-in/partial or page-grain subset into property totals and call it an observed user conversion rate.
+
+**Important timing:** the normal collector's \`current28\` ends on the owner's latest final-data cutoff. A rolling \`current28\` covering 9 September–6 October, for example, is not the frozen T28 of 14 September–11 October. Goose only labels a report as matching a frozen observation window if *both exact boundary dates coincide*. Even then, it is a descriptive Search report: treatment-vs-control comparisons and a later canonical experiment decision require baselines, contamination review, complete observation windows and an assessment of usefulness.
+
+The collector's JSON is read locally: no Google API call, new account permission, new tracker, automatic export publication, conversion assumption or treatment expansion occurs here. Preserve owner evidence privately, and use the existing \`check-gsc\` command only when a **genuine date/page/query** full-window export is needed.
+
 ### 4. Make the *review* a separate decision
 
 Only after comparing a real baseline, treatment and control observations, full windows, independent production evidence, contamination, query-to-page fit and useful-task outcomes should the existing Growth Experiment / Recommendation Review mechanism record `keep`, `revise`, `continue-measuring`, `revert` or `retire`. An observed increase is not automatically causal. Preserve neutral, negative and withheld evidence; do not commit private Google exports or site-owner data into this public repository.
