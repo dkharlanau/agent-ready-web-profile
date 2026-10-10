@@ -15,7 +15,7 @@ const v3Guide = fs.readFileSync(path.join(docs, 'SITE-FOCUS-V0.3.md'), 'utf8');
 const skillIndex = JSON.parse(fs.readFileSync(path.join(root, 'skills', 'index.json'), 'utf8'));
 const publicSkillIndex = JSON.parse(fs.readFileSync(path.join(docs, 'skills', 'index.json'), 'utf8'));
 
-assert.match(home, /Own a problem\.\s*<br>Draw the boundary\./i);
+assert.match(home, /Choose what matters\.\s*<br>Leave the rest out\./i);
 assert.match(home, /GOOSE \/ WE DO/i);
 assert.match(home, /GOOSE \/ WE DO NOT/i);
 assert.match(home, /01 \/ BE FOUND/i);
