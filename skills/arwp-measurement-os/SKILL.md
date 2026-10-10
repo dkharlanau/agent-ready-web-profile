@@ -93,6 +93,8 @@ Interpret stages separately:
 
 7. **Use only provider-local derived metrics.** Review `registry/measurement-patterns.json`. Ratios are acceptable when numerator and denominator share provider, scope and period, or an explicit join key. Never compute Bing-citations/Google-impressions or referrals/crawler-requests and call it conversion. Never manufacture one weighted AI visibility score.
 
+For first-party Bing AI Performance owner evidence, use the [Bing owner-context workflow](../../docs/BING-AI-OWNER-CONTEXT.md) when a real authorized preview export exists. Normalize it privately with opaque IDs and actual query/page filters, then run `node bin/arwp-bing.mjs inspect --input=/private/source.json`. Use `compare` only for equal-length, nonoverlapping final owner windows with stable query IDs. Preserve Intents/Topics classification uncertainty and **query-scoped** Citation Share; reverse page/query filters can be sampled differently, so do not sum or average them. This neither replaces the existing Bing aggregate visibility snapshot nor proves any user visit or intervention gain.
+
 8. **Review repeated fixed cohorts.** For ranked/AI surfaces, use the Winner Observatory when appropriate:
 
 ```bash

@@ -10,6 +10,7 @@
     "arwp-focus": "bin/arwp-focus.mjs",
     "arwp-ai-search": "bin/arwp-ai-search.mjs",
     "arwp-visibility": "bin/arwp-visibility.mjs",
+    "arwp-bing": "bin/arwp-bing.mjs",
     "arwp-cohort": "bin/arwp-cohort.mjs",
     "arwp-agent-eval": "bin/arwp-agent-eval.mjs",
     "arwp-indexnow": "bin/arwp-indexnow.mjs",
@@ -193,6 +194,7 @@
     "test:cohort-observation": "node scripts/controlled-cohort-test.mjs && node scripts/cohort-search-observation-test.mjs && node scripts/cohort-index-observation-test.mjs && node scripts/cohort-index-comparison-test.mjs && node scripts/cohort-web-observer-test.mjs && node --check lib/cohort-web-observer.mjs && node --check lib/cohort-index-comparison.mjs && node --check lib/cohort-search-observation.mjs && node --check lib/cohort-index-observation.mjs && node --check bin/arwp-cohort.mjs",
     "test:human-growth": "node scripts/growth-readable-test.mjs && node --check lib/growth-readable.mjs",
     "test:editorial-parity": "node scripts/editorial-parity-test.mjs && node --check lib/editorial-parity.mjs && node --check bin/arwp-editorial.mjs",
+    "test:bing-context": "node scripts/bing-context-evidence-test.mjs && node --check lib/bing-context-evidence.mjs && node --check bin/arwp-bing.mjs",
     "test:voice": "node scripts/editorial-voice-test.mjs"
   },
   "dependencies": {

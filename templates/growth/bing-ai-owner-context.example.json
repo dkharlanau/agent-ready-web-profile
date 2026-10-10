@@ -1,0 +1,59 @@
+{
+  "version": "0.1",
+  "provider": "bing-webmaster-ai-performance",
+  "sourceClass": "owner-normalized",
+  "sourceVerifiedByGoose": false,
+  "site": "https://example.com/",
+  "capturedAt": "2026-10-10T10:00:00Z",
+  "period": {
+    "start": "2026-09-01",
+    "end": "2026-09-30",
+    "dataState": "partial"
+  },
+  "guardrails": {
+    "sampledNotComplete": true,
+    "notRankingOrTraffic": true
+  },
+  "queries": [
+    {
+      "id": "q01"
+    },
+    {
+      "id": "q02"
+    }
+  ],
+  "topics": [
+    {
+      "id": "topic01"
+    }
+  ],
+  "pages": [
+    {
+      "id": "page01",
+      "canonicalUrl": "https://example.com/help"
+    },
+    {
+      "id": "page02",
+      "canonicalUrl": "https://example.com/guide"
+    }
+  ],
+  "queryContext": [
+    {
+      "queryId": "q01",
+      "intent": "Learn and Solve",
+      "topicId": "topic01",
+      "citationSharePercent": null,
+      "citations": null
+    }
+  ],
+  "pageQueryObservations": [
+    {
+      "direction": "query-to-page",
+      "filterQueryId": "q01",
+      "queryId": "q01",
+      "pageId": "page01",
+      "citations": 2
+    }
+  ],
+  "timeline": []
+}

@@ -6,6 +6,11 @@ on:
     paths:
       - 'lib/visibility-evidence.mjs'
       - 'lib/visibility-import.mjs'
+      - 'lib/bing-context-evidence.mjs'
+      - 'bin/arwp-bing.mjs'
+      - 'scripts/bing-context-evidence-test.mjs'
+      - 'docs/BING-AI-OWNER-CONTEXT.md'
+      - 'templates/growth/bing-ai-owner-context.example.json'
       - 'bin/arwp-visibility.mjs'
       - 'schema/visibility-snapshot.schema.json'
       - 'scripts/visibility-evidence-test.mjs'
@@ -32,6 +37,11 @@ on:
     paths:
       - 'lib/visibility-evidence.mjs'
       - 'lib/visibility-import.mjs'
+      - 'lib/bing-context-evidence.mjs'
+      - 'bin/arwp-bing.mjs'
+      - 'scripts/bing-context-evidence-test.mjs'
+      - 'docs/BING-AI-OWNER-CONTEXT.md'
+      - 'templates/growth/bing-ai-owner-context.example.json'
       - 'bin/arwp-visibility.mjs'
       - 'schema/visibility-snapshot.schema.json'
       - 'scripts/visibility-evidence-test.mjs'
@@ -74,6 +84,10 @@ jobs:
         run: |
           node scripts/visibility-evidence-test.mjs
           node scripts/visibility-import-test.mjs
+          node scripts/bing-context-evidence-test.mjs
+          node --check lib/bing-context-evidence.mjs
+          node --check bin/arwp-bing.mjs
+          node --check scripts/bing-context-evidence-test.mjs
           node --check lib/visibility-evidence.mjs
           node --check lib/visibility-import.mjs
           node --check bin/arwp-visibility.mjs

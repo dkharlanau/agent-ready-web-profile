@@ -25,6 +25,10 @@ The [Deep Run research](research/product/2026-10-10-search-geo-deep-run.md) eval
 
 The normal `arwp-growth` text output now leads with a practical action, its verification and a reason not to apply it. For AI-assisted editorial revisions, use the offline [built-page fact check](docs/EDITORIAL-FACT-PARITY.md) rather than an unreliable "AI text detection" score. For an actual original research item, start with the [original evidence review worksheet](templates/growth/original-evidence-review.md), and link the *existing* canonical experiment, release and outcome evidence rather than inventing a success story.
 
+### Bing AI observations without a synthetic visibility score
+
+The local [Bing AI owner-evidence review](docs/BING-AI-OWNER-CONTEXT.md) can now handle genuine authorized preview data for grouped grounding queries, cited pages, Intents, Topics and query-specific Citation Share. It keeps the two directions of filtered page/query mapping separate because provider sampling may differ, and it compares only genuinely matching owner periods. It neither logs into Bing nor publishes private query text. Use `arwp-bing inspect` and `arwp-bing compare` after owner-supplied evidence is available.
+
 Repository work from ChatGPT/GitHub: start with [AGENTS.md](AGENTS.md), then use [REPO_MAP.md](REPO_MAP.md) to route the task to canonical sources and checks.
 
 Goose ARWP is the product-facing layer built on **Agent-Ready Web Profile (ARWP)**: a source-available system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.
