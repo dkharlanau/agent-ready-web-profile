@@ -1,0 +1,26 @@
+{
+  "version": "0.1",
+  "site": "https://example.com/",
+  "dataStatus": "synthetic",
+  "deployment": {
+    "expectedRef": null,
+    "liveRef": null,
+    "deployedOn": null
+  },
+  "indexing": {
+    "inspectedApprovedUrls": 3,
+    "indexedApprovedUrls": 1
+  },
+  "search": {
+    "provider": "google-search-console",
+    "property": "sc-domain:example.com",
+    "scope": "property",
+    "searchType": "web",
+    "dataState": "final",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-28",
+    "impressions": 100,
+    "clicks": 0
+  },
+  "note": "Synthetic documentation only. Replace with real owner-supplied evidence and set dataStatus to owner-supplied. Do not commit private reports."
+}
