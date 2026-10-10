@@ -129,6 +129,13 @@ assert.throws(() => reviewCohortGscWebExport(synthetic, pageMap, csv, { ...optio
 assert.throws(() => reviewCohortGscWebExport(synthetic, pageMap, csv + '2026-09-28,https://example.com/fixture/t01/,x,1,1\n', options), /outside the explicitly requested/);
 assert.throws(() => reviewCohortGscWebExport(synthetic, pageMap, csv + '2026-09-16,https://example.com/fixture/t01/,how to explain something clearly at work,2,9\n', options), /Duplicate date/);
 assert.throws(() => reviewCohortGscWebExport(synthetic, pageMap, csv, { ...options, productionRef: '0'.repeat(40) }), /production HOLD/);
+const tooLarge = [
+  'Date,Page,Query,Clicks,Impressions',
+  '2026-09-16,https://example.com/fixture/t01/,how to explain something clearly at work,9007199254740991,1',
+  '2026-09-17,https://example.com/fixture/t01/,another query,1,1'
+].join('\n');
+assert.throws(() => reviewCohortGscWebExport(synthetic, pageMap, tooLarge, options), /safe integer precision/);
+
 
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'goose-observation-'));
 try {
@@ -158,6 +165,8 @@ try {
   assert.equal(result.status, 0, result.stderr);
   assert.equal(JSON.parse(result.stdout).observed.treatment.observedImpressions, 13);
   assert.equal(JSON.parse(fs.readFileSync(outPath, 'utf8')).noOutcomeDecision, true);
+  result = run('page-map', cohortFixture, '--output=' + outPath);
+  assert.equal(result.status, 1, 'existing evidence outputs must never be silently overwritten');
   result = run('check-gsc', cohortFixture, '--production-ref=' + ref);
   assert.equal(result.status, 1, 'missing required owner provenance must fail closed');
 } finally {
