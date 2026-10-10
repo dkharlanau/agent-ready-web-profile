@@ -39,7 +39,7 @@
     "gMerchant": "https://developers.google.com/search/docs/appearance/structured-data/merchant-listing",
     "gSpam": "https://developers.google.com/search/docs/essentials/spam-policies",
     "gIndexing": "https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect",
-    "bAi": "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+    "bAi": "https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/",
     "bPreview": "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
     "oBots": "https://developers.openai.com/api/docs/bots",
     "oCommerce": "https://developers.openai.com/commerce/guides/get-started",
@@ -151,7 +151,7 @@
       "measure": "New relevant citations/grounding-query families in a later comparable period, separated from traffic and brand mentions.",
       "skip": "Do not claim any specific prompt, model answer, ranking or causality from aggregated grounding labels.",
       "primarySources": [
-        "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview",
+        "https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/",
         "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/"
       ],
       "existingCoverage": [
@@ -193,7 +193,7 @@
       "skip": "Skip when no Bing owner observations exist; preview labels are not reliable for every niche.",
       "primarySources": [
         "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
-        "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview"
+        "https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/"
       ],
       "existingCoverage": [
         "registry/search-agent-recommendations.json"
@@ -232,7 +232,7 @@
       "skip": "Don't rank unrelated queries, providers or businesses by a blended citation percentage.",
       "primarySources": [
         "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
-        "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview"
+        "https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/"
       ],
       "existingCoverage": [
         "docs/MEASUREMENT-OS.md"
@@ -252,7 +252,7 @@
       "skip": "Don't use a prior period with different eligibility or a changed query set as a causal control.",
       "primarySources": [
         "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
-        "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview"
+        "https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/"
       ],
       "existingCoverage": [
         "docs/MEASUREMENT-OS.md"
