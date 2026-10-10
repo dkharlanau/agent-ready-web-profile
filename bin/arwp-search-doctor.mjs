@@ -71,7 +71,7 @@ async function main() {
     concurrency: 2,
     timeoutMs: 8000
   });
-  const result = diagnoseSearchFailure({site, technical, owner});
+  const result = diagnoseSearchFailure({site, technical, owner, technicalOrigin: scan ? 'live' : 'provided'});
   process.stdout.write(args.includes('--json')
     ? JSON.stringify(result, null, 2) + '\n'
     : formatSearchFailureDiagnosis(result) + '\n');
