@@ -78,7 +78,7 @@ assert.throws(()=>reviewBingContext(edit(x=>{x.pageQueryObservations[0].citation
 assert.throws(()=>reviewBingContext(edit(x=>{x.pages[0].canonicalUrl='https://other.example.com/';})),/owner site/);
 assert.throws(()=>reviewBingContext(edit(x=>{x.queries[0].phrase='private query text';})),/opaque query/);
 assert.throws(()=>reviewBingContext(edit(x=>{x.topics[0].label='private full topic';})),/opaque query/);
-assert.throws(()=>reviewBingContext(edit(x=>{x.timeline[0].date='2026-08-30';})),/within selected/);
+assert.throws(()=>reviewBingContext(edit(x=>{x.timeline[0].date='2026-08-30';})),/within the selected/);
 assert.throws(()=>reviewBingContext(edit(x=>{x.period.dataState='raw';})),/non-ranking guardrails/);
 assert.throws(()=>compareBingContext(review,{...later,site:'https://other.com/'}),/same site/);
 assert.throws(()=>compareBingContext(later,review),/nonoverlapping/);
