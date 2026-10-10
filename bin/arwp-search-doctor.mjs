@@ -41,7 +41,8 @@ function positiveBoundedInt(value, label, max) {
 function loadJson(filename, maxBytes) {
   const stat = fs.statSync(filename);
   if (!stat.isFile() || stat.size > maxBytes) throw new Error('Input must be a regular JSON file up to ' + maxBytes + ' bytes.');
-  return JSON.parse(fs.readFileSync(filename, 'utf8'));
+  try { return JSON.parse(fs.readFileSync(filename, 'utf8')); }
+  catch { throw new Error('Could not read a valid JSON input file (details omitted to protect private owner data).'); }
 }
 async function main() {
   if (args.includes('--help') || args.includes('-h')) {
