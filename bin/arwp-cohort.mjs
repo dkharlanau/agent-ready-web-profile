@@ -16,6 +16,7 @@ import {
 import { reviewCohortIndexInspection } from '../lib/cohort-index-observation.mjs';
 import { compareCohortIndexObservations } from '../lib/cohort-index-comparison.mjs';
 import { reviewCohortObserverWeb } from '../lib/cohort-web-observer.mjs';
+import { inspectCohortSourceDrift } from '../lib/cohort-source-drift.mjs';
 
 const args = process.argv.slice(2);
 const command = args[0] && !args[0].startsWith('--') ? args[0] : 'help';
@@ -33,6 +34,20 @@ function optionValue(name) {
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(path.resolve(file), 'utf8'));
+}
+
+function readPrivateEvents(file) {
+  const full = path.resolve(file);
+  let raw;
+  try {
+    if (!fs.statSync(full).isFile() || fs.statSync(full).size > 1024 * 1024) {
+      throw new Error('invalid size or file');
+    }
+    raw = JSON.parse(fs.readFileSync(full, 'utf8'));
+  } catch {
+    throw new Error('Private publication events must be a readable JSON file of at most 1 MiB; details are suppressed.');
+  }
+  return raw;
 }
 
 function optionRequired(name) {
@@ -56,6 +71,7 @@ function usage() {
     '',
     'Usage:',
     '  arwp-cohort validate <cohort.json> [--json]',
+    '  arwp-cohort source-drift <frozen-cohort.json> --repo=/local/repo --after-ref=<40-char-sha> [--deployment-date=YYYY-MM-DD] [--events=private-events.json] [--json]',
     '  arwp-cohort summarize <cohort.json> [--json]',
     '  arwp-cohort gate <cohort.json> --production-ref=<40-char-sha> [--json]',
     '  arwp-cohort plan <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD [--final-through=YYYY-MM-DD] [--json]',
@@ -84,6 +100,10 @@ function usage() {
     'unknown/uninspected states cannot become false traffic or indexing gains.',
     'review-observer-web reads only the native final Web current28 page+query',
     'dimension; a rolling report is NOT a frozen T28 or proof of traffic growth.',
+    '',
+    'source-drift compares immutable Git source blobs, not live deployment; optional',
+    'dated owner publication events mark potentially affected observation windows.',
+    'Unrecorded publication history never counts as proof of clean controls.',
     '',
     'Search Console can omit anonymized/low-volume rows. No row means unobserved,',
     'not zero. No outcome or causal decision is made from this helper alone. Keep',
@@ -123,6 +143,41 @@ async function main() {
   }
   if (!subject) throw new Error(command + ' requires a controlled cohort JSON file.');
   const cohort = readJson(subject);
+
+  if (command === 'source-drift') {
+    const checked = validateControlledCohort(cohort);
+    if (!checked.valid) throw new Error('Invalid frozen Controlled Cohort; review the canonical design before source comparison.');
+    if (optionValue('events') && !optionValue('deployment-date')) {
+      throw new Error('source-drift --events requires --deployment-date.');
+    }
+    const result = inspectCohortSourceDrift(cohort, {
+      repoFolder: optionRequired('repo'),
+      afterRef: optionRequired('after-ref'),
+      deploymentDate: optionValue('deployment-date'),
+      publicationEvents: optionValue('events') ? readPrivateEvents(optionValue('events')) : null
+    });
+    if (jsonOutput) {
+      console.log(JSON.stringify(result, null, 2));
+    } else {
+      console.log('Goose frozen-source drift review: ' + result.cohortId);
+      console.log('Committed refs: ' + result.baselineCommit + ' -> ' + result.comparedCommit);
+      console.log('Control source changes: ' + result.summary.changedControls + '/' + result.summary.controlCount
+        + '; unresolved: ' + result.summary.unknownControls);
+      console.log('Treatment source changes: ' + result.summary.changedTreatments + '/' + result.summary.treatmentCount
+        + '; unresolved: ' + result.summary.unknownTreatments);
+      for (const member of result.members.filter(m => m.group === 'control' && m.state !== 'source-unchanged')) {
+        console.log('  ' + member.id + ': ' + member.state + ' (' + member.source + ')');
+      }
+      for (const window of result.windows) {
+        console.log('T' + window.days + '  ' + window.startDate + ' .. ' + window.endDate
+          + ': ' + window.interpretation + ' (' + window.ownerLedgerState
+          + '; declared control events=' + window.ownerReportedControlEvents.length + ')');
+      }
+      console.log('Next: ' + result.nextAction);
+      console.log('Committed-source differences and owner publication events are NOT independently verified live deployment or a Search outcome.');
+    }
+    return result.reviewRequired ? 2 : 0;
+  }
 
   if (command === 'validate') {
     const result = validateControlledCohort(cohort);

@@ -8,6 +8,11 @@ on:
       - 'bin/arwp.mjs'
       - 'schema/treatment-cohort-integrity.schema.json'
       - 'scripts/treatment-cohort-integrity-test.mjs'
+      - 'lib/cohort-source-drift.mjs'
+      - 'bin/arwp-cohort.mjs'
+      - 'scripts/cohort-source-drift-test.mjs'
+      - 'docs/CONTROLLED-COHORTS.md'
+      - 'templates/growth/cohort-publication-events.example.json'
       - 'docs/TREATMENT-COHORT-INTEGRITY.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'REPO_MAP.md'
@@ -19,6 +24,11 @@ on:
       - 'bin/arwp.mjs'
       - 'schema/treatment-cohort-integrity.schema.json'
       - 'scripts/treatment-cohort-integrity-test.mjs'
+      - 'lib/cohort-source-drift.mjs'
+      - 'bin/arwp-cohort.mjs'
+      - 'scripts/cohort-source-drift-test.mjs'
+      - 'docs/CONTROLLED-COHORTS.md'
+      - 'templates/growth/cohort-publication-events.example.json'
       - 'docs/TREATMENT-COHORT-INTEGRITY.md'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'REPO_MAP.md'
@@ -44,9 +54,15 @@ jobs:
           node --check bin/arwp-treatment-cohort.mjs
           node --check bin/arwp.mjs
           node --check scripts/treatment-cohort-integrity-test.mjs
+          node --check lib/cohort-source-drift.mjs
+          node --check bin/arwp-cohort.mjs
+          node --check scripts/cohort-source-drift-test.mjs
       - name: Run Treatment Cohort Integrity regression
         run: node scripts/treatment-cohort-integrity-test.mjs
+      - name: Check frozen source drift and owner event provenance
+        run: node scripts/cohort-source-drift-test.mjs
       - name: CLI help smoke
         run: |
           node bin/arwp-treatment-cohort.mjs --help
           node bin/arwp.mjs treatment-cohort --help
+          node bin/arwp-cohort.mjs --help

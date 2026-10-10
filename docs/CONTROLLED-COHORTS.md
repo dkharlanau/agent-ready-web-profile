@@ -111,6 +111,42 @@ R2 therefore:
 
 `ready-to-observe` proves only that the production gate is satisfied for the refrozen implementation. It does not prove indexing, ranking, citation, traffic, conversion or treatment causality. Post-deployment owner evidence must still mature and be reviewed against treatment, controls, confounders and missing evidence.
 
+## Before an outcome review: compare the frozen sources
+
+The October 2026 Ptichi experiment exposed a real failure mode: later editorial work can alter or redirect pages assigned to the **control group**. The existing route-level Treatment Cohort Integrity compares mapped source-to-route inputs; this additional **source-drift** check uses the actual frozen member IDs and committed Git blobs. It does not replace the route/build comparison, canonical page map or owner Search observations.
+
+Run this from the **Goose checkout**, supplying the local **site repository** and its exact descendant commit. A working-tree diff, branch label, GitHub PR or merge is not independent evidence that the content was published.
+
+\`\`\`bash
+# Obtain an immutable committed ref from your local target checkout:
+git -C /path/to/site rev-parse HEAD
+
+node bin/arwp-cohort.mjs source-drift \
+  knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json \
+  --repo=/path/to/site \
+  --after-ref=<exact-40-character-commit> \
+  --json
+\`\`\`
+
+The checker reads only the two commit trees: the baseline pinned in \`sourceEvidence.repositoryRef\`, and the supplied \`--after-ref\`. Both commits must exist locally, the later one must descend from the baseline, and any identifiable GitHub origin must match the cohort repository. It lists each frozen treatment/control source as \`source-changed\`, \`source-unchanged\` or \`unknown-source-ownership\` (for missing/nonregular files). It ignores uncommitted work and unrelated files. Source equality does **not** prove unchanged shared layouts, generated output, redirects or a deployed page.
+
+To review *dated* publication evidence separately, use a private, owner-reviewed event ledger. See the [synthetic template](../templates/growth/cohort-publication-events.example.json), deliberately rejected with \`sourceClass: "synthetic"\` until actual evidence replaces it.
+
+\`\`\`bash
+node bin/arwp-cohort.mjs source-drift \
+  knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json \
+  --repo=/path/to/site --after-ref=<exact-40-character-commit> \
+  --deployment-date=2026-09-13 \
+  --events=/private/observed-publications.json \
+  --json
+\`\`\`
+
+The private JSON contract is \`{ "version":"0.1", "sourceClass":"owner-declared", "cohortId":"<frozen-id>", "completeThrough":"YYYY-MM-DD or null", "events":[...] }\`. Each event has a frozen \`memberId\`, \`publishedOn\` calendar day, exact \`productionRef\`, \`kind\` (\`editorial\`, \`redirect\`, \`metadata\`, \`technical\`, \`other\`) and a credential-free HTTPS \`evidenceUrl\` linking to a relevant reviewed publication receipt. This is an **owner claim**, even if internally reviewed; the command does not query hosting or independently verify a deployed page. Use the exact actual publication day, not the PR-merge day unless the deployment receipt independently confirms the same date.
+
+For a 13 September 2026 deployment, the original T14 (14–27 September) can be kept **separate from** control interventions recorded on 4 October; the full T28 (14 September–11 October) and T56 (14 September–8 November) include those event dates. A \`review-control-change\` label requires an event supplied for a frozen control in that window. \`no-control-event-in-supplied-ledger\` **never** proves the control was untouched: the ledger may be incomplete, shared inputs may drift, or production could differ from Git. A change can be a necessary correctness repair; record it instead of reverting valuable or safety-critical work solely for an experiment.
+
+Exit codes: \`0\` means no **source-file drift alert** was observed at the selected refs; \`2\` means changed or unresolved controls, or a dated control-publication event needs review; \`1\` means invalid/inaccessible inputs. No code, Git branch, target site, frozen assignment or Search outcome is modified. Raw/local evidence paths, URLs and derived reports may be commercially sensitive: keep them outside public repositories. The command preserves every neutral/negative result and does not declare a treatment effect.
+
 ## Put an observation window to work — without changing the experiment
 
 The next operational job is not another SEO checklist. It is to obtain comparable, **actual owner evidence** for the already-frozen treatment and control pages. Goose now supports two read-only helpers in the existing `arwp-cohort` CLI:
