@@ -32,7 +32,7 @@ try {
     'skills/arwp-discoverability/SKILL.md', 'docs/examples/editorial/article.receipt.json',
     'bin/arwp.mjs', 'bin/arwp-ai-search.mjs', 'bin/arwp-visibility.mjs', 'bin/arwp-agent-eval.mjs', 'bin/arwp-indexnow.mjs', 'bin/arwp-deploy-discovery.mjs',
     'bin/arwp-growth.mjs', 'bin/arwp-growth-remediation.mjs', 'bin/arwp-trends.mjs', 'bin/arwp-portfolio.mjs', 'bin/arwp-cohort.mjs',
-    'lib/cohort-search-observation.mjs', 'lib/cohort-index-observation.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs', 'lib/deploy-discovery-loop.mjs',
+    'lib/cohort-search-observation.mjs', 'lib/cohort-index-observation.mjs', 'lib/cohort-index-comparison.mjs', 'lib/scanner.mjs', 'lib/health.mjs', 'lib/validator.mjs', 'lib/verifier.mjs', 'lib/site-audit.mjs', 'lib/visibility-evidence.mjs', 'lib/agent-eval.mjs', 'lib/indexnow.mjs', 'lib/deploy-discovery-loop.mjs',
     'lib/public-fetch.mjs', 'lib/http-discovery.mjs', 'lib/mcp-runtime.mjs', 'lib/a2a-signature.mjs', 'lib/ai-search-profile.mjs',
     'lib/growth-remediation.mjs', 'lib/resolver-adapters.mjs', 'lib/resolver.mjs', 'lib/resolver-snapshot.mjs', 'lib/resolver-batch.mjs', 'lib/resolver-monitor.mjs', 'resolver/server.mjs',
     'schema/site-profile.schema.json', 'schema/ai-search-profile.schema.json', 'schema/claim.schema.json', 'schema/visibility-snapshot.schema.json', 'schema/agent-eval-receipt.schema.json',

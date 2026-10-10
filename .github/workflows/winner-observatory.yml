@@ -12,6 +12,7 @@ on:
       - 'lib/controlled-cohort.mjs'
       - 'lib/cohort-search-observation.mjs'
       - 'lib/cohort-index-observation.mjs'
+      - 'lib/cohort-index-comparison.mjs'
       - 'bin/arwp-winners.mjs'
       - 'bin/arwp-recommendation-review.mjs'
       - 'bin/arwp-cohort.mjs'
@@ -20,6 +21,7 @@ on:
       - 'scripts/controlled-cohort-test.mjs'
       - 'scripts/cohort-search-observation-test.mjs'
       - 'scripts/cohort-index-observation-test.mjs'
+      - 'scripts/cohort-index-comparison-test.mjs'
       - 'scripts/evidence-lab-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
@@ -40,6 +42,7 @@ on:
       - 'lib/controlled-cohort.mjs'
       - 'lib/cohort-search-observation.mjs'
       - 'lib/cohort-index-observation.mjs'
+      - 'lib/cohort-index-comparison.mjs'
       - 'bin/arwp-winners.mjs'
       - 'bin/arwp-recommendation-review.mjs'
       - 'bin/arwp-cohort.mjs'
@@ -48,6 +51,7 @@ on:
       - 'scripts/controlled-cohort-test.mjs'
       - 'scripts/cohort-search-observation-test.mjs'
       - 'scripts/cohort-index-observation-test.mjs'
+      - 'scripts/cohort-index-comparison-test.mjs'
       - 'scripts/evidence-lab-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
@@ -95,6 +99,9 @@ jobs:
           node scripts/controlled-cohort-test.mjs
           node scripts/cohort-search-observation-test.mjs
           node scripts/cohort-index-observation-test.mjs
+          node scripts/cohort-index-comparison-test.mjs
+          node --check lib/cohort-index-comparison.mjs
+          node --check scripts/cohort-index-comparison-test.mjs
           node --check lib/controlled-cohort.mjs
           node --check lib/cohort-index-observation.mjs
           node --check scripts/cohort-index-observation-test.mjs
