@@ -8,6 +8,8 @@ Status: **source review 2026-09-11**.
 
 This page translates OpenAI's current publisher/developer FAQ into implementation decisions that can be reviewed without collapsing Search discovery, model-training preferences, result suppression and browser-agent compatibility into one generic “AI crawler” switch.
 
+**Source-integrity note, reviewed 10 October 2026:** the historical help link below now resolves to an Atlas retirement page rather than the crawler/publisher FAQ it formerly identified. For **current crawler-role definitions only**, use [OpenAI's crawler documentation](https://developers.openai.com/api/docs/bots): it distinguishes OAI-SearchBot, GPTBot, ChatGPT-User and OAI-AdsBot. Historical advice below about Atlas-specific ARIA interpretation, Apps SDK sidebar layouts, ChatGPT Search UTM tagging and suppression requires separate current topic-matching source review; **do not treat the crawler page as proof of those claims**. This is a documented source-move review requirement, not a finding that every original statement was false or that every URL must change.
+
 Primary source: https://help.openai.com/en/articles/12627856-publishers-and-developers-faq
 
 ## Decision matrix
