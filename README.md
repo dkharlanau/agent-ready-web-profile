@@ -10,6 +10,13 @@ Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-pr
 [![BraidGraph validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/braid-graph.yml)
 [![Reference verification](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/reference-verification.yml)
 
+
+### Current priority: complete a real improvement loop
+
+Goose already has more recommendations than it has verified outcome cases. The current priority is to finish the first evidence-based review: choose a change, verify the exact published revision, compare real search observations for frozen treatment and control pages, and record a justified decision. A technical check does not prove more visitors.
+
+For the existing Ptichi experiment, use the [controlled-cohort observation workflow](docs/CONTROLLED-COHORTS.md) rather than starting another cohort. The `arwp-cohort plan` command shows when frozen windows have elapsed; `arwp-cohort check-gsc` reviews a **local**, jointly scoped Google Web Search export with exact page mapping. Missing results stay unknown, and no private exports are committed to this repository. The [Evidence Lab](https://dkharlanau.github.io/agent-ready-web-profile/evidence-lab/) shows what is and is not yet proven.
+
 Repository work from ChatGPT/GitHub: start with [AGENTS.md](AGENTS.md), then use [REPO_MAP.md](REPO_MAP.md) to route the task to canonical sources and checks.
 
 Goose ARWP is the product-facing layer built on **Agent-Ready Web Profile (ARWP)**: a source-available system for turning changing Search, AI, crawler, agent-web and target-site signals into **site-specific, verifiable changes**.

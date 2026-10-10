@@ -10,6 +10,7 @@
     "arwp-focus": "bin/arwp-focus.mjs",
     "arwp-ai-search": "bin/arwp-ai-search.mjs",
     "arwp-visibility": "bin/arwp-visibility.mjs",
+    "arwp-cohort": "bin/arwp-cohort.mjs",
     "arwp-agent-eval": "bin/arwp-agent-eval.mjs",
     "arwp-indexnow": "bin/arwp-indexnow.mjs",
     "arwp-deploy-discovery": "bin/arwp-deploy-discovery.mjs",
@@ -188,6 +189,7 @@
     "test:discoverability": "node scripts/discoverability-test.mjs --site",
     "test:portfolio-workspace": "node scripts/portfolio-workspace-test.mjs",
     "test:evidence-relay": "node scripts/evidence-relay-test.mjs",
+    "test:cohort-observation": "node scripts/controlled-cohort-test.mjs && node scripts/cohort-search-observation-test.mjs && node --check lib/cohort-search-observation.mjs && node --check bin/arwp-cohort.mjs",
     "test:voice": "node scripts/editorial-voice-test.mjs"
   },
   "dependencies": {

@@ -52,6 +52,13 @@ assert.match(html, /READY TO OBSERVE/);
 assert.doesNotMatch(html, /MEASUREMENT HOLD/);
 assert.match(html, new RegExp(cohort.measurementGate.implementationRef.slice(0, 8)));
 assert.match(html, /Measured wins<\/dt><dd>0<\/dd>/);
+assert.match(html, /What we need next: real search evidence/);
+assert.match(html, /arwp-cohort check-gsc/);
+assert.match(html, /Missing rows remain unknown/);
+assert.match(html, /Not yet measured:/);
+assert.match(html, /CONTROLLED-COHORTS\.md/);
+assert.match(css, /\.lab-observation-next/);
+
 assert.match(html, /evidence-lab\.css/);
 assert.match(css, /\.lab-status-hold/);
 assert.match(css, /@media\(max-width:700px\)/);

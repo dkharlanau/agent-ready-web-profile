@@ -10,16 +10,19 @@ on:
       - 'lib/winner-observatory.mjs'
       - 'lib/recommendation-review.mjs'
       - 'lib/controlled-cohort.mjs'
+      - 'lib/cohort-search-observation.mjs'
       - 'bin/arwp-winners.mjs'
       - 'bin/arwp-recommendation-review.mjs'
       - 'bin/arwp-cohort.mjs'
       - 'scripts/winner-observatory-test.mjs'
       - 'scripts/recommendation-review-test.mjs'
       - 'scripts/controlled-cohort-test.mjs'
+      - 'scripts/cohort-search-observation-test.mjs'
       - 'scripts/evidence-lab-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
       - 'docs/CONTROLLED-COHORTS.md'
+      - 'skills/arwp-measurement-os/SKILL.md'
       - 'docs/evidence-lab/**'
       - 'docs/sitemap.xml'
       - 'knowledge/experiments/**'
@@ -33,16 +36,19 @@ on:
       - 'lib/winner-observatory.mjs'
       - 'lib/recommendation-review.mjs'
       - 'lib/controlled-cohort.mjs'
+      - 'lib/cohort-search-observation.mjs'
       - 'bin/arwp-winners.mjs'
       - 'bin/arwp-recommendation-review.mjs'
       - 'bin/arwp-cohort.mjs'
       - 'scripts/winner-observatory-test.mjs'
       - 'scripts/recommendation-review-test.mjs'
       - 'scripts/controlled-cohort-test.mjs'
+      - 'scripts/cohort-search-observation-test.mjs'
       - 'scripts/evidence-lab-test.mjs'
       - 'docs/WINNER-OBSERVATORY.md'
       - 'docs/RECOMMENDATION-REVIEW.md'
       - 'docs/CONTROLLED-COHORTS.md'
+      - 'skills/arwp-measurement-os/SKILL.md'
       - 'docs/evidence-lab/**'
       - 'docs/sitemap.xml'
       - 'knowledge/experiments/**'
@@ -83,7 +89,10 @@ jobs:
       - name: Validate Controlled Cohort contract
         run: |
           node scripts/controlled-cohort-test.mjs
+          node scripts/cohort-search-observation-test.mjs
           node --check lib/controlled-cohort.mjs
+          node --check lib/cohort-search-observation.mjs
+          node --check scripts/cohort-search-observation-test.mjs
           node --check bin/arwp-cohort.mjs
           node --check scripts/controlled-cohort-test.mjs
           node -e "JSON.parse(require('fs').readFileSync('schema/controlled-cohort.schema.json','utf8'));"

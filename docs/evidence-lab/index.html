@@ -50,6 +50,18 @@
         </div>
         <p class="lab-explanation">The original 2026-09-09 freeze remains historical HOLD evidence because its exact implementation was never verified live. Before the first later verified publication, treatment content changed while the 12 treatment / 6 control assignment and 12-query panel stayed fixed. R2 binds that unchanged design to the exact production snapshot <code>13b49e9a…</code>. No post-deployment Search/AI outcome was used to select or rewrite the cohort, and later undeployed source changes are outside this observation state.</p>
         <div class="lab-cohort-grid"><div><h3>12 treatment entities</h3><p>Existing useful Ptichi pages only. No indexable pages were manufactured to reach a generic sample size.</p></div><div><h3>6 unchanged controls</h3><p>Comparable published entities stay outside the treatment during the observation window unless a correctness fix is required and recorded as contamination.</p></div><div><h3>14 / 28 / 56 days</h3><p>Review windows remain fixed. Provider-native evidence is interpreted separately from deployment truth, and immature windows remain HOLD for outcome decisions.</p></div></div>
+        <div class="lab-observation-next">
+          <h3>What we need next: real search evidence</h3>
+          <p>The verified deployment lets us start observing, not claim a result. The 14-, 28- and 56-day windows use the same 12 treatment pages, 6 controls and fixed search questions. We still need the owner's actual Google Search reports, complete windows and a review of what else changed on the site.</p>
+          <ol>
+            <li><strong>Check the dates.</strong> Confirm the deployment record, then use the existing <code>arwp-cohort plan</code> command to see which windows are complete and whether report data is final.</li>
+            <li><strong>Match the right pages.</strong> Use <code>arwp-cohort page-map</code> with exact public canonical URLs. A source filename is not a published page address.</li>
+            <li><strong>Review real observations.</strong> Use <code>arwp-cohort check-gsc</code> on a local, joint Google Web Search date/page/query export. Missing rows remain unknown; never upload private exports to this public repository.</li>
+            <li><strong>Decide separately.</strong> Compare treatment, controls, baseline, query relevance and known disruptions before deciding whether to keep or revise the change.</li>
+          </ol>
+          <p><a href="../CONTROLLED-COHORTS.md">See the exact commands and data requirements →</a></p>
+          <p class="lab-explanation"><strong>Not yet measured:</strong> These steps prepare evidence collection. They are not a claim of more impressions, citations, visits or a successful intervention.</p>
+        </div>
         <details class="lab-query-panel"><summary>View the frozen 12-query panel</summary><ol>
           <li><code>q01-explain-clearly</code><span>how to explain something clearly at work</span></li>
           <li><code>q02-explain-technical</code><span>how to explain technical ideas to non technical people</span></li>

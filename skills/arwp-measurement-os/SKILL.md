@@ -42,6 +42,21 @@ node bin/arwp-cohort.mjs gate cohort.json \
 
 A mismatch keeps the cohort on `measurement-hold`. Do not start T14/T28/T56 or attribute live outcomes to the treatment until the production gate is ready.
 
+### Review the frozen observation window before exporting data
+
+For a site with an existing Controlled Cohort, first use its read-only calendar and local Web Search check rather than inventing a new experiment:
+
+```bash
+node bin/arwp-cohort.mjs plan cohort.json \
+  --production-ref=<independently-verified-full-SHA> \
+  --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD
+node bin/arwp-cohort.mjs page-map cohort.json --output=/private/cohort-page-map.json
+```
+
+The owner fills exact canonical URLs for **every** frozen treatment/control member. `check-gsc` then accepts an actual **joint date/page/query** Google Web Search CSV (not separate page/query totals or an AI impressions export) for one entire frozen window. It rejects mismatched dates, duplicates, unreviewed page maps and HOLD cohorts, and keeps missing members unknown. Only call it with `--report-scope=web`, the full `--export-start`/`--export-end` window and an owner-verified `--final-through` date. See `docs/CONTROLLED-COHORTS.md` for the complete syntax and privacy limits.
+
+Do not put private query/page owner exports or private page-map files in a public repository. A calendar window that has elapsed is not automatically final provider data, and a descriptive GSC row comparison is not causal evidence.
+
 4. **Collect provider-native evidence.** Prefer owner exports and first-party logs. Keep dimensions privately when useful for page/query/cohort analysis.
 
 ```bash
