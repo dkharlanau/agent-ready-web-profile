@@ -7,6 +7,16 @@ on:
       - 'lib/visibility-evidence.mjs'
       - 'lib/visibility-import.mjs'
       - 'lib/bing-context-evidence.mjs'
+      - 'lib/search-geo-execution.mjs'
+      - 'lib/qualified-feature-preflight.mjs'
+      - 'bin/arwp-geo-plan.mjs'
+      - 'bin/arwp-qualified-review.mjs'
+      - 'registry/search-geo-execution-policy.json'
+      - 'examples/search-geo-owner-context.example.json'
+      - 'scripts/search-geo-execution-test.mjs'
+      - 'scripts/qualified-feature-preflight-test.mjs'
+      - 'docs/SEARCH-GEO-EXECUTION.md'
+      - 'docs/QUALIFIED-FEATURE-REVIEW.md'
       - 'bin/arwp-bing.mjs'
       - 'scripts/bing-context-evidence-test.mjs'
       - 'docs/BING-AI-OWNER-CONTEXT.md'
@@ -38,6 +48,16 @@ on:
       - 'lib/visibility-evidence.mjs'
       - 'lib/visibility-import.mjs'
       - 'lib/bing-context-evidence.mjs'
+      - 'lib/search-geo-execution.mjs'
+      - 'lib/qualified-feature-preflight.mjs'
+      - 'bin/arwp-geo-plan.mjs'
+      - 'bin/arwp-qualified-review.mjs'
+      - 'registry/search-geo-execution-policy.json'
+      - 'examples/search-geo-owner-context.example.json'
+      - 'scripts/search-geo-execution-test.mjs'
+      - 'scripts/qualified-feature-preflight-test.mjs'
+      - 'docs/SEARCH-GEO-EXECUTION.md'
+      - 'docs/QUALIFIED-FEATURE-REVIEW.md'
       - 'bin/arwp-bing.mjs'
       - 'scripts/bing-context-evidence-test.mjs'
       - 'docs/BING-AI-OWNER-CONTEXT.md'
@@ -118,6 +138,17 @@ jobs:
           node --check scripts/search-geo-deep-run-test.mjs
           node --check scripts/trend-source-watch-test.mjs
           node --check lib/trend-source-watch.mjs
+      - name: Validate all 34 owner-gated Search/GEO execution decisions
+        run: |
+          node scripts/search-geo-execution-test.mjs
+          node scripts/qualified-feature-preflight-test.mjs
+          node --check lib/search-geo-execution.mjs
+          node --check lib/qualified-feature-preflight.mjs
+          node --check bin/arwp-geo-plan.mjs
+          node --check bin/arwp-qualified-review.mjs
+          node --check scripts/search-geo-execution-test.mjs
+          node --check scripts/qualified-feature-preflight-test.mjs
+          node bin/arwp-geo-plan.mjs --help | grep -q '34 research opportunities'
       - name: Guard against silent promotion
         run: |
           grep -q 'approvalDoesNotMutateRegistry' schema/trend-promotion-proposal.schema.json
