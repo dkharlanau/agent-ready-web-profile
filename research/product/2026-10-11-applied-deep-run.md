@@ -265,7 +265,7 @@ Explicitly recommend doing nothing where there is no evidence-backed next move, 
 
 **Reuse / one bounded action:** Reuse existing one-action Search Failure Doctor and documented no-op/unknown paths.
 
-**Evidence to accept:** A reviewed case can explain what data would reverse a no-op.
+**Evidence to accept:** A reviewed case states the actual missing evidence, the user goal and exactly what observation would reverse the no-op decision.
 
 **Stop or rollback:** Do not turn absence of provider data into a negative metric or a synthetic uplift estimate.
 

@@ -384,7 +384,7 @@
       ],
       "insight": "Explicitly recommend doing nothing where there is no evidence-backed next move, instead of scoring every site red.",
       "existingFirstAction": "Reuse existing one-action Search Failure Doctor and documented no-op/unknown paths.",
-      "verification": "A reviewed case can explain what data would reverse a no-op.",
+      "verification": "A reviewed case states the actual missing evidence, the user goal and exactly what observation would reverse the no-op decision.",
       "stopCondition": "Do not turn absence of provider data into a negative metric or a synthetic uplift estimate.",
       "sourceIds": [
         "paperGeo",
