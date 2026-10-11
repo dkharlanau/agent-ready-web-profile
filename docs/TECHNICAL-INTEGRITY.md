@@ -29,6 +29,20 @@ Rule pack v0.4 adds a third correction from OpenAI's current publisher guidance:
 
 This is intentional dogfood: Goose detectors themselves must remain falsifiable and correctable.
 
+### Source extraction boundary
+
+The detector excludes scripts, styles, comments, templates and SVG from text/link
+signals and balances nested primary regions. An empty initial `main` can coexist
+with a completed streaming payload elsewhere in the HTML source. In that case it
+reports document-source text and an explicit extraction fallback, retaining
+`WATCH` until rendered placement is checked. Footer boilerplate cannot turn an
+empty primary region into a content `PASS`. Markup-looking strings in serialized
+scripts are not links and must not create internal target probes.
+
+This bounded extraction does not execute hydration, verify visible placement or
+implement a complete browser HTML tree. Synthetic streaming/nesting and empty-main
+counterexamples cover the detector; private owner captures remain outside Git.
+
 ## What it checks now
 
 ### P0 — source-backed blockers
