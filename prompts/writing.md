@@ -241,7 +241,7 @@ Repeated utility labels may stay consistent. The anti-template check applies to 
 
 | Element | Write it to do this | Check before accepting |
 | --- | --- | --- |
-| Site name and homepage identity | Name the real project and explain its actual category. | Use one coherent identity; do not add descriptive keywords to the official name or claim an independent identity for a subpath. |
+| Site name and homepage identity | Name the real project and explain its actual category. | Use one coherent identity; do not add descriptive keywords to the official name. A project can have its own brand at a subpath; do not claim separate Google site-name eligibility for that subpath. |
 | HTML `<title>` | Identify this page's specific topic, task or offer, with concise branding where useful. | Distinct from sibling pages; agrees with the page; no keyword lists or unsupported superlatives. Google may select another title source. |
 | H1 | Make the page's main promise clear in the reader's vocabulary. | Obvious main heading; the page fulfills it. H1 and `<title>` may differ in wording while naming the same subject. |
 | Meta description | Summarize the particular page and give a truthful reason to open it. | No invented price, availability or outcome; no keyword list. Google may show page text instead; there is no fixed character quota here. |
@@ -396,7 +396,7 @@ All examples below are fictional teaching examples. Conditions in the last colum
 | Empty state | “No growth” | “No comparison yet. Add the previous export to calculate changes.” | The baseline is missing; no decline or zero has been measured. |
 | Progress | “95% complete” | “Checking duplicate IDs…” | The stage is observed; no reliable percentage is available. |
 | Confirmation | “Your data is safe!” | “The comparison finished. Download the changed rows.” | Completion and the download are confirmed; no storage/privacy claim is inferred. |
-| Metric | “Users: 240” | “Sessions from Google organic search: 240” | Fictional measured count; exact source, window and hostname are available nearby. |
+| Metric | “Users: 240” | “Sessions from Google organic search: 240” | In a real interface, the count must come from the stated source, window and hostname; this example count is invented. |
 | Alt / caption | “best csv tool csv data ai checker” | Alt: “Table with two rows sharing customer ID 42.” Caption: “Example duplicate; the check does not choose the correct row.” | The image shows this fictional example and the distinction is relevant. |
 | Machine description | “Guaranteed intelligent automation for every system” | “Reads a CSV and reports repeated values in a selected column.” | The described operation is implemented; authorization and runtime availability remain separate. |
 
