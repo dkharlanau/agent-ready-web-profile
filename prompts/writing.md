@@ -264,7 +264,7 @@ Repeated utility labels may stay consistent. The anti-template check applies to 
 | Image caption, diagram legend or transcript | Explain what is shown, how to read it and any relevant source/credit. | Not a redundant copy of alt text; actual rights/creator information and visible facts only. |
 | Closing paragraph or next-reading block | Resolve the page's task and point to a genuinely useful continuation if one exists. | No ceremonial recap, compulsory sales pitch or claim that all uncertainty has disappeared. |
 
-Title and snippet behavior follow Google's [title-link](https://developers.google.com/search/docs/appearance/title-link) and [snippet](https://developers.google.com/search/docs/appearance/snippet) guidance. Image text follows W3C WAI's [alt decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/). These sources explain implementation choices, not measured lift for an ARWP target.
+Site-name scope, title and snippet behavior follow Google's [site-name](https://developers.google.com/search/docs/appearance/site-names), [title-link](https://developers.google.com/search/docs/appearance/title-link) and [snippet](https://developers.google.com/search/docs/appearance/snippet) guidance. Image text follows W3C WAI's [alt decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/). These sources explain implementation choices, not measured lift for an ARWP target.
 
 ### Navigation and product interaction
 
