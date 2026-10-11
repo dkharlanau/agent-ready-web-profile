@@ -97,3 +97,6 @@ assert(controls.includes(oldFaq));
 assert.match(controls, /separate current topic-matching source review/);
 assert.match(markdown, /An increase in indexed-state classifications|indexed-state classifications|Indexed URL counts/i);
 console.log('PASS 34 research recommendations: primary sources, applicability, privacy/stop gates, historical watch sources and publication boundaries');
+
+// The newer cross-project methods remain separate review candidates, not active recommendations.
+await import('./applied-deep-run-test.mjs');

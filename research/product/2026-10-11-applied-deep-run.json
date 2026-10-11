@@ -1,0 +1,474 @@
+{
+  "version": "0.1",
+  "reviewDate": "2026-10-11",
+  "owner": "Goose ARWP public research",
+  "title": "Twenty research-to-pilot transfer decisions",
+  "status": "review-candidates-not-product-ships",
+  "policy": {
+    "noAutomaticPromotion": true,
+    "noTargetRepoMutation": true,
+    "noClaimOfSearchUplift": true,
+    "preprintsNotPeerReviewedProof": true,
+    "proofBeforeProduct": true,
+    "privateOwnerEvidenceExcluded": true
+  },
+  "sourceCatalog": {
+    "googleAi": {
+      "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "kind": "official",
+      "note": "Search foundation and original user value; no special GEO shortcut"
+    },
+    "googleContent": {
+      "url": "https://developers.google.com/search/docs/fundamentals/using-gen-ai-content",
+      "kind": "official",
+      "note": "AI-assisted content still needs original value and factual review"
+    },
+    "googleGen": {
+      "url": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+      "kind": "official",
+      "note": "Owner-native Google generative AI exposure reporting"
+    },
+    "googleMulti": {
+      "url": "https://developers.google.com/search/blog/2026/09/web-multimodal-in-sc",
+      "kind": "official",
+      "note": "New September 24 multimodal Search Console filter and export"
+    },
+    "bingAi": {
+      "url": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+      "kind": "official",
+      "note": "Sampled provider-native citations/queries; not traffic or causal impact"
+    },
+    "bingNew": {
+      "url": "https://blogs.bing.com/search/2026/6/New-AI-Visibility-Insights-in-Bing-Webmaster-Tools-Intents-Topics-Citation-Share-Compare/",
+      "kind": "official",
+      "note": "Preview Intents, Topics, query-scoped Citation Share and comparison"
+    },
+    "webmcpEval": {
+      "url": "https://developer.chrome.com/docs/ai/webmcp/evals",
+      "kind": "official-experimental",
+      "note": "Task-level stochastic agent evaluations for WebMCP"
+    },
+    "webmcpSecurity": {
+      "url": "https://developer.chrome.com/docs/ai/webmcp/secure-tools",
+      "kind": "official-experimental",
+      "note": "Tool authorization, untrusted output, consent and origin boundaries"
+    },
+    "webmcpTrial": {
+      "url": "https://developer.chrome.com/blog/ai-webmcp-origin-trial",
+      "kind": "official-experimental",
+      "note": "Chrome-origin-trial status; not a universal interoperable Search switch"
+    },
+    "paperGeo": {
+      "url": "https://arxiv.org/abs/2607.14035",
+      "kind": "preprint",
+      "note": "Critical survey of GEO evidence limits and stochastic multi-stage visibility"
+    },
+    "paperRag": {
+      "url": "https://arxiv.org/abs/2608.00705",
+      "kind": "preprint",
+      "note": "Corpus/embedder/judge robustness in RAG requirements traceability"
+    },
+    "paperAttribution": {
+      "url": "https://arxiv.org/abs/2609.14245",
+      "kind": "preprint",
+      "note": "Compression versus source-span attribution, with evaluator limitations"
+    },
+    "googleControl": {
+      "url": "https://support.google.com/webmasters/answer/16908024",
+      "kind": "official",
+      "note": "Publisher control is a decision; do not silently change owner preferences"
+    }
+  },
+  "opportunities": [
+    {
+      "rank": 1,
+      "id": "source-span-attribution",
+      "priority": "P0",
+      "class": "reusable-evaluation",
+      "projects": [
+        "Vedokrok",
+        "MHC Corpus",
+        "Goose"
+      ],
+      "insight": "Verify each generated factual claim against the actual original cited passage, not against an intermediate AI summary.",
+      "existingFirstAction": "Use existing reference and editorial-receipt evidence; create a frozen, human-reviewed 20-question pilot, not a new publication surface.",
+      "verification": "Report supported/unsupported/ambiguous claims and source mismatch separately; keep source locations and missing evidence.",
+      "stopCondition": "Stop if passages or publication rights are not accessible; a model judge alone is not ground truth.",
+      "sourceIds": [
+        "paperAttribution",
+        "paperRag"
+      ],
+      "maturity": "reuse-or-pilot"
+    },
+    {
+      "rank": 2,
+      "id": "paraphrase-stability-panel",
+      "priority": "P0",
+      "class": "reusable-evaluation",
+      "projects": [
+        "Goose",
+        "Ptichi",
+        "Bonihua"
+      ],
+      "insight": "Test whether a discovery or recommendation observation survives neutral paraphrases, reruns, language, and model-surface drift.",
+      "existingFirstAction": "Extend the existing frozen query/prompt panel with a separately versioned secondary robustness panel; do not retroactively edit Ptichi r2.",
+      "verification": "Preserve exact prompts, answer artifacts, query families, repetitions, dates, models and mention/citation/recommendation distinctions.",
+      "stopCondition": "Do not pool different engines, post-selected winning prompts or missing runs into one visibility score.",
+      "sourceIds": [
+        "paperGeo",
+        "googleGen"
+      ],
+      "maturity": "reuse-or-pilot"
+    },
+    {
+      "rank": 3,
+      "id": "decision-over-feature-gate",
+      "priority": "P0",
+      "class": "product-method",
+      "projects": [
+        "Goose"
+      ],
+      "insight": "The next deliverable is one justified owner decision, not an extra protocol, graph, dashboard or count of researched ideas.",
+      "existingFirstAction": "Use Roadmap M1 and issue #148; select a currently blocked, unchanged or low-risk intervention with a real evidence source.",
+      "verification": "Record next action/no-op/unknown and how the evidence changed the decision versus generic advice.",
+      "stopCondition": "Stop new feature development when no real owner case demonstrates a decision advantage.",
+      "sourceIds": [
+        "paperGeo",
+        "googleAi"
+      ],
+      "maturity": "reuse-or-pilot"
+    },
+    {
+      "rank": 4,
+      "id": "cohort-interference-review",
+      "priority": "P0",
+      "class": "experimental-design",
+      "projects": [
+        "Goose",
+        "Ptichi"
+      ],
+      "insight": "Audit whether shared navigation, templates, links and later source edits contaminate frozen treatment and control groups.",
+      "existingFirstAction": "Reuse source-drift and treatment-cohort integrity checks from PR #151 on the next actual review window.",
+      "verification": "Classify unchanged, exposed-to-shared-change, uncertain, or incompatible controls before interpreting outcomes.",
+      "stopCondition": "Do not repair a contaminated cohort by rewriting its historical freeze.",
+      "sourceIds": [
+        "paperGeo",
+        "googleGen"
+      ],
+      "maturity": "reuse-or-pilot"
+    },
+    {
+      "rank": 5,
+      "id": "human-edited-claim-parity",
+      "priority": "P0",
+      "class": "editorial-method",
+      "projects": [
+        "Goose",
+        "Vedokrok",
+        "Bonihua"
+      ],
+      "insight": "Review headings, summaries, alt text, social previews and structured data as claims that must match the underlying page.",
+      "existingFirstAction": "Extend existing editorial parity and original-evidence workflow to a small sampled page cohort; no automatic mass rewrite.",
+      "verification": "A human can point to each concrete fact; no empty brand promises, fabricated expertise, or title/body contradictions.",
+      "stopCondition": "Do not replace human writing with generic AI-polished claims or publish thin query variants.",
+      "sourceIds": [
+        "googleContent",
+        "googleAi"
+      ],
+      "maturity": "reuse-or-pilot"
+    },
+    {
+      "rank": 6,
+      "id": "multimodal-owner-baseline",
+      "priority": "P0",
+      "class": "provider-measurement",
+      "projects": [
+        "Goose",
+        "Vedokrok",
+        "Ptichi"
+      ],
+      "insight": "Google introduced a multimodal Search Console filter on September 24, 2026: useful only where real visual-query observations exist.",
+      "existingFirstAction": "Add an optional read-only owner review step for real Lens/Circle-to-Search and multimodal generative Search observations.",
+      "verification": "Keep web, generative-AI and multimodal scopes and export dates explicit, including unavailable/zero-volume cases.",
+      "stopCondition": "No images, schema, or tools should be added merely to populate a newly released report.",
+      "sourceIds": [
+        "googleMulti",
+        "googleGen"
+      ],
+      "maturity": "reuse-or-pilot"
+    },
+    {
+      "rank": 7,
+      "id": "bing-intent-page-decision",
+      "priority": "P1",
+      "class": "provider-measurement",
+      "projects": [
+        "Goose",
+        "Bonihua",
+        "Vedokrok"
+      ],
+      "insight": "Map actual Bing grouped grounding phrases and intent/topic labels to their cited canonical pages before suggesting fresh URLs.",
+      "existingFirstAction": "Reuse existing arwp-bing owner context and query-page mapping without treating sampled phrases as literal user prompts.",
+      "verification": "Review one page per supported intent gap; cite the actual provider filter and observation window.",
+      "stopCondition": "Skip when Bing data are unavailable or sparse; Citation Share is neither ranking nor clicks.",
+      "sourceIds": [
+        "bingAi",
+        "bingNew"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 8,
+      "id": "one-page-answer-evidence",
+      "priority": "P1",
+      "class": "content-experiment",
+      "projects": [
+        "Vedokrok",
+        "Ptichi",
+        "Bonihua"
+      ],
+      "insight": "Test a human-authored answer improvement with a concise original example, reproducible artifact or practical exercise.",
+      "existingFirstAction": "Use existing canonical page and deployment receipt; change one substantive answer, not an entire topic cluster.",
+      "verification": "Compare factual clarity and user task success first, then owner-side results in compatible windows.",
+      "stopCondition": "Do not make an unmeasured publication count or claim ranking improvement.",
+      "sourceIds": [
+        "googleContent",
+        "paperGeo"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 9,
+      "id": "webmcp-task-selection-eval",
+      "priority": "P1",
+      "class": "agent-operability",
+      "projects": [
+        "Flow",
+        "Goose"
+      ],
+      "insight": "Measure whether an agent selects the right real tool for a real task and succeeds through a whole journey.",
+      "existingFirstAction": "Use the existing agent-eval tooling on a read-only sandbox; compare semantic HTML baseline with an optional WebMCP prototype.",
+      "verification": "Freeze tasks, success rubric, initial state, retries and tool-call trace; include mid-chain failures.",
+      "stopCondition": "Do not publish WebMCP as a universal browser feature or SEO ranking signal.",
+      "sourceIds": [
+        "webmcpEval",
+        "webmcpTrial"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 10,
+      "id": "webmcp-security-negative-cases",
+      "priority": "P1",
+      "class": "security-evaluation",
+      "projects": [
+        "Flow",
+        "Goose"
+      ],
+      "insight": "Test prompt-injected tool descriptions, cross-origin requests and malicious retrieved output before adding any agent actions.",
+      "existingFirstAction": "Create adversarial fixtures for read-only demonstration; require explicit authorization for irreversible/write operations.",
+      "verification": "All off-origin, untrusted-output and unauthorized writes must fail safely; record declined calls.",
+      "stopCondition": "Skip production tool exposure without confirmed hosting, session boundaries and owner consent.",
+      "sourceIds": [
+        "webmcpSecurity",
+        "webmcpTrial"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 11,
+      "id": "rag-triple-robustness",
+      "priority": "P1",
+      "class": "retrieval-evaluation",
+      "projects": [
+        "Vedokrok",
+        "MHC Corpus",
+        "Metkagram"
+      ],
+      "insight": "Compare retrieval systems while varying corpus split, embedding method and judge; report strata not one pooled winner.",
+      "existingFirstAction": "Run a small held-out fixed question set against existing BM25/simple retrieval and any proposed semantic/graph variant.",
+      "verification": "Record retrieval hit, answer fidelity, source-span support and evaluator agreement independently.",
+      "stopCondition": "Do not replace working BM25 on evidence from one corpus or one LLM judge.",
+      "sourceIds": [
+        "paperRag",
+        "paperAttribution"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 12,
+      "id": "extractive-context-ablation",
+      "priority": "P1",
+      "class": "retrieval-evaluation",
+      "projects": [
+        "Vedokrok",
+        "MHC Corpus"
+      ],
+      "insight": "Compare shorter extractive evidence context against abstractive summaries under equal token budgets.",
+      "existingFirstAction": "On the same frozen questions, compare evidence-bearing spans and answer support before and after compression.",
+      "verification": "Report exact source matches and token cost; record abstentions and losses.",
+      "stopCondition": "Reject compression that makes answers read well but breaks original-source attribution.",
+      "sourceIds": [
+        "paperAttribution"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 13,
+      "id": "multilingual-parity-check",
+      "priority": "P1",
+      "class": "reusable-evaluation",
+      "projects": [
+        "Metkagram",
+        "Bonihua",
+        "Ptichi"
+      ],
+      "insight": "Compare task correctness and evidence fidelity across supported languages without assuming translated prompts are equivalent demand.",
+      "existingFirstAction": "Freeze matched intent families and native-language editorial review; split by locale and audience.",
+      "verification": "Track supported claims, task success, bad translations and coverage gaps separately.",
+      "stopCondition": "No automatic multilingual programmatic pages to inflate indexable URLs.",
+      "sourceIds": [
+        "paperGeo",
+        "googleContent"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 14,
+      "id": "failure-mode-bucketing",
+      "priority": "P1",
+      "class": "product-method",
+      "projects": [
+        "Goose",
+        "Flow",
+        "Vedokrok"
+      ],
+      "insight": "Classify failed tasks by incorrect selection, bad retrieval, missing evidence, execution failure or evaluation ambiguity.",
+      "existingFirstAction": "Map to existing Search Failure Doctor, Resolver regret and agent-eval receipts instead of creating an opaque success score.",
+      "verification": "An owner gets one corrective action at the first evidenced broken stage.",
+      "stopCondition": "Do not promote a guessed root cause from a single incomplete observation.",
+      "sourceIds": [
+        "paperRag",
+        "webmcpEval"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 15,
+      "id": "citation-sampling-calendar",
+      "priority": "P1",
+      "class": "measurement-method",
+      "projects": [
+        "Goose",
+        "Ptichi",
+        "Bonihua"
+      ],
+      "insight": "Prevent cherry-picked AI-answer screenshots by scheduling fixed-panel repeated samples and preserving missed runs.",
+      "existingFirstAction": "Use current Controlled Cohort timeline and a supplemental prompt-panel log only when outcome access exists.",
+      "verification": "Keep chronological coverage, stable families, provider changes, controls and non-results.",
+      "stopCondition": "Do not fabricate exact prompts from Bing grouped grounding queries.",
+      "sourceIds": [
+        "paperGeo",
+        "bingAi"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 16,
+      "id": "no-op-and-stop-decisions",
+      "priority": "P1",
+      "class": "product-method",
+      "projects": [
+        "Goose",
+        "Flow"
+      ],
+      "insight": "Explicitly recommend doing nothing where there is no evidence-backed next move, instead of scoring every site red.",
+      "existingFirstAction": "Reuse existing one-action Search Failure Doctor and documented no-op/unknown paths.",
+      "verification": "A reviewed case states the actual missing evidence, the user goal and exactly what observation would reverse the no-op decision.",
+      "stopCondition": "Do not turn absence of provider data into a negative metric or a synthetic uplift estimate.",
+      "sourceIds": [
+        "paperGeo",
+        "googleAi"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 17,
+      "id": "unit-cost-per-reviewed-decision",
+      "priority": "P1",
+      "class": "operations-method",
+      "projects": [
+        "Goose",
+        "Flow"
+      ],
+      "insight": "Watch the cost of retries and CI fan-out per accepted decision rather than minimizing model tokens in isolation.",
+      "existingFirstAction": "Reuse issue #150; audit PR workflow and agent loop duplication with actual run histories, no assumed billing charges.",
+      "verification": "Record run count, reviewer time, rework and unique verification coverage before/after.",
+      "stopCondition": "Never disable essential checks or block security gates to improve apparent cost.",
+      "sourceIds": [
+        "webmcpEval"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 18,
+      "id": "research-to-pilot-transfer-receipt",
+      "priority": "P1",
+      "class": "governance-method",
+      "projects": [
+        "Goose",
+        "Vedokrok",
+        "Metkagram",
+        "Flow"
+      ],
+      "insight": "Make a portable card that says owner question, exact source, what already exists, one test, acceptance and rollback.",
+      "existingFirstAction": "Reuse existing experiment/receipt contracts and this research set; link to existing issues before making new ones.",
+      "verification": "A second project can reproduce the method without inventing an independent state machine.",
+      "stopCondition": "Do not roll out target-repository changes without separate authorization.",
+      "sourceIds": [
+        "paperGeo",
+        "googleAi"
+      ],
+      "maturity": "conditional-pilot"
+    },
+    {
+      "rank": 19,
+      "id": "webmcp-origin-trial-watch",
+      "priority": "P2",
+      "class": "experimental-technology",
+      "projects": [
+        "Flow",
+        "Goose"
+      ],
+      "insight": "Chrome 149 origin-trial APIs are suitable for task-oriented pilots, not for automatic Search optimization.",
+      "existingFirstAction": "Watch stable rollout and cross-browser compatibility; prototype only with true user-visible read-only capabilities.",
+      "verification": "Show task-completion difference against native HTML controls, plus security negative cases.",
+      "stopCondition": "No agent-facing mutating tool may infer permission from metadata.",
+      "sourceIds": [
+        "webmcpTrial",
+        "webmcpSecurity"
+      ],
+      "maturity": "watch"
+    },
+    {
+      "rank": 20,
+      "id": "owner-controlled-ai-inclusion",
+      "priority": "P2",
+      "class": "rights-governance",
+      "projects": [
+        "Goose",
+        "Vedokrok",
+        "Bonihua"
+      ],
+      "insight": "Google Search Console now offers a generative-AI content inclusion control; this is a rights/business decision, not an optimizer toggle.",
+      "existingFirstAction": "Document where an authorized owner checks it, keeping crawler training controls separate from Search inclusion.",
+      "verification": "Record the owner's intentional preference and observed report scope; never infer state from repository code.",
+      "stopCondition": "Never silently switch owner preferences or promise ranking changes.",
+      "sourceIds": [
+        "googleControl",
+        "googleGen"
+      ],
+      "maturity": "watch"
+    }
+  ]
+}
