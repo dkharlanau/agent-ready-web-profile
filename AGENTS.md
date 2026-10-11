@@ -98,6 +98,7 @@ Use Technical Integrity before optional tactics and again after the changed publ
 - Repository routing and verification: [`REPO_MAP.md`](REPO_MAP.md)
 - Contribution, truthfulness and disclosure rules: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - Core ARWP contract: [`SPEC.md`](SPEC.md)
+- Writing, editing and text review for pages, UI, previews, data explanations and machine-readable descriptions: [`prompts/writing.md`](prompts/writing.md). Apply the relevant element contract and preserve approved facts, real behavior and the target's voice; do not force an article template onto utility copy.
 - Product priorities and stop rules: [`docs/PRODUCT-LINE.md`](docs/PRODUCT-LINE.md)
 - Growth workflow: [`docs/GROWTH-LOOP.md`](docs/GROWTH-LOOP.md) and [`skills/arwp-growth-loop/SKILL.md`](skills/arwp-growth-loop/SKILL.md)
 - Low/declining Search traffic, migration accounting and contradictory HTTP checks: [`docs/SEARCH-FAILURE-TRIAGE.md`](docs/SEARCH-FAILURE-TRIAGE.md)

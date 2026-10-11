@@ -26,6 +26,8 @@ The [Deep Run research](research/product/2026-10-10-search-geo-deep-run.md) eval
 When a site has few impressions or unclear indexing, use the [Search Failure Doctor](docs/SEARCH-FAILURE-TRIAGE.md#search-failure-doctor-one-next-action) to choose the **first check worth doing**, not another score. Run `node bin/arwp.mjs search-doctor https://example.com/ --scan` for a bounded public technical check, or provide a local owner snapshot to distinguish indexing, impressions and clicks. Missing owner evidence stays unknown; this does **not** complete the real Ptichi outcome-proof milestone.
 ### Practical writing and evidence tools
 
+Use [`prompts/writing.md`](prompts/writing.md) for page copy, titles/snippets, navigation, forms, action/state messages, chart/metric explanations, documentation and machine-readable descriptions. It adapts the shared writing foundation into element/page contracts, fictional examples, a reusable agent brief and a factual acceptance review.
+
 The normal `arwp-growth` text output now leads with a practical action, its verification and a reason not to apply it. For AI-assisted editorial revisions, use the offline [built-page fact check](docs/EDITORIAL-FACT-PARITY.md) rather than an unreliable "AI text detection" score. For an actual original research item, start with the [original evidence review worksheet](templates/growth/original-evidence-review.md), and link the *existing* canonical experiment, release and outcome evidence rather than inventing a success story.
 
 ### Bing AI observations without a synthetic visibility score
