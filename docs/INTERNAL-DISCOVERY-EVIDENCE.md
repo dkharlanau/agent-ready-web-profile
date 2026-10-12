@@ -60,6 +60,17 @@ V0.1 uses structural HTML evidence conservatively:
 
 These are review heuristics over observed HTML structure, not Google link categories or ranking factors. A rendered DOM may differ from raw HTML on JavaScript-heavy sites; use browser/runtime evidence when that difference is material.
 
+Anchor observations preserve element text first. For an image-only link, the
+extractor records non-empty `img alt` values in document order; an empty anchor
+may fall back to its own `title`. Comments, scripts, styles, templates and SVG contents do
+not supply these labels. Empty decorative alternatives remain missing unless
+the anchor has a documented title fallback. ARIA labels are not substituted for
+Google anchor-text evidence. Labels remain capped at 500 characters.
+
+These fallbacks follow [Google's link guidance](https://developers.google.com/search/docs/crawling-indexing/links-crawlable).
+This is a bounded static HTML observation, not a computed accessible-name or
+CSS-visibility audit, and it does not establish indexing or ranking effects.
+
 ### Partial coverage is not absence
 
 V0.1 caps same-origin anchor observations per page. If a canonical owner hits that cap, the report sets `summary.gapEvaluationState = "partial"` and suppresses inbound/global-only gap conclusions that could be falsified by omitted edges. It does not convert a bounded observation limit into an orphan finding.
