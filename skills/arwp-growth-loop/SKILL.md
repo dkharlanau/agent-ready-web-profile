@@ -174,6 +174,22 @@ For each material route-level change, record `problem → evidence → risk → 
 
 5. **Verify.** Run the site's own build/tests/lint, Technical Integrity again on the deployed/public surface when network access exists, and relevant ARWP checks. For each selected hypothesis, distinguish `pass`, `fail`, `manual-pass`, `manual-fail`, `external-owner-data`, `not-applicable` and `watch`. Never call a manual or owner-data check automated.
 
+If the required project check fails on the untouched source, use the local-repair
+receipt contract in `docs/SEARCH-FAILURE-TRIAGE.md`. Reproduce the same command on
+the exact clean revision before a repair; retain interrupted, stale, mismatched
+and non-reproduced failures. After one source-owned correction, run every unchanged
+required check. A metadata-only Doctor assessment is owner-reported evidence,
+not authenticated execution. Do not reopen terminal runs, self-acknowledge review,
+publish a local candidate or treat local PASS as a Search outcome.
+
+For observed noindex, inspect the current publication decision before proposing
+removal. The Doctor's optional exact-URL `publicationPolicy` context is documented
+in `docs/SEARCH-FAILURE-TRIAGE.md`. `review-publication-policy` preserves the technical
+FAIL and calls for source/live-policy review; it is not an exemption or permission.
+Archive, draft, utility, duplicate and review exclusions must not become targets
+solely to improve indexed-page or impression counts. Do not infer that today's
+directive explains historical movement without its actual rollout date.
+
 For semantic/template changes also parse generated JSON-LD, compare it with the rendered visible content, and check canonical/indexability/sitemap/hreflang consistency on changed routes. Use current feature-specific external validators or Search Console/Bing tools where owner access exists.
 
 For internal-link/hub changes, rerun the same bounded Internal Discovery cohort when practical. A cleaner graph verifies the implementation only; Search impressions, positions, citations, referrals and conversions remain separate outcome evidence.

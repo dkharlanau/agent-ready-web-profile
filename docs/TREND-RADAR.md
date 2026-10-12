@@ -105,6 +105,8 @@ The [10 October Search/GEO Deep Run](../research/product/2026-10-10-search-geo-d
 
 **Source-link drift:** a source can return HTTP 200 yet silently redirect to an unrelated topic. Page-update/discover-feed checks now surface path/host-changing redirects as a human-review candidate, even without a later page date. Trailing slash or query-only normalization does not automatically raise the alarm. The reviewer must check the **actual claim against a topic-matching primary source** before revising, retiring or replacing the reference. An HTTP failure is reported separately. This guard never promotes WATCH into ADOPT or measures ranking effects.
 
+**Feed coverage:** providers may advertise RSS/Atom through a visible subscription anchor rather than a head `link` alternate. Discovery accepts explicit feed labels/types, or a Subscribe link whose path identifies a feed; it does not follow arbitrary articles about RSS or newsletter signup links. The retrieved response must have a recognized, non-truncated feed envelope before entries are parsed. `feedStatus`, `feedResponse` and `feedEntryCount` separate reading a feed (including an observed empty feed) from a missing subscription, failed request, unrecognized response or truncation. `summary.feedIncomplete` counts incomplete feed reads separately from base-page HTTP failures. This is bounded extraction evidence, not complete XML validation, whole-archive coverage, claim review or proof that nothing changed at the provider. A feed's date cutoff still requires review, and no new candidate becomes an active recommendation automatically.
+
 ## Source policy
 
 A secondary article, social post or community discussion can be useful for discovery, but it cannot promote a trend to ADOPT by itself.

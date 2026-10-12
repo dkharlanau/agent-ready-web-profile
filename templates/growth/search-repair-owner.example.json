@@ -1,0 +1,42 @@
+{
+  "version": "0.1",
+  "site": "https://project.example.test/",
+  "dataStatus": "synthetic",
+  "repair": {
+    "version": "0.1",
+    "sourceRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "requiredChecks": [
+      {
+        "id": "verify",
+        "commandSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    ],
+    "baseline": {
+      "sourceRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "sourceDirty": false,
+      "check": {
+        "id": "verify",
+        "exitCode": 1,
+        "signal": null,
+        "completedAt": "2026-01-03T10:00:00Z",
+        "logSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "commandSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    "candidate": {
+      "baseRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "patchSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "checks": [
+        {
+          "id": "verify",
+          "exitCode": 0,
+          "signal": null,
+          "completedAt": "2026-01-03T11:00:00Z",
+          "logSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "commandSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ]
+    }
+  },
+  "note": "Synthetic receipt only. Digests do not authenticate logs. Real check receipts and patches stay in the private owner store; a local check is not a release or Search outcome."
+}
