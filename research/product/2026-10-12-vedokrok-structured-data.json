@@ -1,0 +1,568 @@
+{
+  "version": "0.1",
+  "id": "vedokrok-structured-data-2026-10-12",
+  "reviewDate": "2026-10-12",
+  "title": "From collection downloads to inspectable agent inputs",
+  "status": "implemented-case-with-bounded-evidence",
+  "authorship": {
+    "kind": "agent",
+    "review": "agent-self-review",
+    "humanReviewClaimed": false,
+    "writingGuide": "prompts/writing.md",
+    "guideCommit": "a35272f21ed3e606d5fcf0f19e3002117e405e7f"
+  },
+  "publicationScope": {
+    "kind": "owner-authorized-public-technical-retrospective",
+    "containsLiveCorpus": false,
+    "containsPrivateOwnerMetrics": false,
+    "containsUserRuns": false,
+    "containsLearnedPerformancePriors": false,
+    "rawOperationalLogsPublished": false
+  },
+  "policy": {
+    "noAutomaticCorpusPromotion": true,
+    "noClaimOfSearchUplift": true,
+    "noClaimOfIndependentReview": true,
+    "noSyntheticTaskCompletion": true,
+    "currentNoticesStillApply": true
+  },
+  "sourceCatalog": {
+    "vocabulary": {
+      "url": "https://vedokrok.com/data/site-vocabulary.json",
+      "kind": "public-interface"
+    },
+    "topics": {
+      "url": "https://vedokrok.com/data/topic-vocabulary.json",
+      "kind": "public-interface"
+    },
+    "catalogs": {
+      "url": "https://vedokrok.com/data/collection-catalogs.json",
+      "kind": "public-interface"
+    },
+    "overlaps": {
+      "url": "https://vedokrok.com/data/collection-overlaps.json",
+      "kind": "public-interface"
+    },
+    "graph": {
+      "url": "https://vedokrok.com/data/discovery-graph.json",
+      "kind": "public-interface"
+    },
+    "catalog": {
+      "url": "https://vedokrok.com/data/data-catalog.json",
+      "kind": "public-interface"
+    },
+    "schemas": {
+      "url": "https://vedokrok.com/data/schema-index.json",
+      "kind": "public-interface"
+    },
+    "checksums": {
+      "url": "https://vedokrok.com/data/checksums.json",
+      "kind": "public-interface"
+    },
+    "history": {
+      "url": "https://vedokrok.com/data/data-history.json",
+      "kind": "public-interface"
+    },
+    "manifests": {
+      "url": "https://vedokrok.com/data/collection-manifests.json",
+      "kind": "public-interface"
+    },
+    "profiles": {
+      "url": "https://vedokrok.com/data/collection-profiles.json",
+      "kind": "public-interface"
+    },
+    "trace": {
+      "url": "https://vedokrok.com/data/agent-output-trace-template.json",
+      "kind": "public-interface"
+    },
+    "forAi": {
+      "url": "https://vedokrok.com/for-ai",
+      "kind": "public-interface"
+    },
+    "jsonSchema": {
+      "url": "https://json-schema.org/draft/2020-12/json-schema-core",
+      "kind": "standard"
+    },
+    "dataDownload": {
+      "url": "https://schema.org/DataDownload",
+      "kind": "standard"
+    },
+    "itemList": {
+      "url": "https://schema.org/ItemList",
+      "kind": "standard"
+    },
+    "jsonPointer": {
+      "url": "https://www.rfc-editor.org/rfc/rfc6901",
+      "kind": "standard"
+    },
+    "prov": {
+      "url": "https://www.w3.org/TR/prov-o/",
+      "kind": "standard"
+    },
+    "sitemap": {
+      "url": "https://vedokrok.com/sitemap.xml",
+      "kind": "public-interface"
+    }
+  },
+  "evidence": {
+    "liveRefresh": {
+      "kind": "direct-public-http-observation",
+      "observedAt": "2026-10-12T06:27:59.596Z",
+      "scope": "Five public index/manifest files only; this refresh does not repeat the earlier complete file audit or tool smoke test.",
+      "files": [
+        {
+          "sourceId": "checksums",
+          "url": "https://vedokrok.com/data/checksums.json",
+          "httpStatus": 200,
+          "contentType": "application/json",
+          "sha256": "f0a7ce2d52b4740ad0bd3fccf29b1105cddecfaaf480d876bb4008391120eaf5",
+          "bytes": 288388,
+          "countField": "files",
+          "count": 1584
+        },
+        {
+          "sourceId": "schemas",
+          "url": "https://vedokrok.com/data/schema-index.json",
+          "httpStatus": 200,
+          "contentType": "application/json",
+          "sha256": "083f679015549a2be38512ff4f80b7c3b2c5e66d46632b5a860710f642f8d516",
+          "bytes": 5799,
+          "countField": "schemas",
+          "count": 20
+        },
+        {
+          "sourceId": "manifests",
+          "url": "https://vedokrok.com/data/collection-manifests.json",
+          "httpStatus": 200,
+          "contentType": "application/json",
+          "sha256": "e85413df3e0b1502237af32e8a03263ea2e2c9ce781042610723a9aac62a4943",
+          "bytes": 32262,
+          "countField": "manifests",
+          "count": 123
+        },
+        {
+          "sourceId": "profiles",
+          "url": "https://vedokrok.com/data/collection-profiles.json",
+          "httpStatus": 200,
+          "contentType": "application/json",
+          "sha256": "908d25332b426f00f4e596cf8f3c44fd79e2f2a6b279233c603f215b97462b83",
+          "bytes": 71427,
+          "countField": "profiles",
+          "count": 123
+        },
+        {
+          "sourceId": "history",
+          "url": "https://vedokrok.com/data/data-history.json",
+          "httpStatus": 200,
+          "contentType": "application/json",
+          "sha256": "1634e6601be01b24aa587bf2bee9bb61507f54931e9186779b0b900fe60e7f8a",
+          "bytes": 1162826,
+          "countField": "editions",
+          "count": 3
+        }
+      ]
+    },
+    "implementationSessionReport": {
+      "kind": "agent-reported-completed-checks",
+      "observedAt": "2026-10-12T06:15:58.091Z",
+      "checks": {
+        "localTestsPassed": 1613,
+        "publicJsonFilesVerified": 1584,
+        "mcpToolsSmokeTested": 14,
+        "responsiveWidthsPx": [
+          1280,
+          390,
+          320
+        ]
+      },
+      "hostedCi": "not-executed",
+      "limits": "Historical aggregate report from the implementation session. Raw logs and private repository records are excluded; these checks are not independently reproduced by this ARWP documentation change.",
+      "coverage": {
+        "publicIdeas": 1010,
+        "publicCollections": 123,
+        "agentPackDownloads": 124,
+        "projectDefinitions": 15,
+        "topicDefinitions": 15,
+        "registeredDatasets": 12,
+        "relationshipTypes": 19,
+        "ideasMissingAvoidWhen": 10,
+        "collectionKind": "collection"
+      }
+    },
+    "outcomes": {
+      "searchVisibility": {
+        "status": "not-measured",
+        "value": null
+      },
+      "aiCitations": {
+        "status": "not-measured",
+        "value": null
+      },
+      "traffic": {
+        "status": "not-measured",
+        "value": null
+      },
+      "businessResults": {
+        "status": "not-measured",
+        "value": null
+      },
+      "realUserTaskSuccess": {
+        "status": "not-measured",
+        "value": null
+      }
+    }
+  },
+  "lessons": [
+    {
+      "id": "one-vocabulary-many-surfaces",
+      "title": "Keep definitions in one place",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "A project definition feeds visible English copy, JSON and JSON-LD. Stable term URLs resolve to actual page anchors. Project format names use additionalType; about describes the real subject.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A site explains recurring project terms across pages and downloads.",
+        "verification": "Compare the displayed definition with the JSON value and resolve every term URL.",
+        "limit": "A project vocabulary is not automatically a universal taxonomy or a canonical knowledge unit."
+      },
+      "sourceIds": [
+        "vocabulary",
+        "topics",
+        "forAi"
+      ]
+    },
+    {
+      "id": "approved-projection-only",
+      "title": "Publish from an approved projection",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Website catalogs and agent downloads consume explicit released records after current availability filtering. Website metadata stays separate from the canonical knowledge corpus.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A repository contains authoring drafts, approved editions and withdrawn records.",
+        "verification": "Reject a missing approval binding; verify that held records never enter public membership or dependencies.",
+        "limit": "A valid schema, main branch or successful build does not grant publication authority."
+      },
+      "sourceIds": [
+        "catalogs",
+        "manifests"
+      ]
+    },
+    {
+      "id": "typed-edges-with-authority",
+      "title": "Say what each relationship means",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "The relationship dictionary defines direction, endpoint kinds and authority. Navigation, evidence and task orchestration edges remain distinguishable. A reference to a source is not a support verdict.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "Software traverses a graph that mixes knowledge and product navigation.",
+        "verification": "Resolve both endpoints and reject reversed source-to-claim edges or invented evidence roles.",
+        "limit": "Do not infer a reverse edge or promote website navigation to scientific evidence."
+      },
+      "sourceIds": [
+        "graph"
+      ]
+    },
+    {
+      "id": "exact-membership-overlap",
+      "title": "Count shared IDs before naming similarity",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Collection overlap uses shared stable idea IDs and retains zero-overlap pairs. Catalog topic membership comes from explicit selectors rather than inferred meanings.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A consumer needs to compare released collection membership.",
+        "verification": "Recompute intersections from the same approved snapshot, including empty intersections.",
+        "limit": "This measures shared membership, not semantic similarity, usefulness or quality."
+      },
+      "sourceIds": [
+        "overlaps",
+        "catalogs"
+      ]
+    },
+    {
+      "id": "standalone-contracts",
+      "title": "Give each public payload a contract",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "The public schema index exposes 20 JSON Schema contracts, including individual cards, collections, agent packs, manifests, profiles and run traces. Compatible optional fields keep existing consumers working.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "Several clients consume independently downloadable JSON files.",
+        "verification": "Validate real generated payloads as well as negative cases against the advertised schema; version breaking changes.",
+        "limit": "Shape validation does not prove accuracy, language quality or fitness for a task."
+      },
+      "sourceIds": [
+        "schemas",
+        "jsonSchema"
+      ]
+    },
+    {
+      "id": "hash-final-bytes",
+      "title": "Hash the file the client receives",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Download digests and byte counts are computed from the final serialized UTF-8 bytes, including the final newline. Parsed and reserialized JSON may have different bytes. Corpus snapshot identity and file identity are separate.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "Clients cache, verify or compare mutable website downloads.",
+        "verification": "Hash response bytes after HTTP content decoding; compare both SHA-256 and byte length.",
+        "limit": "A checksum detects byte mismatch. It is not a signature, source review or proof of truth."
+      },
+      "sourceIds": [
+        "checksums",
+        "dataDownload"
+      ]
+    },
+    {
+      "id": "avoid-manifest-self-reference",
+      "title": "Make checksum exclusions explicit",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "The checksum manifest covers public JSON payloads but excludes itself. A self-hash would make the file depend on its own unfinished bytes. Catalog download metadata follows the same boundary.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A generated manifest describes the files produced in the same build.",
+        "verification": "Check that all intended JSON files are listed once and the manifest explicitly declares its own exclusion.",
+        "limit": "The excluded file still needs an external trust or observation boundary when authenticity matters."
+      },
+      "sourceIds": [
+        "checksums",
+        "catalog"
+      ]
+    },
+    {
+      "id": "retain-history-without-source-prose",
+      "title": "Retain change history without reviving old content",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Explicit append-only checkpoints retain membership and hashed descriptors rather than archived knowledge prose. Builds read the ledger; an explicit checkpoint operation records a new edition before release.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "Old editions must remain identifiable while current notices still govern use.",
+        "verification": "Verify old edition payloads remain unchanged and the current built state has a retained checkpoint.",
+        "limit": "Removal alone does not explain retraction, uncertainty or retirement. Recording time is not deployment time."
+      },
+      "sourceIds": [
+        "history",
+        "checksums"
+      ]
+    },
+    {
+      "id": "thin-index-exact-manifest",
+      "title": "Let agents fetch one collection precisely",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Thin indexes lead to per-collection manifests with release and snapshot bindings, exact member versions, payload URLs, digests and sizes. Availability and notice URLs remain discoverable.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "An agent needs one collection without downloading the entire catalog.",
+        "verification": "Follow an index entry, resolve every member and compare its exact downloaded bytes with the manifest.",
+        "limit": "A hash-valid old edition may still have a current safety notice; identity is not continued approval."
+      },
+      "sourceIds": [
+        "manifests",
+        "checksums"
+      ]
+    },
+    {
+      "id": "conditions-keep-their-source",
+      "title": "Preserve conditions and missing values",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Profiles preserve each member’s use conditions, limits and source pointer. Agent-authored selection guidance is marked separately. Ten released ideas lacked avoid_when; flags describe that absence rather than inventing safety advice.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "Collections combine ideas with different applicability and exclusions.",
+        "verification": "Check provided flags and compare each condition with its released source field.",
+        "limit": "One member’s condition does not describe the whole collection. Missing avoidance text does not mean unrestricted use."
+      },
+      "sourceIds": [
+        "profiles"
+      ]
+    },
+    {
+      "id": "order-is-not-a-prerequisite",
+      "title": "Keep order separate from dependency",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Ordinary collections keep their supplied positions but declare sequence_required false. A suggested starting item is not a prerequisite. Learning paths and playbooks get different order semantics only when their released kind says so.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A UI or agent receives an ordered array of knowledge items.",
+        "verification": "Inspect the declared kind, position and sequence flags before asking the user to follow a fixed sequence.",
+        "limit": "Do not invent a course, workflow or learning dependency from display order. All 123 observed collections were ordinary collections."
+      },
+      "sourceIds": [
+        "profiles",
+        "manifests",
+        "itemList"
+      ]
+    },
+    {
+      "id": "explicit-dependencies-only",
+      "title": "Resolve dependencies from explicit edges",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Dependencies use explicit requires edges from the member to a currently public target, with version, data URL and within-collection status. The projection neither reverses edges nor invents a topological order.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A collection contains genuine prerequisites or references to other released items.",
+        "verification": "Check edge direction, target availability and exact target version; exclude held targets.",
+        "limit": "A related item or earlier position does not establish a prerequisite."
+      },
+      "sourceIds": [
+        "profiles",
+        "graph"
+      ]
+    },
+    {
+      "id": "trace-origin-not-verdict",
+      "title": "Trace where an output came from",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "An optional output trace distinguishes sourced summaries, agent reasoning, user input and observed results. It binds exact item versions and source locations to output locations; W3C PROV describes derivation separately from evidence support.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "An agent combines released knowledge with its own reasoning and user material.",
+        "verification": "Verify each declared source pointer against the pinned release and require an observation basis for observed results.",
+        "limit": "wasDerivedFrom does not mean supports. Complete trace coverage is not independent verification or a completed task."
+      },
+      "sourceIds": [
+        "trace",
+        "prov"
+      ]
+    },
+    {
+      "id": "strict-pointer-resolution",
+      "title": "Treat pointers as addresses",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Trace validation checks actual JSON Pointer resolution, including escape handling, array indexes and nonempty source readings. It rejects inherited object properties and invalid addresses.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A client cites exact input or output fields rather than whole documents.",
+        "verification": "Test invalid escapes, leading-zero array indexes, missing fields and inherited keys, alongside valid addresses.",
+        "limit": "A resolving pointer identifies a location; it does not prove the cited field justifies the output."
+      },
+      "sourceIds": [
+        "trace",
+        "jsonPointer"
+      ]
+    },
+    {
+      "id": "bound-before-extra-reads",
+      "title": "Bound supplemental references before fetching",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Trace processing limits supplemental entries before reading extra assets, then validates them against the current released items. This prevents a validation request from triggering unbounded additional reads.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "User-supplied references can cause extra server-side reads.",
+        "verification": "Exercise oversized input and confirm rejection occurs before supplemental asset access.",
+        "limit": "A shape-only fixture cannot establish runtime read bounds; inspect or instrument the actual access path."
+      },
+      "sourceIds": [
+        "trace"
+      ]
+    },
+    {
+      "id": "advertised-response-schema",
+      "title": "Validate what the tool advertises",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Final review caught a mismatch: the tool returned PROV data but its closed output schema did not permit that property. The response schema was corrected and success and failure responses were checked against it.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "An MCP client relies on the advertised output schema.",
+        "verification": "Validate actual returned structured content against the tool’s declared output schema, including error-shaped responses.",
+        "limit": "A handler-level pass can still leave standards-following clients unable to accept the result."
+      },
+      "sourceIds": [
+        "trace",
+        "prov"
+      ]
+    },
+    {
+      "id": "separate-release-proof",
+      "title": "Check source, build and live state separately",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "The implementation report records local checks, an exact source tree, deployment verification and a complete live checksum audit separately. Hosted CI executed no steps and was not reported as passing.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A local build passes but remote execution or deployment has a separate state.",
+        "verification": "Compare the released revision, public bytes and protocol behavior; record unavailable CI as not executed.",
+        "limit": "A commit, deployment submission or dry run alone does not establish the public state."
+      },
+      "sourceIds": [
+        "checksums",
+        "forAi"
+      ]
+    },
+    {
+      "id": "no-outcome-promotion",
+      "title": "Leave search and user outcomes unknown",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "These changes made downloads and tool responses inspectable. No controlled search, citation, traffic or task-success measurement accompanied this case. Synthetic protocol probes tested validation behavior only.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "Technical work is being recorded as reusable ARWP experience.",
+        "verification": "Keep unmeasured outcome values null and require a separately authorized, scoped observation before claiming improvement.",
+        "limit": "Do not turn this case into a ranking tactic, empirical efficacy claim or learned performance prior."
+      },
+      "sourceIds": [
+        "forAi",
+        "catalog"
+      ]
+    },
+    {
+      "id": "sitemap-index-consumers",
+      "title": "Teach consumers to follow the sitemap index",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "The website now uses a root sitemap index and five leaf sitemaps. Crawl audits and submission tooling were updated to read actual leaves rather than assume the root contains page URLs.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A growing catalog splits page URLs into multiple sitemaps.",
+        "verification": "Read the root, follow leaf sitemap URLs and compare the union with the intended public routes.",
+        "limit": "Splitting sitemaps changes a discovery interface; it does not prove crawling, indexing or ranking improvements."
+      },
+      "sourceIds": [
+        "sitemap",
+        "catalogs"
+      ]
+    },
+    {
+      "id": "serialized-catalog-parity",
+      "title": "Keep visible and machine catalog descriptions aligned",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Download descriptions in JSON-LD are enriched after public files are serialized, using their final bytes. Visible catalog links and hydration share the dataset definitions.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "A page describes downloads in visible text and machine-readable metadata.",
+        "verification": "Compare the built page, hydrated view and downloaded file metadata; reject mismatched catalog links or digests.",
+        "limit": "A valid static page can still disagree with the hydrated client or mutable downloads."
+      },
+      "sourceIds": [
+        "catalog",
+        "forAi",
+        "checksums"
+      ]
+    },
+    {
+      "id": "complete-method-readings",
+      "title": "Supply the source fields a trace needs",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "Solution Pack method downloads now include the full released reading fields, including conditions, evidence and sources, so a trace can resolve meaningful source locations.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "An agent must attribute output to a method and its conditions.",
+        "verification": "Resolve every referenced method field against the actual downloaded pack, not a richer internal record.",
+        "limit": "An item ID alone is not a usable reading pointer, and keeping a condition out of a compact download can change its meaning."
+      },
+      "sourceIds": [
+        "trace",
+        "schemas"
+      ]
+    },
+    {
+      "id": "classify-baseline-failures",
+      "title": "Locate a failed check before changing the gate",
+      "evidenceClass": "implementation-session-observation",
+      "finding": "An unrelated fresh-main UI change failed an existing design guard during integration. The implementation moved the misplaced storage access into the existing logic layer and retained the guard.",
+      "transfer": {
+        "status": "inferred-recommendation",
+        "whenApplicable": "Integration introduces a validation failure outside the new data files.",
+        "verification": "Identify the failing revision and rule, repair the actual layer boundary, then rerun the unchanged check.",
+        "limit": "A baseline failure does not justify weakening a check or attributing all failures to the current feature."
+      },
+      "sourceIds": [
+        "forAi"
+      ]
+    }
+  ]
+}
