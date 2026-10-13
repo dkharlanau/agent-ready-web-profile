@@ -64,6 +64,41 @@ assert.ok(report.actions.some(item => item.url === 'https://example.com/a' && /g
 assert.equal(report.guardrails.noPageRankApproximation, true);
 assert.equal(report.guardrails.linkCountNotCausality, true);
 
+{
+  const selfOnly = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root,'<a href="#main">Skip to content</a><main id="main">Root</main>'),
+    page(root+'self-only','<a href="#main">Skip to content</a><main id="main"><a href="/self-only/#part">Contents</a><h2 id="part">Part</h2></main>')
+  ]});
+  assert.equal(validateInternalDiscoveryReport(selfOnly).valid,true);
+  assert.equal(selfOnly.summary.ownerEdges,0);
+  assert.equal(selfOnly.summary.contextualOwnerEdges,0);
+  assert.deepEqual(selfOnly.gaps.withoutInbound,[root+'self-only']);
+  assert.ok(selfOnly.gaps.withoutContinuation.includes(root+'self-only'));
+  assert.ok(selfOnly.edges.some(e=>e.from===root+'self-only'&&e.to===root+'self-only'), 'self links stay in raw evidence');
+  const review=selfOnly.actions.find(a=>a.url===root+'self-only'&&a.id.startsWith('internal-discovery:inbound:'));
+  assert.equal(review.status,'review');assert.match(review.reason,/bounded cohort/);
+  assert.match(review.doesNotProve,/indexing/);
+
+  const linked = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root,'<nav><a href="/self-only">Reference</a></nav>'),
+    page(root+'self-only','<main><a href="#part">Contents</a><h2 id="part">Part</h2></main>')
+  ]});
+  assert.deepEqual(linked.gaps.withoutInbound,[]);
+  assert.deepEqual(linked.gaps.globalOnlyInbound,[root+'self-only']);
+  assert.equal(linked.summary.ownerEdges,1);
+  assert.equal(linked.summary.globalOwnerEdges,1);
+  assert.equal(linked.summary.contextualOwnerEdges,0);
+
+  const capped = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root,'<a href="#main">Skip</a><main id="main"><a href="/self-only">Reference beyond cap</a></main>',{maxLinksPerPage:1}),
+    page(root+'self-only','<main><a href="#part">Contents</a></main>')
+  ]});
+  assert.equal(capped.summary.gapEvaluationState,'partial');
+  assert.deepEqual(capped.gaps.withoutInbound,[]);
+  assert.deepEqual(capped.gaps.globalOnlyInbound,[]);
+  assert.equal(capped.actions.some(a=>a.id.startsWith('internal-discovery:inbound:')),false);
+}
+
 const edge = (from, to) => report.edges.find(item => item.from === from && item.to === to);
 assert.equal(edge(root, 'https://example.com/a').linkClass, 'global');
 assert.equal(edge(root, 'https://example.com/b').linkClass, 'contextual');

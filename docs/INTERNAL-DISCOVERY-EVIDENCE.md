@@ -48,6 +48,20 @@ The machine-readable contract is `schema/internal-discovery-report.schema.json`.
 
 No PageRank-like value, authority score, SEO score or combined graph grade is produced.
 
+### Same-page anchors and inbound evidence
+
+Links to the same normalized canonical owner, including skip links, table-of-contents
+anchors and self-navigation, remain in the raw `edges` observations. They are excluded
+from `summary.ownerEdges` and its link-class counts, inbound/global-only evaluation
+and contextual continuation. A page linking to itself cannot satisfy the existing
+requirement to observe a link from another canonical owner.
+
+This corrects the earlier self-link accounting in the same report contract. Compare
+implementation summaries only with their analyzer revision; the schema version alone
+does not establish identical calculation behavior. Primary Search/owner outcomes are
+unchanged. A missing inbound edge in a bounded cohort remains a review candidate,
+not proof of a sitewide orphan, and anchor-truncated observations still suppress gaps.
+
 ### Raw HTML classification boundary
 
 V0.1 uses structural HTML evidence conservatively:
