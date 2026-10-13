@@ -36,6 +36,23 @@ function check(report, id) {
 
 const home = 'https://example.com/';
 const guide = 'https://example.com/guide/';
+for (const [meta, headers, blocked] of [
+  [{robots:'NoNe'}, {}, true],
+  [{googlebot:'none'}, {}, true],
+  [{robots:'all, none'}, {}, true],
+  [{}, {xRobotsTag:'none'}, true],
+  [{}, {xRobotsTag:'googlebot: none'}, true],
+  [{robots:'max-image-preview:none'}, {}, false],
+  [{bingbot:'none'}, {}, false]
+]) {
+  const observed = analyzeTechnicalIntegrityFromPages({canonicalUrl:home,
+    pages:[page(home,html(meta),{headers})],
+    robots:{url:home+'robots.txt',ok:true,status:200,text:'User-agent: *\nAllow: /\n'}});
+  assert.equal(observed.pages[0].noindex,blocked);
+  assert.equal(check(observed,'search-indexability').status,blocked?'fail':'pass');
+  // Google's alias does not establish OpenAI's literal noindex control.
+  assert.equal(observed.pages[0].genericNoindex,false);
+}
 const cleanPages = [
   page(home, html({ title: 'Home', canonical: home })),
   page(guide, html({ title: 'Guide', canonical: guide }))

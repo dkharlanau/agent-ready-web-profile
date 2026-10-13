@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { buildSiteGateReport, formatSiteGateReport } from '../lib/site-gate.mjs';
+import { buildSiteGateReport, formatSiteGateReport, siteGate } from '../lib/site-gate.mjs';
 
 function page(url, extra = {}) {
   return {
@@ -111,5 +111,22 @@ assert.equal(
   googleBlocked.gates.find(gate => gate.id === 'eligibility-canonical').checks.find(check => check.id === 'crawler-access-intentional').status,
   'fail'
 );
+
+for(const [meta,header,blocked] of [
+  ['<meta name="robots" content="NoNe">','',true],
+  ['<meta name="googlebot" content="none">','',true],
+  ['<meta name="robots" content="all, none">','',true],
+  ['', 'none',true],
+  ['<meta name="robots" content="max-image-preview:none">','',false],
+  ['<meta name="bingbot" content="none">','',false]
+]) {
+  const markup=`<!doctype html><html><head><title>Example</title><link rel="canonical" href="${canonicalUrl}">${meta}</head><body><main><h1>Example</h1></main></body></html>`;
+  const observed=await siteGate(canonicalUrl,{maxPages:1,
+    resolveImpl:async()=>[{address:'93.184.216.34',family:4}],
+    fetchImpl:async url=>new Response(url===canonicalUrl?markup:'',{status:url===canonicalUrl?200:404,
+      headers:{'content-type':url===canonicalUrl?'text/html':'text/plain',...(url===canonicalUrl&&header?{'x-robots-tag':header}:{})}})});
+  assert.equal(observed.priorityPages[0].noindex,blocked);
+  assert.equal(observed.gates.find(g=>g.id==='eligibility-canonical').checks.find(c=>c.id==='indexability-canonical-sitemap-parity').status,blocked?'fail':'pass');
+}
 
 console.log('site-gate tests passed');
