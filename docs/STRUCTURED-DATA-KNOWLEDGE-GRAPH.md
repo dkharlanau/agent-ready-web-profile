@@ -25,6 +25,19 @@ Apply the layer in this order:
 
 A smaller coherent graph is preferable to a large contradictory graph.
 
+### Identity links and bounded observations
+
+A nested object containing only `@id`, `@type` and optional `@context` is
+reported as an `identity-reference`. It asserts an identity and type; it is not
+a complete description on which to demand name, publisher or licence facts.
+The analyzer retains its type for conflict checks. A reference alone does not
+count as observing the entity definition: if the definition is outside the
+supplied pages, relationship resolution remains an unverified bounded-sample
+finding. Supply the appropriate canonical page before prescribing a correction.
+Top-level sparse entities, anonymous typed objects and objects containing other
+properties still receive ordinary completeness checks. This classification is
+an ARWP audit convention, not a new JSON-LD validity or Google eligibility rule.
+
 ## Core graph patterns
 
 ### Site and publisher

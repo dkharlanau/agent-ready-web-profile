@@ -186,3 +186,50 @@ assert.match(documentation, /areaServed/);
 assert.match(documentation, /map embed is a user-interface aid/i);
 
 console.log(`PASS structured data knowledge graph contract: ${good.summary.entitiesObserved} observed good-fixture entities, ${broken.gaps.length} explicit broken-fixture findings`);
+
+const referencePage = graph => ({
+  url: 'https://graph.example.test/work',
+  html: `<h1>Work guide</h1><script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org', '@graph': graph
+  })}</script>`
+});
+const guide = {
+  '@type': 'WebPage', '@id': 'https://graph.example.test/work#page',
+  name: 'Work guide', url: 'https://graph.example.test/work',
+  about: { '@type': 'Dataset', '@id': 'https://graph.example.test/data#dataset' }
+};
+const refs = analyzeStructuredDataPages([referencePage([guide])]);
+assert.equal(refs.entities.find(e => e.family === 'dataset').observationRole, 'identity-reference');
+assert.ok(!refs.gaps.some(g => g.family === 'dataset' && g.code.startsWith('core-property-missing:')));
+assert.ok(refs.gaps.some(g => g.code === 'unresolved-internal-relation:about'),
+  'a typed identity link must not resolve its own unseen definition');
+const definition = {
+  '@type': 'Dataset', '@id': 'https://graph.example.test/data#dataset',
+  name: 'Shared data', description: 'A synthetic public dataset',
+  url: 'https://graph.example.test/data', license: 'https://graph.example.test/rights',
+  publisher: { '@type': 'Organization', '@id': 'https://graph.example.test/#publisher',
+    name: 'Shared data', url: 'https://graph.example.test/' }
+};
+const resolved = analyzeStructuredDataPages([
+  referencePage([guide]),
+  {url: 'https://graph.example.test/data', html: `<h1>Shared data</h1><script type="application/ld+json">${JSON.stringify(definition)}</script>`}
+]);
+assert.ok(!resolved.gaps.some(g => g.code === 'unresolved-internal-relation:about'));
+assert.ok(!resolved.gaps.some(g => g.code === 'conflicting-reused-id'));
+for (const sparse of [
+  {'@type': 'Dataset', '@id': 'https://graph.example.test/data#dataset'},
+  {'@type': 'Dataset', name: 'Work guide'}
+]) {
+  const report = analyzeStructuredDataPages([referencePage([sparse])]);
+  assert.ok(report.gaps.some(g => g.family === 'dataset' && g.code.startsWith('core-property-missing:')),
+    'standalone or anonymous sparse nodes remain incomplete definitions');
+}
+const embeddedDefinition = structuredClone(guide);
+embeddedDefinition.about.description = 'A partial definition, not only an identity link';
+assert.ok(analyzeStructuredDataPages([referencePage([embeddedDefinition])]).gaps.some(g =>
+  g.family === 'dataset' && g.code === 'core-property-missing:name'));
+const conflictingGuide = structuredClone(guide);
+conflictingGuide.about['@type'] = 'Organization';
+assert.ok(analyzeStructuredDataPages([referencePage([conflictingGuide, definition])]).gaps.some(g =>
+  g.code === 'conflicting-reused-id'), 'typed references retain conflicting type assertions');
+console.log('PASS identity references: unresolved, resolved, sparse-definition and type-conflict boundaries');
