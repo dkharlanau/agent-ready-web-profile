@@ -19,6 +19,25 @@ const page = (url, body, extra = {}) => ({
   ...extra
 });
 
+// A standalone none directive excludes a Google content owner; a preview
+// setting whose value is none does not.
+for (const [meta, headers, blocked] of [
+  ['<meta name="robots" content="NoNe">', {}, true],
+  ['<meta name="googlebot" content="none">', {}, true],
+  ['<meta name="robots" content="all, none">', {}, true],
+  ['', {xRobotsTag:'none'}, true],
+  ['<meta name="robots" content="max-image-preview:none">', {}, false],
+  ['<meta name="bingbot" content="none">', {}, false]
+]) {
+  const observed = analyzeInternalDiscoveryFromPages({canonicalUrl:root, pages:[page(root, '', {
+    headers, html:`<!doctype html><html><head>${meta}</head><body><main>Example</main></body></html>`
+  })]});
+  assert.equal(observed.nodes[0].noindex, blocked);
+  assert.equal(observed.nodes[0].nodeClass, blocked ? 'non-indexable-state' : 'canonical-owner');
+  assert.equal(observed.summary.canonicalOwners, blocked ? 0 : 1);
+  assert.equal(validateInternalDiscoveryReport(observed).valid, true);
+}
+
 const pages = [
   page(root, `
     <header><nav><a href="/a">Section A</a></nav></header>

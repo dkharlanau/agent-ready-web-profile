@@ -56,6 +56,15 @@ counterexamples cover the detector; private owner captures remain outside Git.
 
 Google's robots interpretation uses the most specific matching path rule; when equally specific rules conflict, the less restrictive `Allow` wins. Technical Integrity models that behavior for the sampled priority URLs.
 
+For Google indexing, a standalone `none` robots directive is equivalent to
+`noindex, nofollow`. Technical Integrity, Site Gate and Internal Discovery
+recognize it in generic/Googlebot meta directives and unscoped `X-Robots-Tag`
+values; Technical Integrity also uses its existing Googlebot-scoped header
+parser. A field value such as `max-image-preview:none` is not that directive.
+This Google interpretation is not transferred to OpenAI's documented literal
+`noindex` suppression control, and it does not prove a provider's actual index
+state. See [Google's robots directive specification](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#none).
+
 ### P1 — high-value technical review
 
 - **bounded retrieval footprint** — a document exceeding the configured audit budget is surfaced as a retrieval/performance review item, never silently converted into a Search failure;
