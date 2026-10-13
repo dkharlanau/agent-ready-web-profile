@@ -36,6 +36,29 @@ A release gate should execute against every declared sitemap HTML URL when tract
 
 Keep safety and editorial publication decisions intact. Never bulk-remove draft, medical-review, legal, archive, utility or duplicate exclusions just to increase the indexable count. Site Focus does not independently authorize noindex mutations.
 
+The optional Doctor owner `publicationPolicy` records version `0.1`, a 40-character
+`sourceRef`, actual ISO `observedAt`, and up to 100 exact same-site `pages` with
+`url`, `indexing: "excluded"`, and `basis` of `archive`, `draft`, `utility`,
+`duplicate` or `review_hold`. Wildcards, URL-prefix claims, cross-site URLs,
+duplicates, query/fragment URLs and malformed observations are rejected. Keep
+real policy observations and source captures private; the bundled owner example
+is synthetic and excluded from diagnosis.
+
+When the single P0 indexability finding is fully accounted for by successful,
+non-redirected sampled HTTP 200 pages with observed noindex and matching exact
+exclusions, Doctor selects **review-publication-policy**. It does not exempt the
+URLs, mutate the technical report, change FAIL to PASS, authenticate the owner's
+decision, or assert the cause of historical Search movement. Another P0 failure,
+uncovered URL, missing page evidence, access error or duplicate finding preserves
+ordinary blocker triage. Deployment revision disagreement still comes first.
+
+The context expires after seven days as a tool reuse policy, not a Google crawl
+delay. A declared expected revision must match `sourceRef`; without that revision
+the context is explicitly `unbound_revision_context`. Stale, future or mismatched
+policy metadata does not override the blocker. Before any correction verify the
+current source, live response and human publication decision. Preserve intended
+exclusions and choose an approved indexable cohort for acquisition work.
+
 ## 4. Access evidence must name the client and method
 
 Record method, user-agent label, timestamp, requested/final URL, status and relevant response headers for a probe. Avoid storing cookies, credentials or full private response bodies.
@@ -88,6 +111,46 @@ Safe decision order: owner-reported deployment mismatch → observed bounded P0 
 Use `--help` for options. Input files are capped at 1 MiB for owner data and 4 MiB for the technical report. **Do not commit private owner reports, property/query evidence or client logs to public GitHub**. JSON output can itself contain owner-derived stage descriptions and should be treated as private until reviewed for publication. No automated site writes, provider logins, rating scores or performance promises are part of this command.
 
 Regression: `npm run test:search-doctor`. The tool supplements the canonical Ptichi controlled-cohort proof milestone; it does not complete or replace that outcome review.
+## Local verification repairs
+
+The optional owner `repair` receipt separates a failed source check from a local
+candidate and a production release. It is a metadata contract for triage, not
+an executor, authenticated log validator or automatic approval service. See
+`templates/growth/search-repair-owner.example.json` for a synthetic example.
+
+Record the expected source SHA, unchanged required check IDs, clean baseline
+source SHA, actual check completion dates, exit codes, interruption signals and
+SHA256 command/log digests. Hash the exact configured command argument array as
+UTF-8 `JSON.stringify(command)`; a reused check ID with a changed command digest
+is mismatched evidence. Raw command arguments can remain private. A local
+candidate also names its base SHA, patch digest and
+every required post-change check. Keep real receipts, patches and logs private.
+The Doctor does not open the referenced logs or prove that their hashes are true.
+
+The decision distinguishes:
+
+- an owner-reported failing baseline: reproduce it in a bounded clean checkout
+  before claiming a defect or changing code;
+- an already passing, interrupted, dirty, mismatched, future-dated or stale
+  baseline: do not authorize a repair from it;
+- incomplete, failed or interrupted post-change checks: retain the limitation
+  and rerun the unchanged required contract;
+- a reported local candidate: review the actual source diff and baseline/post
+  logs, then follow a separately authorized release process.
+
+Seven days is a working receipt-reuse limit, not Google's indexing lag or a
+predicted outcome date. Rebuilding a report does not change its check dates.
+Synthetic receipts are excluded from all owner/outcome decisions. An observed
+deployment mismatch or bounded P0 public failure still takes precedence over a
+local repair receipt. Local PASS never means publication, indexing, citations,
+recommendations or revenue; obtain those observations separately.
+
+Preserve terminal failed runs and negative diagnoses. Create a new scoped repair
+task instead of reopening or acknowledging an old one. Source ownership comes
+from the generator/template/route chain. Restore a broken user capability, not
+arbitrary word count or metadata volume; do not weaken tests, remove publication
+holds or change source dates to make a loop appear successful.
+
 ## Existing implementation routes
 
 - `skills/arwp-growth-loop/SKILL.md`: overall research/implementation/measurement loop.

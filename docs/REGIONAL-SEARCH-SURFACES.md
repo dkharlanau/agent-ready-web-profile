@@ -1,6 +1,6 @@
 # Regional Search Surface Review
 
-Status: source-backed planning gate. Reviewed: 2026-09-09. Ranking/traffic impact: unmeasured.
+Status: source-backed planning gate. Reviewed: 2026-10-12. Ranking/traffic impact: unmeasured.
 
 Google documents Search experiences that are available only for particular company-base regions and query types. Goose treats this as an applicability problem before it treats it as an implementation problem.
 
@@ -29,12 +29,12 @@ Use the **company base** required by the provider documentation, not the operato
 
 ## What the gate currently knows
 
-The canonical source is `registry/regional-search-surfaces.json`. It captures the regional feature matrix documented by Google on 2026-09-08:
+The canonical source is `registry/regional-search-surfaces.json`. The current matrix was rechecked on 2026-10-12 and includes Google's 2026-09-18 addition of local-business queries to the Aggregator and Supplier units:
 
 | Market | Search experience | Query types |
 | --- | --- | --- |
-| EEA | Aggregator unit | hotels, flights, ground transportation, products |
-| EEA | Supplier unit | hotels, flights, ground transportation, products |
+| EEA | Aggregator unit | hotels, flights, ground transportation, local businesses, products |
+| EEA | Supplier unit | hotels, flights, ground transportation, local businesses, products |
 | EEA | Ecosystem carousel | weather, sports, finance, translate |
 | EEA | Job sites features | jobs |
 | Türkiye | Places sites features | hotels, local businesses |
@@ -93,3 +93,5 @@ Do not infer causality from a later impression increase. Do not create a cross-f
 This registry is intentionally small and provider-scoped. Regional Search experiences can change. Re-check the primary source before adding a new market, removing a feature, or turning a feature into an automated target-site transformation.
 
 Google added the consolidated regional-differences documentation on 2026-09-08 specifically to help publishers, businesses and aggregators understand country-specific availability, eligibility and participation. That is the evidence boundary for this first registry version; it is not a claim that the listed mechanisms are new ranking systems.
+
+Google's [18 September documentation update](https://developers.google.com/search/updates) added local-business query support to the [Aggregator unit](https://developers.google.com/search/docs/appearance/aggregator-unit) and [Supplier unit](https://developers.google.com/search/docs/appearance/supplier-unit). The source-watch keyword set now includes aggregator, supplier, regional and local-business topics so these changes are not silently omitted. Keyword matching creates a source-review candidate; it does not verify participation or promote a target-site change. Company location and business role still require owner confirmation.

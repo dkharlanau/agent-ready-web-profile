@@ -2,6 +2,18 @@
   "version": "0.1",
   "site": "https://example.com/",
   "dataStatus": "synthetic",
+  "publicationPolicy": {
+    "version": "0.1",
+    "sourceRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "observedAt": "2026-09-29T10:00:00Z",
+    "pages": [
+      {
+        "url": "https://example.com/archive/retained-reference",
+        "indexing": "excluded",
+        "basis": "archive"
+      }
+    ]
+  },
   "deployment": {
     "expectedRef": null,
     "liveRef": null,

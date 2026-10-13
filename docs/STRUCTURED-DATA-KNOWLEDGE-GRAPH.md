@@ -25,6 +25,19 @@ Apply the layer in this order:
 
 A smaller coherent graph is preferable to a large contradictory graph.
 
+### Identity links and bounded observations
+
+A nested object containing only `@id`, `@type` and optional `@context` is
+reported as an `identity-reference`. It asserts an identity and type; it is not
+a complete description on which to demand name, publisher or licence facts.
+The analyzer retains its type for conflict checks. A reference alone does not
+count as observing the entity definition: if the definition is outside the
+supplied pages, relationship resolution remains an unverified bounded-sample
+finding. Supply the appropriate canonical page before prescribing a correction.
+Top-level sparse entities, anonymous typed objects and objects containing other
+properties still receive ordinary completeness checks. This classification is
+an ARWP audit convention, not a new JSON-LD validity or Google eligibility rule.
+
 ## Core graph patterns
 
 ### Site and publisher
@@ -182,6 +195,15 @@ https://example.com/locations/minsk/#place
 ```
 
 Do not create a new ID for the same entity on every page. Do not reuse one ID for two materially different entities.
+
+A repeated ID may carry a short name in one block and a longer name in another
+when `alternateName` explicitly connects those names. The consistency check
+accepts exact declared aliases, including text arrays; it does not infer aliases
+from similar spelling, substrings or a shared generic label. A third unconnected
+name and differing type assertions still require review. Alias agreement does
+not verify the entity's truth, visible parity or provider eligibility.
+See [Schema.org alternateName](https://schema.org/alternateName) and the
+[JSON-LD rule for combining script blocks](https://www.w3.org/TR/json-ld11/#embedding-json-ld-in-html-documents).
 
 Nested value objects such as one-off `PostalAddress` or `GeoCoordinates` do not always need their own reusable `@id`.
 

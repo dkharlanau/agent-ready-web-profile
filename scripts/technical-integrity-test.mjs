@@ -285,4 +285,33 @@ assert.equal(check(openaiGoogleScopedNoindex, 'openai-search-crawl-policy').stat
 assert.equal(check(openaiGoogleScopedNoindex, 'openai-search-crawl-policy').unreadableNoindexCount, undefined);
 assert.match(check(openaiGoogleScopedNoindex, 'openai-search-crawl-policy').message, /robots blocking alone does not prove URL\/title suppression/i);
 
+// Invented streaming source: no private capture or real owner text is included.
+const streamedUrl = 'https://stream.example.test/';
+const streamed = analyzeTechnicalIntegrityFromPages({canonicalUrl:streamedUrl,pages:[page(streamedUrl,html({canonical:streamedUrl,body:
+  '<main><template id="B:1"></template><main><div class="loading"></div></main></main>'+
+  `<div hidden id="S:1"><h1>Completed task</h1><p>${'Evidence for the invented task. '.repeat(35)}</p><a href="/guide/">Guide</a></div>`+
+  '<script>const payload = "<a>fake anchor</a><main>fake main</main>";</script>'
+}))],robots:null});
+assert.ok(streamed.pages[0].textWords > 100);
+assert.equal(streamed.pages[0].textExtraction.scope,'document_fallback_empty_primary');
+assert.equal(streamed.pages[0].textExtraction.renderedVisibilityVerified,false);
+assert.equal(streamed.pages[0].links.anchors,1);
+assert.equal(streamed.pages[0].links.pseudoLinks,0);
+assert.match(check(streamed,'critical-content-textual').message,/verify rendered placement/i);
+assert.equal(check(streamed,'critical-content-textual').status,'watch');
+
+const nested = analyzeTechnicalIntegrityFromPages({canonicalUrl:streamedUrl,pages:[page(streamedUrl,html({canonical:streamedUrl,body:
+  `<main><main><p>Short nested section</p></main><p>${'The substantive outer section remains available. '.repeat(30)}</p><a title="x > y" href="/guide/">Guide</a></main>`+
+  '<template><template><a href="/inert/">Hidden</a></template><script>const fake="</template><a>fake</a>";</script></template>'
+}))],robots:null});
+assert.ok(nested.pages[0].textWords > 100);
+assert.equal(nested.pages[0].textExtraction.scope,'main');
+assert.equal(nested.pages[0].links.anchors,1);
+assert.equal(check(nested,'critical-content-textual').status,'pass');
+
+const footerOnly = analyzeTechnicalIntegrityFromPages({canonicalUrl:streamedUrl,pages:[page(streamedUrl,html({canonical:streamedUrl,body:
+  '<main></main><footer>'+ 'Invented footer boilerplate. '.repeat(40)+'</footer>'
+}))],robots:null});
+assert.equal(check(footerOnly,'critical-content-textual').status,'watch');
+assert.equal(footerOnly.pages[0].textExtraction.emptyPrimary,true);
 console.log('technical-integrity tests passed');

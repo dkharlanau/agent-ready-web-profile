@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { diagnoseSearchFailure, formatSearchFailureDiagnosis } from '../lib/search-failure-doctor.mjs';
+import { diagnoseSearchFailure, formatSearchFailureDiagnosis, assessRepairReceipt, assessPublicationPolicy } from '../lib/search-failure-doctor.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const site = 'https://example.com/project/';
@@ -133,6 +133,85 @@ const privateInput = owner({ site, internalQuery: 'CONFIDENTIAL_QUERY',
   search: { ...search({ impressions: 10, clicks: 0 }), query: 'CONFIDENTIAL_QUERY' }
 });
 assert.doesNotMatch(JSON.stringify(diagnoseSearchFailure({ site, owner: privateInput })), /CONFIDENTIAL_QUERY/);
+
+const repairNow='2026-01-03T12:00:00Z';
+const check=(id,exitCode,completedAt)=>({id,exitCode,signal:null,completedAt,logSha256:'b'.repeat(64),commandSha256:'f'.repeat(64)});
+const receipt={version:'0.1',sourceRef:'a'.repeat(40),requiredChecks:[{id:'verify',commandSha256:'f'.repeat(64)},{id:'links',commandSha256:'f'.repeat(64)}],baseline:{sourceRef:'a'.repeat(40),sourceDirty:false,check:check('verify',1,'2026-01-03T10:00:00Z')},
+  candidate:{baseRef:'a'.repeat(40),patchSha256:'c'.repeat(64),checks:[check('verify',0,'2026-01-03T11:00:00Z'),check('links',0,'2026-01-03T11:10:00Z')]}};
+assert.equal(assessRepairReceipt(receipt,{now:repairNow}).state,'reported_local_candidate');
+assert.equal(assessRepairReceipt(receipt,{now:repairNow}).evaluatedAt,repairNow);
+assert.equal(assessRepairReceipt(receipt,{now:repairNow}).baselineAt,receipt.baseline.check.completedAt);
+const candidate=diagnoseSearchFailure({site,owner:owner({repair:receipt,search:search({impressions:10})}),now:repairNow});
+assert.equal(candidate.primary.code,'review-local-repair');assert.equal(candidate.repair.searchEffect,'not_measured');assert.equal(candidate.repair.automaticPublication,false);
+assert.match(candidate.unknowns.join(' '),/does not authenticate or execute/);
+assert.equal(diagnoseSearchFailure({site,technical:technical([fail()]),owner:owner({repair:receipt}),now:repairNow}).primary.code,'review-technical-blocker','a local receipt cannot override public P0 evidence');
+assert.equal(diagnoseSearchFailure({site,owner:owner({repair:receipt,deployment:{expectedRef:'d'.repeat(40),liveRef:'e'.repeat(40)}}),now:repairNow}).primary.code,'verify-live-revision');
+assert.equal(diagnoseSearchFailure({site,owner:owner({repair:receipt,dataStatus:'synthetic'}),now:repairNow}).repair,null);
+for(const [state,edit] of [
+  ['failure_not_reproduced',r=>r.baseline.check.exitCode=0],
+  ['interrupted_baseline',r=>r.baseline.check.signal='SIGTERM'],
+  ['interrupted_baseline',r=>r.baseline.check.exitCode=null],
+  ['unmatched_or_dirty_baseline',r=>r.baseline.sourceDirty=true],
+  ['unmatched_or_dirty_baseline',r=>r.baseline.sourceRef='d'.repeat(40)],
+  ['unmatched_candidate',r=>r.candidate.baseRef='d'.repeat(40)],
+  ['unmatched_check_contract',r=>r.candidate.checks[0].commandSha256='e'.repeat(64)],
+  ['unmatched_check_contract',r=>r.baseline.check.commandSha256='e'.repeat(64)],
+  ['incomplete_candidate_checks',r=>r.candidate.checks.pop()],
+  ['failed_or_interrupted_candidate',r=>r.candidate.checks[0].exitCode=1],
+  ['failed_or_interrupted_candidate',r=>r.candidate.checks[0].signal='SIGTERM'],
+  ['candidate_predates_baseline',r=>r.candidate.checks[0].completedAt='2026-01-03T09:00:00Z'],
+  ['future_check_date',r=>r.candidate.checks[0].completedAt='2027-01-03T10:00:00Z'],
+  ['reported_failed_baseline',r=>delete r.candidate]
+]){const changed=structuredClone(receipt);edit(changed);assert.equal(assessRepairReceipt(changed,{now:repairNow}).state,state);}
+assert.equal(assessRepairReceipt(receipt,{now:'2026-01-20T12:00:00Z'}).state,'stale_baseline');
+assert.equal(assessRepairReceipt(receipt,{now:repairNow,expectedRef:'d'.repeat(40)}).state,'unmatched_or_dirty_baseline');
+for(const edit of [r=>r.requiredChecks.push(r.requiredChecks[0]),r=>r.candidate.checks.push(r.candidate.checks[0]),r=>r.baseline.check.completedAt='2026-02-30T00:00:00Z',r=>r.baseline.check.logSha256='not-a-digest',r=>r.candidate.checks[0].id='unregistered']){
+ const changed=structuredClone(receipt);edit(changed);assert.throws(()=>assessRepairReceipt(changed,{now:repairNow}));
+}
+const hidden=structuredClone(receipt);hidden.candidate.privateComment='PRIVATE_OWNER_NOTE';
+assert.doesNotMatch(JSON.stringify(diagnoseSearchFailure({site,owner:owner({repair:hidden}),now:repairNow})),/PRIVATE_OWNER_NOTE/);
+
+// Explicit synthetic publication exclusions remain review context, never PASS.
+const excludedUrl=site+'archive/retained',otherUrl=site+'public';
+const publicationPolicy={version:'0.1',sourceRef:'a'.repeat(40),observedAt:'2026-01-03T10:00:00Z',
+  pages:[{url:excludedUrl,indexing:'excluded',basis:'archive',privateNote:'PRIVATE_POLICY_NOTE'}]};
+const excludedAudit={...technical([{...fail(),evidence:[excludedUrl]}]),pages:[{url:excludedUrl,requestedUrl:excludedUrl,ok:true,status:200,noindex:true,redirected:false}]};
+const excludedBefore=structuredClone(excludedAudit);
+const policyResult=diagnoseSearchFailure({site,technical:excludedAudit,owner:owner({publicationPolicy}),now:repairNow});
+assert.equal(policyResult.primary.code,'review-publication-policy');assert.equal(policyResult.publicationPolicy.state,'unbound_revision_context');
+assert.equal(policyResult.stages.publicEligibility,'bounded-failure');assert.equal(policyResult.publicationPolicy.automaticExemption,false);
+assert.equal(policyResult.guardrails.noAutomaticSiteMutation,true);assert.deepEqual(excludedAudit,excludedBefore);
+assert.doesNotMatch(JSON.stringify(policyResult),/PRIVATE_POLICY_NOTE/);
+assert.match(policyResult.primary.hold,/not an audit PASS/);
+assert.equal(assessPublicationPolicy(publicationPolicy,{site,technical:excludedAudit,expectedRef:'a'.repeat(40),now:repairNow}).state,'exact_url_context');
+assert.equal(assessPublicationPolicy(publicationPolicy,{site,technical:excludedAudit,expectedRef:'b'.repeat(40),now:repairNow}).state,'source_mismatch');
+assert.equal(assessPublicationPolicy(publicationPolicy,{site,technical:excludedAudit,now:'2026-01-20T12:00:00Z'}).state,'stale_policy');
+assert.equal(assessPublicationPolicy({...publicationPolicy,observedAt:'2027-01-03T10:00:00Z'},{site,technical:excludedAudit,now:repairNow}).state,'future_policy');
+for(const edit of [
+ t=>t.checks.push({...fail(),id:'robots-path-access'}),
+ t=>t.checks.push({...fail(),evidence:[excludedUrl]}),
+ t=>t.checks[0].evidence=[],
+ t=>t.checks[0].evidence.push(otherUrl),
+ t=>t.pages[0].status=403,
+ t=>t.pages[0].redirected=true,
+ t=>t.pages[0].noindex=false,
+ t=>t.pages[0].ok=false,
+ t=>t.pages.push({...t.pages[0],url:otherUrl}),
+ t=>t.pages.push({...t.pages[0]}),
+ t=>delete t.pages
+]){
+ const changed=structuredClone(excludedAudit);edit(changed);
+ assert.equal(diagnoseSearchFailure({site,technical:changed,owner:owner({publicationPolicy}),now:repairNow}).primary.code,'review-technical-blocker');
+}
+for(const edit of [p=>p.pages.push(p.pages[0]),p=>p.pages[0].url='https://elsewhere.example.test/archive',
+ p=>p.pages[0].url='https://example.com/project-elsewhere/archive',p=>p.pages[0].url=excludedUrl+'?secret=x',
+ p=>p.pages[0].url=excludedUrl+'#fragment',p=>p.pages[0].indexing='indexable',p=>p.pages[0].basis='arbitrary',
+ p=>p.observedAt='2026-02-30T00:00:00Z',p=>p.sourceRef='not-a-ref']){
+ const changed=structuredClone(publicationPolicy);edit(changed);
+ assert.throws(()=>diagnoseSearchFailure({site,technical:excludedAudit,owner:owner({publicationPolicy:changed}),now:repairNow}));
+}
+assert.equal(diagnoseSearchFailure({site,technical:excludedAudit,owner:owner({publicationPolicy,dataStatus:'synthetic'}),now:repairNow}).publicationPolicy,null);
+assert.equal(diagnoseSearchFailure({site,technical:excludedAudit,owner:owner({publicationPolicy,deployment:{expectedRef:'a'.repeat(40),liveRef:'b'.repeat(40)}}),now:repairNow}).primary.code,'verify-live-revision');
 
 for (const input of [
   { site: 'http://example.com/' },

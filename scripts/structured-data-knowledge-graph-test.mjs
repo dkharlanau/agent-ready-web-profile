@@ -186,3 +186,76 @@ assert.match(documentation, /areaServed/);
 assert.match(documentation, /map embed is a user-interface aid/i);
 
 console.log(`PASS structured data knowledge graph contract: ${good.summary.entitiesObserved} observed good-fixture entities, ${broken.gaps.length} explicit broken-fixture findings`);
+
+const referencePage = graph => ({
+  url: 'https://graph.example.test/work',
+  html: `<h1>Work guide</h1><script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org', '@graph': graph
+  })}</script>`
+});
+const guide = {
+  '@type': 'WebPage', '@id': 'https://graph.example.test/work#page',
+  name: 'Work guide', url: 'https://graph.example.test/work',
+  about: { '@type': 'Dataset', '@id': 'https://graph.example.test/data#dataset' }
+};
+const refs = analyzeStructuredDataPages([referencePage([guide])]);
+assert.equal(refs.entities.find(e => e.family === 'dataset').observationRole, 'identity-reference');
+assert.ok(!refs.gaps.some(g => g.family === 'dataset' && g.code.startsWith('core-property-missing:')));
+assert.ok(refs.gaps.some(g => g.code === 'unresolved-internal-relation:about'),
+  'a typed identity link must not resolve its own unseen definition');
+const definition = {
+  '@type': 'Dataset', '@id': 'https://graph.example.test/data#dataset',
+  name: 'Shared data', description: 'A synthetic public dataset',
+  url: 'https://graph.example.test/data', license: 'https://graph.example.test/rights',
+  publisher: { '@type': 'Organization', '@id': 'https://graph.example.test/#publisher',
+    name: 'Shared data', url: 'https://graph.example.test/' }
+};
+const resolved = analyzeStructuredDataPages([
+  referencePage([guide]),
+  {url: 'https://graph.example.test/data', html: `<h1>Shared data</h1><script type="application/ld+json">${JSON.stringify(definition)}</script>`}
+]);
+assert.ok(!resolved.gaps.some(g => g.code === 'unresolved-internal-relation:about'));
+assert.ok(!resolved.gaps.some(g => g.code === 'conflicting-reused-id'));
+for (const sparse of [
+  {'@type': 'Dataset', '@id': 'https://graph.example.test/data#dataset'},
+  {'@type': 'Dataset', name: 'Work guide'}
+]) {
+  const report = analyzeStructuredDataPages([referencePage([sparse])]);
+  assert.ok(report.gaps.some(g => g.family === 'dataset' && g.code.startsWith('core-property-missing:')),
+    'standalone or anonymous sparse nodes remain incomplete definitions');
+}
+const embeddedDefinition = structuredClone(guide);
+embeddedDefinition.about.description = 'A partial definition, not only an identity link';
+assert.ok(analyzeStructuredDataPages([referencePage([embeddedDefinition])]).gaps.some(g =>
+  g.family === 'dataset' && g.code === 'core-property-missing:name'));
+const conflictingGuide = structuredClone(guide);
+conflictingGuide.about['@type'] = 'Organization';
+assert.ok(analyzeStructuredDataPages([referencePage([conflictingGuide, definition])]).gaps.some(g =>
+  g.code === 'conflicting-reused-id'), 'typed references retain conflicting type assertions');
+console.log('PASS identity references: unresolved, resolved, sparse-definition and type-conflict boundaries');
+
+const termId = 'https://identity.example.test/term#entity';
+const term = (name, extra = {}) => ({'@type': 'DefinedTerm', '@id': termId, name, ...extra});
+const aliasPage = nodes => ({url: 'https://identity.example.test/term',
+  html: '<h1>Evidence review</h1><p>Evidence review — a decision aid</p>' + nodes.map(node =>
+    '<script type="application/ld+json">' + JSON.stringify({'@context': 'https://schema.org', ...node}) + '</script>').join('')});
+const conflicts = pages => analyzeStructuredDataPages(pages).gaps.filter(g => g.code === 'conflicting-reused-id');
+const longName = 'Evidence review — a decision aid';
+assert.equal(conflicts([aliasPage([term(longName), term('Evidence review', {alternateName: longName})])]).length, 0,
+  'an explicit alternateName connects the two primary names across script blocks');
+assert.equal(conflicts([aliasPage([term(longName)]), {...aliasPage([term('Evidence review', {alternateName: ['Another label', longName]})]),
+  url: 'https://identity.example.test/catalog'}]).length, 0, 'declared text arrays work across observed pages');
+assert.equal(conflicts([aliasPage([term(' Evidence REVIEW '), term('Evidence review')])]).length, 0);
+assert.equal(conflicts([aliasPage([term(longName), term('Evidence review')])]).length, 1,
+  'a matching prefix is not an explicit alias');
+assert.equal(conflicts([aliasPage([term('First term', {alternateName: 'Common label'}),
+  term('Second term', {alternateName: 'Common label'})])]).length, 1,
+  'a shared alias alone cannot hide unrelated primary names');
+assert.equal(conflicts([aliasPage([term(longName), term('Evidence review', {alternateName: longName}), term('Unrelated term')])]).length, 1,
+  'a declared pair cannot hide an unconnected third primary name');
+assert.equal(conflicts([aliasPage([term(longName), term('Evidence review', {alternateName: longName, '@type': 'Organization'})])]).length, 1,
+  'alias agreement never suppresses a differing type assertion');
+assert.equal(conflicts([aliasPage([term(longName), term('Evidence review', {alternateName: {'@value': longName}})])]).length, 1,
+  'unsupported alias objects are not coerced into text or guessed');
+assert.equal(conflicts([aliasPage([term('Shared spelling', {alternateName: [' ', null, 12]}), term('Different spelling')])]).length, 1);
+console.log('PASS explicit aliases: same/cross-page, array, normalization, unconnected third name, type and no-inference boundaries');

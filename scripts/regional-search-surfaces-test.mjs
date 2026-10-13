@@ -12,8 +12,8 @@ import {
 
 const registry = loadRegionalSearchSurfaces();
 assert.equal(validateRegionalSearchSurfaces(registry).valid, true);
-assert.equal(registry.reviewedAt, '2026-09-09');
-assert.equal(registry.sourceLastUpdated, '2026-09-08');
+assert.equal(registry.reviewedAt, '2026-10-12');
+assert.equal(registry.sourceLastUpdated, '2026-09-18');
 assert.equal(registry.guardrails.regionalAvailabilityIsNotRankingFactor, true);
 assert.equal(registry.guardrails.noUniversalRegionalScore, true);
 assert.equal(registry.features.length, 9);
@@ -43,6 +43,16 @@ assert.deepEqual(eeaAggregator.matches.map(item => item.id), [
 
 const jobs = evaluateRegionalSearchSurfaces({ market: 'eea', queryTypes: 'jobs' }, registry);
 assert.deepEqual(jobs.matches.map(item => item.id), ['google-eea-job-sites']);
+
+// Synthetic declared scopes: the source update expands queries, not roles/markets.
+for(const [role,unit] of [['aggregator','google-eea-aggregator-unit'],['direct-supplier','google-eea-supplier-unit']]){
+  const local=evaluateRegionalSearchSurfaces({market:'eea',queryTypes:'local business',roles:role},registry);
+  assert.deepEqual(local.matches.map(item=>item.id),[unit,'google-eea-structured-data-carousel']);
+  assert.equal(local.status,'review');
+}
+const publisherLocal=evaluateRegionalSearchSurfaces({market:'eea',queryTypes:'local business',roles:'publisher'},registry);
+assert.deepEqual(publisherLocal.matches.map(item=>item.id),['google-eea-structured-data-carousel']);
+assert.equal(evaluateRegionalSearchSurfaces({market:'other',queryTypes:'local business',roles:'aggregator'},registry).status,'not-applicable');
 
 const turkiye = evaluateRegionalSearchSurfaces({ market: 'turkey', queryTypes: 'hotel,local business' }, registry);
 assert.deepEqual(turkiye.matches.map(item => item.id), [

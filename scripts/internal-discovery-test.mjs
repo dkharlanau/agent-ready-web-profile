@@ -72,6 +72,29 @@ assert.equal(edge(root, 'https://example.com/tool').linkClass, 'utility');
 assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
 
 {
+  const anchors = analyzeInternalDiscoveryFromPages({canonicalUrl:root,generatedAt:'2026-09-09T18:00:00Z',pages:[
+    page(root, `<main>
+      <a href="/image" aria-label="Accessible label"><img src="/diagram.webp" alt="Assembly &amp; inspection guide"></a>
+      <a href="/title" title="Part &lt;A&gt; reference"><img src="/icon.webp" alt=""></a>
+      <a href="/visible" title="Unused title"><img src="/decorative.webp" alt="Unused image text">Visible guide</a>
+      <a href="/empty" aria-label="Accessibility label only"><img src="/icon.webp" alt=""></a>
+      <a href="/multiple"><picture><source srcset="/diagram.webp" alt="Not an img alternative"><IMG alt='First diagram' src="/a.webp"></picture><img alt="Second > third" src="/b.webp"></a>
+      <a href="/ignored"><!-- <img alt="Comment text"> --><script>const s='<img alt="Script text">';</script><style>.x{content:'<img alt="Style text">'}</style><template><img alt="Template text"></template><img src="/decorative.webp" alt=""></a>
+      <a href="/bounded"><img alt="${'x'.repeat(550)}" src="/large.webp"></a>
+    </main>`)
+  ]});
+  const link=name=>anchors.edges.find(e=>e.to===root+name);
+  assert.equal(validateInternalDiscoveryReport(anchors).valid,true);
+  assert.equal(link('image').anchorText,'Assembly & inspection guide');
+  assert.equal(link('title').anchorText,'Part <A> reference');
+  assert.equal(link('visible').anchorText,'Visible guide');
+  assert.equal(link('empty').anchorText,null);
+  assert.equal(link('multiple').anchorText,'First diagram Second > third');
+  assert.equal(link('ignored').anchorText,null);
+  assert.equal(link('bounded').anchorText.length,500);
+}
+
+{
   const reordered = analyzeInternalDiscoveryFromPages({
     canonicalUrl: root,
     pages: [
