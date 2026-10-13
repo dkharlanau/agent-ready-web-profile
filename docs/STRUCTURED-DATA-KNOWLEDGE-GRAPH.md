@@ -196,6 +196,15 @@ https://example.com/locations/minsk/#place
 
 Do not create a new ID for the same entity on every page. Do not reuse one ID for two materially different entities.
 
+A repeated ID may carry a short name in one block and a longer name in another
+when `alternateName` explicitly connects those names. The consistency check
+accepts exact declared aliases, including text arrays; it does not infer aliases
+from similar spelling, substrings or a shared generic label. A third unconnected
+name and differing type assertions still require review. Alias agreement does
+not verify the entity's truth, visible parity or provider eligibility.
+See [Schema.org alternateName](https://schema.org/alternateName) and the
+[JSON-LD rule for combining script blocks](https://www.w3.org/TR/json-ld11/#embedding-json-ld-in-html-documents).
+
 Nested value objects such as one-off `PostalAddress` or `GeoCoordinates` do not always need their own reusable `@id`.
 
 ## Completeness is contextual
