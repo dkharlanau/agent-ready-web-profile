@@ -303,6 +303,21 @@ The owner report's property-level total appears as a **separate number**. It is 
 
 The collector's JSON is read locally: no Google API call, new account permission, new tracker, automatic export publication, conversion assumption or treatment expansion occurs here. Preserve owner evidence privately, and use the existing \`check-gsc\` command only when a **genuine date/page/query** full-window export is needed.
 
+### 3c. Read raw API request/response captures when joint exports are empty
+
+Real read-only Search Analytics API captures can return **page-only** rows while \`page+query\` and \`date+page+query\` requests return no rows. The \`check-capture\` command reviews such a local bundle without manufacturing a CSV or joining separate tables:
+
+\`\`\`bash
+node bin/arwp-cohort.mjs check-capture \\
+  knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json --production-ref=13b49e9a5faa9256b5bbded049caf33327abc240 \\
+  --deployment-date=2026-09-13 --as-of=2026-10-10 --final-through=YYYY-MM-DD --window-days=14 \\
+  --page-map=/private/ptichi-page-map.json --capture=/private/gsc-capture-bundle.json --output=/private/t14-capture-review.json
+\`\`\`
+
+The private bundle is \`{ "version":"0.1", "kind":"gsc-web-capture-bundle", "property":"<exact cohort site>", "captures":[...], "digest":"<optional sha256>" }\`. Each capture records the actual \`capturedAt\`, the raw \`request\` (\`startDate\`/\`endDate\` equal to the entire frozen window, \`searchType: "web"\`, \`dataState: "final"\`, \`dimensions\`, \`rowLimit\`), the raw \`response\` (\`rows\`, \`responseAggregationType\`) and \`pagination.complete: true\`. Supported grains: property aggregate, \`page\`, \`page+query\`, \`date+page+query\`; anything else is rejected. A declared digest is an integrity check over the capture content, rejected on mismatch — not Google authentication; the dates are owner claims too.
+
+The grains are reported **separately**: the property total is never added to or distributed over page rows, page-only rows never confirm the frozen query panel, and an empty query grain means the provider returned no rows — not absent demand. Duplicate rows, duplicate grains, incomplete pagination, wrong window/property/aggregation or non-final data fail closed. Members without returned rows remain unknown with \`null\`, never zero; no outcome or causal decision is made.
+
 ### 4. Make the *review* a separate decision
 
 Only after comparing a real baseline, treatment and control observations, full windows, independent production evidence, contamination, query-to-page fit and useful-task outcomes should the existing Growth Experiment / Recommendation Review mechanism record `keep`, `revise`, `continue-measuring`, `revert` or `retire`. An observed increase is not automatically causal. Preserve neutral, negative and withheld evidence; do not commit private Google exports or site-owner data into this public repository.

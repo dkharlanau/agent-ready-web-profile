@@ -11,6 +11,7 @@ import {
 import {
   createCohortPageMapTemplate,
   planCohortSearchObservation,
+  reviewCohortGscWebCapture,
   reviewCohortGscWebExport
 } from '../lib/cohort-search-observation.mjs';
 import { reviewCohortIndexInspection } from '../lib/cohort-index-observation.mjs';
@@ -77,6 +78,7 @@ function usage() {
     '  arwp-cohort plan <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD [--final-through=YYYY-MM-DD] [--json]',
     '  arwp-cohort page-map <cohort.json> [--output=private-map.json] [--json]',
     '  arwp-cohort check-gsc <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD --final-through=YYYY-MM-DD --window-days=14 --report-scope=web --export-start=YYYY-MM-DD --export-end=YYYY-MM-DD --page-map=private-map.json --export=private-web.csv [--output=private-review.json] [--json]',
+    '  arwp-cohort check-capture <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --as-of=YYYY-MM-DD [--final-through=YYYY-MM-DD] --window-days=14 --page-map=private-map.json --capture=private-capture-bundle.json [--output=private-capture-review.json] [--json]',
     '  arwp-cohort check-index <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --page-map=private-map.json --inspection=private-inspection.json [--output=private-index-review.json] [--json]',
     '  arwp-cohort compare-index <cohort.json> --before=private-index-review-a.json --after=private-index-review-b.json [--output=private-change-review.json] [--json]',
     '  arwp-cohort review-observer-web <cohort.json> --production-ref=SHA --deployment-date=YYYY-MM-DD --page-map=private-map.json --observer=private-observer.json [--output=private-web-review.json] [--json]',
@@ -90,6 +92,10 @@ function usage() {
     'Search Console WEB Search. It is NOT a generative-AI export and cannot verify',
     'that the CSV was exported from Search Console. The explicit private page map',
     'links exact canonical URLs to frozen treatment/control IDs. It never guesses URLs.',
+    'check-capture reads a local bundle of raw Search Analytics request/response JSON',
+    'captures. Property, page, page+query and date+page+query grains stay separate',
+    'and are never summed; a declared sha256 digest is an integrity check, not',
+    'Google authentication. An empty query grain is unknown demand, not zero.',
     '',
     'URL Inspection describes Googles indexed version, not live HTTP. check-index',
     'accepts either a dated Search recovery snapshot with current_url_inspection.rows',
@@ -311,6 +317,38 @@ async function main() {
       for (const check of review.nextChecks) console.log(' - ' + check);
       if (written) console.log('WROTE privacy-bounded review: ' + written);
       console.log('No indexing, traffic or causal outcome is claimed.');
+    }
+    return 0;
+  }
+
+  if (command === 'check-capture') {
+    const options = {
+      ...observeOptions(),
+      windowDays: optionRequired('window-days')
+    };
+    const pageMap = readJson(optionRequired('page-map'));
+    const bundle = readJson(optionRequired('capture'));
+    const review = reviewCohortGscWebCapture(cohort, pageMap, bundle, options);
+    const written = writeLocalJson(review, optionValue('output'));
+    if (jsonOutput) console.log(JSON.stringify({ ...review, written }, null, 2));
+    else {
+      console.log('Cohort GSC Web API capture: ' + review.cohortId);
+      console.log('Window: T' + review.window.days + '  ' + review.window.startDate + ' .. ' + review.window.endDate);
+      console.log('State: ' + review.status);
+      if (review.grains.property) {
+        console.log('Owner property total (separate population): ' + (review.grains.property.observed
+          ? review.grains.property.impressions + ' impressions / ' + review.grains.property.clicks + ' clicks'
+          : 'no rows returned'));
+      }
+      for (const grain of ['page', 'page-query', 'date-page-query']) {
+        const summary = review.grains[grain];
+        if (!summary) continue;
+        console.log(grain + ' grain: ' + summary.matchedCohortRows + '/' + summary.returnedRows
+          + ' rows matched; treatment ' + summary.treatment.returnedMembers + '/' + summary.treatment.frozenMembers
+          + ' members returned, control ' + summary.control.returnedMembers + '/' + summary.control.frozenMembers);
+      }
+      if (written) console.log('WROTE descriptive, privacy-bounded review: ' + written);
+      console.log('Grains stay separate; missing members are unknown, not zero; no outcome decision.');
     }
     return 0;
   }
