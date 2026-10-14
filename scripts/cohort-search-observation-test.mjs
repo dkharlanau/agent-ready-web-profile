@@ -5,9 +5,11 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  captureBundleDigest,
   createCohortPageMapTemplate,
   parseGscWebCsv,
   planCohortSearchObservation,
+  reviewCohortGscWebCapture,
   reviewCohortGscWebExport,
   validateCohortPageMap
 } from '../lib/cohort-search-observation.mjs';
@@ -183,4 +185,157 @@ try {
   fs.rmSync(tmp, { recursive: true, force: true });
 }
 
-console.log('PASS bounded Search observation planning, GSC Web CSV review, frozen page mapping, no-zero semantics and CLI gates');
+// Raw Search Analytics request/response capture bundle: page-only rows may exist
+// while both joint grains return nothing. Grains stay separate and unobserved
+// members stay unknown, never zero.
+const small = structuredClone(r2);
+small.site = 'https://capture.example.test/';
+small.treatment = small.treatment.slice(0, 3);
+small.control = small.control.slice(0, 2);
+const keptEntities = new Set([...small.treatment, ...small.control].map(member => member.entity));
+small.queryPanel.queries = small.queryPanel.queries.filter(query => query.targetEntities.every(entity => keptEntities.has(entity)));
+const smallMap = createCohortPageMapTemplate(small);
+for (const member of smallMap.members) member.url = small.site + 'page/' + member.id + '/';
+const smallById = new Map(smallMap.members.map(member => [member.id, member.url]));
+const captureOptions = { ...dates, windowDays: '14' };
+
+function capture(dimensions, rows, extra = {}) {
+  return {
+    capturedAt: '2026-10-10T12:00:00+00:00',
+    request: {
+      startDate: '2026-09-14', endDate: '2026-09-27',
+      searchType: 'web', dataState: 'final', dimensions, rowLimit: 25000,
+      ...(extra.request ?? {})
+    },
+    response: { ...(rows.length ? { rows } : {}), ...(extra.response ?? {}) },
+    pagination: { complete: true },
+    ...(extra.top ?? {})
+  };
+}
+const bundleOf = (captures, extra = {}) => ({
+  version: '0.1', kind: 'gsc-web-capture-bundle', property: small.site, captures, ...extra
+});
+
+const pageRows = [
+  { keys: [smallById.get('t01')], clicks: 2, impressions: 11 },
+  { keys: [smallById.get('c01')], clicks: 0, impressions: 5 },
+  { keys: [small.site + 'other/'], clicks: 1, impressions: 7 }
+];
+const captures = [
+  capture([], [{ clicks: 9, impressions: 120 }], { response: { responseAggregationType: 'byProperty' } }),
+  capture(['page'], pageRows, { response: { responseAggregationType: 'byPage' } }),
+  capture(['page', 'query'], []),
+  capture(['date', 'page', 'query'], [])
+];
+const captureReview = reviewCohortGscWebCapture(small, smallMap,
+  bundleOf(captures, { digest: captureBundleDigest(captures) }), captureOptions);
+assert.equal(captureReview.kind, 'cohort-gsc-web-capture-review');
+assert.equal(captureReview.status, 'descriptive-capture-review-only');
+assert.equal(captureReview.captureAuthenticatedByGoose, false);
+assert.equal(captureReview.digestDeclared, true);
+assert.equal(captureReview.noOutcomeDecision, true);
+assert.equal(captureReview.grains.property.population, 'property-aggregate');
+assert.equal(captureReview.grains.property.impressions, 120);
+assert.notEqual(captureReview.grains.property.impressions, 11 + 5 + 7,
+  'property total is a separate population, never the sum of the page sample');
+assert.equal(captureReview.grains.page.matchedCohortRows, 2);
+assert.equal(captureReview.grains.page.outsideCohortRows, 1);
+assert.equal(captureReview.grains.page.treatment.frozenMembers, 3);
+assert.equal(captureReview.grains.page.treatment.returnedMembers, 1);
+assert.equal(captureReview.grains.page.treatment.observedImpressions, 11);
+assert.equal(captureReview.grains.page.control.frozenMembers, 2);
+assert.equal(captureReview.grains.page.control.observedImpressions, 5);
+assert.deepEqual(captureReview.grains.page.treatment.notReturnedMemberIds, ['t02', 't03']);
+assert.equal(captureReview.grains['page-query'].returnedRows, 0);
+assert.equal(captureReview.grains['page-query'].treatment.observedImpressions, null,
+  'an empty joint query grain stays unknown and says nothing about demand');
+assert.equal(captureReview.grains['page-query'].frozenPanelQueryIdsNotReturned.length, small.queryPanel.queries.length);
+assert.equal(captureReview.grains['date-page-query'].treatment.returnedMembers, 0);
+const t01 = captureReview.members.find(member => member.id === 't01');
+assert.equal(t01.grains.page.impressions, 11);
+assert.equal(t01.grains['page-query'].impressions, null, 'page rows do not confirm the frozen query panel');
+const t02 = captureReview.members.find(member => member.id === 't02');
+assert.equal(t02.grains.page.state, 'not-returned-in-capture');
+assert.equal(t02.grains.page.impressions, null, 'unobserved member is unknown, not zero');
+assert.equal(captureReview.members.length, 5, 'an outside-cohort URL never becomes a cohort member');
+assert.ok(!JSON.stringify(captureReview).includes('capture.example.test/page/'), 'raw URLs stay out of the derived review');
+
+const mutateBundle = change => { const copy = structuredClone(bundleOf(captures)); change(copy); return copy; };
+const rejects = (change, pattern) => assert.throws(
+  () => reviewCohortGscWebCapture(small, smallMap, mutateBundle(change), captureOptions), pattern);
+const emptyCaptureReview = reviewCohortGscWebCapture(small, smallMap,
+  bundleOf([capture(['page'], [])]), captureOptions);
+assert.equal(emptyCaptureReview.status, 'no-capture-rows-returned');
+rejects(b => { b.captures[1].request.startDate = '2026-09-15'; }, /must equal the entire frozen observation window/);
+assert.throws(() => reviewCohortGscWebCapture(small, smallMap,
+  bundleOf(captures, { property: 'https://other.example.test/' }), captureOptions), /frozen cohort site/);
+assert.throws(() => reviewCohortGscWebCapture(small, smallMap,
+  bundleOf([capture(['query'], [])]), captureOptions), /unsupported dimensions grain/);
+rejects(b => { b.captures[1].response.responseAggregationType = 'byProperty'; }, /responseAggregationType must be byPage/);
+rejects(b => { b.captures[1].request.dataState = 'all'; }, /final provider data/);
+rejects(b => { b.captures[1].request.searchType = 'image'; }, /Web Search capture/);
+rejects(b => { b.captures[1].response.rows.push({ ...pageRows[0] }); }, /Duplicate page row/);
+rejects(b => { b.captures[1].pagination.complete = false; }, /pagination is incomplete/);
+assert.throws(() => reviewCohortGscWebCapture(small, smallMap,
+  bundleOf(captures, { digest: '0'.repeat(64) }), captureOptions), /digest mismatch/);
+rejects(b => { b.captures.push(capture(['page'], [])); }, /Duplicate capture/);
+rejects(b => {
+  b.captures[3].response.rows = [{ keys: ['2026-09-28', smallById.get('t01'), 'late query'], clicks: 1, impressions: 1 }];
+  b.captures[3].response.responseAggregationType = 'byPage';
+}, /outside the explicitly requested window/);
+// Google returns keys in request order; auto requests resolve to byPage here.
+for (const dimensions of [['page', 'query'], ['query', 'page'], ['date', 'page', 'query'], ['query', 'date', 'page']]) {
+  const values = { page: smallById.get('t01'), query: small.queryPanel.queries[0].text, date: '2026-09-14' };
+  const native = capture(dimensions, [{ keys: dimensions.map(d => values[d]), clicks: 1, impressions: 3 }],
+    { request: { type: 'web', aggregationType: 'auto' }, response: { responseAggregationType: 'byPage' } });
+  delete native.request.searchType;
+  const reviewed = reviewCohortGscWebCapture(small, smallMap, bundleOf([native]), captureOptions);
+  const grain = dimensions.includes('date') ? 'date-page-query' : 'page-query';
+  assert.equal(reviewed.grains[grain].treatment.observedImpressions, 3);
+  assert.equal(reviewed.members.find(m => m.id === 't01').grains[grain].frozenPanelImpressions, 3);
+}
+rejects(b => { b.captures[1].request.type = 'image'; }, /consistent type/);
+rejects(b => { b.captures[1].request.startRow = 1; }, /startRow must be zero/);
+rejects(b => { b.captures[1].request.aggregationType = 'byProperty'; }, /request aggregation conflicts/);
+rejects(b => { b.captures[0].request.dimensionFilterGroups = [{ groupType: 'and', filters: [{ dimension: 'country', expression: 'USA' }] }]; }, /whole-property aggregate/);
+const filteredPage = structuredClone(captures[1]);
+filteredPage.request.dimensionFilterGroups = [{ groupType: 'and', filters: [{ dimension: 'country', expression: 'USA' }] }];
+assert.equal(reviewCohortGscWebCapture(small, smallMap, bundleOf([filteredPage]), captureOptions).grains.page.filtered, true);
+const timestampCaptures = structuredClone(captures);
+timestampCaptures[0].capturedAt = '2026-10-10T16:00:00+05:00'; // 11:00 UTC, before the others at 12:00 UTC
+assert.equal(reviewCohortGscWebCapture(small, smallMap, bundleOf(timestampCaptures), captureOptions).capturedAtLatest, '2026-10-10T12:00:00+00:00');
+assert.throws(() => reviewCohortGscWebCapture(small, smallMap, bundleOf(captures),
+  { ...captureOptions, productionRef: '0'.repeat(40) }), /production HOLD/);
+assert.throws(() => reviewCohortGscWebCapture(historical, smallMap, bundleOf(captures),
+  { ...captureOptions, productionRef: historical.measurementGate.implementationRef }), /production HOLD/);
+
+const tmpCapture = fs.mkdtempSync(path.join(os.tmpdir(), 'goose-capture-'));
+try {
+  const cohortFixture = path.join(tmpCapture, 'cohort.json');
+  const mapPath = path.join(tmpCapture, 'map.json');
+  const bundlePath = path.join(tmpCapture, 'capture.json');
+  const outPath = path.join(tmpCapture, 'review.json');
+  fs.writeFileSync(cohortFixture, JSON.stringify(small));
+  fs.writeFileSync(mapPath, JSON.stringify(smallMap));
+  fs.writeFileSync(bundlePath, JSON.stringify(bundleOf(captures, { digest: captureBundleDigest(captures) })));
+  const cli = path.join(root, 'bin/arwp-cohort.mjs');
+  const run = (...argv) => spawnSync(process.execPath, [cli, ...argv], { cwd: root, encoding: 'utf8' });
+  let result = run('check-capture', cohortFixture,
+    '--production-ref=' + ref, '--deployment-date=2026-09-13', '--as-of=2026-10-10',
+    '--final-through=2026-10-08', '--window-days=14',
+    '--page-map=' + mapPath, '--capture=' + bundlePath, '--output=' + outPath, '--json');
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(JSON.parse(result.stdout).grains.page.treatment.observedImpressions, 11);
+  assert.equal(JSON.parse(fs.readFileSync(outPath, 'utf8')).noOutcomeDecision, true);
+  result = run('check-capture', cohortFixture,
+    '--production-ref=' + ref, '--deployment-date=2026-09-13', '--as-of=2026-10-10',
+    '--final-through=2026-10-08', '--window-days=14',
+    '--page-map=' + mapPath, '--capture=' + bundlePath, '--output=' + outPath);
+  assert.equal(result.status, 1, 'existing evidence outputs must never be silently overwritten');
+  result = run('check-capture', cohortFixture, '--production-ref=' + ref);
+  assert.equal(result.status, 1, 'missing required owner provenance must fail closed');
+} finally {
+  fs.rmSync(tmpCapture, { recursive: true, force: true });
+}
+
+console.log('PASS bounded Search observation planning, GSC Web CSV review, raw API capture grains, frozen page mapping, no-zero semantics and CLI gates');
