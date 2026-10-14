@@ -281,8 +281,29 @@ assert.throws(() => reviewCohortGscWebCapture(small, smallMap,
 rejects(b => { b.captures.push(capture(['page'], [])); }, /Duplicate capture/);
 rejects(b => {
   b.captures[3].response.rows = [{ keys: ['2026-09-28', smallById.get('t01'), 'late query'], clicks: 1, impressions: 1 }];
-  b.captures[3].response.responseAggregationType = 'auto';
+  b.captures[3].response.responseAggregationType = 'byPage';
 }, /outside the explicitly requested window/);
+// Google returns keys in request order; auto requests resolve to byPage here.
+for (const dimensions of [['page', 'query'], ['query', 'page'], ['date', 'page', 'query'], ['query', 'date', 'page']]) {
+  const values = { page: smallById.get('t01'), query: small.queryPanel.queries[0].text, date: '2026-09-14' };
+  const native = capture(dimensions, [{ keys: dimensions.map(d => values[d]), clicks: 1, impressions: 3 }],
+    { request: { type: 'web', aggregationType: 'auto' }, response: { responseAggregationType: 'byPage' } });
+  delete native.request.searchType;
+  const reviewed = reviewCohortGscWebCapture(small, smallMap, bundleOf([native]), captureOptions);
+  const grain = dimensions.includes('date') ? 'date-page-query' : 'page-query';
+  assert.equal(reviewed.grains[grain].treatment.observedImpressions, 3);
+  assert.equal(reviewed.members.find(m => m.id === 't01').grains[grain].frozenPanelImpressions, 3);
+}
+rejects(b => { b.captures[1].request.type = 'image'; }, /consistent type/);
+rejects(b => { b.captures[1].request.startRow = 1; }, /startRow must be zero/);
+rejects(b => { b.captures[1].request.aggregationType = 'byProperty'; }, /request aggregation conflicts/);
+rejects(b => { b.captures[0].request.dimensionFilterGroups = [{ groupType: 'and', filters: [{ dimension: 'country', expression: 'USA' }] }]; }, /whole-property aggregate/);
+const filteredPage = structuredClone(captures[1]);
+filteredPage.request.dimensionFilterGroups = [{ groupType: 'and', filters: [{ dimension: 'country', expression: 'USA' }] }];
+assert.equal(reviewCohortGscWebCapture(small, smallMap, bundleOf([filteredPage]), captureOptions).grains.page.filtered, true);
+const timestampCaptures = structuredClone(captures);
+timestampCaptures[0].capturedAt = '2026-10-10T16:00:00+05:00'; // 11:00 UTC, before the others at 12:00 UTC
+assert.equal(reviewCohortGscWebCapture(small, smallMap, bundleOf(timestampCaptures), captureOptions).capturedAtLatest, '2026-10-10T12:00:00+00:00');
 assert.throws(() => reviewCohortGscWebCapture(small, smallMap, bundleOf(captures),
   { ...captureOptions, productionRef: '0'.repeat(40) }), /production HOLD/);
 assert.throws(() => reviewCohortGscWebCapture(historical, smallMap, bundleOf(captures),
