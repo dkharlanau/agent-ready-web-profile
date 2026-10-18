@@ -22,12 +22,8 @@ function searchText(tactic) {
   const sources = tactic.source_ids.map(id => sourceMap.get(id)).filter(Boolean);
   return [
     tactic.id,
-    tactic.title,
-    tactic.problem,
     categoryMap.get(tactic.category),
     ...(tactic.applicability || []),
-    ...(tactic.implementation || []).slice(0, 1),
-    ...(tactic.verification || []).slice(0, 1),
     ...sources.map(source => source.title)
   ].filter(Boolean).join(' ').toLowerCase();
 }
