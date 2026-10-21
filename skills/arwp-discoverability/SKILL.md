@@ -40,6 +40,11 @@ For substantive factual content, record an editorial receipt and run `arwp edito
 
 ## Close the loop
 
+For index-measurement completeness, public repository interest, MCP task delivery,
+identity-reference boundaries and reusable task outputs, read
+[the research expansion](../../docs/DISCOVERABILITY-EXPANSION.md). Select from the
+existing corpus; do not create a parallel score or automatically launch its pilots.
+
 Validate the actual generated output and the user journey. Apply changes within the user's existing authorization. Record local validation, commit, release and verified live exposure as separate states; a generated manifest is not live adoption.
 
 Freeze the page/query cohort and useful-action definition before observing results. Keep technical checks, search impressions/clicks, AI citations/recommendations and product actions separate. Use comparable complete windows; represent missing access and unmeasured outcomes explicitly. AI checks need exact prompts, model/surface, date, locale, citations and raw answer evidence; a brand-seeded prompt is not an unprompted recommendation. See [measurement protocol](../../docs/DISCOVERABILITY-BENCHMARKS.md).

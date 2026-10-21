@@ -145,4 +145,23 @@ assert.equal(presentTopic.topicRequiresReview, false);
 assert.equal(presentTopic.topicEvidence.matchedTermCount, 1);
 assert.equal(topicReport.summary.failed, 0, 'missing topic is not a network failure');
 
+
+// Product Search UI announcements may never appear in Search Central's
+// technical-documentation feed. Keep that category as a distinct input.
+const productSource=loadTrendWatchConfig().sources.find(s=>s.id==='google-search-product-feed');
+assert.equal(productSource.provider,'google');
+assert.equal(productSource.kind,'feed');
+assert.equal(productSource.url,'https://blog.google/products-and-platforms/products/search/rss/');
+assert.equal(productSource.reviewedThrough,'2026-10-14');
+assert.match(productSource.note,/UI rollout.*publisher requirements/);
+const productFeed=`<rss><channel><item><title>Useful source links</title><link>https://news.example.test/search-links</link><pubDate>Thu, 15 Oct 2026 10:00:00 GMT</pubDate><description>Fictional product announcement.</description></item><item><title>Old product news</title><link>https://news.example.test/old</link><pubDate>Tue, 13 Oct 2026 10:00:00 GMT</pubDate></item></channel></rss>`;
+const productReport=await runTrendSourceWatch({sources:[{...productSource,url:'https://news.example.test/search/rss/'}]},
+ {fetchImpl:async()=>({ok:true,status:200,url:'https://news.example.test/search/rss/',text:async()=>productFeed,headers:new Headers({'content-type':'application/rss+xml'})})});
+assert.equal(productReport.results[0].feedStatus,'collected');
+assert.equal(productReport.results[0].feedEntryCount,2);
+assert.equal(productReport.candidates.length,1);
+assert.equal(productReport.candidates[0].sourceId,productSource.id);
+assert.equal(productReport.candidates[0].url,'https://news.example.test/search-links');
+assert.equal(productReport.candidates[0].type,'feed-item');
+
 console.log('PASS trend-source-watch-test');

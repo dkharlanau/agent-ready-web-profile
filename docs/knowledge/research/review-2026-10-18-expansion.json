@@ -1,0 +1,288 @@
+{
+  "version": "1.0.0",
+  "reviewed_at": "2026-10-18",
+  "method": "agent-assisted",
+  "disclosure": "source-available / public methodology",
+  "scope": "Public guidance and reversible implementation proposals. No owner observations, learned priors, causal outcomes or runtime certification.",
+  "previous_corpus": "1.13.0",
+  "corpus": "1.14.0",
+  "policy": {
+    "noAutomaticAdoption": true,
+    "noTargetMutation": true,
+    "noOutcomeDecision": true
+  },
+  "directions": [
+    "access",
+    "agents",
+    "architecture",
+    "documentation",
+    "entities",
+    "experience",
+    "experiments",
+    "governance",
+    "measurement",
+    "repositories",
+    "services"
+  ],
+  "added": [
+    {
+      "id": "arwp-measurement-inspection-resume",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-api-limits"
+      ],
+      "why_distinct": "A quota interruption can make a smaller successful sample look like index loss."
+    },
+    {
+      "id": "arwp-measurement-index-live-separation",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-inspection-api"
+      ],
+      "why_distinct": "A healthy page today does not explain which revision Google indexed."
+    },
+    {
+      "id": "arwp-measurement-last-crawl-boundary",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-inspection-result"
+      ],
+      "why_distinct": "A crawl timestamp cannot establish the deployed revision or treatment exposure."
+    },
+    {
+      "id": "arwp-access-verified-crawler-logs",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-verify-crawler"
+      ],
+      "why_distinct": "A claimed Googlebot user agent is not enough to identify Google traffic."
+    },
+    {
+      "id": "arwp-access-render-resource-diff",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-js-debug"
+      ],
+      "why_distinct": "An initial response can be healthy while a critical script or data request fails."
+    },
+    {
+      "id": "arwp-architecture-sitemap-inventory-completeness",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-sitemap-index"
+      ],
+      "why_distinct": "A truncated sitemap response silently changes the index denominator."
+    },
+    {
+      "id": "arwp-repositories-topic-fit",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-topics"
+      ],
+      "why_distinct": "A public repository may be hard to find under the terms its users recognize."
+    },
+    {
+      "id": "arwp-repositories-preview-task",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-social-preview"
+      ],
+      "why_distinct": "A decorative image can obscure what a shared repository actually does."
+    },
+    {
+      "id": "arwp-repositories-traffic-archive",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-traffic-api"
+      ],
+      "why_distinct": "Rolling traffic exports overlap and cannot be added as independent weeks."
+    },
+    {
+      "id": "arwp-repositories-ci-interest-boundary",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-workflow-runs",
+        "github-traffic-api"
+      ],
+      "why_distinct": "Own automation can coincide with a clone spike without revealing who cloned."
+    },
+    {
+      "id": "arwp-agents-text-structured-parity",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-tools-20251125"
+      ],
+      "why_distinct": "A tool can return full structured data while its text hides the steps or limits."
+    },
+    {
+      "id": "arwp-agents-pagination-completeness",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-pagination-20251125"
+      ],
+      "why_distinct": "The first page of tools or resources is not necessarily the full inventory."
+    },
+    {
+      "id": "arwp-agents-negative-task-contract",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-tools-20251125"
+      ],
+      "why_distinct": "A transport error and an empty domain result require different next steps."
+    },
+    {
+      "id": "arwp-agents-resource-read-path",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-resources-20251125"
+      ],
+      "why_distinct": "A discoverable resource URI may still be unusable in the intended client."
+    },
+    {
+      "id": "arwp-agents-annotation-authority",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-risk-annotations"
+      ],
+      "why_distinct": "An advertised read-only hint cannot authorize a write or make returned content trusted."
+    },
+    {
+      "id": "arwp-agents-interface-baseline",
+      "evidence_level": "experimental",
+      "source_ids": [
+        "mcp-resources-20251125"
+      ],
+      "why_distinct": "A new protocol may duplicate a simpler interface without improving the task."
+    },
+    {
+      "id": "arwp-entities-reference-shape",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "jsonld"
+      ],
+      "why_distinct": "A short @id link can be misdiagnosed as a missing-name or missing-license object."
+    },
+    {
+      "id": "arwp-entities-homonym-scope",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "schema-term"
+      ],
+      "why_distinct": "Matching labels can wrongly merge concepts from different domains."
+    },
+    {
+      "id": "arwp-entities-provenance-role",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "prov-o"
+      ],
+      "why_distinct": "A derived-from relation does not say a result is true or independently verified."
+    },
+    {
+      "id": "arwp-entities-language-map-boundary",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "jsonld"
+      ],
+      "why_distinct": "A language-tagged entity label does not create a localized answer page."
+    },
+    {
+      "id": "arwp-experiments-shareable-input-state",
+      "evidence_level": "experimental",
+      "source_ids": [
+        "mdn-url-params"
+      ],
+      "why_distinct": "An interactive example loses its value if the visitor cannot return to the same inputs."
+    },
+    {
+      "id": "arwp-experience-local-state-recovery",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mdn-storage-limits"
+      ],
+      "why_distinct": "A saved badge can hide data that will disappear on eviction or a new device."
+    },
+    {
+      "id": "arwp-documentation-artifact-roundtrip",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mdn-download-anchor"
+      ],
+      "why_distinct": "A successful download click is not the useful outcome promised by the page."
+    },
+    {
+      "id": "arwp-services-timezone-handoff",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mdn-local-datetime"
+      ],
+      "why_distinct": "A local time input can be interpreted in a different zone by the provider."
+    },
+    {
+      "id": "arwp-documentation-subscription-delta",
+      "evidence_level": "experimental",
+      "source_ids": [
+        "atom-feed"
+      ],
+      "why_distinct": "Readers may benefit from a maintained artifact without revisiting a catalog."
+    },
+    {
+      "id": "arwp-governance-distribution-scope",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "data-web"
+      ],
+      "why_distinct": "A reusable sample can accidentally include private inputs or unsupported redistribution rights."
+    },
+    {
+      "id": "arwp-measurement-search-grain-reconciliation",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-api"
+      ],
+      "why_distinct": "Filtered page/query rows may not reproduce property totals or reveal all demand."
+    },
+    {
+      "id": "arwp-experiments-confounder-ledger",
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-drops"
+      ],
+      "why_distinct": "A successful release and a rising chart do not isolate the reason for the movement."
+    }
+  ],
+  "reuse_instead_of_duplicate": [
+    {
+      "idea": "Special AI schema or llms.txt as a ranking shortcut",
+      "decision": "Do not add a rule; reuse access, snippet and optional llms-index patterns. No provider ranking support."
+    },
+    {
+      "idea": "More internal links for every unknown-to-Google URL",
+      "decision": "Reuse bounded internal discovery; require an actual missing useful path before changing a site."
+    },
+    {
+      "idea": "A large new agent gateway or recommendation score",
+      "decision": "Defer platform expansion; first test a real task against the existing HTML and MCP paths."
+    },
+    {
+      "idea": "A page for every query or translated label",
+      "decision": "Reject keyword-only expansion; use existing intent ownership and real translated-answer coverage."
+    },
+    {
+      "idea": "Pilot one reusable recipe inside the strongest existing page",
+      "decision": "Reuse arwp-experiments-useful-artifact; this proposal adds no distinct implementation contract."
+    },
+    {
+      "idea": "Show where a useful recommendation changes with constraints",
+      "decision": "Reuse arwp-comparisons-decision-threshold; this proposal adds no distinct implementation contract."
+    },
+    {
+      "idea": "Pilot review only when an answer-changing dependency moves",
+      "decision": "Reuse arwp-governance-review-trigger; this proposal adds no distinct implementation contract."
+    },
+    {
+      "idea": "Stop expansion when the next page has no distinct useful job",
+      "decision": "Reuse arwp-architecture-intent-owner; this proposal adds no distinct implementation contract."
+    }
+  ]
+}

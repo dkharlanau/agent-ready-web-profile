@@ -91,6 +91,16 @@
       ]
     },
     {
+      "id": "google-search-product-feed",
+      "provider": "google",
+      "kind": "feed",
+      "url": "https://blog.google/products-and-platforms/products/search/rss/",
+      "reviewedThrough": "2026-10-14",
+      "trendIds": [],
+      "keywords": [],
+      "note": "Product Search announcements complement Search Central technical updates. This category feed can include related Google products; review applicability and distinguish a UI rollout or experiment from publisher requirements, actual target availability and Search outcome evidence. A feed candidate is not an adopted practice."
+    },
+    {
       "id": "bing-webmaster-blog",
       "provider": "bing",
       "kind": "discover-feed",

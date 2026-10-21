@@ -52,10 +52,10 @@ assert.match(html('docs/growth/index.html'), /research → classify → technica
 const corpus = JSON.parse(read('knowledge/discoverability-corpus.json'));
 const published = JSON.parse(read('docs/knowledge/discoverability-corpus.json'));
 assert.deepEqual(published, corpus, 'Published practice data must match its canonical source.');
-assert.equal(corpus.tactics.length, 219);
-assert.equal(corpus.sources.length, 132);
+assert.equal(corpus.tactics.length, 247);
+assert.equal(corpus.sources.length, 152);
 assert.equal(new Set(corpus.tactics.map(t => t.id)).size, corpus.tactics.length);
-assert.equal(corpus.previous_release.version, '1.12.0');
+assert.equal(corpus.previous_release.version, '1.13.0');
 assert.match(read('lib/discoverability.mjs'), /'1\.12\.0': '052df898da23b1953a629225a8c1c783e5b87e078b31d6d2e5c8ee3f081676f7'/);
 
 const index = html('docs/discoverability.html');
@@ -72,7 +72,7 @@ const detail = category.slice(detailStart, detailStart + 9000);
 const actionIndex = detail.indexOf('<h3>What to do</h3>');
 const evidenceIndex = detail.indexOf('<details class="pattern-evidence">');
 assert.ok(actionIndex > 0 && evidenceIndex > actionIndex, 'Actions must precede the technical evidence record.');
-assert.match(category, /Updated 10 Oct 2026/, 'Category must not mislabel the corpus update as a new source review.');
+assert.match(category, /Updated 18 Oct 2026/, 'Category must not mislabel the corpus update as a new source review.');
 assert.ok(read('docs/discoverability.css').includes('.practice-first'));
 
 console.log('Editorial voice and publication consistency checks passed.');

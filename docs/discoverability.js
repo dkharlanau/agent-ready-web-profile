@@ -2,6 +2,9 @@ const search = document.querySelector('#practice-search');
 const category = document.querySelector('#category');
 const evidence = document.querySelector('#evidence-level');
 const cards = [...document.querySelectorAll('.practice')];
+// Visible title/problem/action/check text already ships in each card. Do not
+// duplicate it in HTML attributes just to make the same words searchable.
+const searchable = new Map(cards.map(card => [card, `${card.dataset.search} ${card.textContent}`.toLowerCase()]));
 const params = new URLSearchParams(location.search);
 search.value = params.get('q') || '';
 category.value = params.get('category') || '';
@@ -10,7 +13,7 @@ function filter({ interactive = false } = {}) {
   const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
   let count = 0;
   for (const card of cards) {
-    const show = (!category.value || category.value === card.dataset.category) && (!evidence.value || evidence.value === card.dataset.level) && terms.every(term => card.dataset.search.includes(term));
+    const show = (!category.value || category.value === card.dataset.category) && (!evidence.value || evidence.value === card.dataset.level) && terms.every(term => searchable.get(card).includes(term));
     card.hidden = !show;
     if (show) count++;
   }

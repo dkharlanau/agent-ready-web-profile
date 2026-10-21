@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goose ARWP — Agent tasks and protocol delivery</title><meta name="description" content="6 source-backed discoverability patterns for Agent tasks and protocol delivery with implementation, verification, measurement and evidence.">
+<meta name="theme-color" content="#eff600"><link rel="canonical" href="https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html"><link rel="icon" href="../arwp-profile.svg" type="image/svg+xml"><link rel="alternate" type="application/json" href="./index.json" title="Discoverability routing index"><link rel="alternate" type="application/json" href="../knowledge/discoverability-corpus.json" title="Versioned pattern corpus"><link rel="stylesheet" href="../cite-goose.css"><link rel="stylesheet" href="../discoverability.css"><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html#page","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html","name":"Goose ARWP — Agent tasks and protocol delivery","description":"6 reviewed discoverability patterns for agent tasks and protocol delivery, with implementation checks, measurement and source evidence.","inLanguage":"en","dateModified":"2026-10-18","isPartOf":{"@type":"CollectionPage","@id":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html#page"},"mainEntity":{"@type":"ItemList","numberOfItems":6,"itemListElement":[{"@type":"ListItem","position":1,"name":"Preserve the useful result in text-only MCP hosts","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html#arwp-agents-text-structured-parity"},{"@type":"ListItem","position":2,"name":"Keep MCP listing completeness explicit","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html#arwp-agents-pagination-completeness"},{"@type":"ListItem","position":3,"name":"Distinguish no match from a failed MCP task","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html#arwp-agents-negative-task-contract"},{"@type":"ListItem","position":4,"name":"Test the resource read path after a tool returns a link","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html#arwp-agents-resource-read-path"},{"@type":"ListItem","position":5,"name":"Keep tool hints separate from action permission","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html#arwp-agents-annotation-authority"},{"@type":"ListItem","position":6,"name":"Compare an agent interface against the existing useful path","url":"https://dkharlanau.github.io/agent-ready-web-profile/discoverability/agents.html#arwp-agents-interface-baseline"}]}}</script></head>
+<body class="patterns-page category-page"><a class="skip" href="#patterns">Skip to patterns</a><header class="goose-header"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><nav aria-label="Primary"><a href="../discoverability.html">Pattern index</a><a href="../discoverability.html#sources">Sources</a><a href="../growth/">Growth Loop</a></nav></header>
+<main><section class="goose-shell category-hero"><p class="eyebrow">DISCOVERABILITY EVIDENCE HUB / AGENTS</p><h1>Agent tasks and protocol delivery</h1><p>Choose one practical change to try. Full static implementation detail, checks, measurement and evidence. No client-side corpus fetch required.</p><div class="category-meta"><span>Guide edition 1.14.0</span><span>6 practices</span><span>Updated 18 Oct 2026</span></div></section>
+<nav class="goose-shell category-switcher" aria-label="Other discoverability categories"><a href="./access.html">Crawl access and index eligibility</a><a href="./architecture.html">Information architecture and URL ownership</a><a href="./editorial.html">Write pages people can use</a><a href="./evidence.html">Claims, citations, and provenance</a><a href="./entities.html">Entity identity and linked data</a><a href="./datasets.html">Reference data and reusable evidence</a><a href="./comparisons.html">Fair comparisons and alternatives</a><a href="./services.html">Service and local offer clarity</a><a href="./media.html">Images, video, and multimodal evidence</a><a href="./experience.html">Readable and usable page experience</a><a href="./localization.html">Language and regional relevance</a><a href="./documentation.html">Mature product documentation patterns</a><a href="./retrieval.html">Machine reading and answer integrity</a><a href="./measurement.html">Know whether a change helped</a><a href="./experiments.html">Try a change and learn from it</a><a href="./governance.html">Publishing quality and sustained operations</a><a href="./repositories.html">Public repository discovery and interest</a></nav>
+<section class="goose-shell category-patterns" id="patterns"><div class="results-heading"><p>6 patterns</p><a href="../discoverability.html?category=agents">Back to filtered index</a></div><article class="practice practice-full" id="arwp-agents-text-structured-parity">
+  <div class="practice-number" aria-hidden="true">001</div>
+  <div class="practice-body">
+    <p class="practice-category">Agent tasks and protocol delivery</p>
+    <h2><a href="#arwp-agents-text-structured-parity">Preserve the useful result in text-only MCP hosts</a></h2>
+    <p class="practice-problem">A tool can return full structured data while its text hides the steps or limits.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 18 Oct 2026</span></div>
+    <div class="practice-details">
+      <h3>What to do</h3><ul><li>For one real read-only tool, compare structuredContent with the serialized text representation.</li><li>Keep necessary instructions, units and limitations available in both, or supply an explicit supported resource-read path.</li></ul>
+      <h3>Check the change</h3><ul><li>Run the same task in a text-only consumer and a structured consumer; record unavailable host paths.</li></ul>
+      <h3>What result to look for</h3><p>Record complete/partial task results by host, protocol version and representation.</p>
+      <p><strong>Why it may help:</strong> Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.</p>
+      <p><strong>Watch out for:</strong> Assuming a successful tools/call proves the receiving host saw the full answer.</p>
+      <details class="pattern-evidence"><summary>Read the sources and technical record</summary>
+      <div class="pattern-passport"><p class="eyebrow">SOURCE &amp; REVIEW RECORD</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>18 Oct 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP tools, version 2025-11-25</a><p><strong>Structured Content; Output Schema</strong> — This protocol recommends serialized JSON text for compatibility and requires conformity to a supplied output schema.</p></li></ul>
+      <h3>Where it fits</h3><p>mcp-servers</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP tools, version 2025-11-25</a><p>Defines outputSchema, structuredContent, text compatibility and execution errors. This dated protocol is not a claim about every host.</p><span>Model Context Protocol · source checked 18 Oct 2026 · 2025-11-25</span><a class="source-record" href="../discoverability.html#source-mcp-tools-20251125">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-agents-text-structured-parity</code></details>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-agents-pagination-completeness">
+  <div class="practice-number" aria-hidden="true">002</div>
+  <div class="practice-body">
+    <p class="practice-category">Agent tasks and protocol delivery</p>
+    <h2><a href="#arwp-agents-pagination-completeness">Keep MCP listing completeness explicit</a></h2>
+    <p class="practice-problem">The first page of tools or resources is not necessarily the full inventory.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 18 Oct 2026</span></div>
+    <div class="practice-details">
+      <h3>What to do</h3><ul><li>Follow opaque nextCursor values within an explicit request budget; detect repeated cursors.</li><li>At the budget boundary preserve partial inventory and do not declare unseen capabilities absent.</li></ul>
+      <h3>Check the change</h3><ul><li>Test multiple pages, a cursor loop and a failure after page one; only a terminal cursor completes the listing.</li></ul>
+      <h3>What result to look for</h3><p>Report pages fetched, items returned and terminal-cursor state.</p>
+      <p><strong>Why it may help:</strong> Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.</p>
+      <p><strong>Watch out for:</strong> Guessing cursor values or claiming full coverage after a bounded first page.</p>
+      <details class="pattern-evidence"><summary>Read the sources and technical record</summary>
+      <div class="pattern-passport"><p class="eyebrow">SOURCE &amp; REVIEW RECORD</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>18 Oct 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination">MCP pagination, version 2025-11-25</a><p><strong>Pagination</strong> — Opaque cursors and paginated listings are protocol behavior; bounded completeness accounting is our procedure.</p></li></ul>
+      <h3>Where it fits</h3><p>mcp-servers</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination">MCP pagination, version 2025-11-25</a><p>Cursors are opaque; listing may need multiple requests. Bounded audits must retain incomplete status.</p><span>Model Context Protocol · source checked 18 Oct 2026 · 2025-11-25</span><a class="source-record" href="../discoverability.html#source-mcp-pagination-20251125">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-agents-pagination-completeness</code></details>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-agents-negative-task-contract">
+  <div class="practice-number" aria-hidden="true">003</div>
+  <div class="practice-body">
+    <p class="practice-category">Agent tasks and protocol delivery</p>
+    <h2><a href="#arwp-agents-negative-task-contract">Distinguish no match from a failed MCP task</a></h2>
+    <p class="practice-problem">A transport error and an empty domain result require different next steps.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 18 Oct 2026</span></div>
+    <div class="practice-details">
+      <h3>What to do</h3><ul><li>Document the implemented no-match representation and the tool execution error path.</li><li>Test one valid result, one valid no-match input and one controlled execution failure without side effects.</li></ul>
+      <h3>Check the change</h3><ul><li>The consumer can distinguish domain absence, protocol failure and isError execution results without inventing content.</li></ul>
+      <h3>What result to look for</h3><p>Count each result class in the fixed task set, retaining failures.</p>
+      <p><strong>Why it may help:</strong> Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.</p>
+      <p><strong>Watch out for:</strong> Returning a fabricated answer to turn a failed lookup into a successful demo.</p>
+      <details class="pattern-evidence"><summary>Read the sources and technical record</summary>
+      <div class="pattern-passport"><p class="eyebrow">SOURCE &amp; REVIEW RECORD</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>18 Oct 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP tools, version 2025-11-25</a><p><strong>Error Handling</strong> — The specification distinguishes protocol errors and tool execution errors; domain no-match semantics are application-defined.</p></li></ul>
+      <h3>Where it fits</h3><p>mcp-servers</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/tools">MCP tools, version 2025-11-25</a><p>Defines outputSchema, structuredContent, text compatibility and execution errors. This dated protocol is not a claim about every host.</p><span>Model Context Protocol · source checked 18 Oct 2026 · 2025-11-25</span><a class="source-record" href="../discoverability.html#source-mcp-tools-20251125">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-agents-negative-task-contract</code></details>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-agents-resource-read-path">
+  <div class="practice-number" aria-hidden="true">004</div>
+  <div class="practice-body">
+    <p class="practice-category">Agent tasks and protocol delivery</p>
+    <h2><a href="#arwp-agents-resource-read-path">Test the resource read path after a tool returns a link</a></h2>
+    <p class="practice-problem">A discoverable resource URI may still be unusable in the intended client.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 18 Oct 2026</span></div>
+    <div class="practice-details">
+      <h3>What to do</h3><ul><li>From an actual tool result, read the linked resource with the supported client and verify content type and identity.</li><li>Retain unsupported-host and authorization outcomes. Do not assume every resource link appears in resources/list.</li></ul>
+      <h3>Check the change</h3><ul><li>The saved task receipt includes the URI, read response and usable content; declaration alone stays untested.</li></ul>
+      <h3>What result to look for</h3><p>Measure task completion after the read, separately from successful tool invocation.</p>
+      <p><strong>Why it may help:</strong> Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.</p>
+      <p><strong>Watch out for:</strong> Counting declared resource URLs as completed user tasks.</p>
+      <details class="pattern-evidence"><summary>Read the sources and technical record</summary>
+      <div class="pattern-passport"><p class="eyebrow">SOURCE &amp; REVIEW RECORD</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>18 Oct 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/resources">MCP resources, version 2025-11-25</a><p><strong>Reading Resources; Resource Contents</strong> — Resources have URI-based read operations and typed contents; end-to-end host support needs a separate test.</p></li></ul>
+      <h3>Where it fits</h3><p>mcp-servers</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/resources">MCP resources, version 2025-11-25</a><p>Defines resources/read and resource content types; declaration alone does not prove a host can consume them.</p><span>Model Context Protocol · source checked 18 Oct 2026 · 2025-11-25</span><a class="source-record" href="../discoverability.html#source-mcp-resources-20251125">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-agents-resource-read-path</code></details>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-agents-annotation-authority">
+  <div class="practice-number" aria-hidden="true">005</div>
+  <div class="practice-body">
+    <p class="practice-category">Agent tasks and protocol delivery</p>
+    <h2><a href="#arwp-agents-annotation-authority">Keep tool hints separate from action permission</a></h2>
+    <p class="practice-problem">An advertised read-only hint cannot authorize a write or make returned content trusted.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level inferred">inferred</span><span>Pattern reviewed 18 Oct 2026</span></div>
+    <div class="practice-details">
+      <h3>What to do</h3><ul><li>Treat tool metadata as hints and inspect the actual operation and data flow.</li><li>Use a controlled negative task to verify the host refuses an unauthorized side effect; never test destructive operations on production.</li></ul>
+      <h3>Check the change</h3><ul><li>A misleading annotation fixture cannot bypass the existing approval boundary.</li></ul>
+      <h3>What result to look for</h3><p>Record allowed read completion and denied unauthorized actions separately.</p>
+      <p><strong>Why it may help:</strong> Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.</p>
+      <p><strong>Watch out for:</strong> Treating discoverability metadata as delegated authority.</p>
+      <details class="pattern-evidence"><summary>Read the sources and technical record</summary>
+      <div class="pattern-passport"><p class="eyebrow">SOURCE &amp; REVIEW RECORD</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>18 Oct 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/">Tool annotations as risk vocabulary</a><p><strong>Risk vocabulary and client-layer defenses</strong> — The official discussion explains annotation limits; the refusal test is our sandbox evaluation.</p></li></ul>
+      <h3>Where it fits</h3><p>mcp-servers</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/">Tool annotations as risk vocabulary</a><p>Discusses annotation limits and client risk handling; hints cannot grant permission or make external content trusted.</p><span>Model Context Protocol · source checked 18 Oct 2026 · Living document · no fixed release</span><a class="source-record" href="../discoverability.html#source-mcp-risk-annotations">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-agents-annotation-authority</code></details>
+      </details>
+    </div>
+  </div>
+</article>
+<article class="practice practice-full" id="arwp-agents-interface-baseline">
+  <div class="practice-number" aria-hidden="true">006</div>
+  <div class="practice-body">
+    <p class="practice-category">Agent tasks and protocol delivery</p>
+    <h2><a href="#arwp-agents-interface-baseline">Compare an agent interface against the existing useful path</a></h2>
+    <p class="practice-problem">A new protocol may duplicate a simpler interface without improving the task.</p>
+    <div class="practice-meta"><span>v1.0.0</span><span class="level experimental">experimental</span><span>Pattern reviewed 18 Oct 2026</span></div>
+    <div class="practice-details">
+      <h3>What to do</h3><ul><li>Freeze one existing user task and its correct output before comparing browser, resource and tool paths.</li><li>Keep client/version, task result, missing qualifiers and recovery effort; use repeated observations rather than a single polished demo.</li></ul>
+      <h3>Check the change</h3><ul><li>A new interface is retained only for a stated task advantage; unsupported clients and failed attempts remain in the record.</li></ul>
+      <h3>What result to look for</h3><p>Compare correct useful outputs and recovery steps; external demand stays unmeasured.</p>
+      <p><strong>Why it may help:</strong> Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.</p>
+      <p><strong>Watch out for:</strong> Adding MCP or WebMCP solely as an AI-search signal.</p>
+      <details class="pattern-evidence"><summary>Read the sources and technical record</summary>
+      <div class="pattern-passport"><p class="eyebrow">SOURCE &amp; REVIEW RECORD</p><dl>
+        <div><dt>Pattern version</dt><dd>1.0.0</dd></div>
+        <div><dt>Lifecycle</dt><dd>active</dd></div>
+        <div><dt>Individual review</dt><dd>18 Oct 2026</dd></div>
+        <div><dt>Review scope</dt><dd>source-support-and-implementation</dd></div>
+        <div><dt>Review method</dt><dd>agent-assisted</dd></div>
+      </dl><p class="small">Source support, implementation verification and measured Search/AI outcome are separate evidence.</p></div>
+      <h3>What the review found</h3><ul class="review-support"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/resources">MCP resources, version 2025-11-25</a><p><strong>User Interaction Model</strong> — Hosts choose how resources enter context. The cross-interface comparison is our experiment, not protocol conformance.</p></li></ul>
+      <h3>Where it fits</h3><p>interactive-sites, mcp-servers</p>
+      <h3>Follow the evidence</h3><ol class="pattern-references"><li><a href="https://modelcontextprotocol.io/specification/2025-11-25/server/resources">MCP resources, version 2025-11-25</a><p>Defines resources/read and resource content types; declaration alone does not prove a host can consume them.</p><span>Model Context Protocol · source checked 18 Oct 2026 · 2025-11-25</span><a class="source-record" href="../discoverability.html#source-mcp-resources-20251125">Source record</a></li></ol>
+      <details class="routing"><summary>Agent routing &amp; stable ID</summary><p><a href="../growth/hypotheses.json">agent-readable-routes</a></p><p>No current recommendation rule applies.</p><p class="small">These links route a practice into the existing Growth Loop. They do not certify an outcome.</p><code class="tactic-id">arwp-agents-interface-baseline</code></details>
+      </details>
+    </div>
+  </div>
+</article></section>
+<footer class="goose-footer goose-shell"><a class="goose-brand" href="../discoverability.html"><strong>Goose</strong><span>ARWP<br>GET FOUND.</span></a><p>Full evidence in bounded topical routes.</p><a href="./index.json">Routing index</a></footer></main></body></html>
