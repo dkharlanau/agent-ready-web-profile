@@ -409,3 +409,13 @@ Use `arwp-discoverability` as a specialist inside `arwp-growth-loop`. A corpus s
 [Names, locales and offers](docs/COMMERCIAL-LOCALIZATION.md): ten reviewed practices and commercial/localization review fixtures.
 
 [Catalog review](docs/CATALOG-REVIEW.md): 23 historical records reviewed, nine source/instruction corrections and explicit remaining review scope.
+
+## Bounded agent discovery checks
+
+Compare declared HTML/Markdown passages, evidence links and JSON-LD identities; review Search/training/owner controls separately; import owner-normalized Bing Topics Portfolio ranges without inventing observations. See [the operator guide](docs/AGENT-DISCOVERY-CHECKS.md).
+
+```bash
+node bin/arwp.mjs representations --manifest=/private/site.json
+node bin/arwp.mjs ai-access --manifest=/private/site.json
+node bin/arwp.mjs bing topics-template --site=https://synthetic.example.test/ --output=/private/bing-input.json
+```

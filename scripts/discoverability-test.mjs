@@ -6,6 +6,29 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { loadCorpus, validateCorpus, validateCorpusMappings, loadDiscoverabilityRegistries, searchTactics, createAdoptionPlan, validateEditorialReceipt, validateCorpusVersioning, validateReleaseBytes, loadPreviousDiscoverabilityRelease, corpusFingerprint, DISCOVERABILITY_RELEASES } from '../lib/discoverability.mjs';
 
 const corpus = loadCorpus();
+const expansion = JSON.parse(fs.readFileSync(new URL('../knowledge/research/review-2026-10-18-expansion.json', import.meta.url), 'utf8'));
+assert.equal(expansion.disclosure, 'source-available / public methodology');
+assert.deepEqual(expansion.policy, { noAutomaticAdoption: true, noTargetMutation: true, noOutcomeDecision: true });
+const expansionIds = new Set(expansion.added.map(row => row.id));
+assert.equal(expansionIds.size, expansion.added.length, 'Research decisions must identify distinct patterns.');
+for (const row of expansion.added) {
+  const pattern = corpus.tactics.find(t => t.id === row.id);
+  assert.ok(pattern, `Research decision ${row.id} must resolve in the runnable corpus.`);
+  assert.equal(pattern.evidence_level, row.evidence_level, 'Integration cannot promote a research evidence class.');
+  assert.deepEqual(pattern.source_ids, row.source_ids);
+  assert.equal(pattern.review.reviewed_at, expansion.reviewed_at);
+}
+for (const category of ['agents', 'repositories']) {
+  const result = searchTactics(corpus, { category, limit: 500 });
+  assert.ok(result.tactics.length > 0);
+  assert.ok(result.tactics.every(t => expansionIds.has(t.id)));
+}
+const experimental = searchTactics(corpus, { search: 'shareable-input-state', evidence: 'experimental' });
+assert.equal(experimental.total, 1);
+const experimentalPlan = createAdoptionPlan({ site_url: 'https://capture.example.test/', audience: 'Synthetic reviewers', useful_action: 'Restore a synthetic scenario', tactic_ids: [experimental.tactics[0].id] }, corpus);
+assert.equal(experimentalPlan.stage, 'planned');
+assert.equal(experimentalPlan.baseline.search, 'not_measured');
+assert.equal(experimentalPlan.deployed_at, null);
 for (const tactic of corpus.tactics) if (tactic.review.reviewed_at !== null) assert.ok(Array.isArray(tactic.review.support) && tactic.review.support.length > 0, `${tactic.id}: shipped individual reviews expose a public source locator and bounded support note.`);
 if (process.argv.includes('--site')) {
   const published = new URL('../docs/knowledge/discoverability-corpus.json', import.meta.url);

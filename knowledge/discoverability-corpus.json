@@ -1,6 +1,6 @@
 {
-  "version": "1.13.0",
-  "updated_at": "2026-10-10",
+  "version": "1.14.0",
+  "updated_at": "2026-10-18",
   "categories": [
     {
       "id": "access",
@@ -65,6 +65,14 @@
     {
       "id": "governance",
       "title": "Publishing quality and sustained operations"
+    },
+    {
+      "id": "repositories",
+      "title": "Public repository discovery and interest"
+    },
+    {
+      "id": "agents",
+      "title": "Agent tasks and protocol delivery"
     }
   ],
   "sources": [
@@ -1779,6 +1787,266 @@
       "checked_at": "2026-09-08",
       "authority": "official-documentation",
       "notes": "Supports event debugging; debug reception does not prove production reporting or business qualification.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "gsc-inspection-api",
+      "title": "Inspect an indexed URL",
+      "url": "https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect",
+      "publisher": "Google Search Console",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Inspects the version in the Google index, not a live-page indexing request.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "gsc-inspection-result",
+      "title": "URL Inspection response fields",
+      "url": "https://developers.google.com/webmaster-tools/v1/urlInspection.index/UrlInspectionResult",
+      "publisher": "Google Search Console",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Describes verdict, crawl time, fetch state and canonical fields; absent fields remain unknown.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "gsc-api-limits",
+      "title": "Search Console API usage limits",
+      "url": "https://developers.google.com/webmaster-tools/limits",
+      "publisher": "Google Search Console",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Documents per-site and per-project quotas. Checkpointing and cohort completeness are our engineering procedure.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "google-verify-crawler",
+      "title": "Verify requests from Google crawlers",
+      "url": "https://developers.google.com/crawling/docs/crawlers-fetchers/verify-google-requests",
+      "publisher": "Google Crawling Infrastructure",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Documents IP-range or reverse/forward DNS verification; a user-agent string alone is insufficient.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "google-js-debug",
+      "title": "Fix Search-related JavaScript problems",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/javascript/fix-search-javascript",
+      "publisher": "Google Search Central",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Supports inspection of rendered output and resource-loading failures; a browser success is not indexed-state evidence.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "google-sitemap-index",
+      "title": "Manage sitemaps with a sitemap index",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/large-sitemaps",
+      "publisher": "Google Search Central",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Documents sitemap-index structure; a submitted inventory does not establish Google index coverage.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "github-topics",
+      "title": "Classify a repository with topics",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/classifying-your-repository-with-topics",
+      "publisher": "GitHub Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Topics organize and help discover repositories on GitHub; no Google ranking or adoption claim.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "github-social-preview",
+      "title": "Customize a repository social preview",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/customizing-your-repositorys-social-media-preview",
+      "publisher": "GitHub Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Describes preview-image support and repository sharing, not a distribution guarantee.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "github-traffic-api",
+      "title": "Repository traffic REST API",
+      "url": "https://docs.github.com/en/rest/metrics/traffic",
+      "publisher": "GitHub Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Provides rolling 14-day clone/view aggregates, not actor-level clone attribution.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "github-workflow-runs",
+      "title": "Workflow run REST API",
+      "url": "https://docs.github.com/en/rest/actions/workflow-runs",
+      "publisher": "GitHub Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Supports dated run queries and total_count. Workflow runs, jobs, checkouts and clones are different units.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "mcp-tools-20251125",
+      "title": "MCP tools, version 2025-11-25",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/tools",
+      "publisher": "Model Context Protocol",
+      "checked_at": "2026-10-18",
+      "authority": "official-specification",
+      "notes": "Defines outputSchema, structuredContent, text compatibility and execution errors. This dated protocol is not a claim about every host.",
+      "upstream": {
+        "kind": "versioned-release",
+        "version": "2025-11-25"
+      }
+    },
+    {
+      "id": "mcp-resources-20251125",
+      "title": "MCP resources, version 2025-11-25",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/resources",
+      "publisher": "Model Context Protocol",
+      "checked_at": "2026-10-18",
+      "authority": "official-specification",
+      "notes": "Defines resources/read and resource content types; declaration alone does not prove a host can consume them.",
+      "upstream": {
+        "kind": "versioned-release",
+        "version": "2025-11-25"
+      }
+    },
+    {
+      "id": "mcp-pagination-20251125",
+      "title": "MCP pagination, version 2025-11-25",
+      "url": "https://modelcontextprotocol.io/specification/2025-11-25/server/utilities/pagination",
+      "publisher": "Model Context Protocol",
+      "checked_at": "2026-10-18",
+      "authority": "official-specification",
+      "notes": "Cursors are opaque; listing may need multiple requests. Bounded audits must retain incomplete status.",
+      "upstream": {
+        "kind": "versioned-release",
+        "version": "2025-11-25"
+      }
+    },
+    {
+      "id": "mcp-risk-annotations",
+      "title": "Tool annotations as risk vocabulary",
+      "url": "https://blog.modelcontextprotocol.io/posts/2026-03-16-tool-annotations/",
+      "publisher": "Model Context Protocol",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Discusses annotation limits and client risk handling; hints cannot grant permission or make external content trusted.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "mdn-url-params",
+      "title": "URLSearchParams",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams",
+      "publisher": "MDN Web Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Defines URL query manipulation. A shareable task-state format is a project experiment, not a Search feature.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "mdn-storage-limits",
+      "title": "Storage quotas and eviction criteria",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Storage_API/Storage_quotas_and_eviction_criteria",
+      "publisher": "MDN Web Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Browser storage can be evicted or fail. Durable export and recovery must be tested separately.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "mdn-download-anchor",
+      "title": "The anchor download attribute",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a",
+      "publisher": "MDN Web Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "Describes download behavior and origin constraints. A rendered download control does not prove the saved file is usable.",
+      "upstream": {
+        "kind": "living-document",
+        "version": null
+      }
+    },
+    {
+      "id": "atom-feed",
+      "title": "Atom Syndication Format",
+      "url": "https://www.rfc-editor.org/rfc/rfc4287.html",
+      "publisher": "IETF",
+      "checked_at": "2026-10-18",
+      "authority": "official-specification",
+      "notes": "Defines feed and entry identity, links and updated timestamps; subscription impact remains a product hypothesis.",
+      "upstream": {
+        "kind": "versioned-release",
+        "version": "RFC 4287"
+      }
+    },
+    {
+      "id": "prov-o",
+      "title": "PROV-O: The PROV Ontology",
+      "url": "https://www.w3.org/TR/prov-o/",
+      "publisher": "W3C",
+      "checked_at": "2026-10-18",
+      "authority": "official-specification",
+      "notes": "Models provenance activities, agents and derived entities. Provenance relations do not certify truth or efficacy.",
+      "upstream": {
+        "kind": "versioned-release",
+        "version": "PROV-O 2013-04-30"
+      }
+    },
+    {
+      "id": "mdn-local-datetime",
+      "title": "The datetime-local input",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/datetime-local",
+      "publisher": "MDN Web Docs",
+      "checked_at": "2026-10-18",
+      "authority": "official-documentation",
+      "notes": "A local date/time value does not carry a time zone. Scheduling must resolve zone and daylight-saving ambiguity explicitly.",
       "upstream": {
         "kind": "living-document",
         "version": null
@@ -12688,6 +12956,1301 @@
         "replacement_ids": [],
         "reason": null
       }
+    },
+    {
+      "id": "arwp-measurement-inspection-resume",
+      "category": "measurement",
+      "title": "Resume an index census without changing its denominator",
+      "problem": "A quota interruption can make a smaller successful sample look like index loss.",
+      "implementation": [
+        "Freeze the canonical URL inventory and digest before collection. Checkpoint each successful response with its actual request time.",
+        "On retry, reuse that inventory and completed responses; pause on provider limits. A changed inventory starts a separate census."
+      ],
+      "verification": [
+        "Interrupt a synthetic run and confirm no completed URL is requested twice.",
+        "Partial coverage displays a lower bound; resource percentage and delta stay unknown until comparable full censuses exist."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-api-limits"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A complete, comparable observation may prevent a false growth diagnosis; it does not itself increase discovery.",
+      "anti_pattern": "Filling missing responses with zero or forcing repeated requests to refresh a screen.",
+      "measurement": "Report completed/expected URLs and oldest/newest request times; compare index counts only on the same complete inventory.",
+      "growth_hypothesis_ids": [
+        "search-foundation-first"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "gsc-api-limits",
+            "locator": "URL inspection quotas",
+            "note": "Quotas are provider constraints. Resume state and completeness accounting are our procedure."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-measurement-index-live-separation",
+      "category": "measurement",
+      "title": "Keep the indexed version separate from a live fetch",
+      "problem": "A healthy page today does not explain which revision Google indexed.",
+      "implementation": [
+        "Retain the raw Inspection response separately from a dated GET of the public URL.",
+        "Label each result by evidence type and URL; never promote a live HTTP success to an indexed verdict."
+      ],
+      "verification": [
+        "Show a fixture with live 200 and an older excluded indexed response without choosing a fabricated winner."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-inspection-api"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A complete, comparable observation may prevent a false growth diagnosis; it does not itself increase discovery.",
+      "anti_pattern": "Calling the Inspection API an instruction to index the URL.",
+      "measurement": "Track indexed verdict and live eligibility as distinct dated observations.",
+      "growth_hypothesis_ids": [
+        "platform-ai-measurement"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "gsc-inspection-api",
+            "locator": "Method: index.inspect",
+            "note": "The API inspects the version in the index; it is not an indexing submission or live test."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-measurement-last-crawl-boundary",
+      "category": "measurement",
+      "title": "Do not confuse last crawl time with publication time",
+      "problem": "A crawl timestamp cannot establish the deployed revision or treatment exposure.",
+      "implementation": [
+        "Store per-URL lastCrawlTime and canonical fields with the original response.",
+        "Bind a release to separate provider/live-version evidence; retain unknown exposure if no version can be identified."
+      ],
+      "verification": [
+        "Absent lastCrawlTime stays null. A post-release crawl without a version marker is not labelled treatment-confirmed."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-inspection-result"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A complete, comparable observation may prevent a false growth diagnosis; it does not itself increase discovery.",
+      "anti_pattern": "Using a commit date or crawl date as proof of live release exposure.",
+      "measurement": "Show release, request and last-crawl timestamps independently.",
+      "growth_hypothesis_ids": [
+        "search-foundation-first"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "gsc-inspection-result",
+            "locator": "IndexStatusInspectionResult fields",
+            "note": "lastCrawlTime describes a crawl; canonical fields may be absent. Neither identifies the bytes served."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-access-verified-crawler-logs",
+      "category": "access",
+      "title": "Verify a crawler before interpreting its access log",
+      "problem": "A claimed Googlebot user agent is not enough to identify Google traffic.",
+      "implementation": [
+        "When authorized server logs exist, verify the source using published IP ranges or the documented reverse/forward DNS procedure.",
+        "Group verified crawler fetches separately from unknown bots and browser visits; retain URL, time and response state."
+      ],
+      "verification": [
+        "A spoofed user-agent fixture remains unverified. Missing logs remain unavailable."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-verify-crawler"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Localizing an actual retrieval failure may restore access to the existing answer; indexing remains a separate observation.",
+      "anti_pattern": "Calling bot fetches users, citations or indexed pages.",
+      "measurement": "Count verified fetches and affected URLs in a fixed log interval, separately from index status.",
+      "growth_hypothesis_ids": [
+        "search-foundation-first"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-verify-crawler",
+            "locator": "Verify requests: IP ranges and DNS lookup",
+            "note": "The provider documents crawler verification; URL-level summaries are our diagnostic use."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-access-render-resource-diff",
+      "category": "access",
+      "title": "Find the resource that changes the rendered answer",
+      "problem": "An initial response can be healthy while a critical script or data request fails.",
+      "implementation": [
+        "Capture initial HTML, rendered main content and failed requests for one existing task page.",
+        "Compare content-bearing dependencies and the inspected build; fix only a demonstrated missing answer or failed essential resource."
+      ],
+      "verification": [
+        "A delayed or blocked dependency fixture preserves an explicit incomplete-render result.",
+        "A browser render is recorded separately from Google indexed output."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-js-debug"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Localizing an actual retrieval failure may restore access to the existing answer; indexing remains a separate observation.",
+      "anti_pattern": "Rewriting every page to satisfy a raw-HTML detector when the actual answer is already available.",
+      "measurement": "Record task-critical text present/missing and dependency failures by representation.",
+      "growth_hypothesis_ids": [
+        "search-foundation-first"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-js-debug",
+            "locator": "Debug rendering and blocked resources",
+            "note": "Google documents rendering diagnostics. Our comparison localizes an observed failure, not a universal SSR requirement."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-architecture-sitemap-inventory-completeness",
+      "category": "architecture",
+      "title": "Verify the whole sitemap inventory before using a coverage ratio",
+      "problem": "A truncated sitemap response silently changes the index denominator.",
+      "implementation": [
+        "Resolve the sitemap index and bounded child files, preserving each response and parsing state.",
+        "Deduplicate exact canonical URLs and mark the inventory partial when a child fails or exceeds the configured byte/page budget."
+      ],
+      "verification": [
+        "A missing child and a truncated XML fixture both suppress the resource coverage percentage."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-sitemap-index"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A complete URL inventory may make index coverage interpretable; a sitemap remains a discovery hint.",
+      "anti_pattern": "Treating the collector byte cap as the end of the website.",
+      "measurement": "Show fetched/declared sitemap files, unique URLs and inventory digest.",
+      "growth_hypothesis_ids": [
+        "search-foundation-first"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-sitemap-index",
+            "locator": "Sitemap index best practices and reference",
+            "note": "The provider defines sitemap indexes. Complete local inventory accounting is our measurement rule."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-repositories-topic-fit",
+      "category": "repositories",
+      "title": "Use repository topics that match the actual job",
+      "problem": "A public repository may be hard to find under the terms its users recognize.",
+      "implementation": [
+        "Choose a small set of accurate domain, capability and platform topics from the implemented project.",
+        "Review the repository description and README entry against the same user task."
+      ],
+      "verification": [
+        "Each chosen topic has a source-visible capability; planned features and unrelated trending topics are excluded."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-topics"
+      ],
+      "applicability": [
+        "public-repositories"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "An accurate repository entry may help relevant users evaluate the project; views, clones and CI alone do not establish use.",
+      "anti_pattern": "Topic stuffing or presenting topic changes as Google ranking gains.",
+      "measurement": "Observe dated GitHub search-panel presence separately from views and use.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-topics",
+            "locator": "About topics",
+            "note": "GitHub topics support repository classification and discovery; our task-fit review is a convention."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-repositories-preview-task",
+      "category": "repositories",
+      "title": "Make the repository preview explain its usable result",
+      "problem": "A decorative image can obscure what a shared repository actually does.",
+      "implementation": [
+        "Use a readable preview of one real output with the project name and truthful purpose.",
+        "Inspect the shared card and repository landing page together; keep unshipped capabilities out of both."
+      ],
+      "verification": [
+        "The preview remains legible at the receiving surface and describes an available result."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-social-preview"
+      ],
+      "applicability": [
+        "public-repositories"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "An accurate repository entry may help relevant users evaluate the project; views, clones and CI alone do not establish use.",
+      "anti_pattern": "A large preview-image count presented as distribution or adoption.",
+      "measurement": "Keep observed sharing impressions, repository visits and completed first runs separate.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-social-preview",
+            "locator": "Customize a repository social media preview",
+            "note": "GitHub supports custom sharing previews; a task-oriented composition is our design hypothesis."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-repositories-traffic-archive",
+      "category": "repositories",
+      "title": "Archive daily repository traffic without double counting",
+      "problem": "Rolling traffic exports overlap and cannot be added as independent weeks.",
+      "implementation": [
+        "Capture day-grain traffic within the provider retention window and preserve actual capture time.",
+        "Join repository ID, metric and UTC date; retain revisions and missing dates. Never add daily unique counts into unique people."
+      ],
+      "verification": [
+        "Two overlapping synthetic captures do not double the shared days; incomplete weeks have no full-week delta."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-traffic-api"
+      ],
+      "applicability": [
+        "public-repositories"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "An accurate repository entry may help relevant users evaluate the project; views, clones and CI alone do not establish use.",
+      "anti_pattern": "Adding rolling totals or relabelling unique cloners as customers.",
+      "measurement": "Compare two complete equal UTC windows using counts, not summed uniques.",
+      "growth_hypothesis_ids": [
+        "platform-ai-measurement"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-traffic-api",
+            "locator": "Get repository clones; Get page views",
+            "note": "The API offers a rolling 14-day view. Longitudinal deduplication is our storage procedure."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-repositories-ci-interest-boundary",
+      "category": "repositories",
+      "title": "Show CI activity beside clone traffic",
+      "problem": "Own automation can coincide with a clone spike without revealing who cloned.",
+      "implementation": [
+        "Retrieve workflow-run counts for the same UTC interval and retain provider receipts.",
+        "Show runs and clones as different units; label external interest unconfirmed unless independent usage evidence exists. Never subtract runs to invent external clones."
+      ],
+      "verification": [
+        "A high-clone/high-CI fixture stays unattributed; failed CI collection is missing, not zero runs."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "github-workflow-runs",
+        "github-traffic-api"
+      ],
+      "applicability": [
+        "public-repositories"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "An accurate repository entry may help relevant users evaluate the project; views, clones and CI alone do not establish use.",
+      "anti_pattern": "Interpreting a clone residual or correlation as external adoption.",
+      "measurement": "Compare dated workflow runs, clone counts and independently observed first-use outcomes.",
+      "growth_hypothesis_ids": [
+        "platform-ai-measurement"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "github-workflow-runs",
+            "locator": "List workflow runs; traffic aggregate response",
+            "note": "Run queries provide CI context. Neither source joins workflow identities to clone events."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-agents-text-structured-parity",
+      "category": "agents",
+      "title": "Preserve the useful result in text-only MCP hosts",
+      "problem": "A tool can return full structured data while its text hides the steps or limits.",
+      "implementation": [
+        "For one real read-only tool, compare structuredContent with the serialized text representation.",
+        "Keep necessary instructions, units and limitations available in both, or supply an explicit supported resource-read path."
+      ],
+      "verification": [
+        "Run the same task in a text-only consumer and a structured consumer; record unavailable host paths."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-tools-20251125"
+      ],
+      "applicability": [
+        "mcp-servers"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.",
+      "anti_pattern": "Assuming a successful tools/call proves the receiving host saw the full answer.",
+      "measurement": "Record complete/partial task results by host, protocol version and representation.",
+      "growth_hypothesis_ids": [
+        "agent-readable-routes"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mcp-tools-20251125",
+            "locator": "Structured Content; Output Schema",
+            "note": "This protocol recommends serialized JSON text for compatibility and requires conformity to a supplied output schema."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-agents-pagination-completeness",
+      "category": "agents",
+      "title": "Keep MCP listing completeness explicit",
+      "problem": "The first page of tools or resources is not necessarily the full inventory.",
+      "implementation": [
+        "Follow opaque nextCursor values within an explicit request budget; detect repeated cursors.",
+        "At the budget boundary preserve partial inventory and do not declare unseen capabilities absent."
+      ],
+      "verification": [
+        "Test multiple pages, a cursor loop and a failure after page one; only a terminal cursor completes the listing."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-pagination-20251125"
+      ],
+      "applicability": [
+        "mcp-servers"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.",
+      "anti_pattern": "Guessing cursor values or claiming full coverage after a bounded first page.",
+      "measurement": "Report pages fetched, items returned and terminal-cursor state.",
+      "growth_hypothesis_ids": [
+        "agent-readable-routes"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mcp-pagination-20251125",
+            "locator": "Pagination",
+            "note": "Opaque cursors and paginated listings are protocol behavior; bounded completeness accounting is our procedure."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-agents-negative-task-contract",
+      "category": "agents",
+      "title": "Distinguish no match from a failed MCP task",
+      "problem": "A transport error and an empty domain result require different next steps.",
+      "implementation": [
+        "Document the implemented no-match representation and the tool execution error path.",
+        "Test one valid result, one valid no-match input and one controlled execution failure without side effects."
+      ],
+      "verification": [
+        "The consumer can distinguish domain absence, protocol failure and isError execution results without inventing content."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-tools-20251125"
+      ],
+      "applicability": [
+        "mcp-servers"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.",
+      "anti_pattern": "Returning a fabricated answer to turn a failed lookup into a successful demo.",
+      "measurement": "Count each result class in the fixed task set, retaining failures.",
+      "growth_hypothesis_ids": [
+        "agent-readable-routes"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mcp-tools-20251125",
+            "locator": "Error Handling",
+            "note": "The specification distinguishes protocol errors and tool execution errors; domain no-match semantics are application-defined."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-agents-resource-read-path",
+      "category": "agents",
+      "title": "Test the resource read path after a tool returns a link",
+      "problem": "A discoverable resource URI may still be unusable in the intended client.",
+      "implementation": [
+        "From an actual tool result, read the linked resource with the supported client and verify content type and identity.",
+        "Retain unsupported-host and authorization outcomes. Do not assume every resource link appears in resources/list."
+      ],
+      "verification": [
+        "The saved task receipt includes the URI, read response and usable content; declaration alone stays untested."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-resources-20251125"
+      ],
+      "applicability": [
+        "mcp-servers"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.",
+      "anti_pattern": "Counting declared resource URLs as completed user tasks.",
+      "measurement": "Measure task completion after the read, separately from successful tool invocation.",
+      "growth_hypothesis_ids": [
+        "agent-readable-routes"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mcp-resources-20251125",
+            "locator": "Reading Resources; Resource Contents",
+            "note": "Resources have URI-based read operations and typed contents; end-to-end host support needs a separate test."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-agents-annotation-authority",
+      "category": "agents",
+      "title": "Keep tool hints separate from action permission",
+      "problem": "An advertised read-only hint cannot authorize a write or make returned content trusted.",
+      "implementation": [
+        "Treat tool metadata as hints and inspect the actual operation and data flow.",
+        "Use a controlled negative task to verify the host refuses an unauthorized side effect; never test destructive operations on production."
+      ],
+      "verification": [
+        "A misleading annotation fixture cannot bypass the existing approval boundary."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mcp-risk-annotations"
+      ],
+      "applicability": [
+        "mcp-servers"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.",
+      "anti_pattern": "Treating discoverability metadata as delegated authority.",
+      "measurement": "Record allowed read completion and denied unauthorized actions separately.",
+      "growth_hypothesis_ids": [
+        "agent-readable-routes"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mcp-risk-annotations",
+            "locator": "Risk vocabulary and client-layer defenses",
+            "note": "The official discussion explains annotation limits; the refusal test is our sandbox evaluation."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-agents-interface-baseline",
+      "category": "agents",
+      "title": "Compare an agent interface against the existing useful path",
+      "problem": "A new protocol may duplicate a simpler interface without improving the task.",
+      "implementation": [
+        "Freeze one existing user task and its correct output before comparing browser, resource and tool paths.",
+        "Keep client/version, task result, missing qualifiers and recovery effort; use repeated observations rather than a single polished demo."
+      ],
+      "verification": [
+        "A new interface is retained only for a stated task advantage; unsupported clients and failed attempts remain in the record."
+      ],
+      "evidence_level": "experimental",
+      "source_ids": [
+        "mcp-resources-20251125"
+      ],
+      "applicability": [
+        "interactive-sites",
+        "mcp-servers"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reliable delivery of the complete result may help an intended host finish the task; protocol success alone does not establish demand.",
+      "anti_pattern": "Adding MCP or WebMCP solely as an AI-search signal.",
+      "measurement": "Compare correct useful outputs and recovery steps; external demand stays unmeasured.",
+      "growth_hypothesis_ids": [
+        "agent-readable-routes"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mcp-resources-20251125",
+            "locator": "User Interaction Model",
+            "note": "Hosts choose how resources enter context. The cross-interface comparison is our experiment, not protocol conformance."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-entities-reference-shape",
+      "category": "entities",
+      "title": "Do not validate an identity reference as a full entity description",
+      "problem": "A short @id link can be misdiagnosed as a missing-name or missing-license object.",
+      "implementation": [
+        "Distinguish references from owned descriptive nodes before applying type-specific requirements.",
+        "Resolve same-graph identity where possible and report unresolved external references separately from invalid JSON."
+      ],
+      "verification": [
+        "A valid identity-only reference passes the reference check; conflicting descriptions for the same ID trigger review."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "jsonld"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate entity boundaries may reduce ambiguity for consumers; markup correctness is not Search or citation impact.",
+      "anti_pattern": "Adding invented names, publishers or licenses to silence a reference warning.",
+      "measurement": "Count parse failures, identity conflicts and unresolved references separately.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "jsonld",
+            "locator": "Node identifiers; node reference",
+            "note": "JSON-LD permits node references. Full-description requirements depend on the consuming contract."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-entities-homonym-scope",
+      "category": "entities",
+      "title": "Give same-named concepts distinct identities when their meanings differ",
+      "problem": "Matching labels can wrongly merge concepts from different domains.",
+      "implementation": [
+        "State the domain and definition beside each term; keep distinct IDs when the concepts are distinct.",
+        "Link a disambiguation only where it helps the reader; do not merge URLs based on one shared query."
+      ],
+      "verification": [
+        "A same-label fixture retains two meanings and the intended source relations."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "schema-term"
+      ],
+      "applicability": [
+        "glossaries",
+        "knowledge-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate entity boundaries may reduce ambiguity for consumers; markup correctness is not Search or citation impact.",
+      "anti_pattern": "Declaring cannibalization or identity equivalence from one shared word.",
+      "measurement": "Review exact query-page intent and definition accuracy, not label equality.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "schema-term",
+            "locator": "DefinedTerm: termCode and inDefinedTermSet",
+            "note": "The vocabulary can identify terms within term sets; homonym handling is our editorial procedure."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-entities-provenance-role",
+      "category": "entities",
+      "title": "Separate data origin from evidence supporting a claim",
+      "problem": "A derived-from relation does not say a result is true or independently verified.",
+      "implementation": [
+        "Use provenance for the actual input, activity and agent relationship.",
+        "Keep claim support, rights and independent review in their own records; preserve a link to the exact source version."
+      ],
+      "verification": [
+        "A derivation fixture with unsupported claims remains unsupported despite complete lineage."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "prov-o"
+      ],
+      "applicability": [
+        "datasets",
+        "knowledge-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate entity boundaries may reduce ambiguity for consumers; markup correctness is not Search or citation impact.",
+      "anti_pattern": "Using a provenance graph as a quality or authority score.",
+      "measurement": "Report traceable transformations separately from source-supported claims.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "prov-o",
+            "locator": "Entities, activities, agents and derivation",
+            "note": "PROV-O represents provenance relationships; it does not certify claim validity."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-entities-language-map-boundary",
+      "category": "entities",
+      "title": "Keep multilingual labels separate from published translations",
+      "problem": "A language-tagged entity label does not create a localized answer page.",
+      "implementation": [
+        "Use language maps only for actual labels or text values in the graph.",
+        "Track published language URLs and translated answer coverage separately; preserve one identity when labels describe the same entity."
+      ],
+      "verification": [
+        "A French label without a French page is not counted as translated-page coverage."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "jsonld"
+      ],
+      "applicability": [
+        "multilingual-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Accurate entity boundaries may reduce ambiguity for consumers; markup correctness is not Search or citation impact.",
+      "anti_pattern": "Counting graph label translations as new localized resources.",
+      "measurement": "Show label languages and reviewed page languages as different inventories.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "jsonld",
+            "locator": "Language maps",
+            "note": "JSON-LD supports language-tagged values; page availability and translation quality require separate evidence."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-experiments-shareable-input-state",
+      "category": "experiments",
+      "title": "Pilot a link that reopens a useful worked scenario",
+      "problem": "An interactive example loses its value if the visitor cannot return to the same inputs.",
+      "implementation": [
+        "On an existing tool page, encode only bounded non-sensitive scenario inputs and a format version.",
+        "Keep the canonical page stable; reject malformed or obsolete state and never put personal notes or credentials in share URLs."
+      ],
+      "verification": [
+        "Open the link in a clean session and compare the restored inputs and computed result."
+      ],
+      "evidence_level": "experimental",
+      "source_ids": [
+        "mdn-url-params"
+      ],
+      "applicability": [
+        "interactive-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reopening the same bounded scenario may make an existing tool reusable; test actual repeat use before expanding it.",
+      "anti_pattern": "Publishing every input combination as an SEO landing page.",
+      "measurement": "Observe correct restored scenarios and actual reuse; query URLs are not a new indexable-page factory.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mdn-url-params",
+            "locator": "URLSearchParams",
+            "note": "The API manipulates query parameters; shareable scenario state is our reversible product experiment."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-experience-local-state-recovery",
+      "category": "experience",
+      "title": "Let a visitor recover useful work after local storage fails",
+      "problem": "A saved badge can hide data that will disappear on eviction or a new device.",
+      "implementation": [
+        "Handle storage failure explicitly and offer a usable export for work worth keeping.",
+        "Test empty storage, quota failure and a fresh session; tell the user which state stays only in this browser."
+      ],
+      "verification": [
+        "A controlled storage failure does not silently discard the result or claim it is saved."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mdn-storage-limits"
+      ],
+      "applicability": [
+        "interactive-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Recoverable task state may prevent lost useful work; retention or product benefit must be observed separately.",
+      "anti_pattern": "Calling browser-local storage a durable account backup.",
+      "measurement": "Record recoverable/failed task outputs under the defined scenarios.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mdn-storage-limits",
+            "locator": "Storage quotas and eviction",
+            "note": "Browsers apply quotas and eviction. Export and recovery behavior are our product safeguards."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-documentation-artifact-roundtrip",
+      "category": "documentation",
+      "title": "Verify that a downloaded result can be opened and used",
+      "problem": "A successful download click is not the useful outcome promised by the page.",
+      "implementation": [
+        "Download one real sample through the user-facing path; inspect format, encoding and source version.",
+        "Open or import it in the intended consumer and verify the material result without requiring undocumented steps."
+      ],
+      "verification": [
+        "A corrupt-file fixture fails the task even when the download control works."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mdn-download-anchor"
+      ],
+      "applicability": [
+        "download-sites",
+        "interactive-sites"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A consumable artifact may help users finish the documented task; delivery success is not adoption.",
+      "anti_pattern": "Reporting download clicks as successful use or learning benefit.",
+      "measurement": "Count verified usable outputs separately from download events.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mdn-download-anchor",
+            "locator": "download attribute and download behavior",
+            "note": "Browser download behavior does not guarantee file validity; the consumer round trip is our test."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-services-timezone-handoff",
+      "category": "services",
+      "title": "Make a booking time unambiguous before the handoff",
+      "problem": "A local time input can be interpreted in a different zone by the provider.",
+      "implementation": [
+        "State the actual service zone and show the resolved time before confirmation.",
+        "Test a different visitor zone and a daylight-saving boundary without creating real bookings."
+      ],
+      "verification": [
+        "An ambiguous local time is clarified or rejected; both parties see the intended instant."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "mdn-local-datetime"
+      ],
+      "applicability": [
+        "appointment-services"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "An unambiguous time handoff may prevent a scheduling error; it does not establish lead or revenue growth.",
+      "anti_pattern": "Assuming the browser locale or local-time field identifies the service time zone.",
+      "measurement": "Observe correct time interpretation and completed authorized handoffs separately.",
+      "growth_hypothesis_ids": [
+        "non-commodity-evidence"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "mdn-local-datetime",
+            "locator": "Using datetime-local inputs; time zones",
+            "note": "datetime-local has no time-zone value. The booking handoff check is our workflow."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-documentation-subscription-delta",
+      "category": "documentation",
+      "title": "Publish a feed of substantive reusable updates",
+      "problem": "Readers may benefit from a maintained artifact without revisiting a catalog.",
+      "implementation": [
+        "Pilot a feed with stable entry IDs, canonical links and honest substantive-update dates.",
+        "Include only released changes with a useful consequence; do not refresh every entry on each build."
+      ],
+      "verification": [
+        "Rebuilding unchanged sources preserves entry identity and updated time."
+      ],
+      "evidence_level": "experimental",
+      "source_ids": [
+        "atom-feed"
+      ],
+      "applicability": [
+        "maintained-resources"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A consumable artifact may help users finish the documented task; delivery success is not adoption.",
+      "anti_pattern": "Calling feed requests returning readers or changing dates to simulate activity.",
+      "measurement": "Track actual subscriber or referral evidence if available, separately from feed fetches.",
+      "growth_hypothesis_ids": [
+        "freshness-without-fake-recency"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "atom-feed",
+            "locator": "atom:id; atom:updated; atom:link",
+            "note": "Atom supplies syndication semantics; retention and distribution benefits are unmeasured hypotheses."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-governance-distribution-scope",
+      "category": "governance",
+      "title": "Match a reused artifact to its actual distribution rights",
+      "problem": "A reusable sample can accidentally include private inputs or unsupported redistribution rights.",
+      "implementation": [
+        "Before offering a template or dataset elsewhere, classify its source, license and private-data boundary.",
+        "Distribute only the authorized artifact and link back to its canonical method/version; do not imply third-party endorsement."
+      ],
+      "verification": [
+        "A restricted input is excluded even when its derived preview looks useful."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "data-web"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A rights-checked artifact may be safely reusable where it is relevant; distribution and Search effects remain unmeasured.",
+      "anti_pattern": "Publishing owner evidence or repeatedly mirroring the same asset as independent adoption.",
+      "measurement": "Track accepted distribution artifacts and observed referrals without treating copies as independent evidence.",
+      "growth_hypothesis_ids": [
+        "identity-and-provenance"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "data-web",
+            "locator": "Data licenses; data provenance",
+            "note": "W3C data guidance supports explicit license and provenance information; the release boundary is a project decision."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-measurement-search-grain-reconciliation",
+      "category": "measurement",
+      "title": "Keep Search totals and returned query-page rows in their own grain",
+      "problem": "Filtered page/query rows may not reproduce property totals or reveal all demand.",
+      "implementation": [
+        "Preserve raw requests, aggregation type, pagination and exact dates.",
+        "Use property totals for resource impressions; use returned joint rows only for scoped diagnostics. Keep absent query rows unknown."
+      ],
+      "verification": [
+        "A fixture with property total larger than returned rows stays valid without allocating the remainder to invented queries."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "gsc-api"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "A complete, comparable observation may prevent a false growth diagnosis; it does not itself increase discovery.",
+      "anti_pattern": "Summing page impressions into a property KPI or filling unreturned queries with zero.",
+      "measurement": "Report property impressions and sample coverage separately; never call the sample total market demand.",
+      "growth_hypothesis_ids": [
+        "platform-ai-measurement"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "gsc-api",
+            "locator": "Response aggregation and query limitations",
+            "note": "Search Analytics does not guarantee every row. Grain reconciliation is our analytical contract."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
+    },
+    {
+      "id": "arwp-experiments-confounder-ledger",
+      "category": "experiments",
+      "title": "Record concurrent changes before interpreting a search gain",
+      "problem": "A successful release and a rising chart do not isolate the reason for the movement.",
+      "implementation": [
+        "Freeze the intended scope and record shared templates, redirects, content edits and measurement changes affecting it.",
+        "Keep before/after observations descriptive when exposure or comparison assumptions fail; preserve negative results."
+      ],
+      "verification": [
+        "An altered control or unknown live chronology prevents a causal success label."
+      ],
+      "evidence_level": "inferred",
+      "source_ids": [
+        "google-drops"
+      ],
+      "applicability": [
+        "all"
+      ],
+      "effort": "medium",
+      "impact_hypothesis": "Reopening the same bounded scenario may make an existing tool reusable; test actual repeat use before expanding it.",
+      "anti_pattern": "Calling a favorable before/after difference proof of the intervention.",
+      "measurement": "Show exact windows, release evidence and known confounders beside the two primary resource KPI.",
+      "growth_hypothesis_ids": [
+        "platform-ai-measurement"
+      ],
+      "recommendation_rule_ids": [],
+      "pattern_version": "1.0.0",
+      "review": {
+        "reviewed_at": "2026-10-18",
+        "scope": "source-support-and-implementation",
+        "method": "agent-assisted",
+        "support": [
+          {
+            "source_id": "google-drops",
+            "locator": "Assess a traffic drop and compare periods",
+            "note": "Google documents multiple possible drivers. The confounder ledger is our evaluation procedure."
+          }
+        ]
+      },
+      "lifecycle": {
+        "status": "active",
+        "replacement_ids": [],
+        "reason": null
+      }
     }
   ],
   "integration": {
@@ -12702,8 +14265,8 @@
     "scope": "Routing references into the existing Growth Loop, not an additional hypothesis registry. A related hypothesis supplies operational context, not endorsement of every tactic detail or proof of effect. Empty recommendation_rule_ids mean no matching current recommendation rule; they do not mean a failed check. Native hypothesis evidence classes, check modes, applicability and owner-data gates remain authoritative."
   },
   "previous_release": {
-    "version": "1.12.0",
-    "path": "knowledge/releases/v1.12.0.json",
-    "sha256": "052df898da23b1953a629225a8c1c783e5b87e078b31d6d2e5c8ee3f081676f7"
+    "version": "1.13.0",
+    "path": "knowledge/releases/v1.13.0.json",
+    "sha256": "5e8b76389d1a60fedf5bfbd3be8690eb2cc6f729f7099ab68f1f5636ad6e7424"
   }
 }

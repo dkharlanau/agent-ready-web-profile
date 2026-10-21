@@ -7,7 +7,7 @@
   "catalogs": {
     "discoverability": {
       "path": "knowledge/discoverability-corpus.json",
-      "version": "1.13.0"
+      "version": "1.14.0"
     },
     "antiPatterns": {
       "path": "knowledge/research/anti-patterns.json",

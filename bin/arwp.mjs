@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
-if (process.argv[2] === 'search-doctor') {
+if (['representations', 'ai-access'].includes(process.argv[2])) {
+  await import('./arwp-agent-discovery.mjs');
+} else if (process.argv[2] === 'bing') {
+  process.argv.splice(2, 1);
+  await import('./arwp-bing.mjs');
+} else if (process.argv[2] === 'search-doctor') {
   process.argv.splice(2, 1);
   await import('./arwp-search-doctor.mjs');
 } else if (process.argv[2] === 'site-gate') {
