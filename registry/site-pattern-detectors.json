@@ -3,7 +3,7 @@
   "version": "0.1",
   "catalogs": {
     "discoverability": {
-      "version": "1.13.0",
+      "version": "1.14.0",
       "path": "knowledge/discoverability-corpus.json"
     },
     "antiPatterns": {
