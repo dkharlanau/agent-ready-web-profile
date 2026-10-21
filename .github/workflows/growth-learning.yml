@@ -7,6 +7,13 @@ on:
       - 'lib/visibility-evidence.mjs'
       - 'lib/visibility-import.mjs'
       - 'lib/bing-context-evidence.mjs'
+      - 'lib/agent-representations.mjs'
+      - 'lib/ai-access-review.mjs'
+      - 'lib/bing-topics-portfolio.mjs'
+      - 'bin/arwp-agent-discovery.mjs'
+      - 'scripts/agent-discovery-test.mjs'
+      - 'docs/AGENT-DISCOVERY-CHECKS.md'
+      - 'templates/adoption/agent-discovery.mjs'
       - 'bin/arwp-bing.mjs'
       - 'scripts/bing-context-evidence-test.mjs'
       - 'docs/BING-AI-OWNER-CONTEXT.md'
@@ -38,6 +45,13 @@ on:
       - 'lib/visibility-evidence.mjs'
       - 'lib/visibility-import.mjs'
       - 'lib/bing-context-evidence.mjs'
+      - 'lib/agent-representations.mjs'
+      - 'lib/ai-access-review.mjs'
+      - 'lib/bing-topics-portfolio.mjs'
+      - 'bin/arwp-agent-discovery.mjs'
+      - 'scripts/agent-discovery-test.mjs'
+      - 'docs/AGENT-DISCOVERY-CHECKS.md'
+      - 'templates/adoption/agent-discovery.mjs'
       - 'bin/arwp-bing.mjs'
       - 'scripts/bing-context-evidence-test.mjs'
       - 'docs/BING-AI-OWNER-CONTEXT.md'
@@ -85,6 +99,7 @@ jobs:
           node scripts/visibility-evidence-test.mjs
           node scripts/visibility-import-test.mjs
           node scripts/bing-context-evidence-test.mjs
+          node scripts/agent-discovery-test.mjs
           node --check lib/bing-context-evidence.mjs
           node --check bin/arwp-bing.mjs
           node --check scripts/bing-context-evidence-test.mjs

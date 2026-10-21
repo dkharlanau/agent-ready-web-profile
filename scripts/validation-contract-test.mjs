@@ -17,14 +17,14 @@ function fail(message) {
 }
 
 const core = flattenValidationContract('core');
-assert.equal(core.length, 85, 'core validation contract command count changed; review coverage intentionally before updating this assertion');
+assert.equal(core.length, 86, 'core validation contract command count changed; review coverage intentionally before updating this assertion');
 const coreFingerprint = crypto
   .createHash('sha256')
   .update(JSON.stringify(core.map((command) => command.args)))
   .digest('hex');
 assert.equal(
   coreFingerprint,
-  '04de55c62261ee94d62d9604df977a3e2061640b631e51a13e8ce7eeab2eaa24',
+  '7406d559145c26379954c2cdaa921195ceddf665e682f65c2a14d3c016a8d3f5',
   'core validation command/order fingerprint changed; review equivalence intentionally before updating the fingerprint'
 );
 

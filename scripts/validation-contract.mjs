@@ -105,7 +105,8 @@ export const validationPhases = Object.freeze({
       node('scripts/discoverability-test.mjs', '--site'),
       node('scripts/agent-skills-test.mjs'),
       node('scripts/portfolio-workspace-test.mjs'),
-      node('scripts/evidence-relay-test.mjs')
+      node('scripts/evidence-relay-test.mjs'),
+      node('scripts/agent-discovery-test.mjs')
     ])
   }),
   'ci-maturity': Object.freeze({

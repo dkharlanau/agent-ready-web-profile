@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { reviewBingContext, compareBingContext } from '../lib/bing-context-evidence.mjs';
+import { createBingTopicsTemplate, reviewBingTopicsPortfolio } from '../lib/bing-topics-portfolio.mjs';
 
 const args=process.argv.slice(2);
 const command=args[0];
@@ -17,16 +18,26 @@ if(!command||args.includes('--help')){
   console.log('Goose Bing AI owner evidence (read-only, local files)');
   console.log('  arwp-bing inspect --input=PRIVATE-NORMALIZED-BING.json [--json] [--output=PRIVATE-REVIEW.json]');
   console.log('  arwp-bing compare --before=PRIVATE-REVIEW.json --after=PRIVATE-REVIEW.json [--json] [--output=PRIVATE-COMPARISON.json]');
+  console.log('  arwp-bing topics-template --site=https://example.test/ --output=PRIVATE-INPUT.json [--json]');
+  console.log('  arwp-bing topics-inspect --input=PRIVATE-INPUT.json [--json] [--output=PRIVATE-REVIEW.json]');
   console.log('Requires owner-normalized query/page IDs with filters; raw exports stay private. Never infers exact prompts, rankings, clicks, traffic or causality.');
 }else{
   try{
     const result=command==='inspect'?reviewBingContext(read(required('input')))
       :command==='compare'?compareBingContext(read(required('before')),read(required('after')))
+      :command==='topics-template'?createBingTopicsTemplate(required('site'))
+      :command==='topics-inspect'?reviewBingTopicsPortfolio(read(required('input')))
       :null;
     if(!result)throw Error('Unknown command: '+command);
     const saved=write(result);
     if(args.includes('--json'))console.log(JSON.stringify(result,null,2));
-    else{
+    else if(command.startsWith('topics-')){
+      console.log('Goose Bing Topics Portfolio: '+(result.state || result.availability));
+      console.log('Site: '+result.site);
+      console.log('Topics: '+result.topics.length+'; opportunities: '+result.opportunities.length);
+      console.log('No exact demand, automatic page creation, ranking or traffic claim.');
+      if(saved)console.log('WROTE '+saved);
+    }else{
       console.log('Goose '+result.kind);
       console.log('Site: '+result.site);
       if(result.kind==='bing-ai-owner-context-review'){
