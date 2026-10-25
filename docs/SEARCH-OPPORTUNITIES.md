@@ -1,6 +1,6 @@
 # Search opportunities: a review queue, not another readiness score
 
-Status: shipped offline planning tool. Source review: 2026-09-06. Ranking and conversion impact: unmeasured.
+Status: shipped offline planning tool. Source and target-attribution review: 2026-10-25. Ranking and conversion impact: unmeasured.
 
 The Growth audit asks whether a site is technically ready. This planner asks **which user need and existing page deserve the next improvement**. Start from a small, editor-reviewed intent map. Add a joint Search Console query+page export when available. Produce tasks with verification gates, not pages or ranking promises.
 
@@ -57,16 +57,18 @@ Inputs are limited to 5 MiB by the CLI. Unknown fields, duplicate query-page row
 
 ## Queue rules
 
-1. Review meaningful observed query-page overlap before approving another page. Several URLs are a **review signal**, not a diagnosis of cannibalization or permission to merge/redirect/noindex them.
-2. Review existing answers in the average-position band above 3 through 20 when the selected non-brand rows meet the configured impression threshold.
-3. Review other observed existing coverage. For a planned URL, inspect pages already serving the need before creating another.
+1. Review meaningful observed non-brand query-page overlap before approving another page. Several URLs are a **review signal**, not a diagnosis of cannibalization or permission to merge/redirect/noindex them. Branded overlap remains visible for review but does not raise the non-brand acquisition priority.
+2. Review existing answers in the average-position band above 3 through 20 when **that exact target URL's non-brand rows** meet the configured impression threshold. Another page's position and branded traffic cannot supply that evidence.
+3. Review other observed existing coverage. If the need has observations but the declared target has insufficient or missing rows, `review-target-coverage` asks the operator to inspect the actual observed pages first. For a planned URL, inspect pages already serving the need before creating another.
 4. With missing or weak owner evidence, establish a baseline and inspect existing content. Planned pages remain `research-before-publish`.
 
 The default minimum of 50 page impressions and position band are **project scheduling heuristics**, not Google recommendations, statistical significance thresholds or a predicted uplift. Within a priority bucket, ordering uses declared business value, observed non-brand page impressions, declared effort, then ID. No combined ranking, authority or readiness score is produced.
 
 ## Measurement discipline
 
-`observed`, `nonBrandObserved` and `targetObserved` contain only aggregates for matched rows. Position is impression-weighted. Page impressions are not unique searches, keyword volume or property totals: multiple URLs may appear for the same query. Missing export rows remain unknown, not zero demand. Raw query rows are omitted from reports, but reports still contain owner aggregates and must stay private unless publication is explicitly reviewed.
+`observed`, `nonBrandObserved`, `targetObserved` and `targetNonBrandObserved` contain only aggregates for matched rows. Position is impression-weighted. Page impressions are not unique searches, keyword volume or property totals: multiple URLs may appear for the same query. Missing export rows remain unknown, not zero demand. `targetDemandStatus` distinguishes absent target rows from an observed zero. `observedPageAlternatives` lists up to ten other observed non-brand pages, with the total count and explicit truncation flag. It is `null` when no export was supplied. Raw query rows are omitted from reports, but reports still contain owner aggregates and must stay private unless publication is explicitly reviewed.
+
+The additive output uses `model: review-queue-v2`. The input schema remains 1.0. The 25 October regression review found that the previous queue could call an unobserved target near-visible using impressions belonging entirely to another URL. The correction changes action selection; it does not establish a Search outcome.
 
 Brand terms use normalized token-phrase matching. Maintain aliases manually and review multilingual results. The planner does not forecast CTR uplift, equate clicks with conversions, or infer a Google AI-only breakdown from `web` data. Bing citations and referral outcomes remain in the existing visibility-evidence workflow; they are not mixed into Search Console positions.
 

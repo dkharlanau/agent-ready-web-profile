@@ -4,10 +4,12 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { diagnoseSearchFailure, formatSearchFailureDiagnosis, assessRepairReceipt, assessPublicationPolicy } from '../lib/search-failure-doctor.mjs';
+import { diagnoseSearchFailure as diagnose, formatSearchFailureDiagnosis, assessRepairReceipt, assessPublicationPolicy } from '../lib/search-failure-doctor.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const site = 'https://example.com/project/';
+const fixtureNow = '2026-10-01T12:00:00Z';
+const diagnoseSearchFailure = input => diagnose({ now: fixtureNow, ...input });
 const owner = (patch = {}) => ({
   version: '0.1',
   site,
@@ -26,7 +28,7 @@ const search = (patch = {}) => ({
   clicks: 0,
   ...patch
 });
-const technical = (checks = []) => ({ canonicalUrl: site, checks });
+const technical = (checks = [], generatedAt = fixtureNow) => ({ canonicalUrl: site, checks, generatedAt });
 const fail = (priority = 'P0') => ({
   id: 'search-indexability', priority, status: 'fail',
   message: 'Synthetic final HTTP noindex finding', evidence: [], source: 'fixture'
@@ -40,6 +42,13 @@ assert.match(formatSearchFailureDiagnosis(empty), /Start here:/);
 assert.doesNotMatch(formatSearchFailureDiagnosis(empty), /Google Analytics|SEO score: 100/i);
 assert.equal(empty.guardrails.noCompositeScore, true);
 assert.equal(empty.sourceState.owner, 'not-provided');
+assert.ok(formatSearchFailureDiagnosis(empty).includes('Diagnosis evaluated at: ' + fixtureNow));
+assert.match(formatSearchFailureDiagnosis(empty), /Current diagnosis stages:/);
+const legacyDiagnosis = structuredClone(empty);
+delete legacyDiagnosis.evidenceFreshness;
+delete legacyDiagnosis.observedStages;
+assert.match(formatSearchFailureDiagnosis(legacyDiagnosis), /Recorded stages \(freshness not recorded\):/);
+assert.doesNotMatch(formatSearchFailureDiagnosis(legacyDiagnosis), /Current diagnosis stages|Diagnosis evaluated at:/);
 
 const audit = diagnoseSearchFailure({ site, technical: technical([{
   id: 'robots-watch', priority: 'P0', status: 'watch'
@@ -49,7 +58,7 @@ assert.equal(audit.stages.publicEligibility, 'bounded-review');
 
 const blocker = diagnoseSearchFailure({
   site, technical: technical([fail('P0')]),
-  owner: owner({ indexing: { inspectedApprovedUrls: 4, indexedApprovedUrls: 0 }, search: search() })
+  owner: owner({ indexing: { observedAt: fixtureNow, inspectedApprovedUrls: 4, indexedApprovedUrls: 0 }, search: search() })
 });
 assert.equal(blocker.primary.code, 'review-technical-blocker');
 assert.equal(blocker.primary.checkId, 'search-indexability');
@@ -69,7 +78,7 @@ assert.equal(mismatch.stages.publicEligibility, 'bounded-failure');
 
 const partial = diagnoseSearchFailure({
   site, owner: owner({
-    indexing: { inspectedApprovedUrls: 3, indexedApprovedUrls: 1 },
+    indexing: { observedAt: fixtureNow, inspectedApprovedUrls: 3, indexedApprovedUrls: 1 },
     search: search({ impressions: 0 })
   })
 });
@@ -81,7 +90,7 @@ assert.equal(noImpressionsNoIndex.primary.code, 'collect-indexing-evidence');
 assert.equal(noImpressionsNoIndex.stages.exposure, 'zero-reported-property-impressions');
 
 const zeroIndexedSample = diagnoseSearchFailure({ site, owner: owner({
-  indexing: { inspectedApprovedUrls: 2, indexedApprovedUrls: 2 }, search: search()
+  indexing: { observedAt: fixtureNow, inspectedApprovedUrls: 2, indexedApprovedUrls: 2 }, search: search()
 }) });
 assert.equal(zeroIndexedSample.primary.code, 'review-query-fit');
 assert.match(zeroIndexedSample.primary.hold, /Do not manufacture keyword demand/);
@@ -144,7 +153,7 @@ assert.equal(assessRepairReceipt(receipt,{now:repairNow}).baselineAt,receipt.bas
 const candidate=diagnoseSearchFailure({site,owner:owner({repair:receipt,search:search({impressions:10})}),now:repairNow});
 assert.equal(candidate.primary.code,'review-local-repair');assert.equal(candidate.repair.searchEffect,'not_measured');assert.equal(candidate.repair.automaticPublication,false);
 assert.match(candidate.unknowns.join(' '),/does not authenticate or execute/);
-assert.equal(diagnoseSearchFailure({site,technical:technical([fail()]),owner:owner({repair:receipt}),now:repairNow}).primary.code,'review-technical-blocker','a local receipt cannot override public P0 evidence');
+assert.equal(diagnoseSearchFailure({site,technical:technical([fail()],repairNow),owner:owner({repair:receipt}),now:repairNow}).primary.code,'review-technical-blocker','a local receipt cannot override public P0 evidence');
 assert.equal(diagnoseSearchFailure({site,owner:owner({repair:receipt,deployment:{expectedRef:'d'.repeat(40),liveRef:'e'.repeat(40)}}),now:repairNow}).primary.code,'verify-live-revision');
 assert.equal(diagnoseSearchFailure({site,owner:owner({repair:receipt,dataStatus:'synthetic'}),now:repairNow}).repair,null);
 for(const [state,edit] of [
@@ -175,7 +184,7 @@ assert.doesNotMatch(JSON.stringify(diagnoseSearchFailure({site,owner:owner({repa
 const excludedUrl=site+'archive/retained',otherUrl=site+'public';
 const publicationPolicy={version:'0.1',sourceRef:'a'.repeat(40),observedAt:'2026-01-03T10:00:00Z',
   pages:[{url:excludedUrl,indexing:'excluded',basis:'archive',privateNote:'PRIVATE_POLICY_NOTE'}]};
-const excludedAudit={...technical([{...fail(),evidence:[excludedUrl]}]),pages:[{url:excludedUrl,requestedUrl:excludedUrl,ok:true,status:200,noindex:true,redirected:false}]};
+const excludedAudit={...technical([{...fail(),evidence:[excludedUrl]}],repairNow),pages:[{url:excludedUrl,requestedUrl:excludedUrl,ok:true,status:200,noindex:true,redirected:false}]};
 const excludedBefore=structuredClone(excludedAudit);
 const policyResult=diagnoseSearchFailure({site,technical:excludedAudit,owner:owner({publicationPolicy}),now:repairNow});
 assert.equal(policyResult.primary.code,'review-publication-policy');assert.equal(policyResult.publicationPolicy.state,'unbound_revision_context');
@@ -213,6 +222,98 @@ for(const edit of [p=>p.pages.push(p.pages[0]),p=>p.pages[0].url='https://elsewh
 assert.equal(diagnoseSearchFailure({site,technical:excludedAudit,owner:owner({publicationPolicy,dataStatus:'synthetic'}),now:repairNow}).publicationPolicy,null);
 assert.equal(diagnoseSearchFailure({site,technical:excludedAudit,owner:owner({publicationPolicy,deployment:{expectedRef:'a'.repeat(40),liveRef:'b'.repeat(40)}}),now:repairNow}).primary.code,'verify-live-revision');
 
+// Old facts are retained, but cannot choose today's content/repair action.
+const staleTechnical = technical([fail()], '2020-01-01T00:00:00Z');
+const staleBefore = structuredClone(staleTechnical);
+const stale = diagnoseSearchFailure({ site, technical: staleTechnical });
+assert.equal(stale.primary.code, 'refresh-evidence');
+assert.equal(stale.stages.publicEligibility, 'historical-evidence');
+assert.equal(stale.observedStages.publicEligibility, 'bounded-failure');
+assert.equal(stale.evidenceFreshness.technical.state, 'stale');
+assert.equal(stale.evidenceFreshness.technical.observedAt, '2020-01-01T00:00:00Z');
+assert.equal(stale.evidenceFreshness.maxAgeDays, 30);
+assert.equal(stale.evidenceFreshness.policy, 'project-reuse-limit-not-provider-latency');
+assert.deepEqual(staleTechnical, staleBefore);
+assert.match(stale.primary.hold, /Changing a timestamp does not refresh/);
+
+const staleOwner = owner({
+  indexing: { observedAt: '2020-01-31T12:00:00Z', inspectedApprovedUrls: 4, indexedApprovedUrls: 4 },
+  search: search({ startDate: '2020-01-01', endDate: '2020-01-31' })
+});
+const oldZeroes = diagnoseSearchFailure({ site, owner: staleOwner });
+assert.equal(oldZeroes.primary.code, 'refresh-evidence');
+assert.equal(oldZeroes.stages.indexing, 'historical-evidence');
+assert.equal(oldZeroes.stages.exposure, 'historical-evidence');
+assert.equal(oldZeroes.stages.visitsFromSearch, 'unknown');
+assert.equal(oldZeroes.observedStages.exposure, 'zero-reported-property-impressions');
+assert.equal(oldZeroes.sourceState.googleSearchPeriod, null);
+
+const undated = diagnoseSearchFailure({ site, technical: { canonicalUrl: site, checks: [fail()] },
+  owner: owner({ indexing: { inspectedApprovedUrls: 4, indexedApprovedUrls: 0 }, search: search() }) });
+assert.equal(undated.primary.code, 'refresh-evidence');
+assert.equal(undated.stages.publicEligibility, 'undated-evidence');
+assert.equal(undated.stages.indexing, 'undated-evidence');
+assert.equal(undated.evidenceFreshness.technical.observedAt, null);
+assert.equal(undated.evidenceFreshness.indexing.ageDays, null);
+assert.equal(undated.observedStages.indexing, 'none-in-inspected-sample');
+const liveWithoutStamp = diagnoseSearchFailure({ site, technical: { canonicalUrl: site, checks: [fail()] }, technicalOrigin: 'live' });
+assert.equal(liveWithoutStamp.primary.code, 'review-technical-blocker');
+assert.equal(liveWithoutStamp.evidenceFreshness.technical.observedAt, fixtureNow);
+
+// Zero inspected URLs contain no indexing observation and create no freshness debt.
+for (const observedAt of [undefined, '2020-01-01T00:00:00Z', fixtureNow, '2027-01-01T00:00:00Z']) {
+  const noSample = { inspectedApprovedUrls: 0, indexedApprovedUrls: 0, ...(observedAt === undefined ? {} : { observedAt }) };
+  const positiveSearch = diagnoseSearchFailure({ site, technical: technical([]),
+    owner: owner({ indexing: noSample, search: search({ impressions: 100, clicks: 10 }) }) });
+  assert.equal(positiveSearch.primary.code, 'define-useful-outcome');
+  assert.equal(positiveSearch.stages.indexing, 'unknown');
+  assert.equal(positiveSearch.observedStages.indexing, 'unknown');
+  assert.equal(positiveSearch.evidenceFreshness.indexing.state, 'no-sample');
+  assert.equal(positiveSearch.evidenceFreshness.indexing.observedAt, observedAt ?? null);
+  assert.equal(positiveSearch.evidenceFreshness.indexing.ageDays, null);
+  const zeroSearch = diagnoseSearchFailure({ site, technical: technical([]),
+    owner: owner({ indexing: noSample, search: search() }) });
+  assert.equal(zeroSearch.primary.code, 'collect-indexing-evidence');
+  assert.equal(zeroSearch.stages.indexing, 'unknown');
+}
+
+const futureEvidence = diagnoseSearchFailure({ site, technical: technical([fail()], '2027-01-01T00:00:00Z'),
+  owner: owner({ indexing: { observedAt: '2027-01-01T00:00:00Z', inspectedApprovedUrls: 2, indexedApprovedUrls: 0 },
+    search: search({ startDate: '2027-01-01', endDate: '2027-01-31' }) }) });
+assert.equal(futureEvidence.primary.code, 'refresh-evidence');
+assert.equal(futureEvidence.stages.publicEligibility, 'future-evidence');
+assert.equal(futureEvidence.stages.indexing, 'future-evidence');
+assert.equal(futureEvidence.stages.exposure, 'future-evidence');
+
+const recent = technical([fail()], '2026-09-15T12:00:00Z');
+assert.equal(diagnoseSearchFailure({ site, technical: recent }).primary.code, 'review-technical-blocker');
+assert.equal(diagnoseSearchFailure({ site, technical: recent, maxEvidenceAgeDays: 7 }).primary.code, 'refresh-evidence');
+assert.equal(diagnoseSearchFailure({ site, technical: recent, maxEvidenceAgeDays: 7 }).evidenceFreshness.maxAgeDays, 7);
+assert.equal(diagnoseSearchFailure({ site, technical: technical([fail()], '2026-09-01T12:00:00Z') }).primary.code, 'review-technical-blocker');
+assert.equal(diagnoseSearchFailure({ site, technical: technical([fail()], '2026-09-01T11:59:59Z') }).primary.code, 'refresh-evidence');
+
+// Fresh independent blockers/repairs outrank old owner evidence; old blockers do not.
+assert.equal(diagnoseSearchFailure({ site, technical: technical([fail()]), owner: staleOwner }).primary.code, 'review-technical-blocker');
+assert.equal(diagnoseSearchFailure({ site, technical: technical([fail('P1')]), owner: staleOwner }).primary.code, 'review-technical-finding');
+assert.equal(diagnoseSearchFailure({ site, technical: staleTechnical, owner: owner({ repair: receipt }), now: repairNow }).primary.code, 'review-local-repair');
+assert.equal(diagnoseSearchFailure({ site, technical: staleTechnical, owner: owner({
+  indexing: { observedAt: fixtureNow, inspectedApprovedUrls: 2, indexedApprovedUrls: 0 }
+}) }).primary.code, 'review-indexing-sample');
+const stalePolicyAudit = { ...excludedAudit, generatedAt: '2020-01-01T00:00:00Z' };
+const stalePolicy = diagnoseSearchFailure({ site, technical: stalePolicyAudit, owner: owner({ publicationPolicy }), now: repairNow });
+assert.equal(stalePolicy.primary.code, 'refresh-evidence');
+assert.equal(stalePolicy.publicationPolicy.state, 'not_matched');
+
+// UTC has crossed midnight, while the provider's Pacific reporting day has not.
+const pacificNow = '2026-10-01T01:00:00Z';
+const futurePacificDay = diagnoseSearchFailure({ site, now: pacificNow,
+  owner: owner({ search: search({ startDate: '2026-09-01', endDate: '2026-10-01', impressions: 10 }) }) });
+assert.equal(futurePacificDay.evidenceFreshness.search.state, 'future');
+const currentPacificDay = diagnoseSearchFailure({ site, now: pacificNow,
+  owner: owner({ search: search({ startDate: '2026-09-01', endDate: '2026-09-30', impressions: 10 }) }) });
+assert.equal(currentPacificDay.evidenceFreshness.search.state, 'current');
+assert.equal(currentPacificDay.primary.code, 'review-selection-evidence');
+
 for (const input of [
   { site: 'http://example.com/' },
   { site: 'https://example.com/?credential=secret' },
@@ -225,15 +326,21 @@ for (const input of [
   { site, owner: owner({search: search({property:'sc-domain:other.com'})}) },
   { site, owner: owner({search: search({property:'https://example.com/unrelated/'})}) },
   { site, owner: owner({search: search({endDate:'2026-02-30'})}) },
-  { site, owner: owner({indexing:{inspectedApprovedUrls:1,indexedApprovedUrls:2}}) }
+  { site, owner: owner({indexing:{inspectedApprovedUrls:1,indexedApprovedUrls:2}}) },
+  { site, technical: technical([], '2026-02-30T00:00:00Z') },
+  { site, owner: owner({indexing:{observedAt:'2026-02-30T00:00:00Z',inspectedApprovedUrls:1,indexedApprovedUrls:1}}) },
+  { site, now: 'invalid-date' },
+  ...[0, 366, 1.5, NaN, Infinity, '30'].map(maxEvidenceAgeDays => ({ site, maxEvidenceAgeDays }))
 ]) assert.throws(() => diagnoseSearchFailure(input), Error, 'invalid or cross-scope evidence must fail closed');
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'arwp-doctor-test-'));
 try {
   const auditPath = path.join(dir, 'technical.json');
   const ownerPath = path.join(dir, 'owner.json');
-  fs.writeFileSync(auditPath, JSON.stringify(technical([])));
-  fs.writeFileSync(ownerPath, JSON.stringify(owner({search:search({impressions:100,clicks:0})})));
+  const cliNow = new Date().toISOString();
+  const recentDate = new Date(Date.now() - 2 * 86400000).toISOString().slice(0, 10);
+  fs.writeFileSync(auditPath, JSON.stringify(technical([], cliNow)));
+  fs.writeFileSync(ownerPath, JSON.stringify(owner({search:search({startDate:recentDate,endDate:recentDate,impressions:100,clicks:0})})));
   const cli = path.join(root, 'bin/arwp-search-doctor.mjs');
   const run = (args) => spawnSync(process.execPath, args, {
     cwd: root, encoding: 'utf8', timeout: 20000
@@ -248,6 +355,19 @@ try {
   const unsupported = run([cli, site, '--scan', '--technical=' + auditPath]);
   assert.equal(unsupported.status, 1);
   assert.match(unsupported.stderr, /Choose --scan or --technical/);
+  for (const value of ['0', '366', '1.5', 'nope', '']) {
+    const invalidAge = run([cli, site, '--max-evidence-age-days=' + value]);
+    assert.equal(invalidAge.status, 1);
+    assert.match(invalidAge.stderr, /max-evidence-age-days/);
+  }
+  const customAge = run([cli, site, '--max-evidence-age-days=7', '--json']);
+  assert.equal(customAge.status, 0, customAge.stderr);
+  assert.equal(JSON.parse(customAge.stdout).evidenceFreshness.maxAgeDays, 7);
+  assert.equal(run([cli, site, '--max-evidence-age-days=7', '--max-evidence-age-days=9']).status, 1);
+  fs.writeFileSync(auditPath, JSON.stringify(staleTechnical));
+  const oldCli = run([cli, '--technical=' + auditPath, '--json']);
+  assert.equal(oldCli.status, 0, oldCli.stderr);
+  assert.equal(JSON.parse(oldCli.stdout).primary.code, 'refresh-evidence');
 } finally {
   fs.rmSync(dir, { recursive: true, force: true });
 }

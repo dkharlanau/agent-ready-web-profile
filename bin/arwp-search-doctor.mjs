@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import { technicalIntegrity } from '../lib/technical-integrity.mjs';
-import { diagnoseSearchFailure, formatSearchFailureDiagnosis } from '../lib/search-failure-doctor.mjs';
+import { diagnoseSearchFailure, formatSearchFailureDiagnosis, SEARCH_EVIDENCE_MAX_AGE_DAYS } from '../lib/search-failure-doctor.mjs';
 
 const HELP = [
   'Goose Search Failure Doctor — one useful next check, not another SEO score',
@@ -16,6 +16,7 @@ const HELP = [
   '  --max-pages=N      Public pages to inspect with --scan, 1-20 (default 8)',
   '  --technical=FILE   Read an existing arwp technical-integrity --json report (up to 4 MiB)',
   '  --owner=FILE       Read optional LOCAL owner evidence (up to 1 MiB); never uploaded',
+  '  --max-evidence-age-days=N  Reuse observations for 1-365 days (default 30); project policy, not provider latency',
   '  --json             Emit a machine-readable diagnosis',
   '  --help             Show this help',
   '',
@@ -51,7 +52,7 @@ async function main() {
   }
   const supported = new Set(['--scan', '--json']);
   for (const arg of options) {
-    if (!supported.has(arg) && !['--owner=', '--technical=', '--max-pages='].some(prefix => arg.startsWith(prefix))) {
+    if (!supported.has(arg) && !['--owner=', '--technical=', '--max-pages=', '--max-evidence-age-days='].some(prefix => arg.startsWith(prefix))) {
       throw new Error('Unsupported option: ' + arg);
     }
   }
@@ -64,6 +65,8 @@ async function main() {
   if (scan && !site) throw new Error('--scan requires an HTTPS site URL.');
   if (option('max-pages') && !scan) throw new Error('--max-pages requires --scan.');
   if (!site && !technicalFile && !ownerFile) throw new Error('Supply an HTTPS site, --technical or --owner.');
+  if (options.includes('--max-evidence-age-days=')) throw new Error('--max-evidence-age-days requires an integer in 1-365.');
+  const maxEvidenceAgeDays = positiveBoundedInt(option('max-evidence-age-days') ?? String(SEARCH_EVIDENCE_MAX_AGE_DAYS), '--max-evidence-age-days', 365);
   const owner = ownerFile ? loadJson(ownerFile, 1024 * 1024) : null;
   let technical = technicalFile ? loadJson(technicalFile, 4 * 1024 * 1024) : null;
   if (scan) technical = await technicalIntegrity(site, {
@@ -71,7 +74,7 @@ async function main() {
     concurrency: 2,
     timeoutMs: 8000
   });
-  const result = diagnoseSearchFailure({site, technical, owner, technicalOrigin: scan ? 'live' : 'provided'});
+  const result = diagnoseSearchFailure({site, technical, owner, technicalOrigin: scan ? 'live' : 'provided', maxEvidenceAgeDays});
   process.stdout.write(args.includes('--json')
     ? JSON.stringify(result, null, 2) + '\n'
     : formatSearchFailureDiagnosis(result) + '\n');
