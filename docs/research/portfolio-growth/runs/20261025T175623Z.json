@@ -1,0 +1,1382 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-growth-run.schema.json",
+  "version": "0.1",
+  "runId": "20261025T175623Z",
+  "observedAt": "2026-10-25T17:56:23.000Z",
+  "evidenceClass": "owner-controlled-public-observation",
+  "portfolioUpdatedAt": "2026-10-25",
+  "summary": {
+    "enabledSites": 9,
+    "captured": 9,
+    "unavailable": 0,
+    "awaitingOwnerMeasurement": 9
+  },
+  "sites": [
+    {
+      "siteId": "bonihua-chinese-learning",
+      "name": "Bonihua",
+      "canonicalUrl": "https://www.bonihua.com/",
+      "repository": "metalhatscats/bonihua",
+      "vertical": "editorial",
+      "rolloutMode": "observe-only",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://www.bonihua.com/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "audit:google-read-more-deep-links",
+            "priority": "P2",
+            "lane": "citation",
+            "status": "warn",
+            "title": "Keep important sections deep-linkable",
+            "source": "https://developers.google.com/search/docs/appearance/snippet",
+            "reasonDigest": "sha256:b15484eb96ccf8f8ad4b759a89381ab133e4c7c6f69bbf1ec602f98a0713cd97"
+          },
+          {
+            "id": "audit:google-sitemap-lastmod",
+            "priority": "P2",
+            "lane": "freshness",
+            "status": "warn",
+            "title": "Publish accurate sitemap freshness metadata",
+            "source": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+            "reasonDigest": "sha256:27c1c56e1d6803d229a02225e7b530557a321421ad466ffd1e4cc80c05ba826b"
+          },
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 5,
+          "highPriority": 5,
+          "byPriority": {
+            "P2": 2,
+            "P1": 5
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "content-quality": 1,
+            "governance": 1,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": true,
+            "sameAs": 3,
+            "types": [
+              "organization"
+            ]
+          },
+          "localSitemap": {
+            "ok": false,
+            "validLastmodCount": 0
+          },
+          "contentSignal": {
+            "observed": true,
+            "values": {
+              "ai-train": "no",
+              "search": "yes",
+              "ai-input": "yes"
+            }
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 2,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:6c1b791f38fd52ce3e80ad3a5290e6bd9e9e6c5e8bee7342bc936355cb21c069",
+        "digest": "sha256:6c1b791f38fd52ce3e80ad3a5290e6bd9e9e6c5e8bee7342bc936355cb21c069"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 3,
+        "summary": {
+          "manual": 3
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    },
+    {
+      "siteId": "brali-practical-knowledge",
+      "name": "Brali Practical Knowledge Library",
+      "canonicalUrl": "https://brali-lifeos.github.io/",
+      "repository": "Brali-LifeOS/brali-lifeos.github.io",
+      "vertical": "editorial",
+      "rolloutMode": "proposal-only",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://brali-lifeos.github.io/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "audit:google-sitemap-lastmod",
+            "priority": "P2",
+            "lane": "freshness",
+            "status": "warn",
+            "title": "Publish accurate sitemap freshness metadata",
+            "source": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+            "reasonDigest": "sha256:27c1c56e1d6803d229a02225e7b530557a321421ad466ffd1e4cc80c05ba826b"
+          },
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:entity-sameas",
+            "priority": "P2",
+            "lane": "entity-identity",
+            "status": "recommended",
+            "title": "Connect the site entity to authoritative external profiles",
+            "source": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+            "reasonDigest": "sha256:288b4c853e3f2d0abf8f15bc43409f577ed98021bd5cd3aeb5bcc868cd17192d"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 5,
+          "highPriority": 5,
+          "byPriority": {
+            "P2": 2,
+            "P1": 5
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "content-quality": 1,
+            "governance": 1,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": true,
+            "sameAs": 0,
+            "types": [
+              "organization"
+            ]
+          },
+          "localSitemap": {
+            "ok": false,
+            "validLastmodCount": 0
+          },
+          "contentSignal": {
+            "observed": false,
+            "values": {}
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 15,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:83c31e274e2879ceacf22b8b9a9e21d1d6d9ac7939907283c476f032abaaa347",
+        "digest": "sha256:83c31e274e2879ceacf22b8b9a9e21d1d6d9ac7939907283c476f032abaaa347"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 3,
+        "summary": {
+          "manual": 2,
+          "observed": 1
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    },
+    {
+      "siteId": "cbt-cards-public-reflection",
+      "name": "CBT Cards Public Reflection Resource",
+      "canonicalUrl": "https://cbt-cards.github.io/",
+      "repository": "CBT-cards/cbt-cards.github.io",
+      "vertical": "editorial",
+      "rolloutMode": "proposal-only",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://cbt-cards.github.io/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "audit:google-read-more-deep-links",
+            "priority": "P2",
+            "lane": "citation",
+            "status": "warn",
+            "title": "Keep important sections deep-linkable",
+            "source": "https://developers.google.com/search/docs/appearance/snippet",
+            "reasonDigest": "sha256:b15484eb96ccf8f8ad4b759a89381ab133e4c7c6f69bbf1ec602f98a0713cd97"
+          },
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:entity-sameas",
+            "priority": "P2",
+            "lane": "entity-identity",
+            "status": "recommended",
+            "title": "Connect the site entity to authoritative external profiles",
+            "source": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+            "reasonDigest": "sha256:288b4c853e3f2d0abf8f15bc43409f577ed98021bd5cd3aeb5bcc868cd17192d"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 5,
+          "highPriority": 5,
+          "byPriority": {
+            "P2": 2,
+            "P1": 5
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "content-quality": 1,
+            "governance": 1,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": true,
+            "sameAs": 0,
+            "types": [
+              "organization"
+            ]
+          },
+          "localSitemap": {
+            "ok": true,
+            "validLastmodCount": 45
+          },
+          "contentSignal": {
+            "observed": false,
+            "values": {}
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 4,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:1b79b21af3009d86351754690ec05cc127fff241fa0429f58b4db3cecb56b520",
+        "digest": "sha256:1b79b21af3009d86351754690ec05cc127fff241fa0429f58b4db3cecb56b520"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 1,
+        "summary": {
+          "manual": 2,
+          "observed": 1
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    },
+    {
+      "siteId": "cognitive-biases-knowledge",
+      "name": "Cognitive Biases Knowledge Library",
+      "canonicalUrl": "https://cognitive-biases.github.io/",
+      "repository": "Cognitive-Biases/cognitive-biases.github.io",
+      "vertical": "editorial",
+      "rolloutMode": "managed-issue",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://cognitive-biases.github.io/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 3,
+          "highPriority": 3,
+          "byPriority": {
+            "P1": 3
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": true,
+            "sameAs": 1,
+            "types": [
+              "organization"
+            ]
+          },
+          "localSitemap": {
+            "ok": true,
+            "validLastmodCount": 166
+          },
+          "contentSignal": {
+            "observed": false,
+            "values": {}
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 22,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:3f033a2531d8fcca120c5f167a2e2540f552589703f43fa058167a500294b7ca",
+        "digest": "sha256:3f033a2531d8fcca120c5f167a2e2540f552589703f43fa058167a500294b7ca"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 4,
+        "summary": {
+          "partial": 2,
+          "observed": 1
+        }
+      },
+      "ownerDataState": {
+        "observed": true,
+        "valid": true,
+        "recordCount": 1
+      },
+      "error": null
+    },
+    {
+      "siteId": "dkharlanau-sap-knowledge",
+      "name": "Dzmitryi Kharlanau — SAP Knowledge",
+      "canonicalUrl": "https://dkharlanau.github.io/",
+      "repository": "dkharlanau/dkharlanau.github.io",
+      "vertical": "documentation",
+      "rolloutMode": "managed-issue",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://dkharlanau.github.io/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "audit:google-sitemap-lastmod",
+            "priority": "P2",
+            "lane": "freshness",
+            "status": "warn",
+            "title": "Publish accurate sitemap freshness metadata",
+            "source": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+            "reasonDigest": "sha256:1540bd18919cd140bb8da60e445d21a03268affc78427a791f9f67f21c17a2fc"
+          },
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:entity-identity",
+            "priority": "P1",
+            "lane": "entity-identity",
+            "status": "recommended",
+            "title": "Publish a canonical Organization/Person identity graph",
+            "source": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+            "reasonDigest": "sha256:6be66002db92de6b2c30b05bb8489203a12559816d9d43109c8d32d2f49d1310"
+          },
+          {
+            "id": "growth:faq-deprecation",
+            "priority": "P2",
+            "lane": "governance",
+            "status": "review",
+            "title": "Do not rely on FAQPage markup as a current Google rich-result tactic",
+            "source": "https://developers.google.com/search/updates",
+            "reasonDigest": "sha256:df171d5acf71a96e9792975dac49d0dc34a9d5d8dc770249ca68239017607b9a"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "growth:vertical:documentation-version-context",
+            "priority": "P1",
+            "lane": "vertical:documentation",
+            "status": "recommended",
+            "title": "Make version and freshness context explicit",
+            "source": null,
+            "reasonDigest": "sha256:92ebd9569b51c0b80f48a4b2f48e9cacb01d8b66a3f64463cf622867a7aa46c1"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 7,
+          "highPriority": 7,
+          "byPriority": {
+            "P2": 2,
+            "P1": 7
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "entity-identity": 1,
+            "content-quality": 1,
+            "governance": 1,
+            "vertical:documentation": 1,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": false,
+            "sameAs": 0,
+            "types": []
+          },
+          "localSitemap": {
+            "ok": true,
+            "validLastmodCount": 0
+          },
+          "contentSignal": {
+            "observed": true,
+            "values": {
+              "ai-train": "no",
+              "search": "yes",
+              "ai-input": "yes"
+            }
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 1,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:73d0f1785f9dd63968a424738065a1395eca87b156b69797a9b0e15a56587446",
+        "digest": "sha256:73d0f1785f9dd63968a424738065a1395eca87b156b69797a9b0e15a56587446"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 1,
+        "summary": {
+          "not-observed": 1,
+          "observed": 2
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    },
+    {
+      "siteId": "metalhatscats-applied-systems",
+      "name": "MetalHatsCats",
+      "canonicalUrl": "https://metalhatscats.com/",
+      "repository": "metalhatscats/mhc",
+      "vertical": "software-product",
+      "rolloutMode": "observe-only",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://metalhatscats.com/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "audit:google-read-more-deep-links",
+            "priority": "P2",
+            "lane": "citation",
+            "status": "warn",
+            "title": "Keep important sections deep-linkable",
+            "source": "https://developers.google.com/search/docs/appearance/snippet",
+            "reasonDigest": "sha256:b15484eb96ccf8f8ad4b759a89381ab133e4c7c6f69bbf1ec602f98a0713cd97"
+          },
+          {
+            "id": "audit:google-sitemap-lastmod",
+            "priority": "P2",
+            "lane": "freshness",
+            "status": "warn",
+            "title": "Publish accurate sitemap freshness metadata",
+            "source": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+            "reasonDigest": "sha256:1540bd18919cd140bb8da60e445d21a03268affc78427a791f9f67f21c17a2fc"
+          },
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "growth:vertical:software-product-docs-support",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "review",
+            "title": "Expose documentation, examples and support/trust as crawlable product-adjacent surfaces",
+            "source": null,
+            "reasonDigest": "sha256:5fede2867b649d5c8b7272901b7d26a31c46aaf32bf8e7028e56595a664b0814"
+          },
+          {
+            "id": "growth:vertical:software-product-identity",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Keep product identity and software metadata canonical",
+            "source": null,
+            "reasonDigest": "sha256:2fe9cfe73fb231c67d074e3570e76131d5bd2757cdee5da2578c74e0d4943f37"
+          },
+          {
+            "id": "growth:vertical:software-product-release-history",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Publish stable release or change history",
+            "source": null,
+            "reasonDigest": "sha256:4e99a997ddf6f81bc5c87f4fa80070515c5fdac1539d0237cf35749be47a0f61"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 8,
+          "highPriority": 8,
+          "byPriority": {
+            "P2": 2,
+            "P1": 8
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "content-quality": 1,
+            "governance": 1,
+            "vertical:software-product": 3,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": true,
+            "sameAs": 2,
+            "types": [
+              "organization"
+            ]
+          },
+          "localSitemap": {
+            "ok": true,
+            "validLastmodCount": 0
+          },
+          "contentSignal": {
+            "observed": false,
+            "values": {}
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 3,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:b88a0395f187276c97819c56f93a752f2a01ddb78708a5d668fd07e7182223a9",
+        "digest": "sha256:b88a0395f187276c97819c56f93a752f2a01ddb78708a5d668fd07e7182223a9"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 4,
+        "summary": {
+          "not-observed": 2,
+          "partial": 1,
+          "not-applicable-or-not-observed": 1
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    },
+    {
+      "siteId": "metkagram-language-knowledge",
+      "name": "Metkagram",
+      "canonicalUrl": "https://metkagram.github.io/",
+      "repository": "metkagram/metkagram.github.io",
+      "vertical": "software-product",
+      "rolloutMode": "managed-issue",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://metkagram.github.io/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "growth:vertical:software-product-docs-support",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Expose documentation, examples and support/trust as crawlable product-adjacent surfaces",
+            "source": null,
+            "reasonDigest": "sha256:62960c80ea4eec20532a4edf68f2d9be7ebe7385bfee0c470b9a8605cce304da"
+          },
+          {
+            "id": "growth:vertical:software-product-identity",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Keep product identity and software metadata canonical",
+            "source": null,
+            "reasonDigest": "sha256:2fe9cfe73fb231c67d074e3570e76131d5bd2757cdee5da2578c74e0d4943f37"
+          },
+          {
+            "id": "growth:vertical:software-product-release-history",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Publish stable release or change history",
+            "source": null,
+            "reasonDigest": "sha256:4e99a997ddf6f81bc5c87f4fa80070515c5fdac1539d0237cf35749be47a0f61"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 8,
+          "highPriority": 8,
+          "byPriority": {
+            "P1": 8
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "content-quality": 1,
+            "governance": 1,
+            "vertical:software-product": 3,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": true,
+            "sameAs": 1,
+            "types": [
+              "organization"
+            ]
+          },
+          "localSitemap": {
+            "ok": true,
+            "validLastmodCount": 1507
+          },
+          "contentSignal": {
+            "observed": false,
+            "values": {}
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 1,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:198351006c38622346298b9786a36f5c4ef3ec1753a9b2c3c8a69406a31a5da7",
+        "digest": "sha256:198351006c38622346298b9786a36f5c4ef3ec1753a9b2c3c8a69406a31a5da7"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 4,
+        "summary": {
+          "not-observed": 3,
+          "observed": 1
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    },
+    {
+      "siteId": "ptichi-fresh-site",
+      "name": "Ptichi",
+      "canonicalUrl": "https://ptichi.com/",
+      "repository": "dkharlanau/ptichi-site",
+      "vertical": "software-product",
+      "rolloutMode": "proposal-only",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://ptichi.com/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:entity-identity",
+            "priority": "P1",
+            "lane": "entity-identity",
+            "status": "recommended",
+            "title": "Publish a canonical Organization/Person identity graph",
+            "source": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+            "reasonDigest": "sha256:6be66002db92de6b2c30b05bb8489203a12559816d9d43109c8d32d2f49d1310"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "growth:vertical:software-product-docs-support",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "review",
+            "title": "Expose documentation, examples and support/trust as crawlable product-adjacent surfaces",
+            "source": null,
+            "reasonDigest": "sha256:c5930b893dcddf0492af4f54de74cd6cef027dc8d908bcdc74e1046f14dc051c"
+          },
+          {
+            "id": "growth:vertical:software-product-identity",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Keep product identity and software metadata canonical",
+            "source": null,
+            "reasonDigest": "sha256:2fe9cfe73fb231c67d074e3570e76131d5bd2757cdee5da2578c74e0d4943f37"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 8,
+          "highPriority": 8,
+          "byPriority": {
+            "P1": 8
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "entity-identity": 1,
+            "content-quality": 1,
+            "governance": 1,
+            "vertical:software-product": 2,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": false,
+            "sameAs": 0,
+            "types": []
+          },
+          "localSitemap": {
+            "ok": true,
+            "validLastmodCount": 133
+          },
+          "contentSignal": {
+            "observed": false,
+            "values": {}
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 9,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:95fa016e70be5b53a9ff1eb3cfdfb26d7d5bb8e8230f6e31d92c2067fbaab82b",
+        "digest": "sha256:95fa016e70be5b53a9ff1eb3cfdfb26d7d5bb8e8230f6e31d92c2067fbaab82b"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 4,
+        "summary": {
+          "not-observed": 1,
+          "observed": 2,
+          "partial": 1
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    },
+    {
+      "siteId": "vedokrok-practical-learning",
+      "name": "Vedokrok",
+      "canonicalUrl": "https://vedokrok.com/",
+      "repository": "dkharlanau/vedokrok",
+      "vertical": "software-product",
+      "rolloutMode": "observe-only",
+      "measurementState": "awaiting-owner-measurement",
+      "status": "captured",
+      "snapshot": {
+        "snapshotVersion": "0.1",
+        "growthProfile": "2026-09-06",
+        "canonicalUrl": "https://vedokrok.com/",
+        "observedAt": "2026-10-25T17:56:23.000Z",
+        "toolVersion": "0.2.0",
+        "actions": [
+          {
+            "id": "audit:google-sitemap-lastmod",
+            "priority": "P2",
+            "lane": "freshness",
+            "status": "warn",
+            "title": "Publish accurate sitemap freshness metadata",
+            "source": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+            "reasonDigest": "sha256:1540bd18919cd140bb8da60e445d21a03268affc78427a791f9f67f21c17a2fc"
+          },
+          {
+            "id": "growth:bing-ai-citation-measurement",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track citations and grounding queries in Bing AI Performance",
+            "source": "https://www.bing.com/webmasters/help/ai-performance-9f8e7d6c",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:entity-sameas",
+            "priority": "P2",
+            "lane": "entity-identity",
+            "status": "recommended",
+            "title": "Connect the site entity to authoritative external profiles",
+            "source": "https://developers.google.com/search/docs/appearance/structured-data/organization",
+            "reasonDigest": "sha256:288b4c853e3f2d0abf8f15bc43409f577ed98021bd5cd3aeb5bcc868cd17192d"
+          },
+          {
+            "id": "growth:google-generative-ai-measurement-global",
+            "priority": "P1",
+            "lane": "measurement",
+            "status": "external-owner-data",
+            "title": "Track generative Search visibility as a first-class KPI",
+            "source": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+            "reasonDigest": "sha256:be6488edc0b81d85b91f130c67e19c4554586789ee4c97b47fff963215b55807"
+          },
+          {
+            "id": "growth:non-commodity-review",
+            "priority": "P1",
+            "lane": "content-quality",
+            "status": "manual",
+            "title": "Run the non-commodity content review on priority landing/article pages",
+            "source": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+            "reasonDigest": "sha256:a0ca4d7f699217bbdde3c53da8d32062f7e73370ceb5b65f3dad7ff8b1d90f69"
+          },
+          {
+            "id": "growth:site-reputation-policy",
+            "priority": "P1",
+            "lane": "governance",
+            "status": "manual",
+            "title": "Keep third-party content within the site’s real editorial purpose",
+            "source": "https://developers.google.com/search/blog/2026/08/update-site-reputation-policy",
+            "reasonDigest": "sha256:3c8a062b5ec3a028fff3b2b1ab3f3fbfab89caab72a0d93c9473cc8f3b80bb2a"
+          },
+          {
+            "id": "growth:vertical:software-product-identity",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Keep product identity and software metadata canonical",
+            "source": null,
+            "reasonDigest": "sha256:2fe9cfe73fb231c67d074e3570e76131d5bd2757cdee5da2578c74e0d4943f37"
+          },
+          {
+            "id": "growth:vertical:software-product-release-history",
+            "priority": "P1",
+            "lane": "vertical:software-product",
+            "status": "recommended",
+            "title": "Publish stable release or change history",
+            "source": null,
+            "reasonDigest": "sha256:4e99a997ddf6f81bc5c87f4fa80070515c5fdac1539d0237cf35749be47a0f61"
+          },
+          {
+            "id": "trend-owner:google-generative-ai-control-global",
+            "priority": "P1",
+            "lane": "ai-access",
+            "status": "external-owner-data",
+            "title": "Verify the site's Search generative AI inclusion setting",
+            "source": "https://support.google.com/webmasters/answer/16908024?hl=en",
+            "reasonDigest": "sha256:8898fee59066be43dffb3b20218e9a7044a7ff6a71b7ad493f3ec5b6e0cba81a"
+          }
+        ],
+        "debt": {
+          "p0": 0,
+          "p1": 7,
+          "highPriority": 7,
+          "byPriority": {
+            "P2": 2,
+            "P1": 7
+          },
+          "highPriorityByLane": {
+            "measurement": 2,
+            "content-quality": 1,
+            "governance": 1,
+            "vertical:software-product": 2,
+            "ai-access": 1
+          }
+        },
+        "observations": {
+          "entity": {
+            "present": true,
+            "sameAs": 0,
+            "types": [
+              "organization"
+            ]
+          },
+          "localSitemap": {
+            "ok": true,
+            "validLastmodCount": 0
+          },
+          "contentSignal": {
+            "observed": false,
+            "values": {}
+          },
+          "article": {
+            "count": 0,
+            "missingAuthor": 0,
+            "missingDateModified": 0
+          },
+          "media": {
+            "images": 8,
+            "videos": 0,
+            "openGraphImage": true
+          }
+        },
+        "guardrails": {
+          "snapshotTracksImplementationStateNotRanking": true,
+          "resolvedActionDoesNotProveOutcome": true,
+          "ownerMetricsAreSeparateEvidence": true
+        },
+        "snapshotId": "urn:sha256:b26ea9218958a51dfa6526706e3c34371f8ba7c9b722cb3a9cfc44137ac484cd",
+        "digest": "sha256:b26ea9218958a51dfa6526706e3c34371f8ba7c9b722cb3a9cfc44137ac484cd"
+      },
+      "verticalEvidence": {
+        "coverage": "bounded-relevant-surface-public-evidence",
+        "pagesObserved": 4,
+        "summary": {
+          "not-observed": 2,
+          "observed": 2
+        }
+      },
+      "ownerDataState": {
+        "observed": false,
+        "valid": false,
+        "recordCount": 0
+      },
+      "error": null
+    }
+  ],
+  "guardrails": {
+    "ownerControlledPortfolio": true,
+    "publicEvidenceOnly": true,
+    "noIndependentAdoptionInference": true,
+    "noMissingMetricZeros": true,
+    "ownerMetricsSeparate": true,
+    "noRankingCausality": true,
+    "failuresRemainVisible": true
+  }
+}
