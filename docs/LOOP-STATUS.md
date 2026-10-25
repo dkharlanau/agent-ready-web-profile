@@ -10,6 +10,12 @@ The [visibility Deep Run](../research/product/2026-10-25-visibility-deep-run.md)
 
 These changes repair implementation and decision routing. They do not establish a completed Search outcome loop or authorize target-site rollout. Preserve the original Ptichi freeze and review later control-page edits before interpreting a comparison. Use #148 for continuing product validation; closed implementation issue #55 is not proof of the M1 outcome gate.
 
+### Release and portfolio capture follow-up
+
+[ARWP PR #161](https://github.com/dkharlanau/agent-ready-web-profile/pull/161) merged the decision repairs. Its [post-merge portfolio capture](https://github.com/dkharlanau/agent-ready-web-profile/actions/runs/40218065560) exposed a comparison gap: a site's observed canonical URL can change between otherwise successful captures. The follow-up preserves both canonical URLs and marks that row `canonical-url-changed` with a null `growthDiff`; other sites remain comparable. Historical runs and the strict single-site comparator are unchanged. Confirm the next released capture separately before calling the collection loop restored.
+
+[Metkagram PR #152](https://github.com/metkagram/metkagram.github.io/pull/152) is merged, with 384 normal verification tests and exact-head checks passing. The [production deployment](https://github.com/metkagram/metkagram.github.io/actions/runs/40218161067) passed its release contract, and public robots bytes and selected resources were verified. Local browser E2E remained unavailable without Chromium. These are implementation/deployment results, not evidence of indexing or traffic gains.
+
 ## Product focus — Search and recommendation Growth Loop
 
 The existing Resolver, publisher profile, protocol work, scanner, evidence receipts, benchmarks and runtime integrations remain in place. The top-level operating focus is:

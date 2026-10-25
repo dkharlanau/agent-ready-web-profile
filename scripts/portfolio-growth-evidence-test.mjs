@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { createPortfolioGrowthRun, diffPortfolioGrowthRuns, portfolioRunId, validatePortfolioGrowthRun } from '../lib/portfolio-growth-evidence.mjs';
+import { diffGrowthSnapshots } from '../lib/growth-history.mjs';
 
 const portfolio = {
   $schema: 'https://raw.githubusercontent.com/dkharlanau/agent-ready-web-profile/main/schema/portfolio-sites.schema.json',
@@ -100,8 +101,69 @@ assert.equal(siteB.growthDiff, null);
 assert.equal(diff.interpretation.ownerOutcomeEvidenceIncluded, false);
 assert.match(diff.interpretation.note, /does not establish Search ranking/i);
 
+// Redirect/canonical changes can occur without changing the portfolio's entry URL.
+// Keep those captured observations, but do not compare different page identities.
+const beforeCanonicalChange = await createPortfolioGrowthRun(portfolio, {
+  observedAt: '2026-09-21T10:00:00Z',
+  buildGrowthImpl: async (url, options) => plan(url, options.vertical, 1)
+});
+const afterCanonicalChange = await createPortfolioGrowthRun(portfolio, {
+  observedAt: '2026-09-28T10:00:00Z',
+  buildGrowthImpl: async (url, options) => plan(
+    url === 'https://a.example/' ? 'https://a.example/en/' : url,
+    options.vertical,
+    2
+  )
+});
+const beforeCanonicalChangeCopy = structuredClone(beforeCanonicalChange);
+const afterCanonicalChangeCopy = structuredClone(afterCanonicalChange);
+const canonicalDiff = diffPortfolioGrowthRuns(beforeCanonicalChange, afterCanonicalChange);
+const changedCanonical = canonicalDiff.sites.find(site => site.siteId === 'site-a');
+const unchangedCanonical = canonicalDiff.sites.find(site => site.siteId === 'site-b');
+assert.equal(changedCanonical.beforeStatus, 'captured');
+assert.equal(changedCanonical.afterStatus, 'captured');
+assert.equal(changedCanonical.canonicalUrl, 'https://a.example/', 'retain the current portfolio entry URL separately');
+assert.equal(changedCanonical.comparisonState, 'canonical-url-changed');
+assert.equal(changedCanonical.beforeCanonicalUrl, 'https://a.example/');
+assert.equal(changedCanonical.afterCanonicalUrl, 'https://a.example/en/');
+assert.equal(changedCanonical.growthDiff, null, 'different canonical snapshots have no comparable debt or outcome delta');
+assert.equal(changedCanonical.ownerMeasurementState, 'awaiting-owner-measurement');
+assert.equal(unchangedCanonical.comparisonState, 'comparable-public-implementation-state');
+assert.equal(unchangedCanonical.beforeCanonicalUrl, 'https://b.example/');
+assert.equal(unchangedCanonical.afterCanonicalUrl, 'https://b.example/');
+assert.equal(unchangedCanonical.growthDiff.summary.highPriorityDebtDelta, -1);
+assert.deepEqual(canonicalDiff.summary, {
+  sites: 2,
+  comparable: 1,
+  implementationDebtImproved: 1,
+  awaitingOwnerMeasurement: 2
+}, 'only the unchanged canonical contributes a comparable implementation improvement');
+assert.deepEqual(beforeCanonicalChange, beforeCanonicalChangeCopy, 'historical input must remain immutable');
+assert.deepEqual(afterCanonicalChange, afterCanonicalChangeCopy, 'current input must remain immutable');
+assert.equal(siteB.beforeCanonicalUrl, null, 'an unavailable capture does not acquire an inferred snapshot canonical');
+assert.equal(siteB.afterCanonicalUrl, 'https://b.example/');
+assert.throws(
+  () => diffGrowthSnapshots(beforeCanonicalChange.sites[0].snapshot, afterCanonicalChange.sites[0].snapshot),
+  /Cannot diff Growth snapshots from different canonical URLs/,
+  'the strict single-site snapshot comparison must still reject different page identities'
+);
+const unsupportedSnapshot = structuredClone(afterCanonicalChange);
+unsupportedSnapshot.sites[0].snapshot.snapshotVersion = 'unsupported';
+assert.throws(
+  () => diffPortfolioGrowthRuns(beforeCanonicalChange, unsupportedSnapshot),
+  /Growth snapshots must use version/,
+  'a canonical change must not mask an unsupported snapshot version'
+);
+const missingCanonical = structuredClone(beforeCanonicalChange);
+delete missingCanonical.sites[0].snapshot.canonicalUrl;
+assert.throws(
+  () => diffPortfolioGrowthRuns(missingCanonical, afterCanonicalChange),
+  /Cannot diff Growth snapshots from different canonical URLs/,
+  'a malformed snapshot is not evidence of a recorded canonical change'
+);
+
 const invalid = structuredClone(first);
 invalid.guardrails.noMissingMetricZeros = false;
 assert.equal(validatePortfolioGrowthRun(invalid).valid, false, 'run schema must forbid synthetic missing-metric zeros');
 
-console.log('PASS portfolio longitudinal Growth evidence preserves owner-controlled public observations, unavailable sites, immutable implementation snapshots, comparable diffs and explicit awaiting-owner-measurement state without fabricated outcome metrics');
+console.log('PASS portfolio longitudinal Growth evidence preserves owner-controlled public observations, unavailable sites, immutable implementation snapshots, canonical-change boundaries, comparable diffs and explicit awaiting-owner-measurement state without fabricated outcome metrics');
