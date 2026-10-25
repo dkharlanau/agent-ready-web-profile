@@ -191,7 +191,7 @@ Do not build a generalized provider abstraction ahead of evidence. Preserve raw 
 
 The current product P0 is **not** the Proof Board. It is the first completed chain from recommendation to exact deployed change to provider-native outcome to reviewed decision.
 
-Ptichi’s frozen 12-treatment / 6-control cohort remains the canonical first attempt and stays `measurement-hold` until exact production parity is verified.
+Ptichi's first attempt retains the frozen 12-treatment / 6-control assignment. Use the canonical [r2 experiment record](../knowledge/experiments/2026-09-15-ptichi-cohort-refreeze-r2.json) and subsequent evidence for its state; the original September 9 freeze remains historical `measurement-hold`. The r2 record binds the cohort to a verified production revision, but that historical publication observation does not establish current cohort integrity or a Search outcome. Review later source changes before interpreting treatment/control differences. Closing implementation issue #55 did not complete the outcome gate; product validation continues in #148.
 
 No larger replacement cohort should be manufactured for appearance.
 

@@ -4,6 +4,12 @@ Started: 2026-08-26
 Integrated into: `main`
 Last major implementation review: 2026-09-06
 
+## 25 October 2026 decision-quality repair
+
+The [visibility Deep Run](../research/product/2026-10-25-visibility-deep-run.md) documents the evidence and applied-pilot proposals. Search Failure Doctor now distinguishes dated current evidence from stale, future, undated and empty-sample observations. The opportunity planner uses the exact target's non-brand observations and exposes the actual alternative pages. The portfolio registry adds Vedokrok and Bonihua as observe-only and corrects the MetalHatsCats source repository. The legacy Ptichi `GSC empty` label is replaced with dated historical context.
+
+These changes repair implementation and decision routing. They do not establish a completed Search outcome loop or authorize target-site rollout. Preserve the original Ptichi freeze and review later control-page edits before interpreting a comparison. Use #148 for continuing product validation; closed implementation issue #55 is not proof of the M1 outcome gate.
+
 ## Product focus — Search and recommendation Growth Loop
 
 The existing Resolver, publisher profile, protocol work, scanner, evidence receipts, benchmarks and runtime integrations remain in place. The top-level operating focus is:

@@ -1,5 +1,6 @@
 {
-  "updated_at": "2026-09-05",
+  "updated_at": "2026-10-25",
+  "review_scope": "Scoped correction of the stale Ptichi GSC-empty label on 2026-10-25. Other measurement declarations remain historical and were not recollected. Canonical public site/repository inventory: registry/portfolio-sites.json. Search property identifiers are not automatically interchangeable with canonical hostnames.",
   "tracked_sites": [
     "https://dkharlanau.github.io/agent-ready-web-profile/",
     "https://dkharlanau.github.io/ai-cv-builder/",
@@ -80,7 +81,7 @@
       "priority": 72,
       "monetization": "Paid rehearsal plan after repeat-use evidence",
       "next_action": "Define consented rehearsal-completion events after a baseline of hostname-filtered traffic",
-      "measurement": "GSC empty; consent-aware GTM-56QZHWVW version 2 live; GA4 G-T2TS9NCN2N"
+      "measurement": "Historical public GSC report observed 2026-10-09: 140 Web property impressions and 4 clicks for 2026-09-09 through 2026-10-06 (reports/search/search-diagnosis-2026-10-10.md in dkharlanau/ptichi-site). Current owner metrics were not collected in the 2026-10-25 review. Previously declared tags: GTM-56QZHWVW version 2; GA4 G-T2TS9NCN2N; current analytics execution unverified."
     },
     {
       "property": "https://cbt-cards.github.io/",

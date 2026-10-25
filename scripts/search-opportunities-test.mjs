@@ -83,6 +83,81 @@ test('priority threshold is explicit and configurable', () => {
   assert.equal(first(map(), e).priority, 1);
   assert.equal(first(map(), e, { minImpressions: 101 }).priority, 3);
 });
+test('another page cannot lend its near-visibility position to the declared target', () => {
+  const e = owner(); e.rows = [row('static website audit', `${site}other/`, 4, 100, 8)];
+  const item = first(map(), e);
+  assert.equal(item.queue, 'review-target-coverage');
+  assert.equal(item.priority, 2);
+  assert.equal(item.targetNonBrandObserved, null);
+  assert.equal(item.targetDemandStatus, 'no-non-brand-target-rows');
+  assert.equal(item.observedPageAlternatives.pages[0].url, `${site}other/`);
+  assert.equal(item.observedPageAlternatives.pages[0].nonBrandObserved.pageImpressions, 100);
+  assert.ok(item.tasks.some(task => task.kind === 'review-observed-page-coverage'));
+  const formatted = formatOpportunityPlan(planSearchOpportunities(map(), e));
+  assert.ok(formatted.includes(`${site}other/`));
+  assert.match(formatted, /Observed alternative pages \(1 of 1/);
+});
+test('near-visibility uses target non-brand rows, not other queries or branded position', () => {
+  const m = map(); m.opportunities[0].queries.push('check website eligibility');
+  const e = owner(); e.rows = [
+    row('static website audit', `${site}audit/`, 1, 50, 40),
+    row('check website eligibility', `${site}other/`, 10, 1000, 7),
+    row('ARWP audit', `${site}audit/`, 100, 1000, 1)
+  ];
+  const item = first(m, e);
+  assert.equal(item.queue, 'review-existing-answer');
+  assert.equal(item.targetNonBrandObserved.averagePosition, 40);
+  assert.equal(item.targetNonBrandObserved.pageImpressions, 50);
+});
+test('brand-only overlap cannot escalate a non-brand review', () => {
+  const e = owner(); e.rows = [
+    row('static website audit', `${site}audit/`, 2, 100, 35),
+    row('ARWP audit', `${site}audit/`, 50, 100, 1),
+    row('ARWP audit', `${site}other/`, 30, 100, 2)
+  ];
+  const item = first(map(), e);
+  assert.equal(item.overlapQueryCount, 1);
+  assert.equal(item.nonBrandOverlapQueryCount, 0);
+  assert.equal(item.queue, 'review-existing-answer');
+  assert.equal(item.priority, 2);
+});
+test('target observed zero stays different from absent target rows', () => {
+  const e = owner(); e.rows = [
+    row('static website audit', `${site}audit/`, 0, 0, null),
+    row('static website audit', `${site}other/`, 2, 100, 8)
+  ];
+  const item = first(map(), e);
+  assert.equal(item.targetDemandStatus, 'target-rows-observed');
+  assert.equal(item.targetNonBrandObserved.pageImpressions, 0);
+  assert.equal(item.targetNonBrandObserved.averagePosition, null);
+  assert.equal(item.queue, 'review-target-coverage');
+});
+test('page alternatives are bounded with explicit coverage and no query text', () => {
+  const e = owner(); e.rows = Array.from({ length: 12 }, (_, i) =>
+    row('static website audit', `${site}page-${i}/`, 0, 100 + i, 8));
+  const item = first(map(), e);
+  assert.equal(item.observedPageAlternatives.total, 12);
+  assert.equal(item.observedPageAlternatives.pages.length, 10);
+  assert.equal(item.observedPageAlternatives.truncated, true);
+  assert.equal(item.observedPageAlternatives.pages[0].url, `${site}page-11/`);
+  assert.ok(!JSON.stringify(item.observedPageAlternatives).includes('static website audit'));
+  assert.match(formatOpportunityPlan(planSearchOpportunities(map(), e)), /Observed alternative pages \(3 of 12/);
+});
+test('no owner data gives no target metrics or observed alternatives', () => {
+  const item = first();
+  assert.equal(item.targetNonBrandObserved, null);
+  assert.equal(item.targetDemandStatus, 'no-owner-data');
+  assert.equal(item.observedPageAlternatives, null);
+});
+test('text formatting preserves unknown target attribution in legacy reports', () => {
+  const report = planSearchOpportunities(map(), owner());
+  for (const item of report.opportunities) {
+    delete item.targetDemandStatus; delete item.targetNonBrandObserved; delete item.observedPageAlternatives;
+  }
+  const formatted = formatOpportunityPlan(report);
+  assert.match(formatted, /Target non-brand page impressions: unknown \(not-recorded-in-legacy-report\)/);
+  assert.ok(!formatted.includes('undefined'));
+});
 test('equal inputs produce deterministic reports and do not mutate inputs', () => {
   const m = map(), e = owner(), before = JSON.stringify([m, e]);
   assert.deepEqual(planSearchOpportunities(m, e), planSearchOpportunities(m, e));

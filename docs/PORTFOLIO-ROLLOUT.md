@@ -15,7 +15,9 @@ The portfolio layer is operational metadata. It is not an adoption directory, qu
 - rollout mode;
 - optional provider allowlists and trend exclusions.
 
-The current owner portfolio contains six public sites. Three are configured for managed Growth operation and three are proposal-only until explicitly promoted.
+The current owner portfolio contains nine public sites. Three use managed Growth operation, three are proposal-only, and three are observe-only. The canonical inventory is `registry/portfolio-sites.json`.
+
+The 25 October 2026 inventory review adds Vedokrok and Bonihua as observe-only targets and corrects the MetalHatsCats website source to `metalhatscats/mhc`. Bonihua uses its verified `https://www.bonihua.com/` canonical host. The separate MHC Corpus repository is not the source of `metalhatscats.com`. This inventory change does not authorize target-site writes or change any owner analytics settings.
 
 `https://ptichi.com/` is included as a proposal-only target. Ptichi is intentionally treated as a fresh-site baseline in the separate State of the Agentic Web owner reference cohort because its first recorded public release is 2026-09-05. Freshness is context for comparison, not evidence that ARWP caused later Search or AI-discovery movement.
 
@@ -48,7 +50,7 @@ node bin/arwp-portfolio.mjs propose --json
 node bin/arwp-portfolio.mjs propose --site=dkharlanau/dkharlanau.github.io --provider=google --json
 ```
 
-For local operations across a larger set of checkouts, use the separate [portfolio workspace workflow](./PORTFOLIO-FLEET.md). It adds read-only Git/profile inventory, reviewed local checks and bounded public profile checks without changing the six-site trend-mapping registry.
+For local operations across a larger set of checkouts, use the separate [portfolio workspace workflow](./PORTFOLIO-FLEET.md). It adds read-only Git/profile inventory, reviewed local checks and bounded public profile checks without replacing the canonical trend-mapping registry.
 
 Each rollout candidate carries:
 
