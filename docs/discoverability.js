@@ -39,7 +39,61 @@ document.querySelector('#filters').addEventListener('submit', event => { event.p
 document.querySelector('#filters').addEventListener('reset', event => { event.preventDefault(); search.value = ''; category.value = ''; evidence.value = ''; filter({ interactive: true }); });
 document.querySelector('.selection-jump').addEventListener('click', () => { document.querySelector('#plan-details').open = true; });
 const picked = () => [...document.querySelectorAll('input[name=tactic]:checked')];
+const selectionKey = 'goose-arwp-discoverability-selection-v1';
+const selectionNote = document.querySelector('#selection-storage-note');
+const storageUnavailable = () => { selectionNote.textContent = 'Tab storage is unavailable. Download your selection before leaving this page.'; };
+function restoreSelection() {
+  let raw;
+  try { raw = sessionStorage.getItem(selectionKey); } catch { storageUnavailable(); return; }
+  if (!raw) return;
+  let saved;
+  try { saved = JSON.parse(raw); } catch { selectionNote.textContent = 'The saved selection could not be read. Choose patterns again.'; return; }
+  const boxes = [...document.querySelectorAll('input[name=tactic]')];
+  const validIds = new Set(boxes.map(box => box.value));
+  const ids = saved?.ids;
+  if (saved?.corpus !== document.body.dataset.corpusSha256 || !Array.isArray(ids) || ids.length > 25 ||
+      ids.some(id => typeof id !== 'string' || !validIds.has(id)) || new Set(ids).size !== ids.length) {
+    selectionNote.textContent = 'The saved selection does not match this library version. Choose patterns again.';
+    return;
+  }
+  const selected = new Set(ids);
+  for (const box of boxes) box.checked = selected.has(box.value);
+  document.querySelector('#selected-count').textContent = picked().length;
+}
+function saveSelection() {
+  try {
+    sessionStorage.setItem(selectionKey, JSON.stringify({corpus: document.body.dataset.corpusSha256, ids: picked().map(box => box.value)}));
+    selectionNote.textContent = 'Selected patterns are saved in this tab’s session storage. Site and audience details are not saved.';
+  }
+  catch { storageUnavailable(); }
+}
+restoreSelection();
 function invalidateExport() { document.querySelector('#plan-export').hidden = true; document.querySelector('#copy-message').textContent = ''; document.querySelector('#plan-message').textContent = ''; }
+function renderSelection() {
+  const selected = picked();
+  const list = document.querySelector('#plan-selection-list');
+  document.querySelector('#plan-selection-state').textContent = selected.length ? `${selected.length} selected ${selected.length === 1 ? 'pattern' : 'patterns'}` : 'No patterns selected yet.';
+  list.replaceChildren();
+  selected.forEach((box, index) => {
+    const title = box.closest('.practice')?.querySelector('h2 a')?.textContent.trim() || box.value;
+    const item = document.createElement('li');
+    const label = document.createElement('span');
+    const remove = document.createElement('button');
+    label.textContent = title;
+    remove.type = 'button';
+    remove.textContent = 'Remove';
+    remove.setAttribute('aria-label', `Remove ${title} from plan`);
+    remove.addEventListener('click', () => {
+      box.checked = false;
+      box.dispatchEvent(new Event('change', {bubbles: true}));
+      const remaining = list.querySelectorAll('button');
+      (remaining[Math.min(index, remaining.length - 1)] || document.querySelector('#plan-details summary')).focus();
+    });
+    item.append(label, remove);
+    list.append(item);
+  });
+}
+renderSelection();
 document.querySelector('#plan-form').addEventListener('input', invalidateExport);
 for (const box of document.querySelectorAll('input[name=tactic]')) box.addEventListener('change', () => {
   invalidateExport();
@@ -49,6 +103,8 @@ for (const box of document.querySelectorAll('input[name=tactic]')) box.addEventL
     document.querySelector('#plan-details').open = true;
   }
   document.querySelector('#selected-count').textContent = picked().length;
+  saveSelection();
+  renderSelection();
 });
 document.querySelector('#plan-form').addEventListener('submit', event => {
   event.preventDefault();

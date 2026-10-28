@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadCorpus } from '../lib/discoverability.mjs';
+import { checkHomepageLibraryCounts, checkReadmeLibraryCounts } from './discoverability-homepage-check.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const docs = path.join(root, 'docs');
@@ -44,6 +46,20 @@ for (const file of [
 }
 
 const html = fs.readFileSync(htmlPath, 'utf8');
+const homepageCorpus = loadCorpus();
+checkHomepageLibraryCounts(html, homepageCorpus);
+const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+checkReadmeLibraryCounts(readme, homepageCorpus);
+assert.throws(() => checkReadmeLibraryCounts(readme, {...homepageCorpus, categories: [...homepageCorpus.categories, {}]}), /README library counts/,
+  'a changed corpus must not silently leave the README category count stale');
+const withoutReview = structuredClone(homepageCorpus);
+withoutReview.tactics[0].review.reviewed_at = null;
+assert.throws(() => checkReadmeLibraryCounts(readme, withoutReview), /README library counts/,
+  'an absent individual review must not remain in the README review count');
+assert.throws(() => checkHomepageLibraryCounts(html, {...homepageCorpus, tactics: [...homepageCorpus.tactics, {}]}), /Patterns count differs/,
+  'a changed corpus must not silently leave the homepage pattern count stale');
+assert.throws(() => checkHomepageLibraryCounts(html, {...homepageCorpus, sources: [...homepageCorpus.sources, {}]}), /Sources count differs/,
+  'a changed corpus must not silently leave the homepage source count stale');
 assert.match(html, /<h1>Get<br>Found\.<\/h1>/i);
 assert.match(html, /Help agents find their way around/i);
 assert.match(html, /Without a resolver/i);
@@ -55,6 +71,42 @@ assert.match(html, /Federated router/i);
 assert.match(html, /Benchmark utility before expanding the format/i);
 assert.match(html, /data-scanner-endpoint=""/);
 assert.match(html, /<meta name="description"/);
+assert.match(html, /<link rel="icon" href="\.\/goose-icon\.svg" type="image\/svg\+xml">/);
+assert.match(fs.readFileSync(path.join(docs, 'goose-icon.svg'), 'utf8'), /viewBox="0 0 64 64"/,
+  'the browser icon must be a square local SVG');
+const homeTitle = html.match(/<title>([^<]+)<\/title>/i)?.[1];
+const homeSocialTitle = html.match(/<meta property="og:title" content="([^"]+)">/i)?.[1];
+const manifestHome = JSON.parse(fs.readFileSync(path.join(root, 'registry/page-manifest.json'), 'utf8')).pages.find(page => page.id === 'home');
+assert.ok(homeTitle && homeSocialTitle, 'homepage title and social title must be present');
+assert.equal(homeSocialTitle, homeTitle, 'homepage title and social title should describe the same page');
+assert.equal(manifestHome?.title, homeTitle, 'homepage manifest name should match the page title');
+const homeLead = html.match(/<p class="goose-lead">([\s\S]*?)<\/p>/i)?.[1] ?? '';
+assert.match(homeLead, /<a href="\.\/discoverability\/entities\.html">structured data<\/a>/i,
+  'the introduction should link directly to the relevant structured-data guidance');
+assert.match(homeLead, /internal links/i, 'the visible introduction should explain the tools named by the search description');
+const growthHtml = fs.readFileSync(path.join(docs, 'growth/index.html'), 'utf8');
+const measurementHtml = fs.readFileSync(path.join(docs, 'measurement/index.html'), 'utf8');
+assert.match(growthHtml, /<li><a href="\.\.\/measurement\/">Measure outcomes<\/a> with your own evidence\.<\/li>/,
+  'the measurement step should provide a contextual continuation');
+assert.match(measurementHtml, /<link rel="canonical" href="https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/measurement\/">/,
+  'the measurement link should target its canonical page');
+const answersHtml = fs.readFileSync(path.join(docs, 'answers/index.html'), 'utf8');
+const answersManifest = JSON.parse(fs.readFileSync(path.join(root, 'registry/page-manifest.json'), 'utf8')).pages.find(page => page.id === 'answers');
+const answersScript = answersHtml.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1];
+assert.ok(answersScript, 'Answers must expose its declared page semantics');
+const answersSchema = JSON.parse(answersScript);
+const answersHeading = answersHtml.match(/<h1>([^<]+)<\/h1>/i)?.[1];
+const answersCanonical = answersHtml.match(/<link rel="canonical" href="([^"]+)">/i)?.[1];
+assert.equal(answersSchema['@type'], answersManifest.pageType);
+assert.equal(answersSchema.url, answersCanonical);
+assert.equal(answersSchema.url, answersManifest.canonicalUrl);
+assert.equal(answersSchema['@id'], answersCanonical + '#page');
+assert.equal(answersSchema.name, answersHeading, 'page name should describe the visible heading');
+assert.equal(answersSchema.isPartOf['@id'], 'https://dkharlanau.github.io/agent-ready-web-profile/#website');
+assert.ok(!('aggregateRating' in answersSchema), 'page markup must not invent ratings');
+const entityHub = fs.readFileSync(path.join(docs, 'discoverability/entities.html'), 'utf8');
+assert.match(entityHub, /<link rel="canonical" href="https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/discoverability\/entities\.html">/,
+  'the contextual link should target the hub canonical');
 assert.match(html, /<link rel="canonical" href="https:\/\/dkharlanau\.github\.io\/agent-ready-web-profile\/">/);
 assert.match(html, /href="\.\/arwp\.css"/);
 assert.match(html, /src="\.\/arwp\.js"/);

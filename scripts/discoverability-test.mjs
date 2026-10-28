@@ -246,4 +246,5 @@ try {
   assert.match(rejected.stderr, /corpus_version/);
   assert.equal(fs.existsSync(rejectedOutput), false, 'A stale version pin fails before creating an output artifact.');
 } finally { fs.rmSync(temp, { recursive: true, force: true }); }
+await import('./discoverability-selection-test.mjs');
 console.log(`PASS discoverability: ${corpus.tactics.length} tactics, native registry mappings, explicit selection, unmeasured outcomes and CLI overwrite protection${process.argv.includes('--site') ? ', with published corpus and editorial artifacts' : ' (add --site for published artifact checks)'}`);

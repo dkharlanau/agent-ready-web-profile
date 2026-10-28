@@ -97,3 +97,11 @@ When a pin fails, inspect the current diff and relevant upstream evidence before
 ## Verify
 
 Run `node scripts/discoverability-test.mjs` for corpus, passports, immutable history, native references, meaningful version changes, configuration pins and CLI output protection. After rebuilding the public library, run the same command with `--site` to check the actual published corpus, pattern/source anchors and editorial artifacts. Package and deployment verification are separate release gates.
+
+The homepage edition figures are maintained in `docs/index.html`. When the
+canonical corpus changes its pattern or source count, update those two figures
+in the same change. The current pattern, source, category and dated individual
+review counts in `README.md` are also maintained explicitly. `npm run test:site` and
+`node scripts/discoverability-current-surface-test.mjs` compare them with
+`knowledge/discoverability-corpus.json` and fail on drift; the check does not
+rewrite the homepage or publish it.

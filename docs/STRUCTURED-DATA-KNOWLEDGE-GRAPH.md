@@ -10,6 +10,19 @@ Canonical machine-readable contract:
 
 The page-semantics layer answers **what kind of entity/page is this?** This layer answers **is the entity graph complete, truthful and connected for the facts that actually exist?**
 
+For a bounded cross-page review, supply up to five explicit public HTTPS pages:
+
+```sh
+node bin/arwp-structured-data.mjs https://example.com/ https://example.com/product/ --json
+```
+
+Each page uses the existing public-host, redirect, response-size and timeout
+checks. The batch stops on an unavailable page or duplicate final URL instead
+of presenting an incomplete set as a complete observation. Identity references
+can resolve across the supplied pages, but the sample does not establish
+whole-site completeness or provider eligibility. The existing one-URL and
+single local `--file` modes remain available.
+
 ## Operating model
 
 Apply the layer in this order:
@@ -34,6 +47,12 @@ The analyzer retains its type for conflict checks. A reference alone does not
 count as observing the entity definition: if the definition is outside the
 supplied pages, relationship resolution remains an unverified bounded-sample
 finding. Supply the appropriate canonical page before prescribing a correction.
+String-valued relation properties are retained as `unexpanded-string`, without
+an inferred target: a string can be a literal or may be coerced to an IRI by a
+JSON-LD context. This extractor does not expand arbitrary contexts, so it does
+not flag such strings as missing entity IDs; use a standards-aware processor
+when their interpretation matters. Explicit object `@id` references are still
+checked against the supplied pages. See [JSON-LD type coercion](https://www.w3.org/TR/json-ld11/#type-coercion).
 Top-level sparse entities, anonymous typed objects and objects containing other
 properties still receive ordinary completeness checks. This classification is
 an ARWP audit convention, not a new JSON-LD validity or Google eligibility rule.
@@ -200,10 +219,24 @@ A repeated ID may carry a short name in one block and a longer name in another
 when `alternateName` explicitly connects those names. The consistency check
 accepts exact declared aliases, including text arrays; it does not infer aliases
 from similar spelling, substrings or a shared generic label. A third unconnected
-name and differing type assertions still require review. Alias agreement does
-not verify the entity's truth, visible parity or provider eligibility.
+name and differing type assertions still require review. Unconnected names and
+different type sets are reported separately as P1 review signals: JSON-LD can
+represent multiple names, including translations, and several types for one
+node. The difference alone is not a P0 conflict. Inspect the language, labels,
+asserted types and real entity rather than assuming compatibility or contradiction. Alias
+agreement does not verify the entity's truth, visible parity or provider eligibility.
 See [Schema.org alternateName](https://schema.org/alternateName) and the
 [JSON-LD rule for combining script blocks](https://www.w3.org/TR/json-ld11/#embedding-json-ld-in-html-documents).
+The name review accepts simple JSON-LD `@value` strings, but it does not expand
+language maps or custom contexts. A true collision between different real
+entities remains a serious issue when established by additional evidence.
+Identity comparison requires an explicit `@id`; matching `url` properties do
+not by themselves assert the same JSON-LD node. A nested object with a `url`
+and no `@id` remains an embedded node: its declared URL is recorded separately
+and does not resolve a different object's explicit identifier. An entity's
+display ID can fall back to its URL; `explicitStableId` distinguishes that
+fallback from an actual `@id`. Blank-node labels such as
+`_:item` are compared only within the observed document, not across pages.
 
 Nested value objects such as one-off `PostalAddress` or `GeoCoordinates` do not always need their own reusable `@id`.
 
@@ -216,6 +249,76 @@ ARWP deliberately separates three questions:
 3. **Provider eligibility** — does a specific Google/Bing feature have additional required/recommended fields?
 
 A page can be semantically valid without qualifying for a Google rich result. Conversely, adding more markup does not create legitimacy or relevance.
+
+The `visible-name-parity` detector is a bounded literal-text check, not a
+semantic comparison or a browser visibility test. It parses source HTML and
+excludes head metadata, comments, scripts, styles, templates, `noscript`, and
+subtrees marked by the HTML `hidden` attribute from eligible text. If the name
+matches only inside a `hidden` subtree, it emits a P2 rendered-review signal:
+streaming frameworks may later reveal or move that content. A P1 finding means
+the declared name was not found as a normalized substring in either eligible or
+hidden-designated source text; it does not by itself prove a contradiction, a
+Google policy violation or a need to rename the entity. CSS, JavaScript,
+conditional rendering and overriding the `hidden` attribute can change actual
+visibility; a match is not proof of rendered visibility. Review the rendered
+context, supported aliases and the actual entity before changing markup. A
+truthful descriptive label and a shorter visible label may name the same entity.
+Hidden or genuinely misleading facts still require correction. See the [HTML
+hidden attribute](https://html.spec.whatwg.org/multipage/interaction.html#the-hidden-attribute).
+
+For ARWP core-property checks, repeated explicit IDs in the default graph of one
+observed HTML document can contribute properties across JSON-LD script blocks
+when they use the simple `https://schema.org` or `http://schema.org` context,
+including an untyped fragment. Context arrays and nested contexts retain that
+interpretation only for bounded additions of `@base`, `@language`, `@direction`
+and `@version`, or an explicit Schema.org `@vocab`; a reset, unknown context or
+term redefinition is not assumed compatible. This follows the JSON-LD model in which a node's
+properties can be spread across objects. The audit does not borrow properties
+from another supplied page or from a named graph to satisfy that page's check.
+It uses literal property names and is not a full JSON-LD expansion or provider
+eligibility validator; custom contexts, aliases and more complex graph shapes
+still need a standards-aware review. See the [JSON-LD 1.1 node-object rules](https://www.w3.org/TR/json-ld11/#node-objects).
+
+For these bounded presence checks, a property whose value is null, an empty
+array, or an array containing only nulls does not supply a fact. Other values,
+including zero and false, remain present; their suitability is not verified by
+this check. This is not a general value validator or full JSON-LD expansion.
+See the [JSON-LD expansion algorithm](https://www.w3.org/TR/json-ld11-api/#expansion-algorithm).
+
+The same context boundary applies to family classification, literal property
+checks, relations and name/type comparisons: a familiar spelling does not prove
+that a custom or absent context means Schema.org. Typed nodes with an unexpanded
+context remain in the report with `contextInterpretation: unexpanded`; page and
+summary node counts expose this limitation. Because custom contexts can also
+alias `@type`, the node count cannot measure all unrecognized entities. The
+separate `unexpandedContextBlocks` count marks each parsed JSON-LD script block
+once if it contains an object outside the bounded context model, including an
+untyped object or one with an aliased type. A nested unsupported context marks
+the containing block; parse failures are counted separately. No family or
+relation is inferred for unexpanded nodes. Neither count is a count of errors,
+and a low gap count does not establish graph completeness.
+Expand or independently review the context before acting on its semantics. This
+conservative model can also leave valid Schema.org constructs unclassified.
+The CLI exit code follows reported P0/P1 findings; exit code zero does not mean
+the context was fully interpreted. Check the context coverage counts as well.
+See [JSON-LD contexts](https://www.w3.org/TR/json-ld11/#the-context).
+
+For relative entity IDs and relation targets, the analyzer uses the observed
+document URL and its first HTML `base` with an `href`, not the page's canonical
+link. Local JSON-LD `@base` overrides, including `null`, are handled within the
+bounded literal-key model. Canonical URLs remain page-identification evidence,
+not a replacement for the document base. Source text, inline JSON-LD scripts,
+and `base` and canonical `link` elements are selected from parsed HTML rather
+than text that merely resembles markup. Attribute character references are
+decoded by the parser. Comments, raw text and inert templates are not treated
+as elements; conditional `noscript` contents are excluded. JSON-LD inside a
+`hidden` element is still selected. The canonical value is an observed HTML
+declaration, including a link found outside `head`; it is not proof that a
+search engine accepts it. Metadata extraction remains bounded, and none of
+these checks run a browser or a full JSON-LD processor.
+Scripts inserted or moved after execution and complex contexts require an
+independent rendered or standards-aware review. See the
+[JSON-LD HTML base rule](https://www.w3.org/TR/json-ld11/#inheriting-base-iri-from-html-s-base-element).
 
 ## Validation dimensions
 

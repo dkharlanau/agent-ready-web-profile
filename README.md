@@ -2,7 +2,7 @@
 
 **Get Found.**
 
-Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **219 patterns, 132 sources and 16 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 219 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
+Start with the [pattern library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): **247 patterns, 152 sources and 18 categories** for useful editorial work, honest comparisons, structured data and usable interfaces. Every pattern carries a version and review status; 247 have an individual source-support review. Select a few, export a version-pinned plan, then use the Growth Loop to verify and measure the change. [Version contract](docs/DISCOVERABILITY-VERSIONING.md).
 
 [![ARWP validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/ci.yml)
 [![Adaptive Site Upgrade validation](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml/badge.svg)](https://github.com/dkharlanau/agent-ready-web-profile/actions/workflows/adaptive-upgrade.yml)
@@ -396,11 +396,15 @@ PolyForm Strict License 1.0.0 from the current revision onward. Earlier revision
 
 The [Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html) adds versioned, source-backed practices to the existing Growth Loop. Each practice has implementation steps, verification, source scope, an impact hypothesis and native rule/hypothesis routing. It covers decision-oriented articles, fair comparisons, visible evidence footnotes, coherent entities and useful user actions.
 
+From a repository checkout with Node.js 20 or later, install dependencies with `npm ci`, then run:
+
 ```bash
-arwp discoverability --search="comparison" --json
-arwp adoption-plan arwp-adoption.json --output=planned-work.json
-arwp editorial-check article.receipt.json --json
+node bin/arwp.mjs discoverability --search="comparison" --json
+node bin/arwp.mjs adoption-plan /path/to/arwp-adoption.json --output=planned-work.json
+node bin/arwp.mjs editorial-check article.receipt.json --json
 ```
+
+Use a checkout with the same corpus version as the exported selection; the command reports mismatched version pins.
 
 Use `arwp-discoverability` as a specialist inside `arwp-growth-loop`. A corpus selection is a planning aid; actual changes, verification and outcomes stay in the existing Growth/Change Receipt/BraidGraph workflow. [Playbook](docs/DISCOVERABILITY-PLAYBOOK.md) · [Editorial examples](docs/examples/editorial/README.md) · [Measurement contract](docs/DISCOVERABILITY-BENCHMARKS.md).
 

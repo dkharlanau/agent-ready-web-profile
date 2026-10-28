@@ -23,6 +23,9 @@ assert.ok(fs.existsSync(sitemapXmlPath), 'sitemap.xml must exist.');
 assert.ok(fs.existsSync(sitemapMdPath), 'sitemap.md must exist.');
 
 const index = fs.readFileSync(indexPath, 'utf8');
+assert.match(index, /<link rel="icon" href="\.\/goose-icon\.svg" type="image\/svg\+xml">/,
+  'the library index must use the square Goose browser icon');
+assert.ok(fs.existsSync(path.join(docs, 'goose-icon.svg')), 'the local icon must exist');
 const routing = JSON.parse(fs.readFileSync(routingPath, 'utf8'));
 const sitemapXml = fs.readFileSync(sitemapXmlPath, 'utf8');
 const sitemapMd = fs.readFileSync(sitemapMdPath, 'utf8');
@@ -37,6 +40,9 @@ assert.ok(sitemapXml.includes(XML_BEGIN) && sitemapXml.includes(XML_END), 'sitem
 assert.ok(sitemapMd.includes(MD_BEGIN) && sitemapMd.includes(MD_END), 'sitemap.md must contain the managed discoverability evidence-hub block.');
 assert.ok(sitemapMd.includes(`${base}discoverability/index.json`), 'sitemap.md must expose the lightweight routing index.');
 
+assert.ok(index.includes('node bin/arwp.mjs adoption-plan /path/to/arwp-adoption.json --output=planned-work.json'),
+  'the browser plan handoff must show the runnable checkout command');
+assert.ok(index.includes('https://github.com/dkharlanau/agent-ready-web-profile'), 'checkout guidance should link to the repository');
 const routedIds = [];
 for (const category of corpus.categories) {
   const route = routing.categories.find(item => item.id === category.id);
@@ -50,6 +56,14 @@ for (const category of corpus.categories) {
   const file = path.join(docs, 'discoverability', `${category.id}.html`);
   assert.ok(fs.existsSync(file), `Missing evidence hub for ${category.id}`);
   const html = fs.readFileSync(file, 'utf8');
+  assert.match(html, /<link rel="icon" href="\.\.\/goose-icon\.svg" type="image\/svg\+xml">/,
+    `${category.id}: browser icon must resolve to the square Goose mark`);
+  const switcher = html.match(/<details class="goose-shell category-switcher"><summary>([^<]+)<\/summary><nav aria-label="Other discoverability categories">([\s\S]*?)<\/nav><\/details>/);
+  assert.ok(switcher, `${category.id}: accessible topic disclosure is missing.`);
+  assert.equal(switcher[1], `Explore ${corpus.categories.length - 1} other topics`);
+  for (const other of corpus.categories.filter(item => item.id !== category.id)) {
+    assert.ok(switcher[2].includes(`href="./${encodeURIComponent(other.id)}.html"`), `${category.id}: missing static link to ${other.id}.`);
+  }
   const bytes = Buffer.byteLength(html);
   assert.ok(bytes < MAX_ROUTE_BYTES, `${category.id}: evidence hub ${bytes} bytes exceeds bounded route budget.`);
   assert.match(html, new RegExp(`<link rel="canonical" href="https://dkharlanau\\.github\\.io/agent-ready-web-profile/discoverability/${category.id}\\.html">`));

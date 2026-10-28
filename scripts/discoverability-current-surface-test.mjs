@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadCorpus } from '../lib/discoverability.mjs';
+import { checkHomepageLibraryCounts, checkReadmeLibraryCounts } from './discoverability-homepage-check.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const docs = path.join(root, 'docs');
@@ -13,6 +14,8 @@ const categories = corpus.categories.length;
 const llms = fs.readFileSync(path.join(docs, 'llms.txt'), 'utf8');
 const growth = fs.readFileSync(path.join(docs, 'growth', 'index.html'), 'utf8');
 const recommendations = fs.readFileSync(path.join(docs, 'recommendations', 'index.html'), 'utf8');
+checkHomepageLibraryCounts(fs.readFileSync(path.join(docs, 'index.html'), 'utf8'), corpus);
+checkReadmeLibraryCounts(fs.readFileSync(path.join(root, 'README.md'), 'utf8'), corpus);
 
 assert.ok(llms.includes(`Discoverability Library](https://dkharlanau.github.io/agent-ready-web-profile/discoverability.html): ${count} concrete practices across ${categories} bounded categories`), 'llms.txt discoverability count/category drift.');
 assert.ok(llms.includes('discoverability/index.json'), 'llms.txt must route agents through the lightweight discoverability index.');

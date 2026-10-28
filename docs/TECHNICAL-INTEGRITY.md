@@ -127,6 +127,13 @@ A pass does **not** prove crawling, indexing, ranking, AI citation or referral s
 
 Google states that normal Search SEO foundations remain relevant to AI Overviews / AI Mode, with no separate AI markup requirement. Supporting pages must be indexed and eligible to appear with a snippet. Preview controls such as `nosnippet`, `data-nosnippet`, `max-snippet` and `noindex` therefore remain technically relevant.
 
+The source check counts actual `data-nosnippet` attributes on tags, excluding
+comments and inert source. Google documents the attribute on `div`, `span`, and
+`section`; other element types are flagged for review rather than assumed to have
+the same effect. The report retains counts by tag for diagnosis and applies the
+separate Bing check conservatively. This bounded source extraction is not a
+rendered DOM, HTML conformance check or proof of a provider's snippet behavior.
+
 Google's current robots documentation also makes path-level rule precedence explicit, which is why a root-level robots check alone is insufficient. Crawlable-link and crawling-error guidance supplies the upstream basis for checking important links and broken target responses, while Goose's bounded sampling strategy remains its own derived implementation choice.
 
 Sources:

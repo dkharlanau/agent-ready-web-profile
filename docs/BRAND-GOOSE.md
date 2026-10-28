@@ -89,6 +89,11 @@ For generated Growth advice, the user-facing CLI now starts with **Start here**,
 
 The website uses a bright editorial direction: lime `#eff600`, ink `#080c0b`, warm white `#fafaf7`, orange `#ff7138` and blue evidence links `#173bea`. Inter Tight is self-hosted under the included SIL Open Font License. System monospace distinguishes source and version metadata.
 
+The square `goose-icon.svg` uses the same lime and ink for browser tabs on the
+homepage and pattern library. It is distinct from the wider ARWP profile badge.
+Google Search determines favicons at the hostname level, so this subdirectory
+icon does not establish a separate Search favicon for Goose.
+
 Use large editorial typography, high-contrast color fields, clear borders and a small number of strong compositional moves instead of dashboard-style widget noise. Brightness should come from hierarchy and palette, not animation or heavy client-side frameworks.
 
 The goose illustration carries “Show your sources.” Its purpose is recognition and tone; it is not a customer, reviewer or evidence of product impact. The [asset provenance](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/media/cite-goose/illustration-provenance.json) records generation, encoding and checksum; [font provenance](https://github.com/dkharlanau/agent-ready-web-profile/blob/main/docs/media/cite-goose/font-provenance.json) records its upstream distribution and license.
