@@ -28,7 +28,7 @@
     "idRule": "Use one stable absolute canonical @id for reusable first-class entities and reuse it across pages.",
     "recommendedFragments": ["#website", "#organization", "#person", "#product", "#service", "#dataset", "#place"],
     "sameAsRule": "Use sameAs only for URLs that identify the same entity, never for topical links, category pages or loosely related profiles.",
-    "duplicateRule": "The same @id must not resolve to conflicting names, types or materially different identities across pages."
+    "duplicateRule": "The same @id must not identify materially different real entities. Different names or type assertions require contextual review and can be compatible, including multilingual names and multiple types."
   },
   "entityFamilies": [
     {

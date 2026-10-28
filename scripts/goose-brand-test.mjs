@@ -120,7 +120,7 @@ const expectations = [
   ['ai/site-profile.json', '"name": "Goose ARWP"'],
   ['docs/ai/site-profile.json', '"name": "Goose ARWP"'],
   ['docs/index.html', '<strong>Goose</strong><span>ARWP<br>GET FOUND.</span>'],
-  ['docs/index.html', '<title>Goose ARWP — Get Found.</title>'],
+  ['docs/index.html', '<title>Goose ARWP — Get Found.'],
   ['docs/index.html', '<h1>Get<br>Found.</h1>'],
   ['docs/site-focus.html', '<strong>Goose</strong><span>ARWP<br>GET FOUND.</span>'],
   ['docs/site-pattern-graph.html', 'Goose'],

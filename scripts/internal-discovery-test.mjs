@@ -80,6 +80,18 @@ assert.ok(report.gaps.withoutContinuation.includes('https://example.com/tool'));
 assert.deepEqual(report.gaps.transitionTargets, ['https://example.com/old']);
 assert.ok(report.actions.some(item => item.url === 'https://example.com/orphan' && item.priority === 'P1'));
 assert.ok(report.actions.some(item => item.url === 'https://example.com/a' && /global-only/i.test(item.title)));
+assert.equal(new Set(report.actions.map(item => item.id)).size, report.actions.length,
+  'each review has a distinct ID even when URLs share the same origin and prefix');
+const continuationIds = report.actions.filter(item => item.id.startsWith('internal-discovery:continuation:'));
+assert.ok(continuationIds.length >= 2);
+assert.ok(continuationIds.every(item => /^internal-discovery:continuation:[a-f0-9]{64}$/.test(item.id)));
+const reorderedReport = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[...pages].reverse(),generatedAt:'2026-09-09T18:00:00Z'});
+const actionKeys = actions => actions.map(item => `${item.url}\n${item.title}\n${item.id}`).sort();
+assert.deepEqual(actionKeys(reorderedReport.actions),actionKeys(report.actions), 'action IDs are stable across observation order');
+const legacy = structuredClone(report);
+legacy.actions[1].id = legacy.actions[0].id;
+assert.equal(validateInternalDiscoveryReport(legacy).valid, true,
+  'historical v0.1 reports remain schema-readable; old IDs alone are not safe unique keys');
 assert.equal(report.guardrails.noPageRankApproximation, true);
 assert.equal(report.guardrails.linkCountNotCausality, true);
 

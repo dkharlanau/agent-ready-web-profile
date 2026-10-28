@@ -32,6 +32,14 @@ The live command reuses the Site Readiness Gate's deterministic bounded cohort s
 
 The machine-readable contract is `schema/internal-discovery-report.schema.json`. The implementation is `lib/internal-discovery.mjs`.
 
+New review actions identify their class and a SHA-256 digest of the complete
+observed URL. The ID is deterministic for that class and URL and distinguishes
+pages with the same hostname. Earlier v0.1 reports used a truncated URL prefix;
+different pages could therefore have the same action ID. Those historical
+reports remain schema-readable, but their IDs alone are not unique keys. Keep
+their original evidence and use the action class together with its URL when
+reconciling them; do not silently rewrite old IDs or infer a one-to-one mapping.
+
 ### What v0.1 reports
 
 - canonical owners in the reviewed cohort;

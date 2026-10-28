@@ -4,6 +4,7 @@ import path from 'node:path';
 import {
   analyzeStructuredDataPages,
   analyzeStructuredDataUrl,
+  analyzeStructuredDataUrls,
   formatStructuredDataReport
 } from '../lib/structured-data-knowledge-graph.mjs';
 
@@ -11,7 +12,7 @@ function usage() {
   return `arwp-structured-data — Structured Data & Knowledge Graph audit
 
 Usage:
-  node bin/arwp-structured-data.mjs <https://site.example/page> [--json] [--output=FILE]
+  node bin/arwp-structured-data.mjs <https://site.example/page> [more HTTPS URLs, up to 5] [--json] [--output=FILE]
   node bin/arwp-structured-data.mjs --file=page.html [--url=https://site.example/page] [--json] [--output=FILE]
 
 Checks:
@@ -45,6 +46,23 @@ function positiveNumber(args, name, fallback) {
   return value;
 }
 
+function positionalUrls(args) {
+  const valueOptions = new Set(['--file', '--url', '--timeout', '--max-bytes', '--output']);
+  const urls = [];
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (valueOptions.has(arg)) {
+      if (!args[i + 1] || args[i + 1].startsWith('--')) throw new Error(`Missing value for ${arg}`);
+      i++;
+    } else if (arg === '--json' || [...valueOptions].some(option => arg.startsWith(`${option}=`))) {
+      continue;
+    } else if (arg.startsWith('-')) {
+      throw new Error(`Unknown option: ${arg}`);
+    } else urls.push(arg);
+  }
+  return urls;
+}
+
 function writeJson(file, value) {
   const resolved = path.resolve(file);
   fs.mkdirSync(path.dirname(resolved), { recursive: true });
@@ -60,18 +78,21 @@ async function main() {
   }
 
   const file = optionValue(args, 'file');
+  const targets = positionalUrls(args);
   let report;
   if (file) {
+    if (targets.length) throw new Error('Use either --file or public URLs, not both.');
     const html = fs.readFileSync(path.resolve(file), 'utf8');
     const url = optionValue(args, 'url') || 'https://example.invalid/';
     report = analyzeStructuredDataPages([{ url, html }]);
   } else {
-    const target = args.find(arg => !arg.startsWith('--'));
-    if (!target) throw new Error('A public HTTPS URL or --file is required.');
-    report = await analyzeStructuredDataUrl(target, {
+    if (!targets.length) throw new Error('A public HTTPS URL or --file is required.');
+    if (optionValue(args, 'url') != null) throw new Error('--url is only valid with --file.');
+    const options = {
       timeoutMs: positiveNumber(args, 'timeout', 8000),
       maxBytes: positiveNumber(args, 'max-bytes', 512 * 1024)
-    });
+    };
+    report = targets.length === 1 ? await analyzeStructuredDataUrl(targets[0], options) : await analyzeStructuredDataUrls(targets, options);
   }
 
   const output = optionValue(args, 'output');

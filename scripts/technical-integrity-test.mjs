@@ -78,6 +78,29 @@ assert.match(check(clean, 'bounded-internal-link-target-health').message, /No ex
 assert.equal(check(clean, 'hreflang-cluster-integrity').status, 'not-applicable');
 assert.match(formatTechnicalIntegrityReport(clean), /No composite Search\/AI score/);
 
+const snippetSource = body => analyzeTechnicalIntegrityFromPages({
+  canonicalUrl: home,
+  pages: [page(home, html({body}))],
+  robots: {url: home + 'robots.txt', ok: true, status: 200, text: 'User-agent: *\nAllow: /\n'}
+});
+const snippetInert = snippetSource(`<main><h1>Guide</h1><p title="data-nosnippet">Useful text about data-nosnippet.</p><!-- <div data-nosnippet> --><script>const html = '<span data-nosnippet>fake</span>';</script></main>`);
+assert.equal(snippetInert.pages[0].dataNosnippetCount, 0);
+assert.equal(check(snippetInert, 'google-ai-snippet-eligibility').status, 'pass');
+const snippetOther = snippetSource('<main><h1>Guide</h1><aside id="consent" data-nosnippet>Consent</aside></main>');
+assert.deepEqual(snippetOther.pages[0].dataNosnippetTags, {aside: 1});
+assert.equal(snippetOther.pages[0].googleDataNosnippetCount, 0);
+assert.equal(check(snippetOther, 'google-ai-snippet-eligibility').status, 'watch');
+assert.match(check(snippetOther, 'google-ai-snippet-eligibility').message, /outside Google.s documented/);
+assert.equal(check(snippetOther, 'bing-grounding-preview-controls').status, 'watch');
+const snippetSupported = snippetSource('<main><h1>Guide</h1><DIV data-nosnippet="false">Private</DIV><section data-nosnippet><span data-nosnippet>Text</span></section></main>');
+assert.equal(snippetSupported.pages[0].googleDataNosnippetCount, 3);
+assert.equal(check(snippetSupported, 'google-ai-snippet-eligibility').status, 'watch');
+assert.match(check(snippetSupported, 'google-ai-snippet-eligibility').message, /Google-documented/);
+const snippetUnusual = snippetSource('<main><constructor data-nosnippet>Text</constructor><div title="a > b" data-nosnippet>Text</div></main>');
+assert.deepEqual(snippetUnusual.pages[0].dataNosnippetTags, {constructor: 1, div: 1});
+assert.equal(snippetUnusual.pages[0].dataNosnippetCount, 2);
+assert.equal(snippetUnusual.pages[0].googleDataNosnippetCount, 1);
+
 const robots404 = analyzeTechnicalIntegrityFromPages({
   canonicalUrl: home,
   pages: cleanPages,
