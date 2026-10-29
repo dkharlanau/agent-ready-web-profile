@@ -194,6 +194,46 @@ assert.equal(edge(root, 'https://example.com/c').linkClass, 'hub');
 assert.equal(edge(root, 'https://example.com/tool').linkClass, 'utility');
 assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
 
+// A useful link outside a small cohort must be visible as unverified context,
+// without treating it as a reviewed owner or a confirmed continuation.
+{
+  const sample = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root, `<main>
+      <a href="/outside-a">Guide &amp; &lt;script&gt;</a>
+      <a href="/outside-b">Second guide</a>
+      <a href="/outside-c">Third guide</a>
+      <a href="/outside-d">Fourth guide</a>
+      <a href="/unknown">Unavailable page</a>
+      <a href="/alias">Alias</a>
+    </main><nav><a href="/outside-nav">Navigation</a></nav>`),
+    {requestedUrl:root+'unknown',url:root+'unknown',ok:false,status:null,contentType:null,headers:{},html:null},
+    page(root+'alias','<main>Alias</main>',{html:'<html><head><link rel="canonical" href="https://example.com/other"></head><body></body></html>'})
+  ]});
+  const before = JSON.stringify(sample);
+  const map = formatInternalDiscoveryMarkdown(sample);
+  const examples = map.split('## Examples of links outside the sample')[1].split('## Review candidates')[0];
+  assert.match(examples, /Showing 3 of 4 retained eligible edges/);
+  assert.match(examples, /outside-a/);
+  assert.match(examples, /Guide &amp; &amp;lt;script&amp;gt;/);
+  assert.match(examples, /outside-c/);
+  assert.doesNotMatch(examples, /\/outside-d|\/outside-nav|\/unknown|\/alias/);
+  assert.match(examples, /destinations were not reviewed/);
+  assert.match(map, /not confirmed sitewide defects/);
+  assert.equal(JSON.stringify(sample), before, 'formatting does not mutate the report or its gap calculations');
+  const reordered = structuredClone(sample);
+  reordered.edges.reverse();
+  assert.equal(formatInternalDiscoveryMarkdown(reordered).split('## Examples of links outside the sample')[1].split('## Review candidates')[0], examples);
+  const hostile = structuredClone(sample);
+  hostile.edges.find(e => e.to === root+'outside-a').to = 'https://other.example/outside';
+  assert.equal(validateInternalDiscoveryReport(hostile).valid, true);
+  assert.doesNotMatch(formatInternalDiscoveryMarkdown(hostile).split('## Examples of links outside the sample')[1].split('## Review candidates')[0], /other\.example/);
+  const unsafeLabel = structuredClone(sample);
+  unsafeLabel.edges.find(e => e.to === root+'outside-a').anchorText = '<script>alert(1)</script> [label]';
+  const safeMap = formatInternalDiscoveryMarkdown(unsafeLabel);
+  assert.ok(safeMap.includes('&lt;script&gt;alert(1)&lt;/script&gt; &#91;label&#93;'));
+  assert.ok(!safeMap.includes('<script>'));
+}
+
 {
   const anchors = analyzeInternalDiscoveryFromPages({canonicalUrl:root,generatedAt:'2026-09-09T18:00:00Z',pages:[
     page(root, `<main>
