@@ -65,6 +65,36 @@ for (const [meta, headers, blocked] of [
   assert.equal(validateInternalDiscoveryReport(observed).valid, true);
 }
 
+// Scoped header rules apply to their crawler. A merged response may hide the
+// boundary between another crawler's rule list and a separate global field.
+for (const [header, nodeClass, noindex] of [
+  ['googlebot: noindex', 'non-indexable-state', true],
+  ['GoogleBot: NONE', 'non-indexable-state', true],
+  ['bingbot: noindex', 'canonical-owner', false],
+  ['googlebot-news: noindex', 'canonical-owner', false],
+  ['bingbot: nofollow, noindex', 'unknown', false],
+  ['bingbot: noindex, nofollow, none', 'unknown', false],
+  ['noindex, bingbot: nofollow', 'non-indexable-state', true],
+  ['bingbot: nofollow, googlebot: noindex', 'non-indexable-state', true],
+  ['max-image-preview: none', 'canonical-owner', false],
+  ['max-snippet: 0, noindex', 'non-indexable-state', true],
+]) {
+  const observed = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root, '<main>Root</main>', {headers:{xRobotsTag:header}}),
+    page(root+'child', '<main>Child</main>')
+  ]});
+  assert.equal(validateInternalDiscoveryReport(observed).valid,true);
+  assert.equal(observed.nodes[0].nodeClass,nodeClass,header);
+  assert.equal(observed.nodes[0].noindex,noindex,header);
+  if (nodeClass === 'unknown') {
+    assert.ok(observed.nodes[0].evidence.includes('x-robots-tag-scope-ambiguous'));
+    assert.equal(observed.summary.gapEvaluationState,'partial');
+    assert.deepEqual(observed.gaps.withoutInbound,[]);
+    assert.deepEqual(observed.gaps.withoutContinuation,[]);
+    assert.match(formatInternalDiscoveryMarkdown(observed),/ambiguous crawler-specific indexing headers/);
+  }
+}
+
 const pages = [
   page(root, `
     <header><nav><a href="/a">Section A</a></nav></header>
