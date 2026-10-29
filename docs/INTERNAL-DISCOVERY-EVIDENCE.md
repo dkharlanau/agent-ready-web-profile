@@ -103,6 +103,11 @@ may fall back to its own `title`. Comments, scripts, styles, templates and SVG c
 not supply these labels. Empty decorative alternatives remain missing unless
 the anchor has a documented title fallback. ARIA labels are not substituted for
 Google anchor-text evidence. Labels remain capped at 500 characters.
+Character references are decoded once in HTML text or attribute context before
+recording the label, so encoded punctuation is readable and an intentionally
+literal entity is not decoded twice. This can also affect heuristic utility
+classification when an action word was encoded; compare observations using their
+actual analyzer revisions rather than assuming class counts are unchanged.
 For duplicate source, destination and class edges, the analyzer retains the first
 edge with observed anchor text, or the first edge if none has text. This prevents
 an earlier decorative image link from hiding a later text link. The edge count and
