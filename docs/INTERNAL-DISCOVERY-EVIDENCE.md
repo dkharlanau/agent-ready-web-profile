@@ -112,6 +112,16 @@ target and class, truncated to 160 characters for readability. Missing labels
 remain missing. These examples do not represent every link or prove a semantic
 relationship, rendered visibility, indexing or ranking.
 
+The Markdown map also includes up to three retained contextual, hub or utility
+edges per sampled owner that lead outside the cohort, selected in URL and class
+order. They give reviewers context when a cohort-only continuation prompt might
+otherwise overlook real links. Their destinations have not been reviewed in the
+cohort: a link observation does not establish that its target works, is canonical,
+is indexable or provides a useful continuation. The map reports the number of
+eligible retained edges and warns that examples are partial. This is a presentation
+change; the machine-readable graph, gap calculations and saved observations are not
+rewritten. Apply the disclosure warning before sharing owner observations.
+
 These fallbacks follow [Google's link guidance](https://developers.google.com/search/docs/crawling-indexing/links-crawlable).
 This is a bounded static HTML observation, not a computed accessible-name or
 CSS-visibility audit, and it does not establish indexing or ranking effects.
