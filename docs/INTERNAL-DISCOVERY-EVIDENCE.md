@@ -112,6 +112,19 @@ CSS-visibility audit, and it does not establish indexing or ranking effects.
 
 V0.1 caps same-origin anchor observations per page. If a canonical owner hits that cap, the report sets `summary.gapEvaluationState = "partial"` and suppresses inbound/global-only gap conclusions that could be falsified by omitted edges. It does not convert a bounded observation limit into an orphan finding.
 
+For `X-Robots-Tag`, global and Googlebot-specific `noindex` or `none` are
+observed as non-indexable states for this Google-oriented graph. A rule
+explicitly scoped to another crawler is not automatically a Google rule.
+Fetch may combine multiple header fields into one comma-separated value, so
+a bare `noindex` following another crawler's prefix can be ambiguous: it
+could be part of that crawler's list or a separate global field. The page
+then remains `unknown`, and inbound and continuation gaps are suppressed for
+the cohort. `noindex: false` means no applicable directive was confirmed; it
+does not resolve an explicit unknown. Earlier reports keep their original
+revision and may classify these headers differently.
+The crawler-specific and global rules are described in [Google's robots
+metadata documentation](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#using-the-x-robots-tag-http-header).
+
 ## Node classes
 
 Classify a route before treating it as a graph node:
