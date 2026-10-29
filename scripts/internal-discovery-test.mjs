@@ -5,6 +5,7 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { analyzeInternalDiscoveryFromPages, validateInternalDiscoveryReport } from '../lib/internal-discovery.mjs';
+import { formatInternalDiscoveryMarkdown } from '../lib/internal-discovery-markdown.mjs';
 
 const root = 'https://example.com/';
 const html = body => `<!doctype html><html><head><title>Example</title></head><body>${body}</body></html>`;
@@ -192,6 +193,9 @@ assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
   assert.deepEqual(truncated.gaps.withoutInbound, [], 'inbound gaps must be suppressed when a canonical owner link sample is truncated');
   assert.deepEqual(truncated.gaps.globalOnlyInbound, []);
   assert.equal(truncated.actions.some(item => item.id.startsWith('internal-discovery:inbound:')), false);
+  const map = formatInternalDiscoveryMarkdown(truncated);
+  assert.match(map, /Inbound gap evaluation: \*\*partial\*\*/);
+  assert.doesNotMatch(map, /Review a missing inbound crawlable path/);
 }
 
 {
@@ -206,6 +210,21 @@ assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
   assert.equal(failed.summary.unknownNodes, 1);
   assert.deepEqual(failed.gaps.unknownPages, ['https://example.com/fail']);
   assert.equal(failed.nodes.find(item => item.url.endsWith('/fail')).nodeClass, 'unknown');
+  assert.match(formatInternalDiscoveryMarkdown(failed), /fail>\) — unknown/);
+}
+
+{
+  const map = formatInternalDiscoveryMarkdown(report);
+  assert.match(map, /bounded raw-HTML sample, not the whole site/);
+  assert.match(map, /2026-09-09T18:00:00\.000Z/);
+  assert.match(map, /example\.com\/b>\) — contextual/);
+  assert.match(map, /example\.com\/old>\) — canonical-alias/);
+  assert.doesNotMatch(map, /example\.com\/old>\) — contextual/);
+  const hostile = structuredClone(report);
+  hostile.cohort.selectionMethod = '<img src=x onerror=alert(1)> [bad](https://example.com)';
+  assert.doesNotMatch(formatInternalDiscoveryMarkdown(hostile), /<img src/);
+  assert.match(formatInternalDiscoveryMarkdown(hostile), /&lt;img/);
+  assert.throws(() => formatInternalDiscoveryMarkdown({}), /Invalid internal discovery report/);
 }
 
 assert.throws(() => analyzeInternalDiscoveryFromPages({ canonicalUrl: 'http://example.com/', pages }), /HTTPS/);
@@ -219,6 +238,11 @@ try {
   const run = (...args) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
   assert.equal(run('validate', reportFile).status, 0);
   assert.match(run('validate', reportFile).stdout, /PASS Internal Discovery/);
+  const mapFile = path.join(directory, 'map.md');
+  assert.equal(run('markdown', reportFile, `--output=${mapFile}`).status, 0);
+  assert.match(fs.readFileSync(mapFile, 'utf8'), /# Internal discovery map/);
+  assert.equal(run('markdown', reportFile, `--output=${mapFile}`).status, 2, 'existing files are not overwritten');
+  assert.equal(run('markdown', reportFile, '--output=').status, 2);
   assert.equal(run('--help').status, 0);
   assert.equal(run('validate').status, 2);
 } finally {

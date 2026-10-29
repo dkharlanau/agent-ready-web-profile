@@ -25,12 +25,21 @@ node bin/arwp-internal-discovery.mjs https://example.com/ \
   --max-pages=20 --json --output=internal-discovery.json
 
 node bin/arwp-internal-discovery.mjs validate internal-discovery.json
+node bin/arwp-internal-discovery.mjs markdown internal-discovery.json --output=internal-discovery.md
 node scripts/internal-discovery-test.mjs
 ```
 
 The live command reuses the Site Readiness Gate's deterministic bounded cohort selection, then fetches the selected HTML pages as the graph evidence. It does not crawl the entire site and does not infer demand from the selected URLs.
 
 The machine-readable contract is `schema/internal-discovery-report.schema.json`. The implementation is `lib/internal-discovery.mjs`.
+
+The optional Markdown map is generated from an existing validated report; it does
+not fetch pages or change a site. It groups observed owner-to-owner links, shows
+review candidates and unknown or non-owner states, and preserves the observation
+date and coverage boundary. It does not turn a bounded sample into a sitewide
+graph. Output is created without overwriting an existing file. Reports can contain
+owner observations: inspect them under the applicable disclosure policy before
+sharing. A Markdown map is useful for review, not a Google Search requirement.
 
 New review actions identify their class and a SHA-256 digest of the complete
 observed URL. The ID is deterministic for that class and URL and distinguishes
