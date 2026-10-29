@@ -319,4 +319,22 @@ try {
   assert.match(formatInternalDiscoveryMarkdown(sample), /anchor not recorded/);
 }
 
+{
+  const duplicate = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root, '<main><a href="/guide"><img alt="" src="/image.svg"></a><a href="/guide">The useful guide</a>' +
+      '<a href="/first">First useful label</a><a href="/first">Second useful label</a>' +
+      '<a href="/empty"><img alt="" src="/image.svg"></a><a href="/empty"><img alt="" src="/other.svg"></a></main>'),
+    page(root+'guide','<main>Guide</main>'), page(root+'first','<main>First</main>'), page(root+'empty','<main>Empty</main>')
+  ]});
+  assert.equal(validateInternalDiscoveryReport(duplicate).valid,true);
+  const edgeTo = target => duplicate.edges.filter(item => item.from === root && item.to === root+target && item.linkClass === 'contextual');
+  assert.equal(edgeTo('guide').length,1);
+  assert.equal(edgeTo('guide')[0].anchorText,'The useful guide');
+  assert.equal(edgeTo('first').length,1);
+  assert.equal(edgeTo('first')[0].anchorText,'First useful label');
+  assert.equal(edgeTo('empty').length,1);
+  assert.equal(edgeTo('empty')[0].anchorText,null);
+  assert.equal(duplicate.summary.ownerEdges,3);
+}
+
 console.log('PASS Internal Discovery keeps rendered owner relations, redirects/non-indexable states, structural link classes, observation ordering, partial coverage and Search outcome claims separate.');
