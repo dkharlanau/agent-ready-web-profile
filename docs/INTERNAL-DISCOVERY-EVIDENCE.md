@@ -103,6 +103,10 @@ may fall back to its own `title`. Comments, scripts, styles, templates and SVG c
 not supply these labels. Empty decorative alternatives remain missing unless
 the anchor has a documented title fallback. ARIA labels are not substituted for
 Google anchor-text evidence. Labels remain capped at 500 characters.
+For duplicate source, destination and class edges, the analyzer retains the first
+edge with observed anchor text, or the first edge if none has text. This prevents
+an earlier decorative image link from hiding a later text link. The edge count and
+classes do not change; old saved reports retain their original analyzer behavior.
 The Markdown map shows the first retained anchor for each observed source,
 target and class, truncated to 160 characters for readability. Missing labels
 remain missing. These examples do not represent every link or prove a semantic
