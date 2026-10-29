@@ -45,7 +45,7 @@ node bin/arwp-intent-ownership.mjs report \
 ## Ownership states
 
 `owned`
-: Exactly one declared owner exists and its reviewed page state is `indexable`.
+: Exactly one declared owner exists, its reviewed page state is `indexable`, and any recorded canonical URL points to that same owner.
 
 `unowned`
 : The site intends to serve the family, but no owner is declared. Review whether an existing page can own it before considering a new URL.
@@ -57,7 +57,7 @@ node bin/arwp-intent-ownership.mjs report \
 : Multiple owner candidates are declared. This is a review queue, not automatic evidence that pages should be merged, redirected or canonicalized.
 
 `blocked-owner`
-: Exactly one owner is declared but the reviewed page state is `noindex`, `redirect` or `unknown`.
+: Exactly one owner is declared but the reviewed page state is `noindex`, `redirect` or `unknown`, or its recorded canonical URL points elsewhere. The latter is a declaration to review, not proof of the canonical selected by Google.
 
 ## Deliberate non-ownership
 

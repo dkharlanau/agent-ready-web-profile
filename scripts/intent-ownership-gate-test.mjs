@@ -37,4 +37,11 @@ assert.equal(readyGate.summary.ownedServedFamilyCount, 4);
 assert.equal(readyGate.summary.failingServedFamilyCount, 0);
 assert.deepEqual(readyGate.failures, []);
 
+const conflictingCanonical = structuredClone(ready);
+conflictingCanonical.canonicalPages[0].canonicalUrl = 'https://example.com/guide/status-updates/';
+const conflictGate = evaluateIntentOwnershipGate(conflictingCanonical);
+assert.equal(conflictGate.valid, false);
+assert.equal(conflictGate.summary.failingServedFamilyCount, 4);
+assert.equal(conflictGate.failures.every(item => item.ownershipState === 'blocked-owner'), true);
+
 console.log('Intent Ownership readiness gate regression passed.');
