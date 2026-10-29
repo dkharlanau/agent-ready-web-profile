@@ -103,6 +103,10 @@ may fall back to its own `title`. Comments, scripts, styles, templates and SVG c
 not supply these labels. Empty decorative alternatives remain missing unless
 the anchor has a documented title fallback. ARIA labels are not substituted for
 Google anchor-text evidence. Labels remain capped at 500 characters.
+The Markdown map shows the first retained anchor for each observed source,
+target and class, truncated to 160 characters for readability. Missing labels
+remain missing. These examples do not represent every link or prove a semantic
+relationship, rendered visibility, indexing or ranking.
 
 These fallbacks follow [Google's link guidance](https://developers.google.com/search/docs/crawling-indexing/links-crawlable).
 This is a bounded static HTML observation, not a computed accessible-name or

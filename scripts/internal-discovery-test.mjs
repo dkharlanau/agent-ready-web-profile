@@ -305,4 +305,18 @@ try {
   fs.rmSync(directory, { recursive: true, force: true });
 }
 
+{
+  const sample = structuredClone(report);
+  const edge = sample.edges.find(item => item.targetState === 'canonical-owner' && item.from !== item.to);
+  assert.ok(edge);
+  edge.anchorText = 'Read <img src=x> [guide]';
+  const map = formatInternalDiscoveryMarkdown(sample);
+  assert.match(map, /anchor: “Read &lt;img src=x&gt; &#91;guide&#93;”/);
+  assert.doesNotMatch(map, /<img src=x>/);
+  edge.anchorText = 'x'.repeat(180);
+  assert.match(formatInternalDiscoveryMarkdown(sample), new RegExp(`anchor: “x{160}…”`));
+  edge.anchorText = null;
+  assert.match(formatInternalDiscoveryMarkdown(sample), /anchor not recorded/);
+}
+
 console.log('PASS Internal Discovery keeps rendered owner relations, redirects/non-indexable states, structural link classes, observation ordering, partial coverage and Search outcome claims separate.');
