@@ -214,7 +214,7 @@ assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
   const examples = map.split('## Examples of links outside the sample')[1].split('## Review candidates')[0];
   assert.match(examples, /Showing 3 of 4 retained eligible edges/);
   assert.match(examples, /outside-a/);
-  assert.match(examples, /Guide &amp; &amp;lt;script&amp;gt;/);
+  assert.match(examples, /Guide &amp; &lt;script&gt;/);
   assert.match(examples, /outside-c/);
   assert.doesNotMatch(examples, /\/outside-d|\/outside-nav|\/unknown|\/alias/);
   assert.match(examples, /destinations were not reviewed/);
@@ -244,6 +244,11 @@ assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
       <a href="/multiple"><picture><source srcset="/diagram.webp" alt="Not an img alternative"><IMG alt='First diagram' src="/a.webp"></picture><img alt="Second > third" src="/b.webp"></a>
       <a href="/ignored"><!-- <img alt="Comment text"> --><script>const s='<img alt="Script text">';</script><style>.x{content:'<img alt="Style text">'}</style><template><img alt="Template text"></template><img src="/decorative.webp" alt=""></a>
       <a href="/bounded"><img alt="${'x'.repeat(550)}" src="/large.webp"></a>
+      <a href="/entities">What&#x27;s &lt;next&gt; &amp;amp; &#128512;</a>
+      <a href="/literal">&amp;#x27; stays literal</a>
+      <a href="/entity-alt"><img alt="Reader&#x27;s &#x3c;guide&#x3e; &amp;amp;"></a>
+      <a href="/entity-title" title="Reader&#x27;s guide"><img alt=""></a>
+      <a href="/entity-action">&#84;ry this</a>
     </main>`)
   ]});
   const link=name=>anchors.edges.find(e=>e.to===root+name);
@@ -255,6 +260,12 @@ assert.equal(edge(root, 'https://example.com/old').targetState, 'transition');
   assert.equal(link('multiple').anchorText,'First diagram Second > third');
   assert.equal(link('ignored').anchorText,null);
   assert.equal(link('bounded').anchorText.length,500);
+  assert.equal(link('entities').anchorText,"What's <next> &amp; 😀");
+  assert.equal(link('literal').anchorText,'&#x27; stays literal');
+  assert.equal(link('entity-alt').anchorText,"Reader's <guide> &amp;");
+  assert.equal(link('entity-title').anchorText,"Reader's guide");
+  assert.equal(link('entity-action').anchorText,'Try this');
+  assert.equal(link('entity-action').linkClass,'utility');
 }
 
 {
