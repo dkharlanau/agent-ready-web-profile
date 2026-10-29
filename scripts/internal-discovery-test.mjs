@@ -20,6 +20,32 @@ const page = (url, body, extra = {}) => ({
   ...extra
 });
 
+// HTML-like payloads in inert markup are not source-document links. They
+// cannot supply inbound evidence or exhaust the observation cap.
+{
+  const inert = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root, `<main>
+      <script>const link = '<a href="/ghost">Fake</a>';</script>
+      <style>.example::before { content: '<a href="/ghost">Fake</a>'; }</style>
+      <template><section><a href="/ghost">Template</a><script>const x = '</template><a href="/ghost">Fake</a>';</script></section></template>
+      <!-- <a href="/ghost">Comment</a> -->
+      <a href="/real">Real link</a>
+    </main>`, {maxLinksPerPage:2}),
+    page(root+'ghost','<main>Ghost</main>'),
+    page(root+'real','<main>Real</main>')
+  ]});
+  assert.equal(validateInternalDiscoveryReport(inert).valid,true);
+  assert.deepEqual(inert.edges.map(edge=>edge.to),[root+'real']);
+  assert.deepEqual(inert.gaps.withoutInbound,[root+'ghost']);
+  assert.equal(inert.summary.truncatedPages,0);
+  assert.equal(inert.summary.gapEvaluationState,'complete');
+  const svg = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[
+    page(root,'<svg><a href="/real"><text>Diagram link</text></a></svg>'),
+    page(root+'real','<main>Real</main>')
+  ]});
+  assert.equal(svg.edges[0].to,root+'real','existing SVG anchor behavior is preserved');
+}
+
 // A standalone none directive excludes a Google content owner; a preview
 // setting whose value is none does not.
 for (const [meta, headers, blocked] of [

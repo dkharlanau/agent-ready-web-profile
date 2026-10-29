@@ -91,6 +91,12 @@ V0.1 uses structural HTML evidence conservatively:
 
 These are review heuristics over observed HTML structure, not Google link categories or ranking factors. A rendered DOM may differ from raw HTML on JavaScript-heavy sites; use browser/runtime evidence when that difference is material.
 
+The source-document graph excludes HTML-like links inside scripts, styles,
+templates and comments. JavaScript can add links at runtime, so this static
+observation does not establish that those links are absent from the rendered
+page. Historical reports retain their original analyzer revision and may have
+counted inert markup as links; compare reports with that limitation in mind.
+
 Anchor observations preserve element text first. For an image-only link, the
 extractor records non-empty `img alt` values in document order; an empty anchor
 may fall back to its own `title`. Comments, scripts, styles, templates and SVG contents do
