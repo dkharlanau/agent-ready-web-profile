@@ -38,6 +38,15 @@ Apply the layer in this order:
 
 A smaller coherent graph is preferable to a large contradictory graph.
 
+Core-property findings describe each page's own default graph. When an
+explicitly typed description of the same absolute `@id` and entity family on
+another sampled document directly contains the property, a finding also lists
+that document in `propertyObservedOnOtherDocuments`. This is a review clue,
+not a merged page-local value, a provider eligibility decision, or proof the
+property is correct. Blank nodes, named graphs, unknown contexts and typed
+identity-only links do not supply this clue. Old reports retain their original
+analyzer behavior and source dates.
+
 ### Identity links and bounded observations
 
 A nested object containing only `@id`, `@type` and optional `@context` is
