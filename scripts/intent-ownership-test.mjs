@@ -50,6 +50,16 @@ const blocked = report.families.find(item => item.id === 'blocked-draft-owner');
 assert.equal(blocked.ownershipState, 'blocked-owner');
 assert.equal(blocked.attention[0].priority, 'P0');
 
+const canonicalConflict = structuredClone(fixture);
+canonicalConflict.canonicalPages[0].canonicalUrl = 'https://example.com/guide/status-updates/';
+assert.equal(validateIntentOwnershipLedger(canonicalConflict).valid, true);
+const conflictReport = buildIntentOwnershipReport(canonicalConflict).families.find(item => item.id === 'explain-clearly');
+assert.equal(conflictReport.ownershipState, 'blocked-owner');
+assert.match(conflictReport.attention[0].message, /canonical URL pointing elsewhere/);
+const selfCanonical = structuredClone(fixture);
+selfCanonical.canonicalPages[0].canonicalUrl = selfCanonical.canonicalPages[0].url;
+assert.equal(buildIntentOwnershipReport(selfCanonical).families.find(item => item.id === 'explain-clearly').ownershipState, 'owned');
+
 assert.equal(report.boundaries.queryVariantCreatesPage, false);
 assert.equal(report.boundaries.declinedIntentCreatesPage, false);
 assert.equal(report.boundaries.offOwnerObservationProvesCannibalization, false);
