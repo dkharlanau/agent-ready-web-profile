@@ -369,6 +369,31 @@ const separate = analyzeStructuredDataPages([
 ]);
 assert.ok(missingDatasetCore(separate).some(g => g.code === 'core-property-missing:license'),
   'a different supplied page does not satisfy page-local completeness');
+const fullTyped = {...splitTyped, license:'https://split.example.test/license'};
+const otherDoc = {url:'https://split.example.test/other',html:ld(fullTyped)};
+const annotated = analyzeStructuredDataPages([{url:splitPage.url,html:ld(splitTyped)},otherDoc]);
+const licenseGap = missingDatasetCore(annotated).find(g=>g.page===splitPage.url && g.code==='core-property-missing:license');
+assert.ok(licenseGap, 'other-page evidence never suppresses the page-local gap');
+assert.deepEqual(licenseGap.propertyObservedOnOtherDocuments,[otherDoc.url]);
+assert.match(formatStructuredDataReport(annotated),/Same entity and property observed on another sampled document/);
+for(const alternative of [
+  {...fullTyped,'@id':'https://split.example.test/other#dataset'},
+  {...fullTyped,'@context':{'@vocab':'https://other.example.test/'}},
+  {...fullTyped,'@type':'Organization'},
+  {'@context':'https://schema.org','@id':'https://split.example.test/#named','@graph':[fullTyped]},
+  {'@context':'https://schema.org','@type':'WebPage',about:{'@id':datasetId,'@type':'Dataset'}}
+]){
+  const result=analyzeStructuredDataPages([{url:splitPage.url,html:ld(splitTyped)},{...otherDoc,html:ld(alternative)}]);
+  const finding=missingDatasetCore(result).find(g=>g.page===splitPage.url && g.code==='core-property-missing:license');
+  assert.ok(finding);
+  assert.equal(finding.propertyObservedOnOtherDocuments,undefined,'unrelated, unknown-context, named or reference-only sources are not evidence');
+}
+const blankTyped={'@context':'https://schema.org','@type':'Dataset','@id':'_:shared',name:'Blank data'};
+const blankFull={...blankTyped,license:'https://split.example.test/license'};
+const blankReport=analyzeStructuredDataPages([{url:splitPage.url,html:ld(blankTyped)},{...otherDoc,html:ld(blankFull)}]);
+const blankGap=missingDatasetCore(blankReport).find(g=>g.page===splitPage.url && g.code==='core-property-missing:license');
+assert.ok(blankGap);
+assert.equal(blankGap.propertyObservedOnOtherDocuments,undefined,'blank-node labels do not cross documents');
 const named = {'@context':'https://schema.org','@id':'https://split.example.test/#named','@graph':[splitFacts]};
 assert.ok(missingDatasetCore(analyzeStructuredDataPages([{...splitPage,html:`<h1>Split data</h1>${ld(splitTyped)}${ld(named)}`}]))
   .some(g => g.code === 'core-property-missing:license'), 'named graph facts do not fill the default graph');
