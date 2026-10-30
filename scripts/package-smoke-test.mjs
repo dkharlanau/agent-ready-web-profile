@@ -63,6 +63,8 @@ try {
   assert.equal(relay.dataStatus, 'synthetic');
   assert.equal(relay.stages.independent_reuse.uniqueEvidence, 1);
   const installedCli = path.join(installedRoot, 'bin', 'arwp.mjs');
+  const freshnessHelp = execFileSync(process.execPath, [path.join(installedRoot, 'bin', 'arwp-freshness.mjs'), '--help'], { encoding: 'utf8' });
+  assert.match(freshnessHelp, /Freshness Integrity/);
   const installedAiSearchCli = path.join(installedRoot, 'bin', 'arwp-ai-search.mjs');
   const installedVisibilityCli = path.join(installedRoot, 'bin', 'arwp-visibility.mjs');
   const installedBingCli = path.join(installedRoot, 'bin', 'arwp-bing.mjs');

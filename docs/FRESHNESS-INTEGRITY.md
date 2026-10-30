@@ -137,6 +137,9 @@ Freshness v0.1 accepts a final XML `<urlset>` rather than a sitemap index. Build
 
 The parser intentionally:
 
+- requires well-formed XML and a `urlset` root in the sitemap namespace (or a namespace-less legacy `urlset`); it rejects document type declarations;
+- reads only direct sitemap `url`, `loc` and `lastmod` children, without interpreting comments or extension elements as sitemap records;
+- rejects duplicate `loc` or `lastmod` elements within an entry;
 - requires credential-free absolute HTTPS `<loc>` URLs;
 - rejects duplicate normalized `<loc>` values;
 - bounds leaf sitemaps to 50 MiB and 50,000 URL entries;
