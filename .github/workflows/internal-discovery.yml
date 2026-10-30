@@ -5,9 +5,11 @@ on:
     branches: [main]
     paths:
       - 'lib/internal-discovery.mjs'
+      - 'lib/cross-site-discovery.mjs'
       - 'bin/arwp-internal-discovery.mjs'
       - 'schema/internal-discovery-report.schema.json'
       - 'scripts/internal-discovery-test.mjs'
+      - 'scripts/cross-site-discovery-test.mjs'
       - 'docs/INTERNAL-DISCOVERY-EVIDENCE.md'
       - 'lib/site-gate.mjs'
       - 'lib/public-fetch.mjs'
@@ -17,9 +19,11 @@ on:
   pull_request:
     paths:
       - 'lib/internal-discovery.mjs'
+      - 'lib/cross-site-discovery.mjs'
       - 'bin/arwp-internal-discovery.mjs'
       - 'schema/internal-discovery-report.schema.json'
       - 'scripts/internal-discovery-test.mjs'
+      - 'scripts/cross-site-discovery-test.mjs'
       - 'docs/INTERNAL-DISCOVERY-EVIDENCE.md'
       - 'lib/site-gate.mjs'
       - 'lib/public-fetch.mjs'
@@ -50,10 +54,12 @@ jobs:
       - name: Validate bounded graph contract
         run: |
           node --check lib/internal-discovery.mjs
+          node --check lib/cross-site-discovery.mjs
           node --check bin/arwp-internal-discovery.mjs
           node --check scripts/internal-discovery-test.mjs
           node -e "JSON.parse(require('fs').readFileSync('schema/internal-discovery-report.schema.json','utf8'))"
           node scripts/internal-discovery-test.mjs
+          node scripts/cross-site-discovery-test.mjs
           node bin/arwp-internal-discovery.mjs --help
       - name: Reject score-like regressions in the public contract
         shell: bash
