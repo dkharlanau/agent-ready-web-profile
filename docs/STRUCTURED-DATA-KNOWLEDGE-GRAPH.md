@@ -38,6 +38,15 @@ Apply the layer in this order:
 
 A smaller coherent graph is preferable to a large contradictory graph.
 
+Within a recognized Schema.org context, the bounded analyzer recognizes both
+literal type names and absolute Schema.org type IRIs, such as `Organization`
+and `https://schema.org/Organization`. It retains the original assertion in
+the report and treats those spellings as the same type for identity review,
+following [Schema.org's guidance](https://schema.org/docs/developers.html) to
+accept both HTTP and HTTPS vocabulary representations.
+This limited normalization does not expand custom contexts, compact IRIs or
+property aliases; those still require a standards-aware JSON-LD processor.
+
 Core-property findings describe each page's own default graph. When an
 explicitly typed description of the same absolute `@id` and entity family on
 another sampled document directly contains the property, a finding also lists
