@@ -46,6 +46,8 @@ following [Schema.org's guidance](https://schema.org/docs/developers.html) to
 accept both HTTP and HTTPS vocabulary representations.
 This limited normalization does not expand custom contexts, compact IRIs or
 property aliases; those still require a standards-aware JSON-LD processor.
+The bounded inventory accepts both a single node object and an array under
+`@graph`; this does not make it a JSON-LD validity check.
 
 Core-property findings describe each page's own default graph. When an
 explicitly typed description of the same absolute `@id` and entity family on

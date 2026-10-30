@@ -664,3 +664,26 @@ console.log('PASS document and context bases: canonical difference, HTML base, n
   } finally { fs.rmSync(temp,{recursive:true,force:true}); }
   console.log('PASS structured-data CLI: single-file compatibility, option parsing and bounded invalid batches');
 }
+
+// JSON-LD 1.1 permits one node object as well as an array under @graph.
+{
+  const url = 'https://singleton-graph.example.test/data';
+  const render = value => `<script type="application/ld+json">${JSON.stringify(value)}</script>`;
+  const entity = {'@type':'Dataset','@id':`${url}#data`,name:'Sample data',description:'Synthetic dataset',license:'https://singleton-graph.example.test/license'};
+  const input = graph => ({'@context':'https://schema.org','@graph':graph});
+  const one = analyzeStructuredDataHtml(`<h1>Sample data</h1>${render(input(entity))}`,{url});
+  const many = analyzeStructuredDataHtml(`<h1>Sample data</h1>${render(input([entity]))}`,{url});
+  assert.equal(one.summary.entitiesObserved,1,'a singleton graph node is not omitted');
+  assert.deepEqual(one.entities,many.entities,'single and array graph forms inventory the same entity');
+  assert.deepEqual(one.gaps,many.gaps,'single and array graph forms produce the same findings');
+
+  const typed = {'@context':'https://schema.org','@type':'Dataset','@id':`${url}#data`,name:'Sample data'};
+  const fragment = {'@id':`${url}#data`,license:'https://singleton-graph.example.test/license'};
+  const named = graph => ({'@context':'https://schema.org','@id':`${url}#named`,'@graph':graph});
+  const report = graph => analyzeStructuredDataHtml(`${render(typed)}${render(named(graph))}`,{url});
+  const singleNamed = report(fragment), arrayNamed = report([fragment]);
+  assert.deepEqual(singleNamed.gaps,arrayNamed.gaps,'named singleton and array graphs keep the same isolation');
+  assert.ok(singleNamed.gaps.some(g=>g.code==='core-property-missing:license'),
+    'named graph properties do not complete a default graph entity');
+  console.log('PASS singleton JSON-LD graph: entity inventory and named graph isolation');
+}
