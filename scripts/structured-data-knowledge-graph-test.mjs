@@ -687,3 +687,37 @@ console.log('PASS document and context bases: canonical difference, HTML base, n
     'named graph properties do not complete a default graph entity');
   console.log('PASS singleton JSON-LD graph: entity inventory and named graph isolation');
 }
+
+// Repeated default-graph descriptions of the same explicit entity must not
+// crowd out other bounded review findings; distinct contexts stay distinct.
+{
+  const base='https://repeat.example.test/',id=base+'#editorial',name='Example editorial team';
+  const entity=(changes={})=>({'@type':'Organization','@id':id,name,...changes});
+  const block=nodes=>ld({'@context':'https://schema.org','@graph':nodes});
+  const findings=report=>report.gaps.filter(g=>['visible-name-parity','visible-name-render-review'].includes(g.code));
+  const page=(url,html)=>({url,html});
+  const repeated=analyzeStructuredDataPages([page(base,block(Array.from({length:80},()=>entity())))]);
+  const unique=findings(repeated);assert.equal(unique.length,1);assert.equal(unique[0].occurrences,80);
+  assert.match(formatStructuredDataReport(repeated),/Repeated identical assertions in this document: 80/);
+  const hidden=analyzeStructuredDataPages([page(base,`<div hidden>${name}</div>${block([entity(),entity()])}`)]);
+  assert.equal(findings(hidden).length,1);assert.equal(findings(hidden)[0].code,'visible-name-render-review');assert.equal(findings(hidden)[0].occurrences,2);
+  const names=analyzeStructuredDataPages([page(base,block([entity(),entity({name:'Another label'})]))]);
+  assert.equal(findings(names).length,2,'different names remain separately reviewable');
+  const ids=analyzeStructuredDataPages([page(base,block([entity(),entity({'@id':base+'#other'})]))]);
+  assert.equal(findings(ids).length,2,'different explicit IDs are not combined');
+  const types=analyzeStructuredDataPages([page(base,block([entity(),entity({'@type':'https://schema.org/Organization'})]))]);
+  assert.equal(findings(types).length,2,'distinct type spellings remain separately represented');
+  const separatePages=analyzeStructuredDataPages([page(base,block([entity()])),page(base+'other',block([entity()]))]);
+  assert.equal(findings(separatePages).length,2,'different observed documents stay separate');
+  const namedGraph=ld({'@context':'https://schema.org','@id':base+'#graph','@graph':[entity(),entity()]});
+  assert.equal(findings(analyzeStructuredDataPages([page(base,namedGraph)])).length,2,'named graph occurrences are not combined');
+  const nestedAnonymous=ld({'@context':'https://schema.org','@type':'Thing','subjectOf':{'@graph':[entity(),entity()]}});
+  assert.equal(findings(analyzeStructuredDataPages([page(base,nestedAnonymous)])).length,2,'nested anonymous graph scope stays separate');
+  const rootArray=ld([{'@context':'https://schema.org','@graph':[entity(),entity()]}]);
+  assert.equal(findings(analyzeStructuredDataPages([page(base,rootArray)])).length,2,'graph objects inside root arrays remain conservatively separate');
+  const blank=block([entity({'@id':'_:editorial'}),entity({'@id':'_:editorial'})]);
+  assert.equal(findings(analyzeStructuredDataPages([page(base,blank)])).length,2,'blank nodes are not combined');
+  const anonymous=block([{'@type':'Organization',name},{'@type':'Organization',name}]);
+  assert.equal(findings(analyzeStructuredDataPages([page(base,anonymous)])).length,2,'anonymous nodes are not combined');
+  console.log('PASS repeated visible-name findings: bounded dedupe and graph context isolation');
+}
