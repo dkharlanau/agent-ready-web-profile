@@ -319,6 +319,25 @@ const multiType = analyzeStructuredDataPages([aliasPage([
 ])]);
 assert.ok(multiType.gaps.some(g => g.code === 'reused-id-type-review' && g.priority === 'P1'));
 assert.ok(!multiType.gaps.some(g => g.code === 'reused-id-name-review'));
+const expandedType = analyzeStructuredDataPages([aliasPage([
+  term('Evidence review', {'@type':'https://schema.org/Organization'})
+])]);
+assert.equal(expandedType.entities[0].family, 'organization', 'an absolute Schema.org type identifies its family');
+assert.deepEqual(expandedType.entities[0].types, ['https://schema.org/Organization'], 'reports preserve the original type assertion');
+assert.ok(expandedType.gaps.some(g => g.code === 'core-property-missing:url'), 'expanded types receive the same core-property diagnostics');
+const equivalentTypes = analyzeStructuredDataPages([aliasPage([
+  term('Evidence review', {'@type':['Organization','https://schema.org/Organization']}),
+  term('Evidence review', {'@type':'http://schema.org/Organization'})
+])]);
+assert.ok(!equivalentTypes.gaps.some(g => g.code === 'reused-id-type-review'), 'equivalent Schema.org type spellings do not create a conflict');
+const foreignType = analyzeStructuredDataPages([aliasPage([
+  term('Evidence review', {'@type':'https://schema.org.example.test/Organization'})
+])]);
+assert.equal(foreignType.entities[0].family, null, 'other hosts do not become Schema.org types');
+const unknownTypeContext = analyzeStructuredDataPages([aliasPage([
+  term('Evidence review', {'@context':{'@vocab':'https://other.example.test/'}, '@type':'https://schema.org/Organization'})
+])]);
+assert.equal(unknownTypeContext.entities[0].family, null, 'an expanded type alone does not authorize interpreting other properties in a custom context');
 assert.equal(conflicts([aliasPage([term(longName), term('Evidence review', {alternateName: {'@value': longName, '@language':'en'}})])]).length, 0,
   'a simple JSON-LD value object may explicitly connect names');
 assert.equal(conflicts([aliasPage([term(longName), term('Evidence review', {alternateName: {'@value': longName, 'unexpected': 'field'}})])]).length, 1,
