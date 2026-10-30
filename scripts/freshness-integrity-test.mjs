@@ -122,6 +122,29 @@ function sitemap({ rootLastmod = '2026-09-01', aLastmod = '2026-09-02', includeU
 }
 
 {
+  const xml = `<?xml version="1.0"?>
+  <sm:urlset xmlns:sm="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <!-- <sm:url><sm:loc>https://example.com/comment</sm:loc></sm:url> -->
+    <sm:url><sm:loc>https://example.com/a?x=1&amp;y=2</sm:loc><sm:lastmod><![CDATA[2026-09-01]]></sm:lastmod>
+      <image:image><image:loc>https://example.com/image.jpg</image:loc></image:image>
+    </sm:url>
+  </sm:urlset>`;
+  assert.deepEqual(parseLeafSitemap(xml), [{url:'https://example.com/a?x=1&y=2',lastmod:'2026-09-01',lastmodState:'valid'}]);
+  assert.throws(() => parseLeafSitemap('<urlset><url><loc>https://example.com/</loc></url>'), /unclosed|unexpected end/i);
+  assert.throws(() => parseLeafSitemap('<!-- <urlset><url><loc>https://example.com/</loc></url></urlset> -->'), /root/i);
+  assert.throws(() => parseLeafSitemap('<urlset><url><loc>https://example.com/?a=1&b=2</loc></url></urlset>'));
+  assert.throws(() => parseLeafSitemap('<!DOCTYPE urlset [<!ENTITY x "https://example.com/">]><urlset><url><loc>&x;</loc></url></urlset>'), /document type/i);
+  assert.throws(() => parseLeafSitemap('<urlset xmlns="https://example.com/wrong"><url><loc>https://example.com/</loc></url></urlset>'), /urlset sitemap/i);
+  assert.throws(() => parseLeafSitemap('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url xmlns=""><loc>https://example.com/</loc></url></urlset>'), /wrong namespace/i);
+  assert.throws(() => parseLeafSitemap('<urlset xmlns:ext="https://example.com/ext"><url><ext:loc>https://example.com/</ext:loc></url></urlset>'), /missing loc/i);
+  assert.throws(() => parseLeafSitemap('<urlset><url><loc>https://example.com/</loc><loc>https://example.com/other</loc></url></urlset>'), /multiple loc/i);
+  assert.throws(() => parseLeafSitemap('<urlset><url><loc>https://example.com/</loc><lastmod>2026-01-01</lastmod><lastmod>2026-01-02</lastmod></url></urlset>'), /multiple lastmod/i);
+  assert.throws(() => parseLeafSitemap('<urlset><url><loc>https://example.com/<b>nested</b></loc></url></urlset>'), /text only/i);
+  assert.throws(() => parseLeafSitemap('<sm:sitemapindex xmlns:sm="http://www.sitemaps.org/schemas/sitemap/0.9"/>'), /not a leaf urlset/i);
+  assert.deepEqual(parseLeafSitemap('<urlset><url><loc>https://example.com/</loc></url></urlset>'), [{url:root,lastmod:null,lastmodState:'missing'}], 'legacy namespace-less XML remains supported');
+}
+
+{
   const before = buildFreshnessSnapshot(graph(), sitemap({ includeUnmapped: false }), { generatedAt: '2026-09-09T18:00:00Z' });
   const after = buildFreshnessSnapshot(graph(), sitemap({ rootLastmod: '2026-09-03', includeUnmapped: false }), { generatedAt: '2026-09-09T18:05:00Z' });
   const comparison = compareFreshnessSnapshots(before, after, { generatedAt: '2026-09-09T18:06:00Z' });
@@ -192,10 +215,15 @@ try {
   const beforeFile = path.join(directory, 'before.json');
   const afterFile = path.join(directory, 'after.json');
   const comparisonFile = path.join(directory, 'comparison.json');
+  const invalidSitemapFile = path.join(directory, 'invalid.xml');
+  const invalidOutputFile = path.join(directory, 'invalid-output.json');
   fs.writeFileSync(stateFile, JSON.stringify(graph()));
   fs.writeFileSync(sitemapBeforeFile, sitemap({ includeUnmapped: false }));
   fs.writeFileSync(sitemapAfterFile, sitemap({ rootLastmod: '2026-09-03', includeUnmapped: false }));
+  fs.writeFileSync(invalidSitemapFile, '<urlset><url><loc>https://example.com/</loc></url>');
   const run = (...args) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
+  assert.equal(run('snapshot', stateFile, invalidSitemapFile, `--output=${invalidOutputFile}`).status, 2);
+  assert.equal(fs.existsSync(invalidOutputFile), false, 'invalid XML must not create evidence output');
   assert.equal(run('snapshot', stateFile, sitemapBeforeFile, `--output=${beforeFile}`).status, 0);
   assert.equal(run('snapshot', stateFile, sitemapAfterFile, `--output=${afterFile}`).status, 0);
   assert.equal(run('validate', beforeFile).status, 0);
