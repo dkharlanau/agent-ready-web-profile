@@ -65,6 +65,14 @@ reconciling them; do not silently rewrite old IDs or infer a one-to-one mapping.
 
 No PageRank-like value, authority score, SEO score or combined graph grade is produced.
 
+The continuation gap counts links to other verified owners in the bounded cohort.
+When the same source also links to distinct out-of-cohort or unknown targets in a
+contextual, hub or utility placement, the review action reports that count and
+asks for those existing targets to be checked before adding links. These targets
+may be unavailable, non-canonical or irrelevant; neither their existence nor their
+structural link class verifies a useful continuation. Saved reports retain the
+recommendations and analyzer revision they originally recorded.
+
 ### Same-page anchors and inbound evidence
 
 Links to the same normalized canonical owner, including skip links, table-of-contents

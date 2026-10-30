@@ -389,3 +389,30 @@ try {
 }
 
 console.log('PASS Internal Discovery keeps rendered owner relations, redirects/non-indexable states, structural link classes, observation ordering, partial coverage and Search outcome claims separate.');
+
+// An out-of-cohort target is an existing link observation, not a verified
+// continuation. Review it before recommending another link to the page.
+{
+  const source = page(root, `<main>
+    <p><a href="/guide">A guide</a></p>
+    <section class="related-topics"><a href="/guide#details">The same guide</a></section>
+    <p><a href="/unknown">Another guide</a></p>
+  </main><header><nav><a href="/navigation">Navigation</a></nav></header>`);
+  const unknown = page(root+'unknown', '', {ok:false,status:503});
+  const graph = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[source,unknown]});
+  const recommendation = graph.actions.find(a=>a.id.startsWith('internal-discovery:continuation:')&&a.url===root);
+  assert.ok(recommendation, 'bounded owner-to-owner continuation remains unobserved');
+  assert.equal(recommendation.title,'Review existing potential continuations');
+  assert.match(recommendation.reason,/2 .*unverified/i, 'distinct out-of-cohort and unknown targets are counted once');
+  assert.match(recommendation.verification,/before adding/i);
+  assert.match(recommendation.verification,/canonical/i);
+  assert.equal(validateInternalDiscoveryReport(graph).valid,true);
+  assert.equal(graph.summary.ownersWithoutContinuation,1,'the bounded count does not become a sitewide claim');
+  const terminal = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[page(root,'<main>Terminal page</main>')]});
+  const terminalAction = terminal.actions.find(a=>a.id.startsWith('internal-discovery:continuation:'));
+  assert.ok(terminalAction);assert.doesNotMatch(terminalAction.reason,/unverified.*target/i);
+  assert.match(terminalAction.verification,/intentionally terminal/i);
+  const capped = analyzeInternalDiscoveryFromPages({canonicalUrl:root,pages:[page(root,'<main><a href="/a">A</a><a href="/b">B</a></main>',{maxLinksPerPage:1})]});
+  assert.equal(capped.actions.some(a=>a.id.startsWith('internal-discovery:continuation:')),false,'capped source remains unknown');
+  console.log('PASS continuation review prioritizes existing unverified targets without inventing a verified path');
+}
