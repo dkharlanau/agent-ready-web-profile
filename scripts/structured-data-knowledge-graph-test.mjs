@@ -416,6 +416,32 @@ assert.equal(blankGap.propertyObservedOnOtherDocuments,undefined,'blank-node lab
 const named = {'@context':'https://schema.org','@id':'https://split.example.test/#named','@graph':[splitFacts]};
 assert.ok(missingDatasetCore(analyzeStructuredDataPages([{...splitPage,html:`<h1>Split data</h1>${ld(splitTyped)}${ld(named)}`}]))
   .some(g => g.code === 'core-property-missing:license'), 'named graph facts do not fill the default graph');
+// Nested graph objects without @id still represent an isolated anonymous graph.
+const anonymousGraph=children=>({'@context':'https://schema.org','@type':'Thing',subjectOf:{'@graph':children}});
+const core=html=>missingDatasetCore(analyzeStructuredDataPages([{...splitPage,html}]));
+const defaultNeedsLicense=core(`${ld(splitTyped)}${ld(anonymousGraph(splitFacts))}`);
+assert.ok(defaultNeedsLicense.some(g=>g.code==='core-property-missing:license'),
+  'an anonymous nested graph cannot supply a default graph property');
+const nestedNeedsLicense=core(`${ld(splitFacts)}${ld(anonymousGraph(splitTyped))}`);
+assert.ok(nestedNeedsLicense.some(g=>g.code==='core-property-missing:license'),
+  'a default graph fragment cannot fill a nested anonymous graph description');
+const rootArrayFacts=[{'@context':'https://schema.org','@graph':[splitFacts]}];
+assert.ok(core(`${ld(splitTyped)}${ld(rootArrayFacts)}`).some(g=>g.code==='core-property-missing:license'),
+  'a graph object nested in a top-level array remains separate');
+const nestedPeer=analyzeStructuredDataPages([{url:splitPage.url,html:ld(splitTyped)},
+  {...otherDoc,html:ld(anonymousGraph(fullTyped))}]);
+const nestedPeerGap=missingDatasetCore(nestedPeer).find(g=>g.page===splitPage.url&&g.code==='core-property-missing:license');
+assert.equal(nestedPeerGap.propertyObservedOnOtherDocuments,undefined,
+  'a typed description in an anonymous graph is not default-graph peer evidence');
+const nestedWithDefaultPeer=analyzeStructuredDataPages([{url:splitPage.url,html:ld(anonymousGraph(splitTyped))},otherDoc]);
+const nestedGap=missingDatasetCore(nestedWithDefaultPeer).find(g=>g.page===splitPage.url&&g.code==='core-property-missing:license');
+assert.ok(nestedGap);assert.equal(nestedGap.propertyObservedOnOtherDocuments,undefined,
+  'a graph-local finding does not present default-graph facts as the same description');
+const isolatedTwice=core(`${ld(splitTyped)}${ld(anonymousGraph(splitTyped))}`)
+  .filter(g=>g.code==='core-property-missing:license');
+assert.equal(isolatedTwice.length,2,'findings from the default and nested graph are not deduplicated');
+assert.ok(isolatedTwice.some(g=>g.problem.includes('graph description')),
+  'a graph-local finding does not claim the property is absent from the whole page');
 const customContextFacts = {...splitFacts, '@context':{'@vocab':'https://other.example.test/'}};
 assert.ok(missingDatasetCore(analyzeStructuredDataPages([{...splitPage,html:`<h1>Split data</h1>${ld(splitTyped)}${ld(customContextFacts)}`}]))
   .some(g => g.code === 'core-property-missing:license'), 'custom-context properties are not assumed to mean schema.org properties');
