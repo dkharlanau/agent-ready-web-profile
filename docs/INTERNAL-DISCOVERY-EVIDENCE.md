@@ -65,6 +65,53 @@ reconciling them; do not silently rewrite old IDs or infer a one-to-one mapping.
 
 No PageRank-like value, authority score, SEO score or combined graph grade is produced.
 
+### Cross-site relationship review
+
+`reviewCrossSiteRelations` in `lib/cross-site-discovery.mjs` accepts explicitly
+identified sites, caller-supplied bounded page responses and editorial relations.
+Each relation names a source and destination on different declared origins,
+language, proposed anchor and reader job. The existing internal-discovery
+analyzer classifies sampled page owners and aliases; a separate bounded scan
+records whether an anchor to the exact destination appears in the saved raw HTML.
+The output keeps the proposed relation separate from the observed anchor, page
+capture time, SHA-256 of the supplied HTML and owner classification. It preserves
+fragments on observed anchors but joins the canonical page URL without a fragment.
+`formatCrossSiteDiscoveryMarkdown` renders a capped Mermaid preview plus all
+relation rows. The functions do not fetch pages or change sites.
+
+```js
+import { reviewCrossSiteRelations, formatCrossSiteDiscoveryMarkdown } from './lib/cross-site-discovery.mjs';
+
+// Supply saved response objects: requestedUrl, url, ok, status, contentType,
+// observedAt, headers and html. Use [] when no page was sampled for a site.
+const review = reviewCrossSiteRelations({
+  sites: [
+    { id: 'alpha', canonicalUrl: 'https://alpha.example.test/', pages: [] },
+    { id: 'beta', canonicalUrl: 'https://beta.example.test/', pages: [] }
+  ],
+  relations: [{
+    id: 'example-practice', sourceSite: 'alpha', targetSite: 'beta',
+    sourceUrl: 'https://alpha.example.test/guide', targetUrl: 'https://beta.example.test/practice',
+    locale: 'en', anchor: 'Try the practice', job: 'Apply the guide'
+  }]
+});
+console.log(formatCrossSiteDiscoveryMarkdown(review)); // Both pages remain not_sampled.
+```
+
+An unobserved source or target remains `not_sampled`, and a sampled owner
+without an explicit canonical remains `canonical_unverified`; an unavailable or
+non-owner source, capped anchor scan or ambiguous anchor becomes `unknown`.
+`not_seen_in_bounded_raw_html` applies only to the scanned representation, not
+the whole site or a browser-rendered DOM. Script-added links, CSS visibility,
+HTTP headers the caller did not supply, semantic fit and language equivalence
+remain separate review questions. Source hashes bind the supplied bytes but do
+not authenticate their origin, date or deployment. Do not convert a proposed
+edge into a recommendation to insert it automatically or infer search outcomes.
+
+Run `node scripts/cross-site-discovery-test.mjs` for synthetic contract checks.
+Owner URLs, captures, experiments and relationship catalogs stay in private
+workspaces; public tests and examples use synthetic domains only.
+
 The continuation gap counts links to other verified owners in the bounded cohort.
 When the same source also links to distinct out-of-cohort or unknown targets in a
 contextual, hub or utility placement, the review action reports that count and
