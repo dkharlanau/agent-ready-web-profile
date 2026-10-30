@@ -77,6 +77,17 @@ Top-level sparse entities, anonymous typed objects and objects containing other
 properties still receive ordinary completeness checks. This classification is
 an ARWP audit convention, not a new JSON-LD validity or Google eligibility rule.
 
+### Repeated visible-name observations
+
+Within one captured HTML document, identical name-parity findings for the same
+explicit non-blank entity ID, exact type assertion and name in the recognized
+Schema.org default graph are reported once. When repeated, `occurrences` records
+the number of source assertions; priority totals count findings, not copies.
+Different documents, named graphs, nested or ambiguous graph scopes, IDs, types,
+names and anonymous or blank-node identities remain separate. This is report deduplication, not a claim that the
+name is visible or that the underlying markup is valid. JSON-LD distinguishes
+[default and named graphs](https://www.w3.org/TR/json-ld11/#data-model).
+
 ## Core graph patterns
 
 ### Site and publisher
