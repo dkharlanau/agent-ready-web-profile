@@ -2,11 +2,13 @@
 import fs from 'node:fs';
 import { internalDiscovery, formatInternalDiscoveryReport, validateInternalDiscoveryReport } from '../lib/internal-discovery.mjs';
 import { formatInternalDiscoveryMarkdown } from '../lib/internal-discovery-markdown.mjs';
+import { formatIntentGraphReview } from '../lib/intent-graph-review.mjs';
 
 const usage = `Usage:
   arwp-internal-discovery <https://site.example/> [--max-pages=N] [--concurrency=N] [--timeout=N] [--json] [--output=report.json]
   arwp-internal-discovery validate <report.json>
   arwp-internal-discovery markdown <report.json> [--output=map.md]
+  arwp-internal-discovery relations <proposals.json> <report.json> [--output=review.md]
 
 Builds a bounded internal discovery evidence graph from fetched HTML. It separates canonical owners, aliases and link classes and never emits PageRank, authority or SEO scores.`;
 
@@ -29,7 +31,12 @@ try {
     console.log(usage);
     process.exit(args.includes('--help') ? 0 : 2);
   }
-  if (args[0] === 'markdown') {
+  if (args[0] === 'relations') {
+    if (args.length < 3 || args.length > 4 || (args[3] && !/^--output=.+$/.test(args[3]))) throw new Error(usage);
+    const body = formatIntentGraphReview(readJson(args[1]), readJson(args[2]));
+    if (args[3]) fs.writeFileSync(args[3].slice('--output='.length), body, { encoding: 'utf8', flag: 'wx' });
+    else process.stdout.write(body);
+  } else if (args[0] === 'markdown') {
     if (args.length < 2 || args.length > 3 || (args[2] && !/^--output=.+$/.test(args[2]))) throw new Error(usage);
     const body = formatInternalDiscoveryMarkdown(readJson(args[1]));
     if (args[2]) fs.writeFileSync(args[2].slice('--output='.length), body, { encoding: 'utf8', flag: 'wx' });

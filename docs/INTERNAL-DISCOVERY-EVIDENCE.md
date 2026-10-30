@@ -268,3 +268,50 @@ Reject or downgrade evidence when an audit:
 A cleaner internal discovery graph can improve navigability, crawl paths, product continuation and entity/intent coherence. Goose records those as implementation/product evidence.
 
 Classic Search visibility, AI retrieval/citation, referrals and business outcomes remain external observations. A successful graph repair does not by itself prove any of them.
+
+
+## Review a proposed intent graph against saved HTML
+
+The offline `relations` command compares explicitly supplied relationships to
+a saved Internal Discovery JSON report. It makes no fetch and does not edit a
+website. The input is an editorial proposal, not a claim that the edges have
+been reviewed, that URLs are current, or that the product action exists.
+Keep private proposals and observations outside public repositories.
+
+```json
+{
+  "version": "1",
+  "site": "https://example.test/",
+  "relations": [{
+    "from": "https://example.test/guide",
+    "to": "https://example.test/practice",
+    "locale": "en",
+    "kind": "do",
+    "label": "Practice this task",
+    "reason": "The practice page continues the task explained in the guide."
+  }]
+}
+```
+
+```bash
+node bin/arwp-internal-discovery.mjs relations proposals.json report.json --output=review.md
+```
+
+Allowed jobs are `learn`, `do`, `verify`, `prerequisite`, and `alternative`.
+URLs must be normalized, distinct, same-origin HTTPS URLs; `locale` is a
+canonical BCP 47 tag supplied by the editor, not independently verified.
+The report is validated structurally, but the command does not authenticate its
+provenance. It records source and target node states separately and reports:
+
+- `observed-link`: a crawlable source-to-target link was retained in the HTML
+  observation. Its placement classes do not establish the proposed meaning.
+- `not-observed-from-sampled-source`: no such link was retained from a sampled
+  canonical source whose anchor observation was not capped. This is limited to
+  that historical source observation, not a sitewide orphan claim.
+- `unknown`: the source was unsampled, not a canonical owner, or its link
+  observation was capped. Missing evidence is not absence.
+
+Out-of-cohort, alias, non-indexable, and unknown targets require independent
+review. Verify source ownership, destination behavior, language, relevance and
+current rendered HTML before proposing an actual change. Output is a review
+artifact only; no schema, links or site pages are generated or published.

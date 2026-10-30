@@ -113,5 +113,6 @@ assert.match(fs.readFileSync('docs/answers/index.html','utf8'), /Structured proj
 await import('./regional-search-surfaces-test.mjs');
 await import('./search-appearance-patch-test.mjs');
 await import('./internal-discovery-test.mjs');
+await import('./intent-graph-review-test.mjs');
 
 console.log(`PASS ${examples.length} profiles (${referenceProfiles.length} real references), Full Publisher Adoption enforcement, 6 negative/conditional protocol contract tests, structured product/service/profile/event dogfood surfaces, regional Search routing, Search Appearance patch preparation, and bounded Internal Discovery evidence`);
