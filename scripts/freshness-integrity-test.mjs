@@ -206,6 +206,40 @@ function sitemap({ rootLastmod = '2026-09-01', aLastmod = '2026-09-02', includeU
   assert.throws(() => compareFreshnessSnapshots(before, other), /same site origin and basePath/);
 }
 
+{
+  const before = buildFreshnessSnapshot(graph(), sitemap({ includeUnmapped: false }), { sitemapSource: 'https://example.com/pages.xml' });
+  const after = buildFreshnessSnapshot(graph(), sitemap({ includeUnmapped: false }), { sitemapSource: 'https://example.com/atlas.xml' });
+  assert.throws(() => compareFreshnessSnapshots(before, after), /same sitemap source/);
+  after.sitemap.source = before.sitemap.source;
+  assert.equal(compareFreshnessSnapshots(before, after).summary.unchanged, 2);
+  const badDate = structuredClone(after);
+  badDate.entries[0].lastmod = 'not-a-date';
+  assert.equal(validateFreshnessSnapshot(badDate).valid, false);
+  assert.throws(() => compareFreshnessSnapshots(before, badDate), /lastmodState/);
+  const duplicate = structuredClone(after);
+  duplicate.entries[1].url = duplicate.entries[0].url;
+  assert.equal(validateFreshnessSnapshot(duplicate).valid, false);
+  const contradictorySummary = structuredClone(after);
+  contradictorySummary.summary.sitemapEntries++;
+  assert.equal(validateFreshnessSnapshot(contradictorySummary).valid, false);
+  const unbound = structuredClone(after);
+  unbound.entries[0].routeState = 'not-mapped';
+  assert.equal(validateFreshnessSnapshot(unbound).valid, false, 'unknown ownership cannot retain a complete build digest');
+  const missingOwner = structuredClone(after);
+  missingOwner.entries[0].buildInputPaths = ['shared.html'];
+  assert.equal(validateFreshnessSnapshot(missingOwner).valid, false);
+  const original = compareFreshnessSnapshots(before, after);
+  const badCounts = structuredClone(original);
+  badCounts.summary.unchanged++;
+  assert.equal(validateFreshnessComparison(badCounts).valid, false);
+  const badState = structuredClone(original);
+  badState.observations[0].state = 'lastmod-churn-candidate';
+  assert.equal(validateFreshnessComparison(badState).valid, false);
+  const badAction = structuredClone(original);
+  badAction.actions.push({ id:'fake', priority:'P1', status:'review', url:root, kind:'review-synthetic-lastmod', reason:'fake', verification:'fake', source:'https://example.com/', doesNotProve:'fake' });
+  assert.equal(validateFreshnessComparison(badAction).valid, false, 'actions must match an actual review candidate');
+}
+
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'goose-freshness-'));
 const cli = fileURLToPath(new URL('../bin/arwp-freshness.mjs', import.meta.url));
 try {
@@ -215,6 +249,8 @@ try {
   const beforeFile = path.join(directory, 'before.json');
   const afterFile = path.join(directory, 'after.json');
   const comparisonFile = path.join(directory, 'comparison.json');
+  const wrongSourceFile = path.join(directory, 'other-source.json');
+  const wrongComparisonFile = path.join(directory, 'wrong-comparison.json');
   const invalidSitemapFile = path.join(directory, 'invalid.xml');
   const invalidOutputFile = path.join(directory, 'invalid-output.json');
   fs.writeFileSync(stateFile, JSON.stringify(graph()));
@@ -224,8 +260,11 @@ try {
   const run = (...args) => spawnSync(process.execPath, [cli, ...args], { encoding: 'utf8' });
   assert.equal(run('snapshot', stateFile, invalidSitemapFile, `--output=${invalidOutputFile}`).status, 2);
   assert.equal(fs.existsSync(invalidOutputFile), false, 'invalid XML must not create evidence output');
-  assert.equal(run('snapshot', stateFile, sitemapBeforeFile, `--output=${beforeFile}`).status, 0);
-  assert.equal(run('snapshot', stateFile, sitemapAfterFile, `--output=${afterFile}`).status, 0);
+  assert.equal(run('snapshot', stateFile, sitemapBeforeFile, '--sitemap-source=https://example.com/sitemap.xml', `--output=${beforeFile}`).status, 0);
+  assert.equal(run('snapshot', stateFile, sitemapAfterFile, '--sitemap-source=https://example.com/sitemap.xml', `--output=${afterFile}`).status, 0);
+  assert.equal(run('snapshot', stateFile, sitemapAfterFile, '--sitemap-source=https://example.com/other.xml', `--output=${wrongSourceFile}`).status, 0);
+  assert.equal(run('compare', beforeFile, wrongSourceFile, `--output=${wrongComparisonFile}`).status, 2);
+  assert.equal(fs.existsSync(wrongComparisonFile), false, 'different leaf sitemaps must not create a comparison');
   assert.equal(run('validate', beforeFile).status, 0);
   assert.equal(run('compare', beforeFile, afterFile, `--output=${comparisonFile}`).status, 0);
   assert.equal(run('validate', comparisonFile).status, 0);

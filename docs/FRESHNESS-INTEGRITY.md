@@ -58,6 +58,15 @@ node bin/arwp-freshness.mjs snapshot \
   --output=freshness-after.json
 ```
 
+Both snapshots must have the same `sitemap.source` value before they can be
+compared. Use the same explicit `--sitemap-source` for two local captures of
+the same leaf sitemap; otherwise the CLI uses each input filename, which will
+usually differ. A matching source label is an operator assertion, not proof
+that the captured files describe the same cohort. Preserve the original URLs,
+capture dates and response hashes separately. If a sitemap was renamed or
+split, investigate the affected membership first and do not relabel unrelated
+leaf sitemaps as one cohort.
+
 Compare the two snapshots:
 
 ```bash
@@ -79,6 +88,13 @@ Validate either artifact:
 node bin/arwp-freshness.mjs validate freshness-before.json
 node bin/arwp-freshness.mjs validate freshness-comparison.json
 ```
+
+Snapshot validation checks the consistency of dates, unique normalized URLs,
+mapped ownership, input coverage and summary counts. Comparison validation
+checks observation states, review actions and counts against one another. These
+checks cannot authenticate imported artifacts or prove that reported hashes
+match the original files; retain and independently verify the underlying
+evidence.
 
 Output files are created exclusively; the CLI will not overwrite an existing evidence artifact implicitly.
 
