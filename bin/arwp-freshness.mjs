@@ -15,6 +15,7 @@ const usage = `Usage:
   node bin/arwp-freshness.mjs validate <snapshot-or-comparison.json>
 
 Freshness Integrity compares sitemap <lastmod> with revision-bound Repository Mapper owner/build-input evidence.
+Comparison requires the same sitemap source label in both snapshots. Use --sitemap-source for different local capture filenames.
 It does not infer significant content changes from build timestamps and does not predict crawling, ranking or AI visibility.`;
 
 function readText(file, label, maxBytes) {
