@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
+import { compareObservedFreshness, verifyObservedFreshnessComparison } from '../lib/freshness-observed.mjs';
 import {
   buildFreshnessSnapshot,
   compareFreshnessSnapshots,
@@ -12,6 +13,8 @@ const MiB = 1024 * 1024;
 const usage = `Usage:
   node bin/arwp-freshness.mjs snapshot <site-state.json> <leaf-sitemap.xml> [--sitemap-source=<label-or-url>] [--output=snapshot.json]
   node bin/arwp-freshness.mjs compare <before-snapshot.json> <after-snapshot.json> [--output=comparison.json] [--text]
+  node bin/arwp-freshness.mjs observed-compare <before-capture.json> <after-capture.json> [--output=comparison.json]
+  node bin/arwp-freshness.mjs observed-verify <comparison.json> <before-capture.json> <after-capture.json>
   node bin/arwp-freshness.mjs validate <snapshot-or-comparison.json>
 
 Freshness Integrity compares sitemap <lastmod> with revision-bound Repository Mapper owner/build-input evidence.
@@ -103,6 +106,17 @@ try {
       : `${JSON.stringify(comparison, null, 2)}\n`;
     if (options.has('output')) writeExclusive(options.get('output'), body);
     else process.stdout.write(body);
+  } else if (command === 'observed-compare') {
+    const { positionals, options } = parseArgs(args, new Set(['output']));
+    if (positionals.length !== 2) throw new Error(usage);
+    const body = `${JSON.stringify(compareObservedFreshness(positionals[0], positionals[1]), null, 2)}\n`;
+    if (options.has('output')) writeExclusive(options.get('output'), body);
+    else process.stdout.write(body);
+  } else if (command === 'observed-verify') {
+    const { positionals } = parseArgs(args, new Set());
+    if (positionals.length !== 3) throw new Error(usage);
+    const result = verifyObservedFreshnessComparison(readJson(positionals[0], 'Observed comparison'), positionals[1], positionals[2]);
+    console.log(`PASS observed freshness comparison: ${result.observations} record(s)`);
   } else if (command === 'validate') {
     const { positionals } = parseArgs(args, new Set());
     if (positionals.length !== 1) throw new Error(usage);

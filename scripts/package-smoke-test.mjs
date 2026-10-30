@@ -65,6 +65,7 @@ try {
   const installedCli = path.join(installedRoot, 'bin', 'arwp.mjs');
   const freshnessHelp = execFileSync(process.execPath, [path.join(installedRoot, 'bin', 'arwp-freshness.mjs'), '--help'], { encoding: 'utf8' });
   assert.match(freshnessHelp, /Freshness Integrity/);
+  assert.match(freshnessHelp, /observed-compare/);
   const installedAiSearchCli = path.join(installedRoot, 'bin', 'arwp-ai-search.mjs');
   const installedVisibilityCli = path.join(installedRoot, 'bin', 'arwp-visibility.mjs');
   const installedBingCli = path.join(installedRoot, 'bin', 'arwp-bing.mjs');

@@ -98,6 +98,78 @@ evidence.
 
 Output files are created exclusively; the CLI will not overwrite an existing evidence artifact implicitly.
 
+## Compare observed resource bodies
+
+For data resources or dynamic pages without mapped repository ownership, an
+independent offline comparison can use two previously saved public responses.
+It does not change or resolve the Repository Mapper result:
+
+```bash
+node bin/arwp-freshness.mjs observed-compare \
+  private/before/capture.json private/after/capture.json \
+  --output=private/observed-comparison.json
+
+node bin/arwp-freshness.mjs observed-verify \
+  private/observed-comparison.json private/before/capture.json private/after/capture.json
+```
+
+Each capture manifest is private and points to files under its own directory:
+
+```json
+{
+  "schema": "freshness-observed-capture/v1",
+  "sitemap": {
+    "source": "https://example.test/sitemap-data.xml",
+    "finalUrl": "https://example.test/sitemap-data.xml",
+    "observedAt": "2026-01-01T00:00:00Z",
+    "status": 200,
+    "contentType": "application/xml",
+    "complete": true,
+    "file": "sitemap.xml",
+    "sha256": "sha256:<64 lowercase hex digits>"
+  },
+  "captures": [{
+    "requestedUrl": "https://example.test/data.json",
+    "finalUrl": "https://example.test/data.json",
+    "observedAt": "2026-01-01T00:01:00Z",
+    "status": 200,
+    "contentType": "application/json",
+    "contentEncoding": "identity",
+    "bodyScope": "http-payload",
+    "requestProfile": "public-json-v1",
+    "complete": true,
+    "bodyFile": "data.json",
+    "sha256": "sha256:<64 lowercase hex digits>"
+  }]
+}
+```
+
+Provide the real SHA-256 of each exact saved file. Each sitemap must be a
+complete HTTP 200 response with the requested URL as its final URL; a missing
+content type is `null`. For a failed or incomplete
+capture use `complete: false`, with `bodyFile` and `sha256` both `null`; omitted
+URLs remain unknown. Successful comparisons require the same sitemap URL,
+chronological captures, exact requested/final URL, HTTP 200, complete bodies,
+matching content type, content encoding, body scope and request profile. Use
+`identity` for an observed absence of content encoding and `null` if it was
+not captured. `bodyScope` is `http-payload` for bytes after transfer framing
+but before content decoding, `content-decoded` after content decoding, or
+`null` when unknown. The profile is
+an operator assertion about equivalent requests, not verified request headers.
+Store no credentials or cookies in it. Each body must be captured after its
+sitemap and within 24 hours; the earlier body must predate the later sitemap.
+The 24-hour limit is an operational bound, not proof of version parity.
+
+The report records `date_changed_equal_bodies`, `body_changed_equal_date`,
+`both_changed`, `equal_at_samples`, `unknown`, `added` or `removed`. Equal
+bytes at two moments do not rule out intermediate changes; different bytes may
+be insignificant. Capture metadata is operator-supplied, not authenticated by
+the tool. `observed-verify` replays the source manifests and hashes and checks
+the derived report; it cannot authenticate the capture metadata or report
+creation time. Manifests,
+response bodies and reports may contain private evidence
+and belong outside Git. The command fetches nothing and makes no site changes.
+
 ## Comparison states
 
 ### `lastmod-churn-candidate`
