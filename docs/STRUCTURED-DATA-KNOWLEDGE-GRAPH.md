@@ -77,6 +77,18 @@ Top-level sparse entities, anonymous typed objects and objects containing other
 properties still receive ordinary completeness checks. This classification is
 an ARWP audit convention, not a new JSON-LD validity or Google eligibility rule.
 
+### Graph-scoped property checks
+
+Same-document property fragments can complete an entity only when they are
+observed in the recognized default graph. Named and nested anonymous graph
+descriptions are checked separately; their properties do not fill a default
+entity or supply cross-page default-graph evidence. When graph scope is not
+expanded, the finding concerns the individual bounded description, not the
+whole page. Review the actual graph before adding markup. This is not full
+JSON-LD expansion or a provider eligibility judgment. [JSON-LD 1.1 graph
+objects](https://www.w3.org/TR/json-ld11/#graph-objects) define the relevant
+scope distinction.
+
 ### Repeated visible-name observations
 
 Within one captured HTML document, identical name-parity findings for the same
