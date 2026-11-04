@@ -41,7 +41,7 @@ await assert.rejects(checkEvidenceHubs(index.categories, base, mockedFetch(200, 
 await assert.rejects(checkEvidenceHubs(index.categories, base, mockedFetch(200, hubHtml, hubUrl, 'application/json')), /Not HTML/);
 await assert.rejects(checkEvidenceHubs(index.categories, base, mockedFetch(200, hubHtml.replace('<h1>Crawl access</h1>', '<h1>Incorrect topic</h1>'))), /heading does not match routing index/);
 await assert.rejects(checkEvidenceHubs(index.categories, base, mockedFetch(200, hubHtml.replace('../discoverability.html', '../missing-library.html'))), /no navigation back to library/);
-await assert.rejects(checkEvidenceHubs(index.categories, base, mockedFetch(200, hubHtml.replace('href="${hubUrl}"', 'href="https://example.com/wrong.html"'))), /canonical mismatch/);
+await assert.rejects(checkEvidenceHubs(index.categories, base, mockedFetch(200, hubHtml.replace(`href="${hubUrl}"`, 'href="https://example.com/wrong.html"'))), /canonical mismatch/);
 
 await checkSourceEvidenceHubs(index.categories, base, async () => hubHtml);
 await assert.rejects(checkSourceEvidenceHubs(index.categories, base, async () => { const error = new Error('ENOENT'); error.code = 'ENOENT'; throw error; }), /Missing local source evidence hub/);
