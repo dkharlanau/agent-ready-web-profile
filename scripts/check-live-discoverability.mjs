@@ -29,21 +29,27 @@ function textContent(root) {
 
 function canonicalUrl(htmlTree, pageUrl) {
   const link = one(htmlTree, node => node.tagName === 'link' && attr(node, 'rel').split(/\s+/).includes('canonical'), 'canonical link');
-  return new URL(attr(link, 'href'), pageUrl).href;
+  const href = attr(link, 'href').trim();
+  assert.ok(href, 'Canonical link must have a nonempty href');
+  return new URL(href, pageUrl).href;
 }
 
 function assertCategoryId(category) {
   assert.match(category.id ?? '', /^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Invalid evidence hub category id');
 }
 
-function checkHubDocument(html, url, indexUrl, title) {
+function checkHubDocument(html, url, indexUrl, category) {
   const document = parse(html);
   assert.equal(canonicalUrl(document, url), url, `Evidence hub canonical mismatch: ${url}`);
   const main = one(document, node => node.tagName === 'main', `main in ${url}`);
   const headings = elements(main, node => node.tagName === 'h1' && textContent(node));
   assert.ok(headings.length > 0, `Evidence hub has no heading: ${url}`);
   assert.equal(headings.length, 1, `Evidence hub has multiple headings: ${url}`);
-  assert.equal(textContent(headings[0]), title, `Evidence hub heading does not match routing index: ${url}`);
+  assert.equal(textContent(headings[0]), category.title, `Evidence hub heading does not match routing index: ${url}`);
+  const patterns = one(main, node => node.tagName === 'section' && attr(node, 'id') === 'patterns' && hasClass(node, 'category-patterns'), `patterns section in ${url}`);
+  const articles = elements(patterns, node => node.tagName === 'article' && hasClass(node, 'practice'));
+  assert.ok(Number.isSafeInteger(category.count) && category.count > 0, `Invalid routing index pattern count: ${url}`);
+  assert.equal(articles.length, category.count, `Evidence hub pattern count does not match routing index: ${url}`);
   assert.ok(elements(document, node => node.tagName === 'a' && attr(node, 'href') && new URL(attr(node, 'href'), url).href === indexUrl).length > 0, `Evidence hub has no navigation back to library: ${url}`);
 }
 
@@ -73,7 +79,7 @@ export async function checkSourceEvidenceHubs(categories, baseUrl, readSource = 
       }
       throw error;
     }
-    checkHubDocument(html, url, indexUrl, category.title);
+    checkHubDocument(html, url, indexUrl, category);
   }
 }
 
@@ -127,7 +133,7 @@ export async function checkEvidenceHubs(categories, baseUrl, fetchImpl = fetch) 
       assert.equal(response.status, 200, `Evidence hub unavailable: ${url} (HTTP ${response.status})`);
       assert.match(response.headers.get('content-type') ?? '', /text\/html/i, `Not HTML: ${url}`);
       assert.equal(response.url, url, `Evidence hub unexpectedly redirected: ${url}`);
-      checkHubDocument(await response.text(), url, indexUrl, category.title);
+      checkHubDocument(await response.text(), url, indexUrl, category);
       console.log(`Evidence hub OK: ${url}`);
     }
   }));
