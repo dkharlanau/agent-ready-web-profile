@@ -32,6 +32,51 @@ function canonicalUrl(htmlTree, pageUrl) {
   return new URL(attr(link, 'href'), pageUrl).href;
 }
 
+function assertCategoryId(category) {
+  assert.match(category.id ?? '', /^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Invalid evidence hub category id');
+}
+
+function checkHubDocument(html, url, indexUrl, title) {
+  const document = parse(html);
+  assert.equal(canonicalUrl(document, url), url, `Evidence hub canonical mismatch: ${url}`);
+  const main = one(document, node => node.tagName === 'main', `main in ${url}`);
+  const headings = elements(main, node => node.tagName === 'h1' && textContent(node));
+  assert.ok(headings.length > 0, `Evidence hub has no heading: ${url}`);
+  assert.equal(headings.length, 1, `Evidence hub has multiple headings: ${url}`);
+  assert.equal(textContent(headings[0]), title, `Evidence hub heading does not match routing index: ${url}`);
+  assert.ok(elements(document, node => node.tagName === 'a' && attr(node, 'href') && new URL(attr(node, 'href'), url).href === indexUrl).length > 0, `Evidence hub has no navigation back to library: ${url}`);
+}
+
+export function checkSourceProductionAlignment(sourceUrls, liveUrls, eventName) {
+  const removed = liveUrls.filter(url => !sourceUrls.includes(url));
+  assert.equal(removed.length, 0, `Previously published evidence hubs missing from source: ${removed.join(', ')}`);
+  const unpublished = sourceUrls.filter(url => !liveUrls.includes(url));
+  if (unpublished.length && eventName !== 'pull_request') {
+    throw new Error(`Production missing source evidence hubs: ${unpublished.join(', ')}`);
+  }
+  return unpublished;
+}
+
+export async function checkSourceEvidenceHubs(categories, baseUrl, readSource = path => readFile(path, 'utf8')) {
+  const base = new URL(baseUrl);
+  const indexUrl = new URL('discoverability.html', base).href;
+  for (const category of categories) {
+    assertCategoryId(category);
+    const url = new URL(`discoverability/${category.id}.html`, base).href;
+    const sourcePath = new URL(`../docs/discoverability/${category.id}.html`, import.meta.url);
+    let html;
+    try {
+      html = await readSource(sourcePath);
+    } catch (error) {
+      if (error?.code === 'ENOENT') {
+        throw new Error(`Missing local source evidence hub: docs/discoverability/${category.id}.html`, { cause: error });
+      }
+      throw error;
+    }
+    checkHubDocument(html, url, indexUrl, category.title);
+  }
+}
+
 export function checkDiscoverabilityLayout(html, index, baseUrl) {
   const base = new URL(baseUrl);
   const pageUrl = new URL('discoverability.html', base).href;
@@ -43,10 +88,12 @@ export function checkDiscoverabilityLayout(html, index, baseUrl) {
   const grid = one(section, node => hasClass(node, 'category-grid'), 'category grid');
   const cards = elements(grid, node => node.tagName === 'a' && hasClass(node, 'category-card'));
   const expected = index.categories.map(category => {
+    assertCategoryId(category);
     const url = new URL(category.url);
     assert.equal(url.origin, base.origin, `Evidence hub must be same-origin: ${url.href}`);
     assert.ok(url.pathname.startsWith(new URL('discoverability/', base).pathname), `Hub outside discoverability routes: ${url.href}`);
     assert.equal(url.search + url.hash, '', `Hub link cannot have query/fragment: ${url.href}`);
+    assert.equal(url.href, new URL(`discoverability/${category.id}.html`, base).href, `Evidence hub route does not match category id: ${category.id}`);
     return url.href;
   });
   const found = cards.map(card => {
@@ -68,22 +115,19 @@ export function checkDiscoverabilityLayout(html, index, baseUrl) {
   return found;
 }
 
-export async function checkEvidenceHubs(urls, baseUrl, fetchImpl = fetch) {
+export async function checkEvidenceHubs(categories, baseUrl, fetchImpl = fetch) {
   const base = new URL(baseUrl);
   const indexUrl = new URL('discoverability.html', base).href;
   let cursor = 0;
-  await Promise.all(Array.from({ length: Math.min(4, urls.length) }, async () => {
-    while (cursor < urls.length) {
-      const url = urls[cursor++];
+  await Promise.all(Array.from({ length: Math.min(4, categories.length) }, async () => {
+    while (cursor < categories.length) {
+      const category = categories[cursor++];
+      const url = category.url;
       const response = await fetchImpl(url, { method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(12000) });
       assert.equal(response.status, 200, `Evidence hub unavailable: ${url} (HTTP ${response.status})`);
       assert.match(response.headers.get('content-type') ?? '', /text\/html/i, `Not HTML: ${url}`);
-      if (response.url) assert.equal(response.url, url, `Evidence hub unexpectedly redirected: ${url}`);
-      const document = parse(await response.text());
-      assert.equal(canonicalUrl(document, url), url, `Evidence hub canonical mismatch: ${url}`);
-      const main = one(document, node => node.tagName === 'main', `main in ${url}`);
-      assert.ok(elements(main, node => node.tagName === 'h1' && textContent(node)).length > 0, `Evidence hub has no heading: ${url}`);
-      assert.ok(elements(document, node => node.tagName === 'a' && attr(node, 'href') && new URL(attr(node, 'href'), url).href === indexUrl).length > 0, `Evidence hub has no navigation back to library: ${url}`);
+      assert.equal(response.url, url, `Evidence hub unexpectedly redirected: ${url}`);
+      checkHubDocument(await response.text(), url, indexUrl, category.title);
       console.log(`Evidence hub OK: ${url}`);
     }
   }));
@@ -100,15 +144,14 @@ async function main() {
   ]);
   const sourceUrls = checkDiscoverabilityLayout(sourceHtml, sourceIndex, baseUrl);
   const liveUrls = checkDiscoverabilityLayout(liveHtml, liveIndex, baseUrl);
-  const aligned = JSON.stringify([...sourceUrls].sort()) === JSON.stringify([...liveUrls].sort());
-  console.log(`Source: ${sourceUrls.length} hubs; production: ${liveUrls.length} hubs; routes aligned: ${aligned}`);
-  // A PR may introduce unpublished pages; warn instead of treating those as live failures.
-  // Scheduled/manual runs must see the current main publication fully deployed.
-  if (!aligned && process.env.GITHUB_EVENT_NAME !== 'pull_request') {
-    throw new Error('Production discoverability routes differ from the checked-out source');
-  }
-  if (!aligned) console.warn('WARNING: PR source and production differ; inspect deployment freshness before merging.');
-  await checkEvidenceHubs(liveUrls, baseUrl);
+  // Existing live routes must not disappear in a PR; new PR routes may be unpublished.
+  // Scheduled/manual runs must match the published routing inventory exactly.
+  const unpublished = checkSourceProductionAlignment(sourceUrls, liveUrls, process.env.GITHUB_EVENT_NAME);
+  console.log(`Source: ${sourceUrls.length} hubs; production: ${liveUrls.length} hubs; routes aligned: ${unpublished.length === 0}`);
+  if (unpublished.length) console.warn(`WARNING: ${unpublished.length} PR evidence hubs not yet deployed; validate publication after merge.`);
+  // Every route added by a PR must already have a real, structurally valid source page.
+  await checkSourceEvidenceHubs(sourceIndex.categories, baseUrl);
+  await checkEvidenceHubs(liveIndex.categories, baseUrl);
   console.log(`Live discoverability verification passed for ${liveUrls.length} evidence hubs.`);
 }
 
