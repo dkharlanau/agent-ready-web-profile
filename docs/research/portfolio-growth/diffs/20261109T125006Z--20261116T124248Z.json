@@ -1,0 +1,682 @@
+{
+  "version": "0.1",
+  "before": {
+    "runId": "20261109T125006Z",
+    "observedAt": "2026-11-09T12:50:06.000Z"
+  },
+  "after": {
+    "runId": "20261116T124248Z",
+    "observedAt": "2026-11-16T12:42:48.000Z"
+  },
+  "summary": {
+    "sites": 9,
+    "comparable": 9,
+    "implementationDebtImproved": 0,
+    "awaitingOwnerMeasurement": 9
+  },
+  "sites": [
+    {
+      "siteId": "bonihua-chinese-learning",
+      "canonicalUrl": "https://www.bonihua.com/",
+      "beforeCanonicalUrl": "https://www.bonihua.com/",
+      "afterCanonicalUrl": "https://www.bonihua.com/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://www.bonihua.com/",
+        "before": {
+          "snapshotId": "urn:sha256:a2358596a97e8d54036398c23395aa938d61ac6a50cc0016236b5199125f31f1",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P2": 1,
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:5f56430a96723122b402f5125dc12c0d01285b1923f97968e400236783a447d4",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P2": 1,
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "brali-practical-knowledge",
+      "canonicalUrl": "https://brali-lifeos.github.io/",
+      "beforeCanonicalUrl": "https://brali-move.vedokrok.com/",
+      "afterCanonicalUrl": "https://brali-move.vedokrok.com/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://brali-move.vedokrok.com/",
+        "before": {
+          "snapshotId": "urn:sha256:cf29f848fb5a08410030acaab6245d429f9184fc0776f602968465c66e307aab",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P2": 2,
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:b468b15ccfbed082fc0e6044f558dbf5e51aa78f37d970d9b6f1fd8565f9032f",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P2": 2,
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "cbt-cards-public-reflection",
+      "canonicalUrl": "https://cbt-cards.github.io/",
+      "beforeCanonicalUrl": "https://cbt-cards-move.vedokrok.com/",
+      "afterCanonicalUrl": "https://cbt-cards-move.vedokrok.com/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://cbt-cards-move.vedokrok.com/",
+        "before": {
+          "snapshotId": "urn:sha256:4902b2646c71a4baf831c54511f5a9fd2c31d22b7f8952cdce685439d0f17058",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P2": 2,
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:8011cc3309ceab1ddb50b98360813bb393ad3f7d26ea5bba656c09754fb2377b",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P2": 2,
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "cognitive-biases-knowledge",
+      "canonicalUrl": "https://cognitive-biases.github.io/",
+      "beforeCanonicalUrl": "https://cognitive-biases-move.vedokrok.com/",
+      "afterCanonicalUrl": "https://cognitive-biases-move.vedokrok.com/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://cognitive-biases-move.vedokrok.com/",
+        "before": {
+          "snapshotId": "urn:sha256:9ca0d19cb63b4ab91315ec6b8983eae703b7f9d613b9977faee2a2395b534d04",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:c9daa559c80e8112b139944902b04405f20324776af1c7d51341d090d65b0cca",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 5,
+            "highPriority": 5,
+            "byPriority": {
+              "P1": 5
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "dkharlanau-sap-knowledge",
+      "canonicalUrl": "https://dkharlanau.github.io/",
+      "beforeCanonicalUrl": "https://dkharlanau.github.io/",
+      "afterCanonicalUrl": "https://dkharlanau.github.io/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://dkharlanau.github.io/",
+        "before": {
+          "snapshotId": "urn:sha256:6cc413bbbfaebbdaac599f2f7fe7570db77dc65745599235c60319e0c2917742",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 7,
+            "highPriority": 7,
+            "byPriority": {
+              "P2": 1,
+              "P1": 7
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "entity-identity": 1,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:documentation": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:d55130dd41d33633310b6d2ffc296142ad488812288706b89dbd67faf9c2a0d0",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 7,
+            "highPriority": 7,
+            "byPriority": {
+              "P2": 1,
+              "P1": 7
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "entity-identity": 1,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:documentation": 1,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 1,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [
+          {
+            "id": "growth:vertical:documentation-version-context",
+            "title": "Make version and freshness context explicit",
+            "changes": {
+              "reasonDigest": {
+                "before": "sha256:92ebd9569b51c0b80f48a4b2f48e9cacb01d8b66a3f64463cf622867a7aa46c1",
+                "after": "sha256:5637b302e58991d48a41fc075b6474a49b86c202577955995f46154a1b97ade0"
+              }
+            }
+          }
+        ],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "metalhatscats-applied-systems",
+      "canonicalUrl": "https://metalhatscats.com/",
+      "beforeCanonicalUrl": "https://metalhatscats.com/",
+      "afterCanonicalUrl": "https://metalhatscats.com/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://metalhatscats.com/",
+        "before": {
+          "snapshotId": "urn:sha256:e7ac0b1ab6b01cdd52863504a1142b4985553b94997c1711447853455d8ec222",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 8,
+            "highPriority": 8,
+            "byPriority": {
+              "P2": 2,
+              "P1": 8
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 3,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:f1f968a15481b49bbc180bf9ac9c80dba777898742285764e74691885bc0abfc",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 8,
+            "highPriority": 8,
+            "byPriority": {
+              "P2": 2,
+              "P1": 8
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 3,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "metkagram-language-knowledge",
+      "canonicalUrl": "https://metkagram.github.io/",
+      "beforeCanonicalUrl": "https://metkagram.github.io/",
+      "afterCanonicalUrl": "https://metkagram.github.io/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://metkagram.github.io/",
+        "before": {
+          "snapshotId": "urn:sha256:6907475ab5bf4686c4cfed5ad5bfb45473cc380931b35e187be8a96bfc8b3797",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 8,
+            "highPriority": 8,
+            "byPriority": {
+              "P1": 8
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 3,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:9e6832a5de23396bc54d738f4ea6191fbe24a673ea6fc667f5d9fe8636488dd8",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 8,
+            "highPriority": 8,
+            "byPriority": {
+              "P1": 8
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 3,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "ptichi-fresh-site",
+      "canonicalUrl": "https://ptichi.com/",
+      "beforeCanonicalUrl": "https://ptichi.com/",
+      "afterCanonicalUrl": "https://ptichi.com/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://ptichi.com/",
+        "before": {
+          "snapshotId": "urn:sha256:2c4c5c4fd66b5389aa85d4146e20c7edf135debb13810e44157c3e51395af67f",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 8,
+            "highPriority": 8,
+            "byPriority": {
+              "P1": 8
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "entity-identity": 1,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 2,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:1f33a50da1a4b4e48e234731ce98ca8877338deac9bf4e1bdfa008e51ca8dc80",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 8,
+            "highPriority": 8,
+            "byPriority": {
+              "P1": 8
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "entity-identity": 1,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 2,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    },
+    {
+      "siteId": "vedokrok-practical-learning",
+      "canonicalUrl": "https://vedokrok.com/",
+      "beforeCanonicalUrl": "https://vedokrok.com/",
+      "afterCanonicalUrl": "https://vedokrok.com/",
+      "beforeStatus": "captured",
+      "afterStatus": "captured",
+      "comparisonState": "comparable-public-implementation-state",
+      "growthDiff": {
+        "diffVersion": "0.1",
+        "canonicalUrl": "https://vedokrok.com/",
+        "before": {
+          "snapshotId": "urn:sha256:943fd705c80f296222a969a8d3c55025b6b20beda282d9d1fb34bad6bc358e91",
+          "observedAt": "2026-11-09T12:50:06.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 7,
+            "highPriority": 7,
+            "byPriority": {
+              "P2": 2,
+              "P1": 7
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 2,
+              "ai-access": 1
+            }
+          }
+        },
+        "after": {
+          "snapshotId": "urn:sha256:ef34f3205b7f533d1d236c9b13ce99fba4390c178005fba802126227acdf1289",
+          "observedAt": "2026-11-16T12:42:48.000Z",
+          "debt": {
+            "p0": 0,
+            "p1": 7,
+            "highPriority": 7,
+            "byPriority": {
+              "P2": 2,
+              "P1": 7
+            },
+            "highPriorityByLane": {
+              "measurement": 2,
+              "content-quality": 1,
+              "governance": 1,
+              "vertical:software-product": 2,
+              "ai-access": 1
+            }
+          }
+        },
+        "summary": {
+          "actionsAdded": 0,
+          "actionsResolved": 0,
+          "actionsChanged": 0,
+          "observationChanges": 0,
+          "p0Delta": 0,
+          "p1Delta": 0,
+          "highPriorityDebtDelta": 0,
+          "highPriorityResolved": 0,
+          "highPriorityAdded": 0
+        },
+        "added": [],
+        "resolved": [],
+        "changed": [],
+        "observationChanges": [],
+        "interpretation": {
+          "implementationStateImproved": false,
+          "note": "A reduced Growth backlog means fewer currently observed implementation actions. It does not prove better rankings, citations, recommendations, traffic or conversion."
+        }
+      },
+      "ownerMeasurementState": "awaiting-owner-measurement"
+    }
+  ],
+  "interpretation": {
+    "publicImplementationStateOnly": true,
+    "ownerOutcomeEvidenceIncluded": false,
+    "note": "This diff compares observed implementation state. It does not establish Search ranking, AI citation, referral, traffic or conversion effects."
+  }
+}
