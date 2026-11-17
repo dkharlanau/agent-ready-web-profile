@@ -14,6 +14,8 @@ on:
       - 'bin/arwp.mjs'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
+      - 'scripts/check-live-discoverability.mjs'
+      - 'scripts/check-live-discoverability-test.mjs'
       - 'scripts/internal-link-target-health-test.mjs'
       - 'scripts/sync-technical-preflight-instructions.mjs'
       - 'scripts/technical-preflight-instructions-test.mjs'
@@ -39,6 +41,8 @@ on:
       - 'bin/arwp.mjs'
       - 'skills/arwp-growth-loop/SKILL.md'
       - 'scripts/technical-integrity-test.mjs'
+      - 'scripts/check-live-discoverability.mjs'
+      - 'scripts/check-live-discoverability-test.mjs'
       - 'scripts/internal-link-target-health-test.mjs'
       - 'scripts/sync-technical-preflight-instructions.mjs'
       - 'scripts/technical-preflight-instructions-test.mjs'
@@ -82,6 +86,7 @@ jobs:
       - name: Run Technical Integrity regression
         run: |
           node scripts/technical-integrity-test.mjs
+          node scripts/check-live-discoverability-test.mjs
           node scripts/internal-link-target-health-test.mjs
           node scripts/search-failure-doctor-test.mjs
       - name: Syntax check
@@ -94,6 +99,8 @@ jobs:
           node --check scripts/search-failure-doctor-test.mjs
           node --check bin/arwp.mjs
           node --check scripts/technical-integrity-test.mjs
+          node --check scripts/check-live-discoverability.mjs
+          node --check scripts/check-live-discoverability-test.mjs
           node --check scripts/internal-link-target-health-test.mjs
           node --check scripts/sync-technical-preflight-instructions.mjs
           node --check scripts/technical-preflight-instructions-test.mjs
@@ -117,18 +124,17 @@ jobs:
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
-      - name: Confirm bounded discoverability layout is live
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+      - name: Confirm live discoverability navigation and evidence hubs
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         shell: bash
         run: |
           live_html="$RUNNER_TEMP/goose-discoverability.html"
-          curl -fsSL --max-time 15 --max-filesize 2097152 "${LIVE_GOOSE_URL}discoverability.html" -o "$live_html"
-          if ! grep -q 'STATIC EVIDENCE HUBS' "$live_html"; then
-            echo 'Bounded discoverability layout is not observable on the live site.'
-            exit 1
-          fi
+          live_index="$RUNNER_TEMP/goose-discoverability-index.json"
+          curl -fsSL --retry 2 --max-time 15 --max-filesize 2097152 "${LIVE_GOOSE_URL}discoverability.html" -o "$live_html"
+          curl -fsSL --retry 2 --max-time 15 --max-filesize 2097152 "${LIVE_GOOSE_URL}discoverability/index.json" -o "$live_index"
+          node scripts/check-live-discoverability.mjs "$live_html" "$live_index" "$LIVE_GOOSE_URL"
       - name: Dogfood live Goose site
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         id: dogfood
         shell: bash
         run: |
@@ -151,7 +157,7 @@ jobs:
           console.log(JSON.stringify({ canonicalUrl: report.canonicalUrl, summary: report.summary, internalLinkTargetAudit: report.internalLinkTargetAudit || null, findings }, null, 2));
           NODE
       - name: Upload live Goose Technical Integrity report
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: goose-technical-integrity
